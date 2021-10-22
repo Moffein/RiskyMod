@@ -138,62 +138,6 @@ namespace Risky_ItemTweaks.SharedHooks
 									}
 								}
 							}
-							if (MoltenPerf.enabled)
-                            {
-								int perfCount = attackerInventory.GetItemCount(RoR2Content.Items.FireballsOnHit);
-								if (perfCount > 0 && !damageInfo.procChainMask.HasProc(ProcType.Meatball))
-								{
-									InputBankTest component4 = attackerBody.GetComponent<InputBankTest>();
-									Vector3 vector2 = victimBody.characterMotor ? (victim.transform.position + Vector3.up * (victimBody.characterMotor.capsuleHeight * 0.5f + 2f)) : (victim.transform.position + Vector3.up * 2f);
-									Vector3 forward2 = component4 ? component4.aimDirection : victim.transform.forward;
-									forward2 = Vector3.up;
-									float num8 = 20f;
-									if (Util.CheckRoll(10f, attackerMaster))
-									{
-										EffectData effectData = new EffectData
-										{
-											scale = 1f,
-											origin = vector2
-										};
-										EffectManager.SpawnEffect(MoltenPerf.meatballEffect, effectData, true);
-										int num9 = 3;
-										float damageCoefficient7 = 3f * (float)perfCount;
-										float damage4 = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, damageCoefficient7);
-										float min = 15f;
-										float max = 30f;
-										ProcChainMask procChainMask7 = damageInfo.procChainMask;
-										procChainMask7.AddProc(ProcType.Meatball);
-										float speedOverride2 = UnityEngine.Random.Range(min, max);
-										float num10 = (float)(360 / num9);
-										float num11 = num10 / 360f;
-										float num12 = 1f;
-										float num13 = num10;
-										for (int k = 0; k < num9; k++)
-										{
-											float num14 = (float)k * 3.14159274f * 2f / (float)num9;
-											FireProjectileInfo fireProjectileInfo = new FireProjectileInfo
-											{
-												projectilePrefab = MoltenPerf.meatballPrefab,
-												position = vector2 + new Vector3(num12 * Mathf.Sin(num14), 0f, num12 * Mathf.Cos(num14)),
-												rotation = Util.QuaternionSafeLookRotation(forward2),
-												procChainMask = procChainMask7,
-												target = victim,
-												owner = attackerBody.gameObject,
-												damage = damage4,
-												crit = damageInfo.crit,
-												force = 200f,
-												damageColorIndex = DamageColorIndex.Item,
-												speedOverride = speedOverride2,
-												useSpeedOverride = true
-											};
-											num13 += num10;
-											ProjectileManager.instance.FireProjectile(fireProjectileInfo);
-											forward2.x += Mathf.Sin(num14 + UnityEngine.Random.Range(-num8, num8));
-											forward2.z += Mathf.Cos(num14 + UnityEngine.Random.Range(-num8, num8));
-										}
-									}
-								}
-							}
 							if (ChargedPerf.enabled)
                             {
 								int perfCount = attackerInventory.GetItemCount(RoR2Content.Items.LightningStrikeOnHit);

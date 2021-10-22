@@ -3,6 +3,7 @@ using MonoMod.Cil;
 using R2API;
 using RoR2;
 using RoR2.Projectile;
+using System;
 using UnityEngine;
 
 namespace Risky_ItemTweaks.Items.Boss
@@ -11,7 +12,6 @@ namespace Risky_ItemTweaks.Items.Boss
     {
         public static bool enabled = true;
         public static GameObject meatballPrefab;
-        public static GameObject meatballEffect = Resources.Load<GameObject>("Prefabs/Effects/MuzzleFlashes/MuzzleflashFireMeatBall");
 
         public static void Modify()
         {
@@ -21,11 +21,17 @@ namespace Risky_ItemTweaks.Items.Boss
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                /*c.GotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "FireballsOnHit")
+                    );*/
+                c.GotoNext(
+                    x => x.MatchLdstr("Prefabs/Projectiles/FireMeatBall")
                     );
-                c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+                c.Index += 2;
+                c.EmitDelegate<Func<GameObject, GameObject>>((oldPrefab) =>
+                {
+                    return MoltenPerf.meatballPrefab;
+                });
             };
 
             //Effect handled in SharedHooks.OnHitEnemy
