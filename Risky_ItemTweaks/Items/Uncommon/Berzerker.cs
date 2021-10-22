@@ -5,7 +5,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
 
-namespace Risky_ItemTweaks.Items.Uncommon
+namespace Risky_Mod.Items.Uncommon
 {
     public class Berzerker
     {
@@ -23,7 +23,7 @@ namespace Risky_ItemTweaks.Items.Uncommon
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "WarCryOnMultiKill")
                     );
                 c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+                c.Emit<Risky_Mod>(OpCodes.Ldsfld, nameof(Risky_Mod.emptyItemDef));
             };
 
             //On-kill logic handled in SharedHooks.OnCharacterDeath

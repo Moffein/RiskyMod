@@ -3,11 +3,11 @@ using R2API;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
-using Risky_ItemTweaks.Items.Uncommon;
+using Risky_Mod.Items.Uncommon;
 using R2API.Utils;
-using Risky_ItemTweaks.Items.Legendary;
+using Risky_Mod.Items.Legendary;
 
-namespace Risky_ItemTweaks.SharedHooks
+namespace Risky_Mod.SharedHooks
 {
     public class ModifyFinalDamage
     {

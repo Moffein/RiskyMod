@@ -2,7 +2,7 @@
 using R2API;
 using UnityEngine;
 
-namespace Risky_ItemTweaks.Items.Common
+namespace Risky_Mod.Items.Common
 {
     public class Gasoline
     {

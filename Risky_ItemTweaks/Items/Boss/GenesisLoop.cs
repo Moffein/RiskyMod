@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Risky_ItemTweaks.Items.Boss
+namespace Risky_Mod.Items.Boss
 {
     public class GenesisLoop
     {

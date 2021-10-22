@@ -4,7 +4,7 @@ using UnityEngine;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 
-namespace Risky_ItemTweaks.Items.Legendary
+namespace Risky_Mod.Items.Legendary
 {
     public class Headhunter
     {
@@ -37,7 +37,7 @@ namespace Risky_ItemTweaks.Items.Legendary
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "HeadHunter")
                     );
                 c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+                c.Emit<Risky_Mod>(OpCodes.Ldsfld, nameof(Risky_Mod.emptyItemDef));
             };
         }
     }

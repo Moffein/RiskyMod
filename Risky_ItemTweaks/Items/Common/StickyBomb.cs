@@ -6,7 +6,7 @@ using RoR2.Projectile;
 using UnityEngine;
 using System;
 
-namespace Risky_ItemTweaks.Items.Common
+namespace Risky_Mod.Items.Common
 {
     public class StickyBomb
     {

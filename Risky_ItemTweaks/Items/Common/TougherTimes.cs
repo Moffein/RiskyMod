@@ -2,7 +2,7 @@
 using MonoMod.Cil;
 using RoR2;
 using R2API;
-namespace Risky_ItemTweaks.Items.Common
+namespace Risky_Mod.Items.Common
 {
     public class TougherTimes
     {

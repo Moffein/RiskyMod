@@ -1,6 +1,6 @@
 ﻿using RoR2;
 using RoR2.Orbs;
-namespace Risky_ItemTweaks.Items.Boss
+namespace Risky_Mod.Items.Boss
 {
     public class Disciple
     {
@@ -8,7 +8,7 @@ namespace Risky_ItemTweaks.Items.Boss
         public static void Modify()
         {
             if (!enabled) return;
-            if (!Risky_ItemTweaks.disableProcChains) return;
+            if (!Risky_Mod.disableProcChains) return;
 
             On.RoR2.CharacterBody.SprintWispBehavior.Fire += (orig, self) =>
             {

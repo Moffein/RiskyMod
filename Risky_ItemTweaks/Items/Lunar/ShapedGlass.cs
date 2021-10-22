@@ -2,7 +2,7 @@
 using MonoMod.Cil;
 using RoR2;
 
-namespace Risky_ItemTweaks.Items.Lunar
+namespace Risky_Mod.Items.Lunar
 {
     public class ShapedGlass
     {

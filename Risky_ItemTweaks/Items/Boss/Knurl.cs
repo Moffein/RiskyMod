@@ -3,7 +3,7 @@ using MonoMod.Cil;
 using RoR2;
 using R2API;
 
-namespace Risky_ItemTweaks.Items.Boss
+namespace Risky_Mod.Items.Boss
 {
     public class Knurl
     {
@@ -20,7 +20,7 @@ namespace Risky_ItemTweaks.Items.Boss
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "Knurl")
                     );
                 c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+                c.Emit<Risky_Mod>(OpCodes.Ldsfld, nameof(Risky_Mod.emptyItemDef));
             };
 
             LanguageAPI.Add("ITEM_KNURL_PICKUP", "Boosts health, regeneration, and armor.");

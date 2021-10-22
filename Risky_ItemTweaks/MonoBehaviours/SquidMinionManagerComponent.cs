@@ -3,7 +3,7 @@ using RoR2;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 
-namespace Risky_ItemTweaks.MonoBehaviours
+namespace Risky_Mod.MonoBehaviours
 {
     public class SquidMinionManagerComponent : MonoBehaviour
     {

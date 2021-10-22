@@ -1,7 +1,7 @@
 ﻿using R2API;
 using RoR2;
 
-namespace Risky_ItemTweaks.Items.Common
+namespace Risky_Mod.Items.Common
 {
     public class Warbanner
     {

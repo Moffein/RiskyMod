@@ -3,7 +3,7 @@ using MonoMod.Cil;
 using RoR2;
 using System;
 
-namespace Risky_ItemTweaks.Tweaks
+namespace Risky_Mod.Tweaks
 {
     public class ShieldGating
     {

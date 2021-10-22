@@ -2,14 +2,14 @@
 using MonoMod.Cil;
 using RoR2;
 
-namespace Risky_ItemTweaks.Items.Boss
+namespace Risky_Mod.Items.Boss
 {
     public class ChargedPerf
     {
         public static bool enabled = true;
         public static void Modify()
         {
-            if (!enabled || !Risky_ItemTweaks.disableProcChains) return;
+            if (!enabled || !Risky_Mod.disableProcChains) return;
 
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>

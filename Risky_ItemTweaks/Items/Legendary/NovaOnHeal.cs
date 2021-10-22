@@ -3,7 +3,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
 
-namespace Risky_ItemTweaks.Items.Legendary
+namespace Risky_Mod.Items.Legendary
 {
     public class NovaOnHeal
     {
@@ -37,7 +37,7 @@ namespace Risky_ItemTweaks.Items.Legendary
             On.RoR2.ItemCatalog.Init += (orig) =>
             {
                 orig();
-                Risky_ItemTweaks.AddToAIBlacklist(RoR2Content.Items.NovaOnHeal.itemIndex);
+                Risky_Mod.AddToAIBlacklist(RoR2Content.Items.NovaOnHeal.itemIndex);
             };
         }
     }

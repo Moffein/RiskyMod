@@ -3,7 +3,7 @@ using R2API;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 
-namespace Risky_ItemTweaks.Items.Common
+namespace Risky_Mod.Items.Common
 {
     public class Crowbar
     {
@@ -21,7 +21,7 @@ namespace Risky_ItemTweaks.Items.Common
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "Crowbar")
                     );
                 c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+                c.Emit<Risky_Mod>(OpCodes.Ldsfld, nameof(Risky_Mod.emptyItemDef));
             };
 
             LanguageAPI.Add("ITEM_CROWBAR_DESC", "Deal <style=cIsDamage>+50%</style> <style=cStack>(+50% per stack)</style> damage to enemies above <style=cIsDamage>90% health</style>.");

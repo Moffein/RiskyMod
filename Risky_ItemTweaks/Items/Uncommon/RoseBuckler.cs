@@ -3,7 +3,7 @@ using MonoMod.Cil;
 using RoR2;
 using R2API;
 
-namespace Risky_ItemTweaks.Items.Uncommon
+namespace Risky_Mod.Items.Uncommon
 {
     public class RoseBuckler
     {
@@ -20,7 +20,7 @@ namespace Risky_ItemTweaks.Items.Uncommon
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "SprintArmor")
                     );
                 c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+                c.Emit<Risky_Mod>(OpCodes.Ldsfld, nameof(Risky_Mod.emptyItemDef));
             };
 
             LanguageAPI.Add("ITEM_SPRINTARMOR_PICKUP", "Increase armor. Gain bonus armor while sprinting.");

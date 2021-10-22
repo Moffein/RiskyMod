@@ -4,7 +4,7 @@ using R2API;
 using RoR2;
 using System;
 
-namespace Risky_ItemTweaks.Items.Boss
+namespace Risky_Mod.Items.Boss
 {
     public class Shatterspleen
     {
@@ -65,7 +65,7 @@ namespace Risky_ItemTweaks.Items.Boss
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "BleedOnHitAndExplode")
                     );
                 c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+                c.Emit<Risky_Mod>(OpCodes.Ldsfld, nameof(Risky_Mod.emptyItemDef));
             };
 
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
@@ -82,7 +82,7 @@ namespace Risky_ItemTweaks.Items.Boss
                 c.Next.Operand = 0.1f;
 
                 //Disable Proc Coefficient
-                if (Risky_ItemTweaks.disableProcChains)
+                if (Risky_Mod.disableProcChains)
                 {
                     c.GotoNext(
                         x => x.MatchStfld<DelayBlast>("position")

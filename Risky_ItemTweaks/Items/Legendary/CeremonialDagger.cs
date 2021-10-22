@@ -5,7 +5,7 @@ using RoR2.Projectile;
 using R2API;
 using System;
 
-namespace Risky_ItemTweaks.Items.Legendary
+namespace Risky_Mod.Items.Legendary
 {
     class CeremonialDagger
     {
@@ -13,7 +13,7 @@ namespace Risky_ItemTweaks.Items.Legendary
         public static GameObject daggerPrefab;
         public static void Modify()
         {
-            if (!enabled || !Risky_ItemTweaks.disableProcChains) return;
+            if (!enabled || !Risky_Mod.disableProcChains) return;
 
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
@@ -32,7 +32,7 @@ namespace Risky_ItemTweaks.Items.Legendary
 
             daggerPrefab = Resources.Load<GameObject>("prefabs/projectiles/DaggerProjectile").InstantiateClone("RiskyItemTweaks_CeremonialDaggerProjectile", true);
             ProjectileController pc = daggerPrefab.GetComponent<ProjectileController>();
-            pc.procCoefficient = Risky_ItemTweaks.disableProcChains ? 0f : 1f;
+            pc.procCoefficient = Risky_Mod.disableProcChains ? 0f : 1f;
             ProjectileAPI.Add(daggerPrefab);
         }
     }

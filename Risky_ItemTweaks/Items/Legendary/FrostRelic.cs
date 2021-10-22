@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine;
 
-namespace Risky_ItemTweaks.Items.Legendary
+namespace Risky_Mod.Items.Legendary
 {
     public class FrostRelic
     {
@@ -34,7 +34,7 @@ namespace Risky_ItemTweaks.Items.Legendary
                 Debug.Log(self.icicleMaxPerStack);  //6
                 */
 
-                if (Risky_ItemTweaks.disableProcChains)
+                if (Risky_Mod.disableProcChains)
                 {
                     self.icicleProcCoefficientPerTick = 0f;
                 }

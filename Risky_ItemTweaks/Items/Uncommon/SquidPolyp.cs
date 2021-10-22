@@ -4,7 +4,7 @@ using R2API;
 using RoR2;
 using UnityEngine;
 
-namespace Risky_ItemTweaks.Items.Uncommon
+namespace Risky_Mod.Items.Uncommon
 {
     public class SquidPolyp
     {
@@ -24,7 +24,7 @@ namespace Risky_ItemTweaks.Items.Uncommon
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "Squid")
                     );
                 c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+                c.Emit<Risky_Mod>(OpCodes.Ldsfld, nameof(Risky_Mod.emptyItemDef));
             };
 
             //Effect handled in SharedHooks.TakeDamage

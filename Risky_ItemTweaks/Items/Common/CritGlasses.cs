@@ -3,7 +3,7 @@ using RoR2;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 
-namespace Risky_ItemTweaks.Items.Common
+namespace Risky_Mod.Items.Common
 {
     public class CritGlasses
     {
@@ -20,7 +20,7 @@ namespace Risky_ItemTweaks.Items.Common
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "CritGlasses")
                     );
                 c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+                c.Emit<Risky_Mod>(OpCodes.Ldsfld, nameof(Risky_Mod.emptyItemDef));
             };
 
             //Changes handled in SharedHooks.GetStatCoefficients

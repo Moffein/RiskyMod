@@ -1,7 +1,7 @@
 ﻿using R2API;
 using UnityEngine;
 
-namespace Risky_ItemTweaks.Items.Uncommon
+namespace Risky_Mod.Items.Uncommon
 {
     public class Stealthkit
     {

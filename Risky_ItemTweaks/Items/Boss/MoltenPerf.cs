@@ -6,7 +6,7 @@ using RoR2.Projectile;
 using System;
 using UnityEngine;
 
-namespace Risky_ItemTweaks.Items.Boss
+namespace Risky_Mod.Items.Boss
 {
     public class MoltenPerf
     {
@@ -15,7 +15,7 @@ namespace Risky_ItemTweaks.Items.Boss
 
         public static void Modify()
         {
-            if (!enabled || !Risky_ItemTweaks.disableProcChains) return;
+            if (!enabled || !Risky_Mod.disableProcChains) return;
 
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>

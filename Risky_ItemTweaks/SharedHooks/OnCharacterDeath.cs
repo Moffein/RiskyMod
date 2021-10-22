@@ -1,12 +1,12 @@
-﻿using Risky_ItemTweaks.Items.Boss;
-using Risky_ItemTweaks.Items.Legendary;
-using Risky_ItemTweaks.Items.Uncommon;
+﻿using Risky_Mod.Items.Boss;
+using Risky_Mod.Items.Legendary;
+using Risky_Mod.Items.Uncommon;
 using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Risky_ItemTweaks.SharedHooks
+namespace Risky_Mod.SharedHooks
 {
     public class OnCharacterDeath
     {

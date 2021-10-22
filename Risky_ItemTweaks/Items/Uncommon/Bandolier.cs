@@ -2,7 +2,7 @@
 using UnityEngine;
 using R2API;
 
-namespace Risky_ItemTweaks.Items.Uncommon
+namespace Risky_Mod.Items.Uncommon
 {
     public class Bandolier
     {

@@ -3,14 +3,14 @@ using RoR2.Projectile;
 using UnityEngine;
 using R2API;
 
-namespace Risky_ItemTweaks.Items.Legendary
+namespace Risky_Mod.Items.Legendary
 {
     public class LaserTurbine
     {
         public static bool enabled = true;
         public static void Modify()
         {
-            if (!enabled || Risky_ItemTweaks.disableProcChains) return;
+            if (!enabled || Risky_Mod.disableProcChains) return;
             EntityStateConfiguration esc = Resources.Load<EntityStateConfiguration>("entitystateconfigurations/EntityStates.LaserTurbine.FireMainBeamState");
 
             for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)

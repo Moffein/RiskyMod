@@ -4,7 +4,7 @@ using RoR2;
 using R2API;
 using System;
 
-namespace Risky_ItemTweaks.Items.Uncommon
+namespace Risky_Mod.Items.Uncommon
 {
     public class Ukulele
     {
@@ -28,7 +28,7 @@ namespace Risky_ItemTweaks.Items.Uncommon
                 c.Index++;
                 c.EmitDelegate<Func<float, float>> ((originalProcCoefficient) =>
                 {
-                    return Risky_ItemTweaks.disableProcChains ? 0f : originalProcCoefficient;
+                    return Risky_Mod.disableProcChains ? 0f : originalProcCoefficient;
                 });
 
                 //Remove range scaling

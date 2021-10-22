@@ -1,8 +1,8 @@
 ﻿using R2API;
-using Risky_ItemTweaks.Items.Boss;
-using Risky_ItemTweaks.Items.Common;
-using Risky_ItemTweaks.Items.Uncommon;
-using Risky_ItemTweaks.MonoBehaviours;
+using Risky_Mod.Items.Boss;
+using Risky_Mod.Items.Common;
+using Risky_Mod.Items.Uncommon;
+using Risky_Mod.MonoBehaviours;
 using RoR2;
 using RoR2.Audio;
 using RoR2.CharacterAI;
@@ -11,7 +11,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Risky_ItemTweaks.SharedHooks
+namespace Risky_Mod.SharedHooks
 {
     public class TakeDamage
     {
@@ -196,7 +196,7 @@ namespace Risky_ItemTweaks.SharedHooks
                                         lightningOrb.origin = damageInfo.position;
                                         lightningOrb.procChainMask = default(ProcChainMask);
                                         lightningOrb.procChainMask.AddProc(ProcType.Thorns);
-                                        lightningOrb.procCoefficient = isVengeanceClone ? 0f : (Risky_ItemTweaks.disableProcChains ? proc : 0.5f);
+                                        lightningOrb.procCoefficient = isVengeanceClone ? 0f : (Risky_Mod.disableProcChains ? proc : 0.5f);
                                         lightningOrb.range = 0f;
                                         lightningOrb.teamIndex = teamIndex2;
                                         lightningOrb.target = hurtBoxes[k];

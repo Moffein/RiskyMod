@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
 
-namespace Risky_ItemTweaks.Items.Legendary
+namespace Risky_Mod.Items.Legendary
 {
     public class Tesla
     {
@@ -18,7 +18,7 @@ namespace Risky_ItemTweaks.Items.Legendary
             {
                 ILCursor c = new ILCursor(il);
                 
-                if (Risky_ItemTweaks.disableProcChains)
+                if (Risky_Mod.disableProcChains)
                 {
                     c.GotoNext(
                         x => x.MatchStfld<RoR2.Orbs.LightningOrb>("procCoefficient")
@@ -37,7 +37,7 @@ namespace Risky_ItemTweaks.Items.Legendary
             On.RoR2.ItemCatalog.Init += (orig) =>
 			{
 				orig();
-				Risky_ItemTweaks.AddToAIBlacklist(RoR2Content.Items.ShockNearby.itemIndex);
+				Risky_Mod.AddToAIBlacklist(RoR2Content.Items.ShockNearby.itemIndex);
 			};
 		}
     }

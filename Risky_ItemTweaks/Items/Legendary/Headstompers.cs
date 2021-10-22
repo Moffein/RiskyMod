@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine;
 
-namespace Risky_ItemTweaks.Items.Legendary
+namespace Risky_Mod.Items.Legendary
 {
     public class Headstompers
     {

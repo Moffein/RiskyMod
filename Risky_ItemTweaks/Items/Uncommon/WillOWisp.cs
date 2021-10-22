@@ -4,7 +4,7 @@ using MonoMod.Cil;
 using R2API;
 using System;
 
-namespace Risky_ItemTweaks.Items.Uncommon
+namespace Risky_Mod.Items.Uncommon
 {
     public class WillOWisp
     {
@@ -21,7 +21,7 @@ namespace Risky_ItemTweaks.Items.Uncommon
                     );
 
                 //Disable Proc Coefficient
-                if (Risky_ItemTweaks.disableProcChains)
+                if (Risky_Mod.disableProcChains)
                 {
                     c.GotoNext(
                         x => x.MatchStfld<DelayBlast>("position")

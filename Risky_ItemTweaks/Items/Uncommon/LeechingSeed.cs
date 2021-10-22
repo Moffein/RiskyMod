@@ -2,7 +2,7 @@
 using MonoMod.Cil;
 using R2API;
 using RoR2;
-namespace Risky_ItemTweaks.Items.Uncommon
+namespace Risky_Mod.Items.Uncommon
 {
     public class LeechingSeed
     {
@@ -19,7 +19,7 @@ namespace Risky_ItemTweaks.Items.Uncommon
 					 x => x.MatchLdsfld(typeof(RoR2Content.Items), "Seed")
 					);
 				c.Remove();
-				c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+				c.Emit<Risky_Mod>(OpCodes.Ldsfld, nameof(Risky_Mod.emptyItemDef));
 			};
 
 			//Effect is handled in SharedHooks.OnHitEnemy

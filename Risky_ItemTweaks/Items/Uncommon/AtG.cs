@@ -5,7 +5,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
 
-namespace Risky_ItemTweaks.Items.Uncommon
+namespace Risky_Mod.Items.Uncommon
 {
     class AtG
     {
@@ -34,7 +34,7 @@ namespace Risky_ItemTweaks.Items.Uncommon
 						procChainMask2.AddProc(ProcType.Missile);
 						FireProjectileInfo fireProjectileInfo = new FireProjectileInfo
 						{
-							projectilePrefab = Risky_ItemTweaks.disableProcChains ? AtG.missilePrefab : self.missilePrefab,
+							projectilePrefab = Risky_Mod.disableProcChains ? AtG.missilePrefab : self.missilePrefab,
 							position = position,
 							rotation = Util.QuaternionSafeLookRotation(up),
 							procChainMask = procChainMask2,
@@ -52,7 +52,7 @@ namespace Risky_ItemTweaks.Items.Uncommon
 
 			LanguageAPI.Add("ITEM_MISSILE_DESC", "<style=cIsDamage>10%</style> chance to fire a missile that deals <style=cIsDamage>300%</style> <style=cStack>(+180% per stack)</style> TOTAL damage.");
         
-			if (Risky_ItemTweaks.disableProcChains)
+			if (Risky_Mod.disableProcChains)
 			{
 				missilePrefab = Resources.Load<GameObject>("Prefabs/Projectiles/MissileProjectile").InstantiateClone("RiskyItemTweaks_ATGProjectile", true);
 				ProjectileController pc = missilePrefab.GetComponent<ProjectileController>();

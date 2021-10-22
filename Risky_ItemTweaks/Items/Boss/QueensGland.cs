@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 using System;
 using R2API;
 
-namespace Risky_ItemTweaks.Items.Boss
+namespace Risky_Mod.Items.Boss
 {
     public class QueensGland
     {
