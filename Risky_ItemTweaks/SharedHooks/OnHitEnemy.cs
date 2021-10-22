@@ -178,38 +178,6 @@ namespace Risky_ItemTweaks.SharedHooks
 									}
 								}
 							}
-							if (Ukulele.enabled)
-                            {
-								int ukuleleCount = attackerInventory.GetItemCount(RoR2Content.Items.ChainLightning);
-								if (ukuleleCount > 0 && !damageInfo.procChainMask.HasProc(ProcType.ChainLightning) && Util.CheckRoll(25f * damageInfo.procCoefficient, attackerMaster))
-								{
-									float damageCoefficient2 = 0.8f;
-									float damageValue2 = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, damageCoefficient2);
-									LightningOrb lightningOrb2 = new LightningOrb();
-									lightningOrb2.origin = damageInfo.position;
-									lightningOrb2.damageValue = damageValue2;
-									lightningOrb2.isCrit = damageInfo.crit;
-									lightningOrb2.bouncesRemaining = 2 * ukuleleCount;
-									lightningOrb2.teamIndex = attackerTeamIndex;
-									lightningOrb2.attacker = damageInfo.attacker;
-									lightningOrb2.bouncedObjects = new List<HealthComponent>
-									{
-										victim.GetComponent<HealthComponent>()
-									};
-									lightningOrb2.procChainMask = damageInfo.procChainMask;
-									lightningOrb2.procChainMask.AddProc(ProcType.ChainLightning);
-									lightningOrb2.procCoefficient = Risky_ItemTweaks.disableProcChains ? 0f : 0.2f;
-									lightningOrb2.lightningType = LightningOrb.LightningType.Ukulele;
-									lightningOrb2.damageColorIndex = DamageColorIndex.Item;
-									lightningOrb2.range = 25f;
-									HurtBox hurtBox2 = lightningOrb2.PickNextTarget(damageInfo.position);
-									if (hurtBox2)
-									{
-										lightningOrb2.target = hurtBox2;
-										OrbManager.instance.AddOrb(lightningOrb2);
-									}
-								}
-							}
 							if (MeatHook.enabled)
                             {
 								int hookCount = attackerInventory.GetItemCount(RoR2Content.Items.BounceNearby);
