@@ -25,6 +25,7 @@ namespace Risky_ItemTweaks.Tweaks
                     return false;
                 });
 
+                //Disable Death Mark - Calculation has been moved to end of SharedHooks.OnHitEnemy
                 c.GotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "DeathMark")
                     );

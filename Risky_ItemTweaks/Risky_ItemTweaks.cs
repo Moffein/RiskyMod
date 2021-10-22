@@ -56,7 +56,7 @@ namespace Risky_ItemTweaks
         private void AddHooks()
         {
             //A hook needs to be used at least once to be added
-            if (StickyBomb.enabled || LeechingSeed.enabled || ElementalBands.enabled || Shatterspleen.enabled || Ukulele.enabled || 
+            if (LeechingSeed.enabled || ElementalBands.enabled || Shatterspleen.enabled || Ukulele.enabled || 
                 (Risky_ItemTweaks.disableProcChains && (MeatHook.enabled || MoltenPerf.enabled || ChargedPerf.enabled)))
             {
                 On.RoR2.GlobalEventManager.OnHitEnemy += OnHitEnemy.GlobalEventManager_OnHitEnemy;

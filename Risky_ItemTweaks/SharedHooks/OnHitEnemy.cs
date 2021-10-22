@@ -138,23 +138,6 @@ namespace Risky_ItemTweaks.SharedHooks
 									}
 								}
 							}
-							if (StickyBomb.enabled)
-                            {
-								int stickyCount = attackerInventory.GetItemCount(RoR2Content.Items.StickyBomb);
-								float chance = StickyBomb.earlyAccessMode ? 2.5f + 2.5f * stickyCount : 5f * stickyCount;
-								if (stickyCount > 0 && Util.CheckRoll(chance * damageInfo.procCoefficient, attackerMaster) && victimBody)
-								{
-									bool alive = victimBody.healthComponent.alive;
-									float num4 = 5f;
-									Vector3 position = damageInfo.position;
-									Vector3 forward = victimBody.corePosition - position;
-									float magnitude = forward.magnitude;
-									Quaternion rotation = (magnitude != 0f) ? Util.QuaternionSafeLookRotation(forward) : UnityEngine.Random.rotationUniform;
-									float damageCoefficient4 = StickyBomb.earlyAccessMode ? 1.25f + 1.25f * stickyCount : 2.4f;
-									float damage = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, damageCoefficient4);
-									ProjectileManager.instance.FireProjectile(Resources.Load<GameObject>("Prefabs/Projectiles/StickyBomb"), position, rotation, damageInfo.attacker, damage, 100f, damageInfo.crit, DamageColorIndex.Item, null, alive ? (magnitude * num4) : -1f);
-								}
-							}
 							if (MoltenPerf.enabled)
                             {
 								int perfCount = attackerInventory.GetItemCount(RoR2Content.Items.FireballsOnHit);
