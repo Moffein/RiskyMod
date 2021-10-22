@@ -39,12 +39,13 @@ namespace Risky_Mod.Drones
             cb.baseRegen = cb.baseMaxHealth / 30f;  //Drones take 30s to regen to full
 
             //Specific changes
-            switch (cb.baseNameToken)
+            switch (cb.name)
             {
                 case "MegaDroneBody": //If I'm gonna pay the price of a legendary chest to buy a drone, it better be worth it.
                     cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
                     cb.baseRegen = cb.baseMaxHealth / 20f;
                     cb.levelArmor += 3f;
+                    Debug.Log("Running code");
                     break;
                 case "Turret1Body":
                     cb.baseRegen = cb.baseMaxHealth / 20f;  //Stationary, cannot dodge. Needs regen.
