@@ -2,6 +2,7 @@
 using MonoMod.Cil;
 using R2API;
 using RoR2;
+using System;
 
 namespace Risky_ItemTweaks.Items.Uncommon
 {
@@ -19,23 +20,34 @@ namespace Risky_ItemTweaks.Items.Uncommon
                 c.GotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "IceRing")
                     );
-                c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
 
+                //Change IceRing damage
                 c.GotoNext(
-                     x => x.MatchLdsfld(typeof(RoR2Content.Items), "FireRing")
+                     x => x.MatchLdcR4(2.5f)
                     );
-                c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+                c.Next.Operand = 1.5f;
+                c.Index += 4;
+                c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
+                {
+                    return damageCoefficient + 1f;
+                });
 
+                //Jump to FireRing
                 c.GotoNext(
-                     x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "ElementalRingsReady")
+                     x => x.MatchLdstr("Prefabs/Projectiles/FireTornado")
                     );
-                c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyBuffDef));
+
+                //Change FireRing damage
+                c.GotoNext(
+                     x => x.MatchLdcR4(3f)
+                    );
+                c.Next.Operand = 2.1f;
+                c.Index += 4;
+                c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
+                {
+                    return damageCoefficient + 1.4f;
+                });
             };
-
-            //Effect handled in SharedHooks.OnHitEnemy
 
             LanguageAPI.Add("ITEM_ICERING_DESC", "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic ice blast</style>, <style=cIsUtility>slowing</style> them by <style=cIsUtility>80%</style> for <style=cIsUtility>3s</style> <style=cStack>(+3s per stack)</style> and dealing <style=cIsDamage>250%</style> <style=cStack>(+150% per stack)</style> TOTAL damage. Recharges every <style=cIsUtility>10</style> seconds.");
             LanguageAPI.Add("ITEM_FIRERING_DESC", "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic flame tornado</style>, dealing <style=cIsDamage>350%</style> <style=cStack>(+210% per stack)</style> TOTAL damage over time. Recharges every <style=cIsUtility>10</style> seconds.");

@@ -56,7 +56,7 @@ namespace Risky_ItemTweaks
         private void AddHooks()
         {
             //A hook needs to be used at least once to be added
-            if (LeechingSeed.enabled || ElementalBands.enabled || Shatterspleen.enabled)
+            if (LeechingSeed.enabled || Shatterspleen.enabled)
             {
                 On.RoR2.GlobalEventManager.OnHitEnemy += OnHitEnemy.GlobalEventManager_OnHitEnemy;
             }
