@@ -138,31 +138,6 @@ namespace Risky_ItemTweaks.SharedHooks
 									}
 								}
 							}
-							if (ChargedPerf.enabled)
-                            {
-								int perfCount = attackerInventory.GetItemCount(RoR2Content.Items.LightningStrikeOnHit);
-								if (perfCount > 0 && !damageInfo.procChainMask.HasProc(ProcType.LightningStrikeOnHit) && Util.CheckRoll(10f, attackerMaster))
-								{
-									float damageValue4 = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, 5f * (float)perfCount);
-									ProcChainMask procChainMask8 = damageInfo.procChainMask;
-									procChainMask8.AddProc(ProcType.LightningStrikeOnHit);
-									HurtBox target = victimBody.mainHurtBox;
-									if (victimBody.hurtBoxGroup)
-									{
-										target = victimBody.hurtBoxGroup.hurtBoxes[UnityEngine.Random.Range(0, victimBody.hurtBoxGroup.hurtBoxes.Length)];
-									}
-									OrbManager.instance.AddOrb(new SimpleLightningStrikeOrb
-									{
-										attacker = attackerBody.gameObject,
-										damageColorIndex = DamageColorIndex.Item,
-										damageValue = damageValue4,
-										isCrit = Util.CheckRoll(attackerBody.crit, attackerMaster),
-										procChainMask = procChainMask8,
-										procCoefficient = Risky_ItemTweaks.disableProcChains ? 0f : 1f,
-										target = target
-									});
-								}
-							}
 							if (Shatterspleen.enabled)
                             {
 								if (!damageInfo.procChainMask.HasProc(ProcType.BleedOnHit))
