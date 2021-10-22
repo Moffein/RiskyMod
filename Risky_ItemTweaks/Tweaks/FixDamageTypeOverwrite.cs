@@ -8,7 +8,7 @@ namespace Risky_Mod.Tweaks
     class FixDamageTypeOverwrite
     {
         public static bool enabled = true;
-        public static void Modify()
+        public void Modify()
         {
             if (!enabled) return;
 

@@ -10,12 +10,6 @@ namespace Risky_Mod.MonoBehaviours
         private List<GameObject> squidList;
         private Inventory inventory = null;
 
-        class SquidMinion
-        {
-            public GameObject gameObject;
-            public HealthComponent healthComponent = null;
-        }
-
         public void Awake()
         {
             squidList = new List<GameObject>();

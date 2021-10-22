@@ -11,6 +11,7 @@ using Risky_Mod.Items.Legendary;
 using UnityEngine;
 using Risky_Mod.Tweaks;
 using Risky_Mod.Items;
+using Risky_Mod.Drones;
 
 namespace Risky_Mod
 {
@@ -31,10 +32,9 @@ namespace Risky_Mod
         {
             ReadConfig();
 
-            FixDamageTypeOverwrite.Modify();
-            ShieldGating.Modify();
-
-            new ItemsCore().ModifyItems();
+            RunTweaks();
+            new ItemsCore().Modify(); //TODO: Use less static methods.
+            new DronesCore().Modify();
 
             AddHooks();
         }
@@ -42,6 +42,12 @@ namespace Risky_Mod
         private void ReadConfig()
         {
 
+        }
+
+        private void RunTweaks()
+        {
+            new FixDamageTypeOverwrite().Modify();
+            new ShieldGating().Modify();
         }
         
         private void AddHooks()

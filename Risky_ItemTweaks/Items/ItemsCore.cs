@@ -7,7 +7,7 @@ using RoR2;
 
 namespace Risky_Mod.Items
 {
-    class ItemsCore
+    public class ItemsCore
     {
         public static bool itemTweaksEnabled = true;
         public static bool uncommonEnabled = true;
@@ -16,7 +16,7 @@ namespace Risky_Mod.Items
         public static bool bossEnabled = true;
         public static bool lunarEnabled = true;
 
-        public void ModifyItems()
+        public void Modify()
         {
             if (!itemTweaksEnabled) return;
             Planula.enabled = Stealthkit.enabled || Razorwire.enabled || SquidPolyp.enabled;
@@ -92,7 +92,7 @@ namespace Risky_Mod.Items
             ShapedGlass.Modify();
         }
 
-        public void AddToAIBlacklist(string itemName)
+        public static void AddToAIBlacklist(string itemName)
         {
             ItemIndex i = ItemCatalog.FindItemIndex(itemName);
             if (i != ItemIndex.None)

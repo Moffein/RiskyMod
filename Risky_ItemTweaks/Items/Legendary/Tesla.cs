@@ -37,8 +37,8 @@ namespace Risky_Mod.Items.Legendary
             On.RoR2.ItemCatalog.Init += (orig) =>
 			{
 				orig();
-				Risky_Mod.AddToAIBlacklist(RoR2Content.Items.ShockNearby.itemIndex);
-			};
+                ItemsCore.AddToAIBlacklist(RoR2Content.Items.ShockNearby.itemIndex);
+            };
 		}
     }
 }

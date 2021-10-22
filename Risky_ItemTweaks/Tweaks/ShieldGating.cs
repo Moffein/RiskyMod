@@ -8,7 +8,7 @@ namespace Risky_Mod.Tweaks
     public class ShieldGating
     {
         public static bool enabled = true;
-        public static void Modify()
+        public void Modify()
         {
             if (!enabled) return;
             //Remove OSP in SharedHooks.RecalculateStats
