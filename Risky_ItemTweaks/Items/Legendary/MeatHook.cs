@@ -23,8 +23,6 @@ namespace Risky_ItemTweaks.Items.Legendary
                 c.Index--;
                 c.Next.Operand = 0f;
             };
-
-            //Effect handled on SharedHooks.OnHitEnemy
         }
     }
 }
