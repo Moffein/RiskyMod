@@ -37,18 +37,6 @@ namespace Risky_ItemTweaks.Tweaks
                     return remainingDamage;
                 });
             };
-
-            On.RoR2.CharacterBody.OnTakeDamageServer += (orig, self, damageReport) =>
-            {
-                if (!(self.healthComponent && self.healthComponent.shield > 0f))
-                {
-                    self.outOfDangerStopwatch = 0f;
-                }
-                if (self.master)
-                {
-                    self.master.OnBodyDamaged(damageReport);
-                }
-            };
         }
     }
 }
