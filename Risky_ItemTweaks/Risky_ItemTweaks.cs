@@ -36,9 +36,10 @@ namespace Risky_ItemTweaks
         {
             ReadConfig();
 
-            Planula.enabled = Stealthkit.enabled || Razorwire.enabled || SquidPolyp.enabled;
-
+            FixDamageTypeOverwrite.Modify();
             ShieldGating.Modify();
+
+            Planula.enabled = Stealthkit.enabled || Razorwire.enabled || SquidPolyp.enabled;
             ModifyCommon();
             ModifyUncommon();
             ModifyLegendary();
@@ -61,7 +62,7 @@ namespace Risky_ItemTweaks
                 On.RoR2.GlobalEventManager.OnHitEnemy += OnHitEnemy.GlobalEventManager_OnHitEnemy;
             }
             if (Chronobauble.enabled || CritGlasses.enabled || BisonSteak.enabled || ShapedGlass.enabled || Knurl.enabled || Warbanner.enabled
-                || RoseBuckler.enabled || RepArmor.enabled || Headhunter.enabled || Berzerker.enabled)
+                || RoseBuckler.enabled || RepArmor.enabled || Headhunter.enabled || Berzerker.enabled || FixDamageTypeOverwrite.enabled)
             {
                 RecalculateStatsAPI.GetStatCoefficients += GetStatsCoefficient.RecalculateStatsAPI_GetStatCoefficients;
             }

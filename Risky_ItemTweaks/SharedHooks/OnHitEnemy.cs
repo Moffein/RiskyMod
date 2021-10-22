@@ -9,6 +9,7 @@ using RoR2.Orbs;
 using System.Collections.Generic;
 using Risky_ItemTweaks.Items.Legendary;
 using HG;
+using Risky_ItemTweaks.Tweaks;
 
 namespace Risky_ItemTweaks.SharedHooks
 {
@@ -30,7 +31,19 @@ namespace Risky_ItemTweaks.SharedHooks
 						TeamComponent attackerTeamComponent = attackerBody.teamComponent;
 						TeamIndex attackerTeamIndex = attackerTeamComponent ? attackerTeamComponent.teamIndex : TeamIndex.None;
 
-                        if (attackerMaster)
+						if (FixDamageTypeOverwrite.enabled)
+						{
+							if ((damageInfo.damageType & DamageType.IgniteOnHit) > DamageType.Generic)
+							{
+								DotController.InflictDot(victim, damageInfo.attacker, DotController.DotIndex.Burn, 4f * damageInfo.procCoefficient, 1f);
+							}
+							if ((damageInfo.damageType & DamageType.PercentIgniteOnHit) != DamageType.Generic || attackerBody.HasBuff(RoR2Content.Buffs.AffixRed))
+							{
+								DotController.InflictDot(victim, damageInfo.attacker, DotController.DotIndex.PercentBurn, 4f * damageInfo.procCoefficient, 1f);
+							}
+						}
+
+						if (attackerMaster)
                         {
                             Inventory attackerInventory = attackerMaster.inventory;
 
@@ -323,6 +336,35 @@ namespace Risky_ItemTweaks.SharedHooks
 										}
 										CollectionPool<HurtBox, List<HurtBox>>.ReturnCollection(list);
 									}
+								}
+							}
+
+							//Recalculate Death Mark since some debuffs are being moved to outside of OnHitEnemy.
+							int deathMarkCount = attackerMaster.inventory.GetItemCount(RoR2Content.Items.DeathMark);
+							int debuffCount = 0;
+							if (deathMarkCount >= 1 && !victimBody.HasBuff(RoR2Content.Buffs.DeathMark))
+							{
+								foreach (BuffIndex buffType in BuffCatalog.debuffBuffIndices)
+								{
+									if (victimBody.HasBuff(buffType))
+									{
+										debuffCount++;
+									}
+								}
+								DotController dotController = DotController.FindDotController(victim.gameObject);
+								if (dotController)
+								{
+									for (DotController.DotIndex dotIndex = DotController.DotIndex.Bleed; dotIndex < DotController.DotIndex.Count; dotIndex++)
+									{
+										if (dotController.HasDotActive(dotIndex))
+										{
+											debuffCount++;
+										}
+									}
+								}
+								if (debuffCount >= 4)
+								{
+									victimBody.AddTimedBuff(RoR2Content.Buffs.DeathMark, 7f * (float)deathMarkCount);
 								}
 							}
 						}
