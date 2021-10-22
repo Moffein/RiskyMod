@@ -50,21 +50,6 @@ namespace Risky_ItemTweaks.SharedHooks
 						NetworkServer.Spawn(explosionPrefab);
 					}
 				}
-				if (CeremonialDagger.enabled)
-				{
-					int daggerCount = attackerInventory.GetItemCount(RoR2Content.Items.Dagger);
-					if (daggerCount > 0)
-					{
-						float damageCoefficient = 1.5f * (float)daggerCount;
-						Vector3 daggerPosition = victimObject.transform.position + Vector3.up * 1.8f;
-						for (int k = 0; k < 3; k++)
-						{
-							ProjectileManager.instance.FireProjectile(CeremonialDagger.daggerPrefab, daggerPosition + UnityEngine.Random.insideUnitSphere * 0.5f,
-								Util.QuaternionSafeLookRotation(Vector3.up + UnityEngine.Random.insideUnitSphere * 0.1f), attackerBody.gameObject,
-								Util.OnKillProcDamage(attackerBody.damage, damageCoefficient), 200f, Util.CheckRoll(attackerBody.crit, attackerMaster), DamageColorIndex.Item, null, -1f);
-						}
-					}
-				}
 				if (Berzerker.enabled)
                 {
 					int berzerkCount = attackerInventory.GetItemCount(RoR2Content.Items.WarCryOnMultiKill);

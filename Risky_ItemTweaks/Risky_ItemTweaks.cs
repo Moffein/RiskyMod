@@ -74,7 +74,7 @@ namespace Risky_ItemTweaks
             {
                 On.RoR2.HealthComponent.TakeDamage += TakeDamage.HealthComponent_TakeDamage;
             }
-            if (WillOWisp.enabled || CeremonialDagger.enabled || Shatterspleen.enabled || Headhunter.enabled || Berzerker.enabled)
+            if (WillOWisp.enabled || Shatterspleen.enabled || Headhunter.enabled || Berzerker.enabled)
             {
                 On.RoR2.GlobalEventManager.OnCharacterDeath += OnCharacterDeath.GlobalEventManager_OnCharacterDeath;
             }

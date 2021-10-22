@@ -34,8 +34,6 @@ namespace Risky_ItemTweaks.Items.Boss
                 });
             };
 
-            //Effect handled in SharedHooks.OnHitEnemy
-
             meatballPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/FireMeatBall").InstantiateClone("RiskyItemTweaks_Perforator", true);
             ProjectileImpactExplosion pie = meatballPrefab.GetComponent<ProjectileImpactExplosion>();
             pie.blastProcCoefficient = 0f;
