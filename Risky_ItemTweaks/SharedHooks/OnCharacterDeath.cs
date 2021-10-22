@@ -24,32 +24,6 @@ namespace Risky_ItemTweaks.SharedHooks
 
 			if (attackerBody && attackerMaster)
 			{
-				if (WillOWisp.enabled)
-				{
-					int wispCount = attackerInventory.GetItemCount(RoR2Content.Items.ExplodeOnDeath);
-					if (wispCount > 0)
-					{
-						Vector3 victimPosition = Util.GetCorePosition(victimObject);
-						float damageCoefficient = 3.5f * (1f + (float)(wispCount - 1) * 0.8f);
-						float baseDamage = Util.OnKillProcDamage(attackerBody.damage, damageCoefficient);
-						GameObject explosionPrefab = UnityEngine.Object.Instantiate<GameObject>(GlobalEventManager.instance.explodeOnDeathPrefab, victimPosition, Quaternion.identity);
-						DelayBlast db = explosionPrefab.GetComponent<DelayBlast>();
-						db.position = victimPosition;
-						db.baseDamage = baseDamage;
-						db.baseForce = 2000f;
-						db.bonusForce = Vector3.up * 1000f;
-						db.radius = 16f;
-						db.attacker = damageInfo.attacker;
-						db.inflictor = null;
-						db.crit = Util.CheckRoll(attackerBody.crit, attackerMaster);
-						db.maxTimer = 0.5f;
-						db.damageColorIndex = DamageColorIndex.Item;
-						db.falloffModel = BlastAttack.FalloffModel.SweetSpot;
-						db.procCoefficient = Risky_ItemTweaks.disableProcChains ? 0f : 1f;
-						explosionPrefab.GetComponent<TeamFilter>().teamIndex = attackerTeamIndex;
-						NetworkServer.Spawn(explosionPrefab);
-					}
-				}
 				if (Berzerker.enabled)
                 {
 					int berzerkCount = attackerInventory.GetItemCount(RoR2Content.Items.WarCryOnMultiKill);

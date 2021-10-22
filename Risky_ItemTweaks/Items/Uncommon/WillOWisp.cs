@@ -2,6 +2,7 @@
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
+using System;
 
 namespace Risky_ItemTweaks.Items.Uncommon
 {
@@ -12,18 +13,36 @@ namespace Risky_ItemTweaks.Items.Uncommon
         {
             if (!enabled) return;
 
-            //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "ExplodeOnDeath")
                     );
-                c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
-            };
 
-            //Effect handled in SharedHooks.OnCharacterDeath
+                //Disable Proc Coefficient
+                if (Risky_ItemTweaks.disableProcChains)
+                {
+                    c.GotoNext(
+                        x => x.MatchStfld<DelayBlast>("position")
+                        );
+                    c.Index--;
+                    c.EmitDelegate<Func<DelayBlast, DelayBlast>>((db) =>
+                    {
+                        db.procCoefficient = 0f;
+                        return db;
+                    });
+                }
+
+                //Disable Radius Scaling
+                c.GotoNext(
+                     x => x.MatchStfld<RoR2.DelayBlast>("radius")
+                    );
+                c.EmitDelegate<Func<float, float>>((oldRadius) =>
+                {
+                    return 16f;
+                });
+            };
 
             LanguageAPI.Add("ITEM_EXPLODEONDEATH_DESC", "On killing an enemy, spawn a <style=cIsDamage>lava pillar</style> in a <style=cIsDamage>16m</style> radius for <style=cIsDamage>350%</style> <style=cStack>(+280% per stack)</style> base damage.");
         }
