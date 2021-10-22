@@ -56,7 +56,7 @@ namespace Risky_ItemTweaks
         private void AddHooks()
         {
             //A hook needs to be used at least once to be added
-            if (LeechingSeed.enabled || Shatterspleen.enabled)
+            if (LeechingSeed.enabled)
             {
                 On.RoR2.GlobalEventManager.OnHitEnemy += OnHitEnemy.GlobalEventManager_OnHitEnemy;
             }
@@ -73,7 +73,7 @@ namespace Risky_ItemTweaks
             {
                 On.RoR2.HealthComponent.TakeDamage += TakeDamage.HealthComponent_TakeDamage;
             }
-            if (WillOWisp.enabled || Shatterspleen.enabled || Headhunter.enabled || Berzerker.enabled)
+            if (WillOWisp.enabled || Headhunter.enabled || Berzerker.enabled)
             {
                 On.RoR2.GlobalEventManager.OnCharacterDeath += OnCharacterDeath.GlobalEventManager_OnCharacterDeath;
             }

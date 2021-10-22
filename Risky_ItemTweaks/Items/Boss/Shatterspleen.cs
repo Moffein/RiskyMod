@@ -2,6 +2,7 @@
 using MonoMod.Cil;
 using R2API;
 using RoR2;
+using System;
 
 namespace Risky_ItemTweaks.Items.Boss
 {
@@ -15,29 +16,79 @@ namespace Risky_ItemTweaks.Items.Boss
             LanguageAPI.Add("ITEM_BLEEDONHITANDEXPLODE_PICKUP", "Bleeding enemies explode on kill.");
             LanguageAPI.Add("ITEM_BLEEDONHITANDEXPLODE_DESC", "Gain a <style=cIsDamage>5%</style> chance to <style=cIsDamage>bleed</style> enemies for <style=cIsDamage>240%</style> base damage. <style=cIsDamage>Bleeding</style> enemies <style=cIsDamage>explode</style> on death for <style=cIsDamage>400%</style> <style=cStack>(+400% per stack)</style> damage, plus an additional <style=cIsDamage>10%</style> <style=cStack>(+10% per stack)</style> of their maximum health.");
 
-            //Remove Vanilla Effect
+            //Remove Vanilla bleed effect - needs to be recalculated.
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
+                //Add shatterspleen to bleed chance counter.
                 ILCursor c = new ILCursor(il);
+
+                //Having a Shatterspleen now triggers the bleed chance calculation by addint +1 tri-tip
                 c.GotoNext(
-                     x => x.MatchLdsfld(typeof(RoR2Content.Items), "BleedOnHit")    //Overwrite vanilla bleed chance so that Shatterspleen can be added to the tally.
+                     x => x.MatchLdsfld(typeof(RoR2Content.Items), "BleedOnHit")
                     );
-                c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+                c.Index += 2;
+                c.Emit(OpCodes.Ldloc_3);    //inventory
+                c.EmitDelegate<Func<int, Inventory, int>>((bleedCount, inventory) =>
+                {
+                    if (inventory.GetItemCount(RoR2Content.Items.BleedOnHitAndExplode) > 0)
+                    {
+                        bleedCount++;
+                    }
+                    return bleedCount;
+                });
+
+                //Recalculate bleed chance
+                c.GotoNext(
+                     x =>x.MatchLdfld<DamageInfo>("procCoefficient")
+                    );
+                c.Index += 2;
+                c.Emit(OpCodes.Ldloc_3);    //inventory
+                c.Emit(OpCodes.Ldarg_1);    //damageinfo
+                c.EmitDelegate<Func<float, Inventory, DamageInfo, float>>((origChance, inventory, damageInfo) =>
+                {
+                    float newChance = inventory.GetItemCount(RoR2Content.Items.BleedOnHit) * 10f;
+                    if (inventory.GetItemCount(RoR2Content.Items.BleedOnHitAndExplode) > 0)
+                    {
+                        newChance += 5f;
+                    }
+                    return newChance * damageInfo.procCoefficient;
+                });
+
+
+                //Remove vanilla bleed on crit
                 c.GotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "BleedOnHitAndExplode")
                     );
                 c.Remove();
                 c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
             };
+
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "BleedOnHitAndExplode")
                     );
-                c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+
+                //Change Max HP damage
+                c.GotoNext(
+                     x => x.MatchLdcR4(0.15f)
+                    );
+                c.Next.Operand = 0.1f;
+
+                //Disable Proc Coefficient
+                if (Risky_ItemTweaks.disableProcChains)
+                {
+                    c.GotoNext(
+                        x => x.MatchStfld<DelayBlast>("position")
+                        );
+                    c.Index--;
+                    c.EmitDelegate<Func<DelayBlast, DelayBlast>>((db) =>
+                    {
+                        db.procCoefficient = 0f;
+                        return db;
+                    });
+                }
             };
 
             //Effects handled in Sharedhooks.OnHitEnemy and SharedHooks.OnCharacterDeath

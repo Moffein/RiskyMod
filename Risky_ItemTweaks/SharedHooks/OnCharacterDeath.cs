@@ -75,33 +75,6 @@ namespace Risky_ItemTweaks.SharedHooks
                 }
 				if (victimBody)
                 {
-					if (Shatterspleen.enabled)
-					{
-						int spleenCount = attackerInventory.GetItemCount(RoR2Content.Items.BleedOnHitAndExplode);
-						if (spleenCount > 0 && victimBody && (victimBody.HasBuff(RoR2Content.Buffs.Bleeding) || victimBody.HasBuff(RoR2Content.Buffs.SuperBleed)))
-						{
-							Util.PlaySound("Play_bleedOnCritAndExplode_explode", victimObject);
-							Vector3 corePosition3 = Util.GetCorePosition(victimObject);
-							float damageCoefficient3 = 4f * (float)(1 + (spleenCount - 1));
-							float maxHPDamagePercent = 0.1f * (float)(1 + (spleenCount - 1));
-							float baseDamage2 = Util.OnKillProcDamage(attackerBody.damage, damageCoefficient3) + victimBody.maxHealth * maxHPDamagePercent;
-							GameObject gameObject11 = UnityEngine.Object.Instantiate<GameObject>(GlobalEventManager.instance.bleedOnHitAndExplodeBlastEffect, corePosition3, Quaternion.identity);
-							DelayBlast component5 = gameObject11.GetComponent<DelayBlast>();
-							component5.position = corePosition3;
-							component5.baseDamage = baseDamage2;
-							component5.baseForce = 0f;
-							component5.radius = 16f;
-							component5.attacker = damageInfo.attacker;
-							component5.inflictor = null;
-							component5.crit = Util.CheckRoll(attackerBody.crit, attackerMaster);
-							component5.maxTimer = 0f;
-							component5.damageColorIndex = DamageColorIndex.Item;
-							component5.falloffModel = BlastAttack.FalloffModel.SweetSpot;
-							gameObject11.GetComponent<TeamFilter>().teamIndex = attackerTeamIndex;
-							NetworkServer.Spawn(gameObject11);
-						}
-					}
-
 					if (damageReport.victimIsElite)
 					{
 						if (Headhunter.enabled)

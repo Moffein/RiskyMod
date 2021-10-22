@@ -76,50 +76,6 @@ namespace Risky_ItemTweaks.SharedHooks
 									}
 								}
                             }
-							if (Shatterspleen.enabled)
-                            {
-								if (!damageInfo.procChainMask.HasProc(ProcType.BleedOnHit))
-								{
-									int daggerCount = attackerInventory.GetItemCount(RoR2Content.Items.BleedOnHit);
-									int spleenCount = attackerInventory.GetItemCount(RoR2Content.Items.BleedOnHitAndExplode);
-									bool flag = (damageInfo.damageType & DamageType.BleedOnHit) > DamageType.Generic;
-									if ((daggerCount + spleenCount > 0 || flag) && (flag || Util.CheckRoll((10f * daggerCount + (spleenCount > 0 ? 5f : 0f)) * damageInfo.procCoefficient, attackerMaster)))
-									{
-										ProcChainMask procChainMask2 = damageInfo.procChainMask;
-										procChainMask2.AddProc(ProcType.BleedOnHit);
-										DotController.InflictDot(victim, damageInfo.attacker, DotController.DotIndex.Bleed, 3f * damageInfo.procCoefficient, 1f);
-									}
-								}
-							}
-
-							//Recalculate Death Mark since some debuffs are being moved to outside of OnHitEnemy.
-							int deathMarkCount = attackerMaster.inventory.GetItemCount(RoR2Content.Items.DeathMark);
-							int debuffCount = 0;
-							if (deathMarkCount >= 1 && !victimBody.HasBuff(RoR2Content.Buffs.DeathMark))
-							{
-								foreach (BuffIndex buffType in BuffCatalog.debuffBuffIndices)
-								{
-									if (victimBody.HasBuff(buffType))
-									{
-										debuffCount++;
-									}
-								}
-								DotController dotController = DotController.FindDotController(victim.gameObject);
-								if (dotController)
-								{
-									for (DotController.DotIndex dotIndex = DotController.DotIndex.Bleed; dotIndex < DotController.DotIndex.Count; dotIndex++)
-									{
-										if (dotController.HasDotActive(dotIndex))
-										{
-											debuffCount++;
-										}
-									}
-								}
-								if (debuffCount >= 4)
-								{
-									victimBody.AddTimedBuff(RoR2Content.Buffs.DeathMark, 7f * (float)deathMarkCount);
-								}
-							}
 						}
                     }
                 }
