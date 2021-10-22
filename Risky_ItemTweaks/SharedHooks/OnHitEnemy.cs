@@ -17,31 +17,42 @@ namespace Risky_ItemTweaks.SharedHooks
     {
         public static void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, UnityEngine.GameObject victim)
         {
-            orig(self, damageInfo, victim);
+			CharacterBody attackerBody = null;
+			CharacterBody victimBody = null;
+
+			if (NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected)
+			{
+				if (damageInfo.attacker)
+				{
+					attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+					victimBody = victim ? victim.GetComponent<CharacterBody>() : null;
+
+					if (FixDamageTypeOverwrite.enabled)
+					{
+						if ((damageInfo.damageType & DamageType.IgniteOnHit) > DamageType.Generic)
+						{
+							DotController.InflictDot(victim, damageInfo.attacker, DotController.DotIndex.Burn, 4f * damageInfo.procCoefficient, 1f);
+						}
+						if ((damageInfo.damageType & DamageType.PercentIgniteOnHit) != DamageType.Generic || attackerBody.HasBuff(RoR2Content.Buffs.AffixRed))
+						{
+							DotController.InflictDot(victim, damageInfo.attacker, DotController.DotIndex.PercentBurn, 4f * damageInfo.procCoefficient, 1f);
+						}
+					}
+				}
+			}
+
+			orig(self, damageInfo, victim);
+
             if (NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected)
             {
                 if (damageInfo.attacker)
                 {
-                    CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                    CharacterBody victimBody = victim ? victim.GetComponent<CharacterBody>() : null;
                     if (attackerBody && victimBody)
 					{
 						Vector3 aimOrigin = attackerBody.aimOrigin;
 						CharacterMaster attackerMaster = attackerBody.master;
 						TeamComponent attackerTeamComponent = attackerBody.teamComponent;
 						TeamIndex attackerTeamIndex = attackerTeamComponent ? attackerTeamComponent.teamIndex : TeamIndex.None;
-
-						if (FixDamageTypeOverwrite.enabled)
-						{
-							if ((damageInfo.damageType & DamageType.IgniteOnHit) > DamageType.Generic)
-							{
-								DotController.InflictDot(victim, damageInfo.attacker, DotController.DotIndex.Burn, 4f * damageInfo.procCoefficient, 1f);
-							}
-							if ((damageInfo.damageType & DamageType.PercentIgniteOnHit) != DamageType.Generic || attackerBody.HasBuff(RoR2Content.Buffs.AffixRed))
-							{
-								DotController.InflictDot(victim, damageInfo.attacker, DotController.DotIndex.PercentBurn, 4f * damageInfo.procCoefficient, 1f);
-							}
-						}
 
 						if (attackerMaster)
                         {
@@ -150,61 +161,6 @@ namespace Risky_ItemTweaks.SharedHooks
 										ProcChainMask procChainMask2 = damageInfo.procChainMask;
 										procChainMask2.AddProc(ProcType.BleedOnHit);
 										DotController.InflictDot(victim, damageInfo.attacker, DotController.DotIndex.Bleed, 3f * damageInfo.procCoefficient, 1f);
-									}
-								}
-							}
-							if (MeatHook.enabled)
-                            {
-								int hookCount = attackerInventory.GetItemCount(RoR2Content.Items.BounceNearby);
-								if (hookCount > 0)
-								{
-									float num3 = (1f - 100f / (100f + 20f * (float)hookCount)) * 100f;
-									if (!damageInfo.procChainMask.HasProc(ProcType.BounceNearby) && Util.CheckRoll(num3 * damageInfo.procCoefficient, attackerMaster))
-									{
-										List<HurtBox> list = CollectionPool<HurtBox, List<HurtBox>>.RentCollection();
-										int maxTargets = 5 + hookCount * 5;
-										BullseyeSearch search = new BullseyeSearch();
-										List<HealthComponent> list2 = CollectionPool<HealthComponent, List<HealthComponent>>.RentCollection();
-										if (attackerBody && attackerBody.healthComponent)
-										{
-											list2.Add(attackerBody.healthComponent);
-										}
-										if (victimBody && victimBody.healthComponent)
-										{
-											list2.Add(victimBody.healthComponent);
-										}
-										BounceOrb.SearchForTargets(search, attackerTeamIndex, damageInfo.position, 30f, maxTargets, list, list2);
-										CollectionPool<HealthComponent, List<HealthComponent>>.ReturnCollection(list2);
-										List<HealthComponent> bouncedObjects = new List<HealthComponent>
-										{
-											victim.GetComponent<HealthComponent>()
-										};
-										float damageCoefficient3 = 1f;
-										float damageValue3 = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, damageCoefficient3);
-										int i = 0;
-										int count = list.Count;
-										while (i < count)
-										{
-											HurtBox hurtBox3 = list[i];
-											if (hurtBox3)
-											{
-												BounceOrb bounceOrb = new BounceOrb();
-												bounceOrb.origin = damageInfo.position;
-												bounceOrb.damageValue = damageValue3;
-												bounceOrb.isCrit = damageInfo.crit;
-												bounceOrb.teamIndex = attackerTeamIndex;
-												bounceOrb.attacker = damageInfo.attacker;
-												bounceOrb.procChainMask = damageInfo.procChainMask;
-												bounceOrb.procChainMask.AddProc(ProcType.BounceNearby);
-												bounceOrb.procCoefficient = 0f;
-												bounceOrb.damageColorIndex = DamageColorIndex.Item;
-												bounceOrb.bouncedObjects = bouncedObjects;
-												bounceOrb.target = hurtBox3;
-												OrbManager.instance.AddOrb(bounceOrb);
-											}
-											i++;
-										}
-										CollectionPool<HurtBox, List<HurtBox>>.ReturnCollection(list);
 									}
 								}
 							}

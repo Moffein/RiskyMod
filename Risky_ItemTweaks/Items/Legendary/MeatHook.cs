@@ -17,8 +17,11 @@ namespace Risky_ItemTweaks.Items.Legendary
                 c.GotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "BounceNearby")
                     );
-                c.Remove();
-                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+                c.GotoNext(
+                    x => x.MatchStfld<RoR2.Orbs.BounceOrb>("procCoefficient")
+                    );
+                c.Index--;
+                c.Next.Operand = 0f;
             };
 
             //Effect handled on SharedHooks.OnHitEnemy
