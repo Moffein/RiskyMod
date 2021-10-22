@@ -1,0 +1,44 @@
+﻿using Mono.Cecil.Cil;
+using MonoMod.Cil;
+using R2API;
+using RoR2;
+
+namespace Risky_ItemTweaks.Items.Uncommon
+{
+    public class ElementalBands
+    {
+        public static bool enabled = true;
+        public static void Modify()
+        {
+            if (!enabled) return;
+
+            //Remove Vanilla Effect
+            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchLdsfld(typeof(RoR2Content.Items), "IceRing")
+                    );
+                c.Remove();
+                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+
+                c.GotoNext(
+                     x => x.MatchLdsfld(typeof(RoR2Content.Items), "FireRing")
+                    );
+                c.Remove();
+                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyItemDef));
+
+                c.GotoNext(
+                     x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "ElementalRingsReady")
+                    );
+                c.Remove();
+                c.Emit<Risky_ItemTweaks>(OpCodes.Ldsfld, nameof(Risky_ItemTweaks.emptyBuffDef));
+            };
+
+            //Effect handled in SharedHooks.OnHitEnemy
+
+            LanguageAPI.Add("ITEM_ICERING_DESC", "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic ice blast</style>, <style=cIsUtility>slowing</style> them by <style=cIsUtility>80%</style> for <style=cIsUtility>3s</style> <style=cStack>(+3s per stack)</style> and dealing <style=cIsDamage>250%</style> <style=cStack>(+150% per stack)</style> TOTAL damage. Recharges every <style=cIsUtility>10</style> seconds.");
+            LanguageAPI.Add("ITEM_FIRERING_DESC", "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic flame tornado</style>, dealing <style=cIsDamage>350%</style> <style=cStack>(+210% per stack)</style> TOTAL damage over time. Recharges every <style=cIsUtility>10</style> seconds.");
+        }
+    }
+}
