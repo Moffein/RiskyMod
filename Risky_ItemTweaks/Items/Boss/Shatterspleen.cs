@@ -22,19 +22,25 @@ namespace Risky_ItemTweaks.Items.Boss
                 //Add shatterspleen to bleed chance counter.
                 ILCursor c = new ILCursor(il);
 
-                //Having a Shatterspleen now triggers the bleed chance calculation by addint +1 tri-tip
+                //Having a Shatterspleen now triggers the bleed chance calculation by adding +1 tri-tip
                 c.GotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "BleedOnHit")
                     );
-                c.Index += 2;
+                c.GotoNext(
+                    x => x.MatchCgt()
+                    );
+                c.Index++;
                 c.Emit(OpCodes.Ldloc_3);    //inventory
-                c.EmitDelegate<Func<int, Inventory, int>>((bleedCount, inventory) =>
+                c.EmitDelegate<Func<bool, Inventory, bool>>((isBleed, inventory) =>
                 {
-                    if (inventory.GetItemCount(RoR2Content.Items.BleedOnHitAndExplode) > 0)
+                    if (!isBleed)
                     {
-                        bleedCount++;
+                        if (inventory.GetItemCount(RoR2Content.Items.BleedOnHitAndExplode) > 0)
+                        {
+                            isBleed = true;
+                        }
                     }
-                    return bleedCount;
+                    return isBleed;
                 });
 
                 //Recalculate bleed chance
@@ -46,12 +52,11 @@ namespace Risky_ItemTweaks.Items.Boss
                 c.Emit(OpCodes.Ldarg_1);    //damageinfo
                 c.EmitDelegate<Func<float, Inventory, DamageInfo, float>>((origChance, inventory, damageInfo) =>
                 {
-                    float newChance = inventory.GetItemCount(RoR2Content.Items.BleedOnHit) * 10f;
                     if (inventory.GetItemCount(RoR2Content.Items.BleedOnHitAndExplode) > 0)
                     {
-                        newChance += 5f;
+                        origChance += 5f * damageInfo.procCoefficient;
                     }
-                    return newChance * damageInfo.procCoefficient;
+                    return origChance;
                 });
 
 
@@ -90,8 +95,6 @@ namespace Risky_ItemTweaks.Items.Boss
                     });
                 }
             };
-
-            //Effects handled in Sharedhooks.OnHitEnemy and SharedHooks.OnCharacterDeath
         }
     }
 }
