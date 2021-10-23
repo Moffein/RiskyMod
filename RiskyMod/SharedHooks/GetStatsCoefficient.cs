@@ -23,7 +23,7 @@ namespace Risky_Mod.SharedHooks
             {
                 //+30% AtkSpd and MoveSpd already present in vanilla
                 args.armorAdd += 15f;
-                args.damageMultAdd += 0.3f;
+                args.damageMultAdd += 0.15f;
             }
             if (Headhunter.enabled && sender.HasBuff(Headhunter.headhunterBuff))
             {
