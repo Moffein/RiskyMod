@@ -42,25 +42,21 @@ namespace Risky_Mod.Drones
             switch (cb.name)
             {
                 case "MegaDroneBody": //If I'm gonna pay the price of a legendary chest to buy a drone, it better be worth it.
-                    cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
-                    cb.baseRegen = cb.baseMaxHealth / 20f;
-                    cb.levelArmor += 3f;
-                    Debug.Log("Running code");
+                    cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune | CharacterBody.BodyFlags.ResistantToAOE; 
                     break;
-                case "Turret1Body":
+                /*case "Turret1Body":
                     cb.baseRegen = cb.baseMaxHealth / 20f;  //Stationary, cannot dodge. Needs regen.
                     break;
                 case "FlameDroneBody":
                     cb.baseRegen = cb.baseMaxHealth / 20f;  //Has to get close to deal damage.
-                    break;
+                    break;*/
                 default:
                     break;
             }
 
             //This makes their performance stay the same on every stage. (Everything's HP increases 30% per level)
             cb.levelRegen = cb.baseRegen * 0.3f;
-            cb.levelDamage = cb.baseDamage * 0.3f;
-            cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;   //Drones need AOE resistance because they're too stupid to dodge.
+            cb.levelDamage = cb.baseDamage * 0.2f;
             //cb.levelArmor += 3f;  //Give armor on levelup if they are still dying like flies
         }
 

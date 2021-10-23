@@ -29,7 +29,7 @@ namespace Risky_Mod.Tweaks
                 c.Emit(OpCodes.Ldarg_0);
                 c.EmitDelegate<Func<float, HealthComponent, float>>((remainingDamage, self) =>
                 {
-                    if (self.body.inventory && self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly.itemIndex) == 0)
+                    if (self.body.inventory)    //&& self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly.itemIndex) == 0 && !self.body.HasBuff(RoR2Content.Buffs.AffixLunar)
                     {
                         self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 0.3f);
                         return 0f;
