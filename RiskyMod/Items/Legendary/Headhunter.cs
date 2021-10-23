@@ -4,13 +4,13 @@ using UnityEngine;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 
-namespace Risky_Mod.Items.Legendary
+namespace RiskyMod.Items.Legendary
 {
     public class Headhunter
     {
         public static bool enabled = true;
         public static BuffDef headhunterBuff;
-        public static void Modify()
+        public Headhunter()
         {
             if (!enabled) return;
             LanguageAPI.Add("ITEM_HEADHUNTER_PICKUP", "Deal extra damage to elites, and temporarily gain their power on kill.");

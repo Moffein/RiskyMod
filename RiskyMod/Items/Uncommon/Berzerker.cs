@@ -5,13 +5,13 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
 
-namespace Risky_Mod.Items.Uncommon
+namespace RiskyMod.Items.Uncommon
 {
     public class Berzerker
     {
         public static bool enabled = true;
         public static BuffDef berzerkBuff;
-        public static void Modify()
+        public Berzerker()
         {
             if (!enabled) return;
 

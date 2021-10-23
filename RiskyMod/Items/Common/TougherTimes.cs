@@ -2,12 +2,12 @@
 using MonoMod.Cil;
 using RoR2;
 using R2API;
-namespace Risky_Mod.Items.Common
+namespace RiskyMod.Items.Common
 {
     public class TougherTimes
     {
         public static bool enabled = true;
-        public static void Modify()
+        public TougherTimes()
         {
             if (!enabled) return;
 

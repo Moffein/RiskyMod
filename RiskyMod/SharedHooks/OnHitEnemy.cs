@@ -1,17 +1,17 @@
-﻿using Risky_Mod.Items.Uncommon;
+﻿using RiskyMod.Items.Uncommon;
 using RoR2;
 using UnityEngine.Networking;
 using UnityEngine;
 using RoR2.Projectile;
-using Risky_Mod.Items.Common;
-using Risky_Mod.Items.Boss;
+using RiskyMod.Items.Common;
+using RiskyMod.Items.Boss;
 using RoR2.Orbs;
 using System.Collections.Generic;
-using Risky_Mod.Items.Legendary;
+using RiskyMod.Items.Legendary;
 using HG;
-using Risky_Mod.Tweaks;
+using RiskyMod.Tweaks;
 
-namespace Risky_Mod.SharedHooks
+namespace RiskyMod.SharedHooks
 {
     class OnHitEnemy
     {

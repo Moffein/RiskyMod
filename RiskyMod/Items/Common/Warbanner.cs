@@ -1,12 +1,12 @@
 ﻿using R2API;
 using RoR2;
 
-namespace Risky_Mod.Items.Common
+namespace RiskyMod.Items.Common
 {
     public class Warbanner
     {
         public static bool enabled = true;
-        public static void Modify()
+        public Warbanner()
         {
             if (!enabled) return;
 

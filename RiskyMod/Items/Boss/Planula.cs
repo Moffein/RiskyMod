@@ -1,10 +1,10 @@
-﻿namespace Risky_Mod.Items.Boss
+﻿namespace RiskyMod.Items.Boss
 {
     //This is just here to prevent anti-synergy with the Stealthkit/Razorwire/Polyp changes (Planula healing before HP lost is calculated)
     public class Planula
     {
         public static bool enabled = true;
-        public static void Modify()
+        public Planula()
         {
             if (!enabled) return;
 

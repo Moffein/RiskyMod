@@ -3,12 +3,12 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
 
-namespace Risky_Mod.Items.Legendary
+namespace RiskyMod.Items.Legendary
 {
     public class NovaOnHeal
     {
         public static bool enabled = true;
-        public static void Modify()
+        public NovaOnHeal()
         {
             //Nerf Vengeance damage
             IL.RoR2.HealthComponent.ServerFixedUpdate += (il) =>

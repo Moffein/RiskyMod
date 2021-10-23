@@ -3,12 +3,12 @@ using MonoMod.Cil;
 using RoR2;
 using R2API;
 
-namespace Risky_Mod.Items.Common
+namespace RiskyMod.Items.Common
 {
     public class RepArmor
     {
         public static bool enabled = true;
-        public static void Modify()
+        public RepArmor()
         {
             if (!enabled) return;
 

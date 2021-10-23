@@ -1,9 +1,9 @@
-﻿using Risky_Mod.Items.Uncommon;
-using Risky_Mod.Tweaks;
+﻿using RiskyMod.Items.Uncommon;
+using RiskyMod.Tweaks;
 using RoR2;
 using UnityEngine;
 
-namespace Risky_Mod.SharedHooks
+namespace RiskyMod.SharedHooks
 {
     public class RecalculateStats
     {

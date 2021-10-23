@@ -2,12 +2,12 @@
 using MonoMod.Cil;
 using RoR2;
 
-namespace Risky_Mod.Items.Lunar
+namespace RiskyMod.Items.Lunar
 {
     public class ShapedGlass
     {
         public static bool enabled = true;
-        public static void Modify()
+        public ShapedGlass()
         {
             if (!enabled) return;
 

@@ -1,13 +1,13 @@
 ﻿using RoR2;
 using R2API;
-using Risky_Mod.Items.Uncommon;
-using Risky_Mod.Items.Common;
-using Risky_Mod.Items.Boss;
+using RiskyMod.Items.Uncommon;
+using RiskyMod.Items.Common;
+using RiskyMod.Items.Boss;
 using UnityEngine;
-using Risky_Mod.Items.Lunar;
-using Risky_Mod.Items.Legendary;
+using RiskyMod.Items.Lunar;
+using RiskyMod.Items.Legendary;
 
-namespace Risky_Mod.SharedHooks
+namespace RiskyMod.SharedHooks
 {
     public class GetStatsCoefficient
     {

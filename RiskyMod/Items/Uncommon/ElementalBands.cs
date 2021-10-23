@@ -4,14 +4,24 @@ using R2API;
 using RoR2;
 using System;
 
-namespace Risky_Mod.Items.Uncommon
+namespace RiskyMod.Items.Uncommon
 {
     public class ElementalBands
     {
         public static bool enabled = true;
-        public static void Modify()
+
+        public static float initialDamageCoefficientFire = 2.5f;
+        public static float stackDamageCoefficientFire = 1.5f;
+
+        public static float initialDamageCoefficientIce = 2f;
+        public static float stackDamageCoefficientIce = 1.2f;
+
+        public ElementalBands()
         {
             if (!enabled) return;
+
+            float initialDamageFire = initialDamageCoefficientFire - stackDamageCoefficientFire;
+            float initialDamageIce = initialDamageCoefficientIce - stackDamageCoefficientIce;
 
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
@@ -25,11 +35,11 @@ namespace Risky_Mod.Items.Uncommon
                 c.GotoNext(
                      x => x.MatchLdcR4(2.5f)
                     );
-                c.Next.Operand = 1.2f;
+                c.Next.Operand =stackDamageCoefficientIce;
                 c.Index += 4;
                 c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
                 {
-                    return damageCoefficient + 0.8f;
+                    return damageCoefficient + initialDamageIce;
                 });
 
                 //Jump to FireRing
@@ -41,16 +51,16 @@ namespace Risky_Mod.Items.Uncommon
                 c.GotoNext(
                      x => x.MatchLdcR4(3f)
                     );
-                c.Next.Operand = 1.5f;
+                c.Next.Operand = stackDamageCoefficientFire;
                 c.Index += 4;
                 c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
                 {
-                    return damageCoefficient + 1f;
+                    return damageCoefficient + initialDamageFire;
                 });
             };
 
-            LanguageAPI.Add("ITEM_ICERING_DESC", "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic ice blast</style>, <style=cIsUtility>slowing</style> them by <style=cIsUtility>80%</style> for <style=cIsUtility>3s</style> <style=cStack>(+3s per stack)</style> and dealing <style=cIsDamage>200%</style> <style=cStack>(+120% per stack)</style> TOTAL damage. Recharges every <style=cIsUtility>10</style> seconds.");
-            LanguageAPI.Add("ITEM_FIRERING_DESC", "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic flame tornado</style>, dealing <style=cIsDamage>250%</style> <style=cStack>(+150% per stack)</style> TOTAL damage over time. Recharges every <style=cIsUtility>10</style> seconds.");
+            LanguageAPI.Add("ITEM_ICERING_DESC", "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic ice blast</style>, <style=cIsUtility>slowing</style> them by <style=cIsUtility>80%</style> for <style=cIsUtility>3s</style> <style=cStack>(+3s per stack)</style> and dealing <style=cIsDamage>" + ItemsCore.ToPercent(initialDamageCoefficientIce) + "</style> <style=cStack>(+" + ItemsCore.ToPercent(stackDamageCoefficientIce) + " per stack)</style> TOTAL damage. Recharges every <style=cIsUtility>10</style> seconds.");
+            LanguageAPI.Add("ITEM_FIRERING_DESC", "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic flame tornado</style>, dealing <style=cIsDamage>" + ItemsCore.ToPercent(initialDamageCoefficientFire) + "</style> <style=cStack>(+" + ItemsCore.ToPercent(stackDamageCoefficientFire) + " per stack)</style> TOTAL damage over time. Recharges every <style=cIsUtility>10</style> seconds.");
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using RoR2;
 
-namespace Risky_Mod.Items.Common
+namespace RiskyMod.Items.Common
 {
     public class MonsterTooth
     {
         public static bool enabled = true;
-        public static void Modify()
+        public MonsterTooth()
         {
             if (!enabled) return;
 

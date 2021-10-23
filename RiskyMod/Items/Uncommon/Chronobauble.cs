@@ -1,12 +1,12 @@
 ﻿using R2API;
 using RoR2;
 
-namespace Risky_Mod.Items.Uncommon
+namespace RiskyMod.Items.Uncommon
 {
     public class Chronobauble
     {
         public static bool enabled = true;
-        public static void Modify()
+        public Chronobauble()
         {
             if (!enabled) return;
 

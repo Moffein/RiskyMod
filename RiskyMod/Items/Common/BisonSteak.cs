@@ -3,12 +3,12 @@ using R2API;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 
-namespace Risky_Mod.Items.Common
+namespace RiskyMod.Items.Common
 {
     public class BisonSteak
     {
         public static bool enabled = true;
-        public static void Modify()
+        public BisonSteak()
         {
             if (!enabled) return;
 

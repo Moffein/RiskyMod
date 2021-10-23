@@ -3,12 +3,12 @@ using RoR2;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 
-namespace Risky_Mod.Items.Common
+namespace RiskyMod.Items.Common
 {
     public class CritGlasses
     {
         public static bool enabled = true;
-        public static void Modify()
+        public CritGlasses()
         {
             if (!enabled) return;
 

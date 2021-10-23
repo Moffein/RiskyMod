@@ -6,14 +6,15 @@ using RoR2.Projectile;
 using UnityEngine;
 using System;
 
-namespace Risky_Mod.Items.Common
+namespace RiskyMod.Items.Common
 {
     public class StickyBomb
     {
         public static bool enabled = true;
+        public static float damageCoefficient = 2.4f;
         public static GameObject stickybombPrefab;
 
-        public static void Modify()
+        public StickyBomb()
         {
             if (!enabled) return;
 
@@ -28,7 +29,7 @@ namespace Risky_Mod.Items.Common
                 c.GotoNext(
                     x => x.MatchLdcR4(1.8f)
                     );
-                c.Next.Operand = 2.4f;
+                c.Next.Operand = damageCoefficient;
 
                 //Replace projectile
                 c.GotoNext(
@@ -47,7 +48,7 @@ namespace Risky_Mod.Items.Common
             pie.lifetime = 1.2f;
             ProjectileAPI.Add(stickybombPrefab);
 
-            LanguageAPI.Add("ITEM_STICKYBOMB_DESC", "<style=cIsDamage>5%</style> <style=cStack>(+5% per stack)</style> chance on hit to attach a <style=cIsDamage>bomb</style> to an enemy, detonating for <style=cIsDamage>240%</style> TOTAL damage.");
+            LanguageAPI.Add("ITEM_STICKYBOMB_DESC", "<style=cIsDamage>5%</style> <style=cStack>(+5% per stack)</style> chance on hit to attach a <style=cIsDamage>bomb</style> to an enemy, detonating for <style=cIsDamage>" + ItemsCore.ToPercent(damageCoefficient) + "</style> TOTAL damage.");
         }
     }
 }

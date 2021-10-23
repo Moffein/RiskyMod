@@ -3,13 +3,13 @@ using R2API;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 
-namespace Risky_Mod.Items.Common
+namespace RiskyMod.Items.Common
 {
     public class Crowbar
     {
         public static bool enabled = true;
 
-        public static void Modify()
+        public Crowbar()
         {
             if (!enabled) return;
 

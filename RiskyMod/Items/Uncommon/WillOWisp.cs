@@ -4,12 +4,12 @@ using MonoMod.Cil;
 using R2API;
 using System;
 
-namespace Risky_Mod.Items.Uncommon
+namespace RiskyMod.Items.Uncommon
 {
     public class WillOWisp
     {
         public static bool enabled = true;
-        public static void Modify()
+        public WillOWisp()
         {
             if (!enabled) return;
 

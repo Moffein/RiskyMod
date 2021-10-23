@@ -5,13 +5,13 @@ using RoR2.Projectile;
 using R2API;
 using System;
 
-namespace Risky_Mod.Items.Legendary
+namespace RiskyMod.Items.Legendary
 {
     class CeremonialDagger
     {
         public static bool enabled = true;
         public static GameObject daggerPrefab;
-        public static void Modify()
+        public CeremonialDagger()
         {
             if (!enabled || !RiskyMod.disableProcChains) return;
 

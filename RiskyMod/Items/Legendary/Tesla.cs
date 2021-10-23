@@ -5,12 +5,12 @@ using UnityEngine.Networking;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
 
-namespace Risky_Mod.Items.Legendary
+namespace RiskyMod.Items.Legendary
 {
     public class Tesla
     {
         public static bool enabled = true;
-        public static void Modify()
+        public Tesla()
         {
             if (!enabled) return;
 

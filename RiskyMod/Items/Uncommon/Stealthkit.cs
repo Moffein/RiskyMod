@@ -1,13 +1,13 @@
 ﻿using R2API;
 using UnityEngine;
 
-namespace Risky_Mod.Items.Uncommon
+namespace RiskyMod.Items.Uncommon
 {
     public class Stealthkit
     {
         public static bool enabled = true;
         public static GameObject effectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ProcStealthkit");
-        public static void Modify()
+        public Stealthkit()
         {
             if (!enabled) return;
 

@@ -4,16 +4,20 @@ using R2API;
 using RoR2;
 using System;
 
-namespace Risky_Mod.Items.Boss
+namespace RiskyMod.Items.Boss
 {
     public class ChargedPerf
     {
         public static bool enabled = true;
-        public static void Modify()
+        public static float initialDamageCoefficient = 5f;
+        public static float stackDamageCoefficient = 3f;
+        public ChargedPerf()
         {
             if (!enabled) return;
 
-            LanguageAPI.Add("ITEM_FIREBALLSONHIT_DESC", "<style=cIsDamage>10%</style> chance on hit to call forth <style=cIsDamage>3 magma balls</style> from an enemy, dealing <style=cIsDamage>300%</style> <style=cStack>(+180% per stack)</style> damage each.");
+            LanguageAPI.Add("ITEM_LIGHTNINGSTRIKEONHIT_DESC", "<style=cIsDamage>10%</style> chance on hit to down a lightning strike, dealing <style=cIsDamage>" + ItemsCore.ToPercent(initialDamageCoefficient) + "</style> <style=cStack>(+" + ItemsCore.ToPercent(stackDamageCoefficient) + " per stack)</style> damage.");
+
+            float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
@@ -27,11 +31,11 @@ namespace Risky_Mod.Items.Boss
                     x => x.MatchLdfld<DamageInfo>("damage")
                     );
                 c.Index += 3;
-                c.Next.Operand = 3f;
+                c.Next.Operand = ChargedPerf.stackDamageCoefficient;
                 c.Index += 4;
                 c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
                 {
-                    return damageCoefficient + 2f;
+                    return damageCoefficient + initialDamage;
                 });
 
                 if (RiskyMod.disableProcChains)

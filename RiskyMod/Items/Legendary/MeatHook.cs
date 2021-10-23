@@ -1,12 +1,12 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using RoR2;
-namespace Risky_Mod.Items.Legendary
+namespace RiskyMod.Items.Legendary
 {
     public class MeatHook
     {
         public static bool enabled = true;
-        public static void Modify()
+        public MeatHook()
         {
             if (!enabled || !RiskyMod.disableProcChains) return;
 

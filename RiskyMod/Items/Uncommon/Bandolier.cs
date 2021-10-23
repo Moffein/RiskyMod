@@ -2,12 +2,12 @@
 using UnityEngine;
 using R2API;
 
-namespace Risky_Mod.Items.Uncommon
+namespace RiskyMod.Items.Uncommon
 {
     public class Bandolier
     {
         public static bool enabled = true;
-        public static void Modify()
+        public Bandolier()
         {
             if (!enabled) return;
 

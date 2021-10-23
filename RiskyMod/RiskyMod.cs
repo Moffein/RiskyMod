@@ -2,18 +2,18 @@
 using BepInEx;
 using RoR2;
 using R2API.Utils;
-using Risky_Mod.Items.Uncommon;
-using Risky_Mod.Items.Common;
-using Risky_Mod.SharedHooks;
-using Risky_Mod.Items.Boss;
-using Risky_Mod.Items.Lunar;
-using Risky_Mod.Items.Legendary;
+using RiskyMod.Items.Uncommon;
+using RiskyMod.Items.Common;
+using RiskyMod.SharedHooks;
+using RiskyMod.Items.Boss;
+using RiskyMod.Items.Lunar;
+using RiskyMod.Items.Legendary;
 using UnityEngine;
-using Risky_Mod.Tweaks;
-using Risky_Mod.Items;
-using Risky_Mod.Drones;
+using RiskyMod.Tweaks;
+using RiskyMod.Items;
+using RiskyMod.Drones;
 
-namespace Risky_Mod
+namespace RiskyMod
 {
     [BepInDependency("com.bepis.r2api")]
     [BepInDependency("com.PlasmaCore.StickyStunter", BepInDependency.DependencyFlags.SoftDependency)]

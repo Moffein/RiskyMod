@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Risky_Mod.Items.Boss
+namespace RiskyMod.Items.Boss
 {
     public class GenesisLoop
     {
         public static bool enabled = true;
-        public static void Modify()
+        public GenesisLoop()
         {
             if (!enabled) return;
             IL.EntityStates.VagrantNovaItem.ChargeState.OnEnter += (il) =>

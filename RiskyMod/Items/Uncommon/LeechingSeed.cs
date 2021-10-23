@@ -2,12 +2,12 @@
 using MonoMod.Cil;
 using R2API;
 using RoR2;
-namespace Risky_Mod.Items.Uncommon
+namespace RiskyMod.Items.Uncommon
 {
     public class LeechingSeed
     {
         public static bool enabled = true;
-        public static void Modify()
+        public LeechingSeed()
         {
 			if (!enabled) return;
 

@@ -4,12 +4,12 @@ using UnityEngine.Networking;
 using System;
 using R2API;
 
-namespace Risky_Mod.Items.Boss
+namespace RiskyMod.Items.Boss
 {
     public class QueensGland
     {
         public static bool enabled = true;
-        public static void Modify()
+        public QueensGland()
         {
             if (!enabled) return;
 

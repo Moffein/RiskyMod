@@ -3,11 +3,11 @@ using R2API;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
-using Risky_Mod.Items.Uncommon;
+using RiskyMod.Items.Uncommon;
 using R2API.Utils;
-using Risky_Mod.Items.Legendary;
+using RiskyMod.Items.Legendary;
 
-namespace Risky_Mod.SharedHooks
+namespace RiskyMod.SharedHooks
 {
     public class ModifyFinalDamage
     {
@@ -43,7 +43,7 @@ namespace Risky_Mod.SharedHooks
                                     {
                                         if (victimHealth.combinedHealth <= victimHealth.fullCombinedHealth * 0.3f)
                                         {
-                                            newDamage *= 1f + 0.25f * lopperCount;
+                                            newDamage *= 1f + Guillotine.damageCoefficient * lopperCount;
                                             damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
 
                                             EffectManager.SpawnEffect(HealthComponent.AssetReferences.executeEffectPrefab, new EffectData

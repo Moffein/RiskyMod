@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine;
 
-namespace Risky_Mod.Items.Legendary
+namespace RiskyMod.Items.Legendary
 {
     public class FrostRelic
     {
@@ -11,7 +11,7 @@ namespace Risky_Mod.Items.Legendary
         public static bool removeBubble = true;
         public static bool removeFOV = true;
 
-        public static void Modify()
+        public FrostRelic()
         {
             if (!enabled) return;
 

@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine.Networking;
 
-namespace Risky_Mod.Drones
+namespace RiskyMod.Drones
 {
     public class DronesCore
     {

@@ -3,12 +3,12 @@ using MonoMod.Cil;
 using RoR2;
 using R2API;
 
-namespace Risky_Mod.Items.Boss
+namespace RiskyMod.Items.Boss
 {
     public class Knurl
     {
         public static bool enabled = true;
-        public static void Modify()
+        public Knurl()
         {
             if (!enabled) return;
 

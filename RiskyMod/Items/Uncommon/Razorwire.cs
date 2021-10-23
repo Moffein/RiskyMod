@@ -1,11 +1,11 @@
 ﻿using R2API;
 
-namespace Risky_Mod.Items.Uncommon
+namespace RiskyMod.Items.Uncommon
 {
     public class Razorwire
     {
         public static bool enabled = true;
-        public static void Modify()
+        public Razorwire()
         {
             if (!enabled) return;
 

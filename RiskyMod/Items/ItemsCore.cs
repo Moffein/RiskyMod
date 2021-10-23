@@ -1,11 +1,11 @@
-﻿using Risky_Mod.Items.Boss;
-using Risky_Mod.Items.Common;
-using Risky_Mod.Items.Legendary;
-using Risky_Mod.Items.Lunar;
-using Risky_Mod.Items.Uncommon;
+﻿using RiskyMod.Items.Boss;
+using RiskyMod.Items.Common;
+using RiskyMod.Items.Legendary;
+using RiskyMod.Items.Lunar;
+using RiskyMod.Items.Uncommon;
 using RoR2;
 
-namespace Risky_Mod.Items
+namespace RiskyMod.Items
 {
     public class ItemsCore
     {
@@ -30,66 +30,66 @@ namespace Risky_Mod.Items
         private void ModifyCommon()
         {
             if (!commonEnabled) return;
-            BisonSteak.Modify();
-            MonsterTooth.Modify();
-            CritGlasses.Modify();
-            Fireworks.Modify();
-            StickyBomb.Modify();
-            Crowbar.Modify();
-            Warbanner.Modify();
-            Gasoline.Modify();
-            RepArmor.Modify();
+            new BisonSteak();
+            new MonsterTooth();
+            new CritGlasses();
+            new Fireworks();
+            new StickyBomb();
+            new Crowbar();
+            new Warbanner();
+            new Gasoline();
+            new RepArmor();
         }
 
         private void ModifyUncommon()
         {
             if (!uncommonEnabled) return;
-            Predatory.Modify();
-            Chronobauble.Modify();
-            LeechingSeed.Modify();
-            AtG.Modify();
-            ElementalBands.Modify();
-            Bandolier.Modify();
-            Stealthkit.Modify();
-            WillOWisp.Modify();
-            SquidPolyp.Modify();
-            Ukulele.Modify();
-            Razorwire.Modify();
-            RoseBuckler.Modify();
-            Guillotine.Modify();
-            Berzerker.Modify();
+            new Predatory();
+            new Chronobauble();
+            new LeechingSeed();
+            new AtG();
+            new ElementalBands();
+            new Bandolier();
+            new Stealthkit();
+            new WillOWisp();
+            new SquidPolyp();
+            new Ukulele();
+            new Razorwire();
+            new RoseBuckler();
+            new Guillotine();
+            new Berzerker();
         }
 
         private void ModifyLegendary()
         {
             if (!legendaryEnabled) return;
-            Tesla.Modify();
-            FrostRelic.Modify();
-            CeremonialDagger.Modify();
-            MeatHook.Modify();
-            LaserTurbine.Modify();
-            Headhunter.Modify();
-            Headstompers.Modify();
-            NovaOnHeal.Modify();
+            new Tesla();
+            new FrostRelic();
+            new CeremonialDagger();
+            new MeatHook();
+            new LaserTurbine();
+            new Headhunter();
+            new Headstompers();
+            new NovaOnHeal();
         }
 
         private void ModifyBoss()
         {
             if (!bossEnabled) return;
-            QueensGland.Modify();
-            MoltenPerf.Modify();
-            ChargedPerf.Modify();
-            Shatterspleen.Modify();
-            Knurl.Modify();
-            Disciple.Modify();
-            Planula.Modify();
-            GenesisLoop.Modify();
+            new QueensGland();
+            new MoltenPerf();
+            new ChargedPerf();
+            new Shatterspleen();
+            new Knurl();
+            new Disciple();
+            new Planula();
+            new GenesisLoop();
         }
 
         private void ModifyLunar()
         {
             if (!lunarEnabled) return;
-            ShapedGlass.Modify();
+            new ShapedGlass();
         }
 
         public static void AddToAIBlacklist(string itemName)
@@ -103,13 +103,17 @@ namespace Risky_Mod.Items
 
         public static void AddToAIBlacklist(ItemIndex index)
         {
-            //Debug.Log("Adding BrotherBlacklist tag to ItemIndex " + index);
             ItemDef itemDef = ItemCatalog.GetItemDef(index);
-            if (itemDef.DoesNotContainTag(ItemTag.BrotherBlacklist))
+            if (itemDef.DoesNotContainTag(ItemTag.AIBlacklist))
             {
                 System.Array.Resize(ref itemDef.tags, itemDef.tags.Length + 1);
-                itemDef.tags[itemDef.tags.Length - 1] = ItemTag.BrotherBlacklist;
+                itemDef.tags[itemDef.tags.Length - 1] = ItemTag.AIBlacklist;
             }
+        }
+
+        public static string ToPercent(float coefficient)
+        {
+            return coefficient.ToString("P0").Replace(" ", "").Replace(",", "");
         }
     }
 }

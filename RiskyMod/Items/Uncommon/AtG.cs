@@ -5,19 +5,24 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
 
-namespace Risky_Mod.Items.Uncommon
+namespace RiskyMod.Items.Uncommon
 {
     class AtG
     {
         public static bool enabled = true;
 
+		public static float initialDamageCoefficient = 3f;
+		public static float stackDamageCoefficient = 1.8f;
+
 		public static GameObject missilePrefab;
 
-        public static void Modify()
+        public AtG()
         {
             if (!enabled) return;
 
-            On.RoR2.GlobalEventManager.ProcMissile += (orig, self, stack, attackerBody, attackerMaster, attackerTeamIndex, procChainMask, victim, damageInfo) =>
+			float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
+
+			On.RoR2.GlobalEventManager.ProcMissile += (orig, self, stack, attackerBody, attackerMaster, attackerTeamIndex, procChainMask, victim, damageInfo) =>
             {
 				if (stack > 0)
 				{
@@ -28,7 +33,7 @@ namespace Risky_Mod.Items.Uncommon
 					Vector3 up = Vector3.up;
 					if (Util.CheckRoll(10f * damageInfo.procCoefficient, attackerMaster))
 					{
-						float damageCoefficient = 1.2f + 1.8f * stack;
+						float damageCoefficient = initialDamage + stackDamageCoefficient * stack;
 						float damage = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, damageCoefficient);
 						ProcChainMask procChainMask2 = procChainMask;
 						procChainMask2.AddProc(ProcType.Missile);
@@ -50,7 +55,7 @@ namespace Risky_Mod.Items.Uncommon
 				}
 			};
 
-			LanguageAPI.Add("ITEM_MISSILE_DESC", "<style=cIsDamage>10%</style> chance to fire a missile that deals <style=cIsDamage>300%</style> <style=cStack>(+180% per stack)</style> TOTAL damage.");
+			LanguageAPI.Add("ITEM_MISSILE_DESC", "<style=cIsDamage>10%</style> chance to fire a missile that deals <style=cIsDamage>" + ItemsCore.ToPercent(initialDamageCoefficient) + "</style> <style=cStack>(+" + ItemsCore.ToPercent(stackDamageCoefficient) + " per stack)</style> TOTAL damage.");
         
 			if (RiskyMod.disableProcChains)
 			{

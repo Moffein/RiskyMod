@@ -2,12 +2,12 @@
 using R2API;
 using UnityEngine;
 
-namespace Risky_Mod.Items.Common
+namespace RiskyMod.Items.Common
 {
     public class Gasoline
     {
         public static bool enabled = true;
-        public static void Modify()
+        public Gasoline()
         {
             if (!enabled) return;
 

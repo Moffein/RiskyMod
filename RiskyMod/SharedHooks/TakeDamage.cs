@@ -1,8 +1,8 @@
 ﻿using R2API;
-using Risky_Mod.Items.Boss;
-using Risky_Mod.Items.Common;
-using Risky_Mod.Items.Uncommon;
-using Risky_Mod.MonoBehaviours;
+using RiskyMod.Items.Boss;
+using RiskyMod.Items.Common;
+using RiskyMod.Items.Uncommon;
+using RiskyMod.MonoBehaviours;
 using RoR2;
 using RoR2.Audio;
 using RoR2.CharacterAI;
@@ -11,7 +11,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Risky_Mod.SharedHooks
+namespace RiskyMod.SharedHooks
 {
     public class TakeDamage
     {

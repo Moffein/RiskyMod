@@ -4,12 +4,12 @@ using RoR2;
 using R2API;
 using System;
 
-namespace Risky_Mod.Items.Uncommon
+namespace RiskyMod.Items.Uncommon
 {
     public class Ukulele
     {
         public static bool enabled = true;
-        public static void Modify()
+        public Ukulele()
         {
             if (!enabled) return;
 

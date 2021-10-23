@@ -1,4 +1,4 @@
-﻿namespace Risky_Mod.Items.Common
+﻿namespace RiskyMod.Items.Common
 {
 	using RoR2;
 	using UnityEngine;
@@ -7,7 +7,7 @@
 		public static bool enabled = true;
 		public static int maxRockets = 32;
 
-        public static void Modify()
+        public Fireworks()
         {
 			if (!enabled) return;
 

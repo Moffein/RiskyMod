@@ -6,18 +6,22 @@ using RoR2.Projectile;
 using System;
 using UnityEngine;
 
-namespace Risky_Mod.Items.Boss
+namespace RiskyMod.Items.Boss
 {
     public class MoltenPerf
     {
         public static bool enabled = true;
+        public static float initialDamageCoefficient = 3f;
+        public static float stackDamageCoefficient = 1.8f;
         public static GameObject meatballPrefab;
 
-        public static void Modify()
+        public MoltenPerf()
         {
             if (!enabled) return;
 
-            LanguageAPI.Add("ITEM_LIGHTNINGSTRIKEONHIT_DESC", "<style=cIsDamage>10%</style> chance on hit to down a lightning strike, dealing <style=cIsDamage>500%</style> <style=cStack>(+300% per stack)</style> damage.");
+            LanguageAPI.Add("ITEM_FIREBALLSONHIT_DESC", "<style=cIsDamage>10%</style> chance on hit to call forth <style=cIsDamage>3 magma balls</style> from an enemy, dealing <style=cIsDamage>"+ItemsCore.ToPercent(initialDamageCoefficient)+"</style> <style=cStack>(+"+ ItemsCore.ToPercent(stackDamageCoefficient) + " per stack)</style> damage each.");
+
+            float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>

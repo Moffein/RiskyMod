@@ -3,12 +3,12 @@ using MonoMod.Cil;
 using RoR2;
 using R2API;
 
-namespace Risky_Mod.Items.Uncommon
+namespace RiskyMod.Items.Uncommon
 {
     public class RoseBuckler
     {
         public static bool enabled = true;
-        public static void Modify()
+        public RoseBuckler()
         {
             if (!enabled) return;
 

@@ -4,12 +4,12 @@ using R2API;
 using RoR2;
 using System;
 
-namespace Risky_Mod.Items.Boss
+namespace RiskyMod.Items.Boss
 {
     public class Shatterspleen
     {
         public static bool enabled = true;
-        public static void Modify()
+        public Shatterspleen()
         {
             if (!enabled) return;
 

@@ -1,11 +1,11 @@
 ﻿using RoR2;
 
-namespace Risky_Mod.Items.Uncommon
+namespace RiskyMod.Items.Uncommon
 {
     public class Predatory
     {
         public static bool enabled = true;
-        public static void Modify()
+        public Predatory()
         {
             if (!enabled) return;
 

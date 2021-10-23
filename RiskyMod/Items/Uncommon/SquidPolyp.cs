@@ -4,7 +4,7 @@ using R2API;
 using RoR2;
 using UnityEngine;
 
-namespace Risky_Mod.Items.Uncommon
+namespace RiskyMod.Items.Uncommon
 {
     public class SquidPolyp
     {
@@ -12,7 +12,7 @@ namespace Risky_Mod.Items.Uncommon
         public static GameObject procEffectPrefab;
 
         //Does this need turretblacklist?
-        public static void Modify()
+        public SquidPolyp()
         {
             if (!enabled) return;
 

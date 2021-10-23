@@ -2,12 +2,12 @@
 using RoR2;
 using UnityEngine;
 
-namespace Risky_Mod.Items.Legendary
+namespace RiskyMod.Items.Legendary
 {
     public class Headstompers
     {
         public static bool enabled = true;
-        public static void Modify()
+        public Headstompers()
         {
             if (!enabled) return;
             On.EntityStates.Headstompers.BaseHeadstompersState.OnEnter += (orig, self) =>

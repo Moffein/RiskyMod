@@ -1,11 +1,11 @@
 ﻿using RoR2;
 using RoR2.Orbs;
-namespace Risky_Mod.Items.Boss
+namespace RiskyMod.Items.Boss
 {
     public class Disciple
     {
         public static bool enabled = true;
-        public static void Modify()
+        public Disciple()
         {
             if (!enabled) return;
             if (!RiskyMod.disableProcChains) return;
