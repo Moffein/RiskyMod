@@ -4,6 +4,7 @@ using RoR2.Projectile;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
+using System;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -22,36 +23,33 @@ namespace RiskyMod.Items.Uncommon
 
 			float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 
-			On.RoR2.GlobalEventManager.ProcMissile += (orig, self, stack, attackerBody, attackerMaster, attackerTeamIndex, procChainMask, victim, damageInfo) =>
-            {
-				if (stack > 0)
+			IL.RoR2.GlobalEventManager.ProcMissile += (il) =>
+			{
+				ILCursor c = new ILCursor(il);
+				c.GotoNext(
+					 x => x.MatchLdcR4(3f)
+					);
+				c.Next.Operand = stackDamageCoefficient;
+
+				c.GotoNext(
+					 x => x.MatchMul()
+					);
+				c.Index++;
+				c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
 				{
-					GameObject gameObject = attackerBody.gameObject;
-					InputBankTest component = gameObject.GetComponent<InputBankTest>();
-					Vector3 position = component ? component.aimOrigin : gameObject.transform.position;
-					Vector3 vector = component ? component.aimDirection : gameObject.transform.forward;
-					Vector3 up = Vector3.up;
-					if (Util.CheckRoll(10f * damageInfo.procCoefficient, attackerMaster))
+					return damageCoefficient + initialDamage;
+				});
+
+				if (RiskyMod.disableProcChains)
+				{
+					c.GotoNext(
+						 x => x.MatchLdfld<GlobalEventManager>("missilePrefab")
+						);
+					c.Index++;
+					c.EmitDelegate<Func<GameObject, GameObject>>((projectilePrefab) =>
 					{
-						float damageCoefficient = initialDamage + stackDamageCoefficient * stack;
-						float damage = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, damageCoefficient);
-						ProcChainMask procChainMask2 = procChainMask;
-						procChainMask2.AddProc(ProcType.Missile);
-						FireProjectileInfo fireProjectileInfo = new FireProjectileInfo
-						{
-							projectilePrefab = RiskyMod.disableProcChains ? AtG.missilePrefab : self.missilePrefab,
-							position = position,
-							rotation = Util.QuaternionSafeLookRotation(up),
-							procChainMask = procChainMask2,
-							target = victim,
-							owner = gameObject,
-							damage = damage,
-							crit = damageInfo.crit,
-							force = 200f,
-							damageColorIndex = DamageColorIndex.Item
-						};
-						ProjectileManager.instance.FireProjectile(fireProjectileInfo);
-					}
+						return missilePrefab;
+					});
 				}
 			};
 
