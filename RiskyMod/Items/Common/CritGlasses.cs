@@ -17,13 +17,13 @@ namespace Risky_Mod.Items.Common
             {
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(
-                     x => x.MatchLdsfld(typeof(RoR2Content.Items), "CritGlasses")
+                     //x => x.MatchLdsfld(typeof(RoR2Content.Items), "CritGlasses")
+                     x => x.MatchLdfld<CharacterBody>("levelCrit")
                     );
-                c.Remove();
-                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                c.Index += 8;
+                c.Next.Operand = 7f;
             };
 
-            //Changes handled in SharedHooks.GetStatCoefficients
             LanguageAPI.Add("ITEM_CRITGLASSES_DESC", "Your attacks have a <style=cIsDamage>7%</style> <style=cStack>(+7% per stack)</style> chance to '<style=cIsDamage>Critically Strike</style>', dealing <style=cIsDamage>double damage</style>.");
         }
     }

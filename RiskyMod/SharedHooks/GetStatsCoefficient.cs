@@ -42,14 +42,6 @@ namespace Risky_Mod.SharedHooks
 
             if (sender.inventory)
             {
-                if (CritGlasses.enabled)
-                {
-                    int glassesCount = sender.inventory.GetItemCount(RoR2Content.Items.CritGlasses);
-                    if (glassesCount > 0)
-                    {
-                        args.critAdd += 7f * glassesCount;
-                    }
-                }
                 if (BisonSteak.enabled)
                 {
                     int steakCount = sender.inventory.GetItemCount(RoR2Content.Items.FlatHealth);
