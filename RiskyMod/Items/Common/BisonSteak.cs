@@ -24,8 +24,8 @@ namespace Risky_Mod.Items.Common
             };
 
             //Changes handled in SharedHooks.GetStatCoefficients
-            LanguageAPI.Add("ITEM_FLATHEALTH_PICKUP", "Gain 33 max health.");
-            LanguageAPI.Add("ITEM_FLATHEALTH_DESC", "Increases <style=cIsHealing>maximum health</style> by <style=cIsHealing>33</style> <style=cStack>(+33 per stack)</style>.");
+            LanguageAPI.Add("ITEM_FLATHEALTH_PICKUP", "Gain max health.");
+            LanguageAPI.Add("ITEM_FLATHEALTH_DESC", "Increases <style=cIsHealing>maximum health</style> by <style=cIsHealing>30%</style> <style=cStack>(+30% per stack)</style> of your <style=cIsHealing>base maximum health</style>.");
         }
     }
 }
