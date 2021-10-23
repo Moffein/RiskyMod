@@ -56,7 +56,7 @@ namespace Risky_Mod.Drones
 
             //This makes their performance stay the same on every stage. (Everything's HP increases 30% per level)
             cb.levelRegen = cb.baseRegen * 0.3f;
-            cb.levelDamage = cb.baseDamage * 0.2f;
+            cb.levelDamage = cb.baseDamage * 0.3f;
             //cb.levelArmor += 3f;  //Give armor on levelup if they are still dying like flies
         }
 
