@@ -33,8 +33,8 @@ namespace RiskyMod
             ReadConfig();
 
             RunTweaks();
-            new ItemsCore().Modify(); //TODO: Use less static methods.
-            new DronesCore().Modify();
+            new ItemsCore();
+            new DronesCore();
 
             AddHooks();
         }

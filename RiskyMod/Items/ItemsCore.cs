@@ -16,7 +16,7 @@ namespace RiskyMod.Items
         public static bool bossEnabled = true;
         public static bool lunarEnabled = true;
 
-        public void Modify()
+        public ItemsCore()
         {
             if (!itemTweaksEnabled) return;
             Planula.enabled = Stealthkit.enabled || Razorwire.enabled || SquidPolyp.enabled;

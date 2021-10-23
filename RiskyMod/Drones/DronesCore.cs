@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using RoR2;
 using UnityEngine.Networking;
+using MonoMod.Cil;
+using System;
 
 namespace RiskyMod.Drones
 {
     public class DronesCore
     {
         public static bool enabled = true;
-        public void Modify()
+        public DronesCore()
         {
             if (!enabled) return;
 
@@ -29,6 +31,7 @@ namespace RiskyMod.Drones
             //T3 drones
             ChangeScaling(LoadBody("MegaDroneBody"));
 
+            //Squids
             ChangeScaling(LoadBody("SquidTurretBody"));
         }
 
@@ -63,33 +66,22 @@ namespace RiskyMod.Drones
         //Makes backup drones scale with ambient level like all other drones.
         private void FixBackupScaling()
         {
-            On.RoR2.EquipmentSlot.FireDroneBackup += (orig, self) =>
-            {
-                int sliceCount = 4;
-                float num = 25f;
-                if (NetworkServer.active)
-                {
-                    float y = Quaternion.LookRotation(self.GetAimRay().direction).eulerAngles.y;
-                    float d = 3f;
-                    foreach (float num2 in new DegreeSlices(sliceCount, 0.5f))
-                    {
-                        Quaternion rotation = Quaternion.Euler(0f, y + num2, 0f);
-                        Quaternion rotation2 = Quaternion.Euler(0f, y + num2 + 180f, 0f);
-                        Vector3 position = self.transform.position + rotation * (Vector3.forward * d);
-                        CharacterMaster characterMaster = self.SummonMaster(Resources.Load<GameObject>("Prefabs/CharacterMasters/DroneBackupMaster"), position, rotation2);
-                        if (characterMaster)
-                        {
-                            characterMaster.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = num + UnityEngine.Random.Range(0f, 3f);
 
-                            if (characterMaster.inventory)
-                            {
-                                characterMaster.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel.itemIndex);
-                            }
-                        }
+            IL.RoR2.EquipmentSlot.FireDroneBackup += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                    x => x.MatchStfld<MasterSuicideOnTimer>("lifeTimer")
+                    );
+                c.Index -= 7;
+                c.EmitDelegate<Func<CharacterMaster, CharacterMaster>>((master) =>
+                {
+                    if (master.inventory)
+                    {
+                        master.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
                     }
-                }
-                self.subcooldownTimer = 0.5f;
-                return true;
+                    return master;
+                });
             };
         }
 
