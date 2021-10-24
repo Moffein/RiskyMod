@@ -144,6 +144,7 @@ namespace RiskyMod.SharedHooks
                                                             return;
                                                         }
                                                         CharacterMaster component6 = result.spawnedInstance.GetComponent<CharacterMaster>();
+                                                        component6.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel, 1);
                                                         component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 30);
                                                         component6.inventory.GiveItem(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
                                                         if (self.itemCounts.invadingDoppelganger > 0)
