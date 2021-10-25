@@ -3,6 +3,7 @@ using RoR2;
 using UnityEngine.Networking;
 using MonoMod.Cil;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace RiskyMod.Drones
 {
@@ -41,32 +42,25 @@ namespace RiskyMod.Drones
 
             cb.baseRegen = cb.baseMaxHealth / 30f;  //Drones take 30s to regen to full
 
+            //This makes their performance stay the same on every stage. (Everything's HP increases 30% per level)
+            cb.levelRegen = cb.baseRegen * 0.3f;
+            cb.levelDamage = cb.baseDamage * 0.3f;
+            cb.levelArmor += 3f;
+
             //Specific changes
             switch (cb.name)
             {
                 case "MegaDroneBody": //If I'm gonna pay the price of a legendary chest to buy a drone, it better be worth it.
                     cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune | CharacterBody.BodyFlags.ResistantToAOE; 
                     break;
-                /*case "Turret1Body":
-                    cb.baseRegen = cb.baseMaxHealth / 20f;  //Stationary, cannot dodge. Needs regen.
-                    break;
-                case "FlameDroneBody":
-                    cb.baseRegen = cb.baseMaxHealth / 20f;  //Has to get close to deal damage.
-                    break;*/
                 default:
                     break;
             }
-
-            //This makes their performance stay the same on every stage. (Everything's HP increases 30% per level)
-            cb.levelRegen = cb.baseRegen * 0.3f;
-            cb.levelDamage = cb.baseDamage * 0.3f;
-            //cb.levelArmor += 3f;  //Give armor on levelup if they are still dying like flies
         }
 
         //Makes backup drones scale with ambient level like all other drones.
         private void FixBackupScaling()
         {
-
             IL.RoR2.EquipmentSlot.FireDroneBackup += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -85,6 +79,7 @@ namespace RiskyMod.Drones
             };
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private GameObject LoadBody(string bodyname)
         {
             return Resources.Load<GameObject>("prefabs/characterbodies/" + bodyname);

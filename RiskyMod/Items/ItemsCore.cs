@@ -4,6 +4,7 @@ using RiskyMod.Items.Legendary;
 using RiskyMod.Items.Lunar;
 using RiskyMod.Items.Uncommon;
 using RoR2;
+using System.Runtime.CompilerServices;
 
 namespace RiskyMod.Items
 {
