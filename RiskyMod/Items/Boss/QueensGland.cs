@@ -47,6 +47,7 @@ namespace RiskyMod.Items.Boss
 									{
 										guardInv.GiveItem(RoR2Content.Items.BoostDamage, 30 * glandCount);
 										guardInv.GiveItem(RoR2Content.Items.BoostHp, 10 * glandCount);
+										guardInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
 									}
 
 									Deployable d = spawnResult.spawnedInstance.AddComponent<Deployable>();
