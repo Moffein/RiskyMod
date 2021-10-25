@@ -36,13 +36,13 @@ namespace RiskyMod.SharedHooks
                         {
 							if (tb.buffIndex == Berzerker.berzerkBuff.buffIndex)
                             {
-								tb.timer = 5f + 0.33f * foundBuffs;
+								tb.timer = 6f + foundBuffs;
 								foundBuffs++;
                             }
                         }
 						for (int i = 0; i < newBuffStack - foundBuffs; i++)
                         {
-							attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 5f + 0.33f * foundBuffs);
+							attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 6f + foundBuffs);
 							foundBuffs++;
 						}
                     }

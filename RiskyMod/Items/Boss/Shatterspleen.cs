@@ -94,6 +94,16 @@ namespace RiskyMod.Items.Boss
                         return db;
                     });
                 }
+
+                //Disable falloff
+                c.GotoNext(
+                    x => x.MatchStfld<DelayBlast>("falloffModel")
+                    );
+
+                c.EmitDelegate<Func<BlastAttack.FalloffModel, BlastAttack.FalloffModel>>((model) =>
+                {
+                    return BlastAttack.FalloffModel.None;
+                });
             };
         }
     }

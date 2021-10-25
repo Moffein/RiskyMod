@@ -36,7 +36,7 @@ namespace RiskyMod.SharedHooks
                 if (berzerkCount > 0)
                 {
                     args.moveSpeedMultAdd += 0.1f * berzerkCount;
-                    args.attackSpeedMultAdd += 0.1f * berzerkCount;
+                    args.attackSpeedMultAdd += 0.2f * berzerkCount;
                 }
             }
 
