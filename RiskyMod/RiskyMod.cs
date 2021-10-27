@@ -53,6 +53,7 @@ namespace RiskyMod
         {
             new RunScaling();
             new ShieldGating();
+            new SceneDirectorMonsterRewards();
         }
 
         private void RunFixes()
