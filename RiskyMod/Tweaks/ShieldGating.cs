@@ -32,7 +32,7 @@ namespace RiskyMod.Tweaks
                 {
                     if (!((damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic) && self.body.inventory)
                     {
-                        self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 0.3f);
+                        self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 0.2f);
                         return 0f;
                     }
                     return remainingDamage;

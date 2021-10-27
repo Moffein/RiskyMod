@@ -30,9 +30,9 @@ namespace RiskyMod.SharedHooks
                     {
                         if (Crowbar.enabled)
                         {
-                            //Conver to proc chain when custom proc chains are a thing.
+                            //Convert to proc chain when custom proc chains are a thing.
                             //Currently has no protection against self-proc.
-                            if (self.combinedHealth >= self.fullCombinedHealth * 0.9f)
+                            if (self.body != attackerBody && self.combinedHealth >= self.fullCombinedHealth * 0.9f)
                             {
                                 int crowbarCount = attackerInventory.GetItemCount(RoR2Content.Items.Crowbar);
                                 if (crowbarCount > 0)
