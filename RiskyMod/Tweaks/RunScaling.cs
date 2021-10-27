@@ -17,7 +17,7 @@ namespace RiskyMod.Tweaks
                 DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
                 float playerFactor = 0.7f + playerCount * 0.3f;
 				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue;   //Should equate to 1 bar per minute on Monsoon. Note: Vanilla multiplies playerFactor^0.2 here.
-				float stageFactor = Mathf.Pow(1.2f, self.stageClearCount % 5);  //Exponential scaling happens on a per-loop basis
+				float stageFactor = Mathf.Pow(1.2f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
 				float finalDifficulty = (playerFactor + timeFactor) * stageFactor;
 				self.compensatedDifficultyCoefficient = finalDifficulty;
 				self.difficultyCoefficient = finalDifficulty;
