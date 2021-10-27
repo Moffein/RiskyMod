@@ -17,7 +17,7 @@ namespace RiskyMod.SharedHooks
             {
                 //Slow -60% already present in vanilla
                 args.damageMultAdd -= 0.3f; //Might need to check for negative damage mult, come back to this later if there's problems.
-                args.armorAdd -= 30f;
+                args.armorAdd -= 20f;
             }
             if (Warbanner.enabled && sender.HasBuff(RoR2Content.Buffs.Warbanner))
             {

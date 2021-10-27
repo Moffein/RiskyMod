@@ -93,7 +93,7 @@ namespace RiskyMod
             {
                 On.RoR2.CharacterBody.RecalculateStats += RecalculateStats.CharacterBody_RecalculateStats;
             }
-            if (Stealthkit.enabled || SquidPolyp.enabled || Crowbar.enabled || Razorwire.enabled || Planula.enabled)
+            if (Stealthkit.enabled || SquidPolyp.enabled || Razorwire.enabled || Planula.enabled || Crowbar.enabled)
             {
                 On.RoR2.HealthComponent.TakeDamage += TakeDamage.HealthComponent_TakeDamage;
             }

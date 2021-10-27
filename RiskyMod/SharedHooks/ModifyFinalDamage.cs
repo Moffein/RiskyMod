@@ -6,6 +6,7 @@ using System;
 using RiskyMod.Items.Uncommon;
 using R2API.Utils;
 using RiskyMod.Items.Legendary;
+using RiskyMod.Items.Common;
 
 namespace RiskyMod.SharedHooks
 {

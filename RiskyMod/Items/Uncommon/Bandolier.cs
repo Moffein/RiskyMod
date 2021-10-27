@@ -17,7 +17,7 @@ namespace RiskyMod.Items.Uncommon
             GameObject ammoPack = Resources.Load<GameObject>("Prefabs/NetworkedObjects/AmmoPack");
 
             DestroyOnTimer dt = ammoPack.GetComponent<DestroyOnTimer>();
-            dt.duration = 20f;
+            dt.duration = 14f;
 
             BeginRapidlyActivatingAndDeactivating br = ammoPack.GetComponent<BeginRapidlyActivatingAndDeactivating>();
             br.delayBeforeBeginningBlinking = dt.duration - 2f;

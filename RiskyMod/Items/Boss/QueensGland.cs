@@ -36,7 +36,7 @@ namespace RiskyMod.Items.Boss
 									spawnOnTarget = self.transform
 								}, RoR2Application.rng);
 								directorSpawnRequest.summonerBodyObject = self.gameObject;
-
+								directorSpawnRequest.ignoreTeamMemberLimit = true;  //Guards should always be able to spawn. Probably doesn't need a cap since there's only 1 per player.
 								DirectorSpawnRequest directorSpawnRequest2 = directorSpawnRequest;
 
 								directorSpawnRequest2.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest2.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult spawnResult)

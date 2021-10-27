@@ -39,6 +39,7 @@ namespace RiskyMod.SharedHooks
                                 {
                                     damageInfo.damage *= 1f + 0.5f * crowbarCount;
                                     EffectManager.SimpleImpactEffect(HealthComponent.AssetReferences.crowbarImpactEffectPrefab, damageInfo.position, -damageInfo.force, true);
+                                    damageInfo.AddModdedDamageType(Crowbar.crowbarDamage);
                                 }
                             }
                         }
@@ -136,6 +137,7 @@ namespace RiskyMod.SharedHooks
                                                     DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(spawnCard, placementRule, RoR2Application.rng);
                                                     directorSpawnRequest.teamIndexOverride = self.body.teamComponent.teamIndex;
                                                     directorSpawnRequest.summonerBodyObject = self.gameObject;
+                                                    directorSpawnRequest.ignoreTeamMemberLimit = true;  //Polyps should always be able to spawn. Does this need a cap for performance?
                                                     DirectorSpawnRequest directorSpawnRequest2 = directorSpawnRequest;
                                                     directorSpawnRequest2.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest2.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult result)
                                                     {

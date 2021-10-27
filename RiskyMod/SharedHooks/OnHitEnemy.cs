@@ -3,6 +3,8 @@ using RoR2;
 using UnityEngine.Networking;
 using UnityEngine;
 using RiskyMod.Fixes;
+using R2API;
+using RiskyMod.Items.Common;
 
 namespace RiskyMod.SharedHooks
 {
@@ -12,6 +14,7 @@ namespace RiskyMod.SharedHooks
         {
 			CharacterBody attackerBody = null;
 			CharacterBody victimBody = null;
+			Inventory attackerInventory = null;
 
 			if (NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected)
 			{
@@ -49,8 +52,6 @@ namespace RiskyMod.SharedHooks
 
 						if (attackerMaster)
                         {
-                            Inventory attackerInventory = attackerMaster.inventory;
-
                             if (LeechingSeed.enabled)
                             {
 								if (!damageInfo.procChainMask.HasProc(ProcType.HealOnHit))
