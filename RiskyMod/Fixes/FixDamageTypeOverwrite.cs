@@ -3,12 +3,12 @@ using MonoMod.Cil;
 using RoR2;
 using System;
 
-namespace RiskyMod.Tweaks
+namespace RiskyMod.Fixes
 {
     class FixDamageTypeOverwrite
     {
         public static bool enabled = true;
-        public void Modify()
+        public FixDamageTypeOverwrite()
         {
             if (!enabled) return;
 

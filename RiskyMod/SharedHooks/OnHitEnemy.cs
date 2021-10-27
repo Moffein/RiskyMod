@@ -2,14 +2,7 @@
 using RoR2;
 using UnityEngine.Networking;
 using UnityEngine;
-using RoR2.Projectile;
-using RiskyMod.Items.Common;
-using RiskyMod.Items.Boss;
-using RoR2.Orbs;
-using System.Collections.Generic;
-using RiskyMod.Items.Legendary;
-using HG;
-using RiskyMod.Tweaks;
+using RiskyMod.Fixes;
 
 namespace RiskyMod.SharedHooks
 {

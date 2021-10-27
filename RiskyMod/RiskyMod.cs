@@ -10,13 +10,18 @@ using RiskyMod.Items.Lunar;
 using RiskyMod.Items.Legendary;
 using UnityEngine;
 using RiskyMod.Tweaks;
+using RiskyMod.Fixes;
 using RiskyMod.Items;
 using RiskyMod.Drones;
 
 namespace RiskyMod
 {
-    [BepInDependency("com.bepis.r2api")]
     [BepInDependency("com.PlasmaCore.StickyStunter", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.MercExposeFix", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.FixPlayercount", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.NoLevelupHeal", BepInDependency.DependencyFlags.SoftDependency)]
+
+    [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "1.0.0")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(LanguageAPI), nameof(RecalculateStatsAPI), nameof(PrefabAPI),
         nameof(ProjectileAPI), nameof(EffectAPI), nameof(DamageAPI), nameof(BuffAPI))]
@@ -31,7 +36,7 @@ namespace RiskyMod
         public void Awake()
         {
             ReadConfig();
-
+            RunFixes();
             RunTweaks();
             new ItemsCore();
             new DronesCore();
@@ -46,8 +51,29 @@ namespace RiskyMod
 
         private void RunTweaks()
         {
-            new FixDamageTypeOverwrite().Modify();
-            new ShieldGating().Modify();
+            new RunScaling();
+            new ShieldGating();
+        }
+
+        private void RunFixes()
+        {
+            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.MercExposeFix"))
+            {
+                new FixMercExpose();
+            }
+            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.FixPlayercount"))
+            {
+                new FixPlayercount();
+            }
+            else
+            {
+                FixPlayercount.standalonePluginLoaded = true;
+            }
+            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoLevelupHeal"))
+            {
+                new FixLevelupHeal();
+            }
+            new FixDamageTypeOverwrite();
         }
         
         private void AddHooks()
