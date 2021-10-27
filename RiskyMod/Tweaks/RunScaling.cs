@@ -40,8 +40,8 @@ namespace RiskyMod.Tweaks
 				//1.5f doesn't change much
 				//3f increases spawnrates, but mostly elite trash mobs spawn. Players get too much money.
 				//Check the monster card selection stuff later. Goal is to have more heavy mobs spawn earlier. Maybe just do a flat addition to the difficultyCoefficient?
-				//Todo: Test 5f
-				difficultyCoefficient *= 5f;
+				//5f seems to be too chaotic. Lots of flying enemies on Stage 5, not enough Parents. Still spawns lots of elite trash on early stages.
+				difficultyCoefficient = 8f + difficultyCoefficient;	//Todo: Test this
 				return orig(self, deltaTime, difficultyCoefficient);
 			};
         }

@@ -27,9 +27,10 @@ namespace RiskyMod.Tweaks
                     ); ;
                 c.Index += 4;
                 c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<float, HealthComponent, float>>((remainingDamage, self) =>
+                c.Emit(OpCodes.Ldarg_1);
+                c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((remainingDamage, self, damageInfo) =>
                 {
-                    if (self.body.inventory)    //&& self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly.itemIndex) == 0 && !self.body.HasBuff(RoR2Content.Buffs.AffixLunar)
+                    if (!((damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic) && self.body.inventory)
                     {
                         self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 0.3f);
                         return 0f;
