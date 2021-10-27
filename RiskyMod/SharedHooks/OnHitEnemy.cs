@@ -34,6 +34,11 @@ namespace RiskyMod.SharedHooks
 							DotController.InflictDot(victim, damageInfo.attacker, DotController.DotIndex.PercentBurn, 4f * damageInfo.procCoefficient, 1f);
 						}
 					}
+
+					if (attackerBody)
+                    {
+						attackerInventory = attackerBody.inventory;
+                    }
 				}
 			}
 

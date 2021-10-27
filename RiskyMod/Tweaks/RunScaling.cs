@@ -36,7 +36,7 @@ namespace RiskyMod.Tweaks
 			//Increase director intensity. Goal is to have the same level of craziness as stage 5 in Starstorm, with the constant boss spawns and big monsters everywhere.
 			On.RoR2.CombatDirector.DirectorMoneyWave.Update += (orig, self, deltaTime, difficultyCoefficient) =>
 			{
-				difficultyCoefficient *= 1.5f;
+				difficultyCoefficient *= 2f;
 				return orig(self, deltaTime, difficultyCoefficient);
 			};
         }
