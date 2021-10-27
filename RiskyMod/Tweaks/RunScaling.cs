@@ -36,7 +36,12 @@ namespace RiskyMod.Tweaks
 			//Increase director intensity. Goal is to have the same level of craziness as stage 5 in Starstorm, with the constant boss spawns and big monsters everywhere.
 			On.RoR2.CombatDirector.DirectorMoneyWave.Update += (orig, self, deltaTime, difficultyCoefficient) =>
 			{
-				difficultyCoefficient *= 2f;
+				//Notes:
+				//1.5f doesn't change much
+				//3f increases spawnrates, but mostly elite trash mobs spawn. Players get too much money.
+				//Check the monster card selection stuff later. Goal is to have more heavy mobs spawn earlier. Maybe just do a flat addition to the difficultyCoefficient?
+				//Todo: Test 5f
+				difficultyCoefficient *= 5f;
 				return orig(self, deltaTime, difficultyCoefficient);
 			};
         }
