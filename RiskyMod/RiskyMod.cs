@@ -75,7 +75,7 @@ namespace RiskyMod
                 new FixLevelupHeal();
             }
             new FixDamageTypeOverwrite();
-            new FixFocusCrystalSelfProc();
+            new FixFocusCrystalSelfDamage();
         }
         
         private void AddHooks()

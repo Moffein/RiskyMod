@@ -5,9 +5,9 @@ using System;
 
 namespace RiskyMod.Fixes
 {
-    public class FixFocusCrystalSelfProc
+    public class FixFocusCrystalSelfDamage
     {
-        public FixFocusCrystalSelfProc()
+        public FixFocusCrystalSelfDamage()
         {
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
             {
