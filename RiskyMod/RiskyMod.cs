@@ -86,7 +86,7 @@ namespace RiskyMod
                 On.RoR2.GlobalEventManager.OnHitEnemy += OnHitEnemy.GlobalEventManager_OnHitEnemy;
             }
             if (Chronobauble.enabled || CritGlasses.enabled || BisonSteak.enabled || ShapedGlass.enabled || Knurl.enabled || Warbanner.enabled
-                || RoseBuckler.enabled || RepArmor.enabled || Headhunter.enabled || Berzerker.enabled || FixDamageTypeOverwrite.enabled)
+                || RoseBuckler.enabled || RepArmor.enabled || HeadHunter.enabled || Berzerker.enabled || FixDamageTypeOverwrite.enabled)
             {
                 RecalculateStatsAPI.GetStatCoefficients += GetStatsCoefficient.RecalculateStatsAPI_GetStatCoefficients;
             }
@@ -98,11 +98,11 @@ namespace RiskyMod
             {
                 On.RoR2.HealthComponent.TakeDamage += TakeDamage.HealthComponent_TakeDamage;
             }
-            if (Headhunter.enabled || Berzerker.enabled)
+            if (HeadHunter.enabled || Berzerker.enabled)
             {
                 On.RoR2.GlobalEventManager.OnCharacterDeath += OnCharacterDeath.GlobalEventManager_OnCharacterDeath;
             }
-            if (Guillotine.enabled || Headhunter.enabled)
+            if (Guillotine.enabled || HeadHunter.enabled)
             {
                 ModifyFinalDamage.Modify();
             }

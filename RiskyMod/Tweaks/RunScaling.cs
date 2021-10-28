@@ -17,7 +17,7 @@ namespace RiskyMod.Tweaks
                 DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
                 float playerFactor = 0.7f + playerCount * 0.3f;
 				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue * Mathf.Pow(playerCount, 0.2f);
-				float stageFactor = Mathf.Pow(1.1f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
+				float stageFactor = Mathf.Pow(1.2f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
 				float finalDifficulty = (playerFactor + timeFactor) * stageFactor;
 				self.compensatedDifficultyCoefficient = finalDifficulty;
 				self.difficultyCoefficient = finalDifficulty;
@@ -39,10 +39,20 @@ namespace RiskyMod.Tweaks
 				//Notes:
 				//1.5f doesn't change much
 				//3f increases spawnrates, but mostly elite trash mobs spawn. Players get too much money.
-				//Check the monster card selection stuff later. Goal is to have more heavy mobs spawn earlier. Maybe just do a flat addition to the difficultyCoefficient?
 				//5f seems to be too chaotic. Lots of flying enemies on Stage 5, not enough Parents. Still spawns lots of elite trash on early stages.
-				difficultyCoefficient = 3f * DifficultyCatalog.GetDifficultyDef(Run.instance.selectedDifficulty).scalingValue + difficultyCoefficient;	//Todo: Test this
+				//Check the monster card selection stuff later. Goal is to have more heavy mobs spawn earlier.
+
+				//Maybe just do a flat addition to the difficultyCoefficient? - Maybe
+				//Multiply by loop count?
+				//difficultyCoefficient = (2f * DifficultyCatalog.GetDifficultyDef(Run.instance.selectedDifficulty).scalingValue + 1.5f*difficultyCoefficient) * (Run.instance.stageClearCount/5);
+				difficultyCoefficient *= Mathf.Pow(1.15f, Run.instance.stageClearCount);	//This feels good. Money might be a bit high. Need to see how it fares later into loops.
 				return orig(self, deltaTime, difficultyCoefficient);
+			};
+
+			On.RoR2.CombatDirector.Awake += (orig, self) =>
+			{
+				self.creditMultiplier *= 1.25f;
+				orig(self);
 			};
         }
     }

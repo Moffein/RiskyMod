@@ -25,7 +25,7 @@ namespace RiskyMod.SharedHooks
                 args.armorAdd += 15f;
                 args.damageMultAdd += 0.15f;
             }
-            if (Headhunter.enabled && sender.HasBuff(Headhunter.headhunterBuff))
+            if (HeadHunter.enabled && sender.HasBuff(HeadHunter.headhunterBuff))
             {
                 args.moveSpeedMultAdd += 0.3f;
                 args.damageMultAdd += 0.3f;

@@ -51,7 +51,7 @@ namespace RiskyMod.SharedHooks
                 {
 					if (damageReport.victimIsElite)
 					{
-						if (Headhunter.enabled)
+						if (HeadHunter.enabled)
 						{
 							int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
 							if (hhCount > 0)
@@ -63,7 +63,7 @@ namespace RiskyMod.SharedHooks
 									if (victimBody.HasBuff(buffIndex))
 									{
 										attackerBody.AddTimedBuff(buffIndex, duration);
-										attackerBody.AddTimedBuff(Headhunter.headhunterBuff.buffIndex, duration);
+										attackerBody.AddTimedBuff(HeadHunter.headhunterBuff.buffIndex, duration);
 									}
 								}
 							}
