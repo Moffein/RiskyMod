@@ -10,9 +10,9 @@ namespace RiskyMod.Tweaks
             if (!enabled) return;
             On.RoR2.SceneDirector.PopulateScene += (orig, self) =>
             {
-                if (self.expRewardCoefficient < 0.2f)
+                if (self.expRewardCoefficient < 0.11f)
                 {
-                    self.expRewardCoefficient = 0.2f;
+                    self.expRewardCoefficient = 0.11f;
                 }
                 orig(self);
             };
