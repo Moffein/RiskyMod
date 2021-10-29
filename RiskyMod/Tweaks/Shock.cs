@@ -20,7 +20,6 @@ namespace RiskyMod.Tweaks
                 c.GotoNext(
                      x => x.MatchLdsfld<ShockState>("healthFractionToForceExit")
                     );
-                c.Index++;
                 c.Remove();
                 c.Emit<Shock>(OpCodes.Ldsfld, nameof(shockThreshold));
             };
