@@ -4,6 +4,7 @@ using RiskyMod.Items.Common;
 using RiskyMod.Items.Equipment;
 using RiskyMod.Items.Uncommon;
 using RiskyMod.MonoBehaviours;
+using RiskyMod.Tweaks;
 using RoR2;
 using RoR2.Audio;
 using RoR2.CharacterAI;
@@ -46,6 +47,12 @@ namespace RiskyMod.SharedHooks
                         }
                     }
                 }
+            }
+
+            if (FixSlayer.enabled && (damageInfo.damageType & DamageType.BonusToLowHealth) > DamageType.Generic)
+            {
+                damageInfo.damageType &= ~DamageType.BonusToLowHealth;
+                damageInfo.damage *= Mathf.Lerp(3f, 1f, self.combinedHealthFraction);
             }
 
             orig(self, damageInfo);
@@ -119,10 +126,10 @@ namespace RiskyMod.SharedHooks
                                         {
                                             if (Util.CheckRoll(percentHPLost, self.body.master))
                                             {
-                                                SquidMinionManagerComponent sq = self.gameObject.GetComponent<SquidMinionManagerComponent>();
+                                                SquidMinionComponent sq = self.gameObject.GetComponent<SquidMinionComponent>();
                                                 if (!sq)
                                                 {
-                                                    sq = self.gameObject.AddComponent<SquidMinionManagerComponent>();
+                                                    sq = self.gameObject.AddComponent<SquidMinionComponent>();
                                                 }
                                                 if (sq.CanSpawnSquid())
                                                 {

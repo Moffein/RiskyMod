@@ -4,7 +4,7 @@ using RiskyMod.Tweaks;
 
 namespace RiskyMod.MonoBehaviours
 {
-    public class OSPManagerComponent : MonoBehaviour
+    public class OSPComponent : MonoBehaviour
     {
         public static float ospThreshold = 0.9f;    //Max HP Percent that can trigger OSP
         public static float ospTimer = 0.5f;    //After HP goes below ospThreshold, taking lethal damage within this timeframe will trigger OSP.

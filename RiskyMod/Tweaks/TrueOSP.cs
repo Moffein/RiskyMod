@@ -50,16 +50,16 @@ namespace RiskyMod.Tweaks
                 {
                     if (self.body.hasOneShotProtection && (damageInfo.damageType & DamageType.BypassOneShotProtection) != DamageType.BypassOneShotProtection)
                     {
-                        OSPManagerComponent ospm = self.body.gameObject.GetComponent<OSPManagerComponent>();
+                        OSPComponent ospm = self.body.gameObject.GetComponent<OSPComponent>();
                         if (!ospm)
                         {
-                            ospm = self.body.gameObject.AddComponent<OSPManagerComponent>();
+                            ospm = self.body.gameObject.AddComponent<OSPComponent>();
                             ospm.healthComponent = self;
                             ospm.characterBody = self.body;
                             Debug.Log("Adding OSP Manager to player.");
                         }
                         //Check if OSP timer should be triggered
-                        float ospHealthThreshold = self.fullHealth * OSPManagerComponent.ospThreshold;
+                        float ospHealthThreshold = self.fullHealth * OSPComponent.ospThreshold;
                         if (self.health >= ospHealthThreshold && finalHealth < ospHealthThreshold)
                         {
                             ospm.StartOSPTimer();

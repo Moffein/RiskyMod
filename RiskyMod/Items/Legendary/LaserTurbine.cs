@@ -2,6 +2,8 @@
 using RoR2.Projectile;
 using UnityEngine;
 using R2API;
+using MonoMod.Cil;
+using Mono.Cecil.Cil;
 
 namespace RiskyMod.Items.Legendary
 {

@@ -5,6 +5,9 @@ using UnityEngine;
 using RiskyMod.Fixes;
 using R2API;
 using RiskyMod.Items.Common;
+using RiskyMod.Items.Legendary;
+using RiskyMod.MonoBehaviours;
+using RiskyMod.Tweaks;
 
 namespace RiskyMod.SharedHooks
 {
@@ -50,15 +53,15 @@ namespace RiskyMod.SharedHooks
                 {
                     if (attackerBody && victimBody)
 					{
-						Vector3 aimOrigin = attackerBody.aimOrigin;
-						CharacterMaster attackerMaster = attackerBody.master;
+						//Vector3 aimOrigin = attackerBody.aimOrigin;
+						//CharacterMaster attackerMaster = attackerBody.master;
 						TeamComponent attackerTeamComponent = attackerBody.teamComponent;
-						TeamIndex attackerTeamIndex = attackerTeamComponent ? attackerTeamComponent.teamIndex : TeamIndex.None;
+						//TeamIndex attackerTeamIndex = attackerTeamComponent ? attackerTeamComponent.teamIndex : TeamIndex.None;
 
-						if (attackerMaster)
+						if (attackerInventory)
                         {
-                            if (LeechingSeed.enabled)
-                            {
+							if (LeechingSeed.enabled)
+							{
 								if (!damageInfo.procChainMask.HasProc(ProcType.HealOnHit))
 								{
 									int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Seed);
@@ -74,7 +77,53 @@ namespace RiskyMod.SharedHooks
 										}
 									}
 								}
-                            }
+							}
+							if (AssistManager.initialized && RiskyMod.assistManager)
+							{
+								if (HeadHunter.enabled)
+								{
+									int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
+									if (itemCount > 0)
+									{
+										RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.HeadHunter, 3f);
+									}
+								}
+								if (Brainstalks.enabled)
+								{
+									int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.KillEliteFrenzy);
+									if (itemCount > 0)
+									{
+										RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.Brainstalks, 3f);
+									}
+								}
+								if (Berzerker.enabled)
+								{
+									int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.WarCryOnMultiKill);
+									if (itemCount > 0)
+									{
+										RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.Berzerk, 3f);
+									}
+								}
+								if (LaserTurbine.enabled)
+								{
+									int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.LaserTurbine);
+									if (itemCount > 0)
+									{
+										RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.LaserTurbine, 3f);
+									}
+								}
+								if (BanditSpecialGracePeriod.enabled)
+                                {
+									if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)
+									{
+										RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.ResetCooldowns, BanditSpecialGracePeriod.duration);
+									}
+									if ((damageInfo.damageType & DamageType.GiveSkullOnKill) > DamageType.Generic)
+									{
+										RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.BanditSkull, BanditSpecialGracePeriod.duration);
+									}
+								}
+							}
 						}
                     }
                 }

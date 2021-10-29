@@ -14,6 +14,8 @@ using RiskyMod.Fixes;
 using RiskyMod.Items;
 using RiskyMod.Drones;
 using RiskyMod.Items.Equipment;
+using UnityEngine.Networking;
+using RiskyMod.MonoBehaviours;
 
 namespace RiskyMod
 {
@@ -35,6 +37,8 @@ namespace RiskyMod
         public static ItemDef emptyItemDef = null;
         public static BuffDef emptyBuffDef = null;
 
+        public static AssistManager assistManager = null;
+
         public void Awake()
         {
             ReadConfig();
@@ -42,7 +46,7 @@ namespace RiskyMod
             RunTweaks();
             new ItemsCore();
             new DronesCore();
-
+            SetupAssists();
             AddHooks();
         }
 
@@ -57,6 +61,7 @@ namespace RiskyMod
             new TrueOSP();
             new ShieldGating();
             new SceneDirectorMonsterRewards();
+            new BanditSpecialGracePeriod();
         }
 
         private void RunFixes()
@@ -88,12 +93,12 @@ namespace RiskyMod
         private void AddHooks()
         {
             //A hook needs to be used at least once to be added
-            if (LeechingSeed.enabled)
+            if (LeechingSeed.enabled || AssistManager.initialized)
             {
                 On.RoR2.GlobalEventManager.OnHitEnemy += OnHitEnemy.GlobalEventManager_OnHitEnemy;
             }
             if (Chronobauble.enabled || CritGlasses.enabled || BisonSteak.enabled || ShapedGlass.enabled || Knurl.enabled || Warbanner.enabled
-                || RoseBuckler.enabled || RepArmor.enabled || Headhunter.enabled || Berzerker.enabled || FixDamageTypeOverwrite.enabled)
+                || RoseBuckler.enabled || RepArmor.enabled || HeadHunter.enabled || Berzerker.enabled || FixDamageTypeOverwrite.enabled)
             {
                 RecalculateStatsAPI.GetStatCoefficients += GetStatsCoefficient.RecalculateStatsAPI_GetStatCoefficients;
             }
@@ -101,21 +106,41 @@ namespace RiskyMod
             {
                 On.RoR2.CharacterBody.RecalculateStats += RecalculateStats.CharacterBody_RecalculateStats;
             }
-            if (Stealthkit.enabled || SquidPolyp.enabled || Razorwire.enabled || Planula.enabled || Crowbar.enabled || CritHud.enabled)
+            if (Stealthkit.enabled || SquidPolyp.enabled || Razorwire.enabled || Planula.enabled || Crowbar.enabled || CritHud.enabled || FixSlayer.enabled)
             {
                 On.RoR2.HealthComponent.TakeDamage += TakeDamage.HealthComponent_TakeDamage;
             }
-            if (Headhunter.enabled || Berzerker.enabled)
+            if (AssistManager.initialized)
             {
                 On.RoR2.GlobalEventManager.OnCharacterDeath += OnCharacterDeath.GlobalEventManager_OnCharacterDeath;
             }
-            if (Guillotine.enabled || Headhunter.enabled)
+            if (Guillotine.enabled || HeadHunter.enabled)
             {
                 new ModifyFinalDamage();
             }
-            if (Headhunter.enabled || Berzerker.enabled)
+            if (HeadHunter.enabled || Berzerker.enabled)
             {
                 new StealBerzerkEffect();
+            }
+        }
+
+        private void SetupAssists()
+        {
+            if (LaserTurbine.enabled || Berzerker.enabled || HeadHunter.enabled || Brainstalks.enabled || BanditSpecialGracePeriod.enabled)
+            {
+                AssistManager.initialized = true;
+                On.RoR2.Run.Start += (orig, self) =>
+                {
+                    orig(self);
+                    if (NetworkServer.active)
+                    {
+                        RiskyMod.assistManager = self.gameObject.GetComponent<AssistManager>();
+                        if (!RiskyMod.assistManager)
+                        {
+                            RiskyMod.assistManager = self.gameObject.AddComponent<AssistManager>();
+                        }
+                    }
+                };
             }
         }
     }

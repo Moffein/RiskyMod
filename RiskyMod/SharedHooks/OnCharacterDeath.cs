@@ -1,6 +1,8 @@
 ﻿using RiskyMod.Items.Boss;
 using RiskyMod.Items.Legendary;
 using RiskyMod.Items.Uncommon;
+using RiskyMod.MonoBehaviours;
+using RiskyMod.Tweaks;
 using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
@@ -14,59 +16,69 @@ namespace RiskyMod.SharedHooks
         {
             orig(self, damageReport);
 
-            CharacterBody attackerBody = damageReport.attackerBody;
-            CharacterMaster attackerMaster = damageReport.attackerMaster;
-			TeamIndex attackerTeamIndex = damageReport.attackerTeamIndex;
-			DamageInfo damageInfo = damageReport.damageInfo;
-			GameObject victimObject = damageReport.victim.gameObject;
-			CharacterBody victimBody = damageReport.victimBody;
-			Inventory attackerInventory = attackerMaster ? attackerMaster.inventory : null;
+			if (NetworkServer.active)
+            {
+				CharacterBody attackerBody = damageReport.attackerBody;
+				CharacterMaster attackerMaster = damageReport.attackerMaster;
+				TeamIndex attackerTeamIndex = damageReport.attackerTeamIndex;
+				DamageInfo damageInfo = damageReport.damageInfo;
+				GameObject victimObject = damageReport.victim.gameObject;
+				CharacterBody victimBody = damageReport.victimBody;
+				Inventory attackerInventory = attackerMaster ? attackerMaster.inventory : null;
 
-			if (attackerBody && attackerMaster)
-			{
-				if (Berzerker.enabled)
-                {
-					int berzerkCount = attackerInventory.GetItemCount(RoR2Content.Items.WarCryOnMultiKill);
-					if (berzerkCount > 0)
+				if (attackerBody && attackerMaster)
+				{
+					if (victimBody)
 					{
-						//Need to apply buff this way to prevent the visual from disappearing.
-						int newBuffStack = Mathf.Min(attackerBody.GetBuffCount(Berzerker.berzerkBuff) + 1, 2 + 3 * berzerkCount);
-						int foundBuffs = 0;
-						foreach (CharacterBody.TimedBuff tb in attackerBody.timedBuffs)
-                        {
-							if (tb.buffIndex == Berzerker.berzerkBuff.buffIndex)
-                            {
-								tb.timer = 6f + foundBuffs;
-								foundBuffs++;
-                            }
-                        }
-						for (int i = 0; i < newBuffStack - foundBuffs; i++)
-                        {
-							attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 6f + foundBuffs);
-							foundBuffs++;
-						}
-                    }
-                }
-				if (victimBody)
-                {
-					if (damageReport.victimIsElite)
-					{
-						if (Headhunter.enabled)
+						if (AssistManager.initialized && RiskyMod.assistManager)
 						{
-							int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
-							if (hhCount > 0)
+							//On-death is handled by assist manager to prevent having a bunch of duplicated code.
+							//Need to add an assist here since it's called before OnHitEnemy.
+							if (HeadHunter.enabled)
 							{
-								float duration = 5f + 5f * hhCount;
-								for (int l = 0; l < BuffCatalog.eliteBuffIndices.Length; l++)
+								int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
+								if (itemCount > 0)
 								{
-									BuffIndex buffIndex = BuffCatalog.eliteBuffIndices[l];
-									if (victimBody.HasBuff(buffIndex))
-									{
-										attackerBody.AddTimedBuff(buffIndex, duration);
-										attackerBody.AddTimedBuff(Headhunter.headhunterBuff.buffIndex, duration);
-									}
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.HeadHunter, 3f);
 								}
 							}
+							if (Brainstalks.enabled)
+							{
+								int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.KillEliteFrenzy);
+								if (itemCount > 0)
+								{
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.Brainstalks, 3f);
+								}
+							}
+							if (Berzerker.enabled)
+							{
+								int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.WarCryOnMultiKill);
+								if (itemCount > 0)
+								{
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.Berzerk, 3f);
+								}
+							}
+							if (LaserTurbine.enabled)
+							{
+								int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.LaserTurbine);
+								if (itemCount > 0)
+								{
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.LaserTurbine, 3f);
+								}
+							}
+							if (BanditSpecialGracePeriod.enabled)
+							{
+								if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)
+								{
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.ResetCooldowns, BanditSpecialGracePeriod.duration);
+								}
+								if ((damageInfo.damageType & DamageType.GiveSkullOnKill) > DamageType.Generic)
+								{
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.BanditSkull, BanditSpecialGracePeriod.duration);
+								}
+							}
+
+							RiskyMod.assistManager.TriggerAssists(victimBody, attackerBody, damageInfo.position);
 						}
 					}
 				}

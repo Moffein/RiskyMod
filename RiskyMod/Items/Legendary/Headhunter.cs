@@ -6,11 +6,11 @@ using MonoMod.Cil;
 
 namespace RiskyMod.Items.Legendary
 {
-    public class Headhunter
+    public class HeadHunter
     {
         public static bool enabled = true;
         public static BuffDef headhunterBuff;
-        public Headhunter()
+        public HeadHunter()
         {
             if (!enabled) return;
             LanguageAPI.Add("ITEM_HEADHUNTER_PICKUP", "Deal extra damage to elites, and temporarily gain their power on kill.");

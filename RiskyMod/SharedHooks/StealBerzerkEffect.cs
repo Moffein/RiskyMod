@@ -22,7 +22,7 @@ namespace RiskyMod.SharedHooks
                 c.Emit(OpCodes.Ldarg_0);
                 c.EmitDelegate<Func<bool, CharacterBody, bool>>((hasWarCry, self) =>
                 {
-                    return hasWarCry || self.HasBuff(Berzerker.berzerkBuff) || self.HasBuff(Headhunter.headhunterBuff);
+                    return hasWarCry || self.HasBuff(Berzerker.berzerkBuff) || self.HasBuff(HeadHunter.headhunterBuff);
                 });
             };
         }

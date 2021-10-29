@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 namespace RiskyMod.MonoBehaviours
 {
-    public class SquidMinionManagerComponent : MonoBehaviour
+    public class SquidMinionComponent : MonoBehaviour
     {
         private List<GameObject> squidList;
         private Inventory inventory = null;

@@ -55,7 +55,7 @@ namespace RiskyMod.SharedHooks
                                         }
                                     }
                                 }
-                                if (Headhunter.enabled)
+                                if (HeadHunter.enabled)
                                 {
                                     int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
                                     if (hhCount > 0)
