@@ -62,6 +62,11 @@ namespace RiskyMod
             new ShieldGating();
             new SceneDirectorMonsterRewards();
             new BanditSpecialGracePeriod();
+            new Shock();
+            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoLevelupHeal"))
+            {
+                new NoLevelupHeal();
+            }
         }
 
         private void RunFixes()
@@ -81,10 +86,6 @@ namespace RiskyMod
             else
             {
                 FixPlayercount.standalonePluginLoaded = true;
-            }
-            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoLevelupHeal"))
-            {
-                new FixLevelupHeal();
             }
             new FixDamageTypeOverwrite();
             new FixFocusCrystalSelfDamage();

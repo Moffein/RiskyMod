@@ -2,8 +2,6 @@
 using MonoMod.Cil;
 using RoR2;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
 namespace RiskyMod.Tweaks

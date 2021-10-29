@@ -3,10 +3,10 @@
 namespace RiskyMod.Fixes
 {
     //Merged from https://github.com/Moffein/NoLevelupHeal
-    public class FixLevelupHeal
+    public class NoLevelupHeal
     {
         public static bool enabled = true;
-        public FixLevelupHeal()
+        public NoLevelupHeal()
         {
             if (!enabled) return;
             //TODO: See if this can be refactored to not glitch out with AWU shield.
