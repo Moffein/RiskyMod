@@ -72,7 +72,7 @@ namespace RiskyMod.Items
             new CeremonialDagger();
             new MeatHook();
             new LaserTurbine();
-            new HeadHunter();
+            new Headhunter();
             new Headstompers();
             new NovaOnHeal();
         }

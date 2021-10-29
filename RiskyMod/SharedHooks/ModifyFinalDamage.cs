@@ -12,7 +12,7 @@ namespace RiskyMod.SharedHooks
 {
     public class ModifyFinalDamage
     {
-        public static void Modify()
+        public ModifyFinalDamage()
         {
 			IL.RoR2.HealthComponent.TakeDamage += (il) =>
 			{
@@ -55,7 +55,7 @@ namespace RiskyMod.SharedHooks
                                         }
                                     }
                                 }
-                                if (HeadHunter.enabled)
+                                if (Headhunter.enabled)
                                 {
                                     int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
                                     if (hhCount > 0)

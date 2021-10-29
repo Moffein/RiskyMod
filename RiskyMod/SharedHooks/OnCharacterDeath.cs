@@ -51,19 +51,19 @@ namespace RiskyMod.SharedHooks
                 {
 					if (damageReport.victimIsElite)
 					{
-						if (HeadHunter.enabled)
+						if (Headhunter.enabled)
 						{
 							int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
 							if (hhCount > 0)
 							{
-								float duration = 10f * hhCount;
+								float duration = 5f + 5f * hhCount;
 								for (int l = 0; l < BuffCatalog.eliteBuffIndices.Length; l++)
 								{
 									BuffIndex buffIndex = BuffCatalog.eliteBuffIndices[l];
 									if (victimBody.HasBuff(buffIndex))
 									{
 										attackerBody.AddTimedBuff(buffIndex, duration);
-										attackerBody.AddTimedBuff(HeadHunter.headhunterBuff.buffIndex, duration);
+										attackerBody.AddTimedBuff(Headhunter.headhunterBuff.buffIndex, duration);
 									}
 								}
 							}
