@@ -47,7 +47,7 @@ namespace RiskyMod.SharedHooks
                     int steakCount = sender.inventory.GetItemCount(RoR2Content.Items.FlatHealth);
                     if (steakCount > 0)
                     {
-                        args.baseHealthAdd += sender.baseMaxHealth * 0.3f * steakCount; //Technically can just do levelMaxHealth.
+                        args.baseHealthAdd += sender.levelMaxHealth * steakCount;
                     }
                 }
                 if (ShapedGlass.enabled)

@@ -19,6 +19,11 @@ namespace RiskyMod.Items.Boss
             {
 				if (NetworkServer.active)
 				{
+					SceneDef sd = RoR2.SceneCatalog.GetSceneDefForCurrentScene();
+					if (sd && sd.baseSceneName.Equals("bazaar"))
+					{
+						return;
+					}
 					int glandCount = self.inventory ? self.inventory.GetItemCount(RoR2Content.Items.BeetleGland) : 0;
 					if (glandCount > 0)
 					{
