@@ -1,6 +1,7 @@
 ﻿using R2API;
 using RiskyMod.Items.Boss;
 using RiskyMod.Items.Common;
+using RiskyMod.Items.Equipment;
 using RiskyMod.Items.Uncommon;
 using RiskyMod.MonoBehaviours;
 using RoR2;

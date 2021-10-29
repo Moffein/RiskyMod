@@ -1,5 +1,6 @@
 ﻿using RiskyMod.Items.Boss;
 using RiskyMod.Items.Common;
+using RiskyMod.Items.Equipment;
 using RiskyMod.Items.Legendary;
 using RiskyMod.Items.Lunar;
 using RiskyMod.Items.Uncommon;
@@ -16,6 +17,7 @@ namespace RiskyMod.Items
         public static bool legendaryEnabled = true;
         public static bool bossEnabled = true;
         public static bool lunarEnabled = true;
+        public static bool equipmentEnabled = true;
 
         public ItemsCore()
         {
@@ -26,6 +28,7 @@ namespace RiskyMod.Items
             ModifyLegendary();
             ModifyBoss();
             ModifyLunar();
+            ModifyEquipment();
         }
 
         private void ModifyCommon()
@@ -91,6 +94,12 @@ namespace RiskyMod.Items
         {
             if (!lunarEnabled) return;
             new ShapedGlass();
+        }
+
+        private void ModifyEquipment()
+        {
+            if (!equipmentEnabled) return;
+            new CritHud();
         }
 
         public static void AddToAIBlacklist(string itemName)

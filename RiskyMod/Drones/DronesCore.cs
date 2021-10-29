@@ -42,20 +42,28 @@ namespace RiskyMod.Drones
 
             cb.baseRegen = cb.baseMaxHealth / 30f;  //Drones take 30s to regen to full
 
-            //This makes their performance stay the same on every stage. (Everything's HP increases 30% per level)
-            cb.levelRegen = cb.baseRegen * 0.3f;
-            cb.levelDamage = cb.baseDamage * 0.3f;
-            cb.levelArmor += 3f;
-
             //Specific changes
             switch (cb.name)
             {
                 case "MegaDroneBody": //If I'm gonna pay the price of a legendary chest to buy a drone, it better be worth it.
-                    cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune | CharacterBody.BodyFlags.ResistantToAOE; 
+                    cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune | CharacterBody.BodyFlags.ResistantToAOE;
+                    break;
+                case "SquidTurretBody": //These bleed HP pretty fast, they need a bit more resistance to help with that.
+                    cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
+                    break;
+                case "Turret1Body": //These seem to die too quickly, but AOE resist makes them too tanky.
+                    cb.baseRegen = cb.baseMaxHealth / 20f;
+                    cb.baseMaxShield = cb.baseMaxHealth * 0.15f;
                     break;
                 default:
                     break;
             }
+            
+            //This makes their performance stay the same on every stage. (Everything's HP increases 30% per level)
+            cb.levelRegen = cb.baseRegen * 0.3f;
+            cb.levelDamage = cb.baseDamage * 0.3f;
+            cb.levelArmor += 3f;
+            cb.levelMaxShield = cb.baseMaxShield * 0.3f;
         }
 
         //Makes backup drones scale with ambient level like all other drones.
