@@ -47,11 +47,15 @@ namespace RiskyMod.SharedHooks
                                             newDamage *= 1f + Guillotine.damageCoefficient * lopperCount;
                                             damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
 
-                                            EffectManager.SpawnEffect(HealthComponent.AssetReferences.executeEffectPrefab, new EffectData
+                                            //Lock the visual effect behind proccing attacks to improve performance
+                                            if (damageInfo.procCoefficient > 0f)
                                             {
-                                                origin = victimBody.corePosition,
-                                                scale = victimBody.radius * 0.5f
-                                            }, true);
+                                                EffectManager.SpawnEffect(HealthComponent.AssetReferences.executeEffectPrefab, new EffectData
+                                                {
+                                                    origin = victimBody.corePosition,
+                                                    scale = victimBody.radius * 0.3f * damageInfo.procCoefficient   //not sure if radius is even getting affected
+                                                }, true);
+                                            }
                                         }
                                     }
                                 }

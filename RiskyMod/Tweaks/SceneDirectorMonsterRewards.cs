@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RoR2;
+using UnityEngine;
 
 namespace RiskyMod.Tweaks
 {
@@ -12,7 +13,7 @@ namespace RiskyMod.Tweaks
             {
                 if (self.expRewardCoefficient < 0.11f)
                 {
-                    self.expRewardCoefficient = 0.11f;
+                    self.expRewardCoefficient = 0.11f * (RunScaling.enabled ? RunScaling.rewardMultiplier : 1f) / (Run.instance.stageClearCount < 7 ? Mathf.Pow(1.2f, Run.instance.stageClearCount) : 3.6f); 
                 }
                 orig(self);
             };
