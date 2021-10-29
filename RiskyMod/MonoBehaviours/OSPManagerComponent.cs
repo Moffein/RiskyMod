@@ -6,7 +6,7 @@ namespace RiskyMod.MonoBehaviours
 {
     public class OSPManagerComponent : MonoBehaviour
     {
-        public static float ospThreshold = 0.9f;    //Max HP Perccent that can trigger OSP
+        public static float ospThreshold = 0.9f;    //Max HP Percent that can trigger OSP
         public static float ospTimer = 0.5f;    //After HP goes below ospThreshold, taking lethal damage within this timeframe will trigger OSP.
         public static float ospInvuln = 0.3f;   //Grace period after triggering OSP
 
@@ -51,6 +51,7 @@ namespace RiskyMod.MonoBehaviours
                 ospStopwatch = 0f;
                 characterBody.AddBuff(TrueOSP.disableOSP);
                 characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, ospInvuln);
+                characterBody.outOfDangerStopwatch = 0f;
                 Debug.Log("Triggering OSP");
             }
             return ospTriggered;
