@@ -34,6 +34,9 @@ namespace RiskyMod.Drones
 
             //Squids
             ChangeScaling(LoadBody("SquidTurretBody"));
+
+            //Beetle Allies
+            ChangeScaling(LoadBody("BeetleGuardAllyBody"));
         }
 
         private void ChangeScaling(GameObject go)
@@ -47,13 +50,16 @@ namespace RiskyMod.Drones
             {
                 case "MegaDroneBody": //If I'm gonna pay the price of a legendary chest to buy a drone, it better be worth it.
                     cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune | CharacterBody.BodyFlags.ResistantToAOE;
+                    cb.levelArmor += 2f;
                     break;
                 case "SquidTurretBody": //These bleed HP pretty fast, they need a bit more resistance to help with that.
                     cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
+                    cb.levelArmor += 1f;
                     break;
                 case "Turret1Body": //These seem to die too quickly, but AOE resist makes them too tanky.
                     cb.baseRegen = cb.baseMaxHealth / 20f;
                     cb.baseMaxShield = cb.baseMaxHealth * 0.15f;
+                    cb.levelArmor += 1f;
                     break;
                 default:
                     break;
@@ -62,7 +68,7 @@ namespace RiskyMod.Drones
             //This makes their performance stay the same on every stage. (Everything's HP increases 30% per level)
             cb.levelRegen = cb.baseRegen * 0.3f;
             cb.levelDamage = cb.baseDamage * 0.3f;
-            cb.levelArmor += 3f;
+            cb.levelArmor += 1f;
             cb.levelMaxShield = cb.baseMaxShield * 0.3f;
         }
 
