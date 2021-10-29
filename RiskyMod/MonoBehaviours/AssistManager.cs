@@ -10,6 +10,7 @@ namespace RiskyMod.MonoBehaviours
     public class AssistManager : MonoBehaviour
     {
         public static bool initialized = false;
+        public static float genericAssistLength = 3f;
         private List<Assist> pendingAssists;
 
         public void AddAssist(CharacterBody attackerBody, CharacterBody victimBody, AssistType assistType, float duration)
@@ -159,6 +160,17 @@ namespace RiskyMod.MonoBehaviours
                                     }
                                 }
                                 break;
+                            case AssistType.FrostRelic:
+                                //Vanilla behavior is left functional since it requires a GetComponent to access.
+                                if (a.attackerBody != killerBody)
+                                {
+                                    CharacterBody.IcicleItemBehavior ib = a.attackerBody.GetComponent<CharacterBody.IcicleItemBehavior>();
+                                    if (ib && ib.icicleAura)
+                                    {
+                                        ib.icicleAura.OnOwnerKillOther();
+                                    }
+                                }
+                                break;
                             default: break;
                         }
                     }
@@ -221,7 +233,8 @@ namespace RiskyMod.MonoBehaviours
             LaserTurbine,
             Berzerk,
             HeadHunter,
-            Brainstalks
+            Brainstalks,
+            FrostRelic
         }
     }
 }

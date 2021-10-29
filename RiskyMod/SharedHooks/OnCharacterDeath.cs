@@ -39,7 +39,7 @@ namespace RiskyMod.SharedHooks
 								int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
 								if (itemCount > 0)
 								{
-									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.HeadHunter, 3f);
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.HeadHunter, AssistManager.genericAssistLength);
 								}
 							}
 							if (Brainstalks.enabled)
@@ -47,7 +47,7 @@ namespace RiskyMod.SharedHooks
 								int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.KillEliteFrenzy);
 								if (itemCount > 0)
 								{
-									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.Brainstalks, 3f);
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.Brainstalks, AssistManager.genericAssistLength);
 								}
 							}
 							if (Berzerker.enabled)
@@ -55,7 +55,7 @@ namespace RiskyMod.SharedHooks
 								int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.WarCryOnMultiKill);
 								if (itemCount > 0)
 								{
-									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.Berzerk, 3f);
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.Berzerk, AssistManager.genericAssistLength);
 								}
 							}
 							if (LaserTurbine.enabled)
@@ -63,7 +63,15 @@ namespace RiskyMod.SharedHooks
 								int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.LaserTurbine);
 								if (itemCount > 0)
 								{
-									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.LaserTurbine, 3f);
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.LaserTurbine, AssistManager.genericAssistLength);
+								}
+							}
+							if (FrostRelic.enabled)
+							{
+								int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Icicle);
+								if (itemCount > 0)
+								{
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.FrostRelic, AssistManager.genericAssistLength);
 								}
 							}
 							if (BanditSpecialGracePeriod.enabled)
