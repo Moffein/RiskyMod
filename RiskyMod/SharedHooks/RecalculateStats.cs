@@ -1,4 +1,5 @@
 ﻿using RiskyMod.Items.Uncommon;
+using RiskyMod.MonoBehaviours;
 using RiskyMod.Tweaks;
 using RoR2;
 using UnityEngine;
@@ -10,9 +11,26 @@ namespace RiskyMod.SharedHooks
         public static void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
             orig(self);
+			if (TrueOSP.enabled && self.hasOneShotProtection)
+			{
+				//Disable vanilla OSP
+				self.oneShotProtectionFraction = 0f;
+				if (self.HasBuff(TrueOSP.disableOSP))
+				{
+					if (self.outOfDanger && (self.healthComponent && self.healthComponent.health/self.healthComponent.fullHealth > OSPManagerComponent.ospThreshold))
+					{
+						self.RemoveBuff(TrueOSP.disableOSP);
+					}
+					else
+					{
+						self.hasOneShotProtection = false;
+					}
+				}
+			}
 			if (self.inventory)
             {
-				if (Bandolier.enabled && self.inventory.GetItemCount(RoR2Content.Items.Bandolier) > 0)
+				Inventory inventory = self.inventory;
+				if (Bandolier.enabled && inventory.GetItemCount(RoR2Content.Items.Bandolier) > 0)
 				{
 					if (self.skillLocator)
 					{
@@ -35,16 +53,22 @@ namespace RiskyMod.SharedHooks
 					}
 				}
 
-				//This happens after GSC; needed for the armor mult since that's not in GSC currently
+				//This happens after GetStatCoefficients; needed for the armor mult since that's not in GSC currently
 				if (RoseBuckler.enabled && self.isSprinting)
                 {
-					self.armor *= 1.5f;
+					if (inventory.GetItemCount(RoR2Content.Items.SprintArmor) > 0)
+					{
+						self.armor *= 1.5f;
+					}
                 }
 
-				if (ShieldGating.enabled)
+				//This part is split off because it needs the inventory to work
+				if (TrueOSP.enabled && self.hasOneShotProtection)
                 {
-					self.hasOneShotProtection = false;
-					self.oneShotProtectionFraction = Mathf.Infinity;
+					if (inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0)
+                    {
+						self.hasOneShotProtection = false;
+                    }
                 }
 			}
 		}

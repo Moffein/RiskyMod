@@ -54,6 +54,7 @@ namespace RiskyMod
         private void RunTweaks()
         {
             new RunScaling();
+            new TrueOSP();
             new ShieldGating();
             new SceneDirectorMonsterRewards();
         }
@@ -96,7 +97,7 @@ namespace RiskyMod
             {
                 RecalculateStatsAPI.GetStatCoefficients += GetStatsCoefficient.RecalculateStatsAPI_GetStatCoefficients;
             }
-            if (Bandolier.enabled || RoseBuckler.enabled || ShieldGating.enabled)
+            if (Bandolier.enabled || RoseBuckler.enabled || TrueOSP.enabled)
             {
                 On.RoR2.CharacterBody.RecalculateStats += RecalculateStats.CharacterBody_RecalculateStats;
             }
