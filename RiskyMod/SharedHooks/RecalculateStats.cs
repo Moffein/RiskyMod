@@ -3,6 +3,7 @@ using RiskyMod.MonoBehaviours;
 using RiskyMod.Tweaks;
 using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RiskyMod.SharedHooks
 {
@@ -17,7 +18,7 @@ namespace RiskyMod.SharedHooks
 				self.oneShotProtectionFraction = 0f;
 				if (self.HasBuff(TrueOSP.disableOSP))
 				{
-					if (self.outOfDanger)// && (self.healthComponent && self.healthComponent.health/self.healthComponent.fullHealth > OSPManagerComponent.ospThreshold)
+					if (NetworkServer.active && self.outOfDanger)// && (self.healthComponent && self.healthComponent.health/self.healthComponent.fullHealth > OSPManagerComponent.ospThreshold)
 					{
 						//Currently not locked behind having >90% HP because I'd like it to be cleanly tied to the outOfDanger state.
 						//Will have to see if this ends up being too abusable.
