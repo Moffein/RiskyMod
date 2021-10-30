@@ -46,14 +46,13 @@ namespace RiskyMod.Tweaks
 				//Maybe just do a flat addition to the difficultyCoefficient? - Maybe
 				//Multiply by loop count?
 				//difficultyCoefficient = (2f * DifficultyCatalog.GetDifficultyDef(Run.instance.selectedDifficulty).scalingValue + 1.5f*difficultyCoefficient) * (Run.instance.stageClearCount/5);
-				difficultyCoefficient *= Run.instance.stageClearCount < 7 ? Mathf.Pow(1.15f, Run.instance.stageClearCount) : 2.7f;	//Needs cap to prevent game from turning into a slideshow. Will definitely add config to uncap it for those who want it.
+				difficultyCoefficient *= Run.instance.stageClearCount < 5 ? Mathf.Pow(1.2f, Run.instance.stageClearCount) : 2.5f;	//Needs cap to prevent game from turning into a slideshow. Will definitely add config to uncap it for those who want it.
 				return orig(self, deltaTime, difficultyCoefficient);
 			};
 
 			On.RoR2.CombatDirector.Awake += (orig, self) =>
 			{
-				self.creditMultiplier *= 1.2f;
-				self.expRewardCoefficient *= RunScaling.rewardMultiplier / (Run.instance.stageClearCount < 7 ? Mathf.Pow(1.2f, Run.instance.stageClearCount) : 3.6f);
+				self.expRewardCoefficient /= Run.instance.stageClearCount < 5 ? Mathf.Pow(1.2f, Run.instance.stageClearCount) : 2.5f;
 				orig(self);
 			};
         }

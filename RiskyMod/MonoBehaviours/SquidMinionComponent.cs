@@ -23,7 +23,7 @@ namespace RiskyMod.MonoBehaviours
 
         public bool CanSpawnSquid()
         {
-            return squidList.Count < (inventory ? inventory.GetItemCount(RoR2Content.Items.Squid) : 0);
+            return squidList.Count < 1 + (inventory ? inventory.GetItemCount(RoR2Content.Items.Squid) : 0);
         }
 
         public void FixedUpdate()
