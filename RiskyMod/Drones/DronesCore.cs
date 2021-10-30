@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 using MonoMod.Cil;
 using System;
 using System.Runtime.CompilerServices;
+using RoR2.CharacterAI;
 
 namespace RiskyMod.Drones
 {
@@ -13,8 +14,12 @@ namespace RiskyMod.Drones
         public DronesCore()
         {
             if (!enabled) return;
+            ChangeDroneScaling();
+            FixDroneTargeting();
+        }
 
-            //Backup
+        private void ChangeDroneScaling()
+        {//Backup
             FixBackupScaling();
             ChangeScaling(LoadBody("BackupDroneBody"));
 
@@ -102,5 +107,48 @@ namespace RiskyMod.Drones
         {
             return Resources.Load<GameObject>("prefabs/characterbodies/" + bodyname);
         }
+
+
+
+        //Drone targeting fixes from https://github.com/William758/ZetTweaks/blob/main/GameplayModule.cs
+        #region drone_targeting
+        private void FixDroneTargeting()
+        {
+            //Engi
+            AimAtEnemy(LoadMasterObject("EngiTurretMaster"));
+            AimAtEnemy(LoadMasterObject("EngiWalkerTurretMaster"));
+            AimAtEnemy(LoadMasterObject("EngiBeamTurretMaster"));
+
+            //Drones
+            AimAtEnemy(LoadMasterObject("Turret1Master"));
+            AimAtEnemy(LoadMasterObject("Drone1Master"));
+            AimAtEnemy(LoadMasterObject("MegaDroneMaster"));
+            AimAtEnemy(LoadMasterObject("DroneMissileMaster"));
+            AimAtEnemy(LoadMasterObject("FlameDroneMaster"));
+
+            //Item Allies
+            AimAtEnemy(LoadMasterObject("BeetleGuardAllyMaster"));
+            AimAtEnemy(LoadMasterObject("DroneBackupMaster"));
+            AimAtEnemy(LoadMasterObject("SquidTurretMaster"));
+            AimAtEnemy(LoadMasterObject("RoboBallGreenBuddyMaster"));
+            AimAtEnemy(LoadMasterObject("RoboBallRedBuddyMaster"));
+        }
+
+        private void AimAtEnemy(GameObject masterObject)
+        {
+            AimAtEnemy(masterObject.GetComponents<AISkillDriver>());
+        }
+
+        private void AimAtEnemy(AISkillDriver[] skillDrivers)
+        {
+            foreach (var skillDriver in skillDrivers) skillDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private GameObject LoadMasterObject(string mastername)
+        {
+            return Resources.Load<GameObject>("prefabs/charactermasters/" + mastername);
+        }
+        #endregion
     }
 }
