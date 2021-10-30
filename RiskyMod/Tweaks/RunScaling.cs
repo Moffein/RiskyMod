@@ -35,18 +35,13 @@ namespace RiskyMod.Tweaks
 			};
 
 			//Increase director intensity. Goal is to have the same level of craziness as stage 5 in Starstorm, with the constant boss spawns and big monsters everywhere.
+			//Might not be possible since RoR2 prefers to spawn T2 Elite trash, game is a lot more reluctant to spawn bosses.
 			On.RoR2.CombatDirector.DirectorMoneyWave.Update += (orig, self, deltaTime, difficultyCoefficient) =>
 			{
 				//Notes:
-				//1.5f doesn't change much
-				//3f increases spawnrates, but mostly elite trash mobs spawn. Players get too much money.
-				//5f seems to be too chaotic. Lots of flying enemies on Stage 5, not enough Parents. Still spawns lots of elite trash on early stages.
 				//Check the monster card selection stuff later. Goal is to have more heavy mobs spawn earlier.
 
-				//Maybe just do a flat addition to the difficultyCoefficient? - Maybe
-				//Multiply by loop count?
-				//difficultyCoefficient = (2f * DifficultyCatalog.GetDifficultyDef(Run.instance.selectedDifficulty).scalingValue + 1.5f*difficultyCoefficient) * (Run.instance.stageClearCount/5);
-				difficultyCoefficient *= Run.instance.stageClearCount < 5 ? Mathf.Pow(1.15f, Run.instance.stageClearCount) : 2.5f;	//Needs cap to prevent game from turning into a slideshow. Will definitely add config to uncap it for those who want it.
+				difficultyCoefficient *= Run.instance.stageClearCount < 5 ? Mathf.Pow(1.15f, Run.instance.stageClearCount) : 2f;	//Needs cap to prevent game from turning into a slideshow. Will definitely add config to uncap it for those who want it.
 				return orig(self, deltaTime, difficultyCoefficient);
 			};
 
