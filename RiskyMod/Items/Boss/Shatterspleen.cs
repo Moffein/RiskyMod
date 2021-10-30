@@ -14,7 +14,7 @@ namespace RiskyMod.Items.Boss
             if (!enabled) return;
 
             LanguageAPI.Add("ITEM_BLEEDONHITANDEXPLODE_PICKUP", "Bleeding enemies explode on kill.");
-            LanguageAPI.Add("ITEM_BLEEDONHITANDEXPLODE_DESC", "Gain a <style=cIsDamage>5%</style> chance to <style=cIsDamage>bleed</style> enemies for <style=cIsDamage>240%</style> base damage. <style=cIsDamage>Bleeding</style> enemies <style=cIsDamage>explode</style> on death for <style=cIsDamage>400%</style> <style=cStack>(+400% per stack)</style> damage, plus an additional <style=cIsDamage>10%</style> <style=cStack>(+10% per stack)</style> of their maximum health.");
+            LanguageAPI.Add("ITEM_BLEEDONHITANDEXPLODE_DESC", "Gain a <style=cIsDamage>5%</style> chance to <style=cIsDamage>bleed</style> enemies for <style=cIsDamage>240%</style> base damage. <style=cIsDamage>Bleeding</style> enemies <style=cIsDamage>explode</style> on death for <style=cIsDamage>400%</style> <style=cStack>(+320% per stack)</style> damage, plus an additional <style=cIsDamage>10%</style> <style=cStack>(+8% per stack)</style> of their maximum health.");
 
             //Remove Vanilla bleed effect - needs to be recalculated.
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
@@ -75,11 +75,28 @@ namespace RiskyMod.Items.Boss
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "BleedOnHitAndExplode")
                     );
 
+                //Change explosion damage
+                c.GotoNext(
+                     x => x.MatchLdcR4(4f)
+                    );
+                c.Next.Operand = 3.2f;
+                c.Index += 8;
+                c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
+                {
+                    return damageCoefficient + 0.8f;
+                });
+
                 //Change Max HP damage
                 c.GotoNext(
                      x => x.MatchLdcR4(0.15f)
                     );
-                c.Next.Operand = 0.1f;
+                c.Next.Operand = 0.08f;
+                c.Index += 8;
+                c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
+                {
+                    return damageCoefficient + 0.02f;
+                });
+
 
                 //Disable Proc Coefficient
                 if (RiskyMod.disableProcChains)

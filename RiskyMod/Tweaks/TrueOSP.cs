@@ -17,9 +17,9 @@ namespace RiskyMod.Tweaks
             if (!enabled) return;
 
             disableOSP = ScriptableObject.CreateInstance<BuffDef>();
-            disableOSP.buffColor = new Color(0.8f * 140f / 255f, 0.8f * 185f / 255f, 0.8f * 191f / 255f);
+            disableOSP.buffColor = new Color(0.9f * 140f / 255f, 0.9f * 185f / 255f, 0.9f * 191f / 255f);
             disableOSP.canStack = false;
-            disableOSP.isDebuff = false;
+            disableOSP.isDebuff = false;    //Not a debuff so that it doesn't interact with debuff-related stuff like Death Mark and Blast Shower.
             disableOSP.name = "RiskyItemTweaks_DisableOSPBuff";
             disableOSP.iconSprite = Resources.Load<Sprite>("textures/bufficons/texBuffPulverizeIcon");
             BuffAPI.Add(new CustomBuff(disableOSP));
