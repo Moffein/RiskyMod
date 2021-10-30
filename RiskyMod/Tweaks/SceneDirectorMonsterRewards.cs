@@ -13,7 +13,7 @@ namespace RiskyMod.Tweaks
             {
                 if (self.expRewardCoefficient < 0.11f)
                 {
-                    self.expRewardCoefficient = 0.11f / (Run.instance.stageClearCount < 5 ? Mathf.Pow(1.2f, Run.instance.stageClearCount) : 2.5f);
+                    self.expRewardCoefficient = 0.11f / RunScaling.GetScaledExpRewardMult();
                 }
                 orig(self);
             };
