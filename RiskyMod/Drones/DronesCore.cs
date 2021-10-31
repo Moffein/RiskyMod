@@ -108,8 +108,6 @@ namespace RiskyMod.Drones
             return Resources.Load<GameObject>("prefabs/characterbodies/" + bodyname);
         }
 
-
-
         //Drone targeting fixes from https://github.com/William758/ZetTweaks/blob/main/GameplayModule.cs
         #region drone_targeting
         private void FixDroneTargeting()

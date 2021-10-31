@@ -39,19 +39,19 @@ namespace RiskyMod.SharedHooks
 					{
 						if (self.skillLocator.primary)
 						{
-							self.skillLocator.primary.cooldownScale *= 0.85f;
+							self.skillLocator.primary.cooldownScale *= 0.9f;
 						}
 						if (self.skillLocator.secondary)
 						{
-							self.skillLocator.secondary.cooldownScale *= 0.85f;
+							self.skillLocator.secondary.cooldownScale *= 0.9f;
 						}
 						if (self.skillLocator.utility)
 						{
-							self.skillLocator.utility.cooldownScale *= 0.85f;
+							self.skillLocator.utility.cooldownScale *= 0.9f;
 						}
 						if (self.skillLocator.special)
 						{
-							self.skillLocator.special.cooldownScale *= 0.85f;
+							self.skillLocator.special.cooldownScale *= 0.9f;
 						}
 					}
 				}
