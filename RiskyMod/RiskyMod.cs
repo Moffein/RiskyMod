@@ -124,7 +124,7 @@ namespace RiskyMod
 
         private void SetupAssists()
         {
-            if (LaserTurbine.enabled || Berzerker.enabled || HeadHunter.enabled || Brainstalks.enabled
+            if (LaserTurbine.enabled || Berzerker.enabled || HeadHunter.enabled || Brainstalks.enabled || TopazBrooch.enabled
                 || BanditSpecialGracePeriod.enabled || FrostRelic.enabled || HarvesterScythe.enabled || Soulbound.enabled)
             {
                 AssistManager.initialized = true;

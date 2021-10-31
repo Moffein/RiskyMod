@@ -120,6 +120,14 @@ namespace RiskyMod.SharedHooks
 										RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.HarvesterScythe, AssistManager.genericAssistLength);
 									}
 								}
+								if (TopazBrooch.enabled)
+								{
+									int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.BarrierOnKill);
+									if (itemCount > 0)
+									{
+										RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.TopazBrooch, AssistManager.genericAssistLength);
+									}
+								}
 								if (BanditSpecialGracePeriod.enabled)
                                 {
 									if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)

@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using RiskyMod.Items.Common;
 using RiskyMod.Items.Legendary;
 using RiskyMod.Items.Uncommon;
 using RiskyMod.Tweaks;
 using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RiskyMod.MonoBehaviours
 {
@@ -38,6 +40,7 @@ namespace RiskyMod.MonoBehaviours
 
         public void TriggerAssists(CharacterBody victimBody, CharacterBody killerBody, DamageInfo damageInfo)
         {
+            //if (!NetworkServer.active) return; Thing that calls this is already gated behind a network check.
             if (pendingAssists.Count > 0)
             {
                 bool spawnedResetCooldownEffect = false;
@@ -200,6 +203,20 @@ namespace RiskyMod.MonoBehaviours
                                     }
                                 }
                                 break;
+                            case AssistType.TopazBrooch:
+                                if (TopazBrooch.enabled)
+                                {
+                                    Inventory attackerInventory = a.attackerBody.inventory;
+                                    if (attackerInventory)
+                                    {
+                                        int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.BarrierOnKill);
+                                        if (itemCount > 0)
+                                        {
+                                            a.attackerBody.healthComponent.AddBarrier(15f * itemCount);
+                                        }
+                                    }
+                                }
+                                break;
                             default: break;
                         }
                     }
@@ -265,7 +282,8 @@ namespace RiskyMod.MonoBehaviours
             Brainstalks,
             FrostRelic,
             HarvesterScythe,
-            Soulbound
+            Soulbound,
+            TopazBrooch
         }
     }
 }

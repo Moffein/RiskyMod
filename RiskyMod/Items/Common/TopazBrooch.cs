@@ -2,12 +2,12 @@
 using MonoMod.Cil;
 using RoR2;
 
-namespace RiskyMod.Items.Legendary
+namespace RiskyMod.Items.Common
 {
-    public class Soulbound
+    class TopazBrooch
     {
         public static bool enabled = true;
-        public Soulbound()
+        public TopazBrooch()
         {
             if (!enabled) return;
 
@@ -16,7 +16,7 @@ namespace RiskyMod.Items.Legendary
             {
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(
-                     x => x.MatchLdsfld(typeof(RoR2Content.Items), "Talisman")
+                     x => x.MatchLdsfld(typeof(RoR2Content.Items), "BarrierOnKill")
                     );
                 c.Remove();
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));

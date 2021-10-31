@@ -44,6 +44,7 @@ namespace RiskyMod.Items
             new Warbanner();
             new Gasoline();
             new RepArmor();
+            new TopazBrooch();
         }
 
         private void ModifyUncommon()

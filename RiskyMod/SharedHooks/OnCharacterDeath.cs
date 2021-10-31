@@ -1,4 +1,5 @@
 ﻿using RiskyMod.Items.Boss;
+using RiskyMod.Items.Common;
 using RiskyMod.Items.Legendary;
 using RiskyMod.Items.Uncommon;
 using RiskyMod.MonoBehaviours;
@@ -88,6 +89,14 @@ namespace RiskyMod.SharedHooks
 								if (itemCount > 0)
 								{
 									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.HarvesterScythe, AssistManager.genericAssistLength);
+								}
+							}
+							if (TopazBrooch.enabled)
+							{
+								int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.BarrierOnKill);
+								if (itemCount > 0)
+								{
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.TopazBrooch, AssistManager.genericAssistLength);
 								}
 							}
 							if (BanditSpecialGracePeriod.enabled)
