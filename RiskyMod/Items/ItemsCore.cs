@@ -97,6 +97,7 @@ namespace RiskyMod.Items
         {
             if (!lunarEnabled) return;
             new ShapedGlass();
+            new Transcendence();
         }
 
         private void ModifyEquipment()
