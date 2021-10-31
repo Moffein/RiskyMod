@@ -99,6 +99,7 @@ namespace RiskyMod.Items
             new ShapedGlass();
             new Transcendence();
             new BrittleCrown();
+            new Meteorite();
         }
 
         private void ModifyEquipment()
