@@ -94,7 +94,7 @@ namespace RiskyMod
         private void AddHooks()
         {
             //A hook needs to be used at least once to be added
-            if (LeechingSeed.enabled || AssistManager.initialized)
+            if (AssistManager.initialized)
             {
                 On.RoR2.GlobalEventManager.OnHitEnemy += OnHitEnemy.GlobalEventManager_OnHitEnemy;
             }

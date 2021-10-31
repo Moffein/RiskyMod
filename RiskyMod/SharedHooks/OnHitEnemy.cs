@@ -19,7 +19,9 @@ namespace RiskyMod.SharedHooks
 			CharacterBody victimBody = null;
 			Inventory attackerInventory = null;
 
-			if (NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected)
+			bool validDamage = NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected;
+
+			if (validDamage)
 			{
 				if (damageInfo.attacker)
 				{
@@ -47,7 +49,7 @@ namespace RiskyMod.SharedHooks
 
 			orig(self, damageInfo, victim);
 
-            if (NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected)
+            if (validDamage)
             {
                 if (damageInfo.attacker)
                 {
@@ -60,24 +62,6 @@ namespace RiskyMod.SharedHooks
 
 						if (attackerInventory)
                         {
-							if (LeechingSeed.enabled)
-							{
-								if (!damageInfo.procChainMask.HasProc(ProcType.HealOnHit))
-								{
-									int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Seed);
-									if (itemCount > 0)
-									{
-										HealthComponent attackerHealthComponent = attackerBody.GetComponent<HealthComponent>();
-										if (attackerHealthComponent)
-										{
-											ProcChainMask procChainMask = damageInfo.procChainMask;
-											procChainMask.AddProc(ProcType.HealOnHit);
-											attackerHealthComponent.Heal(Mathf.Max(attackerBody.maxHealth * (float)itemCount * 0.005f, 1f * itemCount) * damageInfo.procCoefficient, procChainMask, true);
-											//attackerBody.maxHealth * (0.01f + (float)(itemCount - 1) * 0.005f) 
-										}
-									}
-								}
-							}
 							if (AssistManager.initialized && RiskyMod.assistManager)
 							{
 								if (HeadHunter.enabled)
