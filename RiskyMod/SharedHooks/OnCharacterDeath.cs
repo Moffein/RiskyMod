@@ -86,9 +86,25 @@ namespace RiskyMod.SharedHooks
 								}
 							}
 
-							RiskyMod.assistManager.TriggerAssists(victimBody, attackerBody, damageInfo.position);
+							RiskyMod.assistManager.TriggerAssists(victimBody, attackerBody, damageInfo);
 						}
 					}
+				
+					if (attackerInventory)
+                    {
+						if (HarvesterScythe.enabled)
+                        {
+							int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.HealOnCrit);
+							if (itemCount > 0)
+                            {
+								attackerBody.AddTimedBuff(HarvesterScythe.scytheBuff, 1f + 1f * itemCount);
+								EffectManager.SpawnEffect(HarvesterScythe.effectPrefab, new EffectData
+								{
+									origin = attackerBody.corePosition
+								}, true);
+							}
+                        }
+                    }
 				}
 			}
         }

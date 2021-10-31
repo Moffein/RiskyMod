@@ -39,6 +39,14 @@ namespace RiskyMod.SharedHooks
                     args.attackSpeedMultAdd += 0.2f * berzerkCount;
                 }
             }
+            if (HarvesterScythe.enabled && sender.HasBuff(HarvesterScythe.scytheBuff))
+            {
+                args.critAdd += 100f;
+                if (sender.healthComponent)
+                {
+                    args.baseRegenAdd += sender.maxHealth * 0.05f;
+                }
+            }
 
             if (sender.inventory)
             {

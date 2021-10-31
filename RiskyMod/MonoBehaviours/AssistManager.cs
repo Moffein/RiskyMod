@@ -35,7 +35,7 @@ namespace RiskyMod.MonoBehaviours
             }
         }
 
-        public void TriggerAssists(CharacterBody victimBody, CharacterBody killerBody, Vector3 position)
+        public void TriggerAssists(CharacterBody victimBody, CharacterBody killerBody, DamageInfo damageInfo)
         {
             if (pendingAssists.Count > 0)
             {
@@ -137,7 +137,7 @@ namespace RiskyMod.MonoBehaviours
                                     {
                                         EffectManager.SpawnEffect(BanditSpecialGracePeriod.skullEffect, new EffectData
                                         {
-                                            origin = position
+                                            origin = damageInfo.position
                                         }, true);
                                     }
                                     a.attackerBody.AddBuff(RoR2Content.Buffs.BanditSkull);
@@ -150,7 +150,7 @@ namespace RiskyMod.MonoBehaviours
                                     {
                                         EffectManager.SpawnEffect(BanditSpecialGracePeriod.resetEffect, new EffectData
                                         {
-                                            origin = position
+                                            origin = damageInfo.position
                                         }, true);
                                     }
                                     SkillLocator skillLocator = a.attackerBody.skillLocator;

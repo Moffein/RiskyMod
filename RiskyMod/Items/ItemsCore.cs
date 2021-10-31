@@ -63,6 +63,7 @@ namespace RiskyMod.Items
             new RoseBuckler();
             new Guillotine();
             new Berzerker();
+            new HarvesterScythe();
         }
 
         private void ModifyLegendary()

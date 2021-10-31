@@ -61,34 +61,38 @@ namespace RiskyMod.SharedHooks
             {
                 if (self.alive)
                 {
-                    if (damageInfo.attacker)
+                    if (self.body)
                     {
-                        if (attackerBody)
+                        /*if (HarvesterScythe.enabled && self.body.HasBuff(HarvesterScythe.scytheBuff))
                         {
-                            if (SquidPolyp.enabled)
+                            self.body.ClearTimedBuffs(HarvesterScythe.scytheBuff);
+                        }*/
+                        if (damageInfo.attacker)
+                        {
+                            if (attackerBody)
                             {
-                                //Squid Turrets are guaranteed to draw aggro upon dealing damage.
-                                //Based on https://github.com/DestroyedClone/PoseHelper/blob/master/HighPriorityAggroTest/HPATPlugin.cs
-                                if (damageInfo.attacker.name == "SquidTurretBody(Clone)")
+                                if (SquidPolyp.enabled)
                                 {
-                                    if (self.body.master && self.body.master.aiComponents.Length > 0)
+                                    //Squid Turrets are guaranteed to draw aggro upon dealing damage.
+                                    //Based on https://github.com/DestroyedClone/PoseHelper/blob/master/HighPriorityAggroTest/HPATPlugin.cs
+                                    if (damageInfo.attacker.name == "SquidTurretBody(Clone)")
                                     {
-                                        foreach (BaseAI ai in self.body.master.aiComponents)
+                                        if (self.body.master && self.body.master.aiComponents.Length > 0)
                                         {
-                                            ai.currentEnemy.gameObject = attackerBody.gameObject;
-                                            ai.currentEnemy.bestHurtBox = attackerBody.mainHurtBox;
-                                            ai.enemyAttention = ai.enemyAttentionDuration;
-                                            ai.targetRefreshTimer = 5f;
-                                            ai.BeginSkillDriver(ai.EvaluateSkillDrivers());
+                                            foreach (BaseAI ai in self.body.master.aiComponents)
+                                            {
+                                                ai.currentEnemy.gameObject = attackerBody.gameObject;
+                                                ai.currentEnemy.bestHurtBox = attackerBody.mainHurtBox;
+                                                ai.enemyAttention = ai.enemyAttentionDuration;
+                                                ai.targetRefreshTimer = 5f;
+                                                ai.BeginSkillDriver(ai.EvaluateSkillDrivers());
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
 
-                    if (self.body)
-                    {
                         Inventory inventory = self.body.inventory;
                         if (inventory)
                         {

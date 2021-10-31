@@ -119,10 +119,7 @@ namespace RiskyMod
             {
                 new ModifyFinalDamage();
             }
-            if (HeadHunter.enabled || Berzerker.enabled)
-            {
-                new StealBerzerkEffect();
-            }
+            new StealBuffVFX();
         }
 
         private void SetupAssists()
