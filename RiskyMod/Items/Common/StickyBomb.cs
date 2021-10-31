@@ -43,7 +43,7 @@ namespace RiskyMod.Items.Common
             };
 
             //Modify detonation delay
-            stickybombPrefab = Resources.Load<GameObject>("prefabs/projectiles/stickybomb").InstantiateClone("Risky_ItemTweaks", true);
+            stickybombPrefab = Resources.Load<GameObject>("prefabs/projectiles/stickybomb").InstantiateClone("RiskyMod_Stickybomb", true);
             ProjectileImpactExplosion pie = stickybombPrefab.GetComponent<ProjectileImpactExplosion>();
             pie.lifetime = 1.2f;
             ProjectileAPI.Add(stickybombPrefab);

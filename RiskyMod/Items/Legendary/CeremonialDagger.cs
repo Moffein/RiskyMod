@@ -30,7 +30,7 @@ namespace RiskyMod.Items.Legendary
                 });
             };
 
-            daggerPrefab = Resources.Load<GameObject>("prefabs/projectiles/DaggerProjectile").InstantiateClone("RiskyItemTweaks_CeremonialDaggerProjectile", true);
+            daggerPrefab = Resources.Load<GameObject>("prefabs/projectiles/DaggerProjectile").InstantiateClone("RiskyMod_CeremonialDaggerProjectile", true);
             ProjectileController pc = daggerPrefab.GetComponent<ProjectileController>();
             pc.procCoefficient = RiskyMod.disableProcChains ? 0f : 1f;
             ProjectileAPI.Add(daggerPrefab);

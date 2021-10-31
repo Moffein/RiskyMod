@@ -57,7 +57,7 @@ namespace RiskyMod.Items.Boss
 
             if (RiskyMod.disableProcChains)
             {
-                meatballPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/FireMeatBall").InstantiateClone("RiskyItemTweaks_Perforator", true);
+                meatballPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/FireMeatBall").InstantiateClone("RiskyMod_Perforator", true);
                 ProjectileImpactExplosion pie = meatballPrefab.GetComponent<ProjectileImpactExplosion>();
                 pie.blastProcCoefficient = 0f;
                 ProjectileAPI.Add(meatballPrefab);

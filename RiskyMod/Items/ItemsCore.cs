@@ -6,6 +6,7 @@ using RiskyMod.Items.Lunar;
 using RiskyMod.Items.Uncommon;
 using RoR2;
 using System.Runtime.CompilerServices;
+using UnityEngine;
 
 namespace RiskyMod.Items
 {
@@ -102,6 +103,8 @@ namespace RiskyMod.Items
             if (!equipmentEnabled) return;
             new CritHud();
             new VolcanicEgg();
+            new BFG();
+            new Capacitor();
         }
 
         public static void AddToAIBlacklist(string itemName)
@@ -126,6 +129,16 @@ namespace RiskyMod.Items
         public static string ToPercent(float coefficient)
         {
             return coefficient.ToString("P0").Replace(" ", "").Replace(",", "");
+        }
+
+        public static EquipmentDef LoadEquipmentDef(string equipmentname)
+        {
+            return Resources.Load<EquipmentDef>("equipmentdefs/" + equipmentname);
+        }
+
+        public static void ChangeEquipmentCooldown(EquipmentDef ed, float cooldown)
+        {
+            ed.cooldown = cooldown;
         }
     }
 }

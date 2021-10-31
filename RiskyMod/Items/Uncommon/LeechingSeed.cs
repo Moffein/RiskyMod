@@ -13,7 +13,6 @@ namespace RiskyMod.Items.Uncommon
         {
 			if (!enabled) return;
 
-			//Remove Vanilla Effect
 			IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
 			{
 				ILCursor c = new ILCursor(il);

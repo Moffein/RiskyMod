@@ -57,7 +57,7 @@ namespace RiskyMod.Items.Uncommon
         
 			if (RiskyMod.disableProcChains)
 			{
-				missilePrefab = Resources.Load<GameObject>("Prefabs/Projectiles/MissileProjectile").InstantiateClone("RiskyItemTweaks_ATGProjectile", true);
+				missilePrefab = Resources.Load<GameObject>("Prefabs/Projectiles/MissileProjectile").InstantiateClone("RiskyMod_ATGProjectile", true);
 				ProjectileController pc = missilePrefab.GetComponent<ProjectileController>();
 				pc.procCoefficient = 0f;
 				ProjectileAPI.Add(missilePrefab);
