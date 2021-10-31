@@ -101,6 +101,7 @@ namespace RiskyMod.Items
         {
             if (!equipmentEnabled) return;
             new CritHud();
+            new VolcanicEgg();
         }
 
         public static void AddToAIBlacklist(string itemName)
