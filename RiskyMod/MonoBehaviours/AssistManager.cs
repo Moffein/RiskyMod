@@ -12,7 +12,7 @@ namespace RiskyMod.MonoBehaviours
     public class AssistManager : MonoBehaviour
     {
         public static bool initialized = false;
-        public static float genericAssistLength = 3f;
+        public static float assistLength = 3f;
         private List<Assist> pendingAssists;
         private List<BanditAssist> pendingBanditAssists;
         //Refer to OnHitEnemy and OnCharacterDeath for assist application.

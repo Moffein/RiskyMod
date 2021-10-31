@@ -42,9 +42,8 @@ namespace RiskyMod.Items.Boss
 								}, RoR2Application.rng);
 								directorSpawnRequest.summonerBodyObject = self.gameObject;
 								directorSpawnRequest.ignoreTeamMemberLimit = true;  //Guards should always be able to spawn. Probably doesn't need a cap since there's only 1 per player.
-								DirectorSpawnRequest directorSpawnRequest2 = directorSpawnRequest;
 
-								directorSpawnRequest2.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest2.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult spawnResult)
+								directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult spawnResult)
 								{
 									Inventory guardInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
 
@@ -59,7 +58,7 @@ namespace RiskyMod.Items.Boss
 									self.master.AddDeployable(d, DeployableSlot.BeetleGuardAlly);
 								}));
 
-								DirectorCore.instance.TrySpawnObject(directorSpawnRequest2);
+								DirectorCore.instance.TrySpawnObject(directorSpawnRequest);
 
 								if (deployableCount < 1)
 								{

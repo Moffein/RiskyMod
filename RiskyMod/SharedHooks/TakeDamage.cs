@@ -150,8 +150,7 @@ namespace RiskyMod.SharedHooks
                                                     directorSpawnRequest.teamIndexOverride = self.body.teamComponent.teamIndex;
                                                     directorSpawnRequest.summonerBodyObject = self.gameObject;
                                                     directorSpawnRequest.ignoreTeamMemberLimit = true;  //Polyps should always be able to spawn. Does this need a cap for performance?
-                                                    DirectorSpawnRequest directorSpawnRequest2 = directorSpawnRequest;
-                                                    directorSpawnRequest2.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest2.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult result)
+                                                    directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult result)
                                                     {
                                                         if (!result.success)
                                                         {

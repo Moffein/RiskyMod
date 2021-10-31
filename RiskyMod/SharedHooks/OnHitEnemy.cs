@@ -64,7 +64,7 @@ namespace RiskyMod.SharedHooks
                         {
 							if (AssistManager.initialized && RiskyMod.assistManager)
 							{
-								RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.genericAssistLength);
+								RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.assistLength);
 								if (BanditSpecialGracePeriod.enabled)
                                 {
 									if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)

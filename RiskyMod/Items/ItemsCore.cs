@@ -91,8 +91,9 @@ namespace RiskyMod.Items
             new Shatterspleen();
             new Knurl();
             new Disciple();
-            new Planula();
             new GenesisLoop();
+            new Incubator();
+            new Planula();
         }
 
         private void ModifyLunar()
