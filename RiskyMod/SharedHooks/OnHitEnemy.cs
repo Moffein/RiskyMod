@@ -104,6 +104,22 @@ namespace RiskyMod.SharedHooks
 										RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.FrostRelic, AssistManager.genericAssistLength);
 									}
 								}
+								if (Soulbound.enabled)
+								{
+									int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Talisman);
+									if (itemCount > 0)
+									{
+										RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.Soulbound, AssistManager.genericAssistLength);
+									}
+								}
+								if (HarvesterScythe.enabled)
+								{
+									int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.HealOnCrit);
+									if (itemCount > 0)
+									{
+										RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.HarvesterScythe, AssistManager.genericAssistLength);
+									}
+								}
 								if (BanditSpecialGracePeriod.enabled)
                                 {
 									if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)

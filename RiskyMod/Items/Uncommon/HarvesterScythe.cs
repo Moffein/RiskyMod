@@ -10,7 +10,7 @@ namespace RiskyMod.Items.Uncommon
     {
         public static bool enabled = true;
         public static BuffDef scytheBuff;
-        public static GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/MedkitHealEffect"); //same sfx as "Play_item_proc_crit_heal"
+        //public static GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/MedkitHealEffect"); //same sfx as "Play_item_proc_crit_heal"
         public HarvesterScythe()
         {
             if (!enabled) return;
@@ -34,7 +34,7 @@ namespace RiskyMod.Items.Uncommon
             scytheBuff.iconSprite = Resources.Load<Sprite>("textures/bufficons/texBuffRegenBoostIcon");
             BuffAPI.Add(new CustomBuff(scytheBuff));
 
-            //Buff application handled in SharedHooks.OnCharacterDeath
+            //Buff application handled in Assist Manager
             //Buff stats handled in SharedHooks.GetStatCoefficients
             //Buff removal handled in SharedHooks.TakeDamage; Add this if the healing ends up being too good.
 

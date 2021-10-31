@@ -78,6 +78,7 @@ namespace RiskyMod.Items
             new Headstompers();
             new NovaOnHeal();
             new Brainstalks();
+            new Soulbound();
         }
 
         private void ModifyBoss()

@@ -20,9 +20,9 @@ namespace RiskyMod.SharedHooks
             {
 				CharacterBody attackerBody = damageReport.attackerBody;
 				CharacterMaster attackerMaster = damageReport.attackerMaster;
-				TeamIndex attackerTeamIndex = damageReport.attackerTeamIndex;
+				//TeamIndex attackerTeamIndex = damageReport.attackerTeamIndex;
 				DamageInfo damageInfo = damageReport.damageInfo;
-				GameObject victimObject = damageReport.victim.gameObject;
+				//GameObject victimObject = damageReport.victim.gameObject;
 				CharacterBody victimBody = damageReport.victimBody;
 				Inventory attackerInventory = attackerMaster ? attackerMaster.inventory : null;
 
@@ -74,6 +74,22 @@ namespace RiskyMod.SharedHooks
 									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.FrostRelic, AssistManager.genericAssistLength);
 								}
 							}
+							if (Soulbound.enabled)
+							{
+								int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Talisman);
+								if (itemCount > 0)
+								{
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.Soulbound, AssistManager.genericAssistLength);
+								}
+							}
+							if (HarvesterScythe.enabled)
+							{
+								int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.HealOnCrit);
+								if (itemCount > 0)
+								{
+									RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.AssistType.HarvesterScythe, AssistManager.genericAssistLength);
+								}
+							}
 							if (BanditSpecialGracePeriod.enabled)
 							{
 								if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)
@@ -89,22 +105,6 @@ namespace RiskyMod.SharedHooks
 							RiskyMod.assistManager.TriggerAssists(victimBody, attackerBody, damageInfo);
 						}
 					}
-				
-					if (attackerInventory)
-                    {
-						if (HarvesterScythe.enabled)
-                        {
-							int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.HealOnCrit);
-							if (itemCount > 0)
-                            {
-								attackerBody.AddTimedBuff(HarvesterScythe.scytheBuff, 1f + 1f * itemCount);
-								EffectManager.SpawnEffect(HarvesterScythe.effectPrefab, new EffectData
-								{
-									origin = attackerBody.corePosition
-								}, true);
-							}
-                        }
-                    }
 				}
 			}
         }

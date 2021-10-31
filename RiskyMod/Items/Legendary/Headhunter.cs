@@ -27,7 +27,7 @@ namespace RiskyMod.Items.Legendary
             headhunterBuff.iconSprite = Resources.Load<Sprite>("textures/bufficons/texBuffAttackSpeedOnCritIcon");
             BuffAPI.Add(new CustomBuff(headhunterBuff));
 
-            //Buff application handled in SharedHooks.OnCharacterDeath
+            //Buff application handled via Assist Manager
 
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>

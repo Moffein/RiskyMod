@@ -12,6 +12,7 @@ namespace RiskyMod.MonoBehaviours
         public static bool initialized = false;
         public static float genericAssistLength = 3f;
         private List<Assist> pendingAssists;
+        //Refer to OnHitEnemy and OnCharacterDeath for assist application.
 
         public void AddAssist(CharacterBody attackerBody, CharacterBody victimBody, AssistType assistType, float duration)
         {
@@ -171,6 +172,34 @@ namespace RiskyMod.MonoBehaviours
                                     }
                                 }
                                 break;
+                            case AssistType.Soulbound:
+                                if (Soulbound.enabled)
+                                {
+                                    Inventory attackerInventory = a.attackerBody.inventory;
+                                    if (attackerInventory)
+                                    {
+                                        int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Talisman);
+                                        if (itemCount > 0)
+                                        {
+                                            attackerInventory.DeductActiveEquipmentCooldown(2f + itemCount * 2f);
+                                        }
+                                    }
+                                }
+                                break;
+                            case AssistType.HarvesterScythe:
+                                if (HarvesterScythe.enabled)
+                                {
+                                    Inventory attackerInventory = a.attackerBody.inventory;
+                                    if (attackerInventory)
+                                    {
+                                        int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.HealOnCrit);
+                                        if (itemCount > 0)
+                                        {
+                                            a.attackerBody.AddTimedBuff(HarvesterScythe.scytheBuff, 1f + 1f * itemCount);
+                                        }
+                                    }
+                                }
+                                break;
                             default: break;
                         }
                     }
@@ -228,13 +257,15 @@ namespace RiskyMod.MonoBehaviours
 
         public enum AssistType
         {
-            ResetCooldowns, //Convert later
-            BanditSkull, //Convert later
+            ResetCooldowns,
+            BanditSkull,
             LaserTurbine,
             Berzerk,
             HeadHunter,
             Brainstalks,
-            FrostRelic
+            FrostRelic,
+            HarvesterScythe,
+            Soulbound
         }
     }
 }
