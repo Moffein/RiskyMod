@@ -98,6 +98,7 @@ namespace RiskyMod.Items
             if (!lunarEnabled) return;
             new ShapedGlass();
             new Transcendence();
+            new BrittleCrown();
         }
 
         private void ModifyEquipment()
