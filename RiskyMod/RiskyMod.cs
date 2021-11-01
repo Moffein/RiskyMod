@@ -23,6 +23,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.MercExposeFix", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.FixPlayercount", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.NoLevelupHeal", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.AI_Blacklist", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("dev.wildbook.multitudes", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
@@ -75,6 +76,7 @@ namespace RiskyMod
             {
                 new FixMercExpose();
             }
+
             if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.FixPlayercount"))
             {
                 if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("dev.wildbook.multitudes"))
@@ -86,6 +88,12 @@ namespace RiskyMod
             else
             {
                 FixPlayercount.standalonePluginLoaded = true;
+            }
+
+
+            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist"))
+            {
+                new FixVengeanceLeveling();
             }
             new FixDamageTypeOverwrite();
             new FixFocusCrystalSelfDamage();
