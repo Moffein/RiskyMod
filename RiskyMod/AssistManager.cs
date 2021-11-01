@@ -7,7 +7,7 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace RiskyMod.MonoBehaviours
+namespace RiskyMod
 {
     public class AssistManager : MonoBehaviour
     {
@@ -141,7 +141,7 @@ namespace RiskyMod.MonoBehaviours
                                 int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.HealOnCrit);
                                 if (itemCount > 0)
                                 {
-                                    a.attackerBody.AddTimedBuff(HarvesterScythe.scytheBuff, 1f + 1f * itemCount);
+                                    a.attackerBody.AddTimedBuff(HarvesterScythe.scytheBuff, 1.5f + 1.5f * itemCount);
                                 }
                             }
                             if (TopazBrooch.enabled)
