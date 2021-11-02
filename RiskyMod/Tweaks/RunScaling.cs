@@ -17,7 +17,7 @@ namespace RiskyMod.Tweaks
 				float time = Mathf.Floor(self.GetRunStopwatch() * 0.0166666675f);    //Convert stopwatch(seconds) into minutes
                 DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
                 float playerFactor = 0.7f + playerCount * 0.3f;
-				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue * Mathf.Pow(playerCount, 0.2f);
+				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue * Mathf.Pow(playerCount, 0.15f);
 				float stageFactor = Mathf.Pow(1.2f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
 				float finalDifficulty = (playerFactor + timeFactor) * stageFactor;
 				self.compensatedDifficultyCoefficient = finalDifficulty;
@@ -41,7 +41,7 @@ namespace RiskyMod.Tweaks
 				//Notes:
 				//Check the monster card selection stuff later. Goal is to have more heavy mobs spawn earlier.
 
-				difficultyCoefficient *= Run.instance.stageClearCount < 5 ? Mathf.Pow(1.15f, Run.instance.stageClearCount) : 2f;	//Needs cap to prevent game from turning into a slideshow. Will definitely add config to uncap it for those who want it.
+				difficultyCoefficient *= Run.instance.stageClearCount < 4 ? Mathf.Pow(1.15f, Run.instance.stageClearCount) : 1.75f;	//Needs cap to prevent game from turning into a slideshow. Will definitely add config to uncap it for those who want it.
 				return orig(self, deltaTime, difficultyCoefficient);
 			};
 
@@ -55,7 +55,7 @@ namespace RiskyMod.Tweaks
 
 		public static float GetScaledExpRewardMult()
 		{
-			return RunScaling.enabled ? 0.9f * (Run.instance.stageClearCount < 5 ? Mathf.Pow(1.2f, Run.instance.stageClearCount) : 2.5f) : 1f;
+			return RunScaling.enabled ? 0.9f * (Run.instance.stageClearCount < 4 ? Mathf.Pow(1.2f, Run.instance.stageClearCount) : 2.2f) : 1f;
 
 		}
 	}
