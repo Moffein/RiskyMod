@@ -34,13 +34,13 @@ namespace RiskyMod.SharedHooks
                 {
                     ILCursor c = new ILCursor(il);
                     c.GotoNext(
-                         x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "CrocoRegen")
+                         x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "LifeSteal")
                         );
                     c.Index += 2;
                     c.Emit(OpCodes.Ldarg_0);
-                    c.EmitDelegate<Func<bool, CharacterBody, bool>>((hasCrocoRegen, self) =>
+                    c.EmitDelegate<Func<bool, CharacterBody, bool>>((hasBuff, self) =>
                     {
-                        return hasCrocoRegen || (HarvesterScythe.enabled && self.HasBuff(HarvesterScythe.scytheBuff));
+                        return hasBuff || (HarvesterScythe.enabled && self.HasBuff(HarvesterScythe.scytheBuff));
                     });
                 };
             }

@@ -48,7 +48,7 @@ namespace RiskyMod.Tweaks
 			On.RoR2.CombatDirector.Awake += (orig, self) =>
 			{
 				self.creditMultiplier *= 1.15f;
-				self.expRewardCoefficient = self.expRewardCoefficient / GetScaledExpRewardMult();
+				self.expRewardCoefficient /= GetScaledExpRewardMult();
 				orig(self);
 			};
 		}

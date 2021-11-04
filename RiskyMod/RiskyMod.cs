@@ -16,6 +16,7 @@ using RiskyMod.Drones;
 using RiskyMod.Items.Equipment;
 using UnityEngine.Networking;
 using RiskyMod.MonoBehaviours;
+using RiskyMod.MoonRework;
 
 namespace RiskyMod
 {
@@ -25,6 +26,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.NoLevelupHeal", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.AI_Blacklist", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("dev.wildbook.multitudes", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.rob.ArtifactReliquaryHealingFix", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "1.0.0")]
@@ -47,6 +49,7 @@ namespace RiskyMod
             RunTweaks();
             new ItemsCore();
             new DronesCore();
+            new MoonReworkCore();
             SetupAssists();
             AddHooks();
         }
@@ -97,6 +100,11 @@ namespace RiskyMod
             }
             new FixDamageTypeOverwrite();
             new FixFocusCrystalSelfDamage();
+
+            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.ArtifactReliquaryHealingFix"))
+            {
+                new PreventArtifactHeal();
+            }
         }
         
         private void AddHooks()

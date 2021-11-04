@@ -55,10 +55,11 @@ namespace RiskyMod.Drones
             {
                 case "MegaDroneBody": //If I'm gonna pay the price of a legendary chest to buy a drone, it better be worth it.
                     cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
+                    cb.baseRegen = cb.baseMaxHealth / 20f;
                     cb.baseMaxShield = cb.baseMaxHealth * 0.15f;
                     cb.levelArmor += 2f;
                     break;
-                case "SquidTurretBody": //These still can get destroyed too quickly. Needs more resistances.
+                case "SquidTurretBody":
                     cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
                     cb.levelArmor += 4f;
                     break;
@@ -67,8 +68,12 @@ namespace RiskyMod.Drones
                     cb.baseMaxShield = cb.baseMaxHealth * 0.15f;
                     cb.levelArmor += 2f;
                     break;
+                case "FlameDroneBody": //These seem to die faster than other drones.
+                    //cb.baseRegen = cb.baseMaxHealth / 20f;
+                    cb.levelArmor += 1f;
+                    break;
                 case "BeetleGuardAllyBody":
-                    cb.levelArmor -= 1f;    //Queens Gland Guards get no armor bonus.
+                    cb.levelArmor -= 2f;    //Queens Gland Guards get no armor bonus.
                     break;
                 default:
                     break;
@@ -77,7 +82,7 @@ namespace RiskyMod.Drones
             //This makes their performance stay the same on every stage. (Everything's HP increases 30% per level, so damage and regen increase matches that.)
             cb.levelRegen = cb.baseRegen * 0.3f;
             cb.levelDamage = cb.baseDamage * 0.3f;
-            cb.levelArmor += 1f;
+            cb.levelArmor += 2f;
             cb.levelMaxShield = cb.baseMaxShield * 0.3f;
         }
 
