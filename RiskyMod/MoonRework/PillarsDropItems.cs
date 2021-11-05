@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RiskyMod.MoonRework
 {
@@ -18,22 +19,25 @@ namespace RiskyMod.MoonRework
             On.RoR2.MoonBatteryMissionController.OnBatteryCharged += (orig, self, holdoutZone) =>
             {
                 orig(self, holdoutZone);
-                PickupIndex pickupIndex = SelectItem();
-                if (pickupIndex != PickupIndex.none)
+                if (NetworkServer.active)
                 {
-                    int participatingPlayerCount = Run.instance.participatingPlayerCount;
-                    if (participatingPlayerCount != 0 && holdoutZone.transform)
+                    PickupIndex pickupIndex = SelectItem();
+                    if (pickupIndex != PickupIndex.none)
                     {
-                        int num = participatingPlayerCount;
-                        float angle = 360f / (float)num;
-                        Vector3 vector = Quaternion.AngleAxis((float)UnityEngine.Random.Range(0, 360), Vector3.up) * (Vector3.up * 40f + Vector3.forward * 5f);
-                        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
-                        int k = 0;
-                        while (k < num)
+                        int participatingPlayerCount = Run.instance.participatingPlayerCount;
+                        if (participatingPlayerCount != 0 && holdoutZone.transform)
                         {
-                            PickupDropletController.CreatePickupDroplet(pickupIndex, holdoutZone.transform.position + rewardPositionOffset, vector);
-                            k++;
-                            vector = rotation * vector;
+                            int num = participatingPlayerCount;
+                            float angle = 360f / (float)num;
+                            Vector3 vector = Quaternion.AngleAxis((float)UnityEngine.Random.Range(0, 360), Vector3.up) * (Vector3.up * 40f + Vector3.forward * 5f);
+                            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
+                            int k = 0;
+                            while (k < num)
+                            {
+                                PickupDropletController.CreatePickupDroplet(pickupIndex, holdoutZone.transform.position + rewardPositionOffset, vector);
+                                k++;
+                                vector = rotation * vector;
+                            }
                         }
                     }
                 }
