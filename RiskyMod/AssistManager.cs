@@ -4,6 +4,7 @@ using RiskyMod.Items.Legendary;
 using RiskyMod.Items.Uncommon;
 using RiskyMod.Tweaks;
 using RoR2;
+using RoR2.Orbs;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -150,6 +151,22 @@ namespace RiskyMod
                                 if (itemCount > 0)
                                 {
                                     a.attackerBody.healthComponent.AddBarrier(15f * itemCount);
+                                }
+                            }
+                            if (Infusion.enabled)
+                            {
+                                int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Infusion);
+                                if (itemCount > 0)
+                                {
+                                    int maxInfusionBonus = itemCount * 100;
+                                    if ((ulong)attackerInventory.infusionBonus < (ulong)((long)maxInfusionBonus))
+                                    {
+                                        InfusionOrb infusionOrb = new InfusionOrb();
+                                        infusionOrb.origin = gameObject.transform.position;
+                                        infusionOrb.target = Util.FindBodyMainHurtBox(a.attackerBody);
+                                        infusionOrb.maxHpValue = itemCount;
+                                        OrbManager.instance.AddOrb(infusionOrb);
+                                    }
                                 }
                             }
                             if (a.attackerBody != killerBody) //Vanilla behavior is left functional to prevent GetComponent call.
