@@ -27,7 +27,7 @@ namespace RiskyMod.SharedHooks
             }
             if (HeadHunter.enabled && sender.HasBuff(HeadHunter.headhunterBuff))
             {
-                args.moveSpeedMultAdd += 0.3f;
+                args.moveSpeedMultAdd += 0.5f;
                 args.damageMultAdd += 0.3f;
             }
             if (Berzerker.enabled)
@@ -46,6 +46,10 @@ namespace RiskyMod.SharedHooks
                 {
                     args.baseRegenAdd += sender.maxHealth * 0.05f;
                 }
+            }
+            if (WarHorn.enabled && sender.HasBuff(RoR2Content.Buffs.Energized))
+            {
+                args.moveSpeedMultAdd += 0.5f;
             }
 
             if (sender.inventory)

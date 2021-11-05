@@ -65,6 +65,7 @@ namespace RiskyMod.Items
             new Guillotine();
             new Berzerker();
             new HarvesterScythe();
+            new WarHorn();
         }
 
         private void ModifyLegendary()
