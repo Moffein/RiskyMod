@@ -101,6 +101,9 @@
     <Reference Include="Wwise">
       <HintPath>libs\Wwise.dll</HintPath>
     </Reference>
+    <Reference Include="ZetArtifacts">
+      <HintPath>libs\ZetArtifacts.dll</HintPath>
+    </Reference>
     <Reference Include="Zio">
       <HintPath>libs\Zio.dll</HintPath>
     </Reference>

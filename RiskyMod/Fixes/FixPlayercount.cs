@@ -4,6 +4,7 @@ using R2API.Utils;
 using RoR2;
 using System;
 using System.Runtime.CompilerServices;
+using TPDespair.ZetArtifacts;
 
 namespace RiskyMod.Fixes
 {
@@ -12,6 +13,8 @@ namespace RiskyMod.Fixes
         public static bool enabled = true;
         public static bool standalonePluginLoaded = false;
         public static bool MultitudesLoaded = false;
+        public static bool ZetArtifactsLoaded = false;
+
         public FixPlayercount()
         {
             if (!enabled) return;
@@ -38,6 +41,10 @@ namespace RiskyMod.Fixes
             {
                 players = ApplyMultitudes(players);
             }
+            if (ZetArtifactsLoaded)
+            {
+                players = ApplyZetMultitudesArtifact(players);
+            }
             return players;
         }
 
@@ -45,6 +52,19 @@ namespace RiskyMod.Fixes
         private static int ApplyMultitudes(int origPlayerCount)
         {
             return origPlayerCount * Multitudes.Multitudes.Multiplier;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static int ApplyZetMultitudesArtifact(int origPlayerCount)
+        {
+            if (RunArtifactManager.instance.IsArtifactEnabled(ZetArtifactsContent.Artifacts.ZetMultifact))
+            {
+                return origPlayerCount * Math.Max(2, ZetArtifactsPlugin.MultifactMultiplier.Value); //GetMultiplier is private so I copypasted the code.
+            }
+            else
+            {
+                return origPlayerCount;
+            }
         }
     }
 }
