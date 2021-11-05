@@ -10,6 +10,7 @@ namespace RiskyMod.MoonRework
         public MoonReworkCore()
         {
             if (!enabled) return;
+            new LessPillars();
             new PillarsDropItems();
         }
     }
