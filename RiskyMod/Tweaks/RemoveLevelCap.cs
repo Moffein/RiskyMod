@@ -4,7 +4,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using RoR2;
 
-namespace RiskyMod.Fixes
+namespace RiskyMod.Tweaks
 {
     public class RemoveLevelCap
     {

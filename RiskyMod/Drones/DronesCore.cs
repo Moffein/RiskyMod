@@ -48,24 +48,22 @@ namespace RiskyMod.Drones
         {
             CharacterBody cb = go.GetComponent<CharacterBody>();
 
-            cb.baseRegen = cb.baseMaxHealth / 30f;  //Drones take 30s to regen to full
+            cb.baseRegen = cb.baseMaxHealth / 20f;  //Drones take 30s to regen to full
 
             //Specific changes
             switch (cb.name)
             {
                 case "MegaDroneBody": //If I'm gonna pay the price of a legendary chest to buy a drone, it better be worth it.
                     cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
-                    cb.baseRegen = cb.baseMaxHealth / 20f;
-                    cb.baseMaxShield = cb.baseMaxHealth * 0.15f;
-                    cb.levelArmor += 2f;
+                    cb.baseMaxShield = cb.baseMaxHealth * 0.12f;
+                    cb.levelArmor += 1f;
                     break;
                 case "SquidTurretBody":
                     cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
                     cb.levelArmor += 4f;
                     break;
                 case "Turret1Body": //Shield seems to be enough to put them in a good spot.
-                    cb.baseRegen = cb.baseMaxHealth / 20f;
-                    cb.baseMaxShield = cb.baseMaxHealth * 0.15f;
+                    cb.baseMaxShield = cb.baseMaxHealth * 0.12f;
                     cb.levelArmor += 2f;
                     break;
                 case "FlameDroneBody": //These seem to die faster than other drones.

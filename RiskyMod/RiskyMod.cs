@@ -32,7 +32,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RaiseMonsterLevelCap", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Alpha", "0.0.1")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Alpha", "0.0.2")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(LanguageAPI), nameof(RecalculateStatsAPI), nameof(PrefabAPI),
         nameof(ProjectileAPI), nameof(EffectAPI), nameof(DamageAPI), nameof(BuffAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
@@ -74,6 +74,10 @@ namespace RiskyMod
             {
                 new NoLevelupHeal();
             }
+            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RaiseMonsterLevelCap"))
+            {
+                new RemoveLevelCap();
+            }
         }
 
         private void RunFixes()
@@ -111,11 +115,6 @@ namespace RiskyMod
             if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.ArtifactReliquaryHealingFix"))
             {
                 new PreventArtifactHeal();
-            }
-
-            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RaiseMonsterLevelCap"))
-            {
-                new RemoveLevelCap();
             }
         }
         
