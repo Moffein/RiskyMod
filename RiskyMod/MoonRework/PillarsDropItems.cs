@@ -96,16 +96,24 @@ namespace RiskyMod.MoonRework
                     {
                         //There's probably a better way of doing this.
                         PickupIndex pearlIndex;
-                        //PickupIndex shinyPearlIndex;
+                        PickupIndex shinyPearlIndex;
 
                         list = new List<PickupIndex>();
                         pearlIndex = PickupCatalog.FindPickupIndex(RoR2Content.Items.Pearl.itemIndex);
+                        shinyPearlIndex = PickupCatalog.FindPickupIndex(RoR2Content.Items.ShinyPearl.itemIndex);
+
                         if (pearlIndex != PickupIndex.none && Run.instance.availableBossDropList.Contains(pearlIndex))
                         {
                             list.Add(pearlIndex);
                         }
-                        /*shinyPearlIndex = PickupCatalog.FindPickupIndex(RoR2Content.Items.ShinyPearl.itemIndex);
-                        if (shinyPearlIndex != PickupIndex.none && Run.instance.availableBossDropList.Contains(shinyPearlIndex))
+                        else //Drop only Shiny Pearls if regular pearls aren't available for some reason.
+                        {
+                            if (shinyPearlIndex != PickupIndex.none && Run.instance.availableBossDropList.Contains(shinyPearlIndex))
+                            {
+                                list.Add(shinyPearlIndex);
+                            }
+                        }
+                        /*if (shinyPearlIndex != PickupIndex.none && Run.instance.availableBossDropList.Contains(shinyPearlIndex))
                         {
                             list.Add(shinyPearlIndex);
                         }*/
@@ -113,18 +121,18 @@ namespace RiskyMod.MoonRework
                         {
                             list = Run.instance.availableTier2DropList;
                         }
-                        else
+                        /*else
                         {
-
-                            /*if (pearlIndex != PickupIndex.none && shinyPearlIndex != PickupIndex.none)
+                            //Random chance moved to when the pillar is dropping items to prevent them from dropping 10 shiny pearls at once.
+                            if (pearlIndex != PickupIndex.none && shinyPearlIndex != PickupIndex.none)
                             {
                                 //Shiny pearl is locked behind 20% random chance.
                                 if (treasureRng.RangeInt(0, 5) != 0)
                                 {
                                     list.Remove(shinyPearlIndex);
                                 }
-                            }*/
-                        }
+                            }
+                        }*/
                     }
                 }
             }
