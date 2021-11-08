@@ -12,6 +12,11 @@ namespace RiskyMod.MoonRework
         public static bool enabled = true;
         private static Vector3 rewardPositionOffset = new Vector3(0f, 3f, 0f);
 
+        public static float whiteChance = 40f;
+        public static float greenChance = 30f;
+        public static float redChance = 10f;
+        public static float yellowChance = 20f;
+
         public PillarsDropItems()
         {
             if (!enabled) return;
@@ -31,9 +36,26 @@ namespace RiskyMod.MoonRework
                             float angle = 360f / (float)num;
                             Vector3 vector = Quaternion.AngleAxis((float)UnityEngine.Random.Range(0, 360), Vector3.up) * (Vector3.up * 40f + Vector3.forward * 5f);
                             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
+
+                            //Randomly convert pearls into shiny pearls when dropping so that it doesn't drop a ton of them at once
+                            PickupIndex pearlIndex = PickupCatalog.FindPickupIndex(RoR2Content.Items.Pearl.itemIndex);
+                            PickupIndex shinyPearlIndex = PickupCatalog.FindPickupIndex(RoR2Content.Items.ShinyPearl.itemIndex);
+                            bool randomizePearl = false;
+                            if (pickupIndex == pearlIndex)
+                            {
+                                if (shinyPearlIndex != PickupIndex.none && Run.instance.availableBossDropList.Contains(shinyPearlIndex))
+                                {
+                                    randomizePearl = true;
+                                }
+                            }
+
                             int k = 0;
                             while (k < num)
                             {
+                                if (randomizePearl)
+                                {
+                                    pickupIndex = (Run.instance.bossRewardRng.RangeInt(0, 5) != 0) ? pearlIndex : shinyPearlIndex;
+                                }
                                 PickupDropletController.CreatePickupDroplet(pickupIndex, holdoutZone.transform.position + rewardPositionOffset, vector);
                                 k++;
                                 vector = rotation * vector;
@@ -47,13 +69,8 @@ namespace RiskyMod.MoonRework
         private static PickupIndex SelectItem()
         {
             List<PickupIndex> list;
-            Xoroshiro128Plus treasureRng = Run.instance.runRNG;
+            Xoroshiro128Plus treasureRng = Run.instance.bossRewardRng;
             PickupIndex selectedPickup = PickupIndex.none;
-
-            float whiteChance = 0f;
-            float greenChance = 70f;
-            float redChance = 15f;
-            float yellowChance = 15f;
 
             float total = whiteChance + greenChance + redChance + yellowChance;
 
@@ -79,7 +96,7 @@ namespace RiskyMod.MoonRework
                     {
                         //There's probably a better way of doing this.
                         PickupIndex pearlIndex;
-                        PickupIndex shinyPearlIndex;
+                        //PickupIndex shinyPearlIndex;
 
                         list = new List<PickupIndex>();
                         pearlIndex = PickupCatalog.FindPickupIndex(RoR2Content.Items.Pearl.itemIndex);
@@ -87,25 +104,26 @@ namespace RiskyMod.MoonRework
                         {
                             list.Add(pearlIndex);
                         }
-                        shinyPearlIndex = PickupCatalog.FindPickupIndex(RoR2Content.Items.ShinyPearl.itemIndex);
+                        /*shinyPearlIndex = PickupCatalog.FindPickupIndex(RoR2Content.Items.ShinyPearl.itemIndex);
                         if (shinyPearlIndex != PickupIndex.none && Run.instance.availableBossDropList.Contains(shinyPearlIndex))
                         {
                             list.Add(shinyPearlIndex);
-                        }
-                        if (list.Count > 0)
+                        }*/
+                        if (list.Count <= 0)
                         {
-                            if (pearlIndex != PickupIndex.none && shinyPearlIndex != PickupIndex.none)
+                            list = Run.instance.availableTier2DropList;
+                        }
+                        else
+                        {
+
+                            /*if (pearlIndex != PickupIndex.none && shinyPearlIndex != PickupIndex.none)
                             {
                                 //Shiny pearl is locked behind 20% random chance.
                                 if (treasureRng.RangeInt(0, 5) != 0)
                                 {
                                     list.Remove(shinyPearlIndex);
                                 }
-                            }
-                        }
-                        else
-                        {
-                            list = Run.instance.availableTier2DropList;
+                            }*/
                         }
                     }
                 }
