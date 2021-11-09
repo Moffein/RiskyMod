@@ -112,23 +112,6 @@ namespace RiskyMod
                                     }
                                 }
                             }
-                            if (HeadHunter.enabled)
-                            {
-                                int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
-                                if (hhCount > 0)
-                                {
-                                    float duration = 5f + 5f * hhCount;
-                                    for (int l = 0; l < BuffCatalog.eliteBuffIndices.Length; l++)
-                                    {
-                                        BuffIndex buffIndex = BuffCatalog.eliteBuffIndices[l];
-                                        if (victimBody.HasBuff(buffIndex))
-                                        {
-                                            a.attackerBody.AddTimedBuff(buffIndex, duration);
-                                            a.attackerBody.AddTimedBuff(HeadHunter.headhunterBuff.buffIndex, duration);
-                                        }
-                                    }
-                                }
-                            }
                             if (Soulbound.enabled)
                             {
                                 int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Talisman);
@@ -203,6 +186,23 @@ namespace RiskyMod
                                     if (bsCount > 0)
                                     {
                                         a.attackerBody.AddTimedBuff(RoR2Content.Buffs.NoCooldowns, bsCount * 4f);
+                                    }
+                                }
+                                if (HeadHunter.enabled)
+                                {
+                                    int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
+                                    if (hhCount > 0)
+                                    {
+                                        float duration = 5f + 5f * hhCount;
+                                        for (int l = 0; l < BuffCatalog.eliteBuffIndices.Length; l++)
+                                        {
+                                            BuffIndex buffIndex = BuffCatalog.eliteBuffIndices[l];
+                                            if (victimBody.HasBuff(buffIndex))
+                                            {
+                                                a.attackerBody.AddTimedBuff(buffIndex, duration);
+                                                //a.attackerBody.AddTimedBuff(HeadHunter.headhunterBuff.buffIndex, duration);
+                                            }
+                                        }
                                     }
                                 }
                             }
