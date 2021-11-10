@@ -141,7 +141,7 @@ namespace RiskyMod
                                 int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Infusion);
                                 if (itemCount > 0)
                                 {
-                                    int maxInfusionBonus = itemCount * 100;
+                                    int maxInfusionBonus = itemCount * 150;
                                     if ((ulong)attackerInventory.infusionBonus < (ulong)((long)maxInfusionBonus))
                                     {
                                         InfusionOrb infusionOrb = new InfusionOrb();
