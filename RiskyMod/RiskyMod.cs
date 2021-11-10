@@ -47,6 +47,7 @@ namespace RiskyMod
 
         public void Awake()
         {
+            CheckDependencies();
             ReadConfig();
             RunFixes();
             RunTweaks();
@@ -62,6 +63,19 @@ namespace RiskyMod
 
         }
 
+        private void CheckDependencies()
+        {
+            NoLevelupHeal.enabled = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoLevelupHeal");
+            RemoveLevelCap.enabled = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RaiseMonsterLevelCap");
+            FixMercExpose.enabled = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.MercExposeFix");
+
+            FixPlayercount.enabled = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.FixPlayercount");
+            FixPlayercount.MultitudesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("dev.wildbook.multitudes");
+            FixPlayercount.ZetArtifactsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetArtifacts");
+            FixVengeanceLeveling.enabled = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist");
+            PreventArtifactHeal.enabled = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.ArtifactReliquaryHealingFix");
+        }
+
         private void RunTweaks()
         {
             new RunScaling();
@@ -70,104 +84,47 @@ namespace RiskyMod
             new SceneDirectorMonsterRewards();
             new BanditSpecialGracePeriod();
             new Shock();
-            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoLevelupHeal"))
-            {
-                new NoLevelupHeal();
-            }
-            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RaiseMonsterLevelCap"))
-            {
-                new RemoveLevelCap();
-            }
+            new NoLevelupHeal();
+            new RemoveLevelCap();
         }
 
         private void RunFixes()
         {
-            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.MercExposeFix"))
-            {
-                new FixMercExpose();
-            }
-
-            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.FixPlayercount"))
-            {
-                if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("dev.wildbook.multitudes"))
-                {
-                    FixPlayercount.MultitudesLoaded = true;
-                }
-                if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetArtifacts"))
-                {
-                    FixPlayercount.ZetArtifactsLoaded = true;
-                }
-                new FixPlayercount();
-            }
-            else
-            {
-                FixPlayercount.standalonePluginLoaded = true;
-            }
-
-
-            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist"))
-            {
-                new FixVengeanceLeveling();
-            }
+            new FixMercExpose();
+            new FixPlayercount();
+            new FixVengeanceLeveling();
             new FixDamageTypeOverwrite();
             new FixFocusCrystalSelfDamage();
-
-            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.ArtifactReliquaryHealingFix"))
-            {
-                new PreventArtifactHeal();
-            }
+            new PreventArtifactHeal();
         }
         
         private void AddHooks()
         {
             //A hook needs to be used at least once to be added
-            if (AssistManager.initialized || Incubator.enabled)
-            {
-                On.RoR2.GlobalEventManager.OnHitEnemy += OnHitEnemy.GlobalEventManager_OnHitEnemy;
-            }
-            if (Chronobauble.enabled || CritGlasses.enabled || BisonSteak.enabled || ShapedGlass.enabled || Knurl.enabled || Warbanner.enabled
-                || RoseBuckler.enabled || RepArmor.enabled || HeadHunter.enabled || Berzerker.enabled || FixDamageTypeOverwrite.enabled)
-            {
-                RecalculateStatsAPI.GetStatCoefficients += GetStatsCoefficient.RecalculateStatsAPI_GetStatCoefficients;
-            }
-            if (Bandolier.enabled || RoseBuckler.enabled || TrueOSP.enabled)
-            {
-                On.RoR2.CharacterBody.RecalculateStats += RecalculateStats.CharacterBody_RecalculateStats;
-            }
-            if (Stealthkit.enabled || SquidPolyp.enabled || Razorwire.enabled || Planula.enabled || Crowbar.enabled || CritHud.enabled || FixSlayer.enabled)
-            {
-                On.RoR2.HealthComponent.TakeDamage += TakeDamage.HealthComponent_TakeDamage;
-            }
-            if (AssistManager.initialized)
-            {
-                On.RoR2.GlobalEventManager.OnCharacterDeath += OnCharacterDeath.GlobalEventManager_OnCharacterDeath;
-            }
-            if (Guillotine.enabled || HeadHunter.enabled)
-            {
-                new ModifyFinalDamage();
-            }
+            On.RoR2.GlobalEventManager.OnHitEnemy += OnHitEnemy.GlobalEventManager_OnHitEnemy;
+            RecalculateStatsAPI.GetStatCoefficients += GetStatsCoefficient.RecalculateStatsAPI_GetStatCoefficients;
+            On.RoR2.CharacterBody.RecalculateStats += RecalculateStats.CharacterBody_RecalculateStats;
+            On.RoR2.HealthComponent.TakeDamage += TakeDamage.HealthComponent_TakeDamage;
+            On.RoR2.GlobalEventManager.OnCharacterDeath += OnCharacterDeath.GlobalEventManager_OnCharacterDeath;
+            new ModifyFinalDamage();
             new StealBuffVFX();
         }
 
         private void SetupAssists()
         {
-            if (LaserTurbine.enabled || Berzerker.enabled || HeadHunter.enabled || Brainstalks.enabled || TopazBrooch.enabled
-                || BanditSpecialGracePeriod.enabled || FrostRelic.enabled || HarvesterScythe.enabled || Soulbound.enabled)
+            AssistManager.initialized = true;
+            On.RoR2.Run.Start += (orig, self) =>
             {
-                AssistManager.initialized = true;
-                On.RoR2.Run.Start += (orig, self) =>
+                orig(self);
+                if (NetworkServer.active)
                 {
-                    orig(self);
-                    if (NetworkServer.active)
+                    RiskyMod.assistManager = self.gameObject.GetComponent<AssistManager>();
+                    if (!RiskyMod.assistManager)
                     {
-                        RiskyMod.assistManager = self.gameObject.GetComponent<AssistManager>();
-                        if (!RiskyMod.assistManager)
-                        {
-                            RiskyMod.assistManager = self.gameObject.AddComponent<AssistManager>();
-                        }
+                        RiskyMod.assistManager = self.gameObject.AddComponent<AssistManager>();
                     }
-                };
-            }
+                }
+            };
         }
     }
 }

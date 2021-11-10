@@ -11,7 +11,6 @@ namespace RiskyMod.Fixes
     public class FixPlayercount
     {
         public static bool enabled = true;
-        public static bool standalonePluginLoaded = false;
         public static bool MultitudesLoaded = false;
         public static bool ZetArtifactsLoaded = false;
 
