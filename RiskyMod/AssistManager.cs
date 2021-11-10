@@ -145,7 +145,7 @@ namespace RiskyMod
                                     if ((ulong)attackerInventory.infusionBonus < (ulong)((long)maxInfusionBonus))
                                     {
                                         InfusionOrb infusionOrb = new InfusionOrb();
-                                        infusionOrb.origin = gameObject.transform.position;
+                                        infusionOrb.origin = victimBody.corePosition;
                                         infusionOrb.target = Util.FindBodyMainHurtBox(a.attackerBody);
                                         infusionOrb.maxHpValue = itemCount;
                                         OrbManager.instance.AddOrb(infusionOrb);
