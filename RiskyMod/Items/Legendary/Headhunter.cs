@@ -3,6 +3,7 @@ using R2API;
 using UnityEngine;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using RiskyMod.SharedHooks;
 
 namespace RiskyMod.Items.Legendary
 {
@@ -41,6 +42,16 @@ namespace RiskyMod.Items.Legendary
             };
 
             AssistManager.HandleAssistActions += OnKillEffect;
+            GetStatsCoefficient.HandleStatsActions += HandleStats;
+        }
+
+        private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            if (sender.HasBuff(HeadHunter.headhunterBuff))
+            {
+                args.moveSpeedMultAdd += 0.5f;
+                args.damageMultAdd += 0.3f;
+            }
         }
 
         private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)

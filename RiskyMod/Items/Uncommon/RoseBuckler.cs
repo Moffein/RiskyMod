@@ -2,6 +2,7 @@
 using MonoMod.Cil;
 using RoR2;
 using R2API;
+using RiskyMod.SharedHooks;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -26,7 +27,16 @@ namespace RiskyMod.Items.Uncommon
             LanguageAPI.Add("ITEM_SPRINTARMOR_PICKUP", "Increase armor. Gain bonus armor while sprinting.");
             LanguageAPI.Add("ITEM_SPRINTARMOR_DESC", "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>12</style> <style=cStack>(+12 per stack)</style>. <style=cIsUtility>Sprinting</style> increases TOTAL armor by <style=cIsHealing>+50%</style>.");
 
-            //Effect handled on SharedHooks.GetStatCoefficients and SharedHooks.RecalculateStats
+            GetStatsCoefficient.HandleStatsInventoryActions += HandleStatsInventory;
+        }
+
+        private void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
+        {
+            int bucklerCount = sender.inventory.GetItemCount(RoR2Content.Items.SprintArmor);
+            if (bucklerCount > 0)
+            {
+                args.armorAdd += 12f * bucklerCount;
+            }
         }
     }
 }

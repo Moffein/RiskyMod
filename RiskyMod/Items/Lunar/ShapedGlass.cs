@@ -1,5 +1,7 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using R2API;
+using RiskyMod.SharedHooks;
 using RoR2;
 
 namespace RiskyMod.Items.Lunar
@@ -24,7 +26,16 @@ namespace RiskyMod.Items.Lunar
                 c.Next.Operand = 1f;
             };
 
-            //Damage boost is redone in SharedHooks.GetStatCoefficients
+            GetStatsCoefficient.HandleStatsInventoryActions += HandleStatsInventory;
+        }
+
+        private void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
+        {
+            int glassCount = sender.inventory.GetItemCount(RoR2Content.Items.LunarDagger);
+            if (glassCount > 0)
+            {
+                args.damageMultAdd += glassCount;
+            }
         }
     }
 }

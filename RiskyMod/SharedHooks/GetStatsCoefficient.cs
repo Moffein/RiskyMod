@@ -11,91 +11,21 @@ namespace RiskyMod.SharedHooks
 {
     public class GetStatsCoefficient
     {
+        public delegate void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args);
+        public static HandleStats HandleStatsActions = HandleStatsMethod;
+        private static void HandleStatsMethod(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args) { }
+
+        public delegate void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory);
+        public static HandleStatsInventory HandleStatsInventoryActions = HandleStatsInventoryMethod;
+        private static void HandleStatsInventoryMethod(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory) { }
+
         public static void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (Chronobauble.enabled && sender.HasBuff(RoR2Content.Buffs.Slow60))
-            {
-                //Slow -60% already present in vanilla
-                args.damageMultAdd -= 0.3f; //Might need to check for negative damage mult, come back to this later if there's problems.
-                args.armorAdd -= 20f;
-            }
-            if (Warbanner.enabled && sender.HasBuff(RoR2Content.Buffs.Warbanner))
-            {
-                //+30% AtkSpd and MoveSpd already present in vanilla
-                args.armorAdd += 15f;
-                args.damageMultAdd += 0.15f;
-            }
-            if (HeadHunter.enabled && sender.HasBuff(HeadHunter.headhunterBuff))
-            {
-                args.moveSpeedMultAdd += 0.5f;
-                args.damageMultAdd += 0.3f;
-            }
-            if (Berzerker.enabled)
-            {
-                int berzerkCount = sender.GetBuffCount(Berzerker.berzerkBuff);
-                if (berzerkCount > 0)
-                {
-                    args.moveSpeedMultAdd += 0.1f * berzerkCount;
-                    args.attackSpeedMultAdd += 0.2f * berzerkCount;
-                }
-            }
-            if (HarvesterScythe.enabled && sender.HasBuff(HarvesterScythe.scytheBuff))
-            {
-                args.critAdd += 100f;
-                if (sender.healthComponent)
-                {
-                    args.baseRegenAdd += sender.maxHealth * 0.05f;
-                }
-            }
-            if (WarHorn.enabled && sender.HasBuff(RoR2Content.Buffs.Energized))
-            {
-                args.moveSpeedMultAdd += 0.5f;
-            }
+            HandleStatsActions.Invoke(sender, args);
 
             if (sender.inventory)
             {
-                if (BisonSteak.enabled)
-                {
-                    int steakCount = sender.inventory.GetItemCount(RoR2Content.Items.FlatHealth);
-                    if (steakCount > 0)
-                    {
-                        args.baseHealthAdd += sender.levelMaxHealth * steakCount;
-                    }
-                }
-                if (ShapedGlass.enabled)
-                {
-                    int glassCount = sender.inventory.GetItemCount(RoR2Content.Items.LunarDagger);
-                    if (glassCount > 0)
-                    {
-                        args.damageMultAdd += glassCount;
-                    }
-                }
-                if (Knurl.enabled)
-                {
-                    int knurlCount = sender.inventory.GetItemCount(RoR2Content.Items.Knurl);
-                    if (knurlCount > 0)
-                    {
-                        args.healthMultAdd += 0.1f * knurlCount;
-                        args.armorAdd += 10f * knurlCount;
-                        args.baseRegenAdd += (1.6f + 0.32f*(sender.level - 1f)) * knurlCount;
-                    }
-                }
-                if (RoseBuckler.enabled)
-                {
-                    int bucklerCount = sender.inventory.GetItemCount(RoR2Content.Items.SprintArmor);
-                    if (bucklerCount > 0)
-                    {
-                        args.armorAdd += 12f * bucklerCount;
-                    }
-                }
-                if (RepArmor.enabled)
-                {
-                    int rapCount = sender.inventory.GetItemCount(RoR2Content.Items.ArmorPlate);
-                    if (rapCount > 0)
-                    {
-                        args.armorAdd += 5f * rapCount;
-                    }
-                }
+                HandleStatsInventoryActions.Invoke(sender, args, sender.inventory);
             }
         }
     }

@@ -1,4 +1,6 @@
 ﻿using R2API;
+using RiskyMod.SharedHooks;
+using RoR2;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -13,7 +15,16 @@ namespace RiskyMod.Items.Uncommon
             LanguageAPI.Add("ITEM_ENERGIZEDONEQUIPMENTUSE_DESC",
                 "Activating your Equipment gives you <style=cIsUtility>+50% movement speed</style> and <style=cIsDamage>+70% attack speed</style> for <style=cIsDamage>8s</style> <style=cStack>(+4s per stack)</style>.");
 
-            //Buff handled in SharedHooks.GetStatCoefficients
+            GetStatsCoefficient.HandleStatsActions += HandleStats;
+        }
+
+        private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+
+            if (sender.HasBuff(RoR2Content.Buffs.Energized))
+            {
+                args.moveSpeedMultAdd += 0.5f;
+            }
         }
     }
 }

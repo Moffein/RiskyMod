@@ -4,6 +4,7 @@ using R2API;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
+using RiskyMod.SharedHooks;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -29,7 +30,6 @@ namespace RiskyMod.Items.Uncommon
                  c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
              };
 
-            //Buff logic handled in SharedHooks.GetStatCoefficients
             berzerkBuff = ScriptableObject.CreateInstance<BuffDef>();
             berzerkBuff.buffColor = new Color(210f / 255f, 50f / 255f, 22f / 255f);
             berzerkBuff.canStack = true;
@@ -39,6 +39,17 @@ namespace RiskyMod.Items.Uncommon
             BuffAPI.Add(new CustomBuff(berzerkBuff));
 
             AssistManager.HandleAssistActions += OnKillEffect;
+            GetStatsCoefficient.HandleStatsActions += HandleStats;
+        }
+
+        private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            int berzerkCount = sender.GetBuffCount(Berzerker.berzerkBuff);
+            if (berzerkCount > 0)
+            {
+                args.moveSpeedMultAdd += 0.1f * berzerkCount;
+                args.attackSpeedMultAdd += 0.2f * berzerkCount;
+            }
         }
 
         private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)

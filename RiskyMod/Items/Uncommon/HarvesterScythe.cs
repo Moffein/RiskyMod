@@ -3,6 +3,7 @@ using R2API;
 using UnityEngine;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using RiskyMod.SharedHooks;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -41,6 +42,19 @@ namespace RiskyMod.Items.Uncommon
             LanguageAPI.Add("ITEM_HEALONCRIT_DESC", "Gain <style=cIsDamage>5% critical chance</style>. Killing enemies grants guaranteed '<style=cIsDamage>Critical Strikes</style>' and increases <style=cIsHealing>health regeneration</style> by <style=cIsHealing>5%</style> of your <style=cIsHealing>maximum health</style> for <style=cIsDamage>3s</style> <style=cStack>(+1.5s per stack)</style>.");
 
             AssistManager.HandleAssistActions += OnKillEffect;
+            GetStatsCoefficient.HandleStatsActions += HandleStats;
+        }
+
+        private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            if (sender.HasBuff(HarvesterScythe.scytheBuff))
+            {
+                args.critAdd += 100f;
+                if (sender.healthComponent)
+                {
+                    args.baseRegenAdd += sender.maxHealth * 0.05f;
+                }
+            }
         }
 
         private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
