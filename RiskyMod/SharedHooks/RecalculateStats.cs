@@ -64,15 +64,16 @@ namespace RiskyMod.SharedHooks
 						self.armor *= 1.5f;
 					}
                 }
+			}
 
-				//This part is split off because it needs the inventory to work
-				if (TrueOSP.enabled && self.hasOneShotProtection)
-                {
-					if (inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0 || self.HasBuff(RoR2Content.Buffs.AffixLunar) || self.isGlass || self.cursePenalty > 0f)
-                    {
-						self.hasOneShotProtection = false;
-                    }
-                }
+			//This part is split off because it needs the inventory to work
+			if (TrueOSP.enabled && self.hasOneShotProtection)
+			{
+				if (self.isGlass || self.cursePenalty > 0f || self.HasBuff(RoR2Content.Buffs.AffixLunar) ||
+					(self.inventory && self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0))
+				{
+					self.hasOneShotProtection = false;
+				}
 			}
 		}
     }
