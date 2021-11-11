@@ -102,6 +102,8 @@ namespace RiskyMod.SharedHooks
                         {
                             float percentHPLost = (oldHP - self.health) / self.fullCombinedHealth * 100f;
                             HandleOnHpLostActions.Invoke(damageInfo, self, inventory, percentHPLost);
+
+                            //This should happen after OnHpLost
                             if (Planula.enabled)
                             {
                                 int planulaCount = inventory.GetItemCount(RoR2Content.Items.ParentEgg);
