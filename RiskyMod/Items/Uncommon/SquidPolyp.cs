@@ -1,7 +1,10 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
+using RiskyMod.MonoBehaviours;
+using RiskyMod.SharedHooks;
 using RoR2;
+using System;
 using UnityEngine;
 
 namespace RiskyMod.Items.Uncommon
@@ -36,6 +39,61 @@ namespace RiskyMod.Items.Uncommon
             EffectComponent ec = procEffectPrefab.GetComponent<EffectComponent>();
             ec.soundName = "Play_treeBot_m2_launch";
             EffectAPI.AddEffect(procEffectPrefab);
+
+            TakeDamage.HandleOnHpLostActions += OnHpLost;
+        }
+
+        private void OnHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost)
+        {
+            int polypCount = inventory.GetItemCount(RoR2Content.Items.Squid);
+            if (polypCount > 0)
+            {
+                if (percentHpLost > 0f)
+                {
+                    if (Util.CheckRoll(percentHpLost, self.body.master))
+                    {
+                        SquidMinionComponent sq = self.gameObject.GetComponent<SquidMinionComponent>();
+                        if (!sq)
+                        {
+                            sq = self.gameObject.AddComponent<SquidMinionComponent>();
+                        }
+                        if (sq.CanSpawnSquid())
+                        {
+                            EffectManager.SimpleEffect(SquidPolyp.procEffectPrefab, self.body.corePosition, Quaternion.identity, true);
+                            SpawnCard spawnCard = Resources.Load<CharacterSpawnCard>("SpawnCards/CharacterSpawnCards/cscSquidTurret");
+                            DirectorPlacementRule placementRule = new DirectorPlacementRule
+                            {
+                                placementMode = DirectorPlacementRule.PlacementMode.Approximate,
+                                minDistance = 5f,
+                                maxDistance = 25f,
+                                position = self.body.corePosition
+                            };
+                            DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(spawnCard, placementRule, RoR2Application.rng);
+                            directorSpawnRequest.teamIndexOverride = self.body.teamComponent.teamIndex;
+                            directorSpawnRequest.summonerBodyObject = self.gameObject;
+                            directorSpawnRequest.ignoreTeamMemberLimit = true;  //Polyps should always be able to spawn. Does this need a cap for performance?
+                            directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult result)
+                            {
+                                if (!result.success)
+                                {
+                                    return;
+                                }
+                                CharacterMaster component6 = result.spawnedInstance.GetComponent<CharacterMaster>();
+                                component6.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
+                                component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 30);
+                                component6.inventory.GiveItem(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
+                                if (self.itemCounts.invadingDoppelganger > 0)
+                                {
+                                    //Prevent turrets from hitscanning players to death at full damage
+                                    component6.inventory.GiveItem(RoR2Content.Items.InvadingDoppelganger);
+                                }
+                                sq.AddSquid(result.spawnedInstance);
+                            }));
+                            DirectorCore.instance.TrySpawnObject(directorSpawnRequest);
+                        }
+                    }
+                }
+            }
         }
     }
 }
