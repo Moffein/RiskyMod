@@ -48,7 +48,7 @@ namespace RiskyMod.Tweaks
                 c.Emit(OpCodes.Ldarg_1);//damageinfo
                 c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((finalHealth, self, damageInfo) =>
                 {
-                    if (self.body.hasOneShotProtection && !self.body.isGlass && self.body.cursePenalty <= 0f && (damageInfo.damageType & DamageType.BypassOneShotProtection) != DamageType.BypassOneShotProtection)
+                    if (self.body.hasOneShotProtection && (damageInfo.damageType & DamageType.BypassOneShotProtection) != DamageType.BypassOneShotProtection)
                     {
                         OSPComponent ospm = self.body.gameObject.GetComponent<OSPComponent>();
                         if (!ospm)
