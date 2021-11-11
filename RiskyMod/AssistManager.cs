@@ -18,6 +18,10 @@ namespace RiskyMod
         private List<BanditAssist> pendingBanditAssists;
         //Refer to OnHitEnemy and OnCharacterDeath for assist application.
 
+        public delegate void HandleAssist(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody);
+        public static HandleAssist HandleAssistActions = HandleAssistMethod;
+        private static void HandleAssistMethod(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody) { }
+
         public void AddAssist(CharacterBody attackerBody, CharacterBody victimBody, float duration)
         {
             //Check if this assist already exists.
@@ -89,123 +93,7 @@ namespace RiskyMod
                         Inventory attackerInventory = a.attackerBody.inventory;
                         if (attackerInventory)
                         {
-                            if (Berzerker.enabled)
-                            {
-                                int berzerkCount = attackerInventory.GetItemCount(RoR2Content.Items.WarCryOnMultiKill);
-                                if (berzerkCount > 0)
-                                {
-                                    //Need to apply buff this way to prevent the visual from disappearing.
-                                    int newBuffStack = Mathf.Min(a.attackerBody.GetBuffCount(Berzerker.berzerkBuff) + 1, 2 + 3 * berzerkCount);
-                                    int foundBuffs = 0;
-                                    foreach (CharacterBody.TimedBuff tb in a.attackerBody.timedBuffs)
-                                    {
-                                        if (tb.buffIndex == Berzerker.berzerkBuff.buffIndex)
-                                        {
-                                            tb.timer = 6f + foundBuffs;
-                                            foundBuffs++;
-                                        }
-                                    }
-                                    for (int i = 0; i < newBuffStack - foundBuffs; i++)
-                                    {
-                                        a.attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 6f + foundBuffs);
-                                        foundBuffs++;
-                                    }
-                                }
-                            }
-                            if (Soulbound.enabled)
-                            {
-                                int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Talisman);
-                                if (itemCount > 0)
-                                {
-                                    attackerInventory.DeductActiveEquipmentCooldown(2f + itemCount * 2f);
-                                }
-                            }
-                            if (HarvesterScythe.enabled)
-                            {
-                                int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.HealOnCrit);
-                                if (itemCount > 0)
-                                {
-                                    a.attackerBody.AddTimedBuff(HarvesterScythe.scytheBuff, 1.5f + 1.5f * itemCount);
-                                }
-                            }
-                            if (TopazBrooch.enabled)
-                            {
-                                int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.BarrierOnKill);
-                                if (itemCount > 0)
-                                {
-                                    a.attackerBody.healthComponent.AddBarrier(15f * itemCount);
-                                }
-                            }
-                            if (Infusion.enabled)
-                            {
-                                int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Infusion);
-                                if (itemCount > 0)
-                                {
-                                    int maxInfusionBonus = itemCount * 150;
-                                    if ((ulong)attackerInventory.infusionBonus < (ulong)((long)maxInfusionBonus))
-                                    {
-                                        InfusionOrb infusionOrb = new InfusionOrb();
-                                        infusionOrb.origin = victimBody.corePosition;
-                                        infusionOrb.target = Util.FindBodyMainHurtBox(a.attackerBody);
-                                        infusionOrb.maxHpValue = itemCount;
-                                        OrbManager.instance.AddOrb(infusionOrb);
-                                    }
-                                }
-                            }
-                            if (a.attackerBody != killerBody) //Vanilla behavior is left functional to prevent GetComponent call.
-                            {
-                                if (LaserTurbine.enabled)
-                                {
-                                    int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.LaserTurbine);
-                                    if (itemCount > 0)
-                                    {
-                                        a.attackerBody.AddTimedBuff(RoR2Content.Buffs.LaserTurbineKillCharge, EntityStates.LaserTurbine.RechargeState.killChargeDuration, EntityStates.LaserTurbine.RechargeState.killChargesRequired);
-                                    }
-                                }
-                                if (FrostRelic.enabled)
-                                {
-                                    int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Icicle);
-                                    if (itemCount > 0)
-                                    {
-                                        if (a.attackerBody != killerBody)
-                                        {
-                                            CharacterBody.IcicleItemBehavior ib = a.attackerBody.GetComponent<CharacterBody.IcicleItemBehavior>();
-                                            if (ib && ib.icicleAura)
-                                            {
-                                                ib.icicleAura.OnOwnerKillOther();
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            if (victimBody.isElite)
-                            {
-                                if (Brainstalks.enabled)
-                                {
-                                    int bsCount = attackerInventory.GetItemCount(RoR2Content.Items.KillEliteFrenzy);
-                                    if (bsCount > 0)
-                                    {
-                                        a.attackerBody.AddTimedBuff(RoR2Content.Buffs.NoCooldowns, bsCount * 4f);
-                                    }
-                                }
-                                if (HeadHunter.enabled)
-                                {
-                                    int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
-                                    if (hhCount > 0)
-                                    {
-                                        float duration = 5f + 5f * hhCount;
-                                        for (int l = 0; l < BuffCatalog.eliteBuffIndices.Length; l++)
-                                        {
-                                            BuffIndex buffIndex = BuffCatalog.eliteBuffIndices[l];
-                                            if (victimBody.HasBuff(buffIndex))
-                                            {
-                                                a.attackerBody.AddTimedBuff(buffIndex, duration);
-                                                //a.attackerBody.AddTimedBuff(HeadHunter.headhunterBuff.buffIndex, duration);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            HandleAssistActions(a.attackerBody, attackerInventory, victimBody, killerBody);
                         }
                     }
                     pendingAssists.Remove(a);

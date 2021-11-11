@@ -19,6 +19,20 @@ namespace RiskyMod.Items.Legendary
                 c.Remove();
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
+
+            AssistManager.HandleAssistActions += OnKillEffect;
+        }
+
+        private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
+        {
+            if (victimBody.isElite)
+            {
+                int bsCount = attackerInventory.GetItemCount(RoR2Content.Items.KillEliteFrenzy);
+                if (bsCount > 0)
+                {
+                    attackerBody.AddTimedBuff(RoR2Content.Buffs.NoCooldowns, bsCount * 4f);
+                }
+            }
         }
     }
 }

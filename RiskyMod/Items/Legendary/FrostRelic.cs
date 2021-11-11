@@ -101,6 +101,27 @@ namespace RiskyMod.Items.Legendary
                     }
                 }
             }
+
+            AssistManager.HandleAssistActions += OnKillEffect;
+        }
+
+        private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
+        {
+            if (attackerBody != killerBody) //Vanilla behavior is left functional to prevent GetComponent call.
+            {
+                int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Icicle);
+                if (itemCount > 0)
+                {
+                    if (attackerBody != killerBody)
+                    {
+                        CharacterBody.IcicleItemBehavior ib = attackerBody.GetComponent<CharacterBody.IcicleItemBehavior>();
+                        if (ib && ib.icicleAura)
+                        {
+                            ib.icicleAura.OnOwnerKillOther();
+                        }
+                    }
+                }
+            }
         }
     }
 }

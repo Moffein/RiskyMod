@@ -39,6 +39,29 @@ namespace RiskyMod.Items.Legendary
                 c.Remove();
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
+
+            AssistManager.HandleAssistActions += OnKillEffect;
+        }
+
+        private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
+        {
+            if (victimBody.isElite)
+            {
+                int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
+                if (hhCount > 0)
+                {
+                    float duration = 5f + 5f * hhCount;
+                    for (int l = 0; l < BuffCatalog.eliteBuffIndices.Length; l++)
+                    {
+                        BuffIndex buffIndex = BuffCatalog.eliteBuffIndices[l];
+                        if (victimBody.HasBuff(buffIndex))
+                        {
+                            attackerBody.AddTimedBuff(buffIndex, duration);
+                            //attackerBody.AddTimedBuff(HeadHunter.headhunterBuff.buffIndex, duration);
+                        }
+                    }
+                }
+            }
         }
     }
 }

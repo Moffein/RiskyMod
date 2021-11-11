@@ -22,7 +22,16 @@ namespace RiskyMod.Items.Common
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            //Handled in AssistManager
+            AssistManager.HandleAssistActions += OnKillEffect;
+        }
+
+        private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
+        {
+            int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.BarrierOnKill);
+            if (itemCount > 0)
+            {
+                attackerBody.healthComponent.AddBarrier(15f * itemCount);
+            }
         }
     }
 }

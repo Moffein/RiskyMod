@@ -19,17 +19,15 @@ namespace RiskyMod.Items.Uncommon
             LanguageAPI.Add("ITEM_WARCRYONMULTIKILL_DESC", "<style=cIsDamage>Killing enemies</style> sends you into a <style=cIsDamage>frenzy</style> for <style=cIsDamage>6s</style>. Increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> and <style=cIsDamage>attack speed</style> by <style=cIsDamage>20%</style> for each enemy killed. Stacks up to 5 <style=cStack>(+3 per stack)</style> times.");
 
             //Remove Vanilla Effect
-            IL.RoR2.CharacterBody.AddMultiKill+= (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                c.GotoNext(
-                     x => x.MatchLdsfld(typeof(RoR2Content.Items), "WarCryOnMultiKill")
-                    );
-                c.Remove();
-                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
-            };
-
-            //On-kill logic handled in SharedHooks.OnCharacterDeath
+            IL.RoR2.CharacterBody.AddMultiKill += (il) =>
+             {
+                 ILCursor c = new ILCursor(il);
+                 c.GotoNext(
+                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "WarCryOnMultiKill")
+                     );
+                 c.Remove();
+                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+             };
 
             //Buff logic handled in SharedHooks.GetStatCoefficients
             berzerkBuff = ScriptableObject.CreateInstance<BuffDef>();
@@ -39,6 +37,33 @@ namespace RiskyMod.Items.Uncommon
             berzerkBuff.name = "RiskyItemTweaks_BerzerkBuff";
             berzerkBuff.iconSprite = RoR2Content.Buffs.WarCryBuff.iconSprite;
             BuffAPI.Add(new CustomBuff(berzerkBuff));
+
+            AssistManager.HandleAssistActions += OnKillEffect;
+        }
+
+        private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
+        {
+
+            int berzerkCount = attackerInventory.GetItemCount(RoR2Content.Items.WarCryOnMultiKill);
+            if (berzerkCount > 0)
+            {
+                //Need to apply buff this way to prevent the visual from disappearing.
+                int newBuffStack = Mathf.Min(attackerBody.GetBuffCount(Berzerker.berzerkBuff) + 1, 2 + 3 * berzerkCount);
+                int foundBuffs = 0;
+                foreach (CharacterBody.TimedBuff tb in attackerBody.timedBuffs)
+                {
+                    if (tb.buffIndex == Berzerker.berzerkBuff.buffIndex)
+                    {
+                        tb.timer = 6f + foundBuffs;
+                        foundBuffs++;
+                    }
+                }
+                for (int i = 0; i < newBuffStack - foundBuffs; i++)
+                {
+                    attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 6f + foundBuffs);
+                    foundBuffs++;
+                }
+            }
         }
     }
 }

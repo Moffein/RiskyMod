@@ -22,7 +22,16 @@ namespace RiskyMod.Items.Legendary
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            //Handled in AssistManager
+            AssistManager.HandleAssistActions += OnKillEffect;
+        }
+
+        private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
+        {
+            int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Talisman);
+            if (itemCount > 0)
+            {
+                attackerInventory.DeductActiveEquipmentCooldown(2f + itemCount * 2f);
+            }
         }
     }
 }

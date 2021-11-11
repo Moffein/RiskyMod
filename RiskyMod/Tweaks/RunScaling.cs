@@ -13,7 +13,7 @@ namespace RiskyMod.Tweaks
 			if (!enabled) return;
             On.RoR2.Run.RecalculateDifficultyCoefficentInternal += (orig, self) =>
             {
-				int playerCount = (FixPlayercount.enabled || FixPlayercount.standalonePluginLoaded) ? FixPlayercount.GetConnectedPlayers() : self.participatingPlayerCount;
+				int playerCount = self.participatingPlayerCount;
 				float time = Mathf.Floor(self.GetRunStopwatch() * 0.0166666675f);    //Convert stopwatch(seconds) into minutes
                 DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
                 float playerFactor = 0.7f + playerCount * 0.3f;
