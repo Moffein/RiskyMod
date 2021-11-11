@@ -34,10 +34,10 @@ namespace RiskyMod.Items.Equipment
                         if (attackerBody)
                         {
                             //Roll for another crit if attacker is using HUD
-                            if (attackerBody.crit > 100f && attackerBody.HasBuff(RoR2Content.Buffs.FullCrit))
+                            if (attackerBody.HasBuff(RoR2Content.Buffs.FullCrit))
                             {
                                 float trueCrit = attackerBody.crit - 100f;
-                                if (trueCrit >= 100f || Util.CheckRoll(trueCrit, attackerBody.master))
+                                if (damageInfo.procChainMask.HasProc(ProcType.Backstab) || trueCrit >= 100f || Util.CheckRoll(trueCrit, attackerBody.master))
                                 {
                                     critMult *= 1.5f;
                                 }
