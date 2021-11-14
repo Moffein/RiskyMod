@@ -87,6 +87,7 @@ namespace RiskyMod
             new NoLevelupHeal();
             new RemoveLevelCap();
             new SmallHoldoutCharging();
+            new TeleExpandOnBossKill();
         }
 
         private void RunFixes()
