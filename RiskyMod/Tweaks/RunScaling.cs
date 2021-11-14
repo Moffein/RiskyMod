@@ -41,22 +41,26 @@ namespace RiskyMod.Tweaks
 				//Notes:
 				//Check the monster card selection stuff later. Goal is to have more heavy mobs spawn earlier.
 
-				difficultyCoefficient *= Run.instance.stageClearCount < 4 ? Mathf.Pow(1.15f, Run.instance.stageClearCount) : 1.75f;	//Needs cap to prevent game from turning into a slideshow. Will definitely add config to uncap it for those who want it.
+				difficultyCoefficient *= Run.instance.stageClearCount < 4 ? Mathf.Pow(1.1f, Run.instance.stageClearCount) : 1.5f;	//Needs cap to prevent game from turning into a slideshow. Uncapping it causes excessive T2 Elite spam.
 				return orig(self, deltaTime, difficultyCoefficient);
 			};
 
 			On.RoR2.CombatDirector.Awake += (orig, self) =>
 			{
-				self.creditMultiplier *= 1.15f;
-				self.expRewardCoefficient /= GetScaledExpRewardMult();
+				self.creditMultiplier *= 1.1f;
 				orig(self);
+			};
+
+			On.RoR2.DeathRewards.OnKilledServer += (orig, self, damageReport) =>
+			{
+				self.goldReward = (uint)Mathf.CeilToInt(Mathf.Pow(self.goldReward / GetScaledReward(), 0.8f));
+				orig(self, damageReport);
 			};
 		}
 
-		public static float GetScaledExpRewardMult()
+		private float GetScaledReward()
 		{
-			return RunScaling.enabled ? 0.9f * (Run.instance.stageClearCount < 4 ? Mathf.Pow(1.2f, Run.instance.stageClearCount) : 2.2f) : 1f;
-
+			return 1.1f * Run.instance.stageClearCount < 4 ? Mathf.Pow(1.1f, Run.instance.stageClearCount) : 1.5f;
 		}
 	}
 }
