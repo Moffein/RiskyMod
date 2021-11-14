@@ -32,6 +32,11 @@ namespace RiskyMod.SharedHooks
 				{
 					if (victimBody)
 					{
+						if (Crowbar.enabled)
+                        {
+							Crowbar.crowbarManager.Remove(victimBody.healthComponent);
+                        }
+
 						if (attackerInventory)
                         {
 							if (Incubator.enabled)

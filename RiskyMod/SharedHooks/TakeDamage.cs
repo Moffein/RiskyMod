@@ -36,14 +36,12 @@ namespace RiskyMod.SharedHooks
                     {
                         if (Crowbar.enabled)
                         {
-                            //Convert to proc chain when custom proc chains are a thing.
-                            //Currently has no protection against self-proc.
-                            if (self.body != attackerBody && self.combinedHealth >= self.fullCombinedHealth * 0.9f)
+                            if (self.body != attackerBody && damageInfo.dotIndex == DotController.DotIndex.None && !damageInfo.HasModdedDamageType(Crowbar.crowbarDamage))
                             {
                                 int crowbarCount = attackerInventory.GetItemCount(RoR2Content.Items.Crowbar);
-                                if (crowbarCount > 0)
+                                if (crowbarCount > 0 && Crowbar.crowbarManager.CanApplyCrowbar(self, attackerBody))
                                 {
-                                    damageInfo.damage *= 1f + 0.5f * crowbarCount;
+                                    damageInfo.damage *= 1f + Crowbar.damageCoefficient * crowbarCount;
                                     EffectManager.SimpleImpactEffect(HealthComponent.AssetReferences.crowbarImpactEffectPrefab, damageInfo.position, -damageInfo.force, true);
                                     damageInfo.AddModdedDamageType(Crowbar.crowbarDamage);
                                 }
