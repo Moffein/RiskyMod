@@ -23,7 +23,7 @@ namespace RiskyMod.SharedHooks
 
         public static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
-            float oldHP = self.health;
+            float oldHP = self.combinedHealth;
             CharacterBody attackerBody = null;
             Inventory attackerInventory = null;
             if (damageInfo.attacker)
@@ -100,7 +100,7 @@ namespace RiskyMod.SharedHooks
                         Inventory inventory = self.body.inventory;
                         if (inventory)
                         {
-                            float percentHPLost = (oldHP - self.health) / self.fullCombinedHealth * 100f;
+                            float percentHPLost = (oldHP - self.combinedHealth) / self.fullCombinedHealth * 100f;
                             HandleOnHpLostActions.Invoke(damageInfo, self, inventory, percentHPLost);
 
                             //This should happen after OnHpLost
