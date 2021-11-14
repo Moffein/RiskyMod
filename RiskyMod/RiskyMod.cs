@@ -32,7 +32,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RaiseMonsterLevelCap", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Alpha", "0.0.6")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Alpha", "0.0.7")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(LanguageAPI), nameof(RecalculateStatsAPI), nameof(PrefabAPI),
         nameof(ProjectileAPI), nameof(EffectAPI), nameof(DamageAPI), nameof(BuffAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
@@ -86,6 +86,7 @@ namespace RiskyMod
             new Shock();
             new NoLevelupHeal();
             new RemoveLevelCap();
+            new SmallHoldoutCharging();
         }
 
         private void RunFixes()
