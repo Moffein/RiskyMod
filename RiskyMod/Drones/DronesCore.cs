@@ -16,6 +16,12 @@ namespace RiskyMod.Drones
             if (!enabled) return;
             ChangeDroneScaling();
             FixDroneTargeting();
+            TweakDrones();
+        }
+
+        private void TweakDrones()
+        {
+            new MegaDrone();
         }
 
         private void ChangeDroneScaling()
