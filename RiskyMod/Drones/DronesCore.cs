@@ -25,7 +25,8 @@ namespace RiskyMod.Drones
         }
 
         private void ChangeDroneScaling()
-        {//Backup
+        {
+            //Backup
             FixBackupScaling();
             ChangeScaling(LoadBody("BackupDroneBody"));
 
