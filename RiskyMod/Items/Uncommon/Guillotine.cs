@@ -2,6 +2,9 @@
 using MonoMod.Cil;
 using R2API;
 using RoR2;
+using System;
+using UnityEngine;
+
 namespace RiskyMod.Items.Uncommon
 {
     public class Guillotine

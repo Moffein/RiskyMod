@@ -69,7 +69,7 @@ namespace RiskyMod.SharedHooks
 			//This part is split off because it needs the inventory to work
 			if (TrueOSP.enabled && self.hasOneShotProtection)
 			{
-				if (self.isGlass || self.cursePenalty > 0f || self.HasBuff(RoR2Content.Buffs.AffixLunar) ||
+				if (self.isGlass || self.cursePenalty > 1f || self.HasBuff(RoR2Content.Buffs.AffixLunar) ||
 					(self.inventory && self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0))
 				{
 					self.hasOneShotProtection = false;
