@@ -30,6 +30,7 @@ namespace RiskyMod
     [BepInDependency("com.TPDespair.ZetArtifacts", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.rob.ArtifactReliquaryHealingFix", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.RaiseMonsterLevelCap", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.PlasmaCore.AlwaysAllowSupplyDrops", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Alpha", "0.0.10")]
@@ -74,6 +75,7 @@ namespace RiskyMod
             FixPlayercount.ZetArtifactsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetArtifacts");
             FixVengeanceLeveling.enabled = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist");
             PreventArtifactHeal.enabled = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.ArtifactReliquaryHealingFix");
+            CaptainOrbitalHiddenRealms.enabled = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.PlasmaCore.AlwaysAllowSupplyDrops");
         }
 
         private void RunTweaks()
@@ -83,11 +85,12 @@ namespace RiskyMod
             new ShieldGating();
             new SceneDirectorMonsterRewards();
             new BanditSpecialGracePeriod();
-            new Shock();
             new NoLevelupHeal();
             new RemoveLevelCap();
             new SmallHoldoutCharging();
             new TeleExpandOnBossKill();
+            new CaptainOrbitalHiddenRealms();
+            new Shock();
         }
 
         private void RunFixes()
