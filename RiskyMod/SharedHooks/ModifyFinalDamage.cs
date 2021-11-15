@@ -31,6 +31,13 @@ namespace RiskyMod.SharedHooks
                     CharacterBody victimBody = victimHealth.body;
                     if (victimBody && damageInfo.attacker)
                     {
+                        if (Chronobauble.enabled)
+                        {
+                            if (victimBody.HasBuff(RoR2Content.Buffs.Slow60))
+                            {
+                                newDamage *= 1.15f;
+                            }
+                        }
                         CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
                         if (attackerBody)
                         {
