@@ -1,4 +1,5 @@
 ﻿using R2API;
+using RiskyMod.Drones;
 using RiskyMod.Items.Boss;
 using RiskyMod.Items.Common;
 using RiskyMod.Items.Equipment;
@@ -31,6 +32,15 @@ namespace RiskyMod.SharedHooks
                 attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
                 if (attackerBody)
                 {
+                    if (VagrantResistance.enabled)
+                    {
+                        if (attackerBody.bodyIndex == VagrantResistance.VagrantIndex && damageInfo.procCoefficient > 1f
+                            && self.body && VagrantResistance.HasResist(self.body.bodyIndex))
+                        {
+                            damageInfo.procCoefficient *= 0.3333333333f;
+                            damageInfo.damage *= 0.3333333333f;
+                        }
+                    }
                     attackerInventory = attackerBody.inventory;
                     if (attackerInventory)
                     {

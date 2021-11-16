@@ -1,10 +1,6 @@
-﻿using UnityEngine;
-using RoR2;
-using UnityEngine.Networking;
+﻿using RoR2;
 using MonoMod.Cil;
 using System;
-using System.Runtime.CompilerServices;
-using RoR2.CharacterAI;
 
 namespace RiskyMod.Drones
 {
@@ -18,6 +14,7 @@ namespace RiskyMod.Drones
             new DroneScaling();
             new DroneTargeting();
             new IncreaseShotRadius();
+            new VagrantResistance();
             TweakDrones();
         }
 
