@@ -49,19 +49,6 @@ namespace RiskyMod.SharedHooks
                         }
                     }
                 }
-
-                //Squid invuln
-                if (SquidPolyp.enabled)
-                {
-                    if (self.body && self.body.bodyIndex == BodyCatalog.FindBodyIndex("SquidTurretBody"))
-                    {
-                        damageInfo.rejected = true;
-                        if (attackerBody && (attackerBody.isBoss || attackerBody.isChampion || attackerBody.isPlayerControlled))
-                        {
-                            damageInfo.rejected = false;
-                        }
-                    }
-                }
             }
 
             if (FixSlayer.enabled && (damageInfo.damageType & DamageType.BonusToLowHealth) > DamageType.Generic)

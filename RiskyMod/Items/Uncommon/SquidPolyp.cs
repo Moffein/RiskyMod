@@ -39,8 +39,6 @@ namespace RiskyMod.Items.Uncommon
             EffectAPI.AddEffect(procEffectPrefab);
 
             TakeDamage.HandleOnHpLostActions += OnHpLost;
-
-            //Boss-only damage handled in SharedHooks.TakeDamage
         }
 
         private void OnHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost)

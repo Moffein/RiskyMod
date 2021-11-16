@@ -66,8 +66,10 @@ namespace RiskyMod.Drones
                     cb.levelArmor += 1f;
                     break;
                 case "SquidTurretBody":
+                    cb.baseMaxHealth = 300f;
+                    cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
                     cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
-                    cb.levelArmor += 4f;
+                    cb.levelArmor += 2f;
                     break;
                 case "Turret1Body": //Shield seems to be enough to put them in a good spot.
                     cb.baseMaxShield = cb.baseMaxHealth * 0.12f;
