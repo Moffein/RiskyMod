@@ -9,7 +9,7 @@ namespace RiskyMod.Items.Common
 {
     public class RepArmor
     {
-        public static bool enabled = true;
+        public static bool enabled = false; //temp set to false
         public RepArmor()
         {
             if (!enabled) return;
