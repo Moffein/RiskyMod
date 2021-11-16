@@ -93,6 +93,7 @@ namespace RiskyMod
             new TeleExpandOnBossKill();
             new CaptainOrbitalHiddenRealms();
             new Shock();
+            new DistantRoostCredits();
         }
 
         private void RunFixes()
