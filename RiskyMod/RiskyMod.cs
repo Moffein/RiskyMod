@@ -94,6 +94,7 @@ namespace RiskyMod
             new CaptainOrbitalHiddenRealms();
             new Shock();
             new DistantRoostCredits();
+            new ShrineCombatItems();
         }
 
         private void RunFixes()

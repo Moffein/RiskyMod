@@ -67,7 +67,6 @@ namespace RiskyMod.Drones
                     break;
                 case "SquidTurretBody":
                     cb.baseMaxHealth = 300f;
-                    cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
                     cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
                     cb.levelArmor += 2f;
                     break;
@@ -91,6 +90,7 @@ namespace RiskyMod.Drones
             cb.levelDamage = cb.baseDamage * 0.3f;
             cb.levelArmor += 2f;    //Drones need bonus armor because of increasing enemycounts and elite counts, otherwise they end up dying really quickly.
             cb.levelMaxShield = cb.baseMaxShield * 0.3f;
+            cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
         }
 
         //Makes backup drones scale with ambient level like all other drones.
