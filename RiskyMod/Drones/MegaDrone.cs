@@ -6,11 +6,8 @@ namespace RiskyMod.Drones
 {
     public class MegaDrone
     {
-        public static bool enabled = true;
         public MegaDrone()
         {
-            if (!enabled) return;
-
             GameObject megaDroneMasterObject = Resources.Load<GameObject>("prefabs/charactermasters/MegaDroneMaster");
 
             AISkillDriver[] aiDrivers = megaDroneMasterObject.GetComponentsInChildren<AISkillDriver>();
