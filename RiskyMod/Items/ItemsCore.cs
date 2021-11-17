@@ -115,6 +115,7 @@ namespace RiskyMod.Items
             new VolcanicEgg();
             new BFG();
             new Capacitor();
+            new Backup();
         }
 
         public static void AddToAIBlacklist(string itemName)
