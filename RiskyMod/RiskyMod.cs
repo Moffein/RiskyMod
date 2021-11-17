@@ -37,7 +37,7 @@ namespace RiskyMod
     [BepInDependency("com.ThinkInvisible.Hypercrit", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.1.0")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.1.2")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(LanguageAPI), nameof(RecalculateStatsAPI), nameof(PrefabAPI),
         nameof(ProjectileAPI), nameof(EffectAPI), nameof(DamageAPI), nameof(BuffAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
