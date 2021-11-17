@@ -9,8 +9,8 @@ namespace RiskyMod.Tweaks
     {
         public static bool enabled = true;
         public static float whiteChance = 50f;
-        public static float greenChance = 40f;
-        public static float redChance = 10f;
+        public static float greenChance = 47.5f;
+        public static float redChance = 2.5f;
         private static Vector3 rewardPositionOffset = new Vector3(0f, 6f, 0f);
         public ShrineCombatItems()
         {

@@ -51,7 +51,7 @@ namespace RiskyMod.Drones
                     cb.levelArmor += 1f;
                     break;
                 case "SquidTurretBody":
-                    cb.baseMaxHealth = 960f;
+                    cb.baseMaxHealth = 720f;
                     cb.levelArmor += 2f;
                     break;
                 case "Turret1Body": //Shield seems to be enough to put them in a good spot.
@@ -72,7 +72,7 @@ namespace RiskyMod.Drones
             //This makes their performance stay the same on every stage. (Everything's HP increases 30% per level, so damage and regen increase matches that.)
             cb.levelRegen = cb.baseRegen * 0.3f;
             cb.levelDamage = cb.baseDamage * 0.3f;
-            cb.levelArmor += 2f;    //Drones need bonus armor because of increasing enemycounts and elite counts, otherwise they end up dying really quickly.
+            cb.levelArmor += 1f;    //Drones need bonus armor because of increasing enemycounts and elite counts, otherwise they end up dying really quickly.
             cb.levelMaxShield = cb.baseMaxShield * 0.3f;
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
         }

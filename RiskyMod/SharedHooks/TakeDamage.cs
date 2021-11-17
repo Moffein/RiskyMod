@@ -46,14 +46,14 @@ namespace RiskyMod.SharedHooks
                     {
                         if (Crowbar.enabled)
                         {
-                            if (self.body != attackerBody && damageInfo.dotIndex == DotController.DotIndex.None && !damageInfo.HasModdedDamageType(Crowbar.crowbarDamage))
+                            if (self.body != attackerBody && damageInfo.dotIndex == DotController.DotIndex.None && !damageInfo.HasModdedDamageType(Crowbar.CrowbarDamage))
                             {
                                 int crowbarCount = attackerInventory.GetItemCount(RoR2Content.Items.Crowbar);
                                 if (crowbarCount > 0 && Crowbar.crowbarManager.CanApplyCrowbar(self, attackerBody))
                                 {
                                     damageInfo.damage *= 1f + Crowbar.damageCoefficient * crowbarCount;
                                     EffectManager.SimpleImpactEffect(HealthComponent.AssetReferences.crowbarImpactEffectPrefab, damageInfo.position, -damageInfo.force, true);
-                                    damageInfo.AddModdedDamageType(Crowbar.crowbarDamage);
+                                    damageInfo.AddModdedDamageType(Crowbar.CrowbarDamage);
                                 }
                             }
                         }

@@ -12,14 +12,14 @@ namespace RiskyMod.Items.Common
     public class Crowbar
     {
         public static bool enabled = true;
-        public static DamageAPI.ModdedDamageType crowbarDamage;
+        public static DamageAPI.ModdedDamageType CrowbarDamage;
         public static CrowbarManager crowbarManager;
         public static float damageCoefficient = 0.45f;
 
         public Crowbar()
         {
             if (!enabled) return;
-            crowbarDamage = DamageAPI.ReserveDamageType();
+            CrowbarDamage = DamageAPI.ReserveDamageType();
             //Remove vanilla effect
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
             {
@@ -44,7 +44,7 @@ namespace RiskyMod.Items.Common
                 c.Emit(OpCodes.Ldarg_1);//damageinfo
                 c.EmitDelegate<Func<float, DamageInfo, float>>((ringThreshold, damageInfo) =>
                 {
-                    if (DamageAPI.HasModdedDamageType(damageInfo, crowbarDamage))
+                    if (DamageAPI.HasModdedDamageType(damageInfo, CrowbarDamage))
                     {
                         if (damageInfo.attacker)
                         {

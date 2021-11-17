@@ -1,29 +1,109 @@
 ﻿using MonoMod.Cil;
 using RoR2;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RiskyMod.Items.Equipment
 {
     public class Backup
     {
+        public static GameObject backupMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/DroneBackupMaster");
         public Backup()
         {
-            IL.RoR2.EquipmentSlot.FireDroneBackup += (il) =>
+
+            On.RoR2.EquipmentSlot.FireDroneBackup += (orig, self) =>
             {
-                ILCursor c = new ILCursor(il);
-                c.GotoNext(
-                    x => x.MatchStfld<MasterSuicideOnTimer>("lifeTimer")
-                    );
-                c.Index -= 7;
-                c.EmitDelegate<Func<CharacterMaster, CharacterMaster>>((master) =>
+                int sliceCount = 4;
+                float num = 25f;
+                if (NetworkServer.active)
                 {
-                    if (master.inventory)
+                    BackupTracker bt = self.gameObject.GetComponent<BackupTracker>();
+                    if (!bt)
                     {
-                        master.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
+                        bt = self.gameObject.AddComponent<BackupTracker>();
                     }
-                    return master;
-                });
+
+                    if (!bt.canSpawn)
+                    {
+                        return false;
+                    }
+
+                    float y = Quaternion.LookRotation(self.GetAimRay().direction).eulerAngles.y;
+                    float d = 3f;
+                    foreach (float num2 in new DegreeSlices(sliceCount, 0.5f))
+                    {
+                        Quaternion rotation = Quaternion.Euler(0f, y + num2, 0f);
+                        Quaternion rotation2 = Quaternion.Euler(0f, y + num2 + 180f, 0f);
+                        Vector3 position = self.transform.position + rotation * (Vector3.forward * d);
+                        CharacterMaster characterMaster = new MasterSummon
+                        {
+                            masterPrefab = backupMaster,
+                            position = position,
+                            rotation = rotation,
+                            summonerBodyObject = self.gameObject,
+                            ignoreTeamMemberLimit = true
+                        }.Perform();
+                        if (characterMaster)
+                        {
+                            MasterSuicideOnTimer msot = characterMaster.gameObject.AddComponent<MasterSuicideOnTimer>();
+                            msot.lifeTimer = num + UnityEngine.Random.Range(0f, 3f);
+                            bt.AddMSoT(msot);
+                        }
+                    }
+                }
+                self.subcooldownTimer = 0.5f;
+                return true;
             };
         }
     }
+
+    public class BackupTracker : MonoBehaviour
+    {
+        public static int maxCount = 8;
+
+        private List<MasterSuicideOnTimer> droneList;
+
+        public void FixedUpdate()
+        {
+            if (droneList.Count > 0)
+            {
+                List<MasterSuicideOnTimer> toRemove = new List<MasterSuicideOnTimer>();
+                foreach (MasterSuicideOnTimer m in droneList)
+                {
+                    if (m.hasDied)
+                    {
+                        toRemove.Add(m);
+                    }
+                }
+
+                if (toRemove.Count > 0)
+                {
+                    foreach (MasterSuicideOnTimer m in toRemove)
+                    {
+                        droneList.Remove(m);
+                    }
+                }
+            }
+        }
+
+        public void AddMSoT(MasterSuicideOnTimer m)
+        {
+            droneList.Add(m);
+        }
+
+        public void Awake()
+        {
+            droneList = new List<MasterSuicideOnTimer>();
+        }
+
+        public bool canSpawn
+        {
+            get
+            {
+                return droneList.Count < maxCount;
+            }
+        }
+    };
 }

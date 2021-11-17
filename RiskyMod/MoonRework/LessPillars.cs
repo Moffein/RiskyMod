@@ -17,11 +17,8 @@ namespace RiskyMod.MoonRework
             On.RoR2.MoonBatteryMissionController.Awake += (orig, self) =>
             {
                 orig(self);
-                if (NetworkServer.active)
-                {
-                    self._numRequiredBatteries = 2;
-                }
-            };
+				self._numRequiredBatteries = 2;
+			};
 
             //Prevent pillars from deactivating
             On.RoR2.MoonBatteryMissionController.OnBatteryCharged += (orig, self, holdoutZone) =>
