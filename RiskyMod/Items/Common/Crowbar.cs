@@ -14,7 +14,7 @@ namespace RiskyMod.Items.Common
         public static bool enabled = true;
         public static DamageAPI.ModdedDamageType crowbarDamage;
         public static CrowbarManager crowbarManager;
-        public static float damageCoefficient = 0.4f;
+        public static float damageCoefficient = 0.45f;
 
         public Crowbar()
         {
@@ -91,7 +91,7 @@ namespace RiskyMod.Items.Common
             On.RoR2.Stage.Start += (orig, self) =>
             {
                 orig(self);
-                Crowbar.crowbarManager.ClearList();
+                if (NetworkServer.active) Crowbar.crowbarManager.ClearList();
             };
         }
 

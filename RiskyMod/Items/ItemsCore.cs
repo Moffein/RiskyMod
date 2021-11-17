@@ -45,6 +45,7 @@ namespace RiskyMod.Items
             new Gasoline();
             new RepArmor();
             new TopazBrooch();
+            new TougherTimes();
         }
 
         private void ModifyUncommon()

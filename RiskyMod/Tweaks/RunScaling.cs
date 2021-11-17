@@ -53,7 +53,7 @@ namespace RiskyMod.Tweaks
 
 			On.RoR2.DeathRewards.OnKilledServer += (orig, self, damageReport) =>
 			{
-				self.goldReward = (uint)Mathf.CeilToInt(Mathf.Pow(self.goldReward / GetScaledReward(), 0.8f));
+				self.goldReward = (uint)Mathf.CeilToInt(Mathf.Pow(self.goldReward, 0.9f) / Mathf.Pow(1.2f, Run.instance.stageClearCount / 5));
 				orig(self, damageReport);
 			};
 		}

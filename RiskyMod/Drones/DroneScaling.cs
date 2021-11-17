@@ -51,7 +51,7 @@ namespace RiskyMod.Drones
                     cb.levelArmor += 1f;
                     break;
                 case "SquidTurretBody":
-                    cb.baseMaxHealth = 300f;
+                    cb.baseMaxHealth = 480f;
                     cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
                     cb.levelArmor += 2f;
                     break;
@@ -59,7 +59,7 @@ namespace RiskyMod.Drones
                     cb.baseMaxShield = cb.baseMaxHealth * 0.12f;
                     cb.levelArmor += 2f;
                     break;
-                case "FlameDroneBody": //These seem to die faster than other drones.
+                case "FlameDroneBody": //These seem to die faster than other drones?
                     //cb.baseRegen = cb.baseMaxHealth / 20f;
                     cb.levelArmor += 1f;
                     break;
