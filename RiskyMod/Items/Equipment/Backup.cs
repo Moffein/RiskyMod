@@ -34,22 +34,25 @@ namespace RiskyMod.Items.Equipment
                     float d = 3f;
                     foreach (float num2 in new DegreeSlices(sliceCount, 0.5f))
                     {
-                        Quaternion rotation = Quaternion.Euler(0f, y + num2, 0f);
-                        Quaternion rotation2 = Quaternion.Euler(0f, y + num2 + 180f, 0f);
-                        Vector3 position = self.transform.position + rotation * (Vector3.forward * d);
-                        CharacterMaster characterMaster = new MasterSummon
+                        if (bt.canSpawn)
                         {
-                            masterPrefab = backupMaster,
-                            position = position,
-                            rotation = rotation,
-                            summonerBodyObject = self.gameObject,
-                            ignoreTeamMemberLimit = true
-                        }.Perform();
-                        if (characterMaster)
-                        {
-                            MasterSuicideOnTimer msot = characterMaster.gameObject.AddComponent<MasterSuicideOnTimer>();
-                            msot.lifeTimer = num + UnityEngine.Random.Range(0f, 3f);
-                            bt.AddMSoT(msot);
+                            Quaternion rotation = Quaternion.Euler(0f, y + num2, 0f);
+                            Quaternion rotation2 = Quaternion.Euler(0f, y + num2 + 180f, 0f);
+                            Vector3 position = self.transform.position + rotation * (Vector3.forward * d);
+                            CharacterMaster characterMaster = new MasterSummon
+                            {
+                                masterPrefab = backupMaster,
+                                position = position,
+                                rotation = rotation,
+                                summonerBodyObject = self.gameObject,
+                                ignoreTeamMemberLimit = true
+                            }.Perform();
+                            if (characterMaster)
+                            {
+                                MasterSuicideOnTimer msot = characterMaster.gameObject.AddComponent<MasterSuicideOnTimer>();
+                                msot.lifeTimer = num + UnityEngine.Random.Range(0f, 3f);
+                                bt.AddMSoT(msot);
+                            }
                         }
                     }
                 }
