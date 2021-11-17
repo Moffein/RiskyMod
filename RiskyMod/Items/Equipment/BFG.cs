@@ -4,6 +4,7 @@ using RoR2.Projectile;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
+using RoR2;
 
 namespace RiskyMod.Items.Equipment
 {
@@ -14,6 +15,8 @@ namespace RiskyMod.Items.Equipment
         public BFG()
         {
             if (!enabled) return;
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipDescs, RoR2Content.Equipment.BFG);
+
             ItemsCore.ChangeEquipmentCooldown(ItemsCore.LoadEquipmentDef("bfg"), 120f);
 
             projectilePrefab = Resources.Load<GameObject>("prefabs/projectiles/BeamSphere").InstantiateClone("RiskyMod_BFG", true);
@@ -21,7 +24,7 @@ namespace RiskyMod.Items.Equipment
             pbc.damageCoefficient = 1.9f;
             ProjectileAPI.Add(projectilePrefab);
 
-            LanguageAPI.Add("EQUIPMENT_BFG_DESC", "Fires preon tendrils, zapping enemies within 35m for up to <style=cIsDamage>1180% damage/second</style>. On contact, detonate in an enormous 20m explosion for <style=cIsDamage>8000% damage</style>.");
+            //LanguageAPI.Add("EQUIPMENT_BFG_DESC", "Fires preon tendrils, zapping enemies within 35m for up to <style=cIsDamage>1180% damage/second</style>. On contact, detonate in an enormous 20m explosion for <style=cIsDamage>8000% damage</style>.");
 
             IL.RoR2.EquipmentSlot.FixedUpdate += (il) =>
             {

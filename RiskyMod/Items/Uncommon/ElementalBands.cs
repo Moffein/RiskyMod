@@ -19,6 +19,8 @@ namespace RiskyMod.Items.Uncommon
         public ElementalBands()
         {
             if (!enabled) return;
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.IceRing);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FireRing);
 
             float initialDamageFire = initialDamageCoefficientFire - stackDamageCoefficientFire;
             float initialDamageIce = initialDamageCoefficientIce - stackDamageCoefficientIce;
@@ -59,8 +61,8 @@ namespace RiskyMod.Items.Uncommon
                 });
             };
 
-            LanguageAPI.Add("ITEM_ICERING_DESC", "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic ice blast</style>, <style=cIsUtility>slowing</style> them by <style=cIsUtility>80%</style> for <style=cIsUtility>3s</style> <style=cStack>(+3s per stack)</style> and dealing <style=cIsDamage>" + ItemsCore.ToPercent(initialDamageCoefficientIce) + "</style> <style=cStack>(+" + ItemsCore.ToPercent(stackDamageCoefficientIce) + " per stack)</style> TOTAL damage. Recharges every <style=cIsUtility>10</style> seconds.");
-            LanguageAPI.Add("ITEM_FIRERING_DESC", "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic flame tornado</style>, dealing <style=cIsDamage>" + ItemsCore.ToPercent(initialDamageCoefficientFire) + "</style> <style=cStack>(+" + ItemsCore.ToPercent(stackDamageCoefficientFire) + " per stack)</style> TOTAL damage over time. Recharges every <style=cIsUtility>10</style> seconds.");
+            //LanguageAPI.Add("ITEM_ICERING_DESC", "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic ice blast</style>, <style=cIsUtility>slowing</style> them by <style=cIsUtility>80%</style> for <style=cIsUtility>3s</style> <style=cStack>(+3s per stack)</style> and dealing <style=cIsDamage>" + ItemsCore.ToPercent(initialDamageCoefficientIce) + "</style> <style=cStack>(+" + ItemsCore.ToPercent(stackDamageCoefficientIce) + " per stack)</style> TOTAL damage. Recharges every <style=cIsUtility>10</style> seconds.");
+            //LanguageAPI.Add("ITEM_FIRERING_DESC", "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic flame tornado</style>, dealing <style=cIsDamage>" + ItemsCore.ToPercent(initialDamageCoefficientFire) + "</style> <style=cStack>(+" + ItemsCore.ToPercent(stackDamageCoefficientFire) + " per stack)</style> TOTAL damage over time. Recharges every <style=cIsUtility>10</style> seconds.");
         }
     }
 }

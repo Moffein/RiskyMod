@@ -12,6 +12,7 @@ namespace RiskyMod.Items.Uncommon
         public WillOWisp()
         {
             if (!enabled) return;
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.ExplodeOnDeath);
 
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
@@ -54,7 +55,7 @@ namespace RiskyMod.Items.Uncommon
                 });
             };
 
-            LanguageAPI.Add("ITEM_EXPLODEONDEATH_DESC", "On killing an enemy, spawn a <style=cIsDamage>lava pillar</style> in a <style=cIsDamage>16m</style> radius for <style=cIsDamage>350%</style> <style=cStack>(+280% per stack)</style> base damage.");
+            //LanguageAPI.Add("ITEM_EXPLODEONDEATH_DESC", "On killing an enemy, spawn a <style=cIsDamage>lava pillar</style> in a <style=cIsDamage>16m</style> radius for <style=cIsDamage>350%</style> <style=cStack>(+280% per stack)</style> base damage.");
         }
     }
 }

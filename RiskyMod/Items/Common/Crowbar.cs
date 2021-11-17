@@ -16,9 +16,14 @@ namespace RiskyMod.Items.Common
         public static CrowbarManager crowbarManager;
         public static float damageCoefficient = 0.45f;
 
+        public static ItemDef itemDef = RoR2Content.Items.Crowbar;
+
         public Crowbar()
         {
             if (!enabled) return;
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, itemDef);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
+
             CrowbarDamage = DamageAPI.ReserveDamageType();
             //Remove vanilla effect
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
@@ -69,9 +74,9 @@ namespace RiskyMod.Items.Common
 
             //LanguageAPI.Add("ITEM_CROWBAR_DESC", "Deal <style=cIsDamage>+50%</style> <style=cStack>(+50% per stack)</style> damage to enemies above <style=cIsDamage>90% health</style>.");
 
-            LanguageAPI.Add("ITEM_CROWBAR_DESC", "Deal <style=cIsDamage>+"+ItemsCore.ToPercent(damageCoefficient)+"</style> <style=cStack>(+"
-                + ItemsCore.ToPercent(damageCoefficient) + " per stack)</style> damage on your <style=cIsDamage>first hit</style> against an enemy.");
-            LanguageAPI.Add("ITEM_CROWBAR_PICKUP", "Deal bonus damage on your first hit against an enemy.");
+            //LanguageAPI.Add("ITEM_CROWBAR_DESC", "Deal <style=cIsDamage>+"+ItemsCore.ToPercent(damageCoefficient)+"</style> <style=cStack>(+"
+            //    + ItemsCore.ToPercent(damageCoefficient) + " per stack)</style> damage on your <style=cIsDamage>first hit</style> against an enemy.");
+            //LanguageAPI.Add("ITEM_CROWBAR_PICKUP", "Deal bonus damage on your first hit against an enemy.");
 
             //Effect handled in SharedHooks.TakeDamage and OnCharacterDeath (for removal)
 

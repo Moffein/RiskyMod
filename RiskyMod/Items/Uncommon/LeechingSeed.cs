@@ -12,6 +12,7 @@ namespace RiskyMod.Items.Uncommon
         public LeechingSeed()
         {
 			if (!enabled) return;
+			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Seed);
 
 			IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
 			{
@@ -29,7 +30,7 @@ namespace RiskyMod.Items.Uncommon
 				});
 			};
 
-			LanguageAPI.Add("ITEM_SEED_DESC", "Dealing damage <style=cIsHealing>heals</style> you for <style=cIsHealing>3 <style=cStack>(+3 per stack)</style> health</style>.");
+			//LanguageAPI.Add("ITEM_SEED_DESC", "Dealing damage <style=cIsHealing>heals</style> you for <style=cIsHealing>3 <style=cStack>(+3 per stack)</style> health</style>.");
 		}
     }
 }

@@ -17,6 +17,9 @@ using RiskyMod.Items.Equipment;
 using UnityEngine.Networking;
 using RiskyMod.MonoBehaviours;
 using RiskyMod.MoonRework;
+using Zio;
+using Zio.FileSystems;
+using System.Collections.Generic;
 
 namespace RiskyMod
 {
@@ -35,7 +38,7 @@ namespace RiskyMod
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.1.2")]
-    [R2API.Utils.R2APISubmoduleDependency(nameof(LanguageAPI), nameof(RecalculateStatsAPI), nameof(PrefabAPI),
+    [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI),
         nameof(ProjectileAPI), nameof(EffectAPI), nameof(DamageAPI), nameof(BuffAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
@@ -47,8 +50,13 @@ namespace RiskyMod
 
         public static AssistManager assistManager = null;
 
+        public static PluginInfo pluginInfo;
+        public static FileSystem fileSystem { get; private set; }
+
         public void Awake()
         {
+            pluginInfo = Info;
+
             CheckDependencies();
             ReadConfig();
             RunFixes();
@@ -58,6 +66,7 @@ namespace RiskyMod
             new MoonReworkCore();
             SetupAssists();
             AddHooks();
+            FunnyLanguage();
         }
 
         private void ReadConfig()
@@ -115,6 +124,9 @@ namespace RiskyMod
             On.RoR2.CharacterBody.RecalculateStats += RecalculateStats.CharacterBody_RecalculateStats;
             On.RoR2.HealthComponent.TakeDamage += TakeDamage.HealthComponent_TakeDamage;
             On.RoR2.GlobalEventManager.OnCharacterDeath += OnCharacterDeath.GlobalEventManager_OnCharacterDeath;
+
+            //GlobalEventManager.onCharacterDeathGlobal += OnCharacterDeath.GlobalEventManager_onCharacterDeathGlobal; //Event subscription instead of On. Hook
+            //I am unable to test anything right now, so its commented
             new ModifyFinalDamage();
             new StealBuffVFX();
         }
@@ -134,6 +146,33 @@ namespace RiskyMod
                     }
                 }
             };
+
+            //RoR2.Run.onRunStartGlobal += Run_onRunStartGlobal; Same as with onCharacterDeathGlobal, gotta test this code remplacement whenever I get home
+        }
+
+        private void Run_onRunStartGlobal(Run obj)
+        {
+            if (NetworkServer.active)
+            {
+                RiskyMod.assistManager = obj.gameObject.GetComponent<AssistManager>();
+                if (!RiskyMod.assistManager)
+                {
+                    RiskyMod.assistManager = obj.gameObject.AddComponent<AssistManager>();
+                }
+            }
+        }
+
+        private void FunnyLanguage()
+        {
+            PhysicalFileSystem physicalFileSystem = new PhysicalFileSystem();
+            RiskyMod.fileSystem = new SubFileSystem(physicalFileSystem, physicalFileSystem.ConvertPathFromInternal(Assets.assemblyDir), true);
+            if (RiskyMod.fileSystem.DirectoryExists("/language/")) //Uh, it exists and we make sure to not shit up R2Api
+            {
+                Language.collectLanguageRootFolders += delegate (List<DirectoryEntry> list)
+                {
+                    list.Add(RiskyMod.fileSystem.GetDirectoryEntry("/language/"));
+                };
+            }
         }
     }
 }

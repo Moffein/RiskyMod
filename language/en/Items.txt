@@ -1,0 +1,90 @@
+{
+	strings:
+	{
+	"ITEM_FLATHEALTH_PICKUP_RISKYMOD": "Gain max health.",
+	"ITEM_FLATHEALTH_DESC_RISKYMOD": "Increases <style=cIsHealing>maximum health</style> by <style=cIsHealing>1<style=cStack> (+1 per stack)</style> level</style>.",
+	
+	"ITEM_CRITGLASSES_DESC_RISKYMOD": "Your attacks have a <style=cIsDamage>7%</style> <style=cStack>(+7% per stack)</style> chance to \'<style=cIsDamage>Critically Strike</style>\', dealing <style=cIsDamage>double damage</style>.",
+	
+	"ITEM_STICKYBOMB_DESC_RISKYMOD": "<style=cIsDamage>5%</style> <style=cStack>(+5% per stack)</style> chance on hit to attach a <style=cIsDamage>bomb</style> to an enemy, detonating for <style=cIsDamage>240%</style> TOTAL damage.",
+	
+	"ITEM_CROWBAR_PICKUP_RISKYMOD": "Deal bonus damage on your first hit against an enemy.",
+	"ITEM_CROWBAR_DESC_RISKYMOD": "Deal <style=cIsDamage>+45%</style> <style=cStack>(+45% per stack)</style> damage on your <style=cIsDamage>first hit</style> against an enemy.",
+	
+	"ITEM_WARDONLEVEL_PICKUP_RISKYMOD": "Drop a Warbanner on level up or starting the Teleporter event. Grants allies armor, damage, attack speed, movement speed, and bonus healing.",
+	"ITEM_WARDONLEVEL_DESC_RISKYMOD": "On <style=cIsUtility>level up</style> or starting the <style=cIsUtility>Teleporter event</style>, drop a banner that strengthens all allies within <style=cIsUtility>16m</style> <style=cStack>(+8m per stack)</style>. Raise <style=cIsHealing>armor</style> by <style=cIsHealing>15</style>, raise <style=cIsDamage>damage</style> by <style=cIsDamage>15%</style>, and raise <style=cIsDamage>attack speed</style>, <style=cIsUtility>movement speed</style>, and <style=cIsHealing>healing</style> by <style=cIsDamage>30%</style>.",
+	
+	"ITEM_IGNITEONKILL_DESC_RISKYMOD": "Killing an enemy <style=cIsDamage>ignites</style> all enemies within <style=cIsDamage>16m</style> for <style=cIsDamage>150%</style> base damage. Additionally, enemies <style=cIsDamage>burn</style> for <style=cIsDamage>150%</style> <style=cStack>(+75% per stack)</style> base damage.",
+	
+	"ITEM_REPULSIONARMORPLATE_PICKUP_RISKYMOD": "Increase armor by 5.",
+	"ITEM_REPULSIONARMORPLATE_DESC_RISKYMOD": "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>5</style>.",
+	
+	"ITEM_BEAR_DESC_RISKYMOD": "<style=cIsHealing>7%</style> <style=cStack>(+7% per stack)</style> chance to <style=cIsHealing>block</style> incoming damage. <style=cIsUtility>Unaffected by luck</style>.",
+	
+	"ITEM_SLOWONHIT_PICKUP_RISKYMOD": "Impair enemies on hit.",
+	"ITEM_SLOWONHIT_DESC_RISKYMOD": "<style=cIsUtility>Impair</style> enemies on hit, reducing <style=cIsUtility>movement speed</style> by <style=cIsUtility>-60%</style> and increasing <style=cIsDamage>damage taken</style> by <style=cIsDamage>15%</style> for <style=cIsUtility>2s</style> <style=cStack>(+2s per stack)</style>.",
+	
+	"ITEM_SEED_DESC_RISKYMOD": "Dealing damage <style=cIsHealing>heals</style> you for <style=cIsHealing>3 <style=cStack>(+3 per stack)</style> health</style>.",
+	
+	"ITEM_MISSILE_DESC_RISKYMOD": "<style=cIsDamage>10%</style> chance to fire a missile that deals <style=cIsDamage>300%</style> <style=cStack>(+180% per stack)</style> TOTAL damage.",
+	
+	"ITEM_ICERING_DESC_RISKYMOD": "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic ice blast</style>, <style=cIsUtility>slowing</style> them by <style=cIsUtility>80%</style> for <style=cIsUtility>3s</style> <style=cStack>(+3s per stack)</style> and dealing <style=cIsDamage>200%</style> <style=cStack>(+120% per stack)</style> TOTAL damage. Recharges every <style=cIsUtility>10</style> seconds.",
+	
+	"ITEM_FIRERING_DESC_RISKYMOD": "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic flame tornado</style>, dealing <style=cIsDamage>250%</style> <style=cStack>(+150% per stack)</style> TOTAL damage over time. Recharges every <style=cIsUtility>10</style> seconds.",
+	
+	"ITEM_BANDOLIER_DESC_RISKYMOD": "<style=cIsUtility>Reduce skill cooldowns</style> by <style=cIsUtility>10%</style>. <style=cIsUtility>18%</style> <style=cStack>(+10% per stack)</style> chance on kill to drop an ammo pack that <style=cIsUtility>resets all cooldowns</style>.",
+	
+	"ITEM_PHASING_PICKUP_RISKYMOD": "Turn invisible on taking heavy damage.",
+	"ITEM_PHASING_DESC_RISKYMOD": "Chance on taking damage to gain <style=cIsUtility>40% movement speed</style> and <style=cIsUtility>invisibility</style> for <style=cIsUtility>3s</style> <style=cStack>(+1.5s per stack)</style>. Chance increases the more damage you take.",
+	
+	"ITEM_EXPLODEONDEATH_DESC_RISKYMOD": "On killing an enemy, spawn a <style=cIsDamage>lava pillar</style> in a <style=cIsDamage>16m</style> radius for <style=cIsDamage>350%</style> <style=cStack>(+280% per stack)</style> base damage.",
+	
+	"ITEM_SQUIDTURRET_PICKUP_RISKYMOD": "Taking heavy damage summons a Squid Turret nearby.",
+	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Chance on taking damage to summon a <style=cIsDamage>Squid Turret</style> that <style=cIsUtility>distracts</style> and attacks nearby enemies at <style=cIsDamage>100% <style=cStack>(+100% per stack)</style> attack speed</style>. Chance increases the more damage you take. Can have up to <style=cIsUtility>2</style> <style=cStack>(+1 per stack)</style> Squids at a time.",
+	
+	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>chain lightning</style> for <style=cIsDamage>80%</style> TOTAL damage on up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> targets within <style=cIsDamage>25m</style>.",
+	
+	"ITEM_THORNS_DESC_RISKYMOD": "Getting hit causes you to explode in a burst of razors, dealing <style=cIsDamage>80%-420% damage</style>. Hits up to <style=cIsDamage>5</style> <style=cStack>(+2 per stack)</style> targets in a <style=cIsDamage>16m-40m</style> radius. Damage and radius increases the more damage taken.",
+	
+	"ITEM_SPRINTARMOR_PICKUP_RISKYMOD": "Increase armor. Gain bonus armor while sprinting.",
+	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>12</style> <style=cStack>(+12 per stack)</style>. <style=cIsUtility>Sprinting</style> increases TOTAL armor by <style=cIsHealing>+50%</style>.",
+	
+	"ITEM_EXECUTELOWHEALTHELITE_PICKUP_RISKYMOD": "Deal bonus damage to enemies below 30% health.",
+	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Deal <style=cIsDamage>+25%</style> <style=cStack>(+25% per stack)</style> damage to enemies below <style=cIsDamage>30% health</style>.",
+	
+	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "Enter a frenzy after killing enemies.",
+	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Killing enemies</style> sends you into a <style=cIsDamage>frenzy</style> for <style=cIsDamage>6s</style>. Increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> and <style=cIsDamage>attack speed</style> by <style=cIsDamage>20%</style> for each enemy killed. Stacks up to 5 <style=cStack>(+3 per stack)</style> times.",
+	
+	"ITEM_HEALONCRIT_PICKUP_RISKYMOD": "Gain health regeneration and guaranteed \'Critical Strikes\' on kill.",
+	"ITEM_HEALONCRIT_DESC_RISKYMOD": "Gain <style=cIsDamage>5% critical chance</style>. Killing enemies grants guaranteed \'<style=cIsDamage>Critical Strikes</style>\' and increases <style=cIsHealing>health regeneration</style> by <style=cIsHealing>5%</style> of your <style=cIsHealing>maximum health</style> for <style=cIsDamage>3s</style> <style=cStack>(+1.5s per stack)</style>.",
+	
+	"ITEM_ENERGIZEDONEQUIPMENTUSE_PICKUP_RISKYMOD": "Activating your Equipment gives you a burst of movement speed and attack speed.",
+	"ITEM_ENERGIZEDONEQUIPMENTUSE_DESC_RISKYMOD": "Activating your Equipment gives you <style=cIsUtility>+50% movement speed</style> and <style=cIsDamage>+70% attack speed</style> for <style=cIsDamage>8s</style> <style=cStack>(+4s per stack)</style>.",
+	
+	"ITEM_INFUSION_PICKUP_RISKYMOD": "Killing an enemy permanently increases your maximum health, up to 150.",
+	"ITEM_INFUSION_DESC_RISKYMOD": "Killing an enemy increases your <style=cIsHealing>health permanently</style> by <style=cIsHealing>1</style> <style=cStack>(+1 per stack)</style>, up to a <style=cIsHealing>maximum</style> of <style=cIsHealing>150 <style=cStack>(+150 per stack)</style> health</style>.",
+	
+	"ITEM_ICICLE_DESC_RISKYMOD": "Killing an enemy surrounds you with an <style=cIsDamage>ice storm</style> that deals <style=cIsDamage>1200% <style=cStack>(+600% per stack)</style> damage per second</style> and <style=cIsUtility>slows</style> enemies by <style=cIsUtility>80%</style> for <style=cIsUtility>1.5s</style>. The storm <style=cIsDamage>grows with every kill</style>, increasing its radius by <style=cIsDamage>3m</style>. Stacks up to <style=cIsDamage>24m</style>.",
+	
+	"ITEM_HEADHUNTER_PICKUP_RISKYMOD": "Deal extra damage to elites, and temporarily gain their power on kill.",
+	"ITEM_HEADHUNTER_DESC_RISKYMOD": "Deal an additional <style=cIsDamage>30%</style> damage to elite monsters. Upon killing an elite, temporarily gain its power for <style=cIsDamage>10s</style> <style=cStack>(+5s per stack)</style>.",
+	
+	"ITEM_FALLBOOTS_PICKUP_RISKYMOD": "Increase jump height and air control. Hold \'Interact\' to slam down to the ground.",
+	"ITEM_FALLBOOTS_DESC_RISKYMOD": "Increase <style=cIsUtility>jump height</style> and <style=cIsUtility>air control</style>. Creates a <style=cIsDamage>5m-100m</style> radius <style=cIsDamage>kinetic explosion</style> on hitting the ground, dealing <style=cIsDamage>1000%-10000%</style> base damage that scales up with <style=cIsDamage>fall distance</style>. Recharges in <style=cIsDamage>10</style> <style=cStack>(-50% per stack)</style> seconds.",
+	
+	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>Recruit a Beetle Guard</style> with bonus <style=cIsDamage>300%</style> <style=cStack>(+300% per stack)</style> damage and <style=cIsHealing>100% <style=cStack>(+100% per stack)</style> health</style>.",
+	
+	"ITEM_FIREBALLSONHIT_DESC_RISKYMOD": "<style=cIsDamage>10%</style> chance on hit to call forth <style=cIsDamage>3 magma balls</style> from an enemy, dealing <style=cIsDamage>300%</style> <style=cStack>(+180% per stack)</style> damage each.",
+	
+	"ITEM_LIGHTNINGSTRIKEONHIT_DESC_RISKYMOD": "<style=cIsDamage>10%</style> chance on hit to down a lightning strike, dealing <style=cIsDamage>500%</style> <style=cStack>(+300% per stack)</style> damage.",
+	
+	"ITEM_BLEEDONHITANDEXPLODE_PICKUP_RISKYMOD": "Bleeding enemies explode on kill.",
+	"ITEM_BLEEDONHITANDEXPLODE_DESC_RISKYMOD": "Gain a <style=cIsDamage>5%</style> chance to <style=cIsDamage>bleed</style> enemies for <style=cIsDamage>240%</style> base damage. <style=cIsDamage>Bleeding</style> enemies <style=cIsDamage>explode</style> on death for <style=cIsDamage>400%</style> <style=cStack>(+320% per stack)</style> damage, plus an additional <style=cIsDamage>10%</style> <style=cStack>(+8% per stack)</style> of their maximum health.",
+	
+	"ITEM_KNURL_PICKUP_RISKYMOD": "Boosts health, regeneration, and armor.",
+	"ITEM_KNURL_DESC_RISKYMOD": "<style=cIsHealing>Increase maximum health</style> by <style=cIsHealing>8%</style> <style=cStack>(+8% per stack)</style>, <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>+1.6 hp/s</style> <style=cStack>(+1.6 hp/s per stack)</style>, and <style=cIsHealing>armor</style> by <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style>.",
+		
+	"ITEM_SHIELDONLY_PICKUP_RISKYMOD": "Convert all your health into shield. Increase maximum health... <color=#FF7F7F>BUT increase shield regeneration delay.</color>",
+	"ITEM_SHIELDONLY_DESC_RISKYMOD": "<style=cIsHealing>Convert</style> all but <style=cIsHealing>1 health</style> into <style=cIsHealing>regenerating shields</style>. <style=cIsHealing>Gain 50% <style=cStack>(+25% per stack)</style> maximum health</style>. Increase <style=cIsHealing>shield regeneration delay</style> by <style=cIsHealing>1s</style> <style=cStack>(+1s per stack)</style>.",
+	}
+}

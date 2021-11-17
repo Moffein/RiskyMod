@@ -1,0 +1,8 @@
+{
+	strings:
+	{
+		"EQUIPMENT_FIREBALLDASH_DESC_RISKYMOD": "Turn into a <style=cIsDamage>draconic fireball</style> for <style=cIsDamage>5</style> seconds. Deal <style=cIsDamage>800% damage</style> on impact. Detonates at the end for <style=cIsDamage>1600% damage</style> and <style=cIsDamage>stuns</style> nearby monsters.",
+
+		"EQUIPMENT_BFG_DESC_RISKYMOD": "Fires preon tendrils, zapping enemies within 35m for up to <style=cIsDamage>1180% damage/second</style>. On contact, detonate in an enormous 20m explosion for <style=cIsDamage>8000% damage</style>.",
+	}
+}
