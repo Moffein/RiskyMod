@@ -134,6 +134,14 @@ namespace RiskyMod.Items
             {
                 item.descriptionToken = item.descriptionToken + "_RISKYMOD";
             }
+            foreach (EquipmentDef item in changedEquipPickups)
+            {
+                item.nameToken = item.nameToken + "_RISKYMOD";
+            }
+            foreach (EquipmentDef item in changedEquipDescs)
+            {
+                item.descriptionToken = item.descriptionToken + "_RISKYMOD";
+            }
         }
 
         public static void AddToAIBlacklist(string itemName)
