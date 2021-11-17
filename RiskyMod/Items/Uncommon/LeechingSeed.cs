@@ -25,11 +25,11 @@ namespace RiskyMod.Items.Uncommon
 				c.Index++;
 				c.EmitDelegate<Func<float, float>>((heal) =>
 				{
-					return heal * 2f;
+					return heal * 3f;
 				});
 			};
 
-			LanguageAPI.Add("ITEM_SEED_DESC", "Dealing damage <style=cIsHealing>heals</style> you for <style=cIsHealing>2 <style=cStack>(+2 per stack)</style> health</style>.");
+			LanguageAPI.Add("ITEM_SEED_DESC", "Dealing damage <style=cIsHealing>heals</style> you for <style=cIsHealing>3 <style=cStack>(+3 per stack)</style> health</style>.");
 		}
     }
 }
