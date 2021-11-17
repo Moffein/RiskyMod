@@ -128,7 +128,7 @@ namespace RiskyMod.Items
         {
             foreach (ItemDef item in changedItemPickups)
             {
-                item.nameToken = item.nameToken + "_RISKYMOD";
+                item.pickupToken = item.pickupToken + "_RISKYMOD";
             }
             foreach (ItemDef item in changedItemDescs)
             {
@@ -136,7 +136,7 @@ namespace RiskyMod.Items
             }
             foreach (EquipmentDef item in changedEquipPickups)
             {
-                item.nameToken = item.nameToken + "_RISKYMOD";
+                item.pickupToken = item.pickupToken + "_RISKYMOD";
             }
             foreach (EquipmentDef item in changedEquipDescs)
             {
