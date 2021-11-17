@@ -15,6 +15,8 @@ namespace RiskyMod.Items.Uncommon
 		public Guillotine()
 		{
 			if (!enabled) return;
+			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.ExecuteLowHealthElite);
+			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.ExecuteLowHealthElite);
 
 			//Remove Vanilla Effect
 			IL.RoR2.CharacterBody.OnInventoryChanged += (il) =>
@@ -29,8 +31,8 @@ namespace RiskyMod.Items.Uncommon
 
 			//Effect is handled in SharedHooks.ModifyFinalDamage
 
-			LanguageAPI.Add("ITEM_EXECUTELOWHEALTHELITE_PICKUP", "Deal bonus damage to enemies below 30% health.");
-			LanguageAPI.Add("ITEM_EXECUTELOWHEALTHELITE_DESC", "Deal <style=cIsDamage>+"+ItemsCore.ToPercent(damageCoefficient)+"</style> <style=cStack>(+" + ItemsCore.ToPercent(damageCoefficient) + " per stack)</style> damage to enemies below <style=cIsDamage>30% health</style>.");
+			//LanguageAPI.Add("ITEM_EXECUTELOWHEALTHELITE_PICKUP", "Deal bonus damage to enemies below 30% health.");
+			//LanguageAPI.Add("ITEM_EXECUTELOWHEALTHELITE_DESC", "Deal <style=cIsDamage>+"+ItemsCore.ToPercent(damageCoefficient)+"</style> <style=cStack>(+" + ItemsCore.ToPercent(damageCoefficient) + " per stack)</style> damage to enemies below <style=cIsDamage>30% health</style>.");
 		}
 	}
 }

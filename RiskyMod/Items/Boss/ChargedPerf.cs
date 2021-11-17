@@ -14,8 +14,9 @@ namespace RiskyMod.Items.Boss
         public ChargedPerf()
         {
             if (!enabled) return;
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.LightningStrikeOnHit);
 
-            LanguageAPI.Add("ITEM_LIGHTNINGSTRIKEONHIT_DESC", "<style=cIsDamage>10%</style> chance on hit to down a lightning strike, dealing <style=cIsDamage>" + ItemsCore.ToPercent(initialDamageCoefficient) + "</style> <style=cStack>(+" + ItemsCore.ToPercent(stackDamageCoefficient) + " per stack)</style> damage.");
+            //LanguageAPI.Add("ITEM_LIGHTNINGSTRIKEONHIT_DESC", "<style=cIsDamage>10%</style> chance on hit to down a lightning strike, dealing <style=cIsDamage>" + ItemsCore.ToPercent(initialDamageCoefficient) + "</style> <style=cStack>(+" + ItemsCore.ToPercent(stackDamageCoefficient) + " per stack)</style> damage.");
 
             float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 

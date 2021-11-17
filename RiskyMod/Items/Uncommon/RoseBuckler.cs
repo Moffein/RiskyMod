@@ -12,6 +12,8 @@ namespace RiskyMod.Items.Uncommon
         public RoseBuckler()
         {
             if (!enabled) return;
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.SprintArmor);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.SprintArmor);
 
             //Remove Vanilla Effect
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
@@ -24,8 +26,8 @@ namespace RiskyMod.Items.Uncommon
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            LanguageAPI.Add("ITEM_SPRINTARMOR_PICKUP", "Increase armor. Gain bonus armor while sprinting.");
-            LanguageAPI.Add("ITEM_SPRINTARMOR_DESC", "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>12</style> <style=cStack>(+12 per stack)</style>. <style=cIsUtility>Sprinting</style> increases TOTAL armor by <style=cIsHealing>+50%</style>.");
+            //LanguageAPI.Add("ITEM_SPRINTARMOR_PICKUP", "Increase armor. Gain bonus armor while sprinting.");
+            //LanguageAPI.Add("ITEM_SPRINTARMOR_DESC", "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>12</style> <style=cStack>(+12 per stack)</style>. <style=cIsUtility>Sprinting</style> increases TOTAL armor by <style=cIsHealing>+50%</style>.");
 
             GetStatsCoefficient.HandleStatsInventoryActions += HandleStatsInventory;
         }

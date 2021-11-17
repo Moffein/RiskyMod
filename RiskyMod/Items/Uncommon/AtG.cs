@@ -20,6 +20,7 @@ namespace RiskyMod.Items.Uncommon
         public AtG()
         {
             if (!enabled) return;
+			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Missile);
 
 			float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 
@@ -53,7 +54,7 @@ namespace RiskyMod.Items.Uncommon
 				}
 			};
 
-			LanguageAPI.Add("ITEM_MISSILE_DESC", "<style=cIsDamage>10%</style> chance to fire a missile that deals <style=cIsDamage>" + ItemsCore.ToPercent(initialDamageCoefficient) + "</style> <style=cStack>(+" + ItemsCore.ToPercent(stackDamageCoefficient) + " per stack)</style> TOTAL damage.");
+			//LanguageAPI.Add("ITEM_MISSILE_DESC", "<style=cIsDamage>10%</style> chance to fire a missile that deals <style=cIsDamage>" + ItemsCore.ToPercent(initialDamageCoefficient) + "</style> <style=cStack>(+" + ItemsCore.ToPercent(stackDamageCoefficient) + " per stack)</style> TOTAL damage.");
         
 			if (RiskyMod.disableProcChains)
 			{

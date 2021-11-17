@@ -15,9 +15,11 @@ namespace RiskyMod.Items.Uncommon
         public HarvesterScythe()
         {
             if (!enabled) return;
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.HealOnCrit);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.HealOnCrit);
 
             //Remove Vanilla effect
-			IL.RoR2.GlobalEventManager.OnCrit += (il) =>
+            IL.RoR2.GlobalEventManager.OnCrit += (il) =>
 			{
 				ILCursor c = new ILCursor(il);
 				c.GotoNext(
@@ -38,8 +40,8 @@ namespace RiskyMod.Items.Uncommon
             //Buff stats handled in SharedHooks.GetStatCoefficients
             //Buff removal handled in SharedHooks.TakeDamage; Add this if the healing ends up being too good.
 
-            LanguageAPI.Add("ITEM_HEALONCRIT_PICKUP", "Gain health regeneration and guaranteed 'Critical Strikes' on kill.");
-            LanguageAPI.Add("ITEM_HEALONCRIT_DESC", "Gain <style=cIsDamage>5% critical chance</style>. Killing enemies grants guaranteed '<style=cIsDamage>Critical Strikes</style>' and increases <style=cIsHealing>health regeneration</style> by <style=cIsHealing>5%</style> of your <style=cIsHealing>maximum health</style> for <style=cIsDamage>3s</style> <style=cStack>(+1.5s per stack)</style>.");
+            //LanguageAPI.Add("ITEM_HEALONCRIT_PICKUP", "Gain health regeneration and guaranteed 'Critical Strikes' on kill.");
+            //languageAPI.Add("ITEM_HEALONCRIT_DESC", "Gain <style=cIsDamage>5% critical chance</style>. Killing enemies grants guaranteed '<style=cIsDamage>Critical Strikes</style>' and increases <style=cIsHealing>health regeneration</style> by <style=cIsHealing>5%</style> of your <style=cIsHealing>maximum health</style> for <style=cIsDamage>3s</style> <style=cStack>(+1.5s per stack)</style>.");
 
             AssistManager.HandleAssistActions += OnKillEffect;
             GetStatsCoefficient.HandleStatsActions += HandleStats;

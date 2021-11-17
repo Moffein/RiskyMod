@@ -7,9 +7,11 @@ namespace RiskyMod.Items.Common
     public class TougherTimes
     {
         public static bool enabled = true;
+        public static ItemDef itemDef = RoR2Content.Items.Bear;
         public TougherTimes()
         {
             if (!enabled) return;
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
 
             //Change block chance
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
@@ -24,7 +26,7 @@ namespace RiskyMod.Items.Common
                 c.Next.Operand = 7.5f;
             };
 
-            LanguageAPI.Add("ITEM_BEAR_DESC", "<style=cIsHealing>7%</style> <style=cStack>(+7% per stack)</style> chance to <style=cIsHealing>block</style> incoming damage. <style=cIsUtility>Unaffected by luck</style>.");
+            //LanguageAPI.Add("ITEM_BEAR_DESC", "<style=cIsHealing>7%</style> <style=cStack>(+7% per stack)</style> chance to <style=cIsHealing>block</style> incoming damage. <style=cIsUtility>Unaffected by luck</style>.");
 
             //Effect handled on SharedHooks.GetStatCoefficients and SharedHooks.RecalculateStats
         }

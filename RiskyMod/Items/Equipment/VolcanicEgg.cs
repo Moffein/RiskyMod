@@ -10,6 +10,8 @@ namespace RiskyMod.Items.Equipment
         public VolcanicEgg()
         {
             if (!enabled) return;
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipDescs, RoR2Content.Equipment.FireBallDash);
+
             GameObject fireball = Resources.Load<GameObject>("prefabs/networkedobjects/FireballVehicle");
             FireballVehicle fv = fireball.GetComponent<FireballVehicle>();
             fv.blastRadius = 16f;
@@ -17,7 +19,7 @@ namespace RiskyMod.Items.Equipment
             fv.overlapDamageCoefficient = 8f;
             fv.blastDamageType = DamageType.IgniteOnHit | DamageType.Stun1s;
 
-            LanguageAPI.Add("EQUIPMENT_FIREBALLDASH_DESC", "Turn into a <style=cIsDamage>draconic fireball</style> for <style=cIsDamage>5</style> seconds. Deal <style=cIsDamage>800% damage</style> on impact. Detonates at the end for <style=cIsDamage>1600% damage</style> and <style=cIsDamage>stuns</style> nearby monsters.");
+            //LanguageAPI.Add("EQUIPMENT_FIREBALLDASH_DESC", "Turn into a <style=cIsDamage>draconic fireball</style> for <style=cIsDamage>5</style> seconds. Deal <style=cIsDamage>800% damage</style> on impact. Detonates at the end for <style=cIsDamage>1600% damage</style> and <style=cIsDamage>stuns</style> nearby monsters.");
         }
     }
 }

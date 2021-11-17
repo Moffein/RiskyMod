@@ -1,0 +1,7 @@
+{
+	strings:
+	{
+	"ITEM_FLATHEALTH_PICKUP_RISKYMOD": "Aumenta vida máxima.",
+	"ITEM_FLATHEALTH_DESC_RISKYMOD": "Incrementa la <style=cIsHealing>vida máxima</style> por <style=cIsHealing>1 <style=cStack>(+1 por acumulación)</style> nivel</style>.",
+	}
+}

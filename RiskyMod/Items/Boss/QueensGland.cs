@@ -12,8 +12,11 @@ namespace RiskyMod.Items.Boss
         public QueensGland()
         {
             if (!enabled) return;
+			{
+				if (!enabled) return;
+				HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BeetleGland);
 
-			LanguageAPI.Add("ITEM_BEETLEGLAND_DESC", "<style=cIsUtility>Recruit a Beetle Guard</style> with bonus <style=cIsDamage>300%</style> <style=cStack>(+300% per stack)</style> damage and <style=cIsHealing>100% <style=cStack>(+100% per stack)</style> health</style>.");
+				//LanguageAPI.Add("ITEM_BEETLEGLAND_DESC", "<style=cIsUtility>Recruit a Beetle Guard</style> with bonus <style=cIsDamage>300%</style> <style=cStack>(+300% per stack)</style> damage and <style=cIsHealing>100% <style=cStack>(+100% per stack)</style> health</style>.");
 
 			On.RoR2.CharacterBody.UpdateBeetleGuardAllies += (orig, self) =>
             {

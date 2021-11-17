@@ -20,6 +20,12 @@ namespace RiskyMod.Items
         public static bool lunarEnabled = true;
         public static bool equipmentEnabled = true;
 
+        public static ItemDef[] changedItemPickups = new ItemDef[0];
+        public static ItemDef[] changedItemDescs = new ItemDef[0];
+
+        public static EquipmentDef[] changedEquipPickups = new EquipmentDef[0];
+        public static EquipmentDef[] changedEquipDescs = new EquipmentDef[0];
+
         public ItemsCore()
         {
             if (!itemTweaksEnabled) return;
@@ -30,6 +36,7 @@ namespace RiskyMod.Items
             ModifyBoss();
             ModifyLunar();
             ModifyEquipment();
+            ModifyItemTokens();
         }
 
         private void ModifyCommon()
@@ -116,6 +123,17 @@ namespace RiskyMod.Items
             new BFG();
             new Capacitor();
             new Backup();
+        }
+        private void ModifyItemTokens()
+        {
+            foreach (ItemDef item in changedItemPickups)
+            {
+                item.nameToken = item.nameToken + "_RISKYMOD";
+            }
+            foreach (ItemDef item in changedItemDescs)
+            {
+                item.descriptionToken = item.descriptionToken + "_RISKYMOD";
+            }
         }
 
         public static void AddToAIBlacklist(string itemName)
