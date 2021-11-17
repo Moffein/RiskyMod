@@ -66,6 +66,7 @@ namespace RiskyMod
             new MoonReworkCore();
             SetupAssists();
             AddHooks();
+            FunnyLanguage();
         }
 
         private void ReadConfig()
