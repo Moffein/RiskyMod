@@ -55,19 +55,19 @@ namespace RiskyMod.Tweaks
         private static PickupIndex SelectItem()
         {
             List<PickupIndex> list;
-            Xoroshiro128Plus bossRewardRng = Run.instance.treasureRng;
+            Xoroshiro128Plus treasureRng = Run.instance.treasureRng;
             PickupIndex selectedPickup = PickupIndex.none;
 
             float total = whiteChance + greenChance + redChance;
 
-            if (bossRewardRng.RangeFloat(0f, total) <= whiteChance)//drop white
+            if (treasureRng.RangeFloat(0f, total) <= whiteChance)//drop white
             {
                 list = Run.instance.availableTier1DropList;
             }
             else
             {
                 total -= whiteChance;
-                if (bossRewardRng.RangeFloat(0f, total) <= greenChance)//drop green
+                if (treasureRng.RangeFloat(0f, total) <= greenChance)//drop green
                 {
                     list = Run.instance.availableTier2DropList;
                 }
@@ -79,7 +79,7 @@ namespace RiskyMod.Tweaks
             }
             if (list.Count > 0)
             {
-                selectedPickup = bossRewardRng.NextElementUniform<PickupIndex>(list);
+                selectedPickup = treasureRng.NextElementUniform<PickupIndex>(list);
             }
             return selectedPickup;
         }

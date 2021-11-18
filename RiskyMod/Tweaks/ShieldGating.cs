@@ -3,6 +3,7 @@ using MonoMod.Cil;
 using RoR2;
 using System;
 using R2API;
+using UnityEngine;
 
 namespace RiskyMod.Tweaks
 {
@@ -13,33 +14,7 @@ namespace RiskyMod.Tweaks
         public ShieldGating()
         {
             if (!enabled) return;
-            IgnoreShieldGateDamage = DamageAPI.ReserveDamageType();
-
-            IL.EntityStates.VagrantMonster.FireMegaNova.Detonate += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                c.GotoNext(
-                     x => x.MatchCallvirt<BlastAttack>("Fire")
-                    );
-                c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
-                {
-                    blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                    return blastAttack;
-                });
-            };
-
-            IL.EntityStates.VagrantNovaItem.DetonateState.OnEnter += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                c.GotoNext(
-                     x => x.MatchCallvirt<BlastAttack>("Fire")
-                    );
-                c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
-                {
-                    blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                    return blastAttack;
-                });
-            };
+            SetupIgnoreShieldGate();
 
             //Remove OSP in SharedHooks.RecalculateStats
 
@@ -71,6 +46,39 @@ namespace RiskyMod.Tweaks
                     return remainingDamage;
                 });
             };
+        }
+
+        private void SetupIgnoreShieldGate()
+        {
+            IgnoreShieldGateDamage = DamageAPI.ReserveDamageType();
+
+            IL.EntityStates.VagrantMonster.FireMegaNova.Detonate += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchCallvirt<BlastAttack>("Fire")
+                    );
+                c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                {
+                    blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                    return blastAttack;
+                });
+            };
+
+            IL.EntityStates.VagrantNovaItem.DetonateState.OnEnter += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchCallvirt<BlastAttack>("Fire")
+                    );
+                c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                {
+                    blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                    return blastAttack;
+                });
+            };
+
+            Resources.Load<GameObject>("prefabs/projectiles/RoboBallDelayKnockupProjectile").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
         }
     }
 }

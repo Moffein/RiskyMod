@@ -10,10 +10,10 @@ namespace RiskyMod.Items.Common
     public class RepArmor
     {
         public static bool enabled = false; //temp set to false
-        public static ItemDef itemDef = RoR2Content.Items.ArmorPlate; //Does this shit cause allocations, I wonder?
         public RepArmor()
         {
             if (!enabled) return;
+            ItemDef itemDef = RoR2Content.Items.ArmorPlate;
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, itemDef);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
 
