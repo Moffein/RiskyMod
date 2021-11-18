@@ -35,10 +35,6 @@ namespace RiskyMod.Survivors.Captain
 						{
 							canDelete = false;
 						}
-						if (canDelete && projectileController.gameObject.GetComponent<ProjectileDotZone>())
-						{
-							canDelete = false;
-						}
 
 						if (canDelete)
                         {
