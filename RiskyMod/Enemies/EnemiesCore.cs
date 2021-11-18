@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RiskyMod.MoonRework
+namespace RiskyMod.Enemies
 {
-    public class MoonReworkCore
+    public class EnemiesCore
     {
         public static bool enabled = true;
-        public MoonReworkCore()
+        public EnemiesCore()
         {
             if (!enabled) return;
-            new LessPillars();
-            new PillarsDropItems();
         }
     }
 }

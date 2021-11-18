@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace RiskyMod.MoonRework
+namespace RiskyMod.Moon
 {
     public class PillarsDropItems
     {

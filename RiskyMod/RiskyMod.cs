@@ -16,11 +16,12 @@ using RiskyMod.Drones;
 using RiskyMod.Items.Equipment;
 using UnityEngine.Networking;
 using RiskyMod.MonoBehaviours;
-using RiskyMod.MoonRework;
+using RiskyMod.Moon;
 using Zio;
 using Zio.FileSystems;
 using System.Collections.Generic;
 using RiskyMod.Survivors;
+using RiskyMod.Enemies;
 
 namespace RiskyMod
 {
@@ -38,7 +39,7 @@ namespace RiskyMod
     [BepInDependency("com.ThinkInvisible.Hypercrit", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.1.3")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.2.0")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI),
         nameof(ProjectileAPI), nameof(EffectAPI), nameof(DamageAPI), nameof(BuffAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
@@ -66,6 +67,7 @@ namespace RiskyMod
             new DronesCore();
             new MoonReworkCore();
             new SurvivorsCore();
+            new EnemiesCore();
             SetupAssists();
             AddHooks();
             FunnyLanguage();
@@ -105,6 +107,7 @@ namespace RiskyMod
             new CaptainOrbitalHiddenRealms();
             new DistantRoostCredits();
             new ShrineCombatItems();
+            new VengeancePercentHeal();
         }
 
         private void RunFixes()

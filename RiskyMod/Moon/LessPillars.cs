@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using EntityStates.Missions.Moon;
 using EntityStates.MoonElevator;
 
-namespace RiskyMod.MoonRework
+namespace RiskyMod.Moon
 {
     public class LessPillars
     {
