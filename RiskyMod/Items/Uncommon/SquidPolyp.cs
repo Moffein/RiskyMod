@@ -80,12 +80,16 @@ namespace RiskyMod.Items.Uncommon
                                 }
                                 CharacterMaster component6 = result.spawnedInstance.GetComponent<CharacterMaster>();
                                 component6.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
-                                component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 30);
-                                component6.inventory.GiveItem(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
                                 if (self.itemCounts.invadingDoppelganger > 0)
                                 {
-                                    //Prevent turrets from hitscanning players to death at full damage
+                                    //Doppelganger Turrets decay faster.
                                     component6.inventory.GiveItem(RoR2Content.Items.InvadingDoppelganger);
+                                    component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 10);
+                                }
+                                else
+                                {
+                                    component6.inventory.GiveItem(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
+                                    component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 20);
                                 }
                                 sq.AddSquid(result.spawnedInstance);
                             }));

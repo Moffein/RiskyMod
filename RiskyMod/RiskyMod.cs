@@ -20,6 +20,7 @@ using RiskyMod.MoonRework;
 using Zio;
 using Zio.FileSystems;
 using System.Collections.Generic;
+using RiskyMod.Survivors;
 
 namespace RiskyMod
 {
@@ -64,6 +65,7 @@ namespace RiskyMod
             new ItemsCore();
             new DronesCore();
             new MoonReworkCore();
+            new SurvivorsCore();
             SetupAssists();
             AddHooks();
             FunnyLanguage();
@@ -101,7 +103,6 @@ namespace RiskyMod
             new SmallHoldoutCharging();
             new TeleExpandOnBossKill();
             new CaptainOrbitalHiddenRealms();
-            new Shock();
             new DistantRoostCredits();
             new ShrineCombatItems();
         }
