@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RiskyMod.Enemies.Bosses;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,6 +11,7 @@ namespace RiskyMod.Enemies
         public EnemiesCore()
         {
             if (!enabled) return;
+            new Vagrant();
         }
     }
 }

@@ -2,7 +2,8 @@
 using R2API.Utils;
 using RoR2.Skills;
 
-namespace RiskyMod.Tweaks
+namespace RiskyMod.Survivors.Captain
+
 {
     //Based on https://thunderstore.io/package/PlasmaCore3/AlwaysAllowOrbitalSkills/
     public class CaptainOrbitalHiddenRealms

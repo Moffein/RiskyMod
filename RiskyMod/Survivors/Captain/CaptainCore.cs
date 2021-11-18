@@ -11,6 +11,7 @@ namespace RiskyMod.Survivors.Captain
             if (!enabled) return;
             new Shock();
             new Microbots();
+            new CaptainOrbitalHiddenRealms();
         }
     }
 }

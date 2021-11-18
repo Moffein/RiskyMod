@@ -110,7 +110,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Enemies\Bosses\" />
     <Folder Include="Enemies\Mobs\" />
   </ItemGroup>
 

@@ -9,10 +9,11 @@ namespace RiskyMod.Items.Equipment
 {
     public class Backup
     {
+        public static bool enabled = true;
         public static GameObject backupMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/DroneBackupMaster");
         public Backup()
         {
-
+            if (!enabled) return;
             On.RoR2.EquipmentSlot.FireDroneBackup += (orig, self) =>
             {
                 int sliceCount = 4;

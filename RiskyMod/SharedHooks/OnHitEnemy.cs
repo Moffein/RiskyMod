@@ -8,6 +8,7 @@ using RiskyMod.Items.Common;
 using RiskyMod.Items.Legendary;
 using RiskyMod.MonoBehaviours;
 using RiskyMod.Tweaks;
+using RiskyMod.Survivors.Bandit2;
 
 namespace RiskyMod.SharedHooks
 {

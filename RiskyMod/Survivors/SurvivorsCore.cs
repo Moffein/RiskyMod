@@ -1,4 +1,5 @@
-﻿using RiskyMod.Survivors.Captain;
+﻿using RiskyMod.Survivors.Bandit2;
+using RiskyMod.Survivors.Captain;
 
 namespace RiskyMod.Survivors
 {
@@ -9,6 +10,7 @@ namespace RiskyMod.Survivors
         {
             if (!enabled) return;
             new CaptainCore();
+            new Bandit2Core();
         }
     }
 }

@@ -4,10 +4,10 @@ using System.Text;
 
 namespace RiskyMod.Moon
 {
-    public class MoonReworkCore
+    public class MoonCore
     {
         public static bool enabled = true;
-        public MoonReworkCore()
+        public MoonCore()
         {
             if (!enabled) return;
             new LessPillars();

@@ -12,7 +12,7 @@ namespace RiskyMod.Items
 {
     public class ItemsCore
     {
-        public static bool itemTweaksEnabled = true;
+        public static bool enabled = true;
         public static bool uncommonEnabled = true;
         public static bool commonEnabled = true;
         public static bool legendaryEnabled = true;
@@ -28,7 +28,7 @@ namespace RiskyMod.Items
 
         public ItemsCore()
         {
-            if (!itemTweaksEnabled) return;
+            if (!enabled) return;
             Planula.enabled = Stealthkit.enabled || Razorwire.enabled || SquidPolyp.enabled;
             ModifyCommon();
             ModifyUncommon();
@@ -50,7 +50,6 @@ namespace RiskyMod.Items
             new Crowbar();
             new Warbanner();
             new Gasoline();
-            new RepArmor();
             new TopazBrooch();
             new TougherTimes();
         }

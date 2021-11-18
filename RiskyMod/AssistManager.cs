@@ -2,6 +2,7 @@
 using RiskyMod.Items.Common;
 using RiskyMod.Items.Legendary;
 using RiskyMod.Items.Uncommon;
+using RiskyMod.Survivors.Bandit2;
 using RiskyMod.Tweaks;
 using RoR2;
 using RoR2.Orbs;
