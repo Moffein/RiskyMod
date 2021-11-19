@@ -50,9 +50,15 @@ namespace RiskyMod.Items.Equipment
                             }.Perform();
                             if (characterMaster)
                             {
-                                MasterSuicideOnTimer msot = characterMaster.gameObject.AddComponent<MasterSuicideOnTimer>();
-                                msot.lifeTimer = num + UnityEngine.Random.Range(0f, 3f);
-                                bt.AddMSoT(msot);
+                                CharacterBody cb = characterMaster.GetBody();
+                                if (cb && cb.healthComponent)
+                                {
+                                    MasterSuicideOnTimer msot = characterMaster.gameObject.AddComponent<MasterSuicideOnTimer>();
+                                    msot.lifeTimer = num + UnityEngine.Random.Range(0f, 3f);
+
+
+                                    bt.AddHealthcomponent(cb.healthComponent);
+                                }
                             }
                         }
                     }
@@ -67,39 +73,39 @@ namespace RiskyMod.Items.Equipment
     {
         public static int maxCount = 8;
 
-        private List<MasterSuicideOnTimer> droneList;
+        private List<HealthComponent> droneList;
 
         public void FixedUpdate()
         {
             if (droneList.Count > 0)
             {
-                List<MasterSuicideOnTimer> toRemove = new List<MasterSuicideOnTimer>();
-                foreach (MasterSuicideOnTimer m in droneList)
+                List<HealthComponent> toRemove = new List<HealthComponent>();
+                foreach (HealthComponent h in droneList)
                 {
-                    if (m.hasDied)
+                    if (!h || !h.alive)
                     {
-                        toRemove.Add(m);
+                        toRemove.Add(h);
                     }
                 }
 
                 if (toRemove.Count > 0)
                 {
-                    foreach (MasterSuicideOnTimer m in toRemove)
+                    foreach (HealthComponent h in toRemove)
                     {
-                        droneList.Remove(m);
+                        droneList.Remove(h);
                     }
                 }
             }
         }
 
-        public void AddMSoT(MasterSuicideOnTimer m)
+        public void AddHealthcomponent(HealthComponent h)
         {
-            droneList.Add(m);
+            droneList.Add(h);
         }
 
         public void Awake()
         {
-            droneList = new List<MasterSuicideOnTimer>();
+            droneList = new List<HealthComponent>();
         }
 
         public bool canSpawn
