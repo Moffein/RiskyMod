@@ -111,6 +111,8 @@
 
   <ItemGroup>
     <Folder Include="Enemies\Mobs\" />
+    <Folder Include="Survivors\Bandit2\EntityStates\" />
+    <Folder Include="Survivors\Captain\EntityStates\" />
   </ItemGroup>
 
 </Project>

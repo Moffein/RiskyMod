@@ -16,12 +16,12 @@ namespace RiskyMod.Items.Legendary
             On.EntityStates.Headstompers.BaseHeadstompersState.OnEnter += (orig, self) =>
             {
                 orig(self);
-                self.bodyMotor.airControl = 1f; //Shouldnt this be adding to the bodyMotor, instead of assigning the value? Just wondering
+                if (self.bodyMotor) self.bodyMotor.airControl = 1f; //Shouldnt this be adding to the bodyMotor, instead of assigning the value? Just wondering
             };
 
             On.EntityStates.Headstompers.BaseHeadstompersState.OnExit += (orig, self) =>
             {
-                self.bodyMotor.airControl = 0.25f; //Same here
+                if (self.bodyMotor) self.bodyMotor.airControl = 0.25f; //Same here
                 orig(self);
             };
 

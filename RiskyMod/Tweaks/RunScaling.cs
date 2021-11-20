@@ -17,7 +17,7 @@ namespace RiskyMod.Tweaks
 				float time = Mathf.Floor(self.GetRunStopwatch() * 0.0166666675f);    //Convert stopwatch(seconds) into minutes
                 DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
                 float playerFactor = 0.7f + playerCount * 0.3f;
-				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue * Mathf.Pow(playerCount, 0.15f);
+				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue * Mathf.Pow(playerCount, 0.1f); //was 0.15, want to see if this reduces earlygame bulletsponge in MP a bit. might not be necessary
 				float stageFactor = Mathf.Pow(1.2f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
 				float finalDifficulty = (playerFactor + timeFactor) * stageFactor;
 				self.compensatedDifficultyCoefficient = finalDifficulty;
@@ -35,12 +35,9 @@ namespace RiskyMod.Tweaks
 			};
 
 			//Increase director intensity. Goal is to have the same level of craziness as stage 5 in Starstorm, with the constant boss spawns and big monsters everywhere.
-			//Might not be possible since RoR2 prefers to spawn T2 Elite trash, game is a lot more reluctant to spawn bosses.
+			//Seems to be doing this properly when in big lobbies, which is intended.
 			On.RoR2.CombatDirector.DirectorMoneyWave.Update += (orig, self, deltaTime, difficultyCoefficient) =>
 			{
-				//Notes:
-				//Check the monster card selection stuff later. Goal is to have more heavy mobs spawn earlier.
-
 				difficultyCoefficient *= Run.instance.stageClearCount < 4 ? Mathf.Pow(1.1f, Run.instance.stageClearCount) : 1.5f;	//Needs cap to prevent game from turning into a slideshow. Uncapping it causes excessive T2 Elite spam.
 				return orig(self, deltaTime, difficultyCoefficient);
 			};

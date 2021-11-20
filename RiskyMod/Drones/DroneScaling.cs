@@ -30,19 +30,17 @@ namespace RiskyMod.Drones
             ChangeScaling(LoadBody("MegaDroneBody"));
 
             //Squids
-            ChangeScaling(LoadBody("SquidTurretBody"));
+            ChangeScaling(LoadBody("SquidTurretBody"), false);
 
             //Beetle Allies
-            ChangeScaling(LoadBody("BeetleGuardAllyBody"));
+            ChangeScaling(LoadBody("BeetleGuardAllyBody"), false);
         }
 
-        private void ChangeScaling(GameObject go)
+        private void ChangeScaling(GameObject go, bool useShield = true)
         {
             CharacterBody cb = go.GetComponent<CharacterBody>();
 
-            cb.baseRegen = cb.baseMaxHealth / 25f;  //Drones take 20s to regen to full
-
-            bool noShield = false;
+            cb.baseRegen = cb.baseMaxHealth / 30f;  //Drones take a fixed amount of time to regen to full.
 
             //Specific changes
             switch (cb.name)
@@ -63,21 +61,24 @@ namespace RiskyMod.Drones
                     break;*/
                 case "BeetleGuardAllyBody":
                     cb.levelArmor -= 1f;    //Queens Gland Guards get no armor bonus.
-                    noShield = true;
                     break;
                 default:
                     break;
             }
 
             //This makes their performance stay the same on every stage. (Everything's HP increases 30% per level, so damage and regen increase matches that.)
-            if (!noShield)
+            if (useShield)
             {
                 cb.baseMaxShield += cb.baseMaxHealth * 0.1f;
                 cb.levelMaxShield = cb.baseMaxShield * 0.3f;
             }
+            else
+            {
+                cb.levelArmor += 0.5f;
+            }
             cb.levelRegen = cb.baseRegen * 0.3f;
             cb.levelDamage = cb.baseDamage * 0.3f;
-            cb.levelArmor += 1f;    //Drones need bonus armor because of increasing enemycounts and elite counts, otherwise they end up dying really quickly.
+            cb.levelArmor += 0.5f;    //Drones need bonus armor because of increasing enemycounts and elite counts, otherwise they end up dying really quickly.
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
         }
 
