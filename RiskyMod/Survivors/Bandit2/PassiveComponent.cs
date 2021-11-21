@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RiskyMod.Survivors.Bandit2
 {
-    public class QuickdrawComponent : MonoBehaviour
+    public class PassiveComponent : MonoBehaviour
     {
         SkillLocator sk;
 
