@@ -1,0 +1,7 @@
+{
+	strings:
+	{
+	"BANDIT2_PRIMARY_DESC_RISKYMOD": "Fire a shotgun burst for <style=cIsDamage>5x90% damage</style>. Can hold up to 4 shells.",
+	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD": "Fire a rifle blast that pierces for <style=cIsDamage>330% damage</style>. Can hold up to 4 bullets."
+	}
+}

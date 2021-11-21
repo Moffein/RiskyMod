@@ -41,9 +41,10 @@ namespace RiskyMod
     [BepInDependency("com.ThinkInvisible.Hypercrit", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.2.3")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.3.0")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI),
-        nameof(ProjectileAPI), nameof(EffectAPI), nameof(DamageAPI), nameof(BuffAPI))]
+        nameof(ProjectileAPI), nameof(EffectAPI), nameof(DamageAPI), nameof(BuffAPI)
+        , nameof(LoadoutAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -159,12 +160,12 @@ namespace RiskyMod
 
             //Leave slot 10 for void items
 
-            Vagrant.enabled = Config.Bind("11 - Monsters", "Wandering Vagrant", true, "Enable changes to this monster.").Value;
+            Vagrant.enabled = Config.Bind("Monsters", "Wandering Vagrant", true, "Enable changes to this monster.").Value;
 
-            CaptainCore.enabled = Config.Bind("12 - Survivors: Captain", "Enable Changes", true, "Enable changes to this survivor.").Value;
-            CaptainOrbitalHiddenRealms.enabled = Config.Bind("12 - Survivors: Captain", "Hidden Realm Orbital Skills", true, "Allow Orbital skills in Hiden Realms.").Value;
-            Microbots.enabled = Config.Bind("12 - Survivors: Captain", "Defensive Microbots Nerf", true, "Defensive Microbots no longer deletes stationary projectiles like gas clouds and Void Reaver mortars.").Value;
-            Shock.enabled = Config.Bind("12 - Survivors: Captain", "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
+            CaptainCore.enabled = Config.Bind("Survivors: Captain", "Enable Changes", true, "Enable changes to this survivor.").Value;
+            CaptainOrbitalHiddenRealms.enabled = Config.Bind("Survivors: Captain", "Hidden Realm Orbital Skills", true, "Allow Orbital skills in Hiden Realms.").Value;
+            Microbots.enabled = Config.Bind("Survivors: Captain", "Defensive Microbots Nerf", true, "Defensive Microbots no longer deletes stationary projectiles like gas clouds and Void Reaver mortars.").Value;
+            Shock.enabled = Config.Bind("Survivors: Captain", "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
         }
 
         private void CheckDependencies()
