@@ -43,11 +43,6 @@ namespace RiskyMod.Survivors.Bandit2
             Sprite burstIcon = sk.primary._skillFamily.variants[0].skillDef.icon;
             Sprite blastIcon = sk.primary._skillFamily.variants[1].skillDef.icon;
 
-            SkillFamily primarySkillFamily = ScriptableObject.CreateInstance<SkillFamily>();
-            primarySkillFamily.defaultVariantIndex = 0u;
-            primarySkillFamily.variants = new SkillFamily.Variant[1];
-            sk.primary._skillFamily = primarySkillFamily;
-
             LoadoutAPI.AddSkill(typeof(EnterReload));
             LoadoutAPI.AddSkill(typeof(Reload));
 
@@ -79,13 +74,7 @@ namespace RiskyMod.Survivors.Bandit2
             shotgunDef.reloadInterruptPriority = InterruptPriority.Any;
             LoadoutAPI.AddSkillDef(shotgunDef);
             Skills.Burst = shotgunDef;
-
-            primarySkillFamily.variants[0] = new SkillFamily.Variant
-            {
-                skillDef = Skills.Burst,
-                unlockableName = "",
-                viewableNode = new ViewablesCatalog.Node(Skills.Burst.skillNameToken, false)
-            };
+            sk.primary._skillFamily.variants[0].skillDef = Skills.Burst;
 
             LoadoutAPI.AddSkill(typeof(FirePrimaryRifle));
             ReloadSkillDef rifleDef = SteppedSkillDef.CreateInstance<ReloadSkillDef>();
@@ -115,27 +104,13 @@ namespace RiskyMod.Survivors.Bandit2
             rifleDef.reloadInterruptPriority = InterruptPriority.Any;
             LoadoutAPI.AddSkillDef(rifleDef);
             Skills.Blast = rifleDef;
-            Array.Resize(ref primarySkillFamily.variants, primarySkillFamily.variants.Length + 1);
-            primarySkillFamily.variants[primarySkillFamily.variants.Length - 1] = new SkillFamily.Variant
-            {
-                skillDef = Skills.Blast,
-                unlockableName = "",
-                viewableNode = new ViewablesCatalog.Node(Skills.Blast.skillNameToken, false)
-            };
-
-            LoadoutAPI.AddSkillFamily(primarySkillFamily);
+            sk.primary._skillFamily.variants[1].skillDef = Skills.Blast;
         }
         private void ModifyUtilities(SkillLocator sk)
         {
             if (!enableUtilitySkillChanges) return;
 
             Sprite smokebombIcon = sk.utility._skillFamily.variants[0].skillDef.icon;
-
-            SkillFamily utilitySkillFamily = ScriptableObject.CreateInstance<SkillFamily>();
-            utilitySkillFamily.defaultVariantIndex = 0u;
-            utilitySkillFamily.variants = new SkillFamily.Variant[1];
-            sk.utility._skillFamily = utilitySkillFamily;
-
             LoadoutAPI.AddSkill(typeof(ThrowSmokebomb));
             LoadoutAPI.AddSkill(typeof(StealthMode));
             SkillDef stealthDef = SkillDef.CreateInstance<SkillDef>();
@@ -163,14 +138,7 @@ namespace RiskyMod.Survivors.Bandit2
             LoadoutAPI.AddSkillDef(stealthDef);
             Skills.Smokebomb = stealthDef;
 
-            utilitySkillFamily.variants[0] = new SkillFamily.Variant
-            {
-                skillDef = Skills.Smokebomb,
-                unlockableName = "",
-                viewableNode = new ViewablesCatalog.Node(Skills.Smokebomb.skillNameToken, false)
-            };
-
-            LoadoutAPI.AddSkillFamily(utilitySkillFamily);
+            sk.utility._skillFamily.variants[0].skillDef = Skills.Smokebomb;
         }
     }
 
