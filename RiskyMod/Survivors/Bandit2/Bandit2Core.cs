@@ -32,16 +32,22 @@ namespace RiskyMod.Survivors.Bandit2
         }
         private void ModifySkills(SkillLocator bandit2Skills)
         {
+            ModifyPassives(bandit2Skills);
             ModifyPrimaries(bandit2Skills);
             ModifyUtilities(bandit2Skills);
+        }
+
+        private void ModifyPassives(SkillLocator sk)
+        {
+            if (!enablePassiveSkillChanges) return;
+            new BackstabRework();
+            
+            //Todo: add Quickdraw option
         }
 
         private void ModifyPrimaries(SkillLocator sk)
         {
             if (!enablePrimarySkillChanges) return;
-
-            Sprite burstIcon = sk.primary._skillFamily.variants[0].skillDef.icon;
-            Sprite blastIcon = sk.primary._skillFamily.variants[1].skillDef.icon;
 
             LoadoutAPI.AddSkill(typeof(EnterReload));
             LoadoutAPI.AddSkill(typeof(Reload));
@@ -57,7 +63,7 @@ namespace RiskyMod.Survivors.Bandit2
             shotgunDef.dontAllowPastMaxStocks = true;
             shotgunDef.forceSprintDuringState = false;
             shotgunDef.fullRestockOnAssign = true;
-            shotgunDef.icon = burstIcon;
+            shotgunDef.icon = sk.primary._skillFamily.variants[0].skillDef.icon;
             shotgunDef.interruptPriority = InterruptPriority.Skill;
             shotgunDef.isCombatSkill = true;
             shotgunDef.keywordTokens = new string[] { };
@@ -87,7 +93,7 @@ namespace RiskyMod.Survivors.Bandit2
             rifleDef.dontAllowPastMaxStocks = true;
             rifleDef.forceSprintDuringState = false;
             rifleDef.fullRestockOnAssign = true;
-            rifleDef.icon = blastIcon;
+            rifleDef.icon = sk.primary._skillFamily.variants[1].skillDef.icon;
             rifleDef.interruptPriority = InterruptPriority.Skill;
             rifleDef.isCombatSkill = true;
             rifleDef.keywordTokens = new string[] { };
@@ -110,7 +116,6 @@ namespace RiskyMod.Survivors.Bandit2
         {
             if (!enableUtilitySkillChanges) return;
 
-            Sprite smokebombIcon = sk.utility._skillFamily.variants[0].skillDef.icon;
             LoadoutAPI.AddSkill(typeof(ThrowSmokebomb));
             LoadoutAPI.AddSkill(typeof(StealthMode));
             SkillDef stealthDef = SkillDef.CreateInstance<SkillDef>();
@@ -123,7 +128,7 @@ namespace RiskyMod.Survivors.Bandit2
             stealthDef.forceSprintDuringState = true;
             stealthDef.dontAllowPastMaxStocks = true;
             stealthDef.fullRestockOnAssign = true;
-            stealthDef.icon = smokebombIcon;
+            stealthDef.icon = sk.utility._skillFamily.variants[0].skillDef.icon;
             stealthDef.interruptPriority = InterruptPriority.Skill;
             stealthDef.isCombatSkill = false;
             stealthDef.keywordTokens = new string[] { };
