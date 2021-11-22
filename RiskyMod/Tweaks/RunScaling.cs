@@ -14,8 +14,9 @@ namespace RiskyMod.Tweaks
 			On.RoR2.Run.RecalculateDifficultyCoefficentInternal += (orig, self) =>
             {
 				int playerCount = self.participatingPlayerCount;
-				float time = Mathf.Floor(self.GetRunStopwatch() * 0.0166666675f);    //Convert stopwatch(seconds) into minutes
-                DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
+				float time = self.GetRunStopwatch() * 0.0166666675f; //Convert stopwatch(seconds) into minutes.
+
+				DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
                 float playerFactor = 0.7f + playerCount * 0.3f;
 				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue * Mathf.Pow(playerCount, 0.1f); //was 0.15, want to see if this reduces earlygame bulletsponge in MP a bit. might not be necessary
 				float stageFactor = Mathf.Pow(1.2f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
