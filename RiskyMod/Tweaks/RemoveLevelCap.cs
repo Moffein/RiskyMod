@@ -26,8 +26,7 @@ namespace RiskyMod.Tweaks
 					c.Emit<RemoveLevelCap>(OpCodes.Ldsfld, nameof(RemoveLevelCap.maxLevel));
 				};
 			}
-			Run.ambientLevelCap = (int)maxLevel;
-			//RunScaling already uncaps the levels on its own.
+			Run.ambientLevelCap = (int)maxLevel;	//This is for RunScaling.
 
 			On.RoR2.LevelUpEffectManager.OnRunAmbientLevelUp += (orig, run) =>
 			{
