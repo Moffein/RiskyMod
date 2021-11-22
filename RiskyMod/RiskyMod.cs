@@ -60,11 +60,14 @@ namespace RiskyMod
         private const string bossString = "Items - Boss";
         private const string lunarString = "Items - Lunar";
         private const string equipmentString = "Items - Equipment";
+        private const string itemConfigDescString = "Enable changes to this item.";
 
         private const string monsterString = "Monsters";
 
+        private const string commandoString = "Survivors: Commando";
         private const string banditString = "Survivors: Bandit";
         private const string captainString = "Survivors: Captain";
+
         public static bool disableProcChains = true;
 
         public static ItemDef emptyItemDef = null;
@@ -103,7 +106,7 @@ namespace RiskyMod
             RunScaling.enabled = Config.Bind(scalingString, "Linear Difficulty Scaling", true, "Makes difficulty scaling linear.").Value;
             NoLevelupHeal.enabled = Config.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
             RemoveLevelCap.enabled = Config.Bind(scalingString, "Increase Monster Level Cap", true, "Increases Monster Level Cap.").Value;
-            RemoveLevelCap.maxLevel = Config.Bind(scalingString, "Max Monster Level", 1000f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
+            RemoveLevelCap.maxLevel = Config.Bind(scalingString, "Increase Monster Level Cap - Max Level", 1000f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
 
             DronesCore.enabled = Config.Bind(coreModuleString, "Drone Changes", true, "Enable drone and ally changes.").Value;
             ItemsCore.enabled = Config.Bind(coreModuleString, "Item Changes", true, "Enable item changes.").Value;
@@ -119,64 +122,62 @@ namespace RiskyMod
             SceneDirectorMonsterRewards.enabled = Config.Bind(tweakString, "SceneDirector Monster Rewards", true, "Monsters that spawn with the map now give the same rewards as teleporter monsters.").Value;
             VengeancePercentHeal.enabled = Config.Bind(tweakString, "Reduce Vengeance Healing", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
 
-            BisonSteak.enabled = Config.Bind(commonString, "Bison Steak", true, "Enable changes to this item.").Value;
-            CritGlasses.enabled = Config.Bind(commonString, "Lensmakers Glasses", true, "Enable changes to this item.").Value;
-            Crowbar.enabled = Config.Bind(commonString, "Crowbar", true, "Enable changes to this item.").Value;
-            Fireworks.enabled = Config.Bind(commonString, "Fireworks", true, "Enable changes to this item.").Value;
+            BisonSteak.enabled = Config.Bind(commonString, "Bison Steak", true, itemConfigDescString).Value;
+            CritGlasses.enabled = Config.Bind(commonString, "Lensmakers Glasses", true, itemConfigDescString).Value;
+            Crowbar.enabled = Config.Bind(commonString, "Crowbar", true, itemConfigDescString).Value;
+            Fireworks.enabled = Config.Bind(commonString, "Fireworks", true, itemConfigDescString).Value;
             Fireworks.maxRockets = Config.Bind(commonString, "Fireworks - Max Rockets", 32, "Max rockets to spawn.").Value;
-            Gasoline.enabled = Config.Bind(commonString, "Gasoline", true, "Enable changes to this item.").Value;
-            MonsterTooth.enabled = Config.Bind(commonString, "Monster Tooth", true, "Enable changes to this item.").Value;
-            StickyBomb.enabled = Config.Bind(commonString, "Stickybomb", true, "Enable changes to this item.").Value;
+            Gasoline.enabled = Config.Bind(commonString, "Gasoline", true, itemConfigDescString).Value;
+            MonsterTooth.enabled = Config.Bind(commonString, "Monster Tooth", true, itemConfigDescString).Value;
+            StickyBomb.enabled = Config.Bind(commonString, "Stickybomb", true, itemConfigDescString).Value;
             //TopazBrooch.enabled = Config.Bind("04 - Common Items", "Topaz Brooch", true, "Allow this item to trigger on assist.").Value;
-            TougherTimes.enabled = Config.Bind(commonString, "Tougher Times", true, "Enable changes to this item.").Value;
-            Warbanner.enabled = Config.Bind(commonString, "Warbanner", true, "Enable changes to this item.").Value;
+            TougherTimes.enabled = Config.Bind(commonString, "Tougher Times", true, itemConfigDescString).Value;
+            Warbanner.enabled = Config.Bind(commonString, "Warbanner", true, itemConfigDescString).Value;
 
-            AtG.enabled = Config.Bind(uncommonString, "AtG Missile", true, "Enable changes to this item.").Value;
-            Bandolier.enabled = Config.Bind(uncommonString, "Bandolier", true, "Enable changes to this item.").Value;
-            Berzerker.enabled = Config.Bind(uncommonString, "Berzerkers Pauldron", true, "Enable changes to this item.").Value;
-            Chronobauble.enabled = Config.Bind(uncommonString, "Chronobauble", true, "Enable changes to this item.").Value;
-            ElementalBands.enabled = Config.Bind(uncommonString, "Runalds and Kjaros Bands", true, "Enable changes to this item.").Value;
-            Guillotine.enabled = Config.Bind(uncommonString, "Old Guillotine", true, "Enable changes to this item.").Value;
-            HarvesterScythe.enabled = Config.Bind(uncommonString, "Harvesters Scythe", true, "Enable changes to this item.").Value;
-            Infusion.enabled = Config.Bind(uncommonString, "Infusion", true, "Enable changes to this item.").Value;
-            LeechingSeed.enabled = Config.Bind(uncommonString, "Leeching Seed", true, "Enable changes to this item.").Value;
-            Predatory.enabled = Config.Bind(uncommonString, "Predatory Instincts", true, "Enable changes to this item.").Value;
-            Razorwire.enabled = Config.Bind(uncommonString, "Razorwire", true, "Enable changes to this item.").Value;
-            RoseBuckler.enabled = Config.Bind(uncommonString, "Rose Buckler", true, "Enable changes to this item.").Value;
-            SquidPolyp.enabled = Config.Bind(uncommonString, "Squid Polyp", true, "Enable changes to this item.").Value;
-            Stealthkit.enabled = Config.Bind(uncommonString, "Old War Stealthkit", true, "Enable changes to this item.").Value;
-            Ukulele.enabled = Config.Bind(uncommonString, "Ukulele", true, "Enable changes to this item.").Value;
-            WarHorn.enabled = Config.Bind(uncommonString, "War Horn", true, "Enable changes to this item.").Value;
-            WillOWisp.enabled = Config.Bind(uncommonString, "Will-o-the-Wisp", true, "Enable changes to this item.").Value;
+            AtG.enabled = Config.Bind(uncommonString, "AtG Missile", true, itemConfigDescString).Value;
+            Bandolier.enabled = Config.Bind(uncommonString, "Bandolier", true, itemConfigDescString).Value;
+            Berzerker.enabled = Config.Bind(uncommonString, "Berzerkers Pauldron", true, itemConfigDescString).Value;
+            Chronobauble.enabled = Config.Bind(uncommonString, "Chronobauble", true, itemConfigDescString).Value;
+            ElementalBands.enabled = Config.Bind(uncommonString, "Runalds and Kjaros Bands", true, itemConfigDescString).Value;
+            Guillotine.enabled = Config.Bind(uncommonString, "Old Guillotine", true, itemConfigDescString).Value;
+            HarvesterScythe.enabled = Config.Bind(uncommonString, "Harvesters Scythe", true, itemConfigDescString).Value;
+            Infusion.enabled = Config.Bind(uncommonString, "Infusion", true, itemConfigDescString).Value;
+            LeechingSeed.enabled = Config.Bind(uncommonString, "Leeching Seed", true, itemConfigDescString).Value;
+            Predatory.enabled = Config.Bind(uncommonString, "Predatory Instincts", true, itemConfigDescString).Value;
+            Razorwire.enabled = Config.Bind(uncommonString, "Razorwire", true, itemConfigDescString).Value;
+            RoseBuckler.enabled = Config.Bind(uncommonString, "Rose Buckler", true, itemConfigDescString).Value;
+            SquidPolyp.enabled = Config.Bind(uncommonString, "Squid Polyp", true, itemConfigDescString).Value;
+            Stealthkit.enabled = Config.Bind(uncommonString, "Old War Stealthkit", true, itemConfigDescString).Value;
+            Ukulele.enabled = Config.Bind(uncommonString, "Ukulele", true, itemConfigDescString).Value;
+            WarHorn.enabled = Config.Bind(uncommonString, "War Horn", true, itemConfigDescString).Value;
+            WillOWisp.enabled = Config.Bind(uncommonString, "Will-o-the-Wisp", true, itemConfigDescString).Value;
 
-            FrostRelic.enabled = Config.Bind(legendaryString, "Frost Relic", true, "Enable changes to this item.").Value;
+            FrostRelic.enabled = Config.Bind(legendaryString, "Frost Relic", true, itemConfigDescString).Value;
             FrostRelic.removeFOV = Config.Bind(legendaryString, "Frost Relic - Disable FOV Modifier", true, "Disables FOV modifier.").Value;
             FrostRelic.removeBubble = Config.Bind(legendaryString, "Frost Relic - Disable Bubble", true, "Disables bubble visuals.").Value;
-            HeadHunter.enabled = Config.Bind(legendaryString, "Wake of Vultures", true, "Enable changes to this item.").Value;
-            Headstompers.enabled = Config.Bind(legendaryString, "H3AD-ST", true, "Enable changes to this item.").Value;
-            Tesla.enabled = Config.Bind(legendaryString, "Unstable Tesla Coil", true, "Enable changes to this item.").Value;
-            CeremonialDagger.enabled = Config.Bind(legendaryString, "Ceremonial Dagger", true, "Enable changes to this item.").Value;
-            MeatHook.enabled = Config.Bind(legendaryString, "Sentient Meat Hook", true, "Enable changes to this item.").Value;
+            HeadHunter.enabled = Config.Bind(legendaryString, "Wake of Vultures", true, itemConfigDescString).Value;
+            Headstompers.enabled = Config.Bind(legendaryString, "H3AD-ST", true, itemConfigDescString).Value;
+            Tesla.enabled = Config.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
+            CeremonialDagger.enabled = Config.Bind(legendaryString, "Ceremonial Dagger", true, itemConfigDescString).Value;
+            MeatHook.enabled = Config.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;
 
-            MoltenPerf.enabled = Config.Bind(bossString, "Molten Perforator", true, "Enable changes to this item.").Value;
-            ChargedPerf.enabled = Config.Bind(bossString, "Charged Perforator", true, "Enable changes to this item.").Value;
-            Disciple.enabled = Config.Bind(bossString, "Charged Perforator", true, "Enable changes to this item.").Value;
-            QueensGland.enabled = Config.Bind(bossString, "Queens Gland", true, "Enable changes to this item.").Value;
-            Shatterspleen.enabled = Config.Bind(bossString, "Shatterspleen", true, "Enable changes to this item.").Value;
+            MoltenPerf.enabled = Config.Bind(bossString, "Molten Perforator", true, itemConfigDescString).Value;
+            ChargedPerf.enabled = Config.Bind(bossString, "Charged Perforator", true, itemConfigDescString).Value;
+            Disciple.enabled = Config.Bind(bossString, "Charged Perforator", true, itemConfigDescString).Value;
+            QueensGland.enabled = Config.Bind(bossString, "Queens Gland", true, itemConfigDescString).Value;
+            Shatterspleen.enabled = Config.Bind(bossString, "Shatterspleen", true, itemConfigDescString).Value;
 
-            ShapedGlass.enabled = Config.Bind(lunarString, "Shaped Glass", true, "Enable changes to this item.").Value;
-            BrittleCrown.enabled = Config.Bind(lunarString, "Brittle Crown", true, "Enable changes to this item.").Value;
-            Transcendence.enabled = Config.Bind(lunarString, "Transcendence", true, "Enable changes to this item.").Value;
-            Meteorite.enabled = Config.Bind(lunarString, "Glowing Meteorite", true, "Enable changes to this item.").Value;
+            ShapedGlass.enabled = Config.Bind(lunarString, "Shaped Glass", true, itemConfigDescString).Value;
+            BrittleCrown.enabled = Config.Bind(lunarString, "Brittle Crown", true, itemConfigDescString).Value;
+            Transcendence.enabled = Config.Bind(lunarString, "Transcendence", true, itemConfigDescString).Value;
+            Meteorite.enabled = Config.Bind(lunarString, "Glowing Meteorite", true, itemConfigDescString).Value;
 
-            Backup.enabled = Config.Bind(equipmentString, "The Back-Up", true, "Enable changes to this item.").Value;
-            BFG.enabled = Config.Bind(equipmentString, "Preon Accumulator", true, "Enable changes to this item.").Value;
-            Capacitor.enabled = Config.Bind(equipmentString, "Royal Capacitor", true, "Enable changes to this item.").Value;
-            Chrysalis.enabled = Config.Bind(equipmentString, "Milky Chrysalis", true, "Enable changes to this item.").Value;
-            CritHud.enabled = Config.Bind(equipmentString, "Ocular HUD", true, "Enable changes to this item.").Value;
-            VolcanicEgg.enabled = Config.Bind(equipmentString, "Volcanic Egg", true, "Enable changes to this item.").Value;
-
-            //Leave slot 10 for void items
+            Backup.enabled = Config.Bind(equipmentString, "The Back-Up", true, itemConfigDescString).Value;
+            BFG.enabled = Config.Bind(equipmentString, "Preon Accumulator", true, itemConfigDescString).Value;
+            Capacitor.enabled = Config.Bind(equipmentString, "Royal Capacitor", true, itemConfigDescString).Value;
+            Chrysalis.enabled = Config.Bind(equipmentString, "Milky Chrysalis", true, itemConfigDescString).Value;
+            CritHud.enabled = Config.Bind(equipmentString, "Ocular HUD", true, itemConfigDescString).Value;
+            VolcanicEgg.enabled = Config.Bind(equipmentString, "Volcanic Egg", true, itemConfigDescString).Value;
 
             Vagrant.enabled = Config.Bind(monsterString, "Wandering Vagrant", true, "Enable changes to this monster.").Value;
 
@@ -184,15 +185,16 @@ namespace RiskyMod
             CaptainOrbitalHiddenRealms.enabled = Config.Bind(captainString, "Hidden Realm Orbital Skills", true, "Allow Orbital skills in Hiden Realms.").Value;
             Microbots.enabled = Config.Bind(captainString, "Defensive Microbots Nerf", true, "Defensive Microbots no longer deletes stationary projectiles like gas clouds and Void Reaver mortars.").Value;
             Shock.enabled = Config.Bind(captainString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
+            CaptainCore.enablePrimarySkillChanges = Config.Bind(captainString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
 
             Bandit2Core.enabled = Config.Bind(banditString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            BanditSpecialGracePeriod.enabled = Config.Bind("Survivors: Bandit", "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;
-            BanditSpecialGracePeriod.duration = Config.Bind("Survivors: Bandit", "Special Grace Period Duration", 1.2f, "Length in seconds of Special Grace Period.").Value;
-            Bandit2Core.enablePassiveSkillChanges = Config.Bind("Survivors: Bandit", "Enable Passive Skill Changes", true, "Enable passive skill changes for this survivor.").Value;
-            Bandit2Core.enablePrimarySkillChanges = Config.Bind("Survivors: Bandit", "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
-            Bandit2Core.enableSecondarySkillChanges = Config.Bind("Survivors: Bandit", "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
-            Bandit2Core.enableUtilitySkillChanges = Config.Bind("Survivors: Bandit", "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
-            Bandit2Core.enableSpecialSkillChanges = Config.Bind("Survivors: Bandit", "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
+            BanditSpecialGracePeriod.enabled = Config.Bind(banditString, "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;
+            BanditSpecialGracePeriod.duration = Config.Bind(banditString, "Special Grace Period Duration", 1.2f, "Length in seconds of Special Grace Period.").Value;
+            Bandit2Core.enablePassiveSkillChanges = Config.Bind(banditString, "Enable Passive Skill Changes", true, "Enable passive skill changes for this survivor.").Value;
+            Bandit2Core.enablePrimarySkillChanges = Config.Bind(banditString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
+            Bandit2Core.enableSecondarySkillChanges = Config.Bind(banditString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
+            Bandit2Core.enableUtilitySkillChanges = Config.Bind(banditString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
+            Bandit2Core.enableSpecialSkillChanges = Config.Bind(banditString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
         }
 
         private void CheckDependencies()

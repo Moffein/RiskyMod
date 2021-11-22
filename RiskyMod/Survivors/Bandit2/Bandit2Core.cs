@@ -30,11 +30,11 @@ namespace RiskyMod.Survivors.Bandit2
             new BanditSpecialGracePeriod();
             ModifySkills(RoR2Content.Survivors.Bandit2.bodyPrefab.GetComponent<SkillLocator>());
         }
-        private void ModifySkills(SkillLocator bandit2Skills)
+        private void ModifySkills(SkillLocator sk)
         {
-            ModifyPassives(bandit2Skills);
-            ModifyPrimaries(bandit2Skills);
-            ModifyUtilities(bandit2Skills);
+            ModifyPassives(sk);
+            ModifyPrimaries(sk);
+            ModifyUtilities(sk);
         }
 
         private void ModifyPassives(SkillLocator sk)
@@ -53,7 +53,7 @@ namespace RiskyMod.Survivors.Bandit2
             LoadoutAPI.AddSkill(typeof(Reload));
 
             LoadoutAPI.AddSkill(typeof(FirePrimaryShotgun));
-            ReloadSkillDef shotgunDef = SteppedSkillDef.CreateInstance<ReloadSkillDef>();
+            ReloadSkillDef shotgunDef = ReloadSkillDef.CreateInstance<ReloadSkillDef>();
             shotgunDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryShotgun));
             shotgunDef.activationStateMachineName = "Weapon";
             shotgunDef.baseMaxStock = 4;
@@ -83,7 +83,7 @@ namespace RiskyMod.Survivors.Bandit2
             sk.primary._skillFamily.variants[0].skillDef = Skills.Burst;
 
             LoadoutAPI.AddSkill(typeof(FirePrimaryRifle));
-            ReloadSkillDef rifleDef = SteppedSkillDef.CreateInstance<ReloadSkillDef>();
+            ReloadSkillDef rifleDef = ReloadSkillDef.CreateInstance<ReloadSkillDef>();
             rifleDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryRifle));
             rifleDef.activationStateMachineName = "Weapon";
             rifleDef.baseMaxStock = 4;

@@ -1,9 +1,9 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace SneedStormUtils
+namespace SneedUtils
 {
-    public class SneedStormUtils
+    public class SneedUtils
     {
         public static void DumpEntityStateConfig(EntityStateConfiguration esc)
         {
@@ -22,7 +22,7 @@ namespace SneedStormUtils
         }
         public static void DumpEntityStateConfig(string entityStateName)
         {
-            EntityStateConfiguration esc = Resources.Load<EntityStateConfiguration>("" + entityStateName);
+            EntityStateConfiguration esc = Resources.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
             DumpEntityStateConfig(esc);
         }
     }
