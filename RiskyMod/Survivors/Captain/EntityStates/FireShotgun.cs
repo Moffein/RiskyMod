@@ -47,7 +47,7 @@ namespace EntitiyStates.RiskyMod.Captain
 		public override void ModifyBullet(BulletAttack bulletAttack)
 		{
 			base.ModifyBullet(bulletAttack);
-			bulletAttack.bulletCount = (uint)(this.bulletCount * Mathf.Max(this.attackSpeedStat, 1f));
+			bulletAttack.bulletCount = (uint)Mathf.FloorToInt((this.bulletCount * Mathf.Max(this.attackSpeedStat, 1f)));
 			if (tight)
 			{
 				bulletAttack.falloffModel = BulletAttack.FalloffModel.None;

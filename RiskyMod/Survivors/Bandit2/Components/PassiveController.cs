@@ -1,9 +1,9 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace RiskyMod.Survivors.Bandit2
+namespace RiskyMod.Survivors.Bandit2.Components
 {
-    public class PassiveComponent : MonoBehaviour
+    public class PassiveController : MonoBehaviour
     {
         SkillLocator sk;
 

@@ -14,7 +14,7 @@ namespace RiskyMod.Tweaks
 			On.RoR2.Run.RecalculateDifficultyCoefficentInternal += (orig, self) =>
             {
 				int playerCount = self.participatingPlayerCount;
-				float time = self.GetRunStopwatch() * 0.0166666675f; //Convert stopwatch(seconds) into minutes.
+				float time = self.GetRunStopwatch() * 0.0166666675f; //Convert stopwatch(seconds) into minutes. Why is this Floored in vanilla, and why does it still move anyways despite that?
 
 				DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
                 float playerFactor = 0.7f + playerCount * 0.3f;

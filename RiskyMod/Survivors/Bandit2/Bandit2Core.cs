@@ -1,6 +1,7 @@
 ﻿using EntityStates;
 using EntityStates.RiskyMod.Bandit2;
 using R2API;
+using RiskyMod.Survivors.Bandit2.Components;
 using RoR2;
 using RoR2.Skills;
 using System;
@@ -25,7 +26,6 @@ namespace RiskyMod.Survivors.Bandit2
             if (!enabled) return;
 
             CanBackstab = DamageAPI.ReserveDamageType();
-            RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<PassiveComponent>();    //Move to passive section
 
             new BanditSpecialGracePeriod();
             ModifySkills(RoR2Content.Survivors.Bandit2.bodyPrefab.GetComponent<SkillLocator>());
@@ -41,7 +41,8 @@ namespace RiskyMod.Survivors.Bandit2
         {
             if (!enablePassiveSkillChanges) return;
             new BackstabRework();
-            
+            RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<PassiveController>();    //Move to passive section
+
             //Todo: add Quickdraw option
         }
 

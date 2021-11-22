@@ -67,13 +67,13 @@ namespace RiskyMod.Items.Uncommon
                 {
                     if (tb.buffIndex == Berzerker.berzerkBuff.buffIndex)
                     {
-                        tb.timer = 6f + foundBuffs;
+                        tb.timer = 4f + 0.5f * foundBuffs;
                         foundBuffs++;
                     }
                 }
                 for (int i = 0; i < newBuffStack - foundBuffs; i++)
                 {
-                    attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 6f + foundBuffs);
+                    attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 4f + 0.5f * foundBuffs);
                     foundBuffs++;
                 }
             }
