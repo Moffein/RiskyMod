@@ -11,7 +11,7 @@ namespace RiskyMod.Tweaks
         public RunScaling()
         {
 			if (!enabled) return;
-            On.RoR2.Run.RecalculateDifficultyCoefficentInternal += (orig, self) =>
+			On.RoR2.Run.RecalculateDifficultyCoefficentInternal += (orig, self) =>
             {
 				int playerCount = self.participatingPlayerCount;
 				float time = Mathf.Floor(self.GetRunStopwatch() * 0.0166666675f);    //Convert stopwatch(seconds) into minutes
@@ -23,7 +23,7 @@ namespace RiskyMod.Tweaks
 				self.compensatedDifficultyCoefficient = finalDifficulty;
 				self.difficultyCoefficient = finalDifficulty;
 
-				self.ambientLevel = 3f * (finalDifficulty - playerFactor) + 1f;  //use Run.ambientLevelCap to cap max level
+				self.ambientLevel = Mathf.Min(3f * (finalDifficulty - playerFactor) + 1f, Run.ambientLevelCap);
 
 				//Vanilla code
 				int ambientLevelFloor = self.ambientLevelFloor;

@@ -14,15 +14,20 @@ namespace RiskyMod.Tweaks
         public RemoveLevelCap()
         {
 			//Remove level capping when calculating monster level
-			IL.RoR2.Run.RecalculateDifficultyCoefficentInternal += (il) =>
+			if (!RunScaling.enabled)
 			{
-				ILCursor c = new ILCursor(il);
-				c.GotoNext(
-					x => x.MatchLdsfld<Run>(nameof(Run.ambientLevelCap))
-					);
-				c.Remove();
-				c.Emit<RemoveLevelCap>(OpCodes.Ldsfld, nameof(RemoveLevelCap.maxLevel));
-			};
+				IL.RoR2.Run.RecalculateDifficultyCoefficentInternal += (il) =>
+				{
+					ILCursor c = new ILCursor(il);
+					c.GotoNext(
+						x => x.MatchLdsfld<Run>(nameof(Run.ambientLevelCap))
+						);
+					c.Remove();
+					c.Emit<RemoveLevelCap>(OpCodes.Ldsfld, nameof(RemoveLevelCap.maxLevel));
+				};
+			}
+			Run.ambientLevelCap = (int)maxLevel;
+			//RunScaling already uncaps the levels on its own.
 
 			On.RoR2.LevelUpEffectManager.OnRunAmbientLevelUp += (orig, run) =>
 			{
