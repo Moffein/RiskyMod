@@ -48,7 +48,7 @@ namespace RiskyMod.Survivors.Bandit2
                 {
                     if (!damageInfo.crit)
                     {
-                        DamageAPI.AddModdedDamageType(damageInfo, FakeCrit);
+                        DamageAPI.AddModdedDamageType(damageInfo, FakeCrit);    //This doesn't travel through the proc chain
                         damageInfo.procChainMask.AddProc(ProcType.AACannon);    //Weird stuff will happen if other mods use this. Need modded Proc Chains.
                     }
                     return crit;

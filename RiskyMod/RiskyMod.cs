@@ -105,6 +105,7 @@ namespace RiskyMod
 
             RunScaling.enabled = Config.Bind(scalingString, "Linear Difficulty Scaling", true, "Makes difficulty scaling linear.").Value;
             NoLevelupHeal.enabled = Config.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
+            NoLevelupHeal.enabled = Config.Bind(scalingString, "No Partial Levels", true, "Monsters can't gain partial levels.").Value;
             RemoveLevelCap.enabled = Config.Bind(scalingString, "Increase Monster Level Cap", true, "Increases Monster Level Cap.").Value;
             RemoveLevelCap.maxLevel = Config.Bind(scalingString, "Increase Monster Level Cap - Max Level", 1000f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
 
@@ -130,7 +131,6 @@ namespace RiskyMod
             Gasoline.enabled = Config.Bind(commonString, "Gasoline", true, itemConfigDescString).Value;
             MonsterTooth.enabled = Config.Bind(commonString, "Monster Tooth", true, itemConfigDescString).Value;
             StickyBomb.enabled = Config.Bind(commonString, "Stickybomb", true, itemConfigDescString).Value;
-            //TopazBrooch.enabled = Config.Bind("04 - Common Items", "Topaz Brooch", true, "Allow this item to trigger on assist.").Value;
             TougherTimes.enabled = Config.Bind(commonString, "Tougher Times", true, itemConfigDescString).Value;
             Warbanner.enabled = Config.Bind(commonString, "Warbanner", true, itemConfigDescString).Value;
 
@@ -225,6 +225,7 @@ namespace RiskyMod
             new DistantRoostCredits();
             new ShrineCombatItems();
             new VengeancePercentHeal();
+            new NoPartialLevels();
         }
 
         private void RunFixes()

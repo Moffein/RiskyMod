@@ -29,7 +29,7 @@ namespace RiskyMod.Tweaks
                      x => x.MatchSub(),
                      x => x.MatchStloc(7),
                      x => x.MatchLdarg(0)
-                    ); ;
+                    );
                 c.Index += 4;
                 c.Emit(OpCodes.Ldarg_0);
                 c.Emit(OpCodes.Ldarg_1);

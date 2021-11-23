@@ -39,9 +39,31 @@ namespace RiskyMod.Survivors.Bandit2
         }
         private void ModifySkills(SkillLocator sk)
         {
+            //How far to go with changing Bandit?
+            //Stay near vanilla, or try to reach a halfway with BanditReloaded?
+
+            //Wanted Quickdraw/Backstab as selectable passives, but Quickdraw (isnta reload on skill use) on its own doesn't feel as fun as Backstab.
+            //Would like to combine them, but Bandit's earlygame DPS is already through the roof, even with nerfed backstab multiplier.
+            //But even with Bandit's high earlygame DPS, his lategame DPS is lackluster and he doesn't stand out much.
+                //Minimum reload entry duration certainly doesn't help there, though I want to keep it
+                //because I think you shouldn't be able to simply machinegun reloadable skills without letting go of the trigger.
+            //Enemies sometimes just see you through invis and refuse to let you backstab them. True Invis + Longer Cloak?
             ModifyPassives(sk);
+
             ModifyPrimaries(sk);
             ModifyUtilities(sk);
+
+            //Secondaries:
+            //Boost damage 33% to compensate for lower backstab crit mult.
+            //Default knife gets bigger hitbox so you don't whiff so much, lunge forward like Loader's alt shift but with less forcce.
+            //Throwing knife gains damage over distance.
+            //Merge Dynamite into the mod? Should Dynamite backstab? Was considering making backstab not apply to explosives/AOE.
+            //Does Hemorrhage even help much lategame?
+
+            //Specials
+            //10% HP Execute?
+            //Add Rack Em Up from BanditReloaded
+            //Select between Reset Cooldowns and Desperado as a passive.
         }
 
         private void ModifyPassives(SkillLocator sk)
