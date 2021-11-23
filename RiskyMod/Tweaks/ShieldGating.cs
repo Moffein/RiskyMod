@@ -35,10 +35,10 @@ namespace RiskyMod.Tweaks
                 c.Emit(OpCodes.Ldarg_1);
                 c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((remainingDamage, self, damageInfo) =>
                 {
-                    if (!((damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic
-                    || (damageInfo.damageType & DamageType.BypassOneShotProtection) > DamageType.Generic
-                    || DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage))
-                    || (self.body && self.body.teamComponent && !(self.body.teamComponent.teamIndex == TeamIndex.Player || self.body.isPlayerControlled)))
+                    if ((damageInfo.damageType & DamageType.BypassArmor) != DamageType.BypassArmor
+                    && (damageInfo.damageType & DamageType.BypassOneShotProtection) != DamageType.BypassOneShotProtection
+                    && !DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage)
+                    && (self.body && self.body.teamComponent && (self.body.teamComponent.teamIndex == TeamIndex.Player || self.body.isPlayerControlled)))
                     {
                         self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 0.3f);
                         return 0f;

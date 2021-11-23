@@ -20,6 +20,7 @@ namespace RiskyMod.Survivors.Bandit2
         public static bool enableUtilitySkillChanges = true;
         public static bool enableSpecialSkillChanges = true;
 
+        public static BodyIndex Bandit2Index;
 
         public Bandit2Core()
         {
@@ -29,6 +30,12 @@ namespace RiskyMod.Survivors.Bandit2
 
             new BanditSpecialGracePeriod();
             ModifySkills(RoR2Content.Survivors.Bandit2.bodyPrefab.GetComponent<SkillLocator>());
+
+            On.RoR2.SurvivorCatalog.Init += (orig) =>
+            {
+                orig();
+                Bandit2Index = BodyCatalog.FindBodyIndex("Bandit2Body");
+            };
         }
         private void ModifySkills(SkillLocator sk)
         {
@@ -41,9 +48,48 @@ namespace RiskyMod.Survivors.Bandit2
         {
             if (!enablePassiveSkillChanges) return;
             new BackstabRework();
-            RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<PassiveController>();    //Move to passive section
+            sk.passiveSkill.enabled = false;
 
-            //Todo: add Quickdraw option
+            RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<PassiveController>();
+
+            GenericSkill passive = RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<GenericSkill>();   //TODO: GET THIS ON TOP OF SKILL SELECT
+
+            SkillDef backstabDef = ScriptableObject.CreateInstance<SkillDef>();
+            backstabDef.activationState = new SerializableEntityStateType(typeof(BaseState));
+            backstabDef.activationStateMachineName = "Weapon";
+            backstabDef.skillDescriptionToken = "BANDIT2_PASSIVE_DESCRIPTION";
+            backstabDef.skillName = "Backstab";
+            backstabDef.skillNameToken = "BANDIT2_PASSIVE_NAME";
+            backstabDef.icon = sk.passiveSkill.icon;
+            Skills.Backstab = backstabDef;
+            LoadoutAPI.AddSkillDef(Skills.Backstab);
+
+            SkillDef quickdraw = ScriptableObject.CreateInstance<SkillDef>();
+            quickdraw.activationState = new SerializableEntityStateType(typeof(BaseState));
+            quickdraw.activationStateMachineName = "Weapon";
+            quickdraw.skillDescriptionToken = "BANDIT2_PASSIVE_ALT_DESCRIPTION_RISKYMOD";
+            quickdraw.skillName = "Quickdraw";
+            quickdraw.skillNameToken = "BANDIT2_PASSIVE_ALT_NAME_RISKYMOD";
+            quickdraw.icon = sk.passiveSkill.icon;  //TODO: ICON
+            Skills.Quickdraw = quickdraw;
+            LoadoutAPI.AddSkillDef(Skills.Quickdraw);
+
+            SkillFamily skillFamily = ScriptableObject.CreateInstance<SkillFamily>();
+            skillFamily.variants = new SkillFamily.Variant[2];
+            skillFamily.variants[0] = new SkillFamily.Variant
+            {
+                skillDef = Skills.Backstab,
+                unlockableDef = null,
+                viewableNode = new ViewablesCatalog.Node(Skills.Backstab.skillName, false, null)
+            };
+            skillFamily.variants[1] = new SkillFamily.Variant
+            {
+                skillDef = Skills.Quickdraw,
+                unlockableDef = null,
+                viewableNode = new ViewablesCatalog.Node(Skills.Quickdraw.skillName, false, null)
+            };
+            LoadoutAPI.AddSkillFamily(skillFamily);
+            passive._skillFamily = skillFamily;
         }
 
         private void ModifyPrimaries(SkillLocator sk)

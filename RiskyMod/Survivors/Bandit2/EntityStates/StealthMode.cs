@@ -1,4 +1,6 @@
-﻿using RoR2;
+﻿using R2API;
+using RiskyMod.Survivors.Bandit2;
+using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -95,6 +97,12 @@ namespace EntityStates.RiskyMod.Bandit2
 				blastAttack.baseForce = StealthMode.blastAttackForce;
 				blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
 				blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
+
+				/*if (BackstabRework.enabled)
+                {
+					DamageAPI.AddModdedDamageType(blastAttack, BackstabRework.CanBackstab);
+                }*/
+
 				blastAttack.Fire();
 			}
 
