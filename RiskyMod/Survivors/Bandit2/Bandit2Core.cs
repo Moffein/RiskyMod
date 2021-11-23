@@ -57,7 +57,7 @@ namespace RiskyMod.Survivors.Bandit2
             SkillDef backstabDef = ScriptableObject.CreateInstance<SkillDef>();
             backstabDef.activationState = new SerializableEntityStateType(typeof(BaseState));
             backstabDef.activationStateMachineName = "Weapon";
-            backstabDef.skillDescriptionToken = "BANDIT2_PASSIVE_DESCRIPTION";
+            backstabDef.skillDescriptionToken = "BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD";
             backstabDef.skillName = "Backstab";
             backstabDef.skillNameToken = "BANDIT2_PASSIVE_NAME";
             backstabDef.icon = sk.passiveSkill.icon;

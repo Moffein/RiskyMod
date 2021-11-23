@@ -11,45 +11,13 @@ namespace RiskyMod.Survivors.Bandit2
     {
         public static bool enabled = true;
         public static DamageAPI.ModdedDamageType AlwaysBackstab;
+        public static DamageAPI.ModdedDamageType FakeCrit;
 
         public BackstabRework()
         {
             if (!enabled) return;
             AlwaysBackstab = DamageAPI.ReserveDamageType();
-
-            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
-            {
-                //Backstabs trigger OnCrit even if DamageInfo is not crit
-                ILCursor c = new ILCursor(il);
-                c.GotoNext(
-                     x => x.MatchLdfld<DamageInfo>("crit")
-                    );
-                c.Index++;
-                c.Emit(OpCodes.Ldarg_1);    //DamageInfo
-                c.EmitDelegate<Func<bool, DamageInfo, bool>>((crit, damageInfo) =>
-                {
-                    return crit || damageInfo.procChainMask.HasProc(ProcType.Backstab);
-                });
-
-                //Remove vanilla SuperBleed
-                c.GotoNext(
-                    x => x.MatchLdfld<DamageInfo>("damageType"),
-                    x => x.MatchLdcI4(134217728)
-                   );
-                c.Index++;
-                c.Next.Operand = 0;
-            };
-
-            //Redo SuperBleed effect
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
-            {
-                orig(self, damageInfo, victim);
-                if ((damageInfo.crit || (!damageInfo.crit && damageInfo.procChainMask.HasProc(ProcType.Backstab)))
-                && (damageInfo.damageType & DamageType.SuperBleedOnCrit) != DamageType.Generic)
-                {
-                    DotController.InflictDot(victim, damageInfo.attacker, DotController.DotIndex.SuperBleed, 15f * damageInfo.procCoefficient, 1f);
-                }
-            };
+            FakeCrit = DamageAPI.ReserveDamageType();
 
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
             {
@@ -71,26 +39,25 @@ namespace RiskyMod.Survivors.Bandit2
                     && (damageInfo.procChainMask.HasProc(ProcType.Backstab) || BackstabManager.IsBackstab(-damageVector, self.body));   //Character is actually performing a backstab
                 });
 
-                //Remove Backstab Crit
+                //Mark damageInfo as fake crit
                 c.GotoNext(
                      x => x.MatchStfld<DamageInfo>("crit")
                     );
                 c.Emit(OpCodes.Ldarg_1);    //DamageInfo
                 c.EmitDelegate<Func<bool, DamageInfo, bool>>((crit, damageInfo) =>
                 {
-                    return damageInfo.crit;
+                    if (!damageInfo.crit)
+                    {
+                        DamageAPI.AddModdedDamageType(damageInfo, FakeCrit);
+                        damageInfo.procChainMask.AddProc(ProcType.AACannon);    //Weird stuff will happen if other mods use this. Need modded Proc Chains.
+                    }
+                    return crit;
                 });
 
                 //Change crit multiplier
                 c.GotoNext(
                 x => x.MatchLdfld<DamageInfo>("crit")
                     );
-                c.Index++;
-                c.Emit(OpCodes.Ldarg_1);    //DamageInfo
-                c.EmitDelegate<Func<bool, DamageInfo, bool>>((crit, damageInfo) =>
-                {
-                    return crit || damageInfo.procChainMask.HasProc(ProcType.Backstab);
-                });
                 c.GotoNext(
                 x => x.MatchLdcR4(2f)
                     );
@@ -98,15 +65,16 @@ namespace RiskyMod.Survivors.Bandit2
                 c.Emit(OpCodes.Ldarg_1);
                 c.EmitDelegate<Func<float, DamageInfo, float>>((critMult, damageInfo) =>
                 {
-                    critMult = 1f;
-                    if (damageInfo.crit)
-                    {
-                        critMult *= 2f;
-                    }
                     if (damageInfo.procChainMask.HasProc(ProcType.Backstab))
                     {
-                        critMult *= 1.5f;
-                        damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
+                        if (damageInfo.HasModdedDamageType(FakeCrit) || damageInfo.procChainMask.HasProc(ProcType.AACannon))
+                        {
+                            critMult *= 0.75f;
+                        }
+                        else
+                        {
+                            critMult *= 1.5f;
+                        }
                     }
                     return critMult;
                 });
