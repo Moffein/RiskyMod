@@ -6,6 +6,9 @@
 	"CAPTAIN_PRIMARY_DESC_RISKYMOD": "Fire a blast of pellets that deal <style=cIsDamage>7x100% damage</style>. Charging narrows the <style=cIsUtility>spread</style>. The number of pellets increases with attack speed.",
 	"BANDIT2_PASSIVE_ALT_NAME_RISKYMOD": "Quickdraw",
 	"BANDIT2_PASSIVE_ALT_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Instantly reload</style> your primary upon using other skills.",
-	"BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD": "Direct attacks from <style=cIsDamage>behind</style> are <style=cIsDamage>Mini Critical Strikes</style>, dealing <style=cIsDamage>50%</style> more <style=cIsDamage>damage</style>."
+	"BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD": "Direct attacks from <style=cIsDamage>behind</style> are <style=cIsDamage>Mini Critical Strikes</style>, dealing <style=cIsDamage>50%</style> more damage.",
+	"BANDIT2_REVOLVER_NAME_RISKYMOD": "Gunslinger",
+	"BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD": "Revolver kills <style=cIsUtility>reset all your cooldowns</style>.",
+	"BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD": "Revolver kills grant <style=cIsDamage>stacking tokens</style> for <style=cIsDamage>10%</style> more revolver damage.",
 	}
 }

@@ -53,7 +53,8 @@ namespace RiskyMod.Survivors.Bandit2
             ModifyPassives(sk);
 
             ModifyPrimaries(sk);
-            ModifyUtilities(sk);
+            //ModifyUtilities(sk);
+            ModifySpecials(sk);
 
             //Secondaries:
             //Boost damage 33% to compensate for lower backstab crit mult.
@@ -73,48 +74,7 @@ namespace RiskyMod.Survivors.Bandit2
         {
             if (!enablePassiveSkillChanges) return;
             new BackstabRework();
-            sk.passiveSkill.enabled = false;
-
-            RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<PassiveController>();
-
-            GenericSkill passive = RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<GenericSkill>();   //TODO: GET THIS ON TOP OF SKILL SELECT
-
-            SkillDef backstabDef = ScriptableObject.CreateInstance<SkillDef>();
-            backstabDef.activationState = new SerializableEntityStateType(typeof(BaseState));
-            backstabDef.activationStateMachineName = "Weapon";
-            backstabDef.skillDescriptionToken = "BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD";
-            backstabDef.skillName = "Backstab";
-            backstabDef.skillNameToken = "BANDIT2_PASSIVE_NAME";
-            backstabDef.icon = sk.passiveSkill.icon;
-            Skills.Backstab = backstabDef;
-            LoadoutAPI.AddSkillDef(Skills.Backstab);
-
-            SkillDef quickdraw = ScriptableObject.CreateInstance<SkillDef>();
-            quickdraw.activationState = new SerializableEntityStateType(typeof(BaseState));
-            quickdraw.activationStateMachineName = "Weapon";
-            quickdraw.skillDescriptionToken = "BANDIT2_PASSIVE_ALT_DESCRIPTION_RISKYMOD";
-            quickdraw.skillName = "Quickdraw";
-            quickdraw.skillNameToken = "BANDIT2_PASSIVE_ALT_NAME_RISKYMOD";
-            quickdraw.icon = sk.passiveSkill.icon;  //TODO: ICON
-            Skills.Quickdraw = quickdraw;
-            LoadoutAPI.AddSkillDef(Skills.Quickdraw);
-
-            SkillFamily skillFamily = ScriptableObject.CreateInstance<SkillFamily>();
-            skillFamily.variants = new SkillFamily.Variant[2];
-            skillFamily.variants[0] = new SkillFamily.Variant
-            {
-                skillDef = Skills.Backstab,
-                unlockableDef = null,
-                viewableNode = new ViewablesCatalog.Node(Skills.Backstab.skillName, false, null)
-            };
-            skillFamily.variants[1] = new SkillFamily.Variant
-            {
-                skillDef = Skills.Quickdraw,
-                unlockableDef = null,
-                viewableNode = new ViewablesCatalog.Node(Skills.Quickdraw.skillName, false, null)
-            };
-            LoadoutAPI.AddSkillFamily(skillFamily);
-            passive._skillFamily = skillFamily;
+            sk.passiveSkill.skillDescriptionToken = "BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD";
         }
 
         private void ModifyPrimaries(SkillLocator sk)
@@ -217,13 +177,58 @@ namespace RiskyMod.Survivors.Bandit2
 
             sk.utility._skillFamily.variants[0].skillDef = Skills.Smokebomb;
         }
+
+        private void ModifySpecials(SkillLocator sk)
+        {
+            SpecialDamageType(sk);
+        }
+
+        private void SpecialDamageType(SkillLocator sk)
+        {
+            RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<SpecialDamageController>();
+            GenericSkill passive = RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<GenericSkill>();   //TODO: GET THIS ON TOP OF SKILL SELECT
+
+            SkillDef gunslingerDef = ScriptableObject.CreateInstance<SkillDef>();
+            gunslingerDef.activationState = new SerializableEntityStateType(typeof(BaseState));
+            gunslingerDef.activationStateMachineName = "Weapon";
+            gunslingerDef.skillDescriptionToken = "BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD";
+            gunslingerDef.skillName = "Gunslinger";
+            gunslingerDef.skillNameToken = "BANDIT2_REVOLVER_NAME_RISKYMOD";
+            gunslingerDef.icon = sk.passiveSkill.icon;  //TODO: ICON
+            Skills.Gunslinger = gunslingerDef;
+            LoadoutAPI.AddSkillDef(Skills.Gunslinger);
+
+            SkillDef desperado = ScriptableObject.CreateInstance<SkillDef>();
+            desperado.activationState = new SerializableEntityStateType(typeof(BaseState));
+            desperado.activationStateMachineName = "Weapon";
+            desperado.skillDescriptionToken = "BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD";
+            desperado.skillName = "Desperado";
+            desperado.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME";
+            desperado.icon = sk.passiveSkill.icon;  //TODO: ICON
+            Skills.Desperado = desperado;
+            LoadoutAPI.AddSkillDef(Skills.Desperado);
+
+            SkillFamily skillFamily = ScriptableObject.CreateInstance<SkillFamily>();
+            skillFamily.variants = new SkillFamily.Variant[2];
+            skillFamily.variants[0] = new SkillFamily.Variant
+            {
+                skillDef = Skills.Gunslinger,
+                unlockableDef = null,
+                viewableNode = new ViewablesCatalog.Node(Skills.Gunslinger.skillName, false, null)
+            };
+            skillFamily.variants[1] = new SkillFamily.Variant
+            {
+                skillDef = Skills.Desperado,
+                unlockableDef = null,
+                viewableNode = new ViewablesCatalog.Node(Skills.Desperado.skillName, false, null)
+            };
+            LoadoutAPI.AddSkillFamily(skillFamily);
+            passive._skillFamily = skillFamily;
+        }
     }
 
     public class Skills
     {
-        public static SkillDef Backstab;    //Backstabs are crits (no AOE allowed except for Cloak)
-        public static SkillDef Quickdraw;   //
-
         public static SkillDef Gunslinger;
         public static SkillDef Desperado;
 
