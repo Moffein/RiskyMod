@@ -50,6 +50,7 @@ namespace RiskyMod.Moon
                                 PickupIndex pickupOverwrite = PickupIndex.none;
                                 if ((pearlAvailable || shinyPearlAvailable) && teleBossGroup.bossDropChance > 0f && Run.instance.treasureRng.RangeFloat(0f, 100f) <= teleBossGroup.bossDropChance)
                                 {
+                                    overwritePickup = true;
                                     if (pearlAvailable)
                                     {
                                         pickupOverwrite = pearlIndex;

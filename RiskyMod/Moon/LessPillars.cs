@@ -30,7 +30,7 @@ namespace RiskyMod.Moon
 					{
 						if (self.batteryHoldoutZones[i].enabled)
 						{
-							self.batteryHoldoutZones[i].FullyChargeHoldoutZone();
+							//self.batteryHoldoutZones[i].FullyChargeHoldoutZone();
 							self.batteryHoldoutZones[i].onCharged.RemoveListener(new UnityAction<HoldoutZoneController>(self.OnBatteryCharged));
 						}
 					}

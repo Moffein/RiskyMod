@@ -44,6 +44,8 @@ namespace RiskyMod.Survivors.Bandit2
 
             //Wanted Quickdraw/Backstab as selectable passives, but Quickdraw (isnta reload on skill use) on its own doesn't feel as fun as Backstab.
             //Would like to combine them, but Bandit's earlygame DPS is already through the roof, even with nerfed backstab multiplier.
+                //Maybe only knives can backstab?
+                    //But being able to dump your shotgun into the back of an enemy is a big part of the fun.
             //But even with Bandit's high earlygame DPS, his lategame DPS is lackluster and he doesn't stand out much.
                 //Minimum reload entry duration certainly doesn't help there, though I want to keep it
                 //because I think you shouldn't be able to simply machinegun reloadable skills without letting go of the trigger.
@@ -57,7 +59,8 @@ namespace RiskyMod.Survivors.Bandit2
             //Boost damage 33% to compensate for lower backstab crit mult.
             //Default knife gets bigger hitbox so you don't whiff so much, lunge forward like Loader's alt shift but with less forcce.
             //Throwing knife gains damage over distance.
-            //Merge Dynamite into the mod? Should Dynamite backstab? Was considering making backstab not apply to explosives/AOE.
+            //Merge Dynamite into the mod?
+                //Should Dynamite backstab? Was considering making backstab not apply to explosives/AOE.
             //Does Hemorrhage even help much lategame?
 
             //Specials
