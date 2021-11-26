@@ -1,5 +1,7 @@
 ﻿using EntityStates;
 using EntityStates.RiskyMod.Bandit2;
+using EntityStates.RiskyMod.Bandit2.Primary;
+using EntityStates.RiskyMod.Bandit2.Revolver;
 using R2API;
 using RiskyMod.Survivors.Bandit2.Components;
 using RoR2;
@@ -53,7 +55,7 @@ namespace RiskyMod.Survivors.Bandit2
             ModifyPassives(sk);
 
             ModifyPrimaries(sk);
-            //ModifyUtilities(sk);
+            ModifyUtilities(sk);
             ModifySpecials(sk);
 
             //Secondaries:
@@ -154,7 +156,7 @@ namespace RiskyMod.Survivors.Bandit2
             stealthDef.activationState = new SerializableEntityStateType(typeof(ThrowSmokebomb));
             stealthDef.activationStateMachineName = "Stealth";
             stealthDef.baseMaxStock = 1;
-            stealthDef.baseRechargeInterval = 11f;
+            stealthDef.baseRechargeInterval = 6f;
             stealthDef.beginSkillCooldownOnSkillEnd = false;
             stealthDef.canceledFromSprinting = false;
             stealthDef.forceSprintDuringState = true;
@@ -163,9 +165,9 @@ namespace RiskyMod.Survivors.Bandit2
             stealthDef.icon = sk.utility._skillFamily.variants[0].skillDef.icon;
             stealthDef.interruptPriority = InterruptPriority.Skill;
             stealthDef.isCombatSkill = false;
-            stealthDef.keywordTokens = new string[] { };
+            stealthDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
             stealthDef.mustKeyPress = false;
-            stealthDef.cancelSprintingOnActivation = true;
+            stealthDef.cancelSprintingOnActivation = false;
             stealthDef.rechargeStock = 1;
             stealthDef.requiredStock = 1;
             stealthDef.skillName = "Stealth";
@@ -181,12 +183,71 @@ namespace RiskyMod.Survivors.Bandit2
         private void ModifySpecials(SkillLocator sk)
         {
             SpecialDamageType(sk);
+
+            LoadoutAPI.AddSkill(typeof(BaseSidearmState));
+            LoadoutAPI.AddSkill(typeof(ExitSidearm));
+
+            SkillDef lightsOutDef = SkillDef.CreateInstance<SkillDef>();
+            LoadoutAPI.AddSkill(typeof(PrepLightsOut));
+            LoadoutAPI.AddSkill(typeof(FireLightsOut));
+            lightsOutDef.activationState = new SerializableEntityStateType(typeof(PrepLightsOut));
+            lightsOutDef.activationStateMachineName = "Weapon";
+            lightsOutDef.baseMaxStock = 1;
+            lightsOutDef.baseRechargeInterval = 4f;
+            lightsOutDef.beginSkillCooldownOnSkillEnd = false;
+            lightsOutDef.canceledFromSprinting = false;
+            lightsOutDef.forceSprintDuringState = false;
+            lightsOutDef.dontAllowPastMaxStocks = true;
+            lightsOutDef.fullRestockOnAssign = true;
+            lightsOutDef.icon = sk.special._skillFamily.variants[0].skillDef.icon;
+            lightsOutDef.interruptPriority = InterruptPriority.Skill;
+            lightsOutDef.isCombatSkill = true;
+            lightsOutDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
+            lightsOutDef.mustKeyPress = false;
+            lightsOutDef.cancelSprintingOnActivation = true;
+            lightsOutDef.rechargeStock = 1;
+            lightsOutDef.requiredStock = 1;
+            lightsOutDef.skillName = "LightsOut";
+            lightsOutDef.skillNameToken = "BANDIT2_SPECIAL_NAME";
+            lightsOutDef.skillDescriptionToken = "BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD";
+            lightsOutDef.stockToConsume = 1;
+            LoadoutAPI.AddSkillDef(lightsOutDef);
+            Skills.LightsOut = lightsOutDef;
+            sk.special._skillFamily.variants[0].skillDef = Skills.LightsOut;
+
+            SkillDef reuDef = SkillDef.CreateInstance<SkillDef>();
+            LoadoutAPI.AddSkill(typeof(PrepRackEmUp));
+            LoadoutAPI.AddSkill(typeof(FireRackEmUp));
+            reuDef.activationState = new SerializableEntityStateType(typeof(PrepRackEmUp));
+            reuDef.activationStateMachineName = "Weapon";
+            reuDef.baseMaxStock = 1;
+            reuDef.baseRechargeInterval = 4f;
+            reuDef.beginSkillCooldownOnSkillEnd = false;
+            reuDef.canceledFromSprinting = false;
+            reuDef.forceSprintDuringState = false;
+            reuDef.dontAllowPastMaxStocks = true;
+            reuDef.fullRestockOnAssign = true;
+            reuDef.icon = sk.special._skillFamily.variants[1].skillDef.icon;
+            reuDef.interruptPriority = InterruptPriority.Skill;
+            reuDef.isCombatSkill = true;
+            reuDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
+            reuDef.mustKeyPress = false;
+            reuDef.cancelSprintingOnActivation = true;
+            reuDef.rechargeStock = 1;
+            reuDef.requiredStock = 1;
+            reuDef.skillName = "LightsOut";
+            reuDef.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME_RISKYMOD";
+            reuDef.skillDescriptionToken = "BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
+            reuDef.stockToConsume = 1;
+            LoadoutAPI.AddSkillDef(reuDef);
+            Skills.RackEmUp = reuDef;
+            sk.special._skillFamily.variants[1].skillDef = Skills.RackEmUp;
         }
 
         private void SpecialDamageType(SkillLocator sk)
         {
             RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<SpecialDamageController>();
-            GenericSkill passive = RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<GenericSkill>();   //TODO: GET THIS ON TOP OF SKILL SELECT
+            GenericSkill passive = RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<GenericSkill>();
 
             SkillDef gunslingerDef = ScriptableObject.CreateInstance<SkillDef>();
             gunslingerDef.activationState = new SerializableEntityStateType(typeof(BaseState));
@@ -229,9 +290,6 @@ namespace RiskyMod.Survivors.Bandit2
 
     public class Skills
     {
-        public static SkillDef Gunslinger;
-        public static SkillDef Desperado;
-
         public static ReloadSkillDef Blast;
         public static ReloadSkillDef Burst;
 
@@ -243,5 +301,8 @@ namespace RiskyMod.Survivors.Bandit2
 
         public static SkillDef LightsOut;
         public static SkillDef RackEmUp;
+
+        public static SkillDef Gunslinger;
+        public static SkillDef Desperado;
     }
 }

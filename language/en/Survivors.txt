@@ -4,11 +4,12 @@
 	"BANDIT2_PRIMARY_DESC_RISKYMOD": "Fire a shotgun burst for <style=cIsDamage>5x90% damage</style>. Can hold up to 4 shells.",
 	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD": "Fire a rifle blast that pierces for <style=cIsDamage>330% damage</style>. Can hold up to 4 bullets.",
 	"CAPTAIN_PRIMARY_DESC_RISKYMOD": "Fire a blast of pellets that deal <style=cIsDamage>7x100% damage</style>. Charging narrows the <style=cIsUtility>spread</style>. The number of pellets increases with attack speed.",
-	"BANDIT2_PASSIVE_ALT_NAME_RISKYMOD": "Quickdraw",
-	"BANDIT2_PASSIVE_ALT_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Instantly reload</style> your primary upon using other skills.",
-	"BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD": "Direct attacks from <style=cIsDamage>behind</style> are <style=cIsDamage>Mini Critical Strikes</style>, dealing <style=cIsDamage>50%</style> more damage.",
+	"BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD": "All attacks from <style=cIsDamage>behind</style> are <style=cIsDamage>Mini Critical Strikes</style> that deal <style=cIsDamage>50%</style> more damage.",
 	"BANDIT2_REVOLVER_NAME_RISKYMOD": "Gunslinger",
 	"BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD": "Revolver kills <style=cIsUtility>reset all your cooldowns</style>.",
 	"BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD": "Revolver kills grant <style=cIsDamage>stacking tokens</style> for <style=cIsDamage>10%</style> more revolver damage.",
+	"BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Slayer</style>. Fire a revolver shot for <style=cIsDamage>600% damage</style>.",
+	"BANDIT2_SPECIAL_ALT_NAME_RISKYMOD": "Rack Em Up",
+	"BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Slayer</style>. Rapidly fire a revolver shots for <style=cIsDamage>6x100% damage</style>. Each consecutive hit deals <style=cIsDamage>50%</style> extra damage."
 	}
 }

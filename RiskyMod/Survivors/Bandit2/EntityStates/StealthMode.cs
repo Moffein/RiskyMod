@@ -9,7 +9,7 @@ namespace EntityStates.RiskyMod.Bandit2
     public class StealthMode : BaseState
 	{
 
-		public static float duration = 4f;
+		public static float duration = 3f;
 		public static float minDuration = 0.3f;
 		public static string enterStealthSound = "Play_bandit2_shift_enter";
 		public static string exitStealthSound = "Play_bandit2_shift_exit";

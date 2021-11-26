@@ -2,26 +2,10 @@
 using RoR2;
 using UnityEngine.Networking;
 
-namespace EntityStates.RiskyMod.Bandit2
+namespace EntityStates.RiskyMod.Bandit2.Primary
 {
     public class FirePrimaryShotgun : FirePrimaryBase
     {
-        public static float _damageCoefficient = 0.8f;
-        public static float _procCoefficient = 0.8f;
-        public static int _bulletCount = 5;
-        public static float _maxDistance = 1000f;
-        public static float _bulletRadius = 0.3f;
-        public static bool _useSmartCollision = true;
-        public static float _force = 320f;
-        public static float _minSpread = 0f;
-        public static float _maxSpread = 0f;
-        public static float _spreadPitchScale = 0f;
-        public static float _spreadYawScale = 0f;
-        public static float _spreadBloomValue = 0.6f;
-        public static float _recoilAmplitudeY = 1f;
-        public static float _recoilAmplitudeX = 0.5f;
-        public static string _muzzleName = "MuzzleShotgun";
-        public static string _fireSoundString = "Play_bandit2_m1_shotgun";
         public static GameObject _muzzleFlashPrefab = Resources.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashBandit2");
         public static GameObject _tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/TracerBandit2Shotgun");
         public static GameObject _hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/HitsparkBandit");
@@ -29,24 +13,24 @@ namespace EntityStates.RiskyMod.Bandit2
         public float minFixedSpreadYaw = 1f;
         public float maxFixedSpreadYaw = 1f;
 
-        private void LoadStatics()
+        private void LoadStats()
         {
-            damageCoefficient = _damageCoefficient;
-            procCoefficient = _procCoefficient;
-            bulletCount = _bulletCount;
-            maxDistance = _maxDistance;
-            bulletRadius = _bulletRadius;
-            useSmartCollision = _useSmartCollision;
-            force = _force;
-            minSpread = _minSpread;
-            maxSpread = _maxSpread;
-            spreadPitchScale = _spreadPitchScale;
-            spreadYawScale = _spreadYawScale;
-            spreadBloomValue = _spreadBloomValue;
-            recoilAmplitudeY = _recoilAmplitudeY;
-            recoilAmplitudeX = _recoilAmplitudeX;
-            muzzleName = _muzzleName;
-            fireSoundString = _fireSoundString;
+            damageCoefficient = 0.9f;
+            procCoefficient = 0.75f;
+            bulletCount = 5;
+            maxDistance = 1000f;
+            bulletRadius = 0.3f;
+            useSmartCollision = true;
+            force = 320f;
+            minSpread = 0f;
+            maxSpread = 0f;
+            spreadPitchScale = 0f;
+            spreadYawScale = 0f;
+            spreadBloomValue = 0.6f;
+            recoilAmplitudeY = 1f;
+            recoilAmplitudeX = 0.5f;
+            muzzleName = "MuzzleShotgun";
+            fireSoundString = "Play_bandit2_m1_shotgun";
             muzzleFlashPrefab = _muzzleFlashPrefab;
             tracerEffectPrefab = _tracerEffectPrefab;
             hitEffectPrefab = _hitEffectPrefab;
@@ -54,7 +38,7 @@ namespace EntityStates.RiskyMod.Bandit2
 
         public override void OnEnter()
         {
-            LoadStatics();
+            LoadStats();
             base.OnEnter();
         }
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using RoR2;
 
-namespace EntityStates.RiskyMod.Bandit2
+namespace EntityStates.RiskyMod.Bandit2.Primary
 {
     public class FirePrimaryBase : GenericBulletBaseState
 	{
