@@ -35,6 +35,7 @@ namespace RiskyMod.Survivors.Bandit2
             SpecialDamage = DamageAPI.ReserveDamageType();
 
             new BanditSpecialGracePeriod();
+            new CloakBuff();
             ModifySkills(RoR2Content.Survivors.Bandit2.bodyPrefab.GetComponent<SkillLocator>());
 
             On.RoR2.SurvivorCatalog.Init += (orig) =>
@@ -187,6 +188,7 @@ namespace RiskyMod.Survivors.Bandit2
         private void ModifySpecials(SkillLocator sk)
         {
             if (!enableSpecialSkillChanges) return;
+
             SpecialDamageType(sk);
             SpecialDebuff = BuildSpecialDebuff();
             new SpecialDamageTweaks();
@@ -194,13 +196,15 @@ namespace RiskyMod.Survivors.Bandit2
             LoadoutAPI.AddSkill(typeof(BaseSidearmState));
             LoadoutAPI.AddSkill(typeof(ExitSidearm));
 
+            float cooldown = 7f;
+
             SkillDef lightsOutDef = SkillDef.CreateInstance<SkillDef>();
             LoadoutAPI.AddSkill(typeof(PrepLightsOut));
             LoadoutAPI.AddSkill(typeof(FireLightsOut));
             lightsOutDef.activationState = new SerializableEntityStateType(typeof(PrepLightsOut));
             lightsOutDef.activationStateMachineName = "Weapon";
             lightsOutDef.baseMaxStock = 1;
-            lightsOutDef.baseRechargeInterval = 4f;
+            lightsOutDef.baseRechargeInterval = cooldown;
             lightsOutDef.beginSkillCooldownOnSkillEnd = false;
             lightsOutDef.canceledFromSprinting = false;
             lightsOutDef.forceSprintDuringState = false;
@@ -228,7 +232,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.activationState = new SerializableEntityStateType(typeof(PrepRackEmUp));
             reuDef.activationStateMachineName = "Weapon";
             reuDef.baseMaxStock = 1;
-            reuDef.baseRechargeInterval = 4f;
+            reuDef.baseRechargeInterval = cooldown;
             reuDef.beginSkillCooldownOnSkillEnd = false;
             reuDef.canceledFromSprinting = false;
             reuDef.forceSprintDuringState = false;
