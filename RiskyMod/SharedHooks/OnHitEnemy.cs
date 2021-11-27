@@ -1,20 +1,17 @@
-﻿using RiskyMod.Items.Uncommon;
-using RoR2;
+﻿using RoR2;
 using UnityEngine.Networking;
-using UnityEngine;
 using RiskyMod.Fixes;
-using R2API;
-using RiskyMod.Items.Common;
-using RiskyMod.Items.Legendary;
-using RiskyMod.MonoBehaviours;
-using RiskyMod.Tweaks;
 using RiskyMod.Survivors.Bandit2;
 
 namespace RiskyMod.SharedHooks
 {
-    class OnHitEnemy
-    {
-        public static void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, UnityEngine.GameObject victim)
+    public class OnHitEnemy
+	{
+		public delegate void OnHitNoAttacker(DamageInfo damageInfo, CharacterBody victimBody);
+		public static OnHitNoAttacker OnHitNoAttackerActions = HandleOnHitNoAttackerMethod;
+		private static void HandleOnHitNoAttackerMethod(DamageInfo damageInfo, CharacterBody victimBody) { }
+
+		public static void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, UnityEngine.GameObject victim)
         {
 			CharacterBody attackerBody = null;
 			CharacterBody victimBody = null;
@@ -52,22 +49,19 @@ namespace RiskyMod.SharedHooks
 
             if (validDamage)
             {
-                if (damageInfo.attacker)
+				if (victimBody)
                 {
-                    if (attackerBody && victimBody)
-					{
-						//Vector3 aimOrigin = attackerBody.aimOrigin;
-						//CharacterMaster attackerMaster = attackerBody.master;
-						TeamComponent attackerTeamComponent = attackerBody.teamComponent;
-						//TeamIndex attackerTeamIndex = attackerTeamComponent ? attackerTeamComponent.teamIndex : TeamIndex.None;
+					OnHitNoAttackerActions.Invoke(damageInfo, victimBody);
 
+					if (damageInfo.attacker && attackerBody)
+					{
 						if (attackerInventory)
-                        {
+						{
 							if (AssistManager.initialized && RiskyMod.assistManager)
 							{
 								RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.assistLength);
 								if (BanditSpecialGracePeriod.enabled)
-                                {
+								{
 									if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)
 									{
 										RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.BanditAssistType.ResetCooldowns);
@@ -79,8 +73,8 @@ namespace RiskyMod.SharedHooks
 								}
 							}
 						}
-                    }
-                }
+					}
+				}
             }
         }
     }

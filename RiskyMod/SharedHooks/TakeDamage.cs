@@ -22,6 +22,10 @@ namespace RiskyMod.SharedHooks
         public static OnHpLost HandleOnHpLostActions = HandleOnHpLostMethod;
         private static void HandleOnHpLostMethod(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost) { }
 
+        public delegate void ModifyInitialDamage(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody);
+        public static ModifyInitialDamage ModifyInitialDamageActions = ModifyInitialDamageMethod;
+        private static void ModifyInitialDamageMethod(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody) { }
+
         public static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
             float oldHP = self.combinedHealth;
@@ -32,15 +36,7 @@ namespace RiskyMod.SharedHooks
                 attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
                 if (attackerBody)
                 {
-                    if (VagrantResistance.enabled)
-                    {
-                        if (attackerBody.bodyIndex == VagrantResistance.VagrantIndex && damageInfo.procCoefficient > 1f
-                            && self.body && VagrantResistance.HasResist(self.body.bodyIndex))
-                        {
-                            damageInfo.procCoefficient *= 0.3333333333f;
-                            damageInfo.damage *= 0.3333333333f;
-                        }
-                    }
+                    ModifyInitialDamageActions.Invoke(damageInfo, self, attackerBody);
                     attackerInventory = attackerBody.inventory;
                     if (attackerInventory)
                     {
@@ -75,10 +71,6 @@ namespace RiskyMod.SharedHooks
                 {
                     if (self.body)
                     {
-                        /*if (HarvesterScythe.enabled && self.body.HasBuff(HarvesterScythe.scytheBuff))
-                        {
-                            self.body.ClearTimedBuffs(HarvesterScythe.scytheBuff);
-                        }*/
                         if (damageInfo.attacker)
                         {
                             if (attackerBody)

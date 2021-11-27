@@ -13,7 +13,10 @@ namespace RiskyMod.Survivors.Bandit2
 {
     public class Bandit2Core
     {
-        public static DamageAPI.ModdedDamageType CanBackstab;
+        public static BuffDef SpecialDebuff;
+        public static DamageAPI.ModdedDamageType SpecialDamage;
+        public static DamageAPI.ModdedDamageType RackEmUpDamage;
+        public static DamageAPI.ModdedDamageType AlwaysBackstab;
         public static bool enabled = true;
 
         public static bool enablePassiveSkillChanges = true;
@@ -28,7 +31,8 @@ namespace RiskyMod.Survivors.Bandit2
         {
             if (!enabled) return;
 
-            CanBackstab = DamageAPI.ReserveDamageType();
+            AlwaysBackstab = DamageAPI.ReserveDamageType();
+            SpecialDamage = DamageAPI.ReserveDamageType();
 
             new BanditSpecialGracePeriod();
             ModifySkills(RoR2Content.Survivors.Bandit2.bodyPrefab.GetComponent<SkillLocator>());
@@ -182,7 +186,10 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void ModifySpecials(SkillLocator sk)
         {
+            if (!enableSpecialSkillChanges) return;
             SpecialDamageType(sk);
+            SpecialDebuff = BuildSpecialDebuff();
+            new SpecialDamageTweaks();
 
             LoadoutAPI.AddSkill(typeof(BaseSidearmState));
             LoadoutAPI.AddSkill(typeof(ExitSidearm));
@@ -209,7 +216,7 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.requiredStock = 1;
             lightsOutDef.skillName = "LightsOut";
             lightsOutDef.skillNameToken = "BANDIT2_SPECIAL_NAME";
-            lightsOutDef.skillDescriptionToken = "BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD";
+            lightsOutDef.skillDescriptionToken = SpecialDamageTweaks.specialExecute? "BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD" : "BANDIT2_SPECIAL_DESCRIPTION_NOEXECUTE_RISKYMOD";
             lightsOutDef.stockToConsume = 1;
             LoadoutAPI.AddSkillDef(lightsOutDef);
             Skills.LightsOut = lightsOutDef;
@@ -235,13 +242,25 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.cancelSprintingOnActivation = true;
             reuDef.rechargeStock = 1;
             reuDef.requiredStock = 1;
-            reuDef.skillName = "LightsOut";
+            reuDef.skillName = "RackEmUp";
             reuDef.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME_RISKYMOD";
-            reuDef.skillDescriptionToken = "BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
+            reuDef.skillDescriptionToken = SpecialDamageTweaks.specialExecute ? "BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "BANDIT2_SPECIAL_ALT_DESCRIPTION_NOEXECUTE_RISKYMOD";
             reuDef.stockToConsume = 1;
             LoadoutAPI.AddSkillDef(reuDef);
             Skills.RackEmUp = reuDef;
             sk.special._skillFamily.variants[1].skillDef = Skills.RackEmUp;
+        }
+
+        private BuffDef BuildSpecialDebuff()
+        {
+            BuffDef buff = ScriptableObject.CreateInstance<BuffDef>();
+            buff.buffColor = new Color(0.8039216f, 0.482352942f, 0.843137264f);
+            buff.canStack = true;
+            buff.isDebuff = false;
+            buff.iconSprite = Resources.Load<Sprite>("textures/bufficons/texBuffBanditSkullIcon");
+            buff.name = "RiskyModBanditRevolver";
+            BuffAPI.Add(new CustomBuff(buff));
+            return buff;
         }
 
         private void SpecialDamageType(SkillLocator sk)

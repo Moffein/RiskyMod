@@ -1,4 +1,6 @@
-﻿using RiskyMod.Survivors.Bandit2.Components;
+﻿using R2API;
+using RiskyMod.Survivors.Bandit2;
+using RiskyMod.Survivors.Bandit2.Components;
 using RoR2;
 using UnityEngine;
 namespace EntityStates.RiskyMod.Bandit2.Revolver
@@ -46,6 +48,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
                 {
 					bulletAttack.damageType |= sdc.GetDamageType();
 				}
+				DamageAPI.AddModdedDamageType(bulletAttack, Bandit2Core.SpecialDamage);
 
 				bulletAttack.Fire();
 			}

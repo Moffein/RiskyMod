@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using RiskyMod.SharedHooks;
+using RoR2;
 using System.Collections.Generic;
 
 namespace RiskyMod.Drones
@@ -31,7 +32,16 @@ namespace RiskyMod.Drones
                 VagrantIndex = BodyCatalog.FindBodyIndex("VagrantBody");
             };
 
-            //Damage reduction handled in SharedHooks.TakeDamage
+            TakeDamage.ModifyInitialDamageActions += AddResist;
+        }
+
+        private static void AddResist(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        {
+            if (attackerBody.bodyIndex == VagrantResistance.VagrantIndex && damageInfo.procCoefficient > 1f && self.body && VagrantResistance.HasResist(self.body.bodyIndex))
+            {
+                damageInfo.procCoefficient *= 0.3333333333f;
+                damageInfo.damage *= 0.3333333333f;
+            }
         }
 
         public static bool HasResist(BodyIndex index)

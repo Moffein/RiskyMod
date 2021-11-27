@@ -1,4 +1,6 @@
-﻿using RiskyMod.Survivors.Bandit2.Components;
+﻿using R2API;
+using RiskyMod.Survivors.Bandit2;
+using RiskyMod.Survivors.Bandit2.Components;
 using RoR2;
 using UnityEngine;
 namespace EntityStates.RiskyMod.Bandit2.Revolver
@@ -46,6 +48,8 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 				{
 					bulletAttack.damageType |= sdc.GetDamageType();
 				}
+				DamageAPI.AddModdedDamageType(bulletAttack, Bandit2Core.SpecialDamage);
+				DamageAPI.AddModdedDamageType(bulletAttack, Bandit2Core.RackEmUpDamage);
 
 				bulletAttack.Fire();
 			}
@@ -99,8 +103,9 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 		public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/HitsparkBandit2Pistol");
 		public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/TracerBanditPistol");
 
-		public static float damageCoefficient = 1f;	//+50% per consecutive hit
-		public static float force = 200f;  //vanilla is 1500f
+		public static float damageCoefficient = 1f;
+		public static float bonusDamageCoefficient = 0.4f;
+		public static float force = 300f;
 
 		public static float minSpread = 0f;
 		public static float maxSpread = 2.5f;
