@@ -21,7 +21,6 @@ namespace RiskyMod.Survivors.Bandit2
 
         public static bool enablePassiveSkillChanges = true;
         public static bool enablePrimarySkillChanges = true;
-        public static bool enableSecondarySkillChanges = true;
         public static bool enableUtilitySkillChanges = true;
         public static bool enableSpecialSkillChanges = true;
 
@@ -30,11 +29,10 @@ namespace RiskyMod.Survivors.Bandit2
         public Bandit2Core()
         {
             if (!enabled) return;
-
+            new BanditSpecialGracePeriod();
             AlwaysBackstab = DamageAPI.ReserveDamageType();
             SpecialDamage = DamageAPI.ReserveDamageType();
 
-            new BanditSpecialGracePeriod();
             new CloakBuff();
             ModifySkills(RoR2Content.Survivors.Bandit2.bodyPrefab.GetComponent<SkillLocator>());
 
@@ -43,6 +41,13 @@ namespace RiskyMod.Survivors.Bandit2
                 orig();
                 Bandit2Index = BodyCatalog.FindBodyIndex("Bandit2Body");
             };
+
+            On.RoR2.EntityStateCatalog.InitializeStateFields += (orig, self) =>
+            {
+                orig(self);
+                SlashBlade.bloomCurve = EntityStates.Bandit2.Weapon.SlashBlade.bloomCurve;
+            };
+            SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Bandit2.Weapon.SlashBlade");
         }
         private void ModifySkills(SkillLocator sk)
         {

@@ -35,6 +35,7 @@ namespace RiskyMod.Survivors.Captain
 
         private void ModifyPrimaries(SkillLocator sk)
         {
+            if (!enablePrimarySkillChanges) return;
             LoadoutAPI.AddSkill(typeof(ChargeShotgun));
             LoadoutAPI.AddSkill(typeof(FireShotgun));
 

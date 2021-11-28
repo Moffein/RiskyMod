@@ -40,7 +40,7 @@ namespace RiskyMod.Tweaks
                     && !DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage)
                     && (self.body && self.body.teamComponent && (self.body.teamComponent.teamIndex == TeamIndex.Player || self.body.isPlayerControlled)))
                     {
-                        self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 0.3f);
+                        self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 0.2f);
                         return 0f;
                     }
                     return remainingDamage;
@@ -66,6 +66,19 @@ namespace RiskyMod.Tweaks
             };
 
             IL.EntityStates.VagrantNovaItem.DetonateState.OnEnter += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchCallvirt<BlastAttack>("Fire")
+                    );
+                c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                {
+                    blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                    return blastAttack;
+                });
+            };
+
+            IL.EntityStates.ImpBossMonster.BlinkState.ExitCleanup += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(

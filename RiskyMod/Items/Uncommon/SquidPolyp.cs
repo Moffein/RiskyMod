@@ -84,12 +84,12 @@ namespace RiskyMod.Items.Uncommon
                                 {
                                     //Doppelganger Turrets decay faster.
                                     component6.inventory.GiveItem(RoR2Content.Items.InvadingDoppelganger);
-                                    component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 10);
+                                    component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 12);
                                 }
                                 else
                                 {
                                     component6.inventory.GiveItem(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
-                                    component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 20);
+                                    component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 25);
                                 }
                                 sq.AddSquid(result.spawnedInstance);
                             }));
