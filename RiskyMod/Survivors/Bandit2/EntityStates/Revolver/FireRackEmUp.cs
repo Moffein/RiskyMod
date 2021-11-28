@@ -79,7 +79,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
-			return InterruptPriority.Any;
+			return InterruptPriority.Skill;
 		}
 
 		public override void LoadStats()
@@ -112,7 +112,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 
 		public static string attackSoundString = "Play_bandit2_R_fire";
 		public static float recoilAmplitude = 2.2f;
-		public static float bulletRadius = 1f;
+		public static float bulletRadius = 0.5f;
 
 		public int bulletCount = 6;
 	}

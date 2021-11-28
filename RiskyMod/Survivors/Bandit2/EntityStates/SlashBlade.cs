@@ -30,6 +30,11 @@ namespace EntityStates.RiskyMod.Bandit2
 			{
 				base.characterMotor.velocity = new Vector3(base.characterMotor.velocity.x, Mathf.Max(base.characterMotor.velocity.y, SlashBlade.shortHopVelocity), base.characterMotor.velocity.z);
 			}
+
+			if (base.characterBody)
+            {
+				forceForwardVelocity = base.characterBody.isSprinting;
+			}
 		}
 
 		public override void AuthorityModifyOverlapAttack(OverlapAttack overlapAttack)
@@ -82,7 +87,6 @@ namespace EntityStates.RiskyMod.Bandit2
 			mecanimHitboxActiveParameter = "SlashBlade.hitBoxActive";
 			shorthopVelocityFromHit = 6f;
 			impactSound = _impactSound;
-			forceForwardVelocity = true;
 			beginStateSoundString = "Play_bandit2_m2_slash";
 			forwardVelocityCurve = _forwardVelocityCurve;
 			scaleHitPauseDurationAndVelocityWithAttackSpeed = false;

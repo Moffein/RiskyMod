@@ -10,7 +10,7 @@ namespace RiskyMod.Survivors.Bandit2
         {
             if (!enabled) return;
             CharacterBody cb = RoR2Content.Survivors.Bandit2.bodyPrefab.GetComponent<CharacterBody>();
-            ChildLocator childLocator = cb.modelLocator.modelTransform.GetComponent<ChildLocator>();
+            ChildLocator childLocator = cb.modelLocator.modelTransform.GetComponent<ChildLocator>();    //nullrefs
         }
     }
 }

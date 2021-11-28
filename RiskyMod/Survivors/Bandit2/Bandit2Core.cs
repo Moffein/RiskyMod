@@ -355,11 +355,11 @@ namespace RiskyMod.Survivors.Bandit2
         }
         private void BuildSlashVelocityCurve()
         {
-            Keyframe kf1 = new Keyframe(0f, 1f, -8.182907104492188f, -3.3333332538604738f, 0f, 0.058712735772132876f);
+            Keyframe kf1 = new Keyframe(0f, 1.6f, -8.182907104492188f, -3.3333332538604738f, 0f, 0.058712735772132876f);
             kf1.weightedMode = WeightedMode.None;
             kf1.tangentMode = 65;
 
-            Keyframe kf2 = new Keyframe(0.30000001192092898f, 0f, -3.3333332538604738f, -3.3333332538604738f, 0.3333333432674408f, 0.3333333432674408f);
+            Keyframe kf2 = new Keyframe(0.5f, 0f, -3.3333332538604738f, -3.3333332538604738f, 0.3333333432674408f, 0.3333333432674408f);
             kf2.weightedMode = WeightedMode.None;
             kf2.tangentMode = 34;
 
