@@ -185,16 +185,16 @@ namespace RiskyMod
             CaptainOrbitalHiddenRealms.enabled = Config.Bind(captainString, "Hidden Realm Orbital Skills", true, "Allow Orbital skills in Hiden Realms.").Value;
             Microbots.enabled = Config.Bind(captainString, "Defensive Microbots Nerf", true, "Defensive Microbots no longer deletes stationary projectiles like gas clouds and Void Reaver mortars.").Value;
             Shock.enabled = Config.Bind(captainString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
-            //CaptainCore.enablePrimarySkillChanges = Config.Bind(captainString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
+            CaptainCore.enablePrimarySkillChanges = Config.Bind(captainString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
 
             Bandit2Core.enabled = Config.Bind(banditString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             BanditSpecialGracePeriod.enabled = Config.Bind(banditString, "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;
             BanditSpecialGracePeriod.duration = Config.Bind(banditString, "Special Grace Period Duration", 1.2f, "Length in seconds of Special Grace Period.").Value;
-            /*Bandit2Core.enablePassiveSkillChanges = Config.Bind(banditString, "Enable Passive Skill Changes", true, "Enable passive skill changes for this survivor.").Value;
+            Bandit2Core.enablePassiveSkillChanges = Config.Bind(banditString, "Enable Passive Skill Changes", true, "Enable passive skill changes for this survivor.").Value;
             Bandit2Core.enablePrimarySkillChanges = Config.Bind(banditString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
             Bandit2Core.enableSecondarySkillChanges = Config.Bind(banditString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
             Bandit2Core.enableUtilitySkillChanges = Config.Bind(banditString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
-            Bandit2Core.enableSpecialSkillChanges = Config.Bind(banditString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;*/
+            Bandit2Core.enableSpecialSkillChanges = Config.Bind(banditString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
         }
 
         private void CheckDependencies()

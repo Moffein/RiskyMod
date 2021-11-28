@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 using RiskyMod.Survivors.Bandit2;
+using R2API;
 
 namespace EntityStates.RiskyMod.Bandit2
 {
@@ -14,9 +15,9 @@ namespace EntityStates.RiskyMod.Bandit2
 			}
 		}
 
-		// Token: 0x06004767 RID: 18279 RVA: 0x001214DC File Offset: 0x0011F6DC
 		public override void OnEnter()
 		{
+			LoadStats();
 			base.OnEnter();
 			base.PlayAnimation("Gesture, Additive", "SlashBlade", "SlashBlade.playbackRate", this.duration);
 			this.bladeMeshObject = base.FindModelChild("BladeMesh").gameObject;
@@ -35,6 +36,7 @@ namespace EntityStates.RiskyMod.Bandit2
 		{
 			base.AuthorityModifyOverlapAttack(overlapAttack);
 			overlapAttack.damageType = DamageType.SuperBleedOnCrit;
+			DamageAPI.AddModdedDamageType(overlapAttack, Bandit2Core.AlwaysBackstab);
 		}
 
 		public override void Update()
@@ -65,13 +67,37 @@ namespace EntityStates.RiskyMod.Bandit2
 			return InterruptPriority.Skill;
 		}
 
-		public static float shortHopVelocity;
+		private void LoadStats()
+		{
+			baseDuration = 0.6f;
+			damageCoefficient = 3.6f;
+			hitBoxGroupName = "SlashBlade";
+			hitEffectPrefab = _hitEffectPrefab;
+			procCoefficient = 1f;
+			pushAwayForce = 0;
+			forceVector = Vector3.zero;
+			hitPauseDuration = 0.05f;
+			swingEffectPrefab = _swingEffectPrefab;
+			swingEffectMuzzleString = "MuzzleSlashBlade";
+			mecanimHitboxActiveParameter = "SlashBlade.hitBoxActive";
+			shorthopVelocityFromHit = 6f;
+			impactSound = _impactSound;
+			forceForwardVelocity = true;
+			beginStateSoundString = "Play_bandit2_m2_slash";
+			forwardVelocityCurve = _forwardVelocityCurve;
+			scaleHitPauseDurationAndVelocityWithAttackSpeed = false;
+			ignoreAttackSpeed = false;
+		}
 
-		public static float selfForceStrength;
+		public static float shortHopVelocity = 0f;
+		public static float selfForceStrength = 0f;
+		public static float minimumBaseDuration = 0.3f;
 
-		public static float minimumBaseDuration;
-
+		public static NetworkSoundEventDef _impactSound = Resources.Load<NetworkSoundEventDef>("networksoundeventdefs/nseBandit2ShivHit");
+		public static GameObject _hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniImpactVFXSlash");
+		public static GameObject _swingEffectPrefab;
 		public static AnimationCurve bloomCurve;
+		public static AnimationCurve _forwardVelocityCurve;
 
 		private GameObject bladeMeshObject;
 	}

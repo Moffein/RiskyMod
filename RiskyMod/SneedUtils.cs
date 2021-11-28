@@ -25,5 +25,18 @@ namespace SneedUtils
             EntityStateConfiguration esc = Resources.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
             DumpEntityStateConfig(esc);
         }
+
+        public static GameObject GetEntityStateFieldGameObject(string entityStateName, string fieldName)
+        {
+            EntityStateConfiguration esc = Resources.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
+            for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)
+            {
+                if (esc.serializedFieldsCollection.serializedFields[i].fieldName == fieldName)
+                {
+                    return esc.serializedFieldsCollection.serializedFields[i].fieldValue.objectValue as GameObject;
+                }
+            }
+            return null;
+        }
     }
 }

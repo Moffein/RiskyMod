@@ -11,7 +11,7 @@ namespace RiskyMod.Survivors.Bandit2
 {
     public class SpecialDamageTweaks
     {
-        public static bool specialExecute = true;
+        public static bool specialExecute = false;
         public static float specialExecuteFraction = 0.1f;
 
         public SpecialDamageTweaks()

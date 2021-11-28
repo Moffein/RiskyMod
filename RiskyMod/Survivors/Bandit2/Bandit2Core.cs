@@ -21,6 +21,7 @@ namespace RiskyMod.Survivors.Bandit2
 
         public static bool enablePassiveSkillChanges = true;
         public static bool enablePrimarySkillChanges = true;
+        public static bool enableSecondarySkillChanges = true;
         public static bool enableUtilitySkillChanges = true;
         public static bool enableSpecialSkillChanges = true;
 
@@ -46,9 +47,13 @@ namespace RiskyMod.Survivors.Bandit2
             {
                 orig(self);
                 SlashBlade.bloomCurve = EntityStates.Bandit2.Weapon.SlashBlade.bloomCurve;
+                SlashBlade._swingEffectPrefab = SneedUtils.SneedUtils.GetEntityStateFieldGameObject("EntityStates.Bandit2.Weapon.SlashBlade", "swingEffectPrefab");
             };
+
+            BuildSlashVelocityCurve();
             SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Bandit2.Weapon.SlashBlade");
         }
+
         private void ModifySkills(SkillLocator sk)
         {
             //How far to go with changing Bandit?
@@ -63,8 +68,8 @@ namespace RiskyMod.Survivors.Bandit2
                 //because I think you shouldn't be able to simply machinegun reloadable skills without letting go of the trigger.
             //Enemies sometimes just see you through invis and refuse to let you backstab them. True Invis + Longer Cloak?
             ModifyPassives(sk);
-
             ModifyPrimaries(sk);
+            ModifySecondaries(sk);
             ModifyUtilities(sk);
             ModifySpecials(sk);
 
@@ -156,6 +161,40 @@ namespace RiskyMod.Survivors.Bandit2
             Skills.Blast = rifleDef;
             sk.primary._skillFamily.variants[1].skillDef = Skills.Blast;
         }
+
+        private void ModifySecondaries(SkillLocator sk)
+        {
+            if (!enableSecondarySkillChanges) return;
+            //new IncreaseKnifeHitboxSize();
+
+            LoadoutAPI.AddSkill(typeof(SlashBlade));
+            SkillDef slashBladeDef = SkillDef.CreateInstance<SkillDef>();
+            slashBladeDef.activationState = new SerializableEntityStateType(typeof(SlashBlade));
+            slashBladeDef.activationStateMachineName = "Weapon";
+            slashBladeDef.baseMaxStock = 1;
+            slashBladeDef.baseRechargeInterval = 4f;
+            slashBladeDef.beginSkillCooldownOnSkillEnd = false;
+            slashBladeDef.canceledFromSprinting = false;
+            slashBladeDef.forceSprintDuringState = false;
+            slashBladeDef.dontAllowPastMaxStocks = true;
+            slashBladeDef.fullRestockOnAssign = true;
+            slashBladeDef.icon = sk.secondary._skillFamily.variants[0].skillDef.icon;
+            slashBladeDef.interruptPriority = InterruptPriority.Skill;
+            slashBladeDef.isCombatSkill = true;
+            slashBladeDef.keywordTokens = new string[] { "KEYWORD_SUPERBLEED" };
+            slashBladeDef.mustKeyPress = false;
+            slashBladeDef.cancelSprintingOnActivation = false;
+            slashBladeDef.rechargeStock = 1;
+            slashBladeDef.requiredStock = 1;
+            slashBladeDef.skillName = "SlashBlade";
+            slashBladeDef.skillNameToken = "BANDIT2_SECONDARY_NAME";
+            slashBladeDef.skillDescriptionToken = "BANDIT2_SECONDARY_DESCRIPTION";
+            slashBladeDef.stockToConsume = 1;
+            LoadoutAPI.AddSkillDef(slashBladeDef);
+            Skills.Knife = slashBladeDef;
+            sk.secondary._skillFamily.variants[0].skillDef = Skills.Knife;
+        }
+
         private void ModifyUtilities(SkillLocator sk)
         {
             if (!enableUtilitySkillChanges) return;
@@ -201,7 +240,7 @@ namespace RiskyMod.Survivors.Bandit2
             LoadoutAPI.AddSkill(typeof(BaseSidearmState));
             LoadoutAPI.AddSkill(typeof(ExitSidearm));
 
-            float cooldown = 7f;
+            float cooldown = 4f;
 
             SkillDef lightsOutDef = SkillDef.CreateInstance<SkillDef>();
             LoadoutAPI.AddSkill(typeof(PrepLightsOut));
@@ -313,6 +352,27 @@ namespace RiskyMod.Survivors.Bandit2
             };
             LoadoutAPI.AddSkillFamily(skillFamily);
             passive._skillFamily = skillFamily;
+        }
+        private void BuildSlashVelocityCurve()
+        {
+            Keyframe kf1 = new Keyframe(0f, 1f, -8.182907104492188f, -3.3333332538604738f, 0f, 0.058712735772132876f);
+            kf1.weightedMode = WeightedMode.None;
+            kf1.tangentMode = 65;
+
+            Keyframe kf2 = new Keyframe(0.30000001192092898f, 0f, -3.3333332538604738f, -3.3333332538604738f, 0.3333333432674408f, 0.3333333432674408f);
+            kf2.weightedMode = WeightedMode.None;
+            kf2.tangentMode = 34;
+
+            Keyframe[] keyframes = new Keyframe[2];
+            keyframes[0] = kf1;
+            keyframes[1] = kf2;
+
+            SlashBlade._forwardVelocityCurve = new AnimationCurve
+            {
+                preWrapMode = WrapMode.ClampForever,
+                postWrapMode = WrapMode.ClampForever,
+                keys = keyframes
+            };
         }
     }
 
