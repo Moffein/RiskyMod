@@ -281,7 +281,7 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.activationStateMachineName = "Weapon";
             lightsOutDef.baseMaxStock = 1;
             lightsOutDef.baseRechargeInterval = cooldown;
-            lightsOutDef.beginSkillCooldownOnSkillEnd = false;
+            lightsOutDef.beginSkillCooldownOnSkillEnd = true;
             lightsOutDef.canceledFromSprinting = false;
             lightsOutDef.forceSprintDuringState = false;
             lightsOutDef.dontAllowPastMaxStocks = true;
@@ -309,7 +309,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.activationStateMachineName = "Weapon";
             reuDef.baseMaxStock = 1;
             reuDef.baseRechargeInterval = cooldown;
-            reuDef.beginSkillCooldownOnSkillEnd = false;
+            reuDef.beginSkillCooldownOnSkillEnd = true;
             reuDef.canceledFromSprinting = false;
             reuDef.forceSprintDuringState = false;
             reuDef.dontAllowPastMaxStocks = true;
