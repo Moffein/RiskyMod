@@ -12,6 +12,7 @@
 	"BANDIT2_SPECIAL_DESCRIPTION_NOEXECUTE_RISKYMOD": "<style=cIsDamage>Slayer</style>. Fire a revolver shot for <style=cIsDamage>600% damage</style>.",
 	"BANDIT2_SPECIAL_ALT_NAME_RISKYMOD": "Rack Em Up",
 	"BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Slayer</style>. Rapidly fire a revolver shots for <style=cIsDamage>6x100% damage</style>. Each consecutive hit deals <style=cIsDamage>30%</style> extra damage. Enemies below <style=cIsHealth>10%</style> health are <style=cIsHealth>instantly killed</style>.",
-	"BANDIT2_SPECIAL_ALT_DESCRIPTION_NOEXECUTE_RISKYMOD": "<style=cIsDamage>Slayer</style>. Rapidly fire a revolver shots for <style=cIsDamage>6x100% damage</style>. Each consecutive hit deals <style=cIsDamage>30%</style> extra damage."
+	"BANDIT2_SPECIAL_ALT_DESCRIPTION_NOEXECUTE_RISKYMOD": "<style=cIsDamage>Slayer</style>. Rapidly fire a revolver shots for <style=cIsDamage>6x100% damage</style>. Each consecutive hit deals <style=cIsDamage>30%</style> extra damage.",
+	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Stunning</style>. Throw a hidden blade for <style=cIsDamage>240% damage</style>. Critical Strikes also cause <style=cIsHealth>hemorrhaging</style>."
 	}
 }

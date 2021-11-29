@@ -5,6 +5,7 @@ using EntityStates.RiskyMod.Bandit2.Revolver;
 using R2API;
 using RiskyMod.Survivors.Bandit2.Components;
 using RoR2;
+using RoR2.Projectile;
 using RoR2.Skills;
 using System;
 using UnityEngine;
@@ -25,6 +26,7 @@ namespace RiskyMod.Survivors.Bandit2
         public static bool enableSpecialSkillChanges = true;
 
         public static BodyIndex Bandit2Index;
+        private static AnimationCurve knifeVelocity;
 
         public Bandit2Core()
         {
@@ -41,15 +43,7 @@ namespace RiskyMod.Survivors.Bandit2
                 Bandit2Index = BodyCatalog.FindBodyIndex("Bandit2Body");
             };
 
-            On.RoR2.EntityStateCatalog.InitializeStateFields += (orig, self) =>
-            {
-                orig(self);
-                SlashBlade.bloomCurve = EntityStates.Bandit2.Weapon.SlashBlade.bloomCurve;
-                SlashBlade._swingEffectPrefab = SneedUtils.SneedUtils.GetEntityStateFieldGameObject("EntityStates.Bandit2.Weapon.SlashBlade", "swingEffectPrefab");
-            };
-
             BuildSlashVelocityCurve();
-            SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Bandit2.Weapon.SlashBlade");
         }
 
         private void ModifySkills(SkillLocator sk)
@@ -142,9 +136,8 @@ namespace RiskyMod.Survivors.Bandit2
             if (!enableSecondarySkillChanges) return;
             new IncreaseKnifeHitboxSize();
 
-            LoadoutAPI.AddSkill(typeof(SlashBlade));
             SkillDef slashBladeDef = SkillDef.CreateInstance<SkillDef>();
-            slashBladeDef.activationState = new SerializableEntityStateType(typeof(SlashBlade));
+            slashBladeDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Bandit2.Weapon.SlashBlade));
             slashBladeDef.activationStateMachineName = "Weapon";
             slashBladeDef.baseMaxStock = 1;
             slashBladeDef.baseRechargeInterval = 4f;
@@ -168,6 +161,70 @@ namespace RiskyMod.Survivors.Bandit2
             LoadoutAPI.AddSkillDef(slashBladeDef);
             Skills.Knife = slashBladeDef;
             sk.secondary._skillFamily.variants[0].skillDef = Skills.Knife;
+            knifeVelocity = BuildSlashVelocityCurve();
+            On.EntityStates.Bandit2.Weapon.SlashBlade.OnEnter += (orig, self) =>
+            {
+                orig(self);
+                if (self.characterBody && self.characterBody.isSprinting)
+                {
+                    self.forceForwardVelocity = true;
+                    self.forwardVelocityCurve = knifeVelocity;
+                }
+            };
+
+
+            SkillDef throwKnifeDef = SkillDef.CreateInstance<SkillDef>();
+            throwKnifeDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Bandit2.Weapon.Bandit2FireShiv));
+            throwKnifeDef.activationStateMachineName = "Weapon";
+            throwKnifeDef.baseMaxStock = 1;
+            throwKnifeDef.baseRechargeInterval = 4f;
+            throwKnifeDef.beginSkillCooldownOnSkillEnd = false;
+            throwKnifeDef.canceledFromSprinting = false;
+            throwKnifeDef.forceSprintDuringState = false;
+            throwKnifeDef.dontAllowPastMaxStocks = true;
+            throwKnifeDef.fullRestockOnAssign = true;
+            throwKnifeDef.icon = sk.secondary._skillFamily.variants[1].skillDef.icon;
+            throwKnifeDef.interruptPriority = InterruptPriority.Skill;
+            throwKnifeDef.isCombatSkill = true;
+            throwKnifeDef.keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SUPERBLEED" };
+            throwKnifeDef.mustKeyPress = false;
+            throwKnifeDef.cancelSprintingOnActivation = true;
+            throwKnifeDef.rechargeStock = 1;
+            throwKnifeDef.requiredStock = 1;
+            throwKnifeDef.skillName = "FireShiv";
+            throwKnifeDef.skillNameToken = "BANDIT2_SECONDARY_ALT_NAME";
+            throwKnifeDef.skillDescriptionToken = "BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
+            throwKnifeDef.stockToConsume = 1;
+            LoadoutAPI.AddSkillDef(throwKnifeDef);
+            Skills.ThrowKnife = throwKnifeDef;
+            sk.secondary._skillFamily.variants[1].skillDef = Skills.ThrowKnife;
+
+            On.EntityStates.Bandit2.Weapon.Bandit2FireShiv.FireShiv += (orig, self) =>
+            {
+                if (EntityStates.Bandit2.Weapon.Bandit2FireShiv.muzzleEffectPrefab)
+                {
+                    EffectManager.SimpleMuzzleFlash(EntityStates.Bandit2.Weapon.Bandit2FireShiv.muzzleEffectPrefab, self.gameObject, EntityStates.Bandit2.Weapon.Bandit2FireShiv.muzzleString, false);
+                }
+                if (self.isAuthority)
+                {
+                    Ray aimRay = self.GetAimRay();
+                    if (self.projectilePrefab != null)
+                    {
+                        FireProjectileInfo fireProjectileInfo = new FireProjectileInfo
+                        {
+                            projectilePrefab = self.projectilePrefab,
+                            position = aimRay.origin,
+                            rotation = Util.QuaternionSafeLookRotation(aimRay.direction),
+                            owner = self.gameObject,
+                            damage = self.damageStat * self.damageCoefficient,
+                            force = self.force,
+                            crit = self.RollCrit(),
+                            damageTypeOverride = new DamageType?(DamageType.SuperBleedOnCrit | DamageType.Stun1s)
+                        };
+                        ProjectileManager.instance.FireProjectile(fireProjectileInfo);
+                    }
+                }
+            };
         }
 
         private void ModifyUtilities(SkillLocator sk)
@@ -328,7 +385,7 @@ namespace RiskyMod.Survivors.Bandit2
             LoadoutAPI.AddSkillFamily(skillFamily);
             passive._skillFamily = skillFamily;
         }
-        private void BuildSlashVelocityCurve()
+        private AnimationCurve BuildSlashVelocityCurve()
         {
             Keyframe kf1 = new Keyframe(0f, 3f, -8.182907104492188f, -3.3333332538604738f, 0f, 0.058712735772132876f);
             kf1.weightedMode = WeightedMode.None;
@@ -342,7 +399,7 @@ namespace RiskyMod.Survivors.Bandit2
             keyframes[0] = kf1;
             keyframes[1] = kf2;
 
-            SlashBlade._forwardVelocityCurve = new AnimationCurve
+            return new AnimationCurve
             {
                 preWrapMode = WrapMode.ClampForever,
                 postWrapMode = WrapMode.ClampForever,
