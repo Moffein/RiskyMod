@@ -46,7 +46,7 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
 
         public override void OnExit()
 		{
-			if (!buttonReleased && base.characterBody)
+			if (!buttonReleased && base.characterBody && base.skillLocator && base.skillLocator.primary.stock > 0)
 			{
 				base.characterBody.SetSpreadBloom(0f, false);
 			}

@@ -41,7 +41,7 @@ namespace EntityStates.RiskyMod.Bandit2
 		{
 			base.AuthorityModifyOverlapAttack(overlapAttack);
 			overlapAttack.damageType = DamageType.SuperBleedOnCrit;
-			DamageAPI.AddModdedDamageType(overlapAttack, Bandit2Core.AlwaysBackstab);
+			//DamageAPI.AddModdedDamageType(overlapAttack, Bandit2Core.AlwaysBackstab);
 		}
 
 		public override void Update()

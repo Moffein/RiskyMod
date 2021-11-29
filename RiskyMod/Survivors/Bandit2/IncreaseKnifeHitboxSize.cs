@@ -10,7 +10,13 @@ namespace RiskyMod.Survivors.Bandit2
         {
             if (!enabled) return;
             CharacterBody cb = RoR2Content.Survivors.Bandit2.bodyPrefab.GetComponent<CharacterBody>();
-            ChildLocator childLocator = cb.modelLocator.modelTransform.GetComponent<ChildLocator>();    //nullrefs
+            HitBoxGroup hbg = cb.GetComponentInChildren<HitBoxGroup>();
+            if (hbg.groupName == "SlashBlade")
+            {
+                Transform hitboxTransform = hbg.hitBoxes[0].transform;
+                hitboxTransform.localScale = new Vector3(hitboxTransform.localScale.x, hitboxTransform.localScale.y * 1.4f, hitboxTransform.localScale.z * 1.3f);
+                hitboxTransform.localPosition += new Vector3(0f, 0f, 1f);
+            }
         }
     }
 }

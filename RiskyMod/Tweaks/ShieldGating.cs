@@ -40,7 +40,7 @@ namespace RiskyMod.Tweaks
                     && !DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage)
                     && (self.body && self.body.teamComponent && (self.body.teamComponent.teamIndex == TeamIndex.Player || self.body.isPlayerControlled)))
                     {
-                        self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 0.2f);
+                        self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 0.1f);
                         return 0f;
                     }
                     return remainingDamage;

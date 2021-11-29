@@ -16,7 +16,6 @@ namespace RiskyMod.Survivors.Bandit2
         public static BuffDef SpecialDebuff;
         public static DamageAPI.ModdedDamageType SpecialDamage;
         public static DamageAPI.ModdedDamageType RackEmUpDamage;
-        public static DamageAPI.ModdedDamageType AlwaysBackstab;
         public static bool enabled = true;
 
         public static bool enablePassiveSkillChanges = true;
@@ -31,7 +30,6 @@ namespace RiskyMod.Survivors.Bandit2
         {
             if (!enabled) return;
             new BanditSpecialGracePeriod();
-            AlwaysBackstab = DamageAPI.ReserveDamageType();
             SpecialDamage = DamageAPI.ReserveDamageType();
 
             new CloakBuff();
@@ -56,35 +54,12 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void ModifySkills(SkillLocator sk)
         {
-            //How far to go with changing Bandit?
-            //Stay near vanilla, or try to reach a halfway with BanditReloaded?
-
-            //Wanted Quickdraw/Backstab as selectable passives, but Quickdraw (isnta reload on skill use) on its own doesn't feel as fun as Backstab.
-            //Would like to combine them, but Bandit's earlygame DPS is already through the roof, even with nerfed backstab multiplier.
-                //Maybe only knives can backstab?
-                    //But being able to dump your shotgun into the back of an enemy is a big part of the fun.
-            //But even with Bandit's high earlygame DPS, his lategame DPS is lackluster and he doesn't stand out much.
-                //Minimum reload entry duration certainly doesn't help there, though I want to keep it
-                //because I think you shouldn't be able to simply machinegun reloadable skills without letting go of the trigger.
-            //Enemies sometimes just see you through invis and refuse to let you backstab them. True Invis + Longer Cloak?
+            //Goal is to keep Bandit close to vanilla, but with small tweaks.
             ModifyPassives(sk);
             ModifyPrimaries(sk);
             ModifySecondaries(sk);
             ModifyUtilities(sk);
             ModifySpecials(sk);
-
-            //Secondaries:
-            //Boost damage 33% to compensate for lower backstab crit mult.
-            //Default knife gets bigger hitbox so you don't whiff so much, lunge forward like Loader's alt shift but with less forcce.
-            //Throwing knife gains damage over distance.
-            //Merge Dynamite into the mod?
-                //Should Dynamite backstab? Was considering making backstab not apply to explosives/AOE.
-            //Does Hemorrhage even help much lategame?
-
-            //Specials
-            //10% HP Execute?
-            //Add Rack Em Up from BanditReloaded
-            //Select between Reset Cooldowns and Desperado as a passive.
         }
 
         private void ModifyPassives(SkillLocator sk)
@@ -165,7 +140,7 @@ namespace RiskyMod.Survivors.Bandit2
         private void ModifySecondaries(SkillLocator sk)
         {
             if (!enableSecondarySkillChanges) return;
-            //new IncreaseKnifeHitboxSize();
+            new IncreaseKnifeHitboxSize();
 
             LoadoutAPI.AddSkill(typeof(SlashBlade));
             SkillDef slashBladeDef = SkillDef.CreateInstance<SkillDef>();
@@ -355,11 +330,11 @@ namespace RiskyMod.Survivors.Bandit2
         }
         private void BuildSlashVelocityCurve()
         {
-            Keyframe kf1 = new Keyframe(0f, 1.6f, -8.182907104492188f, -3.3333332538604738f, 0f, 0.058712735772132876f);
+            Keyframe kf1 = new Keyframe(0f, 3f, -8.182907104492188f, -3.3333332538604738f, 0f, 0.058712735772132876f);
             kf1.weightedMode = WeightedMode.None;
             kf1.tangentMode = 65;
 
-            Keyframe kf2 = new Keyframe(0.5f, 0f, -3.3333332538604738f, -3.3333332538604738f, 0.3333333432674408f, 0.3333333432674408f);
+            Keyframe kf2 = new Keyframe(0.3f, 0f, -3.3333332538604738f, -3.3333332538604738f, 0.3333333432674408f, 0.3333333432674408f);    //Time should match up with SlashBlade min duration (hitbox length)
             kf2.weightedMode = WeightedMode.None;
             kf2.tangentMode = 34;
 
