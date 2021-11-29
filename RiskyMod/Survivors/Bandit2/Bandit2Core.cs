@@ -296,7 +296,7 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.requiredStock = 1;
             lightsOutDef.skillName = "LightsOut";
             lightsOutDef.skillNameToken = "BANDIT2_SPECIAL_NAME";
-            lightsOutDef.skillDescriptionToken = SpecialDamageTweaks.specialExecute? "BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD" : "BANDIT2_SPECIAL_DESCRIPTION_NOEXECUTE_RISKYMOD";
+            lightsOutDef.skillDescriptionToken = "BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD";
             lightsOutDef.stockToConsume = 1;
             LoadoutAPI.AddSkillDef(lightsOutDef);
             Skills.LightsOut = lightsOutDef;
@@ -324,7 +324,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.requiredStock = 1;
             reuDef.skillName = "RackEmUp";
             reuDef.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME_RISKYMOD";
-            reuDef.skillDescriptionToken = SpecialDamageTweaks.specialExecute ? "BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "BANDIT2_SPECIAL_ALT_DESCRIPTION_NOEXECUTE_RISKYMOD";
+            reuDef.skillDescriptionToken = "BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
             reuDef.stockToConsume = 1;
             LoadoutAPI.AddSkillDef(reuDef);
             Skills.RackEmUp = reuDef;
