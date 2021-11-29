@@ -40,7 +40,7 @@ namespace RiskyMod.Items.Uncommon
             ec.soundName = "Play_treeBot_m2_launch";
             EffectAPI.AddEffect(procEffectPrefab);
 
-            TakeDamage.HandleOnHpLostActions += OnHpLost;
+            TakeDamage.HandleOnPercentHpLostActions += OnHpLost;
         }
 
         private void OnHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost)

@@ -23,7 +23,7 @@ namespace RiskyMod.Items.Uncommon
 
             //LanguageAPI.Add("ITEM_THORNS_DESC", "Getting hit causes you to explode in a burst of razors, dealing <style=cIsDamage>80%-420% damage</style>. Hits up to <style=cIsDamage>5</style> <style=cStack>(+2 per stack)</style> targets in a <style=cIsDamage>16m-40m</style> radius. Damage and radius increases the more damage taken.");
 
-            TakeDamage.HandleOnHpLostActions += OnHpLost;
+            TakeDamage.HandleOnPercentHpLostActions += OnHpLost;
         }
 
         private void OnHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost)

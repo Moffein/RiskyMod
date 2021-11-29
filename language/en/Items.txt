@@ -24,7 +24,7 @@
 	"ITEM_SLOWONHIT_PICKUP_RISKYMOD": "Impair enemies on hit.",
 	"ITEM_SLOWONHIT_DESC_RISKYMOD": "<style=cIsUtility>Impair</style> enemies on hit, reducing <style=cIsUtility>movement speed</style> by <style=cIsUtility>-60%</style> and increasing <style=cIsDamage>damage taken</style> by <style=cIsDamage>15%</style> for <style=cIsUtility>2s</style> <style=cStack>(+2s per stack)</style>.",
 	
-	"ITEM_SEED_DESC_RISKYMOD": "Dealing damage <style=cIsHealing>heals</style> you for <style=cIsHealing>3 <style=cStack>(+3 per stack)</style> health</style>.",
+	"ITEM_SEED_DESC_RISKYMOD": "Dealing damage <style=cIsHealing>heals</style> you for <style=cIsHealing>7% <style=cStack>(+3.5% per stack)</style></style> of the <style=cIsDamage>damage dealt</style>.",
 	
 	"ITEM_MISSILE_DESC_RISKYMOD": "<style=cIsDamage>10%</style> chance to fire a missile that deals <style=cIsDamage>300%</style> <style=cStack>(+180% per stack)</style> TOTAL damage.",
 	

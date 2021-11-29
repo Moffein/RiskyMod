@@ -18,9 +18,13 @@ namespace RiskyMod.SharedHooks
 {
     public class TakeDamage
     {
-        public delegate void OnHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost);
-        public static OnHpLost HandleOnHpLostActions = HandleOnHpLostMethod;
-        private static void HandleOnHpLostMethod(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost) { }
+        public delegate void OnPercentHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost);
+        public static OnPercentHpLost HandleOnPercentHpLostActions = HandleOnPercentHpLostMethod;
+        private static void HandleOnPercentHpLostMethod(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost) { }
+
+        public delegate void OnHpLostAttacker(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory inventory, float hpLost);
+        public static OnHpLostAttacker HandleOnHpLostAttackerActions = HandleOnHpLostAttackerMethod;
+        private static void HandleOnHpLostAttackerMethod(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory inventory, float hpLost) { }
 
         public delegate void ModifyInitialDamage(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody);
         public static ModifyInitialDamage ModifyInitialDamageActions = ModifyInitialDamageMethod;
@@ -100,8 +104,16 @@ namespace RiskyMod.SharedHooks
                         Inventory inventory = self.body.inventory;
                         if (inventory)
                         {
-                            float percentHPLost = (oldHP - self.combinedHealth) / self.fullCombinedHealth * 100f;
-                            HandleOnHpLostActions.Invoke(damageInfo, self, inventory, percentHPLost);
+                            float totalHPLost = oldHP - self.combinedHealth;
+                            if (totalHPLost > 0f)
+                            {
+                                if (attackerBody)
+                                {
+                                    HandleOnHpLostAttackerActions.Invoke(damageInfo, self, attackerBody, inventory, totalHPLost);
+                                }
+                                float percentHPLost = totalHPLost / self.fullCombinedHealth * 100f;
+                                HandleOnPercentHpLostActions.Invoke(damageInfo, self, inventory, percentHPLost);
+                            }
 
                             //This should happen after OnHpLost
                             if (Planula.enabled)
