@@ -8,9 +8,9 @@ namespace RiskyMod.Tweaks
     public class ShrineCombatItems
     {
         public static bool enabled = true;
-        public static float whiteChance = 50f;
-        public static float greenChance = 47.5f;
-        public static float redChance = 2.5f;
+        public static float whiteChance = 79.2f;
+        public static float greenChance = 19.8f;
+        public static float redChance = 0.99f;
         private static Vector3 rewardPositionOffset = new Vector3(0f, 6f, 0f);
         public ShrineCombatItems()
         {
@@ -20,7 +20,7 @@ namespace RiskyMod.Tweaks
                 orig(self);
                 if (self.combatDirector)
                 {
-                    self.combatDirector.expRewardCoefficient *= 0.55f;  //0.2 -> 0.11
+                    self.combatDirector.expRewardCoefficient *= 0.3335f;  //0.2 -> 0.067
                 }
             };
             On.RoR2.ShrineCombatBehavior.OnDefeatedServer += (orig, self) =>
