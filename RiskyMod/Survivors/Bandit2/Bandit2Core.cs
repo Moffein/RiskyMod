@@ -34,7 +34,6 @@ namespace RiskyMod.Survivors.Bandit2
             new BanditSpecialGracePeriod();
             SpecialDamage = DamageAPI.ReserveDamageType();
 
-            new CloakBuff();
             ModifySkills(RoR2Content.Survivors.Bandit2.bodyPrefab.GetComponent<SkillLocator>());
 
             On.RoR2.SurvivorCatalog.Init += (orig) =>
@@ -230,6 +229,7 @@ namespace RiskyMod.Survivors.Bandit2
         private void ModifyUtilities(SkillLocator sk)
         {
             if (!enableUtilitySkillChanges) return;
+            new CloakBuff();
 
             LoadoutAPI.AddSkill(typeof(ThrowSmokebomb));
             LoadoutAPI.AddSkill(typeof(StealthMode));

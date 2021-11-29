@@ -1,6 +1,4 @@
-﻿using RoR2;
-using RoR2.CharacterAI;
-using UnityEngine;
+﻿using MonoMod.Cil;
 
 namespace RiskyMod.Survivors.Bandit2
 {
@@ -10,7 +8,14 @@ namespace RiskyMod.Survivors.Bandit2
         public CloakBuff()
         {
             if (!enabled) return;
-
+            IL.RoR2.CharacterAI.BaseAI.Target.GetBullseyePosition += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchLdcR4(2f)
+                    );
+                c.Next.Operand = 4f;
+            };
         }
     }
 }
