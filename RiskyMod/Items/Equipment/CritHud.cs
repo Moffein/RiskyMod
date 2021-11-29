@@ -37,7 +37,7 @@ namespace RiskyMod.Items.Equipment
                             if (attackerBody.HasBuff(RoR2Content.Buffs.FullCrit))
                             {
                                 float trueCrit = attackerBody.crit - 100f;
-                                if (damageInfo.procChainMask.HasProc(ProcType.Backstab) || trueCrit >= 100f || Util.CheckRoll(trueCrit, attackerBody.master))
+                                if (trueCrit >= 100f || Util.CheckRoll(trueCrit, attackerBody.master))
                                 {
                                     critMult *= 1.5f;
                                 }
