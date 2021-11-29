@@ -1,8 +1,8 @@
 {
 	strings:
 	{
-	"BANDIT2_PRIMARY_DESC_RISKYMOD": "Fire a shotgun burst for <style=cIsDamage>5x90% damage</style>. Can hold up to 4 shells.",
-	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD": "Fire a rifle blast that pierces for <style=cIsDamage>350% damage</style>. Can hold up to 4 bullets.",
+	"BANDIT2_PRIMARY_DESC_RISKYMOD": "Fire a shotgun burst for <style=cIsDamage>5x80% damage</style>. Can hold up to 4 shells.",
+	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD": "Fire a rifle blast that pierces for <style=cIsDamage>330% damage</style>. Can hold up to 4 bullets.",
 	"CAPTAIN_PRIMARY_DESC_RISKYMOD": "Fire a blast of pellets that deal <style=cIsDamage>7x100% damage</style>. Charging narrows the <style=cIsUtility>spread</style>. The number of pellets increases with attack speed.",
 	"BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD": "All attacks from <style=cIsDamage>behind</style> are <style=cIsDamage>Mini Critical Strikes</style> that deal <style=cIsDamage>50%</style> more damage.",
 	"BANDIT2_REVOLVER_NAME_RISKYMOD": "Gunslinger",
