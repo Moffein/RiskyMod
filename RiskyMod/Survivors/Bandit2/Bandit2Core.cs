@@ -31,8 +31,10 @@ namespace RiskyMod.Survivors.Bandit2
         public Bandit2Core()
         {
             if (!enabled) return;
-            new BanditSpecialGracePeriod();
             SpecialDamage = DamageAPI.ReserveDamageType();
+            RackEmUpDamage = DamageAPI.ReserveDamageType();
+            new BanditSpecialGracePeriod();
+            new DesperadoRework();
 
             ModifySkills(RoR2Content.Survivors.Bandit2.bodyPrefab.GetComponent<SkillLocator>());
 
@@ -41,13 +43,10 @@ namespace RiskyMod.Survivors.Bandit2
                 orig();
                 Bandit2Index = BodyCatalog.FindBodyIndex("Bandit2Body");
             };
-
-            BuildSlashVelocityCurve();
         }
 
         private void ModifySkills(SkillLocator sk)
         {
-            //Goal is to keep Bandit close to vanilla, but with small tweaks.
             ModifyPassives(sk);
             ModifyPrimaries(sk);
             ModifySecondaries(sk);
@@ -263,7 +262,6 @@ namespace RiskyMod.Survivors.Bandit2
         private void ModifySpecials(SkillLocator sk)
         {
             if (!enableSpecialSkillChanges) return;
-            new DesperadoRework();
             SpecialDamageType(sk);
             SpecialDebuff = BuildSpecialDebuff();
             new SpecialDamageTweaks();
@@ -360,7 +358,7 @@ namespace RiskyMod.Survivors.Bandit2
             SkillDef desperado = ScriptableObject.CreateInstance<SkillDef>();
             desperado.activationState = new SerializableEntityStateType(typeof(BaseState));
             desperado.activationStateMachineName = "Weapon";
-            desperado.skillDescriptionToken = "BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD";
+            desperado.skillDescriptionToken = DesperadoRework.enabled ? "BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD" : "BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD";
             desperado.skillName = "Desperado";
             desperado.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME";
             desperado.icon = sk.passiveSkill.icon;  //TODO: ICON
