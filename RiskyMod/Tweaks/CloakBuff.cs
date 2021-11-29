@@ -1,6 +1,6 @@
 ﻿using MonoMod.Cil;
 
-namespace RiskyMod.Survivors.Bandit2
+namespace RiskyMod.Tweaks
 {
     public class CloakBuff
     {
@@ -14,7 +14,7 @@ namespace RiskyMod.Survivors.Bandit2
                 c.GotoNext(
                      x => x.MatchLdcR4(2f)
                     );
-                c.Next.Operand = 4f;
+                c.Next.Operand = 3f;
             };
         }
     }

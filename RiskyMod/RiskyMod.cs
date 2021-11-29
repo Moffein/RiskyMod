@@ -122,6 +122,7 @@ namespace RiskyMod
             FixSlayer.enabled = Config.Bind(tweakString, "Fix Slayer Procs", true, "Bandit/Acrid bonus damage to low hp effect now applies to procs.").Value;
             SceneDirectorMonsterRewards.enabled = Config.Bind(tweakString, "SceneDirector Monster Rewards", true, "Monsters that spawn with the map now give the same rewards as teleporter monsters.").Value;
             VengeancePercentHeal.enabled = Config.Bind(tweakString, "Reduce Vengeance Healing", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
+            CloakBuff.enabled = Config.Bind(tweakString, "Cloak Buff", true, "Increases delay between position updates while cloaked.").Value;
 
             BisonSteak.enabled = Config.Bind(commonString, "Bison Steak", true, itemConfigDescString).Value;
             CritGlasses.enabled = Config.Bind(commonString, "Lensmakers Glasses", true, itemConfigDescString).Value;
@@ -226,6 +227,7 @@ namespace RiskyMod
             new ShrineCombatItems();
             new VengeancePercentHeal();
             new NoPartialLevels();
+            new CloakBuff();
         }
 
         private void RunFixes()

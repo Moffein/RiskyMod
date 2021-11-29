@@ -229,7 +229,6 @@ namespace RiskyMod.Survivors.Bandit2
         private void ModifyUtilities(SkillLocator sk)
         {
             if (!enableUtilitySkillChanges) return;
-            new CloakBuff();
 
             LoadoutAPI.AddSkill(typeof(ThrowSmokebomb));
             LoadoutAPI.AddSkill(typeof(StealthMode));
