@@ -30,7 +30,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 				bulletAttack.minSpread = minSpread;
 				bulletAttack.maxSpread = maxSpread;
 				bulletAttack.bulletCount = 1u;
-				bulletAttack.damage = damageCoefficient * this.damageStat;
+				bulletAttack.damage = damageCoefficient * this.damageStat * DesperadoRework.GetDesperadoMult(base.characterBody);
 				bulletAttack.force = force;
 				bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
 				bulletAttack.tracerEffectPrefab = tracerEffectPrefab;

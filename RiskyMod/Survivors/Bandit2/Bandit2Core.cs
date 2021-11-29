@@ -263,7 +263,7 @@ namespace RiskyMod.Survivors.Bandit2
         private void ModifySpecials(SkillLocator sk)
         {
             if (!enableSpecialSkillChanges) return;
-
+            new DesperadoRework();
             SpecialDamageType(sk);
             SpecialDebuff = BuildSpecialDebuff();
             new SpecialDamageTweaks();

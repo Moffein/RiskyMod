@@ -8,6 +8,7 @@
 	"BANDIT2_REVOLVER_NAME_RISKYMOD": "Gunslinger",
 	"BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD": "Revolver kills <style=cIsUtility>reset all your cooldowns</style>.",
 	"BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD": "Revolver kills grant <style=cIsDamage>stacking tokens</style> for <style=cIsDamage>10%</style> more revolver damage.",
+	"BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD": "Revolver kills grant <style=cIsDamage>stacking tokens</style> for <style=cIsDamage>2.5%</style> more revolver damage.",
 	"BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Slayer</style>. Fire a revolver shot for <style=cIsDamage>600% damage</style>.",
 	"BANDIT2_SPECIAL_ALT_NAME_RISKYMOD": "Rack Em Up",
 	"BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Slayer</style>. Rapidly fire a revolver shots for <style=cIsDamage>6x100% damage</style>. Each consecutive hit deals <style=cIsDamage>30%</style> extra damage.",
