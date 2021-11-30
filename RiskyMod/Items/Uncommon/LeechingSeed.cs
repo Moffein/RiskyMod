@@ -31,15 +31,14 @@ namespace RiskyMod.Items.Uncommon
 
 		private void HealOnHit(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory inventory, float hpLost)
 		{
-			if (!damageInfo.procChainMask.HasProc(ProcType.HealOnHit) && attackerBody.inventory && attackerBody.healthComponent)
+			if (damageInfo.procCoefficient > 0f && !damageInfo.procChainMask.HasProc(ProcType.HealOnHit) && attackerBody.inventory && attackerBody.healthComponent)
             {
 				int seedCount = attackerBody.inventory.GetItemCount(RoR2Content.Items.Seed);
 				if (seedCount > 0)
                 {
 					float toHeal = hpLost * (0.035f + 0.035f * seedCount);
-					ProcChainMask procChainMask = damageInfo.procChainMask;
-					procChainMask.AddProc(ProcType.HealOnHit);
-					attackerBody.healthComponent.Heal(toHeal * damageInfo.procCoefficient, procChainMask);
+					damageInfo.procChainMask.AddProc(ProcType.HealOnHit);
+					attackerBody.healthComponent.Heal(toHeal * damageInfo.procCoefficient, damageInfo.procChainMask);
 				}
             }
 		}

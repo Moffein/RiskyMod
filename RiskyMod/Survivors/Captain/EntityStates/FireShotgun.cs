@@ -17,7 +17,7 @@ namespace EntitiyStates.RiskyMod.Captain
 			this.maxDistance = 2000f;
 			this.bulletRadius = 0.3f;
 			this.useSmartCollision = true;
-			this.damageCoefficient = 1f;
+			this.damageCoefficient = 1.1f;
 			this.procCoefficient = 0.75f;
 			this.force = 500f;
 			this.minSpread = 0f;
