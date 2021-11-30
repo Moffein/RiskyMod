@@ -7,13 +7,25 @@ namespace EntityStates.RiskyMod.Commando
 {
 	public class FireBarrage : BaseState
 	{
+		public virtual void LoadStats()
+		{
+			internalBaseBulletCount = baseBulletCount;
+			internalBaseDurationBetweenShots = baseDurationBetweenShots;
+		}
+
+		
+
 		public override void OnEnter()
 		{
 			base.OnEnter();
+			LoadStats();
 			base.characterBody.SetSpreadBloom(0.2f, false);
 			this.duration = FireBarrage.totalDuration;
-			this.durationBetweenShots = FireBarrage.baseDurationBetweenShots / this.attackSpeedStat;
-			this.bulletCount = (int)((float)FireBarrage.baseBulletCount * this.attackSpeedStat);
+			this.durationBetweenShots = internalBaseDurationBetweenShots / this.attackSpeedStat;
+			this.bulletCount = (int)((float)internalBaseBulletCount * this.attackSpeedStat);
+
+
+			maxAttackSpeed = this.attackSpeedStat;
 			this.modelAnimator = base.GetModelAnimator();
 			this.modelTransform = base.GetModelTransform();
 			base.PlayCrossfade("Gesture, Additive", "FireBarrage", "FireBarrage.playbackRate", this.duration, 0.2f);
@@ -59,12 +71,18 @@ namespace EntityStates.RiskyMod.Commando
 					damageType = DamageType.Stun1s,
 					falloffModel = BulletAttack.FalloffModel.None
 				};
-				DamageAPI.AddModdedDamageType(ba, CommandoCore.SuppressiveFireDamage);
+				AddDamageType(ba);
 				ba.Fire();
 			}
+
 			base.characterBody.AddSpreadBloom(FireBarrage.spreadBloomValue);
 			this.totalBulletsFired++;
 			Util.PlaySound(FireBarrage.fireBarrageSoundString, base.gameObject);
+		}
+
+		public virtual void AddDamageType(BulletAttack ba)
+        {
+			DamageAPI.AddModdedDamageType(ba, CommandoCore.SuppressiveFireDamage);
 		}
 
 		public override void OnExit()
@@ -75,6 +93,15 @@ namespace EntityStates.RiskyMod.Commando
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
+
+			//Fire rate updates during the skill.
+			this.durationBetweenShots = internalBaseDurationBetweenShots / this.attackSpeedStat;
+			if (maxAttackSpeed < this.attackSpeedStat)
+            {
+				maxAttackSpeed = this.attackSpeedStat;
+				this.bulletCount = (int)((float)internalBaseBulletCount * maxAttackSpeed);
+			}
+
 			this.stopwatchBetweenShots += Time.fixedDeltaTime;
 			if (this.stopwatchBetweenShots >= this.durationBetweenShots && this.totalBulletsFired < this.bulletCount)
 			{
@@ -92,6 +119,9 @@ namespace EntityStates.RiskyMod.Commando
 		{
 			return InterruptPriority.Skill;
 		}
+
+		public float internalBaseBulletCount;
+		public float internalBaseDurationBetweenShots;
 
 
 		public static GameObject explosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
@@ -121,6 +151,8 @@ namespace EntityStates.RiskyMod.Commando
 		private Transform modelTransform;
 		private float duration;
 		private float durationBetweenShots;
+
+		private float maxAttackSpeed;
 
 		public static void SuppressiveFireAOE(GlobalEventManager self, DamageInfo damageInfo, GameObject hitObject)
 		{

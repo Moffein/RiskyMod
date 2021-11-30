@@ -11,6 +11,8 @@ namespace EntityStates.RiskyMod.Commando
         public static string beepSoundString = "Play_commando_M2_grenade_beep";
 
         //Things that happen when you overcook
+        public static float damageCoefficient = 12f;
+        public static float force = 2000f;
         public static float selfHPDamagePercent = 0.6f; //Remove this fraction of combined HP
         public static float selfForce = 4500f;
         public static GameObject overcookExplosionEffectPrefab;
@@ -22,10 +24,19 @@ namespace EntityStates.RiskyMod.Commando
         private Animator animator;
         private Transform rightHand;
 
+        public float radiusInternal;
+        public float selfForceInternal;
+
+        public virtual void LoadStats()
+        {
+            radiusInternal = selfBlastRadius;
+            selfForceInternal = selfForce;
+        }
+
         public override void OnEnter()
         {
             base.OnEnter();
-
+            LoadStats();
             animator = base.GetModelAnimator();
             if (animator)
             {
@@ -95,15 +106,15 @@ namespace EntityStates.RiskyMod.Commando
 
         private void OvercookExplosion()
         {
-            EffectManager.SpawnEffect(overcookExplosionEffectPrefab, new EffectData { origin = base.transform.position, scale = selfBlastRadius }, true);
+            EffectManager.SpawnEffect(overcookExplosionEffectPrefab, new EffectData { origin = base.transform.position, scale = radiusInternal }, true);
             new BlastAttack
             {
-                radius = selfBlastRadius,
+                radius = radiusInternal,
                 attackerFiltering = AttackerFiltering.NeverHit,
-                baseDamage = this.damageStat * ThrowGrenade._damageCoefficient,
+                baseDamage = this.damageStat * damageCoefficient,
                 falloffModel = BlastAttack.FalloffModel.None,
                 procCoefficient = 1f,
-                baseForce = ThrowGrenade._force,
+                baseForce = force,
                 crit = base.RollCrit(),
                 damageType = DamageType.Generic,
                 attacker = base.gameObject,
@@ -118,7 +129,7 @@ namespace EntityStates.RiskyMod.Commando
                 attacker = null,
                 crit = false,
                 damage = base.healthComponent.fullCombinedHealth * CookGrenade.selfHPDamagePercent,
-                force = base.GetAimRay().direction * CookGrenade.selfForce,
+                force = base.GetAimRay().direction * selfForceInternal,
                 damageType = DamageType.AOE,
                 inflictor = null,
                 procCoefficient = 0f,

@@ -13,7 +13,7 @@ namespace EntityStates.RiskyMod.Commando
 
         public float fuseTime;
 
-        private void LoadStats()
+        public virtual void LoadStats()
         {
             projectilePrefab = _projectilePrefab;
             damageCoefficient = _damageCoefficient;

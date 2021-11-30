@@ -1,5 +1,6 @@
 ﻿using EntityStates;
 using EntityStates.RiskyMod.Commando;
+using EntityStates.RiskyMod.Commando.Scepter;
 using MonoMod.Cil;
 using R2API;
 using RiskyMod.SharedHooks;
@@ -7,6 +8,7 @@ using RoR2;
 using RoR2.Projectile;
 using RoR2.Skills;
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace RiskyMod.Survivors.Commando
@@ -19,6 +21,7 @@ namespace RiskyMod.Survivors.Commando
         public static bool enableUtilitySkillChanges = true;
         public static bool enableSpecialSkillChanges = true;
         public static DamageAPI.ModdedDamageType SuppressiveFireDamage;
+        public static DamageAPI.ModdedDamageType SuppressiveFireScepterDamage;
         public CommandoCore()
         {
             if (!enabled) return;
@@ -115,6 +118,7 @@ namespace RiskyMod.Survivors.Commando
             if (!enableSpecialSkillChanges) return;
 
             SuppressiveFireDamage = DamageAPI.ReserveDamageType();
+            LoadoutAPI.AddSkill(typeof(FireBarrage));
             SkillDef barrageDef = SkillDef.CreateInstance<SkillDef>();
             barrageDef.activationState = new SerializableEntityStateType(typeof(FireBarrage));
             barrageDef.activationStateMachineName = "Weapon";
@@ -169,6 +173,96 @@ namespace RiskyMod.Survivors.Commando
             grenadeDef.stockToConsume = 1;
             LoadoutAPI.AddSkillDef(grenadeDef);
             sk.special.skillFamily.variants[1].skillDef = grenadeDef;
+
+            if (RiskyMod.ScepterPluginLoaded)
+            {
+                SetupScepter(sk);
+            }
+        }
+
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepter(SkillLocator sk)
+        {
+            SuppressiveFireScepterDamage = DamageAPI.ReserveDamageType();
+            OnHitAll.HandleOnHitAllActions += FireBarrageScepter.SuppressiveFireScepterAOE;
+            SkillDef barrageDef = SkillDef.CreateInstance<SkillDef>();
+            LoadoutAPI.AddSkill(typeof(FireBarrageScepter));
+            barrageDef.activationState = new SerializableEntityStateType(typeof(FireBarrageScepter));
+            barrageDef.activationStateMachineName = "Weapon";
+            barrageDef.baseMaxStock = 1;
+            barrageDef.baseRechargeInterval = 6f;
+            barrageDef.beginSkillCooldownOnSkillEnd = false;
+            barrageDef.canceledFromSprinting = false;
+            barrageDef.dontAllowPastMaxStocks = true;
+            barrageDef.forceSprintDuringState = false;
+            barrageDef.fullRestockOnAssign = true;
+            barrageDef.icon = sk.special.skillFamily.variants[0].skillDef.icon;
+            barrageDef.interruptPriority = InterruptPriority.PrioritySkill;
+            barrageDef.isCombatSkill = true;
+            barrageDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
+            barrageDef.mustKeyPress = false;
+            barrageDef.cancelSprintingOnActivation = true;
+            barrageDef.rechargeStock = 1;
+            barrageDef.requiredStock = 1;
+            barrageDef.skillName = "BarrageScepter";
+            barrageDef.skillNameToken = "COMMANDO_SPECIAL_SCEPTER_NAME";
+            barrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD";
+            barrageDef.stockToConsume = 1;
+            LoadoutAPI.AddSkillDef(barrageDef);
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(barrageDef, "CommandoBody", SkillSlot.Special, 0);
+
+            ThrowGrenadeScepter._projectilePrefab = BuildGrenadeScepterProjectile();
+            LoadoutAPI.AddSkill(typeof(CookGrenadeScepter));
+            LoadoutAPI.AddSkill(typeof(ThrowGrenadeScepter));
+            SkillDef grenadeDef = SkillDef.CreateInstance<SkillDef>();
+            grenadeDef.activationState = new SerializableEntityStateType(typeof(CookGrenadeScepter));
+            grenadeDef.activationStateMachineName = "Weapon";
+            grenadeDef.baseMaxStock = 1;
+            grenadeDef.baseRechargeInterval = 6f;
+            grenadeDef.beginSkillCooldownOnSkillEnd = false;
+            grenadeDef.canceledFromSprinting = false;
+            grenadeDef.dontAllowPastMaxStocks = true;
+            grenadeDef.forceSprintDuringState = false;
+            grenadeDef.fullRestockOnAssign = true;
+            grenadeDef.icon = sk.special.skillFamily.variants[1].skillDef.icon;
+            grenadeDef.interruptPriority = InterruptPriority.PrioritySkill;
+            grenadeDef.isCombatSkill = true;
+            grenadeDef.keywordTokens = new string[] { };
+            grenadeDef.mustKeyPress = false;
+            grenadeDef.cancelSprintingOnActivation = true;
+            grenadeDef.rechargeStock = 1;
+            grenadeDef.requiredStock = 1;
+            grenadeDef.skillName = "GrenadeScepter";
+            grenadeDef.skillNameToken = "COMMANDO_SPECIAL_ALT1_SCEPTER_NAME";
+            grenadeDef.skillDescriptionToken = "COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD";
+            grenadeDef.stockToConsume = 1;
+            LoadoutAPI.AddSkillDef(grenadeDef);
+            
+            //Currently can't override mod's skills
+            //AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(grenadeDef, "CommandoBody", SkillSlot.Special, 1);
+        }
+
+        private GameObject BuildGrenadeScepterProjectile()
+        {
+            GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/CommandoGrenadeProjectile").InstantiateClone("RiskyModFragScepterProjectile", true);
+
+            ProjectileSimple ps = proj.GetComponent<ProjectileSimple>();
+            ps.lifetime = 10f;
+
+            ProjectileImpactExplosion pie = proj.GetComponent<ProjectileImpactExplosion>();
+            pie.timerAfterImpact = false;
+            pie.lifetime = CookGrenade.totalFuseTime;
+            pie.blastRadius = CookGrenadeScepter.selfBlastRadius;
+            pie.falloffModel = BlastAttack.FalloffModel.None;
+
+            ProjectileDamage pd = proj.GetComponent<ProjectileDamage>();
+            pd.damageType = DamageType.Generic;
+
+            proj.AddComponent<GrenadeTimer>();
+
+            ProjectileAPI.Add(proj);
+            return proj;
         }
 
         private GameObject BuildGrenadeProjectile()
