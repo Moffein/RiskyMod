@@ -92,7 +92,7 @@ namespace EntityStates.RiskyMod.Commando
 		public static GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashBarrage");
 		public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/HitsparkCommandoBarrage");
 		public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/TracerCommandoBoost");
-		public static float damageCoefficient = 1.6f;
+		public static float damageCoefficient = 1.2f;
 		public static float force = 100f;
 		public static float minSpread = 0f;
 		public static float maxSpread = 1f;

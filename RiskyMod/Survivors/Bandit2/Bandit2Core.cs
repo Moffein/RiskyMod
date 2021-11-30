@@ -31,8 +31,6 @@ namespace RiskyMod.Survivors.Bandit2
         public Bandit2Core()
         {
             if (!enabled) return;
-            SpecialDamage = DamageAPI.ReserveDamageType();
-            RackEmUpDamage = DamageAPI.ReserveDamageType();
             new BanditSpecialGracePeriod();
             new DesperadoRework();
 
@@ -262,6 +260,8 @@ namespace RiskyMod.Survivors.Bandit2
         private void ModifySpecials(SkillLocator sk)
         {
             if (!enableSpecialSkillChanges) return;
+            SpecialDamage = DamageAPI.ReserveDamageType();
+            RackEmUpDamage = DamageAPI.ReserveDamageType();
             SpecialDamageType(sk);
             SpecialDebuff = BuildSpecialDebuff();
             new SpecialDamageTweaks();

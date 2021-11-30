@@ -17,6 +17,7 @@ namespace RiskyMod.Survivors.Commando
         public static bool enableSecondarySkillChanges = true;
         public static bool enableUtilitySkillChanges = true;
         public static bool enableSpecialSkillChanges = true;
+        public static DamageAPI.ModdedDamageType SuppressiveFireDamage;
         public CommandoCore()
         {
             if (!enabled) return;
@@ -111,6 +112,33 @@ namespace RiskyMod.Survivors.Commando
         private void ModifySpecials(SkillLocator sk)
         {
             if (!enableSpecialSkillChanges) return;
+
+            SuppressiveFireDamage = DamageAPI.ReserveDamageType();
+            SkillDef barrageDef = SkillDef.CreateInstance<SkillDef>();
+            barrageDef.activationState = new SerializableEntityStateType(typeof(FireBarrage));
+            barrageDef.activationStateMachineName = "Weapon";
+            barrageDef.baseMaxStock = 1;
+            barrageDef.baseRechargeInterval = 6f;
+            barrageDef.beginSkillCooldownOnSkillEnd = false;
+            barrageDef.canceledFromSprinting = false;
+            barrageDef.dontAllowPastMaxStocks = true;
+            barrageDef.forceSprintDuringState = false;
+            barrageDef.fullRestockOnAssign = true;
+            barrageDef.icon = sk.special.skillFamily.variants[0].skillDef.icon;
+            barrageDef.interruptPriority = InterruptPriority.PrioritySkill;
+            barrageDef.isCombatSkill = true;
+            barrageDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
+            barrageDef.mustKeyPress = false;
+            barrageDef.cancelSprintingOnActivation = true;
+            barrageDef.rechargeStock = 1;
+            barrageDef.requiredStock = 1;
+            barrageDef.skillName = "Barrage";
+            barrageDef.skillNameToken = "COMMANDO_SPECIAL_NAME";
+            barrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD";
+            barrageDef.stockToConsume = 1;
+            LoadoutAPI.AddSkillDef(barrageDef);
+            sk.special.skillFamily.variants[0].skillDef = barrageDef;
+
             ThrowGrenade._projectilePrefab = BuildGrenadeProjectile();
             CookGrenade.overcookExplosionEffectPrefab = BuildGrenadeOvercookExplosionEffect();
             LoadoutAPI.AddSkill(typeof(CookGrenade));
