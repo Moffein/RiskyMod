@@ -2,6 +2,7 @@
 using EntityStates.RiskyMod.Commando;
 using MonoMod.Cil;
 using R2API;
+using RiskyMod.SharedHooks;
 using RoR2;
 using RoR2.Projectile;
 using RoR2.Skills;
@@ -138,6 +139,7 @@ namespace RiskyMod.Survivors.Commando
             barrageDef.stockToConsume = 1;
             LoadoutAPI.AddSkillDef(barrageDef);
             sk.special.skillFamily.variants[0].skillDef = barrageDef;
+            OnHitAll.HandleOnHitAllActions += FireBarrage.SuppressiveFireAOE;
 
             ThrowGrenade._projectilePrefab = BuildGrenadeProjectile();
             CookGrenade.overcookExplosionEffectPrefab = BuildGrenadeOvercookExplosionEffect();
@@ -200,7 +202,7 @@ namespace RiskyMod.Survivors.Commando
             return effect;
         }
 
-        private static GameObject BuildPhaseRoundProjectile()
+        private GameObject BuildPhaseRoundProjectile()
         {
             GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/fmjramping").InstantiateClone("RiskyModPhaseRound", true);
 

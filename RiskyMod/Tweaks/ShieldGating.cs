@@ -102,6 +102,19 @@ namespace RiskyMod.Tweaks
                 }
             };
 
+            IL.EntityStates.BrotherMonster.WeaponSlam.FixedUpdate += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchCallvirt<BlastAttack>("Fire")
+                    );
+                c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                {
+                    blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                    return blastAttack;
+                });
+            };
+
             Resources.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateLeft").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
             Resources.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateRight").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
         }
