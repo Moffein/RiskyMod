@@ -2,12 +2,14 @@
 using EntityStates.RiskyMod.Bandit2;
 using EntityStates.RiskyMod.Bandit2.Primary;
 using EntityStates.RiskyMod.Bandit2.Revolver;
+using EntityStates.RiskyMod.Bandit2.Revolver.Scepter;
 using R2API;
 using RiskyMod.Survivors.Bandit2.Components;
 using RoR2;
 using RoR2.Projectile;
 using RoR2.Skills;
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace RiskyMod.Survivors.Bandit2
@@ -269,15 +271,13 @@ namespace RiskyMod.Survivors.Bandit2
             LoadoutAPI.AddSkill(typeof(BaseSidearmState));
             LoadoutAPI.AddSkill(typeof(ExitSidearm));
 
-            float cooldown = 4f;
-
             SkillDef lightsOutDef = SkillDef.CreateInstance<SkillDef>();
             LoadoutAPI.AddSkill(typeof(PrepLightsOut));
             LoadoutAPI.AddSkill(typeof(FireLightsOut));
             lightsOutDef.activationState = new SerializableEntityStateType(typeof(PrepLightsOut));
             lightsOutDef.activationStateMachineName = "Weapon";
             lightsOutDef.baseMaxStock = 1;
-            lightsOutDef.baseRechargeInterval = cooldown;
+            lightsOutDef.baseRechargeInterval = 4f;
             lightsOutDef.beginSkillCooldownOnSkillEnd = true;
             lightsOutDef.canceledFromSprinting = false;
             lightsOutDef.forceSprintDuringState = false;
@@ -305,7 +305,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.activationState = new SerializableEntityStateType(typeof(PrepRackEmUp));
             reuDef.activationStateMachineName = "Weapon";
             reuDef.baseMaxStock = 1;
-            reuDef.baseRechargeInterval = cooldown;
+            reuDef.baseRechargeInterval = 4f;
             reuDef.beginSkillCooldownOnSkillEnd = true;
             reuDef.canceledFromSprinting = false;
             reuDef.forceSprintDuringState = false;
@@ -326,6 +326,69 @@ namespace RiskyMod.Survivors.Bandit2
             LoadoutAPI.AddSkillDef(reuDef);
             Skills.RackEmUp = reuDef;
             sk.special._skillFamily.variants[1].skillDef = Skills.RackEmUp;
+
+            if (RiskyMod.ScepterPluginLoaded)
+            {
+                SetupScepter(sk);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepter(SkillLocator sk)
+        {
+            SkillDef lightsOutDef = SkillDef.CreateInstance<SkillDef>();
+            LoadoutAPI.AddSkill(typeof(PrepLightsOutScepter));
+            LoadoutAPI.AddSkill(typeof(FireLightsOutScepter));
+            lightsOutDef.activationState = new SerializableEntityStateType(typeof(PrepLightsOutScepter));
+            lightsOutDef.activationStateMachineName = "Weapon";
+            lightsOutDef.baseMaxStock = 1;
+            lightsOutDef.baseRechargeInterval = 4f;
+            lightsOutDef.beginSkillCooldownOnSkillEnd = true;
+            lightsOutDef.canceledFromSprinting = false;
+            lightsOutDef.forceSprintDuringState = false;
+            lightsOutDef.dontAllowPastMaxStocks = true;
+            lightsOutDef.fullRestockOnAssign = true;
+            lightsOutDef.icon = sk.special._skillFamily.variants[0].skillDef.icon;
+            lightsOutDef.interruptPriority = InterruptPriority.Skill;
+            lightsOutDef.isCombatSkill = true;
+            lightsOutDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
+            lightsOutDef.mustKeyPress = false;
+            lightsOutDef.cancelSprintingOnActivation = true;
+            lightsOutDef.rechargeStock = 1;
+            lightsOutDef.requiredStock = 1;
+            lightsOutDef.skillName = "LightsOutScepter";
+            lightsOutDef.skillNameToken = "BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD";
+            lightsOutDef.skillDescriptionToken = "BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD";
+            lightsOutDef.stockToConsume = 1;
+            LoadoutAPI.AddSkillDef(lightsOutDef);
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(lightsOutDef, "Bandit2Body", SkillSlot.Special, 0);
+
+            SkillDef reuDef = SkillDef.CreateInstance<SkillDef>();
+            LoadoutAPI.AddSkill(typeof(PrepRackEmUpScepter));
+            LoadoutAPI.AddSkill(typeof(FireRackEmUpScepter));
+            reuDef.activationState = new SerializableEntityStateType(typeof(PrepRackEmUpScepter));
+            reuDef.activationStateMachineName = "Weapon";
+            reuDef.baseMaxStock = 1;
+            reuDef.baseRechargeInterval = 4f;
+            reuDef.beginSkillCooldownOnSkillEnd = true;
+            reuDef.canceledFromSprinting = false;
+            reuDef.forceSprintDuringState = false;
+            reuDef.dontAllowPastMaxStocks = true;
+            reuDef.fullRestockOnAssign = true;
+            reuDef.icon = sk.special._skillFamily.variants[1].skillDef.icon;
+            reuDef.interruptPriority = InterruptPriority.Skill;
+            reuDef.isCombatSkill = true;
+            reuDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
+            reuDef.mustKeyPress = false;
+            reuDef.cancelSprintingOnActivation = true;
+            reuDef.rechargeStock = 1;
+            reuDef.requiredStock = 1;
+            reuDef.skillName = "RackEmUpScepter";
+            reuDef.skillNameToken = "BANDIT2_SPECIAL_ALT_SCEPTER_NAME_RISKYMOD";
+            reuDef.skillDescriptionToken = "BANDIT2_SPECIAL_ALT_SCEPTER_DESCRIPTION_RISKYMOD";
+            reuDef.stockToConsume = 1;
+            LoadoutAPI.AddSkillDef(reuDef);
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(reuDef, "Bandit2Body", SkillSlot.Special, 1);
         }
 
         private BuffDef BuildSpecialDebuff()

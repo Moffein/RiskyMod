@@ -180,7 +180,7 @@ namespace RiskyMod.Survivors.Commando
             }
         }
 
-
+        //Currently does nothing because overriding existing scepter skills isn't supported
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepter(SkillLocator sk)
         {
@@ -238,9 +238,7 @@ namespace RiskyMod.Survivors.Commando
             grenadeDef.skillDescriptionToken = "COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD";
             grenadeDef.stockToConsume = 1;
             LoadoutAPI.AddSkillDef(grenadeDef);
-            
-            //Currently can't override mod's skills
-            //AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(grenadeDef, "CommandoBody", SkillSlot.Special, 1);
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(grenadeDef, "CommandoBody", SkillSlot.Special, 1);
         }
 
         private GameObject BuildGrenadeScepterProjectile()

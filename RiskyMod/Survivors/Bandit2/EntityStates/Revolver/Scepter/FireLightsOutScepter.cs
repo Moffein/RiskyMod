@@ -3,15 +3,11 @@ using RiskyMod.Survivors.Bandit2;
 using RiskyMod.Survivors.Bandit2.Components;
 using RoR2;
 using UnityEngine;
-namespace EntityStates.RiskyMod.Bandit2.Revolver
-{
-	public class FireRackEmUp : BaseSidearmState
-	{
-		public virtual int GetBulletCount()
-        {
-			return baseBulletCount;
-		}
 
+namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
+{
+    class FireLightsOutScepter : BaseSidearmState
+	{
 		public override void OnEnter()
 		{
 			shotsFired++;
@@ -47,7 +43,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 				bulletAttack.radius = bulletRadius;
 				bulletAttack.damageType |= DamageType.BonusToLowHealth;
 				bulletAttack.smartCollision = true;
-				bulletAttack.maxDistance = 200f;
+				bulletAttack.maxDistance = 1000f;
 
 				SpecialDamageController sdc = base.GetComponent<SpecialDamageController>();
 				if (sdc)
@@ -55,7 +51,6 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 					bulletAttack.damageType |= sdc.GetDamageType();
 				}
 				DamageAPI.AddModdedDamageType(bulletAttack, Bandit2Core.SpecialDamage);
-				DamageAPI.AddModdedDamageType(bulletAttack, Bandit2Core.RackEmUpDamage);
 
 				bulletAttack.Fire();
 			}
@@ -71,40 +66,27 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 			base.FixedUpdate();
 			if (base.fixedAge >= this.duration && base.isAuthority)
 			{
-				if (shotsFired >= GetBulletCount())
-				{
+				if (shotsFired >= baseShotCount)
+                {
 					this.outer.SetNextState(new ExitSidearm());
 				}
 				else
-                {
-					NextState();
-                }
+				{
+					this.outer.SetNextState(new FireLightsOutScepter { shotsFired = this.shotsFired });
+				}
 				return;
 			}
 		}
 
-		public virtual void NextState()
-        {
-			this.outer.SetNextState(new FireRackEmUp { shotsFired = this.shotsFired });
-		}
-
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
-			return InterruptPriority.Skill;
+			return InterruptPriority.Any;
 		}
 
 		public override void LoadStats()
 		{
 			crosshairOverridePrefab = _crosshairOverridePrefab;
-
-			if (shotsFired >= GetBulletCount())
-			{
-				baseDuration = 1f;
-			}
-			else
-            {
-				baseDuration = 0.13f;
-            }
+			baseDuration = shotsFired >= baseShotCount ? 1f : 0.15f;
 		}
 
 		public static GameObject _crosshairOverridePrefab = Resources.Load<GameObject>("prefabs/crosshair/Bandit2CrosshairPrepRevolverFire");
@@ -113,18 +95,17 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 		public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/HitsparkBandit2Pistol");
 		public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/TracerBanditPistol");
 
-		public static float damageCoefficient = 1f;
-		public static float bonusDamageCoefficient = 0.3f;
-		public static float force = 300f;
+		public static float damageCoefficient = 12f;
+		public static float force = 2000f;
 
 		public static float minSpread = 0f;
-		public static float maxSpread = 2.5f;
+		public static float maxSpread = 0f;
 
 		public static string attackSoundString = "Play_bandit2_R_fire";
-		public static float recoilAmplitude = 2.2f;
-		public static float bulletRadius = 0.5f;
+		public static float recoilAmplitude = 1f;
+		public static float bulletRadius = 1f;
 
-		public static int baseBulletCount = 6;
+		public static int baseShotCount = 2;
 		public int shotsFired = 0;
 	}
 }
