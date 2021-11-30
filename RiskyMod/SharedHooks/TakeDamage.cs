@@ -1,16 +1,11 @@
 ﻿using R2API;
-using RiskyMod.Drones;
 using RiskyMod.Items.Boss;
 using RiskyMod.Items.Common;
-using RiskyMod.Items.Equipment;
 using RiskyMod.Items.Uncommon;
-using RiskyMod.MonoBehaviours;
 using RiskyMod.Tweaks;
 using RoR2;
 using RoR2.Audio;
 using RoR2.CharacterAI;
-using RoR2.Orbs;
-using System;
 using UnityEngine;
 using UnityEngine.Networking;
 

@@ -1,12 +1,8 @@
 ﻿using RiskyMod.Items.Boss;
 using RiskyMod.Items.Common;
 using RiskyMod.Items.Legendary;
-using RiskyMod.Items.Uncommon;
-using RiskyMod.MonoBehaviours;
 using RiskyMod.Survivors.Bandit2;
-using RiskyMod.Tweaks;
 using RoR2;
-using RoR2.Projectile;
 using System;
 using UnityEngine;
 using UnityEngine.Networking;

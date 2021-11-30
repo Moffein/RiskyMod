@@ -1,5 +1,4 @@
 ﻿using RiskyMod.Items.Uncommon;
-using RiskyMod.MonoBehaviours;
 using RiskyMod.Tweaks;
 using RoR2;
 using UnityEngine;
