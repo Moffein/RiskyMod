@@ -95,10 +95,15 @@ namespace EntityStates.RiskyMod.Commando
 			base.FixedUpdate();
 
 			//Fire rate updates during the skill.
-			this.durationBetweenShots = internalBaseDurationBetweenShots / this.attackSpeedStat;
-			if (maxAttackSpeed < this.attackSpeedStat)
+			float currentAttackSpeed = this.attackSpeedStat;
+			if (base.characterBody)
             {
-				maxAttackSpeed = this.attackSpeedStat;
+				currentAttackSpeed = base.characterBody.attackSpeed;
+            }
+			this.durationBetweenShots = internalBaseDurationBetweenShots / maxAttackSpeed;
+			if (maxAttackSpeed < currentAttackSpeed)
+            {
+				maxAttackSpeed = currentAttackSpeed;
 				this.bulletCount = (int)((float)internalBaseBulletCount * maxAttackSpeed);
 			}
 

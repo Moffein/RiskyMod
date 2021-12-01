@@ -9,7 +9,7 @@ namespace EntityStates.RiskyMod.Commando.Scepter
 	{
 		public static new float baseDurationBetweenShots = 0.08f;
 		public static new float baseBulletCount = 10;
-		public static new float blastRadius = 5f;
+		public static new float blastRadius = 3f;
 		public static new float blastDamageCoefficient = 0.5f;  //Multiply by damage coefficient
 
         public override void LoadStats()

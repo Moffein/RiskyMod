@@ -10,6 +10,7 @@ using RoR2.Skills;
 using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RiskyMod.Survivors.Commando
 {
@@ -22,6 +23,8 @@ namespace RiskyMod.Survivors.Commando
         public static bool enableSpecialSkillChanges = true;
         public static DamageAPI.ModdedDamageType SuppressiveFireDamage;
         public static DamageAPI.ModdedDamageType SuppressiveFireScepterDamage;
+        public static BuffDef SlideBuff;
+
         public CommandoCore()
         {
             if (!enabled) return;
@@ -32,7 +35,7 @@ namespace RiskyMod.Survivors.Commando
         {
             ModifyPrimaries(sk);
             ModifySecondaries(sk);
-
+            ModifyUtilities(sk);
             ModifySpecials(sk);
         }
 
@@ -111,6 +114,78 @@ namespace RiskyMod.Survivors.Commando
             phaseBlastDef.stockToConsume = 1;
             LoadoutAPI.AddSkillDef(phaseBlastDef);
             sk.secondary.skillFamily.variants[1].skillDef = phaseBlastDef;
+        }
+
+        private void ModifyUtilities(SkillLocator sk)
+        {
+            if (!enableUtilitySkillChanges) return;
+
+            sk.utility.skillFamily.variants[0].skillDef.skillDescriptionToken = "COMMANDO_UTILITY_DESCRIPTION_RISKYMOD";
+            On.EntityStates.Commando.DodgeState.OnEnter += (orig, self) =>
+            {
+                orig(self);
+                if (self.isAuthority && self.skillLocator)
+                {
+                    if (self.skillLocator.primary.stock < self.skillLocator.primary.maxStock)
+                    {
+                        self.skillLocator.primary.rechargeStopwatch += 1f;
+                    }
+                    if (self.skillLocator.secondary.stock < self.skillLocator.secondary.maxStock)
+                    {
+                        self.skillLocator.secondary.rechargeStopwatch += 1f;
+                    }
+                    if (self.skillLocator.special.stock < self.skillLocator.special.maxStock)
+                    {
+                        self.skillLocator.special.rechargeStopwatch += 1f;
+                    }
+                }
+            };
+
+            SlideBuff = BuildSlideBuff();
+            sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "COMMANDO_UTILITY_ALT_DESCRIPTION_RISKYMOD";
+            GetStatsCoefficient.HandleStatsActions += SlideStats;
+            On.EntityStates.Commando.SlideState.OnEnter += (orig, self) =>
+            {
+                orig(self);
+                if (NetworkServer.active && self.characterBody)
+                {
+                    self.characterBody.AddBuff(SlideBuff);
+                }
+            };
+
+            On.EntityStates.Commando.SlideState.OnExit += (orig, self) =>
+            {
+
+                orig(self);
+                if (NetworkServer.active && self.characterBody)
+                {
+                    if (self.characterBody.HasBuff(SlideBuff))
+                    {
+                        self.characterBody.RemoveBuff(SlideBuff);
+                    }
+                }
+            };
+        }
+
+        private void SlideStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            if (sender.HasBuff(SlideBuff.buffIndex))
+            {
+                args.attackSpeedMultAdd += 0.5f;
+            }
+        }
+
+        private BuffDef BuildSlideBuff()
+        {
+            BuffDef slideDef = ScriptableObject.CreateInstance<BuffDef>();
+            slideDef.buffColor = new Color(237f / 255f, 150f / 255f, 22f / 255f);
+            slideDef.canStack = false;
+            slideDef.isDebuff = false;
+            slideDef.name = "RiskyRebalanceCommandoSlide";
+            slideDef.iconSprite = Resources.Load<Sprite>("Textures/BuffIcons/texBuffFullCritIcon");
+            BuffAPI.Add(new CustomBuff(slideDef));
+
+            return slideDef;
         }
 
         private void ModifySpecials(SkillLocator sk)

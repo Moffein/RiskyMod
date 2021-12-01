@@ -19,6 +19,8 @@
 	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Stunning</style>. Throw a hidden blade for <style=cIsDamage>240% damage</style>. Critical Strikes also cause <style=cIsHealth>hemorrhaging</style>.",
 	"COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD": "Fire a piercing round for <style=cIsDamage>480% damage</style>. Zaps nearby enemies for an additional <style=cIsDamage>240% damage</style>.",
 	"COMMANDO_SECONDARY_ALT1_DESCRIPTION_RISKYMOD": "Fire two close-range blasts that deal <style=cIsDamage>8x170% damage</style> total.",
+	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Roll</style> a short distance and reduce skill cooldowns by <style=cIsUtility>1.0s</style>.",
+	"COMMANDO_UTILITY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Slide</style> on the ground for a short distance and gain <style=cIsDamage>+50% attack speed</style>. You can <style=cIsDamage>fire while sliding</style>.",
 	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Stunning</style>. Fire fragmentation rounds for <style=cIsDamage>6x130% damage</style>. The number of shots increases with attack speed.",
 	"COMMANDO_SPECIAL_ALT1_DESCRIPTION_RISKYMOD": "Throw a grenade that explodes for <style=cIsDamage>1200% damage</style> after 3 seconds. Can be <style=cIsDamage>cooked</style> to explode early.",
 	"COMMANDO_SPECIAL_SCEPTER_NAME_RISKYMOD": "Suppressive Barrage",
