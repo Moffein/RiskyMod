@@ -3,6 +3,8 @@ using UnityEngine;
 using R2API;
 using MonoMod.Cil;
 using System;
+using EntityStates;
+using Mono.Cecil.Cil;
 
 namespace RiskyMod.Survivors.Huntress
 {
@@ -63,6 +65,23 @@ namespace RiskyMod.Survivors.Huntress
 
             sk.primary.skillFamily.variants[0].skillDef.skillDescriptionToken = "HUNTRESS_PRIMARY_DESCRIPTION_RISKYMOD";
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireSeekingArrow", "orbDamageCoefficient", "2");
+
+            sk.primary.skillFamily.variants[1].skillDef.skillDescriptionToken = "HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD";
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbDamageCoefficient", "1.2");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbProcCoefficient", "1");
+            IL.EntityStates.Huntress.HuntressWeapon.FireSeekingArrow.FixedUpdate += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchCall<EntityState>("get_isAuthority")
+                    );
+                c.Index++;
+                c.Emit(OpCodes.Ldarg_0);    //the entitystate
+                c.EmitDelegate<Func<bool, EntityStates.Huntress.HuntressWeapon.FireSeekingArrow, bool>>((flag, self) =>
+                {
+                    return flag && self.firedArrowCount >= self.maxArrowCount;
+                });
+            };
         }
 
         private void ModifySecondaries(SkillLocator sk)

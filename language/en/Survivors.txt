@@ -28,6 +28,7 @@
 	"COMMANDO_SPECIAL_ALT1_SCEPTER_NAME_RISKYMOD": "HE Grenade",
 	"COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD": "Throw a grenade that explodes for <style=cIsDamage>2000% damage</style> after 3 seconds. Can be <style=cIsDamage>cooked</style> to explode early.",
 	"HUNTRESS_PRIMARY_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Agile</style>. Quickly fire a seeking arrow for <style=cIsDamage>200% damage</style>.",
+	"HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Agile</style>. Draw back a volley of <style=cIsDamage>3</style> seeking arrows for <style=cIsDamage>3x120% damage</style>. Critical Strikes fire <style=cIsDamage>6</style> arrows.",
 	"HUNTRESS_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Agile</style>. <style=cIsUtility>Disappear</style> and <style=cIsUtility>teleport</style> a short distance. Can store up to <style=cIsUtility>2</style> charges.",
 	"HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Teleport</style> into the sky. Target an area to rain arrows, <style=cIsUtility>slowing</style> all enemies and dealing <style=cIsDamage>420% damage per second</style>."
 	}
