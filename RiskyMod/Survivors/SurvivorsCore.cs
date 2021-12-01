@@ -11,6 +11,8 @@ namespace RiskyMod.Survivors
         public SurvivorsCore()
         {
             if (!enabled) return;
+            new SharedDamageTypes();
+
             new CommandoCore();
             new HuntressCore();
             new CaptainCore();

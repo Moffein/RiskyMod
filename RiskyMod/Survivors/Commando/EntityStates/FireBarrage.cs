@@ -13,8 +13,6 @@ namespace EntityStates.RiskyMod.Commando
 			internalBaseDurationBetweenShots = baseDurationBetweenShots;
 		}
 
-		
-
 		public override void OnEnter()
 		{
 			base.OnEnter();

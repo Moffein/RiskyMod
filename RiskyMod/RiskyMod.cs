@@ -25,6 +25,7 @@ using RiskyMod.Survivors.Captain;
 using RiskyMod.Enemies.Bosses;
 using RiskyMod.Survivors.Bandit2;
 using RiskyMod.Survivors.Commando;
+using RiskyMod.Survivors.Huntress;
 
 namespace RiskyMod
 {
@@ -66,10 +67,11 @@ namespace RiskyMod
         private const string monsterString = "Monsters";
 
         private const string commandoString = "Survivors: Commando";
+        private const string huntressString = "Survivors: Huntress";
         private const string banditString = "Survivors: Bandit";
         private const string captainString = "Survivors: Captain";
 
-        private const string fireSelectString = "Survivors - Firemode Selection";
+        private const string fireSelectString = "Survivors - Firemode Selection (Client-Side)";
 
         public static bool disableProcChains = true;
 
@@ -240,6 +242,14 @@ namespace RiskyMod
             CommandoCore.enableUtilitySkillChanges = Config.Bind(commandoString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
             CommandoCore.enableSpecialSkillChanges = Config.Bind(commandoString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
 
+            HuntressCore.enabled = Config.Bind(huntressString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+            HuntressCore.HuntressTargetingMode = Config.Bind(huntressString, "Targeting Mode (Client-Side)", BullseyeSearch.SortMode.Angle, "How Huntress's target prioritization works.").Value;
+            HuntressCore.increaseAngle = Config.Bind(huntressString, "Increase Angle", true, "Increase max targeting angle.").Value;
+            HuntressCore.enablePrimarySkillChanges = Config.Bind(huntressString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
+            HuntressCore.enableSecondarySkillChanges = Config.Bind(huntressString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
+            HuntressCore.enableUtilitySkillChanges = Config.Bind(huntressString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
+            HuntressCore.enableSpecialSkillChanges = Config.Bind(huntressString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
+
             CaptainCore.enabled = Config.Bind(captainString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             CaptainOrbitalHiddenRealms.enabled = Config.Bind(captainString, "Hidden Realm Orbital Skills", true, "Allow Orbital skills in Hiden Realms.").Value;
             Microbots.enabled = Config.Bind(captainString, "Defensive Microbots Nerf", true, "Defensive Microbots no longer deletes stationary projectiles like gas clouds and Void Reaver mortars.").Value;
@@ -249,11 +259,11 @@ namespace RiskyMod
             Bandit2Core.enabled = Config.Bind(banditString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             BanditSpecialGracePeriod.enabled = Config.Bind(banditString, "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;
             BanditSpecialGracePeriod.duration = Config.Bind(banditString, "Special Grace Period Duration", 1.2f, "Length in seconds of Special Grace Period.").Value;
+            DesperadoRework.enabled = Config.Bind(banditString, "Persistent Desperado", true, "Desperado stacks are weaker but last between stages.").Value;
             Bandit2Core.enablePassiveSkillChanges = Config.Bind(banditString, "Enable Passive Skill Changes", true, "Enable passive skill changes for this survivor.").Value;
             Bandit2Core.enablePrimarySkillChanges = Config.Bind(banditString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
             Bandit2Core.enableSecondarySkillChanges = Config.Bind(banditString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
             Bandit2Core.enableSpecialSkillChanges = Config.Bind(banditString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
-            DesperadoRework.enabled = Config.Bind(banditString, "Persistent Desperado", true, "Desperado stacks are weaker but last between stages.").Value;
         }
 
         private void CheckDependencies()
