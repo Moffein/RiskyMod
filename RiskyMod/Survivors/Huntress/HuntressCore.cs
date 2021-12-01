@@ -114,6 +114,8 @@ namespace RiskyMod.Survivors.Huntress
 
             sk.special.skillFamily.variants[1].skillDef.baseRechargeInterval = 8f;
             sk.special.skillFamily.variants[1].skillDef.beginSkillCooldownOnSkillEnd = true;
+
+            //Won't bother with Scepter skills until AncientScepter supports overriding the defaults.
         }
     }
 }

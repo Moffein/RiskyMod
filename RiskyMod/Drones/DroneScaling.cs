@@ -40,7 +40,7 @@ namespace RiskyMod.Drones
         {
             CharacterBody cb = go.GetComponent<CharacterBody>();
 
-            cb.baseRegen = cb.baseMaxHealth / 30f;  //Drones take a fixed amount of time to regen to full.
+            cb.baseRegen = cb.baseMaxHealth / 40f;  //Drones take a fixed amount of time to regen to full.
 
             //Specific changes
             switch (cb.name)
@@ -50,10 +50,12 @@ namespace RiskyMod.Drones
                     cb.baseMaxHealth *= 1.5f;
                     break;
                 case "SquidTurretBody":
+                    cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
                     cb.baseMaxHealth = 720f;
                     break;
                 case "Turret1Body": //Shield seems to be enough to put them in a good spot.
-                    cb.baseMaxHealth *= 1.5f;
+                    cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
+                    cb.baseMaxHealth *= 1.2f;
                     break;
                 /*case "FlameDroneBody": //These seem to die faster than other drones?
                     //cb.baseRegen = cb.baseMaxHealth / 20f;
