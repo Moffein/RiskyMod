@@ -155,7 +155,6 @@ namespace RiskyMod.Survivors.Commando
 
             On.EntityStates.Commando.SlideState.OnExit += (orig, self) =>
             {
-
                 orig(self);
                 if (NetworkServer.active && self.characterBody)
                 {
@@ -315,7 +314,6 @@ namespace RiskyMod.Survivors.Commando
             LoadoutAPI.AddSkillDef(grenadeDef);
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(grenadeDef, "CommandoBody", SkillSlot.Special, 1);
         }
-
         private GameObject BuildGrenadeScepterProjectile()
         {
             GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/CommandoGrenadeProjectile").InstantiateClone("RiskyModFragScepterProjectile", true);
@@ -337,7 +335,6 @@ namespace RiskyMod.Survivors.Commando
             ProjectileAPI.Add(proj);
             return proj;
         }
-
         private GameObject BuildGrenadeProjectile()
         {
             GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/CommandoGrenadeProjectile").InstantiateClone("RiskyModFragProjectile", true);
@@ -359,7 +356,6 @@ namespace RiskyMod.Survivors.Commando
             ProjectileAPI.Add(proj);
             return proj;
         }
-
         private GameObject BuildGrenadeOvercookExplosionEffect()
         {
             GameObject effect = Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFXCommandoGrenade").InstantiateClone("RiskyModFragOvercookEffect", false);
@@ -368,7 +364,6 @@ namespace RiskyMod.Survivors.Commando
             EffectAPI.AddEffect(new EffectDef(effect));
             return effect;
         }
-
         private GameObject BuildPhaseRoundProjectile()
         {
             GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/fmjramping").InstantiateClone("RiskyModPhaseRound", true);

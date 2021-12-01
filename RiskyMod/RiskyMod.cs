@@ -24,6 +24,7 @@ using RiskyMod.Enemies;
 using RiskyMod.Survivors.Captain;
 using RiskyMod.Enemies.Bosses;
 using RiskyMod.Survivors.Bandit2;
+using RiskyMod.Survivors.Commando;
 
 namespace RiskyMod
 {
@@ -67,6 +68,8 @@ namespace RiskyMod
         private const string commandoString = "Survivors: Commando";
         private const string banditString = "Survivors: Bandit";
         private const string captainString = "Survivors: Captain";
+
+        private const string fireSelectString = "Survivors - Firemode Selection";
 
         public static bool disableProcChains = true;
 
@@ -126,6 +129,21 @@ namespace RiskyMod
             VengeancePercentHeal.enabled = Config.Bind(tweakString, "Reduce Vengeance Healing", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
             CloakBuff.enabled = Config.Bind(tweakString, "Cloak Buff", true, "Increases delay between position updates while cloaked.").Value;
 
+            ConfigCommonItems();
+            ConfigUncommonItems();
+            ConfigLegendaryItems();
+            ConfigBossItems();
+            ConfigLunars();
+            ConfigEquipment();
+
+            ConfigMonsters();
+
+            ConfigFireSelect();
+            ConfigSurvivors();
+        }
+
+        private void ConfigCommonItems()
+        {
             BisonSteak.enabled = Config.Bind(commonString, "Bison Steak", true, itemConfigDescString).Value;
             CritGlasses.enabled = Config.Bind(commonString, "Lensmakers Glasses", true, itemConfigDescString).Value;
             Crowbar.enabled = Config.Bind(commonString, "Crowbar", true, itemConfigDescString).Value;
@@ -136,7 +154,10 @@ namespace RiskyMod
             StickyBomb.enabled = Config.Bind(commonString, "Stickybomb", true, itemConfigDescString).Value;
             TougherTimes.enabled = Config.Bind(commonString, "Tougher Times", true, itemConfigDescString).Value;
             Warbanner.enabled = Config.Bind(commonString, "Warbanner", true, itemConfigDescString).Value;
+        }
 
+        private void ConfigUncommonItems()
+        {
             AtG.enabled = Config.Bind(uncommonString, "AtG Missile", true, itemConfigDescString).Value;
             Bandolier.enabled = Config.Bind(uncommonString, "Bandolier", true, itemConfigDescString).Value;
             Berzerker.enabled = Config.Bind(uncommonString, "Berzerkers Pauldron", true, itemConfigDescString).Value;
@@ -154,7 +175,10 @@ namespace RiskyMod
             Ukulele.enabled = Config.Bind(uncommonString, "Ukulele", true, itemConfigDescString).Value;
             WarHorn.enabled = Config.Bind(uncommonString, "War Horn", true, itemConfigDescString).Value;
             WillOWisp.enabled = Config.Bind(uncommonString, "Will-o-the-Wisp", true, itemConfigDescString).Value;
+        }
 
+        private void ConfigLegendaryItems()
+        {
             FrostRelic.enabled = Config.Bind(legendaryString, "Frost Relic", true, itemConfigDescString).Value;
             FrostRelic.removeFOV = Config.Bind(legendaryString, "Frost Relic - Disable FOV Modifier", true, "Disables FOV modifier.").Value;
             FrostRelic.removeBubble = Config.Bind(legendaryString, "Frost Relic - Disable Bubble", true, "Disables bubble visuals.").Value;
@@ -163,26 +187,58 @@ namespace RiskyMod
             Tesla.enabled = Config.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
             CeremonialDagger.enabled = Config.Bind(legendaryString, "Ceremonial Dagger", true, itemConfigDescString).Value;
             MeatHook.enabled = Config.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;
+        }
 
+        private void ConfigBossItems()
+        {
             MoltenPerf.enabled = Config.Bind(bossString, "Molten Perforator", true, itemConfigDescString).Value;
             ChargedPerf.enabled = Config.Bind(bossString, "Charged Perforator", true, itemConfigDescString).Value;
             Disciple.enabled = Config.Bind(bossString, "Charged Perforator", true, itemConfigDescString).Value;
             QueensGland.enabled = Config.Bind(bossString, "Queens Gland", true, itemConfigDescString).Value;
             Shatterspleen.enabled = Config.Bind(bossString, "Shatterspleen", true, itemConfigDescString).Value;
+        }
 
+        private void ConfigLunars()
+        {
             ShapedGlass.enabled = Config.Bind(lunarString, "Shaped Glass", true, itemConfigDescString).Value;
             BrittleCrown.enabled = Config.Bind(lunarString, "Brittle Crown", true, itemConfigDescString).Value;
             Transcendence.enabled = Config.Bind(lunarString, "Transcendence", true, itemConfigDescString).Value;
             Meteorite.enabled = Config.Bind(lunarString, "Glowing Meteorite", true, itemConfigDescString).Value;
+        }
 
+        private void ConfigEquipment()
+        {
             Backup.enabled = Config.Bind(equipmentString, "The Back-Up", true, itemConfigDescString).Value;
             BFG.enabled = Config.Bind(equipmentString, "Preon Accumulator", true, itemConfigDescString).Value;
             Capacitor.enabled = Config.Bind(equipmentString, "Royal Capacitor", true, itemConfigDescString).Value;
             Chrysalis.enabled = Config.Bind(equipmentString, "Milky Chrysalis", true, itemConfigDescString).Value;
             CritHud.enabled = Config.Bind(equipmentString, "Ocular HUD", true, itemConfigDescString).Value;
             VolcanicEgg.enabled = Config.Bind(equipmentString, "Volcanic Egg", true, itemConfigDescString).Value;
+        }
 
+        private void ConfigMonsters()
+        {
             Vagrant.enabled = Config.Bind(monsterString, "Wandering Vagrant", true, "Enable changes to this monster.").Value;
+        }
+
+        private void ConfigFireSelect()
+        {
+            FireSelect.scrollSelection = Config.Bind(fireSelectString, "Use Scrollwheel", true, "Mouse Scroll Wheel changes firemode").Value;
+            FireSelect.swapButton = Config.Bind(fireSelectString, "Next Firemode", KeyCode.None, "Button to swap to the next firemode.").Value;
+            FireSelect.prevButton = Config.Bind(fireSelectString, "Previous Firemode", KeyCode.None, "Button to swap to the previous firemode.").Value;
+            CaptainFireModes.enabled = Config.Bind(fireSelectString, "Captain: Enable Fire Select", false, "Enable firemode selection for Captain's shotgun (requires primary changes to be enabled).").Value;
+            CaptainFireModes.defaultButton = Config.Bind(fireSelectString, "Captain: Swap to Default", KeyCode.None, "Button to swap to the Default firemode.").Value;
+            CaptainFireModes.autoButton = Config.Bind(fireSelectString, "Captain: Swap to Auto", KeyCode.None, "Button to swap to the Auto firemode.").Value;
+            CaptainFireModes.chargeButton = Config.Bind(fireSelectString, "Captain: Swap to Charged", KeyCode.None, "Button to swap to the Charged firemode.").Value;
+        }
+
+        private void ConfigSurvivors()
+        {
+            CommandoCore.enabled = Config.Bind(commandoString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+            CommandoCore.enablePrimarySkillChanges = Config.Bind(commandoString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
+            CommandoCore.enableSecondarySkillChanges = Config.Bind(commandoString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
+            CommandoCore.enableUtilitySkillChanges = Config.Bind(commandoString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
+            CommandoCore.enableSpecialSkillChanges = Config.Bind(commandoString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
 
             CaptainCore.enabled = Config.Bind(captainString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             CaptainOrbitalHiddenRealms.enabled = Config.Bind(captainString, "Hidden Realm Orbital Skills", true, "Allow Orbital skills in Hiden Realms.").Value;
@@ -196,8 +252,8 @@ namespace RiskyMod
             Bandit2Core.enablePassiveSkillChanges = Config.Bind(banditString, "Enable Passive Skill Changes", true, "Enable passive skill changes for this survivor.").Value;
             Bandit2Core.enablePrimarySkillChanges = Config.Bind(banditString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
             Bandit2Core.enableSecondarySkillChanges = Config.Bind(banditString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
-            Bandit2Core.enableUtilitySkillChanges = Config.Bind(banditString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
             Bandit2Core.enableSpecialSkillChanges = Config.Bind(banditString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
+            DesperadoRework.enabled = Config.Bind(banditString, "Persistent Desperado", true, "Desperado stacks are weaker but last between stages.").Value;
         }
 
         private void CheckDependencies()
@@ -301,6 +357,15 @@ namespace RiskyMod
                     list.Add(RiskyMod.fileSystem.GetDirectoryEntry("/language/"));
                 };
             }
+        }
+
+
+        public delegate void FireMode();
+        public static FireMode FireModeActions = FireModeMethod;
+        private static void FireModeMethod() { }
+        private void Update()
+        {
+            FireModeActions.Invoke();
         }
     }
 }

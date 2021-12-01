@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 using EntityStates;
+using RiskyMod.Survivors.Captain;
 
 namespace EntitiyStates.RiskyMod.Captain
 {
@@ -67,7 +68,11 @@ namespace EntitiyStates.RiskyMod.Captain
 			}
 			if (base.isAuthority)
 			{
-				if (!this.released && (!base.inputBank || !base.inputBank.skill1.down))
+				if (!this.released &&
+					(!base.inputBank
+					|| !base.inputBank.skill1.down
+					|| (CaptainFireModes.currentfireMode == CaptainFireModes.CaptainFireMode.Auto)
+					|| (CaptainFireModes.currentfireMode == CaptainFireModes.CaptainFireMode.Charged && charge >= 1f)))
 				{
 					this.released = true;
 				}
