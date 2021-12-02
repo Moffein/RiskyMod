@@ -11,6 +11,7 @@ namespace RiskyMod.Survivors.Engi
 
         public TurretChanges()
         {
+            if (!enabled) return;
             ModifyTurret();
             ModifyWalkerTurret();
         }
@@ -23,7 +24,7 @@ namespace RiskyMod.Survivors.Engi
             cb.levelDamage = cb.damage * 0.2f;
             cb.regen = 1f;
             cb.levelRegen = cb.regen * 0.2f;
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.EngiTurret.EngiTurretWeapon.FireBeam", "damageCoefficient", (16f/12f).ToString());
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.EngiTurret.EngiTurretWeapon.FireGauss", "damageCoefficient",  (0.7f * 16f /12f).ToString());
         }
 
         private void ModifyWalkerTurret()
