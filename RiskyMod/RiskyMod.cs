@@ -26,11 +26,12 @@ using RiskyMod.Enemies.Bosses;
 using RiskyMod.Survivors.Bandit2;
 using RiskyMod.Survivors.Commando;
 using RiskyMod.Survivors.Huntress;
+using RiskyMod.Survivors.Engi;
 
 namespace RiskyMod
 {
     [BepInDependency("com.PlasmaCore.StickyStunter", BepInDependency.DependencyFlags.SoftDependency)]
-
+    [BepInDependency("com.Moffein.MobileTurretBuff", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.MercExposeFix", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.FixPlayercount", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.NoLevelupHeal", BepInDependency.DependencyFlags.SoftDependency)]
@@ -68,6 +69,7 @@ namespace RiskyMod
 
         private const string commandoString = "Survivors: Commando";
         private const string huntressString = "Survivors: Huntress";
+        private const string engiString = "Survivors: Engineer";
         private const string banditString = "Survivors: Bandit";
         private const string captainString = "Survivors: Captain";
 
@@ -98,6 +100,7 @@ namespace RiskyMod
             new DronesCore();
             new MoonCore();
             new SurvivorsCore();
+            new FireSelect();
             new EnemiesCore();
             SetupAssists();
             AddHooks();
@@ -118,6 +121,8 @@ namespace RiskyMod
             CaptainOrbitalHiddenRealms.enabled = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.PlasmaCore.AlwaysAllowSupplyDrops");
             CritHud.enabled = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.Hypercrit");   //Effect is already a part of hypercrit
             ScepterPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
+
+            TurretChanges.mobileTurretChanges = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.MobileTurretBuff");
         }
 
         private void RunTweaks()
@@ -342,6 +347,10 @@ namespace RiskyMod
             FireSelect.scrollSelection = Config.Bind(fireSelectString, "Use Scrollwheel", true, "Mouse Scroll Wheel changes firemode").Value;
             FireSelect.swapButton = Config.Bind(fireSelectString, "Next Firemode", KeyCode.None, "Button to swap to the next firemode.").Value;
             FireSelect.prevButton = Config.Bind(fireSelectString, "Previous Firemode", KeyCode.None, "Button to swap to the previous firemode.").Value;
+            EngiFireModes.enabled = Config.Bind(fireSelectString, "Engineer: Enable Fire Select", false, "Enable firemode selection for Engineer's Bouncing Grenades.").Value;
+            EngiFireModes.defaultButton = Config.Bind(fireSelectString, "Engineer: Swap to Default", KeyCode.None, "Button to swap to the Default firemode.").Value;
+            EngiFireModes.autoButton = Config.Bind(fireSelectString, "Engineer: Swap to Auto", KeyCode.None, "Button to swap to the Auto firemode.").Value;
+            EngiFireModes.holdButton = Config.Bind(fireSelectString, "Engineer: Swap to Hold", KeyCode.None, "Button to swap to the Charged firemode.").Value;
             CaptainFireModes.enabled = Config.Bind(fireSelectString, "Captain: Enable Fire Select", false, "Enable firemode selection for Captain's shotgun (requires primary changes to be enabled).").Value;
             CaptainFireModes.defaultButton = Config.Bind(fireSelectString, "Captain: Swap to Default", KeyCode.None, "Button to swap to the Default firemode.").Value;
             CaptainFireModes.autoButton = Config.Bind(fireSelectString, "Captain: Swap to Auto", KeyCode.None, "Button to swap to the Auto firemode.").Value;
@@ -363,6 +372,10 @@ namespace RiskyMod
             HuntressCore.enableSecondarySkillChanges = Config.Bind(huntressString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
             HuntressCore.enableUtilitySkillChanges = Config.Bind(huntressString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
             HuntressCore.enableSpecialSkillChanges = Config.Bind(huntressString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
+
+            EngiCore.enabled = Config.Bind(engiString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+            PressureMines.enabled = Config.Bind(engiString, "Pressure Mine Changes", true, "Pressure Mines only detonate when fully armed.").Value;
+            TurretChanges.enabled = Config.Bind(engiString, "Turret Changes", true, "Enable turret changes.").Value;
 
             CaptainCore.enabled = Config.Bind(captainString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             CaptainOrbitalHiddenRealms.enabled = Config.Bind(captainString, "Hidden Realm Orbital Skills", true, "Allow Orbital skills in Hiden Realms.").Value;

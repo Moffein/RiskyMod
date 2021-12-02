@@ -1,35 +1,49 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace RiskyMod.Survivors.Captain
+namespace RiskyMod.Survivors.Engi
 {
-    public class CaptainFireModes
+    public class EngiFireModes
     {
         public static bool enabled = false;
-
-        public static CaptainFireMode currentfireMode = CaptainFireMode.Default;
+        public static EngiFireMode currentfireMode = EngiFireMode.Default;
         public static bool enableFireSelect = false;
         public static KeyCode defaultButton = KeyCode.None;
         public static KeyCode autoButton = KeyCode.None;
-        public static KeyCode chargeButton = KeyCode.None;
-        public enum CaptainFireMode { Default, Auto, Charged }
+        public static KeyCode holdButton = KeyCode.None;
+        public enum EngiFireMode{ Default, Auto, Hold }
 
-        public CaptainFireModes()
+        public EngiFireModes()
         {
-            if (!enabled || !(CaptainCore.enabled && CaptainCore.enablePrimarySkillChanges)) return;
+            if (!enabled) return;
 
             On.RoR2.UI.SkillIcon.Update += (orig, self) =>
             {
                 orig(self);
                 if (self.targetSkill && self.targetSkillSlot == SkillSlot.Primary)
                 {
-                    if (self.targetSkill.characterBody.bodyIndex == BodyCatalog.FindBodyIndex("CaptainBody"))
+                    if (self.targetSkill.characterBody.bodyIndex == BodyCatalog.FindBodyIndex("EngiBody"))
                     {
                         self.stockText.gameObject.SetActive(true);
                         self.stockText.fontSize = 12f;
                         self.stockText.SetText(currentfireMode.ToString());
                     }
                 }
+            };
+
+            On.EntityStates.Engi.EngiWeapon.ChargeGrenades.OnEnter += (orig, self) =>
+            {
+                float oldBaseTotalDuration = EntityStates.Engi.EngiWeapon.ChargeGrenades.baseTotalDuration;
+                if (currentfireMode == EngiFireMode.Auto)
+                {
+                    EntityStates.Engi.EngiWeapon.ChargeGrenades.baseTotalDuration = EntityStates.Engi.EngiWeapon.ChargeGrenades.baseMaxChargeTime;
+                }
+                else if(currentfireMode == EngiFireMode.Hold)
+                {
+                    EntityStates.Engi.EngiWeapon.ChargeGrenades.baseTotalDuration = 1000000f;
+                }
+                orig(self);
+                EntityStates.Engi.EngiWeapon.ChargeGrenades.baseTotalDuration = oldBaseTotalDuration;
             };
 
             RiskyMod.FireModeActions += FireMode;
@@ -40,15 +54,15 @@ namespace RiskyMod.Survivors.Captain
             int newFireMode = direction + (int)currentfireMode;
             if (newFireMode < 0)
             {
-                currentfireMode = CaptainFireMode.Charged;
+                currentfireMode = EngiFireMode.Hold;
             }
             else if (newFireMode > 2)
             {
-                currentfireMode = CaptainFireMode.Default;
+                currentfireMode = EngiFireMode.Default;
             }
             else
             {
-                currentfireMode = (CaptainFireMode)newFireMode;
+                currentfireMode = (EngiFireMode)newFireMode;
             }
         }
 
@@ -69,15 +83,15 @@ namespace RiskyMod.Survivors.Captain
             }
             if (Input.GetKeyDown(defaultButton))
             {
-                currentfireMode = CaptainFireMode.Default;
+                currentfireMode = EngiFireMode.Default;
             }
             if (Input.GetKeyDown(autoButton))
             {
-                currentfireMode = CaptainFireMode.Auto;
+                currentfireMode = EngiFireMode.Auto;
             }
-            if (Input.GetKeyDown(chargeButton))
+            if (Input.GetKeyDown(holdButton))
             {
-                currentfireMode = CaptainFireMode.Charged;
+                currentfireMode = EngiFireMode.Hold;
             }
         }
     }

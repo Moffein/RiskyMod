@@ -64,8 +64,6 @@ namespace RiskyMod.Survivors.Captain
             LoadoutAPI.AddSkillDef(shotgunDef);
             Skills.Shotgun = shotgunDef;
             sk.primary._skillFamily.variants[0].skillDef = Skills.Shotgun;
-
-            new CaptainFireModes();
         }
     }
 
