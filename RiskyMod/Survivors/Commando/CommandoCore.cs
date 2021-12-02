@@ -141,7 +141,8 @@ namespace RiskyMod.Survivors.Commando
                 }
             };
 
-            SlideBuff = BuildSlideBuff();
+            //Disabling this for now to see if Vanilla Slide is still worth taking when Roll has CDR.
+            /*SlideBuff = BuildSlideBuff();
             sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "COMMANDO_UTILITY_ALT_DESCRIPTION_RISKYMOD";
             GetStatsCoefficient.HandleStatsActions += SlideStats;
             On.EntityStates.Commando.SlideState.OnEnter += (orig, self) =>
@@ -163,7 +164,7 @@ namespace RiskyMod.Survivors.Commando
                         self.characterBody.RemoveBuff(SlideBuff);
                     }
                 }
-            };
+            };*/
         }
 
         private void SlideStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
@@ -197,7 +198,7 @@ namespace RiskyMod.Survivors.Commando
             barrageDef.activationState = new SerializableEntityStateType(typeof(FireBarrage));
             barrageDef.activationStateMachineName = "Weapon";
             barrageDef.baseMaxStock = 1;
-            barrageDef.baseRechargeInterval = 6f;
+            barrageDef.baseRechargeInterval = 7f;
             barrageDef.beginSkillCooldownOnSkillEnd = false;
             barrageDef.canceledFromSprinting = false;
             barrageDef.dontAllowPastMaxStocks = true;
@@ -227,7 +228,7 @@ namespace RiskyMod.Survivors.Commando
             grenadeDef.activationState = new SerializableEntityStateType(typeof(CookGrenade));
             grenadeDef.activationStateMachineName = "Weapon";
             grenadeDef.baseMaxStock = 1;
-            grenadeDef.baseRechargeInterval = 6f;
+            grenadeDef.baseRechargeInterval = 7f;
             grenadeDef.beginSkillCooldownOnSkillEnd = false;
             grenadeDef.canceledFromSprinting = false;
             grenadeDef.dontAllowPastMaxStocks = true;

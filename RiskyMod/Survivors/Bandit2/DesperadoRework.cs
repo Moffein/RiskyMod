@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using MonoMod.Cil;
+using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -13,6 +14,15 @@ namespace RiskyMod.Survivors.Bandit2
         {
             if (!enabled) return;
             RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<DesperadoTracker>();
+
+            IL.EntityStates.Bandit2.Weapon.FireSidearmSkullRevolver.ModifyBullet += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchLdcR4(0.1f)
+                    );
+                c.Next.Operand = damagePerBuff;
+            };
         }
 
         public static float GetDesperadoMult(CharacterBody cb)

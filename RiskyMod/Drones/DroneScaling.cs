@@ -41,6 +41,7 @@ namespace RiskyMod.Drones
             CharacterBody cb = go.GetComponent<CharacterBody>();
 
             cb.baseRegen = cb.baseMaxHealth / 40f;  //Drones take a fixed amount of time to regen to full.
+            cb.levelDamage = cb.baseDamage * 0.3f;
 
             //Specific changes
             switch (cb.name)
@@ -50,19 +51,14 @@ namespace RiskyMod.Drones
                     cb.baseMaxHealth *= 1.5f;
                     break;
                 case "SquidTurretBody":
+                    cb.levelArmor += 1f;
                     cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
                     cb.baseMaxHealth = 720f;
                     break;
-                case "Turret1Body": //Shield seems to be enough to put them in a good spot.
+                case "Turret1Body":
+                    cb.levelArmor += 1f;
                     cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
                     cb.baseMaxHealth *= 1.2f;
-                    break;
-                /*case "FlameDroneBody": //These seem to die faster than other drones?
-                    //cb.baseRegen = cb.baseMaxHealth / 20f;
-                    cb.baseMaxHealth *= 1.5f;
-                    break;*/
-                case "BeetleGuardAllyBody":
-                    cb.levelArmor -= 1f;    //Queens Gland Guards get no armor bonus.
                     break;
                 default:
                     break;
@@ -74,13 +70,7 @@ namespace RiskyMod.Drones
                 cb.baseMaxShield += cb.baseMaxHealth * 0.1f;
                 cb.levelMaxShield = cb.baseMaxShield * 0.3f;
             }
-            else
-            {
-                cb.levelArmor += 0.5f;
-            }
             cb.levelRegen = cb.baseRegen * 0.3f;
-            cb.levelDamage = cb.baseDamage * 0.3f;
-            cb.levelArmor += 0.5f;    //Drones need bonus armor because of increasing enemycounts and elite counts, otherwise they end up dying really quickly.
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
         }
 

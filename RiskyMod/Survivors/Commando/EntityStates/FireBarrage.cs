@@ -129,7 +129,7 @@ namespace EntityStates.RiskyMod.Commando
 
 		public static GameObject explosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
 		public static float blastRadius = 3f;
-		public static float blastDamageCoefficient = 0.3f;	//Multiply by damage coefficient
+		public static float blastDamageCoefficient = 0.2f;	//Multiply by damage coefficient
 
 		public static GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashBarrage");
 		public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/HitsparkCommandoBarrage");

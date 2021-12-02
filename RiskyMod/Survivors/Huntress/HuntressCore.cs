@@ -87,8 +87,8 @@ namespace RiskyMod.Survivors.Huntress
         private void ModifySecondaries(SkillLocator sk)
         {
             if (!enableSecondarySkillChanges) return;
-            sk.secondary.skillFamily.variants[0].skillDef.baseRechargeInterval = 5f;
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.ThrowGlaive", "damageCoefficient", "3");
+            sk.secondary.skillFamily.variants[0].skillDef.baseRechargeInterval = 6f;
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.ThrowGlaive", "baseDuration", "0.6");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.ThrowGlaive", "glaiveProcCoefficient", "1");
         }
 
@@ -105,14 +105,14 @@ namespace RiskyMod.Survivors.Huntress
         private void ModifySpecials(SkillLocator sk)
         {
             if (!enableSpecialSkillChanges) return;
-            sk.special.skillFamily.variants[0].skillDef.baseRechargeInterval = 8f;
+            sk.special.skillFamily.variants[0].skillDef.baseRechargeInterval = 10f;
             sk.special.skillFamily.variants[0].skillDef.beginSkillCooldownOnSkillEnd = true;
             sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD";
             new ArrowRainBuff();
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "damageCoefficient", "4.2");   //ArrowRainBuff adjusts this value to be accurate
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "projectilePrefab", ArrowRainBuff.arrowRainObject);
 
-            sk.special.skillFamily.variants[1].skillDef.baseRechargeInterval = 8f;
+            sk.special.skillFamily.variants[1].skillDef.baseRechargeInterval = 10f;
             sk.special.skillFamily.variants[1].skillDef.beginSkillCooldownOnSkillEnd = true;
 
             //Won't bother with Scepter skills until AncientScepter supports overriding the defaults.
