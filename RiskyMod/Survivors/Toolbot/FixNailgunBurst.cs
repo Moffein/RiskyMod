@@ -16,7 +16,7 @@ namespace RiskyMod.Survivors.Toolbot
                 orig(self);
                 //Manually fire shotgun burst if skill is cancelled.
                 //self.outer.nextState doesn't seem to be working
-                if (self.IsKeyDownAuthority())
+                if (self.IsKeyDownAuthority() && !(self.characterBody && self.characterBody.isSprinting))
                 {
                     if (self.characterBody)
                     {

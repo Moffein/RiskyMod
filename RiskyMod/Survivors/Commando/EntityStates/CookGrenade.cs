@@ -7,7 +7,7 @@ namespace EntityStates.RiskyMod.Commando
 {
     public class CookGrenade : BaseState
     {
-        public static float totalFuseTime = 3f;
+        public static float totalFuseTime = 2f;
         public static string beepSoundString = "Play_commando_M2_grenade_beep";
 
         //Things that happen when you overcook
@@ -55,9 +55,9 @@ namespace EntityStates.RiskyMod.Commando
         {
             base.FixedUpdate();
             stopwatch += Time.fixedDeltaTime;
-            if (stopwatch > 1f && base.fixedAge < totalFuseTime)
+            if (stopwatch > totalFuseTime/3f && base.fixedAge < totalFuseTime)
             {
-                stopwatch -= 1f;
+                stopwatch -= totalFuseTime / 3f;
                 Util.PlaySound(beepSoundString, base.gameObject);
                 if (rightHand)
                 {
