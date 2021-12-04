@@ -67,7 +67,7 @@ namespace RiskyMod.Drones
             //This makes their performance stay the same on every stage. (Everything's HP increases 30% per level, so damage and regen increase matches that.)
             if (useShield)
             {
-                cb.baseMaxShield += cb.baseMaxHealth * 0.1f;
+                cb.baseMaxShield += cb.baseMaxHealth * 0.08f;
                 cb.levelMaxShield = cb.baseMaxShield * 0.3f;
             }
             cb.levelRegen = cb.baseRegen * 0.3f;

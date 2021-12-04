@@ -10,6 +10,7 @@ namespace RiskyMod.Items.Equipment
     public class Backup
     {
         public static bool enabled = true;
+        public static bool allyCap = true;
         public static GameObject backupMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/DroneBackupMaster");
         public Backup()
         {
@@ -46,7 +47,7 @@ namespace RiskyMod.Items.Equipment
                                 position = position,
                                 rotation = rotation,
                                 summonerBodyObject = self.gameObject,
-                                ignoreTeamMemberLimit = true
+                                ignoreTeamMemberLimit = allyCap
                             }.Perform();
                             if (characterMaster)
                             {
@@ -55,8 +56,6 @@ namespace RiskyMod.Items.Equipment
                                 {
                                     MasterSuicideOnTimer msot = characterMaster.gameObject.AddComponent<MasterSuicideOnTimer>();
                                     msot.lifeTimer = num + UnityEngine.Random.Range(0f, 3f);
-
-
                                     bt.AddHealthcomponent(cb.healthComponent);
                                 }
                             }

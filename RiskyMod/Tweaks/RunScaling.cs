@@ -7,6 +7,7 @@ namespace RiskyMod.Tweaks
     public class RunScaling
     {
 		public static bool enabled = true;
+		public static bool scaleSpawnsOnly = true;
 		public static float rewardMultiplier = 0.85f;
         public RunScaling()
         {
@@ -17,8 +18,8 @@ namespace RiskyMod.Tweaks
 				float time = self.GetRunStopwatch() * 0.0166666675f; //Convert stopwatch(seconds) into minutes. Why is this Floored in vanilla, and why does it still move anyways despite that?
 
 				DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
-                float playerFactor = 0.7f + playerCount * 0.3f;
-				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue * Mathf.Pow(playerCount, 0.1f); //was 0.15, want to see if this reduces earlygame bulletsponge in MP a bit. might not be necessary
+                float playerFactor = scaleSpawnsOnly ? 1f : (0.7f + playerCount * 0.3f);
+				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue;//* Mathf.Pow(playerCount, 0.15f)
 				float stageFactor = Mathf.Pow(1.2f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
 				float finalDifficulty = (playerFactor + timeFactor) * stageFactor;
 				self.compensatedDifficultyCoefficient = finalDifficulty;
@@ -37,9 +38,12 @@ namespace RiskyMod.Tweaks
 
 			//Increase director intensity. Goal is to have the same level of craziness as stage 5 in Starstorm, with the constant boss spawns and big monsters everywhere.
 			//Seems to be doing this properly when in big lobbies, which is intended.
+			//Enemies get way too tanky in big lobbies. Experiment with only affecting spawncount?
 			On.RoR2.CombatDirector.DirectorMoneyWave.Update += (orig, self, deltaTime, difficultyCoefficient) =>
 			{
-				difficultyCoefficient *= Run.instance.stageClearCount < 4 ? Mathf.Pow(1.1f, Run.instance.stageClearCount) : 1.5f;	//Needs cap to prevent game from turning into a slideshow. Uncapping it causes excessive T2 Elite spam.
+				float playerFactor = scaleSpawnsOnly? (0.7f + Run.instance.participatingPlayerCount * 0.3f) : 1f;
+				float stageFactor = Run.instance.stageClearCount < 4 ? Mathf.Pow(1.1f, Run.instance.stageClearCount) : 1.5f;//Needs cap to prevent game from turning into a slideshow. Uncapping it causes excessive T2 Elite spam.
+				difficultyCoefficient *= playerFactor * stageFactor;
 				return orig(self, deltaTime, difficultyCoefficient);
 			};
 

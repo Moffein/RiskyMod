@@ -230,6 +230,7 @@ namespace RiskyMod
             TrueOSP.enabled = Config.Bind(generalString, "True OSP", true, "Makes OSP work against multihits.").Value;
 
             RunScaling.enabled = Config.Bind(scalingString, "Linear Difficulty Scaling", true, "Makes difficulty scaling linear.").Value;
+            RunScaling.scaleSpawnsOnly = Config.Bind(scalingString, "Linear Difficulty Scaling - Experimental Scaling", false, "Makes playercount only affect spawnrates instead of monster level scaling (hoping this will cut down on bulletsponge in big lobbies).").Value;
             NoLevelupHeal.enabled = Config.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
             NoLevelupHeal.enabled = Config.Bind(scalingString, "No Partial Levels", true, "Monsters can't gain partial levels.").Value;
             RemoveLevelCap.enabled = Config.Bind(scalingString, "Increase Monster Level Cap", true, "Increases Monster Level Cap.").Value;
@@ -330,6 +331,7 @@ namespace RiskyMod
         private void ConfigEquipment()
         {
             Backup.enabled = Config.Bind(equipmentString, "The Back-Up", true, itemConfigDescString).Value;
+            Backup.enabled = Config.Bind(equipmentString, "The Back-Up: Limit Drones", true, "Back-Up drones count towards the ally cap.").Value;
             BFG.enabled = Config.Bind(equipmentString, "Preon Accumulator", true, itemConfigDescString).Value;
             Capacitor.enabled = Config.Bind(equipmentString, "Royal Capacitor", true, itemConfigDescString).Value;
             Chrysalis.enabled = Config.Bind(equipmentString, "Milky Chrysalis", true, itemConfigDescString).Value;
