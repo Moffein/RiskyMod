@@ -88,7 +88,7 @@ namespace RiskyMod.Survivors.Huntress
         {
             if (!enableSecondarySkillChanges) return;
             sk.secondary.skillFamily.variants[0].skillDef.baseRechargeInterval = 6f;
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.ThrowGlaive", "baseDuration", "0.6");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.ThrowGlaive", "baseDuration", "0.8");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.ThrowGlaive", "glaiveProcCoefficient", "1");
         }
 

@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="resources" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="resources" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>libs\0Harmony.dll</HintPath>
     </Reference>

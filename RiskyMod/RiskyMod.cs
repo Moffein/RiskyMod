@@ -90,7 +90,7 @@ namespace RiskyMod
         public void Awake()
         {
             pluginInfo = Info;
-
+            Assets.Init();
             ReadConfig();
             CheckDependencies();
 

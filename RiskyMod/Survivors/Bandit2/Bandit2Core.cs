@@ -414,7 +414,7 @@ namespace RiskyMod.Survivors.Bandit2
             gunslingerDef.skillDescriptionToken = "BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD";
             gunslingerDef.skillName = "Gunslinger";
             gunslingerDef.skillNameToken = "BANDIT2_REVOLVER_NAME_RISKYMOD";
-            gunslingerDef.icon = sk.passiveSkill.icon;  //TODO: ICON
+            gunslingerDef.icon = Assets.SkillIcons.Bandit2Gunslinger;
             Skills.Gunslinger = gunslingerDef;
             LoadoutAPI.AddSkillDef(Skills.Gunslinger);
 
@@ -424,7 +424,7 @@ namespace RiskyMod.Survivors.Bandit2
             desperado.skillDescriptionToken = DesperadoRework.enabled ? "BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD" : "BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD";
             desperado.skillName = "Desperado";
             desperado.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME";
-            desperado.icon = sk.passiveSkill.icon;  //TODO: ICON
+            desperado.icon = Assets.SkillIcons.Bandit2Desperado;
             Skills.Desperado = desperado;
             LoadoutAPI.AddSkillDef(Skills.Desperado);
 
