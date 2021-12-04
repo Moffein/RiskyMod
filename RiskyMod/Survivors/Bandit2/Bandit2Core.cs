@@ -348,7 +348,7 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.forceSprintDuringState = false;
             lightsOutDef.dontAllowPastMaxStocks = true;
             lightsOutDef.fullRestockOnAssign = true;
-            lightsOutDef.icon = sk.special._skillFamily.variants[0].skillDef.icon;
+            lightsOutDef.icon = AncientScepter.Assets.SpriteAssets.Bandit2ResetRevolver2;
             lightsOutDef.interruptPriority = InterruptPriority.Skill;
             lightsOutDef.isCombatSkill = true;
             lightsOutDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
@@ -375,7 +375,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.forceSprintDuringState = false;
             reuDef.dontAllowPastMaxStocks = true;
             reuDef.fullRestockOnAssign = true;
-            reuDef.icon = sk.special._skillFamily.variants[1].skillDef.icon;
+            reuDef.icon = AncientScepter.Assets.SpriteAssets.Bandit2SkullRevolver2;
             reuDef.interruptPriority = InterruptPriority.Skill;
             reuDef.isCombatSkill = true;
             reuDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };

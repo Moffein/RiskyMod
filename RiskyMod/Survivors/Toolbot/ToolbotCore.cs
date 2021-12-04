@@ -8,7 +8,7 @@ namespace RiskyMod.Survivors.Toolbot
 {
     public class ToolbotCore
     {
-        public static bool enabled = true;
+        public static bool enabled = false;
         public static bool enableNailgunChanges = true;
 
         public ToolbotCore()

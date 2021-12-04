@@ -10,7 +10,9 @@ namespace RiskyMod.Survivors.Huntress
     {
         public static bool enabled = true;
         public static GameObject arrowRainObject;
+        public static GameObject arrowRainScepterObject;
         public static DamageAPI.ModdedDamageType ArrowRainForce;
+        public static DamageAPI.ModdedDamageType ArrowRainScepterForce;
 
         public ArrowRainBuff()
         {

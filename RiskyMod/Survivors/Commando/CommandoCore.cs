@@ -255,7 +255,6 @@ namespace RiskyMod.Survivors.Commando
             }
         }
 
-        //Currently does nothing because overriding existing scepter skills isn't supported
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepter(SkillLocator sk)
         {
@@ -272,7 +271,7 @@ namespace RiskyMod.Survivors.Commando
             barrageDef.dontAllowPastMaxStocks = true;
             barrageDef.forceSprintDuringState = false;
             barrageDef.fullRestockOnAssign = true;
-            barrageDef.icon = sk.special.skillFamily.variants[0].skillDef.icon;
+            barrageDef.icon = AncientScepter.Assets.SpriteAssets.CommandoBarrage2;
             barrageDef.interruptPriority = InterruptPriority.PrioritySkill;
             barrageDef.isCombatSkill = true;
             barrageDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
@@ -300,7 +299,7 @@ namespace RiskyMod.Survivors.Commando
             grenadeDef.dontAllowPastMaxStocks = true;
             grenadeDef.forceSprintDuringState = false;
             grenadeDef.fullRestockOnAssign = true;
-            grenadeDef.icon = sk.special.skillFamily.variants[1].skillDef.icon;
+            grenadeDef.icon = AncientScepter.Assets.SpriteAssets.CommandoGrenade2;
             grenadeDef.interruptPriority = InterruptPriority.PrioritySkill;
             grenadeDef.isCombatSkill = true;
             grenadeDef.keywordTokens = new string[] { };
