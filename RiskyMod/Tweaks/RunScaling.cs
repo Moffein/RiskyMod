@@ -7,7 +7,7 @@ namespace RiskyMod.Tweaks
     public class RunScaling
     {
 		public static bool enabled = true;
-		public static bool scaleSpawnsOnly = true;
+		public static bool scaleSpawnsOnly = true; //Enemies get way too tanky in big lobbies. Experiment with only affecting spawnrates?
 		public static float rewardMultiplier = 0.85f;
         public RunScaling()
         {
@@ -38,10 +38,9 @@ namespace RiskyMod.Tweaks
 
 			//Increase director intensity. Goal is to have the same level of craziness as stage 5 in Starstorm, with the constant boss spawns and big monsters everywhere.
 			//Seems to be doing this properly when in big lobbies, which is intended.
-			//Enemies get way too tanky in big lobbies. Experiment with only affecting spawncount?
 			On.RoR2.CombatDirector.DirectorMoneyWave.Update += (orig, self, deltaTime, difficultyCoefficient) =>
 			{
-				float playerFactor = scaleSpawnsOnly? (0.7f + Run.instance.participatingPlayerCount * 0.3f) : 1f;
+				float playerFactor = scaleSpawnsOnly ? (0.7f + Run.instance.participatingPlayerCount * 0.3f) : 1f;
 				float stageFactor = Run.instance.stageClearCount < 4 ? Mathf.Pow(1.1f, Run.instance.stageClearCount) : 1.5f;//Needs cap to prevent game from turning into a slideshow. Uncapping it causes excessive T2 Elite spam.
 				difficultyCoefficient *= playerFactor * stageFactor;
 				return orig(self, deltaTime, difficultyCoefficient);

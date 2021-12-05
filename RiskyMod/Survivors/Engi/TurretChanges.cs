@@ -24,7 +24,7 @@ namespace RiskyMod.Survivors.Engi
             cb.levelDamage = cb.damage * 0.2f;
             cb.regen = 1f;
             cb.levelRegen = cb.regen * 0.2f;
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.EngiTurret.EngiTurretWeapon.FireGauss", "damageCoefficient",  (0.7f * 16f /12f).ToString());
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.EngiTurret.EngiTurretWeapon.FireGauss", "damageCoefficient",  "0.933333333");
         }
 
         private void ModifyWalkerTurret()
@@ -38,7 +38,7 @@ namespace RiskyMod.Survivors.Engi
             cb.levelDamage = cb.damage * 0.2f;
             cb.regen = 1f;
             cb.levelRegen = cb.regen * 0.2f;
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.EngiTurret.EngiTurretWeapon.FireBeam", "damageCoefficient", (2f * 16f / 12f).ToString());
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.EngiTurret.EngiTurretWeapon.FireBeam", "damageCoefficient", "2.666666667");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.EngiTurret.EngiTurretWeapon.FireBeam", "maxDistance", "45");
 
             Component[] aiDrivers = Resources.Load<GameObject>("prefabs/charactermasters/EngiWalkerTurretMaster").GetComponents<AISkillDriver>();
