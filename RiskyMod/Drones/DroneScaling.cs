@@ -48,7 +48,6 @@ namespace RiskyMod.Drones
             {
                 case "MegaDroneBody": //If I'm gonna pay the price of a legendary chest to buy a drone, it better be worth it.
                     cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
-                    cb.baseMaxHealth *= 1.5f;
                     break;
                 case "SquidTurretBody":
                     cb.levelArmor += 1f;

@@ -95,8 +95,7 @@ namespace RiskyMod.Survivors.Bandit2
             shotgunDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
             shotgunDef.reloadInterruptPriority = InterruptPriority.Any;
             LoadoutAPI.AddSkillDef(shotgunDef);
-            Skills.Burst = shotgunDef;
-            sk.primary._skillFamily.variants[0].skillDef = Skills.Burst;
+            sk.primary._skillFamily.variants[0].skillDef = shotgunDef;
 
             LoadoutAPI.AddSkill(typeof(FirePrimaryRifle));
             ReloadSkillDef rifleDef = ReloadSkillDef.CreateInstance<ReloadSkillDef>();
@@ -125,8 +124,7 @@ namespace RiskyMod.Survivors.Bandit2
             rifleDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
             rifleDef.reloadInterruptPriority = InterruptPriority.Any;
             LoadoutAPI.AddSkillDef(rifleDef);
-            Skills.Blast = rifleDef;
-            sk.primary._skillFamily.variants[1].skillDef = Skills.Blast;
+            sk.primary._skillFamily.variants[1].skillDef = rifleDef;
         }
 
         private void ModifySecondaries(SkillLocator sk)
@@ -157,8 +155,7 @@ namespace RiskyMod.Survivors.Bandit2
             slashBladeDef.skillDescriptionToken = "BANDIT2_SECONDARY_DESCRIPTION";
             slashBladeDef.stockToConsume = 1;
             LoadoutAPI.AddSkillDef(slashBladeDef);
-            Skills.Knife = slashBladeDef;
-            sk.secondary._skillFamily.variants[0].skillDef = Skills.Knife;
+            sk.secondary._skillFamily.variants[0].skillDef = slashBladeDef;
             knifeVelocity = BuildSlashVelocityCurve();
             On.EntityStates.Bandit2.Weapon.SlashBlade.OnEnter += (orig, self) =>
             {
@@ -194,8 +191,7 @@ namespace RiskyMod.Survivors.Bandit2
             throwKnifeDef.skillDescriptionToken = "BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
             throwKnifeDef.stockToConsume = 1;
             LoadoutAPI.AddSkillDef(throwKnifeDef);
-            Skills.ThrowKnife = throwKnifeDef;
-            sk.secondary._skillFamily.variants[1].skillDef = Skills.ThrowKnife;
+            sk.secondary._skillFamily.variants[1].skillDef = throwKnifeDef;
 
             On.EntityStates.Bandit2.Weapon.Bandit2FireShiv.FireShiv += (orig, self) =>
             {
@@ -254,9 +250,7 @@ namespace RiskyMod.Survivors.Bandit2
             stealthDef.skillDescriptionToken = "BANDIT2_UTILITY_DESCRIPTION";
             stealthDef.stockToConsume = 1;
             LoadoutAPI.AddSkillDef(stealthDef);
-            Skills.Smokebomb = stealthDef;
-
-            sk.utility._skillFamily.variants[0].skillDef = Skills.Smokebomb;
+            sk.utility._skillFamily.variants[0].skillDef = stealthDef;
         }
 
         private void ModifySpecials(SkillLocator sk)
@@ -296,8 +290,7 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.skillDescriptionToken = "BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD";
             lightsOutDef.stockToConsume = 1;
             LoadoutAPI.AddSkillDef(lightsOutDef);
-            Skills.LightsOut = lightsOutDef;
-            sk.special._skillFamily.variants[0].skillDef = Skills.LightsOut;
+            sk.special._skillFamily.variants[0].skillDef = lightsOutDef;
 
             SkillDef reuDef = SkillDef.CreateInstance<SkillDef>();
             LoadoutAPI.AddSkill(typeof(PrepRackEmUp));
@@ -324,8 +317,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.skillDescriptionToken = "BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
             reuDef.stockToConsume = 1;
             LoadoutAPI.AddSkillDef(reuDef);
-            Skills.RackEmUp = reuDef;
-            sk.special._skillFamily.variants[1].skillDef = Skills.RackEmUp;
+            sk.special._skillFamily.variants[1].skillDef = reuDef;
 
             if (RiskyMod.ScepterPluginLoaded)
             {
@@ -470,18 +462,6 @@ namespace RiskyMod.Survivors.Bandit2
 
     public class Skills
     {
-        public static ReloadSkillDef Blast;
-        public static ReloadSkillDef Burst;
-
-        public static SkillDef Knife;
-        public static SkillDef ThrowKnife;
-        public static SkillDef Dynamite;
-
-        public static SkillDef Smokebomb;
-
-        public static SkillDef LightsOut;
-        public static SkillDef RackEmUp;
-
         public static SkillDef Gunslinger;
         public static SkillDef Desperado;
     }

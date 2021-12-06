@@ -39,8 +39,8 @@ namespace RiskyMod.Drones
         {
             if (attackerBody.bodyIndex == VagrantResistance.VagrantIndex && damageInfo.procCoefficient > 1f && self.body && VagrantResistance.HasResist(self.body.bodyIndex))
             {
-                damageInfo.procCoefficient *= 0.3333333333f;
-                damageInfo.damage *= 0.3333333333f;
+                damageInfo.procCoefficient *= 0.5f;
+                damageInfo.damage *= 0.5f;
             }
         }
 

@@ -6,7 +6,11 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
     public class FirePrimaryBase : GenericBulletBaseState
 	{
 		public static float _baseDuration = 0.3f;
-		public static float baseMinDuration = 0f;
+		public static float baseMinDuration = 0.1f;
+
+		public static float baseAnimDuration = 1f;
+
+
 		private float minDuration;
 		private bool buttonReleased;
 
@@ -17,7 +21,7 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
 			base.OnEnter();
 			duration = baseDuration / this.attackSpeedStat;
 			minDuration = baseMinDuration / this.attackSpeedStat;
-			base.PlayAnimation("Gesture, Additive", "FireMainWeapon", "FireMainWeapon.playbackRate", this.duration);
+			base.PlayAnimation("Gesture, Additive", "FireMainWeapon", "FireMainWeapon.playbackRate", baseAnimDuration/this.attackSpeedStat);
 		}
 
 		public override void ModifyBullet(BulletAttack bulletAttack)

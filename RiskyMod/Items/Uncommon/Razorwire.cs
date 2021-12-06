@@ -36,9 +36,10 @@ namespace RiskyMod.Items.Uncommon
                 bool isVengeanceClone = inventory.GetItemCount(RoR2Content.Items.InvadingDoppelganger) > 0; //In case some other mod tries to mess with HealthComponent's itemcount
 
                 bool isCrit = self.body.RollCrit();
-                float damageValue = Mathf.Lerp(0.84f, 4.2f, hpLostLerp) * self.body.damage;
+                int stack = thornCount - 1;
+                float damageValue = Mathf.Lerp(0.84f + 0.18f * stack, 4.2f + 0.9f * stack, hpLostLerp) * self.body.damage;
                 float proc = Mathf.Lerp(0.1f, 0.5f, hpLostLerp);
-                float radius = Mathf.Lerp(16f, 40f, hpLostLerp);
+                float radius = Mathf.Lerp(20f, 50f, hpLostLerp);
 
                 TeamIndex teamIndex2 = self.body.teamComponent.teamIndex;
                 HurtBox[] hurtBoxes = new SphereSearch

@@ -36,7 +36,7 @@ namespace RiskyMod.Items.Uncommon
             berzerkBuff.buffColor = new Color(210f / 255f, 50f / 255f, 22f / 255f);
             berzerkBuff.canStack = true;
             berzerkBuff.isDebuff = false;
-            berzerkBuff.name = "RiskyItemTweaks_BerzerkBuff";
+            berzerkBuff.name = "RiskyMod_BerzerkBuff";
             berzerkBuff.iconSprite = RoR2Content.Buffs.WarCryBuff.iconSprite;
             BuffAPI.Add(new CustomBuff(berzerkBuff));
 

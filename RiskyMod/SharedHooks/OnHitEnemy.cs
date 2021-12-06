@@ -11,6 +11,10 @@ namespace RiskyMod.SharedHooks
 		public static OnHitNoAttacker OnHitNoAttackerActions = HandleOnHitNoAttackerMethod;
 		private static void HandleOnHitNoAttackerMethod(DamageInfo damageInfo, CharacterBody victimBody) { }
 
+		public delegate void OnHitAttacker(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody);
+		public static OnHitAttacker OnHitAttackerActions = HandleOnHitAttackerMethod;
+		private static void HandleOnHitAttackerMethod(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody) { }
+
 		public static void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, UnityEngine.GameObject victim)
         {
 			CharacterBody attackerBody = null;
@@ -55,6 +59,7 @@ namespace RiskyMod.SharedHooks
 
 					if (damageInfo.attacker && attackerBody)
 					{
+						OnHitAttackerActions.Invoke(damageInfo, victimBody, attackerBody);
 						if (attackerInventory)
 						{
 							if (AssistManager.initialized && RiskyMod.assistManager)
