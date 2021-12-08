@@ -30,8 +30,6 @@ namespace RiskyMod.Items.Uncommon
             {
                 pickupTrigger.transform.localScale *= 2f;
             }
-
-            //LanguageAPI.Add("ITEM_BANDOLIER_DESC", "<style=cIsUtility>Reduce skill cooldowns</style> by <style=cIsUtility>10%</style>. <style=cIsUtility>18%</style> <style=cStack>(+10% per stack)</style> chance on kill to drop an ammo pack that <style=cIsUtility>resets all cooldowns</style>.");
         }
     }
 }

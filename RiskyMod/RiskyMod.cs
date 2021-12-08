@@ -28,6 +28,7 @@ using RiskyMod.Survivors.Commando;
 using RiskyMod.Survivors.Huntress;
 using RiskyMod.Survivors.Engi;
 using RiskyMod.Survivors.Toolbot;
+using RiskyMod.Survivors.Treebot;
 
 namespace RiskyMod
 {
@@ -69,9 +70,10 @@ namespace RiskyMod
         private const string monsterString = "Monsters";
 
         private const string commandoString = "Survivors: Commando";
-        private const string toolbotString = "Survivors: MUL-T";
         private const string huntressString = "Survivors: Huntress";
+        private const string toolbotString = "Survivors: MUL-T";
         private const string engiString = "Survivors: Engineer";
+        private const string treebotString = "Survivors: REX";
         private const string banditString = "Survivors: Bandit";
         private const string captainString = "Survivors: Captain";
 
@@ -152,6 +154,7 @@ namespace RiskyMod
             new FixDamageTypeOverwrite();
             new FixFocusCrystalSelfDamage();
             new PreventArtifactHeal();
+            new TreebotFruitingNullref();
         }
         
         private void AddHooks()
@@ -386,12 +389,17 @@ namespace RiskyMod
             ToolbotCore.enableRebarChanges = Config.Bind(toolbotString, "Enable Rebar Puncher Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.enableScrapChanges = Config.Bind(toolbotString, "Enable Scrap Launcher Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.enableSawChanges = Config.Bind(toolbotString, "Enable Power Saw Changes", true, "Enable changes to this skill.").Value;
-            ToolbotCore.enableSecondaryChanges = Config.Bind(toolbotString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
-            ToolbotCore.enableSpecialChanges = Config.Bind(toolbotString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
+            ToolbotCore.enableSecondarySkillChanges = Config.Bind(toolbotString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
+            ToolbotCore.enableSpecialSkillChanges = Config.Bind(toolbotString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
 
             EngiCore.enabled = Config.Bind(engiString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             PressureMines.enabled = Config.Bind(engiString, "Pressure Mine Changes", true, "Pressure Mines only detonate when fully armed.").Value;
             TurretChanges.enabled = Config.Bind(engiString, "Turret Changes", true, "Enable turret changes.").Value;
+
+            TreebotCore.enabled = Config.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+            TreebotCore.enableSecondarySkillChanges = Config.Bind(treebotString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
+            TreebotCore.enableUtilitySkillChanges = Config.Bind(treebotString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
+            TreebotCore.enableSpecialSkillChanges = Config.Bind(treebotString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
 
             CaptainCore.enabled = Config.Bind(captainString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             CaptainOrbitalHiddenRealms.enabled = Config.Bind(captainString, "Hidden Realm Orbital Skills", true, "Allow Orbital skills in Hiden Realms.").Value;

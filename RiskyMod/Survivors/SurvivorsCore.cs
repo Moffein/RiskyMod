@@ -4,6 +4,7 @@ using RiskyMod.Survivors.Commando;
 using RiskyMod.Survivors.Engi;
 using RiskyMod.Survivors.Huntress;
 using RiskyMod.Survivors.Toolbot;
+using RiskyMod.Survivors.Treebot;
 
 namespace RiskyMod.Survivors
 {
@@ -13,12 +14,11 @@ namespace RiskyMod.Survivors
         public SurvivorsCore()
         {
             if (!enabled) return;
-            new SharedDamageTypes();
-
             new CommandoCore();
             new HuntressCore();
             new ToolbotCore();
             new EngiCore();
+            new TreebotCore();
             new CaptainCore();
             new Bandit2Core();
         }

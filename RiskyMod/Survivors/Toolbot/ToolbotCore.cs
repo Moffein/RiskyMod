@@ -18,9 +18,9 @@ namespace RiskyMod.Survivors.Toolbot
         public static bool enableScrapChanges = true;
         public static bool enableSawChanges = true;
 
-        public static bool enableSecondaryChanges = true;
+        public static bool enableSecondarySkillChanges = true;
 
-        public static bool enableSpecialChanges = true;
+        public static bool enableSpecialSkillChanges = true;
 
         public static DamageAPI.ModdedDamageType StunDroneForce;
         public static DamageAPI.ModdedDamageType SawBarrier;
@@ -153,7 +153,7 @@ namespace RiskyMod.Survivors.Toolbot
 
         private void ModifySecondaries(SkillLocator sk)
         {
-            if (!enableSecondaryChanges) return;
+            if (!enableSecondarySkillChanges) return;
 
             StunDroneForce = DamageAPI.ReserveDamageType();
             TakeDamage.ModifyInitialDamageActions += ApplyStunDroneForce;
@@ -181,7 +181,7 @@ namespace RiskyMod.Survivors.Toolbot
 
         private void ModifySpecials(SkillLocator sk)
         {
-            if (!enableSpecialChanges) return;
+            if (!enableSpecialSkillChanges) return;
             On.EntityStates.Toolbot.ToolbotStanceSwap.OnEnter += (orig, self) =>
             {
                 orig(self);
