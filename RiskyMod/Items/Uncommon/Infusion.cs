@@ -3,6 +3,8 @@ using MonoMod.Cil;
 using RoR2;
 using R2API;
 using RoR2.Orbs;
+using System;
+using UnityEngine;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -26,10 +28,41 @@ namespace RiskyMod.Items.Uncommon
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            //LanguageAPI.Add("ITEM_INFUSION_PICKUP", "Killing an enemy permanently increases your maximum health, up to 150.");
-            //LanguageAPI.Add("ITEM_INFUSION_DESC", "Killing an enemy increases your <style=cIsHealing>health permanently</style> by <style=cIsHealing>1</style> <style=cStack>(+1 per stack)</style>, up to a <style=cIsHealing>maximum</style> of <style=cIsHealing>150 <style=cStack>(+150 per stack)</style> health</style>.");
-
             AssistManager.HandleAssistActions += OnKillEffect;
+
+            IL.RoR2.CharacterBody.RecalculateStats += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchLdloc(50),
+                     x => x.MatchLdloc(40),
+                     x => x.MatchConvRUn(),
+                     x => x.MatchConvR4(),
+                     x => x.MatchAdd(),
+                     x => x.MatchStloc(50)
+                    );
+                c.Index += 4;
+                c.EmitDelegate<Func<float, float>>(infusionBonus =>
+                {
+                    float newHP = 0;
+                    int hundreds = 1;
+                    while (infusionBonus > 0f)
+                    {
+                        if (infusionBonus <= 100f*hundreds)
+                        {
+                            newHP += infusionBonus / hundreds;
+                        }
+                        else
+                        {
+                            infusionBonus -= 100f * hundreds;
+                            newHP += 100f;
+                            hundreds++;
+                        }
+                    }
+                    return newHP;
+                });
+            };
+
         }
 
         private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
@@ -37,8 +70,7 @@ namespace RiskyMod.Items.Uncommon
             int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Infusion);
             if (itemCount > 0)
             {
-                int maxInfusionBonus = itemCount * 150;
-                if ((ulong)attackerInventory.infusionBonus < (ulong)((long)maxInfusionBonus))
+                if ((victimBody.bodyFlags & CharacterBody.BodyFlags.Masterless) != CharacterBody.BodyFlags.Masterless)
                 {
                     InfusionOrb infusionOrb = new InfusionOrb();
                     infusionOrb.origin = victimBody.corePosition;

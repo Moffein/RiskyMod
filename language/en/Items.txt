@@ -61,8 +61,8 @@
 	"ITEM_ENERGIZEDONEQUIPMENTUSE_PICKUP_RISKYMOD": "Activating your Equipment gives you a burst of movement speed and attack speed.",
 	"ITEM_ENERGIZEDONEQUIPMENTUSE_DESC_RISKYMOD": "Activating your Equipment gives you <style=cIsUtility>+50% movement speed</style> and <style=cIsDamage>+70% attack speed</style> for <style=cIsDamage>8s</style> <style=cStack>(+4s per stack)</style>.",
 	
-	"ITEM_INFUSION_PICKUP_RISKYMOD": "Killing an enemy permanently increases your maximum health, up to 150.",
-	"ITEM_INFUSION_DESC_RISKYMOD": "Killing an enemy increases your <style=cIsHealing>health permanently</style> by <style=cIsHealing>1</style> <style=cStack>(+1 per stack)</style>, up to a <style=cIsHealing>maximum</style> of <style=cIsHealing>150 <style=cStack>(+150 per stack)</style> health</style>.",
+	"ITEM_INFUSION_PICKUP_RISKYMOD": "Killing an enemy permanently increases your maximum health.",
+	"ITEM_INFUSION_DESC_RISKYMOD": "Killing an enemy increases your <style=cIsHealing>health permanently</style> by <style=cIsHealing>1</style> <style=cStack>(+1 per stack)</style>. Every <style=cIsHealing>100 health</style> gained from this item <style=cIsHealth>reduces</style> the maximum <style=cIsHealing>health given</style> from kills.",
 	
 	"ITEM_ICICLE_DESC_RISKYMOD": "Killing an enemy surrounds you with an <style=cIsDamage>ice storm</style> that deals <style=cIsDamage>1200% <style=cStack>(+600% per stack)</style> damage per second</style> and <style=cIsUtility>slows</style> enemies by <style=cIsUtility>80%</style> for <style=cIsUtility>1.5s</style>. The storm <style=cIsDamage>grows with every kill</style>, increasing its radius by <style=cIsDamage>3m</style>. Stacks up to <style=cIsDamage>24m</style>.",
 	
