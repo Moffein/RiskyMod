@@ -12,6 +12,7 @@ namespace RiskyMod.Enemies
         {
             if (!enabled) return;
             new Vagrant();
+            new Gravekeeper();
         }
     }
 }

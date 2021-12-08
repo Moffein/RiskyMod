@@ -345,6 +345,7 @@ namespace RiskyMod
         private void ConfigMonsters()
         {
             Vagrant.enabled = Config.Bind(monsterString, "Wandering Vagrant", true, "Enable changes to this monster.").Value;
+            Gravekeeper.enabled = Config.Bind(monsterString, "Grovetender", true, "Enable changes to this monster.").Value;
         }
 
         private void ConfigFireSelect()

@@ -1,5 +1,8 @@
-﻿using R2API;
+﻿using Mono.Cecil.Cil;
+using MonoMod.Cil;
+using R2API;
 using RoR2;
+using System;
 using UnityEngine;
 
 namespace RiskyMod.Items.Legendary
@@ -25,8 +28,21 @@ namespace RiskyMod.Items.Legendary
                 orig(self);
             };
 
-            //LanguageAPI.Add("ITEM_FALLBOOTS_PICKUP", "Increase jump height and air control. Hold 'Interact' to slam down to the ground.");
-            //LanguageAPI.Add("ITEM_FALLBOOTS_DESC", "Increase <style=cIsUtility>jump height</style> and <style=cIsUtility>air control</style>. Creates a <style=cIsDamage>5m-100m</style> radius <style=cIsDamage>kinetic explosion</style> on hitting the ground, dealing <style=cIsDamage>1000%-10000%</style> base damage that scales up with <style=cIsDamage>fall distance</style>. Recharges in <style=cIsDamage>10</style> <style=cStack>(-50% per stack)</style> seconds.");
+            //Damage per stack
+            IL.EntityStates.Headstompers.HeadstompersFall.DoStompExplosionAuthority += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchCallvirt<RoR2.BlastAttack>("Fire")
+                    );
+                c.Emit(OpCodes.Ldloc_0);   //inventory
+                c.EmitDelegate<Func<BlastAttack, Inventory, BlastAttack>>((blastAttack, inventory) =>
+                {
+                    int itemCount = inventory.GetItemCount(RoR2Content.Items.FallBoots);
+                    blastAttack.baseDamage += blastAttack.baseDamage * 0.3f * (itemCount - 1);
+                    return blastAttack;
+                });
+            };
         }
     }
 }
