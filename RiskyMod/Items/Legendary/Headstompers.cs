@@ -39,7 +39,7 @@ namespace RiskyMod.Items.Legendary
                 c.EmitDelegate<Func<BlastAttack, Inventory, BlastAttack>>((blastAttack, inventory) =>
                 {
                     int itemCount = inventory.GetItemCount(RoR2Content.Items.FallBoots);
-                    blastAttack.baseDamage += blastAttack.baseDamage * 0.3f * (itemCount - 1);
+                    blastAttack.baseDamage += blastAttack.baseDamage * 0.6f * (itemCount - 1);
                     return blastAttack;
                 });
             };
