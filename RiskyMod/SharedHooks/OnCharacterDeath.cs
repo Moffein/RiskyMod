@@ -11,7 +11,11 @@ namespace RiskyMod.SharedHooks
 {
     public class OnCharacterDeath
     {
-        public static void GlobalEventManager_OnCharacterDeath(On.RoR2.GlobalEventManager.orig_OnCharacterDeath orig, GlobalEventManager self, DamageReport damageReport)
+		public delegate void OnCharacterDeathInventory(GlobalEventManager self, DamageReport damageReport, CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody);
+		public static OnCharacterDeathInventory OnCharacterDeathInventoryActions = OnCharacterDeathInventoryMethod;
+		private static void OnCharacterDeathInventoryMethod(GlobalEventManager self, DamageReport damageReport, CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody) { }
+
+		public static void GlobalEventManager_OnCharacterDeath(On.RoR2.GlobalEventManager.orig_OnCharacterDeath orig, GlobalEventManager self, DamageReport damageReport)
         {
             orig(self, damageReport);
 
@@ -36,6 +40,7 @@ namespace RiskyMod.SharedHooks
 
 						if (attackerInventory)
                         {
+							OnCharacterDeathInventoryActions.Invoke(self, damageReport, attackerBody, attackerInventory, victimBody);
 							if (Incubator.enabled)
                             {
 								int incubatorOnKillCount = attackerMaster.inventory.GetItemCount(RoR2Content.Items.Incubator);
@@ -60,7 +65,7 @@ namespace RiskyMod.SharedHooks
 									DirectorCore.instance.TrySpawnObject(directorSpawnRequest);
 								}
 							}
-                        }
+						}
 						if (AssistManager.initialized && RiskyMod.assistManager)
 						{
 							//On-death is handled by assist manager to prevent having a bunch of duplicated code.

@@ -125,6 +125,25 @@ namespace RiskyMod.Items.Common
         }
         private List<CrowbarTarget> targetList;
 
+        public void FixedUpdate()
+        {
+            if (targetList.Count > 0)
+            {
+                List<CrowbarTarget> toRemove = new List<CrowbarTarget>();
+                foreach (CrowbarTarget ct in targetList)
+                {
+                    if (ct.victim.combinedHealth >= ct.victim.fullCombinedHealth)
+                    {
+                        toRemove.Add(ct);
+                    }
+                }
+                foreach(CrowbarTarget ct in toRemove)
+                {
+                    targetList.Remove(ct);
+                }
+            }
+        }
+
         public void Awake()
         {
             targetList = new List<CrowbarTarget>();

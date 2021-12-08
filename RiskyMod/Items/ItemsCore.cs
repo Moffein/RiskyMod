@@ -89,6 +89,8 @@ namespace RiskyMod.Items
             new NovaOnHeal();
             new Brainstalks();
             new Soulbound();
+            new Behemoth();
+            new HappiestMask();
         }
 
         private void ModifyBoss()

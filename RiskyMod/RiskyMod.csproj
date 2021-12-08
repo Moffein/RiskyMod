@@ -123,6 +123,7 @@
   <ItemGroup>
     <Folder Include="Enemies\Mobs\" />
     <Folder Include="Survivors\Captain\Components\" />
+    <Folder Include="Survivors\Treebot\" />
   </ItemGroup>
 
 </Project>

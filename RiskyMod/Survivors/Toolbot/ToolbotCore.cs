@@ -111,10 +111,10 @@ namespace RiskyMod.Survivors.Toolbot
                 c.Emit(OpCodes.Ldarg_0);
                 c.EmitDelegate<Func<int, EntityStates.Toolbot.FireBuzzsaw, int>>((orig, self) =>
                 {
-                    if (self.characterMotor && !self.characterMotor.isGrounded &&self.characterMotor.velocity.y < 0f)
+                    if (self.characterMotor && !self.characterMotor.isGrounded && self.characterMotor.velocity.y <= 0f)
                     {
-                        self.characterMotor.velocity.y = 0f;
-                        self.SmallHop(self.characterMotor, 3f);
+                        //self.characterMotor.velocity.y = 0f;
+                        self.SmallHop(self.characterMotor, 2.5f);
                     }
                     return orig;
                 });
@@ -204,13 +204,14 @@ namespace RiskyMod.Survivors.Toolbot
             PowerModeBuff.iconSprite = RoR2Content.Buffs.SmallArmorBoost.iconSprite;
             BuffAPI.Add(new CustomBuff(PowerModeBuff));
             GetStatsCoefficient.HandleStatsActions += HandlePowerMode;
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.ToolbotDualWieldBase", "bonusBuff", PowerModeBuff);
         }
 
         private void HandlePowerMode(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
             if (sender.HasBuff(PowerModeBuff.buffIndex))
             {
-                args.armorAdd += 75f;
+                args.armorAdd += 60f;
             }
         }
     }

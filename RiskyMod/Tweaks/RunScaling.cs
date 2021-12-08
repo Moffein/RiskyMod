@@ -20,7 +20,7 @@ namespace RiskyMod.Tweaks
 				DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
                 float playerFactor = scaleSpawnsOnly ? 1f : (0.7f + playerCount * 0.3f);
 				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue;//* Mathf.Pow(playerCount, 0.15f)
-				float stageFactor = Mathf.Pow(1.2f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
+				float stageFactor = Mathf.Pow(1.18f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
 				float finalDifficulty = (playerFactor + timeFactor) * stageFactor;
 				self.compensatedDifficultyCoefficient = finalDifficulty;
 				self.difficultyCoefficient = finalDifficulty;

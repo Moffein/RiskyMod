@@ -21,13 +21,13 @@ namespace RiskyMod.Items.Legendary
                 {
                     if (esc.serializedFieldsCollection.serializedFields[i].fieldName == "mainBeamProcCoefficient")
                     {
-                        esc.serializedFieldsCollection.serializedFields[i].fieldValue.stringValue = "0.4";
+                        esc.serializedFieldsCollection.serializedFields[i].fieldValue.stringValue = "0.5";
                     }
                     else if (esc.serializedFieldsCollection.serializedFields[i].fieldName == "secondBombPrefab")
                     {
                         GameObject secondBombPrefab = Resources.Load<GameObject>("prefabs/projectiles/LaserTurbineBomb").InstantiateClone("RiskyMod_LaserTurbineBomb", true);
                         ProjectileImpactExplosion pie = secondBombPrefab.GetComponent<ProjectileImpactExplosion>();
-                        pie.blastProcCoefficient = 0.4f;
+                        pie.blastProcCoefficient = 0.5f;
                         ProjectileAPI.Add(secondBombPrefab);
                         esc.serializedFieldsCollection.serializedFields[i].fieldValue.objectValue = secondBombPrefab;
                     }

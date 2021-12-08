@@ -42,7 +42,7 @@
 	"ITEM_SQUIDTURRET_PICKUP_RISKYMOD": "Taking heavy damage summons a Squid Turret nearby.",
 	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Chance on taking damage to summon a <style=cIsDamage>Squid Turret</style> that <style=cIsUtility>distracts</style> and attacks nearby enemies at <style=cIsDamage>100% <style=cStack>(+100% per stack)</style> attack speed</style>. Chance increases the more damage you take. Can have up to <style=cIsUtility>2</style> <style=cStack>(+1 per stack)</style> Squids at a time.",
 	
-	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>chain lightning</style> for <style=cIsDamage>80%</style> TOTAL damage on up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> targets within <style=cIsDamage>25m</style>.",
+	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>chain lightning</style> for <style=cIsDamage>80%</style> <style=cStack>(+20% per stack)</style> TOTAL damage on up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> targets within <style=cIsDamage>25m</style>.",
 	
 	"ITEM_THORNS_DESC_RISKYMOD": "Getting hit causes you to explode in a burst of razors, dealing <style=cIsDamage>80%-420% <style=cStack>(+18%-90% per stack)</style> damage</style>. Hits up to <style=cIsDamage>5</style> <style=cStack>(+2 per stack)</style> targets in a <style=cIsDamage>20m-50m</style> radius. Damage and radius increases the more damage taken.",
 	
@@ -71,6 +71,13 @@
 	
 	"ITEM_FALLBOOTS_PICKUP_RISKYMOD": "Increase jump height and air control. Hold \'Interact\' to slam down to the ground.",
 	"ITEM_FALLBOOTS_DESC_RISKYMOD": "Increase <style=cIsUtility>jump height</style> and <style=cIsUtility>air control</style>. Creates a <style=cIsDamage>5m-100m</style> radius <style=cIsDamage>kinetic explosion</style> on hitting the ground, dealing <style=cIsDamage>1000%-10000%</style> base damage that scales up with <style=cIsDamage>fall distance</style>. Recharges in <style=cIsDamage>10</style> <style=cStack>(-50% per stack)</style> seconds.",
+	
+	"ITEM_BOUNCENEARBY_DESC_RISKYMOD": "<style=cIsDamage>20%</style> <style=cStack>(+20% per stack)</style> chance on hit to <style=cIsDamage>fire homing hooks</style> at up to <style=cIsDamage>10</style> <style=cStack>(+5 per stack)</style> enemies for <style=cIsDamage>100%</style> <style=cStack>(+25% per stack)</style> TOTAL damage.",
+	
+	"ITEM_GHOSTONKILL_PICKUP_RISKYMOD": "Killing an enemy summons a ghost. Recharges over time.",
+	"ITEM_GHOSTONKILL_DESC_RISKYMOD": "Killing an enemy <style=cIsDamage>spawns a ghost</style> of the killed enemy with <style=cIsDamage>1500%</style> damage. Lasts <style=cIsDamage>30s</style> <style=cStack>(+30s per stack)</style>. Recharges every <style=cIsUtility>10</style> seconds.", 
+	
+	"ITEM_BEHEMOTH_DESC_RISKYMOD": "All your <style=cIsDamage>attacks explode</style> in a <style=cIsDamage>4m</style> radius for a bonus <style=cIsDamage>60%</style> <style=cStack>(+20% per stack)</style> TOTAL damage to nearby enemies.",
 	
 	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>Recruit a Beetle Guard</style> with bonus <style=cIsDamage>300%</style> <style=cStack>(+300% per stack)</style> damage and <style=cIsHealing>100% <style=cStack>(+100% per stack)</style> health</style>.",
 	
