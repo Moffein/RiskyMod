@@ -45,18 +45,20 @@ namespace RiskyMod.Items.Uncommon
                 c.EmitDelegate<Func<float, float>>(infusionBonus =>
                 {
                     float newHP = 0;
-                    int hundreds = 1;
+                    int hundredsFulfilled = 0;
                     while (infusionBonus > 0f)
                     {
-                        if (infusionBonus <= 100f*hundreds)
+                        float killRequirement = 100f + 150f * hundredsFulfilled;
+                        if (infusionBonus <= killRequirement)
                         {
-                            newHP += infusionBonus / hundreds;
+                            newHP += infusionBonus * 100f / killRequirement;
+                            infusionBonus = 0f;
                         }
                         else
                         {
-                            infusionBonus -= 100f * hundreds;
+                            infusionBonus -= killRequirement;
                             newHP += 100f;
-                            hundreds++;
+                            hundredsFulfilled++;
                         }
                     }
                     return newHP;
