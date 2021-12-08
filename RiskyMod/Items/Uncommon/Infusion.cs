@@ -51,7 +51,7 @@ namespace RiskyMod.Items.Uncommon
                         float killRequirement = 100f + 150f * hundredsFulfilled;
                         if (infusionBonus <= killRequirement)
                         {
-                            newHP += infusionBonus * 100f / killRequirement;
+                            newHP += 100f * infusionBonus / killRequirement;
                             infusionBonus = 0f;
                         }
                         else
