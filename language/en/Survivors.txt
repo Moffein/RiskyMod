@@ -35,6 +35,7 @@
 	"HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Agile</style>. Draw back a volley of <style=cIsDamage>3</style> seeking arrows for <style=cIsDamage>3x120% damage</style>. Critical Strikes fire <style=cIsDamage>6</style> arrows.",
 	"HUNTRESS_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Agile</style>. <style=cIsUtility>Disappear</style> and <style=cIsUtility>teleport</style> a short distance. Can store up to <style=cIsUtility>2</style> charges.",
 	"HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Teleport</style> into the sky. Target an area to rain arrows, <style=cIsUtility>slowing</style> all enemies and dealing <style=cIsDamage>420% damage per second</style>.",
+	"HUNTRESS_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Teleport</style> into the sky. Target an area to rain arrows, <style=cIsDamage>igniting</style> all enemies and dealing <style=cIsDamage>420% damage per second</style>.",
 	
 	"TOOLBOT_PRIMARY_DESCRIPTION_RISKYMOD" : "Rapidly fire nails for <style=cIsDamage>60% damage</style>. Finishes with a blast of <style=cIsDamage>12</style> nails.",
 	"TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD" : "Fire a piercing rebar that deals <style=cIsDamage>720% damage</style>.",
@@ -44,6 +45,6 @@
 	
 	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "Fire a <style=cIsUtility>Sonic Boom</style> that <style=cIsHealing>heals for every target hit</style>.",
 	"TREEBOT_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>20% HP</style>. Fire a <style=cIsUtility>Sonic Boom</style> that <style=cIsDamage>Weakens</style> enemies for <style=cIsDamage>550% damage</style>.",
-	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Inject</style> an enemy <style=cIsDamage>330% damage</style>. <style=cIsDamage>Injected</style> enemies have a <style=cIsDamage>15%</style> chance to drop <style=cIsHealing>healing fruits</style> when hit."
+	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Inject</style> an enemy for <style=cIsDamage>330% damage</style>. <style=cIsDamage>Injected</style> enemies have a <style=cIsDamage>15%</style> chance to drop <style=cIsHealing>healing fruits</style> when hit."
 	}
 }

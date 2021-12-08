@@ -35,6 +35,10 @@ namespace RiskyMod.Survivors.Treebot
             GameObject drillPrefab = Resources.Load<GameObject>("prefabs/projectiles/TreebotMortarRain");
             ProjectileDotZone pdz = drillPrefab.GetComponent<ProjectileDotZone>();
             pdz.overlapProcCoefficient = 0.7f;
+
+            //Was originally planning to make it have the same type of hitbox extension and downwards force as Arrow Rain but it didn't play well.
+            //No projectile rotation makes the force feel less flexible, and causes the extended hitbox to poke through weird places when used on walls.
+            //Downwards force would push flying enemies out of the hitbox.
         }
 
         private void ModifyUtilities(SkillLocator sk)

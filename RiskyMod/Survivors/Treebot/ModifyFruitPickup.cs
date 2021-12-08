@@ -21,7 +21,7 @@ namespace RiskyMod.Survivors.Treebot
             }
 
             HealthPickup hp = fruitPack.GetComponentInChildren<HealthPickup>();
-            hp.fractionalHealing = 0.2f;
+            hp.fractionalHealing = 0.15f;
         }
     }
 }
