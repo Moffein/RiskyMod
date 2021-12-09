@@ -22,6 +22,7 @@ namespace RiskyMod.SharedHooks
 			Inventory attackerInventory = null;
 
 			bool validDamage = NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected;
+			bool assistsEnabled = AssistManager.initialized && RiskyMod.assistManager;
 
 			if (validDamage)
 			{
@@ -46,6 +47,22 @@ namespace RiskyMod.SharedHooks
                     {
 						attackerInventory = attackerBody.inventory;
                     }
+
+					//Run this before triggering on-hit procs so that procs don't kill enemies before this triggers.
+					if (assistsEnabled)
+                    {
+						if (BanditSpecialGracePeriod.enabled)
+						{
+							if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)
+							{
+								RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.BanditAssistType.ResetCooldowns);
+							}
+							if ((damageInfo.damageType & DamageType.GiveSkullOnKill) > DamageType.Generic)
+							{
+								RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.BanditAssistType.BanditSkull);
+							}
+						}
+					}
 				}
 			}
 
@@ -62,20 +79,9 @@ namespace RiskyMod.SharedHooks
 						OnHitAttackerActions.Invoke(damageInfo, victimBody, attackerBody);
 						if (attackerInventory)
 						{
-							if (AssistManager.initialized && RiskyMod.assistManager)
+							if (assistsEnabled)
 							{
 								RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.assistLength);
-								if (BanditSpecialGracePeriod.enabled)
-								{
-									if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)
-									{
-										RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.BanditAssistType.ResetCooldowns);
-									}
-									if ((damageInfo.damageType & DamageType.GiveSkullOnKill) > DamageType.Generic)
-									{
-										RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.BanditAssistType.BanditSkull);
-									}
-								}
 							}
 						}
 					}

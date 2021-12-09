@@ -114,7 +114,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 		public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/TracerBanditPistol");
 
 		public static float damageCoefficient = 1f;
-		public static float bonusDamageCoefficient = 0.3f;
+		public static float bonusDamageCoefficient = 0.2f;
 		public static float force = 300f;
 
 		public static float minSpread = 0f;
