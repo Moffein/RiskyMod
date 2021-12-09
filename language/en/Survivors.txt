@@ -12,7 +12,7 @@
 	"BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD": "Revolver kills grant <style=cIsDamage>stacking tokens</style> for <style=cIsDamage>2%</style> more revolver damage.",
 	"BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Slayer</style>. Fire a revolver shot for <style=cIsDamage>600% damage</style>.",
 	"BANDIT2_SPECIAL_ALT_NAME_RISKYMOD" : "Rack Em Up",
-	"BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Slayer</style>. Rapidly fire a revolver shots for <style=cIsDamage>6x100% damage</style>. Each consecutive hit deals <style=cIsDamage>30%</style> extra damage.",
+	"BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Slayer</style>. Rapidly fire a revolver shots for <style=cIsDamage>6x100% damage</style>. Each consecutive hit deals <style=cIsDamage>20%</style> extra damage.",
 	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Stunning</style>. Throw a hidden blade for <style=cIsDamage>240% damage</style>. Critical Strikes also cause <style=cIsHealth>hemorrhaging</style>.",
 	
 	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD ": "Assassinate",
