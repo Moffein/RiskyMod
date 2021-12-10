@@ -66,7 +66,7 @@ namespace RiskyMod.Items.Legendary
                 if (attackerBody.HasBuff(GhostReady.buffIndex))
                 {
                     Util.TryToCreateGhost(victimBody, attackerBody, itemCount * 30);
-                    for (int i = 1; i <= 10; i++)
+                    for (int i = 1; i <= 20; i++)
                     {
                         attackerBody.AddTimedBuff(GhostCooldown.buffIndex, i);
                     }

@@ -36,7 +36,7 @@ namespace RiskyMod.Items.Uncommon
 				int seedCount = attackerBody.inventory.GetItemCount(RoR2Content.Items.Seed);
 				if (seedCount > 0)
                 {
-					float toHeal = hpLost * (0.035f + 0.035f * seedCount);
+					float toHeal = hpLost * (0.025f + 0.025f * seedCount);
 					damageInfo.procChainMask.AddProc(ProcType.HealOnHit);
 					attackerBody.healthComponent.Heal(toHeal * damageInfo.procCoefficient, damageInfo.procChainMask);
 				}

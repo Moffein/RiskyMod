@@ -8,6 +8,7 @@ using Mono.Cecil.Cil;
 using System.Runtime.CompilerServices;
 using EntityStates.RiskyMod.Huntress;
 using RoR2.Skills;
+using UnityEngine.Networking;
 
 namespace RiskyMod.Survivors.Huntress
 {
@@ -72,6 +73,16 @@ namespace RiskyMod.Survivors.Huntress
             sk.primary.skillFamily.variants[1].skillDef.skillDescriptionToken = "HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD";
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbDamageCoefficient", "1.2");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbProcCoefficient", "1");
+
+            On.EntityStates.Huntress.HuntressWeapon.FireSeekingArrow.FireOrbArrow += (orig, self) =>
+            {
+                if (!NetworkServer.active)
+                {
+                    self.firedArrowCount++;
+                }
+                orig(self);
+            };
+
             IL.EntityStates.Huntress.HuntressWeapon.FireSeekingArrow.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
