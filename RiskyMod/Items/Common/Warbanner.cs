@@ -32,33 +32,52 @@ namespace RiskyMod.Items.Common
 
             GetStatsCoefficient.HandleStatsActions += HandleStats;
 
-            On.EntityStates.Missions.BrotherEncounter.BrotherEncounterPhaseBaseState.OnEnter += (orig, self) =>
+            On.EntityStates.Missions.BrotherEncounter.Phase1.OnEnter += (orig, self) =>
             {
-                //Taken from TeleporterInteraction
-                ReadOnlyCollection<TeamComponent> teamMembers = TeamComponent.GetTeamMembers(TeamIndex.Player);
-                for (int j = 0; j < teamMembers.Count; j++)
+                orig(self);
+                SpawnBanners();
+            };
+            On.EntityStates.Missions.BrotherEncounter.Phase2.OnEnter += (orig, self) =>
+            {
+                orig(self);
+                SpawnBanners();
+            };
+            On.EntityStates.Missions.BrotherEncounter.Phase3.OnEnter += (orig, self) =>
+            {
+                orig(self);
+                SpawnBanners();
+            };
+            On.EntityStates.Missions.BrotherEncounter.Phase4.OnEnter += (orig, self) =>
+            {
+                orig(self);
+                SpawnBanners();
+            };
+        }
+
+        private void SpawnBanners()
+        {
+            //Taken from TeleporterInteraction
+            ReadOnlyCollection<TeamComponent> teamMembers = TeamComponent.GetTeamMembers(TeamIndex.Player);
+            for (int j = 0; j < teamMembers.Count; j++)
+            {
+                TeamComponent teamComponent = teamMembers[j];
+                CharacterBody body = teamComponent.body;
+                if (body)
                 {
-                    TeamComponent teamComponent = teamMembers[j];
-                    CharacterBody body = teamComponent.body;
-                    if (body)
+                    CharacterMaster master = teamComponent.body.master;
+                    if (master)
                     {
-                        CharacterMaster master = teamComponent.body.master;
-                        if (master)
+                        int itemCount = master.inventory.GetItemCount(RoR2Content.Items.WardOnLevel);
+                        if (itemCount > 0)
                         {
-                            int itemCount = master.inventory.GetItemCount(RoR2Content.Items.WardOnLevel);
-                            if (itemCount > 0)
-                            {
-                                GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(WarbannerObject, body.transform.position, Quaternion.identity);
-                                gameObject.GetComponent<TeamFilter>().teamIndex = TeamIndex.Player;
-                                gameObject.GetComponent<BuffWard>().Networkradius = 8f + 8f * (float)itemCount;
-                                NetworkServer.Spawn(gameObject);
-                            }
+                            GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(WarbannerObject, body.transform.position, Quaternion.identity);
+                            gameObject.GetComponent<TeamFilter>().teamIndex = TeamIndex.Player;
+                            gameObject.GetComponent<BuffWard>().Networkradius = 8f + 8f * (float)itemCount;
+                            NetworkServer.Spawn(gameObject);
                         }
                     }
                 }
-
-                orig(self);
-            };
+            }
         }
 
         private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
