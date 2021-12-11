@@ -47,7 +47,7 @@ namespace RiskyMod
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.3.9")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.3.10")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI),
         nameof(ProjectileAPI), nameof(EffectAPI), nameof(DamageAPI), nameof(BuffAPI),
         nameof(LoadoutAPI))]
@@ -144,6 +144,7 @@ namespace RiskyMod
             new VengeancePercentHeal();
             new NoPartialLevels();
             new CloakBuff();
+            new SmallHoldoutRadius();
         }
 
         private void RunFixes()
@@ -249,6 +250,7 @@ namespace RiskyMod
 
             TeleExpandOnBossKill.enabled = Config.Bind(tweakString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;
             SmallHoldoutCharging.enabled = Config.Bind(tweakString, "Small Holdout Charging", true, "Void/Moon Holdouts charge at max speed as long as 1 player is charging.").Value;
+            SmallHoldoutRadius.enabled = Config.Bind(tweakString, "Small Holdout Radius", true, "Void/Moon Holdouts have increased radius.").Value;
             ShrineCombatItems.enabled = Config.Bind(tweakString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
             DistantRoostCredits.enabled = Config.Bind(tweakString, "Distant Roost Credit Boost", true, "Makes Distant Roost have the same director credits as Titanic Plains.").Value;
             FixSlayer.enabled = Config.Bind(tweakString, "Fix Slayer Procs", true, "Bandit/Acrid bonus damage to low hp effect now applies to procs.").Value;

@@ -3,7 +3,9 @@ using EntityStates.RiskyMod.Bandit2;
 using EntityStates.RiskyMod.Bandit2.Primary;
 using EntityStates.RiskyMod.Bandit2.Revolver;
 using EntityStates.RiskyMod.Bandit2.Revolver.Scepter;
+using MonoMod.RuntimeDetour;
 using R2API;
+using R2API.Utils;
 using RiskyMod.Survivors.Bandit2.Components;
 using RoR2;
 using RoR2.Projectile;
@@ -130,33 +132,11 @@ namespace RiskyMod.Survivors.Bandit2
         private void ModifySecondaries(SkillLocator sk)
         {
             if (!enableSecondarySkillChanges) return;
-            new IncreaseKnifeHitboxSize();
 
-            SkillDef slashBladeDef = SkillDef.CreateInstance<SkillDef>();
-            slashBladeDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Bandit2.Weapon.SlashBlade));
-            slashBladeDef.activationStateMachineName = "Weapon";
-            slashBladeDef.baseMaxStock = 1;
-            slashBladeDef.baseRechargeInterval = 4f;
-            slashBladeDef.beginSkillCooldownOnSkillEnd = false;
-            slashBladeDef.canceledFromSprinting = false;
-            slashBladeDef.forceSprintDuringState = false;
-            slashBladeDef.dontAllowPastMaxStocks = true;
-            slashBladeDef.fullRestockOnAssign = true;
-            slashBladeDef.icon = sk.secondary._skillFamily.variants[0].skillDef.icon;
-            slashBladeDef.interruptPriority = InterruptPriority.Skill;
-            slashBladeDef.isCombatSkill = true;
-            slashBladeDef.keywordTokens = new string[] { "KEYWORD_SUPERBLEED" };
-            slashBladeDef.mustKeyPress = false;
-            slashBladeDef.cancelSprintingOnActivation = false;
-            slashBladeDef.rechargeStock = 1;
-            slashBladeDef.requiredStock = 1;
-            slashBladeDef.skillName = "SlashBlade";
-            slashBladeDef.skillNameToken = "BANDIT2_SECONDARY_NAME";
-            slashBladeDef.skillDescriptionToken = "BANDIT2_SECONDARY_DESCRIPTION";
-            slashBladeDef.stockToConsume = 1;
-            LoadoutAPI.AddSkillDef(slashBladeDef);
-            sk.secondary._skillFamily.variants[0].skillDef = slashBladeDef;
+            new IncreaseKnifeHitboxSize();
             knifeVelocity = BuildSlashVelocityCurve();
+            sk.secondary.skillFamily.variants[0].skillDef.canceledFromSprinting = false;
+
             On.EntityStates.Bandit2.Weapon.SlashBlade.OnEnter += (orig, self) =>
             {
                 orig(self);
@@ -167,31 +147,13 @@ namespace RiskyMod.Survivors.Bandit2
                 }
             };
 
+            SneedUtils.SneedUtils.SetEntityStateField("entitystates.bandit2.weapon.slashblade", "ignoreAttackSpeed", "1");
 
-            SkillDef throwKnifeDef = SkillDef.CreateInstance<SkillDef>();
-            throwKnifeDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Bandit2.Weapon.Bandit2FireShiv));
-            throwKnifeDef.activationStateMachineName = "Weapon";
-            throwKnifeDef.baseMaxStock = 1;
-            throwKnifeDef.baseRechargeInterval = 4f;
-            throwKnifeDef.beginSkillCooldownOnSkillEnd = false;
-            throwKnifeDef.canceledFromSprinting = false;
-            throwKnifeDef.forceSprintDuringState = false;
-            throwKnifeDef.dontAllowPastMaxStocks = true;
-            throwKnifeDef.fullRestockOnAssign = true;
-            throwKnifeDef.icon = sk.secondary._skillFamily.variants[1].skillDef.icon;
-            throwKnifeDef.interruptPriority = InterruptPriority.Skill;
-            throwKnifeDef.isCombatSkill = true;
-            throwKnifeDef.keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SUPERBLEED" };
-            throwKnifeDef.mustKeyPress = false;
-            throwKnifeDef.cancelSprintingOnActivation = true;
-            throwKnifeDef.rechargeStock = 1;
-            throwKnifeDef.requiredStock = 1;
-            throwKnifeDef.skillName = "FireShiv";
-            throwKnifeDef.skillNameToken = "BANDIT2_SECONDARY_ALT_NAME";
-            throwKnifeDef.skillDescriptionToken = "BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
-            throwKnifeDef.stockToConsume = 1;
-            LoadoutAPI.AddSkillDef(throwKnifeDef);
-            sk.secondary._skillFamily.variants[1].skillDef = throwKnifeDef;
+            var getBandit2SlashBladeMinDuration = new Hook(typeof(EntityStates.Bandit2.Weapon.SlashBlade).GetMethodCached("get_minimumDuration"),
+                typeof(Bandit2Core).GetMethodCached(nameof(GetBandit2SlashBladeMinDurationHook)));
+
+            sk.secondary.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SUPERBLEED" };
+            sk.secondary.skillFamily.variants[1].skillDef.skillDescriptionToken = "BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
 
             On.EntityStates.Bandit2.Weapon.Bandit2FireShiv.FireShiv += (orig, self) =>
             {
@@ -219,6 +181,11 @@ namespace RiskyMod.Survivors.Bandit2
                     }
                 }
             };
+        }
+
+        private static float GetBandit2SlashBladeMinDurationHook(EntityStates.Bandit2.Weapon.SlashBlade self)
+        {
+            return 0.3f;
         }
 
         private void ModifyUtilities(SkillLocator sk)

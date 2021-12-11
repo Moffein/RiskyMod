@@ -17,11 +17,11 @@ namespace RiskyMod.Survivors.Treebot
             Collider pickupTrigger = gp.gameObject.GetComponent<Collider>();
             if (pickupTrigger && pickupTrigger.isTrigger)
             {
-                pickupTrigger.transform.localScale *= 2f;
+                pickupTrigger.transform.localScale *= 1.25f;
             }
 
             HealthPickup hp = fruitPack.GetComponentInChildren<HealthPickup>();
-            hp.fractionalHealing = 0.15f;
+            hp.fractionalHealing = 0.2f;
         }
     }
 }
