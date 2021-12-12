@@ -32,8 +32,6 @@
 	
 	"ITEM_FIRERING_DESC_RISKYMOD": "Hits that deal <style=cIsDamage>more than 400% damage</style> also blasts enemies with a <style=cIsDamage>runic flame tornado</style>, dealing <style=cIsDamage>250%</style> <style=cStack>(+150% per stack)</style> TOTAL damage over time. Recharges every <style=cIsUtility>10</style> seconds.",
 	
-	"ITEM_BANDOLIER_DESC_RISKYMOD": "<style=cIsUtility>Reduce skill cooldowns</style> by <style=cIsUtility>10%</style>. <style=cIsUtility>18%</style> <style=cStack>(+10% per stack)</style> chance on kill to drop an ammo pack that <style=cIsUtility>resets all cooldowns</style>.",
-	
 	"ITEM_PHASING_PICKUP_RISKYMOD": "Turn invisible on taking heavy damage.",
 	"ITEM_PHASING_DESC_RISKYMOD": "Chance on taking damage to gain <style=cIsUtility>40% movement speed</style> and <style=cIsUtility>invisibility</style> for <style=cIsUtility>3s</style> <style=cStack>(+1.5s per stack)</style>. Chance increases the more damage you take.",
 	
@@ -53,7 +51,7 @@
 	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Deal <style=cIsDamage>+25%</style> <style=cStack>(+25% per stack)</style> damage to enemies below <style=cIsDamage>30% health</style>.",
 	
 	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "Enter a frenzy after killing enemies.",
-	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Killing enemies</style> sends you into a <style=cIsDamage>frenzy</style> for <style=cIsDamage>4s</style>. Increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> and <style=cIsDamage>attack speed</style> by <style=cIsDamage>20%</style> for each enemy killed. Stacks up to 5 <style=cStack>(+3 per stack)</style> times.",
+	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Killing enemies</style> sends you into a <style=cIsDamage>frenzy</style> for <style=cIsDamage>5s <style=cStack>(+3s per stack)</style></style>, increasing <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> and <style=cIsDamage>attack speed</style> by <style=cIsDamage>20%</style> for each enemy killed.",
 	
 	"ITEM_HEALONCRIT_PICKUP_RISKYMOD": "Gain health regeneration and guaranteed \'Critical Strikes\' on kill.",
 	"ITEM_HEALONCRIT_DESC_RISKYMOD": "Gain <style=cIsDamage>5% critical chance</style>. Killing enemies grants guaranteed \'<style=cIsDamage>Critical Strikes</style>\' and increases <style=cIsHealing>health regeneration</style> by <style=cIsHealing>5%</style> of your <style=cIsHealing>maximum health</style> for <style=cIsDamage>3s</style> <style=cStack>(+1.5s per stack)</style>.",

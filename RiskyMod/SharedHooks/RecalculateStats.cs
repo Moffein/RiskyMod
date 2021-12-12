@@ -32,7 +32,7 @@ namespace RiskyMod.SharedHooks
 			if (self.inventory)
             {
 				Inventory inventory = self.inventory;
-				if (Bandolier.enabled && inventory.GetItemCount(RoR2Content.Items.Bandolier) > 0)
+				/*if (Bandolier.enabled && inventory.GetItemCount(RoR2Content.Items.Bandolier) > 0)
 				{
 					if (self.skillLocator)
 					{
@@ -53,12 +53,12 @@ namespace RiskyMod.SharedHooks
 							self.skillLocator.special.cooldownScale *= 0.9f;
 						}
 					}
-				}
+				}*/
 
 				//This happens after GetStatCoefficients; needed for the armor mult since that's not in GSC currently
-				if (RoseBuckler.enabled && self.isSprinting)
+				if (RoseBuckler.enabled)
                 {
-					if (inventory.GetItemCount(RoR2Content.Items.SprintArmor) > 0)
+					if (self.isSprinting && inventory.GetItemCount(RoR2Content.Items.SprintArmor) > 0)
 					{
 						self.armor *= 1.5f;
 					}

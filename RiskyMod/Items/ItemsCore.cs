@@ -124,6 +124,7 @@ namespace RiskyMod.Items
             new BFG();
             new Capacitor();
             new Backup();
+            new SuperLeech();
         }
         private void ModifyItemTokens()
         {

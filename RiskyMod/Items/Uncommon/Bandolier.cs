@@ -10,10 +10,6 @@ namespace RiskyMod.Items.Uncommon
         public Bandolier()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Bandolier);
-
-            //Effect handled in SharedHooks.RecalculateStats
-
             //Buff lifetime and pickup range
             GameObject ammoPack = Resources.Load<GameObject>("Prefabs/NetworkedObjects/AmmoPack");
 

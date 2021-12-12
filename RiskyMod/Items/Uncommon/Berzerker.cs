@@ -60,8 +60,9 @@ namespace RiskyMod.Items.Uncommon
             int berzerkCount = attackerInventory.GetItemCount(RoR2Content.Items.WarCryOnMultiKill);
             if (berzerkCount > 0)
             {
+                attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 2f + 3f * berzerkCount);
                 //Need to apply buff this way to prevent the visual from disappearing.
-                int newBuffStack = Mathf.Min(attackerBody.GetBuffCount(Berzerker.berzerkBuff) + 1, 2 + 3 * berzerkCount);
+                /*int newBuffStack = Mathf.Min(attackerBody.GetBuffCount(Berzerker.berzerkBuff) + 1, 2 + 3 * berzerkCount);
                 int foundBuffs = 0;
                 foreach (CharacterBody.TimedBuff tb in attackerBody.timedBuffs)
                 {
@@ -75,7 +76,7 @@ namespace RiskyMod.Items.Uncommon
                 {
                     attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 4f + 0.5f * foundBuffs);
                     foundBuffs++;
-                }
+                }*/
             }
         }
     }
