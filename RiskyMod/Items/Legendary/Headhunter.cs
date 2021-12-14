@@ -17,12 +17,6 @@ namespace RiskyMod.Items.Legendary
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.HeadHunter);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.HeadHunter);
 
-            //LanguageAPI.Add("ITEM_HEADHUNTER_PICKUP", "Deal extra damage to elites, and temporarily gain their power on kill.");
-            //LanguageAPI.Add("ITEM_HEADHUNTER_DESC", "Deal an additional <style=cIsDamage>30%</style> damage to elite monsters. Upon killing an elite, temporarily gain its power for <style=cIsDamage>10s</style> <style=cStack>(+5s per stack)</style>.");
-            
-            //Elite damage bonus is handled in SharedHooks.ModifyFinalDamage
-
-            //Buff logic handled in SharedHooks.GetStatCoefficients
             headhunterBuff = ScriptableObject.CreateInstance<BuffDef>();
             headhunterBuff.buffColor = new Color(210f/255f, 50f/255f, 22f/255f);
             headhunterBuff.canStack = false;
@@ -46,6 +40,22 @@ namespace RiskyMod.Items.Legendary
 
             AssistManager.HandleAssistActions += OnKillEffect;
             GetStatsCoefficient.HandleStatsActions += HandleStats;
+            ModifyFinalDamage.ModifyFinalDamageActions += EliteBonus;
+        }
+
+        private static void EliteBonus(DamageMult damageMult, DamageInfo damageInfo,
+            HealthComponent victimHealth, CharacterBody victimBody,
+            CharacterBody attackerBody, Inventory attackerInventory)
+        {
+            int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
+            if (hhCount > 0)
+            {
+                if (victimBody.isElite)
+                {
+                    damageMult.damageMult *= 1.3f;
+                    damageInfo.damageColorIndex = DamageColorIndex.Item;
+                }
+            }
         }
 
         private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)

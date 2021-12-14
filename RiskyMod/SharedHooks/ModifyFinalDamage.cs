@@ -7,11 +7,20 @@ using RiskyMod.Items.Uncommon;
 using R2API.Utils;
 using RiskyMod.Items.Legendary;
 using RiskyMod.Items.Common;
+using UnityEngine;
 
 namespace RiskyMod.SharedHooks
 {
     public class ModifyFinalDamage
     {
+        public delegate void ModifyFinalDamageDelegate(DamageMult damageMult, DamageInfo damageInfo,
+            HealthComponent victim, CharacterBody victimBody,
+            CharacterBody attackerBody, Inventory attackerInventory);
+        public static ModifyFinalDamageDelegate ModifyFinalDamageActions = ModifyFinalDamageMethod;
+        private static void ModifyFinalDamageMethod(DamageMult damageMult, DamageInfo damageInfo,
+            HealthComponent victim, CharacterBody victimBody,
+            CharacterBody attackerBody, Inventory attackerInventory) {}
+
         public ModifyFinalDamage()
         {
 			IL.RoR2.HealthComponent.TakeDamage += (il) =>
@@ -44,40 +53,9 @@ namespace RiskyMod.SharedHooks
                             Inventory attackerInventory = attackerBody.inventory;
                             if (attackerInventory)
                             {
-                                if (Guillotine.enabled)
-                                {
-                                    int lopperCount = attackerInventory.GetItemCount(RoR2Content.Items.ExecuteLowHealthElite);
-                                    if (lopperCount > 0)
-                                    {
-                                        if (victimHealth.combinedHealth <= victimHealth.fullCombinedHealth * 0.3f)
-                                        {
-                                            newDamage *= 1f + Guillotine.damageCoefficient * lopperCount;
-                                            damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
-
-                                            //Lock the visual effect behind proccing attacks to improve performance
-                                            if (damageInfo.procCoefficient > 0f)
-                                            {
-                                                EffectManager.SpawnEffect(HealthComponent.AssetReferences.executeEffectPrefab, new EffectData
-                                                {
-                                                    origin = victimBody.corePosition,
-                                                    scale = victimBody.radius * 0.3f * damageInfo.procCoefficient   //not sure if radius is even getting affected
-                                                }, true);
-                                            }
-                                        }
-                                    }
-                                }
-                                if (HeadHunter.enabled)
-                                {
-                                    int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
-                                    if (hhCount > 0)
-                                    {
-                                        if (victimBody.isElite)
-                                        {
-                                            newDamage *= 1.3f;
-                                            damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
-                                        }
-                                    }
-                                }
+                                DamageMult damageMult = new DamageMult();
+                                ModifyFinalDamageActions.Invoke(damageMult, damageInfo, victimHealth, victimBody, attackerBody, attackerInventory);
+                                newDamage *= damageMult.damageMult;
                             }
                         }
                     }
@@ -85,5 +63,10 @@ namespace RiskyMod.SharedHooks
                 });
             };
 		}
+    }
+
+    public class DamageMult
+    {
+        public float damageMult = 1f;
     }
 }

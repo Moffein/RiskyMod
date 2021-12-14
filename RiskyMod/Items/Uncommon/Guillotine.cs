@@ -1,6 +1,7 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
+using RiskyMod.SharedHooks;
 using RoR2;
 using System;
 using UnityEngine;
@@ -10,7 +11,6 @@ namespace RiskyMod.Items.Uncommon
     public class Guillotine
     {
         public static bool enabled = true;
-		public static float damageCoefficient = 0.25f;
 
 		public Guillotine()
 		{
@@ -29,10 +29,31 @@ namespace RiskyMod.Items.Uncommon
 				c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
 			};
 
-			//Effect is handled in SharedHooks.ModifyFinalDamage
+			ModifyFinalDamage.ModifyFinalDamageActions += GuillotineBonus;
+		}
+		private static void GuillotineBonus(DamageMult damageMult, DamageInfo damageInfo,
+			HealthComponent victimHealth, CharacterBody victimBody,
+			CharacterBody attackerBody, Inventory attackerInventory)
+		{
+			int lopperCount = attackerInventory.GetItemCount(RoR2Content.Items.ExecuteLowHealthElite);
+			if (lopperCount > 0)
+			{
+				if (victimHealth.combinedHealth <= victimHealth.fullCombinedHealth * 0.3f)
+				{
+					damageMult.damageMult *= 1f + 0.25f * lopperCount;
+					damageInfo.damageColorIndex = DamageColorIndex.Item;
 
-			//LanguageAPI.Add("ITEM_EXECUTELOWHEALTHELITE_PICKUP", "Deal bonus damage to enemies below 30% health.");
-			//LanguageAPI.Add("ITEM_EXECUTELOWHEALTHELITE_DESC", "Deal <style=cIsDamage>+"+ItemsCore.ToPercent(damageCoefficient)+"</style> <style=cStack>(+" + ItemsCore.ToPercent(damageCoefficient) + " per stack)</style> damage to enemies below <style=cIsDamage>30% health</style>.");
+					//Lock the visual effect behind proccing attacks to improve performance
+					if (damageInfo.procCoefficient > 0f)
+					{
+						EffectManager.SpawnEffect(HealthComponent.AssetReferences.executeEffectPrefab, new EffectData
+						{
+							origin = victimBody.corePosition,
+							scale = victimBody.radius * 0.3f * damageInfo.procCoefficient   //not sure if radius is even getting affected
+						}, true);
+					}
+				}
+			}
 		}
 	}
 }
