@@ -140,8 +140,10 @@ namespace RiskyMod.Survivors.Bandit2
             On.EntityStates.Bandit2.Weapon.SlashBlade.OnEnter += (orig, self) =>
             {
                 orig(self);
+                self.ignoreAttackSpeed = false;
                 if (self.characterBody && self.characterBody.isSprinting)
                 {
+                    self.ignoreAttackSpeed = true;
                     self.forceForwardVelocity = true;
                     self.forwardVelocityCurve = knifeVelocity;
                 }
@@ -149,8 +151,7 @@ namespace RiskyMod.Survivors.Bandit2
 
             SneedUtils.SneedUtils.SetEntityStateField("entitystates.bandit2.weapon.slashblade", "ignoreAttackSpeed", "1");
 
-            var getBandit2SlashBladeMinDuration = new Hook(typeof(EntityStates.Bandit2.Weapon.SlashBlade).GetMethodCached("get_minimumDuration"),
-                typeof(Bandit2Core).GetMethodCached(nameof(GetBandit2SlashBladeMinDurationHook)));
+            var getBandit2SlashBladeMinDuration = new Hook(typeof(EntityStates.Bandit2.Weapon.SlashBlade).GetMethodCached("get_minimumDuration"), typeof(Bandit2Core).GetMethodCached(nameof(GetBandit2SlashBladeMinDurationHook)));
 
             sk.secondary.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SUPERBLEED" };
             sk.secondary.skillFamily.variants[1].skillDef.skillDescriptionToken = "BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD";

@@ -31,7 +31,7 @@ namespace RiskyMod.Items.Uncommon
 
             scytheBuff = ScriptableObject.CreateInstance<BuffDef>();
             scytheBuff.buffColor = new Color(210f / 255f, 50f / 255f, 22f / 255f);
-            scytheBuff.canStack = false;
+            scytheBuff.canStack = true;
             scytheBuff.isDebuff = false;
             scytheBuff.name = "RiskyItemTweaks_ScytheBuff";
             scytheBuff.iconSprite = Resources.Load<Sprite>("textures/bufficons/texBuffRegenBoostIcon");
@@ -49,12 +49,13 @@ namespace RiskyMod.Items.Uncommon
 
         private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (sender.HasBuff(HarvesterScythe.scytheBuff))
+            int buffCount = sender.GetBuffCount(HarvesterScythe.scytheBuff);
+            if (buffCount > 0)
             {
                 args.critAdd += 100f;
                 if (sender.healthComponent)
                 {
-                    args.baseRegenAdd += sender.maxHealth * 0.05f;
+                    args.baseRegenAdd += buffCount * (4f + 0.8f * (sender.level - 1f));
                 }
             }
         }
@@ -64,7 +65,7 @@ namespace RiskyMod.Items.Uncommon
             int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.HealOnCrit);
             if (itemCount > 0)
             {
-                attackerBody.AddTimedBuff(HarvesterScythe.scytheBuff, 1.5f + 1.5f * itemCount);
+                attackerBody.AddTimedBuff(HarvesterScythe.scytheBuff, 0.8f + 1.2f * itemCount);
             }
         }
     }

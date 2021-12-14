@@ -8,7 +8,7 @@ namespace RiskyMod.Items.Equipment
 {
     public class SuperLeech
     {
-        public static bool enabled = false;
+        public static bool enabled = true;
         public SuperLeech()
         {
             if (!enabled) return;
