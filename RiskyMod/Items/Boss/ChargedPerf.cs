@@ -1,6 +1,5 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using R2API;
 using RoR2;
 using System;
 
@@ -20,7 +19,6 @@ namespace RiskyMod.Items.Boss
 
             float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 
-            //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -42,14 +40,15 @@ namespace RiskyMod.Items.Boss
                 if (RiskyMod.disableProcChains)
                 {
                     c.GotoNext(
-                        x => x.MatchStfld<RoR2.Orbs.GenericDamageOrb>("procCoefficient")
+                        x => x.MatchCallvirt<RoR2.Orbs.OrbManager>("AddOrb")
                         );
-                    c.Index--;
-                    c.Next.Operand = 0f;
+                    c.EmitDelegate<Func<RoR2.Orbs.SimpleLightningStrikeOrb, RoR2.Orbs.SimpleLightningStrikeOrb>>((orb) =>
+                    {
+                        orb.procCoefficient = 0f;
+                        return orb;
+                    });
                 }
             };
-
-            //Effect handled in SharedHooks.OnHitEnemy
         }
     }
 }

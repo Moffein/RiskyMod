@@ -47,7 +47,7 @@ namespace RiskyMod
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.3.10")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.3.11")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI),
         nameof(ProjectileAPI), nameof(EffectAPI), nameof(DamageAPI), nameof(BuffAPI),
         nameof(LoadoutAPI))]
@@ -156,6 +156,7 @@ namespace RiskyMod
             new FixFocusCrystalSelfDamage();
             new PreventArtifactHeal();
             new TreebotFruitingNullref();
+            new FixLightningStrikeOrbProcCoefficient();
         }
         
         private void AddHooks()

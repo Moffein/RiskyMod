@@ -53,7 +53,7 @@ namespace RiskyMod.Items.Legendary
                 if (victimBody.isElite)
                 {
                     damageMult.damageMult *= 1.3f;
-                    damageInfo.damageColorIndex = DamageColorIndex.Item;
+                    damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
                 }
             }
         }
