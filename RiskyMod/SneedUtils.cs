@@ -1,10 +1,22 @@
 ﻿using RoR2;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SneedUtils
 {
     public class SneedUtils
     {
+        public static void RemoveItemTag(ItemDef itemDef, ItemTag tag)
+        {
+            if (itemDef.ContainsTag(tag))
+            {
+                List<ItemTag> tags = itemDef.tags.ToList();
+                tags.Remove(tag);
+                itemDef.tags = tags.ToArray();
+            }
+        }
+
         public static void DumpEntityStateConfig(EntityStateConfiguration esc)
         {
 
