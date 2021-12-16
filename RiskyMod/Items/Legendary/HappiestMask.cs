@@ -3,6 +3,8 @@ using MonoMod.Cil;
 using R2API;
 using RiskyMod.SharedHooks;
 using RoR2;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -65,17 +67,87 @@ namespace RiskyMod.Items.Legendary
             {
                 if (attackerBody.HasBuff(GhostReady.buffIndex))
                 {
-                    Util.TryToCreateGhost(victimBody, attackerBody, itemCount * 30);
-                    for (int i = 1; i <= 20; i++)
+                    GhostOnKillBehavior gokb = attackerBody.GetComponent<GhostOnKillBehavior>();
+                    if (gokb && gokb.CanSpawnGhost())
                     {
-                        attackerBody.AddTimedBuff(GhostCooldown.buffIndex, i);
+                        gokb.AddGhost(SpawnMaskGhost(victimBody, attackerBody, itemCount * 30));
+                        for (int i = 1; i <= 20; i++)
+                        {
+                            attackerBody.AddTimedBuff(GhostCooldown.buffIndex, i);
+                        }
                     }
                 }
             }
         }
+        public static CharacterBody SpawnMaskGhost(CharacterBody targetBody, CharacterBody ownerBody, int duration)
+        {
+            if (!NetworkServer.active)
+            {
+                Debug.LogWarning("[Server] function 'RoR2.CharacterBody RoR2.Util::TryToCreateGhost(RoR2.CharacterBody, RoR2.CharacterBody, int)' called on client");
+                return null;
+            }
+            if (!targetBody)
+            {
+                return null;
+            }
+            GameObject bodyPrefab = BodyCatalog.FindBodyPrefab(targetBody);
+            if (!bodyPrefab)
+			{
+                return null;
+            }
+            CharacterMaster characterMaster = MasterCatalog.allAiMasters.FirstOrDefault((CharacterMaster master) => master.bodyPrefab == bodyPrefab);
+            if (!characterMaster)
+            {
+                return null;
+            }
+            MasterSummon masterSummon = new MasterSummon();
+            masterSummon.masterPrefab = characterMaster.gameObject;
+            masterSummon.ignoreTeamMemberLimit = true;
+            masterSummon.position = targetBody.footPosition;
+            CharacterDirection component = targetBody.GetComponent<CharacterDirection>();
+            masterSummon.rotation = (component ? Quaternion.Euler(0f, component.yaw, 0f) : targetBody.transform.rotation);
+            masterSummon.summonerBodyObject = (ownerBody ? ownerBody.gameObject : null);
+            masterSummon.inventoryToCopy = targetBody.inventory;
+            masterSummon.useAmbientLevel = null;
+            CharacterMaster characterMaster2 = masterSummon.Perform();
+            if (!characterMaster2)
+            {
+                return null;
+            }
+            else
+            {
+                Inventory inventory = characterMaster2.inventory;
+                if (inventory)
+                {
+                    inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
+                    inventory.GiveItem(RoR2Content.Items.UseAmbientLevel.itemIndex);
+                    inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, duration);
+                    if (ownerBody && ownerBody.teamComponent && ownerBody.teamComponent.teamIndex == TeamIndex.Player)
+                    {
+                        inventory.GiveItem(RoR2Content.Items.BoostDamage.itemIndex, 150);
+                    }
+                }
+            }
+            CharacterBody body = characterMaster2.GetBody();
+            if (body)
+            {
+                foreach (EntityStateMachine entityStateMachine in body.GetComponents<EntityStateMachine>())
+                {
+                    entityStateMachine.initialStateType = entityStateMachine.mainStateType;
+                }
+            }
+            return body;
+        }
 
         public class GhostOnKillBehavior : CharacterBody.ItemBehavior
         {
+            private List<CharacterBody> activeGhosts;
+
+            private void Awake()
+            {
+                activeGhosts = new List<CharacterBody>();
+            }
+
             private void FixedUpdate()
             {
                 bool flag = this.body.HasBuff(GhostCooldown.buffIndex);
@@ -88,6 +160,36 @@ namespace RiskyMod.Items.Legendary
                 {
                     this.body.RemoveBuff(GhostReady.buffIndex);
                 }
+
+                UpdateGhosts();
+            }
+
+            private void UpdateGhosts()
+            {
+                List<CharacterBody> toRemove = new List<CharacterBody>();
+                foreach(CharacterBody cb in activeGhosts)
+                {
+                    if (!(cb && cb.healthComponent && cb.healthComponent.alive))
+                    {
+                        toRemove.Add(cb);
+                    }
+                }
+
+                foreach(CharacterBody cb in toRemove)
+                {
+                    activeGhosts.Remove(cb);
+                }
+            }
+
+            public bool CanSpawnGhost()
+            {
+                int itemCount = base.body.inventory.GetItemCount(RoR2Content.Items.GhostOnKill.itemIndex);
+                return activeGhosts.Count < 3 + (itemCount - 1);
+            }
+
+            public void AddGhost(CharacterBody cb)
+            {
+                activeGhosts.Add(cb);
             }
         }
     }

@@ -65,7 +65,7 @@ namespace RiskyMod.Items.Uncommon
             int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.HealOnCrit);
             if (itemCount > 0)
             {
-                attackerBody.AddTimedBuff(HarvesterScythe.scytheBuff, 0.8f + 1.2f * itemCount);
+                attackerBody.AddTimedBuff(HarvesterScythe.scytheBuff, 2.4f + 1.2f * (itemCount - 1));
             }
         }
     }
