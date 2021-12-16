@@ -1,4 +1,5 @@
-﻿using MonoMod.Cil;
+﻿using Mono.Cecil.Cil;
+using MonoMod.Cil;
 using RoR2;
 using System;
 using UnityEngine;
@@ -23,9 +24,12 @@ namespace RiskyMod.Tweaks
                 c.GotoNext(
                     x => x.MatchStloc(1)
                     );
-                c.EmitDelegate<Func<uint, uint>>(cost =>
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<uint, ShrineBloodBehavior, uint>>((cost, self) =>
                 {
-                    return (uint)Mathf.Max((int)cost, chestCost);
+                    float mult = (float)self.purchaseInteraction.cost / 50f;
+                    int newCost = (int)(chestCost * mult);
+                    return (uint)Mathf.Max((int)cost, newCost);
                 });
             };
         }
