@@ -20,7 +20,10 @@ namespace RiskyMod.Survivors.Croco
             pd.damageType = DamageType.Generic;
 
             DamageAPI.ModdedDamageTypeHolderComponent md = spitProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            md.Add(SharedDamageTypes.InterruptOnHit);
+            //md.Add(SharedDamageTypes.InterruptOnHit);
+            //Interrupt on a character with 2x stuns on demand is a bit much. Would need a much longer cooldown to be justifiable, which would kill Acrid's ability to kill Wisps.
+
+            md.Add(SharedDamageTypes.Blight7s);
 
             IL.EntityStates.Croco.FireSpit.OnEnter += (il) =>
             {

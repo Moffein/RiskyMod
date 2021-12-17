@@ -35,7 +35,7 @@ namespace RiskyMod.Survivors.Croco
                     //- For M2s, only Bite applies blight? So that players need to stay close at melee range to keep their stacks up.
                 //- Make Spit feel more fun to use.
                     //- High knockback?
-                    //- Should it be able to Poison/Blight? Thematically it makes sense, but it enables a cowardly playstyle.
+                    //- Should it be able to Blight? Thematically it makes sense, but it enables a cowardly playstyle.
                     //- Alternative is to make it arc to make it harder to snipe.
                 //- Shift Acid Puddle is bigger and deals more damage/proc. Also slows enemies inside it.
                 //- R deals 4x150% proccing damage instead of Poison
@@ -57,14 +57,15 @@ namespace RiskyMod.Survivors.Croco
 
         private void ModifyPassives(SkillLocator sk)
         {
-            for (int i = 0; i < sk.allSkills.Length; i++)
+            //This nullrefs
+            /*for (int i = 0; i < sk.allSkills.Length; i++)
             {
-                if (sk.allSkills[i].skillFamily.variants[0].skillDef.skillNameToken == "CROCO_PASSIVE_NAME")
+                if (sk.allSkills[i].skillFamily.variants[0].skillDef.skillNameToken == "CROCO_PASSIVE_NAME" && sk.allSkills[i].skillFamily.variants.Length == 2)
                 {
                     sk.allSkills[i].skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD" };
                     break;
                 }
-            }
+            }*/
         }
 
         private void ModifyPrimaries(SkillLocator sk)
@@ -85,6 +86,8 @@ namespace RiskyMod.Survivors.Croco
             sk.secondary.skillFamily.variants[0].skillDef.baseRechargeInterval = 2f;
             sk.secondary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD" };
             new ModifyM2Spit();
+            //Need to figure out some other effect besides Blight for Spit.
+            //Goo that slows/roots enemies?
 
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Bite", "damageCoefficient", "4");
             sk.secondary.skillFamily.variants[1].skillDef.skillDescriptionToken = "CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD";

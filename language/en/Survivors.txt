@@ -48,6 +48,6 @@
 	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Inject</style> an enemy for <style=cIsDamage>330% damage</style>. <style=cIsDamage>Injected</style> enemies have a <style=cIsDamage>15%</style> chance to drop <style=cIsHealing>healing fruits</style> when hit.",
 	
 	"CROCO_PRIMARY_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Poisonous</style>. Maul an enemy for <style=cIsDamage>250% damage</style>. Every 3rd hit is <style=cIsHealing>Regenerative</style> and deals <style=cIsDamage>500% damage</style>.",
-	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Interrupting</style>. Spit toxic bile for <style=cIsDamage>300% damage</style>."
+	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Blighted</style>. Spit toxic bile for <style=cIsDamage>300% damage</style>."
 	}
 }

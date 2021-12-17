@@ -16,6 +16,8 @@ namespace RiskyMod.Survivors
         {
             ProjectileRainForce = DamageAPI.ReserveDamageType();
             DebuffRegen = DamageAPI.ReserveDamageType();
+            InterruptOnHit = DamageAPI.ReserveDamageType();
+            Blight7s = DamageAPI.ReserveDamageType();
 
             TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
             OnHitEnemy.OnHitAttackerActions += ApplyDebuffRegen;
@@ -56,6 +58,17 @@ namespace RiskyMod.Survivors
                     if (victimBody.HasBuff(buffType))
                     {
                         debuffCount++;
+                    }
+                }
+                DotController dotController = DotController.FindDotController(victimBody.gameObject);
+                if (dotController)
+                {
+                    for (DotController.DotIndex dotIndex = DotController.DotIndex.Bleed; dotIndex < DotController.DotIndex.Count; dotIndex++)
+                    {
+                        if (dotController.HasDotActive(dotIndex))
+                        {
+                            debuffCount++;
+                        }
                     }
                 }
                 if (debuffCount > 0)
