@@ -74,7 +74,7 @@ namespace RiskyMod.Survivors.Croco
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "comboFinisherDamageCoefficient", "5");
 
             sk.primary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_PRIMARY_DESCRIPTION_RISKYMOD";
-            sk.primary.skillFamily.variants[0].skillDef.canceledFromSprinting = false;
+            //sk.primary.skillFamily.variants[0].skillDef.canceledFromSprinting = false;    //Removing sprint cancelling breaks this skill super hard.
             sk.primary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_POISON", "KEYWORD_RAPID_REGEN_RISKYMOD" };
             new ModifyM1();
         }
@@ -88,6 +88,8 @@ namespace RiskyMod.Survivors.Croco
             new ModifyM2Spit();
             //Need to figure out some other effect besides Blight for Spit.
             //Goo that slows/roots enemies?
+            //Neurotoxin gives enemies brain damage and makes them move/attack slower?
+                //AtkSpd reduction from multiple sources stacks really quickly and is super noticeable compared to Move Speed.
 
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Bite", "damageCoefficient", "4");
             sk.secondary.skillFamily.variants[1].skillDef.skillDescriptionToken = "CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
