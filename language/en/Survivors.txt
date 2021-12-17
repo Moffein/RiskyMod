@@ -22,7 +22,7 @@
 	
 	"COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD" : "Fire a piercing round for <style=cIsDamage>480% damage</style>. Zaps nearby enemies for an additional <style=cIsDamage>240% damage</style>.",
 	"COMMANDO_SECONDARY_ALT1_DESCRIPTION_RISKYMOD" : "Fire two close-range blasts that deal <style=cIsDamage>8x170% damage</style> total.",
-	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Roll</style> a short distance and reduce skill cooldowns by <style=cIsUtility>1.0s</style>.",
+	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Roll</style> a short distance and reduce skill cooldowns by <style=cIsUtility>33%</style>.",
 	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Stunning</style>. Fire fragmentation rounds for <style=cIsDamage>6x120% damage</style>. The number of shots increases with attack speed.",
 	"COMMANDO_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "Throw a grenade that explodes for <style=cIsDamage>1200% damage</style> after 2 seconds. Can be <style=cIsDamage>cooked</style> to explode early.",
 	
@@ -45,6 +45,9 @@
 	
 	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "Fire a <style=cIsUtility>Sonic Boom</style> that <style=cIsHealing>heals for every target hit</style>.",
 	"TREEBOT_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>20% HP</style>. Fire a <style=cIsUtility>Sonic Boom</style> that <style=cIsDamage>Weakens</style> enemies for <style=cIsDamage>550% damage</style>.",
-	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Inject</style> an enemy for <style=cIsDamage>330% damage</style>. <style=cIsDamage>Injected</style> enemies have a <style=cIsDamage>15%</style> chance to drop <style=cIsHealing>healing fruits</style> when hit."
+	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Inject</style> an enemy for <style=cIsDamage>330% damage</style>. <style=cIsDamage>Injected</style> enemies have a <style=cIsDamage>15%</style> chance to drop <style=cIsHealing>healing fruits</style> when hit.",
+	
+	"CROCO_PRIMARY_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Poisonous</style>. Maul an enemy for <style=cIsDamage>250% damage</style>. Every 3rd hit is <style=cIsHealing>Regenerative</style> and deals <style=cIsDamage>500% damage</style>.",
+	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Interrupting</style>. Spit toxic bile for <style=cIsDamage>300% damage</style>."
 	}
 }

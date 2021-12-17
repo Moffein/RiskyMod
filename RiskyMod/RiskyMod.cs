@@ -29,6 +29,7 @@ using RiskyMod.Survivors.Huntress;
 using RiskyMod.Survivors.Engi;
 using RiskyMod.Survivors.Toolbot;
 using RiskyMod.Survivors.Treebot;
+using RiskyMod.Survivors.Croco;
 
 namespace RiskyMod
 {
@@ -47,7 +48,7 @@ namespace RiskyMod
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.3.12")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.4.0")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI),
         nameof(ProjectileAPI), nameof(EffectAPI), nameof(DamageAPI), nameof(BuffAPI),
         nameof(LoadoutAPI))]
@@ -74,6 +75,7 @@ namespace RiskyMod
         private const string toolbotString = "Survivors: MUL-T";
         private const string engiString = "Survivors: Engineer";
         private const string treebotString = "Survivors: REX";
+        private const string crocoString = "Survivors: Acrid";
         private const string banditString = "Survivors: Bandit";
         private const string captainString = "Survivors: Captain";
 
@@ -408,6 +410,8 @@ namespace RiskyMod
             TreebotCore.enableSecondarySkillChanges = Config.Bind(treebotString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
             TreebotCore.enableUtilitySkillChanges = Config.Bind(treebotString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
             TreebotCore.enableSpecialSkillChanges = Config.Bind(treebotString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
+
+            CrocoCore.enabled = Config.Bind(crocoString, "Enable Changes", true, "Enable changes to this survivor. Skill options unavailable due to everything being too interlinked.").Value;
 
             CaptainCore.enabled = Config.Bind(captainString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             CaptainOrbitalHiddenRealms.enabled = Config.Bind(captainString, "Hidden Realm Orbital Skills", true, "Allow Orbital skills in Hiden Realms.").Value;

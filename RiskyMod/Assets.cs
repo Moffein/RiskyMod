@@ -22,12 +22,23 @@ namespace RiskyMod
                 assetBundle = AssetBundle.LoadFromStream(stream);
             }
             LoadSkillIcons();
+            LoadBuffIcons();
+        }
+
+        private static void LoadBuffIcons()
+        {
+            BuffIcons.Infusion = assetBundle.LoadAsset<Sprite>("BuffInfusion");
         }
 
         private static void LoadSkillIcons()
         {
             SkillIcons.Bandit2Gunslinger = assetBundle.LoadAsset<Sprite>("Bandit2Gunslinger");
             SkillIcons.Bandit2Desperado = assetBundle.LoadAsset<Sprite>("Bandit2Desperado");
+        }
+
+        public static class BuffIcons
+        {
+            public static Sprite Infusion;
         }
 
         public static class SkillIcons

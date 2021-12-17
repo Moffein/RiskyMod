@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2240174309
+CRC: 504830923
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1d2b34e1c5a5268b3a024ce0c829806f
+    Hash: 206ba4addef882dffa815445c06227af
   TypeTreeHash:
     serializedVersion: 2
     Hash: ea5a42e0fd8ea905efa7aa926a3b8944
@@ -16,4 +16,5 @@ ClassTypes:
 Assets:
 - Assets/Resources/Sprites/SkillIcons/Bandit2Gunslinger.png
 - Assets/Resources/Sprites/SkillIcons/Bandit2Desperado.png
+- Assets/Resources/Sprites/Buffs/BuffInfusion.png
 Dependencies: []

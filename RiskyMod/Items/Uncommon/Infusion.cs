@@ -5,12 +5,15 @@ using R2API;
 using RoR2.Orbs;
 using System;
 using UnityEngine;
+using UnityEngine.Networking;
+using static RiskyMod.Assets;
 
 namespace RiskyMod.Items.Uncommon
 {
     public class Infusion
     {
         public static bool enabled = true;
+        public static BuffDef InfusionBuff;
         public Infusion()
         {
             if (!enabled) return;
@@ -42,7 +45,8 @@ namespace RiskyMod.Items.Uncommon
                      x => x.MatchStloc(50)
                     );
                 c.Index += 4;
-                c.EmitDelegate<Func<float, float>>(infusionBonus =>
+                c.Emit(OpCodes.Ldarg_0);//self
+                c.EmitDelegate<Func<float, CharacterBody, float>>((infusionBonus, self) =>
                 {
                     float newHP = 0;
                     int hundredsFulfilled = 0;
@@ -61,10 +65,32 @@ namespace RiskyMod.Items.Uncommon
                             hundredsFulfilled++;
                         }
                     }
+                    if (NetworkServer.active)
+                    {
+                        while (self.HasBuff(InfusionBuff.buffIndex))
+                        {
+                            self.RemoveBuff(InfusionBuff.buffIndex);
+                        }
+                        if (self.inventory.GetItemCount(RoR2Content.Items.Infusion) > 0)
+                        {
+                            int hpGained = Mathf.FloorToInt(newHP);
+                            for (int i = 0; i < hpGained; i++)
+                            {
+                                self.AddBuff(InfusionBuff.buffIndex);
+                            }
+                        }
+                    }
                     return newHP;
                 });
-            };
 
+                InfusionBuff = ScriptableObject.CreateInstance<BuffDef>();
+                InfusionBuff.buffColor = Color.white;
+                InfusionBuff.canStack = true;
+                InfusionBuff.isDebuff = false;
+                InfusionBuff.name = "RiskyMod_InfusionBuff";
+                InfusionBuff.iconSprite = BuffIcons.Infusion;
+                BuffAPI.Add(new CustomBuff(InfusionBuff));
+            };
         }
 
         private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
