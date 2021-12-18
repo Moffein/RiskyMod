@@ -4,14 +4,16 @@ using RoR2.Projectile;
 using MonoMod.Cil;
 using System;
 using R2API;
+using Mono.Cecil.Cil;
 
 namespace RiskyMod.Survivors.Croco
 {
     public class ModifyM2Spit
     {
+        private static GameObject spitProjectile;
         public ModifyM2Spit()
         {
-            GameObject spitProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocospit");
+            spitProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocospit").InstantiateClone("RiskyMod_CrocoSpit", true);
 
             Rigidbody rb = spitProjectile.GetComponent<Rigidbody>();
             rb.useGravity = true;
@@ -20,10 +22,9 @@ namespace RiskyMod.Survivors.Croco
             pd.damageType = DamageType.Generic;
 
             DamageAPI.ModdedDamageTypeHolderComponent md = spitProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            //md.Add(SharedDamageTypes.InterruptOnHit);
-            //Interrupt on a character with 2x stuns on demand is a bit much. Would need a much longer cooldown to be justifiable, which would kill Acrid's ability to kill Wisps.
-
             md.Add(SharedDamageTypes.Blight7s);
+
+            ProjectileAPI.Add(spitProjectile);
 
             IL.EntityStates.Croco.FireSpit.OnEnter += (il) =>
             {
@@ -31,10 +32,14 @@ namespace RiskyMod.Survivors.Croco
                 c.GotoNext(
                      x => x.MatchCallvirt<ProjectileManager>("FireProjectile")
                     );
-                c.EmitDelegate<Func<FireProjectileInfo, FireProjectileInfo>>(orig =>
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<FireProjectileInfo, EntityStates.Croco.FireSpit, FireProjectileInfo>>((projectileInfo, self) =>
                 {
-                    orig.damageTypeOverride = default;
-                    return orig;
+                    if (self.projectilePrefab == spitProjectile)
+                    {
+                        projectileInfo.damageTypeOverride = default;
+                    }
+                    return projectileInfo;
                 });
             };
         }

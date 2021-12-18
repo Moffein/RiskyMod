@@ -14,14 +14,15 @@ namespace RiskyMod.SharedHooks
 			if (TrueOSP.enabled && self.hasOneShotProtection)
 			{
 				//Disable vanilla OSP
-				self.oneShotProtectionFraction = 0f;
-				if (self.HasBuff(TrueOSP.disableOSP))
+				self.oneShotProtectionFraction = 0f;	//I'd like to re-enable the visual, but I need to figure out how to make it not count shields.
+
+				if (self.HasBuff(TrueOSP.DisableOSP))
 				{
 					if (NetworkServer.active && self.outOfDanger)// && (self.healthComponent && self.healthComponent.health/self.healthComponent.fullHealth > OSPManagerComponent.ospThreshold)
 					{
 						//Currently not locked behind having >90% HP because I'd like it to be cleanly tied to the outOfDanger state.
 						//Will have to see if this ends up being too abusable.
-						self.RemoveBuff(TrueOSP.disableOSP);
+						self.RemoveBuff(TrueOSP.DisableOSP);
 					}
 					else
 					{
@@ -32,28 +33,6 @@ namespace RiskyMod.SharedHooks
 			if (self.inventory)
             {
 				Inventory inventory = self.inventory;
-				/*if (Bandolier.enabled && inventory.GetItemCount(RoR2Content.Items.Bandolier) > 0)
-				{
-					if (self.skillLocator)
-					{
-						if (self.skillLocator.primary)
-						{
-							self.skillLocator.primary.cooldownScale *= 0.9f;
-						}
-						if (self.skillLocator.secondary)
-						{
-							self.skillLocator.secondary.cooldownScale *= 0.9f;
-						}
-						if (self.skillLocator.utility)
-						{
-							self.skillLocator.utility.cooldownScale *= 0.9f;
-						}
-						if (self.skillLocator.special)
-						{
-							self.skillLocator.special.cooldownScale *= 0.9f;
-						}
-					}
-				}*/
 
 				//This happens after GetStatCoefficients; needed for the armor mult since that's not in GSC currently
 				if (RoseBuckler.enabled)
@@ -65,11 +44,10 @@ namespace RiskyMod.SharedHooks
                 }
 			}
 
-			//This part is split off because it needs the inventory to work
 			if (TrueOSP.enabled && self.hasOneShotProtection)
 			{
-				if (self.isGlass || self.cursePenalty > 1f || self.HasBuff(RoR2Content.Buffs.AffixLunar) ||
-					(self.inventory && self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0))
+				if (self.isGlass || self.cursePenalty > 1f || self.HasBuff(RoR2Content.Buffs.AffixLunar) ||	//This part doesn't need the inventory
+					(self.inventory && self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0))	//This part needs the inventory
 				{
 					self.hasOneShotProtection = false;
 				}

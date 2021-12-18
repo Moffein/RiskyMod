@@ -161,6 +161,7 @@ namespace RiskyMod
             new PreventArtifactHeal();
             new TreebotFruitingNullref();
             new FixLightningStrikeOrbProcCoefficient();
+            new FixCrocoPoisonAchievement();
         }
         
         private void AddHooks()

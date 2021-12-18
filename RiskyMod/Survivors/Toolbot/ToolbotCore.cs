@@ -22,8 +22,6 @@ namespace RiskyMod.Survivors.Toolbot
 
         public static bool enableSpecialSkillChanges = true;
 
-        public static DamageAPI.ModdedDamageType StunDroneForce;
-        public static DamageAPI.ModdedDamageType SawBarrier;
         public static BuffDef PowerModeBuff;
 
         public ToolbotCore()
@@ -119,14 +117,11 @@ namespace RiskyMod.Survivors.Toolbot
                     return orig;
                 });
             };
-
-            SawBarrier = DamageAPI.ReserveDamageType();
             On.EntityStates.Toolbot.FireBuzzsaw.OnEnter += (orig, self) =>
             {
                 orig(self);
-                self.attack.AddModdedDamageType(SawBarrier);
+                self.attack.AddModdedDamageType(SharedDamageTypes.SawBarrier);
             };
-            OnHitEnemy.OnHitAttackerActions += SawBarrierOnHit;
 
             sk.primary.skillFamily.variants[3].skillDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD";
 
@@ -140,43 +135,12 @@ namespace RiskyMod.Survivors.Toolbot
             }
         }
 
-        private  void SawBarrierOnHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
-        {
-            if (damageInfo.HasModdedDamageType(SawBarrier))
-            {
-                if (attackerBody.healthComponent)
-                {
-                    attackerBody.healthComponent.AddBarrier(attackerBody.healthComponent.fullCombinedHealth * 0.006f);
-                }
-            }
-        }
-
         private void ModifySecondaries(SkillLocator sk)
         {
             if (!enableSecondarySkillChanges) return;
 
-            StunDroneForce = DamageAPI.ReserveDamageType();
-            TakeDamage.ModifyInitialDamageActions += ApplyStunDroneForce;
             DamageAPI.ModdedDamageTypeHolderComponent md = Resources.Load<GameObject>("prefabs/projectiles/CryoCanisterProjectile").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            md.Add(StunDroneForce);
-        }
-        private static void ApplyStunDroneForce(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
-        {
-            if (damageInfo.HasModdedDamageType(StunDroneForce))
-            {
-                Vector3 direction = Vector3.down;
-                CharacterBody cb = self.body;
-                if (cb && cb.isFlying)
-                {
-                    //Scale force to match mass
-                    Rigidbody rb = cb.rigidbody;
-                    if (rb)
-                    {
-                        direction *= Mathf.Max(rb.mass / 100f, 1f);
-                        damageInfo.force += 1600f * direction;
-                    }
-                }
-            }
+            md.Add(SharedDamageTypes.AntiFlyingForce);
         }
 
         private void ModifySpecials(SkillLocator sk)

@@ -10,18 +10,18 @@ namespace RiskyMod.Tweaks
     public class TrueOSP
     {
         public static bool enabled = true;
-        public static BuffDef disableOSP;
+        public static BuffDef DisableOSP;
         public TrueOSP()
         {
             if (!enabled) return;
 
-            disableOSP = ScriptableObject.CreateInstance<BuffDef>();
-            disableOSP.buffColor = new Color(0.9f * 140f / 255f, 0.9f * 185f / 255f, 0.9f * 191f / 255f);
-            disableOSP.canStack = false;
-            disableOSP.isDebuff = false;    //Not a debuff so that it doesn't interact with debuff-related stuff like Death Mark and Blast Shower.
-            disableOSP.name = "RiskyItemTweaks_DisableOSPBuff";
-            disableOSP.iconSprite = Resources.Load<Sprite>("textures/bufficons/texBuffPulverizeIcon");
-            BuffAPI.Add(new CustomBuff(disableOSP));
+            DisableOSP = ScriptableObject.CreateInstance<BuffDef>();
+            DisableOSP.buffColor = new Color(0.9f * 140f / 255f, 0.9f * 185f / 255f, 0.9f * 191f / 255f);
+            DisableOSP.canStack = false;
+            DisableOSP.isDebuff = false;    //Not a debuff so that it doesn't interact with debuff-related stuff like Death Mark and Blast Shower.
+            DisableOSP.name = "RiskyItemTweaks_DisableOSPBuff";
+            DisableOSP.iconSprite = Resources.Load<Sprite>("textures/bufficons/texBuffPulverizeIcon");
+            BuffAPI.Add(new CustomBuff(DisableOSP));
 
             //Handled in MonoBehaviours.OSPManagerComponent and SharedHooks.RecalculateStats
 
@@ -122,7 +122,7 @@ namespace RiskyMod.Tweaks
             {
                 ospTriggered = true;
                 ospStopwatch = 0f;
-                characterBody.AddBuff(TrueOSP.disableOSP);
+                characterBody.AddBuff(TrueOSP.DisableOSP);
                 characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, ospInvuln);
                 characterBody.outOfDangerStopwatch = 0f;
                 Debug.Log("Triggering OSP");
@@ -132,7 +132,7 @@ namespace RiskyMod.Tweaks
 
         public bool CanTriggerOSP()
         {
-            return !characterBody.HasBuff(TrueOSP.disableOSP) && (healthComponent.health / healthComponent.fullHealth > ospThreshold || ospStopwatch > 0f);
+            return !characterBody.HasBuff(TrueOSP.DisableOSP) && (healthComponent.health / healthComponent.fullHealth > ospThreshold || ospStopwatch > 0f);
         }
     }
 }

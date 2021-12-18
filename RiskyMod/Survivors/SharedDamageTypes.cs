@@ -5,24 +5,34 @@ using UnityEngine;
 
 namespace RiskyMod.Survivors
 {
+    //Keep all the custom damagetypes in 1 place, in case there's a need to re-use them across different parts of the mod.
     public class SharedDamageTypes
     {
         public static DamageAPI.ModdedDamageType ProjectileRainForce;
-        public static DamageAPI.ModdedDamageType DebuffRegen;
+
+        public static DamageAPI.ModdedDamageType AntiFlyingForce;
+        public static DamageAPI.ModdedDamageType SawBarrier;
+
         public static DamageAPI.ModdedDamageType InterruptOnHit;
         public static DamageAPI.ModdedDamageType Blight7s;
 
         public SharedDamageTypes()
         {
-            ProjectileRainForce = DamageAPI.ReserveDamageType();
-            DebuffRegen = DamageAPI.ReserveDamageType();
             InterruptOnHit = DamageAPI.ReserveDamageType();
+            ProjectileRainForce = DamageAPI.ReserveDamageType();
+
+            AntiFlyingForce = DamageAPI.ReserveDamageType();
+            SawBarrier = DamageAPI.ReserveDamageType();
+
             Blight7s = DamageAPI.ReserveDamageType();
 
             TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
-            OnHitEnemy.OnHitAttackerActions += ApplyDebuffRegen;
+            TakeDamage.ModifyInitialDamageActions += ApplyStunDroneForce;
+
             OnHitEnemy.OnHitNoAttackerActions += ApplyInterruptOnHit;
             OnHitEnemy.OnHitNoAttackerActions += ApplyBlight7s;
+
+            OnHitEnemy.OnHitAttackerActions += SawBarrierOnHit;
         }
 
 
@@ -48,36 +58,6 @@ namespace RiskyMod.Survivors
             }
         }
 
-        private static void ApplyDebuffRegen(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
-        {
-            if (damageInfo.HasModdedDamageType(SharedDamageTypes.DebuffRegen))
-            {
-                int debuffCount = 0;
-                foreach (BuffIndex buffType in BuffCatalog.debuffBuffIndices)
-                {
-                    if (victimBody.HasBuff(buffType))
-                    {
-                        debuffCount++;
-                    }
-                }
-                DotController dotController = DotController.FindDotController(victimBody.gameObject);
-                if (dotController)
-                {
-                    for (DotController.DotIndex dotIndex = DotController.DotIndex.Bleed; dotIndex < DotController.DotIndex.Count; dotIndex++)
-                    {
-                        if (dotController.HasDotActive(dotIndex))
-                        {
-                            debuffCount++;
-                        }
-                    }
-                }
-                if (debuffCount > 0)
-                {
-                    attackerBody.AddTimedBuff(RoR2Content.Buffs.CrocoRegen, 0.025f * debuffCount * 10f);
-                }
-            }
-        }
-
         private static void ApplyInterruptOnHit(DamageInfo damageInfo, CharacterBody victimBody)
         {
             if (damageInfo.HasModdedDamageType(SharedDamageTypes.InterruptOnHit))
@@ -96,6 +76,42 @@ namespace RiskyMod.Survivors
             {
                 DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Blight, 7f, 1f);
             }
+        }
+
+        private static void ApplyStunDroneForce(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        {
+            if (damageInfo.HasModdedDamageType(AntiFlyingForce))
+            {
+                Vector3 direction = Vector3.down;
+                CharacterBody cb = self.body;
+                if (cb && cb.isFlying)
+                {
+                    //Scale force to match mass
+                    Rigidbody rb = cb.rigidbody;
+                    if (rb)
+                    {
+                        direction *= Mathf.Max(rb.mass / 100f, 1f);
+                        damageInfo.force += 1600f * direction;
+                    }
+                }
+            }
+        }
+
+        private void SawBarrierOnHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
+        {
+            if (damageInfo.HasModdedDamageType(SawBarrier))
+            {
+                if (attackerBody.healthComponent)
+                {
+                    attackerBody.healthComponent.AddBarrier(attackerBody.healthComponent.fullCombinedHealth * 0.006f);
+                }
+            }
+        }
+
+        private static BuffDef BuildEpidemicDebuff()
+        {
+
+            return null;
         }
     }
 }

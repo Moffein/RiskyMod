@@ -1,10 +1,10 @@
 {
 	strings:
 	{
-	"KEYWORD_BLIGHT_RISKYMOD" : "<style=cKeywordName>Blight</style><style=cSub>Deal <style=cIsDamage>420%</style> base damage over 7s. <i>Blight can stack.</i></style>",
+	"KEYWORD_BLIGHT_RISKYMOD" : "<style=cKeywordName>Blighted</style><style=cSub>Deal <style=cIsDamage>420%</style> base damage over 7s. <i>Blight can stack.</i></style>",
 
 	"KEYWORD_INTERRUPT_RISKYMOD" : "<style=cKeywordName>Interrupting</style><style=cSub>Briefly interrupts an enemy's actions.",
 
-	"KEYWORD_RAPID_REGEN_RISKYMOD" : "<style=cKeywordName>Regenerative</style><style=cSub>Heal for <style=cIsHealing>5%</style> of your maximum health over 0.5s. Heal an additional <style=cIsHealing>2.5%</style> of your maximum health for each debuff on the enemy.</style>"
+	"KEYWORD_RAPID_REGEN_RISKYMOD" : "<style=cKeywordName>Regenerative</style><style=cSub>Heal for <style=cIsHealing>8%</style> of your maximum health over 0.8s."
 	}
 }
