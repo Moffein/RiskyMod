@@ -18,7 +18,6 @@ namespace RiskyMod.Survivors.Croco
                         overlapAttack.damageType = DamageType.Generic;
                         overlapAttack.AddModdedDamageType(SharedDamageTypes.Blight7s);
                     }
-                    overlapAttack.AddModdedDamageType(SharedDamageTypes.DebuffRegen);
                 }
             };
         }

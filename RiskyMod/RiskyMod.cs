@@ -177,7 +177,6 @@ namespace RiskyMod
             //GlobalEventManager.onCharacterDeathGlobal += OnCharacterDeath.GlobalEventManager_onCharacterDeathGlobal; //Event subscription instead of On. Hook
             //I am unable to test anything right now, so its commented
             new ModifyFinalDamage();
-            new StealBuffVFX();
         }
 
         private void SetupAssists()

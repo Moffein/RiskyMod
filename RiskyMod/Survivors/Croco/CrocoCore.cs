@@ -18,6 +18,7 @@ namespace RiskyMod.Survivors.Croco
             if (!enabled) return;
             new BlightStack();
             new BiggerMeleeHitbox();
+            new ExtendSpawnInvuln();
 
             ModifyStats(RoR2Content.Survivors.Croco.bodyPrefab.GetComponent<CharacterBody>());
             ModifySkills(RoR2Content.Survivors.Croco.bodyPrefab.GetComponent<SkillLocator>());
@@ -32,17 +33,19 @@ namespace RiskyMod.Survivors.Croco
             //- Melee playstyle (and playstyle in general) seems to lack depth. Just spamming all abilities when they're off cooldown.
 
             //Solutions?
-            //- Poison Heal Passive: Unique debuffs on an enemy = more heals from melee attacks?
+            //- Poison Heal Passive: Unique debuffs on an enemy = more heals from melee attacks? [Scrapped]
+                //Increased healing ends up making him too much like Loader: stand in front of enemies and hold M1.
             //- Bring back playstyle based around stacking different DoTs.
             //- Poison on M1: the strongest tank busting tool should require risk to apply.
             //- Blight stacks like bleed, keep it on M2/Shift impact so that it's cooldown-gated.
             //- For M2s, only Bite applies blight? So that players need to stay close at melee range to keep their stacks up.
+                //- Spit seems to need to apply Blight or else the kit ends up feeling weird.
             //- Make Spit feel more fun to use.
-            //- High knockback?
-            //- Should it be able to Blight? Thematically it makes sense, but it enables a cowardly playstyle.
+                //- High knockback?
+                //- Should it be able to Blight? Thematically it makes sense, but it enables a cowardly playstyle.
             //- Alternative is to make it arc to make it harder to snipe.
             //- Shift Acid Puddle is bigger and deals more damage/proc. Also slows enemies inside it.
-            //- R deals 4x150% proccing damage instead of Poison
+            //- R deals 6x100% proccing damage instead of Poison
             //- This might still allow for the AFK playstyle.
 
             //Debuffs Acrid can use:
@@ -68,34 +71,33 @@ namespace RiskyMod.Survivors.Croco
         //Is the playstyle still feeling too basic?
         private void ModifySkills(SkillLocator sk)
         {
-            new IncreaseRegenerativeHeal();
-            ModifyPassives(sk);
+            RemovePassive(sk);
             ModifyPrimaries(sk);
             ModifySecondaries(sk);
             ModifyUtilities(sk);
             ModifySpecials(sk);
         }
 
-        private void ModifyPassives(SkillLocator sk)
+        private void RemovePassive(SkillLocator sk)
         {
-            //This nullrefs
-            /*for (int i = 0; i < sk.allSkills.Length; i++)
+            //Hide Passive skill, set it to Blight.
+            for (int i = 0; i < sk.allSkills.Length; i++)
             {
                 if (sk.allSkills[i].skillFamily.variants[0].skillDef.skillNameToken == "CROCO_PASSIVE_NAME" && sk.allSkills[i].skillFamily.variants.Length == 2)
                 {
-                    sk.allSkills[i].skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD" };
+                    Debug.Log("Found passives!\n\n\n\n\n\n\n\n\n\n");
                     break;
                 }
-            }*/
+            }
         }
         private void ModifyPrimaries(SkillLocator sk)
         {
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "damageCoefficient", "1.5");
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "comboFinisherDamageCoefficient", "4.5");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "damageCoefficient", "2");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "comboFinisherDamageCoefficient", "4");
 
             sk.primary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_PRIMARY_DESCRIPTION_RISKYMOD";
             //sk.primary.skillFamily.variants[0].skillDef.canceledFromSprinting = false;    //Removing sprint cancelling breaks this skill super hard.
-            sk.primary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_POISON", "KEYWORD_RAPID_REGEN_RISKYMOD" };
+            sk.primary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_POISON", "KEYWORD_RAPID_REGEN" };
             new ModifyM1();
 
             M1PoisonDef = sk.primary.skillFamily.variants[0].skillDef;
@@ -103,19 +105,16 @@ namespace RiskyMod.Survivors.Croco
 
         private void ModifySecondaries(SkillLocator sk)
         {
-            //Ranged attack only Weakens
-                //Allowing it to Blight allows you to keep up Blight stacks with no risk, overshadowing the Bite.
-            //Acrid is overloaded with too many unique debuffs. Consider simplifying.
-            //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireSpit", "damageCoefficient", "2.4");
             sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_SECONDARY_DESCRIPTION_RISKYMOD";
             sk.secondary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD" };
-            new ModifyM2Spit();
+            sk.secondary.skillFamily.variants[0].skillDef.baseRechargeInterval = 3f;
+            //new ModifyM2Spit();   //Handled by Blight passive.
 
             //I hate how this has so many keywords.
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Bite", "damageCoefficient", "4");
             sk.secondary.skillFamily.variants[1].skillDef.skillDescriptionToken = "CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
-            sk.secondary.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_SLAYER", "KEYWORD_RAPID_REGEN_RISKYMOD" };
-            new ModifyM2Bite();
+            sk.secondary.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_SLAYER", "KEYWORD_RAPID_REGEN" };
+            //new ModifyM2Bite();   //Handled by Blight passive.
         }
 
         //Both Shifts can Blight, otherwise the default ends up being objectively better.
@@ -136,7 +135,7 @@ namespace RiskyMod.Survivors.Croco
         //Watch out to make sure this isn't making a worse autoplay situation than the original.
         private void ModifySpecials(SkillLocator sk)
         {
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireDiseaseProjectile", "damageCoefficient", "1.2");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireDiseaseProjectile", "damageCoefficient", "1");
             sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_SPECIAL_DESCRIPTION_RISKYMOD";
             sk.special.skillFamily.variants[0].skillDef.keywordTokens = new string[] {};
             new ModifySpecial();

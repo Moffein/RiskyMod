@@ -4,6 +4,7 @@ using UnityEngine;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using RiskyMod.SharedHooks;
+using System;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -45,6 +46,20 @@ namespace RiskyMod.Items.Uncommon
 
             AssistManager.HandleAssistActions += OnKillEffect;
             GetStatsCoefficient.HandleStatsActions += HandleStats;
+
+            IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "LifeSteal")
+                    );
+                c.Index += 2;
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<bool, CharacterBody, bool>>((hasBuff, self) =>
+                {
+                    return hasBuff || self.HasBuff(HarvesterScythe.scytheBuff);
+                });
+            };
         }
 
         private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)

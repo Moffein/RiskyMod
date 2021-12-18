@@ -47,7 +47,7 @@
 	"TREEBOT_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>20% HP</style>. Fire a <style=cIsUtility>Sonic Boom</style> that <style=cIsDamage>Weakens</style> enemies for <style=cIsDamage>550% damage</style>.",
 	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Inject</style> an enemy for <style=cIsDamage>330% damage</style>. <style=cIsDamage>Injected</style> enemies have a <style=cIsDamage>15%</style> chance to drop <style=cIsHealing>healing fruits</style> when hit.",
 	
-	"CROCO_PRIMARY_DESCRIPTION_RISKYMOD" : "Maul an enemy for <style=cIsDamage>200% damage</style>. Every 3rd hit is <style=cIsHealing>Poisonous</style> and <style=cIsHealing>Regenerative</style> and deals <style=cIsDamage>420% damage</style>.",
+	"CROCO_PRIMARY_DESCRIPTION_RISKYMOD" : "Maul an enemy for <style=cIsDamage>200% damage</style>. Every 3rd hit is <style=cIsHealing>Poisonous</style> and <style=cIsHealing>Regenerative</style> and deals <style=cIsDamage>400% damage</style>.",
 	"CROCO_PRIMARY_ALT_NAME_RISKYMOD" : "Festering Wounds",
 	"CROCO_PRIMARY_ALT_DESCRIPTION_RISKYMOD" : "Maul an enemy for <style=cIsDamage>200% damage</style>. Every 3rd hit is <style=cIsDamage>Blighted</style> and <style=cIsHealing>Regenerative</style> and deals <style=cIsDamage>400% damage</style>.",
 	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Blighted</style>. Spit toxic bile for <style=cIsDamage>300% damage</style>.",

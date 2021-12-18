@@ -42,6 +42,20 @@ namespace RiskyMod.Items.Uncommon
 
             AssistManager.HandleAssistActions += OnKillEffect;
             GetStatsCoefficient.HandleStatsActions += HandleStats;
+
+            IL.RoR2.CharacterBody.OnClientBuffsChanged += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "WarCryBuff")
+                    );
+                c.Index += 2;
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<bool, CharacterBody, bool>>((hasWarCry, self) =>
+                {
+                    return hasWarCry || self.HasBuff(Berzerker.berzerkBuff);
+                });
+            };
         }
 
         private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)

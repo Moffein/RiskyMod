@@ -73,11 +73,11 @@ namespace RiskyMod.Survivors.Croco
             OnHitEnemy.OnHitAttackerActions += ApplyEpidemic;
 
             EpidemicDebuff = ScriptableObject.CreateInstance<BuffDef>();
-            EpidemicDebuff.buffColor = new Color(226f / 255f, 141f / 255f, 58f / 255f);
+            EpidemicDebuff.buffColor = new Color(1.0f, 0.45f, 0f);
             EpidemicDebuff.canStack = false;
             EpidemicDebuff.isDebuff = true;
             EpidemicDebuff.name = "RiskyMod_EpidemicDebuff";
-            EpidemicDebuff.iconSprite = RoR2Content.Buffs.LunarSecondaryRoot.iconSprite;
+            EpidemicDebuff.iconSprite = RoR2Content.Buffs.Entangle.iconSprite;
             BuffAPI.Add(new CustomBuff(EpidemicDebuff));
 
             SharedHooks.GetStatsCoefficient.HandleStatsActions += (CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args) =>
@@ -115,7 +115,8 @@ namespace RiskyMod.Survivors.Croco
     {
         public static int baseTickCount = 5;    //Initial hit is 1 tick
         public static float timeBetweenTicks = 0.5f;
-        public static float baseLingerDuration = 4f;
+        public static float baseLingerDuration = 1.5f;
+        public static float damageCoefficient = 1f;
 
         public static GameObject impactEffect = Resources.Load<GameObject>("prefabs/effects/impacteffects/crocodiseaseimpacteffect");
 
@@ -157,7 +158,7 @@ namespace RiskyMod.Survivors.Croco
                         {
                             attacker = owner.gameObject,
                             inflictor = owner.gameObject,
-                            damage = 1.2f * owner.damage,
+                            damage = damageCoefficient * owner.damage,
                             damageColorIndex = DamageColorIndex.Default,
                             damageType = DamageType.Generic,
                             crit = owner.RollCrit(),

@@ -4,28 +4,18 @@ using UnityEngine;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using RiskyMod.SharedHooks;
+using System;
 
 namespace RiskyMod.Items.Legendary
 {
     public class HeadHunter
     {
         public static bool enabled = true;
-        public static BuffDef headhunterBuff;
         public HeadHunter()
         {
             if (!enabled) return;
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.HeadHunter);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.HeadHunter);
-
-            headhunterBuff = ScriptableObject.CreateInstance<BuffDef>();
-            headhunterBuff.buffColor = new Color(210f/255f, 50f/255f, 22f/255f);
-            headhunterBuff.canStack = false;
-            headhunterBuff.isDebuff = false;
-            headhunterBuff.name = "RiskyItemTweaks_HeadhunterBuff";
-            headhunterBuff.iconSprite = Resources.Load<Sprite>("textures/bufficons/texBuffAttackSpeedOnCritIcon");
-            BuffAPI.Add(new CustomBuff(headhunterBuff));
-
-            //Buff application handled via Assist Manager
 
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
@@ -39,7 +29,6 @@ namespace RiskyMod.Items.Legendary
             };
 
             AssistManager.HandleAssistActions += OnKillEffect;
-            GetStatsCoefficient.HandleStatsActions += HandleStats;
             ModifyFinalDamage.ModifyFinalDamageActions += EliteBonus;
         }
 
@@ -58,15 +47,6 @@ namespace RiskyMod.Items.Legendary
             }
         }
 
-        private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
-        {
-            if (sender.HasBuff(HeadHunter.headhunterBuff))
-            {
-                args.moveSpeedMultAdd += 0.5f;
-                args.damageMultAdd += 0.3f;
-            }
-        }
-
         private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
         {
             if (victimBody.isElite)
@@ -81,7 +61,6 @@ namespace RiskyMod.Items.Legendary
                         if (victimBody.HasBuff(buffIndex))
                         {
                             attackerBody.AddTimedBuff(buffIndex, duration);
-                            //attackerBody.AddTimedBuff(HeadHunter.headhunterBuff.buffIndex, duration);
                         }
                     }
                 }
