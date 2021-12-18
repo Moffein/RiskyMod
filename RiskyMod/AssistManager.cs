@@ -19,9 +19,9 @@ namespace RiskyMod
         private List<BanditAssist> pendingBanditAssists;
         //Refer to OnHitEnemy and OnCharacterDeath for assist application.
 
-        public delegate void HandleAssist(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody);
-        public static HandleAssist HandleAssistActions = HandleAssistMethod;
-        private static void HandleAssistMethod(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody) { }
+        public delegate void HandleAssistInventory(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody);
+        public static HandleAssistInventory HandleAssistInventoryActions = HandleAssistInventoryMethod;
+        private static void HandleAssistInventoryMethod(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody) { }
 
         public void AddAssist(CharacterBody attackerBody, CharacterBody victimBody, float duration)
         {
@@ -94,7 +94,7 @@ namespace RiskyMod
                         Inventory attackerInventory = a.attackerBody.inventory;
                         if (attackerInventory)
                         {
-                            HandleAssistActions(a.attackerBody, attackerInventory, victimBody, killerBody);
+                            HandleAssistInventoryActions(a.attackerBody, attackerInventory, victimBody, killerBody);
                         }
                     }
                     pendingAssists.Remove(a);

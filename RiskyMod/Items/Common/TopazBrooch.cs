@@ -22,7 +22,7 @@ namespace RiskyMod.Items.Common
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            AssistManager.HandleAssistActions += OnKillEffect;
+            AssistManager.HandleAssistInventoryActions += OnKillEffect;
         }
 
         private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)

@@ -30,6 +30,7 @@ using RiskyMod.Survivors.Engi;
 using RiskyMod.Survivors.Toolbot;
 using RiskyMod.Survivors.Treebot;
 using RiskyMod.Survivors.Croco;
+using RiskyMod.Enemies.Mobs.Lunar;
 
 namespace RiskyMod
 {
@@ -162,11 +163,11 @@ namespace RiskyMod
             new TreebotFruitingNullref();
             new FixLightningStrikeOrbProcCoefficient();
             new FixCrocoPoisonAchievement();
+            new FixGhostMinonSpawns();
         }
         
         private void AddHooks()
         {
-            //A hook needs to be used at least once to be added
             On.RoR2.GlobalEventManager.OnHitEnemy += OnHitEnemy.GlobalEventManager_OnHitEnemy;
             RecalculateStatsAPI.GetStatCoefficients += GetStatsCoefficient.RecalculateStatsAPI_GetStatCoefficients;
             On.RoR2.CharacterBody.RecalculateStats += RecalculateStats.CharacterBody_RecalculateStats;
@@ -174,8 +175,6 @@ namespace RiskyMod
             On.RoR2.GlobalEventManager.OnCharacterDeath += OnCharacterDeath.GlobalEventManager_OnCharacterDeath;
             On.RoR2.GlobalEventManager.OnHitAll += OnHitAll.GlobalEventManager_OnHitAll;
 
-            //GlobalEventManager.onCharacterDeathGlobal += OnCharacterDeath.GlobalEventManager_onCharacterDeathGlobal; //Event subscription instead of On. Hook
-            //I am unable to test anything right now, so its commented
             new ModifyFinalDamage();
         }
 
@@ -359,6 +358,7 @@ namespace RiskyMod
 
         private void ConfigMonsters()
         {
+            LunarWisp.enabled = Config.Bind(monsterString, "Lunar Wisp", true, "Enable changes to this monster.").Value;
             Vagrant.enabled = Config.Bind(monsterString, "Wandering Vagrant", true, "Enable changes to this monster.").Value;
             Gravekeeper.enabled = Config.Bind(monsterString, "Grovetender", true, "Enable changes to this monster.").Value;
         }
@@ -411,7 +411,7 @@ namespace RiskyMod
             TreebotCore.enableUtilitySkillChanges = Config.Bind(treebotString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
             TreebotCore.enableSpecialSkillChanges = Config.Bind(treebotString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
 
-            CrocoCore.enabled = Config.Bind(crocoString, "Enable Changes", true, "Enable changes to this survivor. Skill options unavailable due to everything being too interlinked.").Value;
+            CrocoCore.enabled = Config.Bind(crocoString, "Enable Changes", true, "Enable changes to this survivor. Skill options unavailable due to all the changes being too interlinked.").Value;
 
             CaptainCore.enabled = Config.Bind(captainString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             CaptainOrbitalHiddenRealms.enabled = Config.Bind(captainString, "Hidden Realm Orbital Skills", true, "Allow Orbital skills in Hiden Realms.").Value;

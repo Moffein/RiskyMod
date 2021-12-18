@@ -14,7 +14,9 @@ namespace RiskyMod.Survivors
         public static DamageAPI.ModdedDamageType SawBarrier;
 
         public static DamageAPI.ModdedDamageType InterruptOnHit;
+
         public static DamageAPI.ModdedDamageType Blight7s;
+        public static DamageAPI.ModdedDamageType Poison7s;
 
         public SharedDamageTypes()
         {
@@ -25,12 +27,14 @@ namespace RiskyMod.Survivors
             SawBarrier = DamageAPI.ReserveDamageType();
 
             Blight7s = DamageAPI.ReserveDamageType();
+            Poison7s = DamageAPI.ReserveDamageType();
 
             TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
             TakeDamage.ModifyInitialDamageActions += ApplyStunDroneForce;
 
             OnHitEnemy.OnHitNoAttackerActions += ApplyInterruptOnHit;
             OnHitEnemy.OnHitNoAttackerActions += ApplyBlight7s;
+            OnHitEnemy.OnHitNoAttackerActions += ApplyPoison7s;
 
             OnHitEnemy.OnHitAttackerActions += SawBarrierOnHit;
         }
@@ -77,6 +81,13 @@ namespace RiskyMod.Survivors
                 DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Blight, 7f, 1f);
             }
         }
+        private static void ApplyPoison7s(DamageInfo damageInfo, CharacterBody victimBody)
+        {
+            if (damageInfo.HasModdedDamageType(SharedDamageTypes.Poison7s))
+            {
+                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Poison, 7f, 1f);
+            }
+        }
 
         private static void ApplyStunDroneForce(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
         {
@@ -106,12 +117,6 @@ namespace RiskyMod.Survivors
                     attackerBody.healthComponent.AddBarrier(attackerBody.healthComponent.fullCombinedHealth * 0.006f);
                 }
             }
-        }
-
-        private static BuffDef BuildEpidemicDebuff()
-        {
-
-            return null;
         }
     }
 }

@@ -40,7 +40,7 @@ namespace RiskyMod.Items.Uncommon
             berzerkBuff.iconSprite = RoR2Content.Buffs.WarCryBuff.iconSprite;
             BuffAPI.Add(new CustomBuff(berzerkBuff));
 
-            AssistManager.HandleAssistActions += OnKillEffect;
+            AssistManager.HandleAssistInventoryActions += OnKillEffect;
             GetStatsCoefficient.HandleStatsActions += HandleStats;
 
             IL.RoR2.CharacterBody.OnClientBuffsChanged += (il) =>

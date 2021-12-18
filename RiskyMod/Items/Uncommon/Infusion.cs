@@ -31,7 +31,7 @@ namespace RiskyMod.Items.Uncommon
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            AssistManager.HandleAssistActions += OnKillEffect;
+            AssistManager.HandleAssistInventoryActions += OnKillEffect;
 
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {

@@ -115,14 +115,14 @@ namespace RiskyMod.Items.Boss
                 }
 
                 //Disable falloff
-                c.GotoNext(
+                /*c.GotoNext(
                     x => x.MatchStfld<DelayBlast>("falloffModel")
                     );
 
                 c.EmitDelegate<Func<BlastAttack.FalloffModel, BlastAttack.FalloffModel>>((model) =>
                 {
                     return BlastAttack.FalloffModel.None;
-                });
+                });*/
             };
         }
     }

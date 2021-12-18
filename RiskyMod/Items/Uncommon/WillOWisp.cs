@@ -45,14 +45,14 @@ namespace RiskyMod.Items.Uncommon
                 });
 
                 //Disable falloff
-                c.GotoNext(
+                /*c.GotoNext(
                     x => x.MatchStfld<DelayBlast>("falloffModel")
                     );
 
                 c.EmitDelegate<Func<BlastAttack.FalloffModel, BlastAttack.FalloffModel>>((model) =>
                 {
                     return BlastAttack.FalloffModel.None;
-                });
+                });*/
             };
 
             //LanguageAPI.Add("ITEM_EXPLODEONDEATH_DESC", "On killing an enemy, spawn a <style=cIsDamage>lava pillar</style> in a <style=cIsDamage>16m</style> radius for <style=cIsDamage>350%</style> <style=cStack>(+280% per stack)</style> base damage.");

@@ -19,6 +19,7 @@ namespace RiskyMod.Survivors.Croco
             new BlightStack();
             new BiggerMeleeHitbox();
             new ExtendSpawnInvuln();
+            new RemovePoisonDamageCap();
 
             ModifyStats(RoR2Content.Survivors.Croco.bodyPrefab.GetComponent<CharacterBody>());
             ModifySkills(RoR2Content.Survivors.Croco.bodyPrefab.GetComponent<SkillLocator>());
@@ -71,19 +72,34 @@ namespace RiskyMod.Survivors.Croco
         //Is the playstyle still feeling too basic?
         private void ModifySkills(SkillLocator sk)
         {
+            ModifyPassives(sk);
             ModifyPrimaries(sk);
             ModifySecondaries(sk);
             ModifyUtilities(sk);
             ModifySpecials(sk);
         }
 
+        private void ModifyPassives(SkillLocator sk)
+        {
+            GenericSkill passives = RoR2Content.Survivors.Croco.bodyPrefab.GetComponent<GenericSkill>();    //Passive is at the top
+            passives.skillFamily.variants[0].skillDef.skillNameToken = "CROCO_PASSIVE_NAME_RISKYMOD";
+            passives.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_PASSIVE_DESCRIPTION_RISKYMOD";
+            passives.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_POISON_RISKYMOD", "KEYWORD_BLIGHT_RISKYMOD" };
+
+            passives.skillFamily.variants[1].skillDef.skillNameToken = "CROCO_PASSIVE_ALT_NAME_RISKYMOD";
+            passives.skillFamily.variants[1].skillDef.skillDescriptionToken = "CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD";
+            passives.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_POISON_RISKYMOD", "KEYWORD_BLIGHT_RISKYMOD" };
+            new ModifyPassives();
+        }
+
         private void ModifyPrimaries(SkillLocator sk)
         {
             //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "damageCoefficient", "2");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "comboFinisherDamageCoefficient", "5");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "baseDuration", "1.2");
 
             sk.primary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_PRIMARY_DESCRIPTION_RISKYMOD";
-            sk.primary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_POISON", "KEYWORD_RAPID_REGEN" };
+            sk.primary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_POISON_RISKYMOD", "KEYWORD_RAPID_REGEN" };
             new ModifyM1();
         }
 
@@ -125,8 +141,6 @@ namespace RiskyMod.Survivors.Croco
             sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_SPECIAL_DESCRIPTION_RISKYMOD";
             sk.special.skillFamily.variants[0].skillDef.keywordTokens = new string[] {};
             new ModifySpecial();
-
-            SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Croco.FireDiseaseProjectile");
 
             if (RiskyMod.ScepterPluginLoaded)
             {

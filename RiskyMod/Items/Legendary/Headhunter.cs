@@ -28,7 +28,7 @@ namespace RiskyMod.Items.Legendary
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            AssistManager.HandleAssistActions += OnKillEffect;
+            AssistManager.HandleAssistInventoryActions += OnKillEffect;
             ModifyFinalDamage.ModifyFinalDamageActions += EliteBonus;
         }
 

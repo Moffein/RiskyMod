@@ -103,7 +103,7 @@ namespace RiskyMod.Items.Legendary
                 }
             }
 
-            AssistManager.HandleAssistActions += OnKillEffect;
+            AssistManager.HandleAssistInventoryActions += OnKillEffect;
         }
 
         private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)

@@ -44,7 +44,7 @@ namespace RiskyMod.Items.Uncommon
             //LanguageAPI.Add("ITEM_HEALONCRIT_PICKUP", "Gain health regeneration and guaranteed 'Critical Strikes' on kill.");
             //languageAPI.Add("ITEM_HEALONCRIT_DESC", "Gain <style=cIsDamage>5% critical chance</style>. Killing enemies grants guaranteed '<style=cIsDamage>Critical Strikes</style>' and increases <style=cIsHealing>health regeneration</style> by <style=cIsHealing>5%</style> of your <style=cIsHealing>maximum health</style> for <style=cIsDamage>3s</style> <style=cStack>(+1.5s per stack)</style>.");
 
-            AssistManager.HandleAssistActions += OnKillEffect;
+            AssistManager.HandleAssistInventoryActions += OnKillEffect;
             GetStatsCoefficient.HandleStatsActions += HandleStats;
 
             IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>

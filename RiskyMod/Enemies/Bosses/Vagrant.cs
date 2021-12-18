@@ -1,7 +1,8 @@
 ﻿using MonoMod.Cil;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using RoR2;
+using RoR2.Projectile;
+using UnityEngine;
 
 namespace RiskyMod.Enemies.Bosses
 {
@@ -11,7 +12,12 @@ namespace RiskyMod.Enemies.Bosses
         public Vagrant()
         {
             if (!enabled) return;
+            DisableNovaAttackSpeed();
+            RemoveTrackingBombOnKill();
+        }
 
+        private void DisableNovaAttackSpeed()
+        {
             IL.EntityStates.VagrantMonster.ChargeMegaNova.OnEnter += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -24,6 +30,13 @@ namespace RiskyMod.Enemies.Bosses
                     return 1f;
                 });
             };
+        }
+
+        private void RemoveTrackingBombOnKill()
+        {
+            GameObject projectile = Resources.Load<GameObject>("prefabs/projectiles/vagranttrackingbomb");
+            HealthComponent hc = projectile.GetComponent<HealthComponent>();
+            hc.globalDeathEventChanceCoefficient = 0f;
         }
     }
 }

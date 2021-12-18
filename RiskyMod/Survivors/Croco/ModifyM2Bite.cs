@@ -11,7 +11,6 @@ namespace RiskyMod.Survivors.Croco
             {
                 orig(self, overlapAttack);
                 overlapAttack.damageType = DamageType.BonusToLowHealth | DamageType.BlightOnHit;
-                //overlapAttack.AddModdedDamageType(SharedDamageTypes.Blight7s);
             };
         }
     }

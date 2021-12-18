@@ -51,7 +51,7 @@
 	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Deal <style=cIsDamage>+25%</style> <style=cStack>(+25% per stack)</style> damage to enemies below <style=cIsDamage>30% health</style>.",
 	
 	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "Enter a frenzy after killing enemies.",
-	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Killing enemies</style> sends you into a <style=cIsDamage>frenzy</style> for <style=cIsDamage>5s <style=cStack>(+3s per stack)</style></style>, increasing <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> and <style=cIsDamage>attack speed</style> by <style=cIsDamage>20%</style> for each enemy killed.",
+	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Killing enemies</style> sends you into a <style=cIsDamage>frenzy</style> for <style=cIsDamage>5s <style=cStack>(+3s per stack)</style></style>, increasing <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> and <style=cIsDamage>attack speed</style> by <style=cIsDamage>15%</style> for each enemy killed.",
 	
 	"ITEM_HEALONCRIT_PICKUP_RISKYMOD": "Gain health regeneration and guaranteed \'Critical Strikes\' on kill.",
 	"ITEM_HEALONCRIT_DESC_RISKYMOD": "Gain <style=cIsDamage>5% critical chance</style>. Killing enemies grants guaranteed \'<style=cIsDamage>Critical Strikes</style>\' and increases <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>+5 hp/s</style> for <style=cIsDamage>2.4s</style> <style=cStack>(+1.2s per stack)</style>.",
