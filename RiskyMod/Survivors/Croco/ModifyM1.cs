@@ -13,11 +13,11 @@ namespace RiskyMod.Survivors.Croco
                 if (self.isComboFinisher)
                 {
                     overlapAttack.damageType = self.GetComponent<CrocoDamageTypeController>().GetDamageType();
-                    if (overlapAttack.damageType == DamageType.BlightOnHit)
+                    /*if (overlapAttack.damageType == DamageType.BlightOnHit)
                     {
                         overlapAttack.damageType = DamageType.Generic;
                         overlapAttack.AddModdedDamageType(SharedDamageTypes.Blight7s);
-                    }
+                    }*/
                 }
             };
         }
