@@ -10,8 +10,8 @@ namespace RiskyMod.Survivors.Croco
             On.EntityStates.Croco.Bite.AuthorityModifyOverlapAttack += (orig, self, overlapAttack) =>
             {
                 orig(self, overlapAttack);
-                overlapAttack.damageType = DamageType.BonusToLowHealth;
-                overlapAttack.AddModdedDamageType(SharedDamageTypes.Blight7s);
+                overlapAttack.damageType = DamageType.BonusToLowHealth | DamageType.BlightOnHit;
+                //overlapAttack.AddModdedDamageType(SharedDamageTypes.Blight7s);
             };
         }
     }

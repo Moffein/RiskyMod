@@ -1,7 +1,7 @@
 {
 	strings:
 	{
-	"KEYWORD_BLIGHT_RISKYMOD" : "<style=cKeywordName>Blighted</style><style=cSub>Deal <style=cIsDamage>420%</style> base damage over 7s. <i>Blight can stack.</i></style>",
+	"KEYWORD_BLIGHT_RISKYMOD" : "<style=cKeywordName>Blighted</style><style=cSub>Deal <style=cIsDamage>300%</style> base damage over 5s. <i>Blight can stack.</i></style>",
 
 	"KEYWORD_INTERRUPT_RISKYMOD" : "<style=cKeywordName>Interrupting</style><style=cSub>Briefly interrupts an enemy's actions."
 	}

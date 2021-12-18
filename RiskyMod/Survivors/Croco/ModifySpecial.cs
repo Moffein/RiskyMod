@@ -15,8 +15,10 @@ namespace RiskyMod.Survivors.Croco
     public class ModifySpecial
     {
         private static GameObject diseaseProjectile;
+        private static GameObject diseaseScepterProjectile;
 
         public static DamageAPI.ModdedDamageType Epidemic;
+        public static DamageAPI.ModdedDamageType EpidemicScepter;
         public static BuffDef EpidemicDebuff;
 
         public ModifySpecial()
@@ -24,10 +26,17 @@ namespace RiskyMod.Survivors.Croco
             SetupDamageType();
 
             //diseaseProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile");
+
             diseaseProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseProjectile", true);
             DamageAPI.ModdedDamageTypeHolderComponent mdc = diseaseProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             mdc.Add(Epidemic);
             ProjectileAPI.Add(diseaseProjectile);
+
+            diseaseScepterProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseScepterProjectile", true);
+            DamageAPI.ModdedDamageTypeHolderComponent mdc2 = diseaseScepterProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            mdc2.Add(EpidemicScepter);
+            ProjectileAPI.Add(diseaseScepterProjectile);
+            EntityStates.RiskyMod.Croco.FireDiseaseProjectileScepter.projectilePrefab = diseaseScepterProjectile;
 
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireDiseaseProjectile", "projectilePrefab", diseaseProjectile);
 
@@ -61,7 +70,11 @@ namespace RiskyMod.Survivors.Croco
                     if (self.HasModdedDamageType(Epidemic))
                     {
                         newOrb.AddModdedDamageType(Epidemic);
-                    }    
+                    }
+                    if (self.HasModdedDamageType(EpidemicScepter))
+                    {
+                        newOrb.AddModdedDamageType(EpidemicScepter);
+                    }
                     return newOrb;
                 });
             };
@@ -70,10 +83,11 @@ namespace RiskyMod.Survivors.Croco
         private void SetupDamageType()
         {
             Epidemic = DamageAPI.ReserveDamageType();
+            EpidemicScepter = DamageAPI.ReserveDamageType();
             OnHitEnemy.OnHitAttackerActions += ApplyEpidemic;
 
             EpidemicDebuff = ScriptableObject.CreateInstance<BuffDef>();
-            EpidemicDebuff.buffColor = new Color(1.0f, 0.45f, 0f);
+            EpidemicDebuff.buffColor = new Color(243f/255f, 202f/255f, 107f/255f);
             EpidemicDebuff.canStack = false;
             EpidemicDebuff.isDebuff = true;
             EpidemicDebuff.name = "RiskyMod_EpidemicDebuff";
@@ -91,12 +105,18 @@ namespace RiskyMod.Survivors.Croco
 
         private static void ApplyEpidemic(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
         {
-            if (damageInfo.HasModdedDamageType(Epidemic))
+            bool isScepter = damageInfo.HasModdedDamageType(EpidemicScepter);
+            bool isDisease = isScepter || damageInfo.HasModdedDamageType(Epidemic);
+            if (isDisease)
             {
                 //Multiple Acrids can stack Epidemic
                 EpidemicComponent ec = victimBody.gameObject.AddComponent<EpidemicComponent>();
                 ec.owner = attackerBody;
                 ec.victim = victimBody;
+                if (isScepter)
+                {
+                    ec.SetScepter();
+                }
 
                 //Tick poison achievement
                 if (attackerBody.master)
@@ -114,9 +134,12 @@ namespace RiskyMod.Survivors.Croco
     public class EpidemicComponent : MonoBehaviour
     {
         public static int baseTickCount = 5;    //Initial hit is 1 tick
+        public static int baseTickCountScepter = 9;
         public static float timeBetweenTicks = 0.5f;
         public static float baseLingerDuration = 1.5f;
         public static float damageCoefficient = 1f;
+
+        public static float scepterHealCoefficient = 0.15f;
 
         public static GameObject impactEffect = Resources.Load<GameObject>("prefabs/effects/impacteffects/crocodiseaseimpacteffect");
 
@@ -125,6 +148,7 @@ namespace RiskyMod.Survivors.Croco
         private int ticksRemaining;
         private float stopwatch;
         private float lingerStopwatch;
+        private bool scepter = false;
         
         private void Awake()
         {
@@ -135,7 +159,7 @@ namespace RiskyMod.Survivors.Croco
             }
             stopwatch = 0f;
             lingerStopwatch = 0f;
-            ticksRemaining = baseTickCount;
+            ticksRemaining = scepter?baseTickCountScepter:baseTickCount;
         }
 
         private void FixedUpdate()
@@ -181,7 +205,7 @@ namespace RiskyMod.Survivors.Croco
             }
 
             //Let the debuff last a bit longer.
-            if (lingerStopwatch >= baseLingerDuration)
+            if (lingerStopwatch >= baseLingerDuration || !(victim && victim.healthComponent && victim.healthComponent.alive))
             {
                 Destroy(this);
                 return;
@@ -190,16 +214,23 @@ namespace RiskyMod.Survivors.Croco
 
         private void OnDestroy()
         {
+            Debug.Log("Destroying");
             //Remove Buff
             if (victim && victim.HasBuff(ModifySpecial.EpidemicDebuff.buffIndex))
             {
                 victim.RemoveBuff(ModifySpecial.EpidemicDebuff.buffIndex);
             }
+            if (scepter && owner && !(victim && victim.healthComponent && victim.healthComponent.alive))
+            {
+                Debug.Log("Triggering Scepter");
+                owner.AddTimedBuff(RoR2Content.Buffs.CrocoRegen.buffIndex, 1f);
+            }
         }
 
-        public void AddTicks()
+        public void SetScepter()
         {
-            ticksRemaining = baseTickCount;
+            ticksRemaining = baseTickCountScepter;
+            scepter = true;
         }
     }
 }
