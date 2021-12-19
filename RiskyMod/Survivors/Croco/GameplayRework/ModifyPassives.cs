@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 using R2API;
+using RoR2.Projectile;
 
 namespace RiskyMod.Survivors.Croco
 {
