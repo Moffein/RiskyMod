@@ -15,8 +15,9 @@ namespace RiskyMod
     {
         public static bool initialized = false;
         public static float assistLength = 3f;
+        public static float directAsssistLength = 1.2f;
         private List<Assist> pendingAssists;
-        private List<BanditAssist> pendingBanditAssists;
+        private List<DirectAssist> pendingDirectAssists;
         //Refer to OnHitEnemy and OnCharacterDeath for assist application.
 
         public delegate void HandleAssistInventory(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody);
@@ -46,11 +47,11 @@ namespace RiskyMod
             }
         }
 
-        public void AddBanditAssist(CharacterBody attackerBody, CharacterBody victimBody, float duration, BanditAssistType assistType)
+        public void AddBanditAssist(CharacterBody attackerBody, CharacterBody victimBody, float duration, DirectAssistType assistType)
         {
             //Check if this assist already exists.
             bool foundAssist = false;
-            foreach (BanditAssist a in pendingBanditAssists)
+            foreach (DirectAssist a in pendingDirectAssists)
             {
                 if (a.attackerBody == attackerBody && a.victimBody == victimBody && a.assistType == assistType)
                 {
@@ -65,7 +66,7 @@ namespace RiskyMod
 
             if (!foundAssist)
             {
-                pendingBanditAssists.Add(new BanditAssist(attackerBody, victimBody, duration, assistType));
+                pendingDirectAssists.Add(new DirectAssist(attackerBody, victimBody, duration, assistType));
             }
         }
 
@@ -104,13 +105,13 @@ namespace RiskyMod
 
         private void TriggerBanditAssists(CharacterBody victimBody, CharacterBody killerBody, DamageInfo damageInfo)
         {
-            if (pendingBanditAssists.Count > 0)
+            if (pendingDirectAssists.Count > 0)
             {
                 bool spawnedResetCooldownEffect = false;
                 bool spawnedBanditSkullEffect = false;
 
-                List<BanditAssist> toRemove = new List<BanditAssist>();
-                foreach (BanditAssist a in pendingBanditAssists)
+                List<DirectAssist> toRemove = new List<DirectAssist>();
+                foreach (DirectAssist a in pendingDirectAssists)
                 {
                     if (a.victimBody == victimBody)
                     {
@@ -118,11 +119,11 @@ namespace RiskyMod
                     }
                 }
 
-                foreach (BanditAssist a in toRemove)
+                foreach (DirectAssist a in toRemove)
                 {
                     switch (a.assistType)
                     {
-                        case BanditAssistType.BanditSkull:
+                        case DirectAssistType.BanditSkull:
                             if (victimBody.master)
                             {
                                 if (!spawnedBanditSkullEffect)
@@ -136,7 +137,7 @@ namespace RiskyMod
                                 a.attackerBody.AddBuff(RoR2Content.Buffs.BanditSkull);
                             }
                             break;
-                        case BanditAssistType.ResetCooldowns:
+                        case DirectAssistType.ResetCooldowns:
                             if (!spawnedResetCooldownEffect)
                             {
                                 spawnedResetCooldownEffect = true;
@@ -151,6 +152,12 @@ namespace RiskyMod
                                 skillLocator.ResetSkills();
                             }
                             break;
+                        case DirectAssistType.Heal10OnKill:
+                            if (a.attackerBody)
+                            {
+                                a.attackerBody.AddTimedBuff(RoR2Content.Buffs.CrocoRegen.buffIndex, 1f);
+                            }
+                            break;
                         default:
                             break;
                     }
@@ -161,7 +168,7 @@ namespace RiskyMod
         public void Awake()
         {
             pendingAssists = new List<Assist>();
-            pendingBanditAssists = new List<BanditAssist>();
+            pendingDirectAssists = new List<DirectAssist>();
         }
 
         public void FixedUpdate()
@@ -189,10 +196,10 @@ namespace RiskyMod
                 }
             }
 
-            if (pendingBanditAssists.Count > 0)
+            if (pendingDirectAssists.Count > 0)
             {
-                List<BanditAssist> toRemove = new List<BanditAssist>();
-                foreach (BanditAssist a in pendingBanditAssists)
+                List<DirectAssist> toRemove = new List<DirectAssist>();
+                foreach (DirectAssist a in pendingDirectAssists)
                 {
                     a.timer -= Time.fixedDeltaTime;
                     if (a.timer <= 0 || !(a.attackerBody && a.attackerBody.healthComponent && a.attackerBody.healthComponent.alive))
@@ -201,9 +208,9 @@ namespace RiskyMod
                     }
                 }
 
-                foreach (BanditAssist a in toRemove)
+                foreach (DirectAssist a in toRemove)
                 {
-                    pendingBanditAssists.Remove(a);
+                    pendingDirectAssists.Remove(a);
                 }
             }
         }
@@ -222,14 +229,14 @@ namespace RiskyMod
             }
         }
 
-        private class BanditAssist
+        private class DirectAssist
         {
             public float timer;
             public CharacterBody attackerBody;
             public CharacterBody victimBody;
-            public BanditAssistType assistType;
+            public DirectAssistType assistType;
 
-            public BanditAssist(CharacterBody attackerBody, CharacterBody victimBody, float timer, BanditAssistType assistType)
+            public DirectAssist(CharacterBody attackerBody, CharacterBody victimBody, float timer, DirectAssistType assistType)
             {
                 this.attackerBody = attackerBody;
                 this.victimBody = victimBody;
@@ -238,10 +245,12 @@ namespace RiskyMod
             }
         }
 
-        public enum BanditAssistType
+        //Todo: convert from enum to a more general case
+        public enum DirectAssistType
         {
             ResetCooldowns,
-            BanditSkull
+            BanditSkull,
+            Heal10OnKill
         }
     }
 }

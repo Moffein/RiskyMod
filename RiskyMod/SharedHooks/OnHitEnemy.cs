@@ -2,6 +2,8 @@
 using UnityEngine.Networking;
 using RiskyMod.Fixes;
 using RiskyMod.Survivors.Bandit2;
+using R2API;
+using RiskyMod.Survivors;
 
 namespace RiskyMod.SharedHooks
 {
@@ -46,7 +48,14 @@ namespace RiskyMod.SharedHooks
 					if (attackerBody)
                     {
 						attackerInventory = attackerBody.inventory;
-                    }
+						if (attackerInventory)
+						{
+							if (assistsEnabled)
+							{
+								RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.assistLength);
+							}
+						}
+					}
 
 					//Run this before triggering on-hit procs so that procs don't kill enemies before this triggers.
 					if (assistsEnabled)
@@ -55,12 +64,16 @@ namespace RiskyMod.SharedHooks
 						{
 							if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)
 							{
-								RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.BanditAssistType.ResetCooldowns);
+								RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.DirectAssistType.ResetCooldowns);
 							}
 							if ((damageInfo.damageType & DamageType.GiveSkullOnKill) > DamageType.Generic)
 							{
-								RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.BanditAssistType.BanditSkull);
+								RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.DirectAssistType.BanditSkull);
 							}
+						}
+						if (damageInfo.HasModdedDamageType(SharedDamageTypes.Heal10OnKill))
+                        {
+							RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, AssistManager.directAsssistLength, AssistManager.DirectAssistType.Heal10OnKill);
 						}
 					}
 				}
@@ -77,13 +90,6 @@ namespace RiskyMod.SharedHooks
 					if (damageInfo.attacker && attackerBody)
 					{
 						OnHitAttackerActions.Invoke(damageInfo, victimBody, attackerBody);
-						if (attackerInventory)
-						{
-							if (assistsEnabled)
-							{
-								RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.assistLength);
-							}
-						}
 					}
 				}
             }

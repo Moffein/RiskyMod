@@ -17,6 +17,7 @@ namespace RiskyMod.Survivors
 
         public static DamageAPI.ModdedDamageType Blight7s;
         public static DamageAPI.ModdedDamageType Poison7s;
+        public static DamageAPI.ModdedDamageType Heal10OnKill;
 
         public SharedDamageTypes()
         {
@@ -28,6 +29,7 @@ namespace RiskyMod.Survivors
 
             Blight7s = DamageAPI.ReserveDamageType();
             Poison7s = DamageAPI.ReserveDamageType();
+            Heal10OnKill = DamageAPI.ReserveDamageType();
 
             TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
             TakeDamage.ModifyInitialDamageActions += ApplyStunDroneForce;

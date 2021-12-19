@@ -193,8 +193,6 @@ namespace RiskyMod
                     }
                 }
             };
-
-            //RoR2.Run.onRunStartGlobal += Run_onRunStartGlobal; Same as with onCharacterDeathGlobal, gotta test this code remplacement whenever I get home
         }
 
         private void Run_onRunStartGlobal(Run obj)
