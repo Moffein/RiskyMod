@@ -11,7 +11,7 @@ namespace RiskyMod.Items.Uncommon
     public class Guillotine
     {
         public static bool enabled = true;
-
+		public static bool reduceVFX = true;
 		public Guillotine()
 		{
 			if (!enabled) return;
@@ -46,11 +46,14 @@ namespace RiskyMod.Items.Uncommon
 					//Lock the visual effect behind proccing attacks to improve performance
 					if (damageInfo.procCoefficient > 0f)
 					{
-						EffectManager.SpawnEffect(HealthComponent.AssetReferences.executeEffectPrefab, new EffectData
+						if (!reduceVFX || UnityEngine.Random.Range(0f, 100f) <= 100f * damageInfo.damage / (victimHealth.fullCombinedHealth * 0.3f * 0.1f))
 						{
-							origin = victimBody.corePosition,
-							scale = victimBody.radius * 0.3f * damageInfo.procCoefficient   //not sure if radius is even getting affected
-						}, true);
+							EffectManager.SpawnEffect(HealthComponent.AssetReferences.executeEffectPrefab, new EffectData
+							{
+								origin = victimBody.corePosition,
+								scale = victimBody.radius * 0.3f * damageInfo.procCoefficient   //not sure if radius is even getting affected
+							}, true);
+						}
 					}
 				}
 			}
