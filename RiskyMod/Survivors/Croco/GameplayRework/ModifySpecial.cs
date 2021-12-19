@@ -113,6 +113,8 @@ namespace RiskyMod.Survivors.Croco
                 EpidemicComponent ec = victimBody.gameObject.AddComponent<EpidemicComponent>();
                 ec.owner = attackerBody;
                 ec.victim = victimBody;
+                ec.damage = damageInfo.damage;
+                ec.crit = damageInfo.crit;
                 if (isScepter)
                 {
                     ec.SetScepter();
@@ -149,6 +151,9 @@ namespace RiskyMod.Survivors.Croco
         private float stopwatch;
         private float lingerStopwatch;
         private bool scepter = false;
+
+        public bool crit = false;
+        public float damage = 0f;
         
         private void Awake()
         {
@@ -182,10 +187,10 @@ namespace RiskyMod.Survivors.Croco
                         {
                             attacker = owner.gameObject,
                             inflictor = owner.gameObject,
-                            damage = damageCoefficient * owner.damage,
+                            damage = this.damage,
                             damageColorIndex = DamageColorIndex.Default,
                             damageType = DamageType.Generic,
-                            crit = owner.RollCrit(),
+                            crit = this.crit,
                             dotIndex = DotController.DotIndex.None,
                             force = 300f * Vector3.down,
                             position = victim.corePosition,
@@ -204,7 +209,7 @@ namespace RiskyMod.Survivors.Croco
                 lingerStopwatch += Time.fixedDeltaTime;
             }
 
-            //Let the debuff last a bit longer.
+            //Let the debuff last a bit longer than the damage duration.
             if (lingerStopwatch >= baseLingerDuration || !(victim && victim.healthComponent && victim.healthComponent.alive))
             {
                 Destroy(this);
@@ -214,16 +219,13 @@ namespace RiskyMod.Survivors.Croco
 
         private void OnDestroy()
         {
-            Debug.Log("Destroying");
-            //Remove Buff
             if (victim && victim.HasBuff(ModifySpecial.EpidemicDebuff.buffIndex))
             {
                 victim.RemoveBuff(ModifySpecial.EpidemicDebuff.buffIndex);
             }
             if (scepter && owner && !(victim && victim.healthComponent && victim.healthComponent.alive))
             {
-                Debug.Log("Triggering Scepter");
-                owner.AddTimedBuff(RoR2Content.Buffs.CrocoRegen.buffIndex, 1f);
+                owner.AddTimedBuff(RegenRework.CrocoRegen2, 1f);
             }
         }
 

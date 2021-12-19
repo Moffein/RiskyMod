@@ -5,6 +5,8 @@ using RoR2.Skills;
 using System.Runtime.CompilerServices;
 using EntityStates.RiskyMod.Croco;
 using EntityStates;
+using UnityEngine.Networking;
+using RoR2.Orbs;
 
 namespace RiskyMod.Survivors.Croco
 {
