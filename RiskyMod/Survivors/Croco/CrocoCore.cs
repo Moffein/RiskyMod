@@ -10,8 +10,8 @@ namespace RiskyMod.Survivors.Croco
 {
     public class CrocoCore
     {
-        //This won't have the option to disable individual features since everything here is too interlinked.
         public static bool enabled = true;
+        public static bool gameplayRework = true;
 
         public CrocoCore()
         {
@@ -20,47 +20,12 @@ namespace RiskyMod.Survivors.Croco
             new BiggerMeleeHitbox();
             new ExtendSpawnInvuln();
             new RemovePoisonDamageCap();
-
-            ModifyStats(RoR2Content.Survivors.Croco.bodyPrefab.GetComponent<CharacterBody>());
-            ModifySkills(RoR2Content.Survivors.Croco.bodyPrefab.GetComponent<SkillLocator>());
-
-            //Things to Address:
-            //- Actual damage output is already good with both passives.
-            //- Poison allows for players to AFK with R and clear the stage regardless of time scaling.
-            //- Blight falls off hard past the first loop.
-            //- Melee survivability is lacking, Regenerative is mediocre.
-            //- No incentive to actually melee, Bite is nothing but a novelty.
-            //- Visions of Heresy is objectively better than melee.
-            //- Melee playstyle (and playstyle in general) seems to lack depth. Just spamming all abilities when they're off cooldown.
-
-            //Solutions?
-            //- Poison Heal Passive: Unique debuffs on an enemy = more heals from melee attacks? [Scrapped]
-                //Increased healing ends up making him too much like Loader: stand in front of enemies and hold M1.
-            //- Bring back playstyle based around stacking different DoTs.
-            //- Poison on M1: the strongest tank busting tool should require risk to apply.
-            //- Blight stacks like bleed, keep it on M2/Shift impact so that it's cooldown-gated.
-            //- For M2s, only Bite applies blight? So that players need to stay close at melee range to keep their stacks up.
-                //- Spit seems to need to apply Blight or else the kit ends up feeling weird.
-            //- Make Spit feel more fun to use.
-                //- High knockback?
-                //- Should it be able to Blight? Thematically it makes sense, but it enables a cowardly playstyle.
-            //- Alternative is to make it arc to make it harder to snipe.
-            //- Shift Acid Puddle is bigger and deals more damage/proc. Also slows enemies inside it.
-            //- R deals 6x100% proccing damage instead of Poison
-            //- This might still allow for the AFK playstyle.
-
-            //Debuffs Acrid can use:
-            //Poison
-            //Blight
-            //Epidemic
-
-            //Playtest Notes:
-            //Debuff regen devolves into a free regen bonus due to the amount of debuff items. Does not emphasize using Poisons.
-                //Regen based on poison in general doesn't really seem to add much to Acrid's gameplay since he always is poisoning things.
-            //Weaken on Spit M2 feels wrong due to being able to insta trigger Death Mark with his base loadout. Too many unique debuffs in the kit.
-            //Acrid's damage feels too high, he just melts things without a need to rely on kiting/DoT.
-                //Lower his the damage of his proccing skills, force him to rely on Blight Stacking to kill solo targets.
-                //Crowd damage should remain his specialty.
+            if (gameplayRework)
+            {
+                new RegenRework();
+                ModifyStats(RoR2Content.Survivors.Croco.bodyPrefab.GetComponent<CharacterBody>());
+                ModifySkills(RoR2Content.Survivors.Croco.bodyPrefab.GetComponent<SkillLocator>());
+            }
         }
 
         private void ModifyStats(CharacterBody cb)
@@ -96,10 +61,10 @@ namespace RiskyMod.Survivors.Croco
         {
             //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "damageCoefficient", "2");
             //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "comboFinisherDamageCoefficient", "5");
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "baseDuration", "1");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "baseDuration", "1.2");
 
             sk.primary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_PRIMARY_DESCRIPTION_RISKYMOD";
-            sk.primary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_POISON_RISKYMOD", "KEYWORD_RAPID_REGEN" };
+            sk.primary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_POISON_RISKYMOD", "KEYWORD_RAPID_REGEN_RISKYMOD" };
             new ModifyM1();
         }
 
@@ -113,7 +78,7 @@ namespace RiskyMod.Survivors.Croco
             //I hate how this has so many keywords.
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Bite", "damageCoefficient", "3.6");
             sk.secondary.skillFamily.variants[1].skillDef.skillDescriptionToken = "CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
-            sk.secondary.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_SLAYER", "KEYWORD_RAPID_REGEN" };
+            sk.secondary.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_SLAYER", "KEYWORD_RAPID_REGEN_RISKYMOD" };
             new ModifyM2Bite();
         }
 
@@ -124,7 +89,7 @@ namespace RiskyMod.Survivors.Croco
             sk.utility.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_UTILITY_DESCRIPTION_RISKYMOD";
             sk.utility.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_STUNNING"};
 
-            //Might add Regenerative if this is still useless.
+            //Check to see if the cooldown reset is too crazy.
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.ChainableLeap", "blastDamageCoefficient", "3.2");
             sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
             sk.utility.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_STUNNING"};

@@ -28,7 +28,7 @@ namespace RiskyMod.Survivors.Croco
                                         damageInfo.AddModdedDamageType(SharedDamageTypes.Blight7s);
                                     }
                                     break;
-                                case DamageType.BlightOnHit:    //Passive: Poison spread on death
+                                case DamageType.BlightOnHit:    //Passive: Poison spread on application
                                     if (isPoison)
                                     {
                                         damageInfo.damageType &= ~DamageType.PoisonOnHit;
@@ -42,6 +42,7 @@ namespace RiskyMod.Survivors.Croco
                     }
                 }
                 orig(self, damageInfo);
+
             };
         }
     }

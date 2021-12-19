@@ -86,7 +86,7 @@ namespace RiskyMod.SharedHooks
 							}
 							if (damageInfo.HasModdedDamageType(SharedDamageTypes.Heal10OnKill))
 							{
-								RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, AssistManager.directAsssistLength, AssistManager.DirectAssistType.Heal10OnKill);
+								RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, AssistManager.directAssistLength, AssistManager.DirectAssistType.Heal10OnKill);
 							}
 							RiskyMod.assistManager.TriggerAssists(victimBody, attackerBody, damageInfo);
 						}

@@ -126,18 +126,9 @@ namespace RiskyMod.Survivors.Commando
                 orig(self);
                 if (self.isAuthority && self.skillLocator)
                 {
-                    if (self.skillLocator.primary.stock < self.skillLocator.primary.maxStock)
-                    {
-                        self.skillLocator.primary.rechargeStopwatch += self.skillLocator.primary.finalRechargeInterval * 0.3333333334f;
-                    }
-                    if (self.skillLocator.secondary.stock < self.skillLocator.secondary.maxStock)
-                    {
-                        self.skillLocator.secondary.rechargeStopwatch += self.skillLocator.secondary.finalRechargeInterval * 0.3333333334f;
-                    }
-                    if (self.skillLocator.special.stock < self.skillLocator.special.maxStock)
-                    {
-                        self.skillLocator.special.rechargeStopwatch += self.skillLocator.special.finalRechargeInterval * 0.3333333334f;
-                    }
+                    self.skillLocator.primary.RunRecharge(1.5f);
+                    self.skillLocator.secondary.RunRecharge(1.5f);
+                    self.skillLocator.special.RunRecharge(1.5f);
                 }
             };
 

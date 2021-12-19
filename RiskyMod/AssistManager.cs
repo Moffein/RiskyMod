@@ -15,7 +15,7 @@ namespace RiskyMod
     {
         public static bool initialized = false;
         public static float assistLength = 3f;
-        public static float directAsssistLength = 1.2f;
+        public static float directAssistLength = 1.2f;
         private List<Assist> pendingAssists;
         private List<DirectAssist> pendingDirectAssists;
         //Refer to OnHitEnemy and OnCharacterDeath for assist application.

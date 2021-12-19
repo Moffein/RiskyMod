@@ -22,7 +22,7 @@
 	
 	"COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD" : "Fire a piercing round for <style=cIsDamage>480% damage</style>. Zaps nearby enemies for an additional <style=cIsDamage>240% damage</style>.",
 	"COMMANDO_SECONDARY_ALT1_DESCRIPTION_RISKYMOD" : "Fire two close-range blasts that deal <style=cIsDamage>8x170% damage</style> total.",
-	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Roll</style> a short distance and reduce skill cooldowns by <style=cIsUtility>33%</style>.",
+	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Roll</style> a short distance and reduce skill cooldowns by <style=cIsUtility>1.5s</style>.",
 	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Stunning</style>. Fire fragmentation rounds for <style=cIsDamage>6x120% damage</style>. The number of shots increases with attack speed.",
 	"COMMANDO_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "Throw a grenade that explodes for <style=cIsDamage>1200% damage</style> after 2 seconds. Can be <style=cIsDamage>cooked</style> to explode early.",
 	
@@ -50,8 +50,8 @@
 	"CROCO_PASSIVE_NAME_RISKYMOD" : "Virulent",
 	"CROCO_PASSIVE_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Poison</style> and <color=#B1387F>Blight</color> last <style=cIsDamage>40%</style> longer.",
 	"CROCO_PASSIVE_ALT_NAME_RISKYMOD" : "Contagious",
-	"CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Poison</style> and <color=#B1387F>Blight</color> spread to up to <style=cIsDamage>4</style> targets when applied.",
-	"CROCO_PRIMARY_DESCRIPTION_RISKYMOD" : "Maul an enemy for <style=cIsDamage>200% damage</style>. Every 3rd hit is <style=cIsHealing>Poisonous</style> and <style=cIsHealing>Regenerative</style> and deals <style=cIsDamage>500% damage</style>.",
+	"CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Poison</style> and <color=#B1387F>Blight</color> spread to up to <style=cIsDamage>5</style> targets when applied.",
+	"CROCO_PRIMARY_DESCRIPTION_RISKYMOD" : "Maul an enemy for <style=cIsDamage>200% damage</style>. Every 3rd hit is <style=cIsHealing>Poisonous</style> and <style=cIsHealing>Regenerative</style> and deals <style=cIsDamage>400% damage</style>.",
 	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. Spit toxic bile for <style=cIsDamage>240% damage</style>.",
 	"CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. <style=cIsDamage>Slayer</style>. <style=cIsHealing>Regenerative</style>. Bite an enemy for <style=cIsDamage>360% damage</style>.",
 	"CROCO_UTILITY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. <style=cIsDamage>Stunning</style>. Leap in the air, dealing <style=cIsDamage>320% damage</style>. Leave acid that deals <style=cIsDamage>50% damage per second</style>. Can store up to <style=cIsUtility>2</style> charges.",
