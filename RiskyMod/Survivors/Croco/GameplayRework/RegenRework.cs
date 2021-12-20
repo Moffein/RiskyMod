@@ -13,10 +13,12 @@ namespace RiskyMod.Survivors.Croco
         public static BuffDef CrocoRegen2;
         public static float regenDuration = 2f;
         private static float regenAmount;
+        private static float regenReductionOnHit;
 
         public RegenRework()
         {
             regenAmount = 0.1f / regenDuration;
+            regenReductionOnHit = regenDuration * 0.3f;
 
             CrocoRegen2 = ScriptableObject.CreateInstance<BuffDef>();
             CrocoRegen2.buffColor = RoR2Content.Buffs.CrocoRegen.buffColor;
@@ -40,18 +42,6 @@ namespace RiskyMod.Survivors.Croco
                 });
             };
 
-            On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
-            {
-                orig(self, damageInfo);
-                if (NetworkServer.active && !damageInfo.rejected && self.body)
-                {
-                    if (self.body.HasBuff(CrocoRegen2.buffIndex))
-                    {
-                        self.body.ClearTimedBuffs(CrocoRegen2.buffIndex);
-                    }
-                }
-            };
-
             On.RoR2.HealthComponent.ServerFixedUpdate += (orig, self) =>
             {
                 orig(self);
@@ -64,8 +54,25 @@ namespace RiskyMod.Survivors.Croco
                 }
             };
 
+            SharedHooks.OnHitEnemy.OnHitNoAttackerActions += DamageReducesRegen;
+
             ReplaceM1Regen();
             ReplaceBiteRegen();
+        }
+
+        private static void DamageReducesRegen(DamageInfo damageInfo, CharacterBody victimBody)
+        {
+            if (victimBody.HasBuff(CrocoRegen2))
+            {
+                float toRemove = damageInfo.procCoefficient * regenReductionOnHit;
+                foreach (CharacterBody.TimedBuff tb in victimBody.timedBuffs)
+                {
+                    if (tb.buffIndex == CrocoRegen2.buffIndex)
+                    {
+                        tb.timer -= toRemove;
+                    }
+                }
+            }
         }
 
         private void ReplaceM1Regen()
