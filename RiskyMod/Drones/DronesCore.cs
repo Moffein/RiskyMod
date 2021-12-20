@@ -19,6 +19,7 @@ namespace RiskyMod.Drones
 
         private void TweakDrones()
         {
+            new GunnerTurret();
             new MegaDrone();
         }
     }

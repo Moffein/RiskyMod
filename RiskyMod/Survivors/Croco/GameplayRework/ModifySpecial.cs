@@ -112,10 +112,9 @@ namespace RiskyMod.Survivors.Croco
                 orig(self);
                 if (self.HasBuff(EpidemicDebuff.buffIndex))
                 {
-                    EpidemicVFXController ec = self.GetComponent<EpidemicVFXController>();
-                    if (!ec)
+                    if (!self.GetComponent<EpidemicVFXController>())
                     {
-                        ec = self.gameObject.AddComponent<EpidemicVFXController>();
+                        self.gameObject.AddComponent<EpidemicVFXController>();
                     }
                 }
             };

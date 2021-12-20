@@ -11,8 +11,13 @@ namespace RiskyMod.Survivors.Croco
     public class RegenRework
     {
         public static BuffDef CrocoRegen2;
+        public static float regenDuration = 3f;
+        private static float regenAmount;
+
         public RegenRework()
         {
+            regenAmount = 0.1f / regenDuration;
+
             CrocoRegen2 = ScriptableObject.CreateInstance<BuffDef>();
             CrocoRegen2.buffColor = RoR2Content.Buffs.CrocoRegen.buffColor;
             CrocoRegen2.canStack = true;
@@ -35,8 +40,6 @@ namespace RiskyMod.Survivors.Croco
                 });
             };
 
-            SharedHooks.GetStatsCoefficient.HandleStatsActions += CrocoRegenStats;
-
             On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
             {
                 orig(self, damageInfo);
@@ -45,6 +48,18 @@ namespace RiskyMod.Survivors.Croco
                     if (self.body.HasBuff(CrocoRegen2.buffIndex))
                     {
                         self.body.ClearTimedBuffs(CrocoRegen2.buffIndex);
+                    }
+                }
+            };
+
+            On.RoR2.HealthComponent.ServerFixedUpdate += (orig, self) =>
+            {
+                orig(self);
+                if (self.alive)
+                {
+                    if (self.body.HasBuff(CrocoRegen2.buffIndex))
+                    {
+                        self.HealFraction(regenAmount * Time.fixedDeltaTime, default(ProcChainMask));
                     }
                 }
             };
@@ -66,7 +81,7 @@ namespace RiskyMod.Survivors.Croco
                 c.GotoNext(
                         x => x.MatchLdcR4(0.5f)
                        );
-                c.Next.Operand = 1f;
+                c.Next.Operand = RegenRework.regenDuration;
             };
         }
 
@@ -83,16 +98,8 @@ namespace RiskyMod.Survivors.Croco
                 c.GotoNext(
                         x => x.MatchLdcR4(0.5f)
                        );
-                c.Next.Operand = 1f;
+                c.Next.Operand = RegenRework.regenDuration;
             };
-        }
-
-        private static void CrocoRegenStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
-        {
-            if (sender.HasBuff(CrocoRegen2.buffIndex))
-            {
-                args.baseRegenAdd += 0.1f * sender.healthComponent.fullHealth;
-            }
         }
     }
 }

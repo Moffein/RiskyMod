@@ -34,13 +34,13 @@ namespace RiskyMod.Survivors.Croco
 
             //Ticks twice per second.
             ProjectileDotZone pdz = AcidPuddleProjectile.GetComponent<ProjectileDotZone>();
-            pdz.damageCoefficient = 0.45f;    //default is 0.25, ticks twice per second
+            //pdz.damageCoefficient = 0.45f;    //default is 0.25, ticks twice per second
             pdz.overlapProcCoefficient = 0.5f;  //default is 0.1
 
             ProjectileAPI.Add(AcidPuddleProjectile);
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.BaseLeap", "projectilePrefab", AcidPuddleProjectile);
 
-            float cdr = 0.5f;
+            float cdr = 0.7f;
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.ChainableLeap", "refundPerHit", "0");
             IL.EntityStates.Croco.ChainableLeap.DoImpactAuthority += (il) =>
             {

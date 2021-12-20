@@ -155,7 +155,7 @@ namespace RiskyMod
                         case DirectAssistType.Heal10OnKill:
                             if (a.attackerBody)
                             {
-                                a.attackerBody.AddTimedBuff(Survivors.Croco.RegenRework.CrocoRegen2.buffIndex, 1f);
+                                a.attackerBody.AddTimedBuff(Survivors.Croco.RegenRework.CrocoRegen2.buffIndex, Survivors.Croco.RegenRework.regenDuration);
                             }
                             break;
                         default:

@@ -96,7 +96,7 @@ namespace RiskyMod.Survivors.Croco
             }
             if (scepter && owner && !(victim && victim.healthComponent && victim.healthComponent.alive))
             {
-                owner.AddTimedBuff(RegenRework.CrocoRegen2, 1f);
+                owner.AddTimedBuff(RegenRework.CrocoRegen2, RegenRework.regenDuration);
             }
         }
 

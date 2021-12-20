@@ -43,9 +43,9 @@ namespace RiskyMod.Drones
             //Specific changes
             switch (cb.name)
             {
-                case "MegaDroneBody": //If I'm gonna pay the price of a legendary chest to buy a drone, it better be worth it.
+                case "MegaDroneBody":
                     cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
-                    cb.baseDamage *= 0.6f;
+                    cb.baseDamage *= 0.7f;
                     cb.baseMaxHealth *= 0.8f;
                     break;
                 case "SquidTurretBody":
