@@ -129,6 +129,8 @@ namespace RiskyMod
             CritHud.enabled = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.Hypercrit");   //Effect is already a part of hypercrit
             ScepterPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
 
+            BiggerMeleeHitbox.enabled = BiggerMeleeHitbox.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TheTimeSweeper.AcridHitboxBuff");
+
             TurretChanges.mobileTurretChanges = !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.MobileTurretBuff");
         }
 

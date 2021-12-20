@@ -15,7 +15,7 @@ namespace RiskyMod.Drones
             {
                 if (aiDrivers[i].customName == "StopTooCloseTarget")
                 {
-                    aiDrivers[i].movementType = AISkillDriver.MovementType.FleeMoveTarget;
+                    aiDrivers[i].movementType = AISkillDriver.MovementType.StrafeMovetarget;
                     break;
                 }
             }

@@ -42,6 +42,7 @@ namespace RiskyMod.Survivors.Croco
             ProjectileAPI.Add(AcidPuddleProjectile);
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.BaseLeap", "projectilePrefab", AcidPuddleProjectile);
 
+            float cdr = 0.5f;
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.ChainableLeap", "refundPerHit", "0");
             IL.EntityStates.Croco.ChainableLeap.DoImpactAuthority += (il) =>
             {
@@ -52,10 +53,10 @@ namespace RiskyMod.Survivors.Croco
                 c.Emit(OpCodes.Ldarg_0);    //self
                 c.EmitDelegate<Func<BlastAttack.Result, EntityStates.Croco.ChainableLeap, BlastAttack.Result>>((result, self) =>
                 {
-                    self.skillLocator.primary.RunRecharge((float)result.hitCount * 1f);
-                    self.skillLocator.secondary.RunRecharge((float)result.hitCount * 1f);
-                    self.skillLocator.utility.RunRecharge((float)result.hitCount * 1f);
-                    self.skillLocator.special.RunRecharge((float)result.hitCount * 1f);
+                    self.skillLocator.primary.RunRecharge((float)result.hitCount * cdr);
+                    self.skillLocator.secondary.RunRecharge((float)result.hitCount * cdr);
+                    self.skillLocator.utility.RunRecharge((float)result.hitCount * cdr);
+                    self.skillLocator.special.RunRecharge((float)result.hitCount * cdr);
                     return result;
                 });
             };

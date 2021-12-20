@@ -49,8 +49,8 @@
 	
 	"CROCO_PASSIVE_NAME_RISKYMOD" : "Virulent",
 	"CROCO_PASSIVE_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Poison</style> and <color=#B1387F>Blight</color> last <style=cIsDamage>40%</style> longer.",
-	"CROCO_PASSIVE_ALT_NAME_RISKYMOD" : "Contagious",
-	"CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD" : "Enemies afflicted with <style=cIsHealing>Poison</style> or <color=#B1387F>Blight</color> spread infect to up to <style=cIsDamage>3</style> targets when killed.",
+	"CROCO_PASSIVE_ALT_NAME_RISKYMOD" : "Contagion",
+	"CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Poison</style> and <color=#B1387F>Blight</color> spread to <style=cIsDamage>1</style> additional target on kill.",
 	"CROCO_PRIMARY_DESCRIPTION_RISKYMOD" : "Maul an enemy for <style=cIsDamage>200% damage</style>. Every 3rd hit is <style=cIsHealing>Poisonous</style> and <style=cIsHealing>Regenerative</style> and deals <style=cIsDamage>400% damage</style>.",
 	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. Spit toxic bile for <style=cIsDamage>240% damage</style>.",
 	"CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. <style=cIsDamage>Slayer</style>. <style=cIsHealing>Regenerative</style>. Bite an enemy for <style=cIsDamage>360% damage</style>.",

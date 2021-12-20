@@ -38,7 +38,7 @@ namespace RiskyMod.Survivors.Croco
                                         damageInfo.AddModdedDamageType(SharedDamageTypes.Blight7s);
                                     }
                                     break;
-                                case DamageType.BlightOnHit:    //Passive: Poison spread on application
+                                case DamageType.BlightOnHit:    //Passive: Poison spread on kill
                                     if (isPoison)
                                     {
                                         damageInfo.damageType &= ~DamageType.PoisonOnHit;
@@ -143,18 +143,18 @@ namespace RiskyMod.Survivors.Croco
             lightningOrb.attacker = attackerBody.gameObject;
             lightningOrb.inflictor = attackerBody.gameObject;
             lightningOrb.teamIndex = attackerBody.teamComponent.teamIndex;
-            lightningOrb.damageValue = attackerBody.damage * 0.5f;
+            lightningOrb.damageValue = attackerBody.damage * 0.25f;
             lightningOrb.isCrit = attackerBody.RollCrit();
             lightningOrb.origin = victimBody.corePosition;
-            lightningOrb.bouncesRemaining = 3;
+            lightningOrb.bouncesRemaining = 0;
             lightningOrb.lightningType = LightningOrb.LightningType.CrocoDisease;
-            lightningOrb.target = lightningOrb.PickNextTarget(victimBody.corePosition);
             lightningOrb.damageColorIndex = DamageColorIndex.Poison;
             lightningOrb.damageType = damageType;
             lightningOrb.procCoefficient = 1f;
-            lightningOrb.range = 15f;
+            lightningOrb.range = 30f;
 
             lightningOrb.bouncedObjects.Add(victimBody.healthComponent);
+            lightningOrb.target = lightningOrb.PickNextTarget(victimBody.corePosition);
             OrbManager.instance.AddOrb(lightningOrb);
         }
 
