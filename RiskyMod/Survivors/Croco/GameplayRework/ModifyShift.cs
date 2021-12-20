@@ -29,14 +29,12 @@ namespace RiskyMod.Survivors.Croco
                 });
             };
 
-            //Note: Acid projectile's damage coefficient is 100%
+            //Note: Acid projectile's damage coefficient is 1f
             AcidPuddleProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocoleapacid").InstantiateClone("RiskyMod_CrocoLeapAcid", true);
-
-            //AcidPuddleProjectile.transform.localScale *= 2f;  //Causes visual issues when the pool begins to disappear.
 
             //Ticks twice per second.
             ProjectileDotZone pdz = AcidPuddleProjectile.GetComponent<ProjectileDotZone>();
-            //pdz.damageCoefficient = 0.45f;    //default is 0.25
+            pdz.damageCoefficient = 0.45f;    //default is 0.25, ticks twice per second
             pdz.overlapProcCoefficient = 0.5f;  //default is 0.1
 
             ProjectileAPI.Add(AcidPuddleProjectile);
