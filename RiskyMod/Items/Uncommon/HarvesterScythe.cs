@@ -69,7 +69,7 @@ namespace RiskyMod.Items.Uncommon
                     int scytheCount = self.body.GetBuffCount(scytheBuff);
                     if (scytheCount > 0)
                     {
-                        self.Heal(scytheCount * (5f + (self.body.level - 1f)), default(ProcChainMask), true);
+                        self.Heal(Time.fixedDeltaTime * scytheCount * (5f + (self.body.level - 1f)), default(ProcChainMask), true);
                     }
                 }
             };
