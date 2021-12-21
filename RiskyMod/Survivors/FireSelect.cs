@@ -1,4 +1,5 @@
 ﻿using RiskyMod.Survivors.Captain;
+using RiskyMod.Survivors.Croco;
 using RiskyMod.Survivors.Engi;
 using UnityEngine;
 

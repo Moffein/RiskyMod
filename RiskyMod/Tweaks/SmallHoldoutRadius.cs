@@ -5,7 +5,7 @@ namespace RiskyMod.Tweaks
 {
     public class SmallHoldoutRadius
     {
-        public static bool enabled = false;
+        public static bool enabled = true;
         public SmallHoldoutRadius()
         {
             if (!enabled) return;

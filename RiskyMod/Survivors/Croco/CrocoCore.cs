@@ -18,6 +18,7 @@ namespace RiskyMod.Survivors.Croco
         public CrocoCore()
         {
             if (!enabled) return;
+            new ShiftAirControl();
             new BlightStack();
             new BiggerMeleeHitbox();
             new ExtendSpawnInvuln();
@@ -36,7 +37,6 @@ namespace RiskyMod.Survivors.Croco
             cb.levelDamage = cb.baseDamage * 0.2f;
         }
 
-        //Is the playstyle still feeling too basic?
         private void ModifySkills(SkillLocator sk)
         {
             ModifyPassives(sk);

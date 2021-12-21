@@ -47,9 +47,10 @@ namespace RiskyMod.Survivors.Croco
                 orig(self);
                 if (self.alive)
                 {
-                    if (self.body.HasBuff(CrocoRegen2.buffIndex))
+                    int buffCount = self.body.GetBuffCount(CrocoRegen2.buffIndex);
+                    if (buffCount > 0)
                     {
-                        self.HealFraction(regenAmount * Time.fixedDeltaTime, default(ProcChainMask));
+                        self.HealFraction(Time.fixedDeltaTime * buffCount * regenAmount, default(ProcChainMask));
                     }
                 }
             };
