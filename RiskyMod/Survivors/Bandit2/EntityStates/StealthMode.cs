@@ -18,7 +18,7 @@ namespace EntityStates.RiskyMod.Bandit2
 		public static float blastAttackProcCoefficient = 1f;
 		public static float blastAttackForce = 60f;
 		public static GameObject smokeBombEffectPrefab = Resources.Load<GameObject>("prefabs/effects/muzzleflashes/Bandit2SmokeBomb");
-		public static string smokeBombMuzzleString = "MuzzleSmokeBomb";
+		public static string smokeBombMuzzleString = "MuzzleSmokebomb";
 		public static float shortHopVelocity = 17f;
 
 		private Animator animator;
@@ -97,11 +97,6 @@ namespace EntityStates.RiskyMod.Bandit2
 				blastAttack.baseForce = StealthMode.blastAttackForce;
 				blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
 				blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
-
-				/*if (BackstabRework.enabled)
-                {
-					DamageAPI.AddModdedDamageType(blastAttack, BackstabRework.CanBackstab);
-                }*/
 
 				blastAttack.Fire();
 			}
