@@ -12,6 +12,7 @@ namespace RiskyMod.Items.Boss
         public Knurl()
         {
             if (!enabled) return;
+
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Knurl);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Knurl);
 

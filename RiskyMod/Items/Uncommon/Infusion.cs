@@ -33,6 +33,14 @@ namespace RiskyMod.Items.Uncommon
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
 
+            InfusionBuff = ScriptableObject.CreateInstance<BuffDef>();
+            InfusionBuff.buffColor = Color.white;
+            InfusionBuff.canStack = true;
+            InfusionBuff.isDebuff = false;
+            InfusionBuff.name = "RiskyMod_InfusionBuff";
+            InfusionBuff.iconSprite = BuffIcons.Infusion;
+            BuffAPI.Add(new CustomBuff(InfusionBuff));
+
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -82,14 +90,6 @@ namespace RiskyMod.Items.Uncommon
                     }
                     return newHP;
                 });
-
-                InfusionBuff = ScriptableObject.CreateInstance<BuffDef>();
-                InfusionBuff.buffColor = Color.white;
-                InfusionBuff.canStack = true;
-                InfusionBuff.isDebuff = false;
-                InfusionBuff.name = "RiskyMod_InfusionBuff";
-                InfusionBuff.iconSprite = BuffIcons.Infusion;
-                BuffAPI.Add(new CustomBuff(InfusionBuff));
             };
         }
 

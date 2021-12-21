@@ -14,17 +14,17 @@ namespace RiskyMod.Fixes
             {
                 float oldLevel = self.level;
                 float oldHP = self.healthComponent.health;
-                //float oldShield = self.healthComponent.shield;
+                float oldShield = self.healthComponent.shield;
                 orig(self);
                 if (self.level > oldLevel)
                 {
-                    if (self.teamComponent.teamIndex == TeamIndex.Monster && self.healthComponent.combinedHealthFraction < 1f)
+                    if ((self.teamComponent.teamIndex != TeamIndex.Player || !self.isPlayerControlled) && self.healthComponent.combinedHealthFraction < 1f)
                     {
                         self.healthComponent.health = oldHP;
-                        /*if (self.baseNameToken != "SUPERROBOBALLBOSS_BODY_NAME")
+                        if (!(self.HasBuff(RoR2Content.Buffs.EngiTeamShield) || self.HasBuff(RoR2Content.Buffs.EngiShield)))
                         {
                             self.healthComponent.shield = oldShield;
-                        }*/
+                        }
                     }
                 }
             };

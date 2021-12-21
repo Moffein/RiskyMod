@@ -31,12 +31,13 @@ namespace RiskyMod.SharedHooks
 					 x => x.MatchLdfld<DamageInfo>("damage"),
                      x => x.MatchStloc(6)
 					);
-				c.Index ++;
-                c.Remove();
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<DamageInfo, HealthComponent, float>>((damageInfo, victimHealth) =>
+				c.Index += 3;
+                c.Emit(OpCodes.Ldloc, 6);
+                c.Emit(OpCodes.Ldarg_0);    //self
+                c.Emit(OpCodes.Ldarg_1);    //damageInfo
+                c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((origDamage, victimHealth, damageInfo) =>
                 {
-                    float newDamage = damageInfo.damage;
+                    float newDamage = origDamage;
                     CharacterBody victimBody = victimHealth.body;
                     if (victimBody && damageInfo.attacker)
                     {
@@ -61,6 +62,7 @@ namespace RiskyMod.SharedHooks
                     }
                     return newDamage;
                 });
+                c.Emit(OpCodes.Stloc, 6);
             };
 		}
     }

@@ -148,7 +148,6 @@ namespace RiskyMod
             new DistantRoostCredits();
             new ShrineCombatItems();
             new VengeancePercentHeal();
-            new NoPartialLevels();
             new CloakBuff();
             new SmallHoldoutRadius();
             new BloodShrineMinReward();
@@ -243,7 +242,6 @@ namespace RiskyMod
             RunScaling.enabled = Config.Bind(scalingString, "Linear Difficulty Scaling", true, "Makes difficulty scaling linear.").Value;
             RunScaling.scaleSpawnsOnly = Config.Bind(scalingString, "Linear Difficulty Scaling - Experimental Scaling", false, "Makes playercount only affect spawnrates instead of monster level scaling (hoping this will cut down on bulletsponge in big lobbies).").Value;
             NoLevelupHeal.enabled = Config.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
-            NoLevelupHeal.enabled = Config.Bind(scalingString, "No Partial Levels", true, "Monsters can't gain partial levels.").Value;
             RemoveLevelCap.enabled = Config.Bind(scalingString, "Increase Monster Level Cap", true, "Increases Monster Level Cap.").Value;
             RemoveLevelCap.maxLevel = Config.Bind(scalingString, "Increase Monster Level Cap - Max Level", 1000f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
 
