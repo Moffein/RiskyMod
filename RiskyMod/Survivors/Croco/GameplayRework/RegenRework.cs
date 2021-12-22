@@ -1,6 +1,7 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
+using RiskyMod.SharedHooks;
 using RoR2;
 using System;
 using UnityEngine;
@@ -42,23 +43,20 @@ namespace RiskyMod.Survivors.Croco
                 });
             };
 
-            On.RoR2.HealthComponent.ServerFixedUpdate += (orig, self) =>
-            {
-                orig(self);
-                if (self.alive)
-                {
-                    int buffCount = self.body.GetBuffCount(CrocoRegen2.buffIndex);
-                    if (buffCount > 0)
-                    {
-                        self.HealFraction(Time.fixedDeltaTime * buffCount * regenAmount, default(ProcChainMask));
-                    }
-                }
-            };
-
             SharedHooks.OnHitEnemy.OnHitNoAttackerActions += DamageReducesRegen;
+            GetStatsCoefficient.HandleStatsActions += HandleStats;
 
             ReplaceM1Regen();
             ReplaceBiteRegen();
+        }
+
+        private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            int buffCount = sender.GetBuffCount(CrocoRegen2.buffIndex);
+            if (buffCount > 0)
+            {
+                args.baseRegenAdd += buffCount * (sender.maxHealth * regenAmount);
+            }
         }
 
         private static void DamageReducesRegen(DamageInfo damageInfo, CharacterBody victimBody)

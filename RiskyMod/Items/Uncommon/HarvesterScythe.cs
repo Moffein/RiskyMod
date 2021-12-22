@@ -60,19 +60,6 @@ namespace RiskyMod.Items.Uncommon
                     return hasBuff || self.HasBuff(HarvesterScythe.scytheBuff);
                 });
             };
-
-            On.RoR2.HealthComponent.ServerFixedUpdate += (orig, self) =>
-            {
-                orig(self);
-                if (self.alive)
-                {
-                    int scytheCount = self.body.GetBuffCount(scytheBuff);
-                    if (scytheCount > 0)
-                    {
-                        self.Heal(Time.fixedDeltaTime * scytheCount * (5f + (self.body.level - 1f)), default(ProcChainMask), true);
-                    }
-                }
-            };
         }
 
         private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
@@ -81,6 +68,7 @@ namespace RiskyMod.Items.Uncommon
             if (buffCount > 0)
             {
                 args.critAdd += 100f;
+                args.baseRegenAdd += buffCount * (5f + (sender.level - 1f));
             }
         }
 

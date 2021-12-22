@@ -140,7 +140,6 @@ namespace RiskyMod.Survivors.Bandit2
             On.EntityStates.Bandit2.Weapon.SlashBlade.OnEnter += (orig, self) =>
             {
                 orig(self);
-                self.ignoreAttackSpeed = false;
                 if (self.characterBody && self.characterBody.isSprinting)
                 {
                     self.ignoreAttackSpeed = true;

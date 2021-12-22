@@ -79,6 +79,7 @@ namespace RiskyMod.Survivors.Croco
 
             //I hate how this has so many keywords.
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Bite", "damageCoefficient", "3.6");
+            sk.secondary.skillFamily.variants[1].skillDef.cancelSprintingOnActivation = false;
             sk.secondary.skillFamily.variants[1].skillDef.skillDescriptionToken = "CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
             sk.secondary.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_SLAYER", "KEYWORD_RAPID_REGEN_RISKYMOD" };
             new ModifyM2Bite();

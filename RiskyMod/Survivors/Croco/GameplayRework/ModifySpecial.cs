@@ -57,8 +57,8 @@ namespace RiskyMod.Survivors.Croco
                 });
             };
 
-            //Remove this when DamageAPI updates.
-            IL.RoR2.Orbs.LightningOrb.OnArrival += (il) =>
+            //Fixed in beta R2API. Remove this when DamageAPI updates.
+            /*IL.RoR2.Orbs.LightningOrb.OnArrival += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(
@@ -77,7 +77,7 @@ namespace RiskyMod.Survivors.Croco
                     }
                     return newOrb;
                 });
-            };
+            };*/
 
             SetupEpidemicVFX();
         }

@@ -51,7 +51,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.AcridBlightStack", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.4.5")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.4.6")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI),
         nameof(ProjectileAPI), nameof(EffectAPI), nameof(DamageAPI), nameof(BuffAPI),
         nameof(LoadoutAPI))]
@@ -182,7 +182,7 @@ namespace RiskyMod
 
             new ModifyFinalDamage();
         }
-        
+
         private void SetupAssists()
         {
             AssistManager.initialized = true;
