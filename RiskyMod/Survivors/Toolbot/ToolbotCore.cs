@@ -124,6 +124,7 @@ namespace RiskyMod.Survivors.Toolbot
             };
 
             sk.primary.skillFamily.variants[3].skillDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD";
+            sk.primary.skillFamily.variants[3].skillDef.cancelSprintingOnActivation = false;
 
             HitBoxGroup[] hitboxes = RoR2Content.Survivors.Toolbot.bodyPrefab.GetComponentsInChildren<HitBoxGroup>();
             foreach (HitBoxGroup h in hitboxes)

@@ -16,9 +16,10 @@ namespace RiskyMod.Survivors.Croco
             {
                 Transform hitboxTransform = hbg.hitBoxes[0].transform;
                 //Default: (34.8, 27.0, 34.4)
-                hitboxTransform.localScale = new Vector3(34.8f, 27f, 45f);  //z is up/down
-                hitboxTransform.localPosition = new Vector3(0f, 11f, 17.8f);    //y is up/down
-                //hitboxTransform.localPosition += new Vector3(0f, 0f, 1f);
+                hitboxTransform.localScale = new Vector3(40f, 40f, 45f);  //z is up/down
+
+                //Defualt: (0.0, 13.0, 17.8)
+                hitboxTransform.localPosition = new Vector3(0f, 11f, 15f);    //y is up/down
             }
         }
     }

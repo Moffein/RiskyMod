@@ -5,7 +5,7 @@ using RoR2;
 using System;
 using UnityEngine;
 
-namespace RiskyMod.Survivors.Captain
+namespace RiskyMod.Tweaks
 {
     public class Shock
     {

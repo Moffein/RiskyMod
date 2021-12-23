@@ -5,6 +5,7 @@ using RiskyMod.Survivors.Croco;
 using RiskyMod.Survivors.Engi;
 using RiskyMod.Survivors.Huntress;
 using RiskyMod.Survivors.Loader;
+using RiskyMod.Survivors.Mage;
 using RiskyMod.Survivors.Toolbot;
 using RiskyMod.Survivors.Treebot;
 
@@ -28,6 +29,7 @@ namespace RiskyMod.Survivors
             new TreebotCore();
             new CrocoCore();
             new LoaderCore();
+            new MageCore();
         }
     }
 }

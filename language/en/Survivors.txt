@@ -60,7 +60,9 @@
 	"CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD" : "Pandemic",
 	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "Release a deadly disease that deals <style=cIsDamage>10x100% damage</style>. The disease spreads to up to <style=cIsDamage>20</style> targets. If an enemy is killed by Pandemic, <style=cIsHealing>you are healed</style>.",
 	
-	"LOADER_PASSIVE_DESCRIPTION_RISKYMOD" : "Striking enemies with the Loader's gauntlets grants a <style=cIsHealing>temporary barrier</style>.",
-	"LOADER_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Stunning</style>. Fire your gauntlet forward, dealing <style=cIsDamage>320% damage</style> and <style=cIsUtility>pulling</style> you to the target."
+	"LOADER_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Stunning</style>. Fire your gauntlet forward, dealing <style=cIsDamage>320% damage</style> and <style=cIsUtility>pulling</style> you to the target.",
+	
+	"MAGE_SPECIAL_FIRE_DESCRIPTION_RISKYMOD" : "Burn all enemies in front of you for <style=cIsDamage>20x100% damage</style>. The number of shots increases with attack speed.",
+	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Burst into the sky, dealing <style=cIsDamage>800% damage</style>."
 	}
 }

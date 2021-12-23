@@ -13,6 +13,23 @@ namespace RiskyMod.Survivors.Loader
             loaderBody = RoR2Content.Survivors.Loader.bodyPrefab.GetComponent<CharacterBody>();
             ModifyStats(loaderBody);
             ModifySkills(RoR2Content.Survivors.Loader.bodyPrefab.GetComponent<SkillLocator>());
+
+            //Loader lacks proper fail conditions
+                //At close range, she generates barrier and can bail out any time with M2/Shift
+                //High natural tankiness even if she does get hit through all of that
+                //Only thing that can stop her is accidentally ramming into a Malachite spike while using her Shift.
+            //Mechanically, M2+Shift feel fine.
+                //Shift cooldown might be too low.
+                //Shift damage should be lower, and more affected by Grappling.
+            //M2+Shift give her too much mobility.
+                //Increasing M2 cooldown would feel terrible.
+                //Increasing Shift cooldown would be *balanced*, but she doesn't have anything to do when her Shift is offline.
+            //M1 lets her tank in crowds, but doesn't really mesh-in with her kit.
+                //Replacing M1 with Visions doesn't make you lose anything important.
+            //Default R is boring, but needed to deal with wisps.
+                //How can it be reworked?
+            //Alt R is fine(?), scaling damage/AOE based on fall distance would be fun.
+                //But need to balance the rest of her kit first, if it's even possible.
         }
 
         private void ModifyStats(CharacterBody cb)

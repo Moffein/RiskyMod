@@ -112,7 +112,7 @@ namespace RiskyMod.Survivors.Huntress
             sk.utility.skillFamily.variants[0].skillDef.baseRechargeInterval = 6f;
 
             sk.utility.skillFamily.variants[1].skillDef.baseMaxStock = 2;
-            sk.utility.skillFamily.variants[1].skillDef.baseRechargeInterval = 3f;
+            sk.utility.skillFamily.variants[1].skillDef.baseRechargeInterval = 2f;
             sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "HUNTRESS_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
         }
 

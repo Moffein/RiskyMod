@@ -15,7 +15,6 @@ namespace RiskyMod.Survivors.Captain
         public CaptainCore()
         {
             if (!enabled) return;
-            new Shock();
             new Microbots();
             new CaptainOrbitalHiddenRealms();
             ModifySkills(RoR2Content.Survivors.Captain.bodyPrefab.GetComponent<SkillLocator>());
