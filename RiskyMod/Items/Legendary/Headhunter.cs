@@ -66,7 +66,7 @@ namespace RiskyMod.Items.Legendary
         {
             if (sender.HasBuff(Perfected2.buffIndex))
             {
-                args.baseShieldAdd += sender.maxHealth * 0.08f;
+                args.baseShieldAdd += sender.maxHealth * 0.2f;
             }
         }
 

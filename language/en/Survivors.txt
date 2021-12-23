@@ -65,6 +65,6 @@
 	"MAGE_SPECIAL_FIRE_DESCRIPTION_RISKYMOD" : "Burn all enemies in front of you for <style=cIsDamage>20x100% damage</style>. The number of shots increases with attack speed.",
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Burst into the sky, dealing <style=cIsDamage>800% damage</style>.",
 	"MAGE_SPECIAL_FIRE_SCEPTER_NAME_RISKYMOD": "Napalmthrower",
-	"MAGE_SPECIAL_FIRE_SCEPTER_DESCRIPTION_RISKYMOD" : "Burn all enemies in front of you for <style=cIsDamage>20x100% damage</style>, leaving behind a trail of fire. The number of shots increases with attack speed."
+	"MAGE_SPECIAL_FIRE_SCEPTER_DESCRIPTION_RISKYMOD" : "Burn all enemies in front of you for <style=cIsDamage>20x100% damage</style>, leaving a trail of fire. The number of shots increases with attack speed."
 	}
 }

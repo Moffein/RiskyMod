@@ -31,6 +31,8 @@ using RiskyMod.Survivors.Toolbot;
 using RiskyMod.Survivors.Treebot;
 using RiskyMod.Survivors.Croco;
 using RiskyMod.Enemies.Mobs.Lunar;
+using RiskyMod.Survivors.Loader;
+using RiskyMod.Survivors.Mage;
 
 namespace RiskyMod
 {
@@ -81,6 +83,8 @@ namespace RiskyMod
         private const string crocoString = "Survivors: Acrid";
         private const string banditString = "Survivors: Bandit";
         private const string captainString = "Survivors: Captain";
+        private const string mageString = "Survivors: Artificer";
+        private const string loaderString = "Survivors: Loader";
 
         private const string fireSelectString = "Survivors - Firemode Selection (Client-Side)";
 
@@ -413,10 +417,16 @@ namespace RiskyMod
             PressureMines.enabled = Config.Bind(engiString, "Pressure Mine Changes", true, "Pressure Mines only detonate when fully armed.").Value;
             TurretChanges.enabled = Config.Bind(engiString, "Turret Changes", true, "Enable turret changes.").Value;
 
+            MageCore.enabled = Config.Bind(mageString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+
             TreebotCore.enabled = Config.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             TreebotCore.enableSecondarySkillChanges = Config.Bind(treebotString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
             TreebotCore.enableUtilitySkillChanges = Config.Bind(treebotString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
             TreebotCore.enableSpecialSkillChanges = Config.Bind(treebotString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
+
+            LoaderCore.enabled = Config.Bind(loaderString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+            LoaderCore.grappleCancelsSprint = Config.Bind(loaderString, "Secondaries Cancel Sprint", false, "Loader's Grapple cancels sprinting.").Value;
+            LoaderCore.shiftCancelsSprint = Config.Bind(loaderString, "Utilities Cancel Sprint", false, "Loader's Big Punches cancel sprinting.").Value;
 
             CrocoCore.enabled = Config.Bind(crocoString, "Enable Changes", true, "Enable changes to this survivor. Skill options unavailable due to all the changes being too interlinked.").Value;
             CrocoCore.gameplayRework = Config.Bind(crocoString, "Gameplay Rework", true, "A full rework of Acrid's skills.").Value;
