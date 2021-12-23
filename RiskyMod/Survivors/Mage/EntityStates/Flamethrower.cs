@@ -5,14 +5,27 @@ namespace EntityStates.RiskyMod.Mage
 {
     public class Flamethrower : BaseState
     {
+		public virtual void LoadStats()
+        {
+			loadBaseTickCount = Flamethrower.baseTickCount;
+			loadBaseTickFrequency = Flamethrower.baseTickFrequency;
+			loadignitePercentChance = Flamethrower.ignitePercentChance;
+			loadMaxDistance = Flamethrower.maxDistance;
+        }
+
+		public virtual void ModifyBullet(BulletAttack ba) { }
+
 		public override void OnEnter()
 		{
 			base.OnEnter();
 			this.stopwatch = 0f;
+
+			LoadStats();
+
 			this.entryDuration = Flamethrower.baseEntryDuration / this.attackSpeedStat;
 
-			this.tickFrequency = Flamethrower.baseTickFrequency * this.attackSpeedStat;
-			totalTickCount = Mathf.FloorToInt(Flamethrower.baseTickCount * this.attackSpeedStat);
+			this.tickFrequency = loadBaseTickFrequency * this.attackSpeedStat;
+			totalTickCount = Mathf.FloorToInt(loadBaseTickCount * this.attackSpeedStat);
 
 			this.flamethrowerDuration = Flamethrower.baseFlamethrowerDuration;
 
@@ -58,7 +71,7 @@ namespace EntityStates.RiskyMod.Mage
 			Ray aimRay = base.GetAimRay();
 			if (base.isAuthority)
 			{
-				new BulletAttack
+				BulletAttack ba = new BulletAttack
 				{
 					owner = base.gameObject,
 					weapon = base.gameObject,
@@ -74,10 +87,12 @@ namespace EntityStates.RiskyMod.Mage
 					falloffModel = BulletAttack.FalloffModel.None,
 					stopperMask = LayerIndex.world.mask,
 					procCoefficient = Flamethrower.procCoefficientPerTick,
-					maxDistance = Flamethrower.maxDistance,
+					maxDistance = loadMaxDistance,
 					smartCollision = true,
-					damageType = (Util.CheckRoll(Flamethrower.ignitePercentChance, base.characterBody.master) ? DamageType.IgniteOnHit : DamageType.Generic)
-				}.Fire();
+					damageType = (Util.CheckRoll(loadignitePercentChance, base.characterBody.master) ? DamageType.IgniteOnHit : DamageType.Generic)
+				};
+				ModifyBullet(ba);
+				ba.Fire();
 				if (base.characterMotor)
 				{
 					base.characterMotor.ApplyForce(aimRay.direction * -Flamethrower.recoilForce, false, false);
@@ -208,6 +223,11 @@ namespace EntityStates.RiskyMod.Mage
 		private static int baseTickCount = 20;
 		private int totalTickCount;
 		private float tickFrequency;
+
+		public int loadBaseTickCount;
+		public float loadBaseTickFrequency;
+		public float loadignitePercentChance;
+		public float loadMaxDistance;
 
 		private float flamethrowerStopwatch;
 		private float stopwatch;

@@ -2,6 +2,9 @@
 using UnityEngine;
 using System;
 using EntityStates;
+using R2API;
+using System.Runtime.CompilerServices;
+using RoR2.Skills;
 
 namespace RiskyMod.Survivors.Mage
 {
@@ -35,6 +38,12 @@ namespace RiskyMod.Survivors.Mage
                         = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Mage.Weapon.Flamethrower", "flamethrowerEffectPrefab");
                     sk.special.skillFamily.variants[i].skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Mage.Flamethrower));
                     sk.special.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_SPECIAL_FIRE_DESCRIPTION_RISKYMOD";
+
+                    LoadoutAPI.AddSkill(typeof(EntityStates.RiskyMod.Mage.Flamethrower));
+                    if (RiskyMod.ScepterPluginLoaded)
+                    {
+                        SetupFlamethrowerScepter(sk, i);
+                    }
                 }
                 else if (sk.special.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.FlyUpState))
                 {
@@ -46,6 +55,39 @@ namespace RiskyMod.Survivors.Mage
                     new IonSurgeTweaks();
                 }
             }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupFlamethrowerScepter(SkillLocator sk, int slot)
+        {
+            SkillDef orig = sk.special.skillFamily.variants[slot].skillDef;
+            ScepterHandler.InitFlamethrowerScepter();
+
+            LoadoutAPI.AddSkill(typeof(EntityStates.RiskyMod.Mage.FlamethrowerScepter));
+            SkillDef skillDef = SkillDef.CreateInstance<SkillDef>();
+            skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Mage.FlamethrowerScepter));
+            skillDef.activationStateMachineName = orig.activationStateMachineName;
+            skillDef.baseMaxStock = orig.baseMaxStock;
+            skillDef.baseRechargeInterval = orig.baseRechargeInterval;
+            skillDef.beginSkillCooldownOnSkillEnd = orig.beginSkillCooldownOnSkillEnd;
+            skillDef.canceledFromSprinting = orig.canceledFromSprinting;
+            skillDef.dontAllowPastMaxStocks = orig.dontAllowPastMaxStocks;
+            skillDef.forceSprintDuringState = orig.forceSprintDuringState;
+            skillDef.fullRestockOnAssign = orig.fullRestockOnAssign;
+            skillDef.icon = AncientScepter.Assets.SpriteAssets.ArtificerFlameThrower2;
+            skillDef.interruptPriority = orig.interruptPriority;
+            skillDef.isCombatSkill = orig.isCombatSkill;
+            skillDef.keywordTokens = orig.keywordTokens;
+            skillDef.mustKeyPress = orig.mustKeyPress;
+            skillDef.cancelSprintingOnActivation = orig.cancelSprintingOnActivation;
+            skillDef.rechargeStock = orig.rechargeStock;
+            skillDef.requiredStock = orig.requiredStock;
+            skillDef.skillName = orig.skillName + "Scepter";
+            skillDef.skillNameToken = "MAGE_SPECIAL_FIRE_SCEPTER_NAME_RISKYMOD";
+            skillDef.skillDescriptionToken = "MAGE_SPECIAL_FIRE_SCEPTER_DESCRIPTION_RISKYMOD";
+            skillDef.stockToConsume = 1;
+            LoadoutAPI.AddSkillDef(skillDef);
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(skillDef, "MageBody", SkillSlot.Special, slot);
         }
     }
 }

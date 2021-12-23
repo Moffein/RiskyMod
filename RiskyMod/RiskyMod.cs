@@ -244,7 +244,7 @@ namespace RiskyMod
             TrueOSP.enabled = Config.Bind(generalString, "True OSP", true, "Makes OSP work against multihits.").Value;
 
             RunScaling.enabled = Config.Bind(scalingString, "Linear Difficulty Scaling", true, "Makes difficulty scaling linear.").Value;
-            RunScaling.scaleSpawnsOnly = Config.Bind(scalingString, "Linear Difficulty Scaling - Experimental Scaling", false, "Makes playercount only affect spawnrates instead of monster level scaling (hoping this will cut down on bulletsponge in big lobbies).").Value;
+            RunScaling.scaleSpawnsOnly = Config.Bind(scalingString, "Linear Difficulty Scaling - Experimental Scaling", false, "Shelved for now since it doesn't play well. Makes playercount only affect spawnrates instead of monster level scaling.").Value;
             NoLevelupHeal.enabled = Config.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
             RemoveLevelCap.enabled = Config.Bind(scalingString, "Increase Monster Level Cap", true, "Increases Monster Level Cap.").Value;
             RemoveLevelCap.maxLevel = Config.Bind(scalingString, "Increase Monster Level Cap - Max Level", 1000f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
