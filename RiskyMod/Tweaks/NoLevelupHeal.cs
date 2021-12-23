@@ -21,7 +21,7 @@ namespace RiskyMod.Fixes
                     if ((self.teamComponent.teamIndex != TeamIndex.Player || !self.isPlayerControlled) && self.healthComponent.combinedHealthFraction < 1f)
                     {
                         self.healthComponent.health = oldHP;
-                        if (!(self.HasBuff(RoR2Content.Buffs.EngiTeamShield) || self.HasBuff(RoR2Content.Buffs.EngiShield)))
+                        if (self.baseNameToken != "SUPERROBOBALLBOSS_BODY_NAME")
                         {
                             self.healthComponent.shield = oldShield;
                         }
