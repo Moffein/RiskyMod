@@ -5,7 +5,7 @@ namespace RiskyMod.Survivors.Loader
 {
     public class LoaderCore
     {
-        public static bool enabled = false;
+        public static bool enabled = true;
         private CharacterBody loaderBody;
         public LoaderCore()
         {

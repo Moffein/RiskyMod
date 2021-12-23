@@ -1,16 +1,19 @@
-﻿using RoR2;
+﻿using UnityEngine;
+using RoR2;
 using R2API;
-using UnityEngine;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using RiskyMod.SharedHooks;
 using System;
+using RiskyMod.SharedHooks;
 
 namespace RiskyMod.Items.Legendary
 {
     public class HeadHunter
     {
         public static bool enabled = true;
+        public static bool perfectedTweak = true;
+
+        public static BuffDef Perfected2;
         public HeadHunter()
         {
             if (!enabled) return;
@@ -30,6 +33,41 @@ namespace RiskyMod.Items.Legendary
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
             ModifyFinalDamage.ModifyFinalDamageActions += EliteBonus;
+
+            if (perfectedTweak)
+            {
+                //Use placeholder Perfected icon so it doesn't force you into shieldonly.
+                Perfected2 = ScriptableObject.CreateInstance<BuffDef>();
+                Perfected2.buffColor = RoR2Content.Buffs.AffixLunar.buffColor;
+                Perfected2.canStack = false;
+                Perfected2.isDebuff = false;
+                Perfected2.name = "RiskyMod_Perfected2";
+                Perfected2.iconSprite = RoR2Content.Buffs.AffixLunar.iconSprite;
+                BuffAPI.Add(new CustomBuff(Perfected2));
+
+                IL.RoR2.HealthComponent.TakeDamage += (il) =>
+                {
+                    ILCursor c = new ILCursor(il);
+                    c.GotoNext(
+                         x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "AffixLunar")
+                        );
+                    c.Index += 2;
+                    c.Emit(OpCodes.Ldloc_1);
+                    c.EmitDelegate<Func<bool, CharacterBody, bool>>((flag, attackerBody) =>
+                    {
+                        return flag || attackerBody.HasBuff(Perfected2.buffIndex);
+                    });
+                };
+                GetStatsCoefficient.HandleStatsActions += HandlePerfected2Stats;
+            }
+        }
+
+        private void HandlePerfected2Stats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            if (sender.HasBuff(Perfected2.buffIndex))
+            {
+                args.baseShieldAdd += sender.maxHealth * 0.08f;
+            }
         }
 
         private static void EliteBonus(DamageMult damageMult, DamageInfo damageInfo,
@@ -60,7 +98,7 @@ namespace RiskyMod.Items.Legendary
                         BuffIndex buffIndex = BuffCatalog.eliteBuffIndices[l];
                         if (victimBody.HasBuff(buffIndex))
                         {
-                            attackerBody.AddTimedBuff(buffIndex, duration);
+                            attackerBody.AddTimedBuff(buffIndex != RoR2Content.Buffs.AffixLunar.buffIndex ? buffIndex : Perfected2.buffIndex, duration);
                         }
                     }
                 }
