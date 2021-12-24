@@ -28,14 +28,11 @@ namespace RiskyMod.Survivors.Croco
             //diseaseProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile");
 
             diseaseProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseProjectile", true);
-            DamageAPI.ModdedDamageTypeHolderComponent mdc = diseaseProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            mdc.Add(Epidemic);
+            diseaseProjectile = ModifyDiseaseProjectile(diseaseProjectile, Epidemic);
             ProjectileAPI.Add(diseaseProjectile);
 
             diseaseScepterProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseScepterProjectile", true);
-            DamageAPI.ModdedDamageTypeHolderComponent mdc2 = diseaseScepterProjectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            mdc2.Add(EpidemicScepter);
-            ProjectileAPI.Add(diseaseScepterProjectile);
+            diseaseScepterProjectile = ModifyDiseaseProjectile(diseaseScepterProjectile, EpidemicScepter);
             EntityStates.RiskyMod.Croco.FireDiseaseProjectileScepter.projectilePrefab = diseaseScepterProjectile;
 
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireDiseaseProjectile", "projectilePrefab", diseaseProjectile);
@@ -80,6 +77,15 @@ namespace RiskyMod.Survivors.Croco
             };
 
             SetupEpidemicVFX();
+        }
+
+        private GameObject ModifyDiseaseProjectile(GameObject go, DamageAPI.ModdedDamageType dt)
+        {
+            DamageAPI.ModdedDamageTypeHolderComponent mdc = go.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            mdc.Add(dt);
+            ProjectileProximityBeamController pbc = go.GetComponent<ProjectileProximityBeamController>();
+            pbc.attackRange = 40f;
+            return go;
         }
 
         private void SetupDamageType()
@@ -135,6 +141,11 @@ namespace RiskyMod.Survivors.Croco
                 if (isScepter)
                 {
                     ec.SetScepter();
+                }
+                CrocoDamageTypeController cd = attackerBody.GetComponent<CrocoDamageTypeController>();
+                if (cd)
+                {
+                    ec.SetPassive(cd.GetDamageType());
                 }
 
                 //Tick poison achievement

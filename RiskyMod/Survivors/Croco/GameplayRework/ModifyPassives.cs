@@ -10,6 +10,7 @@ namespace RiskyMod.Survivors.Croco
     public class ModifyPassives
     {
         public static CrocoAltPassiveTracker PoisonTrackerInstance;
+
         public ModifyPassives()
         {
             On.RoR2.Run.Start += (orig, self) =>
@@ -78,6 +79,7 @@ namespace RiskyMod.Survivors.Croco
 
     public class CrocoAltPassiveTracker : MonoBehaviour
     {
+        public static float spreadRange = 40f;
         public void Add(CharacterBody attackerBody, CharacterBody victimBody, DamageType damageType, float duration)
         {
             CrocoPoison existing = poisonList.Find(x => x.victimBody == victimBody && x.damageType == damageType);
@@ -151,7 +153,33 @@ namespace RiskyMod.Survivors.Croco
             lightningOrb.damageColorIndex = DamageColorIndex.Poison;
             lightningOrb.damageType = damageType;
             lightningOrb.procCoefficient = 1f;
-            lightningOrb.range = 30f;
+            lightningOrb.range = CrocoAltPassiveTracker.spreadRange;
+
+            lightningOrb.bouncedObjects.Add(victimBody.healthComponent);
+            lightningOrb.target = lightningOrb.PickNextTarget(victimBody.corePosition);
+            OrbManager.instance.AddOrb(lightningOrb);
+        }
+
+        public static void TriggerPoisonSpreadModdedDamage(CharacterBody attackerBody, CharacterBody victimBody,DamageAPI.ModdedDamageType damageType)
+        {
+            LightningOrb lightningOrb = new LightningOrb();
+            lightningOrb.arrivalTime = OrbManager.instance.time + 0.5f;
+            lightningOrb.bouncedObjects = new List<HealthComponent>();
+            lightningOrb.targetsToFindPerBounce = 1;
+            lightningOrb.canBounceOnSameTarget = false;
+            lightningOrb.attacker = attackerBody.gameObject;
+            lightningOrb.inflictor = attackerBody.gameObject;
+            lightningOrb.teamIndex = attackerBody.teamComponent.teamIndex;
+            lightningOrb.damageValue = attackerBody.damage * 0.25f;
+            lightningOrb.isCrit = attackerBody.RollCrit();
+            lightningOrb.origin = victimBody.corePosition;
+            lightningOrb.bouncesRemaining = 0;
+            lightningOrb.lightningType = LightningOrb.LightningType.CrocoDisease;
+            lightningOrb.damageColorIndex = DamageColorIndex.Poison;
+            lightningOrb.damageType = DamageType.Generic;
+            lightningOrb.procCoefficient = 1f;
+            lightningOrb.range = CrocoAltPassiveTracker.spreadRange;
+            lightningOrb.AddModdedDamageType(damageType);
 
             lightningOrb.bouncedObjects.Add(victimBody.healthComponent);
             lightningOrb.target = lightningOrb.PickNextTarget(victimBody.corePosition);

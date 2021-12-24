@@ -9,10 +9,8 @@ namespace RiskyMod.Survivors.Croco
         public static int baseTickCount = 5;    //Initial hit is 1 tick
         public static int baseTickCountScepter = 9;
         public static float timeBetweenTicks = 0.5f;
-        public static float baseLingerDuration = 1.5f;
+        public static float baseLingerDuration = 1f;
         public static float damageCoefficient = 1f;
-
-        public static float scepterHealCoefficient = 0.15f;
 
         public static GameObject impactEffect = Resources.Load<GameObject>("prefabs/effects/impacteffects/crocodiseaseimpacteffect");
 
@@ -22,6 +20,8 @@ namespace RiskyMod.Survivors.Croco
         private float stopwatch;
         private float lingerStopwatch;
         private bool scepter = false;
+        private bool spreadOnDeath = false;
+        private bool victimKilled = false;
 
         public bool crit = false;
         public float damage = 0f;
@@ -80,8 +80,9 @@ namespace RiskyMod.Survivors.Croco
                 lingerStopwatch += Time.fixedDeltaTime;
             }
 
+            victimKilled = !(victim && victim.healthComponent && victim.healthComponent.alive);
             //Let the debuff last a bit longer than the damage duration.
-            if (lingerStopwatch >= baseLingerDuration || !(victim && victim.healthComponent && victim.healthComponent.alive))
+            if (lingerStopwatch >= baseLingerDuration || victimKilled)
             {
                 Destroy(this);
                 return;
@@ -98,12 +99,29 @@ namespace RiskyMod.Survivors.Croco
             {
                 owner.AddTimedBuff(RegenRework.CrocoRegen2, RegenRework.regenDuration);
             }
+
+            if (spreadOnDeath && victimKilled && victim && owner)
+            {
+                CrocoAltPassiveTracker.TriggerPoisonSpreadModdedDamage(owner, victim, scepter ? ModifySpecial.EpidemicScepter : ModifySpecial.Epidemic);
+            }
         }
 
         public void SetScepter()
         {
             ticksRemaining = baseTickCountScepter;
             scepter = true;
+        }
+
+        public void SetPassive(DamageType dt)
+        {
+            if (dt == DamageType.PoisonOnHit)
+            {
+                ticksRemaining = Mathf.FloorToInt(ticksRemaining * 1.4f);
+            }
+            else if (dt == DamageType.BlightOnHit)
+            {
+                spreadOnDeath = true;
+            }
         }
     }
 }
