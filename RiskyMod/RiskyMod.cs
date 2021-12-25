@@ -53,7 +53,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.AcridBlightStack", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.4.8")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.4.9")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI),
         nameof(ProjectileAPI), nameof(EffectAPI), nameof(DamageAPI), nameof(BuffAPI),
         nameof(LoadoutAPI))]
@@ -357,7 +357,8 @@ namespace RiskyMod
         private void ConfigEquipment()
         {
             Backup.enabled = Config.Bind(equipmentString, "The Back-Up", true, itemConfigDescString).Value;
-            Backup.enabled = Config.Bind(equipmentString, "The Back-Up: Limit Drones", true, "Back-Up drones count towards the ally cap.").Value;
+            Backup.ignoreTeamLimit = !Config.Bind(equipmentString, "The Back-Up: Limit Drones", false, "Back-Up drones count towards the ally cap.").Value;
+            BackupTracker.maxCount = Config.Bind(equipmentString, "The Back-Up: Max Drones", 4, "Max active Backup Drones.").Value;
             BFG.enabled = Config.Bind(equipmentString, "Preon Accumulator", true, itemConfigDescString).Value;
             Capacitor.enabled = Config.Bind(equipmentString, "Royal Capacitor", true, itemConfigDescString).Value;
             Chrysalis.enabled = Config.Bind(equipmentString, "Milky Chrysalis", true, itemConfigDescString).Value;

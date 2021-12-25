@@ -10,7 +10,7 @@ namespace RiskyMod.Items.Equipment
     public class Backup
     {
         public static bool enabled = true;
-        public static bool allyCap = true;
+        public static bool ignoreTeamLimit = true;
         public static GameObject backupMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/DroneBackupMaster");
         public Backup()
         {
@@ -47,7 +47,7 @@ namespace RiskyMod.Items.Equipment
                                 position = position,
                                 rotation = rotation,
                                 summonerBodyObject = self.gameObject,
-                                ignoreTeamMemberLimit = allyCap
+                                ignoreTeamMemberLimit = ignoreTeamLimit
                             }.Perform();
                             if (characterMaster)
                             {
@@ -70,7 +70,7 @@ namespace RiskyMod.Items.Equipment
 
     public class BackupTracker : MonoBehaviour
     {
-        public static int maxCount = 8;
+        public static int maxCount = 4;
 
         private List<HealthComponent> droneList;
 
