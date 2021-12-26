@@ -14,12 +14,13 @@ namespace RiskyMod.Survivors.Croco
         public static BuffDef CrocoRegen2;
         public static float regenDuration = 2f;
         private static float regenAmount;
-        private static float regenReductionOnHit;
+        private static float regenReductionOnHit = 0.4f;
+        private static float totalRegenReduction;
 
         public RegenRework()
         {
             regenAmount = 0.1f / regenDuration;
-            regenReductionOnHit = regenDuration * 0.3f;
+            totalRegenReduction = regenDuration * regenReductionOnHit;
 
             CrocoRegen2 = ScriptableObject.CreateInstance<BuffDef>();
             CrocoRegen2.buffColor = RoR2Content.Buffs.CrocoRegen.buffColor;
@@ -63,7 +64,7 @@ namespace RiskyMod.Survivors.Croco
         {
             if (victimBody.HasBuff(CrocoRegen2))
             {
-                float toRemove = damageInfo.procCoefficient * regenReductionOnHit;
+                float toRemove = damageInfo.procCoefficient * totalRegenReduction;
                 foreach (CharacterBody.TimedBuff tb in victimBody.timedBuffs)
                 {
                     if (tb.buffIndex == CrocoRegen2.buffIndex)

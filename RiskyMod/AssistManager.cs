@@ -152,10 +152,16 @@ namespace RiskyMod
                                 skillLocator.ResetSkills();
                             }
                             break;
-                        case DirectAssistType.Heal10OnKill:
+                        case DirectAssistType.CrocoBiteHealOnKill:
                             if (a.attackerBody)
                             {
-                                a.attackerBody.AddTimedBuff(Survivors.Croco.RegenRework.CrocoRegen2.buffIndex, Survivors.Croco.RegenRework.regenDuration);
+                                a.attackerBody.healthComponent.HealFraction(0.05f, default(ProcChainMask));
+                                EffectData effectData = new EffectData
+                                {
+                                    origin = a.attackerBody.corePosition
+                                };
+                                effectData.SetNetworkedObjectReference(a.attackerBody.gameObject);
+                                EffectManager.SpawnEffect(Survivors.SharedDamageTypes.medkitEffect, effectData, true);
                             }
                             break;
                         default:
@@ -250,7 +256,7 @@ namespace RiskyMod
         {
             ResetCooldowns,
             BanditSkull,
-            Heal10OnKill
+            CrocoBiteHealOnKill
         }
     }
 }

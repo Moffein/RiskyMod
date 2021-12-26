@@ -97,7 +97,13 @@ namespace RiskyMod.Survivors.Croco
             }
             if (scepter && owner && !(victim && victim.healthComponent && victim.healthComponent.alive))
             {
-                owner.AddTimedBuff(RegenRework.CrocoRegen2, RegenRework.regenDuration);
+                owner.healthComponent.HealFraction(0.05f, default(ProcChainMask));
+                EffectData effectData = new EffectData
+                {
+                    origin = owner.corePosition
+                };
+                effectData.SetNetworkedObjectReference(owner.gameObject);
+                EffectManager.SpawnEffect(SharedDamageTypes.medkitEffect, effectData, true);
             }
 
             if (spreadOnDeath && victimKilled && victim && owner)

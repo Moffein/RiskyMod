@@ -13,7 +13,7 @@ namespace RiskyMod.Survivors.Croco
             {
                 orig(self, overlapAttack);
                 overlapAttack.damageType = DamageType.BonusToLowHealth | DamageType.BlightOnHit;
-                overlapAttack.AddModdedDamageType(SharedDamageTypes.Heal10OnKill);
+                overlapAttack.AddModdedDamageType(SharedDamageTypes.CrocoBiteHealOnKill);
             };
 
             //This felt jank compared to Bandit, even when modifying the velocity curve.

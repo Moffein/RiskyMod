@@ -24,7 +24,7 @@ namespace RiskyMod.Survivors.Loader
 
             ProjectileAPI.Add(GrappleHook);
 
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Loader.FireHook", "damageCoefficient", "3.2");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Loader.FireHook", "damageCoefficient", "1");    //built-in 3.2 damage coefficient in the prefab
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Loader.FireHook", "projectilePrefab", GrappleHook);
         }
     }

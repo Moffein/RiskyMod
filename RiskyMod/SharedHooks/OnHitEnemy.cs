@@ -71,9 +71,9 @@ namespace RiskyMod.SharedHooks
 								RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.DirectAssistType.BanditSkull);
 							}
 						}
-						if (damageInfo.HasModdedDamageType(SharedDamageTypes.Heal10OnKill))
+						if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBiteHealOnKill))
                         {
-							RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, AssistManager.directAssistLength, AssistManager.DirectAssistType.Heal10OnKill);
+							RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, AssistManager.directAssistLength, AssistManager.DirectAssistType.CrocoBiteHealOnKill);
 						}
 					}
 				}

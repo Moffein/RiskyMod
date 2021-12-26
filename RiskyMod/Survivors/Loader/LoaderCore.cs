@@ -1,4 +1,8 @@
-﻿using RoR2;
+﻿using Mono.Cecil.Cil;
+using MonoMod.Cil;
+using RoR2;
+using RoR2.Projectile;
+using System;
 using UnityEngine;
 
 namespace RiskyMod.Survivors.Loader
@@ -15,17 +19,21 @@ namespace RiskyMod.Survivors.Loader
         {
             if (!enabled) return;
             loaderBody = RoR2Content.Survivors.Loader.bodyPrefab.GetComponent<CharacterBody>();
-            //ModifyStats(loaderBody);
-            ModifySkills(RoR2Content.Survivors.Loader.bodyPrefab.GetComponent<SkillLocator>());
+            SkillLocator sk = RoR2Content.Survivors.Loader.bodyPrefab.GetComponent<SkillLocator>();
+            SprintQoL(sk);
+
+            ModifyStats(loaderBody);
+            new ScrapBarrier();
+            ModifySkills(sk);
 
             //Loader lacks proper fail conditions
                 //At close range, she generates barrier and can bail out any time with M2/Shift
                 //High natural tankiness even if she does get hit through all of that
                 //Only thing that can stop her is accidentally ramming into a Malachite spike while using her Shift.
             //Mechanically, M2+Shift feel fine.
-                //Shift cooldown might be too low.
-                //Shift damage should be lower, and more affected by Grappling.
-            //Note: Grappling well gives around a 2x bonus to Shift damage
+            //Shift cooldown might be too low.
+            //Shift damage should be lower, and more affected by Grappling.
+                //Note: Grappling well gives around a 2x bonus to Shift damage
             //M2+Shift give her too much mobility.
                 //Increasing M2 cooldown would feel terrible.
                 //Increasing Shift cooldown is *balanced*, but she doesn't have anything to do when her Shift is offline.
@@ -38,25 +46,34 @@ namespace RiskyMod.Survivors.Loader
                 //Objectively better than Default R if you have teammates to shoot the wisps, Pylon needs to offer more than just plain AOE damage.
         }
 
+        private void SprintQoL(SkillLocator sk)
+        {
+            sk.secondary.skillFamily.variants[0].skillDef.cancelSprintingOnActivation = grappleCancelsSprint;
+            sk.secondary.skillFamily.variants[1].skillDef.cancelSprintingOnActivation = grappleCancelsSprint;
+
+            sk.utility.skillFamily.variants[0].skillDef.cancelSprintingOnActivation = shiftCancelsSprint;
+            sk.utility.skillFamily.variants[1].skillDef.cancelSprintingOnActivation = shiftCancelsSprint;
+        }
+
         private void ModifyStats(CharacterBody cb)
         {
-            cb.baseMaxHealth = 120f;
+            cb.baseMaxHealth = 140f;
+            cb.baseRegen = 1f;
+            cb.baseArmor = 0f;
+
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
-            cb.baseArmor = 20f;
+            cb.levelRegen = cb.baseRegen * 0.2f;
         }
 
         private void ModifySkills(SkillLocator sk)
         {
             ModifySecondaries(sk);
             ModifyUtilities(sk);
+            ModifySpecials(sk);
         }
 
         private void ModifySecondaries(SkillLocator sk)
         {
-            sk.secondary.skillFamily.variants[0].skillDef.cancelSprintingOnActivation = grappleCancelsSprint;
-            sk.secondary.skillFamily.variants[1].skillDef.cancelSprintingOnActivation = grappleCancelsSprint;
-
-            return;
             sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "LOADER_SECONDARY_DESCRIPTION_RISKYMOD";
             sk.secondary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
             new DefaultGrappleStun();
@@ -64,12 +81,29 @@ namespace RiskyMod.Survivors.Loader
 
         private void ModifyUtilities(SkillLocator sk)
         {
-            sk.utility.skillFamily.variants[0].skillDef.cancelSprintingOnActivation = shiftCancelsSprint;
-            sk.utility.skillFamily.variants[1].skillDef.cancelSprintingOnActivation = shiftCancelsSprint;
-
-            return;
             sk.utility.skillFamily.variants[0].skillDef.baseRechargeInterval = 7f;
+            sk.utility.skillFamily.variants[0].skillDef.skillDescriptionToken = "LOADER_UTILITY_DESCRIPTION_RISKYMOD";
+
             sk.utility.skillFamily.variants[1].skillDef.baseRechargeInterval = 7f;
+            sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "LOADER_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
+
+            SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.baseswingchargedfist", "velocityDamageCoefficient", "0.2222222222"); //20/27
+
+            new UtilityInterrupt();
+            new ZapFistLightningDamageScaling();
+            new VelocityScaling();
+
+            //SneedUtils.SneedUtils.DumpEntityStateConfig("entitystates.loader.baseswingchargedfist");
+            //SneedUtils.SneedUtils.DumpEntityStateConfig("entitystates.loader.swingchargedfist");
+            //SneedUtils.SneedUtils.DumpEntityStateConfig("entitystates.loader.swingzapfist");
+        }
+
+        private void ModifySpecials(SkillLocator sk)
+        {
+            sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "LOADER_SPECIAL_DESCRIPTION_RISKYMOD";
+            sk.special.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_MAGNETIC_RISKYMOD" };
+            new PylonMagnet();
+            new ModifySlam();
         }
     }
 }

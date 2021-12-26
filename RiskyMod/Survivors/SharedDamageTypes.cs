@@ -17,7 +17,9 @@ namespace RiskyMod.Survivors
 
         public static DamageAPI.ModdedDamageType Blight7s;
         public static DamageAPI.ModdedDamageType Poison7s;
-        public static DamageAPI.ModdedDamageType Heal10OnKill;
+
+        public static DamageAPI.ModdedDamageType CrocoBiteHealOnKill;
+        public static GameObject medkitEffect = Resources.Load<GameObject>("Prefabs/Effects/MedkitHealEffect");
 
         public SharedDamageTypes()
         {
@@ -29,10 +31,10 @@ namespace RiskyMod.Survivors
 
             Blight7s = DamageAPI.ReserveDamageType();
             Poison7s = DamageAPI.ReserveDamageType();
-            Heal10OnKill = DamageAPI.ReserveDamageType();
+            CrocoBiteHealOnKill = DamageAPI.ReserveDamageType();
 
             TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
-            TakeDamage.ModifyInitialDamageActions += ApplyStunDroneForce;
+            TakeDamage.ModifyInitialDamageActions += ApplyAntiFlyingForce;
 
             OnHitEnemy.OnHitNoAttackerActions += ApplyInterruptOnHit;
             OnHitEnemy.OnHitNoAttackerActions += ApplyBlight7s;
@@ -91,7 +93,7 @@ namespace RiskyMod.Survivors
             }
         }
 
-        private static void ApplyStunDroneForce(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        private static void ApplyAntiFlyingForce(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
         {
             if (damageInfo.HasModdedDamageType(AntiFlyingForce))
             {
