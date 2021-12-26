@@ -2,6 +2,7 @@
 using MonoMod.Cil;
 using RoR2.Projectile;
 using System;
+using UnityEngine;
 
 namespace RiskyMod.Survivors.Loader
 {
@@ -18,7 +19,7 @@ namespace RiskyMod.Survivors.Loader
                 c.Emit(OpCodes.Ldarg_0);
                 c.EmitDelegate<Func<FireProjectileInfo, EntityStates.Loader.SwingZapFist, FireProjectileInfo>>((projectileInfo, self) =>
                 {
-                    projectileInfo.damage = self.bonusDamage * 3f / 7f;
+                    projectileInfo.damage = self.bonusDamage * 0.428571428f; //3/7
                     return projectileInfo;
                 });
             };

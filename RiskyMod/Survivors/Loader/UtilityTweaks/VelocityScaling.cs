@@ -18,13 +18,19 @@ namespace RiskyMod.Survivors.Loader
                 c.Index++;
                 c.EmitDelegate<Func<float, float>>(speed =>
                 {
-                    if (speed > 100f)
-                    {
-                        speed = 100f + 2f*(speed - 100f);
-                    }
-                    return speed;
+                    return GetScaledSpeed(speed);
                 });
             };
+        }
+
+        public static float GetScaledSpeed(float speed)
+        {
+
+            if (speed > 100f)
+            {
+                speed = 100f + 2f * (speed - 100f);
+            }
+            return speed;
         }
     }
 }

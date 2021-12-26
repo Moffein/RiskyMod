@@ -102,7 +102,9 @@ namespace RiskyMod.Survivors.Loader
         {
             sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "LOADER_SPECIAL_DESCRIPTION_RISKYMOD";
             sk.special.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_MAGNETIC_RISKYMOD" };
+            SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.throwpylon", "damageCoefficient", "0.5");
             new PylonMagnet();
+
             new ModifySlam();
         }
     }
