@@ -434,6 +434,7 @@ namespace RiskyMod
             BiggerMeleeHitbox.enabled = Config.Bind(crocoString, "Extend Melee Hitbox", true, "Extends Acrid's melee hitbox so he can hit Vagrants while standing on top of them.").Value;
             BlightStack.enabled = Config.Bind(crocoString, "Blight Duration Reset", true, "Blight stacks like Bleed.").Value;
             RemovePoisonDamageCap.enabled = Config.Bind(crocoString, "Remove Poison Damage Cap", true, "Poison no longer has a hidden damage cap.").Value;
+            BiggerLeapHitbox.enabled = Config.Bind(crocoString, "Extend Leap Collision Box", true, "Acrid's Shift skills have a larger collision hitbox. Damage radius remains the same.").Value;
             ShiftAirControl.enabled = Config.Bind(crocoString, "Leap Air Control", true, "Acrid's Shift skills gain increased air control at high move speeds.").Value;
 
             CaptainCore.enabled = Config.Bind(captainString, "Enable Changes", true, "Enable changes to this survivor.").Value;

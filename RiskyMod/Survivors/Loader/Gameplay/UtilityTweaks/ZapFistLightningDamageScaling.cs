@@ -19,7 +19,7 @@ namespace RiskyMod.Survivors.Loader
                 c.Emit(OpCodes.Ldarg_0);
                 c.EmitDelegate<Func<FireProjectileInfo, EntityStates.Loader.SwingZapFist, FireProjectileInfo>>((projectileInfo, self) =>
                 {
-                    projectileInfo.damage = self.bonusDamage / 21f; // 3/7 * 1/9
+                    projectileInfo.damage = self.bonusDamage * 2f / 27f; //2/3 * 1/9
                     return projectileInfo;
                 });
             };

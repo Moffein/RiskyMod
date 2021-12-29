@@ -14,6 +14,12 @@ namespace RiskyMod.Survivors.Loader
         public static bool shiftCancelsSprint = false;
         public static bool grappleCancelsSprint = false;
 
+        public static bool modifyStats = true;
+        public static bool modifyPassives = true;
+        public static bool modifySecondaries = true;
+        public static bool modifyUtilities = true;
+        public static bool modifySpecials = true;
+
         private CharacterBody loaderBody;
         public LoaderCore()
         {
@@ -22,8 +28,9 @@ namespace RiskyMod.Survivors.Loader
             SkillLocator sk = RoR2Content.Survivors.Loader.bodyPrefab.GetComponent<SkillLocator>();
             SprintQoL(sk);
 
+            new BiggerSlamHitbox();
+
             ModifyStats(loaderBody);
-            new ScrapBarrier();
             ModifySkills(sk);
 
             //Loader lacks proper fail conditions
@@ -57,6 +64,7 @@ namespace RiskyMod.Survivors.Loader
 
         private void ModifyStats(CharacterBody cb)
         {
+            if (!modifyStats) return;
             cb.baseMaxHealth = 140f;
             cb.baseRegen = 1f;
             cb.baseArmor = 0f;
@@ -67,13 +75,21 @@ namespace RiskyMod.Survivors.Loader
 
         private void ModifySkills(SkillLocator sk)
         {
+            ModifyPassives(sk);
             ModifySecondaries(sk);
             ModifyUtilities(sk);
             ModifySpecials(sk);
         }
 
+        private void ModifyPassives(SkillLocator sk)
+        {
+            if (!modifyPassives) return;
+            new ScrapBarrier();
+        }
+
         private void ModifySecondaries(SkillLocator sk)
         {
+            if (!modifySecondaries) return;
             sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "LOADER_SECONDARY_DESCRIPTION_RISKYMOD";
             sk.secondary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
             new DefaultGrappleStun();
@@ -81,6 +97,7 @@ namespace RiskyMod.Survivors.Loader
 
         private void ModifyUtilities(SkillLocator sk)
         {
+            if (!modifyUtilities) return;
             sk.utility.skillFamily.variants[0].skillDef.baseRechargeInterval = 7f;
             sk.utility.skillFamily.variants[0].skillDef.skillDescriptionToken = "LOADER_UTILITY_DESCRIPTION_RISKYMOD";
 
@@ -100,12 +117,13 @@ namespace RiskyMod.Survivors.Loader
 
         private void ModifySpecials(SkillLocator sk)
         {
+            if (!modifySpecials) return;
             sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "LOADER_SPECIAL_DESCRIPTION_RISKYMOD";
             sk.special.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_MAGNETIC_RISKYMOD" };
             SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.throwpylon", "damageCoefficient", "0.5");
             new PylonMagnet();
 
-            new ModifySlam();
+            new SlamDamageType();
         }
     }
 }

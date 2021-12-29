@@ -2,13 +2,15 @@
 using MonoMod.Cil;
 using RoR2;
 using R2API;
+using EntityStates.Loader;
 
 namespace RiskyMod.Survivors.Loader
 {
-    public class ModifySlam
+    public class SlamDamageType
     {
-        public ModifySlam()
+        public SlamDamageType()
         {
+            //Slam DamageTypes
             IL.EntityStates.Loader.GroundSlam.DetonateAuthority += (il) =>
             {
                 ILCursor c = new ILCursor(il);

@@ -14,6 +14,13 @@ namespace RiskyMod.Survivors.Croco
 
         public ModifyShift()
         {
+            ModifyDamageType();
+            ModifyAcid();
+            ChainableLeapCooldown();
+        }
+
+        private void ModifyDamageType()
+        {
             IL.EntityStates.Croco.BaseLeap.DetonateAuthority += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -28,7 +35,10 @@ namespace RiskyMod.Survivors.Croco
                     return orig;
                 });
             };
+        }
 
+        private void ModifyAcid()
+        {
             //Note: Acid projectile's damage coefficient is 1f
             AcidPuddleProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocoleapacid").InstantiateClone("RiskyMod_CrocoLeapAcid", true);
 
@@ -39,7 +49,10 @@ namespace RiskyMod.Survivors.Croco
 
             ProjectileAPI.Add(AcidPuddleProjectile);
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.BaseLeap", "projectilePrefab", AcidPuddleProjectile);
+        }
 
+        private void ChainableLeapCooldown()
+        {
             float cdr = 0.7f;
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.ChainableLeap", "refundPerHit", "0");
             IL.EntityStates.Croco.ChainableLeap.DoImpactAuthority += (il) =>

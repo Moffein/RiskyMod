@@ -7,6 +7,30 @@ namespace SneedUtils
 {
     public class SneedUtils
     {
+        public static int FindEnemiesInSphere(float radius, Vector3 position, TeamIndex team)
+        {
+            int hitCount = 0;
+            List<HealthComponent> hcList = new List<HealthComponent>();
+            Collider[] array = Physics.OverlapSphere(position, radius, LayerIndex.entityPrecise.mask);
+            for (int i = 0; i < array.Length; i++)
+            {
+                HurtBox hurtBox = array[i].GetComponent<HurtBox>();
+                if (hurtBox)
+                {
+                    HealthComponent healthComponent = hurtBox.healthComponent;
+                    if (healthComponent && !hcList.Contains(healthComponent))
+                    {
+                        hcList.Add(healthComponent);
+                        if (healthComponent.body && healthComponent.body.teamComponent && healthComponent.body.teamComponent.teamIndex != team)
+                        {
+                            hitCount++;
+                        }
+                    }
+                }
+            }
+            return hitCount;
+        }
+
         public static void RemoveItemTag(ItemDef itemDef, ItemTag tag)
         {
             if (itemDef.ContainsTag(tag))
