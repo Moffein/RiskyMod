@@ -160,6 +160,7 @@ namespace RiskyMod
             new BloodShrineMinReward();
             new ShrineSpawnRate();
             new Shock();
+            new FixSlayer();
         }
 
         private void RunFixes()

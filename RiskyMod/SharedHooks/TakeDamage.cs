@@ -25,6 +25,10 @@ namespace RiskyMod.SharedHooks
         public static ModifyInitialDamage ModifyInitialDamageActions = ModifyInitialDamageMethod;
         private static void ModifyInitialDamageMethod(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody) { }
 
+        public delegate void ModifyInitialDamageInventory(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory attackerInventory);
+        public static ModifyInitialDamageInventory ModifyInitialDamageInventoryActions = ModifyInitialDamageInventoryMethod;
+        private static void ModifyInitialDamageInventoryMethod(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory attackerInventory) { }
+
         public static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
             float oldHP = self.combinedHealth;
@@ -39,27 +43,9 @@ namespace RiskyMod.SharedHooks
                     attackerInventory = attackerBody.inventory;
                     if (attackerInventory)
                     {
-                        if (Crowbar.enabled)
-                        {
-                            if (self.body != attackerBody && damageInfo.dotIndex == DotController.DotIndex.None && !damageInfo.HasModdedDamageType(Crowbar.CrowbarDamage))
-                            {
-                                int crowbarCount = attackerInventory.GetItemCount(RoR2Content.Items.Crowbar);
-                                if (crowbarCount > 0 && Crowbar.crowbarManager.CanApplyCrowbar(self, attackerBody))
-                                {
-                                    damageInfo.damage *= 1f + Crowbar.damageCoefficient * crowbarCount;
-                                    EffectManager.SimpleImpactEffect(HealthComponent.AssetReferences.crowbarImpactEffectPrefab, damageInfo.position, -damageInfo.force, true);
-                                    damageInfo.AddModdedDamageType(Crowbar.CrowbarDamage);
-                                }
-                            }
-                        }
+                        ModifyInitialDamageInventoryActions.Invoke(damageInfo, self, attackerBody, attackerInventory);
                     }
                 }
-            }
-
-            if (FixSlayer.enabled && (damageInfo.damageType & DamageType.BonusToLowHealth) > DamageType.Generic)
-            {
-                damageInfo.damageType &= ~DamageType.BonusToLowHealth;
-                damageInfo.damage *= Mathf.Lerp(3f, 1f, self.combinedHealthFraction);
             }
 
             orig(self, damageInfo);

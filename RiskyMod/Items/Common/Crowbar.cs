@@ -6,6 +6,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using RiskyMod.SharedHooks;
 
 namespace RiskyMod.Items.Common
 {
@@ -14,7 +15,7 @@ namespace RiskyMod.Items.Common
         public static bool enabled = true;
         public static DamageAPI.ModdedDamageType CrowbarDamage;
         public static CrowbarManager crowbarManager;
-        public static float damageCoefficient = 0.45f;
+        public static float damageCoefficient = 0.35f;
 
         public static ItemDef itemDef = RoR2Content.Items.Crowbar;
 
@@ -72,13 +73,7 @@ namespace RiskyMod.Items.Common
                 });
             };
 
-            //LanguageAPI.Add("ITEM_CROWBAR_DESC", "Deal <style=cIsDamage>+50%</style> <style=cStack>(+50% per stack)</style> damage to enemies above <style=cIsDamage>90% health</style>.");
-
-            //LanguageAPI.Add("ITEM_CROWBAR_DESC", "Deal <style=cIsDamage>+"+ItemsCore.ToPercent(damageCoefficient)+"</style> <style=cStack>(+"
-            //    + ItemsCore.ToPercent(damageCoefficient) + " per stack)</style> damage on your <style=cIsDamage>first hit</style> against an enemy.");
-            //LanguageAPI.Add("ITEM_CROWBAR_PICKUP", "Deal bonus damage on your first hit against an enemy.");
-
-            //Effect handled in SharedHooks.TakeDamage and OnCharacterDeath (for removal)
+            //Effect handled in OnCharacterDeath (for removal)
 
             On.RoR2.Run.Start += (orig, self) =>
             {
@@ -98,12 +93,37 @@ namespace RiskyMod.Items.Common
                 orig(self);
                 if (NetworkServer.active) Crowbar.crowbarManager.ClearList();
             };
+
+            TakeDamage.ModifyInitialDamageInventoryActions += CrowbarDamageBoost;
         }
 
         //This is used in multiple places, so it is a static method to make sure calculations are consistent.
         public static float GetCrowbarMult(int crowbarCount)
         {
             return 1f + damageCoefficient * crowbarCount;
+        }
+
+        private static void CrowbarDamageBoost(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory attackerInventory)
+        {
+            int crowbarCount = attackerInventory.GetItemCount(RoR2Content.Items.Crowbar);
+            if (crowbarCount > 0)
+            {
+                if (self.body != attackerBody
+                    && damageInfo.procCoefficient > 0f
+                    && !damageInfo.HasModdedDamageType(Crowbar.CrowbarDamage))
+                {
+                    float damageCoefficient = damageInfo.damage / attackerBody.damage;
+                    if (damageCoefficient >= 4f)
+                    {
+                        if (Crowbar.crowbarManager.CanApplyCrowbar(self, attackerBody))
+                        {
+                            damageInfo.damage *= GetCrowbarMult(crowbarCount);
+                            EffectManager.SimpleImpactEffect(HealthComponent.AssetReferences.crowbarImpactEffectPrefab, damageInfo.position, -damageInfo.force, true);
+                            damageInfo.AddModdedDamageType(Crowbar.CrowbarDamage);
+                        }
+                    }
+                }
+            }
         }
     }
 

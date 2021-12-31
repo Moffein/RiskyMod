@@ -7,7 +7,7 @@ namespace SneedUtils
 {
     public class SneedUtils
     {
-        public static int FindEnemiesInSphere(float radius, Vector3 position, TeamIndex team)
+        public static int FindEnemiesInSphere(float radius, Vector3 position, TeamIndex team, bool airborneOnly = false)
         {
             int hitCount = 0;
             List<HealthComponent> hcList = new List<HealthComponent>();
@@ -23,7 +23,12 @@ namespace SneedUtils
                         hcList.Add(healthComponent);
                         if (healthComponent.body && healthComponent.body.teamComponent && healthComponent.body.teamComponent.teamIndex != team)
                         {
-                            hitCount++;
+                            if (!airborneOnly ||
+                                (healthComponent.body.isFlying ||
+                                (healthComponent.body.characterMotor && !healthComponent.body.characterMotor.isGrounded)))
+                            {
+                                hitCount++;
+                            }
                         }
                     }
                 }

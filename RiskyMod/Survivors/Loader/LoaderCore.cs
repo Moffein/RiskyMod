@@ -1,5 +1,7 @@
-﻿using Mono.Cecil.Cil;
+﻿using EntityStates;
+using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using R2API;
 using RoR2;
 using RoR2.Projectile;
 using System;
@@ -67,7 +69,7 @@ namespace RiskyMod.Survivors.Loader
             if (!modifyStats) return;
             cb.baseMaxHealth = 140f;
             cb.baseRegen = 1f;
-            cb.baseArmor = 0f;
+            cb.baseArmor = 12f;
 
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
             cb.levelRegen = cb.baseRegen * 0.2f;
@@ -98,17 +100,17 @@ namespace RiskyMod.Survivors.Loader
         private void ModifyUtilities(SkillLocator sk)
         {
             if (!modifyUtilities) return;
-            sk.utility.skillFamily.variants[0].skillDef.baseRechargeInterval = 7f;
+            sk.utility.skillFamily.variants[0].skillDef.baseRechargeInterval = 5f;
             sk.utility.skillFamily.variants[0].skillDef.skillDescriptionToken = "LOADER_UTILITY_DESCRIPTION_RISKYMOD";
 
-            sk.utility.skillFamily.variants[1].skillDef.baseRechargeInterval = 7f;
+            sk.utility.skillFamily.variants[1].skillDef.baseRechargeInterval = 5f;
             sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "LOADER_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
 
             SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.baseswingchargedfist", "velocityDamageCoefficient", "0.2222222222"); //20/27
 
             new UtilityInterrupt();
-            new ZapFistLightningDamageScaling();
             new VelocityScaling();
+            new ModifyZapDamage();
 
             //SneedUtils.SneedUtils.DumpEntityStateConfig("entitystates.loader.baseswingchargedfist");
             //SneedUtils.SneedUtils.DumpEntityStateConfig("entitystates.loader.swingchargedfist");
@@ -123,7 +125,20 @@ namespace RiskyMod.Survivors.Loader
             SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.throwpylon", "damageCoefficient", "0.5");
             new PylonMagnet();
 
-            new SlamDamageType();
+            sk.special.skillFamily.variants[1].skillDef.skillDescriptionToken = "LOADER_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
+            sk.special.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_HEAVY" };
+
+            LoadoutAPI.AddSkill(typeof(EntityStates.RiskyMod.Loader.PreGroundSlamScaled));
+            LoadoutAPI.AddSkill(typeof(EntityStates.RiskyMod.Loader.GroundSlamScaled));
+            EntityStates.RiskyMod.Loader.GroundSlamScaled.fistEffectPrefab = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Loader.GroundSlam", "fistEffectPrefab");
+            sk.special.skillFamily.variants[1].skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Loader.PreGroundSlamScaled));
+            //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Loader.PreGroundSlam");
+
+            GameObject slamBlastEffect = Resources.Load<GameObject>("prefabs/effects/impacteffects/loadergroundslam");
+            EffectComponent ec = slamBlastEffect.GetComponent<EffectComponent>();
+           /* Debug.Log("\n\n\n\n\n\n\n Apply Scale: " + ec.applyScale);
+            ec.applyScale = true;*/
+            EntityStates.RiskyMod.Loader.GroundSlamScaled.blastEffectPrefab = slamBlastEffect;
         }
     }
 }

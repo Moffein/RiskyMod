@@ -11,6 +11,8 @@ namespace RiskyMod.Tweaks
     {
         public static bool enabled = true;
         public static BuffDef DisableOSP;
+        public static bool enableLogging = false;
+
         public TrueOSP()
         {
             if (!enabled) return;
@@ -55,7 +57,7 @@ namespace RiskyMod.Tweaks
                             ospm = self.body.gameObject.AddComponent<OSPComponent>();
                             ospm.healthComponent = self;
                             ospm.characterBody = self.body;
-                            Debug.Log("Adding OSP Manager to player.");
+                            if (enableLogging) Debug.Log("Adding OSP Manager to player.");
                         }
                         //Check if OSP timer should be triggered
                         float ospHealthThreshold = self.fullHealth * OSPComponent.ospThreshold;
@@ -101,7 +103,7 @@ namespace RiskyMod.Tweaks
                 ospStopwatch -= Time.fixedDeltaTime;
                 if (ospStopwatch <= 0f)
                 {
-                    Debug.Log("OSP timer expired.");
+                    if (TrueOSP.enableLogging) Debug.Log("OSP timer expired.");
                 }
             }
         }
@@ -111,7 +113,7 @@ namespace RiskyMod.Tweaks
             if (ospStopwatch <= 0f && CanTriggerOSP())
             {
                 ospStopwatch = ospTimer;
-                Debug.Log("Starting OSP timer.");
+                if (TrueOSP.enableLogging) Debug.Log("Starting OSP timer.");
             }
         }
 
@@ -125,7 +127,7 @@ namespace RiskyMod.Tweaks
                 characterBody.AddBuff(TrueOSP.DisableOSP);
                 characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, ospInvuln);
                 characterBody.outOfDangerStopwatch = 0f;
-                Debug.Log("Triggering OSP");
+                if (TrueOSP.enableLogging) Debug.Log("Triggering OSP");
             }
             return ospTriggered;
         }
