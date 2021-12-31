@@ -18,8 +18,6 @@ namespace RiskyMod.Items.Equipment
             fv.blastDamageCoefficient = 16f;
             fv.overlapDamageCoefficient = 8f;
             fv.blastDamageType = DamageType.IgniteOnHit | DamageType.Stun1s;
-
-            //LanguageAPI.Add("EQUIPMENT_FIREBALLDASH_DESC", "Turn into a <style=cIsDamage>draconic fireball</style> for <style=cIsDamage>5</style> seconds. Deal <style=cIsDamage>800% damage</style> on impact. Detonates at the end for <style=cIsDamage>1600% damage</style> and <style=cIsDamage>stuns</style> nearby monsters.");
         }
     }
 }

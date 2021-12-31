@@ -54,8 +54,6 @@ namespace RiskyMod.Items.Uncommon
 				}
 			};
 
-			//LanguageAPI.Add("ITEM_MISSILE_DESC", "<style=cIsDamage>10%</style> chance to fire a missile that deals <style=cIsDamage>" + ItemsCore.ToPercent(initialDamageCoefficient) + "</style> <style=cStack>(+" + ItemsCore.ToPercent(stackDamageCoefficient) + " per stack)</style> TOTAL damage.");
-        
 			if (RiskyMod.disableProcChains)
 			{
 				missilePrefab = Resources.Load<GameObject>("Prefabs/Projectiles/MissileProjectile").InstantiateClone("RiskyMod_ATGProjectile", true);

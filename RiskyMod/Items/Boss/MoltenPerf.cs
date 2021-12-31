@@ -20,8 +20,6 @@ namespace RiskyMod.Items.Boss
             if (!enabled) return;
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FireballsOnHit);
 
-            //LanguageAPI.Add("ITEM_FIREBALLSONHIT_DESC", "<style=cIsDamage>10%</style> chance on hit to call forth <style=cIsDamage>3 magma balls</style> from an enemy, dealing <style=cIsDamage>"+ItemsCore.ToPercent(initialDamageCoefficient)+"</style> <style=cStack>(+"+ ItemsCore.ToPercent(stackDamageCoefficient) + " per stack)</style> damage each.");
-
             float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 
             //Remove Vanilla Effect

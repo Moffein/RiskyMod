@@ -26,9 +26,6 @@ namespace RiskyMod.Items.Uncommon
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            //LanguageAPI.Add("ITEM_SPRINTARMOR_PICKUP", "Increase armor. Gain bonus armor while sprinting.");
-            //LanguageAPI.Add("ITEM_SPRINTARMOR_DESC", "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>12</style> <style=cStack>(+12 per stack)</style>. <style=cIsUtility>Sprinting</style> increases TOTAL armor by <style=cIsHealing>+50%</style>.");
-
             GetStatsCoefficient.HandleStatsInventoryActions += HandleStatsInventory;
 
             SneedUtils.SneedUtils.RemoveItemTag(RoR2Content.Items.SprintArmor, ItemTag.SprintRelated);

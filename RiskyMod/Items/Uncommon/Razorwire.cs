@@ -21,8 +21,6 @@ namespace RiskyMod.Items.Uncommon
                 self.itemCounts.thorns = 0;
             };
 
-            //LanguageAPI.Add("ITEM_THORNS_DESC", "Getting hit causes you to explode in a burst of razors, dealing <style=cIsDamage>80%-420% damage</style>. Hits up to <style=cIsDamage>5</style> <style=cStack>(+2 per stack)</style> targets in a <style=cIsDamage>16m-40m</style> radius. Damage and radius increases the more damage taken.");
-
             TakeDamage.HandleOnPercentHpLostActions += OnHpLost;
         }
 
@@ -32,7 +30,7 @@ namespace RiskyMod.Items.Uncommon
             if (thornCount > 0 && !damageInfo.procChainMask.HasProc(ProcType.Thorns))
             {
                 float hpLostLerp = percentHpLost / 100f;
-                int targetCount = 3 + 2 * thornCount;
+                int targetCount = 1 + 2 * thornCount;
                 bool isVengeanceClone = inventory.GetItemCount(RoR2Content.Items.InvadingDoppelganger) > 0; //In case some other mod tries to mess with HealthComponent's itemcount
 
                 bool isCrit = self.body.RollCrit();

@@ -54,8 +54,6 @@ namespace RiskyMod.Items.Uncommon
                 });
 
             };
-
-            //LanguageAPI.Add("ITEM_CHAINLIGHTNING_DESC", "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>chain lightning</style> for <style=cIsDamage>80%</style> TOTAL damage on up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> targets within <style=cIsDamage>25m</style>.");
         }
     }
 }

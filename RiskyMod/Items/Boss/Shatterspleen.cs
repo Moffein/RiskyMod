@@ -15,9 +15,6 @@ namespace RiskyMod.Items.Boss
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.BleedOnHitAndExplode);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BleedOnHitAndExplode);
 
-            //LanguageAPI.Add("ITEM_BLEEDONHITANDEXPLODE_PICKUP", "Bleeding enemies explode on kill.");
-            //LanguageAPI.Add("ITEM_BLEEDONHITANDEXPLODE_DESC", "Gain a <style=cIsDamage>5%</style> chance to <style=cIsDamage>bleed</style> enemies for <style=cIsDamage>240%</style> base damage. <style=cIsDamage>Bleeding</style> enemies <style=cIsDamage>explode</style> on death for <style=cIsDamage>400%</style> <style=cStack>(+320% per stack)</style> damage, plus an additional <style=cIsDamage>10%</style> <style=cStack>(+8% per stack)</style> of their maximum health.");
-
             //Remove Vanilla bleed effect - needs to be recalculated.
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {

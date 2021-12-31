@@ -27,7 +27,6 @@ namespace RiskyMod.Items.Common
                 c.Index += 8;
                 c.Next.Operand = 7f;
             };
-            //Current LanguageAPI.Add("ITEM_CRITGLASSES_DESC", "Your attacks have a <style=cIsDamage>7%</style> <style=cStack>(+7% per stack)</style> chance to '<style=cIsDamage>Critically Strike</style>', dealing <style=cIsDamage>double damage</style>.");
         }
     }
 }

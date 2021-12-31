@@ -25,8 +25,6 @@ namespace RiskyMod.Items.Common
                     );
                 c.Next.Operand = 7.5f;
             };
-
-            //LanguageAPI.Add("ITEM_BEAR_DESC", "<style=cIsHealing>7%</style> <style=cStack>(+7% per stack)</style> chance to <style=cIsHealing>block</style> incoming damage. <style=cIsUtility>Unaffected by luck</style>.");
         }
     }
 }

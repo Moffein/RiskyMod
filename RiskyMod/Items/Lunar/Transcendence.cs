@@ -35,9 +35,6 @@ namespace RiskyMod.Items.Lunar
                     return outOfDangerDelay;
                 });
             };
-
-            //LanguageAPI.Add("ITEM_SHIELDONLY_PICKUP", "Convert all your health into shield. Increase maximum health... <color=#FF7F7F>BUT increase shield regeneration delay.</color>");
-            //LanguageAPI.Add("ITEM_SHIELDONLY_DESC", "<style=cIsHealing>Convert</style> all but <style=cIsHealing>1 health</style> into <style=cIsHealing>regenerating shields</style>. <style=cIsHealing>Gain 50% <style=cStack>(+25% per stack)</style> maximum health</style>. Increase <style=cIsHealing>shield regeneration delay</style> by <style=cIsHealing>1s</style> <style=cStack>(+1s per stack)</style>.");
         }
     }
 }

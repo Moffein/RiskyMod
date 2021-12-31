@@ -13,8 +13,6 @@ namespace RiskyMod.Items.Common
             if (!enabled) return;
 			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
 
-			//LanguageAPI.Add("ITEM_IGNITEONKILL_DESC", "Killing an enemy <style=cIsDamage>ignites</style> all enemies within <style=cIsDamage>16m</style> for <style=cIsDamage>150%</style> base damage. Additionally, enemies <style=cIsDamage>burn</style> for <style=cIsDamage>150%</style> <style=cStack>(+75% per stack)</style> base damage.");
-
             On.RoR2.GlobalEventManager.ProcIgniteOnKill += (orig, damageReport, igniteOnKillCount, victimBody, attackerTeamIndex) =>
             {
 				float blastRadius = victimBody.radius + 16f;

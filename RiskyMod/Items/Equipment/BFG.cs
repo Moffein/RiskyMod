@@ -24,8 +24,6 @@ namespace RiskyMod.Items.Equipment
             pbc.damageCoefficient = 1.9f;
             ProjectileAPI.Add(projectilePrefab);
 
-            //LanguageAPI.Add("EQUIPMENT_BFG_DESC", "Fires preon tendrils, zapping enemies within 35m for up to <style=cIsDamage>1180% damage/second</style>. On contact, detonate in an enormous 20m explosion for <style=cIsDamage>8000% damage</style>.");
-
             IL.RoR2.EquipmentSlot.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
