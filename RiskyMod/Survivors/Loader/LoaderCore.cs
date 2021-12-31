@@ -135,7 +135,7 @@ namespace RiskyMod.Survivors.Loader
             LoadoutAPI.AddSkill(typeof(EntityStates.RiskyMod.Loader.GroundSlamScaled));
             EntityStates.RiskyMod.Loader.GroundSlamScaled.fistEffectPrefab = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Loader.GroundSlam", "fistEffectPrefab");
             sk.special.skillFamily.variants[1].skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Loader.PreGroundSlamScaled));
-            SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Loader.GroundSlam");
+            //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Loader.GroundSlam");
         }
     }
 }

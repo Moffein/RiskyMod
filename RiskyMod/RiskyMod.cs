@@ -175,6 +175,7 @@ namespace RiskyMod
             new FixLightningStrikeOrbProcCoefficient();
             new FixCrocoPoisonAchievement();
             new FixGhostMinonSpawns();
+            new FixWormFallDeath();
         }
         
         private void AddHooks()
