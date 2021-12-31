@@ -105,6 +105,11 @@ namespace RiskyMod.Survivors
                     Rigidbody rb = cb.rigidbody;
                     if (rb)
                     {
+                        if (damageInfo.force.y > 0f)
+                        {
+                            damageInfo.force.y = 0f;
+                        }
+
                         direction *= Mathf.Max(rb.mass / 100f, 1f);
                         damageInfo.force += 1600f * direction;
                     }

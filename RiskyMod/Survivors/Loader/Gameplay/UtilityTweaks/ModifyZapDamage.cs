@@ -7,7 +7,7 @@ namespace RiskyMod.Survivors.Loader
 {
     public class ModifyZapDamage
     {
-        public static float zapDamageCoefficient = 7f / 9f;
+        public static float zapDamageCoefficient = 8f / 9f;
         public ModifyZapDamage()
         {
             IL.EntityStates.Loader.SwingZapFist.OnMeleeHitAuthority += (il) =>

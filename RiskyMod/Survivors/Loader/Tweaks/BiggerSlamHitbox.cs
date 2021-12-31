@@ -18,7 +18,7 @@ namespace RiskyMod.Survivors.Loader
                     if (!(self.detonateNextFrame || self.characterMotor.Motor.GroundingStatus.IsStableOnGround)
                     && self.fixedAge >= GroundSlam.minimumDuration)
                     {
-                        int potentialHits = SneedUtils.SneedUtils.FindEnemiesInSphere(5f, self.characterBody.footPosition, self.GetTeam());
+                        int potentialHits = SneedUtils.SneedUtils.FindEnemiesInSphere(5f, self.characterBody.footPosition, self.GetTeam(), true);
                         if (potentialHits > 0)
                         {
                             self.detonateNextFrame = true;

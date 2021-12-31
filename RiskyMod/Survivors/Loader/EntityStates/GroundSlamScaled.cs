@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 using R2API;
+using RiskyMod.Survivors.Loader;
 using RiskyMod.Survivors;
 
 namespace EntityStates.RiskyMod.Loader
@@ -95,8 +96,8 @@ namespace EntityStates.RiskyMod.Loader
 			{
 				attacker = base.gameObject,
 				baseDamage = this.damageStat * GroundSlamScaled.blastDamageCoefficient,
-				baseForce = 0f,
-				bonusForce = Vector3.zero,
+				baseForce = 1200f,
+				bonusForce = new Vector3(0f, 3000f, 0f),
 				crit = base.RollCrit(),
 				damageType = DamageType.Stun1s,
 				falloffModel = BlastAttack.FalloffModel.None,
@@ -117,7 +118,7 @@ namespace EntityStates.RiskyMod.Loader
 				ba.baseDamage *= damageBoostCoefficient;
 				ba.radius *= radiusBoostCoefficient;
 			}
-			//ba.AddModdedDamageType(SharedDamageTypes.AntiFlyingForce);
+			ba.AddModdedDamageType(SharedDamageTypes.AntiFlyingForce);
 
 			return ba.Fire();
 		}
@@ -133,13 +134,13 @@ namespace EntityStates.RiskyMod.Loader
 		public static float verticalAcceleration = -100f;
 		public static float exitSlowdownCoefficient = 0.2f;
 		public static GameObject blastImpactEffectPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloaderlightning");
-		public static GameObject blastEffectPrefab;
+		public static GameObject blastEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/loadergroundslam");
 		public static GameObject fistEffectPrefab;
 
-		public static float maxDamageBoost = 2.5f;
-		public static float maxRadiusBoost = 2.5f;
-		public static float maxForceBoost = 2.5f;
-		public static float maxBoostDistance = 150f;
+		public static float maxDamageBoost = 3f;
+		public static float maxRadiusBoost = 3f;
+		public static float maxForceBoost = 3f;
+		public static float maxBoostDistance = 200f;
 
 		private float initialY;
 		private float previousAirControl;

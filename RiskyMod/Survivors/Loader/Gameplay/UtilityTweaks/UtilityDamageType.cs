@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace RiskyMod.Survivors.Loader
 {
-    public class UtilityInterrupt
+    public class UtilityDamageType
     {
         public static GameObject ZapConeInterrupt;
-        public UtilityInterrupt()
+        public UtilityDamageType()
         {
             On.EntityStates.Loader.BaseSwingChargedFist.AuthorityModifyOverlapAttack += (orig, self, overlapAttack) =>
             {
