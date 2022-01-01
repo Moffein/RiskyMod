@@ -10,17 +10,86 @@ namespace RiskyMod.Enemies.Mobs.Lunar
     public class LunarWisp
     {
         public static bool enabled = true;
+
+        public static bool enableFalloff = true;
+
         public LunarWisp()
         {
             if (!enabled) return;
-            RemoveTrackingBombOnKill();
+            EnableStatusConditions();
+            ModifyProjectile();
+            EnableBulletFalloff();
         }
 
-        private void RemoveTrackingBombOnKill()
+        private void EnableStatusConditions()
+        {
+            GameObject enemyObject = Resources.Load<GameObject>("prefabs/characterbodies/lunarwispbody");
+            SetStateOnHurt ssoh = enemyObject.GetComponent<SetStateOnHurt>();
+            if (!ssoh)
+            {
+                ssoh = enemyObject.AddComponent<SetStateOnHurt>();
+            }
+            ssoh.hitThreshold = 0.5f;
+            ssoh.canBeHitStunned = true;
+            ssoh.canBeStunned = true;
+            ssoh.canBeFrozen = true;
+
+            EntityStateMachine body = null;
+            EntityStateMachine weapon = null;
+            EntityStateMachine[] stateMachines = enemyObject.GetComponents<EntityStateMachine>();
+            foreach(EntityStateMachine esm in stateMachines)
+            {
+                switch(esm.customName)
+                {
+                    case "Body":
+                        body = esm;
+                        break;
+                    case "Weapon":
+                        weapon = esm;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            ssoh.targetStateMachine = body;
+            ssoh.idleStateMachine = new EntityStateMachine[] { weapon };
+            ssoh.hurtState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.HurtStateFlyer));
+        }
+
+        private void ModifyProjectile()
         {
             GameObject projectile = Resources.Load<GameObject>("prefabs/projectiles/lunarwisptrackingbomb");
             HealthComponent hc = projectile.GetComponent<HealthComponent>();
             hc.globalDeathEventChanceCoefficient = 0f;
+
+            ProjectileImpactExplosion pie = projectile.GetComponent<ProjectileImpactExplosion>();
+            pie.falloffModel = BlastAttack.FalloffModel.SweetSpot;
+        }
+
+        private void EnableBulletFalloff()
+        {
+            IL.EntityStates.LunarWisp.FireLunarGuns.OnFireAuthority += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchCallvirt<BulletAttack>("Fire")
+                    );
+                c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                {
+                    bulletAttack.falloffModel = BulletAttack.FalloffModel.DefaultBullet;
+                    return bulletAttack;
+                });
+
+                c.GotoNext(
+                     x => x.MatchCallvirt<BulletAttack>("Fire")
+                    );
+                c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                {
+                    bulletAttack.falloffModel = BulletAttack.FalloffModel.DefaultBullet;
+                    return bulletAttack;
+                });
+            };
         }
     }
 }

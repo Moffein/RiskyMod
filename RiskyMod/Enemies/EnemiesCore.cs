@@ -1,8 +1,6 @@
 ﻿using RiskyMod.Enemies.Bosses;
+using RiskyMod.Enemies.Mobs;
 using RiskyMod.Enemies.Mobs.Lunar;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RiskyMod.Enemies
 {
@@ -12,6 +10,18 @@ namespace RiskyMod.Enemies
         public EnemiesCore()
         {
             if (!enabled) return;
+            new Beetle();
+            new Jellyfish();
+            new Imp();
+            new HermitCrab();
+
+            new Golem();
+            new Mushrum();
+
+            new Bronzong();
+            new GreaterWisp();
+
+            new Parent();
 
             new LunarWisp();
 

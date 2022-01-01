@@ -33,6 +33,7 @@ using RiskyMod.Survivors.Croco;
 using RiskyMod.Enemies.Mobs.Lunar;
 using RiskyMod.Survivors.Loader;
 using RiskyMod.Survivors.Mage;
+using RiskyMod.Enemies.Mobs;
 
 namespace RiskyMod
 {
@@ -51,6 +52,7 @@ namespace RiskyMod
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.TheTimeSweeper.AcridHitboxBuff", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.AcridBlightStack", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.LunarWispFalloff", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.5.0")]
@@ -140,6 +142,9 @@ namespace RiskyMod
             //Croco
             BiggerMeleeHitbox.enabled = BiggerMeleeHitbox.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TheTimeSweeper.AcridHitboxBuff");
             BlightStack.enabled = BlightStack.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AcridBlightStack");
+            
+            //Enemies
+            LunarWisp.enableFalloff = LunarWisp.enableFalloff && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.LunarWispFalloff");
         }
 
         private void RunTweaks()
@@ -372,6 +377,20 @@ namespace RiskyMod
         private void ConfigMonsters()
         {
             FixVengeanceLeveling.enabled = Config.Bind(monsterString, "Fix Vengeance Doppelganger Levels", true, "Fix Vengeance Doppelgangers not leveling up.").Value;
+
+            Beetle.enabled = Config.Bind(monsterString, "Beetle", true, "Enable changes to this monster.").Value;
+            Jellyfish.enabled = Config.Bind(monsterString, "Jellyfish", true, "Enable changes to this monster.").Value;
+            Imp.enabled = Config.Bind(monsterString, "Imp", true, "Enable changes to this monster.").Value;
+            HermitCrab.enabled = Config.Bind(monsterString, "Hermit Crab", true, "Enable changes to this monster.").Value;
+
+            Golem.enabled = Config.Bind(monsterString, "Stone Golem", true, "Enable changes to this monster.").Value;
+            Mushrum.enabled = Config.Bind(monsterString, "Mini Mushrum", true, "Enable changes to this monster.").Value;
+
+            Bronzong.enabled = Config.Bind(monsterString, "Brass Contraption", true, "Enable changes to this monster.").Value;
+            GreaterWisp.enabled = Config.Bind(monsterString, "Greater Wisp", true, "Enable changes to this monster.").Value;
+
+            Parent.enabled = Config.Bind(monsterString, "Parent", true, "Enable changes to this monster.").Value;
+
             LunarWisp.enabled = Config.Bind(monsterString, "Lunar Wisp", true, "Enable changes to this monster.").Value;
             Vagrant.enabled = Config.Bind(monsterString, "Wandering Vagrant", true, "Enable changes to this monster.").Value;
             Gravekeeper.enabled = Config.Bind(monsterString, "Grovetender", true, "Enable changes to this monster.").Value;

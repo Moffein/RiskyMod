@@ -126,36 +126,14 @@ namespace RiskyMod.Survivors.Commando
                 orig(self);
                 if (self.isAuthority && self.skillLocator)
                 {
-                    self.skillLocator.primary.RunRecharge(1.5f);
-                    self.skillLocator.secondary.RunRecharge(1.5f);
-                    self.skillLocator.special.RunRecharge(1.5f);
+                    self.skillLocator.primary.RunRecharge(1f);
+                    self.skillLocator.secondary.RunRecharge(1f);
+                    self.skillLocator.special.RunRecharge(1f);
                 }
             };
-
-            //Disabling this for now to see if Vanilla Slide is still worth taking when Roll has CDR.
-            /*SlideBuff = BuildSlideBuff();
-            sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "COMMANDO_UTILITY_ALT_DESCRIPTION_RISKYMOD";
-            GetStatsCoefficient.HandleStatsActions += SlideStats;
-            On.EntityStates.Commando.SlideState.OnEnter += (orig, self) =>
-            {
-                orig(self);
-                if (NetworkServer.active && self.characterBody)
-                {
-                    self.characterBody.AddBuff(SlideBuff);
-                }
-            };
-
-            On.EntityStates.Commando.SlideState.OnExit += (orig, self) =>
-            {
-                orig(self);
-                if (NetworkServer.active && self.characterBody)
-                {
-                    if (self.characterBody.HasBuff(SlideBuff))
-                    {
-                        self.characterBody.RemoveBuff(SlideBuff);
-                    }
-                }
-            };*/
+            //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Commando.DodgeState");  //base speed is 5/2.5
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.DodgeState", "initialSpeedCoefficient", "7.25");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.DodgeState", "finalSpeedCoefficient", "3.625");
         }
 
         private void SlideStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
