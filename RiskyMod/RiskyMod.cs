@@ -53,6 +53,7 @@ namespace RiskyMod
     [BepInDependency("com.TheTimeSweeper.AcridHitboxBuff", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.AcridBlightStack", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.LunarWispFalloff", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.BeetleQueenPlus", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.5.0")]
@@ -142,8 +143,9 @@ namespace RiskyMod
             //Croco
             BiggerMeleeHitbox.enabled = BiggerMeleeHitbox.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TheTimeSweeper.AcridHitboxBuff");
             BlightStack.enabled = BlightStack.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AcridBlightStack");
-            
+
             //Enemies
+            BeetleQueen.enabled = BeetleQueen.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BeetleQueenPlus");
             LunarWisp.enableFalloff = LunarWisp.enableFalloff && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.LunarWispFalloff");
         }
 
@@ -392,6 +394,8 @@ namespace RiskyMod
             Parent.enabled = Config.Bind(monsterString, "Parent", true, "Enable changes to this monster.").Value;
 
             LunarWisp.enabled = Config.Bind(monsterString, "Lunar Wisp", true, "Enable changes to this monster.").Value;
+
+            BeetleQueen.enabled = Config.Bind(monsterString, "Beetle Queen", true, "Enable changes to this monster.").Value;
             Vagrant.enabled = Config.Bind(monsterString, "Wandering Vagrant", true, "Enable changes to this monster.").Value;
             Gravekeeper.enabled = Config.Bind(monsterString, "Grovetender", true, "Enable changes to this monster.").Value;
         }
@@ -440,6 +444,7 @@ namespace RiskyMod
             TurretChanges.enabled = Config.Bind(engiString, "Turret Changes", true, "Enable turret changes.").Value;
 
             MageCore.enabled = Config.Bind(mageString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+            EntityStates.RiskyMod.Mage.FlamethrowerScepter.maxFlames = Config.Bind(mageString, "Flamethrower Scepter Max Flames", 30, "Max napalm pools left behind by the Scepter Flamethrower if Flamethrower changes are enabled.").Value;
 
             TreebotCore.enabled = Config.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             TreebotCore.enableSecondarySkillChanges = Config.Bind(treebotString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;

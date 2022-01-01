@@ -25,6 +25,7 @@ namespace RiskyMod.Enemies
 
             new LunarWisp();
 
+            new BeetleQueen();
             new Vagrant();
             new Gravekeeper();
         }

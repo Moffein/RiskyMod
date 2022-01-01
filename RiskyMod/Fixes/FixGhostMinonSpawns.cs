@@ -32,7 +32,7 @@ namespace RiskyMod.Fixes
                         int decayCount = self.characterBody.inventory.GetItemCount(RoR2Content.Items.HealthDecay);
                         if (decayCount > 0)
                         {
-                            minionInventory.GiveItem(RoR2Content.Items.HealthDecay, decayCount);
+                            minionInventory.GiveItem(RoR2Content.Items.HealthDecay, Math.Max(30, decayCount));
                         }
                     }
                     return minionInventory;

@@ -6,6 +6,8 @@ namespace EntityStates.RiskyMod.Mage
 {
     public class FlamethrowerScepter : Flamethrower
     {
+        public static int maxFlames = 30;
+        public int flames;
         public override void LoadStats()
         {
             base.LoadStats();
@@ -13,12 +15,17 @@ namespace EntityStates.RiskyMod.Mage
             this.loadMaxDistance = 30f;
             //this.loadignitePercentChance = 100f;
             //this.loadBaseTickFrequency = 14f/3f;
+            flames = 0;
         }
 
         public override void ModifyBullet(BulletAttack ba)
         {
             base.ModifyBullet(ba);
-            ba.AddModdedDamageType(ScepterHandler.FlamethrowerScepterDamage);
+            if (flames < maxFlames)
+            {
+                ba.AddModdedDamageType(ScepterHandler.FlamethrowerScepterDamage);
+                flames++;
+            }
         }
     }
 }
