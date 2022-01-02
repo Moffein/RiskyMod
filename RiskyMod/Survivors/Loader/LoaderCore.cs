@@ -101,10 +101,10 @@ namespace RiskyMod.Survivors.Loader
         private void ModifyUtilities(SkillLocator sk)
         {
             if (!modifyUtilities) return;
-            sk.utility.skillFamily.variants[0].skillDef.baseRechargeInterval = 7f;
+            sk.utility.skillFamily.variants[0].skillDef.baseRechargeInterval = 6f;
             sk.utility.skillFamily.variants[0].skillDef.skillDescriptionToken = "LOADER_UTILITY_DESCRIPTION_RISKYMOD";
 
-            sk.utility.skillFamily.variants[1].skillDef.baseRechargeInterval = 7f;
+            sk.utility.skillFamily.variants[1].skillDef.baseRechargeInterval = 6f;
             sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "LOADER_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
 
             SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.baseswingchargedfist", "velocityDamageCoefficient", "0.2");  //orig 0.3
