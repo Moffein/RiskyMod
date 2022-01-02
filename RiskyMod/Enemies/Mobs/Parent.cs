@@ -22,6 +22,24 @@ namespace RiskyMod.Enemies.Mobs
             SetStateOnHurt ssoh = enemyObject.GetComponent<SetStateOnHurt>();
             ssoh.canBeHitStunned = true;
             ssoh.canBeStunned = true;
+
+            EntityStateMachine weapon = null;
+            EntityStateMachine[] stateMachines = enemyObject.GetComponents<EntityStateMachine>();
+            foreach (EntityStateMachine esm in stateMachines)
+            {
+                switch (esm.customName)
+                {
+                    case "Weapon":
+                        weapon = esm;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (weapon)
+            {
+                ssoh.idleStateMachine = new EntityStateMachine[] { weapon };
+            }
         }
 
         private void SlamFalloff()
