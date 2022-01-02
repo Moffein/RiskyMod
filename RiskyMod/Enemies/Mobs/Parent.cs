@@ -44,7 +44,7 @@ namespace RiskyMod.Enemies.Mobs
         {
             CharacterSpawnCard csc = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscparent");
             //Debug.Log("\n\n\n\n\n\nCost: " + csc.directorCreditCost);
-            csc.directorCreditCost = 65;
+            csc.directorCreditCost = 75;    //65 to be proportional to parent, 75 for Elder Lemurian
         }
     }
 }
