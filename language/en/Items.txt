@@ -38,7 +38,7 @@
 	"ITEM_EXPLODEONDEATH_DESC_RISKYMOD": "On killing an enemy, spawn a <style=cIsDamage>lava pillar</style> in a <style=cIsDamage>16m</style> radius for <style=cIsDamage>350%</style> <style=cStack>(+280% per stack)</style> base damage.",
 	
 	"ITEM_SQUIDTURRET_PICKUP_RISKYMOD": "Taking heavy damage summons a Squid Turret nearby.",
-	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Chance on taking damage to summon a <style=cIsDamage>Squid Turret</style> that <style=cIsUtility>distracts</style> and attacks nearby enemies at <style=cIsDamage>100% <style=cStack>(+100% per stack)</style> attack speed</style>. Chance increases the more damage you take. Can have up to <style=cIsUtility>2</style> <style=cStack>(+1 per stack)</style> Squids at a time.",
+	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Chance on taking damage to summon a <style=cIsDamage>Squid Turret</style> with <style=cIsHealing>100% <style=cStack>(+30% per stack)</style> health</style> that <style=cIsUtility>distracts</style> and attacks nearby enemies at <style=cIsDamage>100% <style=cStack>(+100% per stack)</style> attack speed</style>. Chance increases the more damage you take. Can have up to <style=cIsUtility>3</style> squids at a time.",
 	
 	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>chain lightning</style> for <style=cIsDamage>80%</style> <style=cStack>(+20% per stack)</style> TOTAL damage on up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> targets within <style=cIsDamage>25m</style>.",
 	
@@ -73,7 +73,7 @@
 	"ITEM_BOUNCENEARBY_DESC_RISKYMOD": "<style=cIsDamage>20%</style> <style=cStack>(+20% per stack)</style> chance on hit to <style=cIsDamage>fire homing hooks</style> at up to <style=cIsDamage>10</style> <style=cStack>(+5 per stack)</style> enemies for <style=cIsDamage>100%</style> <style=cStack>(+25% per stack)</style> TOTAL damage.",
 	
 	"ITEM_GHOSTONKILL_PICKUP_RISKYMOD": "Killing an enemy summons a ghost. Recharges over time.",
-	"ITEM_GHOSTONKILL_DESC_RISKYMOD": "Killing an enemy <style=cIsDamage>spawns a ghost</style> of the killed enemy with <style=cIsDamage>1500%</style> damage. Lasts <style=cIsDamage>30s</style> <style=cStack>(+30s per stack)</style>. Recharges every <style=cIsUtility>20</style> seconds. Can have up to <style=cIsUtility>3</style> <style=cStack>(+1 per stack)</style> ghosts at a time.", 
+	"ITEM_GHOSTONKILL_DESC_RISKYMOD": "Killing an enemy <style=cIsDamage>spawns a ghost</style> of the killed enemy with <style=cIsDamage>1500%</style> <style=cStack>(+450% per stack)</style> damage. Lasts <style=cIsDamage>30s</style> <style=cStack>(+30s per stack)</style>. Recharges every <style=cIsUtility>20</style> seconds. Can have up to <style=cIsUtility>3</style> ghosts at a time.", 
 	
 	"ITEM_BEHEMOTH_DESC_RISKYMOD": "All your <style=cIsDamage>attacks explode</style> in a <style=cIsDamage>4m</style> radius for a bonus <style=cIsDamage>60%</style> <style=cStack>(+20% per stack)</style> TOTAL damage to nearby enemies.",
 	

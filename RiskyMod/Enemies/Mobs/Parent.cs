@@ -13,6 +13,7 @@ namespace RiskyMod.Enemies.Mobs
             if (!enabled) return;
             EnableStuns();
             SlamFalloff();
+            LowerCreditCost();
         }
 
         private void EnableStuns()
@@ -37,6 +38,13 @@ namespace RiskyMod.Enemies.Mobs
                     return blastAttack;
                 });
             };
+        }
+
+        private void LowerCreditCost()
+        {
+            CharacterSpawnCard csc = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscparent");
+            //Debug.Log("\n\n\n\n\n\nCost: " + csc.directorCreditCost);
+            csc.directorCreditCost = 65;
         }
     }
 }

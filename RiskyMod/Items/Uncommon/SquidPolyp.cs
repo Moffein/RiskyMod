@@ -14,6 +14,7 @@ namespace RiskyMod.Items.Uncommon
     {
         public static bool enabled = true;
         public static GameObject procEffectPrefab;
+        public static bool scaleCount = false;
 
         //Does this need turretblacklist?
         public SquidPolyp()
@@ -80,12 +81,13 @@ namespace RiskyMod.Items.Uncommon
                                 component6.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
                                 if (self.itemCounts.invadingDoppelganger > 0)
                                 {
-                                    //Doppelganger Turrets decay faster.
+                                    //Doppelganger Turrets decay faster and deal less damage.
                                     component6.inventory.GiveItem(RoR2Content.Items.InvadingDoppelganger);
                                     component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 15);
                                 }
                                 else
                                 {
+                                    component6.inventory.GiveItem(RoR2Content.Items.BoostHp, 3 * (polypCount - 1));
                                     component6.inventory.GiveItem(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
                                     component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 30);
                                 }
@@ -117,7 +119,14 @@ namespace RiskyMod.Items.Uncommon
 
         public bool CanSpawnSquid()
         {
-            return squidList.Count < 1 + (inventory ? inventory.GetItemCount(RoR2Content.Items.Squid) : 0);
+            if (SquidPolyp.scaleCount)
+            {
+                return squidList.Count < 1 + (inventory ? inventory.GetItemCount(RoR2Content.Items.Squid) : 0);
+            }
+            else
+            {
+                return squidList.Count < 3;
+            }
         }
 
         public void FixedUpdate()

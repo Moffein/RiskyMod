@@ -25,7 +25,6 @@ namespace RiskyMod.Survivors.Loader
 
         public static float GetScaledSpeed(float speed)
         {
-
             if (speed > 100f)
             {
                 speed = 100f + 1.5f * (speed - 100f);

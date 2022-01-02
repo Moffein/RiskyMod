@@ -15,7 +15,7 @@ namespace RiskyMod.Items.Common
         public static bool enabled = true;
         public static DamageAPI.ModdedDamageType CrowbarDamage;
         public static CrowbarManager crowbarManager;
-        public static float damageCoefficient = 0.35f;
+        public static float damageCoefficient = 0.45f;
 
         public static ItemDef itemDef = RoR2Content.Items.Crowbar;
 

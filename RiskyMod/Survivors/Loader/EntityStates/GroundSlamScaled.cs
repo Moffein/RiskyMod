@@ -127,7 +127,7 @@ namespace EntityStates.RiskyMod.Loader
 		public static float minimumDuration = 0.1f;
 		public static float blastRadius = 10f;
 		public static float blastProcCoefficient = 1f;
-		public static float blastDamageCoefficient = 14f;
+		public static float blastDamageCoefficient = 16f;
 		public static string enterSoundString = "Play_loader_R_variant_whooshDown";
 		public static float initialVerticalVelocity = -20f;
 		public static float exitVerticalVelocity = 12f;

@@ -324,6 +324,7 @@ namespace RiskyMod
             Razorwire.enabled = Config.Bind(uncommonString, "Razorwire", true, itemConfigDescString).Value;
             RoseBuckler.enabled = Config.Bind(uncommonString, "Rose Buckler", true, itemConfigDescString).Value;
             SquidPolyp.enabled = Config.Bind(uncommonString, "Squid Polyp", true, itemConfigDescString).Value;
+            SquidPolyp.scaleCount = Config.Bind(uncommonString, "Squid Polyp - Stacks Increase Max Squids", false, "Extra stacks allow for more squids to spawn. Will lag in MP.").Value;
             Stealthkit.enabled = Config.Bind(uncommonString, "Old War Stealthkit", true, itemConfigDescString).Value;
             Ukulele.enabled = Config.Bind(uncommonString, "Ukulele", true, itemConfigDescString).Value;
             WarHorn.enabled = Config.Bind(uncommonString, "War Horn", true, itemConfigDescString).Value;
@@ -344,6 +345,8 @@ namespace RiskyMod
             Behemoth.enabled = Config.Bind(legendaryString, "Brilliant Behemoth", true, itemConfigDescString).Value;
             LaserTurbine.enabled = Config.Bind(legendaryString, "Resonance Disc", true, itemConfigDescString).Value;
             HappiestMask.enabled = Config.Bind(legendaryString, "Happiest Mask", true, itemConfigDescString).Value;
+            HappiestMask.scaleCount = Config.Bind(legendaryString, "Happiest Mask - Stacks Increase Max Ghosts", false, "Extra stacks allow for more ghosts to spawn. Will lag in MP.").Value;
+            HappiestMask.noGhostLimit = Config.Bind(legendaryString, "Happiest Mask - Remove Ghost Limit", false, "Removes the ghost limit at all times. Definitely will lag.").Value;
         }
 
         private void ConfigBossItems()

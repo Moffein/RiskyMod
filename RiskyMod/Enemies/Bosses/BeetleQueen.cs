@@ -41,8 +41,8 @@ namespace RiskyMod.Enemies.Bosses
             BeetleCard = Resources.Load<SpawnCard>("spawncards/characterspawncards/cscbeetle");
             BeetleGuardCard = Resources.Load<SpawnCard>("spawncards/characterspawncards/cscbeetleguard");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.SummonEggs", "spawnCard", BeetleCard);
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.SummonEggs", "maxSummonCount", "7");
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.SummonEggs", "summonInterval", "0.3");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.SummonEggs", "maxSummonCount", "6");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.SummonEggs", "summonInterval", "0.6");
 
             On.EntityStates.BeetleQueenMonster.SummonEggs.SummonEgg += SummonEgg2;
         }
@@ -136,7 +136,7 @@ namespace RiskyMod.Enemies.Bosses
         {
 
             GameObject acidProjectile = Resources.Load<GameObject>("prefabs/projectiles/beetlequeenacid").InstantiateClone("RiskyMod_BeetleQueenAcid", true);
-            acidProjectile.transform.localScale = 2.5f * Vector3.one; //Original scale is (1, 1, 1), Beetle Queen Plus is 2.5x
+            acidProjectile.transform.localScale = 2f * Vector3.one; //Original scale is (1, 1, 1), Beetle Queen Plus is 2.5x
             ProjectileDotZone pdz = acidProjectile.GetComponent<ProjectileDotZone>();
             pdz.overlapProcCoefficient = 0.3f;
             pdz.resetFrequency = 5f;

@@ -16,6 +16,9 @@ namespace RiskyMod.Items.Legendary
         public static BuffDef GhostCooldown;
         public static BuffDef GhostReady;
 
+        public static bool scaleCount = false;
+        public static bool noGhostLimit = false;
+
         public HappiestMask()
         {
             if (!enabled) return;
@@ -49,7 +52,7 @@ namespace RiskyMod.Items.Legendary
             GhostReady.iconSprite = RoR2Content.Buffs.BanditSkull.iconSprite;
             BuffAPI.Add(new CustomBuff(GhostReady));
 
-            OnCharacterDeath.OnCharacterDeathInventoryActions += SpawnGhost;
+            OnCharacterDeath.OnCharacterDeathInventoryActions += TriggerMaskGhost;
             On.RoR2.CharacterBody.OnInventoryChanged += (orig, self) =>
             {
                 orig(self);
@@ -60,7 +63,7 @@ namespace RiskyMod.Items.Legendary
             };
         }
 
-        private static void SpawnGhost(GlobalEventManager self, DamageReport damageReport, CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody)
+        private static void TriggerMaskGhost(GlobalEventManager self, DamageReport damageReport, CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody)
         {
             int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.GhostOnKill);
             if (itemCount > 0)
@@ -70,7 +73,7 @@ namespace RiskyMod.Items.Legendary
                     GhostOnKillBehavior gokb = attackerBody.GetComponent<GhostOnKillBehavior>();
                     if (gokb && gokb.CanSpawnGhost())
                     {
-                        gokb.AddGhost(SpawnMaskGhost(victimBody, attackerBody, itemCount * 30));
+                        gokb.AddGhost(SpawnMaskGhost(victimBody, attackerBody, itemCount));
                         for (int i = 1; i <= 20; i++)
                         {
                             attackerBody.AddTimedBuff(GhostCooldown.buffIndex, i);
@@ -79,7 +82,8 @@ namespace RiskyMod.Items.Legendary
                 }
             }
         }
-        public static CharacterBody SpawnMaskGhost(CharacterBody targetBody, CharacterBody ownerBody, int duration)
+
+        public static CharacterBody SpawnMaskGhost(CharacterBody targetBody, CharacterBody ownerBody, int itemCount)
         {
             if (!NetworkServer.active)
             {
@@ -121,10 +125,10 @@ namespace RiskyMod.Items.Legendary
                 {
                     inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
                     inventory.GiveItem(RoR2Content.Items.UseAmbientLevel.itemIndex);
-                    inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, duration);
+                    inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 30 * itemCount);
                     if (ownerBody && ownerBody.teamComponent && ownerBody.teamComponent.teamIndex == TeamIndex.Player)
                     {
-                        inventory.GiveItem(RoR2Content.Items.BoostDamage.itemIndex, 150);
+                        inventory.GiveItem(RoR2Content.Items.BoostDamage.itemIndex, 105 + 45 * itemCount);
                     }
                 }
             }
@@ -184,7 +188,16 @@ namespace RiskyMod.Items.Legendary
             public bool CanSpawnGhost()
             {
                 int itemCount = base.body.inventory.GetItemCount(RoR2Content.Items.GhostOnKill.itemIndex);
-                return activeGhosts.Count < 3 + (itemCount - 1);
+                if (itemCount <= 0) return false;
+
+                if (noGhostLimit) return true;
+
+                int maxGhosts = 3;
+                if (scaleCount)
+                {
+                    maxGhosts += itemCount - 1;
+                }
+                return activeGhosts.Count < maxGhosts;
             }
 
             public void AddGhost(CharacterBody cb)
