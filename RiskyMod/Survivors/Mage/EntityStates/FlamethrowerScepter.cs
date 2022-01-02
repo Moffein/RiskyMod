@@ -21,7 +21,7 @@ namespace EntityStates.RiskyMod.Mage
         public override void ModifyBullet(BulletAttack ba)
         {
             base.ModifyBullet(ba);
-            if (flames < maxFlames)
+            if (flames < maxFlames && (ba.damageType & DamageType.IgniteOnHit) == DamageType.IgniteOnHit)
             {
                 ba.AddModdedDamageType(ScepterHandler.FlamethrowerScepterDamage);
                 flames++;

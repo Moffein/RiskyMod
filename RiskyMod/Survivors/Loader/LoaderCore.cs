@@ -107,7 +107,7 @@ namespace RiskyMod.Survivors.Loader
             sk.utility.skillFamily.variants[1].skillDef.baseRechargeInterval = 5f;
             sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "LOADER_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
 
-            SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.baseswingchargedfist", "velocityDamageCoefficient", "0.2222222222"); //20/27
+            SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.baseswingchargedfist", "velocityDamageCoefficient", "0.2");  //orig 0.3
 
             new UtilityDamageType();
             new VelocityScaling();

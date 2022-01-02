@@ -3,6 +3,7 @@ using R2API;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using RiskyMod.SharedHooks;
+using UnityEngine;
 
 namespace RiskyMod.Items.Common
 {
@@ -28,6 +29,8 @@ namespace RiskyMod.Items.Common
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
             GetStatsCoefficient.HandleStatsInventoryActions += HandleStatsInventory;
+
+            SneedUtils.SneedUtils.RemoveItemTag(RoR2Content.Items.FlatHealth, ItemTag.OnKillEffect);
         }
 
         private void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)

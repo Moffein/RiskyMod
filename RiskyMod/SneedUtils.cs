@@ -46,6 +46,16 @@ namespace SneedUtils
             }
         }
 
+        public static void AddItemTag(ItemDef itemDef, ItemTag tag)
+        {
+            if (!itemDef.ContainsTag(tag))
+            {
+                List<ItemTag> tags = itemDef.tags.ToList();
+                tags.Add(tag);
+                itemDef.tags = tags.ToArray();
+            }
+        }
+
         public static void DumpEntityStateConfig(EntityStateConfiguration esc)
         {
 

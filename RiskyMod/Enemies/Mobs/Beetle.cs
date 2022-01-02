@@ -19,9 +19,8 @@ namespace RiskyMod.Enemies.Mobs
             CharacterBody cb = go.GetComponent<CharacterBody>();
 
             cb.baseMaxHealth = 96f;
-            cb.baseMoveSpeed = 9f;
-
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
+            cb.baseMoveSpeed = 8.4f;
         }
 
         private void ModifyAttack()

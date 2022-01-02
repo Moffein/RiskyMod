@@ -15,7 +15,7 @@
 	"BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Slayer</style>. Rapidly fire a revolver shots for <style=cIsDamage>6x100% damage</style>. Each consecutive hit deals <style=cIsDamage>20%</style> extra damage.",
 	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Stunning</style>. Throw a hidden blade for <style=cIsDamage>240% damage</style>. Critical Strikes also cause <style=cIsHealth>hemorrhaging</style>.",
 	
-	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD ": "Assassinate",
+	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD": "Assassinate",
 	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Slayer</style>. Fire two revolver shots for <style=cIsDamage>2x1200% damage</style>.",
 	"BANDIT2_SPECIAL_ALT_SCEPTER_NAME_RISKYMOD" : "Fistful of Lead",
 	"BANDIT2_SPECIAL_ALT_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Slayer</style>. Rapidly fire a revolver shots for <style=cIsDamage>12x100% damage</style>. Each consecutive hit deals <style=cIsDamage>20%</style> extra damage.",
@@ -61,10 +61,10 @@
 	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "Release a deadly disease that deals <style=cIsDamage>10x100% damage</style>. The disease spreads to up to <style=cIsDamage>20</style> targets. If an enemy is killed by Pandemic, <style=cIsHealing>you are healed</style>.",
 	
 	"LOADER_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Stunning</style>. Fire your gauntlet forward, dealing <style=cIsDamage>320% damage</style> and <style=cIsUtility>pulling</style> you to the target.",
-	"LOADER_UTILITY_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Heavy</style>. Charge up a <style=cIsUtility>piercing</style> punch for <style=cIsDamage>400%-2000% damage</style>.",
-	"LOADER_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Heavy</style>. Charge up a <style=cIsUtility>single-target</style> punch for <style=cIsDamage>1600% damage</style> that <style=cIsDamage>zaps</style> enemies in a cone for <style=cIsDamage>800% damage</style>.",
+	"LOADER_UTILITY_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Heavy</style>. Charge up a <style=cIsUtility>piercing</style> punch for <style=cIsDamage>400%-1800% damage</style>.",
+	"LOADER_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Heavy</style>. Charge up a <style=cIsUtility>single-target</style> punch for <style=cIsDamage>1400% damage</style> that <style=cIsDamage>zaps</style> enemies in a cone for <style=cIsDamage>750% damage</style>.",
 	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Throw a <style=cIsUtility>Magnetic</style> pylon that <style=cIsDamage>zaps</style> up to <style=cIsDamage>6</style> nearby enemies for <style=cIsDamage>50% damage</style>. Can be <style=cIsUtility>grappled</style>.",
-	"LOADER_SPECIAL_ALT_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Heavy</style>. <style=cIsDamage>Stunning</style>. Slam your fists down, dealing <style=cIsDamage>1500%</style> damage on impact.",
+	"LOADER_SPECIAL_ALT_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Heavy</style>. <style=cIsDamage>Stunning</style>. Slam your fists down, dealing <style=cIsDamage>1400%</style> damage on impact.",
 	
 	"MAGE_SPECIAL_FIRE_DESCRIPTION_RISKYMOD" : "Burn all enemies in front of you for <style=cIsDamage>20x100% damage</style>. The number of shots increases with attack speed.",
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Burst into the sky, dealing <style=cIsDamage>800% damage</style>.",

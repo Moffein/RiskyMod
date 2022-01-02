@@ -91,7 +91,13 @@ namespace RiskyMod.Items.Common
             On.RoR2.Stage.Start += (orig, self) =>
             {
                 orig(self);
-                if (NetworkServer.active) Crowbar.crowbarManager.ClearList();
+                if (NetworkServer.active)
+                {
+                    if (Crowbar.crowbarManager)
+                    {
+                        Crowbar.crowbarManager.ClearList();
+                    }
+                }
             };
 
             TakeDamage.ModifyInitialDamageInventoryActions += CrowbarDamageBoost;
@@ -112,15 +118,17 @@ namespace RiskyMod.Items.Common
                     && damageInfo.procCoefficient > 0f
                     && !damageInfo.HasModdedDamageType(Crowbar.CrowbarDamage))
                 {
-                    float damageCoefficient = damageInfo.damage / attackerBody.damage;
+                    /*float damageCoefficient = damageInfo.damage / attackerBody.damage;
                     if (damageCoefficient >= 4f)
                     {
-                        if (Crowbar.crowbarManager.CanApplyCrowbar(self, attackerBody))
-                        {
-                            damageInfo.damage *= GetCrowbarMult(crowbarCount);
-                            EffectManager.SimpleImpactEffect(HealthComponent.AssetReferences.crowbarImpactEffectPrefab, damageInfo.position, -damageInfo.force, true);
-                            damageInfo.AddModdedDamageType(Crowbar.CrowbarDamage);
-                        }
+                        
+                    }*/
+
+                    if (Crowbar.crowbarManager.CanApplyCrowbar(self, attackerBody))
+                    {
+                        damageInfo.damage *= GetCrowbarMult(crowbarCount);
+                        EffectManager.SimpleImpactEffect(HealthComponent.AssetReferences.crowbarImpactEffectPrefab, damageInfo.position, -damageInfo.force, true);
+                        damageInfo.AddModdedDamageType(Crowbar.CrowbarDamage);
                     }
                 }
             }

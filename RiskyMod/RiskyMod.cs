@@ -393,11 +393,16 @@ namespace RiskyMod
 
             Parent.enabled = Config.Bind(monsterString, "Parent", true, "Enable changes to this monster.").Value;
 
+            LunarGolem.enabled = Config.Bind(monsterString, "Lunar Golem", true, "Enable changes to this monster.").Value;
             LunarWisp.enabled = Config.Bind(monsterString, "Lunar Wisp", true, "Enable changes to this monster.").Value;
 
             BeetleQueen.enabled = Config.Bind(monsterString, "Beetle Queen", true, "Enable changes to this monster.").Value;
             Vagrant.enabled = Config.Bind(monsterString, "Wandering Vagrant", true, "Enable changes to this monster.").Value;
             Gravekeeper.enabled = Config.Bind(monsterString, "Grovetender", true, "Enable changes to this monster.").Value;
+            SCU.enabled = Config.Bind(monsterString, "Solus Control Unit", true, "Enable changes to this monster.").Value;
+
+
+            AWU.enabled = Config.Bind(monsterString, "Alloy Worship Unit", true, "Enable changes to this monster.").Value;
         }
 
         private void ConfigFireSelect()

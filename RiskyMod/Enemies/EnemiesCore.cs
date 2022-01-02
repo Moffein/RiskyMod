@@ -23,11 +23,15 @@ namespace RiskyMod.Enemies
 
             new Parent();
 
+            new LunarGolem();
             new LunarWisp();
 
             new BeetleQueen();
             new Vagrant();
             new Gravekeeper();
+            new SCU();
+
+            new AWU();
         }
     }
 }

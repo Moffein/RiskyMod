@@ -30,6 +30,8 @@ namespace RiskyMod.Items.Uncommon
 			};
 
 			ModifyFinalDamage.ModifyFinalDamageActions += GuillotineBonus;
+
+			SneedUtils.SneedUtils.RemoveItemTag(RoR2Content.Items.ExecuteLowHealthElite, ItemTag.AIBlacklist);
 		}
 		private static void GuillotineBonus(DamageMult damageMult, DamageInfo damageInfo,
 			HealthComponent victimHealth, CharacterBody victimBody,
