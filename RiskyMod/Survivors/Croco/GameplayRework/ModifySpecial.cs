@@ -33,6 +33,7 @@ namespace RiskyMod.Survivors.Croco
 
             diseaseScepterProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseScepterProjectile", true);
             diseaseScepterProjectile = ModifyDiseaseProjectile(diseaseScepterProjectile, EpidemicScepter);
+            ProjectileAPI.Add(diseaseScepterProjectile);
             EntityStates.RiskyMod.Croco.FireDiseaseProjectileScepter.projectilePrefab = diseaseScepterProjectile;
 
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireDiseaseProjectile", "projectilePrefab", diseaseProjectile);

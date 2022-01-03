@@ -17,7 +17,7 @@ namespace RiskyMod.Survivors.Loader
         public static bool grappleCancelsSprint = false;
 
         public static bool modifyStats = true;
-        public static bool modifyPassives = true;
+        public static bool modifyPrimaries = true;
         public static bool modifySecondaries = true;
         public static bool modifyUtilities = true;
         public static bool modifySpecials = true;
@@ -78,16 +78,9 @@ namespace RiskyMod.Survivors.Loader
 
         private void ModifySkills(SkillLocator sk)
         {
-            ModifyPassives(sk);
             ModifySecondaries(sk);
             ModifyUtilities(sk);
             ModifySpecials(sk);
-        }
-
-        private void ModifyPassives(SkillLocator sk)
-        {
-            if (!modifyPassives) return;
-            new ScrapBarrier();
         }
 
         private void ModifySecondaries(SkillLocator sk)
@@ -108,7 +101,6 @@ namespace RiskyMod.Survivors.Loader
             sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "LOADER_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
 
             SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.baseswingchargedfist", "velocityDamageCoefficient", "0.2");  //orig 0.3
-
             new UtilityDamageType();
             new VelocityScaling();
             new ModifyZapDamage();
@@ -135,6 +127,7 @@ namespace RiskyMod.Survivors.Loader
             LoadoutAPI.AddSkill(typeof(EntityStates.RiskyMod.Loader.GroundSlamScaled));
             EntityStates.RiskyMod.Loader.GroundSlamScaled.fistEffectPrefab = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Loader.GroundSlam", "fistEffectPrefab");
             sk.special.skillFamily.variants[1].skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Loader.PreGroundSlamScaled));
+            new SlamScrapBarrier();
             //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Loader.GroundSlam");
         }
     }

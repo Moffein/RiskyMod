@@ -6,18 +6,18 @@ using System;
 
 namespace RiskyMod.Survivors.Loader
 {
-    public class ScrapBarrier
+    public class SlamScrapBarrier
     {
-        public ScrapBarrier()
+        public SlamScrapBarrier()
         {
-            On.EntityStates.Loader.BaseSwingChargedFist.OnMeleeHitAuthority += (orig, self) =>
+            /*On.EntityStates.Loader.BaseSwingChargedFist.OnMeleeHitAuthority += (orig, self) =>
             {
                 orig(self);
                 if (self.healthComponent)
                 {
                     self.healthComponent.AddBarrierAuthority(LoaderMeleeAttack.barrierPercentagePerHit * self.healthComponent.fullBarrier);
                 }
-            };
+            };*/
 
             IL.EntityStates.Loader.GroundSlam.FixedUpdate += (il) =>
             {

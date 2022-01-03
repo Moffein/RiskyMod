@@ -42,7 +42,7 @@ namespace RiskyMod.Enemies.Bosses
             BeetleGuardCard = Resources.Load<SpawnCard>("spawncards/characterspawncards/cscbeetleguard");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.SummonEggs", "spawnCard", BeetleCard);
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.SummonEggs", "maxSummonCount", "6");
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.SummonEggs", "summonInterval", "0.6");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.SummonEggs", "summonInterval", "0.25");
 
             On.EntityStates.BeetleQueenMonster.SummonEggs.SummonEgg += SummonEgg2;
         }
@@ -64,7 +64,6 @@ namespace RiskyMod.Enemies.Bosses
                 Transform transform = (hurtBox && hurtBox.healthComponent) ? hurtBox.healthComponent.body.coreTransform : self.characterBody.coreTransform;
                 if (transform)
                 {
-                    Debug.Log(self.summonCount);
                     SpawnCard selectedCard = self.summonCount < SummonEggs.maxSummonCount ? SummonEggs.spawnCard : BeetleGuardCard;
                     DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(selectedCard, new DirectorPlacementRule
                     {

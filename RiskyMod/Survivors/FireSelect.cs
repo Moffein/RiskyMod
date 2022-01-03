@@ -1,6 +1,7 @@
 ﻿using RiskyMod.Survivors.Captain;
 using RiskyMod.Survivors.Croco;
 using RiskyMod.Survivors.Engi;
+using RiskyMod.Survivors.Loader;
 using UnityEngine;
 
 namespace RiskyMod.Survivors
@@ -15,6 +16,7 @@ namespace RiskyMod.Survivors
         {
             new CaptainFireModes();
             new EngiFireModes();
+            new LoaderPunchBrake();
         }
     }
 }
