@@ -25,7 +25,7 @@ namespace RiskyMod.Enemies.Mobs
                     );
                 c.EmitDelegate<Func<BlastAttack, BlastAttack>>(blastAttack =>
                 {
-                    blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                    blastAttack.falloffModel = BlastAttack.FalloffModel.SweetSpot;
                     return blastAttack;
                 });
             };

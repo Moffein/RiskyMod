@@ -11,13 +11,11 @@ namespace RiskyMod.MonoBehaviours
     {
 		private TeamFilter teamFilter;
 
-
 		public void Awake()
 		{
 			this.teamFilter = base.GetComponent<TeamFilter>();
 			this.sphereSearch = new SphereSearch();
 		}
-
 
 		public void FixedUpdate()
 		{

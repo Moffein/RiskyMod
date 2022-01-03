@@ -421,7 +421,7 @@ namespace RiskyMod
             CaptainFireModes.defaultButton = Config.Bind(fireSelectString, "Captain: Swap to Default", KeyCode.None, "Button to swap to the Default firemode.").Value;
             CaptainFireModes.autoButton = Config.Bind(fireSelectString, "Captain: Swap to Auto", KeyCode.None, "Button to swap to the Auto firemode.").Value;
             CaptainFireModes.chargeButton = Config.Bind(fireSelectString, "Captain: Swap to Charged", KeyCode.None, "Button to swap to the Charged firemode.").Value;
-            LoaderPunchBrake.enabled = Config.Bind(loaderString, "Loader: Primary Stops Big Punch", false, "Holding the Primary skill button while using Loader's utility punches will cause you to stop at the first target you hit.").Value;
+            LoaderPunchBrake.enabled = Config.Bind(fireSelectString, "Loader: Primary Stops Big Punch", false, "Holding the Primary skill button while using Loader's utility punches will cause you to stop at the first target you hit.").Value;
         }
 
         private void ConfigSurvivors()
