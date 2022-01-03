@@ -27,7 +27,7 @@ namespace RiskyMod.Survivors.Loader
         {
             if (speed > 100f)
             {
-                speed = 100f + 1.5f * (speed - 100f);
+                speed = 100f + 1.6f * (speed - 100f);
             }
             return speed;
         }

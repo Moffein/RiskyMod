@@ -23,7 +23,7 @@ namespace RiskyMod.Survivors.Loader
             RadialForceMassLimited rf = go.AddComponent<RadialForceMassLimited>();
             rf.radius = 25f;
             rf.damping = 0.5f;
-            rf.forceMagnitude = -1000f;  //-250f original
+            rf.forceMagnitude = -250f;
             rf.forceCoefficientAtEdge = 0.5f;
             rf.maxMass = 250f;  //same as alt grapple
 
@@ -48,9 +48,10 @@ namespace RiskyMod.Survivors.Loader
         public void Awake()
         {
             radialForce = base.GetComponent<RadialForceMassLimited>();
-            radialForce.enabled = false;
             pulseTimer = 0f;
             stopwatch = 0f;
+            radialForce.enabled = false;
+            EndPulse();
         }
 
         public void FixedUpdate()
@@ -61,6 +62,7 @@ namespace RiskyMod.Survivors.Loader
                 if (stopwatch > initialDelay)
                 {
                     hasStarted = true;
+                    radialForce.enabled = true;
                     stopwatch = 0f;
                     StartPulse();
                 }
@@ -86,12 +88,12 @@ namespace RiskyMod.Survivors.Loader
         public void StartPulse()
         {
             pulseTimer = pulseDuration;
-            radialForce.enabled = true;
+            radialForce.forceMagnitude = -500f;
         }
 
         public void EndPulse()
         {
-            radialForce.enabled = false;
+            radialForce.forceMagnitude = -100f;
         }
     }
 }
