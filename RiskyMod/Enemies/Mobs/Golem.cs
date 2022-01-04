@@ -17,6 +17,8 @@ namespace RiskyMod.Enemies.Mobs
 
         private void RemoveClapFalloff()
         {
+            //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.GolemMonster.ClapState");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.GolemMonster.ClapState", "damageCoefficient", "2.3");   //orig is 3
             IL.EntityStates.GolemMonster.ClapState.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -25,7 +27,7 @@ namespace RiskyMod.Enemies.Mobs
                     );
                 c.EmitDelegate<Func<BlastAttack, BlastAttack>>(blastAttack =>
                 {
-                    blastAttack.falloffModel = BlastAttack.FalloffModel.SweetSpot;
+                    blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                     return blastAttack;
                 });
             };

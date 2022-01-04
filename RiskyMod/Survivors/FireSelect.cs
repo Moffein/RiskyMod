@@ -16,7 +16,6 @@ namespace RiskyMod.Survivors
         {
             new CaptainFireModes();
             new EngiFireModes();
-            new LoaderPunchBrake();
         }
     }
 }
