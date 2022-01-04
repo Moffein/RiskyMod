@@ -75,8 +75,10 @@ namespace RiskyMod.MonoBehaviours
 
 		public void ApplyPullToHurtBox(HurtBox hurtBox)
 		{
-			if (!(hurtBox && hurtBox.healthComponent && hurtBox.healthComponent.body && hurtBox.healthComponent.body.rigidbody)
-				|| hurtBox.healthComponent.body.rigidbody.mass > maxMass)
+			if (!(hurtBox && hurtBox.healthComponent && hurtBox.healthComponent.body)
+				|| !hurtBox.healthComponent.body.rigidbody
+				|| hurtBox.healthComponent.body.rigidbody.mass > maxMass
+				|| (flyingOnly && !hurtBox.healthComponent.body.isFlying))
 			{
 				return;
 			}
@@ -111,6 +113,7 @@ namespace RiskyMod.MonoBehaviours
 		public float forceMagnitude;
 		public float forceCoefficientAtEdge = 0.5f;
 		public TetherVfxOrigin tetherVfxOrigin;
+		public bool flyingOnly = false;
 
 		private SphereSearch sphereSearch;
 	}

@@ -25,7 +25,8 @@ namespace RiskyMod.Survivors.Loader
             rf.damping = 0.5f;
             rf.forceMagnitude = -250f;
             rf.forceCoefficientAtEdge = 0.5f;
-            rf.maxMass = 250f;  //same as alt grapple
+            rf.maxMass = 400f;  //Greater wisps are 300. Yank hook is 250.
+            rf.flyingOnly = true;
 
             go.AddComponent<PylonPulseController>();
 
@@ -51,7 +52,6 @@ namespace RiskyMod.Survivors.Loader
             pulseTimer = 0f;
             stopwatch = 0f;
             radialForce.enabled = false;
-            EndPulse();
         }
 
         public void FixedUpdate()
@@ -88,12 +88,12 @@ namespace RiskyMod.Survivors.Loader
         public void StartPulse()
         {
             pulseTimer = pulseDuration;
-            radialForce.forceMagnitude = -500f;
+            radialForce.forceMagnitude = -750f;
         }
 
         public void EndPulse()
         {
-            radialForce.forceMagnitude = -100f;
+            radialForce.forceMagnitude = -150f;
         }
     }
 }
