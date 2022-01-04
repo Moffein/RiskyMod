@@ -104,6 +104,7 @@ namespace RiskyMod.Survivors.Loader
             //new UtilityDamageType();
             new VelocityScaling();
             new ModifyZapDamage();
+            new ZapConePosition();
 
             //SneedUtils.SneedUtils.DumpEntityStateConfig("entitystates.loader.baseswingchargedfist");
             //SneedUtils.SneedUtils.DumpEntityStateConfig("entitystates.loader.swingchargedfist");

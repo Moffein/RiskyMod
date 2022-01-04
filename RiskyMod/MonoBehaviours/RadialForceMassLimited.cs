@@ -75,13 +75,29 @@ namespace RiskyMod.MonoBehaviours
 
 		public void ApplyPullToHurtBox(HurtBox hurtBox)
 		{
-			if (!(hurtBox && hurtBox.healthComponent && hurtBox.healthComponent.body)
-				|| !hurtBox.healthComponent.body.rigidbody
-				|| hurtBox.healthComponent.body.rigidbody.mass > maxMass
-				|| (flyingOnly && !hurtBox.healthComponent.body.isFlying))
+			bool validBody = hurtBox && hurtBox.healthComponent && hurtBox.healthComponent.body;
+			bool validRigidbody = false;
+			bool validMass = false;
+			bool airborne = false;
+			if (validBody)
 			{
-				return;
+				validRigidbody = hurtBox.healthComponent.body.rigidbody;
+				if (validRigidbody)
+				{
+					validMass = hurtBox.healthComponent.body.rigidbody.mass <= maxMass;
+				}
+
+				if (hurtBox.healthComponent.body.isFlying || (hurtBox.healthComponent.body.characterMotor && !hurtBox.healthComponent.body.characterMotor.isGrounded))
+                {
+					airborne = true;
+                }
 			}
+
+			if (!validBody || !validRigidbody || !validMass || (flyingOnly && !airborne))
+            {
+				return;
+            }
+
 			HealthComponent healthComponent = hurtBox.healthComponent;
 			if (healthComponent && NetworkServer.active)
 			{
