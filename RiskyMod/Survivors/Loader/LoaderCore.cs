@@ -35,7 +35,7 @@ namespace RiskyMod.Survivors.Loader
             ModifySkills(sk);
 
             //Originally had a big all-around stat nerf, but it pretty much was just nerfing for the sake of nerfing and didn't really expand her gameplay or anything,
-            //which is contrary to the reason why this mod exists in the first place.
+            //which is counter to the reason why this mod exists in the first place.
         }
 
         private void SprintQoL(SkillLocator sk)
@@ -64,6 +64,7 @@ namespace RiskyMod.Survivors.Loader
             if (!modifySpecials) return;
             new SlamScrapBarrier();
             new BiggerSlamHitbox();
+            new SlamDamageType();
         }
     }
 }
