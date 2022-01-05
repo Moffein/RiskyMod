@@ -30,10 +30,10 @@ namespace RiskyMod.Enemies.Bosses
             if (!enabled) return;
 
             ModifyProjectile();
-            BuildBeetleBuff();
-            ModifySpawns();
+            //BuildBeetleBuff();
+            //ModifySpawns();
             GetStatsCoefficient.HandleStatsActions += ModifyBeetleJuice;
-            RebuildAI();
+            //RebuildAI();
         }
 
         private void ModifySpawns()
