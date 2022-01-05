@@ -34,6 +34,7 @@ using RiskyMod.Enemies.Mobs.Lunar;
 using RiskyMod.Survivors.Loader;
 using RiskyMod.Survivors.Mage;
 using RiskyMod.Enemies.Mobs;
+using RiskyMod.Survivors.Merc;
 
 namespace RiskyMod
 {
@@ -88,6 +89,7 @@ namespace RiskyMod
         private const string captainString = "Survivors: Captain";
         private const string mageString = "Survivors: Artificer";
         private const string loaderString = "Survivors: Loader";
+        private const string mercString = "Survivors: Mercenary";
 
         private const string fireSelectString = "Survivors - Firemode Selection (Client-Side)";
 
@@ -453,6 +455,8 @@ namespace RiskyMod
 
             MageCore.enabled = Config.Bind(mageString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             EntityStates.RiskyMod.Mage.FlamethrowerScepter.maxFlames = Config.Bind(mageString, "Flamethrower Scepter Max Flames", 30, "Max napalm pools left behind by the Scepter Flamethrower if Flamethrower changes are enabled.").Value;
+
+            MercCore.enabled = Config.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
 
             TreebotCore.enabled = Config.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             TreebotCore.enableSecondarySkillChanges = Config.Bind(treebotString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;

@@ -5,7 +5,6 @@
 	"KEYWORD_BLIGHT_RISKYMOD" : "<style=cKeywordName>Blighted</style><style=cSub>Deal <style=cIsDamage>300%</style> base damage over 5s. <i>Blight can stack.</i></style>",
 	"KEYWORD_POISON_RISKYMOD" : "<style=cKeywordName>Poisonous</style><style=cSub>Deal damage equal to <style=cIsDamage>7%</style> of their maximum health over 7s. <i>Poison cannot kill enemies.</i></style>",
 	"KEYWORD_INTERRUPT_RISKYMOD" : "<style=cKeywordName>Interrupting</style><style=cSub>Briefly interrupts an enemy's actions.",
-	"KEYWORD_SHOCKING_RISKYMOD" : "<style=cKeywordName>Shocking</style><style=cSub>Interrupts enemies and stuns them.",
-	"KEYWORD_MAGNETIC_RISKYMOD" : "<style=cKeywordName>Magnetic</style><style=cSub>Pulls light airborne enemies towards its center."
+	"KEYWORD_SHOCKING_RISKYMOD" : "<style=cKeywordName>Shocking</style><style=cSub>Interrupts enemies and stuns them."
 	}
 }

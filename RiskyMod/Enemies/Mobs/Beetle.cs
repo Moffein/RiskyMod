@@ -18,9 +18,13 @@ namespace RiskyMod.Enemies.Mobs
         {
             CharacterBody cb = go.GetComponent<CharacterBody>();
 
-            cb.baseMaxHealth = 96f;
-            cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
-            cb.baseMoveSpeed = 8.4f;
+            //cb.baseMaxHealth = 96f;
+            //cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
+            float newSpeed = 8.4f;
+            if (cb.baseMoveSpeed < newSpeed)    //Check in case SpeedyBeetles is installed
+            {
+                cb.baseMoveSpeed = newSpeed;
+            }
         }
 
         private void ModifyAttack()
