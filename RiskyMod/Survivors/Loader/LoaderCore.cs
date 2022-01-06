@@ -33,6 +33,8 @@ namespace RiskyMod.Survivors.Loader
 
             new BiggerSlamHitbox();
             ModifySkills(sk);
+            ModifyUtilities(sk);
+            ModifySpecials(sk);
 
             //Originally had a big all-around stat nerf, but it pretty much was just nerfing for the sake of nerfing and didn't really expand her gameplay or anything,
             //which is counter to the reason why this mod exists in the first place.
