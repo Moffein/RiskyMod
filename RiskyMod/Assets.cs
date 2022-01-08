@@ -28,6 +28,7 @@ namespace RiskyMod
         private static void LoadBuffIcons()
         {
             BuffIcons.Infusion = assetBundle.LoadAsset<Sprite>("BuffInfusion");
+            BuffIcons.Freeze = assetBundle.LoadAsset<Sprite>("BuffFreeze");
         }
 
         private static void LoadSkillIcons()
@@ -39,6 +40,7 @@ namespace RiskyMod
         public static class BuffIcons
         {
             public static Sprite Infusion;
+            public static Sprite Freeze;
         }
 
         public static class SkillIcons

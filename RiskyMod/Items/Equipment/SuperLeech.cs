@@ -24,7 +24,7 @@ namespace RiskyMod.Items.Equipment
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyBuffDef));
             };
 
-            TakeDamage.HandleOnHpLostAttackerActions += HealOnHit;
+            TakeDamage.OnHpLostAttackerActions += HealOnHit;
         }
 
         private void HealOnHit(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory inventory, float hpLost)

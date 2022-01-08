@@ -17,8 +17,7 @@ namespace RiskyMod.Enemies.Mobs
 
         private void RemoveClapFalloff()
         {
-            //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.GolemMonster.ClapState");
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.GolemMonster.ClapState", "damageCoefficient", "2.3");   //orig is 3
+            //the hitbox is pretty big, so falloff is needed
             IL.EntityStates.GolemMonster.ClapState.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -27,7 +26,7 @@ namespace RiskyMod.Enemies.Mobs
                     );
                 c.EmitDelegate<Func<BlastAttack, BlastAttack>>(blastAttack =>
                 {
-                    blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                    blastAttack.falloffModel = BlastAttack.FalloffModel.SweetSpot;
                     return blastAttack;
                 });
             };

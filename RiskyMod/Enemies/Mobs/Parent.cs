@@ -11,7 +11,7 @@ namespace RiskyMod.Enemies.Mobs
         public Parent()
         {
             if (!enabled) return;
-            EnableStuns();
+            //EnableStuns();
             SlamFalloff();
             LowerCreditCost();
         }

@@ -9,7 +9,8 @@ namespace RiskyMod.Tweaks
     public class BarrierDecay
     {
         public static bool enabled = true;
-        public static float minDecay = 1f / 3f;
+        public static float minDecay = 0.3f;
+        public static float maxDecay = 1.2f;
 
         public BarrierDecay()
         {
@@ -25,7 +26,7 @@ namespace RiskyMod.Tweaks
                 c.EmitDelegate<Func<float, HealthComponent, float>>((decayRate, self) =>
                 {
                     float barrierPercent = self.barrier / self.fullCombinedHealth;
-                    return decayRate * Mathf.Lerp(minDecay, 1f, barrierPercent);
+                    return decayRate * Mathf.Lerp(minDecay, maxDecay, barrierPercent);
                 });
             };
         }

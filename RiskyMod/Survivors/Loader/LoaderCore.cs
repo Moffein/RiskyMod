@@ -32,6 +32,7 @@ namespace RiskyMod.Survivors.Loader
             SprintQoL(sk);
 
             new BiggerSlamHitbox();
+            ModifyStats(loaderBody);
             ModifySkills(sk);
             ModifyUtilities(sk);
             ModifySpecials(sk);
@@ -49,6 +50,12 @@ namespace RiskyMod.Survivors.Loader
             sk.utility.skillFamily.variants[1].skillDef.cancelSprintingOnActivation = shiftCancelsSprint;
         }
 
+        private void ModifyStats(CharacterBody cb)
+        {
+            cb.baseMaxHealth = 140f;
+            cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
+        }
+
         private void ModifySkills(SkillLocator sk)
         {
             ModifyUtilities(sk);
@@ -64,6 +71,12 @@ namespace RiskyMod.Survivors.Loader
         private void ModifySpecials(SkillLocator sk)
         {
             if (!modifySpecials) return;
+            sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "LOADER_SPECIAL_DESCRIPTION_RISKYMOD";
+            sk.special.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_MAGNETIC_RISKYMOD" };
+            sk.special.skillFamily.variants[0].skillDef.cancelSprintingOnActivation = false;
+            SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.throwpylon", "damageCoefficient", "0.7");
+            new PylonMagnet();
+
             new SlamScrapBarrier();
             new BiggerSlamHitbox();
             new SlamDamageType();

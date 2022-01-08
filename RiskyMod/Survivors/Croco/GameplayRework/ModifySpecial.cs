@@ -97,7 +97,7 @@ namespace RiskyMod.Survivors.Croco
 
             EpidemicDebuff = ScriptableObject.CreateInstance<BuffDef>();
             EpidemicDebuff.buffColor = new Color(243f/255f, 202f/255f, 107f/255f);
-            EpidemicDebuff.canStack = false;
+            EpidemicDebuff.canStack = true;
             EpidemicDebuff.isDebuff = true;
             EpidemicDebuff.name = "RiskyMod_EpidemicDebuff";
             EpidemicDebuff.iconSprite = RoR2Content.Buffs.Entangle.iconSprite;

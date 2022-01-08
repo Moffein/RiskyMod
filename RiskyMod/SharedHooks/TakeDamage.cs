@@ -14,20 +14,19 @@ namespace RiskyMod.SharedHooks
     public class TakeDamage
     {
         public delegate void OnPercentHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost);
-        public static OnPercentHpLost HandleOnPercentHpLostActions = HandleOnPercentHpLostMethod;
-        private static void HandleOnPercentHpLostMethod(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost) { }
+        public static OnPercentHpLost HandleOnPercentHpLostActions;
 
         public delegate void OnHpLostAttacker(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory inventory, float hpLost);
-        public static OnHpLostAttacker HandleOnHpLostAttackerActions = HandleOnHpLostAttackerMethod;
-        private static void HandleOnHpLostAttackerMethod(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory inventory, float hpLost) { }
+        public static OnHpLostAttacker OnHpLostAttackerActions;
 
         public delegate void ModifyInitialDamage(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody);
-        public static ModifyInitialDamage ModifyInitialDamageActions = ModifyInitialDamageMethod;
-        private static void ModifyInitialDamageMethod(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody) { }
+        public static ModifyInitialDamage ModifyInitialDamageActions;
 
         public delegate void ModifyInitialDamageInventory(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory attackerInventory);
-        public static ModifyInitialDamageInventory ModifyInitialDamageInventoryActions = ModifyInitialDamageInventoryMethod;
-        private static void ModifyInitialDamageInventoryMethod(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory attackerInventory) { }
+        public static ModifyInitialDamageInventory ModifyInitialDamageInventoryActions;
+
+        public delegate void OnDamageTaken(DamageInfo damageInfo, HealthComponent self);
+        public static OnDamageTaken OnDamageTakenActions;
 
         public static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
@@ -39,11 +38,11 @@ namespace RiskyMod.SharedHooks
                 attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
                 if (attackerBody)
                 {
-                    ModifyInitialDamageActions.Invoke(damageInfo, self, attackerBody);
+                    if (ModifyInitialDamageActions != null) ModifyInitialDamageActions.Invoke(damageInfo, self, attackerBody);
                     attackerInventory = attackerBody.inventory;
                     if (attackerInventory)
                     {
-                        ModifyInitialDamageInventoryActions.Invoke(damageInfo, self, attackerBody, attackerInventory);
+                        if (ModifyInitialDamageInventoryActions != null) ModifyInitialDamageInventoryActions.Invoke(damageInfo, self, attackerBody, attackerInventory);
                     }
                 }
             }
@@ -54,57 +53,56 @@ namespace RiskyMod.SharedHooks
             {
                 if (self.alive)
                 {
-                    if (self.body)
+                    if (OnDamageTakenActions != null) OnDamageTakenActions.Invoke(damageInfo, self);
+
+                    if (damageInfo.attacker)
                     {
-                        if (damageInfo.attacker)
+                        if (attackerBody)
                         {
-                            if (attackerBody)
+                            if (SquidPolyp.enabled)
                             {
-                                if (SquidPolyp.enabled)
+                                //Squid Turrets are guaranteed to draw aggro upon dealing damage.
+                                //Based on https://github.com/DestroyedClone/PoseHelper/blob/master/HighPriorityAggroTest/HPATPlugin.cs
+                                if (damageInfo.attacker.name == "SquidTurretBody(Clone)")
                                 {
-                                    //Squid Turrets are guaranteed to draw aggro upon dealing damage.
-                                    //Based on https://github.com/DestroyedClone/PoseHelper/blob/master/HighPriorityAggroTest/HPATPlugin.cs
-                                    if (damageInfo.attacker.name == "SquidTurretBody(Clone)")
+                                    if (self.body.master && self.body.master.aiComponents.Length > 0)
                                     {
-                                        if (self.body.master && self.body.master.aiComponents.Length > 0)
+                                        foreach (BaseAI ai in self.body.master.aiComponents)
                                         {
-                                            foreach (BaseAI ai in self.body.master.aiComponents)
-                                            {
-                                                ai.currentEnemy.gameObject = attackerBody.gameObject;
-                                                ai.currentEnemy.bestHurtBox = attackerBody.mainHurtBox;
-                                                ai.enemyAttention = ai.enemyAttentionDuration;
-                                                ai.targetRefreshTimer = 5f;
-                                                ai.BeginSkillDriver(ai.EvaluateSkillDrivers());
-                                            }
+                                            ai.currentEnemy.gameObject = attackerBody.gameObject;
+                                            ai.currentEnemy.bestHurtBox = attackerBody.mainHurtBox;
+                                            ai.enemyAttention = ai.enemyAttentionDuration;
+                                            ai.targetRefreshTimer = 5f;
+                                            ai.BeginSkillDriver(ai.EvaluateSkillDrivers());
                                         }
                                     }
                                 }
                             }
                         }
+                    }
 
-                        Inventory inventory = self.body.inventory;
-                        if (inventory)
+                    Inventory inventory = self.body.inventory;
+                    if (inventory)
+                    {
+                        float totalHPLost = oldHP - self.combinedHealth;
+                        if (totalHPLost > 0f)
                         {
-                            float totalHPLost = oldHP - self.combinedHealth;
-                            if (totalHPLost > 0f)
+                            if (attackerBody)
                             {
-                                if (attackerBody)
-                                {
-                                    HandleOnHpLostAttackerActions.Invoke(damageInfo, self, attackerBody, inventory, totalHPLost);
-                                }
-                                float percentHPLost = totalHPLost / self.fullCombinedHealth * 100f;
-                                HandleOnPercentHpLostActions.Invoke(damageInfo, self, inventory, percentHPLost);
+                                if (OnHpLostAttackerActions != null)  OnHpLostAttackerActions.Invoke(damageInfo, self, attackerBody, inventory, totalHPLost);
                             }
+                            float percentHPLost = totalHPLost / self.fullCombinedHealth * 100f;
+                            if (HandleOnPercentHpLostActions != null) HandleOnPercentHpLostActions.Invoke(damageInfo, self, inventory, percentHPLost);
+                        }
 
-                            //This should happen after OnHpLost
-                            if (Planula.enabled)
+                        //This should happen after OnHpLost
+                        if (Planula.enabled)
+                        {
+                            int planulaCount = inventory.GetItemCount(RoR2Content.Items.ParentEgg);
+                            if (planulaCount > 0)
                             {
-                                int planulaCount = inventory.GetItemCount(RoR2Content.Items.ParentEgg);
-                                if (planulaCount > 0)
-                                {
-                                    self.Heal(planulaCount * 15f, default(ProcChainMask), true);
-                                    EntitySoundManager.EmitSoundServer(Resources.Load<NetworkSoundEventDef>("NetworkSoundEventDefs/nseParentEggHeal").index, self.gameObject);
-                                }
+                                self.Heal(planulaCount * 15f, default(ProcChainMask), true);
+                                EntitySoundManager.EmitSoundServer(Resources.Load<NetworkSoundEventDef>("NetworkSoundEventDefs/nseParentEggHeal").index, self.gameObject);
                             }
                         }
                     }

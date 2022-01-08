@@ -36,6 +36,7 @@ namespace RiskyMod.Survivors.Croco
             stopwatch = 0f;
             lingerStopwatch = 0f;
             ticksRemaining = scepter ? baseTickCountScepter : baseTickCount;
+            victim.AddBuff(ModifySpecial.EpidemicDebuff.buffIndex);
         }
 
         private void FixedUpdate()

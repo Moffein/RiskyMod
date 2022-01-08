@@ -12,9 +12,9 @@ namespace RiskyMod.Survivors.Croco
     public class RegenRework
     {
         public static BuffDef CrocoRegen2;
-        public static float regenDuration = 2f;
+        public static float regenDuration = 1.5f;
         private static float regenAmount;
-        private static float regenReductionOnHit = 0.3f;
+        private static float regenReductionOnHit = 0.36f;
         private static float totalRegenReduction;
 
         public RegenRework()

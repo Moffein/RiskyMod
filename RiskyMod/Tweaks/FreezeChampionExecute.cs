@@ -1,0 +1,131 @@
+﻿using System;
+using RoR2;
+using R2API;
+using UnityEngine;
+using MonoMod.Cil;
+using Mono.Cecil.Cil;
+
+namespace RiskyMod.Tweaks
+{
+    public class FreezeChampionExecute
+    {
+        public static bool enabled = true;
+        public static BuffDef FreezeDebuff;
+        public static float bossExecuteFractionMultiplier = 0.5f;
+
+        public FreezeChampionExecute()
+        {
+            if (!enabled) return;
+            BuildDebuff();
+            ModifyExecuteThreshold();
+            ApplyFreezeDebuff();
+        }
+
+        private void BuildDebuff()
+        {
+            FreezeDebuff = ScriptableObject.CreateInstance<BuffDef>();
+            FreezeDebuff.buffColor = Color.white;
+            FreezeDebuff.canStack = false;
+            FreezeDebuff.isDebuff = true;
+            FreezeDebuff.name = "RiskyMod_FreezeDebuff";
+            FreezeDebuff.iconSprite = Assets.BuffIcons.Freeze;
+            BuffAPI.Add(new CustomBuff(FreezeDebuff));
+            SharedHooks.GetStatsCoefficient.HandleStatsActions += ApplySlow;
+        }
+
+        private static void ApplySlow(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            if (sender.HasBuff(FreezeDebuff))
+            {
+                args.moveSpeedReductionMultAdd += 0.8f;
+            }
+        }
+
+        //This doesn't fix Guillotines not stacking with Freeze, but Guillotines are reworked anyways.
+        private void ModifyExecuteThreshold()
+        {
+            IL.RoR2.HealthComponent.TakeDamage += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(MoveType.After,
+                    x => x.MatchCall<HealthComponent>("get_isInFrozenState")
+                    );
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<bool, HealthComponent, bool>>((isFrozen, self) =>
+                {
+                    return isFrozen || self.body.HasBuff(FreezeDebuff);
+                });
+
+                c.GotoNext(MoveType.After,
+                    x => x.MatchLdcR4(0.3f)
+                    );
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
+                {
+                    return executeThreshold * (self.body.isChampion ? bossExecuteFractionMultiplier : 1f);
+                });
+
+                c.GotoNext(MoveType.After,
+                    x => x.MatchLdcR4(0.3f)
+                    );
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
+                {
+                    return executeThreshold * (self.body.isChampion ? bossExecuteFractionMultiplier : 1f);
+                });
+            };
+
+            IL.RoR2.HealthComponent.GetHealthBarValues += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(MoveType.After,
+                    x => x.MatchCall<HealthComponent>("get_isInFrozenState")
+                    );
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<bool, HealthComponent, bool>>((isFrozen, self) =>
+                {
+                    return isFrozen || self.body.HasBuff(FreezeDebuff);
+                });
+
+                c.GotoNext(MoveType.After,
+                    x => x.MatchLdcR4(0.3f)
+                    );
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
+                {
+                    return executeThreshold * (self.body.isChampion ? bossExecuteFractionMultiplier : 1f);
+                });
+            };
+        }
+
+        private void ApplyFreezeDebuff()
+        {
+            On.EntityStates.FrozenState.OnEnter += (orig, self) =>
+            {
+                orig(self);
+                if (self.characterBody)
+                {
+                    self.characterBody.AddBuff(FreezeDebuff);
+                }
+            };
+
+            On.EntityStates.FrozenState.OnExit += (orig, self) =>
+            {
+                orig(self);
+                if (self.characterBody && self.characterBody.HasBuff(FreezeDebuff))
+                {
+                    self.characterBody.RemoveBuff(FreezeDebuff);
+                }
+            };
+            SharedHooks.TakeDamage.OnDamageTakenActions += ApplyDebuff;
+        }
+
+        private static void ApplyDebuff(DamageInfo damageInfo, HealthComponent self)
+        {
+            if ((damageInfo.damageType & DamageType.Freeze2s) == DamageType.Freeze2s)
+            {
+                self.body.AddTimedBuff(FreezeDebuff.buffIndex, 2f * damageInfo.procCoefficient);    //this is how freeze is handled in SetStateOnHurt
+            }
+        }
+    }
+}

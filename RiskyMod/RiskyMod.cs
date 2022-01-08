@@ -171,6 +171,7 @@ namespace RiskyMod
             new Shock();
             new FixSlayer();
             new BarrierDecay();
+            new FreezeChampionExecute();
         }
 
         private void RunFixes()
@@ -283,7 +284,7 @@ namespace RiskyMod
             VengeancePercentHeal.enabled = Config.Bind(tweakString, "Reduce Vengeance Healing", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
             CloakBuff.enabled = Config.Bind(tweakString, "Cloak Buff", true, "Increases delay between position updates while cloaked.").Value;
             Shock.enabled = Config.Bind(tweakString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
-            BarrierDecay.enabled = Config.Bind(tweakString, "Barrier Decay Tweaks", true, "Barrier decays slower at low barrier values.").Value;
+            BarrierDecay.enabled = Config.Bind(tweakString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
 
             ConfigCommonItems();
             ConfigUncommonItems();
