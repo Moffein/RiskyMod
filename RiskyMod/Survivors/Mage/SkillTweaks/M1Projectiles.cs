@@ -40,7 +40,8 @@ namespace RiskyMod.Survivors.Mage
                 IncreaseProjectileLifetime(LightningBolt);
                 if (modifyPlasma)
                 {
-
+                    ProjectileImpactExplosion pie = LightningBolt.GetComponent<ProjectileImpactExplosion>();
+                    pie.blastRadius = 2.5f;
                 }
                 ProjectileAPI.Add(LightningBolt);
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireLightningBolt", "projectilePrefab", LightningBolt);

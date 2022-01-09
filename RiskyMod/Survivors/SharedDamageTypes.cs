@@ -76,18 +76,24 @@ namespace RiskyMod.Survivors
         {
             if (damageInfo.HasModdedDamageType(SharedDamageTypes.IgniteLevelScaled))
             {
-                float burnDuration = 6f * damageInfo.procCoefficient; //4s is default ignite, 6s needed to always be able to kill Wisps with burn damage alone
+                float burnDuration = 4f * damageInfo.procCoefficient; //4s is default ignite, 6s needed to always be able to kill Wisps with burn damage alone
+                float damageMult = 1f;
 
-                //Downscale damage to attacker's base damage
-                //This may lose some additive damage bonuses but that shouldn't be too noticeable
-                float damageMult = 1f / (1f + 0.2f * (attackerBody.level - 1f));
+                //Only works on weak enemies (Vultures, Imps, Lemurians, Beetles, Wisps, Jellyfish, Hermit Crabs)
+                if (victimBody.baseMaxHealth <= 140f)
+                {
+                    burnDuration *= 1.5f;
+                    //Downscale damage to attacker's base damage
+                    //This may lose some additive damage bonuses but that shouldn't be too noticeable
+                    damageMult = 1f / (1f + 0.2f * (attackerBody.level - 1f));
 
-                //Scale up damage based on enemy level
-                float targetLevel = Mathf.Max(victimBody.level, attackerBody.level);
-                damageMult *= 1f + 0.3f * (targetLevel - 1f);
+                    //Scale up damage based on enemy level
+                    float targetLevel = Mathf.Max(victimBody.level, attackerBody.level);
+                    damageMult *= 1f + 0.3f * (targetLevel - 1f);
 
-                //1.1 is used to reach the 2 shot breakpoint on Beetles/Lemurians
-                damageMult = Mathf.Max(1.1f * damageMult, 1f);
+                    //1.12 is breakpoint for 2shotting Beetles/Lemurians
+                    damageMult = Mathf.Max(1.15f * damageMult, 1f);
+                }
 
                 DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Burn, burnDuration, damageMult);
             }
