@@ -30,7 +30,7 @@ namespace RiskyMod.Items.Common
             int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.BarrierOnKill);
             if (itemCount > 0)
             {
-                attackerBody.healthComponent.AddBarrier(15f * itemCount);
+                attackerBody.healthComponent.AddBarrier((10.5f + 4.5f * attackerBody.level) * itemCount);
             }
         }
     }

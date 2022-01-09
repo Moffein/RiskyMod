@@ -6,6 +6,7 @@ using R2API;
 using System.Runtime.CompilerServices;
 using RoR2.Skills;
 using MonoMod.Cil;
+using Mono.Cecil.Cil;
 
 namespace RiskyMod.Survivors.Mage
 {
@@ -13,7 +14,7 @@ namespace RiskyMod.Survivors.Mage
     {
         public static bool enabled = true;
 
-        public static bool flamethrowerSprintCancel = false;
+        public static bool flamethrowerSprintCancel = true;
 
         public MageCore()
         {
@@ -38,7 +39,10 @@ namespace RiskyMod.Survivors.Mage
                 }
                 else if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireLightningBolt))
                 {
-                    sk.primary.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
+                    if (M1Projectiles.modifyPlasma)
+                    {
+                        sk.primary.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
+                    }
                 }
             }
             //new QuickdrawPassive();
@@ -62,15 +66,20 @@ namespace RiskyMod.Survivors.Mage
                 }
             }*/
 
-            IL.EntityStates.Mage.Weapon.BaseThrowBombState.OnEnter += (il) =>
+            IL.EntityStates.Mage.Weapon.BaseThrowBombState.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
-                     x => x.MatchStfld<EntityStates.Mage.Weapon.BaseThrowBombState>("duration")
+                c.GotoNext(MoveType.After,
+                     x => x.MatchLdfld<EntityStates.Mage.Weapon.BaseThrowBombState>("duration")
                     );
-                c.EmitDelegate<Func<float, float>>(duration =>
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<float, EntityStates.Mage.Weapon.BaseThrowBombState, float>>((duration, self) =>
                 {
-                    return 0.4f;
+                    if (self.inputBank && self.inputBank.skill2.down)
+                    {
+                        return 0.8f;
+                    }
+                    return duration;
                 });
             };
 

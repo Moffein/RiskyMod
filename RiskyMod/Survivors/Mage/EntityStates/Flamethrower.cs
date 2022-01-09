@@ -199,7 +199,7 @@ namespace EntityStates.RiskyMod.Mage
 
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
-			return MageCore.flamethrowerSprintCancel? InterruptPriority.Skill : InterruptPriority.Any;
+			return InterruptPriority.Skill;
 		}
 
 		public static GameObject flamethrowerEffectPrefab;

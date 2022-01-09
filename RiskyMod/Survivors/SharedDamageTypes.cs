@@ -72,6 +72,7 @@ namespace RiskyMod.Survivors
             }
         }
 
+        //I dislike how this is reliant on specific enemy types and acts as an exception to the game mechanics.
         private static void ApplyIgniteLevelScaled(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
         {
             if (damageInfo.HasModdedDamageType(SharedDamageTypes.IgniteLevelScaled))
@@ -79,8 +80,8 @@ namespace RiskyMod.Survivors
                 float burnDuration = 4f * damageInfo.procCoefficient; //4s is default ignite, 6s needed to always be able to kill Wisps with burn damage alone
                 float damageMult = 1f;
 
-                //Only works on non-bosses
-                if (!victimBody.isChampion)
+                //!victimBody.isChampion //Only works on non-bosses
+                if (victimBody.baseMaxHealth <= 100f)    //Only works on Wisps/Jellyfish/Beetles/Lemurians/Hermit Crabs
                 {
                     burnDuration *= 1.5f;
                     //Downscale damage to attacker's base damage
