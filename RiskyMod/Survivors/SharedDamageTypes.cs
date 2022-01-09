@@ -79,8 +79,8 @@ namespace RiskyMod.Survivors
                 float burnDuration = 4f * damageInfo.procCoefficient; //4s is default ignite, 6s needed to always be able to kill Wisps with burn damage alone
                 float damageMult = 1f;
 
-                //Only works on weak enemies (Vultures, Imps, Lemurians, Beetles, Wisps, Jellyfish, Hermit Crabs)
-                if (victimBody.baseMaxHealth <= 140f)
+                //Only works on non-bosses
+                if (!victimBody.isChampion)
                 {
                     burnDuration *= 1.5f;
                     //Downscale damage to attacker's base damage

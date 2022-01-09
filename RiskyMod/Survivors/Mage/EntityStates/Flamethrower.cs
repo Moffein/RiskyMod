@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using UnityEngine;
+using RiskyMod.Survivors.Mage;
 
 namespace EntityStates.RiskyMod.Mage
 {
@@ -198,7 +199,7 @@ namespace EntityStates.RiskyMod.Mage
 
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
-			return InterruptPriority.Skill;
+			return MageCore.flamethrowerSprintCancel? InterruptPriority.Skill : InterruptPriority.Any;
 		}
 
 		public static GameObject flamethrowerEffectPrefab;

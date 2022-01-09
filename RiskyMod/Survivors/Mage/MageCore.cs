@@ -5,12 +5,16 @@ using EntityStates;
 using R2API;
 using System.Runtime.CompilerServices;
 using RoR2.Skills;
+using MonoMod.Cil;
 
 namespace RiskyMod.Survivors.Mage
 {
     public class MageCore
     {
         public static bool enabled = true;
+
+        public static bool flamethrowerSprintCancel = false;
+
         public MageCore()
         {
             if (!enabled) return;
@@ -19,6 +23,7 @@ namespace RiskyMod.Survivors.Mage
         private void ModifySkills(SkillLocator sk)
         {
             ModifyPrimaries(sk);
+            ModifySecondaries(sk);
             ModifyUtilities(sk);
             ModifySpecials(sk);
         }
@@ -36,8 +41,39 @@ namespace RiskyMod.Survivors.Mage
                     sk.primary.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
                 }
             }
-            new QuickdrawPassive();
+            //new QuickdrawPassive();
             new M1Projectiles();
+        }
+
+        private void ModifySecondaries(SkillLocator sk)
+        {
+            //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Mage.Weapon.ThrowNovabomb");
+
+            //This feels bad due to being unable to hold down the button to trigger the ability as soon as it's off cooldown
+            /*for (int i = 0; i < sk.secondary.skillFamily.variants.Length; i++)
+            {
+                if (sk.secondary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.ChargeNovabomb))
+                {
+                    sk.secondary.skillFamily.variants[i].skillDef.mustKeyPress = true;
+                }
+                else if (sk.secondary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.ChargeIcebomb))
+                {
+                    sk.secondary.skillFamily.variants[i].skillDef.mustKeyPress = true;
+                }
+            }*/
+
+            IL.EntityStates.Mage.Weapon.BaseThrowBombState.OnEnter += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchStfld<EntityStates.Mage.Weapon.BaseThrowBombState>("duration")
+                    );
+                c.EmitDelegate<Func<float, float>>(duration =>
+                {
+                    return 0.4f;
+                });
+            };
+
         }
 
         private void ModifyUtilities(SkillLocator sk)
@@ -56,6 +92,7 @@ namespace RiskyMod.Survivors.Mage
                         = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Mage.Weapon.Flamethrower", "flamethrowerEffectPrefab");
                     sk.special.skillFamily.variants[i].skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Mage.Flamethrower));
                     sk.special.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_SPECIAL_FIRE_DESCRIPTION_RISKYMOD";
+                    sk.special.skillFamily.variants[i].skillDef.canceledFromSprinting = flamethrowerSprintCancel;
 
                     LoadoutAPI.AddSkill(typeof(EntityStates.RiskyMod.Mage.Flamethrower));
                     if (RiskyMod.ScepterPluginLoaded)

@@ -35,13 +35,12 @@ namespace RiskyMod.Survivors.Mage
 
             if (increaseRange || modifyPlasma)
             {
-
                 LightningBolt = Resources.Load<GameObject>("prefabs/projectiles/magelightningboltbasic").InstantiateClone("RiskyMod_PlasmaBolt");
                 IncreaseProjectileLifetime(LightningBolt);
                 if (modifyPlasma)
                 {
                     ProjectileImpactExplosion pie = LightningBolt.GetComponent<ProjectileImpactExplosion>();
-                    pie.blastRadius = 2.5f;
+                    //pie.blastRadius = 2.5f;
 
                     ProjectileProximityBeamController pbc = LightningBolt.GetComponent<ProjectileProximityBeamController>();
                     if (!pbc)
@@ -55,7 +54,7 @@ namespace RiskyMod.Survivors.Mage
                     pbc.minAngleFilter = 0f;
                     pbc.maxAngleFilter = 180f;
                     pbc.procCoefficient = 0.5f;
-                    pbc.damageCoefficient = 0.9f / 2.2f;
+                    pbc.damageCoefficient = 0.8f / 2.2f;
                     pbc.bounces = 0;
                     pbc.lightningType = RoR2.Orbs.LightningOrb.LightningType.Ukulele;
                 }
