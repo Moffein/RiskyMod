@@ -21,6 +21,8 @@ namespace RiskyMod.Survivors
         public static DamageAPI.ModdedDamageType CrocoBiteHealOnKill;
         public static GameObject medkitEffect = Resources.Load<GameObject>("Prefabs/Effects/MedkitHealEffect");
 
+        public static DamageAPI.ModdedDamageType IgniteLevelScaled;
+
         public SharedDamageTypes()
         {
             InterruptOnHit = DamageAPI.ReserveDamageType();
@@ -33,6 +35,8 @@ namespace RiskyMod.Survivors
             Poison7s = DamageAPI.ReserveDamageType();
             CrocoBiteHealOnKill = DamageAPI.ReserveDamageType();
 
+            IgniteLevelScaled = DamageAPI.ReserveDamageType();
+
             TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
             TakeDamage.ModifyInitialDamageActions += ApplyAntiFlyingForce;
 
@@ -41,6 +45,8 @@ namespace RiskyMod.Survivors
             OnHitEnemy.OnHitNoAttackerActions += ApplyPoison7s;
 
             OnHitEnemy.OnHitAttackerActions += SawBarrierOnHit;
+
+            OnHitEnemy.OnHitAttackerActions += ApplyIgniteLevelScaled;
         }
 
 
@@ -63,6 +69,27 @@ namespace RiskyMod.Survivors
                     }
                     damageInfo.force = 330f * direction;
                 }
+            }
+        }
+
+        private static void ApplyIgniteLevelScaled(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
+        {
+            if (damageInfo.HasModdedDamageType(SharedDamageTypes.IgniteLevelScaled))
+            {
+                float burnDuration = 6f * damageInfo.procCoefficient; //4s is default ignite, 6s needed to always be able to kill Wisps with burn damage alone
+
+                //Downscale damage to attacker's base damage
+                //This may lose some additive damage bonuses but that shouldn't be too noticeable
+                float damageMult = 1f / (1f + 0.2f * (attackerBody.level - 1f));
+
+                //Scale up damage based on enemy level
+                float targetLevel = Mathf.Max(victimBody.level, attackerBody.level);
+                damageMult *= 1f + 0.3f * (targetLevel - 1f);
+
+                //1.1 is used to reach the 2 shot breakpoint on Beetles/Lemurians
+                damageMult = Mathf.Max(1.1f * damageMult, 1f);
+
+                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Burn, burnDuration, damageMult);
             }
         }
 

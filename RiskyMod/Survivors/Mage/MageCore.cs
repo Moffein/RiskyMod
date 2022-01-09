@@ -19,12 +19,30 @@ namespace RiskyMod.Survivors.Mage
         private void ModifySkills(SkillLocator sk)
         {
             ModifyPrimaries(sk);
+            ModifyUtilities(sk);
             ModifySpecials(sk);
         }
 
         private void ModifyPrimaries(SkillLocator sk)
         {
+            /*for (int i = 0; i < sk.primary.skillFamily.variants.Length; i++)
+            {
+                if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireFireBolt))
+                {
+
+                }
+                else if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireFireBolt))
+                {
+
+                }
+            }*/
+            new QuickdrawPassive();
             new M1Projectiles();
+        }
+
+        private void ModifyUtilities(SkillLocator sk)
+        {
+            new SolidIceWall();
         }
 
         private void ModifySpecials(SkillLocator sk)
