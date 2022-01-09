@@ -25,17 +25,17 @@ namespace RiskyMod.Survivors.Mage
 
         private void ModifyPrimaries(SkillLocator sk)
         {
-            /*for (int i = 0; i < sk.primary.skillFamily.variants.Length; i++)
+            for (int i = 0; i < sk.primary.skillFamily.variants.Length; i++)
             {
                 if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireFireBolt))
                 {
 
                 }
-                else if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireFireBolt))
+                else if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireLightningBolt))
                 {
-
+                    sk.primary.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
                 }
-            }*/
+            }
             new QuickdrawPassive();
             new M1Projectiles();
         }

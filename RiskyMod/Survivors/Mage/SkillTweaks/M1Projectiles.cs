@@ -42,6 +42,22 @@ namespace RiskyMod.Survivors.Mage
                 {
                     ProjectileImpactExplosion pie = LightningBolt.GetComponent<ProjectileImpactExplosion>();
                     pie.blastRadius = 2.5f;
+
+                    ProjectileProximityBeamController pbc = LightningBolt.GetComponent<ProjectileProximityBeamController>();
+                    if (!pbc)
+                    {
+                        pbc = LightningBolt.AddComponent<ProjectileProximityBeamController>();
+                    }
+                    pbc.attackFireCount = 3;
+                    pbc.attackInterval = 0.06f;
+                    pbc.attackRange = 7f;
+                    pbc.listClearInterval = 10f;
+                    pbc.minAngleFilter = 0f;
+                    pbc.maxAngleFilter = 180f;
+                    pbc.procCoefficient = 0.5f;
+                    pbc.damageCoefficient = 0.9f / 2.2f;
+                    pbc.bounces = 0;
+                    pbc.lightningType = RoR2.Orbs.LightningOrb.LightningType.Ukulele;
                 }
                 ProjectileAPI.Add(LightningBolt);
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireLightningBolt", "projectilePrefab", LightningBolt);

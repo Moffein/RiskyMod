@@ -60,6 +60,7 @@
 	"CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD" : "Pandemic",
 	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "Release a deadly disease that deals <style=cIsDamage>10x100% damage</style>. The disease spreads to up to <style=cIsDamage>20</style> targets. If an enemy is killed by Pandemic, <style=cIsHealing>you are healed</style>.",
 	
+	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Fire a bolt for <style=cIsDamage>220% damage</style> that <style=cIsDamage>zaps</style> nearby enemies for <style=cIsDamage>90% damage</style>. Hold up to 4.</style>",
 	"MAGE_SPECIAL_FIRE_DESCRIPTION_RISKYMOD" : "Burn all enemies in front of you for <style=cIsDamage>20x100% damage</style>. The number of shots increases with attack speed.",
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Burst into the sky, dealing <style=cIsDamage>800% damage</style>.",
 	"MAGE_SPECIAL_FIRE_SCEPTER_NAME_RISKYMOD": "Napalmthrower",
