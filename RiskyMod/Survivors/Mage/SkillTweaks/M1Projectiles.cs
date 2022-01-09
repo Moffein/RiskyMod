@@ -11,8 +11,8 @@ namespace RiskyMod.Survivors.Mage
         public static GameObject LightningBolt;
 
         public static bool increaseRange = true;
-        public static bool scaleBurnDamage = true;
-        public static bool modifyPlasma = true;
+        public static bool scaleBurnDamage = false;
+        public static bool modifyPlasma = false;
 
         public M1Projectiles()
         {

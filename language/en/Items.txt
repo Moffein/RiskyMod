@@ -91,5 +91,7 @@
 		
 	"ITEM_SHIELDONLY_PICKUP_RISKYMOD": "Convert all your health into shield. Increase maximum health... <color=#FF7F7F>BUT increase shield regeneration delay.</color>",
 	"ITEM_SHIELDONLY_DESC_RISKYMOD": "<style=cIsHealing>Convert</style> all but <style=cIsHealing>1 health</style> into <style=cIsHealing>regenerating shields</style>. <style=cIsHealing>Gain 50% <style=cStack>(+25% per stack)</style> maximum health</style>. Increase <style=cIsHealing>shield regeneration delay</style> by <style=cIsHealing>1s</style> <style=cStack>(+1s per stack)</style>.",
+	
+	"ITEM_BARRIERONKILL_DESC_RISKYMOD" : "Gain a <style=cIsHealing>temporary barrier</style> on kill for <style=cIsHealing>10 health <style=cStack>(+10 per stack)</style></style>."
 	}
 }

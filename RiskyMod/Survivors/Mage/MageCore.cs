@@ -14,7 +14,9 @@ namespace RiskyMod.Survivors.Mage
     {
         public static bool enabled = true;
 
+        public static bool flamethrowerAttackSpeed = true;
         public static bool flamethrowerSprintCancel = true;
+        public static bool m2Buffer = true;
 
         public MageCore()
         {
@@ -51,38 +53,25 @@ namespace RiskyMod.Survivors.Mage
 
         private void ModifySecondaries(SkillLocator sk)
         {
-            //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Mage.Weapon.ThrowNovabomb");
-
-            //This feels bad due to being unable to hold down the button to trigger the ability as soon as it's off cooldown
-            /*for (int i = 0; i < sk.secondary.skillFamily.variants.Length; i++)
+            if (m2Buffer)
             {
-                if (sk.secondary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.ChargeNovabomb))
+                IL.EntityStates.Mage.Weapon.BaseThrowBombState.FixedUpdate += (il) =>
                 {
-                    sk.secondary.skillFamily.variants[i].skillDef.mustKeyPress = true;
-                }
-                else if (sk.secondary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.ChargeIcebomb))
-                {
-                    sk.secondary.skillFamily.variants[i].skillDef.mustKeyPress = true;
-                }
-            }*/
-
-            IL.EntityStates.Mage.Weapon.BaseThrowBombState.FixedUpdate += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                c.GotoNext(MoveType.After,
-                     x => x.MatchLdfld<EntityStates.Mage.Weapon.BaseThrowBombState>("duration")
-                    );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<float, EntityStates.Mage.Weapon.BaseThrowBombState, float>>((duration, self) =>
-                {
-                    if (self.inputBank && self.inputBank.skill2.down)
+                    ILCursor c = new ILCursor(il);
+                    c.GotoNext(MoveType.After,
+                         x => x.MatchLdfld<EntityStates.Mage.Weapon.BaseThrowBombState>("duration")
+                        );
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<float, EntityStates.Mage.Weapon.BaseThrowBombState, float>>((duration, self) =>
                     {
-                        return 0.8f;
-                    }
-                    return duration;
-                });
-            };
-
+                        if (self.inputBank && self.inputBank.skill2.down)
+                        {
+                            return 0.8f;
+                        }
+                        return duration;
+                    });
+                };
+            }
         }
 
         private void ModifyUtilities(SkillLocator sk)
@@ -97,16 +86,19 @@ namespace RiskyMod.Survivors.Mage
             {
                 if (sk.special.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.Flamethrower))
                 {
-                    EntityStates.RiskyMod.Mage.Flamethrower.flamethrowerEffectPrefab
-                        = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Mage.Weapon.Flamethrower", "flamethrowerEffectPrefab");
-                    sk.special.skillFamily.variants[i].skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Mage.Flamethrower));
-                    sk.special.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_SPECIAL_FIRE_DESCRIPTION_RISKYMOD";
                     sk.special.skillFamily.variants[i].skillDef.canceledFromSprinting = flamethrowerSprintCancel;
-
                     LoadoutAPI.AddSkill(typeof(EntityStates.RiskyMod.Mage.Flamethrower));
-                    if (RiskyMod.ScepterPluginLoaded)
+                    if (flamethrowerAttackSpeed)
                     {
-                        SetupFlamethrowerScepter(sk, i);
+                        EntityStates.RiskyMod.Mage.Flamethrower.flamethrowerEffectPrefab
+                            = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Mage.Weapon.Flamethrower", "flamethrowerEffectPrefab");
+                        sk.special.skillFamily.variants[i].skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Mage.Flamethrower));
+                        sk.special.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_SPECIAL_FIRE_DESCRIPTION_RISKYMOD";
+
+                        if (RiskyMod.ScepterPluginLoaded)
+                        {
+                            SetupFlamethrowerScepter(sk, i);
+                        }
                     }
                 }
                 else if (sk.special.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.FlyUpState))

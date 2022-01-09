@@ -457,7 +457,12 @@ namespace RiskyMod
             TurretChanges.enabled = Config.Bind(engiString, "Turret Changes", true, "Enable turret changes.").Value;
 
             MageCore.enabled = Config.Bind(mageString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            EntityStates.RiskyMod.Mage.FlamethrowerScepter.maxFlames = Config.Bind(mageString, "Flamethrower Scepter Max Flames", 30, "Max napalm pools left behind by the Scepter Flamethrower if Flamethrower changes are enabled.").Value;
+            M1Projectiles.increaseRange = Config.Bind(mageString, "Primary Range Increase", true, "Primary projectiles no longer disappear mid-flight.").Value;
+            MageCore.m2Buffer = Config.Bind(mageString, "Secondary Buffer Time", true, "Adds a 0.8s duration between Secondary uses if you hold down the button.").Value;
+            SolidIceWall.enabled = Config.Bind(mageString, "Snapfreeze - Solid Ice Wall", true, "Ice Wall blocks projectiles and movement.").Value;
+            MageCore.flamethrowerAttackSpeed = Config.Bind(mageString, "Flamethrower - Attack Speed Scaling", true, "Flamethrower shot count and fire rate increases with attack speed.").Value;
+            MageCore.flamethrowerSprintCancel = Config.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
+            EntityStates.RiskyMod.Mage.FlamethrowerScepter.maxFlames = Config.Bind(mageString, "Flamethrower - Scepter Max Flames", 30, "Max napalm pools left behind by the Scepter Flamethrower if Flamethrower changes are enabled.").Value;
 
             MercCore.enabled = Config.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
 

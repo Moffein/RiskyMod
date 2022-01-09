@@ -10,7 +10,7 @@ namespace RiskyMod.Tweaks
     {
         public static bool enabled = true;
         public static float minDecay = 0.3f;
-        public static float maxDecay = 1.2f;
+        public static float maxDecay = 1.8f;
 
         public BarrierDecay()
         {
