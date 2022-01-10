@@ -16,10 +16,16 @@ namespace RiskyMod.Survivors.Huntress
     {
         public static bool enabled = true;
 
-        public static bool enablePrimarySkillChanges = true;
-        public static bool enableSecondarySkillChanges = true;
-        public static bool enableUtilitySkillChanges = true;
-        public static bool enableSpecialSkillChanges = true;
+        public static bool strafeChanges = true;
+        public static bool flurryChanges = true;
+
+        public static bool laserGlaiveChanges = true;
+
+        public static bool blinkChanges = true;
+        public static bool phaseBlinkChanges = true;
+
+        public static bool arrowRainChanges = true;
+        public static bool ballistaChanges = true;
 
         public static bool increaseAngle = true;
         public static BullseyeSearch.SortMode HuntressTargetingMode = BullseyeSearch.SortMode.Angle;
@@ -65,15 +71,21 @@ namespace RiskyMod.Survivors.Huntress
 
         private void ModifyPrimaries(SkillLocator sk)
         {
-            if (!enablePrimarySkillChanges) return;
+            if (strafeChanges)
+            {
+                sk.primary.skillFamily.variants[0].skillDef.skillDescriptionToken = "HUNTRESS_PRIMARY_DESCRIPTION_RISKYMOD";
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireSeekingArrow", "orbDamageCoefficient", "2");
+            }
 
-            sk.primary.skillFamily.variants[0].skillDef.skillDescriptionToken = "HUNTRESS_PRIMARY_DESCRIPTION_RISKYMOD";
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireSeekingArrow", "orbDamageCoefficient", "2");
+            if (flurryChanges)
+            {
+                sk.primary.skillFamily.variants[1].skillDef.skillDescriptionToken = "HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD";
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbDamageCoefficient", "1.2");
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbProcCoefficient", "1");
+            }
 
-            sk.primary.skillFamily.variants[1].skillDef.skillDescriptionToken = "HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD";
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbDamageCoefficient", "1.2");
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbProcCoefficient", "1");
 
+            //This fixes Flurry losing arrows at high attack speed.
             On.EntityStates.Huntress.HuntressWeapon.FireSeekingArrow.FireOrbArrow += (orig, self) =>
             {
                 if (!NetworkServer.active)
@@ -100,7 +112,7 @@ namespace RiskyMod.Survivors.Huntress
 
         private void ModifySecondaries(SkillLocator sk)
         {
-            if (!enableSecondarySkillChanges) return;
+            if (!laserGlaiveChanges) return;
             sk.secondary.skillFamily.variants[0].skillDef.baseRechargeInterval = 6f;
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.ThrowGlaive", "baseDuration", "0.8");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.ThrowGlaive", "glaiveProcCoefficient", "1");
@@ -108,30 +120,40 @@ namespace RiskyMod.Survivors.Huntress
 
         private void ModifyUtilities(SkillLocator sk)
         {
-            if (!enableUtilitySkillChanges) return;
-            sk.utility.skillFamily.variants[0].skillDef.baseRechargeInterval = 6f;
+            if (blinkChanges)
+            {
+                sk.utility.skillFamily.variants[0].skillDef.baseRechargeInterval = 6f;
+            }
 
-            sk.utility.skillFamily.variants[1].skillDef.baseMaxStock = 2;
-            sk.utility.skillFamily.variants[1].skillDef.baseRechargeInterval = 2f;
-            sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "HUNTRESS_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
+            if (phaseBlinkChanges)
+            {
+                sk.utility.skillFamily.variants[1].skillDef.baseMaxStock = 2;
+                sk.utility.skillFamily.variants[1].skillDef.baseRechargeInterval = 2f;
+                sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "HUNTRESS_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
+            }
         }
 
         private void ModifySpecials(SkillLocator sk)
         {
-            if (!enableSpecialSkillChanges) return;
-            sk.special.skillFamily.variants[0].skillDef.baseRechargeInterval = 10f;
-            sk.special.skillFamily.variants[0].skillDef.beginSkillCooldownOnSkillEnd = true;
-            sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD";
-            new ArrowRainBuff();
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "damageCoefficient", "4.2");   //ArrowRainBuff adjusts this value to be accurate
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "projectilePrefab", ArrowRainBuff.arrowRainObject);
-
-            sk.special.skillFamily.variants[1].skillDef.baseRechargeInterval = 10f;
-            sk.special.skillFamily.variants[1].skillDef.beginSkillCooldownOnSkillEnd = true;
-
-            if (RiskyMod.ScepterPluginLoaded)
+            if (arrowRainChanges)
             {
-                SetupScepter(sk);
+                sk.special.skillFamily.variants[0].skillDef.baseRechargeInterval = 10f;
+                sk.special.skillFamily.variants[0].skillDef.beginSkillCooldownOnSkillEnd = true;
+                sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD";
+                new ArrowRainBuff();
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "damageCoefficient", "4.2");   //ArrowRainBuff adjusts this value to be accurate
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "projectilePrefab", ArrowRainBuff.arrowRainObject);
+
+                if (RiskyMod.ScepterPluginLoaded)
+                {
+                    SetupScepter(sk);
+                }
+            }
+
+            if (ballistaChanges)
+            {
+                sk.special.skillFamily.variants[1].skillDef.baseRechargeInterval = 10f;
+                sk.special.skillFamily.variants[1].skillDef.beginSkillCooldownOnSkillEnd = true;
             }
         }
 

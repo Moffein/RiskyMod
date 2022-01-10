@@ -10,7 +10,6 @@ namespace RiskyMod.Items.Common
         public TopazBrooch()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BarrierOnKill);
 
             //Remove vanilla effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
@@ -31,7 +30,7 @@ namespace RiskyMod.Items.Common
             int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.BarrierOnKill);
             if (itemCount > 0)
             {
-                attackerBody.healthComponent.AddBarrier((7f + 3f * attackerBody.level) * itemCount);
+                attackerBody.healthComponent.AddBarrier(15f * itemCount);
             }
         }
     }

@@ -431,30 +431,37 @@ namespace RiskyMod
         private void ConfigSurvivors()
         {
             CommandoCore.enabled = Config.Bind(commandoString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            CommandoCore.enablePrimarySkillChanges = Config.Bind(commandoString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
-            CommandoCore.enableSecondarySkillChanges = Config.Bind(commandoString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
-            CommandoCore.enableUtilitySkillChanges = Config.Bind(commandoString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
-            CommandoCore.enableSpecialSkillChanges = Config.Bind(commandoString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
+            CommandoCore.fixPrimaryFireRate = Config.Bind(commandoString, "Double Tap - Fix Scaling", true, "Fixes Double Tap having a low attack speed cap.").Value;
+            CommandoCore.phaseRoundChanges = Config.Bind(commandoString, "Phase Round Changes", true, "Enable changes to this skill.").Value;
+            CommandoCore.phaseBlastChanges = Config.Bind(commandoString, "Phase Blast Changes", true, "Enable changes to this skill.").Value;
+            CommandoCore.rollChanges = Config.Bind(commandoString, "Tactical Dive Changes", true, "Enable changes to this skill.").Value;
+            CommandoCore.suppressiveChanges = Config.Bind(commandoString, "Suppressive Fire Changes", true, "Enable changes to this skill.").Value;
+            CommandoCore.grenadeChanges = Config.Bind(commandoString, "Frag Grenade Changes", true, "Enable changes to this skill.").Value;
 
             HuntressCore.enabled = Config.Bind(huntressString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             HuntressCore.HuntressTargetingMode = Config.Bind(huntressString, "Targeting Mode (Client-Side)", BullseyeSearch.SortMode.Angle, "How Huntress's target prioritization works.").Value;
-            HuntressCore.increaseAngle = Config.Bind(huntressString, "Increase Angle", true, "Increase max targeting angle.").Value;
-            HuntressCore.enablePrimarySkillChanges = Config.Bind(huntressString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
-            HuntressCore.enableSecondarySkillChanges = Config.Bind(huntressString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
-            HuntressCore.enableUtilitySkillChanges = Config.Bind(huntressString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
-            HuntressCore.enableSpecialSkillChanges = Config.Bind(huntressString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
+            HuntressCore.increaseAngle = Config.Bind(huntressString, "Increase Targeting Angle", true, "Increase max targeting angle.").Value;
+            HuntressCore.strafeChanges = Config.Bind(huntressString, "Strafe Changes", true, "Enable changes to this skill.").Value;
+            HuntressCore.flurryChanges = Config.Bind(huntressString, "Flurry Changes", true, "Enable changes to this skill.").Value;
+            HuntressCore.laserGlaiveChanges = Config.Bind(huntressString, "Laser Glaive Changes", true, "Enable changes to this skill.").Value;
+            HuntressCore.blinkChanges = Config.Bind(huntressString, "Blink Changes", true, "Enable changes to this skill.").Value;
+            HuntressCore.phaseBlinkChanges = Config.Bind(huntressString, "Phase Blink Changes", true, "Enable changes to this skill.").Value;
+            HuntressCore.arrowRainChanges = Config.Bind(huntressString, "Arrow Rain Changes", true, "Enable changes to this skill.").Value;
+            HuntressCore.ballistaChanges = Config.Bind(huntressString, "Ballista Changes", true, "Enable changes to this skill.").Value;
 
             ToolbotCore.enabled = Config.Bind(toolbotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            ToolbotCore.enableNailgunChanges = Config.Bind(toolbotString, "Enable Nailgun Changes", true, "Enable changes to this skill.").Value;
-            ToolbotCore.enableRebarChanges = Config.Bind(toolbotString, "Enable Rebar Puncher Changes", true, "Enable changes to this skill.").Value;
-            ToolbotCore.enableScrapChanges = Config.Bind(toolbotString, "Enable Scrap Launcher Changes", true, "Enable changes to this skill.").Value;
-            ToolbotCore.enableSawChanges = Config.Bind(toolbotString, "Enable Power Saw Changes", true, "Enable changes to this skill.").Value;
-            ToolbotCore.enableSecondarySkillChanges = Config.Bind(toolbotString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
-            ToolbotCore.enableSpecialSkillChanges = Config.Bind(toolbotString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
+            ToolbotCore.enableNailgunChanges = Config.Bind(toolbotString, "Nailgun Changes", true, "Enable changes to this skill.").Value;
+            ToolbotCore.enableRebarChanges = Config.Bind(toolbotString, "Rebar Puncher Changes", true, "Enable changes to this skill.").Value;
+            ToolbotCore.enableScrapChanges = Config.Bind(toolbotString, "Scrap Launcher Changes", true, "Enable changes to this skill.").Value;
+            ToolbotCore.enableSawChanges = Config.Bind(toolbotString, "Power Saw Changes", true, "Enable changes to this skill.").Value;
+            ToolbotCore.enableSecondarySkillChanges = Config.Bind(toolbotString, "Blast Canister Changes", true, "Enable changes to this skill.").Value;
+            ToolbotCore.enableRetoolChanges = Config.Bind(toolbotString, "Retool Changes", true, "Enable changes to this skill.").Value;
+            ToolbotCore.enablePowerModeChanges = Config.Bind(toolbotString, "Power Mode Changes", true, "Enable changes to this skill.").Value;
 
             EngiCore.enabled = Config.Bind(engiString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             PressureMines.enabled = Config.Bind(engiString, "Pressure Mine Changes", true, "Pressure Mines only detonate when fully armed.").Value;
-            TurretChanges.enabled = Config.Bind(engiString, "Turret Changes", true, "Enable turret changes.").Value;
+            TurretChanges.turretChanges = Config.Bind(engiString, "Stationary Turret Changes", true, "Enable changes to Stationary Turrets.").Value;
+            TurretChanges.mobileTurretChanges = Config.Bind(engiString, "Mobile Turret Changes", true, "Enable changes to Mobile Turrets.").Value;
 
             MageCore.enabled = Config.Bind(mageString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             M1Projectiles.increaseRange = Config.Bind(mageString, "Primary Range Increase", true, "Primary projectiles no longer disappear mid-flight.").Value;
@@ -463,17 +470,24 @@ namespace RiskyMod
             MageCore.flamethrowerAttackSpeed = Config.Bind(mageString, "Flamethrower - Attack Speed Scaling", true, "Flamethrower shot count and fire rate increases with attack speed.").Value;
             MageCore.flamethrowerSprintCancel = Config.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
             EntityStates.RiskyMod.Mage.FlamethrowerScepter.maxFlames = Config.Bind(mageString, "Flamethrower - Scepter Max Flames", 30, "Max napalm pools left behind by the Scepter Flamethrower if Flamethrower changes are enabled.").Value;
+            MageCore.ionSurgeMovementScaling = Config.Bind(mageString, "Ion Surge - Movement Scaling", false, "Ion Surge jump height scales with movement speed.").Value;
+            MageCore.ionSurgeShock = Config.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
 
-            MercCore.enabled = Config.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+            MercCore.enabled = Config.Bind(mercString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
 
             TreebotCore.enabled = Config.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            TreebotCore.enableSecondarySkillChanges = Config.Bind(treebotString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
-            TreebotCore.enableUtilitySkillChanges = Config.Bind(treebotString, "Enable Utility Skill Changes", true, "Enable utility skill changes for this survivor.").Value;
-            TreebotCore.enableSpecialSkillChanges = Config.Bind(treebotString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
+            TreebotCore.drillChanges = Config.Bind(treebotString, "DIRECTIVE Drill Changes", true, "Enable changes to this skill.").Value;
+            TreebotCore.swapUtilityEffects = Config.Bind(treebotString, "Utility - Swap Effects", true, "Swaps the effects of REXs Utilities").Value;
+            ModifyUtilityForce.enabled = Config.Bind(treebotString, "Utility - Modify Force", true, "Modifies the force of REXs Utilities.").Value;
+            TreebotCore.fruitChanges = Config.Bind(treebotString, "DIRECTIVE Harvest Changes", true, "Enable changes to this skill.").Value;
 
             LoaderCore.enabled = Config.Bind(loaderString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             LoaderCore.grappleCancelsSprint = Config.Bind(loaderString, "Secondaries Cancel Sprint", false, "Loader's Grapple cancels sprinting.").Value;
             LoaderCore.shiftCancelsSprint = Config.Bind(loaderString, "Utilities Cancel Sprint", false, "Loader's Big Punches cancel sprinting.").Value;
+            LoaderCore.modifyStats = Config.Bind(loaderString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
+            LoaderCore.zapFistChanges = Config.Bind(loaderString, "Thunder Gauntlet Changes", true, "Enable changes to this skill.").Value;
+            LoaderCore.slamChanges = Config.Bind(loaderString, "Thunderslam Changes", true, "Enable changes to this skill.").Value;
+            LoaderCore.pylonChanges = Config.Bind(loaderString, "M551 Pylon Changes", true, "Enable changes to this skill.").Value;
 
             CrocoCore.enabled = Config.Bind(crocoString, "Enable Changes", true, "Enable changes to this survivor. Skill options unavailable due to all the changes being too interlinked.").Value;
             CrocoCore.gameplayRework = Config.Bind(crocoString, "Gameplay Rework", true, "A full rework of Acrid's skills.").Value;
@@ -492,10 +506,13 @@ namespace RiskyMod
             BanditSpecialGracePeriod.enabled = Config.Bind(banditString, "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;
             BanditSpecialGracePeriod.duration = Config.Bind(banditString, "Special Grace Period Duration", 1.2f, "Length in seconds of Special Grace Period.").Value;
             DesperadoRework.enabled = Config.Bind(banditString, "Persistent Desperado", true, "Desperado stacks are weaker but last between stages.").Value;
-            Bandit2Core.enablePassiveSkillChanges = Config.Bind(banditString, "Enable Passive Skill Changes", true, "Enable passive skill changes for this survivor.").Value;
-            Bandit2Core.enablePrimarySkillChanges = Config.Bind(banditString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
-            Bandit2Core.enableSecondarySkillChanges = Config.Bind(banditString, "Enable Secondary Skill Changes", true, "Enable secondary skill changes for this survivor.").Value;
-            Bandit2Core.enableSpecialSkillChanges = Config.Bind(banditString, "Enable Special Skill Changes", true, "Enable special skill changes for this survivor.").Value;
+            Bandit2Core.backstabNerf = Config.Bind(banditString, "Backstab Nerf", true, "Backstabs Minicrit for 50% bonus damage (stacks with crit).").Value;
+            Bandit2Core.burstChanges = Config.Bind(banditString, "Burst Changes", true, "Enable changes to this skill.").Value;
+            Bandit2Core.blastChanges = Config.Bind(banditString, "Blast Changes", true, "Enable changes to this skill.").Value;
+            Bandit2Core.knifeChanges = Config.Bind(banditString, "Serrated Dagger Changes", true, "Enable changes to this skill.").Value;
+            Bandit2Core.knifeThrowChanges = Config.Bind(banditString, "Serrated Shiv Changes", true, "Enable changes to this skill.").Value;
+            Bandit2Core.utilityFix = Config.Bind(banditString, "Smokebomb Fix", true, "Fixes various bugs with Smokebomb.").Value;
+            Bandit2Core.specialRework = Config.Bind(banditString, "Special Rework", true, "Makes Resets/Desperado a selectable passive and adds a new Special skill.").Value;
         }
     }
 }

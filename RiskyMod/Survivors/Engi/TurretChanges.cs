@@ -6,18 +6,18 @@ namespace RiskyMod.Survivors.Engi
 {
     public class TurretChanges
     {
-        public static bool enabled = true;
+        public static bool turretChanges = true;
         public static bool mobileTurretChanges = true;
 
         public TurretChanges()
         {
-            if (!enabled) return;
             ModifyTurret();
             ModifyWalkerTurret();
         }
 
         private void ModifyTurret()
         {
+            if (!turretChanges) return;
             GameObject turretBody = Resources.Load<GameObject>("prefabs/characterbodies/EngiTurretBody");
             CharacterBody cb = turretBody.GetComponent<CharacterBody>();
             cb.damage = 12f;

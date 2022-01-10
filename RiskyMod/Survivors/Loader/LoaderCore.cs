@@ -17,10 +17,11 @@ namespace RiskyMod.Survivors.Loader
         public static bool grappleCancelsSprint = false;
 
         public static bool modifyStats = true;
-        public static bool modifyPrimaries = true;
-        public static bool modifySecondaries = true;
-        public static bool modifyUtilities = true;
-        public static bool modifySpecials = true;
+
+        public static bool zapFistChanges = true;
+
+        public static bool pylonChanges = true;
+        public static bool slamChanges = true;
 
         private CharacterBody loaderBody;
         public LoaderCore()
@@ -31,11 +32,9 @@ namespace RiskyMod.Survivors.Loader
             SkillLocator sk = RoR2Content.Survivors.Loader.bodyPrefab.GetComponent<SkillLocator>();
             SprintQoL(sk);
 
-            new BiggerSlamHitbox();
+            new FixScepterUtilityBarrier();
             ModifyStats(loaderBody);
             ModifySkills(sk);
-            ModifyUtilities(sk);
-            ModifySpecials(sk);
 
             //Originally had a big all-around stat nerf, but it pretty much was just nerfing for the sake of nerfing and didn't really expand her gameplay or anything,
             //which is counter to the reason why this mod exists in the first place.
@@ -52,6 +51,7 @@ namespace RiskyMod.Survivors.Loader
 
         private void ModifyStats(CharacterBody cb)
         {
+            if (!modifyStats) return;
             cb.baseMaxHealth = 140f;
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
         }
@@ -64,22 +64,29 @@ namespace RiskyMod.Survivors.Loader
 
         private void ModifyUtilities(SkillLocator sk)
         {
-            if (!modifyUtilities) return;
-            new ZapConePosition();
+            if (zapFistChanges)
+            {
+                new ZapConePosition();
+            }
         }
 
         private void ModifySpecials(SkillLocator sk)
         {
-            if (!modifySpecials) return;
-            sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "LOADER_SPECIAL_DESCRIPTION_RISKYMOD";
-            sk.special.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_MAGNETIC_RISKYMOD" };
-            sk.special.skillFamily.variants[0].skillDef.cancelSprintingOnActivation = false;
-            SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.throwpylon", "damageCoefficient", "0.7");
-            new PylonMagnet();
+            if (pylonChanges)
+            {
+                sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "LOADER_SPECIAL_DESCRIPTION_RISKYMOD";
+                sk.special.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_MAGNETIC_RISKYMOD" };
+                sk.special.skillFamily.variants[0].skillDef.cancelSprintingOnActivation = false;
+                SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.throwpylon", "damageCoefficient", "0.7");
+                new PylonMagnet();
+            }
 
-            new SlamScrapBarrier();
-            new BiggerSlamHitbox();
-            new SlamDamageType();
+            if (slamChanges)
+            {
+                new BiggerSlamHitbox();
+                new SlamScrapBarrier();
+                new SlamDamageType();
+            }
         }
     }
 }

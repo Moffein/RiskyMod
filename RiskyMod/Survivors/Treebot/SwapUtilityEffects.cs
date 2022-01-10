@@ -5,11 +5,8 @@ namespace RiskyMod.Survivors.Treebot
 {
     public class SwapUtilityEffects
     {
-        public static bool enabled = true;
         public SwapUtilityEffects()
         {
-            if (!enabled) return;
-
             On.EntityStates.Treebot.Weapon.FireSonicBoom.AddDebuff += (orig, self, body) =>
             {
                 SetStateOnHurt component = body.healthComponent.GetComponent<SetStateOnHurt>();

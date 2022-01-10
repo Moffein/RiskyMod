@@ -20,7 +20,8 @@ namespace RiskyMod.Survivors.Toolbot
 
         public static bool enableSecondarySkillChanges = true;
 
-        public static bool enableSpecialSkillChanges = true;
+        public static bool enableRetoolChanges = true;
+        public static bool enablePowerModeChanges = true;
 
         public static BuffDef PowerModeBuff;
 
@@ -146,30 +147,35 @@ namespace RiskyMod.Survivors.Toolbot
 
         private void ModifySpecials(SkillLocator sk)
         {
-            if (!enableSpecialSkillChanges) return;
-            On.EntityStates.Toolbot.ToolbotStanceSwap.OnEnter += (orig, self) =>
+            if (enableRetoolChanges)
             {
-                orig(self);
-                if (self.isAuthority)
+                On.EntityStates.Toolbot.ToolbotStanceSwap.OnEnter += (orig, self) =>
                 {
-                    GenericSkill skill1 = self.GetPrimarySkill1();
-                    skill1.stock = skill1.maxStock;
+                    orig(self);
+                    if (self.isAuthority)
+                    {
+                        GenericSkill skill1 = self.GetPrimarySkill1();
+                        skill1.stock = skill1.maxStock;
 
-                    GenericSkill skill2 = self.GetPrimarySkill2();
-                    skill2.stock = skill2.maxStock;
-                }
-            };
+                        GenericSkill skill2 = self.GetPrimarySkill2();
+                        skill2.stock = skill2.maxStock;
+                    }
+                };
+            }
 
-            sk.special.skillFamily.variants[1].skillDef.skillDescriptionToken = "TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
-            PowerModeBuff = ScriptableObject.CreateInstance<BuffDef>();
-            PowerModeBuff.buffColor = RoR2Content.Buffs.SmallArmorBoost.buffColor;
-            PowerModeBuff.canStack = false;
-            PowerModeBuff.isDebuff = false;
-            PowerModeBuff.name = "RiskyMod_PowerModeBuff";
-            PowerModeBuff.iconSprite = RoR2Content.Buffs.SmallArmorBoost.iconSprite;
-            BuffAPI.Add(new CustomBuff(PowerModeBuff));
-            GetStatsCoefficient.HandleStatsActions += HandlePowerMode;
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.ToolbotDualWieldBase", "bonusBuff", PowerModeBuff);
+            if (enablePowerModeChanges)
+            {
+                sk.special.skillFamily.variants[1].skillDef.skillDescriptionToken = "TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
+                PowerModeBuff = ScriptableObject.CreateInstance<BuffDef>();
+                PowerModeBuff.buffColor = RoR2Content.Buffs.SmallArmorBoost.buffColor;
+                PowerModeBuff.canStack = false;
+                PowerModeBuff.isDebuff = false;
+                PowerModeBuff.name = "RiskyMod_PowerModeBuff";
+                PowerModeBuff.iconSprite = RoR2Content.Buffs.SmallArmorBoost.iconSprite;
+                BuffAPI.Add(new CustomBuff(PowerModeBuff));
+                GetStatsCoefficient.HandleStatsActions += HandlePowerMode;
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.ToolbotDualWieldBase", "bonusBuff", PowerModeBuff);
+            }
         }
 
         private void HandlePowerMode(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)

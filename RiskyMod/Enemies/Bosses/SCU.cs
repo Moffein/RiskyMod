@@ -34,7 +34,7 @@ namespace RiskyMod.Enemies.Bosses
             GameObject enemyObject = Resources.Load<GameObject>("prefabs/characterbodies/roboballbossbody");
             CharacterBody cb = enemyObject.GetComponent<CharacterBody>();
 
-            cb.baseDamage = 22f;    //orig is 15
+            cb.baseDamage = 25f;    //orig is 15
             cb.levelDamage = cb.baseDamage * 0.2f;
         }
     }

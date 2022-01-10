@@ -23,11 +23,17 @@ namespace RiskyMod.Survivors.Bandit2
         public static DamageAPI.ModdedDamageType RackEmUpDamage;
         public static bool enabled = true;
 
-        public static bool enablePassiveSkillChanges = true;
-        public static bool enablePrimarySkillChanges = true;
-        public static bool enableSecondarySkillChanges = true;
-        public static bool enableUtilitySkillChanges = true;
-        public static bool enableSpecialSkillChanges = true;
+        public static bool backstabNerf = true;
+
+        public static bool blastChanges = true;
+        public static bool burstChanges = true;
+
+        public static bool knifeChanges = true;
+        public static bool knifeThrowChanges = true;
+
+        public static bool utilityFix = true;
+
+        public static bool specialRework = true;
 
         public static BodyIndex Bandit2Index;
         private static AnimationCurve knifeVelocity;
@@ -58,129 +64,137 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void ModifyPassives(SkillLocator sk)
         {
-            if (!enablePassiveSkillChanges) return;
+            if (!backstabNerf) return;
             new BackstabRework();
             sk.passiveSkill.skillDescriptionToken = "BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD";
         }
 
         private void ModifyPrimaries(SkillLocator sk)
         {
-            if (!enablePrimarySkillChanges) return;
 
             LoadoutAPI.AddSkill(typeof(EnterReload));
             LoadoutAPI.AddSkill(typeof(Reload));
 
-            LoadoutAPI.AddSkill(typeof(FirePrimaryShotgun));
-            ReloadSkillDef shotgunDef = ReloadSkillDef.CreateInstance<ReloadSkillDef>();
-            shotgunDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryShotgun));
-            shotgunDef.activationStateMachineName = "Weapon";
-            shotgunDef.baseMaxStock = 4;
-            shotgunDef.baseRechargeInterval = 0f;
-            shotgunDef.beginSkillCooldownOnSkillEnd = false;
-            shotgunDef.canceledFromSprinting = false;
-            shotgunDef.dontAllowPastMaxStocks = true;
-            shotgunDef.forceSprintDuringState = false;
-            shotgunDef.fullRestockOnAssign = true;
-            shotgunDef.icon = sk.primary._skillFamily.variants[0].skillDef.icon;
-            shotgunDef.interruptPriority = InterruptPriority.Skill;
-            shotgunDef.isCombatSkill = true;
-            shotgunDef.keywordTokens = new string[] { };
-            shotgunDef.mustKeyPress = false;
-            shotgunDef.cancelSprintingOnActivation = true;
-            shotgunDef.rechargeStock = 0;
-            shotgunDef.requiredStock = 1;
-            shotgunDef.skillName = "FireShotgun";
-            shotgunDef.skillNameToken = "BANDIT2_PRIMARY_NAME";
-            shotgunDef.skillDescriptionToken = "BANDIT2_PRIMARY_DESC_RISKYMOD";
-            shotgunDef.stockToConsume = 1;
-            shotgunDef.graceDuration = 0.4f;
-            shotgunDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
-            shotgunDef.reloadInterruptPriority = InterruptPriority.Any;
-            LoadoutAPI.AddSkillDef(shotgunDef);
-            sk.primary._skillFamily.variants[0].skillDef = shotgunDef;
+            if (burstChanges)
+            {
+                LoadoutAPI.AddSkill(typeof(FirePrimaryShotgun));
+                ReloadSkillDef shotgunDef = ReloadSkillDef.CreateInstance<ReloadSkillDef>();
+                shotgunDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryShotgun));
+                shotgunDef.activationStateMachineName = "Weapon";
+                shotgunDef.baseMaxStock = 4;
+                shotgunDef.baseRechargeInterval = 0f;
+                shotgunDef.beginSkillCooldownOnSkillEnd = false;
+                shotgunDef.canceledFromSprinting = false;
+                shotgunDef.dontAllowPastMaxStocks = true;
+                shotgunDef.forceSprintDuringState = false;
+                shotgunDef.fullRestockOnAssign = true;
+                shotgunDef.icon = sk.primary._skillFamily.variants[0].skillDef.icon;
+                shotgunDef.interruptPriority = InterruptPriority.Skill;
+                shotgunDef.isCombatSkill = true;
+                shotgunDef.keywordTokens = new string[] { };
+                shotgunDef.mustKeyPress = false;
+                shotgunDef.cancelSprintingOnActivation = true;
+                shotgunDef.rechargeStock = 0;
+                shotgunDef.requiredStock = 1;
+                shotgunDef.skillName = "FireShotgun";
+                shotgunDef.skillNameToken = "BANDIT2_PRIMARY_NAME";
+                shotgunDef.skillDescriptionToken = "BANDIT2_PRIMARY_DESC_RISKYMOD";
+                shotgunDef.stockToConsume = 1;
+                shotgunDef.graceDuration = 0.4f;
+                shotgunDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
+                shotgunDef.reloadInterruptPriority = InterruptPriority.Any;
+                LoadoutAPI.AddSkillDef(shotgunDef);
+                sk.primary._skillFamily.variants[0].skillDef = shotgunDef;
+            }
 
-            LoadoutAPI.AddSkill(typeof(FirePrimaryRifle));
-            ReloadSkillDef rifleDef = ReloadSkillDef.CreateInstance<ReloadSkillDef>();
-            rifleDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryRifle));
-            rifleDef.activationStateMachineName = "Weapon";
-            rifleDef.baseMaxStock = 4;
-            rifleDef.baseRechargeInterval = 0f;
-            rifleDef.beginSkillCooldownOnSkillEnd = false;
-            rifleDef.canceledFromSprinting = false;
-            rifleDef.dontAllowPastMaxStocks = true;
-            rifleDef.forceSprintDuringState = false;
-            rifleDef.fullRestockOnAssign = true;
-            rifleDef.icon = sk.primary._skillFamily.variants[1].skillDef.icon;
-            rifleDef.interruptPriority = InterruptPriority.Skill;
-            rifleDef.isCombatSkill = true;
-            rifleDef.keywordTokens = new string[] { };
-            rifleDef.mustKeyPress = false;
-            rifleDef.cancelSprintingOnActivation = true;
-            rifleDef.rechargeStock = 0;
-            rifleDef.requiredStock = 1;
-            rifleDef.skillName = "FireRifle";
-            rifleDef.skillNameToken = "BANDIT2_PRIMARY_ALT_NAME";
-            rifleDef.skillDescriptionToken = "BANDIT2_PRIMARY_ALT_DESC_RISKYMOD";
-            rifleDef.stockToConsume = 1;
-            rifleDef.graceDuration = 0.4f;
-            rifleDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
-            rifleDef.reloadInterruptPriority = InterruptPriority.Any;
-            LoadoutAPI.AddSkillDef(rifleDef);
-            sk.primary._skillFamily.variants[1].skillDef = rifleDef;
+            if (blastChanges)
+            {
+                LoadoutAPI.AddSkill(typeof(FirePrimaryRifle));
+                ReloadSkillDef rifleDef = ReloadSkillDef.CreateInstance<ReloadSkillDef>();
+                rifleDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryRifle));
+                rifleDef.activationStateMachineName = "Weapon";
+                rifleDef.baseMaxStock = 4;
+                rifleDef.baseRechargeInterval = 0f;
+                rifleDef.beginSkillCooldownOnSkillEnd = false;
+                rifleDef.canceledFromSprinting = false;
+                rifleDef.dontAllowPastMaxStocks = true;
+                rifleDef.forceSprintDuringState = false;
+                rifleDef.fullRestockOnAssign = true;
+                rifleDef.icon = sk.primary._skillFamily.variants[1].skillDef.icon;
+                rifleDef.interruptPriority = InterruptPriority.Skill;
+                rifleDef.isCombatSkill = true;
+                rifleDef.keywordTokens = new string[] { };
+                rifleDef.mustKeyPress = false;
+                rifleDef.cancelSprintingOnActivation = true;
+                rifleDef.rechargeStock = 0;
+                rifleDef.requiredStock = 1;
+                rifleDef.skillName = "FireRifle";
+                rifleDef.skillNameToken = "BANDIT2_PRIMARY_ALT_NAME";
+                rifleDef.skillDescriptionToken = "BANDIT2_PRIMARY_ALT_DESC_RISKYMOD";
+                rifleDef.stockToConsume = 1;
+                rifleDef.graceDuration = 0.4f;
+                rifleDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
+                rifleDef.reloadInterruptPriority = InterruptPriority.Any;
+                LoadoutAPI.AddSkillDef(rifleDef);
+                sk.primary._skillFamily.variants[1].skillDef = rifleDef;
+            }
         }
 
         private void ModifySecondaries(SkillLocator sk)
         {
-            if (!enableSecondarySkillChanges) return;
-
-            new IncreaseKnifeHitboxSize();
-            knifeVelocity = BuildSlashVelocityCurve();
-            sk.secondary.skillFamily.variants[0].skillDef.canceledFromSprinting = false;
-
-            On.EntityStates.Bandit2.Weapon.SlashBlade.OnEnter += (orig, self) =>
+            if (knifeChanges)
             {
-                orig(self);
-                if (self.characterBody && self.characterBody.isSprinting)
+                new IncreaseKnifeHitboxSize();
+                knifeVelocity = BuildSlashVelocityCurve();
+                sk.secondary.skillFamily.variants[0].skillDef.canceledFromSprinting = false;
+
+                On.EntityStates.Bandit2.Weapon.SlashBlade.OnEnter += (orig, self) =>
                 {
-                    self.ignoreAttackSpeed = true;
-                    self.forceForwardVelocity = true;
-                    self.forwardVelocityCurve = knifeVelocity;
-                }
-            };
-
-            SneedUtils.SneedUtils.SetEntityStateField("entitystates.bandit2.weapon.slashblade", "ignoreAttackSpeed", "1");
-
-            var getBandit2SlashBladeMinDuration = new Hook(typeof(EntityStates.Bandit2.Weapon.SlashBlade).GetMethodCached("get_minimumDuration"), typeof(Bandit2Core).GetMethodCached(nameof(GetBandit2SlashBladeMinDurationHook)));
-
-            sk.secondary.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SUPERBLEED" };
-            sk.secondary.skillFamily.variants[1].skillDef.skillDescriptionToken = "BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
-
-            On.EntityStates.Bandit2.Weapon.Bandit2FireShiv.FireShiv += (orig, self) =>
-            {
-                if (EntityStates.Bandit2.Weapon.Bandit2FireShiv.muzzleEffectPrefab)
-                {
-                    EffectManager.SimpleMuzzleFlash(EntityStates.Bandit2.Weapon.Bandit2FireShiv.muzzleEffectPrefab, self.gameObject, EntityStates.Bandit2.Weapon.Bandit2FireShiv.muzzleString, false);
-                }
-                if (self.isAuthority)
-                {
-                    Ray aimRay = self.GetAimRay();
-                    if (self.projectilePrefab != null)
+                    orig(self);
+                    if (self.characterBody && self.characterBody.isSprinting)
                     {
-                        FireProjectileInfo fireProjectileInfo = new FireProjectileInfo
-                        {
-                            projectilePrefab = self.projectilePrefab,
-                            position = aimRay.origin,
-                            rotation = Util.QuaternionSafeLookRotation(aimRay.direction),
-                            owner = self.gameObject,
-                            damage = self.damageStat * self.damageCoefficient,
-                            force = self.force,
-                            crit = self.RollCrit(),
-                            damageTypeOverride = new DamageType?(DamageType.SuperBleedOnCrit | DamageType.Stun1s)
-                        };
-                        ProjectileManager.instance.FireProjectile(fireProjectileInfo);
+                        self.ignoreAttackSpeed = true;
+                        self.forceForwardVelocity = true;
+                        self.forwardVelocityCurve = knifeVelocity;
                     }
-                }
-            };
+                };
+
+                SneedUtils.SneedUtils.SetEntityStateField("entitystates.bandit2.weapon.slashblade", "ignoreAttackSpeed", "1");
+                var getBandit2SlashBladeMinDuration = new Hook(typeof(EntityStates.Bandit2.Weapon.SlashBlade).GetMethodCached("get_minimumDuration"), typeof(Bandit2Core).GetMethodCached(nameof(GetBandit2SlashBladeMinDurationHook)));
+            }
+
+            if (knifeThrowChanges)
+            {
+                sk.secondary.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SUPERBLEED" };
+                sk.secondary.skillFamily.variants[1].skillDef.skillDescriptionToken = "BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
+
+                On.EntityStates.Bandit2.Weapon.Bandit2FireShiv.FireShiv += (orig, self) =>
+                {
+                    if (EntityStates.Bandit2.Weapon.Bandit2FireShiv.muzzleEffectPrefab)
+                    {
+                        EffectManager.SimpleMuzzleFlash(EntityStates.Bandit2.Weapon.Bandit2FireShiv.muzzleEffectPrefab, self.gameObject, EntityStates.Bandit2.Weapon.Bandit2FireShiv.muzzleString, false);
+                    }
+                    if (self.isAuthority)
+                    {
+                        Ray aimRay = self.GetAimRay();
+                        if (self.projectilePrefab != null)
+                        {
+                            FireProjectileInfo fireProjectileInfo = new FireProjectileInfo
+                            {
+                                projectilePrefab = self.projectilePrefab,
+                                position = aimRay.origin,
+                                rotation = Util.QuaternionSafeLookRotation(aimRay.direction),
+                                owner = self.gameObject,
+                                damage = self.damageStat * self.damageCoefficient,
+                                force = self.force,
+                                crit = self.RollCrit(),
+                                damageTypeOverride = new DamageType?(DamageType.SuperBleedOnCrit | DamageType.Stun1s)
+                            };
+                            ProjectileManager.instance.FireProjectile(fireProjectileInfo);
+                        }
+                    }
+                };
+            }
         }
 
         private static float GetBandit2SlashBladeMinDurationHook(EntityStates.Bandit2.Weapon.SlashBlade self)
@@ -190,7 +204,7 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void ModifyUtilities(SkillLocator sk)
         {
-            if (!enableUtilitySkillChanges) return;
+            if (!utilityFix) return;
 
             LoadoutAPI.AddSkill(typeof(ThrowSmokebomb));
             LoadoutAPI.AddSkill(typeof(StealthMode));
@@ -222,7 +236,7 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void ModifySpecials(SkillLocator sk)
         {
-            if (!enableSpecialSkillChanges) return;
+            if (!specialRework) return;
             SpecialDamage = DamageAPI.ReserveDamageType();
             RackEmUpDamage = DamageAPI.ReserveDamageType();
             SpecialDamageType(sk);

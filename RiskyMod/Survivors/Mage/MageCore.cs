@@ -18,6 +18,9 @@ namespace RiskyMod.Survivors.Mage
         public static bool flamethrowerSprintCancel = true;
         public static bool m2Buffer = true;
 
+        public static bool ionSurgeShock = true;
+        public static bool ionSurgeMovementScaling = false;
+
         public MageCore()
         {
             if (!enabled) return;
@@ -103,12 +106,42 @@ namespace RiskyMod.Survivors.Mage
                 }
                 else if (sk.special.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.FlyUpState))
                 {
-                    sk.special.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD";
+                    if (ionSurgeShock)
+                    {
+                        sk.special.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD";
+                        string keyword = Tweaks.Shock.enabled ? "KEYWORD_SHOCKING_RISKYMOD" : "KEYWORD_SHOCKING";
+                        sk.special.skillFamily.variants[i].skillDef.keywordTokens = new string[] { keyword };
 
-                    string keyword = Tweaks.Shock.enabled ? "KEYWORD_SHOCKING_RISKYMOD" : "KEYWORD_SHOCKING";
+                        IL.EntityStates.Mage.FlyUpState.OnEnter += (il) =>
+                        {
+                            ILCursor c = new ILCursor(il);
+                            c.GotoNext(
+                                 x => x.MatchCallvirt<BlastAttack>("Fire")
+                                );
+                            c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                            {
+                                blastAttack.damageType = DamageType.Shock5s;
+                                return blastAttack;
+                            });
+                        };
 
-                    sk.special.skillFamily.variants[i].skillDef.keywordTokens = new string[] { keyword };
-                    new IonSurgeTweaks();
+                    }
+
+                    if (!ionSurgeMovementScaling)
+                    {
+                        IL.EntityStates.Mage.FlyUpState.HandleMovements += (il) =>
+                        {
+                            ILCursor c = new ILCursor(il);
+                            c.GotoNext(
+                                 x => x.MatchLdfld<EntityStates.BaseState>("moveSpeedStat")
+                                );
+                            c.Index++;
+                            c.EmitDelegate<Func<float, float>>(orig =>
+                            {
+                                return 7f;
+                            });
+                        };
+                    }
                 }
             }
         }
