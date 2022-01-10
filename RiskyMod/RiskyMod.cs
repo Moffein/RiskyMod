@@ -465,7 +465,8 @@ namespace RiskyMod
 
             MageCore.enabled = Config.Bind(mageString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             M1Projectiles.increaseRange = Config.Bind(mageString, "Primary Range Increase", true, "Primary projectiles no longer disappear mid-flight.").Value;
-            MageCore.m2Buffer = Config.Bind(mageString, "Secondary Buffer Time", true, "Adds a 0.8s duration between Secondary uses if you hold down the button.").Value;
+            MageCore.m2Buffer = Config.Bind(mageString, "Secondary Buffer Time", true, "Adds a 0.6s duration between Secondary uses if you hold down the button.").Value;
+            MageCore.m2RequiresKeypress = Config.Bind(mageString, "Secondary Requires Keypress", false, "Each Secondary use requires you to re-press the button.").Value;
             SolidIceWall.enabled = Config.Bind(mageString, "Snapfreeze - Solid Ice Wall", true, "Ice Wall blocks projectiles and movement.").Value;
             MageCore.flamethrowerAttackSpeed = Config.Bind(mageString, "Flamethrower - Attack Speed Scaling", true, "Flamethrower shot count and fire rate increases with attack speed.").Value;
             MageCore.flamethrowerSprintCancel = Config.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
@@ -486,7 +487,8 @@ namespace RiskyMod
             LoaderCore.shiftCancelsSprint = Config.Bind(loaderString, "Utilities Cancel Sprint", false, "Loader's Big Punches cancel sprinting.").Value;
             LoaderCore.modifyStats = Config.Bind(loaderString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
             LoaderCore.zapFistChanges = Config.Bind(loaderString, "Thunder Gauntlet Changes", true, "Enable changes to this skill.").Value;
-            LoaderCore.slamChanges = Config.Bind(loaderString, "Thunderslam Changes", true, "Enable changes to this skill.").Value;LoaderCore.pylonChanges = Config.Bind(loaderString, "M551 Pylon Changes", true, "Enable changes to this skill.").Value;
+            LoaderCore.slamChanges = Config.Bind(loaderString, "Thunderslam Changes", true, "Enable changes to this skill.").Value;
+            LoaderCore.pylonChanges = Config.Bind(loaderString, "M551 Pylon Changes", true, "Enable changes to this skill.").Value;
 
             CrocoCore.enabled = Config.Bind(crocoString, "Enable Changes", true, "Enable changes to this survivor. Skill options unavailable due to all the changes being too interlinked.").Value;
             CrocoCore.gameplayRework = Config.Bind(crocoString, "Gameplay Rework", true, "A full rework of Acrid's skills.").Value;

@@ -65,7 +65,6 @@
 	"MAGE_SPECIAL_FIRE_SCEPTER_NAME_RISKYMOD": "Napalmthrower",
 	"MAGE_SPECIAL_FIRE_SCEPTER_DESCRIPTION_RISKYMOD" : "Burn all enemies in front of you for <style=cIsDamage>20x100% damage</style>, leaving a trail of fire. The number of shots increases with attack speed.",
 	
-	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Throw a <style=cIsUtility>Magnetic</style> pylon that <style=cIsDamage>zaps</style> up to <style=cIsDamage>6</style> nearby enemies for <style=cIsDamage>70% damage</style>. Can be <style=cIsUtility>grappled</style>.",
-	"LOADER_SPECIAL_ALT_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Heavy</style>. <style=cIsDamage>Stunning</style>. Slam your fists down, dealing <style=cIsDamage>2000%</style> damage on impact."
+	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Throw a <style=cIsUtility>Magnetic</style> pylon that <style=cIsDamage>zaps</style> up to <style=cIsDamage>6</style> nearby enemies for <style=cIsDamage>70% damage</style>. Can be <style=cIsUtility>grappled</style>."
 	}
 }

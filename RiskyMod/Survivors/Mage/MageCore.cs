@@ -17,6 +17,7 @@ namespace RiskyMod.Survivors.Mage
         public static bool flamethrowerAttackSpeed = true;
         public static bool flamethrowerSprintCancel = true;
         public static bool m2Buffer = true;
+        public static bool m2RequiresKeypress = false;
 
         public static bool ionSurgeShock = true;
         public static bool ionSurgeMovementScaling = false;
@@ -56,6 +57,20 @@ namespace RiskyMod.Survivors.Mage
 
         private void ModifySecondaries(SkillLocator sk)
         {
+            if (m2RequiresKeypress)
+            {
+                for (int i = 0; i < sk.secondary.skillFamily.variants.Length; i++)
+                {
+                    if (sk.secondary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.ChargeNovabomb))
+                    {
+                        sk.secondary.skillFamily.variants[i].skillDef.mustKeyPress = true;
+                    }
+                    else if (sk.secondary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.ChargeIcebomb))
+                    {
+                        sk.secondary.skillFamily.variants[i].skillDef.mustKeyPress = true;
+                    }
+                }
+            }
             if (m2Buffer)
             {
                 IL.EntityStates.Mage.Weapon.BaseThrowBombState.FixedUpdate += (il) =>
@@ -69,7 +84,7 @@ namespace RiskyMod.Survivors.Mage
                     {
                         if (self.inputBank && self.inputBank.skill2.down)
                         {
-                            return 0.8f;
+                            return 0.6f;
                         }
                         return duration;
                     });
