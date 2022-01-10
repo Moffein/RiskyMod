@@ -36,7 +36,19 @@ namespace RiskyMod.Survivors.Croco
             stopwatch = 0f;
             lingerStopwatch = 0f;
             ticksRemaining = scepter ? baseTickCountScepter : baseTickCount;
+        }
+
+        public void Setup(CharacterBody attackerBody, CharacterBody victimBody, DamageInfo damageInfo, bool isScepter = false)
+        {
+            owner = attackerBody;
+            victim = victimBody;
+            damage = damageInfo.damage;
+            crit = damageInfo.crit;
             victim.AddBuff(ModifySpecial.EpidemicDebuff.buffIndex);
+            if (isScepter)
+            {
+                SetScepter();
+            }
         }
 
         private void FixedUpdate()

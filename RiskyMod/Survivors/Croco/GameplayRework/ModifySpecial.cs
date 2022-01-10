@@ -135,14 +135,7 @@ namespace RiskyMod.Survivors.Croco
             {
                 //Multiple Acrids can stack Epidemic
                 EpidemicDamageController ec = victimBody.gameObject.AddComponent<EpidemicDamageController>();
-                ec.owner = attackerBody;
-                ec.victim = victimBody;
-                ec.damage = damageInfo.damage;
-                ec.crit = damageInfo.crit;
-                if (isScepter)
-                {
-                    ec.SetScepter();
-                }
+                ec.Setup(attackerBody, victimBody, damageInfo, isScepter);
                 CrocoDamageTypeController cd = attackerBody.GetComponent<CrocoDamageTypeController>();
                 if (cd)
                 {
