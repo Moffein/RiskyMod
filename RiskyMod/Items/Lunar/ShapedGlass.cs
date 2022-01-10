@@ -13,17 +13,15 @@ namespace RiskyMod.Items.Lunar
         {
             if (!enabled) return;
 
-            //Remove vanilla damage boost - don't touch HP since it's entangled with PermanentCurse
+            //Remove vanilla  effects
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(
-                     x => x.MatchLdcR4(2f),
-                     x => x.MatchLdloc(26),
-                     x => x.MatchConvR4(),
-                     x => x.MatchCall("UnityEngine.Mathf", "Pow")
+                     x => x.MatchLdsfld(typeof(RoR2Content.Items), "LunarDagger")
                     );
-                c.Next.Operand = 1f;
+                c.Remove();
+                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
             GetStatsCoefficient.HandleStatsInventoryActions += HandleStatsInventory;
@@ -35,6 +33,7 @@ namespace RiskyMod.Items.Lunar
             if (glassCount > 0)
             {
                 args.damageMultAdd += glassCount;
+                args.baseCurseAdd += glassCount;
             }
         }
     }

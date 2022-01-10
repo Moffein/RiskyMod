@@ -35,17 +35,24 @@ namespace RiskyMod.Tweaks
                 c.Emit(OpCodes.Ldarg_1);
                 c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((remainingDamage, self, damageInfo) =>
                 {
-                    if ((damageInfo.damageType & DamageType.BypassArmor) != DamageType.BypassArmor
-                    && (damageInfo.damageType & DamageType.BypassOneShotProtection) != DamageType.BypassOneShotProtection
-                    && !DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage)
-                    && (self.body && self.body.teamComponent && (self.body.teamComponent.teamIndex == TeamIndex.Player || self.body.isPlayerControlled)))
+                    bool bypassShield = (damageInfo.damageType & DamageType.BypassArmor) == DamageType.BypassArmor
+                    || (damageInfo.damageType & DamageType.BypassOneShotProtection) == DamageType.BypassOneShotProtection;
+
+                    bool shieldOnly = self.body.HasBuff(RoR2Content.Buffs.AffixLunar)
+                    || (self.body.inventory && self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
+
+                    bool isPlayerTeam = self.body && self.body.teamComponent && (self.body.teamComponent.teamIndex == TeamIndex.Player || self.body.isPlayerControlled);
+
+                    if (!bypassShield
+                    && (shieldOnly || !DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage))
+                    && isPlayerTeam)
                     {
                         float duration = 0.1f;
 
                         //ShieldOnly increases grace period since it's your only form of defense against 1shots.
-                        if (self.body.HasBuff(RoR2Content.Buffs.AffixLunar) || (self.body.inventory && self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0))
+                        if (shieldOnly)
                         {
-                            duration = 0.3f;
+                            duration = 0.5f;
                         }
 
                         self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
