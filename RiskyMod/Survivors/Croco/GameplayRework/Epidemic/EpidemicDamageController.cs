@@ -38,13 +38,14 @@ namespace RiskyMod.Survivors.Croco
             ticksRemaining = scepter ? baseTickCountScepter : baseTickCount;
         }
 
-        public void Setup(CharacterBody attackerBody, CharacterBody victimBody, DamageInfo damageInfo, bool isScepter = false)
+        public void Setup(CharacterBody attackerBody, CharacterBody victimBody, DamageInfo damageInfo, DamageType selectedPassive, bool isScepter = false)
         {
             owner = attackerBody;
             victim = victimBody;
             damage = damageInfo.damage;
             crit = damageInfo.crit;
             victim.AddBuff(ModifySpecial.EpidemicDebuff.buffIndex);
+            SetPassive(selectedPassive);
             if (isScepter)
             {
                 SetScepter();

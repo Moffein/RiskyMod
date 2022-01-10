@@ -486,8 +486,7 @@ namespace RiskyMod
             LoaderCore.shiftCancelsSprint = Config.Bind(loaderString, "Utilities Cancel Sprint", false, "Loader's Big Punches cancel sprinting.").Value;
             LoaderCore.modifyStats = Config.Bind(loaderString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
             LoaderCore.zapFistChanges = Config.Bind(loaderString, "Thunder Gauntlet Changes", true, "Enable changes to this skill.").Value;
-            LoaderCore.slamChanges = Config.Bind(loaderString, "Thunderslam Changes", true, "Enable changes to this skill.").Value;
-            LoaderCore.pylonChanges = Config.Bind(loaderString, "M551 Pylon Changes", true, "Enable changes to this skill.").Value;
+            LoaderCore.slamChanges = Config.Bind(loaderString, "Thunderslam Changes", true, "Enable changes to this skill.").Value;LoaderCore.pylonChanges = Config.Bind(loaderString, "M551 Pylon Changes", true, "Enable changes to this skill.").Value;
 
             CrocoCore.enabled = Config.Bind(crocoString, "Enable Changes", true, "Enable changes to this survivor. Skill options unavailable due to all the changes being too interlinked.").Value;
             CrocoCore.gameplayRework = Config.Bind(crocoString, "Gameplay Rework", true, "A full rework of Acrid's skills.").Value;

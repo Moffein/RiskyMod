@@ -133,14 +133,16 @@ namespace RiskyMod.Survivors.Croco
             bool isDisease = isScepter || damageInfo.HasModdedDamageType(Epidemic);
             if (isDisease)
             {
-                //Multiple Acrids can stack Epidemic
-                EpidemicDamageController ec = victimBody.gameObject.AddComponent<EpidemicDamageController>();
-                ec.Setup(attackerBody, victimBody, damageInfo, isScepter);
+                DamageType selectedPassive = DamageType.Generic;
                 CrocoDamageTypeController cd = attackerBody.GetComponent<CrocoDamageTypeController>();
                 if (cd)
                 {
-                    ec.SetPassive(cd.GetDamageType());
+                    selectedPassive = cd.GetDamageType();
                 }
+
+                //Multiple Acrids can stack Epidemic
+                EpidemicDamageController ec = victimBody.gameObject.AddComponent<EpidemicDamageController>();
+                ec.Setup(attackerBody, victimBody, damageInfo, selectedPassive, isScepter);
 
                 //Tick poison achievement
                 if (attackerBody.master)

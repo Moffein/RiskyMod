@@ -23,6 +23,7 @@ namespace RiskyMod.Survivors
 
         public static DamageAPI.ModdedDamageType IgniteLevelScaled;
 
+
         public SharedDamageTypes()
         {
             InterruptOnHit = DamageAPI.ReserveDamageType();

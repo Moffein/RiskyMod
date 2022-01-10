@@ -127,7 +127,7 @@ namespace EntityStates.RiskyMod.Loader
 		public static float minimumDuration = 0.1f;
 		public static float blastRadius = 10f;
 		public static float blastProcCoefficient = 1f;
-		public static float blastDamageCoefficient = 16f;
+		public static float blastDamageCoefficient = 20f;
 		public static string enterSoundString = "Play_loader_R_variant_whooshDown";
 		public static float initialVerticalVelocity = -20f;
 		public static float exitVerticalVelocity = 12f;
@@ -137,10 +137,10 @@ namespace EntityStates.RiskyMod.Loader
 		public static GameObject blastEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/loadergroundslam");
 		public static GameObject fistEffectPrefab;
 
-		public static float maxDamageBoost = 3f;
-		public static float maxRadiusBoost = 3f;
-		public static float maxForceBoost = 3f;
-		public static float maxBoostDistance = 200f;
+		public static float maxDamageBoost = 2f;
+		public static float maxRadiusBoost = 2f;
+		public static float maxForceBoost = 2f;
+		public static float maxBoostDistance = 100f;
 
 		private float initialY;
 		private float previousAirControl;

@@ -83,6 +83,7 @@ namespace RiskyMod.Survivors.Loader
 
             if (slamChanges)
             {
+                sk.special.skillFamily.variants[1].skillDef.cancelSprintingOnActivation = false;
                 new BiggerSlamHitbox();
                 new SlamScrapBarrier();
                 new SlamDamageType();
