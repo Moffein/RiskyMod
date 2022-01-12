@@ -41,7 +41,7 @@ namespace RiskyMod.Items.Uncommon
             BuffAPI.Add(new CustomBuff(scytheBuff));
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
-            GetStatsCoefficient.HandleStatsActions += HandleStats;
+            RecalculateStatsAPI.GetStatCoefficients += HandleStats;
             TakeDamage.ModifyInitialDamageActions += ForceDamageCrit;
 
             IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>

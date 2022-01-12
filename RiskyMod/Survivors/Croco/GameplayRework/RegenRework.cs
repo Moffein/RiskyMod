@@ -45,7 +45,7 @@ namespace RiskyMod.Survivors.Croco
             };
 
             SharedHooks.OnHitEnemy.OnHitNoAttackerActions += DamageReducesRegen;
-            GetStatsCoefficient.HandleStatsActions += HandleStats;
+            RecalculateStatsAPI.GetStatCoefficients += HandleStats;
 
             ReplaceM1Regen();
             ReplaceBiteRegen();

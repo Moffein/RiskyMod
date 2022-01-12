@@ -67,7 +67,7 @@ namespace RiskyMod.Survivors.Treebot
                 new ModifyFruitPickup();
                 new DropFruitOnHit();
 
-                GetStatsCoefficient.HandleStatsActions += FruitBuff;
+                RecalculateStatsAPI.GetStatCoefficients += FruitBuff;
 
                 //Fruit on-death nullref is located in Fixes section
             }

@@ -30,7 +30,7 @@ namespace RiskyMod.Items.Common
                 return orig(self, amount, procChainMask, nonRegen);
             };
 
-            GetStatsCoefficient.HandleStatsActions += HandleStats;
+            RecalculateStatsAPI.GetStatCoefficients += HandleStats;
 
             On.EntityStates.Missions.BrotherEncounter.Phase1.OnEnter += (orig, self) =>
             {

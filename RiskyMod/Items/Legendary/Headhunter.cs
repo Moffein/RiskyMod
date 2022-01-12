@@ -58,7 +58,7 @@ namespace RiskyMod.Items.Legendary
                         return flag || attackerBody.HasBuff(Perfected2.buffIndex);
                     });
                 };
-                GetStatsCoefficient.HandleStatsActions += HandlePerfected2Stats;
+                RecalculateStatsAPI.GetStatCoefficients += HandlePerfected2Stats;
             }
         }
 

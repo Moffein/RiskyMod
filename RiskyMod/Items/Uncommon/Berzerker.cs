@@ -38,7 +38,7 @@ namespace RiskyMod.Items.Uncommon
             BuffAPI.Add(new CustomBuff(berzerkBuff));
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
-            GetStatsCoefficient.HandleStatsActions += HandleStats;
+            RecalculateStatsAPI.GetStatCoefficients += HandleStats;
 
             IL.RoR2.CharacterBody.OnClientBuffsChanged += (il) =>
             {

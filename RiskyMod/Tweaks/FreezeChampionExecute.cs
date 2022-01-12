@@ -30,7 +30,7 @@ namespace RiskyMod.Tweaks
             FreezeDebuff.name = "RiskyMod_FreezeDebuff";
             FreezeDebuff.iconSprite = Assets.BuffIcons.Freeze;
             BuffAPI.Add(new CustomBuff(FreezeDebuff));
-            SharedHooks.GetStatsCoefficient.HandleStatsActions += ApplySlow;
+            RecalculateStatsAPI.GetStatCoefficients += ApplySlow;
 
             IL.RoR2.CharacterModel.UpdateOverlays += (il) =>
             {

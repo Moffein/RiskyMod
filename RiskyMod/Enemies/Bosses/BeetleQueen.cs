@@ -32,7 +32,7 @@ namespace RiskyMod.Enemies.Bosses
             ModifyProjectile();
             //BuildBeetleBuff();
             //ModifySpawns();
-            GetStatsCoefficient.HandleStatsActions += ModifyBeetleJuice;
+            RecalculateStatsAPI.GetStatCoefficients += ModifyBeetleJuice;
             //RebuildAI();
         }
 
@@ -171,7 +171,7 @@ namespace RiskyMod.Enemies.Bosses
             BeetleBuff.iconSprite = RoR2Content.Buffs.Warbanner.iconSprite;
             BuffAPI.Add(new CustomBuff(BeetleBuff));
 
-            GetStatsCoefficient.HandleStatsActions += HandleBeetleBuff;
+            RecalculateStatsAPI.GetStatCoefficients += HandleBeetleBuff;
 
             IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>
             {

@@ -103,7 +103,7 @@ namespace RiskyMod.Survivors.Croco
             EpidemicDebuff.iconSprite = RoR2Content.Buffs.Entangle.iconSprite;
             BuffAPI.Add(new CustomBuff(EpidemicDebuff));
 
-            SharedHooks.GetStatsCoefficient.HandleStatsActions += (CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args) =>
+            RecalculateStatsAPI.GetStatCoefficients += (CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args) =>
             {
                 if (sender.HasBuff(EpidemicDebuff))
                 {

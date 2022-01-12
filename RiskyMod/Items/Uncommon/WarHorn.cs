@@ -12,7 +12,7 @@ namespace RiskyMod.Items.Uncommon
             if (!enabled) return;
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.EnergizedOnEquipmentUse);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.EnergizedOnEquipmentUse);
-            GetStatsCoefficient.HandleStatsActions += HandleStats;
+            RecalculateStatsAPI.GetStatCoefficients += HandleStats;
         }
 
         private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)

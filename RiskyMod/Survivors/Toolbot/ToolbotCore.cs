@@ -173,7 +173,7 @@ namespace RiskyMod.Survivors.Toolbot
                 PowerModeBuff.name = "RiskyMod_PowerModeBuff";
                 PowerModeBuff.iconSprite = RoR2Content.Buffs.SmallArmorBoost.iconSprite;
                 BuffAPI.Add(new CustomBuff(PowerModeBuff));
-                GetStatsCoefficient.HandleStatsActions += HandlePowerMode;
+                RecalculateStatsAPI.GetStatCoefficients += HandlePowerMode;
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.ToolbotDualWieldBase", "bonusBuff", PowerModeBuff);
             }
         }
