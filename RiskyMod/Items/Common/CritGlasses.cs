@@ -21,10 +21,12 @@ namespace RiskyMod.Items.Common
             {
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(
-                     //x => x.MatchLdsfld(typeof(RoR2Content.Items), "CritGlasses")
                      x => x.MatchLdfld<CharacterBody>("levelCrit")
                     );
-                c.Index += 8;
+
+                c.GotoNext(
+                     x => x.MatchLdcR4(10f)
+                    );
                 c.Next.Operand = 7f;
             };
         }

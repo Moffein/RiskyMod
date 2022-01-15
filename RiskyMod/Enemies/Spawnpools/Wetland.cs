@@ -17,6 +17,7 @@ namespace RiskyMod.Enemies.Spawnpools
                     List<DirectorAPI.DirectorCardHolder> toRemove = new List<DirectorAPI.DirectorCardHolder>();
                     foreach (DirectorAPI.DirectorCardHolder dch in list)
                     {
+                        //Removing Wisps increases enemy variety between stages, but does it reduce the gameplay variety?
                         if (dch.Card.spawnCard == SpawnCards.Wisp)
                         {
                             toRemove.Add(dch);
