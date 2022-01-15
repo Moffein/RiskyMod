@@ -1,5 +1,4 @@
 ﻿using R2API;
-using RiskyMod.SharedHooks;
 using RoR2;
 
 namespace RiskyMod.Items.Uncommon
@@ -10,10 +9,16 @@ namespace RiskyMod.Items.Uncommon
         public Chronobauble()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.SlowOnHit);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.SlowOnHit);
+            RecalculateStatsAPI.GetStatCoefficients += ChronobaubleDebuff;
         }
 
-        //Handled in ModifyFinalDamage
+        private static void ChronobaubleDebuff(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            if (sender.HasBuff(RoR2Content.Buffs.Slow50.buffIndex))
+            {
+                args.attackSpeedMultAdd -= 0.2f;
+            }
+        }
     }
 }

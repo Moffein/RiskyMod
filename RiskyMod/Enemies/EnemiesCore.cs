@@ -51,6 +51,10 @@ namespace RiskyMod.Enemies
             if (!modifySpawns) return;
             SpawnCards.Init();
 
+            new GooLake();
+            new Wetland();
+
+            new SirensCall();
             new StadiaJungle();
         }
     }

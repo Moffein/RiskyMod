@@ -12,7 +12,7 @@ namespace RiskyMod.Tweaks
             On.RoR2.CharacterBody.Start += (orig, self) =>
             {
                 orig(self);
-                if (self.isBoss)
+                if (Run.instance.stageClearCount > 5 && self.isBoss)
                 {
                     if (self.inventory
                     && self.inventory.GetItemCount(RoR2Content.Items.AdaptiveArmor.itemIndex) <= 0
