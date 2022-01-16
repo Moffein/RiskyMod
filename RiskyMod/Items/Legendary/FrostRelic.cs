@@ -49,7 +49,7 @@ namespace RiskyMod.Items.Legendary
                 {
                     itemCount = self.cachedOwnerInfo.characterBody.inventory.GetItemCount(RoR2Content.Items.Icicle);
                 }
-                self.icicleDamageCoefficientPerTick = 1f + 1.5f * itemCount;
+                self.icicleDamageCoefficientPerTick = 1.5f + 1.5f * itemCount;
 
                 orig(self);
             };
