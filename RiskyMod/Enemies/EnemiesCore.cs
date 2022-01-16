@@ -13,6 +13,14 @@ namespace RiskyMod.Enemies
     {
         public static bool modifyEnemies = true;
         public static bool modifySpawns = true;
+
+        public static void DisableRegen(GameObject enemyObject)
+        {
+            CharacterBody cb = enemyObject.GetComponent<CharacterBody>();
+            cb.baseRegen = 0f;
+            cb.levelRegen = 0f;
+        }
+
         public EnemiesCore()
         {
             ModifyEnemies();

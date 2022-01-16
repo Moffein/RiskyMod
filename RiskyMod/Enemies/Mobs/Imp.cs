@@ -9,15 +9,12 @@ namespace RiskyMod.Enemies.Mobs
         public Imp()
         {
             if (!enabled) return;
-            DisableRegen();
+            EnemiesCore.DisableRegen(Resources.Load<GameObject>("prefabs/characterbodies/impbody"));
         }
 
-        private void DisableRegen()
+        private void ModifyAI()
         {
-            GameObject enemyObject = Resources.Load<GameObject>("prefabs/characterbodies/impbody");
-            CharacterBody cb = enemyObject.GetComponent<CharacterBody>();
-            cb.baseRegen = 0f;
-            cb.levelRegen = 0f;
+
         }
     }
 }
