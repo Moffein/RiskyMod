@@ -78,22 +78,22 @@ namespace RiskyMod.Items.Boss
                 c.GotoNext(
                      x => x.MatchLdcR4(4f)
                     );
-                c.Next.Operand = 3.2f;
+                c.Next.Operand = 2.7f;
                 c.Index += 8;
                 c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
                 {
-                    return damageCoefficient + 0.8f;
+                    return damageCoefficient + 1.8f;
                 });
 
                 //Change Max HP damage
                 c.GotoNext(
                      x => x.MatchLdcR4(0.15f)
                     );
-                c.Next.Operand = 0.08f;
+                c.Next.Operand = 0.09f;
                 c.Index += 8;
                 c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
                 {
-                    return damageCoefficient + 0.02f;
+                    return damageCoefficient + 0.06f;
                 });
 
 

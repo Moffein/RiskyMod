@@ -23,18 +23,34 @@ namespace RiskyMod.Survivors.Bandit2
                     );
                 c.Next.Operand = damagePerBuff;
             };
+
+            On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, self, damageReport) =>
+            {
+                orig(self, damageReport);
+                if (NetworkServer.active)
+                {
+                    if (damageReport.victimBody && damageReport.victimBodyIndex == Bandit2Core.Bandit2Index)
+                    {
+                        DesperadoTracker dt = damageReport.victimBody.GetComponent<DesperadoTracker>();
+                        if (dt)
+                        {
+                            dt.LoseStacksOnDeath();
+                        }
+                    }
+                }
+            };
         }
 
         public static float GetDesperadoMult(CharacterBody cb)
         {
             int buffCount = cb.GetBuffCount(RoR2Content.Buffs.BanditSkull.buffIndex);
-            if (!DesperadoRework.enabled)
+            if (DesperadoRework.enabled)
             {
-                return 1f + buffCount * 0.1f;
+                return 1f + buffCount * damagePerBuff;
             }
             else
             {
-                return 1f + buffCount * damagePerBuff;
+                return 1f + buffCount * 0.1f;
             }
         }
     }
@@ -47,6 +63,17 @@ namespace RiskyMod.Survivors.Bandit2
         {
             characterBody = base.GetComponent<CharacterBody>();
             if (!characterBody) Destroy(this);
+        }
+
+        public void LoseStacksOnDeath()
+        {
+            if (characterBody && characterBody.healthComponent && !characterBody.healthComponent.alive) //Prevent Witch's Ring from triggering this
+            {
+                if (desperadoPersist)
+                {
+                    desperadoPersist.stacks *= 2 / 3;
+                }
+            }
         }
 
         public void Start()
@@ -70,7 +97,7 @@ namespace RiskyMod.Survivors.Bandit2
 
         public void FixedUpdate()
         {
-            if (NetworkServer.active)
+            if (NetworkServer.active && characterBody.healthComponent && characterBody.healthComponent.alive)
             {
                 int desperadoCount = characterBody.GetBuffCount(RoR2Content.Buffs.BanditSkull.buffIndex);
                 if (desperadoCount > desperadoPersist.stacks)

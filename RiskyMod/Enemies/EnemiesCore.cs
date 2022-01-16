@@ -44,6 +44,7 @@ namespace RiskyMod.Enemies
             new SCU();
 
             new AWU();
+
         }
 
         private void ModifySpawns()
@@ -220,7 +221,12 @@ namespace RiskyMod.Enemies
                 {
                     foreach (DirectorAPI.DirectorCardHolder dch in list)
                     {
-                        Debug.Log("Card: " + dch.Card.spawnCard + "\nCategory: " + dch.MonsterCategory +  "\nWeight: " + dch.Card.selectionWeight + "\nDistance: " + dch.Card.spawnDistance + "\n");
+                        Debug.Log("Card: " + dch.Card.spawnCard
+                            + "\nCategory: " + dch.MonsterCategory
+                            +  "\nWeight: " + dch.Card.selectionWeight
+                            + "\nDistance: " + dch.Card.spawnDistance
+                            //+ "\nMin Stages: " + dch.Card.minimumStageCompletions
+                            + "\n");
                     }
                 };
             }

@@ -21,6 +21,18 @@ namespace RiskyMod.Items.Uncommon
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "ExplodeOnDeath")
                     );
 
+                //Change damage
+                c.GotoNext(
+                     x => x.MatchLdcR4(3.5f)
+                    );
+                c.Next.Operand = 4f;
+
+                //Change damage per stack
+                c.GotoNext(
+                     x => x.MatchLdcR4(0.8f)
+                    );
+                c.Next.Operand = 0.6f;
+
                 //Disable Proc Coefficient
                 if (RiskyMod.disableProcChains)
                 {

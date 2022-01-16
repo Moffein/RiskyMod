@@ -39,7 +39,7 @@ namespace RiskyMod.Items.Legendary
                 c.Emit(OpCodes.Ldloc_3);    //itemCount
                 c.EmitDelegate<Func<float, int, float>>((origDamage, itemCount) =>
                 {
-                    return origDamage + 0.2f * (itemCount - 1);
+                    return origDamage + 0.36f * (itemCount - 1);
                 });
             };
         }

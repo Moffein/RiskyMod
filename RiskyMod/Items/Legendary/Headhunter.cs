@@ -92,7 +92,7 @@ namespace RiskyMod.Items.Legendary
                 int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
                 if (hhCount > 0)
                 {
-                    float duration = 5f + 5f * hhCount;
+                    float duration = 4f + 6f * hhCount;
                     for (int l = 0; l < BuffCatalog.eliteBuffIndices.Length; l++)
                     {
                         BuffIndex buffIndex = BuffCatalog.eliteBuffIndices[l];

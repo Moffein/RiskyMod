@@ -414,7 +414,6 @@ namespace RiskyMod
             Gravekeeper.enabled = Config.Bind(monsterString, "Grovetender", true, "Enable changes to this monster.").Value;
             SCU.enabled = Config.Bind(monsterString, "Solus Control Unit", true, "Enable changes to this monster.").Value;
 
-
             AWU.enabled = Config.Bind(monsterString, "Alloy Worship Unit", true, "Enable changes to this monster.").Value;
         }
 

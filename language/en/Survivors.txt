@@ -9,7 +9,7 @@
 	"BANDIT2_REVOLVER_NAME_RISKYMOD" : "Gunslinger",
 	"BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD" : "Revolver kills <style=cIsUtility>reset all your cooldowns</style>.",
 	"BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD" : "Revolver kills grant <style=cIsDamage>stacking tokens</style> for <style=cIsDamage>10%</style> more revolver damage.",
-	"BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD": "Revolver kills grant <style=cIsDamage>stacking tokens</style> for <style=cIsDamage>1.5%</style> more revolver damage.",
+	"BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD": "Revolver kills grant <style=cIsDamage>stacking tokens</style> for <style=cIsDamage>1.5%</style> more revolver damage. Lose <style=cIsHealth>33% of your tokens</style> upon death.",
 	"BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Slayer</style>. Fire a revolver shot for <style=cIsDamage>600% damage</style>.",
 	"BANDIT2_SPECIAL_ALT_NAME_RISKYMOD" : "Rack Em Up",
 	"BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Slayer</style>. Rapidly fire a revolver shots for <style=cIsDamage>6x100% damage</style>. Each consecutive hit deals <style=cIsDamage>20%</style> extra damage.",
@@ -45,7 +45,7 @@
 	
 	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "Fire a <style=cIsUtility>Sonic Boom</style> that <style=cIsHealing>heals for every target hit</style>.",
 	"TREEBOT_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>20% HP</style>. Fire a <style=cIsUtility>Sonic Boom</style> that <style=cIsDamage>Weakens</style> enemies for <style=cIsDamage>550% damage</style>.",
-	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Inject</style> an enemy for <style=cIsDamage>330% damage</style>. <style=cIsDamage>Injected</style> enemies have a <style=cIsDamage>15%</style> chance to drop <style=cIsHealing>healing fruits</style> when hit.",
+	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Inject</style> an enemy for <style=cIsDamage>330% damage</style>. <style=cIsDamage>Injected</style> enemies have a <style=cIsDamage>20%</style> chance to drop <style=cIsHealing>healing fruits</style> when hit.",
 	
 	"CROCO_PASSIVE_NAME_RISKYMOD" : "Virulent",
 	"CROCO_PASSIVE_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Poison</style>, <color=#B1387F>Blight</color>, and <style=cIsDamage>Epidemic</style> last <style=cIsDamage>40%</style> longer.",

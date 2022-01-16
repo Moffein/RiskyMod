@@ -34,7 +34,7 @@
 	"ITEM_PHASING_PICKUP_RISKYMOD": "Turn invisible on taking heavy damage.",
 	"ITEM_PHASING_DESC_RISKYMOD": "Chance on taking damage to gain <style=cIsUtility>40% movement speed</style> and <style=cIsUtility>invisibility</style> for <style=cIsUtility>3s</style> <style=cStack>(+1.5s per stack)</style>. Chance increases the more damage you take.",
 	
-	"ITEM_EXPLODEONDEATH_DESC_RISKYMOD": "On killing an enemy, spawn a <style=cIsDamage>lava pillar</style> in a <style=cIsDamage>16m</style> radius for <style=cIsDamage>350%</style> <style=cStack>(+280% per stack)</style> base damage.",
+	"ITEM_EXPLODEONDEATH_DESC_RISKYMOD": "On killing an enemy, spawn a <style=cIsDamage>lava pillar</style> in a <style=cIsDamage>16m</style> radius for <style=cIsDamage>400%</style> <style=cStack>(+240% per stack)</style> base damage.",
 	
 	"ITEM_SQUIDTURRET_PICKUP_RISKYMOD": "Taking heavy damage summons a Squid Turret nearby.",
 	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Chance on taking damage to summon a <style=cIsDamage>Squid Turret</style> with <style=cIsHealing>100% <style=cStack>(+30% per stack)</style> health</style> that <style=cIsUtility>distracts</style> and attacks nearby enemies at <style=cIsDamage>100% <style=cStack>(+100% per stack)</style> attack speed</style>. Chance increases the more damage you take. Can have up to <style=cIsUtility>3</style> squids at a time.",
@@ -59,12 +59,12 @@
 	"ITEM_ENERGIZEDONEQUIPMENTUSE_DESC_RISKYMOD": "Activating your Equipment gives you <style=cIsUtility>+50% movement speed</style> and <style=cIsDamage>+70% attack speed</style> for <style=cIsDamage>8s</style> <style=cStack>(+4s per stack)</style>.",
 	
 	"ITEM_INFUSION_PICKUP_RISKYMOD": "Killing an enemy permanently increases your maximum health.",
-	"ITEM_INFUSION_DESC_RISKYMOD": "Killing an enemy increases your <style=cIsHealing>health permanently</style> by <style=cIsHealing>1</style> <style=cStack>(+1 per stack)</style>. Every <style=cIsHealing>100 health</style> gained from this item <style=cIsHealth>reduces</style> the health given from kills.",
+	"ITEM_INFUSION_DESC_RISKYMOD": "Killing an enemy increases your <style=cIsHealing>health permanently</style> by <style=cIsHealing>1</style> <style=cStack>(+1 per stack)</style>. Every <style=cIsHealing>100 health</style> gained from this item <style=cIsHealth>reduces</style> the health gained from kills.",
 	
-	"ITEM_ICICLE_DESC_RISKYMOD": "Killing an enemy surrounds you with an <style=cIsDamage>ice storm</style> that deals <style=cIsDamage>1200% <style=cStack>(+600% per stack)</style> damage per second</style> and <style=cIsUtility>slows</style> enemies by <style=cIsUtility>80%</style> for <style=cIsUtility>1.5s</style>. The storm <style=cIsDamage>grows with every kill</style>, increasing its radius by <style=cIsDamage>3m</style>. Stacks up to <style=cIsDamage>24m</style>.",
+	"ITEM_ICICLE_DESC_RISKYMOD": "Killing an enemy surrounds you with an <style=cIsDamage>ice storm</style> that deals <style=cIsDamage>1000% <style=cStack>(+600% per stack)</style> damage per second</style> and <style=cIsUtility>slows</style> enemies by <style=cIsUtility>80%</style> for <style=cIsUtility>1.5s</style>. The storm <style=cIsDamage>grows with every kill</style>, increasing its radius by <style=cIsDamage>3m</style>. Stacks up to <style=cIsDamage>24m</style>.",
 	
 	"ITEM_HEADHUNTER_PICKUP_RISKYMOD": "Deal extra damage to elites, and temporarily gain their power on kill.",
-	"ITEM_HEADHUNTER_DESC_RISKYMOD": "Deal an additional <style=cIsDamage>30%</style> damage to elite monsters. Upon killing an elite, temporarily gain its power for <style=cIsDamage>10s</style> <style=cStack>(+5s per stack)</style>.",
+	"ITEM_HEADHUNTER_DESC_RISKYMOD": "Deal an additional <style=cIsDamage>30%</style> damage to elite monsters. Upon killing an elite, temporarily gain its power for <style=cIsDamage>10s</style> <style=cStack>(+6s per stack)</style>.",
 	
 	"ITEM_FALLBOOTS_PICKUP_RISKYMOD": "Increase jump height and air control. Hold \'Interact\' to slam down to the ground.",
 	"ITEM_FALLBOOTS_DESC_RISKYMOD": "Increase <style=cIsUtility>jump height</style> and <style=cIsUtility>air control</style>. Creates a <style=cIsDamage>5m-100m</style> radius <style=cIsDamage>kinetic explosion</style> on hitting the ground, dealing <style=cIsDamage>1000%-10000%</style> <style=cStack>(+600%-6000% per stack)</style> base damage that scales up with <style=cIsDamage>fall distance</style>. Recharges in <style=cIsDamage>10</style> <style=cStack>(-50% per stack)</style> seconds.",
@@ -74,7 +74,7 @@
 	"ITEM_GHOSTONKILL_PICKUP_RISKYMOD": "Killing an enemy summons a ghost. Recharges over time.",
 	"ITEM_GHOSTONKILL_DESC_RISKYMOD": "Killing an enemy <style=cIsDamage>spawns a ghost</style> of the killed enemy with <style=cIsDamage>1500%</style> <style=cStack>(+450% per stack)</style> damage. Lasts <style=cIsDamage>30s</style> <style=cStack>(+30s per stack)</style>. Recharges every <style=cIsUtility>20</style> seconds. Can have up to <style=cIsUtility>3</style> ghosts at a time.", 
 	
-	"ITEM_BEHEMOTH_DESC_RISKYMOD": "All your <style=cIsDamage>attacks explode</style> in a <style=cIsDamage>4m</style> radius for a bonus <style=cIsDamage>60%</style> <style=cStack>(+20% per stack)</style> TOTAL damage to nearby enemies.",
+	"ITEM_BEHEMOTH_DESC_RISKYMOD": "All your <style=cIsDamage>attacks explode</style> in a <style=cIsDamage>4m</style> radius for a bonus <style=cIsDamage>60%</style> <style=cStack>(+36% per stack)</style> TOTAL damage to nearby enemies.",
 	
 	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>Recruit a Beetle Guard</style> with bonus <style=cIsDamage>300%</style> <style=cStack>(+300% per stack)</style> damage and <style=cIsHealing>100% <style=cStack>(+100% per stack)</style> health</style>.",
 	
@@ -83,7 +83,7 @@
 	"ITEM_LIGHTNINGSTRIKEONHIT_DESC_RISKYMOD": "<style=cIsDamage>10%</style> chance on hit to down a lightning strike, dealing <style=cIsDamage>500%</style> <style=cStack>(+300% per stack)</style> damage.",
 	
 	"ITEM_BLEEDONHITANDEXPLODE_PICKUP_RISKYMOD": "Bleeding enemies explode on kill.",
-	"ITEM_BLEEDONHITANDEXPLODE_DESC_RISKYMOD": "Gain a <style=cIsDamage>5%</style> chance to <style=cIsDamage>bleed</style> enemies for <style=cIsDamage>240%</style> base damage. <style=cIsDamage>Bleeding</style> enemies <style=cIsDamage>explode</style> on death for <style=cIsDamage>400%</style> <style=cStack>(+320% per stack)</style> damage, plus an additional <style=cIsDamage>10%</style> <style=cStack>(+8% per stack)</style> of their maximum health.",
+	"ITEM_BLEEDONHITANDEXPLODE_DESC_RISKYMOD": "Gain a <style=cIsDamage>5%</style> chance to <style=cIsDamage>bleed</style> enemies for <style=cIsDamage>240%</style> base damage. <style=cIsDamage>Bleeding</style> enemies <style=cIsDamage>explode</style> on death for <style=cIsDamage>450%</style> <style=cStack>(+270% per stack)</style> damage, plus an additional <style=cIsDamage>15%</style> <style=cStack>(+9% per stack)</style> of their maximum health.",
 	
 	"ITEM_KNURL_PICKUP_RISKYMOD": "Boosts health, regeneration, and armor.",
 	"ITEM_KNURL_DESC_RISKYMOD": "<style=cIsHealing>Increase maximum health</style> by <style=cIsHealing>8%</style> <style=cStack>(+8% per stack)</style>, <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>+1.6 hp/s</style> <style=cStack>(+1.6 hp/s per stack)</style>, and <style=cIsHealing>armor</style> by <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style>.",
