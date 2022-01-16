@@ -35,6 +35,7 @@ using RiskyMod.Survivors.Loader;
 using RiskyMod.Survivors.Mage;
 using RiskyMod.Enemies.Mobs;
 using RiskyMod.Survivors.Merc;
+using System.Runtime.CompilerServices;
 
 namespace RiskyMod
 {
@@ -96,6 +97,8 @@ namespace RiskyMod
         public static bool disableProcChains = true;
 
         public static bool ScepterPluginLoaded = false;
+        public static bool AIBlacklistLoaded = false;
+        public static bool AIBlacklistUseVanillaBlacklist = true;
 
         public static ItemDef emptyItemDef = null;
         public static BuffDef emptyBuffDef = null;
@@ -135,7 +138,13 @@ namespace RiskyMod
             FixPlayercount.MultitudesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("dev.wildbook.multitudes");
             FixPlayercount.ZetArtifactsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetArtifacts");
 
-            FixVengeanceLeveling.enabled = FixVengeanceLeveling.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist");
+            bool AIBlacklistLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist");
+            FixVengeanceLeveling.enabled = FixVengeanceLeveling.enabled && !AIBlacklistLoaded;
+            if (AIBlacklistLoaded)
+            {
+                HandleAIBlacklist();
+            }
+
             PreventArtifactHeal.enabled = PreventArtifactHeal.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.ArtifactReliquaryHealingFix");
             CaptainOrbitalHiddenRealms.enabled = CaptainOrbitalHiddenRealms.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.PlasmaCore.AlwaysAllowSupplyDrops");
             CritHud.enabled = CritHud.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.Hypercrit");   //Effect is already a part of hypercrit
@@ -149,6 +158,12 @@ namespace RiskyMod
             //Enemies
             BeetleQueen.enabled = BeetleQueen.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BeetleQueenPlus");
             LunarWisp.enableFalloff = LunarWisp.enableFalloff && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.LunarWispFalloff");
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void HandleAIBlacklist()
+        {
+            AIBlacklistUseVanillaBlacklist = AI_Blacklist.AIBlacklist.useVanillaAIBlacklist;
         }
 
         private void RunTweaks()

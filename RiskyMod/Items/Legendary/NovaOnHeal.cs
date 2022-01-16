@@ -37,7 +37,7 @@ namespace RiskyMod.Items.Legendary
             On.RoR2.ItemCatalog.Init += (orig) =>
             {
                 orig();
-                ItemsCore.AddToAIBlacklist(RoR2Content.Items.NovaOnHeal.itemIndex);
+                if (RiskyMod.AIBlacklistUseVanillaBlacklist) SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.NovaOnHeal, ItemTag.AIBlacklist);
             };
         }
     }

@@ -146,30 +146,6 @@ namespace RiskyMod.Items
             }
         }
 
-        public static void AddToAIBlacklist(string itemName)
-        {
-            ItemIndex i = ItemCatalog.FindItemIndex(itemName);
-            if (i != ItemIndex.None)
-            {
-                AddToAIBlacklist(i);
-            }
-        }
-
-        public static void AddToAIBlacklist(ItemIndex index)
-        {
-            ItemDef itemDef = ItemCatalog.GetItemDef(index);
-            if (itemDef.DoesNotContainTag(ItemTag.AIBlacklist))
-            {
-                System.Array.Resize(ref itemDef.tags, itemDef.tags.Length + 1);
-                itemDef.tags[itemDef.tags.Length - 1] = ItemTag.AIBlacklist;
-            }
-        }
-
-        public static string ToPercent(float coefficient)
-        {
-            return coefficient.ToString("P0").Replace(" ", "").Replace(",", "");
-        }
-
         public static EquipmentDef LoadEquipmentDef(string equipmentname)
         {
             return Resources.Load<EquipmentDef>("equipmentdefs/" + equipmentname);

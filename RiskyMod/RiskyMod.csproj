@@ -16,6 +16,9 @@
     <Reference Include="0Harmony">
       <HintPath>libs\0Harmony.dll</HintPath>
     </Reference>
+    <Reference Include="AI_Blacklist">
+      <HintPath>libs\AI_Blacklist.dll</HintPath>
+    </Reference>
     <Reference Include="AncientScepter">
       <HintPath>libs\AncientScepter.dll</HintPath>
     </Reference>

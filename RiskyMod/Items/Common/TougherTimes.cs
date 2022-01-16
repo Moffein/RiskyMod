@@ -7,14 +7,13 @@ namespace RiskyMod.Items.Common
     public class TougherTimes
     {
         public static bool enabled = true;
-        public static bool aiBlacklist = true;
         public static ItemDef itemDef = RoR2Content.Items.Bear;
         public TougherTimes()
         {
             if (!enabled) return;
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
 
-            if (aiBlacklist) SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.Bear, ItemTag.AIBlacklist);
+            if (RiskyMod.AIBlacklistUseVanillaBlacklist) SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.Bear, ItemTag.AIBlacklist);
 
             //Change block chance
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
