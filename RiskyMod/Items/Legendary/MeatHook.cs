@@ -31,7 +31,7 @@ namespace RiskyMod.Items.Legendary
                 c.Emit(OpCodes.Ldloc, 13);  //itemcount
                 c.EmitDelegate<Func<float, int, float>>((damage, itemCount) =>
                 {
-                    return damage + 0.25f * damage * (itemCount - 1);
+                    return damage + 0.3f * damage * (itemCount - 1);
                 });
 
                 if (RiskyMod.disableProcChains)

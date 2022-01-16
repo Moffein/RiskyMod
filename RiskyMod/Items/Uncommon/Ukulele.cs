@@ -31,7 +31,7 @@ namespace RiskyMod.Items.Uncommon
                 c.Emit(OpCodes.Ldloc, 11);  //Ukulele Count
                 c.EmitDelegate<Func<float, int, float>>((origDamage, itemCount) =>
                 {
-                    return origDamage + origDamage * 0.25f * (itemCount - 1);
+                    return origDamage + origDamage * 0.3f * (itemCount - 1);
                 });
 
                 //Remove proc coefficient
