@@ -11,24 +11,32 @@ namespace RiskyMod.Enemies.Mobs
             if (!enabled) return;
             EnemiesCore.DisableRegen(Resources.Load<GameObject>("prefabs/characterbodies/impbody"));
             ModifyAI();
+            RemoveSlashSlow();
         }
 
         private void ModifyAI()
         {
             GameObject enemyMaster = Resources.Load<GameObject>("prefabs/charactermasters/impmaster");
-            AISkillDriver[] skills = enemyMaster.GetComponents<AISkillDriver>();
 
+            AISkillDriver[] skills = enemyMaster.GetComponents<AISkillDriver>();
             foreach (AISkillDriver ai in skills)
             {
+                //Instead of strafing, just chase the target.
                 if (ai.customName == "StrafeBecausePrimaryIsntReady")
                 {
-                    ai.skillSlot = RoR2.SkillSlot.Utility;
-                    ai.requireSkillReady = true;
+                    //ai.skillSlot = RoR2.SkillSlot.Utility;
+                    //ai.requireSkillReady = true;
                     ai.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-                    ai.aimType = AISkillDriver.AimType.AtMoveTarget;
-                    ai.noRepeat = true;
+                    //ai.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+                    //ai.noRepeat = true;
                 }
             }
+        }
+
+        private void RemoveSlashSlow()
+        {
+            //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.ImpMonster.DoubleSlash");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.ImpMonster.DoubleSlash", "walkSpeedPenaltyCoefficient", "1");   //0.5 is vanilla
         }
     }
 }
