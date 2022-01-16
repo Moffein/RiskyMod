@@ -24,7 +24,7 @@ namespace RiskyMod.Survivors.Treebot
         {
             if (victimBody.HasBuff(RoR2Content.Buffs.Fruiting.buffIndex))
             {
-                if (Util.CheckRoll(15f * damageInfo.procCoefficient, attackerBody.master))
+                if (Util.CheckRoll(20f * damageInfo.procCoefficient, attackerBody.master))
                 {
                     EffectManager.SpawnEffect(fruitEffectPrefab, new EffectData
                     {

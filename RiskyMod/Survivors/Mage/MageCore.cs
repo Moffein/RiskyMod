@@ -17,6 +17,7 @@ namespace RiskyMod.Survivors.Mage
 
         public static bool flamethrowerAttackSpeed = true;
         public static bool flamethrowerSprintCancel = true;
+        public static bool m1Cooldowns = true;
         public static bool m2Buffer = true;
         public static bool m2RequiresKeypress = false;
 
@@ -42,13 +43,11 @@ namespace RiskyMod.Survivors.Mage
             {
                 if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireFireBolt))
                 {
-                    sk.primary.skillFamily.variants[i].skillDef.baseRechargeInterval = 1f;
-                    sk.primary.skillFamily.variants[i].skillDef.beginSkillCooldownOnSkillEnd = true;
+                    M1Cooldown(sk.primary.skillFamily.variants[i].skillDef);
                 }
                 else if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireLightningBolt))
                 {
-                    sk.primary.skillFamily.variants[i].skillDef.baseRechargeInterval = 1f;
-                    sk.primary.skillFamily.variants[i].skillDef.beginSkillCooldownOnSkillEnd = true;
+                    M1Cooldown(sk.primary.skillFamily.variants[i].skillDef);
                     if (M1Projectiles.modifyPlasma)
                     {
                         sk.primary.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
@@ -57,6 +56,13 @@ namespace RiskyMod.Survivors.Mage
             }
             //new QuickdrawPassive();
             new M1Projectiles();
+        }
+
+        private void M1Cooldown(SkillDef skillDef)
+        {
+            if (!m1Cooldowns) return;
+            skillDef.baseRechargeInterval = 1f;
+            skillDef.beginSkillCooldownOnSkillEnd = true;
         }
 
         private void ModifySecondaries(SkillLocator sk)
