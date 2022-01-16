@@ -36,6 +36,7 @@ using RiskyMod.Survivors.Mage;
 using RiskyMod.Enemies.Mobs;
 using RiskyMod.Survivors.Merc;
 using System.Runtime.CompilerServices;
+using RiskyMod.Content;
 
 namespace RiskyMod
 {
@@ -115,6 +116,7 @@ namespace RiskyMod
             ReadConfig();
             CheckDependencies();
 
+            ContentCore.Init();
             RunFixes();
             RunTweaks();
             new ItemsCore();

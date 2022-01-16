@@ -68,6 +68,8 @@ namespace RiskyMod.Enemies
 
             new SirensCall();
             new StadiaJungle();
+
+            new SkyMeadow();
         }
     }
 
@@ -162,6 +164,7 @@ namespace RiskyMod.Enemies
         public static DirectorAPI.DirectorCardHolder Vulture;
 
         public static DirectorAPI.DirectorCardHolder Golem;
+        public static DirectorAPI.DirectorCardHolder GolemBasic;
         public static DirectorAPI.DirectorCardHolder BeetleGuard;
         public static DirectorAPI.DirectorCardHolder Mushrum;
 
@@ -186,7 +189,9 @@ namespace RiskyMod.Enemies
         public static DirectorAPI.DirectorCardHolder Reminder;
         public static DirectorAPI.DirectorCardHolder ReminderLoop;
 
-        public static bool logCardInfo = true;
+        public static DirectorAPI.DirectorCardHolder LunarGolemSkyMeadow;
+
+        public static bool logCardInfo = false;
         public static void Init()
         {
             if (initialized) return;
@@ -202,6 +207,7 @@ namespace RiskyMod.Enemies
             Vulture = BuildDirectorCard(SpawnCards.Vulture, DirectorAPI.MonsterCategory.BasicMonsters);
 
             Golem = BuildDirectorCard(SpawnCards.Golem, DirectorAPI.MonsterCategory.Minibosses);
+            GolemBasic = BuildDirectorCard(SpawnCards.Golem, DirectorAPI.MonsterCategory.BasicMonsters);
             BeetleGuard = BuildDirectorCard(SpawnCards.BeetleGuard, DirectorAPI.MonsterCategory.Minibosses);
             Mushrum = BuildDirectorCard(SpawnCards.Mushrum, DirectorAPI.MonsterCategory.Minibosses); //These are considered basic monsters in Vanilla, but they fit all the criteria of a miniboss enemy.
 
