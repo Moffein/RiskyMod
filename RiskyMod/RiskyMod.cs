@@ -484,7 +484,6 @@ namespace RiskyMod
 
             MageCore.enabled = Config.Bind(mageString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             M1Projectiles.increaseRange = Config.Bind(mageString, "Primary Range Increase", true, "Primary projectiles no longer disappear mid-flight.").Value;
-            MageCore.m1Cooldowns = Config.Bind(mageString, "Primary Cooldown Reduction", true, "Primary skills have reduced cooldown.").Value;
             MageCore.m2Buffer = Config.Bind(mageString, "Secondary Buffer Time", true, "Adds a 0.6s duration between Secondary uses if you hold down the button.").Value;
             MageCore.m2RequiresKeypress = Config.Bind(mageString, "Secondary Requires Keypress", false, "Each Secondary use requires you to re-press the button.").Value;
             SolidIceWall.enabled = Config.Bind(mageString, "Snapfreeze - Solid Ice Wall", true, "Ice Wall blocks projectiles and movement.").Value;
