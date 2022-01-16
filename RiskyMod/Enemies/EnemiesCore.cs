@@ -52,6 +52,9 @@ namespace RiskyMod.Enemies
             if (!modifySpawns) return;
             SpawnCards.Init();
 
+            new TitanicPlains();
+            new DistantRoost();
+
             new GooLake();
             new Wetland();
 
