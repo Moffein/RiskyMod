@@ -10,6 +10,7 @@ using Mono.Cecil.Cil;
 
 namespace RiskyMod.Survivors.Mage
 {
+    //TODO: ADD CONFIG FOR NEW M1 CHANGES
     public class MageCore
     {
         public static bool enabled = true;
@@ -41,10 +42,13 @@ namespace RiskyMod.Survivors.Mage
             {
                 if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireFireBolt))
                 {
-
+                    sk.primary.skillFamily.variants[i].skillDef.baseRechargeInterval = 1f;
+                    sk.primary.skillFamily.variants[i].skillDef.beginSkillCooldownOnSkillEnd = true;
                 }
                 else if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireLightningBolt))
                 {
+                    sk.primary.skillFamily.variants[i].skillDef.baseRechargeInterval = 1f;
+                    sk.primary.skillFamily.variants[i].skillDef.beginSkillCooldownOnSkillEnd = true;
                     if (M1Projectiles.modifyPlasma)
                     {
                         sk.primary.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
