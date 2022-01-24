@@ -15,7 +15,7 @@ namespace RiskyMod.Items.Uncommon
 
         private static void ChronobaubleDebuff(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (sender.HasBuff(RoR2Content.Buffs.Slow50.buffIndex))
+            if (sender.HasBuff(RoR2Content.Buffs.Slow60.buffIndex))
             {
                 args.attackSpeedMultAdd -= 0.2f;
             }

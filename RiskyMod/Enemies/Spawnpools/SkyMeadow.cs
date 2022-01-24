@@ -18,7 +18,7 @@ namespace RiskyMod.Enemies.Spawnpools
                     List<DirectorAPI.DirectorCardHolder> toRemove = new List<DirectorAPI.DirectorCardHolder>();
                     foreach (DirectorAPI.DirectorCardHolder dch in list)
                     {
-                        if (dch.Card.spawnCard == SpawnCards.Mushrum || dch.Card.spawnCard == SpawnCards.Bronzong)
+                        if (dch.Card.spawnCard == SpawnCards.Bronzong)  //dch.Card.spawnCard == SpawnCards.Mushrum
                         {
                             toRemove.Add(dch);
                         }
@@ -29,9 +29,10 @@ namespace RiskyMod.Enemies.Spawnpools
                         list.Remove(dch);
                     }
 
-                    list.Add(DirectorCards.GolemBasic);
+                    //list.Add(DirectorCards.GolemBasic);   //Feels weird to see Lunar Golems and Golems on the same map.
                     list.Add(DirectorCards.Imp);
-                    list.Add(DirectorCards.LunarGolemSkyMeadow);
+                    //list.Add(DirectorCards.GreaterWispBasic);
+                    list.Add(DirectorCards.LunarGolemSkyMeadow);    //I think their spawn animation where they fall from the sky fits the map well.
                 }
             };
         }

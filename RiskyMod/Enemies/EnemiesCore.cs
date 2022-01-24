@@ -170,6 +170,7 @@ namespace RiskyMod.Enemies
 
         public static DirectorAPI.DirectorCardHolder Bronzong;
         public static DirectorAPI.DirectorCardHolder GreaterWisp;
+        public static DirectorAPI.DirectorCardHolder GreaterWispBasic;
 
         public static DirectorAPI.DirectorCardHolder TitanBlackBeach;
         public static DirectorAPI.DirectorCardHolder TitanDampCave;
@@ -213,6 +214,7 @@ namespace RiskyMod.Enemies
 
             Bronzong = BuildDirectorCard(SpawnCards.Bronzong, DirectorAPI.MonsterCategory.Minibosses);  //Basic Monster on SkyMeadow
             GreaterWisp = BuildDirectorCard(SpawnCards.GreaterWisp, DirectorAPI.MonsterCategory.Minibosses);
+            GreaterWispBasic = BuildDirectorCard(SpawnCards.GreaterWisp, DirectorAPI.MonsterCategory.BasicMonsters);
 
             TitanBlackBeach = BuildDirectorCard(SpawnCards.TitanBlackBeach, DirectorAPI.MonsterCategory.Champions);
             TitanDampCave = BuildDirectorCard(SpawnCards.TitanDampCave, DirectorAPI.MonsterCategory.Champions);
