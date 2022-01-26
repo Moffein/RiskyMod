@@ -38,7 +38,7 @@ namespace RiskyMod.Items.Uncommon
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            procEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/claygooorbimpact").InstantiateClone("RiskyItemTweaks_SquidPolypProc", false);
+            procEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/claygooorbimpact").InstantiateClone("RiskyMod_SquidPolypProc", false);
             EffectComponent ec = procEffectPrefab.GetComponent<EffectComponent>();
             ec.soundName = "Play_treeBot_m2_launch";
             EffectAPI.AddEffect(procEffectPrefab);

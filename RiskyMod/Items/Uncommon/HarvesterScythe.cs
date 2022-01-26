@@ -36,7 +36,7 @@ namespace RiskyMod.Items.Uncommon
             scytheBuff.buffColor = new Color(210f / 255f, 50f / 255f, 22f / 255f);
             scytheBuff.canStack = true;
             scytheBuff.isDebuff = false;
-            scytheBuff.name = "RiskyItemTweaks_ScytheBuff";
+            scytheBuff.name = "RiskyMod_ScytheBuff";
             scytheBuff.iconSprite = Resources.Load<Sprite>("textures/bufficons/texBuffRegenBoostIcon");
             BuffAPI.Add(new CustomBuff(scytheBuff));
 
