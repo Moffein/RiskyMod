@@ -9,27 +9,8 @@ namespace RiskyMod.SharedHooks
     public class RecalculateStats
     {
         public static void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
-        {
-            orig(self);
-			if (TrueOSP.enabled && self.hasOneShotProtection)
-			{
-				//Disable vanilla OSP
-				self.oneShotProtectionFraction = 0f;	//I'd like to re-enable the visual, but I need to figure out how to make it not count shields.
-
-				if (self.HasBuff(TrueOSP.DisableOSP))
-				{
-					if (NetworkServer.active && self.outOfDanger)// && (self.healthComponent && self.healthComponent.health/self.healthComponent.fullHealth > OSPManagerComponent.ospThreshold)
-					{
-						//Currently not locked behind having >90% HP because I'd like it to be cleanly tied to the outOfDanger state.
-						//Will have to see if this ends up being too abusable.
-						self.RemoveBuff(TrueOSP.DisableOSP);
-					}
-					else
-					{
-						self.hasOneShotProtection = false;
-					}
-				}
-			}
+		{
+			orig(self);
 			if (self.inventory)
             {
 				Inventory inventory = self.inventory;

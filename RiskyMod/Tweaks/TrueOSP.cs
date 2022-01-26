@@ -4,6 +4,7 @@ using R2API;
 using RoR2;
 using System;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RiskyMod.Tweaks
 {
@@ -25,7 +26,8 @@ namespace RiskyMod.Tweaks
             DisableOSP.iconSprite = Resources.Load<Sprite>("textures/bufficons/texBuffPulverizeIcon");
             BuffAPI.Add(new CustomBuff(DisableOSP));
 
-            //Handled in MonoBehaviours.OSPManagerComponent and SharedHooks.RecalculateStats
+            //Handled in MonoBehaviours.OSPManagerComponent and RecalculateStats
+            On.RoR2.CharacterBody.RecalculateStats += HandleDisableOSPBuff;
 
             //Overwrite vanilla OSP handling
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
@@ -63,7 +65,10 @@ namespace RiskyMod.Tweaks
                         float ospHealthThreshold = self.fullHealth * OSPComponent.ospThreshold;
                         if (self.health >= ospHealthThreshold && finalHealth < ospHealthThreshold)
                         {
-                            ospm.StartOSPTimer();
+                            if (!ShieldGating.enabled || self.shield <= 0f)
+                            {
+                                ospm.StartOSPTimer();
+                            }
                         }
                         if (finalHealth <= 0f)
                         {
@@ -76,6 +81,28 @@ namespace RiskyMod.Tweaks
                     return finalHealth;
                 });
             };
+        }
+
+        private static void HandleDisableOSPBuff(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
+        {
+            orig(self);
+            if (self.hasOneShotProtection)
+            {
+                //Disable vanilla OSP
+                self.oneShotProtectionFraction = 0f;    //I'd like to re-enable the visual, but I need to figure out how to make it not count shields.
+
+                if (self.HasBuff(TrueOSP.DisableOSP))
+                {
+                    if (NetworkServer.active && self.outOfDanger)// && (self.healthComponent && self.healthComponent.health/self.healthComponent.fullHealth > OSPManagerComponent.ospThreshold)
+                    {
+                        self.RemoveBuff(TrueOSP.DisableOSP);
+                    }
+                    else
+                    {
+                        self.hasOneShotProtection = false;
+                    }
+                }
+            }
         }
     }
 
