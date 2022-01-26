@@ -41,22 +41,25 @@ namespace RiskyMod.Tweaks
                     bool shieldOnly = self.body.HasBuff(RoR2Content.Buffs.AffixLunar)
                     || (self.body.inventory && self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
 
+                    bool cursed = self.body.cursePenalty > 1f;  //||self.body.isGlass
+
                     bool isPlayerTeam = self.body && self.body.teamComponent && (self.body.teamComponent.teamIndex == TeamIndex.Player || self.body.isPlayerControlled);
 
-                    if (!bypassShield
-                    && (shieldOnly || !DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage))
-                    && isPlayerTeam)
+                    if (!bypassShield && isPlayerTeam)
                     {
-                        float duration = 0.1f;
-
-                        //ShieldOnly increases grace period since it's your only form of defense against 1shots.
-                        if (shieldOnly)
+                        if (!DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage) || (shieldOnly && !cursed))
                         {
-                            duration = 0.5f;
-                        }
+                            float duration = 0.1f;
 
-                        self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
-                        return 0f;
+                            //ShieldOnly increases grace period since it's your only form of defense against 1shots.
+                            if (shieldOnly)
+                            {
+                                duration = 0.5f;
+                            }
+
+                            self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
+                            return 0f;
+                        }
                     }
                     return remainingDamage;
                 });

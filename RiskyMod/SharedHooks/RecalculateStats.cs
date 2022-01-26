@@ -27,7 +27,7 @@ namespace RiskyMod.SharedHooks
 
 			if (TrueOSP.enabled && self.hasOneShotProtection)
 			{
-				if (self.isGlass || self.cursePenalty > 1f || self.HasBuff(RoR2Content.Buffs.AffixLunar) ||	//This part doesn't need the inventory
+				if (self.cursePenalty > 1f || self.HasBuff(RoR2Content.Buffs.AffixLunar) ||	//This part doesn't need the inventory
 					(self.inventory && self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0))	//This part needs the inventory
 				{
 					self.hasOneShotProtection = false;
