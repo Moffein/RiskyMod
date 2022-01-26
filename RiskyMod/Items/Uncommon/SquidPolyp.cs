@@ -17,7 +17,8 @@ namespace RiskyMod.Items.Uncommon
         public static GameObject procEffectPrefab;
         public static bool scaleCount = false;
 
-        public static BodyIndex SquidTurretBodyIndex;
+        public static BodyIndex squidTurretBodyIndex;
+        public static CharacterSpawnCard squidTurretCard = Resources.Load<CharacterSpawnCard>("SpawnCards/CharacterSpawnCards/cscSquidTurret");
 
         //Does this need turretblacklist?
         public SquidPolyp()
@@ -48,7 +49,7 @@ namespace RiskyMod.Items.Uncommon
             On.RoR2.BodyCatalog.Init += (orig) =>
             {
                 orig();
-                SquidPolyp.SquidTurretBodyIndex = BodyCatalog.FindBodyIndex("SquidTurretBody");
+                SquidPolyp.squidTurretBodyIndex = BodyCatalog.FindBodyIndex("SquidTurretBody");
             };
         }
 
@@ -56,7 +57,7 @@ namespace RiskyMod.Items.Uncommon
         {
             //Squid Turrets are guaranteed to draw aggro upon dealing damage.
             //Based on https://github.com/DestroyedClone/PoseHelper/blob/master/HighPriorityAggroTest/HPATPlugin.cs
-            if (attackerBody.bodyIndex == SquidPolyp.SquidTurretBodyIndex)
+            if (attackerBody.bodyIndex == SquidPolyp.squidTurretBodyIndex)
             {
                 if (self.body.master && self.body.master.aiComponents.Length > 0)
                 {
@@ -89,7 +90,7 @@ namespace RiskyMod.Items.Uncommon
                         if (sq.CanSpawnSquid())
                         {
                             EffectManager.SimpleEffect(SquidPolyp.procEffectPrefab, self.body.corePosition, Quaternion.identity, true);
-                            SpawnCard spawnCard = Resources.Load<CharacterSpawnCard>("SpawnCards/CharacterSpawnCards/cscSquidTurret");
+                            SpawnCard spawnCard = squidTurretCard;
                             DirectorPlacementRule placementRule = new DirectorPlacementRule
                             {
                                 placementMode = DirectorPlacementRule.PlacementMode.Approximate,
