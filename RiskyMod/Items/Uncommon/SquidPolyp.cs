@@ -17,6 +17,8 @@ namespace RiskyMod.Items.Uncommon
         public static GameObject procEffectPrefab;
         public static bool scaleCount = false;
 
+        public static BodyIndex SquidTurretBodyIndex;
+
         //Does this need turretblacklist?
         public SquidPolyp()
         {
@@ -42,13 +44,19 @@ namespace RiskyMod.Items.Uncommon
 
             TakeDamage.HandleOnPercentHpLostActions += OnHpLost;
             TakeDamage.OnDamageTakenAttackerActions += DistractOnHit;
+
+            On.RoR2.BodyCatalog.Init += (orig) =>
+            {
+                orig();
+                SquidPolyp.SquidTurretBodyIndex = BodyCatalog.FindBodyIndex("SquidTurretBody");
+            };
         }
 
         private static void DistractOnHit(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
         {
             //Squid Turrets are guaranteed to draw aggro upon dealing damage.
             //Based on https://github.com/DestroyedClone/PoseHelper/blob/master/HighPriorityAggroTest/HPATPlugin.cs
-            if (damageInfo.attacker.name == "SquidTurretBody(Clone)")
+            if (attackerBody.bodyIndex == SquidPolyp.SquidTurretBodyIndex)
             {
                 if (self.body.master && self.body.master.aiComponents.Length > 0)
                 {
