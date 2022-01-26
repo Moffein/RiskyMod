@@ -3,6 +3,7 @@ using MonoMod.Cil;
 using R2API;
 using RiskyMod.SharedHooks;
 using RoR2;
+using RoR2.CharacterAI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,9 +41,30 @@ namespace RiskyMod.Items.Uncommon
             EffectAPI.AddEffect(procEffectPrefab);
 
             TakeDamage.HandleOnPercentHpLostActions += OnHpLost;
+            TakeDamage.OnDamageTakenAttackerActions += DistractOnHit;
         }
 
-        private void OnHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost)
+        private static void DistractOnHit(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        {
+            //Squid Turrets are guaranteed to draw aggro upon dealing damage.
+            //Based on https://github.com/DestroyedClone/PoseHelper/blob/master/HighPriorityAggroTest/HPATPlugin.cs
+            if (damageInfo.attacker.name == "SquidTurretBody(Clone)")
+            {
+                if (self.body.master && self.body.master.aiComponents.Length > 0)
+                {
+                    foreach (BaseAI ai in self.body.master.aiComponents)
+                    {
+                        ai.currentEnemy.gameObject = attackerBody.gameObject;
+                        ai.currentEnemy.bestHurtBox = attackerBody.mainHurtBox;
+                        ai.enemyAttention = ai.enemyAttentionDuration;
+                        ai.targetRefreshTimer = 5f;
+                        ai.BeginSkillDriver(ai.EvaluateSkillDrivers());
+                    }
+                }
+            }
+        }
+
+        private static void OnHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost)
         {
             int polypCount = inventory.GetItemCount(RoR2Content.Items.Squid);
             if (polypCount > 0)

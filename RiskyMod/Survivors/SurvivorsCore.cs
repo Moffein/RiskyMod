@@ -17,9 +17,8 @@ namespace RiskyMod.Survivors
         public static bool enabled = true;
         public SurvivorsCore()
         {
-            if (!enabled) return;
-
             new SharedDamageTypes();
+            if (!enabled) return;
 
             new Bandit2Core();
             new CaptainCore();

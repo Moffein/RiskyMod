@@ -23,6 +23,8 @@ namespace RiskyMod.Survivors
 
         public static DamageAPI.ModdedDamageType IgniteLevelScaled;
 
+        public static DamageAPI.ModdedDamageType AlwaysIgnite;   //Used for Molten Perforatur due to not proccing
+
 
         public SharedDamageTypes()
         {
@@ -38,6 +40,8 @@ namespace RiskyMod.Survivors
 
             IgniteLevelScaled = DamageAPI.ReserveDamageType();
 
+            AlwaysIgnite = DamageAPI.ReserveDamageType();
+
             TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
             TakeDamage.ModifyInitialDamageActions += ApplyAntiFlyingForce;
 
@@ -48,8 +52,17 @@ namespace RiskyMod.Survivors
             OnHitEnemy.OnHitAttackerActions += SawBarrierOnHit;
 
             OnHitEnemy.OnHitAttackerActions += ApplyIgniteLevelScaled;
+
+            TakeDamage.OnDamageTakenAttackerActions += ApplyAlwaysIgnite;
         }
 
+        private static void ApplyAlwaysIgnite(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        {
+            if (damageInfo.HasModdedDamageType(AlwaysIgnite))
+            {
+                DotController.InflictDot(self.gameObject, damageInfo.attacker, DotController.DotIndex.Burn, 4f, 1f);
+            }
+        }
 
         private static void ApplyProjectileRainForce(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
         {

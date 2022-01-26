@@ -28,6 +28,9 @@ namespace RiskyMod.SharedHooks
         public delegate void OnDamageTaken(DamageInfo damageInfo, HealthComponent self);
         public static OnDamageTaken OnDamageTakenActions;
 
+        public delegate void OnDamageTakenAttacker(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody);
+        public static OnDamageTakenAttacker OnDamageTakenAttackerActions;
+
         public static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
             float oldHP = self.combinedHealth;
@@ -59,25 +62,7 @@ namespace RiskyMod.SharedHooks
                     {
                         if (attackerBody)
                         {
-                            if (SquidPolyp.enabled)
-                            {
-                                //Squid Turrets are guaranteed to draw aggro upon dealing damage.
-                                //Based on https://github.com/DestroyedClone/PoseHelper/blob/master/HighPriorityAggroTest/HPATPlugin.cs
-                                if (damageInfo.attacker.name == "SquidTurretBody(Clone)")
-                                {
-                                    if (self.body.master && self.body.master.aiComponents.Length > 0)
-                                    {
-                                        foreach (BaseAI ai in self.body.master.aiComponents)
-                                        {
-                                            ai.currentEnemy.gameObject = attackerBody.gameObject;
-                                            ai.currentEnemy.bestHurtBox = attackerBody.mainHurtBox;
-                                            ai.enemyAttention = ai.enemyAttentionDuration;
-                                            ai.targetRefreshTimer = 5f;
-                                            ai.BeginSkillDriver(ai.EvaluateSkillDrivers());
-                                        }
-                                    }
-                                }
-                            }
+                            if (OnDamageTakenAttackerActions != null) OnDamageTakenAttackerActions.Invoke(damageInfo, self, attackerBody);
                         }
                     }
 
