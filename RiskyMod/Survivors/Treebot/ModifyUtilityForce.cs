@@ -49,7 +49,7 @@ namespace RiskyMod.Survivors.Treebot
                     Vector3 distance = hurtBox.transform.position - aimRay.origin;
                     float distMagnitude = distance.magnitude;
 
-                    float distMult = Mathf.Lerp(1.1f, 0.2f, distance.magnitude / (self.maxDistance + 1f));
+                    float distMult = Mathf.Lerp(1.1f, 0.5f, distance.magnitude / (self.maxDistance + 1f));
 
                     if (body.isChampion && body.characterMotor && body.characterMotor.isGrounded)
                     {
