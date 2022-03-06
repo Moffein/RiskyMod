@@ -18,7 +18,7 @@ namespace RiskyMod.Survivors.Engi
         private void ModifyTurret()
         {
             if (!turretChanges) return;
-            GameObject turretBody = Resources.Load<GameObject>("prefabs/characterbodies/EngiTurretBody");
+            GameObject turretBody = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/EngiTurretBody");
             CharacterBody cb = turretBody.GetComponent<CharacterBody>();
             cb.damage = 12f;
             cb.levelDamage = cb.damage * 0.2f;
@@ -32,7 +32,7 @@ namespace RiskyMod.Survivors.Engi
             if (!mobileTurretChanges) return;
             float range = 45f;
 
-            GameObject turretBody = Resources.Load<GameObject>("prefabs/characterbodies/EngiWalkerTurretBody");
+            GameObject turretBody = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/EngiWalkerTurretBody");
             CharacterBody cb = turretBody.GetComponent<CharacterBody>();
             cb.damage = 12f;
             cb.levelDamage = cb.damage * 0.2f;
@@ -41,10 +41,10 @@ namespace RiskyMod.Survivors.Engi
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.EngiTurret.EngiTurretWeapon.FireBeam", "damageCoefficient", "2.666666667");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.EngiTurret.EngiTurretWeapon.FireBeam", "maxDistance", "45");
 
-            Component[] aiDrivers = Resources.Load<GameObject>("prefabs/charactermasters/EngiWalkerTurretMaster").GetComponents<AISkillDriver>();
+            Component[] aiDrivers = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/EngiWalkerTurretMaster").GetComponents<AISkillDriver>();
             foreach (AISkillDriver asd in aiDrivers)
             {
-                if (asd.skillSlot != SkillSlot.Primary && asd.customName != "Rest")
+                if (asd.customName != "Rest")
                 {
                     asd.shouldSprint = true;
                 }

@@ -18,7 +18,7 @@ namespace RiskyMod.Items.Uncommon
         public static bool scaleCount = false;
 
         public static BodyIndex squidTurretBodyIndex;
-        public static CharacterSpawnCard squidTurretCard = Resources.Load<CharacterSpawnCard>("SpawnCards/CharacterSpawnCards/cscSquidTurret");
+        public static CharacterSpawnCard squidTurretCard = LegacyResourcesAPI.Load<CharacterSpawnCard>("SpawnCards/CharacterSpawnCards/cscSquidTurret");
 
         //Does this need turretblacklist?
         public SquidPolyp()
@@ -38,7 +38,7 @@ namespace RiskyMod.Items.Uncommon
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            procEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/claygooorbimpact").InstantiateClone("RiskyMod_SquidPolypProc", false);
+            procEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/claygooorbimpact").InstantiateClone("RiskyMod_SquidPolypProc", false);
             EffectComponent ec = procEffectPrefab.GetComponent<EffectComponent>();
             ec.soundName = "Play_treeBot_m2_launch";
             EffectAPI.AddEffect(procEffectPrefab);

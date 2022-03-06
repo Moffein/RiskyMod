@@ -25,13 +25,13 @@ namespace RiskyMod.Survivors.Croco
         {
             SetupDamageType();
 
-            //diseaseProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile");
+            //diseaseProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile");
 
-            diseaseProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseProjectile", true);
+            diseaseProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseProjectile", true);
             diseaseProjectile = ModifyDiseaseProjectile(diseaseProjectile, Epidemic);
             ProjectileAPI.Add(diseaseProjectile);
 
-            diseaseScepterProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseScepterProjectile", true);
+            diseaseScepterProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseScepterProjectile", true);
             diseaseScepterProjectile = ModifyDiseaseProjectile(diseaseScepterProjectile, EpidemicScepter);
             ProjectileAPI.Add(diseaseScepterProjectile);
             EntityStates.RiskyMod.Croco.FireDiseaseProjectileScepter.projectilePrefab = diseaseScepterProjectile;

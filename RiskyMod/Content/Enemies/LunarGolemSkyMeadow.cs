@@ -21,11 +21,11 @@ namespace RiskyMod.Content.Enemies
 
         private void SetupBody()
         {
-            bodyObject = Resources.Load<GameObject>("prefabs/characterbodies/lunargolembody").InstantiateClone("RiskyMod_LunarGolemSkyMeadow", true);
+            bodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/lunargolembody").InstantiateClone("RiskyMod_LunarGolemSkyMeadow", true);
             Content.bodyPrefabs.Add(bodyObject);
             ModifyStats(bodyObject);
 
-            masterObject = Resources.Load<GameObject>("prefabs/charactermasters/lunargolemmaster").InstantiateClone("RiskyMod_LunarGolemSkyMeadowMaster", true);
+            masterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/lunargolemmaster").InstantiateClone("RiskyMod_LunarGolemSkyMeadowMaster", true);
             masterObject.GetComponent<CharacterMaster>().bodyPrefab = bodyObject;
         }
 

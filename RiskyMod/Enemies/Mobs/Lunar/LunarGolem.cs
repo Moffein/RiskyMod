@@ -9,7 +9,7 @@ namespace RiskyMod.Enemies.Mobs.Lunar
         public LunarGolem()
         {
             if (!enabled) return;
-            EnemiesCore.DisableRegen(Resources.Load<GameObject>("prefabs/characterbodies/lunargolembody"));
+            EnemiesCore.DisableRegen(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/lunargolembody"));
         }
     }
 }

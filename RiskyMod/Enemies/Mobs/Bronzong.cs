@@ -14,7 +14,7 @@ namespace RiskyMod.Enemies.Mobs
 
         private void FixStun()
         {
-            GameObject enemyObject = Resources.Load<GameObject>("prefabs/characterbodies/bellbody");
+            GameObject enemyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/bellbody");
 
             EntityStateMachine weapon = null;
             EntityStateMachine[] stateMachines = enemyObject.GetComponents<EntityStateMachine>();

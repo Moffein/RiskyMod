@@ -23,7 +23,7 @@ namespace RiskyMod.Survivors.Loader
                 });
             };
 
-            GameObject projectile = Resources.Load<GameObject>("prefabs/projectiles/loaderzapcone");
+            GameObject projectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/loaderzapcone");
             ProjectileProximityBeamController pbc = projectile.GetComponent<ProjectileProximityBeamController>();
             pbc.attackRange += 1f;
         }

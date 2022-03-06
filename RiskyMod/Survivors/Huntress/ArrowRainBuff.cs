@@ -18,7 +18,7 @@ namespace RiskyMod.Survivors.Huntress
         {
             if (!enabled) return;
 
-            arrowRainObject = Resources.Load<GameObject>("prefabs/projectiles/huntressarrowrain").InstantiateClone("RiskyModArrowRainProjectile", true);
+            arrowRainObject = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/huntressarrowrain").InstantiateClone("RiskyModArrowRainProjectile", true);
             ProjectileAPI.Add(arrowRainObject);
 
             DamageAPI.ModdedDamageTypeHolderComponent mdh = arrowRainObject.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
@@ -36,7 +36,7 @@ namespace RiskyMod.Survivors.Huntress
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public static void ScepterProjectileSetup()
         {
-            ArrowRainBuff.arrowRainScepterObject = Resources.Load<GameObject>("prefabs/projectiles/huntressarrowrain").InstantiateClone("RiskyModArrowRainScepterProjectile", true);
+            ArrowRainBuff.arrowRainScepterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/huntressarrowrain").InstantiateClone("RiskyModArrowRainScepterProjectile", true);
             ProjectileAPI.Add(ArrowRainBuff.arrowRainScepterObject);
 
             arrowRainScepterObject.transform.localScale = new Vector3(arrowRainScepterObject.transform.localScale.x * 1.5f,

@@ -19,7 +19,7 @@ namespace RiskyMod.Survivors
         public static DamageAPI.ModdedDamageType Poison7s;
 
         public static DamageAPI.ModdedDamageType CrocoBiteHealOnKill;
-        public static GameObject medkitEffect = Resources.Load<GameObject>("Prefabs/Effects/MedkitHealEffect");
+        public static GameObject medkitEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect");
 
         public static DamageAPI.ModdedDamageType IgniteLevelScaled;
 

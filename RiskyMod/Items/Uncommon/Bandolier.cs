@@ -11,7 +11,7 @@ namespace RiskyMod.Items.Uncommon
         {
             if (!enabled) return;
             //Buff lifetime and pickup range
-            GameObject ammoPack = Resources.Load<GameObject>("Prefabs/NetworkedObjects/AmmoPack");
+            GameObject ammoPack = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/AmmoPack");
 
             DestroyOnTimer dt = ammoPack.GetComponent<DestroyOnTimer>();
             dt.duration = 14f;

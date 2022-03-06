@@ -114,37 +114,37 @@ namespace RiskyMod.Enemies
             if (initialized) return;
             initialized = true;
 
-            Beetle = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbeetle");
-            Lemurian = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/csclemurian");
+            Beetle = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbeetle");
+            Lemurian = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/csclemurian");
 
-            Wisp = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/csclesserwisp");
-            Jellyfish = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscjellyfish");
+            Wisp = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/csclesserwisp");
+            Jellyfish = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscjellyfish");
 
-            Imp = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscimp");
-            Vulture = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscvulture");
+            Imp = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscimp");
+            Vulture = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscvulture");
 
-            Golem = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscgolem");
-            BeetleGuard = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbeetleguard");
-            Mushrum = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscminimushroom");
+            Golem = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscgolem");
+            BeetleGuard = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbeetleguard");
+            Mushrum = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscminimushroom");
 
-            Bronzong = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbell");
-            GreaterWisp = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscgreaterwisp");
+            Bronzong = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbell");
+            GreaterWisp = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscgreaterwisp");
 
-            TitanBlackBeach = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/csctitanblackbeach");
-            TitanDampCave = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/csctitandampcave");
-            TitanGolemPlains = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/csctitangolemplains");
-            TitanGooLake = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/csctitangoolake");
+            TitanBlackBeach = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/csctitanblackbeach");
+            TitanDampCave = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/csctitandampcave");
+            TitanGolemPlains = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/csctitangolemplains");
+            TitanGooLake = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/csctitangoolake");
 
-            Vagrant = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscvagrant");
-            BeetleQueen = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbeetlequeen");
-            Dunestrider = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscclayboss");
+            Vagrant = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscvagrant");
+            BeetleQueen = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbeetlequeen");
+            Dunestrider = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscclayboss");
 
-            MagmaWorm = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscmagmaworm");
-            ImpOverlord = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscimpboss");
-            Grovetender = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscgravekeeper");
-            RoboBall = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscroboballboss");
+            MagmaWorm = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscmagmaworm");
+            ImpOverlord = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscimpboss");
+            Grovetender = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscgravekeeper");
+            RoboBall = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscroboballboss");
 
-            Reminder = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscelectricworm");
+            Reminder = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscelectricworm");
 
             DirectorCards.Init();
         }

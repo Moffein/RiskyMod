@@ -9,11 +9,16 @@ namespace RiskyMod.Tweaks
     public class ShrineSpawnRate
     {
         public static bool enabled = true;
+        private static SpawnCard shrineBoss;
+        private static SpawnCard shrineCombat;
+        private static SpawnCard voidSeed;
         public ShrineSpawnRate()
         {
             if (!enabled) return;
-            //InteractableSpawnCard msCard = Resources.Load<InteractableSpawnCard>("spawncards/interactablespawncard/iscshrineboss");
-            //InteractableSpawnCard cCard = Resources.Load<InteractableSpawnCard>("spawncards/interactablespawncard/iscshrinecombat");
+
+            shrineBoss = LegacyResourcesAPI.Load<SpawnCard>("spawncards/interactablespawncard/iscshrineboss");
+            shrineCombat = LegacyResourcesAPI.Load<SpawnCard>("spawncards/interactablespawncard/iscshrinecombat");
+            voidSeed = LegacyResourcesAPI.Load<SpawnCard>("spawncards/interactablespawncard/iscvoidsuppressor");
 
             IL.RoR2.SceneDirector.PopulateScene += (il) =>
             {
@@ -25,7 +30,7 @@ namespace RiskyMod.Tweaks
                 c.Emit(OpCodes.Ldloc_2);    //DirectorCard
                 c.EmitDelegate<Func<int, DirectorCard, int>>((cost, card) =>
                 {
-                    if (card.spawnCard.name == "iscShrineBoss" || card.spawnCard.name == "iscShrineCombat")
+                    if (card.spawnCard == shrineBoss || card.spawnCard == shrineCombat || card.spawnCard == voidSeed)
                     {
                         cost = (int)(cost * (1f + 0.5f * (Run.instance.participatingPlayerCount - 1)));
                     }

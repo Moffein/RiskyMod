@@ -13,7 +13,7 @@ namespace RiskyMod.Survivors.Croco
         private static GameObject spitProjectile;
         public ModifyM2Spit()
         {
-            spitProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocospit");
+            spitProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocospit");
 
             IL.EntityStates.Croco.FireSpit.OnEnter += (il) =>
             {

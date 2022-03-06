@@ -17,7 +17,7 @@ namespace RiskyMod.Enemies.Bosses
 
         private void ModifyAI()
         {
-            GameObject enemyMaster = Resources.Load<GameObject>("prefabs/charactermasters/roboballbossmaster");
+            GameObject enemyMaster = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/roboballbossmaster");
             AISkillDriver[] skillDrivers = enemyMaster.GetComponents<AISkillDriver>();
 
             foreach (AISkillDriver ai in skillDrivers)
@@ -31,7 +31,7 @@ namespace RiskyMod.Enemies.Bosses
 
         private void ModifyStats()
         {
-            GameObject enemyObject = Resources.Load<GameObject>("prefabs/characterbodies/roboballbossbody");
+            GameObject enemyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/roboballbossbody");
             CharacterBody cb = enemyObject.GetComponent<CharacterBody>();
 
             cb.baseDamage = 25f;    //orig is 15

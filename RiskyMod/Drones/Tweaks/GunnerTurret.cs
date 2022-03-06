@@ -7,7 +7,7 @@ namespace RiskyMod.Drones
     {
         public GunnerTurret()
         {
-            GameObject gunnerTurret = Resources.Load<GameObject>("prefabs/characterbodies/turret1body");
+            GameObject gunnerTurret = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/turret1body");
             SkillLocator sk = gunnerTurret.GetComponent<SkillLocator>();
             sk.primary.skillFamily.variants[0].skillDef.baseMaxStock = 1;
             sk.primary.skillFamily.variants[0].skillDef.baseRechargeInterval = 0f;

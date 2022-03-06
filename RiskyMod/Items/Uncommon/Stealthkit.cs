@@ -8,7 +8,7 @@ namespace RiskyMod.Items.Uncommon
     public class Stealthkit
     {
         public static bool enabled = true;
-        public static GameObject effectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ProcStealthkit");
+        public static GameObject effectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ProcStealthkit");
         public Stealthkit()
         {
             if (!enabled) return;

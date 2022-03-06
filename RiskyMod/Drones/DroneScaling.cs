@@ -78,7 +78,7 @@ namespace RiskyMod.Drones
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private GameObject LoadBody(string bodyname)
         {
-            return Resources.Load<GameObject>("prefabs/characterbodies/" + bodyname);
+            return LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/" + bodyname);
         }
     }
 }

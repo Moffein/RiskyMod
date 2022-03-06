@@ -9,7 +9,7 @@ namespace EntityStates.RiskyMod.Commando
 {
 	public class FirePhaseRound : GenericProjectileBaseState
 	{
-		public static GameObject _effectPrefab = Resources.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashFMJ");
+		public static GameObject _effectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashFMJ");
 		public static GameObject _projectilePrefab;
 
 		private void LoadStats()

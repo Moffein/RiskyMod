@@ -148,7 +148,7 @@ namespace RiskyMod.Items
 
         public static EquipmentDef LoadEquipmentDef(string equipmentname)
         {
-            return Resources.Load<EquipmentDef>("equipmentdefs/" + equipmentname);
+            return LegacyResourcesAPI.Load<EquipmentDef>("equipmentdefs/" + equipmentname);
         }
 
         public static void ChangeEquipmentCooldown(EquipmentDef ed, float cooldown)

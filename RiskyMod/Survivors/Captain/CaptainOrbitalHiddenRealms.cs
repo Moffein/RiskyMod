@@ -13,7 +13,7 @@ namespace RiskyMod.Survivors.Captain
         {
             if (!enabled) return;
 
-            var getParticipatingPlayerCount = new Hook(typeof(CaptainOrbitalSkillDef).GetMethodCached("get_isAvailable"),
+            var getIsAvailable = new Hook(typeof(CaptainOrbitalSkillDef).GetMethodCached("get_isAvailable"),
                 typeof(CaptainOrbitalHiddenRealms).GetMethodCached(nameof(IsAvailable)));
         }
         private static bool IsAvailable(CaptainOrbitalSkillDef self)

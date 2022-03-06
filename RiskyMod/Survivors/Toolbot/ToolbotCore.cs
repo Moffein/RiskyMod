@@ -141,7 +141,7 @@ namespace RiskyMod.Survivors.Toolbot
         {
             if (!enableSecondarySkillChanges) return;
 
-            DamageAPI.ModdedDamageTypeHolderComponent md = Resources.Load<GameObject>("prefabs/projectiles/CryoCanisterProjectile").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            DamageAPI.ModdedDamageTypeHolderComponent md = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/CryoCanisterProjectile").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             md.Add(SharedDamageTypes.AntiFlyingForce);
         }
 

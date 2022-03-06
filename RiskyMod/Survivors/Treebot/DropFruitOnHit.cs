@@ -15,8 +15,8 @@ namespace RiskyMod.Survivors.Treebot
         {
             if (!enabled) return;
 
-            fruitEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/TreebotFruitDeathEffect");
-            fruitPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/TreebotFruitPack");
+            fruitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/TreebotFruitDeathEffect");
+            fruitPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/TreebotFruitPack");
             OnHitEnemy.OnHitAttackerActions += FruitOnHit;
         }
 

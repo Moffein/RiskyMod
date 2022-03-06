@@ -203,7 +203,7 @@ namespace EntityStates.RiskyMod.Mage
 		}
 
 		public static GameObject flamethrowerEffectPrefab;
-		public static GameObject impactEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/missileexplosionvfx");
+		public static GameObject impactEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/missileexplosionvfx");
 		public static GameObject tracerEffectPrefab = null;
 		public static float maxDistance = 20f;
 		public static float radius = 2f;

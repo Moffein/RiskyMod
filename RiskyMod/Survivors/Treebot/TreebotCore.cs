@@ -33,7 +33,7 @@ namespace RiskyMod.Survivors.Treebot
         {
             if (drillChanges)
             {
-                GameObject drillPrefab = Resources.Load<GameObject>("prefabs/projectiles/TreebotMortarRain");
+                GameObject drillPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/TreebotMortarRain");
                 ProjectileDotZone pdz = drillPrefab.GetComponent<ProjectileDotZone>();
                 pdz.overlapProcCoefficient = 0.7f;
             }
@@ -60,7 +60,7 @@ namespace RiskyMod.Survivors.Treebot
             {
                 sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD";
 
-                GameObject fruitProjectile = Resources.Load<GameObject>("prefabs/projectiles/TreebotFruitSeedProjectile");
+                GameObject fruitProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/TreebotFruitSeedProjectile");
                 ProjectileImpactExplosion pie = fruitProjectile.GetComponent<ProjectileImpactExplosion>();
                 pie.blastRadius = 4f;
 

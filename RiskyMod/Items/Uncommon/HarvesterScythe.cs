@@ -12,7 +12,7 @@ namespace RiskyMod.Items.Uncommon
     {
         public static bool enabled = true;
         public static BuffDef scytheBuff;
-        //public static GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/MedkitHealEffect"); //same sfx as "Play_item_proc_crit_heal"
+        //public static GameObject effectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/MedkitHealEffect"); //same sfx as "Play_item_proc_crit_heal"
         public HarvesterScythe()
         {
             if (!enabled) return;
@@ -37,7 +37,7 @@ namespace RiskyMod.Items.Uncommon
             scytheBuff.canStack = true;
             scytheBuff.isDebuff = false;
             scytheBuff.name = "RiskyMod_ScytheBuff";
-            scytheBuff.iconSprite = Resources.Load<Sprite>("textures/bufficons/texBuffRegenBoostIcon");
+            scytheBuff.iconSprite = LegacyResourcesAPI.Load<Sprite>("textures/bufficons/texBuffRegenBoostIcon");
             BuffAPI.Add(new CustomBuff(scytheBuff));
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;

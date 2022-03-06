@@ -127,13 +127,13 @@ namespace EntityStates.RiskyMod.Commando
 		public float internalBaseDurationBetweenShots;
 
 
-		public static GameObject explosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
+		public static GameObject explosionEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
 		public static float blastRadius = 3f;
 		public static float blastDamageCoefficient = 0.2f;	//Multiply by damage coefficient
 
-		public static GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashBarrage");
-		public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/HitsparkCommandoBarrage");
-		public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/TracerCommandoBoost");
+		public static GameObject effectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashBarrage");
+		public static GameObject hitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/HitsparkCommandoBarrage");
+		public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/TracerCommandoBoost");
 		public static float damageCoefficient = 1f;
 		public static float force = 100f;
 		public static float minSpread = 0f;

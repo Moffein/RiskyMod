@@ -133,8 +133,8 @@ namespace EntityStates.RiskyMod.Loader
 		public static float exitVerticalVelocity = 12f;
 		public static float verticalAcceleration = -100f;
 		public static float exitSlowdownCoefficient = 0.2f;
-		public static GameObject blastImpactEffectPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloaderlightning");
-		public static GameObject blastEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/loadergroundslam");
+		public static GameObject blastImpactEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloaderlightning");
+		public static GameObject blastEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/loadergroundslam");
 		public static GameObject fistEffectPrefab;
 
 		public static float maxDamageBoost = 2f;

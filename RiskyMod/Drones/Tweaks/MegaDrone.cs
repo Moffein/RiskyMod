@@ -8,7 +8,7 @@ namespace RiskyMod.Drones
     {
         public MegaDrone()
         {
-            GameObject megaDroneMasterObject = Resources.Load<GameObject>("prefabs/charactermasters/MegaDroneMaster");
+            GameObject megaDroneMasterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/MegaDroneMaster");
 
             AISkillDriver[] aiDrivers = megaDroneMasterObject.GetComponentsInChildren<AISkillDriver>();
             for (int i = 0; i < aiDrivers.Length; i++)

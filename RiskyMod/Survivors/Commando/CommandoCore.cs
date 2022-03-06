@@ -162,7 +162,7 @@ namespace RiskyMod.Survivors.Commando
             slideDef.canStack = false;
             slideDef.isDebuff = false;
             slideDef.name = "RiskyRebalanceCommandoSlide";
-            slideDef.iconSprite = Resources.Load<Sprite>("Textures/BuffIcons/texBuffFullCritIcon");
+            slideDef.iconSprite = LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffFullCritIcon");
             BuffAPI.Add(new CustomBuff(slideDef));
 
             return slideDef;
@@ -306,7 +306,7 @@ namespace RiskyMod.Survivors.Commando
         }
         private GameObject BuildGrenadeScepterProjectile()
         {
-            GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/CommandoGrenadeProjectile").InstantiateClone("RiskyModFragScepterProjectile", true);
+            GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/CommandoGrenadeProjectile").InstantiateClone("RiskyModFragScepterProjectile", true);
 
             ProjectileSimple ps = proj.GetComponent<ProjectileSimple>();
             ps.lifetime = 10f;
@@ -327,7 +327,7 @@ namespace RiskyMod.Survivors.Commando
         }
         private GameObject BuildGrenadeProjectile()
         {
-            GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/CommandoGrenadeProjectile").InstantiateClone("RiskyModFragProjectile", true);
+            GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/CommandoGrenadeProjectile").InstantiateClone("RiskyModFragProjectile", true);
 
             ProjectileSimple ps = proj.GetComponent<ProjectileSimple>();
             ps.lifetime = 10f;
@@ -348,7 +348,7 @@ namespace RiskyMod.Survivors.Commando
         }
         private GameObject BuildGrenadeOvercookExplosionEffect()
         {
-            GameObject effect = Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFXCommandoGrenade").InstantiateClone("RiskyModFragOvercookEffect", false);
+            GameObject effect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFXCommandoGrenade").InstantiateClone("RiskyModFragOvercookEffect", false);
             EffectComponent ec = effect.GetComponent<EffectComponent>();
             ec.soundName = "Play_commando_M2_grenade_explo";
             EffectAPI.AddEffect(new EffectDef(effect));
@@ -356,7 +356,7 @@ namespace RiskyMod.Survivors.Commando
         }
         private GameObject BuildPhaseRoundProjectile()
         {
-            GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/fmjramping").InstantiateClone("RiskyModPhaseRound", true);
+            GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/fmjramping").InstantiateClone("RiskyModPhaseRound", true);
 
             //Add Lightning
             ProjectileProximityBeamController pbc = proj.GetComponent<ProjectileProximityBeamController>();

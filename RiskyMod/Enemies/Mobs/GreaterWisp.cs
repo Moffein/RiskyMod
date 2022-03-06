@@ -16,7 +16,7 @@ namespace RiskyMod.Enemies.Mobs
 
         private void ChangeFalloff()
         {
-            GameObject projectile = Resources.Load<GameObject>("prefabs/projectiles/wispcannon");
+            GameObject projectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/wispcannon");
             ProjectileImpactExplosion pie = projectile.GetComponent<ProjectileImpactExplosion>();
             pie.falloffModel = BlastAttack.FalloffModel.SweetSpot;
         }

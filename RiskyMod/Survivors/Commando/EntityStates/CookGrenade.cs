@@ -16,7 +16,7 @@ namespace EntityStates.RiskyMod.Commando
         public static float selfHPDamagePercent = 0.6f; //Remove this fraction of combined HP
         public static float selfForce = 4500f;
         public static GameObject overcookExplosionEffectPrefab;
-        public static GameObject grenadeIndicatorPrefab = Resources.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashFMJ");
+        public static GameObject grenadeIndicatorPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashFMJ");
         public static float selfBlastRadius = 14f;
 
         private float stopwatch;

@@ -20,7 +20,7 @@ namespace RiskyMod.Survivors.Mage
 
             if (increaseRange || scaleBurnDamage)
             {
-                FireBolt = Resources.Load<GameObject>("prefabs/projectiles/magefireboltbasic").InstantiateClone("RiskyMod_FlameBolt");
+                FireBolt = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/magefireboltbasic").InstantiateClone("RiskyMod_FlameBolt");
                 IncreaseProjectileLifetime(FireBolt);
                 if (scaleBurnDamage)
                 {
@@ -35,7 +35,7 @@ namespace RiskyMod.Survivors.Mage
 
             if (increaseRange || modifyPlasma)
             {
-                LightningBolt = Resources.Load<GameObject>("prefabs/projectiles/magelightningboltbasic").InstantiateClone("RiskyMod_PlasmaBolt");
+                LightningBolt = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/magelightningboltbasic").InstantiateClone("RiskyMod_PlasmaBolt");
                 IncreaseProjectileLifetime(LightningBolt);
                 if (modifyPlasma)
                 {

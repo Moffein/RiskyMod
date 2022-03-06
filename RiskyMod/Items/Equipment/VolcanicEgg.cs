@@ -12,7 +12,7 @@ namespace RiskyMod.Items.Equipment
             if (!enabled) return;
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipDescs, RoR2Content.Equipment.FireBallDash);
 
-            GameObject fireball = Resources.Load<GameObject>("prefabs/networkedobjects/FireballVehicle");
+            GameObject fireball = LegacyResourcesAPI.Load<GameObject>("prefabs/networkedobjects/FireballVehicle");
             FireballVehicle fv = fireball.GetComponent<FireballVehicle>();
             fv.blastRadius = 16f;
             fv.blastDamageCoefficient = 16f;

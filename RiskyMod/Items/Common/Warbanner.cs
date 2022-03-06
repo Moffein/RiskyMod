@@ -19,7 +19,7 @@ namespace RiskyMod.Items.Common
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, itemDef);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
 
-            WarbannerObject = Resources.Load<GameObject>("Prefabs/NetworkedObjects/WarbannerWard");
+            WarbannerObject = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/WarbannerWard");
 
             On.RoR2.HealthComponent.Heal += (orig, self, amount, procChainMask, nonRegen) =>
             {

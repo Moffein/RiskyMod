@@ -23,7 +23,7 @@ namespace RiskyMod.Survivors.Mage
         //Todo: figure out how to just access that prefab
         private static GameObject BuildFlameProjectile()
         {
-            GameObject projCloud = Resources.Load<GameObject>("prefabs/projectiles/BeetleQueenAcid").InstantiateClone("AncientScepterMageFlamethrowerCloud");
+            GameObject projCloud = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/BeetleQueenAcid").InstantiateClone("AncientScepterMageFlamethrowerCloud");
             var pdz = projCloud.GetComponent<ProjectileDotZone>();
             pdz.lifetime = 10f;
             pdz.impactEffect = null;
@@ -33,7 +33,7 @@ namespace RiskyMod.Survivors.Mage
             fxObj.Find("Decal").gameObject.SetActive(false);
             fxObj.Find("Gas").gameObject.SetActive(false);
             foreach (var x in fxObj.GetComponents<AnimateShaderAlpha>()) { x.enabled = false; }
-            var fxcloud = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("prefabs/FireTrail").GetComponent<DamageTrail>().segmentPrefab, fxObj.transform);
+            var fxcloud = UnityEngine.Object.Instantiate(LegacyResourcesAPI.Load<GameObject>("prefabs/FireTrail").GetComponent<DamageTrail>().segmentPrefab, fxObj.transform);
             var psmain = fxcloud.GetComponent<ParticleSystem>().main;
             psmain.duration = 10f;
             psmain.gravityModifier = -0.05f;

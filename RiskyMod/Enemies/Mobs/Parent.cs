@@ -18,7 +18,7 @@ namespace RiskyMod.Enemies.Mobs
 
         private void EnableStuns()
         {
-            GameObject enemyObject = Resources.Load<GameObject>("prefabs/characterbodies/parentbody");
+            GameObject enemyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/parentbody");
             SetStateOnHurt ssoh = enemyObject.GetComponent<SetStateOnHurt>();
             ssoh.canBeHitStunned = true;
             ssoh.canBeStunned = true;
@@ -60,7 +60,7 @@ namespace RiskyMod.Enemies.Mobs
 
         private void LowerCreditCost()
         {
-            CharacterSpawnCard csc = Resources.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscparent");
+            CharacterSpawnCard csc = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscparent");
             //Debug.Log("\n\n\n\n\n\nCost: " + csc.directorCreditCost);
             csc.directorCreditCost = 75;    //65 to be proportional to parent, 75 for Elder Lemurian
         }

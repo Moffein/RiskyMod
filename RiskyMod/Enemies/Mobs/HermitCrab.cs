@@ -9,7 +9,7 @@ namespace RiskyMod.Enemies.Mobs
         public HermitCrab()
         {
             if (!enabled) return;
-            EnemiesCore.DisableRegen(Resources.Load<GameObject>("prefabs/characterbodies/hermitcrabbody"));
+            EnemiesCore.DisableRegen(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/hermitcrabbody"));
         }
     }
 }

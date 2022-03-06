@@ -59,7 +59,7 @@ namespace EntityStates.RiskyMod.Croco
 		}
 
 		public static GameObject projectilePrefab;
-		public static GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/muzzleflashes/muzzleflashcroco");
+		public static GameObject effectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/muzzleflashcroco");
 		public static float baseDuration = 0.5f;
 		public static float damageCoefficient = 1f;
 		public static float force = 0f;

@@ -9,7 +9,7 @@ namespace RiskyMod.Enemies.Bosses
         public Gravekeeper()
         {
             if (!enabled) return;
-            GameObject trackingWispObject = Resources.Load<GameObject>("prefabs/projectiles/GravekeeperTrackingFireball");
+            GameObject trackingWispObject = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/GravekeeperTrackingFireball");
             HealthComponent hc = trackingWispObject.GetComponent<HealthComponent>();
             hc.globalDeathEventChanceCoefficient = 0f;
         }

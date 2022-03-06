@@ -9,7 +9,8 @@ namespace RiskyMod.Fixes
         public NoLevelupHeal()
         {
             if (!enabled) return;
-            //TODO: See if this can be refactored to not glitch out with AWU shield.
+
+            //Todo: test to see if this glitches out with the AWU shield
             On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
             {
                 float oldLevel = self.level;
@@ -18,10 +19,14 @@ namespace RiskyMod.Fixes
                 orig(self);
                 if (self.level > oldLevel)
                 {
-                    if ((self.teamComponent.teamIndex != TeamIndex.Player || !self.isPlayerControlled) && self.healthComponent.combinedHealthFraction < 1f)
+                    if (self.teamComponent.teamIndex != TeamIndex.Player && self.healthComponent.combinedHealthFraction < 1f)
                     {
-                        self.healthComponent.health = oldHP;
-                        if (self.baseNameToken != "SUPERROBOBALLBOSS_BODY_NAME")
+                        if (self.healthComponent.health > oldHP)
+                        {
+                            self.healthComponent.health = oldHP;
+                        }
+
+                        if (self.healthComponent.shield > oldShield)
                         {
                             self.healthComponent.shield = oldShield;
                         }

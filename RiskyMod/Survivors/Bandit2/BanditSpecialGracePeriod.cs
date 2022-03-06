@@ -10,8 +10,8 @@ namespace RiskyMod.Survivors.Bandit2
     {
         public static bool enabled = true;
         public static float duration = 1.2f;
-        public static GameObject resetEffect = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/Bandit2ResetEffect");
-        public static GameObject skullEffect = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/Bandit2KillEffect");
+        public static GameObject resetEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/Bandit2ResetEffect");
+        public static GameObject skullEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/Bandit2KillEffect");
         public BanditSpecialGracePeriod()
         {
             if (!enabled) return;

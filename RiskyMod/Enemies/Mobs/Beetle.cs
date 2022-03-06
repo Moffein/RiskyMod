@@ -9,7 +9,7 @@ namespace RiskyMod.Enemies.Mobs
         public Beetle()
         {
             if (!enabled) return;
-            GameObject beetleObject = Resources.Load<GameObject>("prefabs/characterbodies/beetlebody");
+            GameObject beetleObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/beetlebody");
             ModifyStats(beetleObject);
             ModifyAttack();
         }

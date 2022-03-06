@@ -11,7 +11,7 @@ namespace RiskyMod.Items.Equipment
     {
         public static bool enabled = true;
         public static bool ignoreTeamLimit = true;
-        public static GameObject backupMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/DroneBackupMaster");
+        public static GameObject backupMaster = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterMasters/DroneBackupMaster");
         public Backup()
         {
             if (!enabled) return;

@@ -9,14 +9,14 @@ namespace RiskyMod.Enemies.Mobs
         public Imp()
         {
             if (!enabled) return;
-            EnemiesCore.DisableRegen(Resources.Load<GameObject>("prefabs/characterbodies/impbody"));
+            EnemiesCore.DisableRegen(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/impbody"));
             ModifyAI();
             RemoveSlashSlow();
         }
 
         private void ModifyAI()
         {
-            GameObject enemyMaster = Resources.Load<GameObject>("prefabs/charactermasters/impmaster");
+            GameObject enemyMaster = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/impmaster");
 
             AISkillDriver[] skills = enemyMaster.GetComponents<AISkillDriver>();
             foreach (AISkillDriver ai in skills)

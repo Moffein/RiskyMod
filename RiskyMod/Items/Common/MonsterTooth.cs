@@ -10,7 +10,7 @@ namespace RiskyMod.Items.Common
         {
             if (!enabled) return;
 
-            GameObject healPack = Resources.Load<GameObject>("Prefabs/NetworkedObjects/HealPack");
+            GameObject healPack = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/HealPack");
 
             //This doesn't stop the rolling.
             /*VelocityRandomOnStart vrs = healPack.GetComponent<VelocityRandomOnStart>();

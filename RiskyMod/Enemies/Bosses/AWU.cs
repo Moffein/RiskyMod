@@ -14,7 +14,7 @@ namespace RiskyMod.Enemies.Bosses
 
         private void ModifyStats()
         {
-            GameObject enemyObject = Resources.Load<GameObject>("prefabs/characterbodies/superroboballbossbody");
+            GameObject enemyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/superroboballbossbody");
             CharacterBody cb = enemyObject.GetComponent<CharacterBody>();
 
             cb.baseDamage = 25f;    //orig is 15

@@ -73,13 +73,13 @@ namespace SneedUtils
         }
         public static void DumpEntityStateConfig(string entityStateName)
         {
-            EntityStateConfiguration esc = Resources.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
+            EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
             DumpEntityStateConfig(esc);
         }
 
         public static Object GetEntityStateFieldObject(string entityStateName, string fieldName)
         {
-            EntityStateConfiguration esc = Resources.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
+            EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
             for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)
             {
                 if (esc.serializedFieldsCollection.serializedFields[i].fieldName == fieldName)
@@ -92,7 +92,7 @@ namespace SneedUtils
 
         public static string GetEntityStateFieldString(string entityStateName, string fieldName)
         {
-            EntityStateConfiguration esc = Resources.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
+            EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
             for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)
             {
                 if (esc.serializedFieldsCollection.serializedFields[i].fieldName == fieldName)
@@ -105,7 +105,7 @@ namespace SneedUtils
 
         public static bool SetEntityStateField(string entityStateName, string fieldName, Object newObject)
         {
-            EntityStateConfiguration esc = Resources.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
+            EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
             for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)
             {
                 if (esc.serializedFieldsCollection.serializedFields[i].fieldName == fieldName)
@@ -119,7 +119,7 @@ namespace SneedUtils
 
         public static bool SetEntityStateField(string entityStateName, string fieldName, string value)
         {
-            EntityStateConfiguration esc = Resources.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
+            EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
             for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)
             {
                 if (esc.serializedFieldsCollection.serializedFields[i].fieldName == fieldName)

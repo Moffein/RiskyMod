@@ -23,7 +23,7 @@ namespace RiskyMod.Enemies.Mobs.Lunar
 
         private void EnableStatusConditions()
         {
-            GameObject enemyObject = Resources.Load<GameObject>("prefabs/characterbodies/lunarwispbody");
+            GameObject enemyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/lunarwispbody");
             SetStateOnHurt ssoh = enemyObject.GetComponent<SetStateOnHurt>();
             if (!ssoh)
             {
@@ -59,7 +59,7 @@ namespace RiskyMod.Enemies.Mobs.Lunar
 
         private void ModifyProjectile()
         {
-            GameObject projectile = Resources.Load<GameObject>("prefabs/projectiles/lunarwisptrackingbomb");
+            GameObject projectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/lunarwisptrackingbomb");
             HealthComponent hc = projectile.GetComponent<HealthComponent>();
             hc.globalDeathEventChanceCoefficient = 0f;
 

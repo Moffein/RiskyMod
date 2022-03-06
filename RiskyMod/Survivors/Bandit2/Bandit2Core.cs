@@ -370,7 +370,7 @@ namespace RiskyMod.Survivors.Bandit2
             buff.buffColor = new Color(0.8039216f, 0.482352942f, 0.843137264f);
             buff.canStack = true;
             buff.isDebuff = false;
-            buff.iconSprite = Resources.Load<Sprite>("textures/bufficons/texBuffBanditSkullIcon");
+            buff.iconSprite = LegacyResourcesAPI.Load<Sprite>("textures/bufficons/texBuffBanditSkullIcon");
             buff.name = "RiskyModBanditRevolver";
             BuffAPI.Add(new CustomBuff(buff));
             return buff;

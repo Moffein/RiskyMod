@@ -48,7 +48,7 @@ namespace RiskyMod.SharedHooks
 								int incubatorOnKillCount = attackerMaster.inventory.GetItemCount(RoR2Content.Items.Incubator);
 								if (incubatorOnKillCount > 0 && attackerMaster.GetDeployableCount(DeployableSlot.ParentPodAlly) + attackerMaster.GetDeployableCount(DeployableSlot.ParentAlly) < incubatorOnKillCount && Util.CheckRoll(7f + 1f * (float)incubatorOnKillCount, attackerMaster))
 								{
-									DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest((SpawnCard)Resources.Load("SpawnCards/CharacterSpawnCards/cscParentPod"), new DirectorPlacementRule
+									DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest((SpawnCard)LegacyResourcesAPI.Load("SpawnCards/CharacterSpawnCards/cscParentPod"), new DirectorPlacementRule
 									{
 										placementMode = DirectorPlacementRule.PlacementMode.Approximate,
 										minDistance = 3f,

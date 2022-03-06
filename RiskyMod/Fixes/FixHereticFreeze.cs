@@ -7,7 +7,7 @@ namespace RiskyMod.Fixes
     {
         public FixHereticFreeze()
         {
-            GameObject bodyObject = Resources.Load<GameObject>("prefabs/characterbodies/hereticbody");
+            GameObject bodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/hereticbody");
 
             EntityStateMachine body = null;
             EntityStateMachine weapon = null;

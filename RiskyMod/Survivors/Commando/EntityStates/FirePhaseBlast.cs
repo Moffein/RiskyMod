@@ -5,9 +5,9 @@ namespace EntityStates.RiskyMod.Commando
 {
 	public class FirePhaseBlast : GenericBulletBaseState
 	{
-		public static GameObject _muzzleFlashPrefab = Resources.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashFMJ");
-		public static GameObject _tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/TracerCommandoShotgun");
-		public static GameObject _hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/HitsparkCommandoShotgun");
+		public static GameObject _muzzleFlashPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashFMJ");
+		public static GameObject _tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/TracerCommandoShotgun");
+		public static GameObject _hitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/HitsparkCommandoShotgun");
 
 		public static float delayBetweenShotgunBlasts = 0.2f;
 		private bool hasFiredSecondBlast;

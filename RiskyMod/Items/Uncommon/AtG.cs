@@ -56,14 +56,14 @@ namespace RiskyMod.Items.Uncommon
 
 			if (RiskyMod.disableProcChains)
 			{
-				missilePrefab = Resources.Load<GameObject>("Prefabs/Projectiles/MissileProjectile").InstantiateClone("RiskyMod_ATGProjectile", true);
+				missilePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MissileProjectile").InstantiateClone("RiskyMod_ATGProjectile", true);
 				ProjectileController pc = missilePrefab.GetComponent<ProjectileController>();
 				pc.procCoefficient = 0f;
 				ProjectileAPI.Add(missilePrefab);
 			}
 			else
             {
-				missilePrefab = Resources.Load<GameObject>("Prefabs/Projectiles/MissileProjectile");
+				missilePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MissileProjectile");
 
 			}
 		}

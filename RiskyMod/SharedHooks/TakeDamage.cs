@@ -87,7 +87,7 @@ namespace RiskyMod.SharedHooks
                             if (planulaCount > 0)
                             {
                                 self.Heal(planulaCount * 15f, default(ProcChainMask), true);
-                                EntitySoundManager.EmitSoundServer(Resources.Load<NetworkSoundEventDef>("NetworkSoundEventDefs/nseParentEggHeal").index, self.gameObject);
+                                EntitySoundManager.EmitSoundServer(LegacyResourcesAPI.Load<NetworkSoundEventDef>("NetworkSoundEventDefs/nseParentEggHeal").index, self.gameObject);
                             }
                         }
                     }

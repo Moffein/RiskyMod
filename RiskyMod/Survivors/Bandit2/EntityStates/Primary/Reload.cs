@@ -9,7 +9,7 @@ namespace EntityStates.RiskyMod.Bandit2
 		public static float exitSoundPitch = 1f;
 		public static string enterSoundString = "Play_bandit2_m1_reload_bullet";
 		public static string exitSoundString = "Play_bandit2_m1_reload_finish";
-		public static GameObject reloadEffectPrefab = Resources.Load<GameObject>("prefabs/effects/Bandit2Reload");
+		public static GameObject reloadEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/Bandit2Reload");
 		public static string reloadEffectMuzzleString = "PalmL";
 		public static float baseDuration = 0.3f;
 

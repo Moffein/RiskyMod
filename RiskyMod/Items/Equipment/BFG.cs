@@ -19,7 +19,7 @@ namespace RiskyMod.Items.Equipment
 
             ItemsCore.ChangeEquipmentCooldown(ItemsCore.LoadEquipmentDef("bfg"), 120f);
 
-            projectilePrefab = Resources.Load<GameObject>("prefabs/projectiles/BeamSphere").InstantiateClone("RiskyMod_BFG", true);
+            projectilePrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/BeamSphere").InstantiateClone("RiskyMod_BFG", true);
             ProjectileProximityBeamController pbc = projectilePrefab.GetComponent<ProjectileProximityBeamController>();
             pbc.damageCoefficient = 1.9f;
             ProjectileAPI.Add(projectilePrefab);

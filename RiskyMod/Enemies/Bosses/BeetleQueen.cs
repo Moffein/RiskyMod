@@ -38,8 +38,8 @@ namespace RiskyMod.Enemies.Bosses
 
         private void ModifySpawns()
         {
-            BeetleCard = Resources.Load<SpawnCard>("spawncards/characterspawncards/cscbeetle");
-            BeetleGuardCard = Resources.Load<SpawnCard>("spawncards/characterspawncards/cscbeetleguard");
+            BeetleCard = LegacyResourcesAPI.Load<SpawnCard>("spawncards/characterspawncards/cscbeetle");
+            BeetleGuardCard = LegacyResourcesAPI.Load<SpawnCard>("spawncards/characterspawncards/cscbeetleguard");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.SummonEggs", "spawnCard", BeetleCard);
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.SummonEggs", "maxSummonCount", "6");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.SummonEggs", "summonInterval", "0.25");
@@ -134,7 +134,7 @@ namespace RiskyMod.Enemies.Bosses
         private void ModifyProjectile()
         {
 
-            GameObject acidProjectile = Resources.Load<GameObject>("prefabs/projectiles/beetlequeenacid").InstantiateClone("RiskyMod_BeetleQueenAcid", true);
+            GameObject acidProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/beetlequeenacid").InstantiateClone("RiskyMod_BeetleQueenAcid", true);
             acidProjectile.transform.localScale = 2f * Vector3.one; //Original scale is (1, 1, 1), Beetle Queen Plus is 2.5x
             ProjectileDotZone pdz = acidProjectile.GetComponent<ProjectileDotZone>();
             pdz.overlapProcCoefficient = 0.3f;
@@ -142,7 +142,7 @@ namespace RiskyMod.Enemies.Bosses
             pdz.lifetime = 20f; //15f
             ProjectileAPI.Add(acidProjectile);
 
-            GameObject spitProjectile = Resources.Load<GameObject>("prefabs/projectiles/beetlequeenspit").InstantiateClone("RiskyMod_BeetleQueenSpit",true);
+            GameObject spitProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/beetlequeenspit").InstantiateClone("RiskyMod_BeetleQueenSpit",true);
             ProjectileImpactExplosion pie = spitProjectile.GetComponent<ProjectileImpactExplosion>();
             //pie.blastDamageCoefficient = 1.3f;
             pie.blastRadius = 6f;
@@ -208,7 +208,7 @@ namespace RiskyMod.Enemies.Bosses
 
         private void RebuildAI()
         {
-            GameObject queenMaster = Resources.Load<GameObject>("prefabs/charactermasters/BeetleQueenMaster");
+            GameObject queenMaster = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/BeetleQueenMaster");
 
             Component[] toDelete = queenMaster.GetComponents<AISkillDriver>();
             foreach (AISkillDriver asd in toDelete)

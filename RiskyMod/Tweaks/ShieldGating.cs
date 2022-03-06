@@ -109,7 +109,7 @@ namespace RiskyMod.Tweaks
                 });
             };
 
-            Resources.Load<GameObject>("prefabs/projectiles/RoboBallDelayKnockupProjectile").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
+            LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/RoboBallDelayKnockupProjectile").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
 
             On.EntityStates.BrotherMonster.WeaponSlam.OnEnter += (orig, self) =>
             {
@@ -133,8 +133,8 @@ namespace RiskyMod.Tweaks
                 });
             };
 
-            Resources.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateLeft").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
-            Resources.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateRight").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
+            LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateLeft").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
+            LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateRight").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
         }
     }
 }

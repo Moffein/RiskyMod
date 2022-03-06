@@ -46,7 +46,7 @@ namespace RiskyMod.Drones
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private GameObject LoadMasterObject(string mastername)
         {
-            return Resources.Load<GameObject>("prefabs/charactermasters/" + mastername);
+            return LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/" + mastername);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace RiskyMod.Items.Boss
 								self.guardResummonCooldown -= Time.fixedDeltaTime;
 								if (self.guardResummonCooldown <= 0f)
 								{
-									DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest((SpawnCard)Resources.Load("SpawnCards/CharacterSpawnCards/cscBeetleGuardAlly"), new DirectorPlacementRule
+									DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest((SpawnCard)LegacyResourcesAPI.Load("SpawnCards/CharacterSpawnCards/cscBeetleGuardAlly"), new DirectorPlacementRule
 									{
 										placementMode = DirectorPlacementRule.PlacementMode.Approximate,
 										minDistance = 3f,

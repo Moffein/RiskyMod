@@ -12,7 +12,7 @@ namespace RiskyMod.Survivors.Loader
         public PylonMagnet()
         {
             //Cloning this causes the collision box to be offset above the projectile for some reason.
-            GameObject pylon = Resources.Load<GameObject>("prefabs/projectiles/loaderpylon");//.InstantiateClone("RiskyMod_LoaderPylon", true);
+            GameObject pylon = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/loaderpylon");//.InstantiateClone("RiskyMod_LoaderPylon", true);
             pylon = BuildProjectile(pylon);
             //ProjectileAPI.Add(PylonProjectile);
             SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.throwpylon", "projectilePrefab", pylon);

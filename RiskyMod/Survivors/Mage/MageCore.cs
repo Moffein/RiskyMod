@@ -95,7 +95,7 @@ namespace RiskyMod.Survivors.Mage
 
         private void ModifyUtilities(SkillLocator sk)
         {
-            new SolidIceWall();
+            //new SolidIceWall();
         }
 
         private void ModifySpecials(SkillLocator sk)

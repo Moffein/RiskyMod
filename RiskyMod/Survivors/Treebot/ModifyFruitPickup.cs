@@ -10,7 +10,7 @@ namespace RiskyMod.Survivors.Treebot
         {
             if (!enabled) return;
 
-            GameObject fruitPack = Resources.Load<GameObject>("Prefabs/NetworkedObjects/TreebotFruitPack");
+            GameObject fruitPack = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/TreebotFruitPack");
 
             GravitatePickup gp = fruitPack.GetComponentInChildren<GravitatePickup>();
 

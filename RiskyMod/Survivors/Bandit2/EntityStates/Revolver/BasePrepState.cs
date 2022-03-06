@@ -35,7 +35,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
         protected abstract EntityState GetNextState();
 
 		public static string enterSoundString = "Play_bandit2_R_load";
-		public static GameObject _crosshairOverridePrefab = Resources.Load<GameObject>("prefabs/crosshair/Bandit2CrosshairPrepRevolver");
+		public static GameObject _crosshairOverridePrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/crosshair/Bandit2CrosshairPrepRevolver");
 
 
 		private Animator animator;

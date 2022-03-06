@@ -89,7 +89,7 @@ namespace RiskyMod.Items.Legendary
             //Remove bubble
             if (removeBubble)
             {
-                GameObject indicator = Resources.Load<GameObject>("Prefabs/NetworkedObjects/IcicleAura");
+                GameObject indicator = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/IcicleAura");
                 ParticleSystemRenderer[] pr = indicator.GetComponentsInChildren<ParticleSystemRenderer>();
                 foreach (ParticleSystemRenderer p in pr)
                 {

@@ -17,7 +17,7 @@ namespace EntityStates.RiskyMod.Bandit2
 		public static float blastAttackDamageCoefficient = 2f;
 		public static float blastAttackProcCoefficient = 1f;
 		public static float blastAttackForce = 60f;
-		public static GameObject smokeBombEffectPrefab = Resources.Load<GameObject>("prefabs/effects/muzzleflashes/Bandit2SmokeBomb");
+		public static GameObject smokeBombEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/Bandit2SmokeBomb");
 		public static string smokeBombMuzzleString = "MuzzleSmokebomb";
 		public static float shortHopVelocity = 17f;
 

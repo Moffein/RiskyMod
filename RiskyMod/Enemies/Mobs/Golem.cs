@@ -11,7 +11,7 @@ namespace RiskyMod.Enemies.Mobs
         public Golem()
         {
             if (!enabled) return;
-            //GameObject golemObject = Resources.Load<GameObject>("prefabs/characterbodies/golembody");
+            //GameObject golemObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/golembody");
             RemoveClapFalloff();
         }
 

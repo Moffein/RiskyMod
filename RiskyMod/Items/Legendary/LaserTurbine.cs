@@ -15,7 +15,7 @@ namespace RiskyMod.Items.Legendary
             if (!enabled) return;
             if (RiskyMod.disableProcChains)
             {
-                EntityStateConfiguration esc = Resources.Load<EntityStateConfiguration>("entitystateconfigurations/EntityStates.LaserTurbine.FireMainBeamState");
+                EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/EntityStates.LaserTurbine.FireMainBeamState");
 
                 for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)
                 {
@@ -25,7 +25,7 @@ namespace RiskyMod.Items.Legendary
                     }
                     else if (esc.serializedFieldsCollection.serializedFields[i].fieldName == "secondBombPrefab")
                     {
-                        GameObject secondBombPrefab = Resources.Load<GameObject>("prefabs/projectiles/LaserTurbineBomb").InstantiateClone("RiskyMod_LaserTurbineBomb", true);
+                        GameObject secondBombPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/LaserTurbineBomb").InstantiateClone("RiskyMod_LaserTurbineBomb", true);
                         ProjectileImpactExplosion pie = secondBombPrefab.GetComponent<ProjectileImpactExplosion>();
                         pie.blastProcCoefficient = 0.5f;
                         ProjectileAPI.Add(secondBombPrefab);

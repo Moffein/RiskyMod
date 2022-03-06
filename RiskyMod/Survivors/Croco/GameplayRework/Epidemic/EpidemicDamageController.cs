@@ -12,7 +12,7 @@ namespace RiskyMod.Survivors.Croco
         public static float baseLingerDuration = 1f;
         public static float damageCoefficient = 1f;
 
-        public static GameObject impactEffect = Resources.Load<GameObject>("prefabs/effects/impacteffects/crocodiseaseimpacteffect");
+        public static GameObject impactEffect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/crocodiseaseimpacteffect");
 
         public CharacterBody owner;
         public CharacterBody victim;

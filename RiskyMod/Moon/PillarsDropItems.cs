@@ -15,7 +15,7 @@ namespace RiskyMod.Moon
         public static float whiteChance = 50f;
         public static float greenChance = 40f;
         public static float redChance = 10f;
-        public static BossGroup teleBossGroup = Resources.Load<BossGroup>("prefabs/networkedobjects/teleporters/Teleporter1");
+        public static BossGroup teleBossGroup = LegacyResourcesAPI.Load<BossGroup>("prefabs/networkedobjects/teleporters/Teleporter1");
 
         public PillarsDropItems()
         {

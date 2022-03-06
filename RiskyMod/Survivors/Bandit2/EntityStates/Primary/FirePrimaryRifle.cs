@@ -6,9 +6,9 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
 {
     public class FirePrimaryRifle : FirePrimaryBase
     {
-        public static GameObject _muzzleFlashPrefab = Resources.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashBandit2");
-        public static GameObject _tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/TracerBandit2Rifle");
-        public static GameObject _hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/HitsparkBandit");
+        public static GameObject _muzzleFlashPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashBandit2");
+        public static GameObject _tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/TracerBandit2Rifle");
+        public static GameObject _hitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/HitsparkBandit");
 
         private void LoadStats()
         {
@@ -22,7 +22,7 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
             minSpread = 0f;
             maxSpread = 0f;
             spreadPitchScale = 0.5f;
-            spreadYawScale =1.3f;
+            spreadYawScale = 1.3f;
             spreadBloomValue = 0.6f;
             recoilAmplitudeY = 1f;
             recoilAmplitudeX = 0.5f;

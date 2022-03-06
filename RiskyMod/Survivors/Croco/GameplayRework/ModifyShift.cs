@@ -40,7 +40,7 @@ namespace RiskyMod.Survivors.Croco
         private void ModifyAcid()
         {
             //Note: Acid projectile's damage coefficient is 1f
-            AcidPuddleProjectile = Resources.Load<GameObject>("prefabs/projectiles/crocoleapacid").InstantiateClone("RiskyMod_CrocoLeapAcid", true);
+            AcidPuddleProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocoleapacid").InstantiateClone("RiskyMod_CrocoLeapAcid", true);
 
             //Ticks twice per second.
             ProjectileDotZone pdz = AcidPuddleProjectile.GetComponent<ProjectileDotZone>();
