@@ -23,6 +23,9 @@
     <Reference Include="0Harmony20">
       <HintPath>libs\BepInEx\0Harmony20.dll</HintPath>
     </Reference>
+    <Reference Include="AI_Blacklist">
+      <HintPath>libs\SoftDependencies\AI_Blacklist.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>libs\Assembly-CSharp.dll</HintPath>
     </Reference>
@@ -76,6 +79,9 @@
     </Reference>
     <Reference Include="MonoMod.Utils">
       <HintPath>libs\BepInEx\MonoMod.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Multitudes">
+      <HintPath>libs\SoftDependencies\Multitudes.dll</HintPath>
     </Reference>
     <Reference Include="R2API">
       <HintPath>libs\R2API\R2API.dll</HintPath>
@@ -319,6 +325,9 @@
     </Reference>
     <Reference Include="Wwise">
       <HintPath>libs\Wwise.dll</HintPath>
+    </Reference>
+    <Reference Include="ZetArtifacts">
+      <HintPath>libs\SoftDependencies\ZetArtifacts.dll</HintPath>
     </Reference>
     <Reference Include="Zio">
       <HintPath>libs\Zio.dll</HintPath>

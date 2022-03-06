@@ -14,9 +14,23 @@ namespace RiskyMod.Fixes
         public static bool MultitudesLoaded = false;
         public static bool ZetArtifactsLoaded = false;
 
+        //These 2 are a holdover from FixPlayercount; they never get set
+        public static bool UpdateOnStageStart = false;
+        public static int stageMaxPlayers = 0;
+
         public FixPlayercount()
         {
             if (!enabled) return;
+
+            if (UpdateOnStageStart)
+            {
+                On.RoR2.Stage.Start += (orig, self) =>
+                {
+                    stageMaxPlayers = 0;
+                    orig(self);
+                };
+            }
+
             //Based on https://github.com/wildbook/R2Mods/blob/master/Multitudes/Multitudes.cs
             var getParticipatingPlayerCount = new Hook(typeof(Run).GetMethodCached("get_participatingPlayerCount"),
                 typeof(FixPlayercount).GetMethodCached(nameof(GetParticipatingPlayerCountHook)));
@@ -44,6 +58,19 @@ namespace RiskyMod.Fixes
             {
                 players = ApplyZetMultitudesArtifact(players);
             }
+
+            if (UpdateOnStageStart)
+            {
+                if (players > FixPlayercount.stageMaxPlayers)
+                {
+                    FixPlayercount.stageMaxPlayers = players;
+                }
+                else
+                {
+                    players = FixPlayercount.stageMaxPlayers;
+                }
+            }
+
             return players;
         }
 

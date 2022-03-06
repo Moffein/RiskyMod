@@ -256,9 +256,9 @@ namespace RiskyMod
             RiskyMod.fileSystem = new SubFileSystem(physicalFileSystem, physicalFileSystem.ConvertPathFromInternal(Assets.assemblyDir), true);
             if (RiskyMod.fileSystem.DirectoryExists("/language/")) //Uh, it exists and we make sure to not shit up R2Api
             {
-                Language.collectLanguageRootFolders += delegate (List<DirectoryEntry> list)
+                Language.collectLanguageRootFolders += delegate (List<string> list)
                 {
-                    list.Add(RiskyMod.fileSystem.GetDirectoryEntry("/language/"));
+                    list.Add(RiskyMod.fileSystem.GetDirectoryEntry("/language/").ToString());   //doublecheck this, ToString was added in without testing
                 };
             }
         }
