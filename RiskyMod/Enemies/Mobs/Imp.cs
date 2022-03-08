@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using RoR2.CharacterAI;
+using RoR2;
 
 namespace RiskyMod.Enemies.Mobs
 {

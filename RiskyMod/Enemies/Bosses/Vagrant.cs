@@ -25,7 +25,7 @@ namespace RiskyMod.Enemies.Bosses
             ProjectileImpactExplosion pie = projectile.GetComponent<ProjectileImpactExplosion>();
             pie.blastRadius = 6f;
             pie.falloffModel = BlastAttack.FalloffModel.None;
-            ProjectileAPI.Add(projectile);
+            R2API.ContentAddition.AddProjectile(projectile);
             SneedUtils.SneedUtils.SetEntityStateField("entitystates.vagrantmonster.weapon.jellybarrage", "projectilePrefab", projectile);*/
 
             //SneedUtils.SneedUtils.SetEntityStateField("entitystates.vagrantmonster.weapon.jellybarrage", "damageCoefficient", "4"); //orig is 4

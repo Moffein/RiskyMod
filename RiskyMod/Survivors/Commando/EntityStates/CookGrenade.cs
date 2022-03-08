@@ -110,7 +110,7 @@ namespace EntityStates.RiskyMod.Commando
             new BlastAttack
             {
                 radius = radiusInternal,
-                attackerFiltering = AttackerFiltering.NeverHit,
+                attackerFiltering = AttackerFiltering.NeverHitSelf,
                 baseDamage = this.damageStat * damageCoefficient,
                 falloffModel = BlastAttack.FalloffModel.None,
                 procCoefficient = 1f,

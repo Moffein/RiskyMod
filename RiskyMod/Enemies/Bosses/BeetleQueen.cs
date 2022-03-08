@@ -140,7 +140,7 @@ namespace RiskyMod.Enemies.Bosses
             pdz.overlapProcCoefficient = 0.3f;
             pdz.resetFrequency = 5f;
             pdz.lifetime = 20f; //15f
-            ProjectileAPI.Add(acidProjectile);
+            R2API.ContentAddition.AddProjectile(acidProjectile);
 
             GameObject spitProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/beetlequeenspit").InstantiateClone("RiskyMod_BeetleQueenSpit",true);
             ProjectileImpactExplosion pie = spitProjectile.GetComponent<ProjectileImpactExplosion>();
@@ -148,7 +148,7 @@ namespace RiskyMod.Enemies.Bosses
             pie.blastRadius = 6f;
             pie.childrenDamageCoefficient = 0.1f;
             pie.childrenProjectilePrefab = acidProjectile;
-            ProjectileAPI.Add(spitProjectile);
+            R2API.ContentAddition.AddProjectile(spitProjectile);
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.FireSpit", "projectilePrefab", spitProjectile);
         }
 
@@ -169,7 +169,7 @@ namespace RiskyMod.Enemies.Bosses
             BeetleBuff.isDebuff = false;
             BeetleBuff.name = "RiskyMod_BeetleBuff";
             BeetleBuff.iconSprite = RoR2Content.Buffs.Warbanner.iconSprite;
-            BuffAPI.Add(new CustomBuff(BeetleBuff));
+            R2API.ContentAddition.AddBuffDef((BeetleBuff));
 
             RecalculateStatsAPI.GetStatCoefficients += HandleBeetleBuff;
 

@@ -9,9 +9,6 @@ namespace RiskyMod.Tweaks
     public class ShrineSpawnRate
     {
         public static bool enabled = true;
-        private static SpawnCard shrineBoss;
-        private static SpawnCard shrineCombat;
-        private static SpawnCard voidSeed;
         public ShrineSpawnRate()
         {
             if (!enabled) return;

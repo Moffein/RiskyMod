@@ -38,7 +38,7 @@ namespace RiskyMod.Items.Uncommon
             scytheBuff.isDebuff = false;
             scytheBuff.name = "RiskyMod_ScytheBuff";
             scytheBuff.iconSprite = LegacyResourcesAPI.Load<Sprite>("textures/bufficons/texBuffRegenBoostIcon");
-            BuffAPI.Add(new CustomBuff(scytheBuff));
+            R2API.ContentAddition.AddBuffDef((scytheBuff));
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
             RecalculateStatsAPI.GetStatCoefficients += HandleStats;

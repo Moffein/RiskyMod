@@ -24,7 +24,7 @@ namespace RiskyMod.Tweaks
             DisableOSP.isDebuff = false;    //Not a debuff so that it doesn't interact with debuff-related stuff like Death Mark and Blast Shower.
             DisableOSP.name = "RiskyMod_DisableOSPBuff";
             DisableOSP.iconSprite = LegacyResourcesAPI.Load<Sprite>("textures/bufficons/texBuffPulverizeIcon");
-            BuffAPI.Add(new CustomBuff(DisableOSP));
+            R2API.ContentAddition.AddBuffDef((DisableOSP));
 
             //Handled in MonoBehaviours.OSPManagerComponent and RecalculateStats
             On.RoR2.CharacterBody.RecalculateStats += HandleDisableOSPBuff;

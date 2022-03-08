@@ -35,7 +35,7 @@ namespace RiskyMod.Items.Uncommon
             berzerkBuff.isDebuff = false;
             berzerkBuff.name = "RiskyMod_BerzerkBuff";
             berzerkBuff.iconSprite = RoR2Content.Buffs.WarCryBuff.iconSprite;
-            BuffAPI.Add(new CustomBuff(berzerkBuff));
+            R2API.ContentAddition.AddBuffDef((berzerkBuff));
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
             RecalculateStatsAPI.GetStatCoefficients += HandleStats;

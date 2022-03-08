@@ -26,6 +26,9 @@
     <Reference Include="AI_Blacklist">
       <HintPath>libs\SoftDependencies\AI_Blacklist.dll</HintPath>
     </Reference>
+    <Reference Include="AncientScepter">
+      <HintPath>libs\SoftDependencies\AncientScepter.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>libs\Assembly-CSharp.dll</HintPath>
     </Reference>

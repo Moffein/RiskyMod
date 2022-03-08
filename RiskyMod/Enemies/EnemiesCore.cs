@@ -262,7 +262,6 @@ namespace RiskyMod.Enemies
             {
                 spawnCard = spawnCard,
                 selectionWeight = weight,
-                allowAmbushSpawn = true,
                 preventOverhead = false,
                 minimumStageCompletions = minStages,
                 spawnDistance = spawnDistance

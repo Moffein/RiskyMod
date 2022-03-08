@@ -16,7 +16,7 @@ namespace RiskyMod.Items.Uncommon
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Phasing);
 
             //Disable vanilla behavior
-            On.RoR2.CharacterBody.PhasingItemBehaviorServer.Start += (orig, self) =>
+            On.RoR2.Items.PhasingBodyBehavior.Start += (orig, self) =>
             {
                 UnityEngine.Object.Destroy(self);
                 return;

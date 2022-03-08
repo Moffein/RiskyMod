@@ -113,7 +113,7 @@ namespace RiskyMod.Items.Legendary
                 {
                     if (attackerBody != killerBody)
                     {
-                        CharacterBody.IcicleItemBehavior ib = attackerBody.GetComponent<CharacterBody.IcicleItemBehavior>();
+                        RoR2.Items.IcicleBodyBehavior ib = attackerBody.GetComponent<RoR2.Items.IcicleBodyBehavior>();
                         if (ib && ib.icicleAura)
                         {
                             ib.icicleAura.OnOwnerKillOther();

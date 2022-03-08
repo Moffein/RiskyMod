@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RoR2.UI;
+using UnityEngine;
 
 namespace EntityStates.RiskyMod.Bandit2.Revolver
 {
@@ -25,8 +26,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 			}
 			if (this.crosshairOverridePrefab)
 			{
-				this.originalCrosshairPrefab = base.characterBody.crosshairPrefab;
-				base.characterBody.crosshairPrefab = this.crosshairOverridePrefab;
+				this.crosshairOverrideRequest = CrosshairUtils.RequestOverrideForBody(base.characterBody, this.crosshairOverridePrefab, CrosshairUtils.OverridePriority.Skill);
 			}
 			base.characterBody.SetAimTimer(3f);
 		}
@@ -38,9 +38,9 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 				this.animator.SetLayerWeight(this.bodySideWeaponLayerIndex, 0f);
 			}
 			base.PlayAnimation("Gesture, Additive", this.exitAnimationStateName);
-			if (this.crosshairOverridePrefab)
-			{
-				base.characterBody.crosshairPrefab = this.originalCrosshairPrefab;
+			if (this.crosshairOverrideRequest != null)
+            {
+				this.crosshairOverrideRequest.Dispose();
 			}
 			Transform transform = base.FindModelChild("SpinningPistolFX");
 			if (transform)
@@ -64,6 +64,6 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 		protected float duration;
 		private Animator animator;
 		private int bodySideWeaponLayerIndex;
-		private GameObject originalCrosshairPrefab;
+		private CrosshairUtils.OverrideRequest crosshairOverrideRequest;
 	}
 }

@@ -24,9 +24,13 @@ namespace RiskyMod.Items.Uncommon
 
 			float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 
-			IL.RoR2.GlobalEventManager.ProcMissile += (il) =>
+			IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
 			{
 				ILCursor c = new ILCursor(il);
+				c.GotoNext(
+					 x => x.MatchLdsfld(typeof(RoR2Content.Items), "Missile")
+					);
+
 				c.GotoNext(
 					 x => x.MatchLdcR4(3f)
 					);
@@ -44,8 +48,8 @@ namespace RiskyMod.Items.Uncommon
 				if (RiskyMod.disableProcChains)
 				{
 					c.GotoNext(
-						 x => x.MatchLdfld<GlobalEventManager>("missilePrefab")
-						);
+					 x => x.MatchLdsfld(typeof(GlobalEventManager.CommonAssets), "missilePrefab")
+					);
 					c.Index++;
 					c.EmitDelegate<Func<GameObject, GameObject>>((projectilePrefab) =>
 					{
@@ -59,7 +63,7 @@ namespace RiskyMod.Items.Uncommon
 				missilePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MissileProjectile").InstantiateClone("RiskyMod_ATGProjectile", true);
 				ProjectileController pc = missilePrefab.GetComponent<ProjectileController>();
 				pc.procCoefficient = 0f;
-				ProjectileAPI.Add(missilePrefab);
+				R2API.ContentAddition.AddProjectile(missilePrefab);
 			}
 			else
             {

@@ -39,7 +39,7 @@ namespace RiskyMod.Items.Uncommon
             InfusionBuff.isDebuff = false;
             InfusionBuff.name = "RiskyMod_InfusionBuff";
             InfusionBuff.iconSprite = BuffIcons.Infusion;
-            BuffAPI.Add(new CustomBuff(InfusionBuff));
+            R2API.ContentAddition.AddBuffDef((InfusionBuff));
 
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {

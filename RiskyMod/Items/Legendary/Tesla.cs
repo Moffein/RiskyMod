@@ -14,7 +14,7 @@ namespace RiskyMod.Items.Legendary
         {
             if (!enabled) return;
 
-            IL.RoR2.CharacterBody.UpdateTeslaCoil += (il) =>
+            IL.RoR2.Items.ShockNearbyBodyBehavior.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 

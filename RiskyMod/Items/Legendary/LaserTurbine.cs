@@ -28,7 +28,7 @@ namespace RiskyMod.Items.Legendary
                         GameObject secondBombPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/LaserTurbineBomb").InstantiateClone("RiskyMod_LaserTurbineBomb", true);
                         ProjectileImpactExplosion pie = secondBombPrefab.GetComponent<ProjectileImpactExplosion>();
                         pie.blastProcCoefficient = 0.5f;
-                        ProjectileAPI.Add(secondBombPrefab);
+                        R2API.ContentAddition.AddProjectile(secondBombPrefab);
                         esc.serializedFieldsCollection.serializedFields[i].fieldValue.objectValue = secondBombPrefab;
                     }
                 }

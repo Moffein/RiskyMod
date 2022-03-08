@@ -29,7 +29,7 @@ namespace RiskyMod.Tweaks
             FreezeDebuff.isDebuff = true;
             FreezeDebuff.name = "RiskyMod_FreezeDebuff";
             FreezeDebuff.iconSprite = Assets.BuffIcons.Freeze;
-            BuffAPI.Add(new CustomBuff(FreezeDebuff));
+            R2API.ContentAddition.AddBuffDef((FreezeDebuff));
             RecalculateStatsAPI.GetStatCoefficients += ApplySlow;
 
             IL.RoR2.CharacterModel.UpdateOverlays += (il) =>

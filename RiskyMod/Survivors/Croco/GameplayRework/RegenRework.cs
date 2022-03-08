@@ -28,7 +28,7 @@ namespace RiskyMod.Survivors.Croco
             CrocoRegen2.isDebuff = false;
             CrocoRegen2.name = "RiskyMod_CrocoRegen";
             CrocoRegen2.iconSprite = RoR2Content.Buffs.CrocoRegen.iconSprite;
-            BuffAPI.Add(new CustomBuff(CrocoRegen2));
+            R2API.ContentAddition.AddBuffDef((CrocoRegen2));
 
             IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>
             {

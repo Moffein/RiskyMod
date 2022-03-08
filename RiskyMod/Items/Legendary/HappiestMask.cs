@@ -42,7 +42,7 @@ namespace RiskyMod.Items.Legendary
             GhostCooldown.isDebuff = true;
             GhostCooldown.name = "RiskyMod_GhostCooldownDebuff";
             GhostCooldown.iconSprite = RoR2Content.Buffs.BanditSkull.iconSprite;
-            BuffAPI.Add(new CustomBuff(GhostCooldown));
+            R2API.ContentAddition.AddBuffDef((GhostCooldown));
 
             GhostReady = ScriptableObject.CreateInstance<BuffDef>();
             GhostReady.buffColor = new Color(0.9f, 0.9f, 0.9f);
@@ -50,7 +50,7 @@ namespace RiskyMod.Items.Legendary
             GhostReady.isDebuff = false;
             GhostReady.name = "RiskyMod_GhostReadyBuff";
             GhostReady.iconSprite = RoR2Content.Buffs.BanditSkull.iconSprite;
-            BuffAPI.Add(new CustomBuff(GhostReady));
+            R2API.ContentAddition.AddBuffDef((GhostReady));
 
             OnCharacterDeath.OnCharacterDeathInventoryActions += TriggerMaskGhost;
             On.RoR2.CharacterBody.OnInventoryChanged += (orig, self) =>

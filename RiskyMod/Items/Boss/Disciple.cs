@@ -10,12 +10,12 @@ namespace RiskyMod.Items.Boss
             if (!enabled) return;
             if (!RiskyMod.disableProcChains) return;
 
-            On.RoR2.CharacterBody.SprintWispBehavior.Fire += (orig, self) =>
+            On.RoR2.Items.SprintWispBodyBehavior.Fire += (orig, self) =>
             {
 				DevilOrb devilOrb = new DevilOrb
 				{
 					origin = self.body.corePosition,
-					damageValue = self.body.damage * CharacterBody.SprintWispBehavior.damageCoefficient * (float)self.stack,
+					damageValue = self.body.damage * RoR2.Items.SprintWispBodyBehavior.damageCoefficient * (float)self.stack,
 					teamIndex = self.body.teamComponent.teamIndex,
 					attacker = self.gameObject,
 					damageColorIndex = DamageColorIndex.Item,
@@ -23,7 +23,7 @@ namespace RiskyMod.Items.Boss
 					effectType = DevilOrb.EffectType.Wisp,
 					procCoefficient = 0f
 				};
-				if (devilOrb.target = devilOrb.PickNextTarget(devilOrb.origin, CharacterBody.SprintWispBehavior.searchRadius))
+				if (devilOrb.target = devilOrb.PickNextTarget(devilOrb.origin, RoR2.Items.SprintWispBodyBehavior.searchRadius))
 				{
 					devilOrb.isCrit = Util.CheckRoll(self.body.crit, self.body.master);
 					OrbManager.instance.AddOrb(devilOrb);

@@ -72,12 +72,12 @@ namespace RiskyMod.Survivors.Bandit2
         private void ModifyPrimaries(SkillLocator sk)
         {
 
-            LoadoutAPI.AddSkill(typeof(EnterReload));
-            LoadoutAPI.AddSkill(typeof(Reload));
+            R2API.ContentAddition.AddEntityState<EnterReload>(out bool a);
+            R2API.ContentAddition.AddEntityState<Reload>(out bool b);
 
             if (burstChanges)
             {
-                LoadoutAPI.AddSkill(typeof(FirePrimaryShotgun));
+                R2API.ContentAddition.AddEntityState<FirePrimaryShotgun>(out bool x);
                 ReloadSkillDef shotgunDef = ReloadSkillDef.CreateInstance<ReloadSkillDef>();
                 shotgunDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryShotgun));
                 shotgunDef.activationStateMachineName = "Weapon";
@@ -103,13 +103,13 @@ namespace RiskyMod.Survivors.Bandit2
                 shotgunDef.graceDuration = 0.4f;
                 shotgunDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
                 shotgunDef.reloadInterruptPriority = InterruptPriority.Any;
-                LoadoutAPI.AddSkillDef(shotgunDef);
+                R2API.ContentAddition.AddSkillDef(shotgunDef);
                 sk.primary._skillFamily.variants[0].skillDef = shotgunDef;
             }
 
             if (blastChanges)
             {
-                LoadoutAPI.AddSkill(typeof(FirePrimaryRifle));
+                R2API.ContentAddition.AddEntityState<FirePrimaryRifle>(out bool x);
                 ReloadSkillDef rifleDef = ReloadSkillDef.CreateInstance<ReloadSkillDef>();
                 rifleDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryRifle));
                 rifleDef.activationStateMachineName = "Weapon";
@@ -135,7 +135,7 @@ namespace RiskyMod.Survivors.Bandit2
                 rifleDef.graceDuration = 0.4f;
                 rifleDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
                 rifleDef.reloadInterruptPriority = InterruptPriority.Any;
-                LoadoutAPI.AddSkillDef(rifleDef);
+                R2API.ContentAddition.AddSkillDef(rifleDef);
                 sk.primary._skillFamily.variants[1].skillDef = rifleDef;
             }
         }
@@ -206,8 +206,8 @@ namespace RiskyMod.Survivors.Bandit2
         {
             if (!utilityFix) return;
 
-            LoadoutAPI.AddSkill(typeof(ThrowSmokebomb));
-            LoadoutAPI.AddSkill(typeof(StealthMode));
+            R2API.ContentAddition.AddEntityState<ThrowSmokebomb>(out bool x);
+            R2API.ContentAddition.AddEntityState<StealthMode>(out bool y);
             SkillDef stealthDef = SkillDef.CreateInstance<SkillDef>();
             stealthDef.activationState = new SerializableEntityStateType(typeof(ThrowSmokebomb));
             stealthDef.activationStateMachineName = "Stealth";
@@ -230,7 +230,7 @@ namespace RiskyMod.Survivors.Bandit2
             stealthDef.skillNameToken = "BANDIT2_UTILITY_NAME";
             stealthDef.skillDescriptionToken = "BANDIT2_UTILITY_DESCRIPTION";
             stealthDef.stockToConsume = 1;
-            LoadoutAPI.AddSkillDef(stealthDef);
+            R2API.ContentAddition.AddSkillDef(stealthDef);
             sk.utility._skillFamily.variants[0].skillDef = stealthDef;
         }
 
@@ -243,12 +243,12 @@ namespace RiskyMod.Survivors.Bandit2
             SpecialDebuff = BuildSpecialDebuff();
             new SpecialDamageTweaks();
 
-            LoadoutAPI.AddSkill(typeof(BaseSidearmState));
-            LoadoutAPI.AddSkill(typeof(ExitSidearm));
+            R2API.ContentAddition.AddEntityState<BaseSidearmState>(out bool c);
+            R2API.ContentAddition.AddEntityState<ExitSidearm>(out bool d);
 
             SkillDef lightsOutDef = SkillDef.CreateInstance<SkillDef>();
-            LoadoutAPI.AddSkill(typeof(PrepLightsOut));
-            LoadoutAPI.AddSkill(typeof(FireLightsOut));
+            R2API.ContentAddition.AddEntityState<PrepLightsOut>(out bool e);
+            R2API.ContentAddition.AddEntityState<FireLightsOut>(out bool f);
             lightsOutDef.activationState = new SerializableEntityStateType(typeof(PrepLightsOut));
             lightsOutDef.activationStateMachineName = "Weapon";
             lightsOutDef.baseMaxStock = 1;
@@ -270,12 +270,12 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.skillNameToken = "BANDIT2_SPECIAL_NAME";
             lightsOutDef.skillDescriptionToken = "BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD";
             lightsOutDef.stockToConsume = 1;
-            LoadoutAPI.AddSkillDef(lightsOutDef);
+            R2API.ContentAddition.AddSkillDef(lightsOutDef);
             sk.special._skillFamily.variants[0].skillDef = lightsOutDef;
 
             SkillDef reuDef = SkillDef.CreateInstance<SkillDef>();
-            LoadoutAPI.AddSkill(typeof(PrepRackEmUp));
-            LoadoutAPI.AddSkill(typeof(FireRackEmUp));
+            R2API.ContentAddition.AddEntityState<PrepRackEmUp>(out bool g);
+            R2API.ContentAddition.AddEntityState<FireRackEmUp>(out bool h);
             reuDef.activationState = new SerializableEntityStateType(typeof(PrepRackEmUp));
             reuDef.activationStateMachineName = "Weapon";
             reuDef.baseMaxStock = 1;
@@ -297,7 +297,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME_RISKYMOD";
             reuDef.skillDescriptionToken = "BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
             reuDef.stockToConsume = 1;
-            LoadoutAPI.AddSkillDef(reuDef);
+            R2API.ContentAddition.AddSkillDef(reuDef);
             sk.special._skillFamily.variants[1].skillDef = reuDef;
 
             if (RiskyMod.ScepterPluginLoaded)
@@ -310,8 +310,8 @@ namespace RiskyMod.Survivors.Bandit2
         private void SetupScepter(SkillLocator sk)
         {
             SkillDef lightsOutDef = SkillDef.CreateInstance<SkillDef>();
-            LoadoutAPI.AddSkill(typeof(PrepLightsOutScepter));
-            LoadoutAPI.AddSkill(typeof(FireLightsOutScepter));
+            R2API.ContentAddition.AddEntityState<PrepLightsOutScepter>(out bool e);
+            R2API.ContentAddition.AddEntityState<FireLightsOutScepter>(out bool f);
             lightsOutDef.activationState = new SerializableEntityStateType(typeof(PrepLightsOutScepter));
             lightsOutDef.activationStateMachineName = "Weapon";
             lightsOutDef.baseMaxStock = 1;
@@ -333,12 +333,12 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.skillNameToken = "BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD";
             lightsOutDef.skillDescriptionToken = "BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD";
             lightsOutDef.stockToConsume = 1;
-            LoadoutAPI.AddSkillDef(lightsOutDef);
+            R2API.ContentAddition.AddSkillDef(lightsOutDef);
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(lightsOutDef, "Bandit2Body", SkillSlot.Special, 0);
 
             SkillDef reuDef = SkillDef.CreateInstance<SkillDef>();
-            LoadoutAPI.AddSkill(typeof(PrepRackEmUpScepter));
-            LoadoutAPI.AddSkill(typeof(FireRackEmUpScepter));
+            R2API.ContentAddition.AddEntityState<PrepRackEmUpScepter>(out bool g);
+            R2API.ContentAddition.AddEntityState<FireRackEmUpScepter>(out bool h);
             reuDef.activationState = new SerializableEntityStateType(typeof(PrepRackEmUpScepter));
             reuDef.activationStateMachineName = "Weapon";
             reuDef.baseMaxStock = 1;
@@ -360,7 +360,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.skillNameToken = "BANDIT2_SPECIAL_ALT_SCEPTER_NAME_RISKYMOD";
             reuDef.skillDescriptionToken = "BANDIT2_SPECIAL_ALT_SCEPTER_DESCRIPTION_RISKYMOD";
             reuDef.stockToConsume = 1;
-            LoadoutAPI.AddSkillDef(reuDef);
+            R2API.ContentAddition.AddSkillDef(reuDef);
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(reuDef, "Bandit2Body", SkillSlot.Special, 1);
         }
 
@@ -372,7 +372,7 @@ namespace RiskyMod.Survivors.Bandit2
             buff.isDebuff = false;
             buff.iconSprite = LegacyResourcesAPI.Load<Sprite>("textures/bufficons/texBuffBanditSkullIcon");
             buff.name = "RiskyModBanditRevolver";
-            BuffAPI.Add(new CustomBuff(buff));
+            R2API.ContentAddition.AddBuffDef((buff));
             return buff;
         }
 
@@ -389,7 +389,7 @@ namespace RiskyMod.Survivors.Bandit2
             gunslingerDef.skillNameToken = "BANDIT2_REVOLVER_NAME_RISKYMOD";
             gunslingerDef.icon = Assets.SkillIcons.Bandit2Gunslinger;
             Skills.Gunslinger = gunslingerDef;
-            LoadoutAPI.AddSkillDef(Skills.Gunslinger);
+            R2API.ContentAddition.AddSkillDef(Skills.Gunslinger);
 
             SkillDef desperado = ScriptableObject.CreateInstance<SkillDef>();
             desperado.activationState = new SerializableEntityStateType(typeof(BaseState));
@@ -399,7 +399,7 @@ namespace RiskyMod.Survivors.Bandit2
             desperado.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME";
             desperado.icon = Assets.SkillIcons.Bandit2Desperado;
             Skills.Desperado = desperado;
-            LoadoutAPI.AddSkillDef(Skills.Desperado);
+            R2API.ContentAddition.AddSkillDef(Skills.Desperado);
 
             SkillFamily skillFamily = ScriptableObject.CreateInstance<SkillFamily>();
             skillFamily.variants = new SkillFamily.Variant[2];
@@ -415,7 +415,7 @@ namespace RiskyMod.Survivors.Bandit2
                 unlockableDef = null,
                 viewableNode = new ViewablesCatalog.Node(Skills.Desperado.skillName, false, null)
             };
-            LoadoutAPI.AddSkillFamily(skillFamily);
+            R2API.ContentAddition.AddSkillFamily(skillFamily);
             passive._skillFamily = skillFamily;
         }
         private AnimationCurve BuildSlashVelocityCurve()

@@ -9,9 +9,9 @@ namespace RiskyMod.Survivors.Croco
         public BlightStack()
         {
             if (!enabled) return;
-            On.RoR2.DotController.AddDot += (orig, self, attackerObject, duration, dotIndex, damageMultiplier) =>
+            On.RoR2.DotController.AddDot += (orig, self, attackerObject, duration, dotIndex, damageMultiplier, maxStacksFromAttacker, totalDamage) =>
             {
-                orig(self, attackerObject, duration, dotIndex, damageMultiplier);
+                orig(self, attackerObject, duration, dotIndex, damageMultiplier, maxStacksFromAttacker, totalDamage);
                 if (dotIndex == DotController.DotIndex.Blight)
                 {
                     for (int i = 0; i < self.dotStackList.Count; i++)

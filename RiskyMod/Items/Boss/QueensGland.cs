@@ -16,7 +16,7 @@ namespace RiskyMod.Items.Boss
 				if (!enabled) return;
 				HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BeetleGland);
 
-				On.RoR2.CharacterBody.UpdateBeetleGuardAllies += (orig, self) =>
+				On.RoR2.Items.BeetleGlandBodyBehavior.FixedUpdate += (orig, self) =>
 				{
 					if (NetworkServer.active)
 					{
@@ -25,16 +25,16 @@ namespace RiskyMod.Items.Boss
 						{
 							return;
 						}
-						int glandCount = self.inventory ? self.inventory.GetItemCount(RoR2Content.Items.BeetleGland) : 0;
+						int glandCount = self.body.inventory ? self.body.inventory.GetItemCount(RoR2Content.Items.BeetleGland) : 0;
 						if (glandCount > 0)
 						{
-							int deployableCount = self.master.GetDeployableCount(DeployableSlot.BeetleGuardAlly);
+							int deployableCount = self.body.master.GetDeployableCount(DeployableSlot.BeetleGuardAlly);
 							if (deployableCount < 1)    //used to be < glandCount
 						{
 								self.guardResummonCooldown -= Time.fixedDeltaTime;
 								if (self.guardResummonCooldown <= 0f)
 								{
-									DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest((SpawnCard)LegacyResourcesAPI.Load("SpawnCards/CharacterSpawnCards/cscBeetleGuardAlly"), new DirectorPlacementRule
+									DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(LegacyResourcesAPI.Load<SpawnCard>("SpawnCards/CharacterSpawnCards/cscBeetleGuardAlly"), new DirectorPlacementRule
 									{
 										placementMode = DirectorPlacementRule.PlacementMode.Approximate,
 										minDistance = 3f,
@@ -56,7 +56,7 @@ namespace RiskyMod.Items.Boss
 										}
 
 										Deployable d = spawnResult.spawnedInstance.AddComponent<Deployable>();
-										self.master.AddDeployable(d, DeployableSlot.BeetleGuardAlly);
+										self.body.master.AddDeployable(d, DeployableSlot.BeetleGuardAlly);
 									}));
 
 									DirectorCore.instance.TrySpawnObject(directorSpawnRequest);

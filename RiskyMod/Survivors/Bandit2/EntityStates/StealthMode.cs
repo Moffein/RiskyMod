@@ -96,7 +96,7 @@ namespace EntityStates.RiskyMod.Bandit2
 				blastAttack.damageType = DamageType.Stun1s;
 				blastAttack.baseForce = StealthMode.blastAttackForce;
 				blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-				blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
+				blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
 				blastAttack.Fire();
 			}

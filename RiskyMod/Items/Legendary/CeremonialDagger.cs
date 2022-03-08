@@ -30,10 +30,10 @@ namespace RiskyMod.Items.Legendary
                 });
             };
 
-            daggerPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/DaggerProjectile").InstantiateClone("RiskyMod_CeremonialDaggerProjectile", true);
+            daggerPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/DaggerProjectile").InstantiateClone("RiskyMod_CeremonialDaggerProjectile", true);
             ProjectileController pc = daggerPrefab.GetComponent<ProjectileController>();
             pc.procCoefficient = RiskyMod.disableProcChains ? 0f : 1f;
-            ProjectileAPI.Add(daggerPrefab);
+            R2API.ContentAddition.AddProjectile(daggerPrefab);
         }
     }
 }

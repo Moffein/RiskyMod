@@ -106,7 +106,7 @@ namespace RiskyMod.Survivors.Mage
                 if (sk.special.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.Flamethrower))
                 {
                     sk.special.skillFamily.variants[i].skillDef.canceledFromSprinting = flamethrowerSprintCancel;
-                    LoadoutAPI.AddSkill(typeof(EntityStates.RiskyMod.Mage.Flamethrower));
+                    R2API.ContentAddition.AddEntityState<EntityStates.RiskyMod.Mage.Flamethrower>(out bool x);
                     if (flamethrowerAttackSpeed)
                     {
                         EntityStates.RiskyMod.Mage.Flamethrower.flamethrowerEffectPrefab
@@ -168,7 +168,7 @@ namespace RiskyMod.Survivors.Mage
             SkillDef orig = sk.special.skillFamily.variants[slot].skillDef;
             ScepterHandler.InitFlamethrowerScepter();
 
-            LoadoutAPI.AddSkill(typeof(EntityStates.RiskyMod.Mage.FlamethrowerScepter));
+            R2API.ContentAddition.AddEntityState<EntityStates.RiskyMod.Mage.FlamethrowerScepter>(out bool x);
             SkillDef skillDef = SkillDef.CreateInstance<SkillDef>();
             skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Mage.FlamethrowerScepter));
             skillDef.activationStateMachineName = orig.activationStateMachineName;
@@ -191,7 +191,7 @@ namespace RiskyMod.Survivors.Mage
             skillDef.skillNameToken = "MAGE_SPECIAL_FIRE_SCEPTER_NAME_RISKYMOD";
             skillDef.skillDescriptionToken = "MAGE_SPECIAL_FIRE_SCEPTER_DESCRIPTION_RISKYMOD";
             skillDef.stockToConsume = 1;
-            LoadoutAPI.AddSkillDef(skillDef);
+            R2API.ContentAddition.AddSkillDef(skillDef);
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(skillDef, "MageBody", SkillSlot.Special, slot);
         }
     }

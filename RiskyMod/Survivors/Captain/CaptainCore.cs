@@ -35,8 +35,9 @@ namespace RiskyMod.Survivors.Captain
         private void ModifyPrimaries(SkillLocator sk)
         {
             if (!enablePrimarySkillChanges) return;
-            LoadoutAPI.AddSkill(typeof(ChargeShotgun));
-            LoadoutAPI.AddSkill(typeof(FireShotgun));
+
+            R2API.ContentAddition.AddEntityState<ChargeShotgun>(out bool x);
+            R2API.ContentAddition.AddEntityState<FireShotgun>(out bool y);
 
             SkillDef shotgunDef = SkillDef.CreateInstance<SkillDef>();
             shotgunDef.activationState = new SerializableEntityStateType(typeof(ChargeShotgun));
@@ -60,7 +61,7 @@ namespace RiskyMod.Survivors.Captain
             shotgunDef.skillNameToken = "CAPTAIN_PRIMARY_NAME";
             shotgunDef.skillDescriptionToken = "CAPTAIN_PRIMARY_DESC_RISKYMOD";
             shotgunDef.stockToConsume = 1;
-            LoadoutAPI.AddSkillDef(shotgunDef);
+            R2API.ContentAddition.AddSkillDef(shotgunDef);
             Skills.Shotgun = shotgunDef;
             sk.primary._skillFamily.variants[0].skillDef = Skills.Shotgun;
         }

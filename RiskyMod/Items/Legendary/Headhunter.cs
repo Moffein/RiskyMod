@@ -43,7 +43,7 @@ namespace RiskyMod.Items.Legendary
                 Perfected2.isDebuff = false;
                 Perfected2.name = "RiskyMod_Perfected2";
                 Perfected2.iconSprite = RoR2Content.Buffs.AffixLunar.iconSprite;
-                BuffAPI.Add(new CustomBuff(Perfected2));
+                R2API.ContentAddition.AddBuffDef((Perfected2));
 
                 IL.RoR2.HealthComponent.TakeDamage += (il) =>
                 {

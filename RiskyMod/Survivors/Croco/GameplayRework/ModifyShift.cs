@@ -47,7 +47,7 @@ namespace RiskyMod.Survivors.Croco
             //pdz.damageCoefficient = 0.45f;    //default is 0.25, ticks twice per second
             pdz.overlapProcCoefficient = 0.5f;  //default is 0.1
 
-            ProjectileAPI.Add(AcidPuddleProjectile);
+            R2API.ContentAddition.AddProjectile(AcidPuddleProjectile);
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.BaseLeap", "projectilePrefab", AcidPuddleProjectile);
         }
 

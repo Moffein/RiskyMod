@@ -43,30 +43,6 @@ namespace RiskyMod.SharedHooks
 						if (attackerInventory)
                         {
 							OnCharacterDeathInventoryActions.Invoke(self, damageReport, attackerBody, attackerInventory, victimBody);
-							if (Incubator.enabled)
-                            {
-								int incubatorOnKillCount = attackerMaster.inventory.GetItemCount(RoR2Content.Items.Incubator);
-								if (incubatorOnKillCount > 0 && attackerMaster.GetDeployableCount(DeployableSlot.ParentPodAlly) + attackerMaster.GetDeployableCount(DeployableSlot.ParentAlly) < incubatorOnKillCount && Util.CheckRoll(7f + 1f * (float)incubatorOnKillCount, attackerMaster))
-								{
-									DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest((SpawnCard)LegacyResourcesAPI.Load("SpawnCards/CharacterSpawnCards/cscParentPod"), new DirectorPlacementRule
-									{
-										placementMode = DirectorPlacementRule.PlacementMode.Approximate,
-										minDistance = 3f,
-										maxDistance = 20f,
-										spawnOnTarget = victimBody.gameObject.transform
-									}, RoR2Application.rng);
-									directorSpawnRequest.summonerBodyObject = attackerBody.gameObject;
-									directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult spawnResult)
-									{
-										Inventory inventory = spawnResult.spawnedInstance.GetComponent<CharacterMaster>().inventory;
-										inventory.GiveItem(RoR2Content.Items.BoostDamage, 30);
-										inventory.GiveItem(RoR2Content.Items.BoostHp, 10 * incubatorOnKillCount);
-										inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
-									}));
-									directorSpawnRequest.ignoreTeamMemberLimit = true;
-									DirectorCore.instance.TrySpawnObject(directorSpawnRequest);
-								}
-							}
 						}
 						if (AssistManager.initialized && RiskyMod.assistManager)
 						{

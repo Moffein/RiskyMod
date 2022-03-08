@@ -29,11 +29,11 @@ namespace RiskyMod.Survivors.Croco
 
             diseaseProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseProjectile", true);
             diseaseProjectile = ModifyDiseaseProjectile(diseaseProjectile, Epidemic);
-            ProjectileAPI.Add(diseaseProjectile);
+            R2API.ContentAddition.AddProjectile(diseaseProjectile);
 
             diseaseScepterProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseScepterProjectile", true);
             diseaseScepterProjectile = ModifyDiseaseProjectile(diseaseScepterProjectile, EpidemicScepter);
-            ProjectileAPI.Add(diseaseScepterProjectile);
+            R2API.ContentAddition.AddProjectile(diseaseScepterProjectile);
             EntityStates.RiskyMod.Croco.FireDiseaseProjectileScepter.projectilePrefab = diseaseScepterProjectile;
 
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireDiseaseProjectile", "projectilePrefab", diseaseProjectile);
@@ -101,7 +101,7 @@ namespace RiskyMod.Survivors.Croco
             EpidemicDebuff.isDebuff = true;
             EpidemicDebuff.name = "RiskyMod_EpidemicDebuff";
             EpidemicDebuff.iconSprite = RoR2Content.Buffs.Entangle.iconSprite;
-            BuffAPI.Add(new CustomBuff(EpidemicDebuff));
+            R2API.ContentAddition.AddBuffDef((EpidemicDebuff));
 
             RecalculateStatsAPI.GetStatCoefficients += (CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args) =>
             {

@@ -103,7 +103,6 @@ namespace RiskyMod.Items
             new Knurl();
             new Disciple();
             new GenesisLoop();
-            new Incubator();
             new Planula();
         }
 

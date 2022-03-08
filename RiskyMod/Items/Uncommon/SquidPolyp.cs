@@ -41,7 +41,7 @@ namespace RiskyMod.Items.Uncommon
             procEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/claygooorbimpact").InstantiateClone("RiskyMod_SquidPolypProc", false);
             EffectComponent ec = procEffectPrefab.GetComponent<EffectComponent>();
             ec.soundName = "Play_treeBot_m2_launch";
-            EffectAPI.AddEffect(procEffectPrefab);
+            R2API.ContentAddition.AddEffect(procEffectPrefab);
 
             TakeDamage.HandleOnPercentHpLostActions += OnHpLost;
             TakeDamage.OnDamageTakenAttackerActions += DistractOnHit;

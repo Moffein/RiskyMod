@@ -29,7 +29,7 @@ namespace RiskyMod.Survivors.Mage
                     DamageAPI.ModdedDamageTypeHolderComponent mdc = FireBolt.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
                     mdc.Add(SharedDamageTypes.IgniteLevelScaled);
                 }
-                ProjectileAPI.Add(FireBolt);
+                R2API.ContentAddition.AddProjectile(FireBolt);
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireFireBolt", "projectilePrefab", FireBolt);
             }
 
@@ -58,7 +58,7 @@ namespace RiskyMod.Survivors.Mage
                     pbc.bounces = 0;
                     pbc.lightningType = RoR2.Orbs.LightningOrb.LightningType.Ukulele;
                 }
-                ProjectileAPI.Add(LightningBolt);
+                R2API.ContentAddition.AddProjectile(LightningBolt);
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireLightningBolt", "projectilePrefab", LightningBolt);
             }
         }

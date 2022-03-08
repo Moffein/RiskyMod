@@ -104,7 +104,7 @@ namespace EntityStates.RiskyMod.Loader
 				procCoefficient = GroundSlamScaled.blastProcCoefficient,
 				radius = GroundSlamScaled.blastRadius,
 				position = footPosition,
-				attackerFiltering = AttackerFiltering.NeverHit,
+				attackerFiltering = AttackerFiltering.NeverHitSelf,
 				impactEffect = EffectCatalog.FindEffectIndexFromPrefab(GroundSlamScaled.blastImpactEffectPrefab),
 				teamIndex = base.teamComponent.teamIndex
 			};
