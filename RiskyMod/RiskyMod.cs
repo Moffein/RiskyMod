@@ -196,7 +196,6 @@ namespace RiskyMod
             new FixMercExpose();
             new FixPlayercount();
             new FixVengeanceLeveling();
-            new FixDamageTypeOverwrite();
             new FixFocusCrystalSelfDamage();
             new PreventArtifactHeal();
             new TreebotFruitingNullref();

@@ -30,7 +30,7 @@ namespace RiskyMod.Items.Common
             };
             GetStatsCoefficient.HandleStatsInventoryActions += HandleStatsInventory;
 
-            SneedUtils.SneedUtils.RemoveItemTag(RoR2Content.Items.FlatHealth, ItemTag.OnKillEffect);
+            SneedUtils.SneedUtils.RemoveItemTag(itemDef, ItemTag.OnKillEffect);
         }
 
         private void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)

@@ -31,18 +31,6 @@ namespace RiskyMod.SharedHooks
 					attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
 					victimBody = victim ? victim.GetComponent<CharacterBody>() : null;
 
-					if (FixDamageTypeOverwrite.enabled)
-					{
-						if ((damageInfo.damageType & DamageType.IgniteOnHit) > DamageType.Generic)
-						{
-							DotController.InflictDot(victim, damageInfo.attacker, DotController.DotIndex.Burn, 4f * damageInfo.procCoefficient, 1f);
-						}
-						if ((damageInfo.damageType & DamageType.PercentIgniteOnHit) != DamageType.Generic || attackerBody.HasBuff(RoR2Content.Buffs.AffixRed))
-						{
-							DotController.InflictDot(victim, damageInfo.attacker, DotController.DotIndex.PercentBurn, 4f * damageInfo.procCoefficient, 1f);
-						}
-					}
-
 					if (attackerBody)
                     {
 						attackerInventory = attackerBody.inventory;

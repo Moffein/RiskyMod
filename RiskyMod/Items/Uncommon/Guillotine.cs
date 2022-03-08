@@ -12,6 +12,7 @@ namespace RiskyMod.Items.Uncommon
     {
         public static bool enabled = true;
 		public static bool reduceVFX = true;
+
 		public Guillotine()
 		{
 			if (!enabled) return;
