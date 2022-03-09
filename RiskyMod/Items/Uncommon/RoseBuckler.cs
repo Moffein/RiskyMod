@@ -40,7 +40,7 @@ namespace RiskyMod.Items.Uncommon
             int bucklerCount = sender.inventory.GetItemCount(RoR2Content.Items.SprintArmor);
             if (bucklerCount > 0)
             {
-                args.armorAdd += 10f * bucklerCount;
+                args.armorAdd += 10f * bucklerCount * (sender.isSprinting ? 2f : 1f);
             }
         }
     }

@@ -31,7 +31,16 @@ namespace RiskyMod.Items.Boss
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            GetStatsCoefficient.HandleStatsInventoryActions += AddBleedChance;
+            //TODO: Modify args instead once bleed chance gets added there
+            //GetStatsCoefficient.HandleStatsInventoryActions += AddBleedChance;
+            On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
+            {
+                orig(self);
+                if (self.inventory && self.inventory.GetItemCount(RoR2Content.Items.BleedOnHitAndExplode) > 0)
+                {
+                    self.bleedChance += 5f;
+                }
+            };
 
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
@@ -93,7 +102,7 @@ namespace RiskyMod.Items.Boss
         {
             if (inventory.GetItemCount(RoR2Content.Items.BleedOnHitAndExplode) > 0)
             {
-                sender.bleedChance += 5f;   //TODO: Modify args instead once bleed chance gets added there
+                sender.bleedChance += 5f;
             }
         }
     }

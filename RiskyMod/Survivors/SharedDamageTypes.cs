@@ -60,7 +60,21 @@ namespace RiskyMod.Survivors
         {
             if (damageInfo.HasModdedDamageType(AlwaysIgnite))
             {
-                DotController.InflictDot(self.gameObject, damageInfo.attacker, DotController.DotIndex.Burn, 4f, 1f);
+                float damageMultiplier = 0.5f;
+                InflictDotInfo inflictDotInfo = new InflictDotInfo
+                {
+                    attackerObject = damageInfo.attacker,
+                    victimObject = self.gameObject,
+                    totalDamage = new float?(damageInfo.damage),
+                    damageMultiplier = damageMultiplier,
+                    dotIndex = DotController.DotIndex.Burn,
+                    maxStacksFromAttacker = null
+                };
+                if (attackerBody.inventory)
+                {
+                    StrengthenBurnUtils.CheckDotForUpgrade(attackerBody.inventory, ref inflictDotInfo);
+                }
+                DotController.InflictDot(ref inflictDotInfo);
             }
         }
 

@@ -37,6 +37,7 @@ using RiskyMod.Enemies.Mobs;
 using RiskyMod.Survivors.Merc;
 using System.Runtime.CompilerServices;
 using RiskyMod.Content;
+using System.Reflection;
 
 namespace RiskyMod
 {
@@ -59,8 +60,8 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.BeetleQueenPlus", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.5.1")]
-    [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(ContentAddition))]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.0")]
+    [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(ContentAddition), nameof(LanguageAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -249,7 +250,7 @@ namespace RiskyMod
 
         private void FunnyLanguage()
         {
-            PhysicalFileSystem physicalFileSystem = new PhysicalFileSystem();
+            /*PhysicalFileSystem physicalFileSystem = new PhysicalFileSystem();
             RiskyMod.fileSystem = new SubFileSystem(physicalFileSystem, physicalFileSystem.ConvertPathFromInternal(Assets.assemblyDir), true);
             if (RiskyMod.fileSystem.DirectoryExists("/language/")) //Uh, it exists and we make sure to not shit up R2Api
             {
@@ -257,7 +258,17 @@ namespace RiskyMod
                 {
                     list.Add(RiskyMod.fileSystem.GetDirectoryEntry("/language/").ToString());   //doublecheck this, ToString was added in without testing
                 };
-            }
+            }*/
+            RegisterTokens(@"\en");
+        }
+
+        private void RegisterTokens(string languageString)
+        {
+            string pathToLanguage = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\language";
+            LanguageAPI.AddPath(System.IO.Path.Combine(pathToLanguage + languageString, "Survivors.txt"));
+            LanguageAPI.AddPath(System.IO.Path.Combine(pathToLanguage + languageString, "Equipment.txt"));
+            LanguageAPI.AddPath(System.IO.Path.Combine(pathToLanguage + languageString, "Items.txt"));
+            LanguageAPI.AddPath(System.IO.Path.Combine(pathToLanguage + languageString, "Keywords.txt"));
         }
 
 

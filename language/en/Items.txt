@@ -44,7 +44,7 @@
 	"ITEM_THORNS_DESC_RISKYMOD": "Getting hit causes you to explode in a burst of razors, dealing <style=cIsDamage>80%-420% <style=cStack>(+18%-90% per stack)</style> damage</style>. Hits up to <style=cIsDamage>3</style> <style=cStack>(+2 per stack)</style> targets in a <style=cIsDamage>20m-50m</style> radius. Damage and radius increases the more damage taken.",
 	
 	"ITEM_SPRINTARMOR_PICKUP_RISKYMOD": "Increase armor. Gain bonus armor while sprinting.",
-	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style>. <style=cIsUtility>Sprinting</style> increases TOTAL armor by <style=cIsHealing>+50%</style>.",
+	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style>. Gain an additional <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style> armor while <style=cIsUtility>sprinting</style>.",
 	
 	"ITEM_EXECUTELOWHEALTHELITE_PICKUP_RISKYMOD": "Deal bonus damage to enemies below 30% health.",
 	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Deal <style=cIsDamage>+25%</style> <style=cStack>(+25% per stack)</style> damage to enemies below <style=cIsDamage>30% health</style>.",
