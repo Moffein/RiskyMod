@@ -10,14 +10,17 @@ namespace RiskyMod.Items.Common
     public class Warbanner
     {
         public static bool enabled = true;
-        public static ItemDef itemDef = RoR2Content.Items.WardOnLevel;
         public static GameObject WarbannerObject;
 
         public Warbanner()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, itemDef);
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.WardOnLevel);
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.WardOnLevel);
+            };
 
             WarbannerObject = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/WarbannerWard");
 

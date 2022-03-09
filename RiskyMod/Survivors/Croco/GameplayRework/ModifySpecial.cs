@@ -100,7 +100,7 @@ namespace RiskyMod.Survivors.Croco
             EpidemicDebuff.canStack = true;
             EpidemicDebuff.isDebuff = true;
             EpidemicDebuff.name = "RiskyMod_EpidemicDebuff";
-            EpidemicDebuff.iconSprite = RoR2Content.Buffs.Entangle.iconSprite;
+            EpidemicDebuff.iconSprite = LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffEntangleIcon");
             R2API.ContentAddition.AddBuffDef((EpidemicDebuff));
 
             RecalculateStatsAPI.GetStatCoefficients += (CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args) =>

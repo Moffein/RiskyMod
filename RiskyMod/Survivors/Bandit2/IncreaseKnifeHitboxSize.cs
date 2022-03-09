@@ -9,7 +9,7 @@ namespace RiskyMod.Survivors.Bandit2
         public IncreaseKnifeHitboxSize()
         {
             if (!enabled) return;
-            CharacterBody cb = RoR2Content.Survivors.Bandit2.bodyPrefab.GetComponent<CharacterBody>();
+            CharacterBody cb = Bandit2Core.bodyPrefab.GetComponent<CharacterBody>();
             HitBoxGroup hbg = cb.GetComponentInChildren<HitBoxGroup>();
             if (hbg.groupName == "SlashBlade")
             {

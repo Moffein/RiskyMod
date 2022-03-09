@@ -11,7 +11,11 @@ namespace RiskyMod.Items.Legendary
         public MeatHook()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BounceNearby);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BounceNearby);
+            };
 
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
@@ -22,9 +26,6 @@ namespace RiskyMod.Items.Legendary
 
                 //Add damage scaling.
                 c.GotoNext(
-                    x => x.MatchLdcR4(1f),
-                    x => x.MatchStloc(37),
-                    x => x.MatchLdarg(1),
                     x => x.MatchLdfld<DamageInfo>("damage")
                     );
                 c.Index++;

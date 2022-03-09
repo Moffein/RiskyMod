@@ -14,7 +14,11 @@ namespace RiskyMod.Items.Common
         {
             if (!enabled) return;
             //HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, itemDef);
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
+            };
 
             //Remove Vanilla Effect
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>

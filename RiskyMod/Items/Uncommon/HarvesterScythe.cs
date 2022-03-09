@@ -16,10 +16,13 @@ namespace RiskyMod.Items.Uncommon
         public HarvesterScythe()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.HealOnCrit);
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.HealOnCrit);
-
-            SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.HealOnCrit, ItemTag.OnKillEffect);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.HealOnCrit);
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.HealOnCrit);
+                SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.HealOnCrit, ItemTag.OnKillEffect);
+            };
 
             //Remove Vanilla effect
             IL.RoR2.GlobalEventManager.OnCrit += (il) =>

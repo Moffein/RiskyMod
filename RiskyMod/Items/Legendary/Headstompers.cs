@@ -13,8 +13,12 @@ namespace RiskyMod.Items.Legendary
         public Headstompers()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.FallBoots);
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FallBoots);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.FallBoots);
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FallBoots);
+            };
 
             On.EntityStates.Headstompers.BaseHeadstompersState.OnEnter += (orig, self) =>
             {

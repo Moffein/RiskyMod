@@ -12,7 +12,11 @@ namespace RiskyMod.Items.Uncommon
         public Razorwire()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Thorns);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Thorns);
+            };
 
             //Remove vanilla effect
             On.RoR2.HealthComponent.OnInventoryChanged += (orig, self) =>

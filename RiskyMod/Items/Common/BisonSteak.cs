@@ -10,13 +10,17 @@ namespace RiskyMod.Items.Common
     public class BisonSteak
     {
         public static bool enabled = true;
-        public static ItemDef itemDef = RoR2Content.Items.FlatHealth;
 
         public BisonSteak()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, itemDef);
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.FlatHealth);
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FlatHealth);
+                SneedUtils.SneedUtils.RemoveItemTag(RoR2Content.Items.FlatHealth, ItemTag.OnKillEffect);
+            };
 
             //Remove Vanilla Effect
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
@@ -30,7 +34,6 @@ namespace RiskyMod.Items.Common
             };
             GetStatsCoefficient.HandleStatsInventoryActions += HandleStatsInventory;
 
-            SneedUtils.SneedUtils.RemoveItemTag(itemDef, ItemTag.OnKillEffect);
         }
 
         private void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)

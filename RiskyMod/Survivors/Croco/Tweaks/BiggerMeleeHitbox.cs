@@ -10,7 +10,7 @@ namespace RiskyMod.Survivors.Croco
         public BiggerMeleeHitbox()
         {
             if (!enabled) return;
-            CharacterBody cb = RoR2Content.Survivors.Croco.bodyPrefab.GetComponent<CharacterBody>();
+            CharacterBody cb = CrocoCore.bodyPrefab.GetComponent<CharacterBody>();
             HitBoxGroup hbg = cb.GetComponentInChildren<HitBoxGroup>();
             if (hbg.groupName == "Slash")
             {

@@ -23,13 +23,14 @@ namespace RiskyMod.Survivors.Loader
         public static bool pylonChanges = true;
         public static bool slamChanges = true;
 
+        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/LoaderBody");
         private CharacterBody loaderBody;
         public LoaderCore()
         {
             if (!enabled) return;
 
-            loaderBody = RoR2Content.Survivors.Loader.bodyPrefab.GetComponent<CharacterBody>();
-            SkillLocator sk = RoR2Content.Survivors.Loader.bodyPrefab.GetComponent<SkillLocator>();
+            loaderBody = bodyPrefab.GetComponent<CharacterBody>();
+            SkillLocator sk = bodyPrefab.GetComponent<SkillLocator>();
             SprintQoL(sk);
 
             new FixScepterUtilityBarrier();
@@ -53,6 +54,7 @@ namespace RiskyMod.Survivors.Loader
         {
             if (!modifyStats) return;
             cb.baseMaxHealth = 140f;
+            cb.baseArmor = 12f;
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
         }
 

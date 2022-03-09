@@ -15,8 +15,12 @@ namespace RiskyMod.Items.Uncommon
         public Berzerker()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.WarCryOnMultiKill);
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.WarCryOnMultiKill);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.WarCryOnMultiKill);
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.WarCryOnMultiKill);
+            };
 
             //Remove Vanilla Effect
             IL.RoR2.CharacterBody.AddMultiKill += (il) =>
@@ -34,7 +38,7 @@ namespace RiskyMod.Items.Uncommon
             berzerkBuff.canStack = true;
             berzerkBuff.isDebuff = false;
             berzerkBuff.name = "RiskyMod_BerzerkBuff";
-            berzerkBuff.iconSprite = RoR2Content.Buffs.WarCryBuff.iconSprite;
+            berzerkBuff.iconSprite = LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texWarcryBuffIcon");
             R2API.ContentAddition.AddBuffDef((berzerkBuff));
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;

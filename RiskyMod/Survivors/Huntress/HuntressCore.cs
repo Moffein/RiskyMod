@@ -29,12 +29,13 @@ namespace RiskyMod.Survivors.Huntress
 
         public static bool increaseAngle = true;
         public static BullseyeSearch.SortMode HuntressTargetingMode = BullseyeSearch.SortMode.Angle;
+        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/HuntressBody");
 
         public HuntressCore()
         {
             if (!enabled) return;
             TrackingChanges();
-            ModifySkills(RoR2Content.Survivors.Huntress.bodyPrefab.GetComponent<SkillLocator>());
+            ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
         }
 
         private void TrackingChanges()

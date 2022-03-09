@@ -10,7 +10,11 @@ namespace RiskyMod.Items.Equipment
         public VolcanicEgg()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipDescs, RoR2Content.Equipment.FireBallDash);
+            On.RoR2.EquipmentCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipDescs, RoR2Content.Equipment.FireBallDash);
+            };
 
             GameObject fireball = LegacyResourcesAPI.Load<GameObject>("prefabs/networkedobjects/FireballVehicle");
             FireballVehicle fv = fireball.GetComponent<FireballVehicle>();

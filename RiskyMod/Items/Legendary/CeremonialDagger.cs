@@ -4,6 +4,7 @@ using UnityEngine;
 using RoR2.Projectile;
 using R2API;
 using System;
+using RoR2;
 
 namespace RiskyMod.Items.Legendary
 {
@@ -20,8 +21,7 @@ namespace RiskyMod.Items.Legendary
             {
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(
-                     //x => x.MatchLdsfld(typeof(RoR2Content.Items), "Dagger")
-                     x => x.MatchLdfld<RoR2.GlobalEventManager>("daggerPrefab")
+                     x => x.MatchLdsfld(typeof(GlobalEventManager.CommonAssets), "daggerPrefab")
                     );
                 c.Index++;
                 c.EmitDelegate<Func<GameObject, GameObject>>((oldPrefab) =>
@@ -32,7 +32,7 @@ namespace RiskyMod.Items.Legendary
 
             daggerPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/DaggerProjectile").InstantiateClone("RiskyMod_CeremonialDaggerProjectile", true);
             ProjectileController pc = daggerPrefab.GetComponent<ProjectileController>();
-            pc.procCoefficient = RiskyMod.disableProcChains ? 0f : 1f;
+            pc.procCoefficient = 0f;
             R2API.ContentAddition.AddProjectile(daggerPrefab);
         }
     }

@@ -14,6 +14,7 @@ namespace RiskyMod.Survivors.Croco
     {
         public static bool enabled = true;
         public static bool gameplayRework = true;
+        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CrocoBody");
 
         public CrocoCore()
         {
@@ -27,8 +28,8 @@ namespace RiskyMod.Survivors.Croco
             if (gameplayRework)
             {
                 new RegenRework();
-                ModifyStats(RoR2Content.Survivors.Croco.bodyPrefab.GetComponent<CharacterBody>());
-                ModifySkills(RoR2Content.Survivors.Croco.bodyPrefab.GetComponent<SkillLocator>());
+                ModifyStats(bodyPrefab.GetComponent<CharacterBody>());
+                ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
             }
         }
 
@@ -49,7 +50,7 @@ namespace RiskyMod.Survivors.Croco
 
         private void ModifyPassives(SkillLocator sk)
         {
-            GenericSkill passives = RoR2Content.Survivors.Croco.bodyPrefab.GetComponent<GenericSkill>();    //Passive is at the top
+            GenericSkill passives = bodyPrefab.GetComponent<GenericSkill>();    //Passive is at the top
             passives.skillFamily.variants[0].skillDef.skillNameToken = "CROCO_PASSIVE_NAME_RISKYMOD";
             passives.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_PASSIVE_DESCRIPTION_RISKYMOD";
             passives.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_POISON_RISKYMOD", "KEYWORD_BLIGHT_RISKYMOD" };

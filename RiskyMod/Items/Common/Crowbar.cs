@@ -17,13 +17,16 @@ namespace RiskyMod.Items.Common
         public static CrowbarManager crowbarManager;
         public static float damageCoefficient = 0.45f;
 
-        public static ItemDef itemDef = RoR2Content.Items.Crowbar;
 
         public Crowbar()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, itemDef);
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Crowbar);
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Crowbar);
+            };
 
             CrowbarDamage = DamageAPI.ReserveDamageType();
             //Remove vanilla effect

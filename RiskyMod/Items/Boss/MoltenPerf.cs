@@ -18,7 +18,12 @@ namespace RiskyMod.Items.Boss
         public MoltenPerf()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FireballsOnHit);
+
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FireballsOnHit);
+            };
 
             float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 

@@ -13,12 +13,14 @@ namespace RiskyMod.Items.Common
         public static bool enabled = true;
         public static GameObject stickybombPrefab;
 
-        public static ItemDef itemDef = RoR2Content.Items.StickyBomb;
-
         public StickyBomb()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.StickyBomb);
+            };
 
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {

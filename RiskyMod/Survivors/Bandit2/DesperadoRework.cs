@@ -13,7 +13,7 @@ namespace RiskyMod.Survivors.Bandit2
         public DesperadoRework()
         {
             if (!enabled) return;
-            RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<DesperadoTracker>();
+            Bandit2Core.bodyPrefab.AddComponent<DesperadoTracker>();
 
             IL.EntityStates.Bandit2.Weapon.FireSidearmSkullRevolver.ModifyBullet += (il) =>
             {

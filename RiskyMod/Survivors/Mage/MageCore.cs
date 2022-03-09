@@ -23,10 +23,12 @@ namespace RiskyMod.Survivors.Mage
         public static bool ionSurgeShock = true;
         public static bool ionSurgeMovementScaling = false;
 
+        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/MageBody");
+
         public MageCore()
         {
             if (!enabled) return;
-            ModifySkills(RoR2Content.Survivors.Mage.bodyPrefab.GetComponent<SkillLocator>());
+            ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
         }
         private void ModifySkills(SkillLocator sk)
         {

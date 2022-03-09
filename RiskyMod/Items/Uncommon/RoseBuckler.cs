@@ -12,8 +12,14 @@ namespace RiskyMod.Items.Uncommon
         public RoseBuckler()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.SprintArmor);
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.SprintArmor);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.SprintArmor);
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.SprintArmor);
+
+                SneedUtils.SneedUtils.RemoveItemTag(RoR2Content.Items.SprintArmor, ItemTag.SprintRelated);
+            };
 
             //Remove Vanilla Effect
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
@@ -27,8 +33,6 @@ namespace RiskyMod.Items.Uncommon
             };
 
             GetStatsCoefficient.HandleStatsInventoryActions += HandleStatsInventory;
-
-            SneedUtils.SneedUtils.RemoveItemTag(RoR2Content.Items.SprintArmor, ItemTag.SprintRelated);
         }
 
         private void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)

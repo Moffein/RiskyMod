@@ -38,13 +38,15 @@ namespace RiskyMod.Survivors.Bandit2
         public static BodyIndex Bandit2Index;
         private static AnimationCurve knifeVelocity;
 
+        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/Bandit2Body");
+
         public Bandit2Core()
         {
             if (!enabled) return;
             new BanditSpecialGracePeriod();
             new DesperadoRework();
 
-            ModifySkills(RoR2Content.Survivors.Bandit2.bodyPrefab.GetComponent<SkillLocator>());
+            ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
 
             On.RoR2.SurvivorCatalog.Init += (orig) =>
             {
@@ -378,8 +380,8 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void SpecialDamageType(SkillLocator sk)
         {
-            RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<SpecialDamageController>();
-            GenericSkill passive = RoR2Content.Survivors.Bandit2.bodyPrefab.AddComponent<GenericSkill>();
+            bodyPrefab.AddComponent<SpecialDamageController>();
+            GenericSkill passive = bodyPrefab.AddComponent<GenericSkill>();
 
             SkillDef gunslingerDef = ScriptableObject.CreateInstance<SkillDef>();
             gunslingerDef.activationState = new SerializableEntityStateType(typeof(BaseState));

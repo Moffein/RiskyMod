@@ -16,10 +16,11 @@ namespace RiskyMod.Survivors.Treebot
 
         public static bool swapUtilityEffects = true;
         public static bool fruitChanges = true;
+        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/TreebotBody");
         public TreebotCore()
         {
             if (!enabled) return;
-            ModifySkills(RoR2Content.Survivors.Treebot.bodyPrefab.GetComponent<SkillLocator>());
+            ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
         }
 
         private void ModifySkills(SkillLocator sk)

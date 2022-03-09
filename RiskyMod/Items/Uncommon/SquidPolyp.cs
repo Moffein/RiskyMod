@@ -24,8 +24,16 @@ namespace RiskyMod.Items.Uncommon
         public SquidPolyp()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Squid);
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Squid);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Squid);
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Squid);
+                if (RiskyMod.AIBlacklistUseVanillaBlacklist)
+                {
+                    SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.Squid, ItemTag.AIBlacklist);
+                }
+            };
 
             //Remove vanilla effect
             IL.RoR2.GlobalEventManager.OnInteractionBegin += (il) =>

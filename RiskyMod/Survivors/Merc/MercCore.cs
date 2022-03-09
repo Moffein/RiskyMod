@@ -6,10 +6,11 @@ namespace RiskyMod.Survivors.Merc
     public class MercCore
     {
         public static bool enabled = true;
+        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/MercBody");
         public MercCore()
         {
             if (!enabled) return;
-            ModifyStats(RoR2Content.Survivors.Merc.bodyPrefab.GetComponent<CharacterBody>());
+            ModifyStats(bodyPrefab.GetComponent<CharacterBody>());
         }
 
         private void ModifyStats(CharacterBody cb)

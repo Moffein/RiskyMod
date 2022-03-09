@@ -14,7 +14,11 @@ namespace RiskyMod.Items.Legendary
         public FrostRelic()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Icicle);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Icicle);
+            };
 
             On.RoR2.IcicleAuraController.Awake += (orig, self) =>
             {

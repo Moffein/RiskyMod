@@ -17,8 +17,12 @@ namespace RiskyMod.Items.Uncommon
         public Infusion()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Infusion);
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Infusion);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Infusion);
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Infusion);
+            };
 
             //Remove vanilla effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
@@ -44,19 +48,14 @@ namespace RiskyMod.Items.Uncommon
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
-                     x => x.MatchLdloc(50),
-                     x => x.MatchLdloc(40),
-                     x => x.MatchConvRUn(),
-                     x => x.MatchConvR4(),
-                     x => x.MatchAdd(),
-                     x => x.MatchStloc(50)
+                c.GotoNext(MoveType.After,
+                     x => x.MatchCallvirt<Inventory>("get_infusionBonus")
                     );
-                c.Index += 4;
                 c.Emit(OpCodes.Ldarg_0);//self
-                c.EmitDelegate<Func<float, CharacterBody, float>>((infusionBonus, self) =>
+                c.EmitDelegate<Func<int, CharacterBody, int>>((infusionBonus, self) =>
                 {
                     float newHP = 0;
+                    float infusionCount = (float)infusionBonus;
                     int hundredsFulfilled = 0;
                     while (infusionBonus > 0f)
                     {
@@ -64,31 +63,38 @@ namespace RiskyMod.Items.Uncommon
                         if (infusionBonus <= killRequirement)
                         {
                             newHP += 100f * infusionBonus / killRequirement;
-                            infusionBonus = 0f;
+                            infusionCount = 0f;
                         }
                         else
                         {
-                            infusionBonus -= killRequirement;
+                            infusionCount-= killRequirement;
                             newHP += 100f;
                             hundredsFulfilled++;
                         }
                     }
+                    int hpGained = Mathf.FloorToInt(newHP);
                     if (NetworkServer.active)
                     {
-                        while (self.HasBuff(InfusionBuff.buffIndex))
+                        int infusionBuffCount = self.GetBuffCount(InfusionBuff.buffIndex);
+                        if (hpGained != infusionBuffCount)
                         {
-                            self.RemoveBuff(InfusionBuff.buffIndex);
-                        }
-                        if (self.inventory.GetItemCount(RoR2Content.Items.Infusion) > 0)
-                        {
-                            int hpGained = Mathf.FloorToInt(newHP);
-                            for (int i = 0; i < hpGained; i++)
+                            if (hpGained > infusionBuffCount)
                             {
-                                self.AddBuff(InfusionBuff.buffIndex);
+                                for (int i = 0; i < hpGained - infusionBuffCount; i++)
+                                {
+                                    self.AddBuff(InfusionBuff.buffIndex);
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < infusionBuffCount - hpGained; i++)
+                                {
+                                    self.RemoveBuff(InfusionBuff.buffIndex);
+                                }
                             }
                         }
                     }
-                    return newHP;
+                    return hpGained;
                 });
             };
         }

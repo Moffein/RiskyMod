@@ -13,7 +13,12 @@ namespace RiskyMod.Items.Boss
         public ChargedPerf()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.LightningStrikeOnHit);
+
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.LightningStrikeOnHit);
+            };
 
             float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 

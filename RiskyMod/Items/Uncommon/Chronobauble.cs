@@ -9,7 +9,11 @@ namespace RiskyMod.Items.Uncommon
         public Chronobauble()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.SlowOnHit);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.SlowOnHit);
+            };
             RecalculateStatsAPI.GetStatCoefficients += ChronobaubleDebuff;
         }
 

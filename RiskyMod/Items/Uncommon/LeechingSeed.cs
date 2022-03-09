@@ -13,7 +13,11 @@ namespace RiskyMod.Items.Uncommon
         public LeechingSeed()
         {
 			if (!enabled) return;
-			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Seed);
+			On.RoR2.ItemCatalog.Init += (orig) =>
+			{
+				orig();
+				HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Seed);
+			};
 
 			//Remove vanilla effect.
 			IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>

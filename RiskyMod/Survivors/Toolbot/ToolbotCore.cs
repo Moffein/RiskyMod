@@ -24,12 +24,13 @@ namespace RiskyMod.Survivors.Toolbot
         public static bool enablePowerModeChanges = true;
 
         public static BuffDef PowerModeBuff;
+        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/ToolbotBody");
 
         public ToolbotCore()
         {
             if (!enabled) return;
 
-            ModifySkills(RoR2Content.Survivors.Toolbot.bodyPrefab.GetComponent<SkillLocator>());
+            ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
 
             //Vanilla Titan kill times
             //Nailgun takes 26.14s
@@ -85,7 +86,7 @@ namespace RiskyMod.Survivors.Toolbot
         {
             if (!enableRebarChanges) return;
             sk.primary.skillFamily.variants[1].skillDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD";
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireSpear", "damageCoefficient", "7.2");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireSpear", "damageCoefficient", "6.6");
         }
 
         private void ScrapChanges(SkillLocator sk)
@@ -127,7 +128,7 @@ namespace RiskyMod.Survivors.Toolbot
             sk.primary.skillFamily.variants[3].skillDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD";
             sk.primary.skillFamily.variants[3].skillDef.cancelSprintingOnActivation = false;
 
-            HitBoxGroup[] hitboxes = RoR2Content.Survivors.Toolbot.bodyPrefab.GetComponentsInChildren<HitBoxGroup>();
+            HitBoxGroup[] hitboxes = ToolbotCore.bodyPrefab.GetComponentsInChildren<HitBoxGroup>();
             foreach (HitBoxGroup h in hitboxes)
             {
                 if (h.groupName.Contains("Buzzsaw"))
@@ -165,13 +166,15 @@ namespace RiskyMod.Survivors.Toolbot
 
             if (enablePowerModeChanges)
             {
+                BuffDef powerDef = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/SmallArmorBoost");
+
                 sk.special.skillFamily.variants[1].skillDef.skillDescriptionToken = "TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
                 PowerModeBuff = ScriptableObject.CreateInstance<BuffDef>();
-                PowerModeBuff.buffColor = RoR2Content.Buffs.SmallArmorBoost.buffColor;
+                PowerModeBuff.buffColor = powerDef.buffColor;
                 PowerModeBuff.canStack = false;
                 PowerModeBuff.isDebuff = false;
                 PowerModeBuff.name = "RiskyMod_PowerModeBuff";
-                PowerModeBuff.iconSprite = RoR2Content.Buffs.SmallArmorBoost.iconSprite;
+                PowerModeBuff.iconSprite = powerDef.iconSprite;
                 R2API.ContentAddition.AddBuffDef((PowerModeBuff));
                 RecalculateStatsAPI.GetStatCoefficients += HandlePowerMode;
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.ToolbotDualWieldBase", "bonusBuff", PowerModeBuff);

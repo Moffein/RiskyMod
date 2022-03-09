@@ -10,7 +10,7 @@ namespace RiskyMod.Survivors.Mage
         {
             if (!enabled) return;
 
-            RoR2Content.Survivors.Mage.bodyPrefab.AddComponent<QuickdrawComponent>();
+            MageCore.bodyPrefab.AddComponent<QuickdrawComponent>();
         }
     }
     public class QuickdrawComponent : MonoBehaviour

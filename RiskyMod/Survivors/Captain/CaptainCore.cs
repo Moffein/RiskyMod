@@ -11,13 +11,14 @@ namespace RiskyMod.Survivors.Captain
     {
         public static bool enabled = true;
         public static bool enablePrimarySkillChanges = true;
+        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CaptainBody");
 
         public CaptainCore()
         {
             if (!enabled) return;
             new Microbots();
             new CaptainOrbitalHiddenRealms();
-            ModifySkills(RoR2Content.Survivors.Captain.bodyPrefab.GetComponent<SkillLocator>());
+            ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
 
             On.RoR2.EntityStateCatalog.InitializeStateFields += (orig, self) =>
             {

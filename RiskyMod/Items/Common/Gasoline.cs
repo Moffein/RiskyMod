@@ -7,13 +7,16 @@ namespace RiskyMod.Items.Common
     public class Gasoline
     {
         public static bool enabled = true;
-		public static ItemDef itemDef = RoR2Content.Items.IgniteOnKill;
         public Gasoline()
         {
             if (!enabled) return;
-			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
+			On.RoR2.ItemCatalog.Init += (orig) =>
+			{
+				orig();
+				HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.IgniteOnKill);
+			};
 
-            On.RoR2.GlobalEventManager.ProcIgniteOnKill += (orig, damageReport, igniteOnKillCount, victimBody, attackerTeamIndex) =>
+			On.RoR2.GlobalEventManager.ProcIgniteOnKill += (orig, damageReport, igniteOnKillCount, victimBody, attackerTeamIndex) =>
             {
 				float blastRadius = victimBody.radius + 16f;
 				float baseDamage = damageReport.attackerBody.damage * 1.5f;

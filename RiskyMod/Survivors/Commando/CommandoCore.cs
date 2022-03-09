@@ -29,12 +29,12 @@ namespace RiskyMod.Survivors.Commando
 
         public static DamageAPI.ModdedDamageType SuppressiveFireDamage;
         public static DamageAPI.ModdedDamageType SuppressiveFireScepterDamage;
-        public static BuffDef SlideBuff;
+        public static BuffDef SlideBuff; public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody");
 
         public CommandoCore()
         {
             if (!enabled) return;
-            ModifySkills(RoR2Content.Survivors.Commando.bodyPrefab.GetComponent<SkillLocator>());
+            ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
         }
 
         private void ModifySkills(SkillLocator sk)

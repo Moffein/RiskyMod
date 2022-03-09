@@ -14,7 +14,11 @@ namespace RiskyMod.Items.Boss
 			if (!enabled) return;
 			{
 				if (!enabled) return;
-				HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BeetleGland);
+				On.RoR2.ItemCatalog.Init += (orig) =>
+				{
+					orig();
+					HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BeetleGland);
+				};
 
 				On.RoR2.Items.BeetleGlandBodyBehavior.FixedUpdate += (orig, self) =>
 				{

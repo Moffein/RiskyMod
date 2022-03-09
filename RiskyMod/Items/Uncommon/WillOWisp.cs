@@ -12,7 +12,11 @@ namespace RiskyMod.Items.Uncommon
         public WillOWisp()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.ExplodeOnDeath);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.ExplodeOnDeath);
+            };
 
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {

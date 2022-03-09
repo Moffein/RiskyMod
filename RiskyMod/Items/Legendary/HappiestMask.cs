@@ -22,8 +22,12 @@ namespace RiskyMod.Items.Legendary
         public HappiestMask()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.GhostOnKill);
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.GhostOnKill);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.GhostOnKill);
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.GhostOnKill);
+            };
 
             //Remove vanilla effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
@@ -36,21 +40,22 @@ namespace RiskyMod.Items.Legendary
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
+            Sprite icon = LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffBanditSkullIcon");
             GhostCooldown = ScriptableObject.CreateInstance<BuffDef>();
             GhostCooldown.buffColor = new Color(88f/255f, 91f/255f, 98f/255f);
             GhostCooldown.canStack = true;
             GhostCooldown.isDebuff = true;
             GhostCooldown.name = "RiskyMod_GhostCooldownDebuff";
-            GhostCooldown.iconSprite = RoR2Content.Buffs.BanditSkull.iconSprite;
-            R2API.ContentAddition.AddBuffDef((GhostCooldown));
+            GhostCooldown.iconSprite = icon;
+            R2API.ContentAddition.AddBuffDef(GhostCooldown);
 
             GhostReady = ScriptableObject.CreateInstance<BuffDef>();
             GhostReady.buffColor = new Color(0.9f, 0.9f, 0.9f);
             GhostReady.canStack = false;
             GhostReady.isDebuff = false;
             GhostReady.name = "RiskyMod_GhostReadyBuff";
-            GhostReady.iconSprite = RoR2Content.Buffs.BanditSkull.iconSprite;
-            R2API.ContentAddition.AddBuffDef((GhostReady));
+            GhostReady.iconSprite = icon;
+            R2API.ContentAddition.AddBuffDef(GhostReady);
 
             OnCharacterDeath.OnCharacterDeathInventoryActions += TriggerMaskGhost;
             On.RoR2.CharacterBody.OnInventoryChanged += (orig, self) =>

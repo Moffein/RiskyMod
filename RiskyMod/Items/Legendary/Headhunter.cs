@@ -17,8 +17,12 @@ namespace RiskyMod.Items.Legendary
         public HeadHunter()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.HeadHunter);
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.HeadHunter);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.HeadHunter);
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.HeadHunter);
+            };
 
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
@@ -37,12 +41,14 @@ namespace RiskyMod.Items.Legendary
             if (perfectedTweak)
             {
                 //Use placeholder Perfected icon so it doesn't force you into shieldonly.
+                BuffDef affixLunarDef = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/AffixLunar");
+
                 Perfected2 = ScriptableObject.CreateInstance<BuffDef>();
-                Perfected2.buffColor = RoR2Content.Buffs.AffixLunar.buffColor;
+                Perfected2.buffColor = affixLunarDef.buffColor;
                 Perfected2.canStack = false;
                 Perfected2.isDebuff = false;
                 Perfected2.name = "RiskyMod_Perfected2";
-                Perfected2.iconSprite = RoR2Content.Buffs.AffixLunar.iconSprite;
+                Perfected2.iconSprite = affixLunarDef.iconSprite;
                 R2API.ContentAddition.AddBuffDef((Perfected2));
 
                 IL.RoR2.HealthComponent.TakeDamage += (il) =>

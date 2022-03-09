@@ -11,7 +11,11 @@ namespace RiskyMod.Items.Legendary
         public Behemoth()
         {
             if (!enabled) return;
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Behemoth);
+            On.RoR2.ItemCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Behemoth);
+            };
             IL.RoR2.GlobalEventManager.OnHitAll += (il) =>
             {
                 ILCursor c = new ILCursor(il);
