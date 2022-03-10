@@ -12,6 +12,8 @@ namespace RiskyMod.Enemies.DLC1
 
             GameObject pestObject = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/FlyingVerminBody");
             CharacterBody cb = pestObject.GetComponent<CharacterBody>();
+            /*cb.baseMaxHealth = 60f;
+            cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;*/
             cb.baseDamage = 7f;
             cb.levelDamage = cb.baseDamage * 0.2f;
         }

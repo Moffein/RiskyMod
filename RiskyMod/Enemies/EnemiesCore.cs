@@ -36,8 +36,6 @@ namespace RiskyMod.Enemies
             new Imp();
             new HermitCrab();
 
-            new BlindPest();
-
             new Golem();
             new Mushrum();
 
@@ -56,6 +54,8 @@ namespace RiskyMod.Enemies
 
             new AWU();
 
+            new VoidInfestor();
+            new BlindPest();
         }
 
         private void ModifySpawns()

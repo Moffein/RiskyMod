@@ -41,6 +41,7 @@ using System.Reflection;
 using RiskyMod.Items.DLC1.Legendary;
 using RiskyMod.Items.DLC1.Void;
 using RiskyMod.Enemies.DLC1;
+using RiskyMod.Survivors.DLC1.VoidFiend;
 
 namespace RiskyMod
 {
@@ -97,6 +98,8 @@ namespace RiskyMod
         private const string mageString = "Survivors: Artificer";
         private const string loaderString = "Survivors: Loader";
         private const string mercString = "Survivors: Mercenary";
+        private const string railgunnerString = "Survivors: Railgunner";
+        private const string voidFiendString = "Survivors: Void Fiend";
 
         private const string fireSelectString = "Survivors - Firemode Selection (Client-Side)";
 
@@ -145,7 +148,7 @@ namespace RiskyMod
             FixPlayercount.MultitudesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("dev.wildbook.multitudes");
             FixPlayercount.ZetArtifactsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetArtifacts");
 
-            NoVoidAllies.enabled = NoVoidAllies.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoVoidAllies");
+            VoidInfestor.noVoidAllies = VoidInfestor.noVoidAllies && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoVoidAllies");
 
             AIBlacklistLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist");
             FixVengeanceLeveling.enabled = FixVengeanceLeveling.enabled && !AIBlacklistLoaded;
@@ -200,7 +203,6 @@ namespace RiskyMod
             new FreezeChampionExecute();
             new LoopBossArmor();
             new PlayerControlledMonsters();
-            new NoVoidAllies();
             new RevertBurnDamage();
         }
 
@@ -326,7 +328,6 @@ namespace RiskyMod
             Shock.enabled = Config.Bind(tweakString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
             BarrierDecay.enabled = Config.Bind(tweakString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
             FreezeChampionExecute.enabled = Config.Bind(tweakString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
-            NoVoidAllies.enabled = Config.Bind(tweakString, "No Void Infestor Ally Possession", true, "Void Infestors can't possess allies.").Value;
             RevertBurnDamage.enabled = Config.Bind(tweakString, "Revert Blazing Damage", true, "Reverts Blazing burn duration to its pre-DLC1 Update behavior.").Value;
 
             ConfigCommonItems();
@@ -452,7 +453,6 @@ namespace RiskyMod
             Jellyfish.enabled = Config.Bind(monsterString, "Jellyfish", true, "Enable changes to this monster.").Value;
             Imp.enabled = Config.Bind(monsterString, "Imp", true, "Enable changes to this monster.").Value;
             HermitCrab.enabled = Config.Bind(monsterString, "Hermit Crab", true, "Enable changes to this monster.").Value;
-            BlindPest.enabled = Config.Bind(monsterString, "Blind Pest", true, "Enable changes to this monster.").Value;
 
             Golem.enabled = Config.Bind(monsterString, "Stone Golem", true, "Enable changes to this monster.").Value;
             Mushrum.enabled = Config.Bind(monsterString, "Mini Mushrum", true, "Enable changes to this monster.").Value;
@@ -471,6 +471,11 @@ namespace RiskyMod
             SCU.enabled = Config.Bind(monsterString, "Solus Control Unit", true, "Enable changes to this monster.").Value;
 
             AWU.enabled = Config.Bind(monsterString, "Alloy Worship Unit", true, "Enable changes to this monster.").Value;
+
+            BlindPest.enabled = Config.Bind(monsterString, "Blind Pest", true, "Enable changes to this monster.").Value;
+
+            VoidInfestor.enabled = Config.Bind(monsterString, "Void Infestor", true, "Enable changes to this monster.").Value;
+            VoidInfestor.noVoidAllies = Config.Bind(tweakString, "Void Infestor - No Ally Infestation", true, "Void Infestors can't possess allies.").Value;
         }
 
         private void ConfigFireSelect()
@@ -571,6 +576,9 @@ namespace RiskyMod
             Bandit2Core.knifeThrowChanges = Config.Bind(banditString, "Serrated Shiv Changes", true, "Enable changes to this skill.").Value;
             Bandit2Core.utilityFix = Config.Bind(banditString, "Smokebomb Fix", true, "Fixes various bugs with Smokebomb.").Value;
             Bandit2Core.specialRework = Config.Bind(banditString, "Special Rework", true, "Makes Resets/Desperado a selectable passive and adds a new Special skill.").Value;
+
+            VoidFiendCore.enabled = Config.Bind(voidFiendString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+            VoidFiendCore.noCorruptHealing = Config.Bind(voidFiendString, "Corruption - No Healing", true, "Makes healing not affect the Corruption meter.").Value;
         }
     }
 }

@@ -2,6 +2,7 @@
 using RiskyMod.Survivors.Captain;
 using RiskyMod.Survivors.Commando;
 using RiskyMod.Survivors.Croco;
+using RiskyMod.Survivors.DLC1.VoidFiend;
 using RiskyMod.Survivors.Engi;
 using RiskyMod.Survivors.Huntress;
 using RiskyMod.Survivors.Loader;
@@ -31,6 +32,7 @@ namespace RiskyMod.Survivors
             new LoaderCore();
             new MageCore();
             new MercCore();
+            new VoidFiendCore();
         }
     }
 }
