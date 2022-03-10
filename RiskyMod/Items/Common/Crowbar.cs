@@ -21,12 +21,8 @@ namespace RiskyMod.Items.Common
         public Crowbar()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Crowbar);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Crowbar);
-            };
+
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             CrowbarDamage = DamageAPI.ReserveDamageType();
             //Remove vanilla effect
@@ -105,8 +101,12 @@ namespace RiskyMod.Items.Common
 
             TakeDamage.ModifyInitialDamageInventoryActions += CrowbarDamageBoost;
         }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Crowbar);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Crowbar);
+        }
 
-        //This is used in multiple places, so it is a static method to make sure calculations are consistent.
         public static float GetCrowbarMult(int crowbarCount)
         {
             return 1f + damageCoefficient * crowbarCount;

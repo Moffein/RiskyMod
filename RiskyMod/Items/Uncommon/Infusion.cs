@@ -17,12 +17,7 @@ namespace RiskyMod.Items.Uncommon
         public Infusion()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Infusion);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Infusion);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove vanilla effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
@@ -97,6 +92,11 @@ namespace RiskyMod.Items.Uncommon
                     return hpGained;
                 });
             };
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Infusion);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Infusion);
         }
 
         private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)

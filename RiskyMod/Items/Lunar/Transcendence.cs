@@ -12,13 +12,7 @@ namespace RiskyMod.Items.Lunar
         public Transcendence()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.ShieldOnly);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.ShieldOnly);
-            };
-
+            ItemsCore.ModifyItemDefActions += ModifyItem;
             IL.RoR2.CharacterBody.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -39,6 +33,11 @@ namespace RiskyMod.Items.Lunar
                     return outOfDangerDelay;
                 });
             };
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.ShieldOnly);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.ShieldOnly);
         }
     }
 }

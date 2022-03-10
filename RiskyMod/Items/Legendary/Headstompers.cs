@@ -13,12 +13,7 @@ namespace RiskyMod.Items.Legendary
         public Headstompers()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.FallBoots);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FallBoots);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             On.EntityStates.Headstompers.BaseHeadstompersState.OnEnter += (orig, self) =>
             {
@@ -47,6 +42,11 @@ namespace RiskyMod.Items.Legendary
                     return blastAttack;
                 });
             };
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.FallBoots);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FallBoots);
         }
     }
 }

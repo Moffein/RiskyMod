@@ -38,6 +38,7 @@ using RiskyMod.Survivors.Merc;
 using System.Runtime.CompilerServices;
 using RiskyMod.Content;
 using System.Reflection;
+using RiskyMod.Items.Legendary.DLC1;
 
 namespace RiskyMod
 {
@@ -58,6 +59,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.AcridBlightStack", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.LunarWispFalloff", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.BeetleQueenPlus", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.NoVoidAllies", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.0")]
@@ -139,6 +141,8 @@ namespace RiskyMod
             FixPlayercount.MultitudesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("dev.wildbook.multitudes");
             FixPlayercount.ZetArtifactsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetArtifacts");
 
+            NoVoidAllies.enabled = NoVoidAllies.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoVoidAllies");
+
             AIBlacklistLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist");
             FixVengeanceLeveling.enabled = FixVengeanceLeveling.enabled && !AIBlacklistLoaded;
             if (AIBlacklistLoaded)
@@ -190,6 +194,7 @@ namespace RiskyMod
             new FreezeChampionExecute();
             new LoopBossArmor();
             new PlayerControlledMonsters();
+            new NoVoidAllies();
         }
 
         private void RunFixes()
@@ -315,6 +320,7 @@ namespace RiskyMod
             Shock.enabled = Config.Bind(tweakString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
             BarrierDecay.enabled = Config.Bind(tweakString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
             FreezeChampionExecute.enabled = Config.Bind(tweakString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
+            NoVoidAllies.enabled = Config.Bind(tweakString, "No Void Infestor Ally Possession", true, "Void Infestors can't possess allies.").Value;
 
             ConfigCommonItems();
             ConfigUncommonItems();
@@ -382,6 +388,7 @@ namespace RiskyMod
             HappiestMask.enabled = Config.Bind(legendaryString, "Happiest Mask", true, itemConfigDescString).Value;
             HappiestMask.scaleCount = Config.Bind(legendaryString, "Happiest Mask - Stacks Increase Max Ghosts", false, "Extra stacks allow for more ghosts to spawn. Will lag in MP.").Value;
             HappiestMask.noGhostLimit = Config.Bind(legendaryString, "Happiest Mask - Remove Ghost Limit", false, "Removes the ghost limit at all times. Definitely will lag.").Value;
+            LaserScope.enabled = Config.Bind(legendaryString, "Laser Scope", true, itemConfigDescString).Value;
         }
 
         private void ConfigBossItems()

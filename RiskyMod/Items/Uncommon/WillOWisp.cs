@@ -12,11 +12,7 @@ namespace RiskyMod.Items.Uncommon
         public WillOWisp()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.ExplodeOnDeath);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
@@ -58,6 +54,10 @@ namespace RiskyMod.Items.Uncommon
                     return BlastAttack.FalloffModel.None;
                 });*/
             };
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.ExplodeOnDeath);
         }
     }
 }

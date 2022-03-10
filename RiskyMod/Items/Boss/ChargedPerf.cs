@@ -14,11 +14,7 @@ namespace RiskyMod.Items.Boss
         {
             if (!enabled) return;
 
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.LightningStrikeOnHit);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 
@@ -52,6 +48,11 @@ namespace RiskyMod.Items.Boss
                     });
                 }
             };
+        }
+
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.LightningStrikeOnHit);
         }
     }
 }

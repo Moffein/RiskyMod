@@ -10,6 +10,7 @@ namespace RiskyMod.Items.Legendary
         public static bool enabled = true;
         public NovaOnHeal()
         {
+            ItemsCore.ModifyItemDefActions += ModifyItem;
             //Nerf Vengeance damage
             IL.RoR2.HealthComponent.ServerFixedUpdate += (il) =>
             {
@@ -33,12 +34,10 @@ namespace RiskyMod.Items.Legendary
                     return newDamage;
                 });
             };
-
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                if (RiskyMod.AIBlacklistUseVanillaBlacklist) SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.NovaOnHeal, ItemTag.AIBlacklist);
-            };
+        }
+        private static void ModifyItem()
+        {
+            if (RiskyMod.AIBlacklistUseVanillaBlacklist) SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.NovaOnHeal, ItemTag.AIBlacklist);
         }
     }
 }

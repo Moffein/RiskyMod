@@ -16,14 +16,7 @@ namespace RiskyMod.Items.Uncommon
 		public Guillotine()
 		{
 			if (!enabled) return;
-			On.RoR2.ItemCatalog.Init += (orig) =>
-			{
-				orig();
-				HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.ExecuteLowHealthElite);
-				HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.ExecuteLowHealthElite);
-
-				SneedUtils.SneedUtils.RemoveItemTag(RoR2Content.Items.ExecuteLowHealthElite, ItemTag.AIBlacklist);
-			};
+			ItemsCore.ModifyItemDefActions += ModifyItem;
 
 			//Remove Vanilla Effect
 			IL.RoR2.CharacterBody.OnInventoryChanged += (il) =>
@@ -38,6 +31,14 @@ namespace RiskyMod.Items.Uncommon
 
 			ModifyFinalDamage.ModifyFinalDamageActions += GuillotineBonus;
 		}
+
+		private static void ModifyItem()
+		{
+			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.ExecuteLowHealthElite);
+			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.ExecuteLowHealthElite);
+			SneedUtils.SneedUtils.RemoveItemTag(RoR2Content.Items.ExecuteLowHealthElite, ItemTag.AIBlacklist);
+		}
+
 		private static void GuillotineBonus(DamageMult damageMult, DamageInfo damageInfo,
 			HealthComponent victimHealth, CharacterBody victimBody,
 			CharacterBody attackerBody, Inventory attackerInventory)

@@ -2,6 +2,7 @@
 using RiskyMod.Items.Common;
 using RiskyMod.Items.Equipment;
 using RiskyMod.Items.Legendary;
+using RiskyMod.Items.Legendary.DLC1;
 using RiskyMod.Items.Lunar;
 using RiskyMod.Items.Uncommon;
 using RoR2;
@@ -91,6 +92,8 @@ namespace RiskyMod.Items
             new Soulbound();
             new Behemoth();
             new HappiestMask();
+
+            new LaserScope();
         }
 
         private void ModifyBoss()
@@ -125,25 +128,36 @@ namespace RiskyMod.Items
             new Backup();
             new SuperLeech();
         }
+
         private void ModifyItemTokens()
         {
-            foreach (ItemDef item in changedItemPickups)
+            On.RoR2.ItemCatalog.Init += (orig) =>
             {
-                item.pickupToken = item.pickupToken + "_RISKYMOD";
-            }
-            foreach (ItemDef item in changedItemDescs)
-            {
-                item.descriptionToken = item.descriptionToken + "_RISKYMOD";
-            }
-            foreach (EquipmentDef item in changedEquipPickups)
-            {
-                item.pickupToken = item.pickupToken + "_RISKYMOD";
-            }
-            foreach (EquipmentDef item in changedEquipDescs)
-            {
-                item.descriptionToken = item.descriptionToken + "_RISKYMOD";
-            }
+                orig();
+
+                if (ModifyItemDefActions != null) ModifyItemDefActions.Invoke();
+
+                foreach (ItemDef item in changedItemPickups)
+                {
+                    item.pickupToken += "_RISKYMOD";
+                }
+                foreach (ItemDef item in changedItemDescs)
+                {
+                    item.descriptionToken += "_RISKYMOD";
+                }
+                foreach (EquipmentDef item in changedEquipPickups)
+                {
+                    item.pickupToken += "_RISKYMOD";
+                }
+                foreach (EquipmentDef item in changedEquipDescs)
+                {
+                    item.descriptionToken += "_RISKYMOD";
+                }
+            };
         }
+
+        public delegate void ModifyItemDef();
+        public static ModifyItemDef ModifyItemDefActions;
 
         public static EquipmentDef LoadEquipmentDef(string equipmentname)
         {

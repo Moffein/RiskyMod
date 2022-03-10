@@ -12,12 +12,7 @@ namespace RiskyMod.Items.Uncommon
         public Stealthkit()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Phasing);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Phasing);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Disable vanilla behavior
             On.RoR2.Items.PhasingBodyBehavior.Start += (orig, self) =>
@@ -27,6 +22,11 @@ namespace RiskyMod.Items.Uncommon
             };
 
             TakeDamage.HandleOnPercentHpLostActions += OnHpLost;
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Phasing);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Phasing);
         }
 
         private void OnHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost)

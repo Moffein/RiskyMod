@@ -14,13 +14,8 @@ namespace RiskyMod.Items.Common
         public BisonSteak()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.FlatHealth);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FlatHealth);
-                SneedUtils.SneedUtils.RemoveItemTag(RoR2Content.Items.FlatHealth, ItemTag.OnKillEffect);
-            };
+
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove Vanilla Effect
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
@@ -36,7 +31,14 @@ namespace RiskyMod.Items.Common
 
         }
 
-        private void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.FlatHealth);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FlatHealth);
+            SneedUtils.SneedUtils.RemoveItemTag(RoR2Content.Items.FlatHealth, ItemTag.OnKillEffect);
+        }
+
+        private static void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
         {
             int steakCount = sender.inventory.GetItemCount(RoR2Content.Items.FlatHealth);
             if (steakCount > 0)

@@ -16,11 +16,7 @@ namespace RiskyMod.Items.Common
         public StickyBomb()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.StickyBomb);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
@@ -50,6 +46,10 @@ namespace RiskyMod.Items.Common
             stickybombPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/stickybomb"); //No longer clones the GameObject since changes are minimal.
             ProjectileImpactExplosion pie = stickybombPrefab.GetComponent<ProjectileImpactExplosion>();
             pie.lifetime = 1.2f;
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.StickyBomb);
         }
     }
 }

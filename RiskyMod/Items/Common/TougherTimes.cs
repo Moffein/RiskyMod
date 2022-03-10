@@ -10,12 +10,7 @@ namespace RiskyMod.Items.Common
         public TougherTimes()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Bear);
-                if (RiskyMod.AIBlacklistUseVanillaBlacklist) SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.Bear, ItemTag.AIBlacklist);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Change block chance
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
@@ -29,6 +24,11 @@ namespace RiskyMod.Items.Common
                     );
                 c.Next.Operand = 7.5f;
             };
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Bear);
+            if (RiskyMod.AIBlacklistUseVanillaBlacklist) SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.Bear, ItemTag.AIBlacklist);
         }
     }
 }

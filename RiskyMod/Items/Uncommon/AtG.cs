@@ -20,11 +20,7 @@ namespace RiskyMod.Items.Uncommon
         public AtG()
         {
             if (!enabled) return;
-			On.RoR2.ItemCatalog.Init += (orig) =>
-			{
-				orig();
-				HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Missile);
-			};
+			ItemsCore.ModifyItemDefActions += ModifyItem;
 
 			float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 
@@ -75,5 +71,9 @@ namespace RiskyMod.Items.Uncommon
 
 			}
 		}
-    }
+		private static void ModifyItem()
+		{
+			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Missile);
+		}
+	}
 }

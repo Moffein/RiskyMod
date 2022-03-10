@@ -13,13 +13,7 @@ namespace RiskyMod.Items.Boss
         {
             if (!enabled) return;
 
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Knurl);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Knurl);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove Vanilla Effect
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
@@ -35,7 +29,7 @@ namespace RiskyMod.Items.Boss
             GetStatsCoefficient.HandleStatsInventoryActions += HandleStatsInventory;
         }
 
-        private void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
+        private static void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
         {
             int knurlCount = sender.inventory.GetItemCount(RoR2Content.Items.Knurl);
             if (knurlCount > 0)
@@ -44,6 +38,12 @@ namespace RiskyMod.Items.Boss
                 args.armorAdd += 10f * knurlCount;
                 args.baseRegenAdd += (1.6f + 0.32f * (sender.level - 1f)) * knurlCount;
             }
+        }
+
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Knurl);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Knurl);
         }
     }
 }

@@ -13,11 +13,7 @@ namespace RiskyMod.Items.Uncommon
         public LeechingSeed()
         {
 			if (!enabled) return;
-			On.RoR2.ItemCatalog.Init += (orig) =>
-			{
-				orig();
-				HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Seed);
-			};
+			ItemsCore.ModifyItemDefActions += ModifyItem;
 
 			//Remove vanilla effect.
 			IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
@@ -31,6 +27,10 @@ namespace RiskyMod.Items.Uncommon
 			};
 
 			TakeDamage.OnHpLostAttackerActions += HealOnHit;
+		}
+		private static void ModifyItem()
+		{
+			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Seed);
 		}
 
 		private void HealOnHit(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory inventory, float hpLost)

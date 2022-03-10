@@ -19,11 +19,7 @@ namespace RiskyMod.Items.Boss
         {
             if (!enabled) return;
 
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FireballsOnHit);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 
@@ -68,6 +64,11 @@ namespace RiskyMod.Items.Boss
                 mdc.Add(Survivors.SharedDamageTypes.AlwaysIgnite);
                 R2API.ContentAddition.AddProjectile(meatballPrefab);
             }
+        }
+
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FireballsOnHit);
         }
     }
 }

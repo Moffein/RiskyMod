@@ -10,13 +10,13 @@ namespace RiskyMod.Items.Uncommon
         public WarHorn()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.EnergizedOnEquipmentUse);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.EnergizedOnEquipmentUse);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
             RecalculateStatsAPI.GetStatCoefficients += HandleStats;
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.EnergizedOnEquipmentUse);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.EnergizedOnEquipmentUse);
         }
 
         private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)

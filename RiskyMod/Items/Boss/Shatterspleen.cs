@@ -13,12 +13,8 @@ namespace RiskyMod.Items.Boss
         public Shatterspleen()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.BleedOnHitAndExplode);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BleedOnHitAndExplode);
-            };
+
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove Vanilla bleed effect - needs to be recalculated.
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
@@ -96,6 +92,12 @@ namespace RiskyMod.Items.Boss
                     return BlastAttack.FalloffModel.None;
                 });*/
             };
+        }
+
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.BleedOnHitAndExplode);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BleedOnHitAndExplode);
         }
 
         private static void AddBleedChance(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)

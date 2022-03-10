@@ -14,11 +14,7 @@ namespace RiskyMod.Items.Legendary
         public FrostRelic()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Icicle);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             On.RoR2.IcicleAuraController.Awake += (orig, self) =>
             {
@@ -106,6 +102,10 @@ namespace RiskyMod.Items.Legendary
             }
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Icicle);
         }
 
         private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)

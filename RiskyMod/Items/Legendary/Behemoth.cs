@@ -11,11 +11,9 @@ namespace RiskyMod.Items.Legendary
         public Behemoth()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Behemoth);
-            };
+
+            ItemsCore.ModifyItemDefActions += ModifyItem;
+
             IL.RoR2.GlobalEventManager.OnHitAll += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -43,9 +41,14 @@ namespace RiskyMod.Items.Legendary
                 c.Emit(OpCodes.Ldloc_3);    //itemCount
                 c.EmitDelegate<Func<float, int, float>>((origDamage, itemCount) =>
                 {
-                    return origDamage + 0.2f * (itemCount - 1);
+                    return origDamage + 0.4f * (itemCount - 1);
                 });
             };
+        }
+
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Behemoth);
         }
     }
 }

@@ -17,12 +17,7 @@ namespace RiskyMod.Items.Legendary
         public HeadHunter()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.HeadHunter);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.HeadHunter);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
@@ -66,6 +61,11 @@ namespace RiskyMod.Items.Legendary
                 };
                 RecalculateStatsAPI.GetStatCoefficients += HandlePerfected2Stats;
             }
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.HeadHunter);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.HeadHunter);
         }
 
         private void HandlePerfected2Stats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)

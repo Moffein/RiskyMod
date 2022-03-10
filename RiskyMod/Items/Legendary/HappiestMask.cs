@@ -22,12 +22,8 @@ namespace RiskyMod.Items.Legendary
         public HappiestMask()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.GhostOnKill);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.GhostOnKill);
-            };
+            
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove vanilla effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
@@ -66,6 +62,12 @@ namespace RiskyMod.Items.Legendary
                     self.AddItemBehavior<GhostOnKillBehavior>(self.inventory.GetItemCount(RoR2Content.Items.GhostOnKill));
                 }
             };
+        }
+
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.GhostOnKill);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.GhostOnKill);
         }
 
         private static void TriggerMaskGhost(GlobalEventManager self, DamageReport damageReport, CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody)

@@ -10,11 +10,7 @@ namespace RiskyMod.Items.Common
         public Gasoline()
         {
             if (!enabled) return;
-			On.RoR2.ItemCatalog.Init += (orig) =>
-			{
-				orig();
-				HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.IgniteOnKill);
-			};
+			ItemsCore.ModifyItemDefActions += ModifyItem;
 
 			On.RoR2.GlobalEventManager.ProcIgniteOnKill += (orig, damageReport, igniteOnKillCount, victimBody, attackerTeamIndex) =>
             {
@@ -63,6 +59,10 @@ namespace RiskyMod.Items.Common
 					rotation = Util.QuaternionSafeLookRotation(damageReport.damageInfo.force)
 				}, true);
 			};
-        }
-    }
+		}
+		private static void ModifyItem()
+		{
+			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.IgniteOnKill);
+		}
+	}
 }

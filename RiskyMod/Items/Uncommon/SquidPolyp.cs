@@ -24,16 +24,7 @@ namespace RiskyMod.Items.Uncommon
         public SquidPolyp()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Squid);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Squid);
-                if (RiskyMod.AIBlacklistUseVanillaBlacklist)
-                {
-                    SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.Squid, ItemTag.AIBlacklist);
-                }
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove vanilla effect
             IL.RoR2.GlobalEventManager.OnInteractionBegin += (il) =>
@@ -60,6 +51,13 @@ namespace RiskyMod.Items.Uncommon
                 SquidPolyp.squidTurretBodyIndex = BodyCatalog.FindBodyIndex("SquidTurretBody");
             };
         }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Squid);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Squid);
+            if (RiskyMod.AIBlacklistUseVanillaBlacklist) SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.Squid, ItemTag.AIBlacklist);
+        }
+
 
         private static void DistractOnHit(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
         {

@@ -16,13 +16,7 @@ namespace RiskyMod.Items.Uncommon
         public HarvesterScythe()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.HealOnCrit);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.HealOnCrit);
-                SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.HealOnCrit, ItemTag.OnKillEffect);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove Vanilla effect
             IL.RoR2.GlobalEventManager.OnCrit += (il) =>
@@ -60,6 +54,12 @@ namespace RiskyMod.Items.Uncommon
                     return hasBuff || self.HasBuff(HarvesterScythe.scytheBuff);
                 });
             };
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.HealOnCrit);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.HealOnCrit);
+            SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.HealOnCrit, ItemTag.OnKillEffect);
         }
 
         private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)

@@ -11,11 +11,7 @@ namespace RiskyMod.Items.Legendary
         public MeatHook()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BounceNearby);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
@@ -45,6 +41,10 @@ namespace RiskyMod.Items.Legendary
                     c.Next.Operand = 0f;
                 }
             };
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BounceNearby);
         }
     }
 }

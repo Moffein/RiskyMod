@@ -14,11 +14,7 @@ namespace RiskyMod.Items.Boss
 			if (!enabled) return;
 			{
 				if (!enabled) return;
-				On.RoR2.ItemCatalog.Init += (orig) =>
-				{
-					orig();
-					HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BeetleGland);
-				};
+				ItemsCore.ModifyItemDefActions += ModifyItem;
 
 				On.RoR2.Items.BeetleGlandBodyBehavior.FixedUpdate += (orig, self) =>
 				{
@@ -77,6 +73,11 @@ namespace RiskyMod.Items.Boss
 					}
 				};
 			}
+		}
+
+		private static void ModifyItem()
+        {
+			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BeetleGland);
 		}
 	}
 }

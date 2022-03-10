@@ -19,12 +19,7 @@ namespace RiskyMod.Items.Uncommon
         public ElementalBands()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.IceRing);
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FireRing);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             float initialDamageFire = initialDamageCoefficientFire - stackDamageCoefficientFire;
             float initialDamageIce = initialDamageCoefficientIce - stackDamageCoefficientIce;
@@ -64,6 +59,11 @@ namespace RiskyMod.Items.Uncommon
                     return damageCoefficient + initialDamageFire;
                 });
             };
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.IceRing);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.FireRing);
         }
     }
 }

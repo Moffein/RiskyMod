@@ -13,11 +13,7 @@ namespace RiskyMod.Items.Uncommon
         public Ukulele()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.ChainLightning);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
@@ -58,6 +54,10 @@ namespace RiskyMod.Items.Uncommon
                 });
 
             };
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.ChainLightning);
         }
     }
 }

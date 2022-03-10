@@ -8,17 +8,12 @@ namespace RiskyMod.Items.Common
     public class CritGlasses
     {
         public static bool enabled = true;
-        public static ItemDef itemDef = RoR2Content.Items.CritGlasses;
 
         public CritGlasses()
         {
             if (!enabled) return;
-            //HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, itemDef);
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, itemDef);
-            };
+
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove Vanilla Effect
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
@@ -34,5 +29,10 @@ namespace RiskyMod.Items.Common
                 c.Next.Operand = 7f;
             };
         }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.CritGlasses);
+        }
+
     }
 }

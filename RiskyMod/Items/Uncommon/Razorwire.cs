@@ -12,11 +12,7 @@ namespace RiskyMod.Items.Uncommon
         public Razorwire()
         {
             if (!enabled) return;
-            On.RoR2.ItemCatalog.Init += (orig) =>
-            {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Thorns);
-            };
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove vanilla effect
             On.RoR2.HealthComponent.OnInventoryChanged += (orig, self) =>
@@ -26,6 +22,10 @@ namespace RiskyMod.Items.Uncommon
             };
 
             TakeDamage.HandleOnPercentHpLostActions += OnHpLost;
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Thorns);
         }
 
         private void OnHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost)
