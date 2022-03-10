@@ -22,9 +22,10 @@ namespace RiskyMod.Items.DLC1.Void
             {
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(
-                     x => x.MatchLdsfld(typeof(DLC1Content.Items), "ElementalRingVoidReady")
+                     x => x.MatchLdsfld(typeof(DLC1Content.Buffs), "ElementalRingVoidReady")
                     );
 
+                //Reduce cooldown
                 c.GotoNext(
                      x => x.MatchLdcR4(20f)
                     );
