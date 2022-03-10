@@ -478,10 +478,6 @@ namespace RiskyMod
             FireSelect.scrollSelection = Config.Bind(fireSelectString, "Use Scrollwheel", true, "Mouse Scroll Wheel changes firemode").Value;
             FireSelect.swapButton = Config.Bind(fireSelectString, "Next Firemode", KeyCode.None, "Button to swap to the next firemode.").Value;
             FireSelect.prevButton = Config.Bind(fireSelectString, "Previous Firemode", KeyCode.None, "Button to swap to the previous firemode.").Value;
-            EngiFireModes.enabled = Config.Bind(fireSelectString, "Engineer: Enable Fire Select", false, "Enable firemode selection for Engineer's Bouncing Grenades.").Value;
-            EngiFireModes.defaultButton = Config.Bind(fireSelectString, "Engineer: Swap to Default", KeyCode.None, "Button to swap to the Default firemode.").Value;
-            EngiFireModes.autoButton = Config.Bind(fireSelectString, "Engineer: Swap to Auto", KeyCode.None, "Button to swap to the Auto firemode.").Value;
-            EngiFireModes.holdButton = Config.Bind(fireSelectString, "Engineer: Swap to Hold", KeyCode.None, "Button to swap to the Charged firemode.").Value;
             CaptainFireModes.enabled = Config.Bind(fireSelectString, "Captain: Enable Fire Select", false, "Enable firemode selection for Captain's shotgun (requires primary changes to be enabled).").Value;
             CaptainFireModes.defaultButton = Config.Bind(fireSelectString, "Captain: Swap to Default", KeyCode.None, "Button to swap to the Default firemode.").Value;
             CaptainFireModes.autoButton = Config.Bind(fireSelectString, "Captain: Swap to Auto", KeyCode.None, "Button to swap to the Auto firemode.").Value;
@@ -533,7 +529,9 @@ namespace RiskyMod
             MageCore.ionSurgeMovementScaling = Config.Bind(mageString, "Ion Surge - Movement Scaling", false, "Ion Surge jump height scales with movement speed.").Value;
             MageCore.ionSurgeShock = Config.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
 
-            MercCore.enabled = Config.Bind(mercString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
+            MercCore.enabled = Config.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+            MercCore.modifyStats = Config.Bind(mercString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
+            MercCore.m1ComboFinishTweak = Config.Bind(mercString, "M1 Attack Speed Tweak", true, "Makes the 3rd hit of Merc's M1 be unaffected by attack speed for use with combo tech. Client-side.").Value;
 
             TreebotCore.enabled = Config.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             TreebotCore.drillChanges = Config.Bind(treebotString, "DIRECTIVE Drill Changes", true, "Enable changes to this skill.").Value;

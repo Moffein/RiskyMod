@@ -15,7 +15,6 @@ namespace RiskyMod.Survivors
         public FireSelect()
         {
             new CaptainFireModes();
-            new EngiFireModes();
         }
     }
 }
