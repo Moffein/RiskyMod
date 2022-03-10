@@ -12,7 +12,6 @@ namespace RiskyMod.Items.DLC1.Legendary
         public static bool enabled = true;
         public LaserScope()
         {
-            return;
             if (!enabled) return;
 
             ItemsCore.ModifyItemDefActions += ModifyItem;

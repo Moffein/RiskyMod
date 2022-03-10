@@ -76,6 +76,7 @@ namespace RiskyMod
         private const string uncommonString = "Items - Uncommon";
         private const string commonString = "Items - Common";
         private const string legendaryString = "Items - Legendary";
+        private const string voidString = "Items - Void";
         private const string bossString = "Items - Boss";
         private const string lunarString = "Items - Lunar";
         private const string equipmentString = "Items - Equipment";
@@ -391,7 +392,7 @@ namespace RiskyMod
             HappiestMask.scaleCount = Config.Bind(legendaryString, "Happiest Mask - Stacks Increase Max Ghosts", false, "Extra stacks allow for more ghosts to spawn. Will lag in MP.").Value;
             HappiestMask.noGhostLimit = Config.Bind(legendaryString, "Happiest Mask - Remove Ghost Limit", false, "Removes the ghost limit at all times. Definitely will lag.").Value;
 
-            //Disabled for now, need to see how balance is.
+            //Disabled for now, trying to get a feel for the balance
             //Turns out SS2's Gadget increased initial hit damage by 50%, which lead to a 3x total damage multiplier, which is what this item does already.
             //LaserScope.enabled = Config.Bind(legendaryString, "Laser Scope", true, itemConfigDescString).Value;
             LaserScope.enabled = false;
@@ -401,8 +402,11 @@ namespace RiskyMod
 
         private void ConfigVoidItems()
         {
-            PlasmaShrimp.enabled = Config.Bind(uncommonString, "Plasma Shrimp", true, itemConfigDescString).Value;
-            VoidWisp.enabled = Config.Bind(uncommonString, "Voidsent Flame", true, itemConfigDescString).Value;
+            SaferSpaces.enabled = Config.Bind(voidString, "Safer Spaces", true, itemConfigDescString).Value;
+            PlasmaShrimp.enabled = Config.Bind(voidString, "Plasma Shrimp", true, itemConfigDescString).Value;
+            VoidWisp.enabled = Config.Bind(voidString, "Voidsent Flame", true, itemConfigDescString).Value;
+            Polylute.enabled = Config.Bind(voidString, "Polylute", true, itemConfigDescString).Value;
+            VoidRing.enabled = Config.Bind(voidString, "Singularity Band", true, itemConfigDescString).Value;
         }
 
         private void ConfigBossItems()

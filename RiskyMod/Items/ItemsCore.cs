@@ -101,9 +101,11 @@ namespace RiskyMod.Items
 
         private void ModifyVoid()
         {
+            new SaferSpaces();
             new PlasmaShrimp();
             new VoidWisp();
             new Polylute();
+            new VoidRing();
         }
 
         private void ModifyBoss()
