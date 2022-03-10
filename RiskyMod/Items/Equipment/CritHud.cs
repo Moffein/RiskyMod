@@ -1,7 +1,7 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using RoR2;
-using System;
+using R2API;
 using UnityEngine;
 
 namespace RiskyMod.Items.Equipment
@@ -13,39 +13,36 @@ namespace RiskyMod.Items.Equipment
         {
             if (!enabled) return;
 
-            IL.RoR2.HealthComponent.TakeDamage += (il) =>
+            //Disable vanilla behavior
+            IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(
-                     x => x.MatchLdarg(1),
-                     x => x.MatchLdfld<DamageInfo>("crit")
-                    );
+                         x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "FullCrit")
+                        );
+                c.Remove();
+                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyBuffDef));
+            };
 
-                c.GotoNext(
-                     x => x.MatchLdcR4(2f)
-                    );
-                c.Index++;
-                c.Emit(OpCodes.Ldarg_1);//damageinfo
-                c.EmitDelegate<Func<float, DamageInfo, float>>((critMult, damageInfo) =>
+            //Todo - move to recalculatestatsapi once critdamagemult is fixed
+            On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
+            {
+                orig(self);
+
+                if (self.HasBuff(RoR2Content.Buffs.FullCrit))
                 {
-                    if (damageInfo.attacker)
+                    float crit = 100f;
+                    float diff = 100f - self.crit;
+                    if (diff > 0f)
                     {
-                        CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                        if (attackerBody)
-                        {
-                            //Roll for another crit if attacker is using HUD
-                            if (attackerBody.HasBuff(RoR2Content.Buffs.FullCrit))
-                            {
-                                float trueCrit = attackerBody.crit - 100f;
-                                if (trueCrit >= 100f || Util.CheckRoll(trueCrit, attackerBody.master))
-                                {
-                                    critMult *= 1.5f;
-                                }
-                            }
-                        }
+                        crit -= diff;
+                        self.crit += diff;
                     }
-                    return critMult;
-                });
+                    if (crit > 0f)
+                    {
+                        self.critMultiplier += crit * 0.01f;
+                    }
+                }
             };
         }
     }

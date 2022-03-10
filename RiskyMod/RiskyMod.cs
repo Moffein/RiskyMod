@@ -61,6 +61,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.LunarWispFalloff", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.BeetleQueenPlus", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.NoVoidAllies", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.EliteReworks", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.0")]
@@ -155,7 +156,9 @@ namespace RiskyMod
             PreventArtifactHeal.enabled = PreventArtifactHeal.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.ArtifactReliquaryHealingFix");
             CaptainOrbitalHiddenRealms.enabled = CaptainOrbitalHiddenRealms.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.PlasmaCore.AlwaysAllowSupplyDrops");
             CritHud.enabled = CritHud.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.Hypercrit");   //Effect is already a part of hypercrit
-            
+
+            RevertBurnDamage.enabled = RevertBurnDamage.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EliteReworks");
+
             ScepterPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
 
             //Croco
@@ -197,6 +200,7 @@ namespace RiskyMod
             new LoopBossArmor();
             new PlayerControlledMonsters();
             new NoVoidAllies();
+            new RevertBurnDamage();
         }
 
         private void RunFixes()
@@ -323,6 +327,7 @@ namespace RiskyMod
             BarrierDecay.enabled = Config.Bind(tweakString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
             FreezeChampionExecute.enabled = Config.Bind(tweakString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
             NoVoidAllies.enabled = Config.Bind(tweakString, "No Void Infestor Ally Possession", true, "Void Infestors can't possess allies.").Value;
+            RevertBurnDamage.enabled = Config.Bind(tweakString, "Revert Blazing Damage", true, "Reverts Blazing burn duration to its pre-DLC1 Update behavior.").Value;
 
             ConfigCommonItems();
             ConfigUncommonItems();
