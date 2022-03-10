@@ -38,7 +38,8 @@ using RiskyMod.Survivors.Merc;
 using System.Runtime.CompilerServices;
 using RiskyMod.Content;
 using System.Reflection;
-using RiskyMod.Items.Legendary.DLC1;
+using RiskyMod.Items.DLC1.Legendary;
+using RiskyMod.Items.DLC1.Void;
 
 namespace RiskyMod
 {
@@ -325,6 +326,7 @@ namespace RiskyMod
             ConfigCommonItems();
             ConfigUncommonItems();
             ConfigLegendaryItems();
+            ConfigVoidItems();
             ConfigBossItems();
             ConfigLunars();
             ConfigEquipment();
@@ -389,9 +391,18 @@ namespace RiskyMod
             HappiestMask.scaleCount = Config.Bind(legendaryString, "Happiest Mask - Stacks Increase Max Ghosts", false, "Extra stacks allow for more ghosts to spawn. Will lag in MP.").Value;
             HappiestMask.noGhostLimit = Config.Bind(legendaryString, "Happiest Mask - Remove Ghost Limit", false, "Removes the ghost limit at all times. Definitely will lag.").Value;
 
-            //Disabled since I need to get a feel for balance. SS2's Gadget increased initial hit damage by 50%, which lead to a 3x total damage multiplier, which is what this item does already.
+            //Disabled for now, need to see how balance is.
+            //Turns out SS2's Gadget increased initial hit damage by 50%, which lead to a 3x total damage multiplier, which is what this item does already.
             //LaserScope.enabled = Config.Bind(legendaryString, "Laser Scope", true, itemConfigDescString).Value;
             LaserScope.enabled = false;
+
+            BottledChaos.enabled = Config.Bind(legendaryString, "Bottled Chaos", true, itemConfigDescString).Value;
+        }
+
+        private void ConfigVoidItems()
+        {
+            PlasmaShrimp.enabled = Config.Bind(uncommonString, "Plasma Shrimp", true, itemConfigDescString).Value;
+            VoidWisp.enabled = Config.Bind(uncommonString, "Voidsent Flame", true, itemConfigDescString).Value;
         }
 
         private void ConfigBossItems()

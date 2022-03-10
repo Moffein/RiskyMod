@@ -1,8 +1,9 @@
 ﻿using RiskyMod.Items.Boss;
 using RiskyMod.Items.Common;
+using RiskyMod.Items.DLC1.Legendary;
+using RiskyMod.Items.DLC1.Void;
 using RiskyMod.Items.Equipment;
 using RiskyMod.Items.Legendary;
-using RiskyMod.Items.Legendary.DLC1;
 using RiskyMod.Items.Lunar;
 using RiskyMod.Items.Uncommon;
 using RoR2;
@@ -34,6 +35,7 @@ namespace RiskyMod.Items
             ModifyCommon();
             ModifyUncommon();
             ModifyLegendary();
+            ModifyVoid();
             ModifyBoss();
             ModifyLunar();
             ModifyEquipment();
@@ -94,6 +96,14 @@ namespace RiskyMod.Items
             new HappiestMask();
 
             new LaserScope();
+            new BottledChaos();
+        }
+
+        private void ModifyVoid()
+        {
+            new PlasmaShrimp();
+            new VoidWisp();
+            new Polylute();
         }
 
         private void ModifyBoss()
