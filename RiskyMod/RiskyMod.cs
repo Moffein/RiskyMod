@@ -215,7 +215,6 @@ namespace RiskyMod
             new FixCrocoPoisonAchievement();
             new FixGhostMinonSpawns();
             new FixWormFallDeath();
-            new FixHereticFreeze();
         }
         
         private void AddHooks()
