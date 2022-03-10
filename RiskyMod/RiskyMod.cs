@@ -506,7 +506,6 @@ namespace RiskyMod
             HuntressCore.flurryChanges = Config.Bind(huntressString, "Flurry Changes", true, "Enable changes to this skill.").Value;
             HuntressCore.laserGlaiveChanges = Config.Bind(huntressString, "Laser Glaive Changes", true, "Enable changes to this skill.").Value;
             HuntressCore.blinkChanges = Config.Bind(huntressString, "Blink Changes", true, "Enable changes to this skill.").Value;
-            HuntressCore.phaseBlinkChanges = Config.Bind(huntressString, "Phase Blink Changes", true, "Enable changes to this skill.").Value;
             HuntressCore.arrowRainChanges = Config.Bind(huntressString, "Arrow Rain Changes", true, "Enable changes to this skill.").Value;
             HuntressCore.ballistaChanges = Config.Bind(huntressString, "Ballista Changes", true, "Enable changes to this skill.").Value;
 

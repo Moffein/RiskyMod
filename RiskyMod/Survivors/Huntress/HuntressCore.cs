@@ -22,7 +22,6 @@ namespace RiskyMod.Survivors.Huntress
         public static bool laserGlaiveChanges = true;
 
         public static bool blinkChanges = true;
-        public static bool phaseBlinkChanges = true;
 
         public static bool arrowRainChanges = true;
         public static bool ballistaChanges = true;
@@ -124,13 +123,6 @@ namespace RiskyMod.Survivors.Huntress
             if (blinkChanges)
             {
                 sk.utility.skillFamily.variants[0].skillDef.baseRechargeInterval = 6f;
-            }
-
-            if (phaseBlinkChanges)
-            {
-                sk.utility.skillFamily.variants[1].skillDef.baseMaxStock = 2;
-                sk.utility.skillFamily.variants[1].skillDef.baseRechargeInterval = 2f;
-                sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "HUNTRESS_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
             }
         }
 
