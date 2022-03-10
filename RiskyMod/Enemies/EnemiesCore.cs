@@ -1,5 +1,6 @@
 ﻿using R2API;
 using RiskyMod.Enemies.Bosses;
+using RiskyMod.Enemies.DLC1;
 using RiskyMod.Enemies.Mobs;
 using RiskyMod.Enemies.Mobs.Lunar;
 using RiskyMod.Enemies.Spawnpools;
@@ -34,6 +35,8 @@ namespace RiskyMod.Enemies
             new Jellyfish();
             new Imp();
             new HermitCrab();
+
+            new BlindPest();
 
             new Golem();
             new Mushrum();

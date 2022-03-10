@@ -40,6 +40,7 @@ using RiskyMod.Content;
 using System.Reflection;
 using RiskyMod.Items.DLC1.Legendary;
 using RiskyMod.Items.DLC1.Void;
+using RiskyMod.Enemies.DLC1;
 
 namespace RiskyMod
 {
@@ -451,6 +452,7 @@ namespace RiskyMod
             Jellyfish.enabled = Config.Bind(monsterString, "Jellyfish", true, "Enable changes to this monster.").Value;
             Imp.enabled = Config.Bind(monsterString, "Imp", true, "Enable changes to this monster.").Value;
             HermitCrab.enabled = Config.Bind(monsterString, "Hermit Crab", true, "Enable changes to this monster.").Value;
+            BlindPest.enabled = Config.Bind(monsterString, "Blind Pest", true, "Enable changes to this monster.").Value;
 
             Golem.enabled = Config.Bind(monsterString, "Stone Golem", true, "Enable changes to this monster.").Value;
             Mushrum.enabled = Config.Bind(monsterString, "Mini Mushrum", true, "Enable changes to this monster.").Value;
