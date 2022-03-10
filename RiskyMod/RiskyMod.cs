@@ -388,7 +388,10 @@ namespace RiskyMod
             HappiestMask.enabled = Config.Bind(legendaryString, "Happiest Mask", true, itemConfigDescString).Value;
             HappiestMask.scaleCount = Config.Bind(legendaryString, "Happiest Mask - Stacks Increase Max Ghosts", false, "Extra stacks allow for more ghosts to spawn. Will lag in MP.").Value;
             HappiestMask.noGhostLimit = Config.Bind(legendaryString, "Happiest Mask - Remove Ghost Limit", false, "Removes the ghost limit at all times. Definitely will lag.").Value;
-            LaserScope.enabled = Config.Bind(legendaryString, "Laser Scope", true, itemConfigDescString).Value;
+
+            //Disabled since I need to get a feel for balance. SS2's Gadget increased initial hit damage by 50%, which lead to a 3x total damage multiplier, which is what this item does already.
+            //LaserScope.enabled = Config.Bind(legendaryString, "Laser Scope", true, itemConfigDescString).Value;
+            LaserScope.enabled = false;
         }
 
         private void ConfigBossItems()

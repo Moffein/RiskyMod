@@ -19,17 +19,13 @@ namespace RiskyMod.Items.Legendary.DLC1
 
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(
-                     /*x => x.MatchLdcR4(2f),
+                     x => x.MatchLdcR4(2f),
                      x => x.MatchLdcR4(1f),
-                     x => x.MatchLdloc(42),
-                     x => x.MatchConvR4(),
-                     x => x.MatchMul(),
-                     x => x.MatchAdd(),*/
-                     x => x.MatchCall<CharacterBody>("set_critMultiplier")
+                     x => x.MatchLdloc(42)
                     );
 
-                /*c.Index-= 5;
-                c.Next.Operand = 0.5f;*/
+                c.Index++;
+                c.Next.Operand = 0.5f;
             };
         }
 
