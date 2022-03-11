@@ -544,7 +544,7 @@ namespace RiskyMod
             BanditSpecialGracePeriod.enabled = Config.Bind(banditString, "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;
             BanditSpecialGracePeriod.duration = Config.Bind(banditString, "Special Grace Period Duration", 1.2f, "Length in seconds of Special Grace Period.").Value;
             DesperadoRework.enabled = Config.Bind(banditString, "Persistent Desperado", true, "Desperado stacks are weaker but last between stages.").Value;
-            Bandit2Core.backstabNerf = Config.Bind(banditString, "Backstab Nerf", true, "Backstabs Minicrit for 50% bonus damage (stacks with crit).").Value;
+            Bandit2Core.backstabNerf = Config.Bind(banditString, "Backstab Changes", true, "Backstabs minicrit for 50% bonus damage and crit chance is converted to crit damage..").Value;
             Bandit2Core.burstChanges = Config.Bind(banditString, "Burst Changes", true, "Enable changes to this skill.").Value;
             Bandit2Core.blastChanges = Config.Bind(banditString, "Blast Changes", true, "Enable changes to this skill.").Value;
             Bandit2Core.knifeChanges = Config.Bind(banditString, "Serrated Dagger Changes", true, "Enable changes to this skill.").Value;
@@ -553,8 +553,7 @@ namespace RiskyMod
             Bandit2Core.specialRework = Config.Bind(banditString, "Special Rework", true, "Makes Resets/Desperado a selectable passive and adds a new Special skill.").Value;
 
             VoidFiendCore.enabled = Config.Bind(voidFiendString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            VoidFiendCore.noCorruptHealing = Config.Bind(voidFiendString, "Corruption - No Healing", true, "Makes healing not affect the Corruption meter.").Value;
-            VoidFiendCore.instantTransition = Config.Bind(voidFiendString, "Corruption - Instant Transform", true, "Removes the pause when transforming into Corrupted mode.").Value;
+            VoidFiendCore.modifyCorruption = Config.Bind(voidFiendString, "Corruption Changes", true, "Corruption is unaffected by healing, and Corruption-on-Crit is replaced with Corruption-on-Kill.").Value;
         }
     }
 }
