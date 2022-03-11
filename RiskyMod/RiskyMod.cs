@@ -48,7 +48,6 @@ namespace RiskyMod
 {
     [BepInDependency("com.PlasmaCore.StickyStunter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.MobileTurretBuff", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.Moffein.MercExposeFix", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.FixPlayercount", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.NoLevelupHeal", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.AI_Blacklist", BepInDependency.DependencyFlags.SoftDependency)]
@@ -142,7 +141,6 @@ namespace RiskyMod
         {
             NoLevelupHeal.enabled = NoLevelupHeal.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoLevelupHeal");
             RemoveLevelCap.enabled = RemoveLevelCap.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RaiseMonsterLevelCap");
-            FixMercExpose.enabled = FixMercExpose.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.MercExposeFix");
 
             FixPlayercount.enabled = FixPlayercount.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.FixPlayercount");
             FixPlayercount.MultitudesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("dev.wildbook.multitudes");
@@ -160,8 +158,6 @@ namespace RiskyMod
             PreventArtifactHeal.enabled = PreventArtifactHeal.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.ArtifactReliquaryHealingFix");
             CaptainOrbitalHiddenRealms.enabled = CaptainOrbitalHiddenRealms.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.PlasmaCore.AlwaysAllowSupplyDrops");
             CritHud.enabled = CritHud.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.Hypercrit");   //Effect is already a part of hypercrit
-
-            RevertBurnDamage.enabled = RevertBurnDamage.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EliteReworks");
 
             ScepterPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
 
@@ -203,12 +199,10 @@ namespace RiskyMod
             new FreezeChampionExecute();
             new LoopBossArmor();
             new PlayerControlledMonsters();
-            new RevertBurnDamage();
         }
 
         private void RunFixes()
         {
-            new FixMercExpose();
             new FixPlayercount();
             new FixVengeanceLeveling();
             new FixFocusCrystalSelfDamage();
@@ -304,7 +298,6 @@ namespace RiskyMod
             Shock.enabled = Config.Bind(tweakString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
             BarrierDecay.enabled = Config.Bind(tweakString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
             FreezeChampionExecute.enabled = Config.Bind(tweakString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
-            RevertBurnDamage.enabled = Config.Bind(tweakString, "Revert Blazing Damage", true, "Reverts Blazing burn duration to its pre-DLC1 Update behavior.").Value;
 
             ConfigCommonItems();
             ConfigUncommonItems();
@@ -503,9 +496,7 @@ namespace RiskyMod
             M1Projectiles.increaseRange = Config.Bind(mageString, "Primary Range Increase", true, "Primary projectiles no longer disappear mid-flight.").Value;
             MageCore.m2Buffer = Config.Bind(mageString, "Secondary Buffer Time", true, "Adds a 0.6s duration between Secondary uses if you hold down the button.").Value;
             MageCore.m2RequiresKeypress = Config.Bind(mageString, "Secondary Requires Keypress", false, "Each Secondary use requires you to re-press the button.").Value;
-            MageCore.flamethrowerAttackSpeed = Config.Bind(mageString, "Flamethrower - Attack Speed Scaling", true, "Flamethrower shot count and fire rate increases with attack speed.").Value;
             MageCore.flamethrowerSprintCancel = Config.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
-            EntityStates.RiskyMod.Mage.FlamethrowerScepter.maxFlames = Config.Bind(mageString, "Flamethrower - Scepter Max Flames", 30, "Max napalm pools left behind by the Scepter Flamethrower if Flamethrower changes are enabled.").Value;
             MageCore.ionSurgeMovementScaling = Config.Bind(mageString, "Ion Surge - Movement Scaling", false, "Ion Surge jump height scales with movement speed.").Value;
             MageCore.ionSurgeShock = Config.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
 

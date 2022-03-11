@@ -68,6 +68,13 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                 orig(self);
                 self.corruptionPerSecondInCombat = 2f;
                 self.corruptionPerSecondOutOfCombat = 2f;
+                self.corruptionFractionPerSecondWhileCorrupted = -1f / 12f;
+
+                //Debug.Log(self.maxCorruption); //100
+                //Debug.Log(self.corruptionPerSecondInCombat);   //3
+                //Debug.Log(self.corruptionPerSecondOutOfCombat);    //3
+                //Debug.Log(self.corruptionFractionPerSecondWhileCorrupted); //-0.06666667
+                //Debug.Log(self.corruptionPerCrit); //2
             };
         }
 
@@ -76,12 +83,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
             VoidSurvivorController vsc = attackerBody.gameObject.GetComponent<VoidSurvivorController>();
             if (vsc)
             {
-                vsc.AddCorruption(2f);
-
-                //Debug.Log(vsc.maxCorruption); //100
-                //Debug.Log(vsc.corruptionPerSecondInCombat);   //3
-                //Debug.Log(vsc.corruptionPerSecondOutOfCombat);    //3
-                //Debug.Log(vsc.corruptionFractionPerSecondWhileCorrupted); //-0.06666667
+                vsc.AddCorruption(4f);
             }
         }
     }
