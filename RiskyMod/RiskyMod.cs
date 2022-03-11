@@ -578,6 +578,7 @@ namespace RiskyMod
 
             VoidFiendCore.enabled = Config.Bind(voidFiendString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             VoidFiendCore.noCorruptHealing = Config.Bind(voidFiendString, "Corruption - No Healing", true, "Makes healing not affect the Corruption meter.").Value;
+            VoidFiendCore.instantTransition = Config.Bind(voidFiendString, "Corruption - Instant Transform", true, "Removes the pause when transforming into Corrupted mode.").Value;
         }
     }
 }
