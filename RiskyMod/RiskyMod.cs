@@ -42,6 +42,7 @@ using RiskyMod.Items.DLC1.Legendary;
 using RiskyMod.Items.DLC1.Void;
 using RiskyMod.Enemies.DLC1;
 using RiskyMod.Survivors.DLC1.VoidFiend;
+using System.IO;
 
 namespace RiskyMod
 {
@@ -67,7 +68,7 @@ namespace RiskyMod
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.0")]
-    [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(ContentAddition), nameof(LanguageAPI))]
+    [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(ContentAddition))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -135,7 +136,6 @@ namespace RiskyMod
             new EnemiesCore();
             SetupAssists();
             AddHooks();
-            FunnyLanguage();
         }
 
         private void CheckDependencies()
@@ -260,30 +260,6 @@ namespace RiskyMod
                 }
             }
         }
-
-        private void FunnyLanguage()
-        {
-            /*PhysicalFileSystem physicalFileSystem = new PhysicalFileSystem();
-            RiskyMod.fileSystem = new SubFileSystem(physicalFileSystem, physicalFileSystem.ConvertPathFromInternal(Assets.assemblyDir), true);
-            if (RiskyMod.fileSystem.DirectoryExists("/language/")) //Uh, it exists and we make sure to not shit up R2Api
-            {
-                Language.collectLanguageRootFolders += delegate (List<string> list)
-                {
-                    list.Add(RiskyMod.fileSystem.GetDirectoryEntry("/language/").ToString());   //doublecheck this, ToString was added in without testing
-                };
-            }*/
-            RegisterTokens(@"\en");
-        }
-
-        private void RegisterTokens(string languageString)
-        {
-            string pathToLanguage = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\language";
-            LanguageAPI.AddPath(System.IO.Path.Combine(pathToLanguage + languageString, "Survivors.txt"));
-            LanguageAPI.AddPath(System.IO.Path.Combine(pathToLanguage + languageString, "Equipment.txt"));
-            LanguageAPI.AddPath(System.IO.Path.Combine(pathToLanguage + languageString, "Items.txt"));
-            LanguageAPI.AddPath(System.IO.Path.Combine(pathToLanguage + languageString, "Keywords.txt"));
-        }
-
 
         public delegate void FireMode();
         public static FireMode FireModeActions = FireModeMethod;
