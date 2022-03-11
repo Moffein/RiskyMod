@@ -23,6 +23,10 @@ namespace RiskyMod
         public delegate void HandleAssistInventory(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody);
         public static HandleAssistInventory HandleAssistInventoryActions;
 
+
+        public delegate void HandleAssist(CharacterBody attackerBody, CharacterBody victimBody, CharacterBody killerBody);
+        public static HandleAssist HandleAssistActions;
+
         public void AddAssist(CharacterBody attackerBody, CharacterBody victimBody, float duration)
         {
             //Check if this assist already exists.
@@ -91,6 +95,7 @@ namespace RiskyMod
                 {
                     if (a.attackerBody && a.attackerBody.healthComponent && a.attackerBody.healthComponent.alive)
                     {
+                        if (HandleAssistActions != null) HandleAssistActions.Invoke(a.attackerBody, victimBody, killerBody);
                         Inventory attackerInventory = a.attackerBody.inventory;
                         if (attackerInventory && HandleAssistInventoryActions != null)
                         {

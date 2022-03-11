@@ -16,12 +16,19 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
 
             //bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/VoidSurvivor");
 
+            ModifySkills();
+        }
+
+        private void ModifySkills()
+        {
             ModifyPassive();
         }
 
         private void ModifyPassive()
         {
             if (!modifyCorruption) return;
+
+            //"KEYWORD_VOIDCORRUPTION_RISKYMOD"
 
             //Remove healing affecting Corruption.
             On.RoR2.VoidSurvivorController.OnCharacterHealServer += (orig, self, healthComponent, amount, proc) =>
@@ -45,6 +52,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
 
             //Remove crits affecting Corruption.
             //Not showstopping like Healing reducing Corruption, but it's odd how you're forced to get a specific few items to utilize this.
+            //Pretty much gives Corruption for building certain items, rather than something that's actively a part of your gameplay.
             On.RoR2.VoidSurvivorController.OnDamageDealtServer += (orig, self, damageReport) =>
             {
                 return;
@@ -52,6 +60,29 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
 
             //Kills increase Corruption.
             //Hoping this adds an additional layer of depth to using Void Fiend's Corruption
+            AssistManager.HandleAssistActions += CorruptionAssist;
+
+            //Reduce passive Corruption gain since kills now give a decent boost to build rate
+            On.RoR2.VoidSurvivorController.OnEnable += (orig, self) =>
+            {
+                orig(self);
+                self.corruptionPerSecondInCombat = 2f;
+                self.corruptionPerSecondOutOfCombat = 2f;
+            };
+        }
+
+        private static void CorruptionAssist(CharacterBody attackerBody, CharacterBody victimBody, CharacterBody killerBody)
+        {
+            VoidSurvivorController vsc = attackerBody.gameObject.GetComponent<VoidSurvivorController>();
+            if (vsc)
+            {
+                vsc.AddCorruption(2f);
+
+                //Debug.Log(vsc.maxCorruption); //100
+                //Debug.Log(vsc.corruptionPerSecondInCombat);   //3
+                //Debug.Log(vsc.corruptionPerSecondOutOfCombat);    //3
+                //Debug.Log(vsc.corruptionFractionPerSecondWhileCorrupted); //-0.06666667
+            }
         }
     }
 }
