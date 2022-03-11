@@ -31,6 +31,9 @@ namespace RiskyMod.SharedHooks
         public delegate void OnDamageTakenAttacker(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody);
         public static OnDamageTakenAttacker OnDamageTakenAttackerActions;
 
+        public delegate void TakeDamageEnd(DamageInfo damageInfo, HealthComponent self);
+        public static TakeDamageEnd TakeDamageEndActions;
+
         public static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
             float oldHP = self.combinedHealth;
@@ -79,18 +82,8 @@ namespace RiskyMod.SharedHooks
                             float percentHPLost = totalHPLost / self.fullCombinedHealth * 100f;
                             if (HandleOnPercentHpLostActions != null) HandleOnPercentHpLostActions.Invoke(damageInfo, self, inventory, percentHPLost);
                         }
-
-                        //This should happen after OnHpLost
-                        if (Planula.enabled)
-                        {
-                            int planulaCount = inventory.GetItemCount(RoR2Content.Items.ParentEgg);
-                            if (planulaCount > 0)
-                            {
-                                self.Heal(planulaCount * 15f, default(ProcChainMask), true);
-                                EntitySoundManager.EmitSoundServer(LegacyResourcesAPI.Load<NetworkSoundEventDef>("NetworkSoundEventDefs/nseParentEggHeal").index, self.gameObject);
-                            }
-                        }
                     }
+                    if (TakeDamageEndActions != null) TakeDamageEndActions.Invoke(damageInfo, self);
                 }
             }
         }

@@ -44,8 +44,7 @@ namespace RiskyMod.Drones
             switch (cb.name)
             {
                 case "MegaDroneBody":
-                    cb.baseDamage *= 0.7f;
-                    cb.baseMaxHealth *= 0.8f;
+                    cb.baseDamage *= 0.8f;
                     break;
                 case "SquidTurretBody":
                     cb.levelArmor += 1f;

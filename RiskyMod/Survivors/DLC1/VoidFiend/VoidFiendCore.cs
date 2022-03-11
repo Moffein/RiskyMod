@@ -22,11 +22,14 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
         private void ModifyPassive()
         {
             if (!modifyCorruption) return;
+
+            //Remove healing affecting Corruption.
             On.RoR2.VoidSurvivorController.OnCharacterHealServer += (orig, self, healthComponent, amount, proc) =>
             {
                 return;
             };
 
+            //Tweak Corruption transition duration.
             On.EntityStates.VoidSurvivor.CorruptionTransitionBase.OnEnter += (orig, self) =>
             {
                 if (self.duration > 0f) //Exiting has 0 duration by default
@@ -40,7 +43,15 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                 orig(self);
             };
 
+            //Remove crits affecting Corruption.
+            //Not showstopping like Healing reducing Corruption, but it's odd how you're forced to get a specific few items to utilize this.
+            On.RoR2.VoidSurvivorController.OnDamageDealtServer += (orig, self, damageReport) =>
+            {
+                return;
+            };
 
+            //Kills increase Corruption.
+            //Hoping this adds an additional layer of depth to using Void Fiend's Corruption
         }
     }
 }

@@ -21,8 +21,7 @@ namespace RiskyMod
         //Refer to OnHitEnemy and OnCharacterDeath for assist application.
 
         public delegate void HandleAssistInventory(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody);
-        public static HandleAssistInventory HandleAssistInventoryActions = HandleAssistInventoryMethod;
-        private static void HandleAssistInventoryMethod(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody) { }
+        public static HandleAssistInventory HandleAssistInventoryActions;
 
         public void AddAssist(CharacterBody attackerBody, CharacterBody victimBody, float duration)
         {
@@ -93,7 +92,7 @@ namespace RiskyMod
                     if (a.attackerBody && a.attackerBody.healthComponent && a.attackerBody.healthComponent.alive)
                     {
                         Inventory attackerInventory = a.attackerBody.inventory;
-                        if (attackerInventory)
+                        if (attackerInventory && HandleAssistInventoryActions != null)
                         {
                             HandleAssistInventoryActions(a.attackerBody, attackerInventory, victimBody, killerBody);
                         }
