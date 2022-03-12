@@ -26,6 +26,7 @@ namespace RiskyMod.Drones
 
         private void BuildAllyBodies()
         {
+            AllyBodies = new List<BodyIndex>();
             On.RoR2.BodyCatalog.Init += (orig) =>
             {
                 orig();

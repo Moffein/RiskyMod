@@ -136,6 +136,19 @@ namespace RiskyMod.Tweaks
 
             LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateLeft").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
             LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateRight").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
+
+            IL.EntityStates.VoidRaidCrab.SpinBeamAttack.FireBeamBulletAuthority += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchCallvirt<BulletAttack>("Fire")
+                    );
+                c.EmitDelegate<Func<BulletAttack, BulletAttack>>((bulletAttack) =>
+                {
+                    bulletAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                    return bulletAttack;
+                });
+            };
         }
     }
 }
