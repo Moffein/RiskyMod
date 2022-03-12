@@ -379,9 +379,7 @@ namespace RiskyMod
 
         private void ConfigVoidItems()
         {
-            //TODO: Find out how this stacks up to Tougher Times. Might need to adjust both.
-            //SaferSpaces.enabled = Config.Bind(voidString, "Safer Spaces", true, itemConfigDescString).Value;
-            SaferSpaces.enabled = false;
+            SaferSpaces.enabled = Config.Bind(voidString, "Safer Spaces", true, itemConfigDescString).Value;
 
             PlasmaShrimp.enabled = Config.Bind(voidString, "Plasma Shrimp", true, itemConfigDescString).Value;
             VoidWisp.enabled = Config.Bind(voidString, "Voidsent Flame", true, itemConfigDescString).Value;

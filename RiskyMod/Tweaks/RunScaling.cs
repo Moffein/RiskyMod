@@ -49,9 +49,26 @@ namespace RiskyMod.Tweaks
 				}
 			};
 
+			On.RoR2.InfiniteTowerRun.RecalculateDifficultyCoefficentInternal += (orig, self) =>
+			{
+				DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
+				float num = 1.5f * (float)self.waveIndex;
+				float num2 = 0.1111111111f * difficultyDef.scalingValue;	//0.0506f, see equivalent
+				float num3 = Mathf.Pow(1.01f, (float)self.waveIndex);	//1.02f, needs further investigation but the graph looks about right (higher linear scaling, lower exponential scaling)
+				self.difficultyCoefficient = (1f + num2 * num) * num3;
+				self.compensatedDifficultyCoefficient = self.difficultyCoefficient;
+				self.ambientLevel = Mathf.Min((self.difficultyCoefficient - 1f) * 3f + 1f, 9999f);	//changed from division operation to multiplication, see equivalent
+				int ambientLevelFloor = self.ambientLevelFloor;
+				self.ambientLevelFloor = Mathf.FloorToInt(self.ambientLevel);
+				if (ambientLevelFloor != self.ambientLevelFloor && ambientLevelFloor != 0 && self.ambientLevelFloor > ambientLevelFloor)
+				{
+					self.OnAmbientLevelUp();
+				}
+			};
+
 			On.RoR2.CombatDirector.DirectorMoneyWave.Update += (orig, self, deltaTime, difficultyCoefficient) =>
 			{
-				if (Run.instance.gameModeIndex == classicRunIndex)
+				if (Run.instance.gameModeIndex != simulacrumIndex)
 				{
 					float stageFactor = Run.instance.stageClearCount < 4 ? Mathf.Pow(1.1f, Run.instance.stageClearCount) : 1.5f;//Needs cap to prevent game from turning into a slideshow. Uncapping it causes excessive T2 Elite spam.
 					difficultyCoefficient *= stageFactor;
@@ -61,7 +78,7 @@ namespace RiskyMod.Tweaks
 
 			On.RoR2.CombatDirector.Awake += (orig, self) =>
 			{
-				if (Run.instance.gameModeIndex == classicRunIndex)
+				if (Run.instance.gameModeIndex != simulacrumIndex)
 				{
 					self.creditMultiplier *= 1.1f;
 				}
@@ -70,7 +87,7 @@ namespace RiskyMod.Tweaks
 
 			On.RoR2.DeathRewards.OnKilledServer += (orig, self, damageReport) =>
 			{
-				if (Run.instance.gameModeIndex == classicRunIndex)
+				if (Run.instance.gameModeIndex != simulacrumIndex)
 				{
 					self.goldReward = (uint)Mathf.CeilToInt(Mathf.Pow(self.goldReward, 0.9f) / Mathf.Pow(1.2f, Run.instance.stageClearCount / 5));
 				}

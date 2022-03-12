@@ -23,7 +23,7 @@ namespace RiskyMod.Items.DLC1.Void
                 c.GotoNext(
                      x => x.MatchLdcR4(0.9f)
                     );
-                c.Next.Operand = 0.95f;
+                c.Next.Operand = 0.93f;
             };
         }
 

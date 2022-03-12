@@ -22,7 +22,7 @@ namespace RiskyMod.Items.Common
                      x => x.MatchLdflda(typeof(RoR2.HealthComponent), "itemCounts"),
                      x => x.MatchLdfld(typeof(RoR2.HealthComponent.ItemCounts), "bear")
                     );
-                c.Next.Operand = 7.5f;
+                c.Next.Operand = 10f;
             };
         }
         private static void ModifyItem()
