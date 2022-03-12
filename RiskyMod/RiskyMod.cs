@@ -186,7 +186,6 @@ namespace RiskyMod
             new RemoveLevelCap();
             new SmallHoldoutCharging();
             new TeleExpandOnBossKill();
-            new DistantRoostCredits();
             new ShrineCombatItems();
             new VengeancePercentHeal();
             new CloakBuff();
@@ -292,7 +291,6 @@ namespace RiskyMod
             ShrineSpawnRate.enabled = Config.Bind(tweakString, "Mountain/Combat Shrine Playercount Scaling", true, "Mountain/Combat Shrine Director Credit cost scales with playercount.").Value;
             ShrineCombatItems.enabled = Config.Bind(tweakString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
             BloodShrineMinReward.enabled = Config.Bind(tweakString, "Shrine of Blood Minimum Reward", true, "Shrine of Blood always gives at least enough money to buy a small chest.").Value;
-            DistantRoostCredits.enabled = Config.Bind(tweakString, "Distant Roost Credit Boost", true, "Makes Distant Roost have the same director credits as Titanic Plains.").Value;
             FixSlayer.enabled = Config.Bind(tweakString, "Fix Slayer Procs", true, "Bandit/Acrid bonus damage to low hp effect now applies to procs.").Value;
             SceneDirectorMonsterRewards.enabled = Config.Bind(tweakString, "SceneDirector Monster Rewards", true, "Monsters that spawn with the map now give the same rewards as teleporter monsters.").Value;
             VengeancePercentHeal.enabled = Config.Bind(tweakString, "Reduce Vengeance Healing", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;

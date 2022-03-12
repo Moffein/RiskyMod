@@ -12,6 +12,15 @@ namespace RiskyMod.Drones
         {
             if (!enabled) return;
 
+            On.RoR2.HealthComponent.TakeDamage += (orig, self, di) =>
+            {
+                if ((di.damageType & DamageType.VoidDeath) != DamageType.Generic)
+                {
+                    Debug.Log("VoidDeath damage");
+                }
+                orig(self, di);
+            };
+
             //Backup
             ChangeScaling(LoadBody("BackupDroneBody"));
 

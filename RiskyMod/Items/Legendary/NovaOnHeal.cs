@@ -10,7 +10,6 @@ namespace RiskyMod.Items.Legendary
         public static bool enabled = true;
         public NovaOnHeal()
         {
-            ItemsCore.ModifyItemDefActions += ModifyItem;
             //Nerf Vengeance damage
             IL.RoR2.HealthComponent.ServerFixedUpdate += (il) =>
             {
