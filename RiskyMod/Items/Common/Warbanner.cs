@@ -35,7 +35,7 @@ namespace RiskyMod.Items.Common
                 orig(self);
                 SpawnBanners();
             };
-            On.EntityStates.Missions.BrotherEncounter.Phase2.OnEnter += (orig, self) =>
+            /*On.EntityStates.Missions.BrotherEncounter.Phase2.OnEnter += (orig, self) =>
             {
                 orig(self);
                 SpawnBanners();
@@ -49,7 +49,7 @@ namespace RiskyMod.Items.Common
             {
                 orig(self);
                 SpawnBanners();
-            };
+            };*/
         }
         private static void ModifyItem()
         {

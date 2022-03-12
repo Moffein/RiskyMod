@@ -47,6 +47,9 @@ namespace RiskyMod.Drones
                 AddBody("SquidTurretBody");
                 AddBody("BeetleGuardAllyBody");
 
+                AddBody("RoboBallGreenBuddyBody");
+                AddBody("RoboBallRedBuddyBody");
+
                 if (ModifyAlliesActions != null) ModifyAlliesActions.Invoke(AllyBodies);
             };
         }

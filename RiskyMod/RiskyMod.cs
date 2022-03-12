@@ -43,6 +43,7 @@ using RiskyMod.Items.DLC1.Void;
 using RiskyMod.Enemies.DLC1;
 using RiskyMod.Survivors.DLC1.VoidFiend;
 using System.IO;
+using RiskyMod.VoidLocus;
 
 namespace RiskyMod
 {
@@ -131,6 +132,7 @@ namespace RiskyMod
             new ItemsCore();
             new DronesCore();
             new MoonCore();
+            new VoidLocusCore();
             new SurvivorsCore();
             new FireSelect();
             new EnemiesCore();
@@ -285,6 +287,7 @@ namespace RiskyMod
             SurvivorsCore.enabled = Config.Bind(coreModuleString, "Survivor Changes", true, "Enable survivor changes.").Value;
             EnemiesCore.modifyEnemies = Config.Bind(coreModuleString, "Monster Changes", true, "Enable enemy changes.").Value;
             MoonCore.enabled = Config.Bind(coreModuleString, "Moon Changes", true, "Enable Moon changes.").Value;
+            VoidLocusCore.enabled = Config.Bind(coreModuleString, "Void Locus Changes", true, "Enable Void Locus changes.").Value;
 
             AIBlacklistItems.enabled = Config.Bind(tweakString, "Expanded AI Blacklist", true, "Adds a few extra items to the AI Blacklist by default.").Value;
             TeleExpandOnBossKill.enabled = Config.Bind(tweakString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;
