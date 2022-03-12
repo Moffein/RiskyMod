@@ -14,8 +14,11 @@ namespace RiskyMod.Items.DLC1.Legendary
             {
                 orig();
 
+                RoR2Content.Equipment.FireBallDash.canBeRandomlyTriggered = false;
                 EquipmentCatalog.randomTriggerEquipmentList.Remove(RoR2Content.Equipment.FireBallDash.equipmentIndex);
                 EquipmentCatalog.randomTriggerEquipmentList.Remove(RoR2Content.Equipment.Gateway.equipmentIndex);
+
+
                 /*foreach (EquipmentIndex ed in EquipmentCatalog.randomTriggerEquipmentList)
                 {
                     Debug.Log(EquipmentCatalog.GetEquipmentDef(ed).name);

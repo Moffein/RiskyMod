@@ -128,6 +128,7 @@ namespace RiskyMod.Items
             new Transcendence();
             new BrittleCrown();
             new Meteorite();
+            new Gesture();
         }
 
         private void ModifyEquipment()

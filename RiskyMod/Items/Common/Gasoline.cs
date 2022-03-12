@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using R2API;
 using UnityEngine;
+using MonoMod.Cil;
 
 namespace RiskyMod.Items.Common
 {
@@ -10,55 +11,23 @@ namespace RiskyMod.Items.Common
         public Gasoline()
         {
             if (!enabled) return;
-			ItemsCore.ModifyItemDefActions += ModifyItem;
 
-			On.RoR2.GlobalEventManager.ProcIgniteOnKill += (orig, damageReport, igniteOnKillCount, victimBody, attackerTeamIndex) =>
+            IL.RoR2.GlobalEventManager.ProcIgniteOnKill += (il) =>
             {
-				float blastRadius = victimBody.radius + 16f;
-				float baseDamage = damageReport.attackerBody.damage * 1.5f;
+                ILCursor c = new ILCursor(il);
 
-				float burnDuration = 1f + 0.5f * igniteOnKillCount;
-				float burnDamageMult = 1.5f * igniteOnKillCount / burnDuration;
+                //Increase base range
+                c.GotoNext(
+                x => x.MatchLdcR4(8f)
+                    );
+                c.Next.Operand = 12f;
 
-				Vector3 corePosition = victimBody.corePosition;
-				GlobalEventManager.igniteOnKillSphereSearch.origin = corePosition;
-				GlobalEventManager.igniteOnKillSphereSearch.mask = LayerIndex.entityPrecise.mask;
-				GlobalEventManager.igniteOnKillSphereSearch.radius = blastRadius;
-				GlobalEventManager.igniteOnKillSphereSearch.RefreshCandidates();
-				GlobalEventManager.igniteOnKillSphereSearch.FilterCandidatesByHurtBoxTeam(TeamMask.GetUnprotectedTeams(attackerTeamIndex));
-				GlobalEventManager.igniteOnKillSphereSearch.FilterCandidatesByDistinctHurtBoxEntities();
-				GlobalEventManager.igniteOnKillSphereSearch.OrderCandidatesByDistance();
-				GlobalEventManager.igniteOnKillSphereSearch.GetHurtBoxes(GlobalEventManager.igniteOnKillHurtBoxBuffer);
-				GlobalEventManager.igniteOnKillSphereSearch.ClearCandidates();
-				for (int i = 0; i < GlobalEventManager.igniteOnKillHurtBoxBuffer.Count; i++)
-				{
-					HurtBox hurtBox = GlobalEventManager.igniteOnKillHurtBoxBuffer[i];
-					if (hurtBox.healthComponent)
-					{
-						DotController.InflictDot(hurtBox.healthComponent.gameObject, damageReport.attacker, DotController.DotIndex.Burn, burnDuration, burnDamageMult);
-					}
-				}
-				GlobalEventManager.igniteOnKillHurtBoxBuffer.Clear();
-				new BlastAttack
-				{
-					radius = blastRadius,
-					baseDamage = baseDamage,
-					procCoefficient = 0f,
-					crit = Util.CheckRoll(damageReport.attackerBody.crit, damageReport.attackerMaster),
-					damageColorIndex = DamageColorIndex.Item,
-					attackerFiltering = AttackerFiltering.Default,
-					falloffModel = BlastAttack.FalloffModel.None,
-					attacker = damageReport.attacker,
-					teamIndex = attackerTeamIndex,
-					position = corePosition
-				}.Fire();
-				EffectManager.SpawnEffect(GlobalEventManager.CommonAssets.igniteOnKillExplosionEffectPrefab, new EffectData
-				{
-					origin = corePosition,
-					scale = blastRadius,
-					rotation = Util.QuaternionSafeLookRotation(damageReport.damageInfo.force)
-				}, true);
-			};
+                //Remove range scaling
+                c.GotoNext(
+                     x => x.MatchLdcR4(4f)
+                    );
+                c.Next.Operand = 0f;
+            };
 		}
 		private static void ModifyItem()
 		{

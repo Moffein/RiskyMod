@@ -199,6 +199,7 @@ namespace RiskyMod
             new FreezeChampionExecute();
             new LoopBossArmor();
             new PlayerControlledMonsters();
+            new EnigmaBlacklist();
         }
 
         private void RunFixes()
@@ -274,7 +275,7 @@ namespace RiskyMod
             RunScaling.enabled = Config.Bind(scalingString, "Linear Difficulty Scaling", true, "Makes difficulty scaling linear.").Value;
             NoLevelupHeal.enabled = Config.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
             RemoveLevelCap.enabled = Config.Bind(scalingString, "Increase Monster Level Cap", true, "Increases Monster Level Cap.").Value;
-            RemoveLevelCap.maxLevel = Config.Bind(scalingString, "Increase Monster Level Cap - Max Level", 1000f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
+            RemoveLevelCap.maxLevel = Config.Bind(scalingString, "Increase Monster Level Cap - Max Level", 9999f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
             LoopBossArmor.enabled = Config.Bind(scalingString, "Loop Boss Armor", true, "Teleporter bosses gain bonus armor when looping.").Value;
 
             DronesCore.enabled = Config.Bind(coreModuleString, "Drone Changes", true, "Enable drone and ally changes.").Value;
@@ -298,6 +299,7 @@ namespace RiskyMod
             Shock.enabled = Config.Bind(tweakString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
             BarrierDecay.enabled = Config.Bind(tweakString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
             FreezeChampionExecute.enabled = Config.Bind(tweakString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
+            EnigmaBlacklist.enabled = Config.Bind(tweakString, "Enigma Blacklist", true, "Blacklist Lunars and Recycler from the Artifact of Enigma.").Value;
 
             ConfigCommonItems();
             ConfigUncommonItems();
@@ -377,7 +379,10 @@ namespace RiskyMod
 
         private void ConfigVoidItems()
         {
-            SaferSpaces.enabled = Config.Bind(voidString, "Safer Spaces", true, itemConfigDescString).Value;
+            //TODO: Find out how this stacks up to Tougher Times. Might need to adjust both.
+            //SaferSpaces.enabled = Config.Bind(voidString, "Safer Spaces", true, itemConfigDescString).Value;
+            SaferSpaces.enabled = false;
+
             PlasmaShrimp.enabled = Config.Bind(voidString, "Plasma Shrimp", true, itemConfigDescString).Value;
             VoidWisp.enabled = Config.Bind(voidString, "Voidsent Flame", true, itemConfigDescString).Value;
             Polylute.enabled = Config.Bind(voidString, "Polylute", true, itemConfigDescString).Value;
@@ -395,6 +400,7 @@ namespace RiskyMod
 
         private void ConfigLunars()
         {
+            Gesture.enabled = Config.Bind(lunarString, "Gesture of the Drowned", true, itemConfigDescString).Value;
             ShapedGlass.enabled = Config.Bind(lunarString, "Shaped Glass", true, itemConfigDescString).Value;
             BrittleCrown.enabled = Config.Bind(lunarString, "Brittle Crown", true, itemConfigDescString).Value;
             Transcendence.enabled = Config.Bind(lunarString, "Transcendence", true, itemConfigDescString).Value;

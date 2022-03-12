@@ -9,7 +9,7 @@ namespace RiskyMod.Tweaks
     public class RemoveLevelCap
     {
         public static bool enabled = true;
-		public static float maxLevel = 1000f;
+		public static float maxLevel = 9999f;
 		public static float stopSound = 300f;
         public RemoveLevelCap()
         {
