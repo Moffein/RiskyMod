@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using RoR2.CharacterAI;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -11,43 +12,22 @@ namespace RiskyMod.Drones
         public DroneScaling()
         {
             if (!enabled) return;
-
-            On.RoR2.HealthComponent.TakeDamage += (orig, self, di) =>
-            {
-                if ((di.damageType & DamageType.VoidDeath) != DamageType.Generic)
-                {
-                    Debug.Log("VoidDeath damage");
-                }
-                orig(self, di);
-            };
-
-            //Backup
-            ChangeScaling(LoadBody("BackupDroneBody"));
-
-            //T1 drones
-            ChangeScaling(LoadBody("Drone1Body"));
-            ChangeScaling(LoadBody("Drone2Body"));
-            ChangeScaling(LoadBody("Turret1Body"));
-
-            //T2 drones
-            ChangeScaling(LoadBody("MissileDroneBody"));
-            ChangeScaling(LoadBody("FlameDroneBody"));
-            ChangeScaling(LoadBody("EquipmentDroneBody"));
-            ChangeScaling(LoadBody("EmergencyDroneBody"));
-
-            //T3 drones
-            ChangeScaling(LoadBody("MegaDroneBody"));
-
-            //Squids
-            ChangeScaling(LoadBody("SquidTurretBody"), false);
-
-            //Beetle Allies
-            ChangeScaling(LoadBody("BeetleGuardAllyBody"), false);
+            DronesCore.ModifyAlliesActions += ModifyAllies;
         }
 
-        private void ChangeScaling(GameObject go, bool useShield = true)
+        private void ModifyAllies(List<BodyIndex> bodies)
+        {
+            foreach (BodyIndex i in bodies)
+            {
+                ChangeScaling(BodyCatalog.GetBodyPrefab(i));
+            }
+        }
+
+        private void ChangeScaling(GameObject go)
         {
             CharacterBody cb = go.GetComponent<CharacterBody>();
+
+            bool useShield = cb.bodyFlags.HasFlag(CharacterBody.BodyFlags.Mechanical);
 
             //Specific changes
             switch (cb.name)

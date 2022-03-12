@@ -18,16 +18,6 @@ namespace RiskyMod.Drones
             On.RoR2.BodyCatalog.Init += (orig) =>
             {
                 orig();
-                AddBody("BackupDroneBody");
-
-                AddBody("Drone1Body");
-                AddBody("Drone2Body");
-                AddBody("Turret1Body");
-
-                AddBody("MissileDroneBody");
-                AddBody("FlameDroneBody");
-                AddBody("EquipmentDroneBody");
-                AddBody("EmergencyDroneBody");
 
                 VagrantIndex = BodyCatalog.FindBodyIndex("VagrantBody");
             };
@@ -37,28 +27,14 @@ namespace RiskyMod.Drones
 
         private static void AddResist(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
         {
-            if (attackerBody.bodyIndex == VagrantResistance.VagrantIndex && damageInfo.procCoefficient > 1f && self.body && VagrantResistance.HasResist(self.body.bodyIndex))
+            if (!self.body.isPlayerControlled
+                && attackerBody.bodyIndex == VagrantResistance.VagrantIndex 
+                & damageInfo.procCoefficient > 1f
+                && (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player)
+                && DronesCore.IsAlly(self.body.bodyIndex))
             {
                 damageInfo.procCoefficient *= 0.5f;
                 damageInfo.damage *= 0.5f;
-            }
-        }
-
-        public static bool HasResist(BodyIndex index)
-        {
-            foreach (BodyIndex b in AffectedBodies)
-            {
-                if (b == index) return true;
-            }
-            return false;
-        }
-
-        public static void AddBody(string bodyname)
-        {
-            BodyIndex index = BodyCatalog.FindBodyIndex(bodyname);
-            if (index != BodyIndex.None)
-            {
-                AffectedBodies.Add(index);
             }
         }
     }

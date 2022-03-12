@@ -36,7 +36,8 @@ namespace RiskyMod.Tweaks
                 c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((remainingDamage, self, damageInfo) =>
                 {
                     bool bypassShield = (damageInfo.damageType & DamageType.BypassArmor) == DamageType.BypassArmor
-                    || (damageInfo.damageType & DamageType.BypassOneShotProtection) == DamageType.BypassOneShotProtection;
+                    || (damageInfo.damageType & DamageType.BypassOneShotProtection) == DamageType.BypassOneShotProtection
+                    || (damageInfo.damageType & DamageType.BypassBlock) == DamageType.BypassBlock;
 
                     bool shieldOnly = self.body.HasBuff(RoR2Content.Buffs.AffixLunar)
                     || (self.body.inventory && self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
