@@ -52,7 +52,7 @@ namespace RiskyMod.Items.Uncommon
                     float newHP = 0;
                     float infusionCount = (float)infusionBonus;
                     int hundredsFulfilled = 0;
-                    while (infusionBonus > 0f)
+                    while (infusionCount > 0f)
                     {
                         float killRequirement = 100f + 150f * hundredsFulfilled;
                         if (infusionBonus <= killRequirement)

@@ -8,9 +8,22 @@ namespace RiskyMod.Tweaks
     {
 		public static bool enabled = true;
 		public static float rewardMultiplier = 0.85f;
+
+		public static GameModeIndex classicRunIndex;
+		public static GameModeIndex simulacrumIndex;
+
         public RunScaling()
         {
 			if (!enabled) return;
+
+
+			On.RoR2.GameModeCatalog.LoadGameModes += (orig) =>
+			{
+				orig();
+				simulacrumIndex = GameModeCatalog.FindGameModeIndex("InfiniteTowerRun");
+				classicRunIndex = GameModeCatalog.FindGameModeIndex("ClassicRun");
+			};
+
 			On.RoR2.Run.RecalculateDifficultyCoefficentInternal += (orig, self) =>
             {
 				int playerCount = self.participatingPlayerCount;
@@ -38,20 +51,29 @@ namespace RiskyMod.Tweaks
 
 			On.RoR2.CombatDirector.DirectorMoneyWave.Update += (orig, self, deltaTime, difficultyCoefficient) =>
 			{
-				float stageFactor = Run.instance.stageClearCount < 4 ? Mathf.Pow(1.1f, Run.instance.stageClearCount) : 1.5f;//Needs cap to prevent game from turning into a slideshow. Uncapping it causes excessive T2 Elite spam.
-				difficultyCoefficient *= stageFactor;
+				if (Run.instance.gameModeIndex == classicRunIndex)
+				{
+					float stageFactor = Run.instance.stageClearCount < 4 ? Mathf.Pow(1.1f, Run.instance.stageClearCount) : 1.5f;//Needs cap to prevent game from turning into a slideshow. Uncapping it causes excessive T2 Elite spam.
+					difficultyCoefficient *= stageFactor;
+				}
 				return orig(self, deltaTime, difficultyCoefficient);
 			};
 
 			On.RoR2.CombatDirector.Awake += (orig, self) =>
 			{
-				self.creditMultiplier *= 1.1f;
+				if (Run.instance.gameModeIndex == classicRunIndex)
+				{
+					self.creditMultiplier *= 1.1f;
+				}
 				orig(self);
 			};
 
 			On.RoR2.DeathRewards.OnKilledServer += (orig, self, damageReport) =>
 			{
-				self.goldReward = (uint)Mathf.CeilToInt(Mathf.Pow(self.goldReward, 0.9f) / Mathf.Pow(1.2f, Run.instance.stageClearCount / 5));
+				if (Run.instance.gameModeIndex == classicRunIndex)
+				{
+					self.goldReward = (uint)Mathf.CeilToInt(Mathf.Pow(self.goldReward, 0.9f) / Mathf.Pow(1.2f, Run.instance.stageClearCount / 5));
+				}
 				orig(self, damageReport);
 			};
 		}

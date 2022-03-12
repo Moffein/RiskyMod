@@ -41,11 +41,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
             {
                 if (self.duration > 0f) //Exiting has 0 duration by default
                 {
-                    self.duration = 0.6f;  //Default enter duration is 1f
-                }
-                else
-                {
-                    self.duration = 0.1f;   //Noticed some crashes when exiting Corrupt state so I'm setting this to a positive number to see if it fixes those. Needs futher investigation.
+                    self.duration = 0.5f;  //Default enter duration is 1f
                 }
                 orig(self);
             };
