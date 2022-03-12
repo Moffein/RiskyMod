@@ -35,21 +35,12 @@ namespace RiskyMod.Items.Common
                 orig(self);
                 SpawnBanners();
             };
-            /*On.EntityStates.Missions.BrotherEncounter.Phase2.OnEnter += (orig, self) =>
+
+            On.EntityStates.InfiniteTowerSafeWard.Active.OnEnter += (orig, self) =>
             {
                 orig(self);
                 SpawnBanners();
             };
-            On.EntityStates.Missions.BrotherEncounter.Phase3.OnEnter += (orig, self) =>
-            {
-                orig(self);
-                SpawnBanners();
-            };
-            On.EntityStates.Missions.BrotherEncounter.Phase4.OnEnter += (orig, self) =>
-            {
-                orig(self);
-                SpawnBanners();
-            };*/
         }
         private static void ModifyItem()
         {
