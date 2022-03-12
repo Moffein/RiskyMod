@@ -494,8 +494,6 @@ namespace RiskyMod
 
             MageCore.enabled = Config.Bind(mageString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             M1Projectiles.increaseRange = Config.Bind(mageString, "Primary Range Increase", true, "Primary projectiles no longer disappear mid-flight.").Value;
-            MageCore.m2Buffer = Config.Bind(mageString, "Secondary Buffer Time", true, "Adds a 0.6s duration between Secondary uses if you hold down the button.").Value;
-            MageCore.m2RequiresKeypress = Config.Bind(mageString, "Secondary Requires Keypress", false, "Each Secondary use requires you to re-press the button.").Value;
             MageCore.flamethrowerSprintCancel = Config.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
             MageCore.ionSurgeMovementScaling = Config.Bind(mageString, "Ion Surge - Movement Scaling", false, "Ion Surge jump height scales with movement speed.").Value;
             MageCore.ionSurgeShock = Config.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
