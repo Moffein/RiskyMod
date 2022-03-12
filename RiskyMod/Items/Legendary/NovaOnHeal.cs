@@ -35,9 +35,5 @@ namespace RiskyMod.Items.Legendary
                 });
             };
         }
-        private static void ModifyItem()
-        {
-            if (RiskyMod.AIBlacklistUseVanillaBlacklist) SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.NovaOnHeal, ItemTag.AIBlacklist);
-        }
     }
 }

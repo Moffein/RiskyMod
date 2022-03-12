@@ -200,6 +200,7 @@ namespace RiskyMod
             new LoopBossArmor();
             new PlayerControlledMonsters();
             new EnigmaBlacklist();
+            new AIBlacklistItems();
         }
 
         private void RunFixes()
@@ -284,7 +285,7 @@ namespace RiskyMod
             EnemiesCore.modifyEnemies = Config.Bind(coreModuleString, "Monster Changes", true, "Enable enemy changes.").Value;
             MoonCore.enabled = Config.Bind(coreModuleString, "Moon Changes", true, "Enable Moon changes.").Value;
 
-            PlayerControlledMonsters.enabled = Config.Bind(tweakString, "Player-Controlled Monster Regen", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
+            AIBlacklistItems.enabled = Config.Bind(tweakString, "Expanded AI Blacklist", true, "Adds a few extra items to the AI Blacklist by default.").Value;
             TeleExpandOnBossKill.enabled = Config.Bind(tweakString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;
             SmallHoldoutCharging.enabled = Config.Bind(tweakString, "Small Holdout Charging", true, "Void/Moon Holdouts charge at max speed as long as 1 player is charging.").Value;
             SmallHoldoutRadius.enabled = Config.Bind(tweakString, "Small Holdout Radius", true, "Void/Moon Holdouts have increased radius.").Value;
@@ -300,6 +301,7 @@ namespace RiskyMod
             BarrierDecay.enabled = Config.Bind(tweakString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
             FreezeChampionExecute.enabled = Config.Bind(tweakString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
             EnigmaBlacklist.enabled = Config.Bind(tweakString, "Enigma Blacklist", true, "Blacklist Lunars and Recycler from the Artifact of Enigma.").Value;
+            PlayerControlledMonsters.enabled = Config.Bind(tweakString, "Player-Controlled Monster Regen", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
 
             ConfigCommonItems();
             ConfigUncommonItems();
@@ -380,7 +382,6 @@ namespace RiskyMod
         private void ConfigVoidItems()
         {
             SaferSpaces.enabled = Config.Bind(voidString, "Safer Spaces", true, itemConfigDescString).Value;
-
             PlasmaShrimp.enabled = Config.Bind(voidString, "Plasma Shrimp", true, itemConfigDescString).Value;
             VoidWisp.enabled = Config.Bind(voidString, "Voidsent Flame", true, itemConfigDescString).Value;
             Polylute.enabled = Config.Bind(voidString, "Polylute", true, itemConfigDescString).Value;

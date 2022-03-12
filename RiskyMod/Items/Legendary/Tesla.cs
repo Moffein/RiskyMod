@@ -13,7 +13,6 @@ namespace RiskyMod.Items.Legendary
         public Tesla()
         {
             if (!enabled) return;
-            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             IL.RoR2.Items.ShockNearbyBodyBehavior.FixedUpdate += (il) =>
             {
@@ -34,10 +33,6 @@ namespace RiskyMod.Items.Legendary
                 c.Index--;
                 c.Next.Operand = 20f;
             };
-        }
-        private static void ModifyItem()
-        {
-            if (RiskyMod.AIBlacklistUseVanillaBlacklist) SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.ShockNearby, ItemTag.AIBlacklist);
         }
     }
 }

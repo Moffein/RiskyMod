@@ -28,7 +28,6 @@ namespace RiskyMod.Items.Common
         private static void ModifyItem()
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Bear);
-            if (RiskyMod.AIBlacklistUseVanillaBlacklist) SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.Bear, ItemTag.AIBlacklist);
         }
     }
 }
