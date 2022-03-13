@@ -68,6 +68,7 @@ namespace RiskyMod
     [BepInDependency("Charzard4261.CaptainAbilitiesOffworld", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.EnigmaBlacklist", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.GestureEnigma", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.BackstabRework", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.0")]
@@ -170,6 +171,9 @@ namespace RiskyMod
             //Croco
             BiggerMeleeHitbox.enabled = BiggerMeleeHitbox.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TheTimeSweeper.AcridHitboxBuff");
             BlightStack.enabled = BlightStack.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AcridBlightStack");
+
+            //Bandit2
+            Bandit2Core.backstabNerf = Bandit2Core.backstabNerf && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BackstabRework");
 
             //Enemies
             BeetleQueen.enabled = BeetleQueen.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BeetleQueenPlus");
@@ -558,7 +562,10 @@ namespace RiskyMod
             Bandit2Core.specialRework = Config.Bind(banditString, "Special Rework", true, "Makes Resets/Desperado a selectable passive and adds a new Special skill.").Value;
 
             VoidFiendCore.enabled = Config.Bind(voidFiendString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            VoidFiendCore.modifyCorruption = Config.Bind(voidFiendString, "Corruption Changes", true, "Corruption is unaffected by healing, and Corruption-on-Crit is replaced with Corruption-on-Kill.").Value;
+            VoidFiendCore.fasterCorruptTransition = Config.Bind(voidFiendString, "Faster Corrupt Transition", true, "Speed up the corruption transform animation.").Value;
+            VoidFiendCore.corruptOnKill = Config.Bind(voidFiendString, "Corruption on Kill", true, "Gain Corruption on kill. Lowers passive Corruption gain and Corrupted form duration.").Value;
+            VoidFiendCore.noCorruptCrit = Config.Bind(voidFiendString, "No Corruption on Crit", true, "Disables Corruption gain on crit.").Value;
+            VoidFiendCore.noCorruptHeal = Config.Bind(voidFiendString, "No Corruption loss on Heal", true, "Disables Corruption loss on heal.").Value;
         }
     }
 }
