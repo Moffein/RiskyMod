@@ -44,6 +44,7 @@ using RiskyMod.Enemies.DLC1;
 using RiskyMod.Survivors.DLC1.VoidFiend;
 using System.IO;
 using RiskyMod.VoidLocus;
+using RiskyMod.Survivors.DLC1.Railgunner;
 
 namespace RiskyMod
 {
@@ -560,6 +561,9 @@ namespace RiskyMod
             Bandit2Core.knifeThrowChanges = Config.Bind(banditString, "Serrated Shiv Changes", true, "Enable changes to this skill.").Value;
             Bandit2Core.utilityFix = Config.Bind(banditString, "Smokebomb Fix", true, "Fixes various bugs with Smokebomb.").Value;
             Bandit2Core.specialRework = Config.Bind(banditString, "Special Rework", true, "Makes Resets/Desperado a selectable passive and adds a new Special skill.").Value;
+
+            RailgunnerCore.enabled = Config.Bind(railgunnerString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+            Survivors.DLC1.Railgunner.FixBungus.enabled = Config.Bind(railgunnerString, "Fix Bungus", true, "Removes self knockback force when on the ground.").Value;
 
             VoidFiendCore.enabled = Config.Bind(voidFiendString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             VoidFiendCore.fasterCorruptTransition = Config.Bind(voidFiendString, "Faster Corrupt Transition", true, "Speed up the corruption transform animation.").Value;
