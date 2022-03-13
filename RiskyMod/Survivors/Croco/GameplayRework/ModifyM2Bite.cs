@@ -6,7 +6,6 @@ namespace RiskyMod.Survivors.Croco
 {
     public class ModifyM2Bite
     {
-        AnimationCurve biteLunge;
         public ModifyM2Bite()
         {
             On.EntityStates.Croco.Bite.AuthorityModifyOverlapAttack += (orig, self, overlapAttack) =>
@@ -15,21 +14,6 @@ namespace RiskyMod.Survivors.Croco
                 overlapAttack.damageType = DamageType.BonusToLowHealth | DamageType.BlightOnHit;
                 overlapAttack.AddModdedDamageType(SharedDamageTypes.CrocoBiteHealOnKill);
             };
-
-            //This felt jank compared to Bandit, even when modifying the velocity curve.
-            /*biteLunge = BuildBiteVelocityCurve();
-            On.EntityStates.Croco.Bite.OnEnter += (orig, self) =>
-            {
-                orig(self);
-                if (self.characterBody && self.characterBody.isSprinting)
-                {
-                    self.ignoreAttackSpeed = true;
-                    self.forceForwardVelocity = true;
-                    self.forwardVelocityCurve = biteLunge;
-                }
-                self.durationBeforeInterruptable = 0.3f;
-            };
-            SneedUtils.SneedUtils.SetEntityStateField("entitystates.croco.bite", "ignoreAttackSpeed", "1");*/
         }
 
         private AnimationCurve BuildBiteVelocityCurve()

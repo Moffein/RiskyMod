@@ -1,11 +1,11 @@
 ﻿using RoR2;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.DLC1.VoidFiend
 {
     public class VoidFiendCore
     {
-        public static GameObject bodyPrefab;
         public static bool enabled = true;
 
         public static bool fasterCorruptTransition = true;
@@ -13,22 +13,32 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
         public static bool noCorruptHeal = true;
         public static bool noCorruptCrit = true;
 
+        public static BodyIndex bodyIndex;
+        public static GameObject bodyPrefab;
 
         public VoidFiendCore()
         {
             if (!enabled) return;
 
+            bodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidSurvivor/VoidSurvivorBody.prefab").WaitForCompletion();
+
+            On.RoR2.BodyCatalog.Init += (orig) =>
+            {
+                orig();
+                bodyIndex = BodyCatalog.FindBodyIndex("VoidSurvivor");
+            };
+
             //bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/VoidSurvivor");
 
-            ModifySkills();
+            ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
         }
 
-        private void ModifySkills()
+        private void ModifySkills(SkillLocator sk)
         {
-            ModifyPassive();
+            ModifyPassive(sk);
         }
 
-        private void ModifyPassive()
+        private void ModifyPassive(SkillLocator sk)
         {
             if (fasterCorruptTransition)
             {
@@ -45,7 +55,9 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
 
             if (corruptOnKill)
             {
+                //Which part changes the keyword? PassiveSkill doesn't seem to be it.
                 //"KEYWORD_VOIDCORRUPTION_RISKYMOD"
+
                 //Kills increase Corruption.
                 //Hoping this adds an additional layer of depth to using Void Fiend's Corruption
                 AssistManager.HandleAssistActions += CorruptionAssist;

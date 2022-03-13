@@ -18,7 +18,7 @@ namespace RiskyMod.Survivors.DLC1.Railgunner
                 c.Emit(OpCodes.Ldarg_0);
                 c.EmitDelegate<Func<float, EntityStates.Railgunner.Weapon.BaseFireSnipe, float>>((force, self) =>
                 {
-                    if (self.characterMotor && self.characterMotor.isGrounded)
+                    if (self.characterBody && self.characterBody.GetNotMoving())
                     {
                         return 0;
                     }

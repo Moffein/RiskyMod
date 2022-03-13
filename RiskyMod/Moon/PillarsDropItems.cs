@@ -15,7 +15,7 @@ namespace RiskyMod.Moon
         public static float whiteChance = 50f;
         public static float greenChance = 40f;
         public static float redChance = 10f;
-        public static BossGroup teleBossGroup = LegacyResourcesAPI.Load<BossGroup>("prefabs/networkedobjects/teleporters/Teleporter1");
+        public static float pearlChance = 15f;
 
         public PillarsDropItems()
         {
@@ -48,7 +48,7 @@ namespace RiskyMod.Moon
                             {
                                 bool overwritePickup = false;
                                 PickupIndex pickupOverwrite = PickupIndex.none;
-                                if ((pearlAvailable || shinyPearlAvailable) && teleBossGroup.bossDropChance > 0f && Run.instance.treasureRng.RangeFloat(0f, 100f) <= teleBossGroup.bossDropChance)
+                                if ((pearlAvailable || shinyPearlAvailable) && Run.instance.treasureRng.RangeFloat(0f, 100f) <= pearlChance)
                                 {
                                     overwritePickup = true;
                                     if (pearlAvailable)
@@ -64,6 +64,7 @@ namespace RiskyMod.Moon
                                         pickupOverwrite = shinyPearlIndex;
                                     }
                                 }
+
                                 PickupDropletController.CreatePickupDroplet(overwritePickup ? pickupOverwrite : pickupIndex, holdoutZone.transform.position + rewardPositionOffset, vector);
                                 k++;
                                 vector = rotation * vector;
