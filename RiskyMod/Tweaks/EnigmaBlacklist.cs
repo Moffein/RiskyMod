@@ -9,6 +9,8 @@ namespace RiskyMod.Tweaks
     public class EnigmaBlacklist
     {
         public static bool enabled = true;
+        public static bool blacklistLunar = true;
+
         public EnigmaBlacklist()
         {
             if (!enabled) return;
@@ -23,7 +25,7 @@ namespace RiskyMod.Tweaks
                     EquipmentDef ed = EquipmentCatalog.GetEquipmentDef(i);
                     if (ed)
                     {
-                        if (ed.isLunar)
+                        if (blacklistLunar && ed.isLunar)
                         {
                             toRemove.Add(i);
                         }

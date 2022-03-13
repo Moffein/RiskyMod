@@ -23,6 +23,10 @@ namespace RiskyMod.Tweaks
                     {
                         self.baseRadius *= 4f / 3f;
                     }
+                    else if (sd.baseSceneName.Equals("voidstage"))
+                    {
+                        self.baseRadius *= 4f / 3f;
+                    }
                 }
                 orig(self);
             };

@@ -74,7 +74,7 @@
 	"ITEM_GHOSTONKILL_PICKUP_RISKYMOD": "Killing an enemy summons a ghost. Recharges over time.",
 	"ITEM_GHOSTONKILL_DESC_RISKYMOD": "Killing an enemy <style=cIsDamage>spawns a ghost</style> of the killed enemy with <style=cIsDamage>1500%</style> <style=cStack>(+450% per stack)</style> damage. Lasts <style=cIsDamage>30s</style> <style=cStack>(+30s per stack)</style>. Recharges every <style=cIsUtility>20</style> seconds. Can have up to <style=cIsUtility>3</style> ghosts at a time.", 
 	
-	"ITEM_BEHEMOTH_DESC_RISKYMOD": "All your <style=cIsDamage>attacks explode</style> in a <style=cIsDamage>4m</style> radius for a bonus <style=cIsDamage>60%</style> <style=cStack>(+40% per stack)</style> TOTAL damage to nearby enemies.",
+	"ITEM_BEHEMOTH_DESC_RISKYMOD": "All your <style=cIsDamage>attacks explode</style> in a <style=cIsDamage>4m</style> radius for a bonus <style=cIsDamage>60%</style> <style=cStack>(+36% per stack)</style> TOTAL damage to nearby enemies.",
 	
 	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>Recruit a Beetle Guard</style> with bonus <style=cIsDamage>300%</style> <style=cStack>(+300% per stack)</style> damage and <style=cIsHealing>100% <style=cStack>(+100% per stack)</style> health</style>.",
 	
@@ -100,6 +100,6 @@
 	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Hits that deal <style=cIsDamage>more than 400% damage</style> also fire a black hole that <style=cIsUtility>draws enemies within 15m into its center</style>. Lasts <style=cIsUtility>5</style> seconds before collapsing, dealing <style=cIsDamage>100%</style> <style=cStack>(+100% per stack)</style> TOTAL damage. Recharges every <style=cIsUtility>15</style> seconds.",
 	
 	"ITEM_AUTOCASTEQUIPMENT_PICKUP_RISKYMOD": "Dramatically reduce Equipment cooldown... <color=#FF7F7F>\BUT it is randomized after each activation.</color>",
-	"ITEM_AUTOCASTEQUIPMENT_DESC_RISKYMOD": "<style=cIsUtility>Reduce Equipment cooldown</style> by <style=cIsUtility>50%</style> <style=cStack>(+15% per stack)</style>. Forces your Equipment to change to a <style=cIsUtility>random equipment</style> whenever it is <style=cIsUtility>activated</style>."
+	"ITEM_AUTOCASTEQUIPMENT_DESC_RISKYMOD": "<style=cIsUtility>Reduce Equipment cooldown</style> by <style=cIsUtility>50%</style> <style=cStack>(+15% per stack)</style>. Forces your Equipment to change to a <style=cIsHealth>random Equipment</style> whenever it is <style=cIsUtility>activated</style>."
 	}
 }

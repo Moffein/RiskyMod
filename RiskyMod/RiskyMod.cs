@@ -66,6 +66,8 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.NoVoidAllies", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.EliteReworks", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("Charzard4261.CaptainAbilitiesOffworld", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.EnigmaBlacklist", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.GestureEnigma", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.0")]
@@ -172,6 +174,9 @@ namespace RiskyMod
             //Enemies
             BeetleQueen.enabled = BeetleQueen.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BeetleQueenPlus");
             LunarWisp.enableFalloff = LunarWisp.enableFalloff && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.LunarWispFalloff");
+
+            FixEnigmaBlacklist.enabled = FixEnigmaBlacklist.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EnigmaBlacklist");
+            Gesture.enabled = Gesture.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.GestureEnigma");
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -402,7 +407,10 @@ namespace RiskyMod
 
         private void ConfigLunars()
         {
-            Gesture.enabled = Config.Bind(lunarString, "Gesture of the Drowned", true, itemConfigDescString).Value;
+            //Currently split into a separate mod to see how it plays.
+            //Gesture.enabled = Config.Bind(lunarString, "Gesture of the Drowned", true, itemConfigDescString).Value;
+            Gesture.enabled = false;
+
             ShapedGlass.enabled = Config.Bind(lunarString, "Shaped Glass", true, itemConfigDescString).Value;
             BrittleCrown.enabled = Config.Bind(lunarString, "Brittle Crown", true, itemConfigDescString).Value;
             Transcendence.enabled = Config.Bind(lunarString, "Transcendence", true, itemConfigDescString).Value;
