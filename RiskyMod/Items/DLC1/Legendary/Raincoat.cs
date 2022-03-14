@@ -13,11 +13,18 @@ namespace RiskyMod.Items.DLC1.Legendary
         public static BuffDef RaincoatReadyBuff;
         public static BuffDef RaincoatActiveBuff;
         public static BuffDef RaincoatCooldownBuff;
-        public static GameObject triggerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/Bandit2SmokeBomb");
+
+        public static GameObject triggerEffectPrefab;
+
         public Raincoat()
         {
             if (!enabled) return;
             ItemsCore.ModifyItemDefActions += ModifyItem;
+
+            triggerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/Bandit2SmokeBomb").InstantiateClone("RiskyMod_ProcRaincoat", false);
+            EffectComponent ec = triggerEffectPrefab.GetComponent<EffectComponent>();
+            ec.soundName = "Play_bandit2_shift_exit";
+            Content.Content.effectDefs.Add(new EffectDef(triggerEffectPrefab));
 
             DisableVanillaBehavior();
             HookTimedDebuffs();
