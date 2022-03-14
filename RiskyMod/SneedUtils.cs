@@ -9,6 +9,31 @@ namespace SneedUtils
 {
     public class SneedUtils
     {
+        public static void StunEnemiesInSphere(CharacterBody body, float radius)
+        {
+            if (body && body.teamComponent)
+            {
+                List<HealthComponent> hcList = new List<HealthComponent>();
+                Collider[] array = Physics.OverlapSphere(body.corePosition, radius, LayerIndex.entityPrecise.mask);
+                for (int i = 0; i < array.Length; i++)
+                {
+                    HurtBox hurtBox = array[i].GetComponent<HurtBox>();
+                    if (hurtBox && hurtBox.healthComponent && !hcList.Contains(hurtBox.healthComponent))
+                    {
+                        hcList.Add(hurtBox.healthComponent);
+                        if (hurtBox.healthComponent.body.teamComponent && hurtBox.healthComponent.body.teamComponent.teamIndex != body.teamComponent.teamIndex)
+                        {
+                            SetStateOnHurt ssoh = hurtBox.healthComponent.gameObject.GetComponent<SetStateOnHurt>();
+                            if (ssoh && ssoh.canBeStunned)
+                            {
+                                ssoh.SetStun(1f);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         public static void FixSkillName(SkillDef skillDef)
         {
             (skillDef as UnityEngine.Object).name = "RiskyMod_" + skillDef.skillName;

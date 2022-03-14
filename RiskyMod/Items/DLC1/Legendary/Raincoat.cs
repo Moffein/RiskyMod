@@ -2,7 +2,9 @@
 using MonoMod.Cil;
 using R2API;
 using RoR2;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace RiskyMod.Items.DLC1.Legendary
@@ -15,6 +17,8 @@ namespace RiskyMod.Items.DLC1.Legendary
         public static BuffDef RaincoatCooldownBuff;
 
         public static GameObject triggerEffectPrefab;
+        public static GameObject debuffNegateEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/ImmuneToDebuff/ImmuneToDebuffEffect.prefab").WaitForCompletion();
+        public static GameObject endEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/ImmuneToDebuff/ImmuneToDebuffEffect.prefab").WaitForCompletion();
 
         public Raincoat()
         {
@@ -25,6 +29,11 @@ namespace RiskyMod.Items.DLC1.Legendary
             EffectComponent ec = triggerEffectPrefab.GetComponent<EffectComponent>();
             ec.soundName = "Play_bandit2_shift_exit";
             Content.Content.effectDefs.Add(new EffectDef(triggerEffectPrefab));
+
+            endEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/CleanseEffect").InstantiateClone("RiskyMod_ProcRaincoatEnd", false);
+            ec = endEffectPrefab.GetComponent<EffectComponent>();
+            ec.soundName = "Play_item_lunar_use_utilityReplacement_end";
+            Content.Content.effectDefs.Add(new EffectDef(endEffectPrefab));
 
             DisableVanillaBehavior();
             HookTimedDebuffs();
@@ -37,6 +46,7 @@ namespace RiskyMod.Items.DLC1.Legendary
             {
                 if (body.HasBuff(RaincoatActiveBuff))
                 {
+                    EffectManager.SimpleImpactEffect(debuffNegateEffectPrefab, body.corePosition, Vector3.up, true);
                     return true;
                 }
                 else if (body.HasBuff(RaincoatReadyBuff))
@@ -46,6 +56,9 @@ namespace RiskyMod.Items.DLC1.Legendary
                     if (itemCount > 0)
                     {
                         body.AddTimedBuff(RaincoatActiveBuff, 4f);
+
+                        SneedUtils.SneedUtils.StunEnemiesInSphere(body, 12f);
+                        EffectManager.SimpleImpactEffect(debuffNegateEffectPrefab, body.corePosition, Vector3.up, true);
                         EffectManager.SpawnEffect(triggerEffectPrefab,
                             new EffectData
                             {
@@ -84,7 +97,7 @@ namespace RiskyMod.Items.DLC1.Legendary
                 true,
                 false,
                 new Color(88f / 255f, 91f / 255f, 98f / 255f),
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/CloakSpeed").iconSprite
+                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Nullified").iconSprite
                 );
 
             //Raincoat Active
@@ -117,6 +130,11 @@ namespace RiskyMod.Items.DLC1.Legendary
                             {
                                 self.AddTimedBuff(RaincoatCooldownBuff, i == 0 ? cooldown : stacksToApply - i);
                             }
+                            EffectManager.SpawnEffect(endEffectPrefab,
+                               new EffectData
+                               {
+                                   origin = self.corePosition
+                               }, true);
                         }
                     }
                 }
@@ -205,6 +223,7 @@ namespace RiskyMod.Items.DLC1.Legendary
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
         }
+
         private static void ModifyItem()
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, DLC1Content.Items.ImmuneToDebuff);

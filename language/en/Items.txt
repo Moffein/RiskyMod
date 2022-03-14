@@ -102,7 +102,7 @@
 	"ITEM_AUTOCASTEQUIPMENT_PICKUP_RISKYMOD": "Dramatically reduce Equipment cooldown... <color=#FF7F7F>\BUT it is randomized after each activation.</color>",
 	"ITEM_AUTOCASTEQUIPMENT_DESC_RISKYMOD": "<style=cIsUtility>Reduce Equipment cooldown</style> by <style=cIsUtility>50%</style> <style=cStack>(+15% per stack)</style>. Forces your Equipment to change to a <style=cIsHealth>random Equipment</style> whenever it is <style=cIsUtility>activated</style>.",
 	
-	"ITEM_IMMUNETODEBUFF_PICKUP_RISKYMOD" : "Negate a debuff and gain a speed boost. Recharges over time.",
-	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Upon receiving a <style=cIsDamage>debuff</style>, gain <style=cIsDamage>debuff immunity</style> and increase <style=cIsUtility>movement speed</style> by <style=cIsUtility>50%</style> for <style=cIsUtility>4s</style>. Recharges every <style=cIsUtility>15 seconds</style> <style=cStack>(-10% per stack)</style>."
+	"ITEM_IMMUNETODEBUFF_PICKUP_RISKYMOD" : "Negate debuffs and stun nearby enemies. Recharges over time.",
+	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Upon receiving a <style=cIsDamage>debuff</style>, <style=cIsDamage>stun</style> nearby enemies and gain <style=cIsDamage>debuff immunity</style> for <style=cIsDamage>4s</style>. Recharges every <style=cIsUtility>15 seconds</style> <style=cStack>(-10% per stack)</style>."
 	}
 }
