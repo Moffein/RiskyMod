@@ -19,7 +19,7 @@ namespace EntityStates.RiskyMod.Commando
 			maxDistance = 60f;
 			bulletRadius = 3f;
 			useSmartCollision = true;
-			damageCoefficient = 1.7f;
+			damageCoefficient = 2f;
 			procCoefficient = 0.75f;
 			force = 300f;
 			minSpread = 0f;

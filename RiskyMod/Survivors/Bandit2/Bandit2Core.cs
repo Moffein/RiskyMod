@@ -104,6 +104,7 @@ namespace RiskyMod.Survivors.Bandit2
                 shotgunDef.graceDuration = 0.4f;
                 shotgunDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
                 shotgunDef.reloadInterruptPriority = InterruptPriority.Any;
+                SneedUtils.SneedUtils.FixSkillName(shotgunDef);
                 Content.Content.skillDefs.Add(shotgunDef);
                 sk.primary._skillFamily.variants[0].skillDef = shotgunDef;
             }
@@ -136,6 +137,7 @@ namespace RiskyMod.Survivors.Bandit2
                 rifleDef.graceDuration = 0.4f;
                 rifleDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
                 rifleDef.reloadInterruptPriority = InterruptPriority.Any;
+                SneedUtils.SneedUtils.FixSkillName(rifleDef);
                 Content.Content.skillDefs.Add(rifleDef);
                 sk.primary._skillFamily.variants[1].skillDef = rifleDef;
             }
@@ -231,6 +233,7 @@ namespace RiskyMod.Survivors.Bandit2
             stealthDef.skillNameToken = "BANDIT2_UTILITY_NAME";
             stealthDef.skillDescriptionToken = "BANDIT2_UTILITY_DESCRIPTION";
             stealthDef.stockToConsume = 1;
+            SneedUtils.SneedUtils.FixSkillName(stealthDef);
             Content.Content.skillDefs.Add(stealthDef);
             sk.utility._skillFamily.variants[0].skillDef = stealthDef;
         }
@@ -278,6 +281,7 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.skillNameToken = "BANDIT2_SPECIAL_NAME";
             lightsOutDef.skillDescriptionToken = "BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD";
             lightsOutDef.stockToConsume = 1;
+            SneedUtils.SneedUtils.FixSkillName(lightsOutDef);
             Content.Content.skillDefs.Add(lightsOutDef);
             sk.special._skillFamily.variants[0].skillDef = lightsOutDef;
 
@@ -305,6 +309,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME_RISKYMOD";
             reuDef.skillDescriptionToken = "BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
             reuDef.stockToConsume = 1;
+            SneedUtils.SneedUtils.FixSkillName(reuDef);
             Content.Content.skillDefs.Add(reuDef);
             sk.special._skillFamily.variants[1].skillDef = reuDef;
 
@@ -341,6 +346,7 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.skillNameToken = "BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD";
             lightsOutDef.skillDescriptionToken = "BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD";
             lightsOutDef.stockToConsume = 1;
+            SneedUtils.SneedUtils.FixSkillName(lightsOutDef);
             Content.Content.skillDefs.Add(lightsOutDef);
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(lightsOutDef, "Bandit2Body", SkillSlot.Special, 0);
 
@@ -368,6 +374,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.skillNameToken = "BANDIT2_SPECIAL_ALT_SCEPTER_NAME_RISKYMOD";
             reuDef.skillDescriptionToken = "BANDIT2_SPECIAL_ALT_SCEPTER_DESCRIPTION_RISKYMOD";
             reuDef.stockToConsume = 1;
+            SneedUtils.SneedUtils.FixSkillName(reuDef);
             Content.Content.skillDefs.Add(reuDef);
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(reuDef, "Bandit2Body", SkillSlot.Special, 1);
         }
@@ -385,6 +392,7 @@ namespace RiskyMod.Survivors.Bandit2
             gunslingerDef.skillNameToken = "BANDIT2_REVOLVER_NAME_RISKYMOD";
             gunslingerDef.icon = Assets.SkillIcons.Bandit2Gunslinger;
             Skills.Gunslinger = gunslingerDef;
+            SneedUtils.SneedUtils.FixSkillName(gunslingerDef);
             Content.Content.skillDefs.Add(Skills.Gunslinger);
 
             SkillDef desperado = ScriptableObject.CreateInstance<SkillDef>();
@@ -395,6 +403,7 @@ namespace RiskyMod.Survivors.Bandit2
             desperado.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME";
             desperado.icon = Assets.SkillIcons.Bandit2Desperado;
             Skills.Desperado = desperado;
+            SneedUtils.SneedUtils.FixSkillName(desperado);
             Content.Content.skillDefs.Add(Skills.Desperado);
 
             SkillFamily skillFamily = ScriptableObject.CreateInstance<SkillFamily>();

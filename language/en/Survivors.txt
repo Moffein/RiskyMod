@@ -21,7 +21,6 @@
 	"BANDIT2_SPECIAL_ALT_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Slayer</style>. Rapidly fire a revolver shots for <style=cIsDamage>12x100% damage</style>. Each consecutive hit deals <style=cIsDamage>20%</style> extra damage.",
 	
 	"COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD" : "Fire a piercing round for <style=cIsDamage>480% damage</style>. Zaps nearby enemies for an additional <style=cIsDamage>240% damage</style>.",
-	"COMMANDO_SECONDARY_ALT1_DESCRIPTION_RISKYMOD" : "Fire two close-range blasts that deal <style=cIsDamage>8x170% damage</style> total.",
 	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Roll</style> a short distance and reduce skill cooldowns by <style=cIsUtility>1s</style>.",
 	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Stunning</style>. Fire fragmentation rounds for <style=cIsDamage>6x120% damage</style>. The number of shots increases with attack speed.",
 	"COMMANDO_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "Throw a grenade that explodes for <style=cIsDamage>1200% damage</style> after 2 seconds. Can be <style=cIsDamage>cooked</style> to explode early.",

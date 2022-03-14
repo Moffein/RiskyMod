@@ -1,5 +1,6 @@
 ﻿using RiskyMod.Content;
 using RoR2;
+using RoR2.Skills;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,6 +9,11 @@ namespace SneedUtils
 {
     public class SneedUtils
     {
+        public static void FixSkillName(SkillDef skillDef)
+        {
+            (skillDef as UnityEngine.Object).name = "RiskyMod_" + skillDef.skillName;
+        }
+
         public static BuffDef CreateBuffDef(string name, bool canStack, bool isCooldown, bool isDebuff, Color color, Sprite iconSprite)
         {
             BuffDef bd = ScriptableObject.CreateInstance<BuffDef>();

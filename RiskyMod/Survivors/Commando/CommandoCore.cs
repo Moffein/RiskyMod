@@ -92,6 +92,7 @@ namespace RiskyMod.Survivors.Commando
                 phaseRoundDef.skillNameToken = "COMMANDO_SECONDARY_NAME";
                 phaseRoundDef.skillDescriptionToken = "COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD";
                 phaseRoundDef.stockToConsume = 1;
+                SneedUtils.SneedUtils.FixSkillName(phaseRoundDef);
                 Content.Content.skillDefs.Add(phaseRoundDef);
                 sk.secondary.skillFamily.variants[0].skillDef = phaseRoundDef;
             }
@@ -119,8 +120,9 @@ namespace RiskyMod.Survivors.Commando
                 phaseBlastDef.requiredStock = 1;
                 phaseBlastDef.skillName = "FireShotgunBlast";
                 phaseBlastDef.skillNameToken = "COMMANDO_SECONDARY_ALT1_NAME";
-                phaseBlastDef.skillDescriptionToken = "COMMANDO_SECONDARY_ALT1_DESCRIPTION_RISKYMOD";
+                phaseBlastDef.skillDescriptionToken = "COMMANDO_SECONDARY_ALT1_DESCRIPTION";//_RISKYMOD
                 phaseBlastDef.stockToConsume = 1;
+                SneedUtils.SneedUtils.FixSkillName(phaseBlastDef);
                 Content.Content.skillDefs.Add(phaseBlastDef);
                 sk.secondary.skillFamily.variants[1].skillDef = phaseBlastDef;
             }

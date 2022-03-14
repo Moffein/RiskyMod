@@ -3,6 +3,7 @@ using MonoMod.Cil;
 using R2API;
 using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RiskyMod.Items.DLC1.Legendary
 {
@@ -12,6 +13,7 @@ namespace RiskyMod.Items.DLC1.Legendary
         public static BuffDef RaincoatReadyBuff;
         public static BuffDef RaincoatActiveBuff;
         public static BuffDef RaincoatCooldownBuff;
+        public static GameObject triggerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/Bandit2SmokeBomb");
         public Raincoat()
         {
             if (!enabled) return;
@@ -24,19 +26,27 @@ namespace RiskyMod.Items.DLC1.Legendary
 
         public static bool ProcRaincoat(CharacterBody body)
         {
-            if (body.HasBuff(RaincoatActiveBuff))
+            if (body)
             {
-                return true;
-            }
-            else if (body.HasBuff(RaincoatReadyBuff))
-            {
-                int itemCount = body.inventory ? body.inventory.GetItemCount(DLC1Content.Items.ImmuneToDebuff) : 0;
-                if (itemCount > 0)
+                if (body.HasBuff(RaincoatActiveBuff))
+                {
+                    return true;
+                }
+                else if (body.HasBuff(RaincoatReadyBuff))
                 {
                     body.RemoveBuff(RaincoatReadyBuff);
-                    body.AddTimedBuff(RaincoatActiveBuff, 4f);
+                    int itemCount = body.inventory ? body.inventory.GetItemCount(DLC1Content.Items.ImmuneToDebuff) : 0;
+                    if (itemCount > 0)
+                    {
+                        body.AddTimedBuff(RaincoatActiveBuff, 4f);
+                        EffectManager.SpawnEffect(triggerEffectPrefab,
+                            new EffectData
+                            {
+                                origin = body.corePosition
+                            }, true);
+                    }
+                    return true;
                 }
-                return true;
             }
             return false;
         }
@@ -63,7 +73,7 @@ namespace RiskyMod.Items.DLC1.Legendary
 
             RaincoatCooldownBuff = SneedUtils.SneedUtils.CreateBuffDef(
                 "RiskyMod_RaincoatCooldown",
-                false,
+                true,
                 true,
                 false,
                 new Color(88f / 255f, 91f / 255f, 98f / 255f),
@@ -83,21 +93,23 @@ namespace RiskyMod.Items.DLC1.Legendary
             On.RoR2.CharacterBody.RemoveBuff_BuffIndex += (orig, self, buffType) =>
             {
                 orig(self, buffType);
-
-                if (buffType == RaincoatActiveBuff.buffIndex)
+                if (NetworkServer.active)
                 {
-                    if (!self.HasBuff(RaincoatActiveBuff))
+                    if (buffType == RaincoatActiveBuff.buffIndex)
                     {
-                        float cooldown = 20f;
-                        int itemCount = self.inventory ? self.inventory.GetItemCount(DLC1Content.Items.ImmuneToDebuff) : 0;
-                        if (itemCount > 1)
+                        if (!self.HasBuff(RaincoatActiveBuff))
                         {
-                            cooldown = Mathf.Max(cooldown * Mathf.Pow(0.8f, itemCount - 1), 1f);
-                        }
-                        int stacksToApply = Mathf.CeilToInt(cooldown);
-                        for (int i = 0; i<stacksToApply;i++)
-                        {
-                            self.AddTimedBuff(RaincoatCooldownBuff, i == 0 ? cooldown : stacksToApply - i);
+                            float cooldown = 15f;
+                            int itemCount = self.inventory ? self.inventory.GetItemCount(DLC1Content.Items.ImmuneToDebuff) : 0;
+                            if (itemCount > 1)
+                            {
+                                cooldown = Mathf.Max(cooldown * Mathf.Pow(0.9f, itemCount - 1), 1f);
+                            }
+                            int stacksToApply = Mathf.CeilToInt(cooldown);
+                            for (int i = 0; i < stacksToApply; i++)
+                            {
+                                self.AddTimedBuff(RaincoatCooldownBuff, i == 0 ? cooldown : stacksToApply - i);
+                            }
                         }
                     }
                 }
@@ -107,11 +119,14 @@ namespace RiskyMod.Items.DLC1.Legendary
             On.RoR2.CharacterBody.FixedUpdate += (orig, self) =>
             {
                 orig(self);
-                if (self.inventory && self.inventory.GetItemCount(DLC1Content.Items.ImmuneToDebuff) > 0)
+                if (NetworkServer.active)
                 {
-                    if (!(self.HasBuff(RaincoatActiveBuff) || self.HasBuff(RaincoatCooldownBuff) || self.HasBuff(RaincoatReadyBuff)))
+                    if (self.inventory && self.inventory.GetItemCount(DLC1Content.Items.ImmuneToDebuff) > 0)
                     {
-                        self.AddBuff(RaincoatReadyBuff);
+                        if (!(self.HasBuff(RaincoatActiveBuff) || self.HasBuff(RaincoatCooldownBuff) || self.HasBuff(RaincoatReadyBuff)))
+                        {
+                            self.AddBuff(RaincoatReadyBuff);
+                        }
                     }
                 }
             };
@@ -121,7 +136,7 @@ namespace RiskyMod.Items.DLC1.Legendary
         {
             On.RoR2.CharacterBody.AddTimedBuff_BuffDef_float += (orig, self, buffDef, duration) =>
             {
-                if (buffDef.isDebuff)
+                if (NetworkServer.active && buffDef.isDebuff)
                 {
                     if (ProcRaincoat(self))
                     {
@@ -133,7 +148,7 @@ namespace RiskyMod.Items.DLC1.Legendary
 
             On.RoR2.CharacterBody.AddTimedBuff_BuffDef_float_int += (orig, self, buffDef, duration, maxStacks) =>
             {
-                if (buffDef.isDebuff)
+                if (NetworkServer.active && buffDef.isDebuff)
                 {
                     if (ProcRaincoat(self))
                     {
@@ -145,7 +160,7 @@ namespace RiskyMod.Items.DLC1.Legendary
 
             On.RoR2.DotController.InflictDot_refInflictDotInfo += (On.RoR2.DotController.orig_InflictDot_refInflictDotInfo orig, ref InflictDotInfo inflictDotInfo) =>
             {
-                if (inflictDotInfo.victimObject)
+                if (NetworkServer.active && inflictDotInfo.victimObject)
                 {
                     CharacterBody characterBody = inflictDotInfo.victimObject.GetComponent<CharacterBody>();
                     if (ProcRaincoat(characterBody))

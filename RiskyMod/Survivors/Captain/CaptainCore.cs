@@ -62,6 +62,7 @@ namespace RiskyMod.Survivors.Captain
             shotgunDef.skillNameToken = "CAPTAIN_PRIMARY_NAME";
             shotgunDef.skillDescriptionToken = "CAPTAIN_PRIMARY_DESC_RISKYMOD";
             shotgunDef.stockToConsume = 1;
+            SneedUtils.SneedUtils.FixSkillName(shotgunDef);
             Content.Content.skillDefs.Add(shotgunDef);
             Skills.Shotgun = shotgunDef;
             sk.primary._skillFamily.variants[0].skillDef = Skills.Shotgun;
