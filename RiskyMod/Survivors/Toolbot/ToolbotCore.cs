@@ -7,6 +7,7 @@ using RoR2.Skills;
 using EntityStates;
 using RiskyMod.SharedHooks;
 using Mono.Cecil.Cil;
+using RiskyMod.Survivors.Toolbot.Components;
 
 namespace RiskyMod.Survivors.Toolbot
 {
@@ -92,9 +93,21 @@ namespace RiskyMod.Survivors.Toolbot
         private void ScrapChanges(SkillLocator sk)
         {
             if (!enableScrapChanges) return;
+            bodyPrefab.AddComponent<GrenadeStockController>();
             sk.primary.skillFamily.variants[2].skillDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT2_DESCRIPTION_RISKYMOD";
+            sk.primary.skillFamily.variants[2].skillDef.rechargeStock = 0;
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireGrenadeLauncher", "damageCoefficient", "3.9");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireGrenadeLauncher", "maxSpread", "0");
+
+            On.EntityStates.Toolbot.FireGrenadeLauncher.OnEnter += (orig, self) =>
+            {
+                orig(self);
+                GrenadeStockController gsc = self.gameObject.GetComponent<GrenadeStockController>();
+                if (gsc)
+                {
+                    gsc.FireSkill(self.activatorSkillSlot);
+                }
+            };
         }
 
         private void SawChanges(SkillLocator sk)

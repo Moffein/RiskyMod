@@ -68,63 +68,14 @@ namespace RiskyMod.Survivors.Commando
         {
             if (phaseRoundChanges)
             {
-                FirePhaseRound._projectilePrefab = BuildPhaseRoundProjectile();
-                Content.Content.entityStates.Add(typeof(FirePhaseRound));
-                SkillDef phaseRoundDef = SkillDef.CreateInstance<SkillDef>();
-                phaseRoundDef.activationState = new SerializableEntityStateType(typeof(FirePhaseRound));
-                phaseRoundDef.activationStateMachineName = "Weapon";
-                phaseRoundDef.baseMaxStock = 1;
-                phaseRoundDef.baseRechargeInterval = 3f;
-                phaseRoundDef.beginSkillCooldownOnSkillEnd = false;
-                phaseRoundDef.canceledFromSprinting = false;
-                phaseRoundDef.dontAllowPastMaxStocks = true;
-                phaseRoundDef.forceSprintDuringState = false;
-                phaseRoundDef.fullRestockOnAssign = true;
-                phaseRoundDef.icon = sk.secondary.skillFamily.variants[0].skillDef.icon;
-                phaseRoundDef.interruptPriority = InterruptPriority.Skill;
-                phaseRoundDef.isCombatSkill = true;
-                phaseRoundDef.keywordTokens = new string[] { };
-                phaseRoundDef.mustKeyPress = false;
-                phaseRoundDef.cancelSprintingOnActivation = true;
-                phaseRoundDef.rechargeStock = 1;
-                phaseRoundDef.requiredStock = 1;
-                phaseRoundDef.skillName = "FireFMJ";
-                phaseRoundDef.skillNameToken = "COMMANDO_SECONDARY_NAME";
-                phaseRoundDef.skillDescriptionToken = "COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD";
-                phaseRoundDef.stockToConsume = 1;
-                SneedUtils.SneedUtils.FixSkillName(phaseRoundDef);
-                Content.Content.skillDefs.Add(phaseRoundDef);
-                sk.secondary.skillFamily.variants[0].skillDef = phaseRoundDef;
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireFMJ", "projectilePrefab", BuildPhaseRoundProjectile());
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireFMJ", "damageCoefficient", "4.8");
+                sk.primary.skillFamily.variants[0].skillDef.skillDescriptionToken = "COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD";
             }
 
             if (phaseBlastChanges)
             {
-                Content.Content.entityStates.Add(typeof(FirePhaseBlast));
-                SkillDef phaseBlastDef = SkillDef.CreateInstance<SkillDef>();
-                phaseBlastDef.activationState = new SerializableEntityStateType(typeof(FirePhaseBlast));
-                phaseBlastDef.activationStateMachineName = "Weapon";
-                phaseBlastDef.baseMaxStock = 1;
-                phaseBlastDef.baseRechargeInterval = 3f;
-                phaseBlastDef.beginSkillCooldownOnSkillEnd = false;
-                phaseBlastDef.canceledFromSprinting = false;
-                phaseBlastDef.dontAllowPastMaxStocks = true;
-                phaseBlastDef.forceSprintDuringState = false;
-                phaseBlastDef.fullRestockOnAssign = true;
-                phaseBlastDef.icon = sk.secondary.skillFamily.variants[1].skillDef.icon;
-                phaseBlastDef.interruptPriority = InterruptPriority.Skill;
-                phaseBlastDef.isCombatSkill = true;
-                phaseBlastDef.keywordTokens = new string[] { };
-                phaseBlastDef.mustKeyPress = false;
-                phaseBlastDef.cancelSprintingOnActivation = true;
-                phaseBlastDef.rechargeStock = 1;
-                phaseBlastDef.requiredStock = 1;
-                phaseBlastDef.skillName = "FireShotgunBlast";
-                phaseBlastDef.skillNameToken = "COMMANDO_SECONDARY_ALT1_NAME";
-                phaseBlastDef.skillDescriptionToken = "COMMANDO_SECONDARY_ALT1_DESCRIPTION";//_RISKYMOD
-                phaseBlastDef.stockToConsume = 1;
-                SneedUtils.SneedUtils.FixSkillName(phaseBlastDef);
-                Content.Content.skillDefs.Add(phaseBlastDef);
-                sk.secondary.skillFamily.variants[1].skillDef = phaseBlastDef;
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireShotgunBlast", "procCoefficient", "0.75");
             }
         }
 

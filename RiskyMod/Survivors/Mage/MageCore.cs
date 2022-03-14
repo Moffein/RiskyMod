@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using RoR2.Skills;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
+using RiskyMod.Survivors.Mage.Components;
 
 namespace RiskyMod.Survivors.Mage
 {
@@ -14,6 +15,8 @@ namespace RiskyMod.Survivors.Mage
     public class MageCore
     {
         public static bool enabled = true;
+
+        public static bool m1AttackSpeed = true;
 
         public static bool flamethrowerSprintCancel = true;
 
@@ -36,21 +39,47 @@ namespace RiskyMod.Survivors.Mage
 
         private void ModifyPrimaries(SkillLocator sk)
         {
+            if (m1AttackSpeed)
+            {
+                MageStockController.fireMuzzleflashEffectPrefab = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Mage.Weapon.FireFireBolt", "muzzleflashEffectPrefab");
+                MageStockController.lightningMuzzleflashEffectPrefab = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Mage.Weapon.FireLightningBolt", "muzzleflashEffectPrefab");
+                MageStockController.iceMuzzleflashEffectPrefab = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Mage.Weapon.FireIceBolt", "muzzleflashEffectPrefab");
+                bodyPrefab.AddComponent<MageStockController>();
+            }
             for (int i = 0; i < sk.primary.skillFamily.variants.Length; i++)
             {
                 if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireFireBolt))
                 {
+                    if (m1AttackSpeed)
+                    {
+                        sk.primary.skillFamily.variants[i].skillDef.rechargeStock = 0;
+                        //sk.primary.skillFamily.variants[i].skillDef.baseRechargeInterval = 0;
 
+                        //FireLightningBolt inherits from this
+                        On.EntityStates.Mage.Weapon.FireFireBolt.OnEnter += (orig, self) =>
+                        {
+                            orig(self);
+                            MageStockController msc = self.gameObject.GetComponent<MageStockController>();
+                            if (msc)
+                            {
+                                msc.FireSkill();
+                            }
+                        };
+                    }
                 }
                 else if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireLightningBolt))
                 {
+                    if (m1AttackSpeed)
+                    {
+                        sk.primary.skillFamily.variants[i].skillDef.rechargeStock = 0;
+                        //sk.primary.skillFamily.variants[i].skillDef.baseRechargeInterval = 0;
+                    }
                     if (M1Projectiles.modifyPlasma)
                     {
                         sk.primary.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
                     }
                 }
             }
-            //new QuickdrawPassive();
             new M1Projectiles();
         }
 
