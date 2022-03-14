@@ -23,32 +23,8 @@ namespace RiskyMod.Survivors.Mage.Components
         public static GameObject lightningMuzzleflashEffectPrefab;
         public static GameObject iceMuzzleflashEffectPrefab;
 
-        private void ShowReloadVFX()
-        {
-            GameObject currentEffectPrefab = null;
-            if (skills.primary.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireFireBolt))
-            {
-                currentEffectPrefab = fireMuzzleflashEffectPrefab;
-            }
-            else if (skills.primary.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireLightningBolt))
-            {
-                currentEffectPrefab = lightningMuzzleflashEffectPrefab;
-            }
-            else
-            {
-                currentEffectPrefab = iceMuzzleflashEffectPrefab;
-            }
 
-
-            if (currentEffectPrefab)
-            {
-                EffectManager.SimpleMuzzleFlash(currentEffectPrefab, base.gameObject, rightMuzzle ? "MuzzleRight" : "MuzzleLeft", false);
-            }
-
-            rightMuzzle = !rightMuzzle;
-        }
-
-        public void Awake()
+        private void Awake()
         {
             body = base.GetComponent<CharacterBody>();
             skills = base.GetComponent<SkillLocator>();
@@ -58,7 +34,7 @@ namespace RiskyMod.Survivors.Mage.Components
             rightMuzzle = true;
         }
 
-        public void FixedUpdate()
+        private void FixedUpdate()
         {
             if (skills.primary.stock < skills.primary.maxStock && ValidStates.Contains(skills.primary.activationState.stateType))
             {
@@ -94,6 +70,30 @@ namespace RiskyMod.Survivors.Mage.Components
         {
             delayStopwatch = graceDuration;  //Duration is already scaled to attack speed. InitialDelay is simply for inputs, and is ignored if the mag is empty.
             reloadStopwatch = baseDuration / body.attackSpeed;
+        }
+        private void ShowReloadVFX()
+        {
+            GameObject currentEffectPrefab = null;
+            if (skills.primary.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireFireBolt))
+            {
+                currentEffectPrefab = fireMuzzleflashEffectPrefab;
+            }
+            else if (skills.primary.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireLightningBolt))
+            {
+                currentEffectPrefab = lightningMuzzleflashEffectPrefab;
+            }
+            else
+            {
+                currentEffectPrefab = iceMuzzleflashEffectPrefab;
+            }
+
+
+            if (currentEffectPrefab)
+            {
+                EffectManager.SimpleMuzzleFlash(currentEffectPrefab, base.gameObject, rightMuzzle ? "MuzzleRight" : "MuzzleLeft", false);
+            }
+
+            rightMuzzle = !rightMuzzle;
         }
     }
 }

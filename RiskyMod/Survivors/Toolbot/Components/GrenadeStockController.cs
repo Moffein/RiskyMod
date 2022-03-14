@@ -27,7 +27,7 @@ namespace RiskyMod.Survivors.Toolbot.Components
             }
         }
 
-        public void Awake()
+        private void Awake()
         {
             body = base.GetComponent<CharacterBody>();
             skills = base.GetComponent<SkillLocator>();
@@ -35,7 +35,7 @@ namespace RiskyMod.Survivors.Toolbot.Components
             skillStatuses = new List<SkillStatus>();
         }
 
-        public void FixedUpdate()
+        private void FixedUpdate()
         {
             foreach (SkillStatus s in skillStatuses)
             {
