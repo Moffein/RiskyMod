@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using RiskyMod.Content;
+using RoR2;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,6 +8,21 @@ namespace SneedUtils
 {
     public class SneedUtils
     {
+        public static BuffDef CreateBuffDef(string name, bool canStack, bool isCooldown, bool isDebuff, Color color, Sprite iconSprite)
+        {
+            BuffDef bd = ScriptableObject.CreateInstance<BuffDef>();
+            bd.name = name;
+            bd.canStack = canStack;
+            bd.isCooldown = isCooldown;
+            bd.isDebuff = isDebuff;
+            bd.buffColor = color;
+            bd.iconSprite = iconSprite;
+            Content.buffDefs.Add(bd);
+
+            (bd as UnityEngine.Object).name = bd.name;
+            return bd;
+        }
+
         public static int FindEnemiesInSphere(float radius, Vector3 position, TeamIndex team, bool airborneOnly = false)
         {
             int hitCount = 0;

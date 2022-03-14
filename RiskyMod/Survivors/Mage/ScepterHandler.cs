@@ -70,7 +70,7 @@ namespace RiskyMod.Survivors.Mage
                 lightCpt.range = 5f;
             }
 
-            R2API.ContentAddition.AddProjectile(projCloud);
+            Content.Content.projectilePrefabs.Add(projCloud);
             return projCloud;
         }
 

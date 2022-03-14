@@ -60,7 +60,6 @@ namespace RiskyMod.Items
         private void ModifyUncommon()
         {
             if (!uncommonEnabled) return;
-            new Predatory();
             new Chronobauble();
             new LeechingSeed();
             new AtG();
@@ -97,6 +96,7 @@ namespace RiskyMod.Items
 
             new LaserScope();
             new BottledChaos();
+            new Raincoat();
         }
 
         private void ModifyVoid()

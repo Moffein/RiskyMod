@@ -28,13 +28,14 @@ namespace RiskyMod.Items.Uncommon
                  c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
              };
 
-            berzerkBuff = ScriptableObject.CreateInstance<BuffDef>();
-            berzerkBuff.buffColor = new Color(210f / 255f, 50f / 255f, 22f / 255f);
-            berzerkBuff.canStack = true;
-            berzerkBuff.isDebuff = false;
-            berzerkBuff.name = "RiskyMod_BerzerkBuff";
-            berzerkBuff.iconSprite = LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texWarcryBuffIcon");
-            R2API.ContentAddition.AddBuffDef((berzerkBuff));
+            berzerkBuff = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_BerzerkBuff",
+                true,
+                false,
+                false,
+                new Color(210f / 255f, 50f / 255f, 22f / 255f),
+                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/WarCryBuff").iconSprite
+                );
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
             RecalculateStatsAPI.GetStatCoefficients += HandleStats;

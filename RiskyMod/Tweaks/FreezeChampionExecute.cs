@@ -23,13 +23,15 @@ namespace RiskyMod.Tweaks
 
         private void BuildDebuff()
         {
-            FreezeDebuff = ScriptableObject.CreateInstance<BuffDef>();
-            FreezeDebuff.buffColor = Color.white;
-            FreezeDebuff.canStack = false;
-            FreezeDebuff.isDebuff = true;
-            FreezeDebuff.name = "RiskyMod_FreezeDebuff";
-            FreezeDebuff.iconSprite = Assets.BuffIcons.Freeze;
-            R2API.ContentAddition.AddBuffDef((FreezeDebuff));
+            FreezeDebuff = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_FreezeDebuff",
+                false,
+                false,
+                true,
+                Color.white,
+                Assets.BuffIcons.Freeze
+                );
+
             RecalculateStatsAPI.GetStatCoefficients += ApplySlow;
 
             IL.RoR2.CharacterModel.UpdateOverlays += (il) =>

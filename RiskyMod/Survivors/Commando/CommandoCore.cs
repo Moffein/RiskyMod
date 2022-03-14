@@ -69,7 +69,7 @@ namespace RiskyMod.Survivors.Commando
             if (phaseRoundChanges)
             {
                 FirePhaseRound._projectilePrefab = BuildPhaseRoundProjectile();
-                R2API.ContentAddition.AddEntityState<FirePhaseRound>(out bool x);
+                Content.Content.entityStates.Add(typeof(FirePhaseRound));
                 SkillDef phaseRoundDef = SkillDef.CreateInstance<SkillDef>();
                 phaseRoundDef.activationState = new SerializableEntityStateType(typeof(FirePhaseRound));
                 phaseRoundDef.activationStateMachineName = "Weapon";
@@ -92,13 +92,13 @@ namespace RiskyMod.Survivors.Commando
                 phaseRoundDef.skillNameToken = "COMMANDO_SECONDARY_NAME";
                 phaseRoundDef.skillDescriptionToken = "COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD";
                 phaseRoundDef.stockToConsume = 1;
-                R2API.ContentAddition.AddSkillDef(phaseRoundDef);
+                Content.Content.skillDefs.Add(phaseRoundDef);
                 sk.secondary.skillFamily.variants[0].skillDef = phaseRoundDef;
             }
 
             if (phaseBlastChanges)
             {
-                R2API.ContentAddition.AddEntityState<FirePhaseBlast>(out bool x);
+                Content.Content.entityStates.Add(typeof(FirePhaseBlast));
                 SkillDef phaseBlastDef = SkillDef.CreateInstance<SkillDef>();
                 phaseBlastDef.activationState = new SerializableEntityStateType(typeof(FirePhaseBlast));
                 phaseBlastDef.activationStateMachineName = "Weapon";
@@ -121,7 +121,7 @@ namespace RiskyMod.Survivors.Commando
                 phaseBlastDef.skillNameToken = "COMMANDO_SECONDARY_ALT1_NAME";
                 phaseBlastDef.skillDescriptionToken = "COMMANDO_SECONDARY_ALT1_DESCRIPTION_RISKYMOD";
                 phaseBlastDef.stockToConsume = 1;
-                R2API.ContentAddition.AddSkillDef(phaseBlastDef);
+                Content.Content.skillDefs.Add(phaseBlastDef);
                 sk.secondary.skillFamily.variants[1].skillDef = phaseBlastDef;
             }
         }
@@ -155,25 +155,12 @@ namespace RiskyMod.Survivors.Commando
             }
         }
 
-        private BuffDef BuildSlideBuff()
-        {
-            BuffDef slideDef = ScriptableObject.CreateInstance<BuffDef>();
-            slideDef.buffColor = new Color(237f / 255f, 150f / 255f, 22f / 255f);
-            slideDef.canStack = false;
-            slideDef.isDebuff = false;
-            slideDef.name = "RiskyRebalanceCommandoSlide";
-            slideDef.iconSprite = LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffFullCritIcon");
-            R2API.ContentAddition.AddBuffDef((slideDef));
-
-            return slideDef;
-        }
-
         private void ModifySpecials(SkillLocator sk)
         {
             if (suppressiveChanges)
             {
                 SuppressiveFireDamage = DamageAPI.ReserveDamageType();
-                R2API.ContentAddition.AddEntityState<FireBarrage>(out bool x);
+                Content.Content.entityStates.Add(typeof(FireBarrage));
                 SkillDef barrageDef = SkillDef.CreateInstance<SkillDef>();
                 barrageDef.activationState = new SerializableEntityStateType(typeof(FireBarrage));
                 barrageDef.activationStateMachineName = "Weapon";
@@ -196,7 +183,7 @@ namespace RiskyMod.Survivors.Commando
                 barrageDef.skillNameToken = "COMMANDO_SPECIAL_NAME";
                 barrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD";
                 barrageDef.stockToConsume = 1;
-                R2API.ContentAddition.AddSkillDef(barrageDef);
+                Content.Content.skillDefs.Add(barrageDef);
                 sk.special.skillFamily.variants[0].skillDef = barrageDef;
                 OnHitAll.HandleOnHitAllActions += FireBarrage.SuppressiveFireAOE;
             }
@@ -205,8 +192,10 @@ namespace RiskyMod.Survivors.Commando
             {
                 ThrowGrenade._projectilePrefab = BuildGrenadeProjectile();
                 CookGrenade.overcookExplosionEffectPrefab = BuildGrenadeOvercookExplosionEffect();
-                R2API.ContentAddition.AddEntityState<CookGrenade>(out bool x);
-                R2API.ContentAddition.AddEntityState<ThrowGrenade>(out bool y);
+
+                Content.Content.entityStates.Add(typeof(CookGrenade));
+                Content.Content.entityStates.Add(typeof(ThrowGrenade));
+
                 SkillDef grenadeDef = SkillDef.CreateInstance<SkillDef>();
                 grenadeDef.activationState = new SerializableEntityStateType(typeof(CookGrenade));
                 grenadeDef.activationStateMachineName = "Weapon";
@@ -229,7 +218,7 @@ namespace RiskyMod.Survivors.Commando
                 grenadeDef.skillNameToken = "COMMANDO_SPECIAL_ALT1_NAME";
                 grenadeDef.skillDescriptionToken = "COMMANDO_SPECIAL_ALT1_DESCRIPTION_RISKYMOD";
                 grenadeDef.stockToConsume = 1;
-                R2API.ContentAddition.AddSkillDef(grenadeDef);
+                Content.Content.skillDefs.Add(grenadeDef);
                 sk.special.skillFamily.variants[1].skillDef = grenadeDef;
             }
 
@@ -247,7 +236,7 @@ namespace RiskyMod.Survivors.Commando
                 SuppressiveFireScepterDamage = DamageAPI.ReserveDamageType();
                 OnHitAll.HandleOnHitAllActions += FireBarrageScepter.SuppressiveFireScepterAOE;
                 SkillDef barrageDef = SkillDef.CreateInstance<SkillDef>();
-                R2API.ContentAddition.AddEntityState<FireBarrageScepter>(out bool x);
+                Content.Content.entityStates.Add(typeof(FireBarrageScepter));
                 barrageDef.activationState = new SerializableEntityStateType(typeof(FireBarrageScepter));
                 barrageDef.activationStateMachineName = "Weapon";
                 barrageDef.baseMaxStock = 1;
@@ -269,15 +258,15 @@ namespace RiskyMod.Survivors.Commando
                 barrageDef.skillNameToken = "COMMANDO_SPECIAL_SCEPTER_NAME";
                 barrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD";
                 barrageDef.stockToConsume = 1;
-                R2API.ContentAddition.AddSkillDef(barrageDef);
+                Content.Content.skillDefs.Add(barrageDef);
                 AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(barrageDef, "CommandoBody", SkillSlot.Special, 0);
             }
 
             if (grenadeChanges)
             {
                 ThrowGrenadeScepter._projectilePrefab = BuildGrenadeScepterProjectile();
-                R2API.ContentAddition.AddEntityState<CookGrenadeScepter>(out bool x);
-                R2API.ContentAddition.AddEntityState<ThrowGrenadeScepter>(out bool y);
+                Content.Content.entityStates.Add(typeof(CookGrenadeScepter));
+                Content.Content.entityStates.Add(typeof(ThrowGrenadeScepter));
                 SkillDef grenadeDef = SkillDef.CreateInstance<SkillDef>();
                 grenadeDef.activationState = new SerializableEntityStateType(typeof(CookGrenadeScepter));
                 grenadeDef.activationStateMachineName = "Weapon";
@@ -300,7 +289,7 @@ namespace RiskyMod.Survivors.Commando
                 grenadeDef.skillNameToken = "COMMANDO_SPECIAL_ALT1_SCEPTER_NAME";
                 grenadeDef.skillDescriptionToken = "COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD";
                 grenadeDef.stockToConsume = 1;
-                R2API.ContentAddition.AddSkillDef(grenadeDef);
+                Content.Content.skillDefs.Add(grenadeDef);
                 AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(grenadeDef, "CommandoBody", SkillSlot.Special, 1);
             }
         }
@@ -322,7 +311,7 @@ namespace RiskyMod.Survivors.Commando
 
             proj.AddComponent<GrenadeTimer>();
 
-            R2API.ContentAddition.AddProjectile(proj);
+            Content.Content.projectilePrefabs.Add(proj);
             return proj;
         }
         private GameObject BuildGrenadeProjectile()
@@ -343,7 +332,7 @@ namespace RiskyMod.Survivors.Commando
 
             proj.AddComponent<GrenadeTimer>();
 
-            R2API.ContentAddition.AddProjectile(proj);
+            Content.Content.projectilePrefabs.Add(proj);
             return proj;
         }
         private GameObject BuildGrenadeOvercookExplosionEffect()
@@ -351,7 +340,7 @@ namespace RiskyMod.Survivors.Commando
             GameObject effect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFXCommandoGrenade").InstantiateClone("RiskyModFragOvercookEffect", false);
             EffectComponent ec = effect.GetComponent<EffectComponent>();
             ec.soundName = "Play_commando_M2_grenade_explo";
-            R2API.ContentAddition.AddEffect(effect);
+            Content.Content.effectDefs.Add(new EffectDef(effect));
             return effect;
         }
         private GameObject BuildPhaseRoundProjectile()
@@ -382,7 +371,7 @@ namespace RiskyMod.Survivors.Commando
             ProjectileOverlapAttack poa = proj.GetComponent<ProjectileOverlapAttack>();
             poa.onServerHit = null;
 
-            R2API.ContentAddition.AddProjectile(proj);
+            Content.Content.projectilePrefabs.Add(proj);
             return proj;
         }
     }

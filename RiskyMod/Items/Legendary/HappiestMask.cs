@@ -36,22 +36,23 @@ namespace RiskyMod.Items.Legendary
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            Sprite icon = LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffBanditSkullIcon");
-            GhostCooldown = ScriptableObject.CreateInstance<BuffDef>();
-            GhostCooldown.buffColor = new Color(88f/255f, 91f/255f, 98f/255f);
-            GhostCooldown.canStack = true;
-            GhostCooldown.isDebuff = true;
-            GhostCooldown.name = "RiskyMod_GhostCooldownDebuff";
-            GhostCooldown.iconSprite = icon;
-            R2API.ContentAddition.AddBuffDef(GhostCooldown);
+            GhostReady = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_GhostReady",
+                false,
+                false,
+                false,
+                new Color(0.9f, 0.9f, 0.9f),
+                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/BanditSkull").iconSprite
+                );
 
-            GhostReady = ScriptableObject.CreateInstance<BuffDef>();
-            GhostReady.buffColor = new Color(0.9f, 0.9f, 0.9f);
-            GhostReady.canStack = false;
-            GhostReady.isDebuff = false;
-            GhostReady.name = "RiskyMod_GhostReadyBuff";
-            GhostReady.iconSprite = icon;
-            R2API.ContentAddition.AddBuffDef(GhostReady);
+            GhostCooldown = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_GhostCooldown",
+                true,
+                true,
+                false,
+                new Color(88f / 255f, 91f / 255f, 98f / 255f),
+                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/BanditSkull").iconSprite
+                );
 
             OnCharacterDeath.OnCharacterDeathInventoryActions += TriggerMaskGhost;
             On.RoR2.CharacterBody.OnInventoryChanged += (orig, self) =>

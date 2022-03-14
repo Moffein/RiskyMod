@@ -62,7 +62,7 @@ namespace RiskyMod.Items.Boss
                 pie.blastProcCoefficient = 0f;
                 DamageAPI.ModdedDamageTypeHolderComponent mdc = meatballPrefab.AddComponent <DamageAPI.ModdedDamageTypeHolderComponent>();
                 mdc.Add(Survivors.SharedDamageTypes.AlwaysIgnite);
-                R2API.ContentAddition.AddProjectile(meatballPrefab);
+                Content.Content.projectilePrefabs.Add(meatballPrefab);
             }
         }
 

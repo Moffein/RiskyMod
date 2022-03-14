@@ -38,13 +38,14 @@ namespace RiskyMod.Items.Legendary
                 //Use placeholder Perfected icon so it doesn't force you into shieldonly.
                 BuffDef affixLunarDef = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/AffixLunar");
 
-                Perfected2 = ScriptableObject.CreateInstance<BuffDef>();
-                Perfected2.buffColor = affixLunarDef.buffColor;
-                Perfected2.canStack = false;
-                Perfected2.isDebuff = false;
-                Perfected2.name = "RiskyMod_Perfected2";
-                Perfected2.iconSprite = affixLunarDef.iconSprite;
-                R2API.ContentAddition.AddBuffDef((Perfected2));
+                Perfected2 = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_Perfected2",
+                false,
+                false,
+                false,
+                affixLunarDef.buffColor,
+                affixLunarDef.iconSprite
+                );
 
                 IL.RoR2.HealthComponent.TakeDamage += (il) =>
                 {

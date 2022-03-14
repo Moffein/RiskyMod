@@ -6,7 +6,7 @@ using UnityEngine;
 namespace RiskyMod.Items.DLC1.Legendary
 {
     //Currently disabled because it turns out SS2's Gadget was actually giving +100% crit damage the whole time.
-    //Need to play more to see if this even needs changing.
+    //Reducing it to +50% makes it feel weaked compared to other options.
     public class LaserScope
     {
         public static bool enabled = true;
@@ -26,7 +26,7 @@ namespace RiskyMod.Items.DLC1.Legendary
                     );
 
                 c.Index++;
-                c.Next.Operand = 0.5f;
+                //c.Next.Operand = 0.5f;
             };
         }
 

@@ -18,13 +18,14 @@ namespace RiskyMod.Tweaks
         {
             if (!enabled) return;
 
-            DisableOSP = ScriptableObject.CreateInstance<BuffDef>();
-            DisableOSP.buffColor = new Color(0.9f * 140f / 255f, 0.9f * 185f / 255f, 0.9f * 191f / 255f);
-            DisableOSP.canStack = false;
-            DisableOSP.isDebuff = false;    //Not a debuff so that it doesn't interact with debuff-related stuff like Death Mark and Blast Shower.
-            DisableOSP.name = "RiskyMod_DisableOSPBuff";
-            DisableOSP.iconSprite = LegacyResourcesAPI.Load<Sprite>("textures/bufficons/texBuffPulverizeIcon");
-            R2API.ContentAddition.AddBuffDef((DisableOSP));
+            DisableOSP = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_DisableOSPBuff",
+                false,
+                false,
+                false,
+                new Color(0.9f * 140f / 255f, 0.9f * 185f / 255f, 0.9f * 191f / 255f),
+                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Pulverized").iconSprite
+                );
 
             //Handled in MonoBehaviours.OSPManagerComponent and RecalculateStats
             On.RoR2.CharacterBody.RecalculateStats += HandleDisableOSPBuff;

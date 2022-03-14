@@ -169,13 +169,16 @@ namespace RiskyMod.Survivors.Toolbot
                 BuffDef powerDef = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/SmallArmorBoost");
 
                 sk.special.skillFamily.variants[1].skillDef.skillDescriptionToken = "TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
-                PowerModeBuff = ScriptableObject.CreateInstance<BuffDef>();
-                PowerModeBuff.buffColor = powerDef.buffColor;
-                PowerModeBuff.canStack = false;
-                PowerModeBuff.isDebuff = false;
-                PowerModeBuff.name = "RiskyMod_PowerModeBuff";
-                PowerModeBuff.iconSprite = powerDef.iconSprite;
-                R2API.ContentAddition.AddBuffDef((PowerModeBuff));
+
+                PowerModeBuff = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_PowerModeBuff",
+                false,
+                false,
+                false,
+                powerDef.buffColor,
+                powerDef.iconSprite
+                );
+
                 RecalculateStatsAPI.GetStatCoefficients += HandlePowerMode;
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.ToolbotDualWieldBase", "bonusBuff", PowerModeBuff);
             }

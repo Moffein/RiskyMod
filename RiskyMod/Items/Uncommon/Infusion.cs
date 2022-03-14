@@ -32,13 +32,14 @@ namespace RiskyMod.Items.Uncommon
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
 
-            InfusionBuff = ScriptableObject.CreateInstance<BuffDef>();
-            InfusionBuff.buffColor = Color.white;
-            InfusionBuff.canStack = true;
-            InfusionBuff.isDebuff = false;
-            InfusionBuff.name = "RiskyMod_InfusionBuff";
-            InfusionBuff.iconSprite = BuffIcons.Infusion;
-            R2API.ContentAddition.AddBuffDef((InfusionBuff));
+            InfusionBuff = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_InfusionBuff",
+                true,
+                false,
+                false,
+                Color.white,
+                BuffIcons.Infusion
+                );
 
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {

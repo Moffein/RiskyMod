@@ -63,7 +63,7 @@ namespace RiskyMod.Items.Uncommon
 				missilePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MissileProjectile").InstantiateClone("RiskyMod_ATGProjectile", true);
 				ProjectileController pc = missilePrefab.GetComponent<ProjectileController>();
 				pc.procCoefficient = 0f;
-				R2API.ContentAddition.AddProjectile(missilePrefab);
+				Content.Content.projectilePrefabs.Add(missilePrefab);
 			}
 			else
             {

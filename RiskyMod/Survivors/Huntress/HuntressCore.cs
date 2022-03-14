@@ -155,8 +155,8 @@ namespace RiskyMod.Survivors.Huntress
         {
             ArrowRainBuff.ScepterProjectileSetup();
 
-            R2API.ContentAddition.AddEntityState<BeginArrowRainScepter>(out bool x);
-            R2API.ContentAddition.AddEntityState<ArrowRainScepter>(out bool y);
+            Content.Content.entityStates.Add(typeof(BeginArrowRainScepter));
+            Content.Content.entityStates.Add(typeof(ArrowRainScepter));
 
             ArrowRainScepter.muzzleFlashEffect = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Huntress.ArrowRain", "muzzleFlashEffect");
             ArrowRainScepter.areaIndicatorPrefab = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Huntress.ArrowRain", "areaIndicatorPrefab");
@@ -183,7 +183,7 @@ namespace RiskyMod.Survivors.Huntress
             arrowRainDef.skillNameToken = "ANCIENTSCEPTER_HUNTRESS_RAINNAME";
             arrowRainDef.skillDescriptionToken = "HUNTRESS_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD";
             arrowRainDef.stockToConsume = 1;
-            R2API.ContentAddition.AddSkillDef(arrowRainDef);
+            Content.Content.skillDefs.Add(arrowRainDef);
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(arrowRainDef, "HuntressBody", SkillSlot.Special, 0);
         }
     }

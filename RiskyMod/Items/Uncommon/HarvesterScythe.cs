@@ -29,13 +29,14 @@ namespace RiskyMod.Items.Uncommon
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            scytheBuff = ScriptableObject.CreateInstance<BuffDef>();
-            scytheBuff.buffColor = new Color(210f / 255f, 50f / 255f, 22f / 255f);
-            scytheBuff.canStack = true;
-            scytheBuff.isDebuff = false;
-            scytheBuff.name = "RiskyMod_ScytheBuff";
-            scytheBuff.iconSprite = LegacyResourcesAPI.Load<Sprite>("textures/bufficons/texBuffRegenBoostIcon");
-            R2API.ContentAddition.AddBuffDef((scytheBuff));
+            scytheBuff = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_ScytheBuff",
+                true,
+                false,
+                false,
+                new Color(210f / 255f, 50f / 255f, 22f / 255f),
+                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/CrocoRegen").iconSprite
+                );
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
             RecalculateStatsAPI.GetStatCoefficients += HandleStats;

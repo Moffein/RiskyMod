@@ -23,13 +23,14 @@ namespace RiskyMod.Survivors.Croco
             totalRegenReduction = regenDuration * regenReductionOnHit;
 
             BuffDef bd = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/CrocoRegen");
-            CrocoRegen2 = ScriptableObject.CreateInstance<BuffDef>();
-            CrocoRegen2.buffColor = bd.buffColor;
-            CrocoRegen2.canStack = true;
-            CrocoRegen2.isDebuff = false;
-            CrocoRegen2.name = "RiskyMod_CrocoRegen";
-            CrocoRegen2.iconSprite = bd.iconSprite;
-            R2API.ContentAddition.AddBuffDef((CrocoRegen2));
+            CrocoRegen2 = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_CrocoRegen",
+                true,
+                false,
+                false,
+                bd.buffColor,
+               bd.iconSprite
+                );
 
             IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>
             {

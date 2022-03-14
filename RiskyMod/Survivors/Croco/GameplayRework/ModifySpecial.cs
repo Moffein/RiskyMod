@@ -29,12 +29,15 @@ namespace RiskyMod.Survivors.Croco
 
             diseaseProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseProjectile", true);
             diseaseProjectile = ModifyDiseaseProjectile(diseaseProjectile, Epidemic);
-            R2API.ContentAddition.AddProjectile(diseaseProjectile);
+            Content.Content.projectilePrefabs.Add(diseaseProjectile);
 
-            diseaseScepterProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseScepterProjectile", true);
-            diseaseScepterProjectile = ModifyDiseaseProjectile(diseaseScepterProjectile, EpidemicScepter);
-            R2API.ContentAddition.AddProjectile(diseaseScepterProjectile);
-            EntityStates.RiskyMod.Croco.FireDiseaseProjectileScepter.projectilePrefab = diseaseScepterProjectile;
+            if (RiskyMod.ScepterPluginLoaded)
+            {
+                diseaseScepterProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseScepterProjectile", true);
+                diseaseScepterProjectile = ModifyDiseaseProjectile(diseaseScepterProjectile, EpidemicScepter);
+                Content.Content.projectilePrefabs.Add(diseaseScepterProjectile);
+                EntityStates.RiskyMod.Croco.FireDiseaseProjectileScepter.projectilePrefab = diseaseScepterProjectile;
+            }
 
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireDiseaseProjectile", "projectilePrefab", diseaseProjectile);
 
@@ -52,28 +55,6 @@ namespace RiskyMod.Survivors.Croco
                         projectileInfo.damageTypeOverride = default;
                     }
                     return projectileInfo;
-                });
-            };
-
-            //Fixed in beta R2API. Remove this when DamageAPI updates.
-            IL.RoR2.Orbs.LightningOrb.OnArrival += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                c.GotoNext(
-                    x => x.MatchCallvirt<RoR2.Orbs.OrbManager>("AddOrb")
-                    );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<LightningOrb, LightningOrb, LightningOrb>>((newOrb, self) =>
-                {
-                    if (self.HasModdedDamageType(Epidemic))
-                    {
-                        newOrb.AddModdedDamageType(Epidemic);
-                    }
-                    if (self.HasModdedDamageType(EpidemicScepter))
-                    {
-                        newOrb.AddModdedDamageType(EpidemicScepter);
-                    }
-                    return newOrb;
                 });
             };
 
@@ -95,13 +76,14 @@ namespace RiskyMod.Survivors.Croco
             EpidemicScepter = DamageAPI.ReserveDamageType();
             OnHitEnemy.OnHitAttackerActions += ApplyEpidemic;
 
-            EpidemicDebuff = ScriptableObject.CreateInstance<BuffDef>();
-            EpidemicDebuff.buffColor = new Color(243f/255f, 202f/255f, 107f/255f);
-            EpidemicDebuff.canStack = true;
-            EpidemicDebuff.isDebuff = true;
-            EpidemicDebuff.name = "RiskyMod_EpidemicDebuff";
-            EpidemicDebuff.iconSprite = LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffEntangleIcon");
-            R2API.ContentAddition.AddBuffDef((EpidemicDebuff));
+            EpidemicDebuff = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_EpidemicDebuff",
+                true,
+                false,
+                true,
+                new Color(243f / 255f, 202f / 255f, 107f / 255f),
+                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Entangle").iconSprite
+                );
 
             RecalculateStatsAPI.GetStatCoefficients += (CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args) =>
             {

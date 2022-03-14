@@ -73,7 +73,7 @@ namespace RiskyMod
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.0")]
-    [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(ContentAddition))]
+    [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -356,7 +356,6 @@ namespace RiskyMod
             HarvesterScythe.enabled = Config.Bind(uncommonString, "Harvesters Scythe", true, itemConfigDescString).Value;
             Infusion.enabled = Config.Bind(uncommonString, "Infusion", true, itemConfigDescString).Value;
             LeechingSeed.enabled = Config.Bind(uncommonString, "Leeching Seed", true, itemConfigDescString).Value;
-            Predatory.enabled = Config.Bind(uncommonString, "Predatory Instincts", true, itemConfigDescString).Value;
             Razorwire.enabled = Config.Bind(uncommonString, "Razorwire", true, itemConfigDescString).Value;
             RoseBuckler.enabled = Config.Bind(uncommonString, "Rose Buckler", true, itemConfigDescString).Value;
             SquidPolyp.enabled = Config.Bind(uncommonString, "Squid Polyp", true, itemConfigDescString).Value;
