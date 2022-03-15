@@ -24,7 +24,7 @@ namespace RiskyMod.Items.Lunar
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            GetStatsCoefficient.HandleStatsInventoryActions += HandleStatsInventory;
+            GetStatCoefficients.HandleStatsInventoryActions += HandleStatsInventory;
         }
 
         private void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)

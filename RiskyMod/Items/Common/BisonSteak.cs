@@ -27,7 +27,7 @@ namespace RiskyMod.Items.Common
                 c.Remove();
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
-            GetStatsCoefficient.HandleStatsInventoryActions += HandleStatsInventory;
+            GetStatCoefficients.HandleStatsInventoryActions += HandleStatsInventory;
 
         }
 

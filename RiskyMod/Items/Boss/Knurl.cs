@@ -26,7 +26,7 @@ namespace RiskyMod.Items.Boss
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
-            GetStatsCoefficient.HandleStatsInventoryActions += HandleStatsInventory;
+            GetStatCoefficients.HandleStatsInventoryActions += HandleStatsInventory;
         }
 
         private static void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)

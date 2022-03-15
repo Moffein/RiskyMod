@@ -78,8 +78,8 @@ namespace RiskyMod.Items.DLC1.Legendary
                 false,
                 false,
                 false,
-                new Color(214f / 255f, 201f / 255f, 58f / 255f),
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Nullified").iconSprite
+                new Color(1f,1f,1f),
+                Content.Assets.BuffIcons.RaincoatReady
                 );
 
             RaincoatActiveBuff = SneedUtils.SneedUtils.CreateBuffDef(
@@ -87,8 +87,8 @@ namespace RiskyMod.Items.DLC1.Legendary
                 false,
                 false,
                 false,
-                new Color(214f / 255f, 201f / 255f, 58f / 255f),
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/CloakSpeed").iconSprite
+                new Color(1f, 1f, 1f),
+                Content.Assets.BuffIcons.RaincoatActive
                 );
 
             RaincoatCooldownBuff = SneedUtils.SneedUtils.CreateBuffDef(
@@ -96,16 +96,18 @@ namespace RiskyMod.Items.DLC1.Legendary
                 true,
                 true,
                 false,
-                new Color(88f / 255f, 91f / 255f, 98f / 255f),
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Nullified").iconSprite
+                new Color(1f, 1f, 1f),
+                Content.Assets.BuffIcons.RaincoatCooldown
                 );
 
+
             //Raincoat Active
-            RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
+            SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += (sender, args, inventory) =>
             {
                 if (sender.HasBuff(RaincoatActiveBuff))
                 {
-                    args.moveSpeedMultAdd += 0.5f;
+                    int itemCount = inventory.GetItemCount(DLC1Content.Items.ImmuneToDebuff);
+                    args.armorAdd += 50f * Mathf.Max(1f, itemCount);
                 }
             };
 

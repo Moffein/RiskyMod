@@ -6,7 +6,7 @@ using RoR2.Orbs;
 using System;
 using UnityEngine;
 using UnityEngine.Networking;
-using static RiskyMod.Assets;
+using static RiskyMod.Content.Assets;
 
 namespace RiskyMod.Items.Uncommon
 {
