@@ -69,7 +69,7 @@ namespace RiskyMod.Items.Uncommon
             if (buffCount > 0)
             {
                 args.critAdd += 100f;
-                args.baseRegenAdd += buffCount * (4f + 0.8f * (sender.level - 1f));
+                args.baseRegenAdd += buffCount * (5f + (sender.level - 1f));
             }
         }
 

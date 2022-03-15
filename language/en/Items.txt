@@ -53,7 +53,7 @@
 	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Killing enemies</style> sends you into a <style=cIsDamage>frenzy</style> for <style=cIsDamage>5s <style=cStack>(+3s per stack)</style></style>, increasing <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> and <style=cIsDamage>attack speed</style> by <style=cIsDamage>15%</style> for each enemy killed.",
 	
 	"ITEM_HEALONCRIT_PICKUP_RISKYMOD": "Gain health regeneration and guaranteed \'Critical Strikes\' on kill.",
-	"ITEM_HEALONCRIT_DESC_RISKYMOD": "Gain <style=cIsDamage>5% critical chance</style>. Killing enemies grants guaranteed \'<style=cIsDamage>Critical Strikes</style>\' and increases <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>4 hp/s</style> for <style=cIsDamage>2.4s</style> <style=cStack>(+1.2s per stack)</style>.",
+	"ITEM_HEALONCRIT_DESC_RISKYMOD": "Gain <style=cIsDamage>5% critical chance</style>. Killing enemies grants guaranteed \'<style=cIsDamage>Critical Strikes</style>\' and increases <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>5 hp/s</style> for <style=cIsDamage>2.4s</style> <style=cStack>(+1.2s per stack)</style>.",
 	
 	"ITEM_ENERGIZEDONEQUIPMENTUSE_PICKUP_RISKYMOD": "Activating your Equipment gives you a burst of movement speed and attack speed.",
 	"ITEM_ENERGIZEDONEQUIPMENTUSE_DESC_RISKYMOD": "Activating your Equipment gives you <style=cIsUtility>+50% movement speed</style> and <style=cIsDamage>+70% attack speed</style> for <style=cIsDamage>8s</style> <style=cStack>(+4s per stack)</style>.",
@@ -103,6 +103,10 @@
 	"ITEM_AUTOCASTEQUIPMENT_DESC_RISKYMOD": "<style=cIsUtility>Reduce Equipment cooldown</style> by <style=cIsUtility>50%</style> <style=cStack>(+15% per stack)</style>. Forces your Equipment to change to a <style=cIsHealth>random Equipment</style> whenever it is <style=cIsUtility>activated</style>.",
 	
 	"ITEM_IMMUNETODEBUFF_PICKUP_RISKYMOD" : "When debuffed, stun nearby enemies and gain armor and debuff immunity. Recharges over time.",
-	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Upon receiving a <style=cIsDamage>debuff</style>, <style=cIsDamage>stun</style> nearby enemies and gain <style=cIsHealing>50</style> <style=cStack>(+50 per stack)</style> armor and <style=cIsDamage>debuff immunity</style> for <style=cIsDamage>4s</style>. Recharges every <style=cIsUtility>15 seconds</style> <style=cStack>(-10% per stack)</style>."
+	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Upon receiving a <style=cIsDamage>debuff</style>, <style=cIsDamage>stun</style> nearby enemies and gain <style=cIsHealing>50</style> <style=cStack>(+50 per stack)</style> armor and <style=cIsDamage>debuff immunity</style> for <style=cIsDamage>4s</style>. Recharges every <style=cIsUtility>15 seconds</style> <style=cStack>(-10% per stack)</style>.",
+	
+	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Killing an enemy increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>125%</style>, fading over <style=cIsUtility>3</style> <style=cStack>(+1.5 per stack)</style> seconds.",
+	
+	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> <style=cStack>(+10% per stack)</style>. Leaving combat boosts your <style=cIsUtility>movement speed</style> by an additional <style=cIsUtility>30%</style> <style=cStack>(+30% per stack)</style>."
 	}
 }

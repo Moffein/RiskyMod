@@ -4,6 +4,7 @@ using R2API;
 using UnityEngine;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
+using RiskyMod.Content;
 
 namespace RiskyMod.Tweaks
 {

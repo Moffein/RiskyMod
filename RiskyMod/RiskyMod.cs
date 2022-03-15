@@ -45,6 +45,7 @@ using RiskyMod.Survivors.DLC1.VoidFiend;
 using System.IO;
 using RiskyMod.VoidLocus;
 using RiskyMod.Survivors.DLC1.Railgunner;
+using RiskyMod.Items.DLC1.Uncommon;
 
 namespace RiskyMod
 {
@@ -353,10 +354,12 @@ namespace RiskyMod
             ElementalBands.enabled = Config.Bind(uncommonString, "Runalds and Kjaros Bands", true, itemConfigDescString).Value;
             Guillotine.enabled = Config.Bind(uncommonString, "Old Guillotine", true, itemConfigDescString).Value;
             Guillotine.reduceVFX = Config.Bind(uncommonString, "Old Guillotine - Reduce VFX", true, "Reduce how often this item's VFX shows up.").Value;
+            Harpoon.enabled = Config.Bind(uncommonString, "Hunters Harpoon", true, itemConfigDescString).Value;
             HarvesterScythe.enabled = Config.Bind(uncommonString, "Harvesters Scythe", true, itemConfigDescString).Value;
             Infusion.enabled = Config.Bind(uncommonString, "Infusion", true, itemConfigDescString).Value;
             LeechingSeed.enabled = Config.Bind(uncommonString, "Leeching Seed", true, itemConfigDescString).Value;
             Razorwire.enabled = Config.Bind(uncommonString, "Razorwire", true, itemConfigDescString).Value;
+            RedWhip.enabled = Config.Bind(uncommonString, "Red Whip", true, itemConfigDescString).Value;
             RoseBuckler.enabled = Config.Bind(uncommonString, "Rose Buckler", true, itemConfigDescString).Value;
             SquidPolyp.enabled = Config.Bind(uncommonString, "Squid Polyp", true, itemConfigDescString).Value;
             SquidPolyp.scaleCount = Config.Bind(uncommonString, "Squid Polyp - Stacks Increase Max Squids", false, "Extra stacks allow for more squids to spawn. Will lag in MP.").Value;
@@ -368,27 +371,28 @@ namespace RiskyMod
 
         private void ConfigLegendaryItems()
         {
+            Behemoth.enabled = Config.Bind(legendaryString, "Brilliant Behemoth", true, itemConfigDescString).Value;
+            BottledChaos.enabled = Config.Bind(legendaryString, "Bottled Chaos", true, itemConfigDescString).Value;
+            CeremonialDagger.enabled = Config.Bind(legendaryString, "Ceremonial Dagger", true, itemConfigDescString).Value;
             FrostRelic.enabled = Config.Bind(legendaryString, "Frost Relic", true, itemConfigDescString).Value;
             FrostRelic.removeFOV = Config.Bind(legendaryString, "Frost Relic - Disable FOV Modifier", true, "Disables FOV modifier.").Value;
             FrostRelic.removeBubble = Config.Bind(legendaryString, "Frost Relic - Disable Bubble", true, "Disables bubble visuals.").Value;
-            HeadHunter.enabled = Config.Bind(legendaryString, "Wake of Vultures", true, itemConfigDescString).Value;
-            HeadHunter.perfectedTweak = Config.Bind(legendaryString, "Wake of Vultures - Perfected Tweak", true, "Perfected Affix gained via Wake of Vultures will not force your health pool to bec").Value;
-            Headstompers.enabled = Config.Bind(legendaryString, "H3AD-ST", true, itemConfigDescString).Value;
-            Tesla.enabled = Config.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
-            CeremonialDagger.enabled = Config.Bind(legendaryString, "Ceremonial Dagger", true, itemConfigDescString).Value;
-            MeatHook.enabled = Config.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;
-            Behemoth.enabled = Config.Bind(legendaryString, "Brilliant Behemoth", true, itemConfigDescString).Value;
-            LaserTurbine.enabled = Config.Bind(legendaryString, "Resonance Disc", true, itemConfigDescString).Value;
             HappiestMask.enabled = Config.Bind(legendaryString, "Happiest Mask", true, itemConfigDescString).Value;
             HappiestMask.scaleCount = Config.Bind(legendaryString, "Happiest Mask - Stacks Increase Max Ghosts", false, "Extra stacks allow for more ghosts to spawn. Will lag in MP.").Value;
             HappiestMask.noGhostLimit = Config.Bind(legendaryString, "Happiest Mask - Remove Ghost Limit", false, "Removes the ghost limit at all times. Definitely will lag.").Value;
+            HeadHunter.enabled = Config.Bind(legendaryString, "Wake of Vultures", true, itemConfigDescString).Value;
+            HeadHunter.perfectedTweak = Config.Bind(legendaryString, "Wake of Vultures - Perfected Tweak", true, "Perfected Affix gained via Wake of Vultures will not force your health pool to bec").Value;
+            Headstompers.enabled = Config.Bind(legendaryString, "H3AD-ST", true, itemConfigDescString).Value;
+            LaserTurbine.enabled = Config.Bind(legendaryString, "Resonance Disc", true, itemConfigDescString).Value;
+            MeatHook.enabled = Config.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;
+            Raincoat.enabled = Config.Bind(legendaryString, "Bens Raincoat", true, itemConfigDescString).Value;
+            Tesla.enabled = Config.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
 
             //Disabled for now, trying to get a feel for the balance
             //Turns out SS2's Gadget increased initial hit damage by 50%, which lead to a 3x total damage multiplier, which is what this item does already.
             //LaserScope.enabled = Config.Bind(legendaryString, "Laser Scope", true, itemConfigDescString).Value;
             LaserScope.enabled = false;
 
-            BottledChaos.enabled = Config.Bind(legendaryString, "Bottled Chaos", true, itemConfigDescString).Value;
         }
 
         private void ConfigVoidItems()
@@ -402,9 +406,9 @@ namespace RiskyMod
 
         private void ConfigBossItems()
         {
-            MoltenPerf.enabled = Config.Bind(bossString, "Molten Perforator", true, itemConfigDescString).Value;
             ChargedPerf.enabled = Config.Bind(bossString, "Charged Perforator", true, itemConfigDescString).Value;
             Disciple.enabled = Config.Bind(bossString, "Charged Perforator", true, itemConfigDescString).Value;
+            MoltenPerf.enabled = Config.Bind(bossString, "Molten Perforator", true, itemConfigDescString).Value;
             QueensGland.enabled = Config.Bind(bossString, "Queens Gland", true, itemConfigDescString).Value;
             Shatterspleen.enabled = Config.Bind(bossString, "Shatterspleen", true, itemConfigDescString).Value;
         }
@@ -415,10 +419,10 @@ namespace RiskyMod
             //Gesture.enabled = Config.Bind(lunarString, "Gesture of the Drowned", true, itemConfigDescString).Value;
             Gesture.enabled = false;
 
-            ShapedGlass.enabled = Config.Bind(lunarString, "Shaped Glass", true, itemConfigDescString).Value;
             BrittleCrown.enabled = Config.Bind(lunarString, "Brittle Crown", true, itemConfigDescString).Value;
-            Transcendence.enabled = Config.Bind(lunarString, "Transcendence", true, itemConfigDescString).Value;
             Meteorite.enabled = Config.Bind(lunarString, "Glowing Meteorite", true, itemConfigDescString).Value;
+            ShapedGlass.enabled = Config.Bind(lunarString, "Shaped Glass", true, itemConfigDescString).Value;
+            Transcendence.enabled = Config.Bind(lunarString, "Transcendence", true, itemConfigDescString).Value;
         }
 
         private void ConfigEquipment()
@@ -430,8 +434,8 @@ namespace RiskyMod
             Capacitor.enabled = Config.Bind(equipmentString, "Royal Capacitor", true, itemConfigDescString).Value;
             Chrysalis.enabled = Config.Bind(equipmentString, "Milky Chrysalis", true, itemConfigDescString).Value;
             CritHud.enabled = Config.Bind(equipmentString, "Ocular HUD", true, itemConfigDescString).Value;
-            VolcanicEgg.enabled = Config.Bind(equipmentString, "Volcanic Egg", true, itemConfigDescString).Value;
             SuperLeech.enabled = Config.Bind(equipmentString, "Super Massive Leech", true, itemConfigDescString).Value;
+            VolcanicEgg.enabled = Config.Bind(equipmentString, "Volcanic Egg", true, itemConfigDescString).Value;
         }
 
         private void ConfigMonsters()

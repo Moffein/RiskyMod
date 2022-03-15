@@ -6,6 +6,7 @@ using EntityStates.RiskyMod.Bandit2.Revolver.Scepter;
 using MonoMod.RuntimeDetour;
 using R2API;
 using R2API.Utils;
+using RiskyMod.Content;
 using RiskyMod.Survivors.Bandit2.Components;
 using RoR2;
 using RoR2.Projectile;

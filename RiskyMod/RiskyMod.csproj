@@ -15,7 +15,6 @@
   <ItemGroup>
     <Folder Include="Items\DLC1\Common\" />
     <Folder Include="Items\DLC1\Lunar\" />
-    <Folder Include="Items\DLC1\Uncommon\" />
     <Folder Include="Survivors\Captain\Components\" />
     <Folder Include="Survivors\Mage\EntityStates\" />
   </ItemGroup>
