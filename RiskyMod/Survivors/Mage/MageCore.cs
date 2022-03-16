@@ -62,7 +62,7 @@ namespace RiskyMod.Survivors.Mage
                             MageStockController msc = self.gameObject.GetComponent<MageStockController>();
                             if (msc)
                             {
-                                msc.FireSkill();
+                                msc.FireSkill(self.duration);
                             }
                         };
                     }

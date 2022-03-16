@@ -105,7 +105,7 @@ namespace RiskyMod.Survivors.Toolbot
                 GrenadeStockController gsc = self.gameObject.GetComponent<GrenadeStockController>();
                 if (gsc)
                 {
-                    gsc.FireSkill(self.activatorSkillSlot);
+                    gsc.FireSkill(self.activatorSkillSlot, self.duration);
                 }
             };
         }

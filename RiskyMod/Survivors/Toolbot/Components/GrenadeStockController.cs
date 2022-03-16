@@ -65,7 +65,7 @@ namespace RiskyMod.Survivors.Toolbot.Components
             }
         }
 
-        public void FireSkill(GenericSkill g)
+        public void FireSkill(GenericSkill g, float duration)
         {
             bool set = false;
             foreach (SkillStatus s in skillStatuses)
@@ -74,7 +74,7 @@ namespace RiskyMod.Survivors.Toolbot.Components
                 {
                     set = true;
                     s.delayStopwatch = graceDuration;
-                    s.reloadStopwatch = baseDuration / body.attackSpeed;
+                    s.reloadStopwatch = baseDuration / body.attackSpeed + duration;
                 }
             }
 
