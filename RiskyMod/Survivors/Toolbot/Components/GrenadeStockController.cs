@@ -51,7 +51,7 @@ namespace RiskyMod.Survivors.Toolbot.Components
                         s.reloadStopwatch -= Time.fixedDeltaTime;
                         if (s.reloadStopwatch <= 0f)
                         {
-                            s.reloadStopwatch = baseDuration / body.attackSpeed;
+                            s.reloadStopwatch += baseDuration / body.attackSpeed;
 
                             s.skill.stock = s.skill.maxStock;
                             Util.PlaySound("Play_captain_m1_reload", base.gameObject);
@@ -74,7 +74,7 @@ namespace RiskyMod.Survivors.Toolbot.Components
                 {
                     set = true;
                     s.delayStopwatch = graceDuration;
-                    s.reloadStopwatch = baseDuration / body.attackSpeed + duration;
+                    s.reloadStopwatch = baseDuration / body.attackSpeed + (g.stock <= 0 ? duration : 0f);
                 }
             }
 
