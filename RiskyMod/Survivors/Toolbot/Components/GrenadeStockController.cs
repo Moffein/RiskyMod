@@ -54,6 +54,7 @@ namespace RiskyMod.Survivors.Toolbot.Components
                             s.reloadStopwatch = baseDuration / body.attackSpeed;
 
                             s.skill.stock = s.skill.maxStock;
+                            Util.PlaySound("Play_captain_m1_reload", base.gameObject);
                         }
                     }
                 }

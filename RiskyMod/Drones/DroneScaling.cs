@@ -9,6 +9,10 @@ namespace RiskyMod.Drones
     public class DroneScaling
     {
         public static bool enabled = true;
+
+        public delegate void ChangeDroneBodyScaling(CharacterBody body);
+        public static ChangeDroneBodyScaling ChangeDroneBodyScalingActions;
+
         public DroneScaling()
         {
             if (!enabled) return;
@@ -26,7 +30,8 @@ namespace RiskyMod.Drones
         private void ChangeScaling(GameObject go)
         {
             CharacterBody cb = go.GetComponent<CharacterBody>();
-
+            if (!cb) return;
+            if (ChangeDroneBodyScalingActions != null) ChangeDroneBodyScalingActions.Invoke(cb);
             bool useShield = cb.bodyFlags.HasFlag(CharacterBody.BodyFlags.Mechanical);
 
             //Specific changes
@@ -44,6 +49,10 @@ namespace RiskyMod.Drones
                     cb.levelArmor += 1f;
                     cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
                     cb.baseMaxHealth *= 1.2f;
+                    break;
+                case "RoboBallGreenBuddyBody":
+                case "RoboBallRedBuddyBody":
+                    cb.baseDamage *= 0.8f;  //These already do good damage in Vanilla.
                     break;
                 default:
                     break;

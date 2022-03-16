@@ -9,6 +9,22 @@ namespace RiskyMod.Drones
     {
         public static bool enabled = true;
         public static List<BodyIndex> AllyBodies;
+        public static List<string> AllyBodyNames = new List<string>
+        {
+            "BackupDroneBody",
+            "Drone1Body",
+            "Drone2Body",
+            "Turret1Body",
+            "MissileDroneBody",
+            "FlameDroneBody",
+            "EquipmentDroneBody",
+            "EmergencyDroneBody",
+            "MegaDroneBody",
+            "SquidTurretBody",
+            "BeetleGuardAllyBody",
+            "RoboBallGreenBuddyBody",
+            "RoboBallRedBuddyBody"
+        };
 
         public delegate void ModifyAllies(List<BodyIndex> bodies);
         public static ModifyAllies ModifyAlliesActions;
@@ -31,24 +47,10 @@ namespace RiskyMod.Drones
             {
                 orig();
 
-                AddBody("BackupDroneBody");
-
-                AddBody("Drone1Body");
-                AddBody("Drone2Body");
-                AddBody("Turret1Body");
-
-                AddBody("MissileDroneBody");
-                AddBody("FlameDroneBody");
-                AddBody("EquipmentDroneBody");
-                AddBody("EmergencyDroneBody");
-
-                AddBody("MegaDroneBody");
-
-                AddBody("SquidTurretBody");
-                AddBody("BeetleGuardAllyBody");
-
-                AddBody("RoboBallGreenBuddyBody");
-                AddBody("RoboBallRedBuddyBody");
+                foreach (string str in AllyBodyNames)
+                {
+                    AddBody(str);
+                }
 
                 if (ModifyAlliesActions != null) ModifyAlliesActions.Invoke(AllyBodies);
             };

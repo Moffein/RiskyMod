@@ -19,15 +19,6 @@ namespace RiskyMod.Items.Common
 
             WarbannerObject = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/WarbannerWard");
 
-            On.RoR2.HealthComponent.Heal += (orig, self, amount, procChainMask, nonRegen) =>
-            {
-                if (self.body && self.body.HasBuff(RoR2Content.Buffs.Warbanner.buffIndex))
-                {
-                    amount *= 1.3f;
-                }
-                return orig(self, amount, procChainMask, nonRegen);
-            };
-
             RecalculateStatsAPI.GetStatCoefficients += HandleStats;
 
             On.EntityStates.Missions.BrotherEncounter.Phase1.OnEnter += (orig, self) =>

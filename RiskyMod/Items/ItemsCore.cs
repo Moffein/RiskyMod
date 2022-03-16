@@ -78,6 +78,7 @@ namespace RiskyMod.Items
             new WarHorn();
             new Infusion();
             new RedWhip();
+            new Daisy();
 
             new Harpoon();
         }

@@ -334,11 +334,11 @@ namespace RiskyMod
         private void ConfigCommonItems()
         {
             BisonSteak.enabled = Config.Bind(commonString, "Bison Steak", true, itemConfigDescString).Value;
-            CritGlasses.enabled = Config.Bind(commonString, "Lensmakers Glasses", true, itemConfigDescString).Value;
             Crowbar.enabled = Config.Bind(commonString, "Crowbar", true, itemConfigDescString).Value;
             Fireworks.enabled = Config.Bind(commonString, "Fireworks", true, itemConfigDescString).Value;
             Fireworks.maxRockets = Config.Bind(commonString, "Fireworks - Max Rockets", 32, "Max rockets to spawn.").Value;
             Gasoline.enabled = Config.Bind(commonString, "Gasoline", true, itemConfigDescString).Value;
+            CritGlasses.enabled = Config.Bind(commonString, "Lensmakers Glasses", true, itemConfigDescString).Value;
             MonsterTooth.enabled = Config.Bind(commonString, "Monster Tooth", true, itemConfigDescString).Value;
             StickyBomb.enabled = Config.Bind(commonString, "Stickybomb", true, itemConfigDescString).Value;
             TougherTimes.enabled = Config.Bind(commonString, "Tougher Times", true, itemConfigDescString).Value;
@@ -352,12 +352,13 @@ namespace RiskyMod
             Berzerker.enabled = Config.Bind(uncommonString, "Berzerkers Pauldron", true, itemConfigDescString).Value;
             Chronobauble.enabled = Config.Bind(uncommonString, "Chronobauble", true, itemConfigDescString).Value;
             ElementalBands.enabled = Config.Bind(uncommonString, "Runalds and Kjaros Bands", true, itemConfigDescString).Value;
-            Guillotine.enabled = Config.Bind(uncommonString, "Old Guillotine", true, itemConfigDescString).Value;
-            Guillotine.reduceVFX = Config.Bind(uncommonString, "Old Guillotine - Reduce VFX", true, "Reduce how often this item's VFX shows up.").Value;
             Harpoon.enabled = Config.Bind(uncommonString, "Hunters Harpoon", true, itemConfigDescString).Value;
             HarvesterScythe.enabled = Config.Bind(uncommonString, "Harvesters Scythe", true, itemConfigDescString).Value;
             Infusion.enabled = Config.Bind(uncommonString, "Infusion", true, itemConfigDescString).Value;
             LeechingSeed.enabled = Config.Bind(uncommonString, "Leeching Seed", true, itemConfigDescString).Value;
+            Daisy.enabled = Config.Bind(uncommonString, "Lepton Daisy", true, itemConfigDescString).Value;
+            Guillotine.enabled = Config.Bind(uncommonString, "Old Guillotine", true, itemConfigDescString).Value;
+            Guillotine.reduceVFX = Config.Bind(uncommonString, "Old Guillotine - Reduce VFX", true, "Reduce how often this item's VFX shows up.").Value;
             Razorwire.enabled = Config.Bind(uncommonString, "Razorwire", true, itemConfigDescString).Value;
             RedWhip.enabled = Config.Bind(uncommonString, "Red Whip", true, itemConfigDescString).Value;
             RoseBuckler.enabled = Config.Bind(uncommonString, "Rose Buckler", true, itemConfigDescString).Value;

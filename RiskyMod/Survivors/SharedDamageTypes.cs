@@ -172,7 +172,7 @@ namespace RiskyMod.Survivors
                             damageInfo.force.y = 0f;
                         }
 
-                        direction *= Mathf.Max(rb.mass / 100f, 1f);
+                        direction *= Mathf.Min(10f, Mathf.Max(rb.mass / 100f, 1f));
                         damageInfo.force += 1600f * direction;
                     }
                 }

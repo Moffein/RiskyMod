@@ -8,7 +8,7 @@ namespace RiskyMod.Survivors.Mage.Components
     public class MageStockController : MonoBehaviour
     {
         public static float graceDuration = 0.4f;    //Used when there's still stocks in the mag
-        public static float baseDuration = 1.3f;
+        public static float baseDuration = 1f;
 
         private CharacterBody body;
         private SkillLocator skills;
@@ -51,6 +51,7 @@ namespace RiskyMod.Survivors.Mage.Components
                         reloadStopwatch = baseDuration / body.attackSpeed;
 
                         skills.primary.AddOneStock();
+                        Util.PlaySound("Play_railgunner_m2_reload_basic", base.gameObject);
                         ShowReloadVFX();
 
                         if (skills.primary.stock > skills.primary.maxStock)
