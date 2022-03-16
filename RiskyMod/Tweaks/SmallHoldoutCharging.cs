@@ -16,7 +16,7 @@ namespace RiskyMod.Tweaks
                 {
                     //if (holdoutZoneController.name.Contains("NullSafeZone") || holdoutZoneController.name.Contains("MoonBattery"))
                     SceneDef sd = RoR2.SceneCatalog.GetSceneDefForCurrentScene();
-                    if (sd && (sd.baseSceneName.Equals("arena") || sd.baseSceneName.Equals("moon2")))
+                    if (sd && (sd.baseSceneName.Equals("arena") || sd.baseSceneName.Equals("moon2") || sd.baseSceneName.Equals("voidstage")))
                     {
                         return HoldoutZoneController.CountLivingPlayers(teamIndex);
                     }
