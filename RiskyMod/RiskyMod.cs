@@ -488,7 +488,6 @@ namespace RiskyMod
             CommandoCore.enabled = Config.Bind(commandoString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             CommandoCore.fixPrimaryFireRate = Config.Bind(commandoString, "Double Tap - Fix Scaling", true, "Fixes Double Tap having a low attack speed cap.").Value;
             CommandoCore.phaseRoundChanges = Config.Bind(commandoString, "Phase Round Changes", true, "Enable changes to this skill.").Value;
-            CommandoCore.phaseBlastChanges = Config.Bind(commandoString, "Phase Blast Changes", true, "Enable changes to this skill.").Value;
             CommandoCore.rollChanges = Config.Bind(commandoString, "Tactical Dive Changes", true, "Enable changes to this skill.").Value;
             CommandoCore.suppressiveChanges = Config.Bind(commandoString, "Suppressive Fire Changes", true, "Enable changes to this skill.").Value;
             CommandoCore.grenadeChanges = Config.Bind(commandoString, "Frag Grenade Changes", true, "Enable changes to this skill.").Value;

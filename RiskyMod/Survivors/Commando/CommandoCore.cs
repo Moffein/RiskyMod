@@ -20,7 +20,6 @@ namespace RiskyMod.Survivors.Commando
         public static bool fixPrimaryFireRate = true;
 
         public static bool phaseRoundChanges = true;
-        public static bool phaseBlastChanges = true;
 
         public static bool rollChanges = true;
 
@@ -59,7 +58,7 @@ namespace RiskyMod.Survivors.Commando
                 c.Index++;
                 c.EmitDelegate<Func<int, int>>(zero =>
                 {
-                    return -1000;
+                    return -1000000;
                 });
             };
         }
@@ -71,11 +70,6 @@ namespace RiskyMod.Survivors.Commando
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireFMJ", "projectilePrefab", BuildPhaseRoundProjectile());
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireFMJ", "damageCoefficient", "4.8");
                 sk.primary.skillFamily.variants[0].skillDef.skillDescriptionToken = "COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD";
-            }
-
-            if (phaseBlastChanges)
-            {
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireShotgunBlast", "procCoefficient", "0.75");
             }
         }
 
