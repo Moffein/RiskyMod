@@ -518,6 +518,8 @@ namespace RiskyMod
 
             MageCore.enabled = Config.Bind(mageString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             M1Projectiles.increaseRange = Config.Bind(mageString, "Primary Range Increase", true, "Primary projectiles no longer disappear mid-flight.").Value;
+            MageCore.modifyFireBolt = Config.Bind(mageString, "Fire Bolt Changes", true, "Enable changes to this skill.").Value;
+            MageCore.modifyPlasmaBolt = Config.Bind(mageString, "Plasma Bolt Changes", true, "Enable changes to this skill.").Value;
             MageCore.flamethrowerSprintCancel = Config.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
             MageCore.ionSurgeMovementScaling = Config.Bind(mageString, "Ion Surge - Movement Scaling", false, "Ion Surge jump height scales with movement speed.").Value;
             MageCore.ionSurgeShock = Config.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;

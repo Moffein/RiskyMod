@@ -17,6 +17,8 @@ namespace RiskyMod.Survivors.Mage
         public static bool enabled = true;
 
         public static bool m1AttackSpeed = true;
+        public static bool modifyFireBolt = true;
+        public static bool modifyPlasmaBolt = true;
 
         public static bool flamethrowerSprintCancel = true;
 
@@ -46,6 +48,7 @@ namespace RiskyMod.Survivors.Mage
                 MageStockController.iceMuzzleflashEffectPrefab = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Mage.Weapon.FireIceBolt", "muzzleflashEffectPrefab");
                 bodyPrefab.AddComponent<MageStockController>();
             }
+
             for (int i = 0; i < sk.primary.skillFamily.variants.Length; i++)
             {
                 if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireFireBolt))
@@ -66,6 +69,12 @@ namespace RiskyMod.Survivors.Mage
                             }
                         };
                     }
+
+                    if (modifyFireBolt)
+                    {
+                        sk.primary.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD";
+                        SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireFireBolt", "damageCoefficient", "3");
+                    }
                 }
                 else if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireLightningBolt))
                 {
@@ -74,9 +83,11 @@ namespace RiskyMod.Survivors.Mage
                         sk.primary.skillFamily.variants[i].skillDef.rechargeStock = 0;
                         //sk.primary.skillFamily.variants[i].skillDef.baseRechargeInterval = 0;
                     }
-                    if (M1Projectiles.modifyPlasma)
+
+                    if (modifyPlasmaBolt)
                     {
                         sk.primary.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
+                        SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireLightningBolt", "damageCoefficient", "3");
                     }
                 }
             }
