@@ -1,4 +1,5 @@
 ﻿using RoR2;
+using RoR2.Skills;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -9,6 +10,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
         public static bool enabled = true;
 
         public static bool fasterCorruptTransition = true;
+        public static bool corruptMeterTweaks = true;
         public static bool corruptOnKill = true;
         public static bool noCorruptHeal = true;
         public static bool noCorruptCrit = true;
@@ -27,8 +29,6 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                 orig();
                 bodyIndex = BodyCatalog.FindBodyIndex("VoidSurvivor");
             };
-
-            //bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/VoidSurvivor");
 
             ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
         }
@@ -53,15 +53,8 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                 };
             }
 
-            if (corruptOnKill)
+            if (corruptMeterTweaks)
             {
-                //Which part changes the keyword? PassiveSkill doesn't seem to be it.
-                //"KEYWORD_VOIDCORRUPTION_RISKYMOD"
-
-                //Kills increase Corruption.
-                //Hoping this adds an additional layer of depth to using Void Fiend's Corruption
-                AssistManager.HandleAssistActions += CorruptionAssist;
-
                 //Reduce passive Corruption gain since kills now give a decent boost to build rate
                 On.RoR2.VoidSurvivorController.OnEnable += (orig, self) =>
                 {
@@ -76,6 +69,21 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                     //Debug.Log(self.corruptionFractionPerSecondWhileCorrupted); //-0.06666667
                     //Debug.Log(self.corruptionPerCrit); //2
                 };
+
+                SkillDef crushHealth = Addressables.LoadAssetAsync<SkillDef>("RoR2/DLC1/VoidSurvivor/CrushHealth.asset").WaitForCompletion();
+                crushHealth.baseMaxStock = 1;
+                crushHealth.baseRechargeInterval = 0;
+                crushHealth.rechargeStock = 1;
+            }
+
+            if (corruptOnKill)
+            {
+                //Which part changes the keyword? PassiveSkill doesn't seem to be it.
+                //"KEYWORD_VOIDCORRUPTION_RISKYMOD"
+
+                //Kills increase Corruption.
+                //Hoping this adds an additional layer of depth to using Void Fiend's Corruption
+                AssistManager.HandleAssistActions += CorruptionAssist;
             }
 
             if (noCorruptHeal)
@@ -104,7 +112,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
             VoidSurvivorController vsc = attackerBody.gameObject.GetComponent<VoidSurvivorController>();
             if (vsc)
             {
-                vsc.AddCorruption(4f);
+                vsc.AddCorruption(5f);
             }
         }
     }

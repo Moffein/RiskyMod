@@ -165,7 +165,7 @@ namespace RiskyMod
                                     origin = a.attackerBody.corePosition
                                 };
                                 effectData.SetNetworkedObjectReference(a.attackerBody.gameObject);
-                                EffectManager.SpawnEffect(Survivors.SharedDamageTypes.medkitEffect, effectData, true);
+                                EffectManager.SpawnEffect(SharedDamageTypes.medkitEffect, effectData, true);
                             }
                             break;
                         default:

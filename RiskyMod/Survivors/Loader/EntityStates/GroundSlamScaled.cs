@@ -3,6 +3,7 @@ using UnityEngine;
 using R2API;
 using RiskyMod.Survivors.Loader;
 using RiskyMod.Survivors;
+using RiskyMod;
 
 namespace EntityStates.RiskyMod.Loader
 {

@@ -3,7 +3,7 @@ using RiskyMod.SharedHooks;
 using RoR2;
 using UnityEngine;
 
-namespace RiskyMod.Survivors
+namespace RiskyMod
 {
     //Keep all the custom damagetypes in 1 place, in case there's a need to re-use them across different parts of the mod.
     public class SharedDamageTypes
@@ -23,7 +23,7 @@ namespace RiskyMod.Survivors
 
         public static DamageAPI.ModdedDamageType IgniteLevelScaled;
 
-        public static DamageAPI.ModdedDamageType AlwaysIgnite;   //Used for Molten Perforatur due to not proccing
+        public static DamageAPI.ModdedDamageType AlwaysIgnite;   //Used for Molten Perforator due to not proccing
 
 
         public SharedDamageTypes()
@@ -65,8 +65,8 @@ namespace RiskyMod.Survivors
                 {
                     attackerObject = damageInfo.attacker,
                     victimObject = self.gameObject,
-                    totalDamage = new float?(damageInfo.damage),
-                    damageMultiplier = damageMultiplier,
+                    totalDamage = new float?(damageInfo.damage * damageMultiplier),
+                    damageMultiplier = 1f,
                     dotIndex = DotController.DotIndex.Burn,
                     maxStacksFromAttacker = null
                 };

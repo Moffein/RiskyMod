@@ -20,6 +20,8 @@ namespace RiskyMod.Survivors.Mage
         public static bool modifyFireBolt = true;
         public static bool modifyPlasmaBolt = true;
 
+        public static bool m2RemoveNanobombGravity = true;
+
         public static bool flamethrowerSprintCancel = true;
 
         public static bool ionSurgeShock = true;
@@ -35,6 +37,7 @@ namespace RiskyMod.Survivors.Mage
         private void ModifySkills(SkillLocator sk)
         {
             ModifyPrimaries(sk);
+            ModifySecondaries(sk);
             ModifyUtilities(sk);
             ModifySpecials(sk);
         }
@@ -92,6 +95,16 @@ namespace RiskyMod.Survivors.Mage
                 }
             }
             new M1Projectiles();
+        }
+
+        private void ModifySecondaries(SkillLocator sk)
+        {
+            if (m2RemoveNanobombGravity)
+            {
+                GameObject projectile = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MageLightningBombProjectile");
+                AntiGravityForce agf = projectile.GetComponent<AntiGravityForce>();
+                agf.antiGravityCoefficient = 1f;
+            }
         }
 
         private void ModifyUtilities(SkillLocator sk)

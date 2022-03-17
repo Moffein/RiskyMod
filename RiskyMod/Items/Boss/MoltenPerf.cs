@@ -60,8 +60,8 @@ namespace RiskyMod.Items.Boss
                 meatballPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/FireMeatBall").InstantiateClone("RiskyMod_Perforator", true);
                 ProjectileImpactExplosion pie = meatballPrefab.GetComponent<ProjectileImpactExplosion>();
                 pie.blastProcCoefficient = 0f;
-                DamageAPI.ModdedDamageTypeHolderComponent mdc = meatballPrefab.AddComponent <DamageAPI.ModdedDamageTypeHolderComponent>();
-                mdc.Add(Survivors.SharedDamageTypes.AlwaysIgnite);
+                DamageAPI.ModdedDamageTypeHolderComponent mdc = meatballPrefab.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+                mdc.Add(SharedDamageTypes.AlwaysIgnite);
                 Content.Content.projectilePrefabs.Add(meatballPrefab);
             }
         }

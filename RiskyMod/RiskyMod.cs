@@ -132,6 +132,7 @@ namespace RiskyMod
             CheckDependencies();
 
             ContentCore.Init();
+            new SharedDamageTypes();
             RunFixes();
             RunTweaks();
             new ItemsCore();
@@ -520,13 +521,14 @@ namespace RiskyMod
             M1Projectiles.increaseRange = Config.Bind(mageString, "Primary Range Increase", true, "Primary projectiles no longer disappear mid-flight.").Value;
             MageCore.modifyFireBolt = Config.Bind(mageString, "Fire Bolt Changes", true, "Enable changes to this skill.").Value;
             MageCore.modifyPlasmaBolt = Config.Bind(mageString, "Plasma Bolt Changes", true, "Enable changes to this skill.").Value;
+            MageCore.m2RemoveNanobombGravity = Config.Bind(mageString, "Nanobomb - Remove Gravity", true, "Removes projectile drop from Nanobomb so it behaves like it did pre-1.0 update.").Value;
             MageCore.flamethrowerSprintCancel = Config.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
             MageCore.ionSurgeMovementScaling = Config.Bind(mageString, "Ion Surge - Movement Scaling", false, "Ion Surge jump height scales with movement speed.").Value;
             MageCore.ionSurgeShock = Config.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
 
             MercCore.enabled = Config.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             MercCore.modifyStats = Config.Bind(mercString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
-            MercCore.m1ComboFinishTweak = Config.Bind(mercString, "M1 Attack Speed Tweak", true, "Makes the 3rd hit of Merc's M1 be unaffected by attack speed for use with combo tech. Client-side.").Value;
+            MercCore.m1ComboFinishTweak = Config.Bind(mercString, "M1 Attack Speed Tweak (Client-Side)", true, "Makes the 3rd hit of Merc's M1 be unaffected by attack speed for use with combo tech.").Value;
 
             TreebotCore.enabled = Config.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             TreebotCore.drillChanges = Config.Bind(treebotString, "DIRECTIVE Drill Changes", true, "Enable changes to this skill.").Value;
@@ -573,6 +575,7 @@ namespace RiskyMod
             VoidFiendCore.enabled = Config.Bind(voidFiendString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             VoidFiendCore.fasterCorruptTransition = Config.Bind(voidFiendString, "Faster Corrupt Transition", true, "Speed up the corruption transform animation.").Value;
             VoidFiendCore.corruptOnKill = Config.Bind(voidFiendString, "Corruption on Kill", true, "Gain Corruption on kill. Lowers passive Corruption gain and Corrupted form duration.").Value;
+            VoidFiendCore.corruptMeterTweaks = Config.Bind(voidFiendString, "Corruption Meter Tweaks", true, "Faster decay, slower passive buildup. Corrupted Suppress can be used as long as you have the HP for it. Meant to be used with Corrupt on Kill.").Value;
             VoidFiendCore.noCorruptCrit = Config.Bind(voidFiendString, "No Corruption on Crit", true, "Disables Corruption gain on crit.").Value;
             VoidFiendCore.noCorruptHeal = Config.Bind(voidFiendString, "No Corruption loss on Heal", true, "Disables Corruption loss on heal.").Value;
         }
