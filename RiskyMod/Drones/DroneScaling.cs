@@ -62,7 +62,7 @@ namespace RiskyMod.Drones
             //This makes their performance stay the same on every stage. (Everything's HP increases 30% per level, so damage and regen increase matches that.)
             if (useShield)
             {
-                cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune | CharacterBody.BodyFlags.ImmuneToExecutes;
+                cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune | CharacterBody.BodyFlags.ImmuneToExecutes | CharacterBody.BodyFlags.ImmuneToVoidDeath;
                 cb.baseMaxShield += cb.baseMaxHealth * 0.08f;
                 cb.levelMaxShield = cb.baseMaxShield * 0.3f;
             }

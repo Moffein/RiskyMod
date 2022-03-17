@@ -38,6 +38,8 @@ namespace RiskyMod.Tweaks
                 }
 
                 EnigmaArtifactManager.validEquipment.Remove(RoR2Content.Equipment.Recycle.equipmentIndex);
+                EnigmaArtifactManager.validEquipment.Remove(DLC1Content.Equipment.BossHunter.equipmentIndex);
+                EnigmaArtifactManager.validEquipment.Remove(DLC1Content.Equipment.MultiShopCard.equipmentIndex);
             };
         }
     }
