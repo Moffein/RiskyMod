@@ -59,6 +59,7 @@ namespace RiskyMod.Content
             Language.currentLanguage.LoadStrings();
             Language.english.UnloadStrings();
             Language.english.LoadStrings();
+            RoR2.Language.SetCurrentLanguage(RoR2.Language.currentLanguageName);
         }
         private static void LoadBuffIcons()
         {
