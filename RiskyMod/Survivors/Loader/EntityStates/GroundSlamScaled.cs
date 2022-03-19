@@ -56,8 +56,7 @@ namespace EntityStates.RiskyMod.Loader
 				if (!(detonateNextFrame || base.characterMotor.Motor.GroundingStatus.IsStableOnGround)
 					&& base.fixedAge >= GroundSlamScaled.minimumDuration)
 				{
-					int potentialHits = SneedUtils.SneedUtils.FindEnemiesInSphere(5f, base.characterBody.footPosition, base.GetTeam());
-					if (potentialHits > 0)
+					if (SneedUtils.SneedUtils.IsEnemyInSphere(5f, base.characterBody.footPosition, base.GetTeam()))
 					{
 						detonateNextFrame = true;
 					}

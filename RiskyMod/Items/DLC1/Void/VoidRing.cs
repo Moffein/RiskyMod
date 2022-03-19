@@ -1,6 +1,7 @@
 ﻿using MonoMod.Cil;
 using RoR2;
 using RoR2.Projectile;
+using System;
 using UnityEngine;
 
 namespace RiskyMod.Items.DLC1.Void
@@ -16,7 +17,11 @@ namespace RiskyMod.Items.DLC1.Void
             GameObject prefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/ElementalRingVoidBlackHole");
             ProjectileExplosion pe = prefab.GetComponent<ProjectileExplosion>();
             pe.falloffModel = BlastAttack.FalloffModel.None;
-            pe.blastProcCoefficient = 0f;   //Not sure if this is even needed
+            
+            if (RiskyMod.disableProcChains)
+            {
+                pe.blastProcCoefficient = 0f;   //1.0 default
+            }
 
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
@@ -30,6 +35,17 @@ namespace RiskyMod.Items.DLC1.Void
                      x => x.MatchLdcR4(20f)
                     );
                 c.Next.Operand = 15f;
+
+                //Change damage
+                c.GotoNext(
+                     x => x.MatchLdcR4(1f)
+                    );
+                c.Next.Operand = 0.9f;
+
+                c.GotoNext(MoveType.After,
+                     x => x.MatchMul()
+                    );
+                c.EmitDelegate<Func<float, float>>(damageCoefficient => damageCoefficient + 0.6f);
             };
         }
 

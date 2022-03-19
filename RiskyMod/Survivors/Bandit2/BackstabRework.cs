@@ -34,24 +34,15 @@ namespace RiskyMod.Survivors.Bandit2
                 });
             };
 
-            //TODO: Convert to recalculatestatsapi once its fixed.
-            //RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
-            On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
-            {
-                orig(self);
-                if (self.bodyIndex == Bandit2Core.Bandit2Index)
-                {
-                    self.critMultiplier -= 0.5f;
-                }
-            };
+            RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
         }
 
-        /*private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
             if (sender.bodyIndex == Bandit2Core.Bandit2Index)
             {
                 args.critDamageMultAdd -= 0.5f;
             }
-        }*/
+        }
     }
 }

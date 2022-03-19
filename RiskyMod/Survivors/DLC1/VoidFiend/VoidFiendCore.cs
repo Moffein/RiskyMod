@@ -80,6 +80,8 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
             {
                 //Which part changes the keyword? PassiveSkill doesn't seem to be it.
                 //"KEYWORD_VOIDCORRUPTION_RISKYMOD"
+                SkillDef passive = Addressables.LoadAssetAsync<SkillDef>("RoR2/DLC1/VoidSurvivor/VoidSurvivorPassive.asset").WaitForCompletion();
+                passive.keywordTokens = new string[] { "KEYWORD_VOIDCORRUPTION_RISKYMOD" };
 
                 //Kills increase Corruption.
                 //Hoping this adds an additional layer of depth to using Void Fiend's Corruption
@@ -112,7 +114,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
             VoidSurvivorController vsc = attackerBody.gameObject.GetComponent<VoidSurvivorController>();
             if (vsc)
             {
-                vsc.AddCorruption(5f);
+                vsc.AddCorruption(4f);
             }
         }
     }
