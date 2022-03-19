@@ -21,7 +21,7 @@ namespace RiskyMod.Items.Uncommon
             int itemCount = inventory.GetItemCount(RoR2Content.Items.SprintOutOfCombat);
             if (itemCount > 0)
             {
-                args.baseMoveSpeedAdd += sender.baseMoveSpeed * 0.1f * itemCount;
+                args.moveSpeedMultAdd += 0.1f * itemCount;
             }
         }
 
