@@ -184,6 +184,7 @@ namespace RiskyMod
 
             FixEnigmaBlacklist.enabled = FixEnigmaBlacklist.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EnigmaBlacklist");
             Gesture.enabled = Gesture.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.GestureEnigma");
+            NerfVoidtouched.enabled = NerfVoidtouched.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EliteReworks");
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -216,6 +217,7 @@ namespace RiskyMod
             new PlayerControlledMonsters();
             new EnigmaBlacklist();
             new AIBlacklistItems();
+            new NerfVoidtouched();
         }
 
         private void RunFixes()
@@ -317,6 +319,7 @@ namespace RiskyMod
             FreezeChampionExecute.enabled = Config.Bind(tweakString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
             EnigmaBlacklist.enabled = Config.Bind(tweakString, "Enigma Blacklist", true, "Blacklist Lunars and Recycler from the Artifact of Enigma.").Value;
             PlayerControlledMonsters.enabled = Config.Bind(tweakString, "Player-Controlled Monster Regen", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
+            NerfVoidtouched.enabled = Config.Bind(tweakString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
 
             ConfigCommonItems();
             ConfigUncommonItems();
