@@ -338,6 +338,7 @@ namespace RiskyMod
         private void ConfigCommonItems()
         {
             BisonSteak.enabled = Config.Bind(commonString, "Bison Steak", true, itemConfigDescString).Value;
+            CautiousSlug.enabled = Config.Bind(commonString, "Cautious Slug", true, itemConfigDescString).Value;
             Crowbar.enabled = Config.Bind(commonString, "Crowbar", true, itemConfigDescString).Value;
             Fireworks.enabled = Config.Bind(commonString, "Fireworks", true, itemConfigDescString).Value;
             Fireworks.maxRockets = Config.Bind(commonString, "Fireworks - Max Rockets", 32, "Max rockets to spawn.").Value;
@@ -393,7 +394,6 @@ namespace RiskyMod
             Raincoat.enabled = Config.Bind(legendaryString, "Bens Raincoat", true, itemConfigDescString).Value;
             Tesla.enabled = Config.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
 
-            //Disabled for now, trying to get a feel for the balance
             //Turns out SS2's Gadget increased initial hit damage by 50%, which lead to a 3x total damage multiplier, which is what this item does already.
             //LaserScope.enabled = Config.Bind(legendaryString, "Laser Scope", true, itemConfigDescString).Value;
             LaserScope.enabled = false;
@@ -402,7 +402,12 @@ namespace RiskyMod
 
         private void ConfigVoidItems()
         {
-            SaferSpaces.enabled = Config.Bind(voidString, "Safer Spaces", true, itemConfigDescString).Value;
+            Dungus.enabled = Config.Bind(voidString, "Weeping Fungus", true, itemConfigDescString).Value;
+
+            //Get feedback first.
+            //SaferSpaces.enabled = Config.Bind(voidString, "Safer Spaces", true, itemConfigDescString).Value;
+            SaferSpaces.enabled = false;
+
             PlasmaShrimp.enabled = Config.Bind(voidString, "Plasma Shrimp", true, itemConfigDescString).Value;
             VoidWisp.enabled = Config.Bind(voidString, "Voidsent Flame", true, itemConfigDescString).Value;
             Polylute.enabled = Config.Bind(voidString, "Polylute", true, itemConfigDescString).Value;

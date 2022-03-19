@@ -107,6 +107,10 @@
 	
 	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Killing an enemy increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>125%</style>, fading over <style=cIsUtility>3</style> <style=cStack>(+1.5 per stack)</style> seconds.",
 	
-	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> <style=cStack>(+10% per stack)</style>. Leaving combat boosts your <style=cIsUtility>movement speed</style> by an additional <style=cIsUtility>30%</style> <style=cStack>(+30% per stack)</style>."
+	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> <style=cStack>(+10% per stack)</style>. Leaving combat boosts your <style=cIsUtility>movement speed</style> by an additional <style=cIsUtility>30%</style> <style=cStack>(+30% per stack)</style>.",
+	
+	"ITEM_HEALWHILESAFE_DESC_RISKYMOD": "Increases <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>+4 hp/s</style> <style=cStack>(+4 hp/s per stack)</style>while outside of combat.",
+	
+	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsHealing>Heals</style> for <style=cIsHealing>2%</style> <style=cStack>(+1% per stack)</style> of your <style=cIsHealing>health</style> every second <style=cIsUtility>while sprinting</style>. <style=cIsVoid>Corrupts all Bustling Fungi</style>."
 	}
 }

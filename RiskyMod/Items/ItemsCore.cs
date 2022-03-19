@@ -56,6 +56,7 @@ namespace RiskyMod.Items
             new Gasoline();
             new TopazBrooch();
             new TougherTimes();
+            new CautiousSlug();
         }
 
         private void ModifyUncommon()
@@ -106,6 +107,7 @@ namespace RiskyMod.Items
 
         private void ModifyVoid()
         {
+            new Dungus();
             new SaferSpaces();
             new PlasmaShrimp();
             new VoidWisp();

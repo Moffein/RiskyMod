@@ -3,6 +3,7 @@ using MonoMod.Cil;
 using RoR2;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Enemies.DLC1
 {
@@ -15,10 +16,10 @@ namespace RiskyMod.Enemies.DLC1
         {
             if (!enabled) return;
 
-            GameObject enemyObject = LegacyResourcesAPI.Load<GameObject>("");
-            /*CharacterBody cb = enemyObject.GetComponent<CharacterBody>();
-            cb.baseMaxHealth = 35f;
-            cb.levelMaxHealth = 10f;*/    //apparently decimals get rounded when autocalculating level stats
+            GameObject enemyObject = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/EliteVoid/VoidInfestorBody.prefab").WaitForCompletion();
+            CharacterBody cb = enemyObject.GetComponent<CharacterBody>();
+            cb.baseMaxHealth = 30f;
+            cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
 
             if (noVoidAllies)
             {
