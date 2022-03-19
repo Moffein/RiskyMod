@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using RoR2;
+using System.Linq;
 
 namespace RiskyMod.Content
 {
@@ -31,36 +32,21 @@ namespace RiskyMod.Content
 
         private static void LoadLanguage()
         {
-            RoR2.RoR2Application.onLoad += (delegate ()
-            {
-                if (Directory.Exists(Assets.languageRoot))
-                {
-                    FixLanguageFolders(Assets.languageRoot);
-                }
-            });
+            On.RoR2.Language.SetFolders += fixme;
         }
 
         //Credits to Anreol for this code
-        public static void FixLanguageFolders(string rootFolder)
+        private static void fixme(On.RoR2.Language.orig_SetFolders orig, Language self, System.Collections.Generic.IEnumerable<string> newFolders)
         {
-            var allLanguageFolders = Directory.EnumerateDirectories(rootFolder);
-            foreach (Language language in Language.GetAllLanguages())
+            if (System.IO.Directory.Exists(Assets.languageRoot))
             {
-                foreach (var folder in allLanguageFolders)
-                {
-                    if (folder.Contains(language.name))
-                    {
-                        HG.ArrayUtils.ArrayAppend<string>(ref language.folders, folder);
-                    }
-                }
+                var dirs = System.IO.Directory.EnumerateDirectories(System.IO.Path.Combine(Assets.languageRoot), self.name);
+                orig(self, newFolders.Union(dirs));
+                return;
             }
-            //Reload all folders, by this time, the language has already been initialized, thats why we are doing this.
-            Language.currentLanguage.UnloadStrings();
-            Language.currentLanguage.LoadStrings();
-            Language.english.UnloadStrings();
-            Language.english.LoadStrings();
-            RoR2.Language.SetCurrentLanguage(RoR2.Language.currentLanguageName);
+            orig(self, newFolders);
         }
+
         private static void LoadBuffIcons()
         {
             BuffIcons.Infusion = assetBundle.LoadAsset<Sprite>("BuffInfusion");
