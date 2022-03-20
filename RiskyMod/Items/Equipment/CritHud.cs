@@ -12,7 +12,11 @@ namespace RiskyMod.Items.Equipment
         public CritHud()
         {
             if (!enabled) return;
-
+            On.RoR2.EquipmentCatalog.Init += (orig) =>
+            {
+                orig();
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipDescs, RoR2Content.Equipment.CritHud);
+            };
             //Disable vanilla behavior
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {
