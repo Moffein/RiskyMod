@@ -33,7 +33,7 @@ namespace RiskyMod.Items.Uncommon
             int thornCount = inventory.GetItemCount(RoR2Content.Items.Thorns);
             if (thornCount > 0 && !damageInfo.procChainMask.HasProc(ProcType.Thorns))
             {
-                float hpLostLerp = percentHpLost / 100f;
+                float hpLostLerp = percentHpLost / 50f; //Was /100f, Lerp should be clamped.
                 int targetCount = 1 + 2 * thornCount;
                 bool isVengeanceClone = inventory.GetItemCount(RoR2Content.Items.InvadingDoppelganger) > 0; //In case some other mod tries to mess with HealthComponent's itemcount
 
