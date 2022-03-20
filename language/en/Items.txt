@@ -19,7 +19,7 @@
 	"ITEM_REPULSIONARMORPLATE_PICKUP_RISKYMOD": "Increase armor by 5.",
 	"ITEM_REPULSIONARMORPLATE_DESC_RISKYMOD": "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>5</style>.",
 	
-	"ITEM_BEAR_DESC_RISKYMOD": "<style=cIsHealing>7%</style> <style=cStack>(+7% per stack)</style> chance to <style=cIsHealing>block</style> incoming damage. <style=cIsUtility>Unaffected by luck</style>.",
+	"ITEM_BEAR_DESC_RISKYMOD": "<style=cIsHealing>10%</style> <style=cStack>(+10% per stack)</style> chance to <style=cIsHealing>block</style> incoming damage. <style=cIsUtility>Unaffected by luck</style>.",
 	
 	"ITEM_SLOWONHIT_DESC_RISKYMOD": "<style=cIsUtility>Slow</style> enemies on hit for <style=cIsUtility>-60% movement speed</style> and <style=cIsDamage>-20% attack speed</style> for <style=cIsUtility>2s</style> <style=cStack>(+2s per stack)</style>.",
 	
