@@ -418,6 +418,7 @@ namespace RiskyMod
         {
             ChargedPerf.enabled = Config.Bind(bossString, "Charged Perforator", true, itemConfigDescString).Value;
             Disciple.enabled = Config.Bind(bossString, "Charged Perforator", true, itemConfigDescString).Value;
+            Knurl.enabled = Config.Bind(bossString, "Titanic Knurl", true, itemConfigDescString).Value;
             MoltenPerf.enabled = Config.Bind(bossString, "Molten Perforator", true, itemConfigDescString).Value;
             QueensGland.enabled = Config.Bind(bossString, "Queens Gland", true, itemConfigDescString).Value;
             Shatterspleen.enabled = Config.Bind(bossString, "Shatterspleen", true, itemConfigDescString).Value;
