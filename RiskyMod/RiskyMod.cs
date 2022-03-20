@@ -379,6 +379,7 @@ namespace RiskyMod
         {
             Behemoth.enabled = Config.Bind(legendaryString, "Brilliant Behemoth", true, itemConfigDescString).Value;
             BottledChaos.enabled = Config.Bind(legendaryString, "Bottled Chaos", true, itemConfigDescString).Value;
+            Brainstalks.enabled = Config.Bind(legendaryString, "Brainstalks", true, itemConfigDescString).Value;
             CeremonialDagger.enabled = Config.Bind(legendaryString, "Ceremonial Dagger", true, itemConfigDescString).Value;
             FrostRelic.enabled = Config.Bind(legendaryString, "Frost Relic", true, itemConfigDescString).Value;
             FrostRelic.removeFOV = Config.Bind(legendaryString, "Frost Relic - Disable FOV Modifier", true, "Disables FOV modifier.").Value;
@@ -418,6 +419,7 @@ namespace RiskyMod
         {
             ChargedPerf.enabled = Config.Bind(bossString, "Charged Perforator", true, itemConfigDescString).Value;
             Disciple.enabled = Config.Bind(bossString, "Charged Perforator", true, itemConfigDescString).Value;
+            Knurl.enabled = Config.Bind(bossString, "Titanic Knurl", true, itemConfigDescString).Value;
             MoltenPerf.enabled = Config.Bind(bossString, "Molten Perforator", true, itemConfigDescString).Value;
             QueensGland.enabled = Config.Bind(bossString, "Queens Gland", true, itemConfigDescString).Value;
             Shatterspleen.enabled = Config.Bind(bossString, "Shatterspleen", true, itemConfigDescString).Value;
