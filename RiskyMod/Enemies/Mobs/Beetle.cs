@@ -20,7 +20,7 @@ namespace RiskyMod.Enemies.Mobs
 
             //cb.baseMaxHealth = 96f;
             //cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
-            float newSpeed = 8.4f;
+            float newSpeed = 10f;
             if (cb.baseMoveSpeed < newSpeed)    //Check in case SpeedyBeetles is installed
             {
                 cb.baseMoveSpeed = newSpeed;

@@ -55,7 +55,7 @@ namespace RiskyMod.Items.DLC1.Legendary
                     int itemCount = body.inventory ? body.inventory.GetItemCount(DLC1Content.Items.ImmuneToDebuff) : 0;
                     if (itemCount > 0)
                     {
-                        body.AddTimedBuff(RaincoatActiveBuff, 4f);
+                        body.AddTimedBuff(RaincoatActiveBuff, 3f);
 
                         SneedUtils.SneedUtils.StunEnemiesInSphere(body, 12f);
                         EffectManager.SimpleImpactEffect(debuffNegateEffectPrefab, body.corePosition, Vector3.up, true);
@@ -102,14 +102,14 @@ namespace RiskyMod.Items.DLC1.Legendary
 
 
             //Raincoat Active
-            SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += (sender, args, inventory) =>
+            /*SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += (sender, args, inventory) =>
             {
                 if (sender.HasBuff(RaincoatActiveBuff))
                 {
                     int itemCount = inventory.GetItemCount(DLC1Content.Items.ImmuneToDebuff);
                     args.armorAdd += 50f * Mathf.Max(1f, itemCount);
                 }
-            };
+            };*/
 
             //Cooldown Start
             On.RoR2.CharacterBody.RemoveBuff_BuffIndex += (orig, self, buffType) =>

@@ -40,7 +40,6 @@ namespace RiskyMod.Items.Uncommon
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
             RecalculateStatsAPI.GetStatCoefficients += HandleStats;
-            TakeDamage.ModifyInitialDamageActions += ForceDamageCrit;
 
             IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>
             {
@@ -79,14 +78,6 @@ namespace RiskyMod.Items.Uncommon
             if (itemCount > 0)
             {
                 attackerBody.AddTimedBuff(HarvesterScythe.scytheBuff, 2.4f + 1.2f * (itemCount - 1));
-            }
-        }
-
-        private void ForceDamageCrit(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
-        {
-            if (!damageInfo.crit && attackerBody.HasBuff(HarvesterScythe.scytheBuff))
-            {
-                damageInfo.crit = true;
             }
         }
     }

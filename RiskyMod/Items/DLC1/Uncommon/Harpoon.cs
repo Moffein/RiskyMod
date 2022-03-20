@@ -9,6 +9,7 @@ namespace RiskyMod.Items.DLC1.Uncommon
     public class Harpoon
     {
         public static bool enabled = true;
+        private static GameObject effectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MoveSpeedOnKillActivate");
         public Harpoon()
         {
             if (!enabled) return;
@@ -33,13 +34,13 @@ namespace RiskyMod.Items.DLC1.Uncommon
             int itemCount = attackerInventory.GetItemCount(DLC1Content.Items.MoveSpeedOnKill);
             if (itemCount > 0)
             {
-                int num5 = itemCount - 1;
+                int stack = itemCount - 1;
                 int num6 = 5;
-                float num7 = 3f + (float)num5 * 1.5f;
+                float totalDuration = 3f + (float)stack * 1.5f;
                 attackerBody.ClearTimedBuffs(DLC1Content.Buffs.KillMoveSpeed);
-                for (int l = 0; l < num6; l++)
+                for (int i = 0; i < num6; i++)
                 {
-                    attackerBody.AddTimedBuff(DLC1Content.Buffs.KillMoveSpeed, num7 * (float)(l + 1) / (float)num6);
+                    attackerBody.AddTimedBuff(DLC1Content.Buffs.KillMoveSpeed, totalDuration * (float)(i + 1) / (float)num6);
                 }
                 EffectData effectData = new EffectData();
                 effectData.origin = attackerBody.corePosition;
@@ -58,7 +59,7 @@ namespace RiskyMod.Items.DLC1.Uncommon
                 {
                     effectData.rotation = attackerBody.transform.rotation;
                 }
-                EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MoveSpeedOnKillActivate"), effectData, true);
+                EffectManager.SpawnEffect(Harpoon.effectPrefab, effectData, true);
             }
         }
 
