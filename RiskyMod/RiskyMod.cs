@@ -379,6 +379,7 @@ namespace RiskyMod
         {
             Behemoth.enabled = Config.Bind(legendaryString, "Brilliant Behemoth", true, itemConfigDescString).Value;
             BottledChaos.enabled = Config.Bind(legendaryString, "Bottled Chaos", true, itemConfigDescString).Value;
+            Brainstalks.enabled = Config.Bind(legendaryString, "Brainstalks", true, itemConfigDescString).Value;
             CeremonialDagger.enabled = Config.Bind(legendaryString, "Ceremonial Dagger", true, itemConfigDescString).Value;
             FrostRelic.enabled = Config.Bind(legendaryString, "Frost Relic", true, itemConfigDescString).Value;
             FrostRelic.removeFOV = Config.Bind(legendaryString, "Frost Relic - Disable FOV Modifier", true, "Disables FOV modifier.").Value;
