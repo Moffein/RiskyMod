@@ -127,7 +127,7 @@ namespace RiskyMod.Survivors.Toolbot
                     if (self.characterMotor && !self.characterMotor.isGrounded && self.characterMotor.velocity.y <= 0f)
                     {
                         //self.characterMotor.velocity.y = 0f;
-                        self.SmallHop(self.characterMotor, 2.5f);
+                        self.SmallHop(self.characterMotor, 2.5f / Mathf.Sqrt(self.attackSpeedStat));
                     }
                     return orig;
                 });

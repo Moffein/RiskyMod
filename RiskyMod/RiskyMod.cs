@@ -84,6 +84,8 @@ namespace RiskyMod
         private const string tweakString = "General - Tweaks";
         private const string coreModuleString = "General - Core Modules";
 
+        private const string moonString = "Moon";
+
         private const string uncommonString = "Items - Uncommon";
         private const string commonString = "Items - Common";
         private const string legendaryString = "Items - Legendary";
@@ -339,6 +341,7 @@ namespace RiskyMod
             PlayerControlledMonsters.enabled = Config.Bind(tweakString, "Player-Controlled Monster Regen", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
             NerfVoidtouched.enabled = Config.Bind(tweakString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
 
+            ConfigMoon();
             ConfigCommonItems();
             ConfigUncommonItems();
             ConfigLegendaryItems();
@@ -351,6 +354,18 @@ namespace RiskyMod
 
             ConfigFireSelect();
             ConfigSurvivors();
+        }
+
+        private void ConfigMoon()
+        {
+            LessPillars.enabled = Config.Bind(moonString, "Reduce Pillar Count", true, "Reduce the amount of pillars required to activate the jump pads.").Value;
+            PillarsDropItems.enabled = Config.Bind(moonString, "Pillars Drop Items", true, "Pillars drop items for the team when completed.").Value;
+            PillarsDropItems.whiteChance = Config.Bind(moonString, "Pillars Drop Items - Common Chance", 50f, "Chance for Pillars to drop Common Items.").Value;
+            PillarsDropItems.greenChance = Config.Bind(moonString, "Pillars Drop Items - Uncommon Chance", 40f, "Chance for Pillars to drop Common Items.").Value;
+            PillarsDropItems.redChance = Config.Bind(moonString, "Pillars Drop Items - Legendary Chance", 10f, "Chance for Pillars to drop Common Items.").Value;
+            PillarsDropItems.pearlOverwriteChance = Config.Bind(moonString, "Pillars Drop Items - Pearl Overwrite Chance", 15f, "Chance for nonlegendary Pillar drops to be overwritten with a Pearl.").Value;
+            PillarsDropItems.lunarOverwriteChance = Config.Bind(moonString, "Pillars Drop Items - Lunar Overwrite Chance", 0f, "Chance for nonlegendary Pillar drops to be overwritten with a random Lunar item.").Value;
+            PillarsDropItems.noOverwriteChance = Config.Bind(moonString, "Pillars Drop Items - No Overwrite Chance", 85f, "Chance for nonlegendary Pillar drops to not be overwritten.").Value;
         }
 
         private void ConfigCommonItems()
