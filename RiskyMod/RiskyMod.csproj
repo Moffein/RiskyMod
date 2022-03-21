@@ -98,6 +98,9 @@
     <Reference Include="RoR2BepInExPack">
       <HintPath>libs\BepInEx\RoR2BepInExPack.dll</HintPath>
     </Reference>
+    <Reference Include="ShareSuite">
+      <HintPath>libs\SoftDependencies\ShareSuite.dll</HintPath>
+    </Reference>
     <Reference Include="SimpleJSON">
       <HintPath>libs\SimpleJSON.dll</HintPath>
     </Reference>

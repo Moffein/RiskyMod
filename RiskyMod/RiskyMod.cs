@@ -71,6 +71,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.EnigmaBlacklist", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.GestureEnigma", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.BackstabRework", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.funkfrog_sipondo.sharesuite", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.1")]
@@ -116,6 +117,13 @@ namespace RiskyMod
         public static bool AIBlacklistLoaded = false;
         public static bool AIBlacklistUseVanillaBlacklist = true;
 
+        public static bool ShareSuiteLoaded = false;
+        public static bool ShareSuiteCommon = false;
+        public static bool ShareSuiteUncommon = false;
+        public static bool ShareSuiteLegendary = false;
+        public static bool ShareSuiteBoss = false;
+        public static bool ShareSuiteLunar = false;
+
         public static ItemDef emptyItemDef = null;
         public static BuffDef emptyBuffDef = null;
 
@@ -158,11 +166,8 @@ namespace RiskyMod
             VoidInfestor.noVoidAllies = VoidInfestor.noVoidAllies && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoVoidAllies");
 
             AIBlacklistLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist");
+            if (AIBlacklistLoaded) HandleAIBlacklist();
             FixVengeanceLeveling.enabled = FixVengeanceLeveling.enabled && !AIBlacklistLoaded;
-            if (AIBlacklistLoaded)
-            {
-                HandleAIBlacklist();
-            }
 
             PreventArtifactHeal.enabled = PreventArtifactHeal.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.ArtifactReliquaryHealingFix");
             CaptainOrbitalHiddenRealms.enabled = CaptainOrbitalHiddenRealms.enabled
@@ -185,12 +190,25 @@ namespace RiskyMod
             FixEnigmaBlacklist.enabled = FixEnigmaBlacklist.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EnigmaBlacklist");
             Gesture.enabled = Gesture.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.GestureEnigma");
             NerfVoidtouched.enabled = NerfVoidtouched.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EliteReworks");
+
+            ShareSuiteLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.funkfrog_sipondo.sharesuite");
+            if (ShareSuiteLoaded) HandleShareSuite();
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void HandleAIBlacklist()
         {
             AIBlacklistUseVanillaBlacklist = AI_Blacklist.AIBlacklist.useVanillaAIBlacklist;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void HandleShareSuite()
+        {
+            ShareSuiteCommon = ShareSuite.ShareSuite.WhiteItemsShared.Value;
+            ShareSuiteUncommon = ShareSuite.ShareSuite.GreenItemsShared.Value;
+            ShareSuiteLegendary = ShareSuite.ShareSuite.RedItemsShared.Value;
+            ShareSuiteBoss = ShareSuite.ShareSuite.BossItemsShared.Value;
+            ShareSuiteLunar = ShareSuite.ShareSuite.LunarItemsShared.Value;
         }
 
         private void RunTweaks()

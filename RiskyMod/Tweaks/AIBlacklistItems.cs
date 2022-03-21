@@ -20,6 +20,8 @@ namespace RiskyMod.Tweaks
                     SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.NovaOnHeal, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(DLC1Content.Items.ImmuneToDebuff, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(DLC1Content.Items.DroneWeapons, ItemTag.AIBlacklist);
+                    SneedUtils.SneedUtils.AddItemTag(DLC1Content.Items.FreeChest, ItemTag.AIBlacklist);
+                    SneedUtils.SneedUtils.AddItemTag(DLC1Content.Items.RegeneratingScrap, ItemTag.AIBlacklist);
                 }
             };
         }

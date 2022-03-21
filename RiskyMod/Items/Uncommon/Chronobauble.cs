@@ -21,7 +21,7 @@ namespace RiskyMod.Items.Uncommon
         {
             if (sender.HasBuff(RoR2Content.Buffs.Slow60.buffIndex))
             {
-                args.attackSpeedMultAdd -= 0.2f;
+                args.attackSpeedMultAdd *= 0.85f;   //Multiply since it's possible to get negative attack speed with subtraction
             }
         }
     }

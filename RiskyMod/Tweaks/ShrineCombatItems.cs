@@ -35,6 +35,21 @@ namespace RiskyMod.Tweaks
                         if (participatingPlayerCount != 0 && self.transform)
                         {
                             int num = participatingPlayerCount;
+
+                            switch (PickupCatalog.GetPickupDef(pickupIndex).itemTier)
+                            {
+                                case ItemTier.Tier1:
+                                    if (RiskyMod.ShareSuiteCommon) num = 1;
+                                    break;
+                                case ItemTier.Tier2:
+                                    if (RiskyMod.ShareSuiteUncommon) num = 1;
+                                    break;
+                                case ItemTier.Tier3:
+                                    if (RiskyMod.ShareSuiteLegendary) num = 1;
+                                    break;
+                                default: break;
+                            }
+
                             float angle = 360f / (float)num;
                             Vector3 vector = Quaternion.AngleAxis((float)UnityEngine.Random.Range(0, 360), Vector3.up) * (Vector3.up * 40f + Vector3.forward * 5f);
                             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);

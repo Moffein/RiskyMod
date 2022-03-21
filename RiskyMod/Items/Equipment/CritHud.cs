@@ -15,7 +15,7 @@ namespace RiskyMod.Items.Equipment
             On.RoR2.EquipmentCatalog.Init += (orig) =>
             {
                 orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipDescs, RoR2Content.Equipment.CritHud);
+                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipDescs, RoR2Content.Equipment.CritOnUse);
             };
             //Disable vanilla behavior
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
