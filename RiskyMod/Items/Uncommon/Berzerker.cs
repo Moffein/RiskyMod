@@ -66,33 +66,17 @@ namespace RiskyMod.Items.Uncommon
             if (berzerkCount > 0)
             {
                 args.moveSpeedMultAdd += 0.1f * berzerkCount;
-                args.attackSpeedMultAdd += 0.2f * berzerkCount;
+                args.attackSpeedMultAdd += 0.15f * berzerkCount;
             }
         }
 
         private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
         {
 
-            int berzerkCount = attackerInventory.GetItemCount(RoR2Content.Items.WarCryOnMultiKill);
-            if (berzerkCount > 0)
+            int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.WarCryOnMultiKill);
+            if (itemCount > 0)
             {
-                attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 2f + 3f * berzerkCount);
-                //Need to apply buff this way to prevent the visual from disappearing.
-                /*int newBuffStack = Mathf.Min(attackerBody.GetBuffCount(Berzerker.berzerkBuff) + 1, 2 + 3 * berzerkCount);
-                int foundBuffs = 0;
-                foreach (CharacterBody.TimedBuff tb in attackerBody.timedBuffs)
-                {
-                    if (tb.buffIndex == Berzerker.berzerkBuff.buffIndex)
-                    {
-                        tb.timer = 4f + 0.5f * foundBuffs;
-                        foundBuffs++;
-                    }
-                }
-                for (int i = 0; i < newBuffStack - foundBuffs; i++)
-                {
-                    attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 4f + 0.5f * foundBuffs);
-                    foundBuffs++;
-                }*/
+                attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 5f, 1 + 2 * itemCount);
             }
         }
     }

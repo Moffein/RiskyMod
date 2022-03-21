@@ -54,6 +54,7 @@ namespace RiskyMod.Items.Uncommon
                     return hasBuff || self.HasBuff(HarvesterScythe.scytheBuff);
                 });
             };
+
         }
         private static void ModifyItem()
         {
@@ -68,7 +69,7 @@ namespace RiskyMod.Items.Uncommon
             if (buffCount > 0)
             {
                 args.critAdd += 100f;
-                args.baseRegenAdd += buffCount * (5f + (sender.level - 1f));
+                args.baseRegenAdd += buffCount * (4f + 0.8f * (sender.level - 1f));
             }
         }
 
@@ -77,7 +78,7 @@ namespace RiskyMod.Items.Uncommon
             int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.HealOnCrit);
             if (itemCount > 0)
             {
-                attackerBody.AddTimedBuff(HarvesterScythe.scytheBuff, 2.4f + 1.2f * (itemCount - 1));
+                attackerBody.AddTimedBuff(HarvesterScythe.scytheBuff, 5f,  1 + 2 * itemCount);
             }
         }
     }

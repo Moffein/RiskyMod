@@ -99,6 +99,7 @@ namespace RiskyMod.Items
             new Soulbound();
             new Behemoth();
             new HappiestMask();
+            new Clover();
 
             new LaserScope();
             new BottledChaos();

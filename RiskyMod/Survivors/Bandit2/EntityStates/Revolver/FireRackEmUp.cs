@@ -45,14 +45,18 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 				bulletAttack.isCrit = base.RollCrit();
 				bulletAttack.HitEffectNormal = false;
 				bulletAttack.radius = bulletRadius;
-				bulletAttack.damageType |= DamageType.BonusToLowHealth;
 				bulletAttack.smartCollision = true;
 				bulletAttack.maxDistance = 200f;
 
 				SpecialDamageController sdc = base.GetComponent<SpecialDamageController>();
 				if (sdc)
 				{
-					bulletAttack.damageType |= sdc.GetDamageType();
+					DamageType dt = sdc.GetDamageType();
+					bulletAttack.damageType |= dt;
+					if (!DesperadoRework.noSlayerDesperado || dt == DamageType.ResetCooldownsOnKill)
+					{
+						bulletAttack.damageType |= DamageType.BonusToLowHealth;
+					}
 				}
 				DamageAPI.AddModdedDamageType(bulletAttack, Bandit2Core.SpecialDamage);
 				DamageAPI.AddModdedDamageType(bulletAttack, Bandit2Core.RackEmUpDamage);
