@@ -37,6 +37,7 @@ namespace RiskyMod.Drones
             new DroneTargeting();
             new IncreaseShotRadius();
             new VagrantResistance();
+            new NoVoidDamage();
             TweakDrones();
         }
 

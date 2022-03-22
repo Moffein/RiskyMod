@@ -68,7 +68,7 @@ namespace RiskyMod.Items.Uncommon
             int buffCount = sender.GetBuffCount(HarvesterScythe.scytheBuff);
             if (buffCount > 0)
             {
-                args.critAdd += 100f;
+                args.critAdd += 10f * buffCount;
                 args.baseRegenAdd += buffCount * (4f + 0.8f * (sender.level - 1f));
             }
         }
