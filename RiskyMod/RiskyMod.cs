@@ -252,6 +252,7 @@ namespace RiskyMod
             new FixGhostMinonSpawns();
             new FixWormFallDeath();
             new GhostDunestriderFriendlyFire();
+            new FixExtraLifeVoidBlacklist();
         }
         
         private void AddHooks()
