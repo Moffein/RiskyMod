@@ -70,7 +70,8 @@ namespace RiskyMod.Items.Uncommon
             {
                 int stack = Mathf.Max(0, daisyCount - 1);
 
-                healingWard.radius = 16f;   //Same as 1 Warbanner
+                healingWard.Networkradius = 16f;
+                healingWard.radius = 16f;
                 float healFraction = 0.05f + 0.025f * stack;
                 healingWard.healFraction = healFraction;
             }
