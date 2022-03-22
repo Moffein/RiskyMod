@@ -183,7 +183,7 @@ namespace RiskyMod
             BlightStack.enabled = BlightStack.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AcridBlightStack");
 
             //Bandit2
-            Bandit2Core.backstabNerf = Bandit2Core.backstabNerf && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BackstabRework");
+            BackstabRework.enabled = BackstabRework.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BackstabRework");
 
             //Enemies
             BeetleQueen.enabled = BeetleQueen.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BeetleQueenPlus");
@@ -605,8 +605,8 @@ namespace RiskyMod
             BanditSpecialGracePeriod.enabled = Config.Bind(banditString, "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;
             BanditSpecialGracePeriod.duration = Config.Bind(banditString, "Special Grace Period Duration", 1.2f, "Length in seconds of Special Grace Period.").Value;
             DesperadoRework.enabled = Config.Bind(banditString, "Persistent Desperado", true, "Desperado stacks are weaker but last between stages.").Value;
-            DesperadoRework.noSlayerDesperado = Config.Bind(banditString, "No Slayer Desperado", true, "Desperado does not benefit from BonusToLowHealth damage.").Value;
-            Bandit2Core.backstabNerf = Config.Bind(banditString, "Backstab Changes", true, "Backstabs minicrit for 50% bonus damage and crit chance is converted to crit damage..").Value;
+            DesperadoRework.noSlayerDesperado = Config.Bind(banditString, "No Slayer for Desperado", true, "Desperado does not benefit from BonusToLowHealth damage.").Value;
+            BackstabRework.enabled = Config.Bind(banditString, "Backstab Changes", true, "Backstabs minicrit for 50% bonus damage and crit chance is converted to crit damage..").Value;
             Bandit2Core.burstChanges = Config.Bind(banditString, "Burst Changes", true, "Enable changes to this skill.").Value;
             Bandit2Core.blastChanges = Config.Bind(banditString, "Blast Changes", true, "Enable changes to this skill.").Value;
             Bandit2Core.knifeChanges = Config.Bind(banditString, "Serrated Dagger Changes", true, "Enable changes to this skill.").Value;

@@ -76,7 +76,7 @@ namespace RiskyMod.Items.Uncommon
             int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.WarCryOnMultiKill);
             if (itemCount > 0)
             {
-                attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 5f, 1 + 2 * itemCount);
+                attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 4f, 1 + 2 * itemCount);
             }
         }
     }

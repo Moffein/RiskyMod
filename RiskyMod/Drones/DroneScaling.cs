@@ -59,14 +59,13 @@ namespace RiskyMod.Drones
             }
             cb.levelDamage = cb.baseDamage * 0.3f;
 
-            //This makes their performance stay the same on every stage. (Everything's HP increases 30% per level, so damage and regen increase matches that.)
             if (useShield)
             {
                 cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune | CharacterBody.BodyFlags.ImmuneToExecutes | CharacterBody.BodyFlags.ImmuneToVoidDeath;
                 cb.baseMaxShield += cb.baseMaxHealth * 0.08f;
                 cb.levelMaxShield = cb.baseMaxShield * 0.3f;
             }
-            cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
+            cb.levelMaxHealth = cb.baseMaxHealth * 0.2f;    //0.3f is standard scaling
 
             cb.baseRegen = cb.baseMaxHealth / 40f;  //Drones take a fixed amount of time to regen to full.
             cb.levelRegen = cb.baseRegen * 0.3f;

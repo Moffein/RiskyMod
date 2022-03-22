@@ -50,15 +50,15 @@ namespace RiskyMod.Items.Uncommon
                 c.Emit(OpCodes.Ldarg_0);//self
                 c.EmitDelegate<Func<int, CharacterBody, int>>((infusionBonus, self) =>
                 {
-                    float newHP = 0;
+                    float newHP = 0f;
                     float infusionCount = (float)infusionBonus;
                     int hundredsFulfilled = 0;
                     while (infusionCount > 0f)
                     {
                         float killRequirement = 100f + 150f * hundredsFulfilled;
-                        if (infusionBonus <= killRequirement)
+                        if (infusionCount <= killRequirement)
                         {
-                            newHP += 100f * infusionBonus / killRequirement;
+                            newHP += 100f * infusionCount / killRequirement;
                             infusionCount = 0f;
                         }
                         else

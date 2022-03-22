@@ -29,7 +29,7 @@ namespace RiskyMod.Tweaks
             {
                 if (sender.HasBuff(DLC1Content.Buffs.EliteVoid))
                 {
-                    args.damageMultAdd += 0.3f;
+                    args.damageMultAdd += 0.8f; //0.3f + 0.5f, has inherent -0.3f mult
                 }
             };
 

@@ -24,8 +24,6 @@ namespace RiskyMod.Survivors.Bandit2
         public static DamageAPI.ModdedDamageType RackEmUpDamage;
         public static bool enabled = true;
 
-        public static bool backstabNerf = true;
-
         public static bool blastChanges = true;
         public static bool burstChanges = true;
 
@@ -67,9 +65,11 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void ModifyPassives(SkillLocator sk)
         {
-            if (!backstabNerf) return;
-            new BackstabRework();
-            sk.passiveSkill.skillDescriptionToken = "BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD";
+            if (BackstabRework.enabled)
+            {
+                new BackstabRework();
+                sk.passiveSkill.skillDescriptionToken = "BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD";
+            }
         }
 
         private void ModifyPrimaries(SkillLocator sk)
@@ -146,6 +146,8 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void ModifySecondaries(SkillLocator sk)
         {
+            if (BuffHemorrhage.enabled) new BuffHemorrhage();
+
             if (knifeChanges)
             {
                 new IncreaseKnifeHitboxSize();
