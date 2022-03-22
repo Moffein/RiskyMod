@@ -251,6 +251,7 @@ namespace RiskyMod
             new FixCrocoPoisonAchievement();
             new FixGhostMinonSpawns();
             new FixWormFallDeath();
+            new GhostDunestriderFriendlyFire();
         }
         
         private void AddHooks()

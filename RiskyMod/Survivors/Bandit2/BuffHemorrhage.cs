@@ -13,9 +13,10 @@ namespace RiskyMod.Survivors.Bandit2
             {
                 if (damageInfo.dotIndex == RoR2.DotController.DotIndex.SuperBleed)
                 {
-                    if (self.body.armor > 0f)
+                    float totalArmor = self.body.armor + self.adaptiveArmorValue;
+                    if (totalArmor > 0f)
                     {
-                        damageInfo.damage *= (100f + self.body.armor + self.adaptiveArmorValue)/100f;
+                        damageInfo.damage *= (100f + totalArmor)/100f;
                     }
                 }
                 orig(self, damageInfo);

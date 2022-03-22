@@ -41,12 +41,10 @@ namespace RiskyMod.Drones
                     cb.baseDamage *= 0.8f;
                     break;
                 case "SquidTurretBody":
-                    cb.levelArmor += 1f;
                     cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
                     cb.baseMaxHealth = 720f;
                     break;
                 case "Turret1Body":
-                    cb.levelArmor += 1f;
                     cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
                     cb.baseMaxHealth *= 1.2f;
                     break;

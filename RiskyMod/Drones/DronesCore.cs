@@ -8,22 +8,28 @@ namespace RiskyMod.Drones
     public class DronesCore
     {
         public static bool enabled = true;
-        public static List<BodyIndex> AllyBodies;
+        public static List<BodyIndex> AllyBodies = new List<BodyIndex>();
+        public static List<BodyIndex> AllyTurretBodies = new List<BodyIndex>();
         public static List<string> AllyBodyNames = new List<string>
         {
             "BackupDroneBody",
             "Drone1Body",
             "Drone2Body",
-            "Turret1Body",
             "MissileDroneBody",
             "FlameDroneBody",
             "EquipmentDroneBody",
             "EmergencyDroneBody",
             "MegaDroneBody",
-            "SquidTurretBody",
             "BeetleGuardAllyBody",
             "RoboBallGreenBuddyBody",
             "RoboBallRedBuddyBody"
+        };
+
+        //These get added to the AllyBodies list, but they also get added to a separate list for referencing.
+        public static List<string> AllyTurretBodyNames = new List<string>
+        {
+            "Turret1Body",
+            "SquidTurretBody"
         };
 
         public delegate void ModifyAllies(List<BodyIndex> bodies);
@@ -43,7 +49,6 @@ namespace RiskyMod.Drones
 
         private void BuildAllyBodies()
         {
-            AllyBodies = new List<BodyIndex>();
             On.RoR2.BodyCatalog.Init += (orig) =>
             {
                 orig();
@@ -51,6 +56,10 @@ namespace RiskyMod.Drones
                 foreach (string str in AllyBodyNames)
                 {
                     AddBody(str);
+                }
+                foreach (string str in AllyTurretBodyNames)
+                {
+                    AddTurretBody(str);
                 }
 
                 if (ModifyAlliesActions != null) ModifyAlliesActions.Invoke(AllyBodies);
@@ -72,9 +81,25 @@ namespace RiskyMod.Drones
             }
         }
 
+        public static void AddTurretBody(string bodyname)
+        {
+            BodyIndex index = BodyCatalog.FindBodyIndex(bodyname);
+            if (index != BodyIndex.None)
+            {
+                AllyBodies.Add(index);
+                AllyTurretBodies.Add(index);
+            }
+        }
+
         public static bool IsAlly(BodyIndex bodyIndex)
         {
             return AllyBodies.Contains(bodyIndex);
+        }
+
+        //TODO: look into a more general tagging system instead of this
+        public static bool IsTurretAlly(BodyIndex bodyIndex)
+        {
+            return AllyTurretBodies.Contains(bodyIndex);
         }
     }
 }
