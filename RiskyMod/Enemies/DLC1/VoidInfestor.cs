@@ -45,7 +45,7 @@ namespace RiskyMod.Enemies.DLC1
                     c.Emit(OpCodes.Ldloc_3);
                     c.EmitDelegate<Func<bool, CharacterBody, bool>>((playerControlled, body) =>
                     {
-                        return playerControlled || (body.teamComponent && body.teamComponent.teamIndex == TeamIndex.Player);
+                        return playerControlled || (body.teamComponent && body.teamComponent.teamIndex == TeamIndex.Player) || body.isBoss;
                     });
 
                     //Fix allied Ghost Infestors creating new Void Team monsters

@@ -135,8 +135,6 @@ namespace RiskyMod.Survivors.Huntress
                 sk.special.skillFamily.variants[0].skillDef.beginSkillCooldownOnSkillEnd = true;
                 sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD";
                 new ArrowRainBuff();
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "damageCoefficient", "4.2");   //ArrowRainBuff adjusts this value to be accurate
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "projectilePrefab", ArrowRainBuff.arrowRainObject);
 
                 if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
                 {

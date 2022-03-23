@@ -31,6 +31,9 @@ namespace RiskyMod.Survivors.Huntress
             HitBox hb = arrowRainObject.GetComponentInChildren<HitBox>();
             hb.transform.localPosition += 0.5f * Vector3.up;
             hb.transform.localScale = new Vector3(hb.transform.localScale.x, 2f * hb.transform.localScale.y, hb.transform.localScale.z);
+
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "damageCoefficient", "4.2");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "projectilePrefab", ArrowRainBuff.arrowRainObject);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
