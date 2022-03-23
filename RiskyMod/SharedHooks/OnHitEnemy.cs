@@ -15,6 +15,9 @@ namespace RiskyMod.SharedHooks
 		public delegate void OnHitAttacker(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody);
 		public static OnHitAttacker OnHitAttackerActions;
 
+		public delegate void OnHitAttackerInventory(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody, Inventory attackerInventory);
+		public static OnHitAttackerInventory OnHitAttackerInventoryActions;
+
 		public static void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, UnityEngine.GameObject victim)
         {
 			CharacterBody attackerBody = null;
@@ -76,6 +79,7 @@ namespace RiskyMod.SharedHooks
 					if (damageInfo.attacker && attackerBody)
 					{
 						if (OnHitAttackerActions != null) OnHitAttackerActions.Invoke(damageInfo, victimBody, attackerBody);
+						if (attackerInventory && OnHitAttackerInventoryActions != null) OnHitAttackerInventoryActions.Invoke(damageInfo, victimBody, attackerBody, attackerInventory);
 					}
 				}
             }

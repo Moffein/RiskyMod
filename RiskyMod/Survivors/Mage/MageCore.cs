@@ -126,7 +126,7 @@ namespace RiskyMod.Survivors.Mage
                     if (ionSurgeShock)
                     {
                         sk.special.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD";
-                        string keyword = Tweaks.Shock.enabled ? "KEYWORD_SHOCKING_RISKYMOD" : "KEYWORD_SHOCKING";
+                        string keyword = Tweaks.CharacterMechanics.Shock.enabled ? "KEYWORD_SHOCKING_RISKYMOD" : "KEYWORD_SHOCKING";
                         sk.special.skillFamily.variants[i].skillDef.keywordTokens = new string[] { keyword };
 
                         IL.EntityStates.Mage.FlyUpState.OnEnter += (il) =>

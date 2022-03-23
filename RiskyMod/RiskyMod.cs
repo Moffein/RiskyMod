@@ -400,6 +400,7 @@ namespace RiskyMod
         private void ConfigUncommonItems()
         {
             AtG.enabled = Config.Bind(uncommonString, "AtG Missile", true, itemConfigDescString).Value;
+            AtG.useOrb = Config.Bind(uncommonString, "AtG Missile - Use OrbAttack", true, "Makes AtG missiles behave like Plasma Shrimp to improve performance.").Value;
             Bandolier.enabled = Config.Bind(uncommonString, "Bandolier", true, itemConfigDescString).Value;
             Berzerker.enabled = Config.Bind(uncommonString, "Berzerkers Pauldron", true, itemConfigDescString).Value;
             Chronobauble.enabled = Config.Bind(uncommonString, "Chronobauble", true, itemConfigDescString).Value;

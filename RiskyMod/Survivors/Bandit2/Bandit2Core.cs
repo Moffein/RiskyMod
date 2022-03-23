@@ -275,7 +275,7 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.icon = sk.special._skillFamily.variants[0].skillDef.icon;
             lightsOutDef.interruptPriority = InterruptPriority.Skill;
             lightsOutDef.isCombatSkill = true;
-            lightsOutDef.keywordTokens = new string[] { };
+            lightsOutDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
             lightsOutDef.mustKeyPress = false;
             lightsOutDef.cancelSprintingOnActivation = true;
             lightsOutDef.rechargeStock = 1;
@@ -303,7 +303,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.icon = sk.special._skillFamily.variants[1].skillDef.icon;
             reuDef.interruptPriority = InterruptPriority.Skill;
             reuDef.isCombatSkill = true;
-            reuDef.keywordTokens = new string[] { };
+            reuDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
             reuDef.mustKeyPress = false;
             reuDef.cancelSprintingOnActivation = true;
             reuDef.rechargeStock = 1;
@@ -340,7 +340,7 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.icon = AncientScepter.Assets.SpriteAssets.Bandit2ResetRevolver2;
             lightsOutDef.interruptPriority = InterruptPriority.Skill;
             lightsOutDef.isCombatSkill = true;
-            lightsOutDef.keywordTokens = new string[] {};
+            lightsOutDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
             lightsOutDef.mustKeyPress = false;
             lightsOutDef.cancelSprintingOnActivation = true;
             lightsOutDef.rechargeStock = 1;
@@ -368,7 +368,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.icon = AncientScepter.Assets.SpriteAssets.Bandit2SkullRevolver2;
             reuDef.interruptPriority = InterruptPriority.Skill;
             reuDef.isCombatSkill = true;
-            reuDef.keywordTokens = new string[] {};
+            reuDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
             reuDef.mustKeyPress = false;
             reuDef.cancelSprintingOnActivation = true;
             reuDef.rechargeStock = 1;
@@ -393,7 +393,7 @@ namespace RiskyMod.Survivors.Bandit2
             gunslingerDef.skillDescriptionToken = "BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD";
             gunslingerDef.skillName = "Gunslinger";
             gunslingerDef.skillNameToken = "BANDIT2_REVOLVER_NAME_RISKYMOD";
-            gunslingerDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
+            gunslingerDef.keywordTokens = new string[] {};
             gunslingerDef.icon = Assets.SkillIcons.Bandit2Gunslinger;
             Skills.Gunslinger = gunslingerDef;
             SneedUtils.SneedUtils.FixSkillName(gunslingerDef);

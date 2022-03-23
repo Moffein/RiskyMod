@@ -1,5 +1,6 @@
 ﻿using RiskyMod.Items.Uncommon;
 using RiskyMod.Tweaks;
+using RiskyMod.Tweaks.CharacterMechanics;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;

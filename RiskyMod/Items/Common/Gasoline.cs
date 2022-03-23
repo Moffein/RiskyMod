@@ -11,6 +11,7 @@ namespace RiskyMod.Items.Common
         public Gasoline()
         {
             if (!enabled) return;
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             IL.RoR2.GlobalEventManager.ProcIgniteOnKill += (il) =>
             {
