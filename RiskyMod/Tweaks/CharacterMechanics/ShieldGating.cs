@@ -13,8 +13,8 @@ namespace RiskyMod.Tweaks.CharacterMechanics
         public static bool enabled = true;
         public ShieldGating()
         {
+            SetupIgnoreShieldGate();    //This is used in other parts of the mod. Should do nothing on its own if ShieldGating isn't enabled.
             if (!enabled) return;
-            SetupIgnoreShieldGate();
 
             //Remove OSP in SharedHooks.RecalculateStats
 

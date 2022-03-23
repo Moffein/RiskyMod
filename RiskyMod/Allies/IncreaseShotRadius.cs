@@ -2,7 +2,7 @@
 using System;
 using RoR2;
 
-namespace RiskyMod.Drones
+namespace RiskyMod.Allies
 {
     public class IncreaseShotRadius
     {

@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using UnityEngine;
 
-namespace RiskyMod.Drones
+namespace RiskyMod.Allies
 {
     public class NoVoidDamage
     {
@@ -25,7 +25,7 @@ namespace RiskyMod.Drones
                         && damageInfo.damageType == (DamageType.BypassArmor | DamageType.BypassBlock)
                         && (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player))
                         {
-                            if (DronesCore.IsAlly(self.body.bodyIndex))
+                            if (AlliesCore.IsAlly(self.body.bodyIndex))
                             {
                                 damageInfo.rejected = true;
                             }

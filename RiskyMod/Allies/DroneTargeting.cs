@@ -3,7 +3,7 @@ using RoR2.CharacterAI;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace RiskyMod.Drones
+namespace RiskyMod.Allies
 {
     public class DroneTargeting
     {

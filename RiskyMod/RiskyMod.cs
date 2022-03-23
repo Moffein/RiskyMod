@@ -12,7 +12,7 @@ using UnityEngine;
 using RiskyMod.Tweaks;
 using RiskyMod.Fixes;
 using RiskyMod.Items;
-using RiskyMod.Drones;
+using RiskyMod.Allies;
 using RiskyMod.Items.Equipment;
 using UnityEngine.Networking;
 using RiskyMod.Moon;
@@ -95,6 +95,8 @@ namespace RiskyMod
 
         private const string moonString = "Moon";
 
+        private const string allyString = "Allies";
+
         private const string uncommonString = "Items - Uncommon";
         private const string commonString = "Items - Common";
         private const string legendaryString = "Items - Legendary";
@@ -156,7 +158,7 @@ namespace RiskyMod
             RunFixes();
             RunTweaks();
             new ItemsCore();
-            new DronesCore();
+            new AlliesCore();
             new MoonCore();
             new VoidLocusCore();
             new SurvivorsCore();
@@ -354,12 +356,19 @@ namespace RiskyMod
             LoopBossArmor.enabled = Config.Bind(scalingString, "Loop Boss Armor", true, "Teleporter bosses gain bonus armor when looping.").Value;
             SceneDirectorMonsterRewards.enabled = Config.Bind(scalingString, "SceneDirector Monster Rewards", true, "Monsters that spawn with the map now give the same rewards as teleporter monsters.").Value;
 
-            DronesCore.enabled = Config.Bind(coreModuleString, "Drone Changes", true, "Enable drone and ally changes.").Value;
+            AlliesCore.enabled = Config.Bind(coreModuleString, "Ally Changes", true, "Enable drone and ally changes.").Value;
             ItemsCore.enabled = Config.Bind(coreModuleString, "Item Changes", true, "Enable item changes.").Value;
             SurvivorsCore.enabled = Config.Bind(coreModuleString, "Survivor Changes", true, "Enable survivor changes.").Value;
             EnemiesCore.modifyEnemies = Config.Bind(coreModuleString, "Monster Changes", true, "Enable enemy changes.").Value;
             MoonCore.enabled = Config.Bind(coreModuleString, "Moon Changes", true, "Enable Moon changes.").Value;
             VoidLocusCore.enabled = Config.Bind(coreModuleString, "Void Locus Changes", true, "Enable Void Locus changes.").Value;
+
+            AllyScaling.normalizeDroneDamage = Config.Bind(allyString, "Normalize Drone Damage", true, "Normalize drone damage stats so that they perform the same when using Spare Drone Parts.").Value;
+            AlliesCore.nerfDroneParts = Config.Bind(allyString, "Spare Drone Parts Changes", true, "Reduce the damage of Spare Drone Parts.").Value;
+            AllyScaling.noVoidDeath = Config.Bind(allyString, "No Void Death", true, "Allies are immune to Void implosions.").Value;
+            AllyScaling.noOverheat = Config.Bind(allyString, "No Overheat", true, "Allies are immune to Grandparent Overheat.").Value;
+            NoVoidDamage.enabled = Config.Bind(allyString, "No Void Damage", true, "Allies take no damage from Void fog.").Value;
+            SuperAttackResist.enabled = Config.Bind(allyString, "Superattack Resistance", true, "Allies take less damage from superattacks like Vagrant Novas.").Value;
 
             TeleExpandOnBossKill.enabled = Config.Bind(holdoutString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;
             SmallHoldoutCharging.enabled = Config.Bind(holdoutString, "Small Holdout Charging", true, "Void/Moon Holdouts charge at max speed as long as 1 player is charging.").Value;
@@ -467,7 +476,6 @@ namespace RiskyMod
             Headstompers.enabled = Config.Bind(legendaryString, "H3AD-ST", true, itemConfigDescString).Value;
             LaserTurbine.enabled = Config.Bind(legendaryString, "Resonance Disc", true, itemConfigDescString).Value;
             MeatHook.enabled = Config.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;
-            DroneParts.enabled = Config.Bind(legendaryString, "Spare Drone Parts", true, itemConfigDescString).Value;
             Raincoat.enabled = Config.Bind(legendaryString, "Bens Raincoat", true, itemConfigDescString).Value;
             Tesla.enabled = Config.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
 

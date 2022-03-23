@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace RiskyMod.Drones
+namespace RiskyMod.Allies
 {
     public class TurretDamageResistance
     {
@@ -13,7 +13,7 @@ namespace RiskyMod.Drones
             {
                 if (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player)
                 {
-                    if (DronesCore.IsTurretAlly(self.body.bodyIndex))
+                    if (AlliesCore.IsTurretAlly(self.body.bodyIndex))
                     {
                         di.damage *= Mathf.Min(Mathf.Max(0.1f, di.procCoefficient), 1f);
                     }

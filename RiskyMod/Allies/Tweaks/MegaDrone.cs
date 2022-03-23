@@ -2,7 +2,7 @@
 using RoR2.CharacterAI;
 using UnityEngine;
 
-namespace RiskyMod.Drones
+namespace RiskyMod.Allies
 {
     public class MegaDrone
     {
