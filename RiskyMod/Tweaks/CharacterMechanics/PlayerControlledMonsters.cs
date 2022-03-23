@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine;
 
-namespace RiskyMod.Tweaks
+namespace RiskyMod.Tweaks.CharacterMechanics
 {
     public class PlayerControlledMonsters
     {

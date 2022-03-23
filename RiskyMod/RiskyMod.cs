@@ -49,6 +49,7 @@ using RiskyMod.Items.DLC1.Uncommon;
 using RiskyMod.Tweaks.RunScaling;
 using RiskyMod.Tweaks.Holdouts;
 using RiskyMod.Tweaks.CharacterMechanics;
+using RiskyMod.Tweaks.Artifacts;
 
 namespace RiskyMod
 {
@@ -84,7 +85,10 @@ namespace RiskyMod
     {
         private const string generalString = "General";
         private const string scalingString = "General - Run Scaling";
-        private const string tweakString = "General - Tweaks";
+        private const string holdoutString = "General - Holdouts";
+        private const string shrineString = "General - Shrines";
+        private const string charMechanicsString = "General - Character Mechanics";
+        private const string artifactString = "General - Artifacts";
         private const string coreModuleString = "General - Core Modules";
 
         private const string moonString = "Moon";
@@ -244,11 +248,13 @@ namespace RiskyMod
             new BarrierDecay();
             new FreezeChampionExecute();
             new NerfVoidtouched();
+            new PlayerControlledMonsters();
+
+            //Artifacts
             new VengeancePercentHeal();
+            new EnigmaBlacklist();
 
             //Misc
-            new PlayerControlledMonsters();
-            new EnigmaBlacklist();
             new AIBlacklistItems();
         }
 
@@ -323,12 +329,14 @@ namespace RiskyMod
             disableProcChains = Config.Bind(generalString, "Disable Proc Chains", true, "Remove the proc coefficient on most item effects.").Value;
             ShieldGating.enabled = Config.Bind(generalString, "Shield Gating", true, "Shields gate against HP damage.").Value;
             TrueOSP.enabled = Config.Bind(generalString, "True OSP", true, "Makes OSP work against multihits.").Value;
+            AIBlacklistItems.enabled = Config.Bind(generalString, "Expanded AI Blacklist", true, "Adds extra items to the AI Blacklist by default.").Value;
 
             Scaling.enabled = Config.Bind(scalingString, "Linear Difficulty Scaling", true, "Makes difficulty scaling linear.").Value;
             NoLevelupHeal.enabled = Config.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
             RemoveLevelCap.enabled = Config.Bind(scalingString, "Increase Monster Level Cap", true, "Increases Monster Level Cap.").Value;
             RemoveLevelCap.maxLevel = Config.Bind(scalingString, "Increase Monster Level Cap - Max Level", 9999f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
             LoopBossArmor.enabled = Config.Bind(scalingString, "Loop Boss Armor", true, "Teleporter bosses gain bonus armor when looping.").Value;
+            SceneDirectorMonsterRewards.enabled = Config.Bind(scalingString, "SceneDirector Monster Rewards", true, "Monsters that spawn with the map now give the same rewards as teleporter monsters.").Value;
 
             DronesCore.enabled = Config.Bind(coreModuleString, "Drone Changes", true, "Enable drone and ally changes.").Value;
             ItemsCore.enabled = Config.Bind(coreModuleString, "Item Changes", true, "Enable item changes.").Value;
@@ -337,23 +345,25 @@ namespace RiskyMod
             MoonCore.enabled = Config.Bind(coreModuleString, "Moon Changes", true, "Enable Moon changes.").Value;
             VoidLocusCore.enabled = Config.Bind(coreModuleString, "Void Locus Changes", true, "Enable Void Locus changes.").Value;
 
-            AIBlacklistItems.enabled = Config.Bind(tweakString, "Expanded AI Blacklist", true, "Adds a few extra items to the AI Blacklist by default.").Value;
-            TeleExpandOnBossKill.enabled = Config.Bind(tweakString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;
-            SmallHoldoutCharging.enabled = Config.Bind(tweakString, "Small Holdout Charging", true, "Void/Moon Holdouts charge at max speed as long as 1 player is charging.").Value;
-            SmallHoldoutRadius.enabled = Config.Bind(tweakString, "Small Holdout Radius", true, "Void/Moon Holdouts have increased radius.").Value;
-            ShrineSpawnRate.enabled = Config.Bind(tweakString, "Mountain/Combat Shrine Playercount Scaling", true, "Mountain/Combat Shrine Director Credit cost scales with playercount.").Value;
-            ShrineCombatItems.enabled = Config.Bind(tweakString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
-            BloodShrineMinReward.enabled = Config.Bind(tweakString, "Shrine of Blood Minimum Reward", true, "Shrine of Blood always gives at least enough money to buy a small chest.").Value;
-            FixSlayer.enabled = Config.Bind(tweakString, "Fix Slayer Procs", true, "Bandit/Acrid bonus damage to low hp effect now applies to procs.").Value;
-            SceneDirectorMonsterRewards.enabled = Config.Bind(tweakString, "SceneDirector Monster Rewards", true, "Monsters that spawn with the map now give the same rewards as teleporter monsters.").Value;
-            VengeancePercentHeal.enabled = Config.Bind(tweakString, "Reduce Vengeance Healing", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
-            CloakBuff.enabled = Config.Bind(tweakString, "Cloak Buff", true, "Increases delay between position updates while cloaked.").Value;
-            Shock.enabled = Config.Bind(tweakString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
-            BarrierDecay.enabled = Config.Bind(tweakString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
-            FreezeChampionExecute.enabled = Config.Bind(tweakString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
-            EnigmaBlacklist.enabled = Config.Bind(tweakString, "Enigma Blacklist", true, "Blacklist Lunars and Recycler from the Artifact of Enigma.").Value;
-            PlayerControlledMonsters.enabled = Config.Bind(tweakString, "Player-Controlled Monster Regen", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
-            NerfVoidtouched.enabled = Config.Bind(tweakString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
+            TeleExpandOnBossKill.enabled = Config.Bind(holdoutString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;
+            SmallHoldoutCharging.enabled = Config.Bind(holdoutString, "Small Holdout Charging", true, "Void/Moon Holdouts charge at max speed as long as 1 player is charging.").Value;
+            SmallHoldoutRadius.enabled = Config.Bind(holdoutString, "Small Holdout Radius", true, "Void/Moon Holdouts have increased radius.").Value;
+
+            FixSlayer.enabled = Config.Bind(charMechanicsString, "Fix Slayer Procs", true, "Bandit/Acrid bonus damage to low hp effect now applies to procs.").Value;
+            CloakBuff.enabled = Config.Bind(charMechanicsString, "Cloak Buff", true, "Increases delay between position updates while cloaked.").Value;
+            Shock.enabled = Config.Bind(charMechanicsString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
+            BarrierDecay.enabled = Config.Bind(charMechanicsString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
+            FreezeChampionExecute.enabled = Config.Bind(charMechanicsString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
+            NerfVoidtouched.enabled = Config.Bind(charMechanicsString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
+            PlayerControlledMonsters.enabled = Config.Bind(charMechanicsString, "Player-Controlled Monster Regen", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
+
+            ShrineSpawnRate.enabled = Config.Bind(shrineString, "Mountain/Combat Shrine Playercount Scaling", true, "Mountain/Combat Shrine Director Credit cost scales with playercount.").Value;
+            ShrineCombatItems.enabled = Config.Bind(shrineString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
+            BloodShrineMinReward.enabled = Config.Bind(shrineString, "Shrine of Blood Minimum Reward", true, "Shrine of Blood always gives at least enough money to buy a small chest.").Value;
+
+            VengeancePercentHeal.enabled = Config.Bind(artifactString, "Reduce Vengeance Healing", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
+            EnigmaBlacklist.enabled = Config.Bind(artifactString, "Enigma Blacklist", true, "Blacklist Lunars and Recycler from the Artifact of Enigma.").Value;
+
 
             ConfigMoon();
             ConfigCommonItems();
@@ -530,7 +540,7 @@ namespace RiskyMod
             BlindPest.enabled = Config.Bind(monsterString, "Blind Pest", true, "Enable changes to this monster.").Value;
 
             VoidInfestor.enabled = Config.Bind(monsterString, "Void Infestor", true, "Enable changes to this monster.").Value;
-            VoidInfestor.noVoidAllies = Config.Bind(tweakString, "Void Infestor - No Ally Infestation", true, "Void Infestors can't possess allies.").Value;
+            VoidInfestor.noVoidAllies = Config.Bind(monsterString, "Void Infestor - No Ally Infestation", true, "Void Infestors can't possess allies.").Value;
         }
 
         private void ConfigFireSelect()
