@@ -71,6 +71,9 @@ namespace RiskyMod.Survivors.Commando
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireFMJ", "damageCoefficient", "4.8");
                 sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD";
             }
+
+            sk.secondary.skillFamily.variants[0].skillDef.mustKeyPress = false;
+            sk.secondary.skillFamily.variants[1].skillDef.mustKeyPress = false;
         }
 
         private void ModifyUtilities(SkillLocator sk)

@@ -77,6 +77,7 @@ namespace RiskyMod.Survivors.Croco
             sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_SECONDARY_DESCRIPTION_RISKYMOD";
             sk.secondary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD" };
             sk.secondary.skillFamily.variants[0].skillDef.baseRechargeInterval = 2f;
+            sk.secondary.skillFamily.variants[0].skillDef.mustKeyPress = false;
             new ModifyM2Spit();
 
             //I hate how this has so many keywords.
@@ -84,6 +85,7 @@ namespace RiskyMod.Survivors.Croco
             sk.secondary.skillFamily.variants[1].skillDef.cancelSprintingOnActivation = false;
             sk.secondary.skillFamily.variants[1].skillDef.skillDescriptionToken = "CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
             sk.secondary.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_SLAYER", "KEYWORD_RAPID_REGEN_RISKYMOD" };
+            sk.secondary.skillFamily.variants[1].skillDef.mustKeyPress = false;
             new ModifyM2Bite();
         }
 

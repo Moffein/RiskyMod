@@ -120,6 +120,7 @@ namespace EntityStates.RiskyMod.Commando
 
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
+			if (base.inputBank && base.inputBank.skill4.down) return InterruptPriority.Pain;
 			return InterruptPriority.Skill;
 		}
 
