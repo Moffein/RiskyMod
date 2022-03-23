@@ -25,13 +25,13 @@ namespace RiskyMod.Items.Legendary
             if (sender.master && sender.master.luck > 1f)
             {
                 float boost = sender.master.luck - 1f;
-                float mult =  boost * 0.1f;
+                float mult =  boost * 0.15f;
                 args.healthMultAdd += mult;
                 args.moveSpeedMultAdd += mult;
                 args.regenMultAdd += mult;  //Irradiant Pearls add regen instead of multiplying according to the wiki
                 args.damageMultAdd += mult;
-                args.critAdd += 10f * boost;
-                args.armorAdd += boost * 10f;   //Irradiant Pearls multiply armor instead of adding according to the wiki
+                args.critAdd += 15f * boost;
+                args.armorAdd += boost * 15f;   //Irradiant Pearls multiply armor instead of adding according to the wiki
             }
         }
     }

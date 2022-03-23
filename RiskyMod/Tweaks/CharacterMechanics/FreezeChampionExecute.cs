@@ -6,7 +6,7 @@ using MonoMod.Cil;
 using Mono.Cecil.Cil;
 using RiskyMod.Content;
 
-namespace RiskyMod.Tweaks
+namespace RiskyMod.Tweaks.CharacterMechanics
 {
     public class FreezeChampionExecute
     {

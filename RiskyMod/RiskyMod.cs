@@ -46,6 +46,9 @@ using System.IO;
 using RiskyMod.VoidLocus;
 using RiskyMod.Survivors.DLC1.Railgunner;
 using RiskyMod.Items.DLC1.Uncommon;
+using RiskyMod.Tweaks.RunScaling;
+using RiskyMod.Tweaks.Holdouts;
+using RiskyMod.Tweaks.CharacterMechanics;
 
 namespace RiskyMod
 {
@@ -215,29 +218,38 @@ namespace RiskyMod
 
         private void RunTweaks()
         {
-            new RunScaling();
+            //RunScaling
+            new Scaling();
+            new LoopBossArmor();
+            new RemoveLevelCap();
+            new NoLevelupHeal();
+            new SceneDirectorMonsterRewards();
+
+            //Holdouts
+            new SmallHoldoutCharging();
+            new SmallHoldoutRadius();
+            new TeleExpandOnBossKill();
+
+            //Shrines
+            new BloodShrineMinReward();
+            new ShrineCombatItems();
+            new ShrineSpawnRate();
+
+            //Character Mechanics
             new TrueOSP();
             new ShieldGating();
-            new SceneDirectorMonsterRewards();
-            new NoLevelupHeal();
-            new RemoveLevelCap();
-            new SmallHoldoutCharging();
-            new TeleExpandOnBossKill();
-            new ShrineCombatItems();
-            new VengeancePercentHeal();
             new CloakBuff();
-            new SmallHoldoutRadius();
-            new BloodShrineMinReward();
-            new ShrineSpawnRate();
             new Shock();
             new FixSlayer();
             new BarrierDecay();
             new FreezeChampionExecute();
-            new LoopBossArmor();
+            new NerfVoidtouched();
+            new VengeancePercentHeal();
+
+            //Misc
             new PlayerControlledMonsters();
             new EnigmaBlacklist();
             new AIBlacklistItems();
-            new NerfVoidtouched();
         }
 
         private void RunFixes()
@@ -312,7 +324,7 @@ namespace RiskyMod
             ShieldGating.enabled = Config.Bind(generalString, "Shield Gating", true, "Shields gate against HP damage.").Value;
             TrueOSP.enabled = Config.Bind(generalString, "True OSP", true, "Makes OSP work against multihits.").Value;
 
-            RunScaling.enabled = Config.Bind(scalingString, "Linear Difficulty Scaling", true, "Makes difficulty scaling linear.").Value;
+            Scaling.enabled = Config.Bind(scalingString, "Linear Difficulty Scaling", true, "Makes difficulty scaling linear.").Value;
             NoLevelupHeal.enabled = Config.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
             RemoveLevelCap.enabled = Config.Bind(scalingString, "Increase Monster Level Cap", true, "Increases Monster Level Cap.").Value;
             RemoveLevelCap.maxLevel = Config.Bind(scalingString, "Increase Monster Level Cap - Max Level", 9999f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
@@ -428,6 +440,7 @@ namespace RiskyMod
             Headstompers.enabled = Config.Bind(legendaryString, "H3AD-ST", true, itemConfigDescString).Value;
             LaserTurbine.enabled = Config.Bind(legendaryString, "Resonance Disc", true, itemConfigDescString).Value;
             MeatHook.enabled = Config.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;
+            DroneParts.enabled = Config.Bind(legendaryString, "Spare Drone Parts", true, itemConfigDescString).Value;
             Raincoat.enabled = Config.Bind(legendaryString, "Bens Raincoat", true, itemConfigDescString).Value;
             Tesla.enabled = Config.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
 
@@ -607,7 +620,6 @@ namespace RiskyMod
             BanditSpecialGracePeriod.enabled = Config.Bind(banditString, "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;
             BanditSpecialGracePeriod.duration = Config.Bind(banditString, "Special Grace Period Duration", 1.2f, "Length in seconds of Special Grace Period.").Value;
             DesperadoRework.enabled = Config.Bind(banditString, "Persistent Desperado", true, "Desperado stacks are weaker but last between stages.").Value;
-            DesperadoRework.noSlayerDesperado = Config.Bind(banditString, "No Slayer for Desperado", true, "Desperado does not benefit from BonusToLowHealth damage.").Value;
             BackstabRework.enabled = Config.Bind(banditString, "Backstab Changes", true, "Backstabs minicrit for 50% bonus damage and crit chance is converted to crit damage..").Value;
             Bandit2Core.burstChanges = Config.Bind(banditString, "Burst Changes", true, "Enable changes to this skill.").Value;
             Bandit2Core.blastChanges = Config.Bind(banditString, "Blast Changes", true, "Enable changes to this skill.").Value;

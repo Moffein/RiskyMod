@@ -3,7 +3,7 @@ using RoR2;
 using R2API;
 using Mono.Cecil.Cil;
 
-namespace RiskyMod.Tweaks
+namespace RiskyMod.Tweaks.CharacterMechanics
 {
     public class NerfVoidtouched
     {

@@ -4,7 +4,7 @@ using RoR2;
 using System;
 using UnityEngine;
 
-namespace RiskyMod.Tweaks
+namespace RiskyMod.Tweaks.CharacterMechanics
 {
     public class BarrierDecay
     {

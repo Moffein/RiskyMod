@@ -1,6 +1,6 @@
 ﻿using MonoMod.Cil;
 
-namespace RiskyMod.Tweaks
+namespace RiskyMod.Tweaks.CharacterMechanics
 {
     public class CloakBuff
     {

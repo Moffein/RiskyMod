@@ -66,7 +66,9 @@ namespace RiskyMod.Drones
             cb.levelMaxHealth = cb.baseMaxHealth * 0.2f;    //0.3f is standard scaling
 
             cb.baseRegen = cb.baseMaxHealth / 40f;  //Drones take a fixed amount of time to regen to full.
-            cb.levelRegen = cb.baseRegen * 0.3f;
+            cb.levelRegen = cb.baseRegen * 0.2f;    //Change to 0.2 (standard scaling) now that HP is 0.2/level
+
+            cb.autoCalculateLevelStats = false; //Nonstandard stat scaling is used, so this needs to be set
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

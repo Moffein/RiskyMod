@@ -1,6 +1,6 @@
 ﻿using RoR2;
 
-namespace RiskyMod.Tweaks
+namespace RiskyMod.Tweaks.Holdouts
 {
     public class TeleExpandOnBossKill
     {

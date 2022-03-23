@@ -8,7 +8,6 @@ namespace RiskyMod.Survivors.Bandit2
     public class DesperadoRework
     {
         public static bool enabled = true;
-        public static bool noSlayerDesperado = true;
         public static float damagePerBuff = 0.015f;
 
         public DesperadoRework()

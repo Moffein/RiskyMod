@@ -1,6 +1,6 @@
 ﻿using RoR2;
 
-namespace RiskyMod.Fixes
+namespace RiskyMod.Tweaks.RunScaling
 {
     //Merged from https://github.com/Moffein/NoLevelupHeal
     public class NoLevelupHeal

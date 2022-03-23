@@ -53,10 +53,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 				{
 					DamageType dt = sdc.GetDamageType();
 					bulletAttack.damageType |= dt;
-					if (!DesperadoRework.noSlayerDesperado || dt == DamageType.ResetCooldownsOnKill)
-					{
-						bulletAttack.damageType |= DamageType.BonusToLowHealth;
-					}
+					bulletAttack.damageType |= DamageType.BonusToLowHealth;
 				}
 				DamageAPI.AddModdedDamageType(bulletAttack, Bandit2Core.SpecialDamage);
 				DamageAPI.AddModdedDamageType(bulletAttack, Bandit2Core.RackEmUpDamage);

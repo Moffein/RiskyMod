@@ -4,7 +4,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using RoR2;
 
-namespace RiskyMod.Tweaks
+namespace RiskyMod.Tweaks.RunScaling
 {
     public class RemoveLevelCap
     {
@@ -14,7 +14,7 @@ namespace RiskyMod.Tweaks
         public RemoveLevelCap()
         {
 			//Remove level capping when calculating monster level
-			if (!RunScaling.enabled)
+			if (!Scaling.enabled)
 			{
 				IL.RoR2.Run.RecalculateDifficultyCoefficentInternal += (il) =>
 				{

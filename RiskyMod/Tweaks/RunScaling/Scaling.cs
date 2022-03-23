@@ -2,9 +2,9 @@
 using RoR2;
 using RiskyMod.Fixes;
 
-namespace RiskyMod.Tweaks
+namespace RiskyMod.Tweaks.RunScaling
 {
-    public class RunScaling
+    public class Scaling
     {
 		public static bool enabled = true;
 		public static float rewardMultiplier = 0.85f;
@@ -12,7 +12,7 @@ namespace RiskyMod.Tweaks
 		public static GameModeIndex classicRunIndex;
 		public static GameModeIndex simulacrumIndex;
 
-        public RunScaling()
+        public Scaling()
         {
 			if (!enabled) return;
 
@@ -32,7 +32,7 @@ namespace RiskyMod.Tweaks
 				DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
                 float playerFactor = 0.7f + playerCount * 0.3f;
 				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue;//* Mathf.Pow(playerCount, 0.15f)
-				float stageFactor = Mathf.Pow(1.15f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
+				float stageFactor = Mathf.Pow(1.18f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
 				float finalDifficulty = (playerFactor + timeFactor) * stageFactor;
 				self.compensatedDifficultyCoefficient = finalDifficulty;
 				self.difficultyCoefficient = finalDifficulty;

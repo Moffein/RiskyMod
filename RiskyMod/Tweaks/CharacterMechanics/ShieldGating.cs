@@ -5,7 +5,7 @@ using System;
 using R2API;
 using UnityEngine;
 
-namespace RiskyMod.Tweaks
+namespace RiskyMod.Tweaks.CharacterMechanics
 {
     public class ShieldGating
     {

@@ -6,7 +6,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace RiskyMod.Tweaks
+namespace RiskyMod.Tweaks.CharacterMechanics
 {
     public class TrueOSP
     {

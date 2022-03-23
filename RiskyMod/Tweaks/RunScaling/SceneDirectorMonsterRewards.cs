@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace RiskyMod.Tweaks
+namespace RiskyMod.Tweaks.RunScaling
 {
     public class SceneDirectorMonsterRewards
     {
