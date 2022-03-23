@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using EntityStates.RiskyMod.Huntress;
 using RoR2.Skills;
 using UnityEngine.Networking;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Huntress
 {
@@ -137,9 +138,15 @@ namespace RiskyMod.Survivors.Huntress
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "damageCoefficient", "4.2");   //ArrowRainBuff adjusts this value to be accurate
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "projectilePrefab", ArrowRainBuff.arrowRainObject);
 
-                if (RiskyMod.ScepterPluginLoaded)
+                if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
                 {
-                    SetupScepter(sk);
+                    BuildScepterSkillDefs(sk);
+                    if (RiskyMod.ScepterPluginLoaded)
+                    {
+                        SetIconScepter();
+                        SetupScepter();
+                    }
+                    if (RiskyMod.ClassicItemsScepterLoaded) SetupScepterClassic();
                 }
             }
 
@@ -150,8 +157,7 @@ namespace RiskyMod.Survivors.Huntress
             }
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void SetupScepter(SkillLocator sk)
+        private void BuildScepterSkillDefs(SkillLocator sk)
         {
             ArrowRainBuff.ScepterProjectileSetup();
 
@@ -171,10 +177,10 @@ namespace RiskyMod.Survivors.Huntress
             arrowRainDef.dontAllowPastMaxStocks = true;
             arrowRainDef.forceSprintDuringState = false;
             arrowRainDef.fullRestockOnAssign = true;
-            arrowRainDef.icon = AncientScepter.Assets.SpriteAssets.HuntressRain2;
+            arrowRainDef.icon = sk.special.skillFamily.variants[0].skillDef.icon;
             arrowRainDef.interruptPriority = sk.special.skillFamily.variants[0].skillDef.interruptPriority;
             arrowRainDef.isCombatSkill = true;
-            arrowRainDef.keywordTokens = new string[] {};
+            arrowRainDef.keywordTokens = new string[] { };
             arrowRainDef.mustKeyPress = false;
             arrowRainDef.cancelSprintingOnActivation = true;
             arrowRainDef.rechargeStock = 1;
@@ -184,7 +190,28 @@ namespace RiskyMod.Survivors.Huntress
             arrowRainDef.skillDescriptionToken = "HUNTRESS_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD";
             arrowRainDef.stockToConsume = 1;
             Content.Content.skillDefs.Add(arrowRainDef);
-            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(arrowRainDef, "HuntressBody", SkillSlot.Special, 0);
         }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetIconScepter()
+        {
+            Skills.ArrowRainScepter.icon = AncientScepter.Assets.SpriteAssets.HuntressRain2;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepter()
+        {
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.ArrowRainScepter, "HuntressBody", SkillSlot.Special, 0);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepterClassic()
+        {
+            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.ArrowRainScepter, "HuntressBody", SkillSlot.Special, 0);
+        }
+    }
+    public static class Skills
+    {
+        public static SkillDef ArrowRainScepter;
     }
 }

@@ -133,6 +133,8 @@ namespace RiskyMod.Survivors.Commando
                 Content.Content.skillDefs.Add(barrageDef);
                 sk.special.skillFamily.variants[0].skillDef = barrageDef;
                 OnHitAll.HandleOnHitAllActions += FireBarrage.SuppressiveFireAOE;
+
+                Skills.Barrage = barrageDef;
             }
 
             if (grenadeChanges)
@@ -167,16 +169,23 @@ namespace RiskyMod.Survivors.Commando
                 grenadeDef.stockToConsume = 1;
                 Content.Content.skillDefs.Add(grenadeDef);
                 sk.special.skillFamily.variants[1].skillDef = grenadeDef;
+
+                Skills.Grenade = grenadeDef;
             }
 
-            if (RiskyMod.ScepterPluginLoaded)
+            if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
             {
-                SetupScepter(sk);
+                BuildScepterSkillDefs(sk);
+                if (RiskyMod.ScepterPluginLoaded)
+                {
+                    SetIconScepter();
+                    SetupScepter();
+                }
+                if (RiskyMod.ClassicItemsScepterLoaded) SetupScepterClassic();
             }
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void SetupScepter(SkillLocator sk)
+        private void BuildScepterSkillDefs(SkillLocator sk)
         {
             if (suppressiveChanges)
             {
@@ -193,7 +202,7 @@ namespace RiskyMod.Survivors.Commando
                 barrageDef.dontAllowPastMaxStocks = true;
                 barrageDef.forceSprintDuringState = false;
                 barrageDef.fullRestockOnAssign = true;
-                barrageDef.icon = AncientScepter.Assets.SpriteAssets.CommandoBarrage2;
+                barrageDef.icon = Skills.Barrage.icon;
                 barrageDef.interruptPriority = InterruptPriority.PrioritySkill;
                 barrageDef.isCombatSkill = true;
                 barrageDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
@@ -206,9 +215,8 @@ namespace RiskyMod.Survivors.Commando
                 barrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD";
                 barrageDef.stockToConsume = 1;
                 Content.Content.skillDefs.Add(barrageDef);
-                AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(barrageDef, "CommandoBody", SkillSlot.Special, 0);
+                Skills.BarrageScepter = barrageDef;
             }
-
             if (grenadeChanges)
             {
                 ThrowGrenadeScepter._projectilePrefab = BuildGrenadeScepterProjectile();
@@ -224,7 +232,7 @@ namespace RiskyMod.Survivors.Commando
                 grenadeDef.dontAllowPastMaxStocks = true;
                 grenadeDef.forceSprintDuringState = false;
                 grenadeDef.fullRestockOnAssign = true;
-                grenadeDef.icon = AncientScepter.Assets.SpriteAssets.CommandoGrenade2;
+                grenadeDef.icon = Skills.Grenade.icon;
                 grenadeDef.interruptPriority = InterruptPriority.PrioritySkill;
                 grenadeDef.isCombatSkill = true;
                 grenadeDef.keywordTokens = new string[] { };
@@ -237,9 +245,44 @@ namespace RiskyMod.Survivors.Commando
                 grenadeDef.skillDescriptionToken = "COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD";
                 grenadeDef.stockToConsume = 1;
                 Content.Content.skillDefs.Add(grenadeDef);
-                AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(grenadeDef, "CommandoBody", SkillSlot.Special, 1);
+                Skills.GrenadeScepter = grenadeDef;
             }
         }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetIconScepter()
+        {
+            if (suppressiveChanges) Skills.BarrageScepter.icon = AncientScepter.Assets.SpriteAssets.CommandoBarrage2;
+            if (grenadeChanges) Skills.GrenadeScepter.icon = AncientScepter.Assets.SpriteAssets.CommandoGrenade2;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepter()
+        {
+            if (suppressiveChanges)
+            {
+                AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.BarrageScepter, "CommandoBody", SkillSlot.Special, 0);
+            }
+
+            if (grenadeChanges)
+            {
+                AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.GrenadeScepter, "CommandoBody", SkillSlot.Special, 1);
+            }
+        }
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepterClassic()
+        {
+            if (suppressiveChanges)
+            {
+                ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.BarrageScepter, "CommandoBody", SkillSlot.Special, 0);
+            }
+
+            if (grenadeChanges)
+            {
+                ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.GrenadeScepter, "CommandoBody", SkillSlot.Special, 1);
+            }
+        }
+
         private GameObject BuildGrenadeScepterProjectile()
         {
             GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/CommandoGrenadeProjectile").InstantiateClone("RiskyModFragScepterProjectile", true);
@@ -321,5 +364,13 @@ namespace RiskyMod.Survivors.Commando
             Content.Content.projectilePrefabs.Add(proj);
             return proj;
         }
+    }
+
+    public class Skills
+    {
+        public static SkillDef Barrage;
+        public static SkillDef Grenade;
+        public static SkillDef BarrageScepter;
+        public static SkillDef GrenadeScepter;
     }
 }

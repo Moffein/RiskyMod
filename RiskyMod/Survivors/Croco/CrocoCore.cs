@@ -92,37 +92,42 @@ namespace RiskyMod.Survivors.Croco
         {
             //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Leap", "blastDamageCoefficient", "3.2");
             sk.utility.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_UTILITY_DESCRIPTION_RISKYMOD";
-            sk.utility.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_STUNNING"};
+            sk.utility.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_STUNNING" };
 
             //Check to see if the cooldown reset is too crazy.
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.ChainableLeap", "blastDamageCoefficient", "3.2");
             sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
-            sk.utility.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_STUNNING"};
+            sk.utility.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_STUNNING" };
             sk.utility.skillFamily.variants[1].skillDef.baseMaxStock = 1;
             sk.utility.skillFamily.variants[1].skillDef.baseRechargeInterval = 6f;
             new ModifyShift();
         }
 
         //Watch out to make sure this isn't making a worse autoplay situation than the original.
-            //Seems strong, but isn't something you can solely rely on to clear the map like Vanilla poison.
+        //Seems strong, but isn't something you can solely rely on to clear the map like Vanilla poison.
         private void ModifySpecials(SkillLocator sk)
         {
             //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireDiseaseProjectile", "damageCoefficient", "1");
             sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_SPECIAL_DESCRIPTION_RISKYMOD";
-            sk.special.skillFamily.variants[0].skillDef.keywordTokens = new string[] {};
+            sk.special.skillFamily.variants[0].skillDef.keywordTokens = new string[] { };
             new ModifySpecial();
 
-            if (RiskyMod.ScepterPluginLoaded)
+            if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
             {
-                SetupScepter(sk);
+                BuildScepterSkillDefs(sk);
+
+                if (RiskyMod.ScepterPluginLoaded)
+                {
+                    SetIconScepter();
+                    SetupScepter();
+                }
+                if (RiskyMod.ClassicItemsScepterLoaded) SetupScepterClassic();
             }
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void SetupScepter(SkillLocator sk)
+        private void BuildScepterSkillDefs(SkillLocator sk)
         {
             SkillDef orig = sk.special.skillFamily.variants[0].skillDef;
-
             SkillDef diseaseScepterDef = ScriptableObject.CreateInstance<SkillDef>();
             diseaseScepterDef.activationState = new SerializableEntityStateType(typeof(FireDiseaseProjectileScepter));
             diseaseScepterDef.activationStateMachineName = orig.activationStateMachineName;
@@ -134,7 +139,7 @@ namespace RiskyMod.Survivors.Croco
             diseaseScepterDef.dontAllowPastMaxStocks = true;
             diseaseScepterDef.forceSprintDuringState = false;
             diseaseScepterDef.fullRestockOnAssign = true;
-            diseaseScepterDef.icon = AncientScepter.Assets.SpriteAssets.CrocoDisease2;
+            diseaseScepterDef.icon = orig.icon;
             diseaseScepterDef.interruptPriority = orig.interruptPriority;
             diseaseScepterDef.isCombatSkill = orig.isCombatSkill;
             diseaseScepterDef.keywordTokens = orig.keywordTokens;
@@ -147,8 +152,33 @@ namespace RiskyMod.Survivors.Croco
             diseaseScepterDef.skillNameToken = "CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD";
             diseaseScepterDef.stockToConsume = 1;
 
-            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(diseaseScepterDef, "CrocoBody", SkillSlot.Special, 0);
+            Content.Content.entityStates.Add(typeof(FireDiseaseProjectileScepter));
+            Content.Content.skillDefs.Add(diseaseScepterDef);
+
+            Skills.EpidemicScepter = diseaseScepterDef;
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetIconScepter()
+        {
+            Skills.EpidemicScepter.icon = AncientScepter.Assets.SpriteAssets.CrocoDisease2;
+        }
+
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepter()
+        {
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.EpidemicScepter, "CrocoBody", SkillSlot.Special, 0);
+        }
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepterClassic()
+        {
+            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.EpidemicScepter, "CrocoBody", SkillSlot.Special, 0);
+        }
+    }
+
+    public static class Skills
+    {
+        public static SkillDef EpidemicScepter;
     }
 }

@@ -287,6 +287,7 @@ namespace RiskyMod.Survivors.Bandit2
             SneedUtils.SneedUtils.FixSkillName(lightsOutDef);
             Content.Content.skillDefs.Add(lightsOutDef);
             sk.special._skillFamily.variants[0].skillDef = lightsOutDef;
+            Skills.LightsOut = lightsOutDef;
 
             SkillDef reuDef = SkillDef.CreateInstance<SkillDef>();
             Content.Content.entityStates.Add(typeof(PrepRackEmUp));
@@ -315,15 +316,21 @@ namespace RiskyMod.Survivors.Bandit2
             SneedUtils.SneedUtils.FixSkillName(reuDef);
             Content.Content.skillDefs.Add(reuDef);
             sk.special._skillFamily.variants[1].skillDef = reuDef;
+            Skills.RackEmUp = reuDef;
 
-            if (RiskyMod.ScepterPluginLoaded)
+            if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
             {
-                SetupScepter(sk);
-            }
+                BuildScepterSkillDefs(sk);
+                if (RiskyMod.ScepterPluginLoaded)
+                {
+                    SetIconScepter();
+                    SetupScepter();
+                }
+                if (RiskyMod.ClassicItemsScepterLoaded) SetupScepterClassic();
+            }    
         }
 
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void SetupScepter(SkillLocator sk)
+        private void BuildScepterSkillDefs(SkillLocator sk)
         {
             SkillDef lightsOutDef = SkillDef.CreateInstance<SkillDef>();
             Content.Content.entityStates.Add(typeof(PrepLightsOutScepter));
@@ -337,7 +344,7 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.forceSprintDuringState = false;
             lightsOutDef.dontAllowPastMaxStocks = true;
             lightsOutDef.fullRestockOnAssign = true;
-            lightsOutDef.icon = AncientScepter.Assets.SpriteAssets.Bandit2ResetRevolver2;
+            lightsOutDef.icon = Skills.LightsOut.icon;
             lightsOutDef.interruptPriority = InterruptPriority.Skill;
             lightsOutDef.isCombatSkill = true;
             lightsOutDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
@@ -351,7 +358,6 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.stockToConsume = 1;
             SneedUtils.SneedUtils.FixSkillName(lightsOutDef);
             Content.Content.skillDefs.Add(lightsOutDef);
-            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(lightsOutDef, "Bandit2Body", SkillSlot.Special, 0);
 
             SkillDef reuDef = SkillDef.CreateInstance<SkillDef>();
             Content.Content.entityStates.Add(typeof(PrepRackEmUpScepter));
@@ -365,7 +371,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.forceSprintDuringState = false;
             reuDef.dontAllowPastMaxStocks = true;
             reuDef.fullRestockOnAssign = true;
-            reuDef.icon = AncientScepter.Assets.SpriteAssets.Bandit2SkullRevolver2;
+            reuDef.icon = Skills.RackEmUp.icon;
             reuDef.interruptPriority = InterruptPriority.Skill;
             reuDef.isCombatSkill = true;
             reuDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
@@ -379,7 +385,27 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.stockToConsume = 1;
             SneedUtils.SneedUtils.FixSkillName(reuDef);
             Content.Content.skillDefs.Add(reuDef);
-            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(reuDef, "Bandit2Body", SkillSlot.Special, 1);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetIconScepter()
+        {
+            Skills.LightsOutScepter.icon = AncientScepter.Assets.SpriteAssets.Bandit2ResetRevolver2;
+            Skills.RackEmUpScepter.icon = AncientScepter.Assets.SpriteAssets.Bandit2SkullRevolver2;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepter()
+        {
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.LightsOutScepter, "Bandit2Body", SkillSlot.Special, 0);
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.RackEmUpScepter, "Bandit2Body", SkillSlot.Special, 1);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepterClassic()
+        {
+            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.LightsOutScepter, "Bandit2Body", SkillSlot.Special, 0);
+            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.RackEmUpScepter, "Bandit2Body", SkillSlot.Special, 1);
         }
 
         private void SpecialDamageType(SkillLocator sk)
@@ -454,5 +480,11 @@ namespace RiskyMod.Survivors.Bandit2
     {
         public static SkillDef Gunslinger;
         public static SkillDef Desperado;
+
+        public static SkillDef LightsOut;
+        public static SkillDef RackEmUp;
+
+        public static SkillDef LightsOutScepter;
+        public static SkillDef RackEmUpScepter;
     }
 }
