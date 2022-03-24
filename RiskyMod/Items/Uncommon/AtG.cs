@@ -12,10 +12,15 @@ namespace RiskyMod.Items.Uncommon
     class AtG
     {
         public static bool enabled = true;
-		public static bool useOrb = true;
+
+		public static bool useOrb = false;
+		public static bool alwaysOrb = false;
 
 		public static float initialDamageCoefficient = 3f;
 		public static float stackDamageCoefficient = 1.8f;
+
+		public static float projectileDamageTreshold = 4f;
+
 
 		public static GameObject missilePrefab;
 
@@ -35,9 +40,27 @@ namespace RiskyMod.Items.Uncommon
 					 x => x.MatchLdsfld(typeof(RoR2Content.Items), "Missile")
 					);
 				c.Emit(OpCodes.Ldloc, 4); //master
-				c.EmitDelegate<Func<ItemDef, CharacterMaster, ItemDef>>((item, master) =>
+				c.Emit(OpCodes.Ldarg_1);	//damageinfo
+				c.EmitDelegate<Func<ItemDef, CharacterMaster, DamageInfo, ItemDef>>((item, master, damageInfo) =>
 				{
-					if (useOrb && master.teamIndex == TeamIndex.Player) item = RiskyMod.emptyItemDef;
+					if (useOrb && master.teamIndex == TeamIndex.Player)
+					{
+						if (alwaysOrb)
+						{
+							item = RiskyMod.emptyItemDef;
+						}
+						else
+						{
+							CharacterBody cb = master.GetBody();
+							if (cb)
+							{
+								if (damageInfo.damage / cb.damage < projectileDamageTreshold)
+								{
+									item = RiskyMod.emptyItemDef;
+								}
+							}
+						}
+                    }
 					return item;
 				});
 
@@ -95,37 +118,41 @@ namespace RiskyMod.Items.Uncommon
 					int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Missile);
 					if (itemCount > 0)
                     {
-						if (Util.CheckRoll(10f * damageInfo.procCoefficient, attackerBody.master))
-						{
-							float damageCoefficient = initialDamageCoefficient + stackDamageCoefficient * (itemCount - 1);
-							float damageValue = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, damageCoefficient);
-
-							int icbmCount = attackerInventory.GetItemCount(DLC1Content.Items.MoreMissile);
-							if (icbmCount > 1)
+						//Need this check to prevent heavy hits from rolling twice.
+						if (damageInfo.damage / attackerBody.damage < projectileDamageTreshold)
+                        {
+							if (Util.CheckRoll(10f * damageInfo.procCoefficient, attackerBody.master))
 							{
-								damageValue *= 1f + 0.5f * (icbmCount - 1);
-							}
+								float damageCoefficient = initialDamageCoefficient + stackDamageCoefficient * (itemCount - 1);
+								float damageValue = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, damageCoefficient);
 
-							if (attackerBody.aimOrigin != null)
-							{
-								int missilesToFire = icbmCount > 0 ? 3 : 1;
-								for (int i = 0; i < missilesToFire; i++)
+								int icbmCount = attackerInventory.GetItemCount(DLC1Content.Items.MoreMissile);
+								if (icbmCount > 1)
 								{
-									MicroMissileOrb missileOrb = new MicroMissileOrb();
-									missileOrb.origin = attackerBody.aimOrigin;
-									missileOrb.damageValue = damageValue;
-									missileOrb.isCrit = damageInfo.crit;
-									missileOrb.teamIndex = attackerBody.teamComponent.teamIndex;
-									missileOrb.attacker = damageInfo.attacker;
-									missileOrb.procChainMask = damageInfo.procChainMask;
-									missileOrb.procChainMask.AddProc(ProcType.Missile);
-									missileOrb.procCoefficient = RiskyMod.disableProcChains ? 0f : 1f;
-									missileOrb.damageColorIndex = DamageColorIndex.Item;
-									HurtBox mainHurtBox = victimBody.mainHurtBox;
-									if (mainHurtBox)
+									damageValue *= 1f + 0.5f * (icbmCount - 1);
+								}
+
+								if (attackerBody.aimOrigin != null)
+								{
+									int missilesToFire = icbmCount > 0 ? 3 : 1;
+									for (int i = 0; i < missilesToFire; i++)
 									{
-										missileOrb.target = mainHurtBox;
-										OrbManager.instance.AddOrb(missileOrb);
+										MicroMissileOrb missileOrb = new MicroMissileOrb();
+										missileOrb.origin = attackerBody.aimOrigin;
+										missileOrb.damageValue = damageValue;
+										missileOrb.isCrit = damageInfo.crit;
+										missileOrb.teamIndex = attackerBody.teamComponent.teamIndex;
+										missileOrb.attacker = damageInfo.attacker;
+										missileOrb.procChainMask = damageInfo.procChainMask;
+										missileOrb.procChainMask.AddProc(ProcType.Missile);
+										missileOrb.procCoefficient = RiskyMod.disableProcChains ? 0f : 1f;
+										missileOrb.damageColorIndex = DamageColorIndex.Item;
+										HurtBox mainHurtBox = victimBody.mainHurtBox;
+										if (mainHurtBox)
+										{
+											missileOrb.target = mainHurtBox;
+											OrbManager.instance.AddOrb(missileOrb);
+										}
 									}
 								}
 							}

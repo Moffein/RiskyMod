@@ -49,7 +49,8 @@ namespace RiskyMod.Tweaks.RunScaling
 				}
 			};
 
-			On.RoR2.InfiniteTowerRun.RecalculateDifficultyCoefficentInternal += (orig, self) =>
+			//This wasn't supposed to be enabled.
+			/*On.RoR2.InfiniteTowerRun.RecalculateDifficultyCoefficentInternal += (orig, self) =>
 			{
 				DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
 				float num = 1.5f * (float)self.waveIndex;
@@ -64,13 +65,14 @@ namespace RiskyMod.Tweaks.RunScaling
 				{
 					self.OnAmbientLevelUp();
 				}
-			};
+			};*/
 
 			On.RoR2.CombatDirector.DirectorMoneyWave.Update += (orig, self, deltaTime, difficultyCoefficient) =>
 			{
 				if (Run.instance.gameModeIndex != simulacrumIndex)
 				{
-					float stageFactor = Run.instance.stageClearCount < 4 ? Mathf.Pow(1.1f, Run.instance.stageClearCount) : 1.5f;//Needs cap to prevent game from turning into a slideshow. Uncapping it causes excessive T2 Elite spam.
+					//Needs cap to prevent game from turning into a slideshow. Uncapping it causes excessive T2 Elite spam.
+					float stageFactor = Run.instance.stageClearCount < 4 ? Mathf.Pow(1.1f, Run.instance.stageClearCount) : 1.5f;
 					difficultyCoefficient *= stageFactor;
 				}
 				return orig(self, deltaTime, difficultyCoefficient);

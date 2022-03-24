@@ -382,6 +382,9 @@ namespace RiskyMod
             NerfVoidtouched.enabled = Config.Bind(charMechanicsString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
             PlayerControlledMonsters.enabled = Config.Bind(charMechanicsString, "Player-Controlled Monster Regen", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
 
+            Clover.enabled = Config.Bind(charMechanicsString, "Cap Max Luck", false, "Caps how high the Luck stat can go.").Value;
+            Clover.luckCap = Config.Bind(charMechanicsString, "Cap Max Luck - Maximum Value", 1f, "Maximum Luck value playeres can reach. Extra Luck is converted to stat boosts.").Value;
+
             ShrineSpawnRate.enabled = Config.Bind(shrineString, "Mountain/Combat Shrine Playercount Scaling", true, "Mountain/Combat Shrine Director Credit cost scales with playercount.").Value;
             ShrineCombatItems.enabled = Config.Bind(shrineString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
             BloodShrineMinReward.enabled = Config.Bind(shrineString, "Shrine of Blood Minimum Reward", true, "Shrine of Blood always gives at least enough money to buy a small chest.").Value;
@@ -435,7 +438,8 @@ namespace RiskyMod
         private void ConfigUncommonItems()
         {
             AtG.enabled = Config.Bind(uncommonString, "AtG Missile", true, itemConfigDescString).Value;
-            AtG.useOrb = Config.Bind(uncommonString, "AtG Missile - Use OrbAttack", true, "Makes AtG missiles behave like Plasma Shrimp to improve performance.").Value;
+            AtG.useOrb = Config.Bind(uncommonString, "AtG Missile - Use OrbAttack", true, "Makes AtG missiles behave like Plasma Shrimp when fired off of weak attacks to improve performance.").Value;
+            AtG.alwaysOrb = Config.Bind(uncommonString, "AtG Missile - Always Use OrbAttack", false, "AtG Missiles always fire orbattacks regardless of the hit's strength.").Value;
             Bandolier.enabled = Config.Bind(uncommonString, "Bandolier", true, itemConfigDescString).Value;
             Berzerker.enabled = Config.Bind(uncommonString, "Berzerkers Pauldron", true, itemConfigDescString).Value;
             Chronobauble.enabled = Config.Bind(uncommonString, "Chronobauble", true, itemConfigDescString).Value;
@@ -460,7 +464,6 @@ namespace RiskyMod
 
         private void ConfigLegendaryItems()
         {
-            Clover.enabled = Config.Bind(legendaryString, "57 Leaf Clover", true, itemConfigDescString).Value;
             Behemoth.enabled = Config.Bind(legendaryString, "Brilliant Behemoth", true, itemConfigDescString).Value;
             BottledChaos.enabled = Config.Bind(legendaryString, "Bottled Chaos", true, itemConfigDescString).Value;
             Brainstalks.enabled = Config.Bind(legendaryString, "Brainstalks", true, itemConfigDescString).Value;
