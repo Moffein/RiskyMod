@@ -44,13 +44,10 @@ namespace RiskyMod.Allies
             }
             if (!bodyPrefab || !cb) return;
 
-            Debug.Log("\nModifying Drone Scaling");
-
             bool ignoreScaling = (ally.tags & AllyTag.DontModifyScaling) == AllyTag.DontModifyScaling;
 
             if (!ignoreScaling)
             {
-                Debug.Log("IgnoreScaling = false");
                 if (noVoidDeath) cb.bodyFlags |= CharacterBody.BodyFlags.ImmuneToVoidDeath;
                 if (noOverheat) cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
 
