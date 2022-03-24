@@ -4,10 +4,10 @@ using RoR2;
 
 namespace RiskyMod.Allies
 {
-    public class IncreaseShotRadius
+    public class ModifyBulletAttacks
     {
         public static bool enabled = true;
-        public IncreaseShotRadius()
+        public ModifyBulletAttacks()
         {
             if (!enabled) return;
 
@@ -20,6 +20,7 @@ namespace RiskyMod.Allies
                      );
                 c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
                 {
+                    bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
                     bulletAttack.radius = 0.3f;
                     bulletAttack.smartCollision = true;
                     return bulletAttack;
@@ -35,6 +36,7 @@ namespace RiskyMod.Allies
                      );
                 c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
                 {
+                    bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
                     bulletAttack.radius = 0.3f;
                     bulletAttack.smartCollision = true;
                     return bulletAttack;
@@ -50,6 +52,7 @@ namespace RiskyMod.Allies
                      );
                 c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
                 {
+                    bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
                     bulletAttack.radius = 0.3f;
                     bulletAttack.smartCollision = true;
                     return bulletAttack;

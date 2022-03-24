@@ -37,13 +37,20 @@ namespace RiskyMod.Allies
             if (ChangeAllyScalingActions != null) ChangeAllyScalingActions.Invoke(ally);
 
             GameObject bodyPrefab = BodyCatalog.GetBodyPrefab(ally.bodyIndex);
-            CharacterBody cb = bodyPrefab.GetComponent<CharacterBody>();
-            if (!cb) return;
+            CharacterBody cb = null;
+            if (bodyPrefab)
+            {
+                cb = bodyPrefab.GetComponent<CharacterBody>();
+            }
+            if (!bodyPrefab || !cb) return;
+
+            Debug.Log("\nModifying Drone Scaling");
 
             bool ignoreScaling = (ally.tags & AllyTag.DontModifyScaling) == AllyTag.DontModifyScaling;
 
             if (!ignoreScaling)
             {
+                Debug.Log("IgnoreScaling = false");
                 if (noVoidDeath) cb.bodyFlags |= CharacterBody.BodyFlags.ImmuneToVoidDeath;
                 if (noOverheat) cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
 
@@ -51,38 +58,15 @@ namespace RiskyMod.Allies
                 {
                     cb.baseMaxShield += cb.baseMaxHealth * 0.08f;
 
+                    //Don't like how normalization is split between AllyScaling and AlliesCore
                     if (normalizeDroneDamage)
                     {
                         cb.baseDamage = 12f;
                         //Account for normalized damage values
                         //This should probably be somewhere else since it's not strictly dependent on the body being passed in
-                        switch (cb.name)
+                        if (cb.name == "BackupDroneBody")
                         {
-
-                            case "Drone1Body":
-                                //These feel weak, so I won't bother adjusting their damage downwards
-                                //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireTurret", "damageCoefficient", "0.4166666667");   //Damage 10 -> 12, coef 0.5 -> 0.4167
-                                break;
-                            case "BackupDroneBody":
-                                cb.baseDamage = 7f; //Keep baseDamage the same since the firing state is tied to Drone1Body
-                                break;
-                            case "Turret1Body":
-                                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireGatling", "damageCoefficient", "0.45");   //Damage 18 -> 12, coef 0.3 -> 0.45
-                                break;
-                            //case "EmergencyDroneBody":    //Shares stats and state with Drone2Body. No need to run this twice.
-                            case "Drone2Body":
-                                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.HealBeam", "healCoefficient", "1.7");   //Damage 10 -> 12, coef 2 -> 1.6667
-                                break;
-                            case "FlameDroneBody":
-                                //Can't figure out how to change this. Flamethrower state might be tied to Artificer.
-                                break;
-                            case "MegaDroneBody":
-                                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireMegaTurret", "damageCoefficient", "2.1");   //Damage 14 -> 12, coef 2.2 -> 2.5667 mult by 0.8
-                                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireTwinRocket", "damageCoefficient", "3.75");   //Damage 14 -> 12, coef 4 -> 4.6667 mult by 0.8
-                                break;
-                            case "MissileDroneBody":
-                                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireMissileBarrage", "damageCoefficient", "1.17");   //Damage 14 -> 12, coef 1 -> 1.166666667
-                                break;
+                            cb.baseDamage = 8.5f; //Shares firing state with Gunner Drones, so needs lower damage. Technically makes drone parts worse on this.
                         }
                     }
                 }
