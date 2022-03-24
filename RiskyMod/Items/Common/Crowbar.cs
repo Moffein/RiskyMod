@@ -39,7 +39,7 @@ namespace RiskyMod.Items.Common
             //Effect handled in OnCharacterDeath (for removal)
 
             //Scale up ring activation threshold to match the crowbar damage bonus.
-            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            /*IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(
@@ -73,7 +73,7 @@ namespace RiskyMod.Items.Common
                     }
                     return ringThreshold;
                 });
-            };
+            };*/
 
             On.RoR2.Run.Start += (orig, self) =>
             {
@@ -123,14 +123,14 @@ namespace RiskyMod.Items.Common
                     && !damageInfo.HasModdedDamageType(Crowbar.CrowbarDamage))
                 {
                     float damageCoefficient = damageInfo.damage / attackerBody.damage;
-                    //if (damageCoefficient >= 4f)
-                    //{  
-                    //}
-                    if (Crowbar.crowbarManager.CanApplyCrowbar(self, attackerBody))
+                    if (damageCoefficient >= 4f)
                     {
-                        damageInfo.damage *= GetCrowbarMult(crowbarCount);
-                        EffectManager.SimpleImpactEffect(HealthComponent.AssetReferences.crowbarImpactEffectPrefab, damageInfo.position, -damageInfo.force, true);
-                        damageInfo.AddModdedDamageType(Crowbar.CrowbarDamage);
+                        if (Crowbar.crowbarManager.CanApplyCrowbar(self, attackerBody))
+                        {
+                            damageInfo.damage *= GetCrowbarMult(crowbarCount);
+                            EffectManager.SimpleImpactEffect(HealthComponent.AssetReferences.crowbarImpactEffectPrefab, damageInfo.position, -damageInfo.force, true);
+                            damageInfo.AddModdedDamageType(Crowbar.CrowbarDamage);
+                        }
                     }
                 }
             }
