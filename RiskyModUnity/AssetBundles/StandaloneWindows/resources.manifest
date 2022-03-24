@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3695389642
+CRC: 984281895
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 59afa7cfbb167b8549d4a6430608792d
+    Hash: a1e4158c16285530e60e00ed2fcc18ec
   TypeTreeHash:
     serializedVersion: 2
     Hash: ea5a42e0fd8ea905efa7aa926a3b8944
@@ -18,7 +18,9 @@ Assets:
 - Assets/Resources/Sprites/Buffs/BuffRaincoatActive.png
 - Assets/Resources/Sprites/Buffs/BuffRaincoatCooldown.png
 - Assets/Resources/Sprites/SkillIcons/Bandit2Gunslinger.png
+- Assets/Resources/Sprites/Buffs/BuffHeadstomperCooldown.png
 - Assets/Resources/Sprites/SkillIcons/Bandit2Desperado.png
 - Assets/Resources/Sprites/Buffs/BuffFreeze.png
 - Assets/Resources/Sprites/Buffs/BuffInfusion.png
+- Assets/Resources/Sprites/Buffs/BuffHeadstomperActive.png
 Dependencies: []

@@ -54,6 +54,8 @@ namespace RiskyMod.Content
             BuffIcons.RaincoatActive = assetBundle.LoadAsset<Sprite>("BuffRaincoatActive");
             BuffIcons.RaincoatReady = assetBundle.LoadAsset<Sprite>("BuffRaincoatReady");
             BuffIcons.RaincoatCooldown = assetBundle.LoadAsset<Sprite>("BuffRaincoatCooldown");
+            BuffIcons.HeadstomperActive = assetBundle.LoadAsset<Sprite>("BuffHeadstomperActive");
+            BuffIcons.HeadstomperCooldown = assetBundle.LoadAsset<Sprite>("BuffHeadstomperCooldown");
         }
 
         private static void LoadSkillIcons()
@@ -69,6 +71,8 @@ namespace RiskyMod.Content
             public static Sprite RaincoatReady;
             public static Sprite RaincoatActive;
             public static Sprite RaincoatCooldown;
+            public static Sprite HeadstomperActive;
+            public static Sprite HeadstomperCooldown;
         }
 
         public static class SkillIcons
