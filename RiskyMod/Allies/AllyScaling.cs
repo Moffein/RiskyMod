@@ -53,8 +53,6 @@ namespace RiskyMod.Allies
 
                 if ((ally.tags & AllyTag.Drone) == AllyTag.Drone)
                 {
-                    cb.baseMaxShield += cb.baseMaxHealth * 0.08f;
-
                     //Don't like how normalization is split between AllyScaling and AlliesCore
                     if (normalizeDroneDamage)
                     {
@@ -65,12 +63,29 @@ namespace RiskyMod.Allies
                         {
                             cb.baseDamage = 8.5f; //Shares firing state with Gunner Drones, so needs lower damage. Technically makes drone parts worse on this.
                         }
+                        else if (cb.name == "MegaDroneBody")
+                        {
+                            cb.baseMaxShield += cb.baseMaxHealth * 0.08f;
+                        }
+                        else if (cb.name == "Turret1Body")
+                        {
+                            cb.baseMaxHealth *= 1.2f;
+                        }
+                        else if (cb.name == "Drone1Body" || cb.name == "Drone2Body")
+                        {
+                            cb.baseMaxHealth = 170f;    //vanilla is 150
+                        }
+                        //RoboBallBuddyGreen/Red get damage reduced from 15 -> 12, same as the earlier build with the 0.8x damage penalty
                     }
                 }
 
                 if ((ally.tags & AllyTag.Turret) == AllyTag.Turret)
                 {
                     cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
+                    if ((ally.tags & AllyTag.Turret) == AllyTag.Turret)
+                    {
+                        cb.baseMaxShield += cb.baseMaxHealth * 0.08f;
+                    }
                 }
 
                 //Specific Tweaks
@@ -78,10 +93,6 @@ namespace RiskyMod.Allies
                 {
                     case "SquidTurretBody":
                         cb.baseMaxHealth = 720f;
-                        break;
-                    case "RoboBallGreenBuddyBody":
-                    case "RoboBallRedBuddyBody":
-                        cb.baseDamage *= 0.8f;
                         break;
                 }
                 //Gunner Turrets used to have a 20% HP bonus, but see how they perform with the new turret resistance thing
@@ -97,12 +108,6 @@ namespace RiskyMod.Allies
                 cb.levelRegen = cb.baseRegen * 0.2f;
                 cb.autoCalculateLevelStats = false;
             }
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private GameObject LoadBody(string bodyname)
-        {
-            return LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/" + bodyname);
         }
     }
 }

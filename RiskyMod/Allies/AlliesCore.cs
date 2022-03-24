@@ -42,7 +42,7 @@ namespace RiskyMod.Allies
             if (nerfDroneParts)
             {
                 Items.ItemsCore.ModifyItemDefActions += ModifyDroneParts;
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.DroneWeaponsChainGun.FireChainGun", "damageCoefficient", "0.7");   //coef 1 -> 0.7
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.DroneWeaponsChainGun.FireChainGun", "damageCoefficient", "0.5");   //coef 1 -> 0.5
 
                 IL.RoR2.DroneWeaponsBoostBehavior.OnEnemyHit += (il) =>
                 {
@@ -170,11 +170,11 @@ namespace RiskyMod.Allies
                         ally.tags |= AllyTag.Drone;
                         break;
                     case "DroneCommanderBody":
+                    case "RoboBallGreenBuddyBody":
+                    case "RoboBallRedBuddyBody":
                         ally.tags |= AllyTag.Drone | AllyTag.Item;
                         break;
                     case "BeetleGuardAllyBody":
-                    case "RoboBallGreenBuddyBody":
-                    case "RoboBallRedBuddyBody":
                         ally.tags |= AllyTag.Item;
                         break;
                     case "Turret1Body":

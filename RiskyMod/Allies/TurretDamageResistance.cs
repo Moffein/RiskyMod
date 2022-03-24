@@ -13,7 +13,7 @@ namespace RiskyMod.Allies
             {
                 if (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player)
                 {
-                    if (AlliesCore.IsTurretAlly(self.body.bodyIndex))
+                    if (di.dotIndex == DotController.DotIndex.None && AlliesCore.IsTurretAlly(self.body.bodyIndex))
                     {
                         di.damage *= Mathf.Min(Mathf.Max(0.1f, di.procCoefficient), 1f);
                     }

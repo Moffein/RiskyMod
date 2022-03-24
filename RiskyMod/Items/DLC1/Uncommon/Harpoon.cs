@@ -36,7 +36,7 @@ namespace RiskyMod.Items.DLC1.Uncommon
             {
                 int stack = itemCount - 1;
                 int num6 = 5;
-                float totalDuration = 2f + (float)stack * 1f;
+                float totalDuration = 3f + (float)stack * 1.5f;
                 attackerBody.ClearTimedBuffs(DLC1Content.Buffs.KillMoveSpeed);
                 for (int i = 0; i < num6; i++)
                 {

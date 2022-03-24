@@ -32,6 +32,7 @@ namespace RiskyMod.Items.Common
         private static void ModifyItem()
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.CritGlasses);
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.CritGlasses);
         }
 
     }
