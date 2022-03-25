@@ -5,6 +5,6 @@
 
 		"EQUIPMENT_BFG_DESC_RISKYMOD": "Fires preon tendrils, zapping enemies within 35m for up to <style=cIsDamage>1180% damage/second</style>. On contact, detonate in an enormous 20m explosion for <style=cIsDamage>8000% damage</style>.",
 		
-		"EQUIPMENT_CRITHUD_DESC_RISKYMOD": "Gain <style=cIsDamage>+100% Critical Strike Chance</style> for 8 seconds. Excess chance is converted into <style=cIsDamage>Critical Strike Damage</style>.",
+		"EQUIPMENT_CRITONUSE_DESC_RISKYMOD": "Gain <style=cIsDamage>+100% Critical Strike Chance</style> for 8 seconds. Excess chance is converted into <style=cIsDamage>Critical Strike Damage</style>.",
 	}
 }

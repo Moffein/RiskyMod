@@ -675,6 +675,7 @@ namespace RiskyMod
             VoidFiendCore.corruptMeterTweaks = Config.Bind(voidFiendString, "Corruption Meter Tweaks", true, "Faster decay, slower passive buildup. Corrupted Suppress can be used as long as you have the HP for it. Meant to be used with Corrupt on Kill.").Value;
             VoidFiendCore.noCorruptCrit = Config.Bind(voidFiendString, "No Corruption on Crit", true, "Disables Corruption gain on crit.").Value;
             VoidFiendCore.noCorruptHeal = Config.Bind(voidFiendString, "No Corruption loss on Heal", true, "Disables Corruption loss on heal.").Value;
+            VoidFiendCore.secondaryMultitask = Config.Bind(voidFiendString, "Secondary Multitasking", true, "Drown and Suppress can be fired while charging Flood.").Value;
         }
     }
 }

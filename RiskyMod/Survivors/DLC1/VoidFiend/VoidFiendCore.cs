@@ -1,5 +1,7 @@
-﻿using RoR2;
+﻿using EntityStates;
+using RoR2;
 using RoR2.Skills;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -14,6 +16,8 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
         public static bool corruptOnKill = true;
         public static bool noCorruptHeal = true;
         public static bool noCorruptCrit = true;
+
+        public static bool secondaryMultitask = true;
 
         public static BodyIndex bodyIndex;
         public static GameObject bodyPrefab;
@@ -36,6 +40,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
         private void ModifySkills(SkillLocator sk)
         {
             ModifyPassive(sk);
+            ModifySecondaries(sk);
         }
 
         private void ModifyPassive(SkillLocator sk)
@@ -74,6 +79,8 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                 crushHealth.baseMaxStock = 1;
                 crushHealth.baseRechargeInterval = 0;
                 crushHealth.rechargeStock = 1;
+
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC1/VoidSurvivor/EntityStates.VoidSurvivor.Weapon.ChargeCrushHealth.asset", "baseDuration", "0.5"); //vanilla is 1
             }
 
             if (corruptOnKill)
@@ -106,6 +113,23 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                 {
                     return;
                 };
+            }
+        }
+
+        private void ModifySecondaries(SkillLocator sk)
+        {
+            if (secondaryMultitask)
+            {
+                //Based on https://thunderstore.io/package/Bog/VoidFiendTweaks/
+                EntityStateMachine cannonStateMachine = bodyPrefab.AddComponent<EntityStateMachine>();
+                cannonStateMachine.customName = "RightArmCannon";
+                cannonStateMachine.initialStateType = new SerializableEntityStateType(typeof(EntityStates.BaseState));
+                cannonStateMachine.mainStateType = new SerializableEntityStateType(typeof(EntityStates.BaseState));
+
+                NetworkStateMachine nsm = bodyPrefab.GetComponent<NetworkStateMachine>();
+                nsm.stateMachines = nsm.stateMachines.Append(cannonStateMachine).ToArray();
+
+                sk.secondary.skillFamily.variants[0].skillDef.activationStateMachineName = "RightArmCannon";
             }
         }
 
