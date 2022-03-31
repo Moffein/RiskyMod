@@ -11,7 +11,7 @@ namespace RiskyMod.Enemies.Spawnpools
             if (!enabled) return;
 
             //Jellyfish are unique to Distant Roost, Wisps are unique to Titanic Plains.
-            DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
+            /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
             {
                 if (stage.stage == DirectorAPI.Stage.TitanicPlains)
                 {
@@ -29,7 +29,7 @@ namespace RiskyMod.Enemies.Spawnpools
                         list.Remove(dch);
                     }
                 }
-            };
+            };*/
         }
     }
 }

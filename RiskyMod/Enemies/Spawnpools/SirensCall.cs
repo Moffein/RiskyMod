@@ -13,7 +13,7 @@ namespace RiskyMod.Enemies.Spawnpools
 
             if (!enabled) return;
 
-            DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
+            /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
             {
                 if (stage.stage == DirectorAPI.Stage.SirensCall)
                 {
@@ -34,7 +34,7 @@ namespace RiskyMod.Enemies.Spawnpools
                     list.Add(DirectorCards.Imp);
                     list.Add(DirectorCards.Reminder);
                 }
-            };
+            };*/
         }
     }
 }

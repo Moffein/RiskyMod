@@ -239,7 +239,8 @@ namespace RiskyMod.Enemies
 
             if (logCardInfo)
             {
-                DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
+                //Todo: fix for r2api update
+                /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
                 {
                     foreach (DirectorAPI.DirectorCardHolder dch in list)
                     {
@@ -250,7 +251,7 @@ namespace RiskyMod.Enemies
                             //+ "\nMin Stages: " + dch.Card.minimumStageCompletions
                             + "\n");
                     }
-                };
+                };*/
             }
         }
 
@@ -272,8 +273,7 @@ namespace RiskyMod.Enemies
             DirectorAPI.DirectorCardHolder cardHolder = new DirectorAPI.DirectorCardHolder
             {
                 Card = dc,
-                MonsterCategory = monsterCategory,
-                InteractableCategory = DirectorAPI.InteractableCategory.None
+                MonsterCategory = monsterCategory
             };
             return cardHolder;
         }

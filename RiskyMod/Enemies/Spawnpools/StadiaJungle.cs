@@ -10,7 +10,7 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
-            DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
+            /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
             {
                 if (stage.stage == DirectorAPI.Stage.SunderedGrove)
                 {
@@ -43,7 +43,7 @@ namespace RiskyMod.Enemies.Spawnpools
                     list.Add(DirectorCards.BeetleQueen);    //Replace Titan, will this even do anything on this map?
                     list.Add(DirectorCards.Grovetender);    //Replace Vagrant. Not sure if Vagrants should be removed since they look nice.
                 }
-            };
+            };*/
         }
     }
 }

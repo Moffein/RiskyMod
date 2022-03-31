@@ -10,14 +10,14 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
-            DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
+            /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
             {
                 if (stage.stage == DirectorAPI.Stage.AbandonedAqueduct)
                 {
                     list.Add(DirectorCards.MagmaWormLoop);
                     list.Add(DirectorCards.ReminderLoop);
                 }
-            };
+            };*/
         }
     }
 }

@@ -35,7 +35,7 @@ namespace RiskyMod.SharedHooks
 				{
 					if (victimBody)
 					{
-						if (Crowbar.enabled)
+						if (Crowbar.enabled && Crowbar.crowbarManager)
                         {
 							Crowbar.crowbarManager.Remove(victimBody.healthComponent);
                         }

@@ -10,7 +10,7 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
-            DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
+            /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
             {
                 if (stage.stage == DirectorAPI.Stage.WetlandAspect)
                 {
@@ -29,7 +29,7 @@ namespace RiskyMod.Enemies.Spawnpools
                         list.Remove(dch);
                     }
                 }
-            };
+            };*/
         }
     }
 }

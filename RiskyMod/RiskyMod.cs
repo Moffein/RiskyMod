@@ -80,18 +80,18 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.TeleExpansion", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.6")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.7")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
         private const string generalString = "General";
-        private const string scalingString = "General - Run Scaling";
-        private const string holdoutString = "General - Holdouts";
-        private const string shrineString = "General - Shrines";
-        private const string charMechanicsString = "General - Character Mechanics";
-        private const string artifactString = "General - Artifacts";
-        private const string coreModuleString = "General - Core Modules";
+        private const string scalingString = "Run Scaling";
+        private const string holdoutString = "Holdouts";
+        private const string shrineString = "Shrines";
+        private const string charMechanicsString = "Character Mechanics";
+        private const string artifactString = "Artifacts";
+        private const string coreModuleString = "0 - Core Modules";
 
         private const string moonString = "Moon";
 
@@ -366,8 +366,8 @@ namespace RiskyMod
             AllyScaling.normalizeDroneDamage = Config.Bind(allyString, "Normalize Drone Damage", true, "Normalize drone damage stats so that they perform the same when using Spare Drone Parts.").Value;
             AlliesCore.nerfDroneParts = Config.Bind(allyString, "Spare Drone Parts Changes", true, "Reduce the damage of Spare Drone Parts.").Value;
             AllyScaling.noVoidDeath = Config.Bind(allyString, "No Void Death", true, "Allies are immune to Void implosions.").Value;
-            AllyScaling.noOverheat = Config.Bind(allyString, "No Overheat", true, "Allies are immune to Grandparent Overheat.").Value;
             NoVoidDamage.enabled = Config.Bind(allyString, "No Void Damage", true, "Allies take no damage from Void fog.").Value;
+            AllyScaling.noOverheat = Config.Bind(allyString, "No Overheat", true, "Allies are immune to Grandparent Overheat.").Value;
             SuperAttackResist.enabled = Config.Bind(allyString, "Superattack Resistance", true, "Allies take less damage from superattacks like Vagrant Novas.").Value;
 
             TeleExpandOnBossKill.enabled = Config.Bind(holdoutString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;

@@ -11,7 +11,7 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
-            DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
+            /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
             {
                 if (stage.stage == DirectorAPI.Stage.SkyMeadow)
                 {
@@ -34,7 +34,7 @@ namespace RiskyMod.Enemies.Spawnpools
                     //list.Add(DirectorCards.GreaterWispBasic);
                     list.Add(DirectorCards.LunarGolemSkyMeadow);    //I think their spawn animation where they fall from the sky fits the map well.
                 }
-            };
+            };*/
         }
     }
 }

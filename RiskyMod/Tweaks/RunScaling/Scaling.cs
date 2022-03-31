@@ -14,15 +14,14 @@ namespace RiskyMod.Tweaks.RunScaling
 
         public Scaling()
         {
-			if (!enabled) return;
-
-
 			On.RoR2.GameModeCatalog.LoadGameModes += (orig) =>
 			{
 				orig();
 				simulacrumIndex = GameModeCatalog.FindGameModeIndex("InfiniteTowerRun");
 				classicRunIndex = GameModeCatalog.FindGameModeIndex("ClassicRun");
 			};
+
+			if (!enabled) return;
 
 			On.RoR2.Run.RecalculateDifficultyCoefficentInternal += (orig, self) =>
             {
