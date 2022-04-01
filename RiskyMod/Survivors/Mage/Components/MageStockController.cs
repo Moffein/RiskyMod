@@ -70,7 +70,7 @@ namespace RiskyMod.Survivors.Mage.Components
         public void FireSkill(float duration)
         {
             delayStopwatch = graceDuration;  //Duration is already scaled to attack speed. InitialDelay is simply for inputs, and is ignored if the mag is empty.
-            reloadStopwatch = baseDuration / body.attackSpeed + (skills.primary.stock <= 0 ? duration : 0f);
+            reloadStopwatch = baseDuration / body.attackSpeed;// + (skills.primary.stock <= 0 ? duration : 0f);
         }
         private void ShowReloadVFX()
         {

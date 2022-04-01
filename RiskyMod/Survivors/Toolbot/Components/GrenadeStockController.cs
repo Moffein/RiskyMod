@@ -39,28 +39,31 @@ namespace RiskyMod.Survivors.Toolbot.Components
         {
             foreach (SkillStatus s in skillStatuses)
             {
-                if (s.skill.stock < s.skill.maxStock)
+                if (s.skill.skillDef.activationState.GetType() == typeof(EntityStates.Toolbot.FireGrenadeLauncher))
                 {
-                    if (s.skill.stock <= 0) s.delayStopwatch = 0f;
-                    if (s.delayStopwatch > 0f)
+                    if (s.skill.stock < s.skill.maxStock)
                     {
-                        s.delayStopwatch -= Time.fixedDeltaTime;
+                        if (s.skill.stock <= 0) s.delayStopwatch = 0f;
+                        if (s.delayStopwatch > 0f)
+                        {
+                            s.delayStopwatch -= Time.fixedDeltaTime;
+                        }
+                        else
+                        {
+                            s.reloadStopwatch -= Time.fixedDeltaTime;
+                            if (s.reloadStopwatch <= 0f)
+                            {
+                                s.reloadStopwatch += baseDuration / body.attackSpeed;
+
+                                s.skill.stock = s.skill.maxStock;
+                                Util.PlaySound("Play_captain_m1_reload", base.gameObject);
+                            }
+                        }
                     }
                     else
                     {
-                        s.reloadStopwatch -= Time.fixedDeltaTime;
-                        if (s.reloadStopwatch <= 0f)
-                        {
-                            s.reloadStopwatch += baseDuration / body.attackSpeed;
-
-                            s.skill.stock = s.skill.maxStock;
-                            Util.PlaySound("Play_captain_m1_reload", base.gameObject);
-                        }
+                        s.reloadStopwatch = baseDuration / body.attackSpeed;
                     }
-                }
-                else
-                {
-                    s.reloadStopwatch = baseDuration / body.attackSpeed;
                 }
             }
         }
@@ -74,7 +77,7 @@ namespace RiskyMod.Survivors.Toolbot.Components
                 {
                     set = true;
                     s.delayStopwatch = graceDuration;
-                    s.reloadStopwatch = baseDuration / body.attackSpeed + (g.stock <= 0 ? duration : 0f);
+                    s.reloadStopwatch = baseDuration / body.attackSpeed;// + (g.stock <= 0 ? duration : 0f);
                 }
             }
 
