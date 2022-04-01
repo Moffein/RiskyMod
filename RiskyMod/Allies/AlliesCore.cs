@@ -42,7 +42,7 @@ namespace RiskyMod.Allies
             if (nerfDroneParts)
             {
                 Items.ItemsCore.ModifyItemDefActions += ModifyDroneParts;
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.DroneWeaponsChainGun.FireChainGun", "damageCoefficient", "0.4");   //coef 1 -> 0.5
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.DroneWeaponsChainGun.FireChainGun", "damageCoefficient", "0.5");   //coef 1 orig
 
                 IL.RoR2.DroneWeaponsBoostBehavior.OnEnemyHit += (il) =>
                 {

@@ -54,7 +54,7 @@ namespace RiskyMod.Tweaks.RunScaling
                 {
 					stagesCleared--;
                 }*/
-				float stageFactor = 1f + 0.3f * Mathf.Floor(stagesCleared / 5);	//Explicitly use Floor to be safe, even though int division already floors it.
+				float stageFactor = 1f + 0.25f * Mathf.Floor(stagesCleared / 5);	//Explicitly use Floor to be safe, even though int division already floors it.
 				float finalDifficulty = (playerFactor + timeFactor) * stageFactor;
 				self.compensatedDifficultyCoefficient = finalDifficulty;
 				self.difficultyCoefficient = finalDifficulty;

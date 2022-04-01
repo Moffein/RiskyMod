@@ -39,7 +39,7 @@ namespace RiskyMod.Survivors.Toolbot.Components
         {
             foreach (SkillStatus s in skillStatuses)
             {
-                if (s.skill.skillDef.activationState.GetType() == typeof(EntityStates.Toolbot.FireGrenadeLauncher))
+                if (s.skill.activationState.stateType == typeof(EntityStates.Toolbot.FireGrenadeLauncher))
                 {
                     if (s.skill.stock < s.skill.maxStock)
                     {
