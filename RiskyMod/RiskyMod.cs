@@ -80,7 +80,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.TeleExpansion", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.8")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.9")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
@@ -285,7 +285,6 @@ namespace RiskyMod
             new TreebotFruitingNullref();
             new FixLightningStrikeOrbProcCoefficient();
             new FixCrocoPoisonAchievement();
-            new FixGhostMinonSpawns();
             new FixWormFallDeath();
             new GhostDunestriderFriendlyFire();
             new FixExtraLifeVoidBlacklist();
