@@ -13,6 +13,7 @@ namespace RiskyMod.Tweaks.RunScaling
 		public static float stopSound = 300f;
         public RemoveLevelCap()
         {
+			if (!enabled) return;
 			//Remove level capping when calculating monster level
 			if (!Scaling.enabled)
 			{

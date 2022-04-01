@@ -20,11 +20,11 @@ namespace RiskyMod.Items.DLC1.Void
                 c.GotoNext(
                      x => x.MatchLdcR4(0.01f)
                     );
-                c.Next.Operand = 0.005f;
+                c.Next.Operand = 0.00375f;
                 c.GotoNext(MoveType.After,
                      x => x.MatchMul()
                     );
-                c.EmitDelegate<Func<float, float>>(healPercent => healPercent + 0.005f);
+                c.EmitDelegate<Func<float, float>>(healPercent => healPercent + 0.00375f);
             };
         }
         private static void ModifyItem()

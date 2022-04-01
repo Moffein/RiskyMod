@@ -80,17 +80,17 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.TeleExpansion", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.7")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.6.8")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
         private const string generalString = "General";
-        private const string scalingString = "Run Scaling";
-        private const string holdoutString = "Holdouts";
-        private const string shrineString = "Shrines";
-        private const string charMechanicsString = "Character Mechanics";
-        private const string artifactString = "Artifacts";
+        private const string scalingString = "General - Run Scaling";
+        private const string holdoutString = "General - Holdouts";
+        private const string shrineString = "General - Shrines";
+        private const string charMechanicsString = "General - Character Mechanics";
+        private const string artifactString = "General - Artifacts";
         private const string coreModuleString = "0 - Core Modules";
 
         private const string moonString = "Moon";
@@ -423,6 +423,7 @@ namespace RiskyMod
         private void ConfigCommonItems()
         {
             BisonSteak.enabled = Config.Bind(commonString, "Bison Steak", true, itemConfigDescString).Value;
+            Bungus.enabled = Config.Bind(commonString, "Bustling Fungus", true, itemConfigDescString).Value;
             CautiousSlug.enabled = Config.Bind(commonString, "Cautious Slug", true, itemConfigDescString).Value;
             Crowbar.enabled = Config.Bind(commonString, "Crowbar", true, itemConfigDescString).Value;
             Fireworks.enabled = Config.Bind(commonString, "Fireworks", true, itemConfigDescString).Value;

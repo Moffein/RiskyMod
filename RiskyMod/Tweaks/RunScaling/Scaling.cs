@@ -12,6 +12,8 @@ namespace RiskyMod.Tweaks.RunScaling
 		public static GameModeIndex classicRunIndex;
 		public static GameModeIndex simulacrumIndex;
 
+		private static bool isBossStage = false;
+
         public Scaling()
         {
 			On.RoR2.GameModeCatalog.LoadGameModes += (orig) =>
@@ -23,6 +25,21 @@ namespace RiskyMod.Tweaks.RunScaling
 
 			if (!enabled) return;
 
+			/*On.RoR2.Stage.Start += (orig, self) =>
+			{
+				Scaling.isBossStage = false;
+				SceneDef sd = RoR2.SceneCatalog.GetSceneDefForCurrentScene();
+				if (sd)
+				{
+					if (sd.baseSceneName == "moon" || sd.baseSceneName == "moon2" || sd.baseSceneName == "voidraid")
+                    {
+						Scaling.isBossStage = true;
+					}
+				}
+
+				orig(self);
+			};*/
+
 			On.RoR2.Run.RecalculateDifficultyCoefficentInternal += (orig, self) =>
             {
 				int playerCount = self.participatingPlayerCount;
@@ -31,7 +48,13 @@ namespace RiskyMod.Tweaks.RunScaling
 				DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
                 float playerFactor = 0.7f + playerCount * 0.3f;
 				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue;//* Mathf.Pow(playerCount, 0.15f)
-				float stageFactor = Mathf.Pow(1.18f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
+				//float stageFactor = Mathf.Pow(1.18f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
+				int stagesCleared = self.stageClearCount;
+				/*if (Scaling.isBossStage && stagesCleared > 0)
+                {
+					stagesCleared--;
+                }*/
+				float stageFactor = 1f + 0.3f * Mathf.Floor(stagesCleared / 5);	//Explicitly use Floor to be safe, even though int division already floors it.
 				float finalDifficulty = (playerFactor + timeFactor) * stageFactor;
 				self.compensatedDifficultyCoefficient = finalDifficulty;
 				self.difficultyCoefficient = finalDifficulty;

@@ -12,7 +12,7 @@ namespace RiskyMod.Tweaks.RunScaling
             On.RoR2.SceneDirector.PopulateScene += (orig, self) =>
             {
                 //Enemies spawned with the level are worth the same as Teleporter enemies.
-                if (self.expRewardCoefficient < 0.11f)
+                if (self && self.expRewardCoefficient < 0.11f)
                 {
                     self.expRewardCoefficient = 0.11f;
                 }

@@ -12,7 +12,7 @@ namespace RiskyMod.Content
             if (initialized) return;
             ContentManager.collectContentPackProviders += ContentCore.ContentManager_collectContentPackProviders;
 
-            new LunarGolemSkyMeadow();
+            //new LunarGolemSkyMeadow();
         }
 
         private static void ContentManager_collectContentPackProviders(ContentManager.AddContentPackProviderDelegate addContentPackProvider)

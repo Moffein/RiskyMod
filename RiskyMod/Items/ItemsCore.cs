@@ -57,6 +57,7 @@ namespace RiskyMod.Items
             new TopazBrooch();
             new TougherTimes();
             new CautiousSlug();
+            new Bungus();
         }
 
         private void ModifyUncommon()

@@ -22,7 +22,7 @@
 	
 	"ITEM_BEAR_DESC_RISKYMOD": "<style=cIsHealing>10%</style> <style=cStack>(+10% per stack)</style> chance to <style=cIsHealing>block</style> incoming damage. <style=cIsUtility>Unaffected by luck</style>.",
 	
-	"ITEM_SLOWONHIT_DESC_RISKYMOD": "<style=cIsUtility>Slow</style> enemies on hit for <style=cIsUtility>-60% movement speed</style> and <style=cIsDamage>-15% attack speed</style> for <style=cIsUtility>2s</style> <style=cStack>(+2s per stack)</style>.",
+	"ITEM_SLOWONHIT_DESC_RISKYMOD": "<style=cIsUtility>Slow</style> enemies on hit for <style=cIsUtility>-60% movement speed</style> and <style=cIsDamage>-20% attack speed</style> for <style=cIsUtility>2s</style> <style=cStack>(+2s per stack)</style>.",
 	
 	"ITEM_SEED_DESC_RISKYMOD": "Dealing damage <style=cIsHealing>heals</style> you for <style=cIsHealing>5% <style=cStack>(+2.5% per stack)</style></style> of the <style=cIsDamage>damage dealt</style>.",
 	
@@ -48,7 +48,7 @@
 	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style>. Gain an additional <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style> armor while <style=cIsUtility>sprinting</style>.",
 	
 	"ITEM_EXECUTELOWHEALTHELITE_PICKUP_RISKYMOD": "Deal bonus damage to enemies below 30% health.",
-	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Deal <style=cIsDamage>+25%</style> <style=cStack>(+25% per stack)</style> damage to enemies below <style=cIsDamage>30% health</style>.",
+	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Deal <style=cIsDamage>+30%</style> <style=cStack>(+30% per stack)</style> damage to enemies below <style=cIsDamage>30% health</style>.",
 	
 	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "Enter a frenzy after killing enemies. Stacks 3 times.",
 	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Killing enemies</style> sends you into a <style=cIsDamage>frenzy</style> for <style=cIsDamage>4s</style>, increasing <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> and <style=cIsDamage>attack speed</style> by <style=cIsDamage>15%</style> for each enemy killed. Maximum cap of <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> buffs.",
@@ -112,12 +112,12 @@
 	
 	"ITEM_HEALWHILESAFE_DESC_RISKYMOD": "Increases <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>+4 hp/s</style> <style=cStack>(+4 hp/s per stack)</style>while outside of combat.",
 	
-	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsHealing>Heals</style> for <style=cIsHealing>2%</style> <style=cStack>(+1% per stack)</style> of your <style=cIsHealing>health</style> every second <style=cIsUtility>while sprinting</style>. <style=cIsVoid>Corrupts all Bustling Fungi</style>.",
+	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsHealing>Heals</style> for <style=cIsHealing>1.5%</style> <style=cStack>(+0.75% per stack)</style> of your <style=cIsHealing>health</style> every second <style=cIsUtility>while sprinting</style>. <style=cIsVoid>Corrupts all Bustling Fungi</style>.",
 	
-	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Create a zone around the Teleporter that <style=cIsHealing>heals</style> for <style=cIsHealing>5%</style> <style=cStack>(+2.5% per stack)</style> of your <style=cIsHealing>health</style> every second. Release a <style=cIsHealing>healing nova </style>during the Teleporter event, <style=cIsHealing>healing</style> all nearby allies for <style=cIsHealing>50%</style> of their maximum health. Occurs <style=cIsHealing>1</style> <style=cStack>(+1 per stack)</style> times.",
+	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Create a zone around the Teleporter that <style=cIsHealing>heals</style> for <style=cIsHealing>4.5%</style> <style=cStack>(+2.25% per stack)</style> of your <style=cIsHealing>health</style> every second. Release a <style=cIsHealing>healing nova </style>during the Teleporter event, <style=cIsHealing>healing</style> all nearby allies for <style=cIsHealing>50%</style> of their maximum health. Occurs <style=cIsHealing>1</style> <style=cStack>(+1 per stack)</style> times.",
 	
 	"ITEM_CLOVER_DESC_RISKYMOD": "All random effects are rolled <style=cIsUtility>+1</style> <style=cStack>(+1 per stack)</style>times for a <style=cIsUtility>favorable outcome</style>. If your <style=cIsDamage>luck</style> is above <style=cIsUtility>1</style>, increase <style=cIsUtility>ALL stats</style> by <style=cIsUtility>20%</style> <style=cStack>(+20% per stack)</style> instead.",
 	
-	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Gain <style=cIsDamage>Col. Droneman</style>. \nDrones gain <style=cIsDamage>+50%</style> <style=cStack>(+50% per stack)</style> attack speed and cooldown reduction. \nDrones gain <style=cIsDamage>10%</style> chance to fire a <style=cIsDamage>missile</style> on hit, dealing <style=cIsDamage>300%</style> TOTAL damage. \nDrones gain an <style=cIsDamage>automatic chain gun</style> that deals <style=cIsDamage>6x70%</style>damage, bouncing to <style=cIsDamage>2</style> enemies."
+	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Gain <style=cIsDamage>Col. Droneman</style>. \nDrones gain <style=cIsDamage>+50%</style> <style=cStack>(+50% per stack)</style> attack speed and cooldown reduction. \nDrones gain <style=cIsDamage>10%</style> chance to fire a <style=cIsDamage>missile</style> on hit, dealing <style=cIsDamage>300%</style> TOTAL damage. \nDrones gain an <style=cIsDamage>automatic chain gun</style> that deals <style=cIsDamage>6x40%</style>damage, bouncing to <style=cIsDamage>2</style> enemies."
 	}
 }
