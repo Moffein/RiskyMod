@@ -534,6 +534,7 @@ namespace RiskyMod
             Capacitor.enabled = Config.Bind(equipmentString, "Royal Capacitor", true, itemConfigDescString).Value;
             Chrysalis.enabled = Config.Bind(equipmentString, "Milky Chrysalis", true, itemConfigDescString).Value;
             CritHud.enabled = Config.Bind(equipmentString, "Ocular HUD", true, itemConfigDescString).Value;
+            Fruit.enabled = Config.Bind(equipmentString, "Foreign Fruit", true, itemConfigDescString).Value;
             SuperLeech.enabled = Config.Bind(equipmentString, "Super Massive Leech", true, itemConfigDescString).Value;
             VolcanicEgg.enabled = Config.Bind(equipmentString, "Volcanic Egg", true, itemConfigDescString).Value;
         }

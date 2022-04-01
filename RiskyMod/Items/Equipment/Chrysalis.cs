@@ -6,7 +6,7 @@
         public Chrysalis()
         {
             if (!enabled) return;
-            ItemsCore.ChangeEquipmentCooldown(ItemsCore.LoadEquipmentDef("jetpack"), 30f);
+            ItemsCore.ChangeEquipmentCooldown(ItemsCore.LoadEquipmentDef("jetpack"), 45f);
         }
     }
 }

@@ -149,6 +149,8 @@ namespace RiskyMod.Items
             new Capacitor();
             new Backup();
             new SuperLeech();
+            new Chrysalis();
+            new Fruit();
         }
 
         private void ModifyItemTokens()
