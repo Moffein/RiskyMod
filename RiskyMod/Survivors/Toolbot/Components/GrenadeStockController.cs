@@ -37,6 +37,7 @@ namespace RiskyMod.Survivors.Toolbot.Components
 
         private void FixedUpdate()
         {
+            if (!skills.hasAuthority) return;
             foreach (SkillStatus s in skillStatuses)
             {
                 if (s.skill.activationState.stateType == typeof(EntityStates.Toolbot.FireGrenadeLauncher))

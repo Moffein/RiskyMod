@@ -36,6 +36,7 @@ namespace RiskyMod.Survivors.Mage.Components
 
         private void FixedUpdate()
         {
+            if (!skills.hasAuthority) return;
             if (skills.primary.stock < skills.primary.maxStock && ValidStates.Contains(skills.primary.activationState.stateType))
             {
                 if (skills.primary.stock <= 0) delayStopwatch = 0f;
@@ -91,7 +92,7 @@ namespace RiskyMod.Survivors.Mage.Components
 
             if (currentEffectPrefab)
             {
-                EffectManager.SimpleMuzzleFlash(currentEffectPrefab, base.gameObject, rightMuzzle ? "MuzzleRight" : "MuzzleLeft", false);
+                EffectManager.SimpleMuzzleFlash(currentEffectPrefab, base.gameObject, rightMuzzle ? "MuzzleRight" : "MuzzleLeft", true);
             }
 
             rightMuzzle = !rightMuzzle;
