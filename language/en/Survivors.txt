@@ -1,8 +1,8 @@
 {
 	strings:
 	{
-	"CAPTAIN_PRIMARY_DESC_RISKYMOD" : "Fire a blast of pellets that deal <style=cIsDamage>7x110% damage</style>. Charging narrows the <style=cIsUtility>spread</style>. The number of pellets increases with attack speed.",
-	"CAPTAIN_SECONDARY_DESC_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Fire a fast tazer that <style=cIsUtility>slows</style> and deals <style=cIsDamage>100% damage</style>. Travels farther if bounced.",
+	"CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD" : "Fire a blast of pellets that deal <style=cIsDamage>7x110% damage</style>. Charging narrows the <style=cIsUtility>spread</style>. The number of pellets increases with attack speed.",
+	"CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Fire a fast tazer that <style=cIsUtility>slows</style> and deals <style=cIsDamage>100% damage</style>. Travels farther if bounced.",
 	
 	"BANDIT2_PRIMARY_DESC_RISKYMOD" : "Fire a shotgun burst for <style=cIsDamage>5x90% damage</style>. Can hold up to 4 shells.",
 	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD" : "Fire a rifle blast that pierces for <style=cIsDamage>330% damage</style>. Can hold up to 4 bullets.",
@@ -63,8 +63,7 @@
 	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Fire a bolt for <style=cIsDamage>300% damage</style> that <style=cIsDamage>explodes</style> in a small area. Hold up to 4.</style>",
 	"MAGE_SPECIAL_FIRE_DESCRIPTION_RISKYMOD" : "Burn all enemies in front of you for <style=cIsDamage>20x100% damage</style>. The number of shots increases with attack speed.",
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Burst into the sky, dealing <style=cIsDamage>800% damage</style>.",
-	"MAGE_SPECIAL_FIRE_SCEPTER_NAME_RISKYMOD": "Napalmthrower",
-	"MAGE_SPECIAL_FIRE_SCEPTER_DESCRIPTION_RISKYMOD" : "Burn all enemies in front of you for <style=cIsDamage>20x100% damage</style>, leaving a trail of fire. The number of shots increases with attack speed.",
+	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Freezing</style>. Create a barrier that hurts enemies for <style=cIsDamage>100% damage</style>.",
 	
 	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Throw a <style=cIsUtility>Magnetic</style> pylon that <style=cIsDamage>zaps</style> up to <style=cIsDamage>6</style> nearby enemies for <style=cIsDamage>70% damage</style>. Can be <style=cIsUtility>grappled</style>.",
 	

@@ -66,7 +66,7 @@ namespace RiskyMod.Survivors.Captain
             shotgunDef.requiredStock = 1;
             shotgunDef.skillName = "ChargeShotgun";
             shotgunDef.skillNameToken = "CAPTAIN_PRIMARY_NAME";
-            shotgunDef.skillDescriptionToken = "CAPTAIN_PRIMARY_DESC_RISKYMOD";
+            shotgunDef.skillDescriptionToken = "CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD";
             shotgunDef.stockToConsume = 1;
             SneedUtils.SneedUtils.FixSkillName(shotgunDef);
             Content.Content.skillDefs.Add(shotgunDef);
@@ -91,7 +91,7 @@ namespace RiskyMod.Survivors.Captain
                 Content.Content.projectilePrefabs.Add(taserPrefab);
 
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Captain.Weapon.FireTazer", "projectilePrefab", taserPrefab);
-                sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CAPTAIN_SECONDARY_DESC_RISKYMOD";
+                sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD";
             }
         }
 

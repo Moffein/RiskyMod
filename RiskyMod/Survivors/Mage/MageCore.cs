@@ -8,6 +8,7 @@ using RoR2.Skills;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
 using RiskyMod.Survivors.Mage.Components;
+using EntityStates.RiskyMod.Mage.Weapon;
 
 namespace RiskyMod.Survivors.Mage
 {
@@ -26,6 +27,8 @@ namespace RiskyMod.Survivors.Mage
 
         public static bool ionSurgeShock = true;
         public static bool ionSurgeMovementScaling = false;
+
+        public static bool iceWallRework = true;
 
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/MageBody");
 
@@ -109,7 +112,41 @@ namespace RiskyMod.Survivors.Mage
 
         private void ModifyUtilities(SkillLocator sk)
         {
-            //new SolidIceWall();
+            if (iceWallRework)
+            {
+                //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Mage.Weapon.PrepWall");
+                Content.Content.entityStates.Add(typeof(PrepIceWall));
+
+                SkillDef iceSkill = ScriptableObject.CreateInstance<SkillDef>();
+
+                iceSkill.activationState = new SerializableEntityStateType(typeof(PrepIceWall));
+                iceSkill.activationStateMachineName = "Weapon";
+                iceSkill.baseMaxStock = 1;
+                iceSkill.baseRechargeInterval = 12f;
+                iceSkill.beginSkillCooldownOnSkillEnd = true;
+                iceSkill.canceledFromSprinting = true;
+                iceSkill.cancelSprintingOnActivation = true;
+                iceSkill.dontAllowPastMaxStocks = true;
+                iceSkill.forceSprintDuringState = false;
+                iceSkill.fullRestockOnAssign = true;
+                iceSkill.icon = sk.utility.skillFamily.variants[0].skillDef.icon;
+                iceSkill.interruptPriority = InterruptPriority.PrioritySkill;
+                iceSkill.isCombatSkill = true;
+                iceSkill.keywordTokens = new string[] { "KEYWORD_FREEZING" };
+                iceSkill.mustKeyPress = false;
+                iceSkill.rechargeStock = 1;
+                iceSkill.requiredStock = 1;
+                iceSkill.resetCooldownTimerOnUse = false;
+                iceSkill.skillDescriptionToken = "MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD";
+                iceSkill.skillNameToken = "MAGE_UTILITY_ICE_NAME";
+                iceSkill.skillName = "RiskyModIceWall";
+                iceSkill.stockToConsume = 1;
+                SneedUtils.SneedUtils.FixSkillName(iceSkill);
+
+                Skills.PrepIceWall = iceSkill;
+                Content.Content.skillDefs.Add(Skills.PrepIceWall);
+                sk.utility.skillFamily.variants[0].skillDef = Skills.PrepIceWall;
+            }
         }
 
         private void ModifySpecials(SkillLocator sk)
@@ -162,5 +199,10 @@ namespace RiskyMod.Survivors.Mage
                 }
             }
         }
+    }
+
+    public static class Skills
+    {
+        public static SkillDef PrepIceWall;
     }
 }
