@@ -195,7 +195,9 @@ namespace RiskyMod.Survivors.Mage
                     unlockableDef = Addressables.LoadAssetAsync<UnlockableDef>("RoR2/Base/Mage/Skills.Mage.FlyUp.asset").WaitForCompletion(),
                     viewableNode = new ViewablesCatalog.Node(ionSurge2.skillNameToken, false)
                 };
-
+                
+                //Remove Vanilla Ion Surge
+                sk.special.skillFamily.variants = sk.special.skillFamily.variants.Where(v => v.skillDef.activationState.stateType != typeof(EntityStates.Mage.FlyUpState)).ToArray();
                 //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Toolbot.AimStunDrone");
             }
         }
@@ -209,7 +211,7 @@ namespace RiskyMod.Survivors.Mage
                 {
                     sk.special.skillFamily.variants[i].skillDef.canceledFromSprinting = flamethrowerSprintCancel;
                 }
-                else if (sk.special.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.FlyUpState))
+                else if (sk.special.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.FlyUpState) && !ionSurgeRework)
                 {
                     if (ionSurgeShock)
                     {
@@ -248,11 +250,6 @@ namespace RiskyMod.Survivors.Mage
                         };
                     }
                 }
-            }
-
-            if (ionSurgeRework)
-            {
-                sk.special.skillFamily.variants = sk.special.skillFamily.variants.Where(v => v.skillDef.activationState.stateType != typeof(EntityStates.Mage.FlyUpState)).ToArray();
             }
         }
     }

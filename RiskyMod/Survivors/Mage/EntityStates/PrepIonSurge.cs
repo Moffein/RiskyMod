@@ -90,6 +90,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			base.OnExit();
 		}
 
+		//This runs clientside
 		public void FireBlastJump()
 		{
 			Ray aimRay = base.GetAimRay();
@@ -122,8 +123,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			blastAttack.AddModdedDamageType(SharedDamageTypes.Slow50For5s);
 			blastAttack.Fire();
 
-			//Handle the force clientside
-			if (base.characterMotor && base.characterBody)
+			if (base.characterMotor && !base.characterMotor.isGrounded && base.characterBody)
 			{
 				Vector3 characterPos = base.characterBody.corePosition + Vector3.up;    //Need to shift position up a bit to get it to feel consistent.
 				Vector3 diff = characterPos - aimPos;
@@ -142,7 +142,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 		}
 
 		public static float baseDuration = 0.5f;
-		public static float damageCoefficient = 1f;
+		public static float damageCoefficient = 8f;
 		public static GameObject areaIndicatorPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab").WaitForCompletion();
 		public static GameObject muzzleflashEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightningLarge.prefab").WaitForCompletion();
 		public static GameObject crosshairOverridePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/SimpleDotCrosshair.prefab").WaitForCompletion();

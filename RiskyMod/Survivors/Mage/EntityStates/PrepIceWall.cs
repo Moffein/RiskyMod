@@ -129,6 +129,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			base.OnExit();
 		}
 
+		//This runs clientside
 		public void FireBlastJump()
         {
 			Ray aimRay = base.GetAimRay();
@@ -162,8 +163,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
             };
 			blastAttack.Fire();
 
-			//Handle the force clientside
-			if (base.characterMotor && base.characterBody)
+			if (base.characterMotor && !base.characterMotor.isGrounded && base.characterBody)
             {
 				Vector3 characterPos = base.characterBody.corePosition + Vector3.up;	//Need to shift position up a bit to get it to feel consistent.
 				Vector3 diff = characterPos - aimPos;
