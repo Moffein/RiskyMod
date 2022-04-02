@@ -9,6 +9,9 @@ using MonoMod.Cil;
 using Mono.Cecil.Cil;
 using RiskyMod.Survivors.Mage.Components;
 using EntityStates.RiskyMod.Mage.Weapon;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Mage
 {
@@ -27,6 +30,8 @@ namespace RiskyMod.Survivors.Mage
 
         public static bool ionSurgeShock = true;
         public static bool ionSurgeMovementScaling = false;
+
+        public static bool ionSurgeRework = true;
 
         public static bool iceWallRework = true;
 
@@ -147,6 +152,52 @@ namespace RiskyMod.Survivors.Mage
                 Content.Content.skillDefs.Add(Skills.PrepIceWall);
                 sk.utility.skillFamily.variants[0].skillDef = Skills.PrepIceWall;
             }
+
+            if (ionSurgeRework)
+            {
+                //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Mage.FlyUpState"); SkillDef ionSurge2 = ScriptableObject.CreateInstance<SkillDef>();
+                Content.Content.entityStates.Add(typeof(PrepIonSurge));
+
+                SkillDef ionSurge2 = ScriptableObject.CreateInstance<SkillDef>();
+                ionSurge2.activationState = new SerializableEntityStateType(typeof(PrepIonSurge));
+                ionSurge2.activationStateMachineName = "Weapon";
+                ionSurge2.baseMaxStock = 1;
+                ionSurge2.baseRechargeInterval = 12f;
+                ionSurge2.beginSkillCooldownOnSkillEnd = true;
+                ionSurge2.canceledFromSprinting = true;
+                ionSurge2.cancelSprintingOnActivation = true;
+                ionSurge2.dontAllowPastMaxStocks = true;
+                ionSurge2.forceSprintDuringState = false;
+                ionSurge2.fullRestockOnAssign = true;
+                ionSurge2.icon = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFlyUp.asset").WaitForCompletion().icon;
+                ionSurge2.interruptPriority = InterruptPriority.PrioritySkill;
+                ionSurge2.isCombatSkill = true;
+                string keyword = Tweaks.CharacterMechanics.Shock.enabled ? "KEYWORD_SHOCKING_RISKYMOD" : "KEYWORD_SHOCKING";
+                ionSurge2.keywordTokens = new string[] { keyword };
+                ionSurge2.mustKeyPress = false;
+                ionSurge2.rechargeStock = 1;
+                ionSurge2.requiredStock = 1;
+                ionSurge2.resetCooldownTimerOnUse = false;
+                ionSurge2.skillDescriptionToken = "MAGE_UTILITY_LIGHTNING_DESCRIPTION_RISKYMOD";
+                ionSurge2.skillNameToken = "MAGE_SPECIAL_LIGHTNING_NAME";
+                ionSurge2.skillName = "RiskyModIonSurge";
+                ionSurge2.stockToConsume = 1;
+                SneedUtils.SneedUtils.FixSkillName(ionSurge2);
+
+                Skills.PrepIonSurge = ionSurge2;
+                Content.Content.skillDefs.Add(Skills.PrepIonSurge);
+
+                SkillFamily secondarySkillFamily = sk.utility.skillFamily;
+                Array.Resize(ref secondarySkillFamily.variants, secondarySkillFamily.variants.Length + 1);
+                secondarySkillFamily.variants[secondarySkillFamily.variants.Length - 1] = new SkillFamily.Variant
+                {
+                    skillDef = ionSurge2,
+                    unlockableDef = Addressables.LoadAssetAsync<UnlockableDef>("RoR2/Base/Mage/Skills.Mage.FlyUp.asset").WaitForCompletion(),
+                    viewableNode = new ViewablesCatalog.Node(ionSurge2.skillNameToken, false)
+                };
+
+                //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Toolbot.AimStunDrone");
+            }
         }
 
         private void ModifySpecials(SkillLocator sk)
@@ -198,11 +249,17 @@ namespace RiskyMod.Survivors.Mage
                     }
                 }
             }
+
+            if (ionSurgeRework)
+            {
+                sk.special.skillFamily.variants = sk.special.skillFamily.variants.Where(v => v.skillDef.activationState.stateType != typeof(EntityStates.Mage.FlyUpState)).ToArray();
+            }
         }
     }
 
     public static class Skills
     {
         public static SkillDef PrepIceWall;
+        public static SkillDef PrepIonSurge;
     }
 }

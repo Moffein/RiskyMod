@@ -9,7 +9,6 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 {
 	public class PrepIceWall : BaseState
 	{
-		// Token: 0x06000C0E RID: 3086 RVA: 0x00064B80 File Offset: 0x00062D80
 		public override void OnEnter()
 		{
 			base.OnEnter();
@@ -17,11 +16,11 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			base.characterBody.SetAimTimer(this.duration + 2f);
 			base.PlayAnimation("Gesture, Additive", "PrepIceWall", "PrepIceWall.playbackRate", this.duration);
 			Util.PlaySound(PrepIceWall.PrepIceWallSoundString, base.gameObject);
+
 			this.areaIndicatorInstance = UnityEngine.Object.Instantiate<GameObject>(PrepIceWall.areaIndicatorPrefab);
 			this.UpdateAreaIndicator();
 		}
 
-		// Token: 0x06000C0F RID: 3087 RVA: 0x00064C00 File Offset: 0x00062E00
 		private void UpdateAreaIndicator()
 		{
 			bool flag = this.goodPlacement;
@@ -54,14 +53,12 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			this.areaIndicatorInstance.SetActive(this.goodPlacement);
 		}
 
-		// Token: 0x06000C10 RID: 3088 RVA: 0x0000A5C7 File Offset: 0x000087C7
 		public override void Update()
 		{
 			base.Update();
 			this.UpdateAreaIndicator();
 		}
 
-		// Token: 0x06000C11 RID: 3089 RVA: 0x00064D40 File Offset: 0x00062F40
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
@@ -79,12 +76,12 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			{
 				this.PlayAnimation("Gesture, Additive", "FireWall");
 				Util.PlaySound(PrepIceWall.fireSoundString, base.gameObject);
+				EffectManager.SimpleMuzzleFlash(PrepIceWall.muzzleflashEffect, base.gameObject, "MuzzleLeft", true);
+				EffectManager.SimpleMuzzleFlash(PrepIceWall.muzzleflashEffect, base.gameObject, "MuzzleRight", true);
 				if (this.goodPlacement)
 				{
 					if (this.areaIndicatorInstance && base.isAuthority)
 					{
-						EffectManager.SimpleMuzzleFlash(PrepIceWall.muzzleflashEffect, base.gameObject, "MuzzleLeft", true);
-						EffectManager.SimpleMuzzleFlash(PrepIceWall.muzzleflashEffect, base.gameObject, "MuzzleRight", true);
 						Vector3 forward = this.areaIndicatorInstance.transform.forward;
 						forward.y = 0f;
 						forward.Normalize();
@@ -112,13 +109,19 @@ namespace EntityStates.RiskyMod.Mage.Weapon
         {
 			Ray aimRay = base.GetAimRay();
 			Vector3 aimPos = aimRay.origin + aimRay.direction * maxDistance;
-			RaycastHit raycastHit;
-			if (Physics.Raycast(aimRay, out raycastHit, maxDistance, LayerIndex.world.mask | LayerIndex.defaultLayer.mask | LayerIndex.entityPrecise.mask))
+			RaycastHit raycastHit = default(RaycastHit);
+			if (Util.CharacterRaycast(base.gameObject, aimRay, out raycastHit, maxDistance, LayerIndex.CommonMasks.bullet, QueryTriggerInteraction.UseGlobal))
 			{
 				aimPos = raycastHit.point;
 			}
 
-            BlastAttack blastAttack = new BlastAttack
+			EffectData effectData = new EffectData();
+			effectData.rotation = Util.QuaternionSafeLookRotation(Vector3.up);
+			effectData.origin = aimPos;
+			effectData.scale = blastRadius * 0.75F;	//VFX is huge for some reason
+			EffectManager.SpawnEffect(blastEffectPrefab, effectData, true);
+
+			BlastAttack blastAttack = new BlastAttack
             {
                 radius = blastRadius,	
                 procCoefficient = 1f,
@@ -168,13 +171,13 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 
 		//for the guaranteed blastAttack
 		public static GameObject hitEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MageIceExplosion.prefab").WaitForCompletion();
-		//public static GameObject blastEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MageIceExplosion.prefab").WaitForCompletion();
+		public static GameObject blastEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/OmniImpactVFXFrozen.prefab").WaitForCompletion();
 
-		public static float blastRadius = 12f;//Ion Surge is 14f
-		public static float blastJumpRadius = 12f;
+		public static float blastRadius = 8f;//Ion Surge is 14f
+		public static float blastJumpRadius = 14f;
 
 		public static float blastForce = 3000f;
-		public static Vector3 additionalForce = 500f * Vector3.up;
+		public static Vector3 additionalForce = 400f * Vector3.up;
 
 		private float duration;
 		private float stopwatch;

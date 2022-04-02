@@ -621,8 +621,10 @@ namespace RiskyMod
             MageCore.modifyPlasmaBolt = Config.Bind(mageString, "Plasma Bolt Changes", true, "Enable changes to this skill.").Value;
             MageCore.m2RemoveNanobombGravity = Config.Bind(mageString, "Nanobomb - Remove Gravity", true, "Removes projectile drop from Nanobomb so it behaves like it did pre-1.0 update.").Value;
             MageCore.flamethrowerSprintCancel = Config.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
-            MageCore.ionSurgeMovementScaling = Config.Bind(mageString, "Ion Surge - Movement Scaling", false, "Ion Surge jump height scales with movement speed.").Value;
-            MageCore.ionSurgeShock = Config.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
+            MageCore.ionSurgeMovementScaling = Config.Bind(mageString, "Vanilla Ion Surge - Movement Scaling", false, "Ion Surge jump height scales with movement speed.").Value;
+            MageCore.ionSurgeShock = Config.Bind(mageString, "Vanilla Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
+            MageCore.iceWallRework = Config.Bind(mageString, "Snapfreeze Rework", true, "Adds blast jumping to Snapfreeze.").Value;
+            MageCore.ionSurgeRework = Config.Bind(mageString, "Ion Surge Rework", true, "Moves Ion Surge to the Utility slot and changes it into a blast jumping skill.").Value;
 
             MercCore.enabled = Config.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             MercCore.modifyStats = Config.Bind(mercString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
