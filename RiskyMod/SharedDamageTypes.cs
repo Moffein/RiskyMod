@@ -1,6 +1,8 @@
 ﻿using R2API;
 using RiskyMod.SharedHooks;
 using RoR2;
+using RoR2.Orbs;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RiskyMod
@@ -15,13 +17,13 @@ namespace RiskyMod
 
         public static DamageAPI.ModdedDamageType InterruptOnHit;
 
+        public static DamageAPI.ModdedDamageType Slow50For5s;
+
         public static DamageAPI.ModdedDamageType Blight7s;
         public static DamageAPI.ModdedDamageType Poison7s;
 
         public static DamageAPI.ModdedDamageType CrocoBiteHealOnKill;
         public static GameObject medkitEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect");
-
-        public static DamageAPI.ModdedDamageType IgniteLevelScaled;
 
         public static DamageAPI.ModdedDamageType AlwaysIgnite;   //Used for Molten Perforator due to not proccing
 
@@ -38,9 +40,9 @@ namespace RiskyMod
             Poison7s = DamageAPI.ReserveDamageType();
             CrocoBiteHealOnKill = DamageAPI.ReserveDamageType();
 
-            IgniteLevelScaled = DamageAPI.ReserveDamageType();
-
             AlwaysIgnite = DamageAPI.ReserveDamageType();
+
+            Slow50For5s = DamageAPI.ReserveDamageType();
 
             TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
             TakeDamage.ModifyInitialDamageActions += ApplyAntiFlyingForce;
@@ -48,10 +50,9 @@ namespace RiskyMod
             OnHitEnemy.OnHitNoAttackerActions += ApplyInterruptOnHit;
             OnHitEnemy.OnHitNoAttackerActions += ApplyBlight7s;
             OnHitEnemy.OnHitNoAttackerActions += ApplyPoison7s;
+            OnHitEnemy.OnHitNoAttackerActions += ApplySlow50For5s;
 
-            OnHitEnemy.OnHitAttackerActions += SawBarrierOnHit;
-
-            OnHitEnemy.OnHitAttackerActions += ApplyIgniteLevelScaled;
+            OnHitEnemy.OnHitAttackerActions += ApplySawBarrierOnHit;
 
             TakeDamage.OnDamageTakenAttackerActions += ApplyAlwaysIgnite;
         }
@@ -97,34 +98,6 @@ namespace RiskyMod
                     }
                     damageInfo.force = 330f * direction;
                 }
-            }
-        }
-
-        //I dislike how this is reliant on specific enemy types and acts as an exception to the game mechanics.
-        private static void ApplyIgniteLevelScaled(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
-        {
-            if (damageInfo.HasModdedDamageType(SharedDamageTypes.IgniteLevelScaled))
-            {
-                float burnDuration = 4f * damageInfo.procCoefficient; //4s is default ignite, 6s needed to always be able to kill Wisps with burn damage alone
-                float damageMult = 1f;
-
-                //!victimBody.isChampion //Only works on non-bosses
-                if (victimBody.baseMaxHealth <= 100f)    //Only works on Wisps/Jellyfish/Beetles/Lemurians/Hermit Crabs
-                {
-                    burnDuration *= 1.5f;
-                    //Downscale damage to attacker's base damage
-                    //This may lose some additive damage bonuses but that shouldn't be too noticeable
-                    damageMult = 1f / (1f + 0.2f * (attackerBody.level - 1f));
-
-                    //Scale up damage based on enemy level
-                    float targetLevel = Mathf.Max(victimBody.level, attackerBody.level);
-                    damageMult *= 1f + 0.3f * (targetLevel - 1f);
-
-                    //1.12 is breakpoint for 2shotting Beetles/Lemurians
-                    damageMult = Mathf.Max(1.15f * damageMult, 1f);
-                }
-
-                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Burn, burnDuration, damageMult);
             }
         }
 
@@ -179,7 +152,7 @@ namespace RiskyMod
             }
         }
 
-        private void SawBarrierOnHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
+        private static void ApplySawBarrierOnHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
         {
             if (damageInfo.HasModdedDamageType(SawBarrier))
             {
@@ -187,6 +160,14 @@ namespace RiskyMod
                 {
                     attackerBody.healthComponent.AddBarrier(attackerBody.healthComponent.fullCombinedHealth * 0.006f);
                 }
+            }
+        }
+
+        private static void ApplySlow50For5s(DamageInfo damageInfo, CharacterBody victimBody)
+        {
+            if (damageInfo.HasModdedDamageType(Slow50For5s))
+            {
+                victimBody.AddTimedBuff(RoR2Content.Buffs.Slow50, 5f);
             }
         }
     }

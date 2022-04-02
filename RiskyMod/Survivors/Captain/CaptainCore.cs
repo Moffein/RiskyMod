@@ -2,6 +2,7 @@
 using EntityStates;
 using R2API;
 using RoR2;
+using RoR2.Projectile;
 using RoR2.Skills;
 using UnityEngine;
 
@@ -12,6 +13,9 @@ namespace RiskyMod.Survivors.Captain
         public static bool enabled = true;
         public static bool enablePrimarySkillChanges = true;
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CaptainBody");
+
+        public static bool modifyTaser = true;
+        public static bool nukeBuff = true;
 
         public CaptainCore()
         {
@@ -31,6 +35,8 @@ namespace RiskyMod.Survivors.Captain
         private void ModifySkills(SkillLocator sk)
         {
             ModifyPrimaries(sk);
+            ModifySecondaries(sk);
+            ModifyUtilities(sk);
         }
 
         private void ModifyPrimaries(SkillLocator sk)
@@ -66,6 +72,37 @@ namespace RiskyMod.Survivors.Captain
             Content.Content.skillDefs.Add(shotgunDef);
             Skills.Shotgun = shotgunDef;
             sk.primary._skillFamily.variants[0].skillDef = Skills.Shotgun;
+        }
+
+        private void ModifySecondaries(SkillLocator sk)
+        {
+            if (modifyTaser)
+            {
+                GameObject taserPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CaptainTazer").InstantiateClone("RiskyModCaptainTazer", true);
+                DamageAPI.ModdedDamageTypeHolderComponent mdc = taserPrefab.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+                mdc.Add(SharedDamageTypes.Slow50For5s);
+
+                ProjectileDamage pd = taserPrefab.GetComponent<ProjectileDamage>();
+                pd.damageType = DamageType.SlowOnHit | DamageType.Shock5s;  //Redundant slowonhit so that death mark triggers cleanly
+
+                ProjectileImpactExplosion pie = taserPrefab.GetComponent<ProjectileImpactExplosion>();
+                pie.blastRadius = 8f;
+
+                Content.Content.projectilePrefabs.Add(taserPrefab);
+
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Captain.Weapon.FireTazer", "projectilePrefab", taserPrefab);
+                sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CAPTAIN_SECONDARY_DESC_RISKYMOD";
+            }
+        }
+
+        private void ModifyUtilities(SkillLocator sk)
+        {
+            if (nukeBuff)
+            {
+                GameObject nukePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CaptainAirstrikeAltProjectile");
+                ProjectileImpactExplosion pie = nukePrefab.GetComponent<ProjectileImpactExplosion>();
+                pie.blastProcCoefficient = 3f;
+            }
         }
     }
 
