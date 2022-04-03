@@ -4,6 +4,7 @@ using RoR2;
 using RoR2.Orbs;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RiskyMod
 {
@@ -28,6 +29,8 @@ namespace RiskyMod
         public static DamageAPI.ModdedDamageType AlwaysIgnite;   //Used for Molten Perforator due to not proccing
 
 
+        public static DamageAPI.ModdedDamageType RepeatHit;
+
         public SharedDamageTypes()
         {
             InterruptOnHit = DamageAPI.ReserveDamageType();
@@ -44,6 +47,8 @@ namespace RiskyMod
 
             Slow50For5s = DamageAPI.ReserveDamageType();
 
+            RepeatHit = DamageAPI.ReserveDamageType();
+
             TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
             TakeDamage.ModifyInitialDamageActions += ApplyAntiFlyingForce;
 
@@ -53,6 +58,7 @@ namespace RiskyMod
             OnHitEnemy.OnHitNoAttackerActions += ApplySlow50For5s;
 
             OnHitEnemy.OnHitAttackerActions += ApplySawBarrierOnHit;
+            OnHitEnemy.OnHitAttackerActions += ApplyRepeatHit;
 
             TakeDamage.OnDamageTakenAttackerActions += ApplyAlwaysIgnite;
         }
@@ -168,6 +174,96 @@ namespace RiskyMod
             if (damageInfo.HasModdedDamageType(Slow50For5s))
             {
                 victimBody.AddTimedBuff(RoR2Content.Buffs.Slow50, 5f);
+            }
+        }
+
+        private static void ApplyRepeatHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
+        {
+            if (damageInfo.HasModdedDamageType(RepeatHit))
+            {
+                RepeatHitComponent rhc = victimBody.gameObject.AddComponent<RepeatHitComponent>();
+                rhc.attackerBody = attackerBody;
+                rhc.victimBody = victimBody;
+                rhc.damage = damageInfo.damage;
+                rhc.procCoefficient = damageInfo.procCoefficient;
+                rhc.damageColor = damageInfo.damageColorIndex;
+                rhc.damageType = damageInfo.damageType;
+                rhc.crit = damageInfo.crit;
+                rhc.baseHitCount = 4;
+                rhc.baseHitDuration = 0.3f;
+                rhc.effectRadius = 2.5f;
+                rhc.effectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
+            }
+        }
+    }
+
+    public class RepeatHitComponent : MonoBehaviour
+    {
+        public CharacterBody victimBody;
+        public CharacterBody attackerBody;
+        public float damage;
+        public float procCoefficient;
+        public DamageType damageType;
+        public bool crit;
+        public DamageColorIndex damageColor;
+
+        public int baseHitCount = 4; //+1 from initial hit
+        public float baseHitDuration = 0.3f;
+
+        public GameObject effectPrefab;
+        public float effectRadius = 1f;
+
+        private int hitCount;
+        private float stopwatch;
+
+        public void Awake()
+        {
+            hitCount = 0;
+            stopwatch = 0f;
+        }
+
+        public void FixedUpdate()
+        {
+            stopwatch += Time.fixedDeltaTime;
+            if (stopwatch >= baseHitDuration)
+            {
+                stopwatch -= baseHitDuration;
+                ApplyHit();
+            }
+        }
+
+        public void ApplyHit()
+        {
+            hitCount++;
+
+            //The only way this can get applied is via a NetworkServer.active locked check, but just to be safe.
+            if (NetworkServer.active && victimBody.healthComponent)
+            {
+                if (effectPrefab)
+                {
+                    EffectData ed = new EffectData();
+                    ed.origin = victimBody.corePosition;
+                    ed.scale = effectRadius;
+                    EffectManager.SpawnEffect(EffectCatalog.FindEffectIndexFromPrefab(effectPrefab), ed, true);
+                }
+
+                DamageInfo di = new DamageInfo
+                {
+                    attacker = attackerBody.gameObject,
+                    inflictor = attackerBody.gameObject,
+                    crit = crit,
+                    damage = damage,
+                    damageType = damageType,
+                    damageColorIndex = damageColor,
+                    dotIndex = DotController.DotIndex.None,
+                    force = Vector3.zero,
+                    canRejectForce = true,
+                    position = victimBody.corePosition,
+                    procChainMask = default,
+                    procCoefficient = procCoefficient
+                };
+                victimBody.healthComponent.TakeDamage(di);
+                GlobalEventManager.instance.OnHitEnemy(di, victimBody.gameObject);
             }
         }
     }

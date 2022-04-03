@@ -52,6 +52,9 @@ namespace RiskyMod.Survivors.Mage
 
         private void ModifyPrimaries(SkillLocator sk)
         {
+            //Range increase always gets run now
+            new M1Projectiles();
+
             if (m1AttackSpeed)
             {
                 MageStockController.fireMuzzleflashEffectPrefab = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Mage.Weapon.FireFireBolt", "muzzleflashEffectPrefab");
@@ -84,7 +87,7 @@ namespace RiskyMod.Survivors.Mage
                     if (modifyFireBolt)
                     {
                         sk.primary.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD";
-                        SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireFireBolt", "damageCoefficient", "3");
+                        M1Projectiles.ModifyFireBolt();
                     }
                 }
                 else if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireLightningBolt))
@@ -102,7 +105,6 @@ namespace RiskyMod.Survivors.Mage
                     }
                 }
             }
-            new M1Projectiles();
         }
 
         private void ModifySecondaries(SkillLocator sk)

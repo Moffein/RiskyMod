@@ -616,7 +616,6 @@ namespace RiskyMod
             TurretChanges.mobileTurretChanges = Config.Bind(engiString, "Mobile Turret Changes", true, "Enable changes to Mobile Turrets.").Value;
 
             MageCore.enabled = Config.Bind(mageString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            M1Projectiles.increaseRange = Config.Bind(mageString, "Primary Range Increase", true, "Primary projectiles no longer disappear mid-flight.").Value;
             MageCore.modifyFireBolt = Config.Bind(mageString, "Fire Bolt Changes", true, "Enable changes to this skill.").Value;
             MageCore.modifyPlasmaBolt = Config.Bind(mageString, "Plasma Bolt Changes", true, "Enable changes to this skill.").Value;
             MageCore.m2RemoveNanobombGravity = Config.Bind(mageString, "Nanobomb - Remove Gravity", true, "Removes projectile drop from Nanobomb so it behaves like it did pre-1.0 update.").Value;

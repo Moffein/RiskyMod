@@ -17,6 +17,8 @@ namespace RiskyMod.Survivors.Captain
         public static bool modifyTaser = true;
         public static bool nukeBuff = true;
 
+        public static bool beaconRework = true;
+
         public CaptainCore()
         {
             if (!enabled) return;
@@ -37,6 +39,7 @@ namespace RiskyMod.Survivors.Captain
             ModifyPrimaries(sk);
             ModifySecondaries(sk);
             ModifyUtilities(sk);
+            ModifyBeacons(sk);
         }
 
         private void ModifyPrimaries(SkillLocator sk)
@@ -102,6 +105,14 @@ namespace RiskyMod.Survivors.Captain
                 GameObject nukePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CaptainAirstrikeAltProjectile");
                 ProjectileImpactExplosion pie = nukePrefab.GetComponent<ProjectileImpactExplosion>();
                 pie.blastProcCoefficient = 3f;
+            }
+        }
+
+        private void ModifyBeacons(SkillLocator sk)
+        {
+            if (beaconRework)
+            {
+                new BeaconRework(sk);
             }
         }
     }
