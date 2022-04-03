@@ -19,6 +19,8 @@ namespace RiskyMod.Survivors.Captain
 
         public static bool beaconRework = true;
 
+        public static BodyIndex CaptainIndex;
+
         public CaptainCore()
         {
             if (!enabled) return;
@@ -31,6 +33,12 @@ namespace RiskyMod.Survivors.Captain
                 orig(self);
                 ChargeShotgun.chargeupVfxPrefab = EntityStates.Captain.Weapon.ChargeCaptainShotgun.chargeupVfxPrefab;
                 ChargeShotgun.holdChargeVfxPrefab = EntityStates.Captain.Weapon.ChargeCaptainShotgun.holdChargeVfxPrefab;
+            };
+
+            On.RoR2.BodyCatalog.Init += (orig) =>
+            {
+                orig();
+                CaptainIndex = BodyCatalog.FindBodyIndex("CaptainBody");
             };
         }
 

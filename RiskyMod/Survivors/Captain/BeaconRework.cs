@@ -40,6 +40,16 @@ namespace RiskyMod.Survivors.Captain
                     return beacon;
                 });
             };
+
+            On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
+            {
+                orig(self);
+                if (self.bodyIndex == CaptainCore.CaptainIndex)
+                {
+                    self.skillLocator.FindSkill("SupplyDrop1").SetBonusStockFromBody(self.skillLocator.special.bonusStockFromBody);
+                    self.skillLocator.FindSkill("SupplyDrop2").SetBonusStockFromBody(self.skillLocator.special.bonusStockFromBody);
+                }
+            };
         }
 
         private void AddCooldown(string address)
@@ -61,16 +71,16 @@ namespace RiskyMod.Survivors.Captain
 
     public class CaptainDeployableManager : MonoBehaviour
     {
-        private SkillLocator skillLocator;
-        private CharacterBody body;
+        public SkillLocator skillLocator;
+        public CharacterBody body;
 
-        private GenericSkill Beacon1;
-        private GenericSkill Beacon2;
+        public GenericSkill Beacon1;
+        public GenericSkill Beacon2;
 
-        private Queue<GameObject> Beacon1Deployables;
-        private Queue<GameObject> Beacon2Deployables;
+        public Queue<GameObject> Beacon1Deployables;
+        public Queue<GameObject> Beacon2Deployables;
 
-        public void Awake()
+        private void Awake()
         {
             body = base.GetComponent<CharacterBody>();
             skillLocator = base.GetComponent<SkillLocator>();
@@ -84,6 +94,7 @@ namespace RiskyMod.Survivors.Captain
 
         public void AddBeacon(GameObject newBeacon, GenericSkill skill)
         {
+            if (!NetworkServer.active) return;  //Beacons being instantiated/deleted are server-side.
             int maxBeacons = Math.Min(skillLocator.special.maxStock, 2);
             if (skill == Beacon1)
             {
@@ -103,6 +114,18 @@ namespace RiskyMod.Survivors.Captain
                     UnityEngine.Object.Destroy(toRemove);
                 }
                 Beacon2Deployables.Enqueue(newBeacon);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            while (Beacon1Deployables.Count > 0)
+            {
+                UnityEngine.Object.Destroy(Beacon1Deployables.Dequeue());
+            }
+            while (Beacon2Deployables.Count > 0)
+            {
+                UnityEngine.Object.Destroy(Beacon2Deployables.Dequeue());
             }
         }
     }
