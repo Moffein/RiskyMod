@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using EntityStates.CaptainDefenseMatrixItem;
 using EntityStates;
+using MonoMod.RuntimeDetour;
+using R2API.Utils;
 
 namespace RiskyMod.Survivors.Captain
 {
@@ -69,6 +71,15 @@ namespace RiskyMod.Survivors.Captain
 				}
 				return result;
 			};
-        }
+
+			var getMicrobotRechargeFrequency =
+				new Hook(typeof(EntityStates.CaptainDefenseMatrixItem.DefenseMatrixOn).GetMethodCached("get_rechargeFrequency"), typeof(Microbots).GetMethodCached(nameof(MicrobotsAttackSpeedHook)));
+		}
+
+		private static float MicrobotsAttackSpeedHook(EntityStates.CaptainDefenseMatrixItem.DefenseMatrixOn self)
+        {
+			return DefenseMatrixOn.baseRechargeFrequency;
+
+		}
     }
 }

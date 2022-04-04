@@ -120,6 +120,7 @@ namespace RiskyMod.Items.Common
             {
                 if (self.body != attackerBody
                     && damageInfo.procCoefficient > 0f
+                    && damageInfo.damage > 0f
                     && !damageInfo.HasModdedDamageType(Crowbar.CrowbarDamage))
                 {
                     if (Crowbar.crowbarManager.CanApplyCrowbar(self, attackerBody))

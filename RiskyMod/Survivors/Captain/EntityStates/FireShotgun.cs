@@ -49,6 +49,7 @@ namespace EntitiyStates.RiskyMod.Captain
 			base.ModifyBullet(bulletAttack);
 			bulletAttack.minSpread = 0f;	//Needs to be 0 or else weird things happen. Why isn't this vanilla?
 			bulletAttack.bulletCount = (uint)Mathf.FloorToInt((this.bulletCount * Mathf.Max(this.attackSpeedStat, 1f)));
+			bulletAttack.force = this.force * Mathf.Sqrt(bulletCount / 7f);
 			if (tight)
 			{
 				bulletAttack.falloffModel = BulletAttack.FalloffModel.None;

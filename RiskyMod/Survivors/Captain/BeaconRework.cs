@@ -56,7 +56,7 @@ namespace RiskyMod.Survivors.Captain
         {
             SkillDef sd = Addressables.LoadAssetAsync<SkillDef>(address).WaitForCompletion();
             sd.rechargeStock = 1;
-            sd.baseRechargeInterval = 30f;
+            sd.baseRechargeInterval = 40f;
             sd.baseMaxStock = 1;
             sd.beginSkillCooldownOnSkillEnd = false;
 
@@ -80,6 +80,8 @@ namespace RiskyMod.Survivors.Captain
         public Queue<GameObject> Beacon1Deployables;
         public Queue<GameObject> Beacon2Deployables;
 
+        public static bool allowLysateStack = false;
+
         private void Awake()
         {
             body = base.GetComponent<CharacterBody>();
@@ -95,7 +97,8 @@ namespace RiskyMod.Survivors.Captain
         public void AddBeacon(GameObject newBeacon, GenericSkill skill)
         {
             if (!NetworkServer.active) return;  //Beacons being instantiated/deleted are server-side.
-            int maxBeacons = Math.Min(skillLocator.special.maxStock, 2);
+            int maxBeacons = skillLocator.special.maxStock;
+            if (!allowLysateStack && maxBeacons >= 2) maxBeacons = 2;
             if (skill == Beacon1)
             {
                 if(Beacon1Deployables.Count >= maxBeacons)
