@@ -26,6 +26,26 @@ namespace RiskyMod.Items.Uncommon
             {
                 pickupTrigger.transform.localScale *= 2f;
             }
+
+            On.RoR2.GenericSkill.ApplyAmmoPack += (orig, self) =>
+            {
+                if (self.stock < self.maxStock && self.skillName != "SupplyDrop1" && self.skillName != "SupplyDrop2")   //Prevent captain from refilling his own beacons
+                {
+                    if (self.characterBody && self.characterBody.skillLocator && self == self.characterBody.skillLocator.primary)
+                    {
+                        self.Reset();
+                    }
+                    else
+                    {
+                        self.stock += self.rechargeStock;
+                    }
+
+                    if (self.stock > self.maxStock)
+                    {
+                        self.stock = self.maxStock;
+                    }
+                }
+            };
         }
     }
 }

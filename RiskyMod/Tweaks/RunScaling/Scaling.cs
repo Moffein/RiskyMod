@@ -89,7 +89,7 @@ namespace RiskyMod.Tweaks.RunScaling
 				}
 			};*/
 
-			On.RoR2.CombatDirector.DirectorMoneyWave.Update += (orig, self, deltaTime, difficultyCoefficient) =>
+			/*On.RoR2.CombatDirector.DirectorMoneyWave.Update += (orig, self, deltaTime, difficultyCoefficient) =>
 			{
 				if (Run.instance.gameModeIndex != simulacrumIndex)
 				{
@@ -98,13 +98,13 @@ namespace RiskyMod.Tweaks.RunScaling
 					difficultyCoefficient *= stageFactor;
 				}
 				return orig(self, deltaTime, difficultyCoefficient);
-			};
+			};*/
 
 			On.RoR2.CombatDirector.Awake += (orig, self) =>
 			{
 				if (Run.instance.gameModeIndex != simulacrumIndex)
 				{
-					self.creditMultiplier *= 1.1f;
+					self.creditMultiplier *= 1.2f;
 				}
 				orig(self);
 			};
@@ -113,7 +113,8 @@ namespace RiskyMod.Tweaks.RunScaling
 			{
 				if (Run.instance.gameModeIndex != simulacrumIndex)
 				{
-					self.goldReward = (uint)Mathf.CeilToInt(Mathf.Pow(self.goldReward, 0.9f) / Mathf.Pow(1.2f, Run.instance.stageClearCount / 5));
+					//self.goldReward = (uint)Mathf.CeilToInt(Mathf.Pow(self.goldReward, 0.9f) / Mathf.Pow(1.2f, Run.instance.stageClearCount / 5));
+					self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * 0.8333333333f);
 				}
 				orig(self, damageReport);
 			};

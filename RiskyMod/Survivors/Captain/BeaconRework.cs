@@ -1,5 +1,6 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using R2API;
 using RoR2;
 using RoR2.Skills;
 using System;
@@ -12,9 +13,15 @@ namespace RiskyMod.Survivors.Captain
 {
     public class BeaconRework
     {
+        public static class Skills
+        {
+            public static SkillDef BeaconResupply;
+        }
+
         public BeaconRework(SkillLocator sk)
         {
-            AddCooldown("RoR2/Base/Captain/CallSupplyDropEquipmentRestock.asset");
+            Skills.BeaconResupply = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropEquipmentRestock.asset").WaitForCompletion();
+            AddCooldown(Skills.BeaconResupply);
             AddCooldown("RoR2/Base/Captain/CallSupplyDropHacking.asset");
             AddCooldown("RoR2/Base/Captain/CallSupplyDropHealing.asset");
             AddCooldown("RoR2/Base/Captain/CallSupplyDropShocking.asset");
@@ -50,22 +57,43 @@ namespace RiskyMod.Survivors.Captain
                     self.skillLocator.FindSkill("SupplyDrop2").SetBonusStockFromBody(self.skillLocator.special.bonusStockFromBody);
                 }
             };
+
+            ModifyBeacons(sk);
         }
 
         private void AddCooldown(string address)
         {
             SkillDef sd = Addressables.LoadAssetAsync<SkillDef>(address).WaitForCompletion();
+            AddCooldown(sd);
+        }
+
+        private void AddCooldown(SkillDef sd)
+        {
             sd.rechargeStock = 1;
             sd.baseRechargeInterval = 40f;
             sd.baseMaxStock = 1;
             sd.beginSkillCooldownOnSkillEnd = false;
 
             On.RoR2.CaptainSupplyDropController.SetSkillOverride +=
-                (On.RoR2.CaptainSupplyDropController.orig_SetSkillOverride orig, CaptainSupplyDropController self, ref SkillDef currentSkillDef, SkillDef newSkillDef, GenericSkill component)  =>
-            {
-                newSkillDef = currentSkillDef;
-                orig(self, ref currentSkillDef, newSkillDef, component);
-            };
+                (On.RoR2.CaptainSupplyDropController.orig_SetSkillOverride orig, CaptainSupplyDropController self, ref SkillDef currentSkillDef, SkillDef newSkillDef, GenericSkill component) =>
+                {
+                    newSkillDef = currentSkillDef;
+                    orig(self, ref currentSkillDef, newSkillDef, component);
+                };
+        }
+
+        private void ModifyBeacons(SkillLocator sk)
+        {
+            //Debug.Log("Shock Radius: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.CaptainSupplyDrop.ShockZoneMainState", "shockRadius"));//10, same as healing
+            ModifyBeaconResupply(sk);
+        }
+
+        private void ModifyBeaconResupply(SkillLocator sk)
+        {
+            GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, EquipmentRestock.prefab");
+            EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
+            esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconResupplyMain));
+            Skills.BeaconResupply.skillDescriptionToken = "CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD";
         }
     }
 

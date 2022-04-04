@@ -2,7 +2,7 @@
 using UnityEngine;
 using EntityStates;
 
-namespace EntitiyStates.RiskyMod.Captain
+namespace EntityStates.RiskyMod.Captain
 {
     public class FireShotgun : GenericBulletBaseState
     {

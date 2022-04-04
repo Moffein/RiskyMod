@@ -4,6 +4,8 @@
 	"CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD" : "Fire a blast of pellets that deal <style=cIsDamage>7x110% damage</style>. Charging narrows the <style=cIsUtility>spread</style>. The number of pellets increases with attack speed.",
 	"CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Fire a fast tazer that <style=cIsUtility>slows</style> and deals <style=cIsDamage>100% damage</style>. Travels farther if bounced.",
 	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "Request a Supply Beacon. Can equip <style=cIsUtility>two</style> types of Beacons.",
+	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Recharge Skills</style> and <style=cIsUtility>reduce Equipment cooldown</style> by <style=cIsUtility>15s</style> on use.",
+	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_INTERACTION_RISKYMOD" : "Take Skill Charge",
 	
 	"BANDIT2_PRIMARY_DESC_RISKYMOD" : "Fire a shotgun burst for <style=cIsDamage>5x90% damage</style>. Can hold up to 4 shells.",
 	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD" : "Fire a rifle blast that pierces for <style=cIsDamage>330% damage</style>. Can hold up to 4 bullets.",

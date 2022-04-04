@@ -1,4 +1,4 @@
-﻿using EntitiyStates.RiskyMod.Captain;
+﻿using EntityStates.RiskyMod.Captain;
 using EntityStates;
 using R2API;
 using RoR2;
