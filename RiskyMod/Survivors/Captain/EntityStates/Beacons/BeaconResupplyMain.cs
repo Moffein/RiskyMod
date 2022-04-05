@@ -34,7 +34,7 @@ namespace EntityStates.RiskyMod.Captain.Beacon
 				{
 					foreach (GenericSkill skill in skills.allSkills)
 					{
-						if (skill.stock < skill.maxStock && skill.name != "SupplyDrop1" && skill.name != "SupplyDrop2")
+						if (skill.stock < skill.maxStock && skill.skillName != "SupplyDrop1" && skill.skillName != "SupplyDrop2")
 						{
 							anySkillUsed = true;
 							break;
