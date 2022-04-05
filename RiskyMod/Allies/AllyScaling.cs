@@ -63,10 +63,6 @@ namespace RiskyMod.Allies
                         {
                             cb.baseDamage = 8.5f; //Shares firing state with Gunner Drones, so needs lower damage. Technically makes drone parts worse on this.
                         }
-                        else if (cb.name == "MegaDroneBody")
-                        {
-                            cb.baseMaxShield += cb.baseMaxHealth * 0.08f;
-                        }
                         else if (cb.name == "Turret1Body")
                         {
                             cb.baseMaxHealth *= 1.2f;
@@ -82,10 +78,11 @@ namespace RiskyMod.Allies
                 if ((ally.tags & AllyTag.Turret) == AllyTag.Turret)
                 {
                     cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
-                    if ((ally.tags & AllyTag.Turret) == AllyTag.Turret)
-                    {
-                        cb.baseMaxShield += cb.baseMaxHealth * 0.08f;
-                    }
+                }
+
+                if ((ally.tags & AllyTag.UseShield) == AllyTag.UseShield)
+                {
+                    cb.baseMaxShield += cb.baseMaxHealth * 0.08f;
                 }
 
                 //Specific Tweaks

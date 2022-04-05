@@ -70,7 +70,7 @@ namespace RiskyMod.Survivors.Captain
         private void AddCooldown(SkillDef sd)
         {
             sd.rechargeStock = 1;
-            sd.baseRechargeInterval = 40f;
+            sd.baseRechargeInterval = 60f;
             sd.baseMaxStock = 1;
             sd.beginSkillCooldownOnSkillEnd = false;
 

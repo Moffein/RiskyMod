@@ -166,8 +166,10 @@ namespace RiskyMod.Allies
                     case "FlameDroneBody":
                     case "EquipmentDroneBody":
                     case "EmergencyDroneBody":
-                    case "MegaDroneBody":
                         ally.tags |= AllyTag.Drone;
+                        break;
+                    case "MegaDroneBody":
+                        ally.tags |= AllyTag.Drone | AllyTag.UseShield;
                         break;
                     case "DroneCommanderBody":
                     case "RoboBallGreenBuddyBody":
@@ -178,7 +180,7 @@ namespace RiskyMod.Allies
                         ally.tags |= AllyTag.Item;
                         break;
                     case "Turret1Body":
-                        ally.tags |= AllyTag.Drone | AllyTag.Turret;
+                        ally.tags |= AllyTag.Drone | AllyTag.Turret | AllyTag.UseShield;
                         break;
                     case "SquidTurretBody":
                         ally.tags |= AllyTag.Item | AllyTag.Turret;
@@ -234,6 +236,7 @@ namespace RiskyMod.Allies
         Drone,  //Benefits from Droneman
         Item,   //Is an item effect
         Turret,  //Resistance to AOE/Proc
-        DontModifyScaling
+        DontModifyScaling,
+        UseShield
     }
 }
