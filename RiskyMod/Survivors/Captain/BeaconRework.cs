@@ -94,6 +94,19 @@ namespace RiskyMod.Survivors.Captain
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
             esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconResupplyMain));
             Skills.BeaconResupply.skillDescriptionToken = "CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD";
+
+            //Prevent beacons from benefiting from Resupply cooldown reduction
+            On.RoR2.SkillLocator.DeductCooldownFromAllSkillsAuthority += (orig, self, deduction) =>
+            {
+                for (int i = 0; i < self.allSkills.Length; i++)
+                {
+                    GenericSkill genericSkill = self.allSkills[i];
+                    if (genericSkill.stock < genericSkill.maxStock && genericSkill.skillName != "SupplyDrop1" && genericSkill.skillName != "SupplyDrop2")
+                    {
+                        genericSkill.rechargeStopwatch += deduction;
+                    }
+                }
+            };
         }
     }
 

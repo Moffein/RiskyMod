@@ -39,9 +39,10 @@ namespace RiskyMod.Items.Uncommon
 				c.GotoNext(MoveType.After,
 					 x => x.MatchLdsfld(typeof(RoR2Content.Items), "Missile")
 					);
+				c.Emit(OpCodes.Ldloc, 1); //victimBody
 				c.Emit(OpCodes.Ldloc, 4); //master
 				c.Emit(OpCodes.Ldarg_1);	//damageinfo
-				c.EmitDelegate<Func<ItemDef, CharacterMaster, DamageInfo, ItemDef>>((item, master, damageInfo) =>
+				c.EmitDelegate<Func<ItemDef, CharacterBody, CharacterMaster, DamageInfo, ItemDef>>((item, victimBody, master, damageInfo) =>
 				{
 					if (useOrb && master.teamIndex == TeamIndex.Player)
 					{
@@ -51,12 +52,17 @@ namespace RiskyMod.Items.Uncommon
 						}
 						else
 						{
-							CharacterBody cb = master.GetBody();
-							if (cb)
+							//Don't fire orb if victim is dead, since it won't hit.
+							bool victimIsAlive = victimBody && victimBody.healthComponent && victimBody.healthComponent.alive;
+							if (victimIsAlive)
 							{
-								if (damageInfo.damage / cb.damage < projectileDamageTreshold)
+								CharacterBody cb = master.GetBody();
+								if (cb)
 								{
-									item = RiskyMod.emptyItemDef;
+									if (damageInfo.damage / cb.damage < projectileDamageTreshold)
+									{
+										item = RiskyMod.emptyItemDef;
+									}
 								}
 							}
 						}

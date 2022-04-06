@@ -29,7 +29,7 @@ namespace RiskyMod.Items.Uncommon
 
             On.RoR2.GenericSkill.ApplyAmmoPack += (orig, self) =>
             {
-                if (self.stock < self.maxStock && self.skillName != "SupplyDrop1" && self.skillName != "SupplyDrop2")   //Prevent captain from refilling his own beacons
+                if (self.stock < self.maxStock)   // && self.skillName != "SupplyDrop1" && self.skillName != "SupplyDrop2"
                 {
                     if (self.characterBody && self.characterBody.skillLocator && self == self.characterBody.skillLocator.primary)
                     {
