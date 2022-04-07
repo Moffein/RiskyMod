@@ -183,11 +183,11 @@ namespace RiskyMod
                 List<HealthComponent> bouncedObjects = new List<HealthComponent>();
                 bouncedObjects.Add(victimBody.healthComponent);
 
-                int targets = 2;
+                int initialTargets = 7; //Since the range is smaller than Epidemic, add more initial targets.
                 float range = 12f;
 
                 //Need to individually find all targets for the first bounce.
-                for (int i = 0; i < targets; i++)
+                for (int i = 0; i < initialTargets; i++)
                 {
                     LightningOrb taserLightning = new LightningOrb
                     {

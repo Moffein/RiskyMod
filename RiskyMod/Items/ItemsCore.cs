@@ -1,5 +1,6 @@
 ﻿using RiskyMod.Items.Boss;
 using RiskyMod.Items.Common;
+using RiskyMod.Items.DLC1.Common;
 using RiskyMod.Items.DLC1.Legendary;
 using RiskyMod.Items.DLC1.Uncommon;
 using RiskyMod.Items.DLC1.Void;
@@ -58,6 +59,8 @@ namespace RiskyMod.Items
             new TougherTimes();
             new CautiousSlug();
             new Bungus();
+
+            new DelicateWatch();
         }
 
         private void ModifyUncommon()

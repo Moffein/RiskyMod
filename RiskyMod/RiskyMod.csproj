@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Items\DLC1\Common\" />
     <Folder Include="Items\DLC1\Lunar\" />
     <Folder Include="Survivors\Captain\Components\" />
   </ItemGroup>

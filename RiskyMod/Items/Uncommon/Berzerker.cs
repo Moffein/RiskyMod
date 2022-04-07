@@ -65,8 +65,8 @@ namespace RiskyMod.Items.Uncommon
             int berzerkCount = sender.GetBuffCount(Berzerker.berzerkBuff);
             if (berzerkCount > 0)
             {
-                args.moveSpeedMultAdd += 0.1f * berzerkCount;
-                args.attackSpeedMultAdd += 0.15f * berzerkCount;
+                args.moveSpeedMultAdd += 0.12f * berzerkCount;
+                args.attackSpeedMultAdd += 0.12f * berzerkCount;
             }
         }
 
