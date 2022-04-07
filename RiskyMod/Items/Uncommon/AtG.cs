@@ -143,7 +143,7 @@ namespace RiskyMod.Items.Uncommon
 										search.teamMaskFilter = TeamMask.GetEnemyTeams(attackerBody.teamComponent.teamIndex);
 										search.filterByLoS = false;
 										search.searchOrigin = attackerBody.aimOrigin;
-										search.sortMode = BullseyeSearch.SortMode.Distance;
+										search.sortMode = BullseyeSearch.SortMode.Angle;
 										search.maxDistanceFilter = 1000f;
 										search.maxAngleFilter = 360f;
 										search.RefreshCandidates();

@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 using R2API;
+using RiskyMod.Survivors.Toolbot;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -30,9 +31,15 @@ namespace RiskyMod.Items.Uncommon
             On.RoR2.GenericSkill.ApplyAmmoPack += (orig, self) =>
             {
                 orig(self);
-                if (self.characterBody && self.characterBody.skillLocator && self == self.characterBody.skillLocator.primary)
+                if (self.characterBody)
                 {
-                    self.Reset();
+                    bool isPrimary = self.characterBody.skillLocator && self == self.characterBody.skillLocator.primary;
+                    bool isToolbotAkimbo = (ToolbotCore.enablePowerModeChanges && self.characterBody.HasBuff(ToolbotCore.PowerModeBuff)) || (!ToolbotCore.enablePowerModeChanges && self.characterBody.HasBuff(RoR2Content.Buffs.SmallArmorBoost));
+                    isToolbotAkimbo = isToolbotAkimbo && self.skillName == "StunDrone";
+                    if (isPrimary || isToolbotAkimbo)
+                    {
+                        self.Reset();
+                    }
                 }
             };
         }
