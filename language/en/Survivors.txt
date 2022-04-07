@@ -2,7 +2,7 @@
 	strings:
 	{
 	"CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD" : "Fire a blast of pellets that deal <style=cIsDamage>7x110% damage</style>. Charging narrows the <style=cIsUtility>spread</style>. The number of pellets increases with attack speed.",
-	"CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Fire a fast tazer that <style=cIsUtility>slows</style> and deals <style=cIsDamage>100% damage</style>. Travels farther if bounced.",
+	"CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Fire a fast tazer that deals <style=cIsDamage>100% damage</style>. Spreads to nearby targets.",
 	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "Request a Supply Beacon. Can equip <style=cIsUtility>two</style> types of Beacons.",
 	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Reduce all Skill and Equipment cooldowns</style> by <style=cIsUtility>12s</style> on use.",
 	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_INTERACTION_RISKYMOD" : "Take Skill Charge",
@@ -67,7 +67,7 @@
 	"MAGE_SPECIAL_FIRE_DESCRIPTION_RISKYMOD" : "Burn all enemies in front of you for <style=cIsDamage>20x100% damage</style>. The number of shots increases with attack speed.",
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Burst into the sky, dealing <style=cIsDamage>800% damage</style>.",
 	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Freezing</style>. Create a barrier that hurts enemies for <style=cIsDamage>100% damage</style> and <style=cIsUtility>pushes</style> you away.",
-	"MAGE_UTILITY_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Shocking</style>. Create a <style=cIsUtility>slowing</style> electric surge that deals <style=cIsDamage>800% damage</style> and <style=cIsUtility>pushes</style> you away.",
+	"MAGE_UTILITY_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Shocking</style>. Create an electric surge that deals <style=cIsDamage>800% damage</style> and <style=cIsUtility>pushes</style> you away.",
 	
 	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Throw a <style=cIsUtility>Magnetic</style> pylon that <style=cIsDamage>zaps</style> up to <style=cIsDamage>6</style> nearby enemies for <style=cIsDamage>70% damage</style>. Can be <style=cIsUtility>grappled</style>.",
 	

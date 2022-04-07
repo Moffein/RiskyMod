@@ -10,8 +10,8 @@ namespace EntityStates.RiskyMod.Captain
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			this.minChargeDuration = baseMinChargeDuration; // this.attackSpeedStat;
-			this.chargeDuration = baseChargeDuration; // this.attackSpeedStat;
+			this.minChargeDuration = baseMinChargeDuration/this.attackSpeedStat; // this.attackSpeedStat;
+			this.chargeDuration = baseChargeDuration/this.attackSpeedStat; // this.attackSpeedStat;
 			base.PlayCrossfade("Gesture, Override", "ChargeCaptainShotgun", "ChargeCaptainShotgun.playbackRate", this.chargeDuration, 0.1f);
 			base.PlayCrossfade("Gesture, Additive", "ChargeCaptainShotgun", "ChargeCaptainShotgun.playbackRate", this.chargeDuration, 0.1f);
 			this.muzzleTransform = base.FindModelChild(muzzleName);

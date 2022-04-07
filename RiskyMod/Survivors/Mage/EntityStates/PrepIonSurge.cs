@@ -120,7 +120,6 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 				damageType = DamageType.Shock5s,
 				attackerFiltering = AttackerFiltering.NeverHitSelf
 			};
-			blastAttack.AddModdedDamageType(SharedDamageTypes.Slow50For5s);
 			blastAttack.Fire();
 
 			if (base.characterMotor && !base.characterMotor.isGrounded && base.characterBody)

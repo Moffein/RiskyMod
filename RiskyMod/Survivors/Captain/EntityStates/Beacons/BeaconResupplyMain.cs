@@ -19,6 +19,7 @@ namespace EntityStates.RiskyMod.Captain.Beacon
 			return Language.GetString("CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_INTERACTION_RISKYMOD");
 		}
 
+		//How does this work online?
 		public override Interactability GetInteractability(Interactor activator)
 		{
 			bool anySkillUsed = false;

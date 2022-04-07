@@ -23,13 +23,12 @@ namespace RiskyMod
         public static DamageAPI.ModdedDamageType Blight7s;
         public static DamageAPI.ModdedDamageType Poison7s;
 
+        public static DamageAPI.ModdedDamageType CaptainTaserSource;
+
         public static DamageAPI.ModdedDamageType CrocoBiteHealOnKill;
         public static GameObject medkitEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect");
 
         public static DamageAPI.ModdedDamageType AlwaysIgnite;   //Used for Molten Perforator due to not proccing
-
-
-        public static DamageAPI.ModdedDamageType RepeatHit;
 
         public SharedDamageTypes()
         {
@@ -46,8 +45,8 @@ namespace RiskyMod
             AlwaysIgnite = DamageAPI.ReserveDamageType();
 
             Slow50For5s = DamageAPI.ReserveDamageType();
-
-            RepeatHit = DamageAPI.ReserveDamageType();
+            
+            CaptainTaserSource = DamageAPI.ReserveDamageType();
 
             TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
             TakeDamage.ModifyInitialDamageActions += ApplyAntiFlyingForce;
@@ -58,7 +57,7 @@ namespace RiskyMod
             OnHitEnemy.OnHitNoAttackerActions += ApplySlow50For5s;
 
             OnHitEnemy.OnHitAttackerActions += ApplySawBarrierOnHit;
-            OnHitEnemy.OnHitAttackerActions += ApplyRepeatHit;
+            OnHitEnemy.OnHitAttackerActions += ApplyCaptainTaserSource;
 
             TakeDamage.OnDamageTakenAttackerActions += ApplyAlwaysIgnite;
         }
@@ -177,22 +176,50 @@ namespace RiskyMod
             }
         }
 
-        private static void ApplyRepeatHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
+        private static void ApplyCaptainTaserSource(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
         {
-            if (damageInfo.HasModdedDamageType(RepeatHit))
+            if (damageInfo.HasModdedDamageType(SharedDamageTypes.CaptainTaserSource))
             {
-                RepeatHitComponent rhc = victimBody.gameObject.AddComponent<RepeatHitComponent>();
-                rhc.attackerBody = attackerBody;
-                rhc.victimBody = victimBody;
-                rhc.damage = damageInfo.damage;
-                rhc.procCoefficient = damageInfo.procCoefficient;
-                rhc.damageColor = damageInfo.damageColorIndex;
-                rhc.damageType = damageInfo.damageType;
-                rhc.crit = damageInfo.crit;
-                rhc.baseHitCount = 4;
-                rhc.baseHitDuration = 0.3f;
-                rhc.effectRadius = 2.5f;
-                rhc.effectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
+                List<HealthComponent> bouncedObjects = new List<HealthComponent>();
+                bouncedObjects.Add(victimBody.healthComponent);
+
+                int targets = 2;
+                float range = 12f;
+
+                //Need to individually find all targets for the first bounce.
+                for (int i = 0; i < targets; i++)
+                {
+                    LightningOrb taserLightning = new LightningOrb
+                    {
+                        bouncedObjects = bouncedObjects,
+                        attacker = damageInfo.attacker,
+                        inflictor = damageInfo.attacker,
+                        damageValue = damageInfo.damage,
+                        procCoefficient = 1f,
+                        teamIndex = attackerBody.teamComponent.teamIndex,
+                        isCrit = damageInfo.crit,
+                        procChainMask = damageInfo.procChainMask,
+                        lightningType = LightningOrb.LightningType.Ukulele,
+                        damageColorIndex = DamageColorIndex.Default,
+                        bouncesRemaining = 20,
+                        targetsToFindPerBounce = 2,
+                        range = range,
+                        origin = damageInfo.position,
+                        damageType = DamageType.Shock5s,
+                        speed = 120f
+                    };
+                    taserLightning.AddModdedDamageType(SharedDamageTypes.Slow50For5s);
+
+                    HurtBox hurtBox = taserLightning.PickNextTarget(damageInfo.position);
+
+                    //Fire orb if HurtBox is found.
+                    if (hurtBox)
+                    {
+                        taserLightning.target = hurtBox;
+                        OrbManager.instance.AddOrb(taserLightning);
+                        taserLightning.bouncedObjects.Add(hurtBox.healthComponent);
+                    }
+                }
             }
         }
     }

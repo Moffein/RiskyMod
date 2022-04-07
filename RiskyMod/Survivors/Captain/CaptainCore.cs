@@ -89,19 +89,7 @@ namespace RiskyMod.Survivors.Captain
         {
             if (modifyTaser)
             {
-                GameObject taserPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CaptainTazer").InstantiateClone("RiskyModCaptainTazer", true);
-                DamageAPI.ModdedDamageTypeHolderComponent mdc = taserPrefab.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-                mdc.Add(SharedDamageTypes.Slow50For5s);
-
-                ProjectileDamage pd = taserPrefab.GetComponent<ProjectileDamage>();
-                pd.damageType = DamageType.SlowOnHit | DamageType.Shock5s;  //Redundant slowonhit so that death mark triggers cleanly
-
-                ProjectileImpactExplosion pie = taserPrefab.GetComponent<ProjectileImpactExplosion>();
-                pie.blastRadius = 8f;
-
-                Content.Content.projectilePrefabs.Add(taserPrefab);
-
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Captain.Weapon.FireTazer", "projectilePrefab", taserPrefab);
+                new TaserRework();
                 sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD";
             }
         }
