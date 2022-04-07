@@ -338,8 +338,8 @@ namespace RiskyMod.Survivors.Commando
         }
         private GameObject BuildPhaseRoundProjectile()
         {
-            GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/fmjramping").InstantiateClone("RiskyModPhaseRound", true);
-
+            GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/fmjramping");
+            if (RiskyMod.compatibilityMode) proj = proj.InstantiateClone("RiskyModPhaseRound", true);
             //Add Lightning
             ProjectileProximityBeamController pbc = proj.GetComponent<ProjectileProximityBeamController>();
             if (!pbc)
@@ -364,7 +364,7 @@ namespace RiskyMod.Survivors.Commando
             ProjectileOverlapAttack poa = proj.GetComponent<ProjectileOverlapAttack>();
             poa.onServerHit = null;
 
-            Content.Content.projectilePrefabs.Add(proj);
+            if (RiskyMod.compatibilityMode) Content.Content.projectilePrefabs.Add(proj);
             return proj;
         }
     }
