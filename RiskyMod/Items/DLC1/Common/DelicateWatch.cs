@@ -25,9 +25,14 @@ namespace RiskyMod.Items.DLC1.Common
                     );
                 c.Remove();
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+            };
+
+            IL.RoR2.HealthComponent.UpdateLastHitTime += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
 
                 c.GotoNext(MoveType.After,
-                     x => x.MatchLdfld<HealthComponent.ItemCounts>("fragileDamageBonus")
+                     x => x.MatchLdfld(typeof(HealthComponent.ItemCounts), "fragileDamageBonus")
                     );
                 c.EmitDelegate<Func<int, int>>(val => 0);
             };
