@@ -23,12 +23,12 @@ namespace EntityStates.RiskyMod.Captain.Beacon
 		public override Interactability GetInteractability(Interactor activator)
 		{
 			bool anySkillUsed = false;
-			bool equipmentCanRestock = false;
+			//bool equipmentCanRestock = false;
 
 			CharacterBody activatorBody = activator.GetComponent<CharacterBody>();
 			if (activatorBody)
 			{
-				Inventory inventory = activatorBody.inventory;
+				//Inventory inventory = activatorBody.inventory;
 				SkillLocator skills = activatorBody.skillLocator;
 
 				if (skills)
@@ -43,17 +43,17 @@ namespace EntityStates.RiskyMod.Captain.Beacon
 					}
 				}
 
-				if (inventory)
+				/*if (inventory)
 				{
 					equipmentCanRestock = inventory.GetEquipmentRestockableChargeCount(inventory.activeEquipmentSlot) > 0;
-				}
+				}*/
 			}
 
 			if (!activatorBody)
 			{
 				return Interactability.Disabled;
 			}
-			if (activationCost >= this.energyComponent.energy || (!anySkillUsed && !equipmentCanRestock))
+			if (activationCost >= this.energyComponent.energy || !anySkillUsed)//(!anySkillUsed && !equipmentCanRestock)
 			{
 				return Interactability.ConditionsNotMet;
 			}
@@ -72,13 +72,15 @@ namespace EntityStates.RiskyMod.Captain.Beacon
             {
 				if (activatorBody.skillLocator)
                 {
-					activatorBody.skillLocator.DeductCooldownFromAllSkillsServer(cooldownPerUse);
+					//activatorBody.skillLocator.DeductCooldownFromAllSkillsServer(cooldownPerUse);
 					//activatorBody.skillLocator.primary.ApplyAmmoPack();//this is clientside
-                }
-				if (activatorBody.inventory)
+					activatorBody.skillLocator.ApplyAmmoPack();
+
+				}
+				/*if (activatorBody.inventory)
                 {
 					activatorBody.inventory.DeductActiveEquipmentCooldown(BeaconResupplyMain.cooldownPerUse);
-                }
+                }*/
             }
 		}
 
@@ -89,8 +91,8 @@ namespace EntityStates.RiskyMod.Captain.Beacon
 		}
 
         public static float activationCost = 100f/3f;
-		public static float rechargeTimePerUse = 20f;
+		public static float rechargeTimePerUse = 30f;
 
-		public static float cooldownPerUse = 12f;
+		//public static float cooldownPerUse = 15f;
 	}
 }

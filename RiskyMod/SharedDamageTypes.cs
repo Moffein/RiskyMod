@@ -4,6 +4,7 @@ using RoR2;
 using RoR2.Orbs;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace RiskyMod
@@ -26,9 +27,10 @@ namespace RiskyMod
         public static DamageAPI.ModdedDamageType CaptainTaserSource;
 
         public static DamageAPI.ModdedDamageType CrocoBiteHealOnKill;
-        public static GameObject medkitEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect");
 
         public static DamageAPI.ModdedDamageType AlwaysIgnite;   //Used for Molten Perforator due to not proccing
+
+        public static GameObject medkitEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect");
 
         public SharedDamageTypes()
         {
@@ -180,6 +182,7 @@ namespace RiskyMod
         {
             if (damageInfo.HasModdedDamageType(SharedDamageTypes.CaptainTaserSource))
             {
+
                 List<HealthComponent> bouncedObjects = new List<HealthComponent>();
                 bouncedObjects.Add(victimBody.healthComponent);
 
@@ -210,7 +213,7 @@ namespace RiskyMod
                     };
                     taserLightning.AddModdedDamageType(SharedDamageTypes.Slow50For5s);
 
-                    HurtBox hurtBox = taserLightning.PickNextTarget(damageInfo.position);
+                    HurtBox hurtBox = taserLightning.PickNextTarget(victimBody.corePosition);
 
                     //Fire orb if HurtBox is found.
                     if (hurtBox)
@@ -220,77 +223,6 @@ namespace RiskyMod
                         taserLightning.bouncedObjects.Add(hurtBox.healthComponent);
                     }
                 }
-            }
-        }
-    }
-
-    public class RepeatHitComponent : MonoBehaviour
-    {
-        public CharacterBody victimBody;
-        public CharacterBody attackerBody;
-        public float damage;
-        public float procCoefficient;
-        public DamageType damageType;
-        public bool crit;
-        public DamageColorIndex damageColor;
-
-        public int baseHitCount = 4; //+1 from initial hit
-        public float baseHitDuration = 0.3f;
-
-        public GameObject effectPrefab;
-        public float effectRadius = 1f;
-
-        private int hitCount;
-        private float stopwatch;
-
-        public void Awake()
-        {
-            hitCount = 0;
-            stopwatch = 0f;
-        }
-
-        public void FixedUpdate()
-        {
-            stopwatch += Time.fixedDeltaTime;
-            if (stopwatch >= baseHitDuration)
-            {
-                stopwatch -= baseHitDuration;
-                ApplyHit();
-            }
-        }
-
-        public void ApplyHit()
-        {
-            hitCount++;
-
-            //The only way this can get applied is via a NetworkServer.active locked check, but just to be safe.
-            if (NetworkServer.active && victimBody.healthComponent)
-            {
-                if (effectPrefab)
-                {
-                    EffectData ed = new EffectData();
-                    ed.origin = victimBody.corePosition;
-                    ed.scale = effectRadius;
-                    EffectManager.SpawnEffect(EffectCatalog.FindEffectIndexFromPrefab(effectPrefab), ed, true);
-                }
-
-                DamageInfo di = new DamageInfo
-                {
-                    attacker = attackerBody.gameObject,
-                    inflictor = attackerBody.gameObject,
-                    crit = crit,
-                    damage = damage,
-                    damageType = damageType,
-                    damageColorIndex = damageColor,
-                    dotIndex = DotController.DotIndex.None,
-                    force = Vector3.zero,
-                    canRejectForce = true,
-                    position = victimBody.corePosition,
-                    procChainMask = default,
-                    procCoefficient = procCoefficient
-                };
-                victimBody.healthComponent.TakeDamage(di);
-                GlobalEventManager.instance.OnHitEnemy(di, victimBody.gameObject);
             }
         }
     }

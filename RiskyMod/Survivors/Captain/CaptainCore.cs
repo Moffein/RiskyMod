@@ -40,6 +40,30 @@ namespace RiskyMod.Survivors.Captain
                 orig();
                 CaptainIndex = BodyCatalog.FindBodyIndex("CaptainBody");
             };
+
+
+            if (CaptainCore.beaconRework || CaptainCore.nukeBuff)
+            {
+                On.RoR2.GenericSkill.ApplyAmmoPack += (orig, self) =>
+                {
+                    //Probably don't need to actually check for BeaconRework since vanilla beacons don't benefit from ammopacks.
+                    if (CaptainCore.beaconRework && (self.skillName == "SupplyDrop1" || self.skillName == "SupplyDrop2"))
+                    {
+                        return;
+                    }
+                    else if (CaptainCore.nukeBuff && self.activationState.stateType == typeof(EntityStates.Captain.Weapon.SetupAirstrikeAlt))
+                    {
+                        if (self.stock < self.maxStock)
+                        {
+                            self.rechargeStopwatch += self.finalRechargeInterval * 0.5f;
+                        }
+                    }
+                    else
+                    {
+                        orig(self);
+                    }
+                };
+            }
         }
 
         private void ModifySkills(SkillLocator sk)

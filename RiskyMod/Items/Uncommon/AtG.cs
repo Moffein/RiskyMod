@@ -6,6 +6,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
 using System;
+using System.Linq;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -39,10 +40,9 @@ namespace RiskyMod.Items.Uncommon
 				c.GotoNext(MoveType.After,
 					 x => x.MatchLdsfld(typeof(RoR2Content.Items), "Missile")
 					);
-				c.Emit(OpCodes.Ldloc, 1); //victimBody
 				c.Emit(OpCodes.Ldloc, 4); //master
 				c.Emit(OpCodes.Ldarg_1);	//damageinfo
-				c.EmitDelegate<Func<ItemDef, CharacterBody, CharacterMaster, DamageInfo, ItemDef>>((item, victimBody, master, damageInfo) =>
+				c.EmitDelegate<Func<ItemDef, CharacterMaster, DamageInfo, ItemDef>>((item, master, damageInfo) =>
 				{
 					if (useOrb && master.teamIndex == TeamIndex.Player)
 					{
@@ -52,17 +52,12 @@ namespace RiskyMod.Items.Uncommon
 						}
 						else
 						{
-							//Don't fire orb if victim is dead, since it won't hit.
-							bool victimIsAlive = victimBody && victimBody.healthComponent && victimBody.healthComponent.alive;
-							if (victimIsAlive)
+							CharacterBody cb = master.GetBody();
+							if (cb)
 							{
-								CharacterBody cb = master.GetBody();
-								if (cb)
+								if (damageInfo.damage / cb.damage < projectileDamageTreshold)
 								{
-									if (damageInfo.damage / cb.damage < projectileDamageTreshold)
-									{
-										item = RiskyMod.emptyItemDef;
-									}
+									item = RiskyMod.emptyItemDef;
 								}
 							}
 						}
@@ -140,6 +135,28 @@ namespace RiskyMod.Items.Uncommon
 
 								if (attackerBody.aimOrigin != null)
 								{
+									//Change target if victim is dead
+									HurtBox targetHurtBox = victimBody.mainHurtBox;
+									if (victimBody.healthComponent && !victimBody.healthComponent.alive && attackerBody.teamComponent)
+									{
+										BullseyeSearch search = new BullseyeSearch();
+										search.teamMaskFilter = TeamMask.GetEnemyTeams(attackerBody.teamComponent.teamIndex);
+										search.filterByLoS = false;
+										search.searchOrigin = attackerBody.aimOrigin;
+										search.sortMode = BullseyeSearch.SortMode.Distance;
+										search.maxDistanceFilter = 1000f;
+										search.maxAngleFilter = 360f;
+										search.RefreshCandidates();
+										search.FilterOutGameObject(attackerBody.gameObject);
+										search.FilterOutGameObject(victimBody.gameObject);
+
+										targetHurtBox = search.GetResults().FirstOrDefault<HurtBox>();
+										if (targetHurtBox == default)
+                                        {
+											targetHurtBox = victimBody.mainHurtBox;
+                                        }
+									}
+
 									int missilesToFire = icbmCount > 0 ? 3 : 1;
 									for (int i = 0; i < missilesToFire; i++)
 									{
@@ -156,7 +173,7 @@ namespace RiskyMod.Items.Uncommon
 										HurtBox mainHurtBox = victimBody.mainHurtBox;
 										if (mainHurtBox)
 										{
-											missileOrb.target = mainHurtBox;
+											missileOrb.target = targetHurtBox;
 											OrbManager.instance.AddOrb(missileOrb);
 										}
 									}

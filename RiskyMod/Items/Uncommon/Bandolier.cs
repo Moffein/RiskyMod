@@ -29,21 +29,10 @@ namespace RiskyMod.Items.Uncommon
 
             On.RoR2.GenericSkill.ApplyAmmoPack += (orig, self) =>
             {
-                if (self.stock < self.maxStock)   // && self.skillName != "SupplyDrop1" && self.skillName != "SupplyDrop2"
+                orig(self);
+                if (self.characterBody && self.characterBody.skillLocator && self == self.characterBody.skillLocator.primary)
                 {
-                    if (self.characterBody && self.characterBody.skillLocator && self == self.characterBody.skillLocator.primary)
-                    {
-                        self.Reset();
-                    }
-                    else
-                    {
-                        self.stock += self.rechargeStock;
-                    }
-
-                    if (self.stock > self.maxStock)
-                    {
-                        self.stock = self.maxStock;
-                    }
+                    self.Reset();
                 }
             };
         }

@@ -28,6 +28,7 @@ namespace RiskyMod.Survivors.Captain
             psi.destroyOnWorld = false;
             psi.destroyWhenNotAlive = true;
             psi.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainTazerNova.prefab").WaitForCompletion();
+            //spawn impact effect in taser hook
 
             Content.Content.projectilePrefabs.Add(taserPrefab);
 
