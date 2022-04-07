@@ -138,7 +138,7 @@ namespace RiskyMod
         public static bool ShareSuiteBoss = false;
         public static bool ShareSuiteLunar = false;
 
-        public static bool compatibilityMode = true;
+        public static bool EnableProjectileCloning = true;
 
         public static ItemDef emptyItemDef = null;
         public static BuffDef emptyBuffDef = null;
