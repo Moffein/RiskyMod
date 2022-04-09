@@ -383,6 +383,7 @@ namespace RiskyMod
             FreezeChampionExecute.enabled = Config.Bind(charMechanicsString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
             NerfVoidtouched.enabled = Config.Bind(charMechanicsString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
             PlayerControlledMonsters.enabled = Config.Bind(charMechanicsString, "Player-Controlled Monster Regen", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
+            SlowDownProjectilesModifyDamage.enabled = Config.Bind(charMechanicsString, "Slowed Projectiles Deal Less Damage", true, "Projectiles slowed by Railgunners Polar Field Device and similar skills deal less damage.").Value;
 
             Clover.enabled = Config.Bind(charMechanicsString, "Cap Max Luck", false, "Caps how high the Luck stat can go.").Value;
             Clover.luckCap = Config.Bind(charMechanicsString, "Cap Max Luck - Maximum Value", 1f, "Maximum Luck value playeres can reach. Extra Luck is converted to stat boosts.").Value;

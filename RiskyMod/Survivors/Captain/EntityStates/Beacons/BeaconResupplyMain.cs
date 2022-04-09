@@ -91,7 +91,7 @@ namespace EntityStates.RiskyMod.Captain.Beacon
 		}
 
         public static float activationCost = 100f/3f;
-		public static float rechargeTimePerUse = 30f;
+		public static float rechargeTimePerUse = 20f;
 
 		//public static float cooldownPerUse = 15f;
 	}
