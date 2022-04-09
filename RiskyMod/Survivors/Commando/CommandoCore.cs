@@ -28,7 +28,7 @@ namespace RiskyMod.Survivors.Commando
 
         public static DamageAPI.ModdedDamageType SuppressiveFireDamage;
         public static DamageAPI.ModdedDamageType SuppressiveFireScepterDamage;
-        public static BuffDef SlideBuff; public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody");
+        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody");
 
         public CommandoCore()
         {
@@ -94,14 +94,6 @@ namespace RiskyMod.Survivors.Commando
                 //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Commando.DodgeState");  //base speed is 5/2.5
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.DodgeState", "initialSpeedCoefficient", "7.25");
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.DodgeState", "finalSpeedCoefficient", "3.625");
-            }
-        }
-
-        private void SlideStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
-        {
-            if (sender.HasBuff(SlideBuff.buffIndex))
-            {
-                args.attackSpeedMultAdd += 0.5f;
             }
         }
 

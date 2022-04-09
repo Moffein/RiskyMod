@@ -269,6 +269,7 @@ namespace RiskyMod
             new FreezeChampionExecute();
             new NerfVoidtouched();
             new PlayerControlledMonsters();
+            new SlowDownProjectilesModifyDamage();
 
             //Artifacts
             new VengeancePercentHeal();
@@ -659,6 +660,7 @@ namespace RiskyMod
             CaptainCore.enablePrimarySkillChanges = Config.Bind(captainString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
             CaptainCore.modifyTaser = Config.Bind(captainString, "Power Taser Changes", true, "Enable changes to this skill.").Value;
             CaptainCore.nukeBuff = Config.Bind(captainString, "Diablo Strike Changes", true, "Enable changes to this skill.").Value;
+            CaptainCore.beaconRework = Config.Bind(captainString, "Beacon Changes", true, "Beacons can be replaced on a cooldown and reworks Supply and Hack beacons.").Value;
 
             Bandit2Core.enabled = Config.Bind(banditString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             BanditSpecialGracePeriod.enabled = Config.Bind(banditString, "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;
