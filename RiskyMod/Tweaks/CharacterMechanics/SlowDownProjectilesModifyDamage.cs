@@ -24,7 +24,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             On.RoR2.Projectile.SlowDownProjectiles.OnTriggerExit += (orig, self, other) =>
             {
                 ProjectileDamage pd = other.GetComponent<ProjectileDamage>();
-                if (pd)
+                if (pd && other.GetComponent<ProjectileSimple>())
                 {
                     pd.damage /= self.slowDownCoefficient;
                 }

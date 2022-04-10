@@ -152,6 +152,7 @@ namespace RiskyMod
         {
             pluginInfo = Info;
             Assets.Init();
+            ConfigFiles.Init();
             ReadConfig();
             CheckDependencies();
 
@@ -668,8 +669,11 @@ namespace RiskyMod
             BanditSpecialGracePeriod.duration = Config.Bind(banditString, "Special Grace Period Duration", 1.2f, "Length in seconds of Special Grace Period.").Value;
             DesperadoRework.enabled = Config.Bind(banditString, "Persistent Desperado", true, "Desperado stacks are weaker but last between stages.").Value;
             BackstabRework.enabled = Config.Bind(banditString, "Backstab Changes", true, "Backstabs minicrit for 50% bonus damage and crit chance is converted to crit damage..").Value;
+            BuffHemorrhage.ignoreArmor = Config.Bind(banditString, "Hemmorrhage - Ignore Armor", true, "Hemmorhage damage ignores positive armor.").Value;
+            BuffHemorrhage.enableProcs = Config.Bind(banditString, "Hemmorrhage - Enable Procs", true, "Hemmorhage has a low proc coefficient.").Value;
             Bandit2Core.burstChanges = Config.Bind(banditString, "Burst Changes", true, "Enable changes to this skill.").Value;
             Bandit2Core.blastChanges = Config.Bind(banditString, "Blast Changes", true, "Enable changes to this skill.").Value;
+            Bandit2Core.noKnifeCancel = Config.Bind(banditString, "Knife While Reloading", true, "Knife skills can be used without interrupting your reload.").Value;
             Bandit2Core.knifeChanges = Config.Bind(banditString, "Serrated Dagger Changes", true, "Enable changes to this skill.").Value;
             Bandit2Core.knifeThrowChanges = Config.Bind(banditString, "Serrated Shiv Changes", true, "Enable changes to this skill.").Value;
             Bandit2Core.utilityFix = Config.Bind(banditString, "Smokebomb Fix", true, "Fixes various bugs with Smokebomb.").Value;

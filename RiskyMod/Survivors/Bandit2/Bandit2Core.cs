@@ -12,6 +12,7 @@ using RoR2;
 using RoR2.Projectile;
 using RoR2.Skills;
 using System;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -29,6 +30,7 @@ namespace RiskyMod.Survivors.Bandit2
 
         public static bool knifeChanges = true;
         public static bool knifeThrowChanges = true;
+        public static bool noKnifeCancel = true;
 
         public static bool utilityFix = true;
 
@@ -148,11 +150,24 @@ namespace RiskyMod.Survivors.Bandit2
         {
             if (BuffHemorrhage.enabled) new BuffHemorrhage();
 
+            if (noKnifeCancel)
+            {
+                EntityStateMachine knifeStateMachine = bodyPrefab.AddComponent<EntityStateMachine>();
+                knifeStateMachine.customName = "KnifeArm";
+                knifeStateMachine.initialStateType = new SerializableEntityStateType(typeof(EntityStates.BaseState));
+                knifeStateMachine.mainStateType = new SerializableEntityStateType(typeof(EntityStates.BaseState));
+
+                NetworkStateMachine nsm = bodyPrefab.GetComponent<NetworkStateMachine>();
+                nsm.stateMachines = nsm.stateMachines.Append(knifeStateMachine).ToArray();
+            }
+
             if (knifeChanges)
             {
                 new IncreaseKnifeHitboxSize();
                 knifeVelocity = BuildSlashVelocityCurve();
                 sk.secondary.skillFamily.variants[0].skillDef.canceledFromSprinting = false;
+
+                if (noKnifeCancel) sk.secondary.skillFamily.variants[0].skillDef.activationStateMachineName = "KnifeArm";
 
                 On.EntityStates.Bandit2.Weapon.SlashBlade.OnEnter += (orig, self) =>
                 {
@@ -173,6 +188,7 @@ namespace RiskyMod.Survivors.Bandit2
             {
                 sk.secondary.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SUPERBLEED" };
                 sk.secondary.skillFamily.variants[1].skillDef.skillDescriptionToken = "BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
+                if (noKnifeCancel) sk.secondary.skillFamily.variants[1].skillDef.activationStateMachineName = "KnifeArm";
 
                 On.EntityStates.Bandit2.Weapon.Bandit2FireShiv.FireShiv += (orig, self) =>
                 {

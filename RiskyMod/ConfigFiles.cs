@@ -3,7 +3,7 @@ using System.IO;
 
 namespace RiskyMod
 {
-    public static class Config
+    public static class ConfigFiles
     {
         public static ConfigFile Items;
         public static ConfigFile Survivors;
@@ -33,7 +33,7 @@ namespace RiskyMod
         private const string railgunnerString = "Survivors: Railgunner";
         private const string voidFiendString = "Survivors: Void Fiend";
 
-        public static void ReadConfig()
+        public static void Init()
         {
             Items = new ConfigFile(Path.Combine(ConfigFolderPath, $"RiskyMod_Items.cfg"), true);
             Survivors = new ConfigFile(Path.Combine(ConfigFolderPath, $"RiskyMod_Survivors.cfg"), true);
