@@ -40,9 +40,10 @@ namespace RiskyMod.Items.Uncommon
 				c.GotoNext(MoveType.After,
 					 x => x.MatchLdsfld(typeof(RoR2Content.Items), "Missile")
 					);
+				c.Emit(OpCodes.Ldloc, 1); //victimBody
 				c.Emit(OpCodes.Ldloc, 4); //master
 				c.Emit(OpCodes.Ldarg_1);	//damageinfo
-				c.EmitDelegate<Func<ItemDef, CharacterMaster, DamageInfo, ItemDef>>((item, master, damageInfo) =>
+				c.EmitDelegate<Func<ItemDef, CharacterBody, CharacterMaster, DamageInfo, ItemDef>>((item, victimBody, master, damageInfo) =>
 				{
 					if (useOrb && master.teamIndex == TeamIndex.Player)
 					{
@@ -50,7 +51,7 @@ namespace RiskyMod.Items.Uncommon
 						{
 							item = RiskyMod.emptyItemDef;
 						}
-						else
+						else if (victimBody.healthComponent && victimBody.healthComponent.alive)	//Only fire orb if target is alive to prevent whiffing against already-dead targets.
 						{
 							CharacterBody cb = master.GetBody();
 							if (cb)
@@ -135,9 +136,10 @@ namespace RiskyMod.Items.Uncommon
 
 								if (attackerBody.aimOrigin != null)
 								{
-									//Change target if victim is dead
 									HurtBox targetHurtBox = victimBody.mainHurtBox;
-									if (victimBody.healthComponent && !victimBody.healthComponent.alive && attackerBody.teamComponent)
+
+									//Change target if victim is dead
+									/*if (victimBody.healthComponent && !victimBody.healthComponent.alive && attackerBody.teamComponent)
 									{
 										BullseyeSearch search = new BullseyeSearch();
 										search.teamMaskFilter = TeamMask.GetEnemyTeams(attackerBody.teamComponent.teamIndex);
@@ -155,7 +157,7 @@ namespace RiskyMod.Items.Uncommon
                                         {
 											targetHurtBox = victimBody.mainHurtBox;
                                         }
-									}
+									}*/
 
 									int missilesToFire = icbmCount > 0 ? 3 : 1;
 									for (int i = 0; i < missilesToFire; i++)

@@ -39,6 +39,9 @@ namespace RiskyMod
         public static ConfigFile ItemCfg;
         public static ConfigFile SurvivorCfg;
         public static ConfigFile MonsterCfg;
+
+        public static ConfigFile GeneralCfg;
+
         public static string ConfigFolderPath { get => System.IO.Path.Combine(BepInEx.Paths.ConfigPath, RiskyMod.pluginInfo.Metadata.GUID); }
 
 
@@ -71,9 +74,15 @@ namespace RiskyMod
 
         public static void Init()
         {
+            ConfigGeneral();
             ConfigItems();
             ConfigSurvivors();
             ConfigMonsters();
+        }
+
+        private static void ConfigGeneral()
+        {
+
         }
 
         private static void ConfigItems()
@@ -96,7 +105,7 @@ namespace RiskyMod
             Crowbar.enabled = ItemCfg.Bind(commonString, "Crowbar", true, itemConfigDescString).Value;
             DelicateWatch.enabled = ItemCfg.Bind(commonString, "Delicate Watch", true, itemConfigDescString).Value;
             Fireworks.enabled = ItemCfg.Bind(commonString, "Fireworks", true, itemConfigDescString).Value;
-            Fireworks.maxRockets = ItemCfg.Bind(commonString, "Fireworks - Max Rockets", 32, "Max rockets to spawn.").Value;
+            Fireworks.maxRockets = ItemCfg.Bind(commonString, "Fireworks - Max Rockets", 32, "Max rockets that can spawn from each use. Going above this value raises rocket damage instead.").Value;
             Gasoline.enabled = ItemCfg.Bind(commonString, "Gasoline", true, itemConfigDescString).Value;
             CritGlasses.enabled = ItemCfg.Bind(commonString, "Lensmakers Glasses", true, itemConfigDescString).Value;
             MonsterTooth.enabled = ItemCfg.Bind(commonString, "Monster Tooth", true, itemConfigDescString).Value;
