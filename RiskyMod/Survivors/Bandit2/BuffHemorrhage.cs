@@ -9,12 +9,14 @@ namespace RiskyMod.Survivors.Bandit2
 
         public static bool ignoreArmor = true;
         public static bool enableProcs = true;
+        public static bool enableCrit = false;
         public BuffHemorrhage()
         {
-            if (!enabled || (!ignoreArmor && !enableProcs)) return;
+            if (!enabled || (!ignoreArmor && !enableProcs && !enableCrit)) return;
             On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
             {
-                if (damageInfo.dotIndex == RoR2.DotController.DotIndex.SuperBleed)
+                bool procHemmorrhage = false;
+                if (damageInfo.dotIndex == RoR2.DotController.DotIndex.SuperBleed && damageInfo.damageType.HasFlag(DamageType.DoT))
                 {
                     if (ignoreArmor)
                     {
@@ -25,9 +27,25 @@ namespace RiskyMod.Survivors.Bandit2
                         }
                     }
 
-                    if (enableProcs) damageInfo.procCoefficient = 0.2f;
+                    if (enableProcs)
+                    {
+                        damageInfo.procCoefficient = 0.2f;
+                        procHemmorrhage = true;
+                    }
+
+                    if (enableCrit)
+                    {
+                        float baseCritMult = BackstabRework.enabled ? 1.5f : 2f;
+                        damageInfo.damage /= baseCritMult;
+                        damageInfo.crit = true;
+                    }
                 }
                 orig(self, damageInfo);
+
+                if (procHemmorrhage)
+                {
+                    GlobalEventManager.instance.OnHitEnemy(damageInfo, self.gameObject);
+                }
             };
         }
     }

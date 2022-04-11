@@ -71,22 +71,32 @@ namespace RiskyMod.Items.Uncommon
                     int hpGained = Mathf.FloorToInt(newHP);
                     if (NetworkServer.active)
                     {
-                        int infusionBuffCount = self.GetBuffCount(InfusionBuff.buffIndex);
-                        if (hpGained != infusionBuffCount)
+                        int currentInfusionBuffCount = self.GetBuffCount(InfusionBuff.buffIndex);
+                        if (self.inventory && self.inventory.GetItemCount(RoR2Content.Items.Infusion) > 0)
                         {
-                            if (hpGained > infusionBuffCount)
+                            if (hpGained != currentInfusionBuffCount)
                             {
-                                for (int i = 0; i < hpGained - infusionBuffCount; i++)
+                                if (hpGained > currentInfusionBuffCount)
                                 {
-                                    self.AddBuff(InfusionBuff.buffIndex);
+                                    for (int i = 0; i < hpGained - currentInfusionBuffCount; i++)
+                                    {
+                                        self.AddBuff(InfusionBuff);
+                                    }
+                                }
+                                else
+                                {
+                                    for (int i = 0; i < currentInfusionBuffCount - hpGained; i++)
+                                    {
+                                        self.RemoveBuff(InfusionBuff);
+                                    }
                                 }
                             }
-                            else
+                        }
+                        else
+                        {
+                            for (int i = 0; i < currentInfusionBuffCount; i++)
                             {
-                                for (int i = 0; i < infusionBuffCount - hpGained; i++)
-                                {
-                                    self.RemoveBuff(InfusionBuff.buffIndex);
-                                }
+                                self.RemoveBuff(InfusionBuff);
                             }
                         }
                     }
