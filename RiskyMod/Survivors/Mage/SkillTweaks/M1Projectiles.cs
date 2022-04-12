@@ -52,10 +52,10 @@ namespace RiskyMod.Survivors.Mage
             ProjectileZapChainOnExplosion pzc = LightningBolt.AddComponent<ProjectileZapChainOnExplosion>();
             pzc.damageCoefficient = 0.9f / 2.7f;
             pzc.maxBounces = 20;
-            pzc.initialTargets = 7;
+            pzc.initialTargets = 2;
             pzc.targetsPerBounce = 2;
             pzc.procCoefficient = 0.5f;
-            pzc.range = 8f;
+            pzc.range = 10f;
             pzc.requireHit = true;
 
             ProjectileImpactExplosion pie = LightningBolt.GetComponent<ProjectileImpactExplosion>();
