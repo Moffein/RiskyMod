@@ -26,7 +26,7 @@ namespace RiskyMod.Items.Uncommon
 				c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
 			};
 
-			//TakeDamage.OnHpLostAttackerActions += HealOnHit;
+			//TakeDamage.OnHpLostAttackerActions += HealOnHitFinalDamage;
 			OnHitEnemy.OnHitAttackerInventoryActions += HealOnHitInitialDamage;
 		}
 		private static void ModifyItem()

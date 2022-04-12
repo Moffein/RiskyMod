@@ -129,7 +129,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 				float distSqr = diff.sqrMagnitude;
 				if (distSqr <= blastJumpRadius * blastJumpRadius)
 				{
-					base.characterMotor.ApplyForce(blastForce * diff.normalized, true, false);
+					base.characterMotor.ApplyForce(blastForce * diff.normalized + additionalForce, true, false);
 				}
 			}
 		}
@@ -154,8 +154,8 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 		public static float blastRadius = 14f;//Ion Surge is 14f
 		public static float blastJumpRadius = 14f;
 
-		public static float blastForce = 3200f;
-		public static Vector3 additionalForce = 400f * Vector3.up;
+		public static float blastForce = 4000f;
+		public static Vector3 additionalForce = 200f * Vector3.up;
 
 		private float duration;
 		private float stopwatch;
