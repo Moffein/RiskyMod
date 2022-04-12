@@ -21,7 +21,7 @@ namespace RiskyMod.Items.Legendary
                     );
 
                 //Add damage scaling.
-                c.GotoNext(
+                /*c.GotoNext(
                     x => x.MatchLdfld<DamageInfo>("damage")
                     );
                 c.Index++;
@@ -29,7 +29,7 @@ namespace RiskyMod.Items.Legendary
                 c.EmitDelegate<Func<float, int, float>>((damage, itemCount) =>
                 {
                     return damage + 0.3f * damage * (itemCount - 1);
-                });
+                });*/
 
                 if (RiskyMod.disableProcChains)
                 {
@@ -38,7 +38,7 @@ namespace RiskyMod.Items.Legendary
                         x => x.MatchStfld<RoR2.Orbs.BounceOrb>("procCoefficient")
                         );
                     c.Index--;
-                    c.Next.Operand = 0f;
+                    c.Next.Operand = 0.1f;
                 }
             };
         }

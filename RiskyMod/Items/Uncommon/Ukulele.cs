@@ -24,7 +24,7 @@ namespace RiskyMod.Items.Uncommon
                     );
 
                 //Add damage scaling
-                c.GotoNext(
+                /*c.GotoNext(
                     x => x.MatchLdcR4(0.8f)
                     );
                 c.Index++;
@@ -32,16 +32,16 @@ namespace RiskyMod.Items.Uncommon
                 c.EmitDelegate<Func<float, int, float>>((origDamage, itemCount) =>
                 {
                     return origDamage + origDamage * 0.3f * (itemCount - 1);
-                });
+                });*/
 
-                //Remove proc coefficient
+                //Change proc coefficient
                 c.GotoNext(
                     x => x.MatchLdcR4(0.2f)
                     );
                 c.Index++;
                 c.EmitDelegate<Func<float, float>> ((originalProcCoefficient) =>
                 {
-                    return RiskyMod.disableProcChains ? 0f : originalProcCoefficient;
+                    return RiskyMod.disableProcChains ? 0.1f : originalProcCoefficient;
                 });
 
                 //Remove range scaling

@@ -16,7 +16,7 @@ namespace RiskyMod.Survivors.Bandit2
             On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
             {
                 bool procHemmorrhage = false;
-                if (damageInfo.dotIndex == RoR2.DotController.DotIndex.SuperBleed && damageInfo.damageType.HasFlag(DamageType.DoT))
+                if (damageInfo.dotIndex == RoR2.DotController.DotIndex.SuperBleed && damageInfo.damageType.HasFlag(DamageType.DoT) && damageInfo.procCoefficient == 0f)
                 {
                     if (ignoreArmor)
                     {
