@@ -12,6 +12,7 @@ namespace RiskyMod.Fixes
         public static bool enabled = true;
         public GhostDunestriderFriendlyFire()
         {
+            if (!enabled) return;
             IL.EntityStates.ClayBoss.Recover.FireTethers += (il) =>
             {
                 ILCursor c = new ILCursor(il);

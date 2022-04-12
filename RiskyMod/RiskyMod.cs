@@ -265,6 +265,7 @@ namespace RiskyMod
             new FixWormFallDeath();
             new GhostDunestriderFriendlyFire();
             new FixExtraLifeVoidBlacklist();
+            new GhostGrandparentFriendlyFire();
         }
         
         private void AddHooks()
