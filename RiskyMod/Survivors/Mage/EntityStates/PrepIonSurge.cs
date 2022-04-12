@@ -134,14 +134,13 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			}
 		}
 
-		// Token: 0x06000C13 RID: 3091 RVA: 0x000058E2 File Offset: 0x00003AE2
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			return InterruptPriority.Pain;
 		}
 
 		public static float baseDuration = 0.5f;
-		public static float damageCoefficient = 8f;
+		public static float damageCoefficient = 10f;
 		public static GameObject areaIndicatorPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab").WaitForCompletion();
 		public static GameObject muzzleflashEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightningLarge.prefab").WaitForCompletion();
 		public static GameObject crosshairOverridePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/SimpleDotCrosshair.prefab").WaitForCompletion();

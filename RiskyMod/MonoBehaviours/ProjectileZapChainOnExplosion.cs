@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using R2API;
+using RoR2;
 using RoR2.Orbs;
 using RoR2.Projectile;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace RiskyMod.MonoBehaviours
             projectileController = base.GetComponent<ProjectileController>();
             projectileDamage = base.GetComponent<ProjectileDamage>();
             projectileExplosion = base.GetComponent<ProjectileExplosion>();
+            moddedDamageTypeHolderComponent = base.GetComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
         }
 
         public void Fire()
@@ -64,6 +66,11 @@ namespace RiskyMod.MonoBehaviours
                     speed = 120f
                 };
 
+                if (moddedDamageTypeHolderComponent)
+                {
+                    moddedDamageTypeHolderComponent.CopyTo(lightning);
+                }
+
                 HurtBox hurtBox = lightning.PickNextTarget(base.transform.position);
 
                 //Fire orb if HurtBox is found.
@@ -76,6 +83,7 @@ namespace RiskyMod.MonoBehaviours
             }
         }
 
+        private DamageAPI.ModdedDamageTypeHolderComponent moddedDamageTypeHolderComponent;
         private ProjectileController projectileController;
         private ProjectileDamage projectileDamage;
         private ProjectileExplosion projectileExplosion;

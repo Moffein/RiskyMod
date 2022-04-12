@@ -92,7 +92,6 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			}
 		}
 
-		// Token: 0x06000C12 RID: 3090 RVA: 0x00064D98 File Offset: 0x00062F98
 		public override void OnExit()
 		{
 			if (!this.outer.destroying)
@@ -175,7 +174,6 @@ namespace EntityStates.RiskyMod.Mage.Weapon
             }
 		}
 
-		// Token: 0x06000C13 RID: 3091 RVA: 0x000058E2 File Offset: 0x00003AE2
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			return InterruptPriority.Pain;
