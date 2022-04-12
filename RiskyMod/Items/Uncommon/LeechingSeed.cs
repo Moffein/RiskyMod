@@ -26,14 +26,30 @@ namespace RiskyMod.Items.Uncommon
 				c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
 			};
 
-			TakeDamage.OnHpLostAttackerActions += HealOnHit;
+			//TakeDamage.OnHpLostAttackerActions += HealOnHit;
+			OnHitEnemy.OnHitAttackerInventoryActions += HealOnHitInitialDamage;
 		}
 		private static void ModifyItem()
 		{
 			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Seed);
 		}
 
-		private void HealOnHit(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory inventory, float hpLost)
+		private static void HealOnHitInitialDamage(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody, Inventory attackerInventory)
+        {
+			if (!damageInfo.procChainMask.HasProc(ProcType.HealOnHit))
+			{
+				int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Seed);
+				if (itemCount > 0)
+				{
+					float toHeal = damageInfo.damage * (0.025f + 0.025f * itemCount) * damageInfo.procCoefficient;
+					damageInfo.procChainMask.AddProc(ProcType.HealOnHit);
+					attackerBody.healthComponent.Heal(toHeal, damageInfo.procChainMask);
+
+				}
+			}
+        }
+
+		/*private static void HealOnHitFinalDamage(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory inventory, float hpLost)
 		{
 			if (damageInfo.procCoefficient > 0f && !damageInfo.procChainMask.HasProc(ProcType.HealOnHit) && attackerBody.inventory && attackerBody.healthComponent)
             {
@@ -45,6 +61,6 @@ namespace RiskyMod.Items.Uncommon
 					attackerBody.healthComponent.Heal(toHeal * damageInfo.procCoefficient, damageInfo.procChainMask);
 				}
             }
-		}
+		}*/
 	}
 }

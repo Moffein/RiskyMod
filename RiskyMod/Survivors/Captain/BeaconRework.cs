@@ -53,8 +53,12 @@ namespace RiskyMod.Survivors.Captain
                 orig(self);
                 if (self.bodyIndex == CaptainCore.CaptainIndex)
                 {
-                    self.skillLocator.FindSkill("SupplyDrop1").SetBonusStockFromBody(self.skillLocator.special.bonusStockFromBody);
-                    self.skillLocator.FindSkill("SupplyDrop2").SetBonusStockFromBody(self.skillLocator.special.bonusStockFromBody);
+                    if (self.skillLocator.special.bonusStockFromBody > 0)
+                    {
+                        self.skillLocator.FindSkill("SupplyDrop1").SetBonusStockFromBody(self.skillLocator.special.bonusStockFromBody);
+                        if (self.skillLocator.special.bonusStockFromBody > 1)
+                            self.skillLocator.FindSkill("SupplyDrop2").SetBonusStockFromBody(self.skillLocator.special.bonusStockFromBody);
+                    }
                 }
             };
 
