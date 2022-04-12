@@ -182,7 +182,6 @@ namespace RiskyMod
         {
             if (damageInfo.HasModdedDamageType(SharedDamageTypes.CaptainTaserSource))
             {
-
                 List<HealthComponent> bouncedObjects = new List<HealthComponent>();
                 bouncedObjects.Add(victimBody.healthComponent);
 
@@ -211,7 +210,7 @@ namespace RiskyMod
                         damageType = DamageType.Shock5s,
                         speed = 120f
                     };
-                    taserLightning.AddModdedDamageType(SharedDamageTypes.Slow50For5s);
+                    //taserLightning.AddModdedDamageType(SharedDamageTypes.Slow50For5s);
 
                     HurtBox hurtBox = taserLightning.PickNextTarget(victimBody.corePosition);
 

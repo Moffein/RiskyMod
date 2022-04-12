@@ -2,6 +2,7 @@
 using RoR2.Projectile;
 using R2API;
 using UnityEngine;
+using RiskyMod.MonoBehaviours;
 
 namespace RiskyMod.Survivors.Mage
 {
@@ -40,12 +41,25 @@ namespace RiskyMod.Survivors.Mage
         {
             if (!FireBolt) CreateFireBolt();
 
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireFireBolt", "damageCoefficient", "3.6");   //Gets repeated 5x
-            /*DamageAPI.ModdedDamageTypeHolderComponent mdc = FireBolt.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            mdc.Add(SharedDamageTypes.RepeatHit);
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireFireBolt", "damageCoefficient", "3.6");
+        }
 
-            ProjectileController pc = FireBolt.GetComponent<ProjectileController>();
-            pc.procCoefficient = 0.75f;*/
+        public static void ModifyLightningBolt()
+        {
+            if (!LightningBolt) CreateLightningBolt();
+
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireLightningBolt", "damageCoefficient", "2.7");
+            ProjectileZapChainOnExplosion pzc = LightningBolt.AddComponent<ProjectileZapChainOnExplosion>();
+            pzc.damageCoefficient = 0.9f / 2.7f;
+            pzc.maxBounces = 20;
+            pzc.initialTargets = 7;
+            pzc.targetsPerBounce = 2;
+            pzc.procCoefficient = 0.5f;
+            pzc.range = 8f;
+            pzc.requireHit = true;
+
+            ProjectileImpactExplosion pie = LightningBolt.GetComponent<ProjectileImpactExplosion>();
+            pie.blastRadius = 2.5f; //Same as Fire Bolt now
         }
 
         private static void IncreaseProjectileLifetime(GameObject projectile)

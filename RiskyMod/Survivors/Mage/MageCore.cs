@@ -101,7 +101,7 @@ namespace RiskyMod.Survivors.Mage
                     if (modifyPlasmaBolt)
                     {
                         sk.primary.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
-                        SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireLightningBolt", "damageCoefficient", "3");
+                        M1Projectiles.ModifyLightningBolt();
                     }
                 }
             }

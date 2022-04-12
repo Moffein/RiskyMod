@@ -50,6 +50,7 @@ using RiskyMod.Tweaks.RunScaling;
 using RiskyMod.Tweaks.Holdouts;
 using RiskyMod.Tweaks.CharacterMechanics;
 using RiskyMod.Tweaks.Artifacts;
+using RiskyMod.MonoBehaviours;
 
 namespace RiskyMod
 {
@@ -128,6 +129,8 @@ namespace RiskyMod
             ConfigFiles.Init();
             ReadConfig();
             CheckDependencies();
+
+            ProjectileZapChainOnExplosion.Init();
 
             ContentCore.Init();
             new SharedDamageTypes();
