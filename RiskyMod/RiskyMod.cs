@@ -232,6 +232,7 @@ namespace RiskyMod
             new BloodShrineMinReward();
             new ShrineCombatItems();
             new ShrineSpawnRate();
+            new VoidSeedLimit();
 
             //Character Mechanics
             new TrueOSP();
@@ -363,6 +364,9 @@ namespace RiskyMod
             ShrineSpawnRate.enabled = Config.Bind(shrineString, "Mountain/Combat Shrine Playercount Scaling", true, "Mountain/Combat Shrine Director Credit cost scales with playercount.").Value;
             ShrineCombatItems.enabled = Config.Bind(shrineString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
             BloodShrineMinReward.enabled = Config.Bind(shrineString, "Shrine of Blood Minimum Reward", true, "Shrine of Blood always gives at least enough money to buy a small chest.").Value;
+
+            VoidSeedLimit.seedLimit = Config.Bind(shrineString, "Void Seed Limit", 1, "Limit how many Void Seeds can spawn on 1 stage. Set to negative to disable.").Value;
+            VoidSeedLimit.enabled = VoidSeedLimit.seedLimit >= 0;
 
             VengeancePercentHeal.enabled = Config.Bind(artifactString, "Reduce Vengeance Healing", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
             EnigmaBlacklist.enabled = Config.Bind(artifactString, "Enigma Blacklist", true, "Blacklist Lunars and Recycler from the Artifact of Enigma.").Value;

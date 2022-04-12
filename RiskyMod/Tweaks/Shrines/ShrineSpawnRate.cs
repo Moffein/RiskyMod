@@ -23,9 +23,12 @@ namespace RiskyMod.Tweaks
                 c.Emit(OpCodes.Ldloc_2);    //DirectorCard
                 c.EmitDelegate<Func<int, DirectorCard, int>>((cost, card) =>
                 {
-                    if (card.spawnCard.name == "iscShrineCombat" || card.spawnCard.name == "iscShrineBoss" || card.spawnCard.name == "iscVoidCamp")
+                    if (card.spawnCard) //This check probably isn't necessary, but just to be safe
                     {
-                        cost = (int)(cost * (1f + 0.5f * (Run.instance.participatingPlayerCount - 1)));
+                        if (card.spawnCard.name == "iscShrineCombat" || card.spawnCard.name == "iscShrineBoss")// || card.spawnCard.name == "iscVoidCamp"
+                        {
+                            cost = (int)(cost * (1f + 0.5f * (Run.instance.participatingPlayerCount - 1)));
+                        }
                     }
                     return cost;
                 });
