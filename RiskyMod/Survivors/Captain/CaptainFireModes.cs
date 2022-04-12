@@ -23,7 +23,7 @@ namespace RiskyMod.Survivors.Captain
                 orig(self);
                 if (self.targetSkill && self.targetSkillSlot == SkillSlot.Primary)
                 {
-                    if (self.targetSkill.characterBody.bodyIndex == BodyCatalog.FindBodyIndex("CaptainBody"))
+                    if (self.targetSkill.characterBody.bodyIndex == CaptainCore.CaptainIndex && self.targetSkill.skillDef.activationState.stateType == typeof(EntityStates.RiskyMod.Captain.ChargeShotgun))
                     {
                         self.stockText.gameObject.SetActive(true);
                         self.stockText.fontSize = 12f;

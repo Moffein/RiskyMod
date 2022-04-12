@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using RoR2;
+using RiskyMod.Survivors.Bandit2;
 
 namespace EntityStates.RiskyMod.Bandit2.Primary
 {
@@ -18,6 +19,7 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
 		{
 			buttonReleased = false;
 			baseDuration = _baseDuration;
+			if (BanditFireModes.enabled && BanditFireModes.currentfireMode == BanditFireModes.Bandit2FireMode.Spam) baseDuration = 0.1f;
 			base.OnEnter();
 			duration = baseDuration / this.attackSpeedStat;
 			minDuration = baseMinDuration / this.attackSpeedStat;
@@ -50,7 +52,8 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
 
         public override void OnExit()
 		{
-			if (!buttonReleased && base.characterBody && base.skillLocator && base.skillLocator.primary.stock > 0)
+			if (!buttonReleased && base.characterBody && base.skillLocator && base.skillLocator.primary.stock > 0
+				&& !(BanditFireModes.enabled && BanditFireModes.currentfireMode == BanditFireModes.Bandit2FireMode.Spam))
 			{
 				base.characterBody.SetSpreadBloom(0f, false);
 			}

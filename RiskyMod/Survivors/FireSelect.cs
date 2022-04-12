@@ -1,7 +1,5 @@
-﻿using RiskyMod.Survivors.Captain;
-using RiskyMod.Survivors.Croco;
-using RiskyMod.Survivors.Engi;
-using RiskyMod.Survivors.Loader;
+﻿using RiskyMod.Survivors.Bandit2;
+using RiskyMod.Survivors.Captain;
 using UnityEngine;
 
 namespace RiskyMod.Survivors
@@ -15,6 +13,7 @@ namespace RiskyMod.Survivors
         public FireSelect()
         {
             new CaptainFireModes();
+            new BanditFireModes();
         }
     }
 }
