@@ -188,7 +188,7 @@ namespace RiskyMod.Survivors.Toolbot
                 false,
                 false,
                 false,
-                powerDef.buffColor,
+                new Color(0.839f, 0.788f, 0.227f),
                 powerDef.iconSprite
                 );
 

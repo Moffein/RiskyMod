@@ -7,7 +7,6 @@ namespace RiskyMod.Tweaks.RunScaling
     public class Scaling
     {
 		public static bool enabled = true;
-		public static float rewardMultiplier = 0.85f;
 
 		public static GameModeIndex classicRunIndex;
 		public static GameModeIndex simulacrumIndex;
@@ -54,8 +53,10 @@ namespace RiskyMod.Tweaks.RunScaling
                 {
 					stagesCleared--;
                 }*/
-				float stageFactor = 1f + 0.5f * Mathf.Floor(stagesCleared / 5);	//Explicitly use Floor to be safe, even though int division already floors it.
-				float finalDifficulty = (playerFactor + timeFactor) * stageFactor;
+				int loopCount = Mathf.FloorToInt(stagesCleared / 5);
+				float loopFactor = 1f + 0.25f * loopCount;
+				float stageFactor = loopCount > 0 ? (stagesCleared - 5) * 0.08f : 1f;
+				float finalDifficulty = (playerFactor + timeFactor) * loopFactor * stageFactor;
 				self.compensatedDifficultyCoefficient = finalDifficulty;
 				self.difficultyCoefficient = finalDifficulty;
 
@@ -113,16 +114,12 @@ namespace RiskyMod.Tweaks.RunScaling
 			{
 				if (Run.instance.gameModeIndex != simulacrumIndex)
 				{
-					//self.goldReward = (uint)Mathf.CeilToInt(Mathf.Pow(self.goldReward, 0.9f) / Mathf.Pow(1.2f, Run.instance.stageClearCount / 5));
-					self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * 0.8333333333f);
+					int loopCount = Mathf.FloorToInt(Run.instance.stageClearCount / 5);
+					//self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * 0.8333333333f / (1f + 0.08f * Run.instance.stageClearCount) / (1f + 0.25f * loopCount));
+					self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * 0.8333333333f / (1f + 0.25f * loopCount));
 				}
 				orig(self, damageReport);
 			};
-		}
-
-		private float GetScaledReward()
-		{
-			return 1.1f * Run.instance.stageClearCount < 4 ? Mathf.Pow(1.1f, Run.instance.stageClearCount) : 1.5f;
 		}
 	}
 }

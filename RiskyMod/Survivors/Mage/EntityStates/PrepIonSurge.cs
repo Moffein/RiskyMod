@@ -154,7 +154,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 		public static float blastRadius = 14f;//Ion Surge is 14f
 		public static float blastJumpRadius = 14f;
 
-		public static float blastForce = 4000f;
+		public static float blastForce = 3200f; //4000f is railgunner
 		public static Vector3 additionalForce = 200f * Vector3.up;
 
 		private float duration;

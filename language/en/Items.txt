@@ -121,7 +121,7 @@
 	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Gain <style=cIsDamage>Col. Droneman</style>. \nDrones gain <style=cIsDamage>+50%</style> <style=cStack>(+50% per stack)</style> attack speed and cooldown reduction. \nDrones gain <style=cIsDamage>10%</style> chance to fire a <style=cIsDamage>missile</style> on hit, dealing <style=cIsDamage>300%</style> TOTAL damage. \nDrones gain an <style=cIsDamage>automatic chain gun</style> that deals <style=cIsDamage>6x40%</style>damage, bouncing to <style=cIsDamage>2</style> enemies.",
 	
 	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "Deal bonus damage while outside of danger.",
-	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Increase damage by <style=cIsDamage>8%</style> <style=cStack>(+8% per stack)</style> while outside of danger.",
+	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Increase damage by <style=cIsDamage>10%</style> <style=cStack>(+10% per stack)</style> while outside of danger.",
 	
 	"ITEM_CHAINLIGHTNINGVOID_DESC_RISKYMOD": "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>lightning</style> for <style=cIsDamage>60%</style> TOTAL damage up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> times. <style=cIsVoid>Corrupts all Ukuleles</style>."
 	}

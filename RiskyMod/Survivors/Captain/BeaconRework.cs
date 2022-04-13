@@ -2,6 +2,7 @@
 using MonoMod.Cil;
 using R2API;
 using RoR2;
+using RoR2.Orbs;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
@@ -16,13 +17,17 @@ namespace RiskyMod.Survivors.Captain
         public static class Skills
         {
             public static SkillDef BeaconResupply;
+            public static SkillDef BeaconHacking;
         }
+
+        public static BuffDef AmpBuff;
 
         public BeaconRework(SkillLocator sk)
         {
             Skills.BeaconResupply = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropEquipmentRestock.asset").WaitForCompletion();
+            Skills.BeaconHacking = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropHacking.asset").WaitForCompletion();
             AddCooldown(Skills.BeaconResupply);
-            AddCooldown("RoR2/Base/Captain/CallSupplyDropHacking.asset");
+            AddCooldown(Skills.BeaconHacking);
             AddCooldown("RoR2/Base/Captain/CallSupplyDropHealing.asset");
             AddCooldown("RoR2/Base/Captain/CallSupplyDropShocking.asset");
 
@@ -61,7 +66,6 @@ namespace RiskyMod.Survivors.Captain
                     }
                 }
             };
-
             ModifyBeacons(sk);
         }
 
@@ -90,6 +94,7 @@ namespace RiskyMod.Survivors.Captain
         {
             //Debug.Log("Shock Radius: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.CaptainSupplyDrop.ShockZoneMainState", "shockRadius"));//10, same as healing
             ModifyBeaconResupply(sk);
+            ModifyBeaconHacking(sk);
         }
 
         private void ModifyBeaconResupply(SkillLocator sk)
@@ -98,19 +103,97 @@ namespace RiskyMod.Survivors.Captain
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
             esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconResupplyMain));
             Skills.BeaconResupply.skillDescriptionToken = "CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD";
+        }
+        private void ModifyBeaconHacking(SkillLocator sk)
+        {
+            AmpBuff = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyModCaptainAmp",
+                false,
+                false,
+                false,
+                new Color(0.839f, 0.788f, 0.227f),
+                Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/ShockNearby/bdTeslaField.asset").WaitForCompletion().iconSprite
+                );
 
-            //Prevent beacons from benefiting from Resupply cooldown reduction
-            On.RoR2.SkillLocator.DeductCooldownFromAllSkillsAuthority += (orig, self, deduction) =>
+            /*RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
-                for (int i = 0; i < self.allSkills.Length; i++)
+                if (sender.HasBuff(AmpBuff))
                 {
-                    GenericSkill genericSkill = self.allSkills[i];
-                    if (genericSkill.stock < genericSkill.maxStock && genericSkill.skillName != "SupplyDrop1" && genericSkill.skillName != "SupplyDrop2")
+                    args.attackSpeedMultAdd += 0.3f;
+                }
+            };*/
+
+            SharedHooks.OnHitEnemy.OnHitAttackerActions += (DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody) =>
+            {
+                if (attackerBody.HasBuff(AmpBuff) && !damageInfo.procChainMask.HasProc(ProcType.LoaderLightning))
+                {
+                    //if (Util.CheckRoll(30f * damageInfo.procCoefficient, attackerBody.master))
+
+                    float damageCoefficient3 = 0.3f;
+                    float damageValue2 = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, damageCoefficient3);
+
+                    bool victimAlive = (victimBody.healthComponent && victimBody.healthComponent.alive);
+
+                    LightningOrb lightningOrb = new LightningOrb();
+                    lightningOrb.origin = damageInfo.position;
+                    lightningOrb.damageValue = damageValue2;
+                    lightningOrb.isCrit = damageInfo.crit;
+                    lightningOrb.bouncesRemaining = victimAlive ? 1 : 0;
+                    lightningOrb.teamIndex = attackerBody.teamComponent ? attackerBody.teamComponent.teamIndex : TeamIndex.None;
+                    lightningOrb.attacker = damageInfo.attacker;
+                    lightningOrb.bouncedObjects = new List<HealthComponent>();
+                    if (!victimAlive) lightningOrb.bouncedObjects.Add(victimBody.healthComponent);
+                    /*lightningOrb.bouncedObjects = new List<HealthComponent>
+                        {
+                            victimBody.healthComponent
+                        };*/
+                    lightningOrb.procChainMask = damageInfo.procChainMask;
+                    lightningOrb.procChainMask.AddProc(ProcType.LoaderLightning);
+                    lightningOrb.procCoefficient = 0.5f;
+                    lightningOrb.lightningType = LightningOrb.LightningType.Loader;
+                    lightningOrb.damageColorIndex = DamageColorIndex.Item;
+                    lightningOrb.range = 20f;
+                    HurtBox hurtBox = lightningOrb.PickNextTarget(damageInfo.position);
+                    if (hurtBox)
                     {
-                        genericSkill.rechargeStopwatch += deduction;
+                        lightningOrb.target = hurtBox;
+                        OrbManager.instance.AddOrb(lightningOrb);
                     }
                 }
             };
+
+            IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "Warbanner")
+                    );
+                c.Index += 2;
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<bool, CharacterBody, bool>>((hasWarbanner, self) =>
+                {
+                    return hasWarbanner || self.HasBuff(AmpBuff);
+                });
+            };
+
+            GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, Hacking.prefab").WaitForCompletion();
+            EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
+            esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconHackingMain));
+
+            BuffWard ward = beaconPrefab.AddComponent<BuffWard>();
+            ward.shape = BuffWard.BuffWardShape.Sphere;
+            ward.radius = 10f;  //How big is hack radius?
+            ward.interval = 0.2f;
+            ward.buffDef = AmpBuff;
+            ward.buffDuration = 1f;
+            ward.floorWard = false;
+            ward.expires = false;
+            ward.invertTeamFilter = false;
+            ward.animateRadius = false;
+            ward.requireGrounded = false;
+
+            Skills.BeaconHacking.skillNameToken = "CAPTAIN_SUPPLY_HACKING_NAME_RISKYMOD";
+            Skills.BeaconHacking.skillDescriptionToken = "CAPTAIN_SUPPLY_HACKING_DESCRIPTION_RISKYMOD";
         }
     }
 
