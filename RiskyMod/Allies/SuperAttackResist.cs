@@ -22,8 +22,8 @@ namespace RiskyMod.Allies
                 && (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player)
                 && AlliesCore.IsAlly(self.body.bodyIndex))
             {
-                damageInfo.procCoefficient *= 0.5f;
-                damageInfo.damage *= 0.5f;
+                damageInfo.procCoefficient *= 0.3333333333f;
+                damageInfo.damage *= 0.3333333333f;
             }
         }
     }

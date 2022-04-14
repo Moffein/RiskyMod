@@ -7,7 +7,7 @@
 	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Restores Skill charges</style> on use.",
 	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_INTERACTION_RISKYMOD" : "Take Skill Charge",
 	"CAPTAIN_SUPPLY_HACKING_NAME_RISKYMOD" : "Beacon: Amp",
-	"CAPTAIN_SUPPLY_HACKING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Electrifies</style> the attacks of nearby allies and their drones.",
+	"CAPTAIN_SUPPLY_HACKING_DESCRIPTION_RISKYMOD" : "Boosts <style=cIsDamage>attack speed</style> and <style=cIsDamage>damage</style> of nearby allies and their drones.",
 	
 	"BANDIT2_PRIMARY_DESC_RISKYMOD" : "Fire a shotgun burst for <style=cIsDamage>5x90% damage</style>. Can hold up to 4 shells.",
 	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD" : "Fire a rifle blast that pierces for <style=cIsDamage>330% damage</style>. Can hold up to 4 bullets.",

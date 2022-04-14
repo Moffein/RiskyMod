@@ -115,15 +115,17 @@ namespace RiskyMod.Survivors.Captain
                 Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/ShockNearby/bdTeslaField.asset").WaitForCompletion().iconSprite
                 );
 
-            /*RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
+            RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
                 if (sender.HasBuff(AmpBuff))
                 {
                     args.attackSpeedMultAdd += 0.3f;
+                    args.damageMultAdd += 0.15f;
+                    args.armorAdd += 15F;
                 }
-            };*/
+            };
 
-            SharedHooks.OnHitEnemy.OnHitAttackerActions += (DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody) =>
+            /*SharedHooks.OnHitEnemy.OnHitAttackerActions += (DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody) =>
             {
                 if (attackerBody.HasBuff(AmpBuff) && !damageInfo.procChainMask.HasProc(ProcType.LoaderLightning))
                 {
@@ -143,13 +145,10 @@ namespace RiskyMod.Survivors.Captain
                     lightningOrb.attacker = damageInfo.attacker;
                     lightningOrb.bouncedObjects = new List<HealthComponent>();
                     if (!victimAlive) lightningOrb.bouncedObjects.Add(victimBody.healthComponent);
-                    /*lightningOrb.bouncedObjects = new List<HealthComponent>
-                        {
-                            victimBody.healthComponent
-                        };*/
+                    //lightningOrb.bouncedObjects = new List<HealthComponent> { victimBody.healthComponent };
                     lightningOrb.procChainMask = damageInfo.procChainMask;
                     lightningOrb.procChainMask.AddProc(ProcType.LoaderLightning);
-                    lightningOrb.procCoefficient = 0.5f;
+                    lightningOrb.procCoefficient = 0.4f;
                     lightningOrb.lightningType = LightningOrb.LightningType.Loader;
                     lightningOrb.damageColorIndex = DamageColorIndex.Item;
                     lightningOrb.range = 20f;
@@ -160,7 +159,7 @@ namespace RiskyMod.Survivors.Captain
                         OrbManager.instance.AddOrb(lightningOrb);
                     }
                 }
-            };
+            };*/
 
             IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>
             {
@@ -182,7 +181,7 @@ namespace RiskyMod.Survivors.Captain
 
             BuffWard ward = beaconPrefab.AddComponent<BuffWard>();
             ward.shape = BuffWard.BuffWardShape.Sphere;
-            ward.radius = 10f;  //How big is hack radius?
+            ward.radius = 10f;
             ward.interval = 0.2f;
             ward.buffDef = AmpBuff;
             ward.buffDuration = 1f;

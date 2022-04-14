@@ -31,6 +31,16 @@ using RiskyMod.Enemies.Mobs;
 using RiskyMod.Enemies.Mobs.Lunar;
 using RiskyMod.Enemies.DLC1;
 using RiskyMod.Enemies.Bosses;
+using RiskyMod.Allies;
+using RiskyMod.Items;
+using RiskyMod.Enemies;
+using RiskyMod.Moon;
+using RiskyMod.VoidLocus;
+using RiskyMod.Tweaks.Holdouts;
+using RiskyMod.Tweaks.Artifacts;
+using RiskyMod.Tweaks;
+using RiskyMod.Tweaks.CharacterMechanics;
+using RiskyMod.Tweaks.RunScaling;
 
 namespace RiskyMod
 {
@@ -44,6 +54,15 @@ namespace RiskyMod
 
         public static string ConfigFolderPath { get => System.IO.Path.Combine(BepInEx.Paths.ConfigPath, RiskyMod.pluginInfo.Metadata.GUID); }
 
+        private const string coreModuleString = "0. Core Modules";
+        private const string gameMechString = "1. Game Mechanics";
+        private const string scalingString = "2. Run Scaling";
+        private const string interactString = "3. Interactables";
+        private const string allyString = "4. Allies";
+        private const string artifactString = "5. Artifacts";
+        private const string moonString = "6. Moon";
+        private const string voidLocusString = "7. Void Locus";
+        private const string miscString = "100. Misc Tweaks";
 
         private const string uncommonString = "Items - Uncommon";
         private const string commonString = "Items - Common";
@@ -82,8 +101,90 @@ namespace RiskyMod
 
         private static void ConfigGeneral()
         {
+            GeneralCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_General.cfg"), true);
 
+            //Core Modules
+            AlliesCore.enabled = GeneralCfg.Bind(coreModuleString, "Ally Changes", true, "Enable drone and ally changes.").Value;
+            ItemsCore.enabled = GeneralCfg.Bind(coreModuleString, "Item Changes", true, "Enable item changes.").Value;
+            SurvivorsCore.enabled = GeneralCfg.Bind(coreModuleString, "Survivor Changes", true, "Enable survivor changes.").Value;
+            EnemiesCore.modifyEnemies = GeneralCfg.Bind(coreModuleString, "Monster Changes", true, "Enable enemy changes.").Value;
+            MoonCore.enabled = GeneralCfg.Bind(coreModuleString, "Moon Changes", true, "Enable Moon changes.").Value;
+            VoidLocusCore.enabled = GeneralCfg.Bind(coreModuleString, "Void Locus Changes", true, "Enable Void Locus changes.").Value;
+
+            //Game Mechanics
+            RiskyMod.disableProcChains = GeneralCfg.Bind(gameMechString, "Disable Proc Chains", true, "Remove the proc coefficient on most item effects.").Value;
+            ShieldGating.enabled = GeneralCfg.Bind(gameMechString, "Shield Gating", true, "Shields gate against HP damage.").Value;
+            TrueOSP.enabled = GeneralCfg.Bind(gameMechString, "True OSP", true, "Makes OSP work against multihits.").Value;
+            AIBlacklistItems.enabled = GeneralCfg.Bind(gameMechString, "Expanded AI Blacklist", true, "Adds extra items to the AI Blacklist by default.").Value;
+            BarrierDecay.enabled = GeneralCfg.Bind(gameMechString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
+            TeleExpandOnBossKill.enabled = GeneralCfg.Bind(gameMechString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;
+            SmallHoldoutCharging.enabled = GeneralCfg.Bind(gameMechString, "Small Holdout Charging", true, "Void/Moon Holdouts charge at max speed as long as 1 player is charging.").Value;
+
+            //Run Scaling
+            Scaling.enabled = GeneralCfg.Bind(scalingString, "Linear Difficulty Scaling", true, "Makes difficulty scaling linear.").Value;
+            NoLevelupHeal.enabled = GeneralCfg.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
+            RemoveLevelCap.enabled = GeneralCfg.Bind(scalingString, "Increase Monster Level Cap", true, "Increases Monster Level Cap.").Value;
+            RemoveLevelCap.maxLevel = GeneralCfg.Bind(scalingString, "Increase Monster Level Cap - Max Level", 9999f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
+            LoopBossArmor.enabled = GeneralCfg.Bind(scalingString, "Loop Boss Armor", true, "Teleporter bosses gain bonus armor when looping.").Value;
+            SceneDirectorMonsterRewards.enabled = GeneralCfg.Bind(scalingString, "SceneDirector Monster Rewards", true, "Monsters that spawn with the map now give the same rewards as teleporter monsters.").Value;
+
+            //Allies
+            AllyScaling.normalizeDroneDamage = GeneralCfg.Bind(allyString, "Normalize Drone Damage", true, "Normalize drone damage stats so that they perform the same when using Spare Drone Parts.").Value;
+            AlliesCore.nerfDroneParts = GeneralCfg.Bind(allyString, "Spare Drone Parts Changes", true, "Reduce the damage of Spare Drone Parts.").Value;
+            AllyScaling.noVoidDeath = GeneralCfg.Bind(allyString, "No Void Death", true, "Allies are immune to Void implosions.").Value;
+            NoVoidDamage.enabled = GeneralCfg.Bind(allyString, "No Void Damage", true, "Allies take no damage from Void fog.").Value;
+            AllyScaling.noOverheat = GeneralCfg.Bind(allyString, "No Overheat", true, "Allies are immune to Grandparent Overheat.").Value;
+            SuperAttackResist.enabled = GeneralCfg.Bind(allyString, "Superattack Resistance", true, "Allies take less damage from superattacks like Vagrant Novas.").Value;
+
+            //Interactables
+            ShrineSpawnRate.enabled = GeneralCfg.Bind(interactString, "Mountain/Combat Shrine Playercount Scaling", true, "Mountain/Combat Shrine Director Credit cost scales with playercount.").Value;
+            ShrineCombatItems.enabled = GeneralCfg.Bind(interactString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
+            BloodShrineMinReward.enabled = GeneralCfg.Bind(interactString, "Shrine of Blood Minimum Reward", true, "Shrine of Blood always gives at least enough money to buy a small chest.").Value;
+            VoidSeedLimit.seedLimit = GeneralCfg.Bind(interactString, "Void Seed Limit", 1, "Limit how many Void Seeds can spawn on 1 stage. Set to negative to disable.").Value;
+            VoidSeedLimit.enabled = VoidSeedLimit.seedLimit >= 0;
+
+            //Artifacts
+            VengeancePercentHeal.enabled = GeneralCfg.Bind(artifactString, "Reduce Vengeance Healing", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
+            EnigmaBlacklist.enabled = GeneralCfg.Bind(artifactString, "Enigma Blacklist", true, "Blacklist Lunars and Recycler from the Artifact of Enigma.").Value;
+
+            //Moon
+            Moon.ModifyHoldout.enabled = GeneralCfg.Bind(moonString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
+            LessPillars.enabled = GeneralCfg.Bind(moonString, "Reduce Pillar Count", true, "Reduce the amount of pillars required to activate the jump pads.").Value;
+            Moon.PillarsDropItems.enabled = GeneralCfg.Bind(moonString, "Pillars Drop Items", true, "Pillars drop items for the team when completed.").Value;
+            Moon.PillarsDropItems.whiteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Common Chance", 50f, "Chance for Pillars to drop Common Items.").Value;
+            Moon.PillarsDropItems.greenChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Uncommon Chance", 40f, "Chance for Pillars to drop Uncommon Items.").Value;
+            Moon.PillarsDropItems.redChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Legendary Chance", 10f, "Chance for Pillars to drop Legendary Items.").Value;
+            Moon.PillarsDropItems.pearlOverwriteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Pearl Overwrite Chance", 15f, "Chance for nonlegendary Pillar drops to be overwritten with a Pearl.").Value;
+            Moon.PillarsDropItems.lunarOverwriteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Lunar Overwrite Chance", 0f, "Chance for nonlegendary Pillar drops to be overwritten with a random Lunar item.").Value;
+            Moon.PillarsDropItems.noOverwriteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - No Overwrite Chance", 85f, "Chance for nonlegendary Pillar drops to not be overwritten.").Value;
+
+            //Void Locus
+            RemoveFog.enabled = GeneralCfg.Bind(voidLocusString, "Remove Fog", true, "Removes Void Fog from the map.").Value;
+            VoidLocus.ModifyHoldout.enabled = GeneralCfg.Bind(voidLocusString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
+            VoidLocus.PillarsDropItems.enabled = GeneralCfg.Bind(voidLocusString, "Signals Drop Items", true, "Pillars drop items for the team when completed.").Value;
+            VoidLocus.PillarsDropItems.whiteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Common Chance", 50f, "Chance for Signals to drop Common Items.").Value;
+            VoidLocus.PillarsDropItems.greenChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Uncommon Chance", 40f, "Chance for Signals to drop Uncommon Items.").Value;
+            VoidLocus.PillarsDropItems.redChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Legendary Chance", 10f, "Chance for Signals to drop Legendary Items.").Value;
+            VoidLocus.PillarsDropItems.pearlOverwriteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Pearl Overwrite Chance", 0f, "Chance for nonlegendary Pillar drops to be overwritten with a Pearl.").Value;
+            VoidLocus.PillarsDropItems.lunarOverwriteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Lunar Overwrite Chance", 0f, "Chance for nonlegendary Pillar drops to be overwritten with a random Lunar item.").Value;
+            VoidLocus.PillarsDropItems.noOverwriteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - No Overwrite Chance", 100f, "Chance for nonlegendary Pillar drops to not be overwritten.").Value;
+
+            //Misc
+            FixSlayer.enabled = GeneralCfg.Bind(miscString, "Fix Slayer Procs", true, "Bandit/Acrid bonus damage to low hp effect now applies to procs.").Value;
+            CloakBuff.enabled = GeneralCfg.Bind(miscString, "Cloak Buff", true, "Increases delay between position updates while cloaked.").Value;
+            Shock.enabled = GeneralCfg.Bind(miscString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
+            FreezeChampionExecute.enabled = GeneralCfg.Bind(miscString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
+            NerfVoidtouched.enabled = GeneralCfg.Bind(miscString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
+            PlayerControlledMonsters.enabled = GeneralCfg.Bind(miscString, "Player-Controlled Monster Regen", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
+            SlowDownProjectilesModifyDamage.enabled = GeneralCfg.Bind(miscString, "Slowed Projectiles Deal Less Damage", true, "Projectiles slowed by Railgunners Polar Field Device and similar skills deal less damage.").Value;
         }
+
+
+        /*private void ReadConfig()
+        {
+            //Holdouts
+            SmallHoldoutRadius.enabled = GeneralCfg.Bind(holdoutString, "Small Holdout Radius", true, "Void/Moon Holdouts have increased radius.").Value;
+        }*/
 
         private static void ConfigItems()
         {
