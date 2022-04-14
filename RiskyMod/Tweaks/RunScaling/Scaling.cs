@@ -118,7 +118,8 @@ namespace RiskyMod.Tweaks.RunScaling
 					//int loopCount = Mathf.FloorToInt(Run.instance.stageClearCount / 5);
 					//self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * 0.8333333333f / (1f + 0.08f * Run.instance.stageClearCount) / (1f + 0.25f * loopCount));
 					//self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * 0.8333333333f / (1f + 0.25f * loopCount));
-					self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * stageChestCost / Run.instance.GetDifficultyScaledCost(25));
+					float chestRatio = stageChestCost / (float)Run.instance.GetDifficultyScaledCost(25);
+					self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * chestRatio);
 				}
 				orig(self, damageReport);
 			};

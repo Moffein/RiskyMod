@@ -191,7 +191,6 @@ namespace RiskyMod.Survivors.Captain
             ward.animateRadius = false;
             ward.requireGrounded = false;
 
-            Skills.BeaconHacking.skillNameToken = "CAPTAIN_SUPPLY_HACKING_NAME_RISKYMOD";
             Skills.BeaconHacking.skillDescriptionToken = "CAPTAIN_SUPPLY_HACKING_DESCRIPTION_RISKYMOD";
         }
     }
