@@ -41,6 +41,7 @@ using RiskyMod.Tweaks.Artifacts;
 using RiskyMod.Tweaks;
 using RiskyMod.Tweaks.CharacterMechanics;
 using RiskyMod.Tweaks.RunScaling;
+using RiskyMod.VoidFields;
 
 namespace RiskyMod
 {
@@ -60,8 +61,9 @@ namespace RiskyMod
         private const string interactString = "3. Interactables";
         private const string allyString = "4. Allies";
         private const string artifactString = "5. Artifacts";
-        private const string moonString = "6. Moon";
-        private const string voidLocusString = "7. Void Locus";
+        private const string voidFieldsString = "6. Void Fields";
+        private const string moonString = "7. Moon";
+        private const string voidLocusString = "8. Void Locus";
         private const string miscString = "100. Misc Tweaks";
 
         private const string uncommonString = "Items - Uncommon";
@@ -110,6 +112,7 @@ namespace RiskyMod
             EnemiesCore.modifyEnemies = GeneralCfg.Bind(coreModuleString, "Monster Changes", true, "Enable enemy changes.").Value;
             MoonCore.enabled = GeneralCfg.Bind(coreModuleString, "Moon Changes", true, "Enable Moon changes.").Value;
             VoidLocusCore.enabled = GeneralCfg.Bind(coreModuleString, "Void Locus Changes", true, "Enable Void Locus changes.").Value;
+            VoidFieldsCore.enabled = GeneralCfg.Bind(coreModuleString, "Void Fields Changes", true, "Enable Void Fields changes.").Value;
 
             //Game Mechanics
             RiskyMod.disableProcChains = GeneralCfg.Bind(gameMechString, "Disable Proc Chains", true, "Remove the proc coefficient on most item effects.").Value;
@@ -147,6 +150,9 @@ namespace RiskyMod
             VengeancePercentHeal.enabled = GeneralCfg.Bind(artifactString, "Reduce Vengeance Healing", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
             EnigmaBlacklist.enabled = GeneralCfg.Bind(artifactString, "Enigma Blacklist", true, "Blacklist Lunars and Recycler from the Artifact of Enigma.").Value;
 
+            //Void Fields
+            VoidFields.ModifyHoldout.enabled = GeneralCfg.Bind(voidFieldsString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
+
             //Moon
             Moon.ModifyHoldout.enabled = GeneralCfg.Bind(moonString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
             LessPillars.enabled = GeneralCfg.Bind(moonString, "Reduce Pillar Count", true, "Reduce the amount of pillars required to activate the jump pads.").Value;
@@ -178,13 +184,6 @@ namespace RiskyMod
             PlayerControlledMonsters.enabled = GeneralCfg.Bind(miscString, "Player-Controlled Monster Regen", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
             SlowDownProjectilesModifyDamage.enabled = GeneralCfg.Bind(miscString, "Slowed Projectiles Deal Less Damage", true, "Projectiles slowed by Railgunners Polar Field Device and similar skills deal less damage.").Value;
         }
-
-
-        /*private void ReadConfig()
-        {
-            //Holdouts
-            SmallHoldoutRadius.enabled = GeneralCfg.Bind(holdoutString, "Small Holdout Radius", true, "Void/Moon Holdouts have increased radius.").Value;
-        }*/
 
         private static void ConfigItems()
         {

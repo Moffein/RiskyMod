@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <Folder Include="Items\DLC1\Lunar\" />
-    <Folder Include="VoidFields\" />
   </ItemGroup>
 
   <ItemGroup>

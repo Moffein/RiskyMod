@@ -51,6 +51,7 @@ using RiskyMod.Tweaks.Holdouts;
 using RiskyMod.Tweaks.CharacterMechanics;
 using RiskyMod.Tweaks.Artifacts;
 using RiskyMod.MonoBehaviours;
+using RiskyMod.VoidFields;
 
 namespace RiskyMod
 {
@@ -125,6 +126,7 @@ namespace RiskyMod
             RunTweaks();
             new ItemsCore();
             new AlliesCore();
+            new VoidFieldsCore();
             new MoonCore();
             new VoidLocusCore();
             new SurvivorsCore();
@@ -178,8 +180,9 @@ namespace RiskyMod
             //No need for this to be static since this doesn't get referenced anywhere else
             bool teleExpansionLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.TeleExpansion");
             SmallHoldoutCharging.enabled = SmallHoldoutCharging.enabled && !teleExpansionLoaded;
-            SmallHoldoutRadius.enabled = SmallHoldoutRadius.enabled && !teleExpansionLoaded;
             TeleExpandOnBossKill.enabled = TeleExpandOnBossKill.enabled && !teleExpansionLoaded;
+            VoidLocus.ModifyHoldout.enabled = VoidLocus.ModifyHoldout.enabled && !teleExpansionLoaded;
+            Moon.ModifyHoldout.enabled = Moon.ModifyHoldout.enabled && !teleExpansionLoaded;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -215,7 +218,6 @@ namespace RiskyMod
 
             //Holdouts
             new SmallHoldoutCharging();
-            new SmallHoldoutRadius();
             new TeleExpandOnBossKill();
 
             //Shrines
