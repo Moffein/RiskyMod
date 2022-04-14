@@ -55,16 +55,16 @@ namespace RiskyMod
 
         public static string ConfigFolderPath { get => System.IO.Path.Combine(BepInEx.Paths.ConfigPath, RiskyMod.pluginInfo.Metadata.GUID); }
 
-        private const string coreModuleString = "0. Core Modules";
-        private const string gameMechString = "1. Game Mechanics";
-        private const string scalingString = "2. Run Scaling";
-        private const string interactString = "3. Interactables";
-        private const string allyString = "4. Allies";
-        private const string artifactString = "5. Artifacts";
-        private const string voidFieldsString = "6. Void Fields";
-        private const string moonString = "7. Moon";
-        private const string voidLocusString = "8. Void Locus";
-        private const string miscString = "100. Misc Tweaks";
+        private const string coreModuleString = "00. Core Modules";
+        private const string gameMechString = "01. Game Mechanics";
+        private const string scalingString = "02. Run Scaling";
+        private const string interactString = "03. Interactables";
+        private const string allyString = "04. Allies";
+        private const string artifactString = "05. Artifacts";
+        private const string voidFieldsString = "06. Void Fields";
+        private const string moonString = "07. Moon";
+        private const string voidLocusString = "08. Void Locus";
+        private const string miscString = "99. Misc Tweaks";
 
         private const string uncommonString = "Items - Uncommon";
         private const string commonString = "Items - Common";
