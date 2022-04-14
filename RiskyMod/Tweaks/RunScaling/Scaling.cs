@@ -12,6 +12,7 @@ namespace RiskyMod.Tweaks.RunScaling
 		public static GameModeIndex simulacrumIndex;
 
 		private static bool isBossStage = false;
+		private static int stageChestCost = 25;
 
         public Scaling()
         {
@@ -24,9 +25,9 @@ namespace RiskyMod.Tweaks.RunScaling
 
 			if (!enabled) return;
 
-			/*On.RoR2.Stage.Start += (orig, self) =>
+			On.RoR2.Stage.Start += (orig, self) =>
 			{
-				Scaling.isBossStage = false;
+				/*Scaling.isBossStage = false;
 				SceneDef sd = RoR2.SceneCatalog.GetSceneDefForCurrentScene();
 				if (sd)
 				{
@@ -34,10 +35,10 @@ namespace RiskyMod.Tweaks.RunScaling
                     {
 						Scaling.isBossStage = true;
 					}
-				}
-
+				}*/
+				stageChestCost = Run.instance.GetDifficultyScaledCost(25);
 				orig(self);
-			};*/
+			};
 
 			On.RoR2.Run.RecalculateDifficultyCoefficentInternal += (orig, self) =>
             {
@@ -114,9 +115,10 @@ namespace RiskyMod.Tweaks.RunScaling
 			{
 				if (Run.instance.gameModeIndex != simulacrumIndex)
 				{
-					int loopCount = Mathf.FloorToInt(Run.instance.stageClearCount / 5);
+					//int loopCount = Mathf.FloorToInt(Run.instance.stageClearCount / 5);
 					//self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * 0.8333333333f / (1f + 0.08f * Run.instance.stageClearCount) / (1f + 0.25f * loopCount));
-					self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * 0.8333333333f / (1f + 0.25f * loopCount));
+					//self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * 0.8333333333f / (1f + 0.25f * loopCount));
+					self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * stageChestCost / Run.instance.GetDifficultyScaledCost(25));
 				}
 				orig(self, damageReport);
 			};
