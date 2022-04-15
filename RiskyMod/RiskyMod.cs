@@ -111,8 +111,18 @@ namespace RiskyMod
         public static PluginInfo pluginInfo;
         public static FileSystem fileSystem { get; private set; }
 
+        public static GameModeIndex classicRunIndex;
+        public static GameModeIndex simulacrumIndex;
+
         public void Awake()
         {
+            On.RoR2.GameModeCatalog.LoadGameModes += (orig) =>
+            {
+                orig();
+                simulacrumIndex = GameModeCatalog.FindGameModeIndex("InfiniteTowerRun");
+                classicRunIndex = GameModeCatalog.FindGameModeIndex("ClassicRun");
+            };
+
             pluginInfo = Info;
             Assets.Init();
             ConfigFiles.Init();
@@ -210,8 +220,7 @@ namespace RiskyMod
         private void RunTweaks()
         {
             //RunScaling
-            new Scaling();
-            new LoopBossArmor();
+            new LinearScaling();
             new RemoveLevelCap();
             new NoLevelupHeal();
             new SceneDirectorMonsterRewards();

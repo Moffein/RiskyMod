@@ -15,7 +15,7 @@ namespace RiskyMod.Tweaks.RunScaling
         {
 			if (!enabled) return;
 			//Remove level capping when calculating monster level
-			if (!Scaling.enabled)
+			if (!LinearScaling.enabled)
 			{
 				IL.RoR2.Run.RecalculateDifficultyCoefficentInternal += (il) =>
 				{

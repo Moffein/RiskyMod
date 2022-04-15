@@ -124,11 +124,13 @@ namespace RiskyMod
             SmallHoldoutCharging.enabled = GeneralCfg.Bind(gameMechString, "Small Holdout Charging", true, "Void/Moon Holdouts charge at max speed as long as 1 player is charging.").Value;
 
             //Run Scaling
-            Scaling.enabled = GeneralCfg.Bind(scalingString, "Linear Difficulty Scaling", true, "Makes difficulty scaling linear.").Value;
+            CombatDirectorMultiplier.multiplier = GeneralCfg.Bind(scalingString, "Combat Director Credit Multiplier", 1.2f, "Multiply Combat Director credits by this amount. Set to 1 to disable").Value;
+            CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.multiplier != 1f;
+            MonsterGoldRewards.enabled = GeneralCfg.Bind(scalingString, "Scaled Monster Gold Rewards", true, "Monsters gold rewards are scaled off of the initial price of chests on the stage.").Value;
+            LinearScaling.enabled = GeneralCfg.Bind(scalingString, "Experimental: Linear Difficulty Scaling", false, "Makes difficulty scaling linear like in RoR1. Was used in older versions of the mod but ended up getting scrapped since it ended up underscaling enemies compared to Vanilla when looping.").Value;
             NoLevelupHeal.enabled = GeneralCfg.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
             RemoveLevelCap.enabled = GeneralCfg.Bind(scalingString, "Increase Monster Level Cap", true, "Increases Monster Level Cap.").Value;
             RemoveLevelCap.maxLevel = GeneralCfg.Bind(scalingString, "Increase Monster Level Cap - Max Level", 9999f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
-            LoopBossArmor.enabled = GeneralCfg.Bind(scalingString, "Loop Boss Armor", true, "Teleporter bosses gain bonus armor when looping.").Value;
             SceneDirectorMonsterRewards.enabled = GeneralCfg.Bind(scalingString, "SceneDirector Monster Rewards", true, "Monsters that spawn with the map now give the same rewards as teleporter monsters.").Value;
 
             //Allies

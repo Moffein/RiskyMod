@@ -4,42 +4,13 @@ using RiskyMod.Fixes;
 
 namespace RiskyMod.Tweaks.RunScaling
 {
-    public class Scaling
+    public class LinearScaling
     {
-		public static bool enabled = true;
+		public static bool enabled = false;
 
-		public static GameModeIndex classicRunIndex;
-		public static GameModeIndex simulacrumIndex;
-
-		private static bool isBossStage = false;
-		private static int stageChestCost = 25;
-
-        public Scaling()
+        public LinearScaling()
         {
-			On.RoR2.GameModeCatalog.LoadGameModes += (orig) =>
-			{
-				orig();
-				simulacrumIndex = GameModeCatalog.FindGameModeIndex("InfiniteTowerRun");
-				classicRunIndex = GameModeCatalog.FindGameModeIndex("ClassicRun");
-			};
-
 			if (!enabled) return;
-
-			On.RoR2.Stage.Start += (orig, self) =>
-			{
-				/*Scaling.isBossStage = false;
-				SceneDef sd = RoR2.SceneCatalog.GetSceneDefForCurrentScene();
-				if (sd)
-				{
-					if (sd.baseSceneName == "moon" || sd.baseSceneName == "moon2" || sd.baseSceneName == "voidraid")
-                    {
-						Scaling.isBossStage = true;
-					}
-				}*/
-				stageChestCost = Run.instance.GetDifficultyScaledCost(25);
-				orig(self);
-			};
-
 			On.RoR2.Run.RecalculateDifficultyCoefficentInternal += (orig, self) =>
             {
 				int playerCount = self.participatingPlayerCount;
@@ -47,17 +18,11 @@ namespace RiskyMod.Tweaks.RunScaling
 
 				DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
                 float playerFactor = 0.7f + playerCount * 0.3f;
-				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue;//* Mathf.Pow(playerCount, 0.15f)
-				//float stageFactor = Mathf.Pow(1.18f, self.stageClearCount / 5);  //Exponential scaling happens on a per-loop basis
+				float timeFactor = time * 0.1111111111f * difficultyDef.scalingValue;
 				int stagesCleared = self.stageClearCount;
-				/*if (Scaling.isBossStage && stagesCleared > 0)
-                {
-					stagesCleared--;
-                }*/
 				int loopCount = Mathf.FloorToInt(stagesCleared / 5);
 				float loopFactor = 1f + 0.25f * loopCount;
-				float stageFactor = loopCount > 0 ? (stagesCleared - 5) * 0.08f : 1f;
-				float finalDifficulty = (playerFactor + timeFactor) * loopFactor * stageFactor;
+				float finalDifficulty = (playerFactor + timeFactor) * loopFactor;
 				self.compensatedDifficultyCoefficient = finalDifficulty;
 				self.difficultyCoefficient = finalDifficulty;
 
@@ -101,28 +66,6 @@ namespace RiskyMod.Tweaks.RunScaling
 				}
 				return orig(self, deltaTime, difficultyCoefficient);
 			};*/
-
-			On.RoR2.CombatDirector.Awake += (orig, self) =>
-			{
-				if (Run.instance.gameModeIndex != simulacrumIndex)
-				{
-					self.creditMultiplier *= 1.2f;
-				}
-				orig(self);
-			};
-
-			On.RoR2.DeathRewards.OnKilledServer += (orig, self, damageReport) =>
-			{
-				if (Run.instance.gameModeIndex != simulacrumIndex)
-				{
-					//int loopCount = Mathf.FloorToInt(Run.instance.stageClearCount / 5);
-					//self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * 0.8333333333f / (1f + 0.08f * Run.instance.stageClearCount) / (1f + 0.25f * loopCount));
-					//self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * 0.8333333333f / (1f + 0.25f * loopCount));
-					float chestRatio = stageChestCost / (float)Run.instance.GetDifficultyScaledCost(25);
-					self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * chestRatio);
-				}
-				orig(self, damageReport);
-			};
 		}
 	}
 }
