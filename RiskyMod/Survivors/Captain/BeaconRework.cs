@@ -128,34 +128,38 @@ namespace RiskyMod.Survivors.Captain
             {
                 if (!attackerBody.isPlayerControlled && attackerBody.bodyFlags.HasFlag(CharacterBody.BodyFlags.Mechanical) && attackerBody.HasBuff(AmpBuff) && !damageInfo.procChainMask.HasProc(ProcType.LoaderLightning))
                 {
-                    //if (Util.CheckRoll(30f * damageInfo.procCoefficient, attackerBody.master))
-
-                    float damageCoefficient3 = 0.3f;
-                    float damageValue2 = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, damageCoefficient3);
-
-                    LightningOrb lightningOrb = new LightningOrb();
-                    lightningOrb.origin = damageInfo.position;
-                    lightningOrb.damageValue = damageValue2;
-                    lightningOrb.isCrit = damageInfo.crit;
-                    lightningOrb.bouncesRemaining = 2;
-                    lightningOrb.teamIndex = attackerBody.teamComponent ? attackerBody.teamComponent.teamIndex : TeamIndex.None;
-                    lightningOrb.attacker = damageInfo.attacker;
-
-                    lightningOrb.bouncedObjects = new List<HealthComponent>();
-                    lightningOrb.bouncedObjects.Add(victimBody.healthComponent);
-
-                    //lightningOrb.bouncedObjects = new List<HealthComponent> { victimBody.healthComponent };
-                    lightningOrb.procChainMask = damageInfo.procChainMask;
-                    lightningOrb.procChainMask.AddProc(ProcType.LoaderLightning);
-                    lightningOrb.procCoefficient = 0.1f;
-                    lightningOrb.lightningType = LightningOrb.LightningType.Loader;
-                    lightningOrb.damageColorIndex = DamageColorIndex.Item;
-                    lightningOrb.range = 20f;
-                    HurtBox hurtBox = lightningOrb.PickNextTarget(damageInfo.position);
-                    if (hurtBox)
+                    if (Util.CheckRoll(30f * damageInfo.procCoefficient, attackerBody.master))
                     {
-                        lightningOrb.target = hurtBox;
-                        OrbManager.instance.AddOrb(lightningOrb);
+                        float damageCoefficient3 = 1f;
+                        float damageValue2 = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, damageCoefficient3);
+
+                        LightningOrb lightningOrb = new LightningOrb();
+                        lightningOrb.origin = damageInfo.position;
+                        lightningOrb.damageValue = damageValue2;
+                        lightningOrb.isCrit = damageInfo.crit;
+                        lightningOrb.bouncesRemaining = 2;
+                        lightningOrb.teamIndex = attackerBody.teamComponent ? attackerBody.teamComponent.teamIndex : TeamIndex.None;
+                        lightningOrb.attacker = damageInfo.attacker;
+
+                        lightningOrb.bouncedObjects = new List<HealthComponent>();
+                        if (victimBody.healthComponent && !victimBody.healthComponent.alive)
+                        {
+                            lightningOrb.bouncedObjects.Add(victimBody.healthComponent);
+                        }
+
+                        //lightningOrb.bouncedObjects = new List<HealthComponent> { victimBody.healthComponent };
+                        lightningOrb.procChainMask = damageInfo.procChainMask;
+                        lightningOrb.procChainMask.AddProc(ProcType.LoaderLightning);
+                        lightningOrb.procCoefficient = 0.2f;
+                        lightningOrb.lightningType = LightningOrb.LightningType.Loader;
+                        lightningOrb.damageColorIndex = DamageColorIndex.Item;
+                        lightningOrb.range = 25f;
+                        HurtBox hurtBox = lightningOrb.PickNextTarget(damageInfo.position);
+                        if (hurtBox)
+                        {
+                            lightningOrb.target = hurtBox;
+                            OrbManager.instance.AddOrb(lightningOrb);
+                        }
                     }
                 }
             };
@@ -166,6 +170,7 @@ namespace RiskyMod.Survivors.Captain
 
                 if (self.isPlayerControlled && buffDef == AmpBuff)
                 {
+                    float buffDuration = Mathf.Max(duration, 7f);
                     //based on https://github.com/DestroyedClone/RoR1SkillsPort/blob/master/Loader/ActivateShield.cs
                     foreach (var characterMaster in CharacterMaster.readOnlyInstancesList)
                     {
@@ -174,7 +179,7 @@ namespace RiskyMod.Survivors.Captain
                             CharacterBody minionBody = characterMaster.GetBody();
                             if (minionBody && !minionBody.isPlayerControlled && (minionBody.bodyFlags &= CharacterBody.BodyFlags.Mechanical) == CharacterBody.BodyFlags.Mechanical)
                             {
-                                minionBody.AddTimedBuff(buffDef, duration);
+                                minionBody.AddTimedBuff(buffDef, buffDuration);
                             }
                         }
                     }
@@ -202,9 +207,9 @@ namespace RiskyMod.Survivors.Captain
             BuffWard ward = beaconPrefab.AddComponent<BuffWard>();
             ward.shape = BuffWard.BuffWardShape.Sphere;
             ward.radius = 10f;
-            ward.interval = 0.2f;
+            ward.interval = 0.5f;
             ward.buffDef = AmpBuff;
-            ward.buffDuration = 1f;
+            ward.buffDuration = 1.5f;
             ward.floorWard = false;
             ward.expires = false;
             ward.invertTeamFilter = false;

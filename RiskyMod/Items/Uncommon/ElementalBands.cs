@@ -73,7 +73,7 @@ namespace RiskyMod.Items.Uncommon
                 c.GotoNext(
                      x => x.MatchLdcR4(2.5f)
                     );
-                c.Next.Operand =stackDamageCoefficientIce;
+                c.Next.Operand = stackDamageCoefficientIce;
                 c.Index += 4;
                 c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
                 {
