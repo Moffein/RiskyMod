@@ -15,7 +15,7 @@ namespace RiskyMod.Survivors.Captain
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CaptainBody");
 
         public static bool modifyTaser = true;
-        public static bool nukeBuff = true;
+        public static bool nukeChanges = true;
 
         public static bool beaconRework = true;
 
@@ -41,8 +41,7 @@ namespace RiskyMod.Survivors.Captain
                 CaptainIndex = BodyCatalog.FindBodyIndex("CaptainBody");
             };
 
-
-            if (CaptainCore.beaconRework || CaptainCore.nukeBuff)
+            if (nukeChanges || beaconRework)
             {
                 On.RoR2.GenericSkill.ApplyAmmoPack += (orig, self) =>
                 {
@@ -51,12 +50,11 @@ namespace RiskyMod.Survivors.Captain
                     {
                         return;
                     }
-                    else if (CaptainCore.nukeBuff && self.activationState.stateType == typeof(EntityStates.Captain.Weapon.SetupAirstrikeAlt))
+                    else if (CaptainCore.nukeChanges && self.activationState.stateType == typeof(EntityStates.Captain.Weapon.SetupAirstrikeAlt))
                     {
                         if (self.stock < self.maxStock)
                         {
-                            self.rechargeStopwatch += 0.4f * Mathf.Max(self.finalRechargeInterval, self.baseRechargeInterval);
-                            //self.rechargeStopwatch += 16f;
+                            self.rechargeStopwatch += 0.5f * self.finalRechargeInterval;
                         }
                     }
                     else
@@ -121,11 +119,11 @@ namespace RiskyMod.Survivors.Captain
 
         private void ModifyUtilities(SkillLocator sk)
         {
-            if (nukeBuff)
+            if (nukeChanges)
             {
-                GameObject nukePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CaptainAirstrikeAltProjectile");
+                /*GameObject nukePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CaptainAirstrikeAltProjectile");
                 ProjectileImpactExplosion pie = nukePrefab.GetComponent<ProjectileImpactExplosion>();
-                pie.blastProcCoefficient = 3f;
+                pie.blastProcCoefficient = 3f;*/
             }
         }
 

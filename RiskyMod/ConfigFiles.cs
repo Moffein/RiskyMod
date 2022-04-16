@@ -297,7 +297,7 @@ namespace RiskyMod
 
         private static void ConfigLunars()
         {
-            //Currently split into a separate mod. Will likely remain that way since 
+            //Currently split into a separate mod. Will likely remain that way
             //Gesture.enabled = ItemCfg.Bind(lunarString, "Gesture of the Drowned", true, itemConfigDescString).Value;
             Gesture.enabled = false;
 
@@ -411,7 +411,7 @@ namespace RiskyMod
             Microbots.enabled = SurvivorCfg.Bind(captainString, "Defensive Microbots Nerf", true, "Defensive Microbots no longer deletes stationary projectiles like gas clouds and Void Reaver mortars.").Value;
             CaptainCore.enablePrimarySkillChanges = SurvivorCfg.Bind(captainString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
             CaptainCore.modifyTaser = SurvivorCfg.Bind(captainString, "Power Taser Changes", true, "Enable changes to this skill.").Value;
-            CaptainCore.nukeBuff = SurvivorCfg.Bind(captainString, "Diablo Strike Changes", true, "Enable changes to this skill.").Value;
+            CaptainCore.nukeChanges = SurvivorCfg.Bind(captainString, "Diablo Strike Changes", true, "Enable changes to this skill.").Value;
             CaptainCore.beaconRework = SurvivorCfg.Bind(captainString, "Beacon Changes", true, "Beacons can be replaced on a cooldown and reworks Supply and Hack beacons.").Value;
 
             Bandit2Core.enabled = SurvivorCfg.Bind(banditString, "Enable Changes", true, "Enable changes to this survivor.").Value;

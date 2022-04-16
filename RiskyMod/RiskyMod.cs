@@ -224,6 +224,8 @@ namespace RiskyMod
             new RemoveLevelCap();
             new NoLevelupHeal();
             new SceneDirectorMonsterRewards();
+            new MonsterGoldRewards();
+            new CombatDirectorMultiplier();
 
             //Holdouts
             new SmallHoldoutCharging();

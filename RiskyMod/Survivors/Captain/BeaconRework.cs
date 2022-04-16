@@ -120,35 +120,34 @@ namespace RiskyMod.Survivors.Captain
                 if (sender.HasBuff(AmpBuff))
                 {
                     args.attackSpeedMultAdd += 0.3f;
-                    args.damageMultAdd += 0.15f;
-                    args.armorAdd += 15F;
+                    args.armorAdd += 30f;
                 }
             };
 
-            /*SharedHooks.OnHitEnemy.OnHitAttackerActions += (DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody) =>
+            SharedHooks.OnHitEnemy.OnHitAttackerActions += (DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody) =>
             {
-                if (attackerBody.HasBuff(AmpBuff) && !damageInfo.procChainMask.HasProc(ProcType.LoaderLightning))
+                if (!attackerBody.isPlayerControlled && attackerBody.bodyFlags.HasFlag(CharacterBody.BodyFlags.Mechanical) && attackerBody.HasBuff(AmpBuff) && !damageInfo.procChainMask.HasProc(ProcType.LoaderLightning))
                 {
                     //if (Util.CheckRoll(30f * damageInfo.procCoefficient, attackerBody.master))
 
                     float damageCoefficient3 = 0.3f;
                     float damageValue2 = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, damageCoefficient3);
 
-                    bool victimAlive = (victimBody.healthComponent && victimBody.healthComponent.alive);
-
                     LightningOrb lightningOrb = new LightningOrb();
                     lightningOrb.origin = damageInfo.position;
                     lightningOrb.damageValue = damageValue2;
                     lightningOrb.isCrit = damageInfo.crit;
-                    lightningOrb.bouncesRemaining = victimAlive ? 1 : 0;
+                    lightningOrb.bouncesRemaining = 2;
                     lightningOrb.teamIndex = attackerBody.teamComponent ? attackerBody.teamComponent.teamIndex : TeamIndex.None;
                     lightningOrb.attacker = damageInfo.attacker;
+
                     lightningOrb.bouncedObjects = new List<HealthComponent>();
-                    if (!victimAlive) lightningOrb.bouncedObjects.Add(victimBody.healthComponent);
+                    lightningOrb.bouncedObjects.Add(victimBody.healthComponent);
+
                     //lightningOrb.bouncedObjects = new List<HealthComponent> { victimBody.healthComponent };
                     lightningOrb.procChainMask = damageInfo.procChainMask;
                     lightningOrb.procChainMask.AddProc(ProcType.LoaderLightning);
-                    lightningOrb.procCoefficient = 0.4f;
+                    lightningOrb.procCoefficient = 0.1f;
                     lightningOrb.lightningType = LightningOrb.LightningType.Loader;
                     lightningOrb.damageColorIndex = DamageColorIndex.Item;
                     lightningOrb.range = 20f;
@@ -159,7 +158,28 @@ namespace RiskyMod.Survivors.Captain
                         OrbManager.instance.AddOrb(lightningOrb);
                     }
                 }
-            };*/
+            };
+
+            On.RoR2.CharacterBody.AddTimedBuff_BuffDef_float += (orig, self, buffDef, duration) =>
+            {
+                orig(self, buffDef, duration);
+
+                if (self.isPlayerControlled && buffDef == AmpBuff)
+                {
+                    //based on https://github.com/DestroyedClone/RoR1SkillsPort/blob/master/Loader/ActivateShield.cs
+                    foreach (var characterMaster in CharacterMaster.readOnlyInstancesList)
+                    {
+                        if (characterMaster.minionOwnership && characterMaster.minionOwnership.ownerMaster == self.master)
+                        {
+                            CharacterBody minionBody = characterMaster.GetBody();
+                            if (minionBody && !minionBody.isPlayerControlled && (minionBody.bodyFlags &= CharacterBody.BodyFlags.Mechanical) == CharacterBody.BodyFlags.Mechanical)
+                            {
+                                minionBody.AddTimedBuff(buffDef, duration);
+                            }
+                        }
+                    }
+                }
+            };
 
             IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>
             {
