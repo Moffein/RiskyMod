@@ -16,8 +16,8 @@ namespace RiskyMod.VoidLocus
                 {
                     if (sd.baseSceneName.Equals("voidstage"))
                     {
-                        self.baseRadius = 30f;  //20f in vanilla
-                        self.baseChargeDuration = 30f;
+                        self.baseRadius *= 1.5f;  //20f in vanilla
+                        self.baseChargeDuration *= 0.5f;  //60f in vanilla
                     }
                 }
                 orig(self);

@@ -16,15 +16,15 @@ namespace RiskyMod.Moon
                 {
                     if (sd.baseSceneName.Equals("moon2") && self.name.Contains("MoonBattery"))
                     {
-                        self.baseRadius = 30f;  //all are 20 in vanilla
+                        self.baseRadius *= 1.5f;  //all are 20 in vanilla
 
                         if (self.name.Contains("MoonBatteryMass"))
                         {
-                            self.baseChargeDuration = 45f;
+                            self.baseChargeDuration *= 0.75f;  //60f default
                         }
                         else if (self.name.Contains("MoonBatterySoul"))
                         {
-                            self.baseChargeDuration = 20f;
+                            self.baseChargeDuration *= 0.6666666667f;  //30f default
                         }
                     }
                 }

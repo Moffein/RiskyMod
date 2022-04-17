@@ -24,7 +24,8 @@ namespace RiskyMod.Tweaks.RunScaling
 				if (Run.instance.gameModeIndex != RiskyMod.simulacrumIndex)
 				{
 					float chestRatio = stageChestCost / (float)Run.instance.GetDifficultyScaledCost(25);
-					self.goldReward = (uint)Mathf.CeilToInt(self.goldReward * chestRatio);
+					int goldRewardRaw = (int)Mathf.Max(Mathf.Round(self.goldReward * chestRatio), 1f);
+					self.goldReward = (uint)goldRewardRaw;
 				}
 				orig(self, damageReport);
 			};

@@ -220,12 +220,13 @@ namespace RiskyMod
         private void RunTweaks()
         {
             //RunScaling
-            new LinearScaling();
+            new ModdedScaling();
             new RemoveLevelCap();
             new NoLevelupHeal();
             new SceneDirectorMonsterRewards();
             new MonsterGoldRewards();
             new CombatDirectorMultiplier();
+            new LoopBossArmor();
 
             //Holdouts
             new SmallHoldoutCharging();
