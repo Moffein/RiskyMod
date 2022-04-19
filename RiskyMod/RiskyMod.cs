@@ -235,8 +235,7 @@ namespace RiskyMod
             //Shrines
             new BloodShrineMinReward();
             new ShrineCombatItems();
-            new ShrineSpawnRate();
-            new VoidSeedLimit();
+            new SpawnLimits();
 
             //Character Mechanics
             new TrueOSP();
@@ -248,7 +247,6 @@ namespace RiskyMod
             new FreezeChampionExecute();
             new NerfVoidtouched();
             new PlayerControlledMonsters();
-            new SlowDownProjectilesModifyDamage();
 
             //Artifacts
             new VengeancePercentHeal();
@@ -269,7 +267,6 @@ namespace RiskyMod
             new FixCrocoPoisonAchievement();
             new FixWormFallDeath();
             new GhostDunestriderFriendlyFire();
-            new FixExtraLifeVoidBlacklist();
             new GhostGrandparentFriendlyFire();
         }
         

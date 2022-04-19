@@ -147,11 +147,14 @@ namespace RiskyMod
             SuperAttackResist.enabled = GeneralCfg.Bind(allyString, "Superattack Resistance", true, "Allies take less damage from superattacks like Vagrant Novas.").Value;
 
             //Interactables
-            ShrineSpawnRate.enabled = GeneralCfg.Bind(interactString, "Mountain/Combat Shrine Playercount Scaling", true, "Mountain/Combat Shrine Director Credit cost scales with playercount.").Value;
             ShrineCombatItems.enabled = GeneralCfg.Bind(interactString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
             BloodShrineMinReward.enabled = GeneralCfg.Bind(interactString, "Shrine of Blood Minimum Reward", true, "Shrine of Blood always gives at least enough money to buy a small chest.").Value;
-            VoidSeedLimit.seedLimit = GeneralCfg.Bind(interactString, "Void Seed Limit", 1, "Limit how many Void Seeds can spawn on 1 stage. Set to negative to disable.").Value;
-            VoidSeedLimit.enabled = VoidSeedLimit.seedLimit >= 0;
+
+            SpawnLimits.maxMountainShrines = GeneralCfg.Bind(interactString, "Max Shrines of the Mountain", 5, "Limit how many Mountain Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
+            SpawnLimits.maxCombatShrines = GeneralCfg.Bind(interactString, "Max Shrines of Combat", 5, "Limit how many Combat Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
+            SpawnLimits.maxVoidSeeds = GeneralCfg.Bind(interactString, "Max Void Seeds", 1, "Limit how many Void Seeds can spawn on 1 stage. Vanilla is 3. Set to negative for no limit.").Value;
+
+            if (SpawnLimits.maxMountainShrines < 0 && SpawnLimits.maxCombatShrines < 0 && SpawnLimits.maxVoidSeeds == 3) SpawnLimits.enabled = false;
 
             //Artifacts
             VengeancePercentHeal.enabled = GeneralCfg.Bind(artifactString, "Reduce Vengeance Healing", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
@@ -189,7 +192,6 @@ namespace RiskyMod
             FreezeChampionExecute.enabled = GeneralCfg.Bind(miscString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
             NerfVoidtouched.enabled = GeneralCfg.Bind(miscString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
             PlayerControlledMonsters.enabled = GeneralCfg.Bind(miscString, "Player-Controlled Monster Regen", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
-            SlowDownProjectilesModifyDamage.enabled = GeneralCfg.Bind(miscString, "Slowed Projectiles Deal Less Damage", true, "Projectiles slowed by Railgunners Polar Field Device and similar skills deal less damage.").Value;
         }
 
         private static void ConfigItems()
@@ -439,6 +441,7 @@ namespace RiskyMod
 
             RailgunnerCore.enabled = SurvivorCfg.Bind(railgunnerString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             Survivors.DLC1.Railgunner.FixBungus.enabled = SurvivorCfg.Bind(railgunnerString, "Fix Bungus", true, "Removes self knockback force when on the ground.").Value;
+            RailgunnerCore.slowFieldChanges = SurvivorCfg.Bind(railgunnerString, "Polar Field Device Changes", true, "Enable changes to this skill.").Value;
 
             VoidFiendCore.enabled = SurvivorCfg.Bind(voidFiendString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             VoidFiendCore.fasterCorruptTransition = SurvivorCfg.Bind(voidFiendString, "Faster Corrupt Transition", true, "Speed up the corruption transform animation.").Value;

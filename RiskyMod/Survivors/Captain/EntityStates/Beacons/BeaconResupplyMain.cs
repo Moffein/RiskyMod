@@ -53,10 +53,11 @@ namespace EntityStates.RiskyMod.Captain.Beacon
 			{
 				return Interactability.Disabled;
 			}
-			if (activationCost >= this.energyComponent.energy || !anySkillUsed)//(!anySkillUsed && !equipmentCanRestock)
+			//Interactibility is entirely handled server-side when actually interacting.
+			/*if (activationCost >= this.energyComponent.energy || !anySkillUsed)//(!anySkillUsed && !equipmentCanRestock)
 			{
 				return Interactability.ConditionsNotMet;
-			}
+			}*/
 
 			return Interactability.Available;
 		}

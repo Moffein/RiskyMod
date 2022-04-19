@@ -103,6 +103,8 @@ namespace RiskyMod.Survivors.Captain
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
             esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconResupplyMain));
             Skills.BeaconResupply.skillDescriptionToken = "CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD";
+
+            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconResupplyMain));
         }
         private void ModifyBeaconHacking(SkillLocator sk)
         {
@@ -137,7 +139,7 @@ namespace RiskyMod.Survivors.Captain
                         lightningOrb.origin = damageInfo.position;
                         lightningOrb.damageValue = damageValue2;
                         lightningOrb.isCrit = damageInfo.crit;
-                        lightningOrb.bouncesRemaining = 2;
+                        lightningOrb.bouncesRemaining = 3;
                         lightningOrb.teamIndex = attackerBody.teamComponent ? attackerBody.teamComponent.teamIndex : TeamIndex.None;
                         lightningOrb.attacker = damageInfo.attacker;
 
@@ -150,7 +152,7 @@ namespace RiskyMod.Survivors.Captain
                         //lightningOrb.bouncedObjects = new List<HealthComponent> { victimBody.healthComponent };
                         lightningOrb.procChainMask = damageInfo.procChainMask;
                         lightningOrb.procChainMask.AddProc(ProcType.LoaderLightning);
-                        lightningOrb.procCoefficient = 0.2f;
+                        lightningOrb.procCoefficient = 0.1f;
                         lightningOrb.lightningType = LightningOrb.LightningType.Loader;
                         lightningOrb.damageColorIndex = DamageColorIndex.Item;
                         lightningOrb.range = 25f;
@@ -217,6 +219,8 @@ namespace RiskyMod.Survivors.Captain
             ward.requireGrounded = false;
 
             Skills.BeaconHacking.skillDescriptionToken = "CAPTAIN_SUPPLY_HACKING_DESCRIPTION_RISKYMOD";
+
+            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconHackingMain));
         }
     }
 

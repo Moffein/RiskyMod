@@ -22,18 +22,19 @@ namespace RiskyMod.Tweaks.RunScaling
 				float time = self.GetRunStopwatch() * 0.0166666675f; //Convert stopwatch(seconds) into minutes. Why is this Floored in vanilla, and why does it still move anyways despite that?
 
 				DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
-				float playerFactor = 0.7f + playerCount * 0.3f;
-				float timeFactor = time * 0.0506f * difficultyDef.scalingValue;	//0.506 vanilla
+				float initialPlayerFactor = 0.7f + playerCount * 0.3f;
+				float playerFactor = Mathf.Pow(playerCount, 0.1f);	//0.2f vanilla
+				float timeFactor = time * 0.0506f * difficultyDef.scalingValue * playerFactor;	//0.506 vanilla
 				int stagesCleared = self.stageClearCount;
 
 				//float stageFactor = 1f + stagesCleared * 0.2f;	//exp 1.15 in vanilla
 				float stageFactor = Mathf.Pow(1.15f, stagesCleared);
-				float finalDifficulty = (playerFactor + timeFactor) * stageFactor;
+				float finalDifficulty = (initialPlayerFactor + timeFactor) * stageFactor;
 				self.compensatedDifficultyCoefficient = finalDifficulty;
 				self.difficultyCoefficient = finalDifficulty;
 
 				//Untitled Difficulty Mod overwrites Run.ambientLevelCap
-				self.ambientLevel = Mathf.Min(3f * (finalDifficulty - playerFactor) + 1f, RemoveLevelCap.enabled ? RemoveLevelCap.maxLevel : Run.ambientLevelCap);
+				self.ambientLevel = Mathf.Min(3f * (finalDifficulty - initialPlayerFactor) + 1f, RemoveLevelCap.enabled ? RemoveLevelCap.maxLevel : Run.ambientLevelCap);
 
 				//Vanilla code
 				int ambientLevelFloor = self.ambientLevelFloor;
