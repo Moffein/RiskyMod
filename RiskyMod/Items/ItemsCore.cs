@@ -107,7 +107,6 @@ namespace RiskyMod.Items
 
             new LaserScope();
             new BottledChaos();
-            new Raincoat();
         }
 
         private void ModifyVoid()
