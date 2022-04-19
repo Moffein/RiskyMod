@@ -255,7 +255,7 @@ namespace RiskyMod
             Brainstalks.enabled = ItemCfg.Bind(legendaryString, "Brainstalks", true, itemConfigDescString).Value;
             CeremonialDagger.enabled = ItemCfg.Bind(legendaryString, "Ceremonial Dagger", true, itemConfigDescString).Value;
             Clover.enabled = ItemCfg.Bind(legendaryString, "57 Leaf Clover", false, "Caps how high the Luck stat can go.").Value;
-            Clover.luckCap = ItemCfg.Bind(legendaryString, "57 Leaf Clove - Max Luck", 1f, "Maximum Luck value players can reach. Extra Luck is converted to stat boosts.").Value;
+            Clover.luckCap = ItemCfg.Bind(legendaryString, "57 Leaf Clover - Max Luck", 1f, "Maximum Luck value players can reach. Extra Luck is converted to stat boosts.").Value;
             FrostRelic.enabled = ItemCfg.Bind(legendaryString, "Frost Relic", true, itemConfigDescString).Value;
             FrostRelic.removeFOV = ItemCfg.Bind(legendaryString, "Frost Relic - Disable FOV Modifier", true, "Disables FOV modifier.").Value;
             FrostRelic.removeBubble = ItemCfg.Bind(legendaryString, "Frost Relic - Disable Bubble", true, "Disables bubble visuals.").Value;

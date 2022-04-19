@@ -46,13 +46,17 @@ namespace RiskyMod.Enemies.Bosses
             if (RiskyMod.EnableProjectileCloning) Content.Content.projectilePrefabs.Add(acidProjectile);
 
             GameObject spitProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/beetlequeenspit");
-            if (RiskyMod.EnableProjectileCloning) acidProjectile = spitProjectile.InstantiateClone("RiskyMod_BeetleQueenSpit", true);
+
+            if (RiskyMod.EnableProjectileCloning) spitProjectile = spitProjectile.InstantiateClone("RiskyMod_BeetleQueenSpit", true);
+
             ProjectileImpactExplosion pie = spitProjectile.GetComponent<ProjectileImpactExplosion>();
             //pie.blastDamageCoefficient = 1.3f;
             pie.blastRadius = 6f;
             pie.childrenDamageCoefficient = 0.1f;
             pie.childrenProjectilePrefab = acidProjectile;
+
             if (RiskyMod.EnableProjectileCloning) Content.Content.projectilePrefabs.Add(spitProjectile);
+
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.FireSpit", "projectilePrefab", spitProjectile);
         }
 
