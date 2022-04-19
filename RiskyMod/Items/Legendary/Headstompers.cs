@@ -13,6 +13,7 @@ namespace RiskyMod.Items.Legendary
         public static bool enabled = true;
 
         public static BuffDef HeadstompersActive;
+        public static BuffDef HeadstompersPending;
         public static BuffDef HeadstompersCooldown;
 
         public Headstompers()
@@ -22,6 +23,15 @@ namespace RiskyMod.Items.Legendary
 
             Headstompers.HeadstompersActive = SneedUtils.SneedUtils.CreateBuffDef(
                 "RiskyModHeadstompersActive",
+                false,
+                false,
+                false,
+                Color.white,
+                Content.Assets.BuffIcons.HeadstomperActive
+                );
+
+            Headstompers.HeadstompersPending = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyModHeadstompersPending",
                 false,
                 false,
                 false,
@@ -78,6 +88,7 @@ namespace RiskyMod.Items.Legendary
                 if (NetworkServer.active && self.body)
                 {
                     if (self.body.HasBuff(HeadstompersActive)) self.body.RemoveBuff(HeadstompersActive);
+                    if (self.body.HasBuff(HeadstompersPending)) self.body.RemoveBuff(HeadstompersPending);
 
                     int buffCount = 0;
                     float durationCount = self.duration;
@@ -111,16 +122,16 @@ namespace RiskyMod.Items.Legendary
                     {
                         if (self.isAuthority)
                         {
-                            if (self.body.HasBuff(HeadstompersActive))
+                            if (self.body.HasBuff(HeadstompersPending))
                             {
                                 self.outer.SetNextState(new EntityStates.Headstompers.HeadstompersIdle());
                             }
                         }
                         else if (NetworkServer.active)
                         {
-                            if (!self.body.HasBuff(HeadstompersActive))
+                            if (!self.body.HasBuff(HeadstompersPending))
                             {
-                                self.body.AddBuff(HeadstompersActive);
+                                self.body.AddBuff(HeadstompersPending);
                             }
                         }
                     }
@@ -129,6 +140,17 @@ namespace RiskyMod.Items.Legendary
                         if (NetworkServer.active && self.body.HasBuff(HeadstompersActive)) self.body.RemoveBuff(HeadstompersActive);
                     }
                 }
+            };
+
+            On.EntityStates.Headstompers.BaseHeadstompersState.OnExit += (orig, self) =>
+            {
+                if (NetworkServer.active && self.body)
+                {
+                    if (self.body.HasBuff(HeadstompersCooldown)) self.body.ClearTimedBuffs(HeadstompersCooldown);
+                    if (self.body.HasBuff(HeadstompersActive)) self.body.RemoveBuff(HeadstompersActive);
+                    if (self.body.HasBuff(HeadstompersPending)) self.body.RemoveBuff(HeadstompersPending);
+                }
+                orig(self);
             };
 
             On.EntityStates.Headstompers.HeadstompersIdle.FixedUpdate += (orig, self) =>
@@ -145,18 +167,6 @@ namespace RiskyMod.Items.Legendary
                         if (self.body.HasBuff(HeadstompersActive)) self.body.RemoveBuff(HeadstompersActive);
                     }
                 }
-            };
-
-            On.EntityStates.Headstompers.BaseHeadstompersState.OnExit += (orig, self) =>
-            {
-                if (NetworkServer.active && self.body && self.body.inventory)
-                {
-                    if (self.body.inventory.GetItemCount(RoR2Content.Items.FallBoots) <= 0)
-                    {
-                        if (self.body.HasBuff(HeadstompersActive)) self.body.RemoveBuff(HeadstompersActive);
-                    }
-                }
-                orig(self);
             };
         }
         private static void ModifyItem()
