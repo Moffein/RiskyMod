@@ -212,11 +212,15 @@ namespace RiskyMod
             Bungus.enabled = ItemCfg.Bind(commonString, "Bustling Fungus", true, itemConfigDescString).Value;
             CautiousSlug.enabled = ItemCfg.Bind(commonString, "Cautious Slug", true, itemConfigDescString).Value;
             Crowbar.enabled = ItemCfg.Bind(commonString, "Crowbar", true, itemConfigDescString).Value;
-            DelicateWatch.enabled = ItemCfg.Bind(commonString, "Delicate Watch", true, itemConfigDescString).Value;
+
+            //Kind of an iffy change. Going to leave this out.
+            //DelicateWatch.enabled = ItemCfg.Bind(commonString, "Delicate Watch", true, itemConfigDescString).Value;
+            DelicateWatch.enabled = false;
+
             Fireworks.enabled = ItemCfg.Bind(commonString, "Fireworks", true, itemConfigDescString).Value;
             Fireworks.maxRockets = ItemCfg.Bind(commonString, "Fireworks - Max Rockets", 32, "Max rockets that can spawn from each use. Going above this value raises rocket damage instead.").Value;
             Gasoline.enabled = ItemCfg.Bind(commonString, "Gasoline", true, itemConfigDescString).Value;
-            CritGlasses.enabled = ItemCfg.Bind(commonString, "Lensmakers Glasses", true, itemConfigDescString).Value;
+            CritGlasses.enabled = ItemCfg.Bind(commonString, "Lensmakers Glasses", false, "Reduce crit chance from 10% to 7% like in RoR1.").Value;
             MonsterTooth.enabled = ItemCfg.Bind(commonString, "Monster Tooth", true, itemConfigDescString).Value;
             StickyBomb.enabled = ItemCfg.Bind(commonString, "Stickybomb", true, itemConfigDescString).Value;
             TougherTimes.enabled = ItemCfg.Bind(commonString, "Tougher Times", true, itemConfigDescString).Value;
@@ -233,7 +237,7 @@ namespace RiskyMod
             Chronobauble.enabled = ItemCfg.Bind(uncommonString, "Chronobauble", true, itemConfigDescString).Value;
             ElementalBands.enabled = ItemCfg.Bind(uncommonString, "Runalds and Kjaros Bands", true, itemConfigDescString).Value;
             Harpoon.enabled = ItemCfg.Bind(uncommonString, "Hunters Harpoon", true, itemConfigDescString).Value;
-            HarvesterScythe.enabled = ItemCfg.Bind(uncommonString, "Harvesters Scythe", true, itemConfigDescString).Value;
+            HarvesterScythe.enabled = ItemCfg.Bind(uncommonString, "Harvesters Scythe", false, "Reworks this item to give Crit Chance + Regen on kill.").Value;
             Infusion.enabled = ItemCfg.Bind(uncommonString, "Infusion", true, itemConfigDescString).Value;
             LeechingSeed.enabled = ItemCfg.Bind(uncommonString, "Leeching Seed", true, itemConfigDescString).Value;
             Daisy.enabled = ItemCfg.Bind(uncommonString, "Lepton Daisy", true, itemConfigDescString).Value;

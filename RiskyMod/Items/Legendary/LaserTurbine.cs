@@ -13,7 +13,7 @@ namespace RiskyMod.Items.Legendary
         public LaserTurbine()
         {
             if (!enabled) return;
-            if (RiskyMod.disableProcChains)
+            /*if (RiskyMod.disableProcChains)
             {
                 EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/EntityStates.LaserTurbine.FireMainBeamState");
 
@@ -32,7 +32,7 @@ namespace RiskyMod.Items.Legendary
                         esc.serializedFieldsCollection.serializedFields[i].fieldValue.objectValue = secondBombPrefab;
                     }
                 }
-            }
+            }*/
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
         }

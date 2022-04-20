@@ -181,7 +181,7 @@ namespace RiskyMod
                             damageInfo.force.y = 0f;
                         }
 
-                        direction *= Mathf.Min(10f, Mathf.Max(rb.mass / 100f, 1f));
+                        direction *= Mathf.Min(4f, Mathf.Max(rb.mass / 100f, 1f));  //Greater Wisp 300f, SCU 1000f
                         damageInfo.force += 1600f * direction;
                     }
                 }

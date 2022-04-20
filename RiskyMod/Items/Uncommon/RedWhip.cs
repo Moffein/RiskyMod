@@ -18,10 +18,14 @@ namespace RiskyMod.Items.Uncommon
 
         private static void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
         {
-            int itemCount = inventory.GetItemCount(RoR2Content.Items.SprintOutOfCombat);
-            if (itemCount > 0)
+            //Since the net move speed gain is the same as Vanilla while out of combat, just use the vanilla effect when applicable.
+            if (!sender.HasBuff(RoR2Content.Buffs.WhipBoost))
             {
-                args.moveSpeedMultAdd += 0.1f * itemCount;
+                int itemCount = inventory.GetItemCount(RoR2Content.Items.SprintOutOfCombat);
+                if (itemCount > 0)
+                {
+                    args.moveSpeedMultAdd += 0.15f * itemCount;
+                }
             }
         }
 

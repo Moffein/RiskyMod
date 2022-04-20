@@ -123,6 +123,12 @@ namespace RiskyMod.Survivors.Captain
                 {
                     args.attackSpeedMultAdd += 0.3f;
                     args.armorAdd += 30f;
+
+                    if (!sender.isPlayerControlled && sender.bodyFlags.HasFlag(CharacterBody.BodyFlags.Mechanical))
+                    {
+                        args.regenMultAdd += 1f;
+                        args.damageMultAdd += 0.15f;
+                    }    
                 }
             };
 

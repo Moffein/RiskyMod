@@ -64,7 +64,7 @@
 	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "Release a deadly disease that deals <style=cIsDamage>15x100% damage</style>. The disease spreads to up to <style=cIsDamage>20</style> targets. If an enemy is killed by Pandemic, <style=cIsHealing>you are healed</style>.",
 	
 	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Ignite</style>. Fire a bolt for <style=cIsDamage>390% damage</style>. Hold up to 4.</style>",
-	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Fire a bolt for <style=cIsDamage>270% damage</style>. Spreads <style=cIsDamage>lightning</style> to nearby targets for <style=cIsDamage>90% damage</style> on hit. Hold up to 4.</style>",
+	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Fire a bolt for <style=cIsDamage>390% damage</style> that <style=cIsDamage>explodes</style> in a small area. Hold up to 4.</style>",
 	"MAGE_SPECIAL_FIRE_DESCRIPTION_RISKYMOD" : "Burn all enemies in front of you for <style=cIsDamage>20x100% damage</style>. The number of shots increases with attack speed.",
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Burst into the sky, dealing <style=cIsDamage>800% damage</style>.",
 	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Freezing</style>. Create a barrier that hurts enemies for <style=cIsDamage>100% damage</style> and <style=cIsUtility>pushes</style> you away.",

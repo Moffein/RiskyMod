@@ -41,25 +41,25 @@ namespace RiskyMod.Survivors.Mage
         {
             if (!FireBolt) CreateFireBolt();
 
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireFireBolt", "damageCoefficient", "3.6");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireFireBolt", "damageCoefficient", "3.9");
         }
 
         public static void ModifyLightningBolt()
         {
             if (!LightningBolt) CreateLightningBolt();
 
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireLightningBolt", "damageCoefficient", "2.7");
-            ProjectileZapChainOnExplosion pzc = LightningBolt.AddComponent<ProjectileZapChainOnExplosion>();
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireLightningBolt", "damageCoefficient", "3.9");
+            /*ProjectileZapChainOnExplosion pzc = LightningBolt.AddComponent<ProjectileZapChainOnExplosion>();
             pzc.damageCoefficient = 0.9f / 2.7f;
             pzc.maxBounces = 20;
             pzc.initialTargets = 2;
             pzc.targetsPerBounce = 2;
             pzc.procCoefficient = 0.5f;
             pzc.range = 10f;
-            pzc.requireHit = true;
+            pzc.requireHit = true;*/
 
-            ProjectileImpactExplosion pie = LightningBolt.GetComponent<ProjectileImpactExplosion>();
-            pie.blastRadius = 2.5f; //Same as Fire Bolt now
+            /*ProjectileImpactExplosion pie = LightningBolt.GetComponent<ProjectileImpactExplosion>();
+            pie.blastRadius = 2.5f; //Same as Fire Bolt now*/
         }
 
         private static void IncreaseProjectileLifetime(GameObject projectile)

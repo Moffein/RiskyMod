@@ -13,7 +13,7 @@ namespace EntityStates.RiskyMod.Commando
         //Things that happen when you overcook
         public static float damageCoefficient = 12f;
         public static float force = 2000f;
-        public static float selfHPDamagePercent = 0.6f; //Remove this fraction of combined HP
+        public static float selfHPDamagePercent = 0.3333333334f; //Remove this fraction of combined HP
         public static float selfForce = 4500f;
         public static GameObject overcookExplosionEffectPrefab;
         public static GameObject grenadeIndicatorPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashFMJ");
