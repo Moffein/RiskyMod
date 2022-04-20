@@ -6,8 +6,8 @@ namespace RiskyMod.Survivors.Croco
 {
     public class EpidemicDamageController : MonoBehaviour
     {
-        public static int baseTickCount = 5;    //Initial hit is 1 tick
-        public static int baseTickCountScepter = 9;
+        public static int baseTickCount = 7;    //Initial hit is 1 tick
+        public static int baseTickCountScepter = 14;
         public static float timeBetweenTicks = 0.5f;
         public static float baseLingerDuration = 1f;
         public static float damageCoefficient = 1f;
@@ -20,7 +20,7 @@ namespace RiskyMod.Survivors.Croco
         private float stopwatch;
         private float lingerStopwatch;
         private bool scepter = false;
-        private bool spreadOnDeath = false;
+        //private bool spreadOnDeath = false;
         private bool victimKilled = false;
 
         public bool crit = false;
@@ -38,14 +38,13 @@ namespace RiskyMod.Survivors.Croco
             ticksRemaining = scepter ? baseTickCountScepter : baseTickCount;
         }
 
-        public void Setup(CharacterBody attackerBody, CharacterBody victimBody, DamageInfo damageInfo, DamageType selectedPassive, bool isScepter = false)
+        public void Setup(CharacterBody attackerBody, CharacterBody victimBody, DamageInfo damageInfo, bool isScepter = false)
         {
             owner = attackerBody;
             victim = victimBody;
             damage = damageInfo.damage;
             crit = damageInfo.crit;
             victim.AddBuff(ModifySpecial.EpidemicDebuff.buffIndex);
-            SetPassive(selectedPassive);
             if (isScepter)
             {
                 SetScepter();
@@ -120,28 +119,16 @@ namespace RiskyMod.Survivors.Croco
                 EffectManager.SpawnEffect(SharedDamageTypes.medkitEffect, effectData, true);
             }
 
-            if (spreadOnDeath && victimKilled && victim && owner)
+            /*if (spreadOnDeath && victimKilled && victim && owner)
             {
                 CrocoAltPassiveTracker.TriggerPoisonSpreadModdedDamage(owner, victim, scepter ? ModifySpecial.EpidemicScepter : ModifySpecial.Epidemic);
-            }
+            }*/
         }
 
         public void SetScepter()
         {
             ticksRemaining = baseTickCountScepter;
             scepter = true;
-        }
-
-        public void SetPassive(DamageType dt)
-        {
-            if (dt == DamageType.PoisonOnHit)
-            {
-                ticksRemaining = Mathf.FloorToInt(ticksRemaining * 1.4f);
-            }
-            else if (dt == DamageType.BlightOnHit)
-            {
-                spreadOnDeath = true;
-            }
         }
     }
 }

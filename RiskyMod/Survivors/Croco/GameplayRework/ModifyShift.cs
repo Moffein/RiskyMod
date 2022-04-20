@@ -29,9 +29,9 @@ namespace RiskyMod.Survivors.Croco
                     );
                 c.EmitDelegate<Func<BlastAttack, BlastAttack>>(orig =>
                 {
-                    orig.damageType = DamageType.Stun1s | DamageType.BlightOnHit;
+                    orig.damageType = DamageType.Stun1s;
                     orig.AddModdedDamageType(SharedDamageTypes.AntiFlyingForce);
-                    //orig.AddModdedDamageType(SharedDamageTypes.Blight7s);
+                    orig.AddModdedDamageType(SharedDamageTypes.CrocoBlight6s);
                     return orig;
                 });
             };

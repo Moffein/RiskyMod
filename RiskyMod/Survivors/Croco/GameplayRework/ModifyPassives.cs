@@ -19,42 +19,6 @@ namespace RiskyMod.Survivors.Croco
                 ModifyPassives.PoisonTrackerInstance = self.gameObject.AddComponent<CrocoAltPassiveTracker>();
             };
 
-            On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
-            {
-                bool isPoison = (damageInfo.damageType & DamageType.PoisonOnHit) == DamageType.PoisonOnHit;
-                bool isBlight = (damageInfo.damageType & DamageType.BlightOnHit) == DamageType.BlightOnHit;
-                if (isPoison || isBlight)
-                {
-                    if (damageInfo.attacker)
-                    {
-                        CrocoDamageTypeController cd = damageInfo.attacker.GetComponent<CrocoDamageTypeController>();
-                        if (cd)
-                        {
-                            switch (cd.GetDamageType())
-                            {
-                                case DamageType.PoisonOnHit:    //Passive: Extended poison duration
-                                    if (isBlight)
-                                    {
-                                        damageInfo.damageType &= ~DamageType.BlightOnHit;
-                                        damageInfo.AddModdedDamageType(SharedDamageTypes.Blight7s);
-                                    }
-                                    break;
-                                case DamageType.BlightOnHit:    //Passive: Poison spread on kill
-                                    if (isPoison)
-                                    {
-                                        damageInfo.damageType &= ~DamageType.PoisonOnHit;
-                                        damageInfo.AddModdedDamageType(SharedDamageTypes.Poison7s);
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-                }
-                orig(self, damageInfo);
-            };
-
             SharedHooks.OnHitEnemy.OnHitAttackerActions += TrackPoison;
         }
 
@@ -63,15 +27,15 @@ namespace RiskyMod.Survivors.Croco
             CrocoDamageTypeController cd = attackerBody.GetComponent<CrocoDamageTypeController>();
             if (cd && cd.GetDamageType() == DamageType.BlightOnHit)
             {
-                bool isBlight = (damageInfo.damageType & DamageType.BlightOnHit) == DamageType.BlightOnHit;
-                bool isPoison = damageInfo.HasModdedDamageType(SharedDamageTypes.Poison7s);
+                bool isBlight = damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBlight6s);
+                bool isPoison = damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoPoison6s);
                 if (isBlight)
                 {
-                    ModifyPassives.PoisonTrackerInstance.Add(attackerBody, victimBody, DamageType.BlightOnHit, 5f);
+                    ModifyPassives.PoisonTrackerInstance.Add(attackerBody, victimBody, SharedDamageTypes.CrocoBlight6s, 6f);
                 }
                 if (isPoison)
                 {
-                    ModifyPassives.PoisonTrackerInstance.Add(attackerBody, victimBody, DamageType.PoisonOnHit, 7f);
+                    ModifyPassives.PoisonTrackerInstance.Add(attackerBody, victimBody, SharedDamageTypes.CrocoPoison6s, 6f);
                 }
             }
         }
@@ -79,14 +43,15 @@ namespace RiskyMod.Survivors.Croco
 
     public class CrocoAltPassiveTracker : MonoBehaviour
     {
-        public static float spreadRange = 40f;
-        public void Add(CharacterBody attackerBody, CharacterBody victimBody, DamageType damageType, float duration)
+        public static float spreadRange = 30f;
+        public void Add(CharacterBody attackerBody, CharacterBody victimBody,DamageAPI.ModdedDamageType damageType, float duration)
         {
             CrocoPoison existing = poisonList.Find(x => x.victimBody == victimBody && x.damageType == damageType);
             if (existing != null)
             {
                 existing.attackerBody = attackerBody;
                 existing.duration = duration;
+                existing.stacks++;
             }
             else
             {
@@ -130,56 +95,35 @@ namespace RiskyMod.Survivors.Croco
                 foreach (CrocoPoison c in killList)
                 {
                     poisonList.Remove(c);
-                    TriggerPoisonSpread(c.attackerBody, c.victimBody, c.damageType);
+                    TriggerPoisonSpread(c.attackerBody, c.victimBody, c.damageType, c.stacks);
                 }
             }
         }
 
-        public static void TriggerPoisonSpread(CharacterBody attackerBody, CharacterBody victimBody, DamageType damageType)
+        public static void TriggerPoisonSpread(CharacterBody attackerBody, CharacterBody victimBody, DamageAPI.ModdedDamageType damageType, int stacks)
         {
             LightningOrb lightningOrb = new LightningOrb();
-            lightningOrb.arrivalTime = OrbManager.instance.time + 0.5f;
+            lightningOrb.arrivalTime = OrbManager.instance.time + 0.4f;
             lightningOrb.bouncedObjects = new List<HealthComponent>();
             lightningOrb.targetsToFindPerBounce = 1;
             lightningOrb.canBounceOnSameTarget = false;
             lightningOrb.attacker = attackerBody.gameObject;
             lightningOrb.inflictor = attackerBody.gameObject;
             lightningOrb.teamIndex = attackerBody.teamComponent.teamIndex;
-            lightningOrb.damageValue = attackerBody.damage * 0.25f;
+            lightningOrb.damageValue = stacks;
+            lightningOrb.damageCoefficientPerBounce = 1f;
+            lightningOrb.procCoefficient = 0.1f;
             lightningOrb.isCrit = attackerBody.RollCrit();
             lightningOrb.origin = victimBody.corePosition;
             lightningOrb.bouncesRemaining = 0;
             lightningOrb.lightningType = LightningOrb.LightningType.CrocoDisease;
             lightningOrb.damageColorIndex = DamageColorIndex.Poison;
-            lightningOrb.damageType = damageType;
-            lightningOrb.procCoefficient = 1f;
-            lightningOrb.range = CrocoAltPassiveTracker.spreadRange;
-
-            lightningOrb.bouncedObjects.Add(victimBody.healthComponent);
-            lightningOrb.target = lightningOrb.PickNextTarget(victimBody.corePosition);
-            OrbManager.instance.AddOrb(lightningOrb);
-        }
-
-        public static void TriggerPoisonSpreadModdedDamage(CharacterBody attackerBody, CharacterBody victimBody,DamageAPI.ModdedDamageType damageType)
-        {
-            LightningOrb lightningOrb = new LightningOrb();
-            lightningOrb.arrivalTime = OrbManager.instance.time + 0.5f;
-            lightningOrb.bouncedObjects = new List<HealthComponent>();
-            lightningOrb.targetsToFindPerBounce = 1;
-            lightningOrb.canBounceOnSameTarget = false;
-            lightningOrb.attacker = attackerBody.gameObject;
-            lightningOrb.inflictor = attackerBody.gameObject;
-            lightningOrb.teamIndex = attackerBody.teamComponent.teamIndex;
-            lightningOrb.damageValue = attackerBody.damage * 0.25f;
-            lightningOrb.isCrit = attackerBody.RollCrit();
-            lightningOrb.origin = victimBody.corePosition;
-            lightningOrb.bouncesRemaining = 0;
-            lightningOrb.lightningType = LightningOrb.LightningType.CrocoDisease;
-            lightningOrb.damageColorIndex = DamageColorIndex.Poison;
-            lightningOrb.damageType = DamageType.Generic;
-            lightningOrb.procCoefficient = 1f;
+            lightningOrb.damageType = DamageType.NonLethal;
             lightningOrb.range = CrocoAltPassiveTracker.spreadRange;
             lightningOrb.AddModdedDamageType(damageType);
+
+            if (damageType == SharedDamageTypes.CrocoBlight6s) lightningOrb.AddModdedDamageType(SharedDamageTypes.CrocoBlightStack);
+            if (Items.Common.Crowbar.enabled) lightningOrb.AddModdedDamageType(Items.Common.Crowbar.IgnoreCrowbar);
 
             lightningOrb.bouncedObjects.Add(victimBody.healthComponent);
             lightningOrb.target = lightningOrb.PickNextTarget(victimBody.corePosition);
@@ -189,17 +133,19 @@ namespace RiskyMod.Survivors.Croco
         private List<CrocoPoison> poisonList;
         public class CrocoPoison
         {
-            public CrocoPoison(CharacterBody attacker, CharacterBody victim, DamageType dt, float dur)
+            public CrocoPoison(CharacterBody attacker, CharacterBody victim, DamageAPI.ModdedDamageType dt, float dur)
             {
                 attackerBody = attacker;
                 victimBody = victim;
                 damageType = dt;
                 duration = dur;
+                stacks = 1;
             }
             public CharacterBody attackerBody;
             public CharacterBody victimBody;
             public float duration;
-            public DamageType damageType;
+            public DamageAPI.ModdedDamageType damageType;
+            public int stacks;
         }
     }
 }

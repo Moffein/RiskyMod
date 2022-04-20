@@ -21,8 +21,9 @@ namespace RiskyMod
 
         public static DamageAPI.ModdedDamageType Slow50For5s;
 
-        public static DamageAPI.ModdedDamageType Blight7s;
-        public static DamageAPI.ModdedDamageType Poison7s;
+        public static DamageAPI.ModdedDamageType CrocoBlightStack;
+        public static DamageAPI.ModdedDamageType CrocoBlight6s;
+        public static DamageAPI.ModdedDamageType CrocoPoison6s;
 
         public static DamageAPI.ModdedDamageType CaptainTaserSource;
 
@@ -40,8 +41,9 @@ namespace RiskyMod
             AntiFlyingForce = DamageAPI.ReserveDamageType();
             SawBarrier = DamageAPI.ReserveDamageType();
 
-            Blight7s = DamageAPI.ReserveDamageType();
-            Poison7s = DamageAPI.ReserveDamageType();
+            CrocoBlightStack = DamageAPI.ReserveDamageType();
+            CrocoBlight6s = DamageAPI.ReserveDamageType();
+            CrocoPoison6s = DamageAPI.ReserveDamageType();
             CrocoBiteHealOnKill = DamageAPI.ReserveDamageType();
 
             AlwaysIgnite = DamageAPI.ReserveDamageType();
@@ -54,8 +56,10 @@ namespace RiskyMod
             TakeDamage.ModifyInitialDamageActions += ApplyAntiFlyingForce;
 
             OnHitEnemy.OnHitNoAttackerActions += ApplyInterruptOnHit;
-            OnHitEnemy.OnHitNoAttackerActions += ApplyBlight7s;
-            OnHitEnemy.OnHitNoAttackerActions += ApplyPoison7s;
+
+            OnHitEnemy.OnHitAttackerActions += ApplyCrocoBlight;
+            OnHitEnemy.OnHitAttackerActions += ApplyCrocoPoison;
+
             OnHitEnemy.OnHitNoAttackerActions += ApplySlow50For5s;
 
             OnHitEnemy.OnHitAttackerActions += ApplySawBarrierOnHit;
@@ -120,18 +124,43 @@ namespace RiskyMod
             }
         }
 
-        private static void ApplyBlight7s(DamageInfo damageInfo, CharacterBody victimBody)
+        private static void ApplyCrocoBlight(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
         {
-            if (damageInfo.HasModdedDamageType(SharedDamageTypes.Blight7s))
+            if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBlight6s))
             {
-                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Blight, 7f, 1f);
+                bool extend = false;
+                CrocoDamageTypeController cdc = attackerBody.gameObject.GetComponent<CrocoDamageTypeController>();
+                if (cdc && cdc.GetDamageType() == DamageType.PoisonOnHit)
+                {
+                    extend = true;
+                }
+                float duration = (extend ? 10f : 6f);
+
+                int stacks = 1;
+                if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBlightStack)) stacks = Mathf.CeilToInt(damageInfo.damage);
+
+                for (int i = 0; i < stacks; i++)
+                {
+                    DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Blight, duration, 1f);
+
+                    if (i > 0 && Survivors.Croco.ModifyPassives.PoisonTrackerInstance)
+                    {
+                        Survivors.Croco.ModifyPassives.PoisonTrackerInstance.Add(attackerBody, victimBody, SharedDamageTypes.CrocoBlight6s, duration);
+                    }
+                }
             }
         }
-        private static void ApplyPoison7s(DamageInfo damageInfo, CharacterBody victimBody)
+        private static void ApplyCrocoPoison(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
         {
-            if (damageInfo.HasModdedDamageType(SharedDamageTypes.Poison7s))
+            if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoPoison6s))
             {
-                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Poison, 7f, 1f);
+                bool extend = false;
+                CrocoDamageTypeController cdc = attackerBody.gameObject.GetComponent<CrocoDamageTypeController>();
+                if (cdc && cdc.GetDamageType() == DamageType.PoisonOnHit)
+                {
+                    extend = true;
+                }
+                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Poison, (extend ? 10f : 6f), 1f);
             }
         }
 

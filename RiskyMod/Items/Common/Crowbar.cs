@@ -14,6 +14,7 @@ namespace RiskyMod.Items.Common
     {
         public static bool enabled = true;
         public static DamageAPI.ModdedDamageType CrowbarDamage;
+        public static DamageAPI.ModdedDamageType IgnoreCrowbar;
         public static CrowbarManager crowbarManager;
         public static float damageCoefficient = 0.45f;
 
@@ -24,6 +25,7 @@ namespace RiskyMod.Items.Common
 
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
+            IgnoreCrowbar = DamageAPI.ReserveDamageType();
             CrowbarDamage = DamageAPI.ReserveDamageType();
             //Remove vanilla effect
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
@@ -84,6 +86,7 @@ namespace RiskyMod.Items.Common
                 if (self.body != attackerBody
                     && damageInfo.procCoefficient > 0f
                     && damageInfo.damage > 0f
+                    && !damageInfo.HasModdedDamageType(Crowbar.IgnoreCrowbar)
                     && !damageInfo.HasModdedDamageType(Crowbar.CrowbarDamage))
                 {
                     if (Crowbar.crowbarManager.CanApplyCrowbar(self, attackerBody))

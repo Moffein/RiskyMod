@@ -23,7 +23,7 @@ namespace RiskyMod.Tweaks.RunScaling
 
 				DifficultyDef difficultyDef = DifficultyCatalog.GetDifficultyDef(self.selectedDifficulty);
 				float initialPlayerFactor = 0.7f + playerCount * 0.3f;
-				float playerFactor = Mathf.Pow(playerCount, 0.1f);	//0.2f vanilla
+				float playerFactor = Mathf.Pow(playerCount, 0.15f);	//0.2f vanilla
 				float timeFactor = time * 0.0506f * difficultyDef.scalingValue * playerFactor;	//0.506 vanilla
 				int stagesCleared = self.stageClearCount;
 

@@ -10,10 +10,22 @@ namespace RiskyMod.Survivors.Croco
 {
     public class ModifyM2Spit
     {
-        private static GameObject spitProjectile;
+        private static GameObject spitVanilla;
+        private static GameObject spitModded;
+
         public ModifyM2Spit()
         {
-            spitProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocospit");
+            spitVanilla = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocospit");
+
+            spitModded = spitVanilla.InstantiateClone("RiskyMod_CrocoSpit", true);
+
+            DamageAPI.ModdedDamageTypeHolderComponent mdc = spitModded.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            mdc.Add(SharedDamageTypes.CrocoBlight6s);
+
+            ProjectileDamage pd = spitModded.GetComponent<ProjectileDamage>();
+            pd.damageType = DamageType.Generic;
+
+            Content.Content.projectilePrefabs.Add(spitModded);
 
             IL.EntityStates.Croco.FireSpit.OnEnter += (il) =>
             {
@@ -24,9 +36,10 @@ namespace RiskyMod.Survivors.Croco
                 c.Emit(OpCodes.Ldarg_0);
                 c.EmitDelegate<Func<FireProjectileInfo, EntityStates.Croco.FireSpit, FireProjectileInfo>>((projectileInfo, self) =>
                 {
-                    if (self.projectilePrefab == spitProjectile)
+                    if (self.projectilePrefab == spitVanilla)
                     {
-                        projectileInfo.damageTypeOverride = DamageType.BlightOnHit;
+                        projectileInfo.projectilePrefab = spitModded;
+                        projectileInfo.damageTypeOverride = null;
                     }
                     return projectileInfo;
                 });

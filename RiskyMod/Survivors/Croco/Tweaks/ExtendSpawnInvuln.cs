@@ -12,9 +12,17 @@ namespace RiskyMod.Survivors.Croco
                 orig(self);
                 if (NetworkServer.active && self.characterBody)
                 {
-                    float invulnDuration = EntityStates.Croco.Spawn.minimumSleepDuration + EntityStates.Croco.WakeUp.duration + 2f;
-                    self.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, invulnDuration);
+                    self.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
                 }
+            };
+
+            On.EntityStates.Croco.Spawn.OnExit += (orig, self) =>
+            {
+                if (NetworkServer.active && self.characterBody && self.characterBody.HasBuff(RoR2Content.Buffs.HiddenInvincibility))
+                {
+                    self.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
+                }
+                orig(self);
             };
         }
     }

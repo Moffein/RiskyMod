@@ -103,7 +103,7 @@
 	"ITEM_AUTOCASTEQUIPMENT_PICKUP_RISKYMOD": "Dramatically reduce Equipment cooldown... <color=#FF7F7F>\BUT it is randomized after each activation.</color>",
 	"ITEM_AUTOCASTEQUIPMENT_DESC_RISKYMOD": "<style=cIsUtility>Reduce Equipment cooldown</style> by <style=cIsUtility>50%</style> <style=cStack>(+15% per stack)</style>. Forces your Equipment to change to a <style=cIsHealth>random Equipment</style> whenever it is <style=cIsUtility>activated</style>.",
 	
-	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Killing an enemy increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>125%</style>, fading over <style=cIsUtility>2.5</style> <style=cStack>(+1.25 per stack)</style> seconds.",
+	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Killing an enemy increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>125%</style>, fading over <style=cIsUtility>3</style> <style=cStack>(+1.5 per stack)</style> seconds.",
 	
 	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> <style=cStack>(+10% per stack)</style>. Leaving combat boosts your <style=cIsUtility>movement speed</style> by an additional <style=cIsUtility>30%</style> <style=cStack>(+30% per stack)</style>.",
 	

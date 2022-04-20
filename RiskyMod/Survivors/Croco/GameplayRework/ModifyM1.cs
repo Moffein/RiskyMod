@@ -17,7 +17,7 @@ namespace RiskyMod.Survivors.Croco
                 orig(self, overlapAttack);
                 if (self.isComboFinisher)
                 {
-                    overlapAttack.damageType = DamageType.PoisonOnHit;
+                    overlapAttack.AddModdedDamageType(SharedDamageTypes.CrocoPoison6s);
                 }
             };
         }
