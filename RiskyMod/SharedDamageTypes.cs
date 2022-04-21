@@ -214,8 +214,8 @@ namespace RiskyMod
                 List<HealthComponent> bouncedObjects = new List<HealthComponent>();
                 bouncedObjects.Add(victimBody.healthComponent);
 
-                int initialTargets = 7; //Since the range is smaller than Epidemic, add more initial targets.
-                float range = 12f;
+                int initialTargets = 2; //Since the range is smaller than Epidemic, add more initial targets.
+                float range = 15f;
 
                 //Need to individually find all targets for the first bounce.
                 for (int i = 0; i < initialTargets; i++)
@@ -232,14 +232,17 @@ namespace RiskyMod
                         procChainMask = damageInfo.procChainMask,
                         lightningType = LightningOrb.LightningType.Ukulele,
                         damageColorIndex = DamageColorIndex.Default,
-                        bouncesRemaining = 20,
-                        targetsToFindPerBounce = 2,
+                        bouncesRemaining = 2,
+                        targetsToFindPerBounce = 1,
                         range = range,
                         origin = damageInfo.position,
                         damageType = DamageType.Shock5s,
                         speed = 120f
                     };
                     //taserLightning.AddModdedDamageType(SharedDamageTypes.Slow50For5s);
+
+                    //2 initial lightnings
+                    //Each lightning will hit, then bounce 2 extra times
 
                     HurtBox hurtBox = taserLightning.PickNextTarget(victimBody.corePosition);
 

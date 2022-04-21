@@ -1,4 +1,5 @@
-﻿using Mono.Cecil.Cil;
+﻿using HG;
+using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
 using RoR2;
@@ -121,31 +122,31 @@ namespace RiskyMod.Survivors.Captain
             {
                 if (sender.HasBuff(AmpBuff))
                 {
-                    args.attackSpeedMultAdd += 0.3f;
                     args.armorAdd += 30f;
+                    args.attackSpeedMultAdd += 0.3f;
 
                     if (!sender.isPlayerControlled && sender.bodyFlags.HasFlag(CharacterBody.BodyFlags.Mechanical))
                     {
-                        args.regenMultAdd += 1f;
-                        args.damageMultAdd += 0.15f;
-                    }    
+                        args.baseRegenAdd += sender.maxHealth * 0.1f;
+                    }
                 }
             };
 
-            SharedHooks.OnHitEnemy.OnHitAttackerActions += (DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody) =>
+            //This didn't actually do much because Drone base performance is pretty bad.
+            /*SharedHooks.OnHitEnemy.OnHitAttackerActions += (DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody) =>
             {
                 if (!attackerBody.isPlayerControlled && attackerBody.bodyFlags.HasFlag(CharacterBody.BodyFlags.Mechanical) && attackerBody.HasBuff(AmpBuff) && !damageInfo.procChainMask.HasProc(ProcType.LoaderLightning))
                 {
-                    if (Util.CheckRoll(30f * damageInfo.procCoefficient, attackerBody.master))
+                    if (Util.CheckRoll(50f * damageInfo.procCoefficient, attackerBody.master))
                     {
-                        float damageCoefficient3 = 1f;
+                        float damageCoefficient3 = 0.6f;
                         float damageValue2 = Util.OnHitProcDamage(damageInfo.damage, attackerBody.damage, damageCoefficient3);
 
                         LightningOrb lightningOrb = new LightningOrb();
                         lightningOrb.origin = damageInfo.position;
                         lightningOrb.damageValue = damageValue2;
                         lightningOrb.isCrit = damageInfo.crit;
-                        lightningOrb.bouncesRemaining = 3;
+                        lightningOrb.bouncesRemaining = 2;
                         lightningOrb.teamIndex = attackerBody.teamComponent ? attackerBody.teamComponent.teamIndex : TeamIndex.None;
                         lightningOrb.attacker = damageInfo.attacker;
 
@@ -170,29 +171,29 @@ namespace RiskyMod.Survivors.Captain
                         }
                     }
                 }
-            };
+            };*/
 
-            On.RoR2.CharacterBody.AddTimedBuff_BuffDef_float += (orig, self, buffDef, duration) =>
+            /*On.RoR2.CharacterBody.AddTimedBuff_BuffDef_float += (orig, self, buffDef, duration) =>
             {
                 orig(self, buffDef, duration);
 
                 if (self.isPlayerControlled && buffDef == AmpBuff)
                 {
-                    float buffDuration = Mathf.Max(duration, 7f);
+                    float buffDuration = Mathf.Max(duration, 10f);
                     //based on https://github.com/DestroyedClone/RoR1SkillsPort/blob/master/Loader/ActivateShield.cs
-                    foreach (var characterMaster in CharacterMaster.readOnlyInstancesList)
+                    foreach (CharacterMaster characterMaster in CharacterMaster.readOnlyInstancesList)
                     {
                         if (characterMaster.minionOwnership && characterMaster.minionOwnership.ownerMaster == self.master)
                         {
                             CharacterBody minionBody = characterMaster.GetBody();
-                            if (minionBody && !minionBody.isPlayerControlled && (minionBody.bodyFlags &= CharacterBody.BodyFlags.Mechanical) == CharacterBody.BodyFlags.Mechanical)
+                            if (minionBody && !minionBody.isPlayerControlled)// && (minionBody.bodyFlags &= CharacterBody.BodyFlags.Mechanical) == CharacterBody.BodyFlags.Mechanical
                             {
                                 minionBody.AddTimedBuff(buffDef, buffDuration);
                             }
                         }
                     }
                 }
-            };
+            };*/
 
             IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>
             {
@@ -210,7 +211,7 @@ namespace RiskyMod.Survivors.Captain
 
             GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, Hacking.prefab").WaitForCompletion();
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
-            esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconHackingMain));
+            //esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconHackingMain));
 
             BuffWard ward = beaconPrefab.AddComponent<BuffWard>();
             ward.shape = BuffWard.BuffWardShape.Sphere;
@@ -226,70 +227,120 @@ namespace RiskyMod.Survivors.Captain
 
             Skills.BeaconHacking.skillDescriptionToken = "CAPTAIN_SUPPLY_HACKING_DESCRIPTION_RISKYMOD";
 
-            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconHackingMain));
-        }
-    }
+            //Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconHackingMain));
 
-    public class CaptainDeployableManager : MonoBehaviour
-    {
-        public SkillLocator skillLocator;
-        public CharacterBody body;
-
-        public GenericSkill Beacon1;
-        public GenericSkill Beacon2;
-
-        public Queue<GameObject> Beacon1Deployables;
-        public Queue<GameObject> Beacon2Deployables;
-
-        public static bool allowLysateStack = false;
-
-        private void Awake()
-        {
-            body = base.GetComponent<CharacterBody>();
-            skillLocator = base.GetComponent<SkillLocator>();
-
-            Beacon1 = skillLocator.FindSkill("SupplyDrop1");
-            Beacon2 = skillLocator.FindSkill("SupplyDrop2");
-
-            Beacon1Deployables = new Queue<GameObject>();
-            Beacon2Deployables = new Queue<GameObject>();
-        }
-
-        public void AddBeacon(GameObject newBeacon, GenericSkill skill)
-        {
-            if (!NetworkServer.active) return;  //Beacons being instantiated/deleted are server-side.
-            int maxBeacons = skillLocator.special.maxStock;
-            if (!allowLysateStack && maxBeacons >= 2) maxBeacons = 2;
-            if (skill == Beacon1)
+            On.EntityStates.CaptainSupplyDrop.HackingMainState.PurchaseInteractionIsValidTarget += (orig, purchaseInteraction) =>
             {
-                if(Beacon1Deployables.Count >= maxBeacons)
+                bool isValid = orig(purchaseInteraction)
+                && !purchaseInteraction.isShrine && !purchaseInteraction.isGoldShrine
+                && !(purchaseInteraction.gameObject && purchaseInteraction.gameObject.GetComponent<InteractableHackedComponent>()); ;
+                bool isDrone = false;
+                if (isValid && purchaseInteraction.gameObject)
                 {
-                    GameObject toRemove = Beacon1Deployables.Dequeue();
-                    UnityEngine.Object.Destroy(toRemove);
+                    SummonMasterBehavior smb = purchaseInteraction.gameObject.GetComponent<SummonMasterBehavior>();
+                    if (smb && smb.destroyAfterSummoning)
+                    {
+                        isDrone = true;
+                    }
                 }
+                return isValid && isDrone;
+            };
 
-                Beacon1Deployables.Enqueue(newBeacon);
-            }
-            else if (skill == Beacon2)
+            IL.EntityStates.CaptainSupplyDrop.UnlockTargetState.OnEnter += (il) =>
             {
-                if (Beacon2Deployables.Count >= maxBeacons)
+                ILCursor c = new ILCursor(il);
+
+                //Halve Cost instead of removing it
+                c.GotoNext(
+                     x => x.MatchCall<RoR2.PurchaseInteraction>("set_Networkcost")
+                    );
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<int, EntityStates.CaptainSupplyDrop.UnlockTargetState, int>>((cost, self) =>
                 {
-                    GameObject toRemove = Beacon2Deployables.Dequeue();
-                    UnityEngine.Object.Destroy(toRemove);
-                }
-                Beacon2Deployables.Enqueue(newBeacon);
-            }
+                    cost = Math.Max(Mathf.RoundToInt(self.target.cost * 0.5f), 1);
+                    return cost;
+                });
+
+                //Don't attempt interaction
+                c.GotoNext(
+                     x => x.MatchCallvirt<RoR2.Interactor>("AttemptInteraction")
+                    );
+                c.EmitDelegate<Func<GameObject, GameObject>>(orig =>
+                {
+                    if (orig)
+                    {
+                        orig.AddComponent<InteractableHackedComponent>();
+                    }
+                    return null;
+                });
+
+            };
         }
 
-        private void OnDestroy()
+        //This just keeps track of if an interactable has already been hacked
+        public class InteractableHackedComponent : MonoBehaviour { }
+
+        public class CaptainDeployableManager : MonoBehaviour
         {
-            while (Beacon1Deployables.Count > 0)
+            public SkillLocator skillLocator;
+            public CharacterBody body;
+
+            public GenericSkill Beacon1;
+            public GenericSkill Beacon2;
+
+            public Queue<GameObject> Beacon1Deployables;
+            public Queue<GameObject> Beacon2Deployables;
+
+            public static bool allowLysateStack = false;
+
+            private void Awake()
             {
-                UnityEngine.Object.Destroy(Beacon1Deployables.Dequeue());
+                body = base.GetComponent<CharacterBody>();
+                skillLocator = base.GetComponent<SkillLocator>();
+
+                Beacon1 = skillLocator.FindSkill("SupplyDrop1");
+                Beacon2 = skillLocator.FindSkill("SupplyDrop2");
+
+                Beacon1Deployables = new Queue<GameObject>();
+                Beacon2Deployables = new Queue<GameObject>();
             }
-            while (Beacon2Deployables.Count > 0)
+
+            public void AddBeacon(GameObject newBeacon, GenericSkill skill)
             {
-                UnityEngine.Object.Destroy(Beacon2Deployables.Dequeue());
+                if (!NetworkServer.active) return;  //Beacons being instantiated/deleted are server-side.
+                int maxBeacons = skillLocator.special.maxStock;
+                if (!allowLysateStack && maxBeacons >= 2) maxBeacons = 2;
+                if (skill == Beacon1)
+                {
+                    if (Beacon1Deployables.Count >= maxBeacons)
+                    {
+                        GameObject toRemove = Beacon1Deployables.Dequeue();
+                        UnityEngine.Object.Destroy(toRemove);
+                    }
+
+                    Beacon1Deployables.Enqueue(newBeacon);
+                }
+                else if (skill == Beacon2)
+                {
+                    if (Beacon2Deployables.Count >= maxBeacons)
+                    {
+                        GameObject toRemove = Beacon2Deployables.Dequeue();
+                        UnityEngine.Object.Destroy(toRemove);
+                    }
+                    Beacon2Deployables.Enqueue(newBeacon);
+                }
+            }
+
+            private void OnDestroy()
+            {
+                while (Beacon1Deployables.Count > 0)
+                {
+                    UnityEngine.Object.Destroy(Beacon1Deployables.Dequeue());
+                }
+                while (Beacon2Deployables.Count > 0)
+                {
+                    UnityEngine.Object.Destroy(Beacon2Deployables.Dequeue());
+                }
             }
         }
     }

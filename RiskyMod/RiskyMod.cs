@@ -80,6 +80,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.BackstabRework", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.funkfrog_sipondo.sharesuite", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.TeleExpansion", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.TPDespair.ZetTweaks", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.7.0")]
@@ -93,6 +94,7 @@ namespace RiskyMod
         public static bool ScepterPluginLoaded = false;
         public static bool AIBlacklistLoaded = false;
         public static bool AIBlacklistUseVanillaBlacklist = true;
+        public static bool ZetTweaksLoaded = false;
 
         public static bool ShareSuiteLoaded = false;
         public static bool ShareSuiteCommon = false;
@@ -148,6 +150,9 @@ namespace RiskyMod
 
         private void CheckDependencies()
         {
+            ZetTweaksLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetTweaks");
+            if (ZetTweaksLoaded) ZetTweaksCompat();
+
             NoLevelupHeal.enabled = NoLevelupHeal.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoLevelupHeal");
             RemoveLevelCap.enabled = RemoveLevelCap.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RaiseMonsterLevelCap");
 
@@ -196,6 +201,15 @@ namespace RiskyMod
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void ZetTweaksCompat()
+        {
+            if (ZetTweaksLoaded)
+            {
+                Allies.MegaDrone.allowRepair = false;
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private bool CheckClassicItemsScepter()
         {
             return ThinkInvisible.ClassicItems.Scepter.instance.enabled;
@@ -232,7 +246,7 @@ namespace RiskyMod
             new SmallHoldoutCharging();
             new TeleExpandOnBossKill();
 
-            //Shrines
+            //Interactables
             new BloodShrineMinReward();
             new ShrineCombatItems();
             new SpawnLimits();

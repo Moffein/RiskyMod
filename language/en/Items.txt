@@ -102,7 +102,7 @@
 	
 	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Killing an enemy increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>125%</style>, fading over <style=cIsUtility>3</style> <style=cStack>(+1.5 per stack)</style> seconds.",
 	
-	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> <style=cStack>(+10% per stack)</style>. Leaving combat boosts your <style=cIsUtility>movement speed</style> by an additional <style=cIsUtility>20%</style> <style=cStack>(+20% per stack)</style>.",
+	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> <style=cStack>(+10% per stack)</style>. Leaving combat boosts your <style=cIsUtility>movement speed</style> by an additional <style=cIsUtility>30%</style> <style=cStack>(+30% per stack)</style>.",
 	
 	"ITEM_HEALWHILESAFE_DESC_RISKYMOD": "Increases <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>+4 hp/s</style> <style=cStack>(+4 hp/s per stack)</style>while outside of danger.",
 	
@@ -117,6 +117,9 @@
 	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "Deal bonus damage while outside of danger.",
 	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Increase damage by <style=cIsDamage>10%</style> <style=cStack>(+10% per stack)</style> while outside of danger.",
 	
-	"ITEM_CHAINLIGHTNINGVOID_DESC_RISKYMOD": "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>lightning</style> for <style=cIsDamage>60%</style> TOTAL damage up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> times. <style=cIsVoid>Corrupts all Ukuleles</style>."
+	"ITEM_CHAINLIGHTNINGVOID_DESC_RISKYMOD": "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>lightning</style> for <style=cIsDamage>60%</style> TOTAL damage up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> times. <style=cIsVoid>Corrupts all Ukuleles</style>.",
+	
+	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "Shoot down nearby projectiles. Recharge rate scales with the amount of drones you have.",
+	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "Shoot down <style=cIsDamage>1</style> <style=cStack>(+1 per stack)</style> projectiles within <style=cIsDamage>20m</style> every <style=cIsDamage>0.5 seconds</style>. <style=cIsUtility>Recharge rate scales with the amount of drones you have</style>."
 	}
 }

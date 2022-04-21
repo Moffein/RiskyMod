@@ -6,6 +6,7 @@ using EntityStates.CaptainDefenseMatrixItem;
 using EntityStates;
 using MonoMod.RuntimeDetour;
 using R2API.Utils;
+using RiskyMod.Items;
 
 namespace RiskyMod.Survivors.Captain
 {
@@ -72,14 +73,37 @@ namespace RiskyMod.Survivors.Captain
 				return result;
 			};
 
+			ItemsCore.ModifyItemDefActions += ModifyItem;
+
 			var getMicrobotRechargeFrequency =
 				new Hook(typeof(EntityStates.CaptainDefenseMatrixItem.DefenseMatrixOn).GetMethodCached("get_rechargeFrequency"), typeof(Microbots).GetMethodCached(nameof(MicrobotsAttackSpeedHook)));
 		}
 
+		private static void ModifyItem()
+		{
+			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.CaptainDefenseMatrix);
+			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.CaptainDefenseMatrix);
+		}
+
 		private static float MicrobotsAttackSpeedHook(EntityStates.CaptainDefenseMatrixItem.DefenseMatrixOn self)
         {
-			return DefenseMatrixOn.baseRechargeFrequency;
-
+			float allyFactor = 1f;
+			if (self.characterBody && self.characterBody.master)
+            {
+				//based on https://github.com/DestroyedClone/RoR1SkillsPort/blob/master/Loader/ActivateShield.cs
+                foreach (CharacterMaster characterMaster in CharacterMaster.readOnlyInstancesList)
+				{
+					if (characterMaster.minionOwnership && characterMaster.minionOwnership.ownerMaster == self.characterBody.master)
+					{
+						CharacterBody minionBody = characterMaster.GetBody();
+						if (minionBody && !minionBody.isPlayerControlled && (minionBody.bodyFlags &= CharacterBody.BodyFlags.Mechanical) == CharacterBody.BodyFlags.Mechanical)
+						{
+							allyFactor += 0.2f;
+						}
+					}
+				}
+			}
+			return DefenseMatrixOn.baseRechargeFrequency / allyFactor;
 		}
     }
 }

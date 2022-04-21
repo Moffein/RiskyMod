@@ -35,7 +35,7 @@ namespace RiskyMod.Tweaks
                 Addressables.LoadAssetAsync<InteractableSpawnCard>("RoR2/Base/ShrineCombat/iscShrineCombatSnowy.asset").WaitForCompletion().maxSpawnsPerStage = maxCombatShrines;
             }
 
-            //Addressables.LoadAssetAsync<InteractableSpawnCard>("RoR2/DLC1/VoidCamp/iscVoidCamp.asset").WaitForCompletion().maxSpawnsPerStage = maxVoidSeeds;
+            if (maxVoidSeeds != 3) Addressables.LoadAssetAsync<InteractableSpawnCard>("RoR2/DLC1/VoidCamp/iscVoidCamp.asset").WaitForCompletion().maxSpawnsPerStage = maxVoidSeeds;
         }
     }
 }
