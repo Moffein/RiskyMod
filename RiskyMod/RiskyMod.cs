@@ -81,6 +81,7 @@ namespace RiskyMod
     [BepInDependency("com.funkfrog_sipondo.sharesuite", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.TeleExpansion", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.TPDespair.ZetTweaks", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.InteractableLimit", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.7.0")]
@@ -191,6 +192,8 @@ namespace RiskyMod
 
             ShareSuiteLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.funkfrog_sipondo.sharesuite");
             if (ShareSuiteLoaded) HandleShareSuite();
+
+            SpawnLimits.enabled = SpawnLimits.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.InteractableLimit");
 
             //No need for this to be static since this doesn't get referenced anywhere else
             bool teleExpansionLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.TeleExpansion");

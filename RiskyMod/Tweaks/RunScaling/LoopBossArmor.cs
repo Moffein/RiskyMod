@@ -17,7 +17,7 @@ namespace RiskyMod.Tweaks.RunScaling
         {
             if (sender.isChampion && sender.isBoss)
             {
-                if (sender.inventory && sender.inventory.GetItemCount(RoR2Content.Items.InvadingDoppelganger) <= 0)
+                if (sender.inventory && sender.inventory.GetItemCount(RoR2Content.Items.InvadingDoppelganger) <= 0 && sender.inventory.GetItemCount(RoR2Content.Items.AdaptiveArmor) <= 0)
                 {
                     int loops = Run.instance.stageClearCount / 5;
                     args.armorAdd += loops * 40f;

@@ -17,8 +17,7 @@ namespace RiskyMod.VoidLocus
         public static float redChance = 10f;
 
         public static float pearlOverwriteChance = 0f;
-        public static float lunarOverwriteChance = 0f;
-        public static float noOverwriteChance = 100f;
+        public static float lunarChance = 0f;
 
         public PillarsDropItems()
         {
@@ -83,35 +82,23 @@ namespace RiskyMod.VoidLocus
                                         PickupIndex pickupOverwrite = PickupIndex.none;
                                         if (tier != ItemTier.Tier3) //Don't overwrite legendaries
                                         {
-                                            bool replaceLunar = lunarOverwriteChance > 0f;
                                             bool replaceBoss = pearlOverwriteChance > 0f;
                                             if (itemShareActive)
                                             {
-                                                replaceLunar = replaceLunar && RiskyMod.ShareSuiteLunar;
                                                 replaceBoss = replaceBoss && RiskyMod.ShareSuiteBoss;
                                             }
                                             else
                                             {
-                                                replaceLunar = replaceLunar && !RiskyMod.ShareSuiteLunar;
                                                 replaceBoss = replaceBoss && !RiskyMod.ShareSuiteBoss;
                                             }
 
-                                            if (replaceLunar || replaceBoss)
+                                            if (replaceBoss)
                                             {
                                                 float pearlChance = (replaceBoss ? pearlOverwriteChance : 0f);
-                                                float lunarChance = (replaceLunar ? lunarOverwriteChance : 0f);
-                                                float total = noOverwriteChance + pearlChance + lunarChance;
-                                                if (Run.instance.bossRewardRng.RangeFloat(0f, total) < pearlChance)
+                                                float total = pearlChance;
+                                                if (Run.instance.bossRewardRng.RangeFloat(0f, 100f) < pearlChance)
                                                 {
                                                     pickupOverwrite = SelectPearl();
-                                                }
-                                                else
-                                                {
-                                                    total -= pearlOverwriteChance;
-                                                    if (Run.instance.bossRewardRng.RangeFloat(0f, total) < lunarChance)
-                                                    {
-                                                        pickupOverwrite = SelectLunar();
-                                                    }
                                                 }
 
                                                 if (pickupOverwrite == PickupIndex.none) overwritePickup = false;
@@ -159,14 +146,6 @@ namespace RiskyMod.VoidLocus
             return toReturn;
         }
 
-        private static PickupIndex SelectLunar()
-        {
-            List<PickupIndex> list = Run.instance.availableLunarCombinedDropList;
-            Xoroshiro128Plus bossRewardRng = Run.instance.bossRewardRng;
-            PickupIndex selectedPickup = bossRewardRng.NextElementUniform<PickupIndex>(list);
-            return selectedPickup;
-        }
-
         //Yellow Chance is handled after selecting item
         private static PickupIndex SelectItem()
         {
@@ -174,7 +153,7 @@ namespace RiskyMod.VoidLocus
             Xoroshiro128Plus bossRewardRng = Run.instance.bossRewardRng;
             PickupIndex selectedPickup = PickupIndex.none;
 
-            float total = whiteChance + greenChance + redChance;
+            float total = whiteChance + greenChance + redChance + lunarChance;
 
             if (bossRewardRng.RangeFloat(0f, total) <= whiteChance)//drop white
             {
@@ -190,7 +169,15 @@ namespace RiskyMod.VoidLocus
                 else
                 {
                     total -= greenChance;
-                    list = Run.instance.availableTier3DropList;
+                    if ((bossRewardRng.RangeFloat(0f, total) <= redChance))
+                    {
+                        list = Run.instance.availableTier3DropList;
+                    }
+                    else
+                    {
+                        list = Run.instance.availableLunarCombinedDropList;
+                    }
+
                 }
             }
             if (list.Count > 0)

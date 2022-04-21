@@ -93,9 +93,15 @@ namespace RiskyMod.Survivors.Captain
 
         private void ModifyBeacons(SkillLocator sk)
         {
-            //Debug.Log("Shock Radius: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.CaptainSupplyDrop.ShockZoneMainState", "shockRadius"));//10, same as healing
             ModifyBeaconResupply(sk);
             ModifyBeaconHacking(sk);
+            ModifyBeaconShocking(sk);
+        }
+
+        private void ModifyBeaconShocking(SkillLocator sk)
+        {
+            //Debug.Log("Shock Radius: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.CaptainSupplyDrop.ShockZoneMainState", "shockRadius"));//10, same as healing
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.CaptainSupplyDrop.ShockZoneMainState", "shockRadius", "15");
         }
 
         private void ModifyBeaconResupply(SkillLocator sk)

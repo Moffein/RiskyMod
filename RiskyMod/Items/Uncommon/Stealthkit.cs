@@ -27,6 +27,7 @@ namespace RiskyMod.Items.Uncommon
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Phasing);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Phasing);
+            SneedUtils.SneedUtils.RemoveItemTag(RoR2Content.Items.Phasing, ItemTag.LowHealth);
         }
 
         private void OnHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost)

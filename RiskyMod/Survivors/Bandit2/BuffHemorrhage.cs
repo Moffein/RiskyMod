@@ -29,7 +29,7 @@ namespace RiskyMod.Survivors.Bandit2
 
                     if (enableProcs)
                     {
-                        damageInfo.procCoefficient = 0.2f;
+                        damageInfo.procCoefficient = 0.3f;
                         procHemmorrhage = true;
                     }
 

@@ -126,7 +126,10 @@ namespace RiskyMod
             //Run Scaling
             CombatDirectorMultiplier.multiplier = GeneralCfg.Bind(scalingString, "Combat Director Credit Multiplier", 1.2f, "Multiply Combat Director credits by this amount. Set to 1 to disable").Value;
             CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.multiplier != 1f;
-            MonsterGoldRewards.enabled = GeneralCfg.Bind(scalingString, "Scaled Monster Gold Rewards", true, "Monsters gold rewards are scaled off of the initial price of chests on the stage.").Value;
+            MonsterGoldRewards.scaleToChests = GeneralCfg.Bind(scalingString, "Gold - Scale to Chests", true, "Monsters gold rewards are scaled off of the initial price of chests on the stage.").Value;
+            MonsterGoldRewards.scaleToInflation = GeneralCfg.Bind(scalingString, "Gold - Scale to Combat Director Credits", true, "Monsters gold rewards are scaled off of the current combat director credit earn rate.").Value;
+            MonsterGoldRewards.enabled = MonsterGoldRewards.scaleToChests || MonsterGoldRewards.scaleToInflation;
+
 
             ModdedScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Modded Scaling", true, "Slightly tweaks how difficulty scaling is calculated by converting exponential increases in to multiplicative increases.").Value;
             LinearScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling", false, "Makes difficulty scaling linear like in RoR1. Requires Modded Scaling to be enabled.").Value;
@@ -170,9 +173,8 @@ namespace RiskyMod
             Moon.PillarsDropItems.whiteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Common Chance", 50f, "Chance for Pillars to drop Common Items.").Value;
             Moon.PillarsDropItems.greenChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Uncommon Chance", 40f, "Chance for Pillars to drop Uncommon Items.").Value;
             Moon.PillarsDropItems.redChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Legendary Chance", 10f, "Chance for Pillars to drop Legendary Items.").Value;
-            Moon.PillarsDropItems.pearlOverwriteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Overwrite with Pearl Chance", 15f, "Chance for nonlegendary Pillar drops to be overwritten with a Pearl.").Value;
-            Moon.PillarsDropItems.lunarOverwriteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Overwrite with Lunar Chance", 0f, "Chance for nonlegendary Pillar drops to be overwritten with a random Lunar item.").Value;
-            Moon.PillarsDropItems.noOverwriteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Overwrite Fail Chance", 85f, "Chance for nonlegendary Pillar drops to not be overwritten.").Value;
+            Moon.PillarsDropItems.lunarChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Lunar Chance", 0f, "Chance for nonlegendary Pillar drops to be overwritten with a random Lunar item.").Value;
+            Moon.PillarsDropItems.pearlOverwriteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Pearl Override Chance", 15f, "Chance for nonlegendary Pillar drops to be overwritten with a Pearl.").Value;
 
             //Void Locus
             RemoveFog.enabled = GeneralCfg.Bind(voidLocusString, "Remove Fog", true, "Removes Void Fog from the map.").Value;
@@ -181,9 +183,8 @@ namespace RiskyMod
             VoidLocus.PillarsDropItems.whiteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Common Chance", 50f, "Chance for Signals to drop Common Items.").Value;
             VoidLocus.PillarsDropItems.greenChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Uncommon Chance", 40f, "Chance for Signals to drop Uncommon Items.").Value;
             VoidLocus.PillarsDropItems.redChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Legendary Chance", 10f, "Chance for Signals to drop Legendary Items.").Value;
+            VoidLocus.PillarsDropItems.lunarChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Lunar Chance", 0f, "Chance for Signals to drop Lunar Items.").Value;
             VoidLocus.PillarsDropItems.pearlOverwriteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Overwrite with Pearl Chance", 0f, "Chance for nonlegendary Pillar drops to be overwritten with a Pearl.").Value;
-            VoidLocus.PillarsDropItems.lunarOverwriteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Overwrite with Lunar Chance", 0f, "Chance for nonlegendary Pillar drops to be overwritten with a random Lunar item.").Value;
-            VoidLocus.PillarsDropItems.noOverwriteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Overwrite Fail Chance", 100f, "Chance for nonlegendary Pillar drops to not be overwritten.").Value;
 
             //Misc
             FixSlayer.enabled = GeneralCfg.Bind(miscString, "Fix Slayer Procs", true, "Bandit/Acrid bonus damage to low hp effect now applies to procs.").Value;
