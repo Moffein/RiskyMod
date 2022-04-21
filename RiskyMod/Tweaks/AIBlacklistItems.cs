@@ -14,6 +14,7 @@ namespace RiskyMod.Tweaks
                 orig();
                 if (RiskyMod.AIBlacklistUseVanillaBlacklist)
                 {
+                    SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.Icicle, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.RoboBallBuddy, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.CaptainDefenseMatrix, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.Bear, ItemTag.AIBlacklist);
