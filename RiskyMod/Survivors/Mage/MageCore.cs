@@ -16,7 +16,6 @@ using RoR2.Projectile;
 
 namespace RiskyMod.Survivors.Mage
 {
-    //TODO: ADD CONFIG FOR NEW M1 CHANGES
     public class MageCore
     {
         public static bool enabled = true;
