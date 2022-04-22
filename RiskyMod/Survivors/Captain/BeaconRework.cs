@@ -108,10 +108,9 @@ namespace RiskyMod.Survivors.Captain
         {
             GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, EquipmentRestock.prefab").WaitForCompletion();
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
-            esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconResupplyMain));
-            Skills.BeaconResupply.skillDescriptionToken = "CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD";
-
-            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconResupplyMain));
+            esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconEquipmentRestoreMain));
+            //Skills.BeaconResupply.skillDescriptionToken = "CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD";
+            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconEquipmentRestoreMain));
         }
         private void ModifyBeaconHacking(SkillLocator sk)
         {

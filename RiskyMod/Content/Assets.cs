@@ -27,6 +27,7 @@ namespace RiskyMod.Content
             }
             LoadSkillIcons();
             LoadBuffIcons();
+            LoadMiscSprites();
             LoadLanguage();
         }
 
@@ -64,6 +65,11 @@ namespace RiskyMod.Content
             SkillIcons.Bandit2Desperado = assetBundle.LoadAsset<Sprite>("Bandit2Desperado");
         }
 
+        private static void LoadMiscSprites()
+        {
+            MiscSprites.CaptainEquipmentRestockBar = assetBundle.LoadAsset<Sprite>("texUIEquipmentRestock");
+        }
+
         public static class BuffIcons
         {
             public static Sprite Infusion;
@@ -79,6 +85,11 @@ namespace RiskyMod.Content
         {
             public static Sprite Bandit2Gunslinger;
             public static Sprite Bandit2Desperado;
+        }
+
+        public static class MiscSprites
+        {
+            public static Sprite CaptainEquipmentRestockBar;
         }
     }
 }
