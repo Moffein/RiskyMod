@@ -5,21 +5,22 @@ using R2API;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using RiskyMod;
+using RoR2.Projectile;
 
 namespace EntityStates.RiskyMod.Mage.Weapon
 {
-    public class PrepIonSurge : BaseState
+    public class PrepFireStorm : BaseState
     {
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			this.duration = PrepIonSurge.baseDuration / this.attackSpeedStat;
+			this.duration = PrepFireStorm.baseDuration / this.attackSpeedStat;
 			base.characterBody.SetAimTimer(this.duration + 2f);
 			this.crosshairOverrideRequest = CrosshairUtils.RequestOverrideForBody(base.characterBody, crosshairOverridePrefab, CrosshairUtils.OverridePriority.Skill);
 			base.PlayAnimation("Gesture, Additive", "PrepIonSurge", "PrepIonSurge.playbackRate", this.duration);
-			Util.PlaySound(PrepIonSurge.PrepIonSurgeSoundString, base.gameObject);
+			Util.PlaySound(PrepFireStorm.PrepIonSurgeSoundString, base.gameObject);
 
-			this.areaIndicatorInstance = UnityEngine.Object.Instantiate<GameObject>(PrepIonSurge.areaIndicatorPrefab);
+			this.areaIndicatorInstance = UnityEngine.Object.Instantiate<GameObject>(PrepFireStorm.areaIndicatorPrefab);
 			if (areaIndicatorInstance)
             {
 				areaIndicatorInstance.transform.localScale = blastRadius * Vector3.one;
@@ -74,9 +75,9 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			if (!this.outer.destroying)
 			{
 				this.PlayAnimation("Gesture, Additive", "FireWall");
-				Util.PlaySound(PrepIonSurge.fireSoundString, base.gameObject);
-				EffectManager.SimpleMuzzleFlash(PrepIonSurge.muzzleflashEffect, base.gameObject, "MuzzleLeft", true);
-				EffectManager.SimpleMuzzleFlash(PrepIonSurge.muzzleflashEffect, base.gameObject, "MuzzleRight", true);
+				Util.PlaySound(PrepFireStorm.fireSoundString, base.gameObject);
+				EffectManager.SimpleMuzzleFlash(PrepFireStorm.muzzleflashEffect, base.gameObject, "MuzzleLeft", true);
+				EffectManager.SimpleMuzzleFlash(PrepFireStorm.muzzleflashEffect, base.gameObject, "MuzzleRight", true);
 			}
 			EntityState.Destroy(this.areaIndicatorInstance.gameObject);
 			CrosshairUtils.OverrideRequest overrideRequest = this.crosshairOverrideRequest;
@@ -106,7 +107,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			effectData.origin = aimPos;
 			EffectManager.SpawnEffect(blastEffectPrefab, effectData, true);
 
-			BlastAttack blastAttack = new BlastAttack
+			/*BlastAttack blastAttack = new BlastAttack
 			{
 				radius = blastRadius,
 				procCoefficient = 1f,
@@ -120,7 +121,22 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 				damageType = DamageType.Shock5s,
 				attackerFiltering = AttackerFiltering.NeverHitSelf
 			};
-			blastAttack.Fire();
+			blastAttack.Fire();*/
+
+			ProjectileManager.instance.FireProjectile(new FireProjectileInfo
+			{
+				damage = base.damageStat * PrepFireStorm.damageCoefficient,
+				crit = base.RollCrit(),
+				damageColorIndex = DamageColorIndex.Item,
+				position = aimPos,
+				procChainMask = default,
+				force = 0f,
+				owner = base.gameObject,
+				projectilePrefab = PrepFireStorm.projectilePrefab,
+				rotation = Quaternion.identity,
+				speedOverride = 0f,
+				target = null
+			}); ;
 
 			if (base.characterMotor && !base.characterMotor.isGrounded && base.characterBody)
 			{
@@ -140,7 +156,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 		}
 
 		public static float baseDuration = 0.5f;
-		public static float damageCoefficient = 10f;
+		public static float damageCoefficient = 15f;
 		public static GameObject areaIndicatorPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab").WaitForCompletion();
 		public static GameObject muzzleflashEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightningLarge.prefab").WaitForCompletion();
 		public static GameObject crosshairOverridePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/SimpleDotCrosshair.prefab").WaitForCompletion();
@@ -148,10 +164,12 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 		public static float maxDistance = 600f;
 		public static string fireSoundString = "Play_mage_R_lightningBlast";
 
+		public static GameObject projectilePrefab;
+
 		//for the guaranteed blastAttack
 		public static GameObject blastEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/OmniImpactVFXLightningMage.prefab").WaitForCompletion();
 
-		public static float blastRadius = 14f;//Ion Surge is 14f
+		public static float blastRadius = 8f;//Ion Surge is 14f
 		public static float blastJumpRadius = 14f;
 
 		public static float blastForce = 3200f; //4000f is railgunner

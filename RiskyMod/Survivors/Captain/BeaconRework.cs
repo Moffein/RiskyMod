@@ -106,27 +106,32 @@ namespace RiskyMod.Survivors.Captain
 
         private void ModifyBeaconResupply(SkillLocator sk)
         {
-            GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, EquipmentRestock.prefab").WaitForCompletion();
+            GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, EquipmentRestock.prefab").WaitForCompletion().InstantiateClone("RiskyMod_CaptainSupplyEquipmentRestock", true);
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
             esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconEquipmentRestoreMain));
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconEquipmentRestoreMain));
+            Content.Content.projectilePrefabs.Add(beaconPrefab);
         }
         private void ModifyBeaconHacking(SkillLocator sk)
         {
-            GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, Hacking.prefab").WaitForCompletion();
+            GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, Plating.prefab").WaitForCompletion().InstantiateClone("RiskyMod_CaptainSupplySkillRestock", true); ;//, Hacking
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
             esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
 
+            Content.Content.projectilePrefabs.Add(beaconPrefab);
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Captain.Weapon.CallSupplyDropHacking", "supplyDropPrefab", beaconPrefab);
             Skills.BeaconHacking.skillDescriptionToken = "CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD";
 
-            Debug.Log("Destroying Hack Indicator");
-            ObjectTransformCurve[] gos = beaconPrefab.GetComponentsInChildren<ObjectTransformCurve>();
-            for (int i = 0; i < gos.Length; i++)
+            //beaconPrefab.GetComponent<OnEnableEvent>().action = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, EquipmentRestock.prefab").WaitForCompletion().GetComponent<OnEnableEvent>().action;
+            /*Debug.Log("Destroying Hack Indicator");
+            ModelLocator ml = beaconPrefab.GetComponent<ModelLocator>();
+            ml.
+            Transform[] tfs = ml.modelBaseTransform.GetComponentsInChildren<Transform>();
+            foreach (Transform t in tfs)
             {
-                var g = gos[i];
-                Debug.Log(g.name);
-            }
+                Debug.Log(t.name);
+            }*/
 
             /*Transform[] tfs = beaconPrefab.GetComponentsInChildren<Transform>();
             foreach (Transform t in tfs)

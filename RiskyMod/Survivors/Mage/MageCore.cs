@@ -12,6 +12,7 @@ using EntityStates.RiskyMod.Mage.Weapon;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.AddressableAssets;
+using RoR2.Projectile;
 
 namespace RiskyMod.Survivors.Mage
 {
@@ -27,11 +28,14 @@ namespace RiskyMod.Survivors.Mage
         public static bool m2RemoveNanobombGravity = true;
 
         public static bool flamethrowerSprintCancel = true;
+        public static bool flamethrowerRangeExtend = true;
 
         public static bool ionSurgeShock = true;
         public static bool ionSurgeMovementScaling = false;
 
-        public static bool ionSurgeRework = true;
+        public static bool ionSurgeUtility = true;
+
+        public static bool enableFireUtility = true;
 
         public static bool iceWallRework = true;
 
@@ -44,6 +48,8 @@ namespace RiskyMod.Survivors.Mage
         }
         private void ModifySkills(SkillLocator sk)
         {
+            HandleIonSurge(sk);
+
             ModifyPrimaries(sk);
             ModifySecondaries(sk);
             ModifyUtilities(sk);
@@ -155,52 +161,62 @@ namespace RiskyMod.Survivors.Mage
                 sk.utility.skillFamily.variants[0].skillDef = Skills.PrepIceWall;
             }
 
-            if (ionSurgeRework)
+            if (enableFireUtility)
             {
                 //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Mage.FlyUpState"); SkillDef ionSurge2 = ScriptableObject.CreateInstance<SkillDef>();
-                Content.Content.entityStates.Add(typeof(PrepIonSurge));
+                Content.Content.entityStates.Add(typeof(PrepFireStorm));
 
-                SkillDef ionSurge2 = ScriptableObject.CreateInstance<SkillDef>();
-                ionSurge2.activationState = new SerializableEntityStateType(typeof(PrepIonSurge));
-                ionSurge2.activationStateMachineName = "Weapon";
-                ionSurge2.baseMaxStock = 1;
-                ionSurge2.baseRechargeInterval = 12f;
-                ionSurge2.beginSkillCooldownOnSkillEnd = true;
-                ionSurge2.canceledFromSprinting = true;
-                ionSurge2.cancelSprintingOnActivation = true;
-                ionSurge2.dontAllowPastMaxStocks = true;
-                ionSurge2.forceSprintDuringState = false;
-                ionSurge2.fullRestockOnAssign = true;
-                ionSurge2.icon = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFlyUp.asset").WaitForCompletion().icon;
-                ionSurge2.interruptPriority = InterruptPriority.PrioritySkill;
-                ionSurge2.isCombatSkill = true;
-                string keyword = Tweaks.CharacterMechanics.Shock.enabled ? "KEYWORD_SHOCKING_RISKYMOD" : "KEYWORD_SHOCKING";
-                ionSurge2.keywordTokens = new string[] { keyword };
-                ionSurge2.mustKeyPress = false;
-                ionSurge2.rechargeStock = 1;
-                ionSurge2.requiredStock = 1;
-                ionSurge2.resetCooldownTimerOnUse = false;
-                ionSurge2.skillDescriptionToken = "MAGE_UTILITY_LIGHTNING_DESCRIPTION_RISKYMOD";
-                ionSurge2.skillNameToken = "MAGE_SPECIAL_LIGHTNING_NAME";
-                ionSurge2.skillName = "RiskyModIonSurge";
-                ionSurge2.stockToConsume = 1;
-                SneedUtils.SneedUtils.FixSkillName(ionSurge2);
+                SkillDef fireStorm = ScriptableObject.CreateInstance<SkillDef>();
+                fireStorm.activationState = new SerializableEntityStateType(typeof(PrepFireStorm));
+                fireStorm.activationStateMachineName = "Weapon";
+                fireStorm.baseMaxStock = 1;
+                fireStorm.baseRechargeInterval = 12f;
+                fireStorm.beginSkillCooldownOnSkillEnd = true;
+                fireStorm.canceledFromSprinting = true;
+                fireStorm.cancelSprintingOnActivation = true;
+                fireStorm.dontAllowPastMaxStocks = true;
+                fireStorm.forceSprintDuringState = false;
+                fireStorm.fullRestockOnAssign = true;
+                fireStorm.icon = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFlamethrower.asset").WaitForCompletion().icon;
+                fireStorm.interruptPriority = InterruptPriority.PrioritySkill;
+                fireStorm.isCombatSkill = true;
+                fireStorm.keywordTokens = new string[] { "KEYWORD_IGNITE" };
+                fireStorm.mustKeyPress = false;
+                fireStorm.rechargeStock = 1;
+                fireStorm.requiredStock = 1;
+                fireStorm.resetCooldownTimerOnUse = false;
+                fireStorm.skillDescriptionToken = "MAGE_UTILITY_FIRE_DESCRIPTION_RISKYMOD";
+                fireStorm.skillNameToken = "MAGE_UTILITY_FIRE_NAME_RISKYMOD";
+                fireStorm.skillName = "RiskyModFireStorm";
+                fireStorm.stockToConsume = 1;
+                SneedUtils.SneedUtils.FixSkillName(fireStorm);
 
-                Skills.PrepIonSurge = ionSurge2;
+                Skills.PrepIonSurge = fireStorm;
                 Content.Content.skillDefs.Add(Skills.PrepIonSurge);
 
-                SkillFamily secondarySkillFamily = sk.utility.skillFamily;
-                Array.Resize(ref secondarySkillFamily.variants, secondarySkillFamily.variants.Length + 1);
-                secondarySkillFamily.variants[secondarySkillFamily.variants.Length - 1] = new SkillFamily.Variant
+                SkillFamily utilitySkillFamily = sk.utility.skillFamily;
+                Array.Resize(ref utilitySkillFamily.variants, utilitySkillFamily.variants.Length + 1);
+                utilitySkillFamily.variants[utilitySkillFamily.variants.Length - 1] = new SkillFamily.Variant
                 {
-                    skillDef = ionSurge2,
-                    unlockableDef = Addressables.LoadAssetAsync<UnlockableDef>("RoR2/Base/Mage/Skills.Mage.FlyUp.asset").WaitForCompletion(),
-                    viewableNode = new ViewablesCatalog.Node(ionSurge2.skillNameToken, false)
+                    skillDef = fireStorm,
+                    viewableNode = new ViewablesCatalog.Node(fireStorm.skillNameToken, false)
                 };
-                
-                //Remove Vanilla Ion Surge
-                sk.special.skillFamily.variants = sk.special.skillFamily.variants.Where(v => v.skillDef.activationState.stateType != typeof(EntityStates.Mage.FlyUpState)).ToArray();
-                //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Toolbot.AimStunDrone");
+
+                GameObject fireStormProjectile = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/FireTornado").InstantiateClone("RiskyMod_MageFireStorm", true);
+
+                ProjectileSimple ps = fireStormProjectile.GetComponent<ProjectileSimple>();
+                //ps.lifetime = 5f; //Particle doesn't scale to lifetime
+
+                ProjectileOverlapAttack poa = fireStormProjectile.GetComponent<ProjectileOverlapAttack>();
+                poa.overlapProcCoefficient = 1f;
+                //poa.resetInterval = 0.33f;
+                poa.damageCoefficient = poa.resetInterval / ps.lifetime;
+
+                ProjectileDamage pd = fireStormProjectile.GetComponent<ProjectileDamage>();
+                pd.damageType = DamageType.IgniteOnHit;
+
+                Content.Content.projectilePrefabs.Add(fireStormProjectile);
+                EntityStates.RiskyMod.Mage.Weapon.PrepFireStorm.projectilePrefab = fireStormProjectile;
             }
         }
 
@@ -212,46 +228,73 @@ namespace RiskyMod.Survivors.Mage
                 if (sk.special.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.Flamethrower))
                 {
                     sk.special.skillFamily.variants[i].skillDef.canceledFromSprinting = flamethrowerSprintCancel;
+                    if (flamethrowerRangeExtend)
+                    {
+                        SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.Flamethrower", "maxDistance", "25");  //20 vanilla
+                    }
                 }
-                else if (sk.special.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.FlyUpState) && !ionSurgeRework)
+            }
+
+            if (ionSurgeUtility)
+            {
+
+            }
+        }
+
+        private void HandleIonSurge(SkillLocator sk)
+        {
+            SkillDef surgeDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFlyUp.asset").WaitForCompletion();
+            if (ionSurgeShock)
+            {
+                surgeDef.skillDescriptionToken = "MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD";
+                string keyword = Tweaks.CharacterMechanics.Shock.enabled ? "KEYWORD_SHOCKING_RISKYMOD" : "KEYWORD_SHOCKING";
+                surgeDef.keywordTokens = new string[] { keyword };
+
+                IL.EntityStates.Mage.FlyUpState.OnEnter += (il) =>
                 {
-                    if (ionSurgeShock)
+                    ILCursor c = new ILCursor(il);
+                    c.GotoNext(
+                         x => x.MatchCallvirt<BlastAttack>("Fire")
+                        );
+                    c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
                     {
-                        sk.special.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD";
-                        string keyword = Tweaks.CharacterMechanics.Shock.enabled ? "KEYWORD_SHOCKING_RISKYMOD" : "KEYWORD_SHOCKING";
-                        sk.special.skillFamily.variants[i].skillDef.keywordTokens = new string[] { keyword };
+                        blastAttack.damageType = DamageType.Shock5s;
+                        return blastAttack;
+                    });
+                };
 
-                        IL.EntityStates.Mage.FlyUpState.OnEnter += (il) =>
-                        {
-                            ILCursor c = new ILCursor(il);
-                            c.GotoNext(
-                                 x => x.MatchCallvirt<BlastAttack>("Fire")
-                                );
-                            c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
-                            {
-                                blastAttack.damageType = DamageType.Shock5s;
-                                return blastAttack;
-                            });
-                        };
+            }
 
-                    }
-
-                    if (!ionSurgeMovementScaling)
+            if (!ionSurgeMovementScaling)
+            {
+                IL.EntityStates.Mage.FlyUpState.HandleMovements += (il) =>
+                {
+                    ILCursor c = new ILCursor(il);
+                    c.GotoNext(
+                         x => x.MatchLdfld<EntityStates.BaseState>("moveSpeedStat")
+                        );
+                    c.Index++;
+                    c.EmitDelegate<Func<float, float>>(orig =>
                     {
-                        IL.EntityStates.Mage.FlyUpState.HandleMovements += (il) =>
-                        {
-                            ILCursor c = new ILCursor(il);
-                            c.GotoNext(
-                                 x => x.MatchLdfld<EntityStates.BaseState>("moveSpeedStat")
-                                );
-                            c.Index++;
-                            c.EmitDelegate<Func<float, float>>(orig =>
-                            {
-                                return 7f;
-                            });
-                        };
-                    }
-                }
+                        return 7f;
+                    });
+                };
+            }
+
+            if (ionSurgeUtility)
+            {
+                //Remove Ion Surge from Specials
+                sk.special.skillFamily.variants = sk.special.skillFamily.variants.Where(v => v.skillDef.activationState.stateType != typeof(EntityStates.Mage.FlyUpState)).ToArray();
+
+                //Add to Utility
+                SkillFamily utilitySkillFamily = sk.utility.skillFamily;
+                Array.Resize(ref utilitySkillFamily.variants, utilitySkillFamily.variants.Length + 1);
+                utilitySkillFamily.variants[utilitySkillFamily.variants.Length - 1] = new SkillFamily.Variant
+                {
+                    skillDef = surgeDef,
+                    unlockableDef = Addressables.LoadAssetAsync<UnlockableDef>("RoR2/Base/Mage/Skills.Mage.FlyUp.asset").WaitForCompletion(),
+                    viewableNode = new ViewablesCatalog.Node(surgeDef.skillNameToken, false)
+                };
             }
         }
     }

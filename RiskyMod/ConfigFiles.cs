@@ -385,11 +385,12 @@ namespace RiskyMod
             MageCore.modifyFireBolt = SurvivorCfg.Bind(mageString, "Fire Bolt Changes", true, "Enable changes to this skill.").Value;
             MageCore.modifyPlasmaBolt = SurvivorCfg.Bind(mageString, "Plasma Bolt Changes", true, "Enable changes to this skill.").Value;
             MageCore.m2RemoveNanobombGravity = SurvivorCfg.Bind(mageString, "Nanobomb - Remove Gravity", true, "Removes projectile drop from Nanobomb so it behaves like it did pre-1.0 update.").Value;
-            MageCore.flamethrowerSprintCancel = SurvivorCfg.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
             MageCore.ionSurgeMovementScaling = SurvivorCfg.Bind(mageString, "Vanilla Ion Surge - Movement Scaling", false, "Ion Surge jump height scales with movement speed.").Value;
             MageCore.ionSurgeShock = SurvivorCfg.Bind(mageString, "Vanilla Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
             MageCore.iceWallRework = SurvivorCfg.Bind(mageString, "Snapfreeze Rework", true, "Adds blast jumping to Snapfreeze.").Value;
-            MageCore.ionSurgeRework = SurvivorCfg.Bind(mageString, "Ion Surge Rework", true, "Moves Ion Surge to the Utility slot and changes it into a blast jumping skill.").Value;
+            MageCore.enableFireUtility = SurvivorCfg.Bind(mageString, "Ion Surge Rework", true, "Moves Ion Surge to the Utility slot and changes it into a blast jumping skill.").Value;
+            MageCore.flamethrowerSprintCancel = SurvivorCfg.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
+            MageCore.flamethrowerRangeExtend = SurvivorCfg.Bind(mageString, "Flamethrower - Increase Range", true, "Increases the range of flamethrower.").Value;
 
             MercCore.enabled = SurvivorCfg.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             MercCore.modifyStats = SurvivorCfg.Bind(mercString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
