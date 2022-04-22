@@ -126,9 +126,9 @@ namespace RiskyMod
             //Run Scaling
             CombatDirectorMultiplier.multiplier = GeneralCfg.Bind(scalingString, "Combat Director Credit Multiplier", 1.2f, "Multiply Combat Director credits by this amount. Set to 1 to disable").Value;
             CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.multiplier != 1f;
-            MonsterGoldRewards.scaleToChests = GeneralCfg.Bind(scalingString, "Gold - Scale to Chests", true, "Monsters gold rewards are scaled off of the initial price of chests on the stage.").Value;
+            MonsterGoldRewards.scaleToInitialDifficulty = GeneralCfg.Bind(scalingString, "Gold - Scale to Initial Stage Difficulty", true, "Monsters gold rewards are scaled off of the difficulty at the start of the stage.").Value;
             MonsterGoldRewards.scaleToInflation = GeneralCfg.Bind(scalingString, "Gold - Scale to Combat Director Credits", true, "Monsters gold rewards are scaled off of the current combat director credit earn rate.").Value;
-            MonsterGoldRewards.enabled = MonsterGoldRewards.scaleToChests || MonsterGoldRewards.scaleToInflation;
+            MonsterGoldRewards.enabled = MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToInflation;
 
 
             ModdedScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Modded Scaling", true, "Slightly tweaks how difficulty scaling is calculated by converting exponential increases in to multiplicative increases.").Value;

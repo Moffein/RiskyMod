@@ -121,7 +121,7 @@ namespace RiskyMod.Survivors.Captain
             Skills.BeaconHacking.skillDescriptionToken = "CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD";
 
             Debug.Log("Destroying Hack Indicator");
-            ObjectScaleCurve[] gos = beaconPrefab.GetComponentsInChildren<ObjectScaleCurve>();
+            ObjectTransformCurve[] gos = beaconPrefab.GetComponentsInChildren<ObjectTransformCurve>();
             for (int i = 0; i < gos.Length; i++)
             {
                 var g = gos[i];
