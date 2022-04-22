@@ -455,6 +455,7 @@ namespace RiskyMod
             VoidFiendCore.noCorruptCrit = SurvivorCfg.Bind(voidFiendString, "No Corruption on Crit", true, "Disables Corruption gain on crit.").Value;
             VoidFiendCore.noCorruptHeal = SurvivorCfg.Bind(voidFiendString, "No Corruption loss on Heal", true, "Disables Corruption loss on heal.").Value;
             VoidFiendCore.secondaryMultitask = SurvivorCfg.Bind(voidFiendString, "Secondary Multitasking", true, "Drown and Suppress can be fired while charging Flood.").Value;
+            VoidFiendCore.modifyCorruptCrush = SurvivorCfg.Bind(voidFiendString, "Corrupted Suppress Changes", true, "Enable changes to this skill.").Value;
         }
 
         private static void ConfigMonsters()

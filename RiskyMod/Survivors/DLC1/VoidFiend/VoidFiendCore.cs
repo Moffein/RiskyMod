@@ -19,6 +19,8 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
 
         public static bool secondaryMultitask = true;
 
+        public static bool modifyCorruptCrush = true;
+
         public static BodyIndex bodyIndex;
         public static GameObject bodyPrefab;
 
@@ -41,6 +43,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
         {
             ModifyPassive(sk);
             ModifySecondaries(sk);
+            ModifySpecials(sk);
         }
 
         private void ModifyPassive(SkillLocator sk)
@@ -74,13 +77,6 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                     //Debug.Log(self.corruptionFractionPerSecondWhileCorrupted); //-0.06666667
                     //Debug.Log(self.corruptionPerCrit); //2
                 };
-
-                SkillDef crushHealth = Addressables.LoadAssetAsync<SkillDef>("RoR2/DLC1/VoidSurvivor/CrushHealth.asset").WaitForCompletion();
-                crushHealth.baseMaxStock = 1;
-                crushHealth.baseRechargeInterval = 0;
-                crushHealth.rechargeStock = 1;
-
-                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC1/VoidSurvivor/EntityStates.VoidSurvivor.Weapon.ChargeCrushHealth.asset", "baseDuration", "0.5"); //vanilla is 1
             }
 
             if (corruptOnKill)
@@ -130,6 +126,22 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                 nsm.stateMachines = nsm.stateMachines.Append(cannonStateMachine).ToArray();
 
                 sk.secondary.skillFamily.variants[0].skillDef.activationStateMachineName = "RightArmCannon";
+
+                SkillDef corruptM2 = Addressables.LoadAssetAsync<SkillDef>("RoR2/DLC1/VoidSurvivor/FireCorruptDisk.asset").WaitForCompletion();
+                corruptM2.activationStateMachineName = "RightArmCannon";
+            }
+        }
+
+        private void ModifySpecials(SkillLocator sk)
+        {
+            if (modifyCorruptCrush)
+            {
+                SkillDef crushHealth = Addressables.LoadAssetAsync<SkillDef>("RoR2/DLC1/VoidSurvivor/CrushHealth.asset").WaitForCompletion();
+                crushHealth.baseMaxStock = 1;
+                crushHealth.baseRechargeInterval = 0;
+                crushHealth.rechargeStock = 1;
+
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC1/VoidSurvivor/EntityStates.VoidSurvivor.Weapon.ChargeCrushHealth.asset", "baseDuration", "0.3"); //vanilla is 1
             }
         }
 
