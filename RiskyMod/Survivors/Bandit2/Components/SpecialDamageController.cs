@@ -1,9 +1,11 @@
 ﻿using RoR2;
+using RoR2.Skills;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RiskyMod.Survivors.Bandit2.Components
 {
-    public class SpecialDamageController : MonoBehaviour
+    public class SpecialDamageController : NetworkBehaviour
     {
         SkillLocator sk;
         CharacterBody cb;
@@ -38,9 +40,18 @@ namespace RiskyMod.Survivors.Bandit2.Components
             }
         }
 
-        public DamageType GetDamageType()
+        public SkillDef GetPassiveSkillDef()
         {
-            return (passiveSkillSlot.skillDef == Bandit2.Skills.Gunslinger) ? DamageType.ResetCooldownsOnKill : DamageType.GiveSkullOnKill;
+            return passiveSkillSlot.skillDef;
+        }
+
+        [ClientRpc]
+        public void RpcResetSpecial()
+        {
+            if (base.hasAuthority && sk)
+            {
+                sk.special.Reset();
+            }
         }
     }
 }

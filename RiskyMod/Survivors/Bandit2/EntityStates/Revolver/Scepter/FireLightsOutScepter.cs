@@ -2,6 +2,7 @@
 using RiskyMod.Survivors.Bandit2;
 using RiskyMod.Survivors.Bandit2.Components;
 using RoR2;
+using RoR2.Skills;
 using UnityEngine;
 
 namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
@@ -47,8 +48,21 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
 				SpecialDamageController sdc = base.GetComponent<SpecialDamageController>();
 				if (sdc)
 				{
-					DamageType dt = sdc.GetDamageType();
-					bulletAttack.damageType |= dt;
+					SkillDef selectedPassive = sdc.GetPassiveSkillDef();
+					if (selectedPassive == Skills.Gunslinger)
+					{
+						bulletAttack.damageType |= DamageType.ResetCooldownsOnKill;
+					}
+					else if (selectedPassive == Skills.DesperadoKillStack)
+					{
+						bulletAttack.damageType |= DamageType.GiveSkullOnKill;
+					}
+					else if (selectedPassive == Skills.DesperadoRicochet)
+					{
+						bulletAttack.AddModdedDamageType(Bandit2Core.RevolverRicochet);
+						bulletAttack.AddModdedDamageType(Bandit2Core.ResetRevolverOnKill);
+					}
+
 					bulletAttack.damageType |= DamageType.BonusToLowHealth;
 				}
 				DamageAPI.AddModdedDamageType(bulletAttack, Bandit2Core.SpecialDamage);

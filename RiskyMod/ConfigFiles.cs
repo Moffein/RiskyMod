@@ -449,6 +449,14 @@ namespace RiskyMod
             Bandit2Core.enabled = SurvivorCfg.Bind(banditString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             BanditSpecialGracePeriod.enabled = SurvivorCfg.Bind(banditString, "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;
             BanditSpecialGracePeriod.duration = SurvivorCfg.Bind(banditString, "Special Grace Period Duration", 1.2f, "Length in seconds of Special Grace Period.").Value;
+
+            //Not sure if the Special even works if you disable this.
+            if (!BanditSpecialGracePeriod.enabled)
+            {
+                BanditSpecialGracePeriod.enabled = true;
+                BanditSpecialGracePeriod.duration = 0f;
+            }
+
             DesperadoRework.enabled = SurvivorCfg.Bind(banditString, "Persistent Desperado", true, "Desperado stacks are weaker but last between stages.").Value;
             BackstabRework.enabled = SurvivorCfg.Bind(banditString, "Backstab Changes", true, "Backstabs minicrit for 50% bonus damage and crit chance is converted to crit damage..").Value;
             BuffHemorrhage.ignoreArmor = SurvivorCfg.Bind(banditString, "Hemmorrhage - Ignore Armor", true, "Hemmorrhage damage ignores positive armor.").Value;

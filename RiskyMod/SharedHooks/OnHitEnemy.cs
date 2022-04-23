@@ -49,20 +49,21 @@ namespace RiskyMod.SharedHooks
 					//Run this before triggering on-hit procs so that procs don't kill enemies before this triggers.
 					if (assistsEnabled)
                     {
-						if (BanditSpecialGracePeriod.enabled)
+						if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)
 						{
-							if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)
-							{
-								RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.DirectAssistType.ResetCooldowns);
-							}
-							if ((damageInfo.damageType & DamageType.GiveSkullOnKill) > DamageType.Generic)
-							{
-								RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.DirectAssistType.BanditSkull);
-							}
+							RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.DirectAssistType.ResetCooldowns);
+						}
+						if ((damageInfo.damageType & DamageType.GiveSkullOnKill) > DamageType.Generic)
+						{
+							RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.DirectAssistType.BanditSkull);
+						}
+						if (damageInfo.HasModdedDamageType(Bandit2Core.ResetRevolverOnKill))
+						{
+							RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.DirectAssistType.ResetSpecial);
 						}
 						if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBiteHealOnKill))
                         {
-							RiskyMod.assistManager.AddBanditAssist(attackerBody, victimBody, AssistManager.directAssistLength, AssistManager.DirectAssistType.CrocoBiteHealOnKill);
+							RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, AssistManager.directAssistLength, AssistManager.DirectAssistType.CrocoBiteHealOnKill);
 						}
 					}
 				}

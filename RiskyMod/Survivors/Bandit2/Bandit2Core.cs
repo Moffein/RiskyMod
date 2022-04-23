@@ -23,6 +23,10 @@ namespace RiskyMod.Survivors.Bandit2
         public static BuffDef SpecialDebuff;
         public static DamageAPI.ModdedDamageType SpecialDamage;
         public static DamageAPI.ModdedDamageType RackEmUpDamage;
+
+        public static DamageAPI.ModdedDamageType RevolverRicochet;
+        public static DamageAPI.ModdedDamageType ResetRevolverOnKill;
+
         public static bool enabled = true;
 
         public static bool blastChanges = true;
@@ -35,6 +39,9 @@ namespace RiskyMod.Survivors.Bandit2
         public static bool utilityFix = true;
 
         public static bool specialRework = true;
+
+        public static bool enableDesperadoKillStack = false;
+        public static bool enableDesperadoRicochet = true;
 
         public static BodyIndex Bandit2Index;
         private static AnimationCurve knifeVelocity;
@@ -262,6 +269,8 @@ namespace RiskyMod.Survivors.Bandit2
             if (!specialRework) return;
             SpecialDamage = DamageAPI.ReserveDamageType();
             RackEmUpDamage = DamageAPI.ReserveDamageType();
+            ResetRevolverOnKill = DamageAPI.ReserveDamageType();
+            RevolverRicochet = DamageAPI.ReserveDamageType();
             SpecialDamageType(sk);
             SpecialDebuff = SneedUtils.SneedUtils.CreateBuffDef(
                 "RiskyModBanditRevolver",
@@ -441,31 +450,59 @@ namespace RiskyMod.Survivors.Bandit2
             SneedUtils.SneedUtils.FixSkillName(gunslingerDef);
             Content.Content.skillDefs.Add(Skills.Gunslinger);
 
-            SkillDef desperado = ScriptableObject.CreateInstance<SkillDef>();
-            desperado.activationState = new SerializableEntityStateType(typeof(BaseState));
-            desperado.activationStateMachineName = "Weapon";
-            desperado.skillDescriptionToken = DesperadoRework.enabled ? "BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD" : "BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD";
-            desperado.skillName = "Desperado";
-            desperado.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME";
-            desperado.icon = Assets.SkillIcons.Bandit2Desperado;
-            Skills.Desperado = desperado;
-            SneedUtils.SneedUtils.FixSkillName(desperado);
-            Content.Content.skillDefs.Add(Skills.Desperado);
+            SkillDef desperadoKillStack = ScriptableObject.CreateInstance<SkillDef>();
+            desperadoKillStack.activationState = new SerializableEntityStateType(typeof(BaseState));
+            desperadoKillStack.activationStateMachineName = "Weapon";
+            desperadoKillStack.skillDescriptionToken = DesperadoRework.enabled ? "BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD" : "BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD";
+            desperadoKillStack.skillName = "DesperadoKillStack";
+            desperadoKillStack.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME";
+            desperadoKillStack.icon = Assets.SkillIcons.Bandit2Desperado;
+            Skills.DesperadoKillStack = desperadoKillStack;
+            SneedUtils.SneedUtils.FixSkillName(desperadoKillStack);
+            Content.Content.skillDefs.Add(Skills.DesperadoKillStack);
+
+            SkillDef desperadoRicochet = ScriptableObject.CreateInstance<SkillDef>();
+            desperadoRicochet.activationState = new SerializableEntityStateType(typeof(BaseState));
+            desperadoRicochet.activationStateMachineName = "Weapon";
+            desperadoRicochet.skillDescriptionToken = "BANDIT2_REVOLVER_RICOCHET_DESCRIPTION_RISKYMOD";
+            desperadoRicochet.skillName = "DesperadoRicochet";
+            desperadoRicochet.skillNameToken = "BANDIT2_REVOLVER_RICOCHET_NAME_RISKYMOD";
+            desperadoRicochet.icon = Assets.SkillIcons.Bandit2Desperado;
+            Skills.DesperadoRicochet = desperadoRicochet;
+            SneedUtils.SneedUtils.FixSkillName(desperadoRicochet);
+            Content.Content.skillDefs.Add(Skills.DesperadoRicochet);
 
             SkillFamily skillFamily = ScriptableObject.CreateInstance<SkillFamily>();
-            skillFamily.variants = new SkillFamily.Variant[2];
+            skillFamily.variants = new SkillFamily.Variant[1];
             skillFamily.variants[0] = new SkillFamily.Variant
             {
                 skillDef = Skills.Gunslinger,
                 unlockableDef = null,
                 viewableNode = new ViewablesCatalog.Node(Skills.Gunslinger.skillName, false, null)
             };
-            skillFamily.variants[1] = new SkillFamily.Variant
+
+            if (enableDesperadoRicochet)
             {
-                skillDef = Skills.Desperado,
-                unlockableDef = null,
-                viewableNode = new ViewablesCatalog.Node(Skills.Desperado.skillName, false, null)
-            };
+                Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+                skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
+                {
+                    skillDef = Skills.DesperadoRicochet,
+                    unlockableDef = null,
+                    viewableNode = new ViewablesCatalog.Node(Skills.DesperadoRicochet.skillName, false, null)
+                };
+            }
+
+            if (enableDesperadoKillStack)
+            {
+                Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+                skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
+                {
+                    skillDef = Skills.DesperadoKillStack,
+                    unlockableDef = null,
+                    viewableNode = new ViewablesCatalog.Node(Skills.DesperadoKillStack.skillName, false, null)
+                };
+            }
+
             Content.Content.skillFamilies.Add(skillFamily);
             passive._skillFamily = skillFamily;
         }
@@ -495,7 +532,8 @@ namespace RiskyMod.Survivors.Bandit2
     public class Skills
     {
         public static SkillDef Gunslinger;
-        public static SkillDef Desperado;
+        public static SkillDef DesperadoKillStack;
+        public static SkillDef DesperadoRicochet;
 
         public static SkillDef LightsOut;
         public static SkillDef RackEmUp;

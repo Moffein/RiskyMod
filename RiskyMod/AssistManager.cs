@@ -3,6 +3,7 @@ using RiskyMod.Items.Common;
 using RiskyMod.Items.Legendary;
 using RiskyMod.Items.Uncommon;
 using RiskyMod.Survivors.Bandit2;
+using RiskyMod.Survivors.Bandit2.Components;
 using RiskyMod.Tweaks;
 using RoR2;
 using RoR2.Orbs;
@@ -50,7 +51,7 @@ namespace RiskyMod
             }
         }
 
-        public void AddBanditAssist(CharacterBody attackerBody, CharacterBody victimBody, float duration, DirectAssistType assistType)
+        public void AddDirectAssist(CharacterBody attackerBody, CharacterBody victimBody, float duration, DirectAssistType assistType)
         {
             //Check if this assist already exists.
             bool foundAssist = false;
@@ -168,6 +169,27 @@ namespace RiskyMod
                                 EffectManager.SpawnEffect(SharedDamageTypes.medkitEffect, effectData, true);
                             }
                             break;
+                        case DirectAssistType.ResetSpecial:
+                            if (victimBody.master)
+                            {
+                                if (!spawnedBanditSkullEffect)
+                                {
+                                    spawnedBanditSkullEffect = true;
+                                    EffectManager.SpawnEffect(BanditSpecialGracePeriod.skullEffect, new EffectData
+                                    {
+                                        origin = damageInfo.position
+                                    }, true);
+                                }
+                                if (a.attackerBody)
+                                {
+                                    SpecialDamageController sdc = a.attackerBody.GetComponent<SpecialDamageController>();
+                                    if (sdc)
+                                    {
+                                        sdc.RpcResetSpecial();
+                                    }
+                                }
+                            }
+                            break;
                         default:
                             break;
                     }
@@ -260,6 +282,7 @@ namespace RiskyMod
         {
             ResetCooldowns,
             BanditSkull,
+            ResetSpecial,
             CrocoBiteHealOnKill
         }
     }

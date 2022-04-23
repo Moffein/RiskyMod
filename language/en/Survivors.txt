@@ -13,6 +13,8 @@
 	"BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD" : "All attacks from <style=cIsDamage>behind</style> are <style=cIsDamage>Critical Strikes</style>. All <style=cIsDamage>Critical Strike Chance</style> is converted into <style=cIsDamage>Critical Strike Damage</style>.",
 	"BANDIT2_REVOLVER_NAME_RISKYMOD" : "Gunslinger",
 	"BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD" : "Revolver kills <style=cIsUtility>reset all your cooldowns</style>.",
+	"BANDIT2_REVOLVER_RICOCHET_NAME_RISKYMOD" : "Trigger Happy",
+	"BANDIT2_REVOLVER_RICOCHET_DESCRIPTION_RISKYMOD" : "Revolver bullets <style=cIsDamage>ricochet</style> to <style=cIsDamage>2</style> additional targets. Revolver kills <style=cIsUtility>reset your Revolver cooldown</style>.",
 	"BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD" : "Revolver kills grant <style=cIsDamage>stacking tokens</style> for <style=cIsDamage>10%</style> more revolver damage.",
 	"BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD": "Revolver kills grant <style=cIsDamage>stacking tokens</style> for <style=cIsDamage>1.5%</style> more revolver damage.",
 	"BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Slayer</style>. Fire a revolver shot for <style=cIsDamage>600% damage</style>.",
