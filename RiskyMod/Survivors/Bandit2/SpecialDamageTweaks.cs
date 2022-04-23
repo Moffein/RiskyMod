@@ -34,10 +34,10 @@ namespace RiskyMod.Survivors.Bandit2
                 chainGunOrb.procCoefficient = damageInfo.procCoefficient;
                 chainGunOrb.procChainMask = damageInfo.procChainMask;
                 chainGunOrb.origin = damageInfo.position;
-                chainGunOrb.speed = 200f;   //Drone Parts is 600f
+                chainGunOrb.speed = 80f;   //Drone Parts is 600f
                 chainGunOrb.bouncesRemaining = 1;
-                chainGunOrb.bounceRange = 20f;
-                chainGunOrb.damageCoefficientPerBounce = 0.75f;
+                chainGunOrb.bounceRange = 30f;
+                chainGunOrb.damageCoefficientPerBounce = 1f;
                 chainGunOrb.targetsToFindPerBounce = 1;
                 chainGunOrb.canBounceOnSameTarget = false;
                 chainGunOrb.damageColorIndex = damageInfo.damageColorIndex;
