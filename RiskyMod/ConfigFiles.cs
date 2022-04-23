@@ -386,7 +386,7 @@ namespace RiskyMod
             MageCore.modifyPlasmaBolt = SurvivorCfg.Bind(mageString, "Plasma Bolt Changes", true, "Enable changes to this skill.").Value;
             MageCore.m2RemoveNanobombGravity = SurvivorCfg.Bind(mageString, "Nanobomb - Remove Gravity", true, "Removes projectile drop from Nanobomb so it behaves like it did pre-1.0 update.").Value;
 
-            MageCore.ionSurgeUtility = SurvivorCfg.Bind(mageString, "Ion Surge - Utility Slot", false, "Moves Ion Surge to the Utility slot.").Value;
+            MageCore.ionSurgeUtility = SurvivorCfg.Bind(mageString, "Ion Surge - Move to Utility Slot", true, "Moves Ion Surge to the Utility slot.").Value;
             MageCore.ionSurgeMovementScaling = SurvivorCfg.Bind(mageString, "Ion Surge - Movement Scaling", false, "Ion Surge jump height scales with movement speed.").Value;
             MageCore.ionSurgeShock = SurvivorCfg.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
 
@@ -440,10 +440,11 @@ namespace RiskyMod
             BeaconRework.resupplyChanges = SurvivorCfg.Bind(captainString, "Beacon: Resupply - Enable Changes", true, "Enable changes to the effect of this beacon.").Value;
 
             CaptainCore.beaconRework = SurvivorCfg.Bind(captainString, "Beacon Changes", true, "Beacons can be replaced on a cooldown and reworks Supply and Hack beacons. Disabling this disables all beacon-related changes.").Value;
-            if (!(BeaconRework.healCooldown || BeaconRework.hackCooldown || BeaconRework.hackChanges || BeaconRework.shockCooldown || BeaconRework.shockChanges || BeaconRework.resupplyChanges || BeaconRework.resupplyCooldown))
-            {
-                CaptainCore.beaconRework = false;
-            }
+            CaptainCore.beaconRework = CaptainCore.beaconRework
+                && (BeaconRework.healCooldown
+                || BeaconRework.hackCooldown|| BeaconRework.hackChanges
+                || BeaconRework.shockCooldown || BeaconRework.shockChanges
+                || BeaconRework.resupplyChanges || BeaconRework.resupplyCooldown);
 
             Bandit2Core.enabled = SurvivorCfg.Bind(banditString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             BanditSpecialGracePeriod.enabled = SurvivorCfg.Bind(banditString, "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;

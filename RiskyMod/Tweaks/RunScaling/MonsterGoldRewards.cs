@@ -21,7 +21,7 @@ namespace RiskyMod.Tweaks.RunScaling
 					DeathRewards dw = self.GetComponent<DeathRewards>();
 					if (dw && dw.goldReward > 0)
 					{
-						float chestRatio = scaleToInitialDifficulty && Stage.instance ? Stage.instance.entryDifficultyCoefficient / Run.instance.difficultyCoefficient : 1f;
+						float chestRatio = (scaleToInitialDifficulty && Stage.instance) ? (Stage.instance.entryDifficultyCoefficient / Run.instance.difficultyCoefficient) : 1f;
 						float inflationRatio = scaleToInflation ? 1.4f / (1f + 0.4f * Run.instance.difficultyCoefficient) : 1f; //Couldn't find actual code, but wiki claims Combat Director spawning crerdits gets multiplied by this.
 
 						int goldRewardRaw = (int)Mathf.Max(Mathf.Round(dw.goldReward * chestRatio * inflationRatio), 1f);
