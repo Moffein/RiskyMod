@@ -427,7 +427,23 @@ namespace RiskyMod
             CaptainCore.enablePrimarySkillChanges = SurvivorCfg.Bind(captainString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
             CaptainCore.modifyTaser = SurvivorCfg.Bind(captainString, "Power Taser Changes", true, "Enable changes to this skill.").Value;
             CaptainCore.nukeChanges = SurvivorCfg.Bind(captainString, "Diablo Strike Changes", true, "Enable changes to this skill.").Value;
-            CaptainCore.beaconRework = SurvivorCfg.Bind(captainString, "Beacon Changes", true, "Beacons can be replaced on a cooldown and reworks Supply and Hack beacons.").Value;
+
+            BeaconRework.healCooldown = SurvivorCfg.Bind(captainString, "Beacon: Healing - Enable Cooldown", true, "Allow this beacon to be re-used on a cooldown.").Value;
+
+            BeaconRework.hackCooldown = SurvivorCfg.Bind(captainString, "Beacon: Hack - Enable Cooldown", true, "Allow this beacon to be re-used on a cooldown.").Value;
+            BeaconRework.hackChanges = SurvivorCfg.Bind(captainString, "Beacon: Hack - Enable Changes", true, "Enable changes to the effect of this beacon.").Value;
+
+            BeaconRework.shockCooldown = SurvivorCfg.Bind(captainString, "Beacon: Shocking - Enable Cooldown", true, "Allow this beacon to be re-used on a cooldown.").Value;
+            BeaconRework.shockChanges = SurvivorCfg.Bind(captainString, "Beacon: Shocking - Enable Changes", true, "Enable changes to the effect of this beacon.").Value;
+
+            BeaconRework.resupplyCooldown = SurvivorCfg.Bind(captainString, "Beacon: Resupply - Enable Cooldown", true, "Allow this beacon to be re-used on a cooldown.").Value;
+            BeaconRework.resupplyChanges = SurvivorCfg.Bind(captainString, "Beacon: Resupply - Enable Changes", true, "Enable changes to the effect of this beacon.").Value;
+
+            CaptainCore.beaconRework = SurvivorCfg.Bind(captainString, "Beacon Changes", true, "Beacons can be replaced on a cooldown and reworks Supply and Hack beacons. Disabling this disables all beacon-related changes.").Value;
+            if (!(BeaconRework.healCooldown || BeaconRework.hackCooldown || BeaconRework.hackChanges || BeaconRework.shockCooldown || BeaconRework.shockChanges || BeaconRework.resupplyChanges || BeaconRework.resupplyCooldown))
+            {
+                CaptainCore.beaconRework = false;
+            }
 
             Bandit2Core.enabled = SurvivorCfg.Bind(banditString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             BanditSpecialGracePeriod.enabled = SurvivorCfg.Bind(banditString, "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;

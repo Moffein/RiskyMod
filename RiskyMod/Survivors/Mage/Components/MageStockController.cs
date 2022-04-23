@@ -18,11 +18,11 @@ namespace RiskyMod.Survivors.Mage.Components
 
         private bool rightMuzzle;
 
-        public static List<Type> ValidStates = new List<Type> { typeof(EntityStates.Mage.Weapon.FireFireBolt), typeof(EntityStates.Mage.Weapon.FireLightningBolt) };
         public static GameObject fireMuzzleflashEffectPrefab;
         public static GameObject lightningMuzzleflashEffectPrefab;
         public static GameObject iceMuzzleflashEffectPrefab;
 
+        public static List<Type> ValidStates = new List<Type> { typeof(EntityStates.Mage.Weapon.FireFireBolt), typeof(EntityStates.Mage.Weapon.FireLightningBolt) };
 
         private void Awake()
         {

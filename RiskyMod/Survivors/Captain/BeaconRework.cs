@@ -21,14 +21,23 @@ namespace RiskyMod.Survivors.Captain
             public static SkillDef BeaconHacking;
         }
 
+        public static bool healCooldown = true;
+        public static bool hackCooldown = true;
+        public static bool shockCooldown = true;
+        public static bool resupplyCooldown = true;
+
+        public static bool hackChanges= true;
+        public static bool shockChanges = true;
+        public static bool resupplyChanges = true;
+
         public BeaconRework(SkillLocator sk)
         {
             Skills.BeaconResupply = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropEquipmentRestock.asset").WaitForCompletion();
             Skills.BeaconHacking = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropHacking.asset").WaitForCompletion();
-            AddCooldown(Skills.BeaconResupply);
-            AddCooldown(Skills.BeaconHacking);
-            AddCooldown("RoR2/Base/Captain/CallSupplyDropHealing.asset");
-            AddCooldown("RoR2/Base/Captain/CallSupplyDropShocking.asset");
+            if (resupplyCooldown) AddCooldown(Skills.BeaconResupply);
+            if (hackCooldown) AddCooldown(Skills.BeaconHacking);
+            if (healCooldown) AddCooldown("RoR2/Base/Captain/CallSupplyDropHealing.asset");
+            if (shockCooldown) AddCooldown("RoR2/Base/Captain/CallSupplyDropShocking.asset");
 
             sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD";
 
@@ -100,12 +109,14 @@ namespace RiskyMod.Survivors.Captain
 
         private void ModifyBeaconShocking(SkillLocator sk)
         {
+            if (!shockChanges) return;
             //Debug.Log("Shock Radius: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.CaptainSupplyDrop.ShockZoneMainState", "shockRadius"));//10, same as healing
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.CaptainSupplyDrop.ShockZoneMainState", "shockRadius", "15");
         }
 
         private void ModifyBeaconResupply(SkillLocator sk)
         {
+            if (!resupplyChanges) return;
             GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, EquipmentRestock.prefab").WaitForCompletion().InstantiateClone("RiskyMod_CaptainSupplyEquipmentRestock", true);
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
             esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconEquipmentRestoreMain));
@@ -114,7 +125,8 @@ namespace RiskyMod.Survivors.Captain
         }
         private void ModifyBeaconHacking(SkillLocator sk)
         {
-            GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, Plating.prefab").WaitForCompletion().InstantiateClone("RiskyMod_CaptainSupplySkillRestock", true); ;//, Hacking
+            if (!hackChanges) return;
+            GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, Hacking.prefab").WaitForCompletion().InstantiateClone("RiskyMod_CaptainSupplySkillRestock", true); ;//, Hacking
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
             esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
@@ -123,28 +135,8 @@ namespace RiskyMod.Survivors.Captain
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Captain.Weapon.CallSupplyDropHacking", "supplyDropPrefab", beaconPrefab);
             Skills.BeaconHacking.skillDescriptionToken = "CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD";
 
-            //beaconPrefab.GetComponent<OnEnableEvent>().action = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, EquipmentRestock.prefab").WaitForCompletion().GetComponent<OnEnableEvent>().action;
-            /*Debug.Log("Destroying Hack Indicator");
-            ModelLocator ml = beaconPrefab.GetComponent<ModelLocator>();
-            ml.
-            Transform[] tfs = ml.modelBaseTransform.GetComponentsInChildren<Transform>();
-            foreach (Transform t in tfs)
-            {
-                Debug.Log(t.name);
-            }*/
-
-            /*Transform[] tfs = beaconPrefab.GetComponentsInChildren<Transform>();
-            foreach (Transform t in tfs)
-            {
-                Debug.Log(t.name);
-            }
-            for (int i = 0; i < tfs.Length; i++)
-            {
-                if (i > tfs.Length/2 && tfs[i].name != "ModelBase")
-                {
-                    tfs[i].localScale = Vector3.zero;
-                }
-            }*/
+            //Credits to DestroyedClone for this code
+            UnityEngine.Object.Destroy(beaconPrefab.GetComponent<ModelLocator>()?.modelTransform?.Find("Indicator").gameObject);
         }
 
         public class CaptainDeployableManager : MonoBehaviour
