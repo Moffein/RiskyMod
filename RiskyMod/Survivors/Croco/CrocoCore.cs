@@ -7,6 +7,7 @@ using EntityStates.RiskyMod.Croco;
 using EntityStates;
 using UnityEngine.Networking;
 using RoR2.Orbs;
+using RiskyMod.Content;
 
 namespace RiskyMod.Survivors.Croco
 {
@@ -118,11 +119,7 @@ namespace RiskyMod.Survivors.Croco
             {
                 BuildScepterSkillDefs(sk);
 
-                if (RiskyMod.ScepterPluginLoaded)
-                {
-                    SetIconScepter();
-                    SetupScepter();
-                }
+                if (RiskyMod.ScepterPluginLoaded) SetupScepter();
                 if (RiskyMod.ClassicItemsScepterLoaded) SetupScepterClassic();
             }
         }
@@ -141,7 +138,7 @@ namespace RiskyMod.Survivors.Croco
             diseaseScepterDef.dontAllowPastMaxStocks = true;
             diseaseScepterDef.forceSprintDuringState = false;
             diseaseScepterDef.fullRestockOnAssign = true;
-            diseaseScepterDef.icon = orig.icon;
+            diseaseScepterDef.icon = Assets.ScepterSkillIcons.CrocoEpidemicScepter;
             diseaseScepterDef.interruptPriority = orig.interruptPriority;
             diseaseScepterDef.isCombatSkill = orig.isCombatSkill;
             diseaseScepterDef.keywordTokens = orig.keywordTokens;
@@ -159,13 +156,6 @@ namespace RiskyMod.Survivors.Croco
 
             Skills.EpidemicScepter = diseaseScepterDef;
         }
-
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void SetIconScepter()
-        {
-            Skills.EpidemicScepter.icon = AncientScepter.Assets.SpriteAssets.CrocoDisease2;
-        }
-
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepter()

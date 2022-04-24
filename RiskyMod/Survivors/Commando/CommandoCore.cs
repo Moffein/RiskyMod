@@ -3,6 +3,7 @@ using EntityStates.RiskyMod.Commando;
 using EntityStates.RiskyMod.Commando.Scepter;
 using MonoMod.Cil;
 using R2API;
+using RiskyMod.Content;
 using RiskyMod.SharedHooks;
 using RoR2;
 using RoR2.Projectile;
@@ -171,11 +172,7 @@ namespace RiskyMod.Survivors.Commando
             if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
             {
                 BuildScepterSkillDefs(sk);
-                if (RiskyMod.ScepterPluginLoaded)
-                {
-                    SetIconScepter();
-                    SetupScepter();
-                }
+                if (RiskyMod.ScepterPluginLoaded) SetupScepter();
                 if (RiskyMod.ClassicItemsScepterLoaded) SetupScepterClassic();
             }
         }
@@ -197,7 +194,7 @@ namespace RiskyMod.Survivors.Commando
                 barrageDef.dontAllowPastMaxStocks = true;
                 barrageDef.forceSprintDuringState = false;
                 barrageDef.fullRestockOnAssign = true;
-                barrageDef.icon = Skills.Barrage.icon;
+                barrageDef.icon = Assets.ScepterSkillIcons.CommandoBarrageScepter;
                 barrageDef.interruptPriority = InterruptPriority.PrioritySkill;
                 barrageDef.isCombatSkill = true;
                 barrageDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
@@ -227,7 +224,7 @@ namespace RiskyMod.Survivors.Commando
                 grenadeDef.dontAllowPastMaxStocks = true;
                 grenadeDef.forceSprintDuringState = false;
                 grenadeDef.fullRestockOnAssign = true;
-                grenadeDef.icon = Skills.Grenade.icon;
+                grenadeDef.icon = Assets.ScepterSkillIcons.CommandoGrenadeScepter;
                 grenadeDef.interruptPriority = InterruptPriority.PrioritySkill;
                 grenadeDef.isCombatSkill = true;
                 grenadeDef.keywordTokens = new string[] { };
@@ -242,13 +239,6 @@ namespace RiskyMod.Survivors.Commando
                 Content.Content.skillDefs.Add(grenadeDef);
                 Skills.GrenadeScepter = grenadeDef;
             }
-        }
-
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void SetIconScepter()
-        {
-            if (suppressiveChanges) Skills.BarrageScepter.icon = AncientScepter.Assets.SpriteAssets.CommandoBarrage2;
-            if (grenadeChanges) Skills.GrenadeScepter.icon = AncientScepter.Assets.SpriteAssets.CommandoGrenade2;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]

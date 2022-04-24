@@ -124,12 +124,13 @@ namespace RiskyMod
             SmallHoldoutCharging.enabled = GeneralCfg.Bind(gameMechString, "Small Holdout Charging", true, "Void/Moon Holdouts charge at max speed as long as 1 player is charging.").Value;
 
             //Run Scaling
-            CombatDirectorMultiplier.multiplier = GeneralCfg.Bind(scalingString, "Combat Director Credit Multiplier", 1.2f, "Multiply Combat Director credits by this amount. Set to 1 to disable").Value;
-            CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.multiplier != 1f;
+            CombatDirectorMultiplier.directorCreditMultiplier = GeneralCfg.Bind(scalingString, "Combat Director Credit Multiplier", 1.4f, "Multiply Combat Director credits by this amount. Set to 1 to disable").Value;
+            CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.directorCreditMultiplier != 1f;
             MonsterGoldRewards.scaleToInitialDifficulty = GeneralCfg.Bind(scalingString, "Gold - Scale to Initial Stage Difficulty", true, "Monsters gold rewards are scaled off of the difficulty at the start of the stage.").Value;
             MonsterGoldRewards.scaleToInflation = GeneralCfg.Bind(scalingString, "Gold - Scale to Combat Director Credits", true, "Monsters gold rewards are scaled off of the current combat director credit earn rate.").Value;
-            MonsterGoldRewards.enabled = MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToInflation;
-
+            MonsterGoldRewards.scaleToDirectorMultiplier = GeneralCfg.Bind(scalingString, "Gold - Scale to Combat Director Credit Multipliers", true, "Monsters gold rewards are divided by the Combat Director Credit Multiplier.").Value;
+            MonsterGoldRewards.enabled = MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToInflation || MonsterGoldRewards.scaleToDirectorMultiplier;
+            
 
             ModdedScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Modded Scaling", true, "Slightly tweaks how difficulty scaling is calculated by converting exponential increases in to multiplicative increases.").Value;
             LinearScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling", false, "Makes difficulty scaling linear like in RoR1. Requires Modded Scaling to be enabled.").Value;

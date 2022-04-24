@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2599526125
+CRC: 1553636841
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ca037f10439d1220a3d2f09b6cb483bf
+    Hash: 616fdcf6065329605e484cdc97045140
   TypeTreeHash:
     serializedVersion: 2
     Hash: ea5a42e0fd8ea905efa7aa926a3b8944
@@ -16,11 +16,17 @@ ClassTypes:
 Assets:
 - Assets/Resources/Sprites/UI/texUIEquipmentRestock.png
 - Assets/Resources/Sprites/Buffs/BuffRaincoatReady.png
+- Assets/Resources/Sprites/SkillIcons/Scepter/texCommandoR2.png
+- Assets/Resources/Sprites/SkillIcons/Scepter/texBanditR2.png
 - Assets/Resources/Sprites/Buffs/BuffRaincoatActive.png
+- Assets/Resources/Sprites/SkillIcons/Scepter/texHuntressR1.png
 - Assets/Resources/Sprites/Buffs/BuffRaincoatCooldown.png
 - Assets/Resources/Sprites/SkillIcons/Bandit2Gunslinger.png
 - Assets/Resources/Sprites/Buffs/BuffHeadstomperCooldown.png
+- Assets/Resources/Sprites/SkillIcons/Scepter/texAcridR1.png
 - Assets/Resources/Sprites/SkillIcons/Bandit2Desperado.png
+- Assets/Resources/Sprites/SkillIcons/Scepter/texCommandoR1.png
+- Assets/Resources/Sprites/SkillIcons/Scepter/texBanditR1.png
 - Assets/Resources/Sprites/Buffs/BuffFreeze.png
 - Assets/Resources/Sprites/Buffs/BuffInfusion.png
 - Assets/Resources/Sprites/Buffs/BuffHeadstomperActive.png

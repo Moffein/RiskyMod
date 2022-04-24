@@ -26,6 +26,7 @@ namespace RiskyMod.Content
                 assetBundle = AssetBundle.LoadFromStream(stream);
             }
             LoadSkillIcons();
+            LoadScepterSkillIcons();
             LoadBuffIcons();
             LoadMiscSprites();
             LoadLanguage();
@@ -65,6 +66,19 @@ namespace RiskyMod.Content
             SkillIcons.Bandit2Desperado = assetBundle.LoadAsset<Sprite>("Bandit2Desperado");
         }
 
+        private static void LoadScepterSkillIcons()
+        {
+            ScepterSkillIcons.CommandoBarrageScepter = assetBundle.LoadAsset<Sprite>("texCommandoR1");
+            ScepterSkillIcons.CommandoGrenadeScepter = assetBundle.LoadAsset<Sprite>("texCommandoR2");
+
+            ScepterSkillIcons.HuntressArrowRainScepter = assetBundle.LoadAsset<Sprite>("texHuntressR1");
+
+            ScepterSkillIcons.CrocoEpidemicScepter = assetBundle.LoadAsset<Sprite>("texCrocoR1");
+
+            ScepterSkillIcons.LightsOutScepter = assetBundle.LoadAsset<Sprite>("texBanditR1");
+            ScepterSkillIcons.RackEmUpScepter = assetBundle.LoadAsset<Sprite>("texBanditR2");
+        }
+
         private static void LoadMiscSprites()
         {
             MiscSprites.CaptainEquipmentRestockBar = assetBundle.LoadAsset<Sprite>("texUIEquipmentRestock");
@@ -85,6 +99,19 @@ namespace RiskyMod.Content
         {
             public static Sprite Bandit2Gunslinger;
             public static Sprite Bandit2Desperado;
+        }
+
+        public static class ScepterSkillIcons
+        {
+            public static Sprite CommandoBarrageScepter;
+            public static Sprite CommandoGrenadeScepter;
+
+            public static Sprite HuntressArrowRainScepter;
+
+            public static Sprite LightsOutScepter;
+            public static Sprite RackEmUpScepter;
+
+            public static Sprite CrocoEpidemicScepter;
         }
 
         public static class MiscSprites

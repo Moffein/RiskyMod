@@ -10,6 +10,7 @@ using EntityStates.RiskyMod.Huntress;
 using RoR2.Skills;
 using UnityEngine.Networking;
 using UnityEngine.AddressableAssets;
+using RiskyMod.Content;
 
 namespace RiskyMod.Survivors.Huntress
 {
@@ -139,11 +140,7 @@ namespace RiskyMod.Survivors.Huntress
                 if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
                 {
                     BuildScepterSkillDefs(sk);
-                    if (RiskyMod.ScepterPluginLoaded)
-                    {
-                        SetIconScepter();
-                        SetupScepter();
-                    }
+                    if (RiskyMod.ScepterPluginLoaded) SetupScepter();
                     if (RiskyMod.ClassicItemsScepterLoaded) SetupScepterClassic();
                 }
             }
@@ -175,7 +172,7 @@ namespace RiskyMod.Survivors.Huntress
             arrowRainDef.dontAllowPastMaxStocks = true;
             arrowRainDef.forceSprintDuringState = false;
             arrowRainDef.fullRestockOnAssign = true;
-            arrowRainDef.icon = sk.special.skillFamily.variants[0].skillDef.icon;
+            arrowRainDef.icon = Assets.ScepterSkillIcons.HuntressArrowRainScepter;
             arrowRainDef.interruptPriority = sk.special.skillFamily.variants[0].skillDef.interruptPriority;
             arrowRainDef.isCombatSkill = true;
             arrowRainDef.keywordTokens = new string[] { };
@@ -188,12 +185,8 @@ namespace RiskyMod.Survivors.Huntress
             arrowRainDef.skillDescriptionToken = "HUNTRESS_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD";
             arrowRainDef.stockToConsume = 1;
             Content.Content.skillDefs.Add(arrowRainDef);
-        }
 
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void SetIconScepter()
-        {
-            Skills.ArrowRainScepter.icon = AncientScepter.Assets.SpriteAssets.HuntressRain2;
+            Skills.ArrowRainScepter = arrowRainDef;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
