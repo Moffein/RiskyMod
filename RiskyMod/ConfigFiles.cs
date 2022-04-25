@@ -128,9 +128,10 @@ namespace RiskyMod
             CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.directorCreditMultiplier != 1f;
             MonsterGoldRewards.scaleToInitialDifficulty = GeneralCfg.Bind(scalingString, "Gold - Scale to Initial Stage Difficulty", true, "Monsters gold rewards are scaled off of the difficulty at the start of the stage.").Value;
             MonsterGoldRewards.scaleToInflation = GeneralCfg.Bind(scalingString, "Gold - Scale to Combat Director Credits", true, "Monsters gold rewards are scaled off of the current combat director credit earn rate.").Value;
-            MonsterGoldRewards.scaleToDirectorMultiplier = GeneralCfg.Bind(scalingString, "Gold - Scale to Combat Director Credit Multipliers", true, "Monsters gold rewards are divided by the Combat Director Credit Multiplier.").Value;
+            MonsterGoldRewards.scaleToDirectorMultiplier = GeneralCfg.Bind(scalingString, "Gold - Scale to Modded Combat Director Credit Multiplier", true, "Monsters gold rewards are divided by the Modded Combat Director Credit Multiplier.").Value;
             MonsterGoldRewards.enabled = MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToInflation || MonsterGoldRewards.scaleToDirectorMultiplier;
-            
+            PriceScaling.enabled = GeneralCfg.Bind(scalingString, "Gold - Linear Interactable Price Scaling", true, "Interactable prices are calculated by difficulty * 1.25 instead of difficulty ^ 1.25.").Value;
+
 
             ModdedScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Modded Scaling", true, "Slightly tweaks how difficulty scaling is calculated by converting exponential increases in to multiplicative increases.").Value;
             LinearScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling", false, "Makes difficulty scaling linear like in RoR1. Requires Modded Scaling to be enabled.").Value;
