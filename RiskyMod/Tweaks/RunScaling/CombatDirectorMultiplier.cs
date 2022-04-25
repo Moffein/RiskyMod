@@ -7,13 +7,13 @@ namespace RiskyMod.Tweaks.RunScaling
     {
         public static bool enabled = true;
         public static float directorCreditMultiplier = 1.2f;
-        public static float scaledGoldDivisor = 1f;
+        public static float scaledGoldRatio = 1f;
 
         public CombatDirectorMultiplier()
         {
             if (!enabled) return;
 
-            scaledGoldDivisor = 1f / (Mathf.Sqrt(CombatDirectorMultiplier.directorCreditMultiplier));
+            scaledGoldRatio = 1f / (Mathf.Sqrt(CombatDirectorMultiplier.directorCreditMultiplier));
 
             On.RoR2.CombatDirector.Awake += (orig, self) =>
             {
