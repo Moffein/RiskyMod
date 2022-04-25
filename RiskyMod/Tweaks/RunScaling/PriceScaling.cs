@@ -1,7 +1,6 @@
 ﻿using MonoMod.Cil;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using RoR2;
 
 namespace RiskyMod.Tweaks.RunScaling
 {
@@ -23,7 +22,7 @@ namespace RiskyMod.Tweaks.RunScaling
                 c.GotoNext(MoveType.After, x => x.MatchMul());
                 c.EmitDelegate<Func<float, float>>(price =>
                 {
-                    return price * 1.25f;
+                    return price * (Run.instance.difficultyCoefficient * 1.25f - 0.25f);
                 });
             };
         }

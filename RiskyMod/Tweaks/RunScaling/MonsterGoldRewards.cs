@@ -9,9 +9,20 @@ namespace RiskyMod.Tweaks.RunScaling
 		public static bool scaleToInitialDifficulty = true;
 		public static bool scaleToInflation = true;
 		public static bool scaleToDirectorMultiplier = true;
+
+		public static float inflationCoefficient = 0.3f;
+
+		private static float goldBank = 0f;
+
 		public MonsterGoldRewards()
         {
             if (!enabled) return;
+
+			On.RoR2.Run.Start += (orig, self) =>
+			{
+				goldBank = 0f;
+				orig(self);
+			};
 
 			On.RoR2.CharacterBody.Start += (orig, self) =>
 			{
@@ -23,19 +34,23 @@ namespace RiskyMod.Tweaks.RunScaling
 					if (dw && dw.goldReward > 0)
 					{
 						float chestRatio = (scaleToInitialDifficulty && Stage.instance) ? (Stage.instance.entryDifficultyCoefficient / Run.instance.difficultyCoefficient) : 1f;
-						float inflationRatio = scaleToInflation ? 1.4f / (1f + 0.4f * Run.instance.difficultyCoefficient) : 1f; //Couldn't find actual code, but wiki claims Combat Director spawning crerdits gets multiplied by this.
+						float inflationRatio = scaleToInflation ? (1f + inflationCoefficient) / (1f + inflationCoefficient * Run.instance.difficultyCoefficient) : 1f; //Couldn't find actual code, but wiki claims Combat Director spawning crerdits gets multiplied by this.
 						float directorRatio = (scaleToDirectorMultiplier ? CombatDirectorMultiplier.scaledGoldRatio : 1f);
 
 						float trueGold = dw.goldReward * chestRatio * inflationRatio * directorRatio;
-						float flooredGold = Mathf.Floor(trueGold);
-						float roundingFactorPercent = 100f * (trueGold - flooredGold);
-						if (roundingFactorPercent > 0f)
+						float finalGold = Mathf.Floor(trueGold);
+
+						float difference = trueGold - finalGold;
+						if (difference > 0f) goldBank += difference;
+
+						if (goldBank >= 1f)
                         {
-							if (Util.CheckRoll(roundingFactorPercent)) flooredGold += 1f;
+							goldBank -= 1f;
+							finalGold += 1f;
                         }
 
-						int goldRewardRaw = (int)Mathf.Max(flooredGold, 1f);
-						dw.goldReward = (uint)goldRewardRaw;
+						int finalGoldInt = (int)Mathf.Max(finalGold, 1f);
+						dw.goldReward = (uint)finalGoldInt;
 					}
 				}
 			};
