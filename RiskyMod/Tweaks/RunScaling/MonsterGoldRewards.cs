@@ -40,14 +40,16 @@ namespace RiskyMod.Tweaks.RunScaling
 						float trueGold = dw.goldReward * chestRatio * inflationRatio * directorRatio;
 						float finalGold = Mathf.Floor(trueGold);
 
-						float difference = trueGold - finalGold;
-						if (difference > 0f) goldBank += difference;
-
-						if (goldBank >= 1f)
-                        {
-							goldBank -= 1f;
-							finalGold += 1f;
-                        }
+						if (finalGold > 0)
+						{
+							float difference = trueGold - finalGold;
+							if (difference > 0f) goldBank += difference;
+							if (goldBank >= 1f)
+							{
+								goldBank -= 1f;
+								finalGold += 1f;
+							}
+						}
 
 						int finalGoldInt = (int)Mathf.Max(finalGold, 1f);
 						dw.goldReward = (uint)finalGoldInt;

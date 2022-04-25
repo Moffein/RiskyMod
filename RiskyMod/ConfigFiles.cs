@@ -127,8 +127,10 @@ namespace RiskyMod
             CombatDirectorMultiplier.directorCreditMultiplier = GeneralCfg.Bind(scalingString, "Combat Director Credit Multiplier", 1.4f, "Multiply Combat Director credits by this amount. Set to 1 to disable").Value;
             CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.directorCreditMultiplier != 1f;
             MonsterGoldRewards.scaleToInitialDifficulty = GeneralCfg.Bind(scalingString, "Gold - Scale to Initial Stage Difficulty", true, "Monsters gold rewards are scaled off of the difficulty at the start of the stage.").Value;
-            MonsterGoldRewards.scaleToInflation = GeneralCfg.Bind(scalingString, "Gold - Scale to Combat Director Credits", true, "Monsters gold rewards are scaled off of the current combat director credit earn rate.").Value;
-            MonsterGoldRewards.scaleToDirectorMultiplier = GeneralCfg.Bind(scalingString, "Gold - Scale to Modded Combat Director Credit Multiplier", true, "Monsters gold rewards are divided by the sqrt of the Modded Combat Director Credit Multiplier.").Value;
+
+            MonsterGoldRewards.scaleToInflation = GeneralCfg.Bind(scalingString, "Gold (EXPERIMENTAL) - Scale to Combat Director Credit Rate", false, "Monsters gold rewards are scaled off of the current combat director credit earn rate.").Value;
+
+            MonsterGoldRewards.scaleToDirectorMultiplier = GeneralCfg.Bind(scalingString, "Gold - Scale to Modded Combat Director Credit Multiplier", true, "Monsters gold rewards are divided by the Modded Combat Director Credit Multiplier.").Value;
             MonsterGoldRewards.enabled = MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToInflation || MonsterGoldRewards.scaleToDirectorMultiplier;
 
             //doesn't work that well
