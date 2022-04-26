@@ -185,7 +185,7 @@ namespace RiskyMod
                                     SpecialDamageController sdc = a.attackerBody.GetComponent<SpecialDamageController>();
                                     if (sdc)
                                     {
-                                        sdc.RpcResetSpecial();
+                                        sdc.RpcResetSpecial();    //TODO: FIX
                                     }
                                 }
                             }

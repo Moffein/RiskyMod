@@ -22,7 +22,7 @@ namespace RiskyMod.Survivors.Mage
         private static void CreateFireBolt()
         {
             if (FireBolt) return;
-            FireBolt = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/magefireboltbasic").InstantiateClone("RiskyMod_FlameBolt");
+            FireBolt = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/magefireboltbasic").InstantiateClone("RiskyMod_FlameBolt", true);
             IncreaseProjectileLifetime(FireBolt);
             Content.Content.projectilePrefabs.Add(FireBolt);
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireFireBolt", "projectilePrefab", FireBolt);
@@ -31,7 +31,7 @@ namespace RiskyMod.Survivors.Mage
         private static void CreateLightningBolt()
         {
             if (LightningBolt) return;
-            LightningBolt = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/magelightningboltbasic").InstantiateClone("RiskyMod_PlasmaBolt");
+            LightningBolt = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/magelightningboltbasic").InstantiateClone("RiskyMod_PlasmaBolt", true);
             IncreaseProjectileLifetime(LightningBolt);
             Content.Content.projectilePrefabs.Add(LightningBolt);
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireLightningBolt", "projectilePrefab", LightningBolt);
