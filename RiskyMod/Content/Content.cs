@@ -11,6 +11,7 @@ namespace RiskyMod.Content
     public class Content : IContentPackProvider
     {
         public static ContentPack content = new ContentPack();
+        public static List<GameObject> networkedObjectPrefabs = new List<GameObject>();
         public static List<GameObject> bodyPrefabs = new List<GameObject>();
         public static List<GameObject> masterPrefabs = new List<GameObject>();
         public static List<BuffDef> buffDefs = new List<BuffDef>();
@@ -36,6 +37,7 @@ namespace RiskyMod.Content
 
         public IEnumerator LoadStaticContentAsync(LoadStaticContentAsyncArgs args)
         {
+            content.networkedObjectPrefabs.Add(networkedObjectPrefabs.ToArray());
             content.bodyPrefabs.Add(bodyPrefabs.ToArray());
             content.masterPrefabs.Add(masterPrefabs.ToArray());
             content.buffDefs.Add(buffDefs.ToArray());

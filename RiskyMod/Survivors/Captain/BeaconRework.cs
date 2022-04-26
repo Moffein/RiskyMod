@@ -121,7 +121,7 @@ namespace RiskyMod.Survivors.Captain
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
             esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconEquipmentRestoreMain));
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconEquipmentRestoreMain));
-            Content.Content.projectilePrefabs.Add(beaconPrefab);
+            Content.Content.networkedObjectPrefabs.Add(beaconPrefab);
         }
         private void ModifyBeaconHacking(SkillLocator sk)
         {
@@ -131,7 +131,7 @@ namespace RiskyMod.Survivors.Captain
             esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
 
-            Content.Content.projectilePrefabs.Add(beaconPrefab);
+            Content.Content.networkedObjectPrefabs.Add(beaconPrefab);
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Captain.Weapon.CallSupplyDropHacking", "supplyDropPrefab", beaconPrefab);
             Skills.BeaconHacking.skillDescriptionToken = "CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD";
 
