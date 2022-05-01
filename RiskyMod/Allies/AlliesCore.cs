@@ -184,9 +184,11 @@ namespace RiskyMod.Allies
                     case "Turret1Body":
                         ally.tags |= AllyTag.Drone | AllyTag.Turret | AllyTag.UseShield;
                         break;
-                    case "MinorConstructAllyBody":
                     case "SquidTurretBody":
                         ally.tags |= AllyTag.Item | AllyTag.Turret;
+                        break;
+                    case "MinorConstructAllyBody":
+                        ally.tags |= AllyTag.Item | AllyTag.Turret | AllyTag.DontModifyRegen;
                         break;
                     default:
                         break;
@@ -240,6 +242,7 @@ namespace RiskyMod.Allies
         Item,   //Is an item effect
         Turret,  //Resistance to AOE/Proc
         DontModifyScaling,
-        UseShield
+        UseShield,
+        DontModifyRegen
     }
 }

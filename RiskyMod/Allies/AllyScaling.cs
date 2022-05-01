@@ -96,13 +96,16 @@ namespace RiskyMod.Allies
                 //Megadrone and RoboBalls need 0.8x damage penalty
 
                 //Drones always regen to full in 40s
-                cb.baseRegen = cb.baseMaxHealth / 40f;
+                if (!((ally.tags & AllyTag.DontModifyRegen) == AllyTag.DontModifyRegen))
+                {
+                    cb.baseRegen = cb.baseMaxHealth / 40f;
+                    cb.levelRegen = cb.baseRegen * 0.2f;
+                }
 
                 //Set Level Stats
                 cb.levelDamage = cb.baseDamage * 0.3f;
                 cb.levelMaxHealth = cb.baseMaxHealth * 0.2f;
                 cb.levelMaxShield = cb.baseMaxShield * 0.2f;
-                cb.levelRegen = cb.baseRegen * 0.2f;
                 cb.autoCalculateLevelStats = false;
             }
         }

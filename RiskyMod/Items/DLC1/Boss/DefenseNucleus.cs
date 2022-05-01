@@ -28,7 +28,7 @@ namespace RiskyMod.Items.DLC1.Boss
             {
                 if (slot == DeployableSlot.MinorConstructOnKill)
                 {
-                    return 4;
+                    return (self.inventory.GetItemCount(DLC1Content.Items.MinorConstructOnKill) > 0) ? 4 : 0;
                 }
                 else
                 {

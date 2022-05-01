@@ -17,6 +17,18 @@ namespace RiskyMod.Items.Boss
 				if (!enabled) return;
 				ItemsCore.ModifyItemDefActions += ModifyItem;
 
+				On.RoR2.CharacterMaster.GetDeployableSameSlotLimit += (orig, self, slot) =>
+				{
+					if (slot == DeployableSlot.BeetleGuardAlly)
+					{
+						return (self.inventory.GetItemCount(RoR2Content.Items.BeetleGland) > 0) ? 1 : 0;
+					}
+					else
+					{
+						return orig(self, slot);
+					}
+				};
+
 				//Overwrite the Vanilla code since it's obfuscated in DNSPY
 				On.RoR2.Items.BeetleGlandBodyBehavior.FixedUpdate += (orig, self) =>
 				{
@@ -27,12 +39,10 @@ namespace RiskyMod.Items.Boss
 						{
 							return;
 						}
-						int glandCount = self.body.inventory ? self.body.inventory.GetItemCount(RoR2Content.Items.BeetleGland) : 0;
-						if (glandCount > 0)
-						{
-							int deployableCount = self.body.master.GetDeployableCount(DeployableSlot.BeetleGuardAlly);
-							if (deployableCount < 1)    //used to be < glandCount
-						{
+						if (self.body.master)
+                        {
+							if (self.body.master.IsDeployableSlotAvailable(DeployableSlot.BeetleGuardAlly))    //used to be < glandCount
+							{
 								self.guardResummonCooldown -= Time.fixedDeltaTime;
 								if (self.guardResummonCooldown <= 0f)
 								{
@@ -46,12 +56,13 @@ namespace RiskyMod.Items.Boss
 									directorSpawnRequest.summonerBodyObject = self.gameObject;
 									directorSpawnRequest.ignoreTeamMemberLimit = ignoreAllyCap;  //Guards should always be able to spawn. Probably doesn't need a cap since there's only 1 per player.
 
-								directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult spawnResult)
+									directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult spawnResult)
 									{
-										if (spawnResult.success)
+										if (spawnResult.success && self.body.inventory)
 										{
 											Inventory guardInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
 
+											int glandCount = self.body.inventory ? self.body.inventory.GetItemCount(RoR2Content.Items.BeetleGland) : 0;
 											if (guardInv && glandCount > 1)
 											{
 												guardInv.GiveItem(RoR2Content.Items.BoostDamage, 30 * glandCount);
@@ -66,7 +77,7 @@ namespace RiskyMod.Items.Boss
 
 									DirectorCore.instance.TrySpawnObject(directorSpawnRequest);
 
-									if (deployableCount < 1)
+									if (self.body.master.IsDeployableSlotAvailable(DeployableSlot.BeetleGuardAlly))
 									{
 										self.guardResummonCooldown = 1f;
 										return;
