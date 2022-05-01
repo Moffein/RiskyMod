@@ -30,7 +30,9 @@ namespace RiskyMod.Allies
             "RoboBallGreenBuddyBody",
             "RoboBallRedBuddyBody",
             "Turret1Body",
-            "SquidTurretBody"
+            "SquidTurretBody",
+
+            "MinorConstructAllyBody"
         };
 
         public delegate void ModifyAllies(List<AllyInfo> allyList);
@@ -182,6 +184,7 @@ namespace RiskyMod.Allies
                     case "Turret1Body":
                         ally.tags |= AllyTag.Drone | AllyTag.Turret | AllyTag.UseShield;
                         break;
+                    case "MinorConstructAllyBody":
                     case "SquidTurretBody":
                         ally.tags |= AllyTag.Item | AllyTag.Turret;
                         break;

@@ -100,7 +100,7 @@ namespace RiskyMod.Items.Uncommon
                             SpawnCard spawnCard = squidTurretCard;
                             DirectorPlacementRule placementRule = new DirectorPlacementRule
                             {
-                                placementMode = DirectorPlacementRule.PlacementMode.Approximate,
+                                placementMode = DirectorPlacementRule.PlacementMode.Approximate,    //Set to approximate since NearestNode causes overlapping
                                 minDistance = 5f,
                                 maxDistance = 25f,
                                 position = self.body.corePosition

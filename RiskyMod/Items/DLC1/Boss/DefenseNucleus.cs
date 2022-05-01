@@ -110,7 +110,7 @@ namespace RiskyMod.Items.DLC1.Boss
                     SpawnCard spawnCard = DefenseNucleus.MinorConstructOnKillCard;
                     DirectorPlacementRule placementRule = new DirectorPlacementRule
                     {
-                        placementMode = DirectorPlacementRule.PlacementMode.NearestNode,
+                        placementMode = DirectorPlacementRule.PlacementMode.Approximate,//Set to approximate since NearestNode causes overlapping
                         minDistance = 5f,
                         maxDistance = 25f,
                         position = victimBody.corePosition
