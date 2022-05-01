@@ -1,5 +1,6 @@
 ﻿using RiskyMod.Items.Boss;
 using RiskyMod.Items.Common;
+using RiskyMod.Items.DLC1.Boss;
 using RiskyMod.Items.DLC1.Common;
 using RiskyMod.Items.DLC1.Legendary;
 using RiskyMod.Items.DLC1.Uncommon;
@@ -130,6 +131,8 @@ namespace RiskyMod.Items
             new Disciple();
             new GenesisLoop();
             new Planula();
+            new EmpathyCores();
+            new DefenseNucleus();
         }
 
         private void ModifyLunar()

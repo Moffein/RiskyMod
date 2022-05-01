@@ -9,6 +9,7 @@ namespace RiskyMod.Tweaks.RunScaling
 		public static bool scaleToInitialDifficulty = true;
 		public static bool scaleToInflation = true;
 		public static bool scaleToDirectorMultiplier = true;
+		public static bool scaleToChestCosts = true;
 
 		public static float inflationCoefficient = 0.3f;
 
@@ -38,6 +39,8 @@ namespace RiskyMod.Tweaks.RunScaling
 						float directorRatio = (scaleToDirectorMultiplier ? CombatDirectorMultiplier.scaledGoldRatio : 1f);
 
 						float trueGold = dw.goldReward * chestRatio * inflationRatio * directorRatio;
+						if (scaleToChestCosts) trueGold = Mathf.Pow(trueGold, 1.25f);
+
 						float finalGold = Mathf.Floor(trueGold);
 
 						if (finalGold > 0)

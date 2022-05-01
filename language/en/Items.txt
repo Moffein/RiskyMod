@@ -38,7 +38,7 @@
 	"ITEM_EXPLODEONDEATH_DESC_RISKYMOD": "On killing an enemy, spawn a <style=cIsDamage>lava pillar</style> in a <style=cIsDamage>16m</style> radius for <style=cIsDamage>350%</style> <style=cStack>(+280% per stack)</style> base damage.",
 	
 	"ITEM_SQUIDTURRET_PICKUP_RISKYMOD": "Taking heavy damage summons a Squid Turret nearby.",
-	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Chance on taking damage to summon a <style=cIsDamage>Squid Turret</style> with <style=cIsHealing>100% <style=cStack>(+30% per stack)</style> health</style> that <style=cIsUtility>distracts</style> and attacks nearby enemies at <style=cIsDamage>100% <style=cStack>(+100% per stack)</style> attack speed</style>. Chance increases the more damage you take. Can have up to <style=cIsUtility>3</style> squids at a time.",
+	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Chance on taking damage to summon a <style=cIsDamage>Squid Turret</style> with <style=cIsHealing>100% <style=cStack>(+30% per stack)</style> health</style> and <style=cIsDamage>100% <style=cStack>(+100% per stack)</style> attack speed</style> that <style=cIsUtility>distracts</style> nearby enemies. Chance increases the more damage you take. Limited to <style=cIsUtility>3</style>.",
 	
 	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>chain lightning</style> for <style=cIsDamage>80%</style> TOTAL damage on up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> targets within <style=cIsDamage>25m</style>.",
 	
@@ -120,6 +120,8 @@
 	"ITEM_CHAINLIGHTNINGVOID_DESC_RISKYMOD": "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>lightning</style> for <style=cIsDamage>60%</style> TOTAL damage up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> times. <style=cIsVoid>Corrupts all Ukuleles</style>.",
 	
 	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "Shoot down nearby projectiles. Recharge rate scales with the amount of drones you have.",
-	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "Shoot down <style=cIsDamage>1</style> <style=cStack>(+1 per stack)</style> projectiles within <style=cIsDamage>20m</style> every <style=cIsDamage>0.5 seconds</style>. <style=cIsUtility>Recharge rate scales with the amount of drones you have</style>."
+	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "Shoot down <style=cIsDamage>1</style> <style=cStack>(+1 per stack)</style> projectiles within <style=cIsDamage>20m</style> every <style=cIsDamage>0.5 seconds</style>. <style=cIsUtility>Recharge rate scales with the amount of drones you have</style>.",
+	
+	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "Killing elite monsters spawns an <style=cIsDamage>Alpha Construct</style> with <style=cIsHealing>100% <style=cStack>(+30% per stack)</style> health</style> and <style=cIsDamage>100% <style=cStack>(+100% per stack)</style> damage</style>. Limited to <style=cIsUtility>4</style>."
 	}
 }

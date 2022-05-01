@@ -16,6 +16,7 @@ namespace RiskyMod.Items.Uncommon
         public static bool enabled = true;
         public static GameObject procEffectPrefab;
         public static bool scaleCount = false;
+        public static bool ignoreAllyCap = true;
 
         public static BodyIndex squidTurretBodyIndex;
         public static CharacterSpawnCard squidTurretCard = LegacyResourcesAPI.Load<CharacterSpawnCard>("SpawnCards/CharacterSpawnCards/cscSquidTurret");
@@ -107,7 +108,7 @@ namespace RiskyMod.Items.Uncommon
                             DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(spawnCard, placementRule, RoR2Application.rng);
                             directorSpawnRequest.teamIndexOverride = self.body.teamComponent.teamIndex;
                             directorSpawnRequest.summonerBodyObject = self.gameObject;
-                            directorSpawnRequest.ignoreTeamMemberLimit = true;  //Polyps should always be able to spawn. Does this need a cap for performance?
+                            directorSpawnRequest.ignoreTeamMemberLimit = SquidPolyp.ignoreAllyCap;
                             directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult result)
                             {
                                 if (!result.success)
@@ -158,7 +159,7 @@ namespace RiskyMod.Items.Uncommon
         {
             if (SquidPolyp.scaleCount)
             {
-                return squidList.Count < 1 + (inventory ? inventory.GetItemCount(RoR2Content.Items.Squid) : 0);
+                return squidList.Count < 2 + (inventory ? inventory.GetItemCount(RoR2Content.Items.Squid) : -2);
             }
             else
             {

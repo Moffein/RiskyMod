@@ -42,6 +42,7 @@ using RiskyMod.Tweaks;
 using RiskyMod.Tweaks.CharacterMechanics;
 using RiskyMod.Tweaks.RunScaling;
 using RiskyMod.VoidFields;
+using RiskyMod.Items.DLC1.Boss;
 
 namespace RiskyMod
 {
@@ -128,7 +129,9 @@ namespace RiskyMod
             CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.directorCreditMultiplier != 1f;
             MonsterGoldRewards.scaleToInitialDifficulty = GeneralCfg.Bind(scalingString, "Gold - Scale to Initial Stage Difficulty", true, "Monsters gold rewards are scaled off of the difficulty at the start of the stage.").Value;
 
+
             MonsterGoldRewards.scaleToInflation = GeneralCfg.Bind(scalingString, "Gold (EXPERIMENTAL) - Scale to Combat Director Credit Rate", false, "Monsters gold rewards are scaled off of the current combat director credit earn rate.").Value;
+            MonsterGoldRewards.scaleToChestCosts = GeneralCfg.Bind(scalingString, "Gold (EXPERIMENTAL) - Scale to Chest Costs", false, "Monsters gold rewards are increased to the power of 1.25 to match chest scaling. I recommend to use this with Scale to Combat Director Credit Rate.").Value;
 
             MonsterGoldRewards.scaleToDirectorMultiplier = GeneralCfg.Bind(scalingString, "Gold - Scale to Modded Combat Director Credit Multiplier", true, "Monsters gold rewards are divided by the Modded Combat Director Credit Multiplier.").Value;
             MonsterGoldRewards.enabled = MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToInflation || MonsterGoldRewards.scaleToDirectorMultiplier;
@@ -254,6 +257,7 @@ namespace RiskyMod
             RedWhip.enabled = ItemCfg.Bind(uncommonString, "Red Whip", true, itemConfigDescString).Value;
             RoseBuckler.enabled = ItemCfg.Bind(uncommonString, "Rose Buckler", true, itemConfigDescString).Value;
             SquidPolyp.enabled = ItemCfg.Bind(uncommonString, "Squid Polyp", true, itemConfigDescString).Value;
+            SquidPolyp.ignoreAllyCap = ItemCfg.Bind(uncommonString, "Squid Polyp - Ignore Ally Cap", true, "Squid Polyps ignore the ally cap if changes are enabled.").Value;
             SquidPolyp.scaleCount = ItemCfg.Bind(uncommonString, "Squid Polyp - Stacks Increase Max Squids", false, "Extra stacks allow for more squids to spawn. Will lag in MP.").Value;
             Stealthkit.enabled = ItemCfg.Bind(uncommonString, "Old War Stealthkit", true, itemConfigDescString).Value;
             Ukulele.enabled = ItemCfg.Bind(uncommonString, "Ukulele", true, itemConfigDescString).Value;
@@ -308,8 +312,17 @@ namespace RiskyMod
             Disciple.enabled = ItemCfg.Bind(bossString, "Charged Perforator", true, itemConfigDescString).Value;
             Knurl.enabled = ItemCfg.Bind(bossString, "Titanic Knurl", true, itemConfigDescString).Value;
             MoltenPerf.enabled = ItemCfg.Bind(bossString, "Molten Perforator", true, itemConfigDescString).Value;
+
             QueensGland.enabled = ItemCfg.Bind(bossString, "Queens Gland", true, itemConfigDescString).Value;
+            QueensGland.ignoreAllyCap = ItemCfg.Bind(bossString, "Queens Gland - Ignore Ally Cap", true, "Queens Gland Guards ignore the ally cap if changes are enabled.").Value;
+
             Shatterspleen.enabled = ItemCfg.Bind(bossString, "Shatterspleen", true, itemConfigDescString).Value;
+
+            EmpathyCores.ignoreAllyCap = ItemCfg.Bind(bossString, "Empathy Cores - Ignore Ally Cap", true, "Empathy Cores ignore the ally cap.").Value;
+            EmpathyCores.enabled = EmpathyCores.enabled && EmpathyCores.ignoreAllyCap;
+
+            DefenseNucleus.enabled = ItemCfg.Bind(bossString, "Defense Nucleus", true, itemConfigDescString).Value;
+            DefenseNucleus.ignoreAllyCap = ItemCfg.Bind(bossString, "Defense Nucleus - Ignore Ally Cap", true, "Defense Nucleus Alpha Constructs ignore the ally cap if changes are enabled.").Value;
         }
 
         private static void ConfigLunars()

@@ -9,6 +9,7 @@ namespace RiskyMod.Items.Boss
 	public class QueensGland
 	{
 		public static bool enabled = true;
+		public static bool ignoreAllyCap = true;
 		public QueensGland()
 		{
 			if (!enabled) return;
@@ -16,6 +17,7 @@ namespace RiskyMod.Items.Boss
 				if (!enabled) return;
 				ItemsCore.ModifyItemDefActions += ModifyItem;
 
+				//Overwrite the Vanilla code since it's obfuscated in DNSPY
 				On.RoR2.Items.BeetleGlandBodyBehavior.FixedUpdate += (orig, self) =>
 				{
 					if (NetworkServer.active)
@@ -42,13 +44,13 @@ namespace RiskyMod.Items.Boss
 										spawnOnTarget = self.transform
 									}, RoR2Application.rng);
 									directorSpawnRequest.summonerBodyObject = self.gameObject;
-									directorSpawnRequest.ignoreTeamMemberLimit = true;  //Guards should always be able to spawn. Probably doesn't need a cap since there's only 1 per player.
+									directorSpawnRequest.ignoreTeamMemberLimit = ignoreAllyCap;  //Guards should always be able to spawn. Probably doesn't need a cap since there's only 1 per player.
 
 								directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult spawnResult)
 									{
 										Inventory guardInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
 
-										if (glandCount > 1)
+										if (guardInv && glandCount > 1)
 										{
 											guardInv.GiveItem(RoR2Content.Items.BoostDamage, 30 * glandCount);
 											guardInv.GiveItem(RoR2Content.Items.BoostHp, 10 * glandCount);
