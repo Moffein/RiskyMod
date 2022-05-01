@@ -322,6 +322,7 @@ namespace RiskyMod
             EmpathyCores.enabled = EmpathyCores.enabled && EmpathyCores.ignoreAllyCap;
 
             DefenseNucleus.enabled = ItemCfg.Bind(bossString, "Defense Nucleus", true, itemConfigDescString).Value;
+            DefenseNucleus.inheritEliteAffix = ItemCfg.Bind(bossString, "Defense Nucleus - Inherit Elite Affix", true, "Defense Nucleus Alpha Constructs inherit the Elite Affix of the enemy that was killed. This removes their spawn VFX.").Value;
             DefenseNucleus.ignoreAllyCap = ItemCfg.Bind(bossString, "Defense Nucleus - Ignore Ally Cap", true, "Defense Nucleus Alpha Constructs ignore the ally cap if changes are enabled.").Value;
         }
 

@@ -131,8 +131,8 @@ namespace RiskyMod.Items.Legendary
                 Inventory inventory = characterMaster2.inventory;
                 if (inventory)
                 {
-                    inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
-                    inventory.GiveItem(RoR2Content.Items.UseAmbientLevel.itemIndex);
+                    if (inventory.GetItemCount(RoR2Content.Items.Ghost) <= 0) inventory.GiveItem(RoR2Content.Items.Ghost);
+                    if (inventory.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
                     inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 30 * itemCount);
                     if (ownerBody && ownerBody.teamComponent && ownerBody.teamComponent.teamIndex == TeamIndex.Player)
                     {

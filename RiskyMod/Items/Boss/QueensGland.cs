@@ -48,17 +48,20 @@ namespace RiskyMod.Items.Boss
 
 								directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult spawnResult)
 									{
-										Inventory guardInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
-
-										if (guardInv && glandCount > 1)
+										if (spawnResult.success)
 										{
-											guardInv.GiveItem(RoR2Content.Items.BoostDamage, 30 * glandCount);
-											guardInv.GiveItem(RoR2Content.Items.BoostHp, 10 * glandCount);
-											guardInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
-										}
+											Inventory guardInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
 
-										Deployable d = spawnResult.spawnedInstance.AddComponent<Deployable>();
-										self.body.master.AddDeployable(d, DeployableSlot.BeetleGuardAlly);
+											if (guardInv && glandCount > 1)
+											{
+												guardInv.GiveItem(RoR2Content.Items.BoostDamage, 30 * glandCount);
+												guardInv.GiveItem(RoR2Content.Items.BoostHp, 10 * glandCount);
+												if (guardInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) guardInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
+											}
+
+											Deployable d = spawnResult.spawnedInstance.AddComponent<Deployable>();
+											self.body.master.AddDeployable(d, DeployableSlot.BeetleGuardAlly);
+										}
 									}));
 
 									DirectorCore.instance.TrySpawnObject(directorSpawnRequest);

@@ -14,8 +14,7 @@ namespace RiskyMod.SharedHooks
     public class OnCharacterDeath
     {
 		public delegate void OnCharacterDeathInventory(GlobalEventManager self, DamageReport damageReport, CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody);
-		public static OnCharacterDeathInventory OnCharacterDeathInventoryActions = OnCharacterDeathInventoryMethod;
-		private static void OnCharacterDeathInventoryMethod(GlobalEventManager self, DamageReport damageReport, CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody) { }
+		public static OnCharacterDeathInventory OnCharacterDeathInventoryActions;
 
 		public static void GlobalEventManager_OnCharacterDeath(On.RoR2.GlobalEventManager.orig_OnCharacterDeath orig, GlobalEventManager self, DamageReport damageReport)
         {
@@ -40,7 +39,7 @@ namespace RiskyMod.SharedHooks
 							Crowbar.crowbarManager.Remove(victimBody.healthComponent);
                         }
 
-						if (attackerInventory)
+						if (attackerInventory && OnCharacterDeathInventoryActions != null)
                         {
 							OnCharacterDeathInventoryActions.Invoke(self, damageReport, attackerBody, attackerInventory, victimBody);
 						}

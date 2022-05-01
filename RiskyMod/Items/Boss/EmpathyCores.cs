@@ -11,8 +11,8 @@ namespace RiskyMod.Items.Boss
         public static bool enabled = true;
         public static bool ignoreAllyCap = true;
 
-        private static SpawnCard RedBuddyCard = LegacyResourcesAPI.Load<SpawnCard>("SpawnCards/CharacterSpawnCards/cscRoboBallRedBuddy");
-        private static SpawnCard GreenBuddyCard = LegacyResourcesAPI.Load<SpawnCard>("SpawnCards/CharacterSpawnCards/cscRoboBallGreenBuddy");
+        public static SpawnCard RedBuddyCard = LegacyResourcesAPI.Load<SpawnCard>("SpawnCards/CharacterSpawnCards/cscRoboBallRedBuddy");
+        public static SpawnCard GreenBuddyCard = LegacyResourcesAPI.Load<SpawnCard>("SpawnCards/CharacterSpawnCards/cscRoboBallGreenBuddy");
 
         public EmpathyCores()
         {

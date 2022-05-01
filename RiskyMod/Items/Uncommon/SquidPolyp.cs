@@ -111,25 +111,27 @@ namespace RiskyMod.Items.Uncommon
                             directorSpawnRequest.ignoreTeamMemberLimit = SquidPolyp.ignoreAllyCap;
                             directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult result)
                             {
-                                if (!result.success)
+                                if (result.success)
                                 {
-                                    return;
+                                    CharacterMaster component6 = result.spawnedInstance.GetComponent<CharacterMaster>();
+                                    if (component6.inventory)
+                                    {
+                                        if (component6.inventory.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) component6.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
+                                        if (self.itemCounts.invadingDoppelganger > 0)
+                                        {
+                                            //Doppelganger Turrets decay faster and deal less damage.
+                                            component6.inventory.GiveItem(RoR2Content.Items.InvadingDoppelganger);
+                                            component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 10);
+                                        }
+                                        else
+                                        {
+                                            component6.inventory.GiveItem(RoR2Content.Items.BoostHp, 3 * (polypCount - 1));
+                                            component6.inventory.GiveItem(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
+                                            component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 30);
+                                        }
+                                    }
+                                    sq.AddSquid(result.spawnedInstance);
                                 }
-                                CharacterMaster component6 = result.spawnedInstance.GetComponent<CharacterMaster>();
-                                component6.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
-                                if (self.itemCounts.invadingDoppelganger > 0)
-                                {
-                                    //Doppelganger Turrets decay faster and deal less damage.
-                                    component6.inventory.GiveItem(RoR2Content.Items.InvadingDoppelganger);
-                                    component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 15);
-                                }
-                                else
-                                {
-                                    component6.inventory.GiveItem(RoR2Content.Items.BoostHp, 3 * (polypCount - 1));
-                                    component6.inventory.GiveItem(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
-                                    component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 30);
-                                }
-                                sq.AddSquid(result.spawnedInstance);
                             }));
                             DirectorCore.instance.TrySpawnObject(directorSpawnRequest);
                         }
