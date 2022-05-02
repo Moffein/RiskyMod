@@ -24,13 +24,13 @@ namespace RiskyMod.Allies
             }
 
             //Allies deal bonus damage against elites
-            if (self.body.isElite && !attackerBody.isPlayerControlled
+            /*if (self.body.isElite && !attackerBody.isPlayerControlled
                 && (attackerBody.teamComponent && attackerBody.teamComponent.teamIndex == TeamIndex.Player)
                 && !(self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player)
                 && AlliesCore.IsAlly(attackerBody.bodyIndex))
             {
                 damageInfo.damage *= 1.5f;
-            }
+            }*/
         }
     }
 }

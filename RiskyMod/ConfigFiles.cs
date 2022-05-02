@@ -43,6 +43,7 @@ using RiskyMod.Tweaks.CharacterMechanics;
 using RiskyMod.Tweaks.RunScaling;
 using RiskyMod.VoidFields;
 using RiskyMod.Items.DLC1.Boss;
+using RiskyMod.Items.DLC1.Equipment;
 
 namespace RiskyMod
 {
@@ -356,6 +357,7 @@ namespace RiskyMod
             Fruit.enabled = ItemCfg.Bind(equipmentString, "Foreign Fruit", true, itemConfigDescString).Value;
             SuperLeech.enabled = ItemCfg.Bind(equipmentString, "Super Massive Leech", true, itemConfigDescString).Value;
             VolcanicEgg.enabled = ItemCfg.Bind(equipmentString, "Volcanic Egg", true, itemConfigDescString).Value;
+            Goobo.enabled = ItemCfg.Bind(equipmentString, "Goobo Jr.", true, itemConfigDescString).Value;
         }
 
         private static void ConfigFireSelect()

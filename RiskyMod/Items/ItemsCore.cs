@@ -2,6 +2,7 @@
 using RiskyMod.Items.Common;
 using RiskyMod.Items.DLC1.Boss;
 using RiskyMod.Items.DLC1.Common;
+using RiskyMod.Items.DLC1.Equipment;
 using RiskyMod.Items.DLC1.Legendary;
 using RiskyMod.Items.DLC1.Uncommon;
 using RiskyMod.Items.DLC1.Void;
@@ -159,6 +160,7 @@ namespace RiskyMod.Items
             new SuperLeech();
             new Chrysalis();
             new Fruit();
+            new Goobo();
         }
 
         private void ModifyItemTokens()
