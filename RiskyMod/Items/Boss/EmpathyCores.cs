@@ -16,7 +16,7 @@ namespace RiskyMod.Items.Boss
 
         public EmpathyCores()
         {
-            if (!enabled || !ignoreAllyCap) return;
+            if (!enabled) return;
 
             IL.RoR2.DeployableMinionSpawner.SpawnMinion += (il) =>
             {

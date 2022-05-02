@@ -60,6 +60,7 @@ namespace RiskyMod.Items
             new TougherTimes();
             new CautiousSlug();
             new Bungus();
+            new StunGrenade();
 
             new DelicateWatch();
         }
@@ -119,6 +120,7 @@ namespace RiskyMod.Items
             new VoidWisp();
             new Polylute();
             new VoidRing();
+            new Zoea();
         }
 
         private void ModifyBoss()

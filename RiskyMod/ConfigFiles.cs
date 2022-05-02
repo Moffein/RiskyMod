@@ -235,6 +235,7 @@ namespace RiskyMod
             StickyBomb.enabled = ItemCfg.Bind(commonString, "Stickybomb", true, itemConfigDescString).Value;
             TougherTimes.enabled = ItemCfg.Bind(commonString, "Tougher Times", true, itemConfigDescString).Value;
             Warbanner.enabled = ItemCfg.Bind(commonString, "Warbanner", true, itemConfigDescString).Value;
+            StunGrenade.enabled = ItemCfg.Bind(commonString, "Stun Grenade", true, itemConfigDescString).Value;
         }
 
         private static void ConfigUncommonItems()
@@ -305,6 +306,9 @@ namespace RiskyMod
             VoidWisp.enabled = ItemCfg.Bind(voidString, "Voidsent Flame", true, itemConfigDescString).Value;
             Polylute.enabled = ItemCfg.Bind(voidString, "Polylute", true, itemConfigDescString).Value;
             VoidRing.enabled = ItemCfg.Bind(voidString, "Singularity Band", true, itemConfigDescString).Value;
+
+            Zoea.ignoreAllyCap = ItemCfg.Bind(voidString, "Newly Hatched Zoea - Ignore Ally Cap", true, "Zoea Allies ignore the ally cap.").Value;
+            Zoea.enabled = Zoea.enabled && Zoea.ignoreAllyCap;
         }
 
         private static void ConfigBossItems()
