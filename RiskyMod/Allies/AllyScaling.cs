@@ -98,7 +98,7 @@ namespace RiskyMod.Allies
                 //Drones always regen to full in 40s
                 if (!((ally.tags & AllyTag.DontModifyRegen) == AllyTag.DontModifyRegen))
                 {
-                    cb.baseRegen = cb.baseMaxHealth / 40f;
+                    cb.baseRegen = cb.baseMaxHealth / 30f;
                     cb.levelRegen = cb.baseRegen * 0.2f;
                 }
 

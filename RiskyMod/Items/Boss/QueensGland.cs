@@ -63,7 +63,7 @@ namespace RiskyMod.Items.Boss
 											Inventory guardInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
 
 											int glandCount = self.body.inventory ? self.body.inventory.GetItemCount(RoR2Content.Items.BeetleGland) : 0;
-											if (guardInv && glandCount > 1)
+											if (guardInv && glandCount > 0)
 											{
 												guardInv.GiveItem(RoR2Content.Items.BoostDamage, 30 * glandCount);
 												guardInv.GiveItem(RoR2Content.Items.BoostHp, 10 * glandCount);
@@ -72,6 +72,18 @@ namespace RiskyMod.Items.Boss
 
 											Deployable d = spawnResult.spawnedInstance.AddComponent<Deployable>();
 											self.body.master.AddDeployable(d, DeployableSlot.BeetleGuardAlly);
+
+											CharacterMaster cm = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
+											if (cm)
+                                            {
+												CharacterBody body = cm.GetBody();
+												if (body)
+												{
+													UpdateGlandStats ugs = spawnResult.spawnedInstance.AddComponent<UpdateGlandStats>();
+													ugs.ownerInventory = self.body.inventory;
+													ugs.minionInventory = guardInv;
+												}
+											}
 										}
 									}));
 
@@ -96,4 +108,47 @@ namespace RiskyMod.Items.Boss
 			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BeetleGland);
 		}
 	}
+
+	public class UpdateGlandStats : MonoBehaviour
+    {
+		public Inventory minionInventory;
+		public Inventory ownerInventory;
+
+		public void FixedUpdate()
+        {
+			if (NetworkServer.active && ownerInventory && minionInventory)
+            {
+				int glandCount = Math.Max(ownerInventory.GetItemCount(RoR2Content.Items.BeetleGland), 1);
+				int targetHealthBoost = 10 * glandCount;
+				int targetDamageBoost = 30 * glandCount;
+
+				int currentHealthBoost = minionInventory.GetItemCount(RoR2Content.Items.BoostHp);
+				int currentDamageBoost = minionInventory.GetItemCount(RoR2Content.Items.BoostDamage);
+
+				if (currentHealthBoost != targetHealthBoost)
+				{
+					if (currentHealthBoost < targetHealthBoost)
+					{
+						minionInventory.GiveItem(RoR2Content.Items.BoostHp, targetHealthBoost - currentHealthBoost);
+					}
+					else if (currentHealthBoost > targetHealthBoost)
+					{
+						minionInventory.RemoveItem(RoR2Content.Items.BoostHp, currentHealthBoost - targetHealthBoost);
+					}
+				}
+
+				if (currentDamageBoost != targetDamageBoost)
+				{
+					if (currentDamageBoost < targetDamageBoost)
+					{
+						minionInventory.GiveItem(RoR2Content.Items.BoostDamage, targetDamageBoost - currentDamageBoost);
+					}
+					else if (currentDamageBoost > targetDamageBoost)
+					{
+						minionInventory.RemoveItem(RoR2Content.Items.BoostDamage, currentDamageBoost - targetDamageBoost);
+					}
+				}
+			}
+        }
+    }
 }
