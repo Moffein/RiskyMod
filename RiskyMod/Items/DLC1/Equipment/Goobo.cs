@@ -17,8 +17,8 @@ namespace RiskyMod.Items.DLC1.Equipment
 
             On.RoR2.Projectile.GummyCloneProjectile.SpawnGummyClone += (orig, self) =>
             {
-                self.hpBoostCount = 70;
-                self.damageBoostCount = 35;
+                self.hpBoostCount = 70; //20 vanilla
+                self.damageBoostCount = 35; //20 vanilla
                 orig(self);
             };
         }
