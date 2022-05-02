@@ -15,7 +15,7 @@ namespace RiskyMod.Items.Common
             {
                 ILCursor c = new ILCursor(il);
                 c.GotoNext(MoveType.After,
-                     x => x.MatchCall(nameof(RoR2.Util), "ConvertAmplificationPercentageIntoReductionPercentage")
+                     x => x.MatchCall(typeof(RoR2.Util), "ConvertAmplificationPercentageIntoReductionPercentage")
                     );
                 c.Emit(OpCodes.Ldloc_3);    //ItemCount
                 c.Emit(OpCodes.Ldarg_1);    //DamageReport
