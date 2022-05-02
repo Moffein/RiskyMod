@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace RiskyMod.Allies
+namespace RiskyMod.Allies.DroneChanges
 {
     public class GunnerTurret
     {

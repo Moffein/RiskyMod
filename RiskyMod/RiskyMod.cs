@@ -196,7 +196,7 @@ namespace RiskyMod
         {
             if (ZetTweaksLoaded)
             {
-                Allies.MegaDrone.allowRepair = false;
+                Allies.DroneChanges.MegaDrone.allowRepair = false;
             }
         }
 

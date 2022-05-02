@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
-namespace RiskyMod.Allies
+namespace RiskyMod.Allies.DroneChanges
 {
     public class MegaDrone
     {
@@ -19,23 +19,28 @@ namespace RiskyMod.Allies
                 if (aiDrivers[i].customName == "StopTooCloseTarget")
                 {
                     aiDrivers[i].movementType = AISkillDriver.MovementType.StrafeMovetarget;
-                    aiDrivers[i].resetCurrentEnemyOnNextDriverSelection = true; //Does this actually improve it?
+					aiDrivers[i].noRepeat = true;
+					aiDrivers[i].resetCurrentEnemyOnNextDriverSelection = true; //Does this actually improve it?
                     break;
                 }
             }
 
 			GameObject megaDroneBrokenObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/MegaDroneBroken.prefab").WaitForCompletion();
 			PurchaseInteraction pi = megaDroneBrokenObject.GetComponent<PurchaseInteraction>();
-			pi.cost = 300;
+			pi.cost = 300;	//Vanilla is 350
 
+			GameObject megaDroneBodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/MegaDroneBody");
 			if (allowRepair)
             {
-				GameObject megaDroneBodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/MegaDroneBody");
 				CharacterDeathBehavior cdb = megaDroneBodyObject.GetComponent<CharacterDeathBehavior>();
 				cdb.deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.MegaDrone.MegaDroneDeathState));
 				Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.MegaDrone.MegaDroneDeathState));
 			}
-	    }
+
+			CharacterBody megaDroneBody = megaDroneBodyObject.GetComponent<CharacterBody>();
+			megaDroneBody.acceleration = 80f;   //Vanilla is 20f
+			megaDroneBody.baseMoveSpeed = 30f;   //Vanilla is 20f
+		}
     }
 }
 

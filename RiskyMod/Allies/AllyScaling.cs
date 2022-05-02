@@ -61,7 +61,7 @@ namespace RiskyMod.Allies
                         //This should probably be somewhere else since it's not strictly dependent on the body being passed in
                         if (cb.name == "BackupDroneBody")
                         {
-                            cb.baseDamage = 8.5f; //Shares firing state with Gunner Drones, so needs lower damage. Technically makes drone parts worse on this.
+                            cb.baseDamage = 6f; //Shares firing state with Gunner Drones, so needs lower damage. Technically makes drone parts worse on this.
                         }
                         else if (cb.name == "Turret1Body")
                         {

@@ -21,7 +21,7 @@ namespace RiskyMod.Allies
                 c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
                 {
                     bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
-                    bulletAttack.radius = 0.3f;
+                    bulletAttack.radius = 0.5f;
                     bulletAttack.smartCollision = true;
                     return bulletAttack;
                 });
@@ -37,7 +37,7 @@ namespace RiskyMod.Allies
                 c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
                 {
                     bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
-                    bulletAttack.radius = 0.3f;
+                    bulletAttack.radius = 0.5f;
                     bulletAttack.smartCollision = true;
                     return bulletAttack;
                 });
@@ -53,7 +53,7 @@ namespace RiskyMod.Allies
                 c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
                 {
                     bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
-                    bulletAttack.radius = 0.3f;
+                    bulletAttack.radius = 0.5f;
                     bulletAttack.smartCollision = true;
                     return bulletAttack;
                 });
