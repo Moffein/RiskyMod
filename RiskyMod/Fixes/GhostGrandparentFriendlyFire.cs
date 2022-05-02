@@ -2,6 +2,7 @@
 using MonoMod.Cil;
 using RoR2;
 using System;
+using UnityEngine;
 
 namespace RiskyMod.Fixes
 {
@@ -11,6 +12,8 @@ namespace RiskyMod.Fixes
         public GhostGrandparentFriendlyFire()
         {
             if (!enabled) return;
+
+            //Handles the damage
             IL.RoR2.GrandParentSunController.ServerFixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -20,15 +23,21 @@ namespace RiskyMod.Fixes
                 c.Emit(OpCodes.Ldarg_0);    //suncontroller
                 c.EmitDelegate<Func<HealthComponent, GrandParentSunController, HealthComponent>>((victimHealth, self) =>
                 {
-                    if (self.teamFilter && self.teamFilter.teamIndex == TeamIndex.Player
-                    && victimHealth && victimHealth.body.teamComponent && victimHealth.body.teamComponent.teamIndex == TeamIndex.Player)
+                    GameObject ownerObject = self.ownership.ownerObject;
+                    if (ownerObject)
                     {
-                        return null;
+                        TeamComponent tc = ownerObject.GetComponent<TeamComponent>();
+                        if (tc && tc.teamIndex == TeamIndex.Player
+                        && victimHealth && victimHealth.body.teamComponent && victimHealth.body.teamComponent.teamIndex == TeamIndex.Player)
+                        {
+                            return null;
+                        }
                     }
                     return victimHealth;
                 });
             };
 
+            //Handles the visuals
             IL.RoR2.GrandParentSunController.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -38,10 +47,14 @@ namespace RiskyMod.Fixes
                 c.Emit(OpCodes.Ldarg_0);    //suncontroller
                 c.EmitDelegate<Func<CharacterBody, GrandParentSunController, CharacterBody>>((victimBody, self) =>
                 {
-                    if (self.teamFilter && self.teamFilter.teamIndex == TeamIndex.Player
-                    && victimBody && victimBody.teamComponent && victimBody.teamComponent.teamIndex == TeamIndex.Player)
+                    GameObject ownerObject = self.ownership.ownerObject; if (ownerObject)
                     {
-                        return null;
+                        TeamComponent tc = ownerObject.GetComponent<TeamComponent>();
+                        if (tc && tc.teamIndex == TeamIndex.Player
+                        && victimBody && victimBody.teamComponent && victimBody.teamComponent.teamIndex == TeamIndex.Player)
+                        {
+                            return null;
+                        }
                     }
                     return victimBody;
                 });
