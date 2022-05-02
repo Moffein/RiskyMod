@@ -37,9 +37,10 @@ namespace RiskyMod.Allies.DroneChanges
 				Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.MegaDrone.MegaDroneDeathState));
 			}
 
-			CharacterBody megaDroneBody = megaDroneBodyObject.GetComponent<CharacterBody>();
-			megaDroneBody.acceleration = 80f;   //Vanilla is 20f
-			megaDroneBody.baseMoveSpeed = 30f;   //Vanilla is 20f
+			//This doesn't really do anything useful.
+			/*CharacterBody megaDroneBody = megaDroneBodyObject.GetComponent<CharacterBody>();
+			megaDroneBody.acceleration = 20f;   //Vanilla is 20f
+			megaDroneBody.baseMoveSpeed = 24f;   //Vanilla is 20f*/
 		}
     }
 }

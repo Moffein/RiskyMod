@@ -48,8 +48,9 @@ namespace RiskyMod.Allies.DroneChanges
                         search.filterByLoS = false;
                         search.searchOrigin = aimRay.origin;
                         search.sortMode = BullseyeSearch.SortMode.Angle;
-                        search.maxDistanceFilter = 80f; //Should this be 60f?
+                        search.maxDistanceFilter = 60f; //fall back to actual projectiles if the distance is greater than this
                         search.maxAngleFilter = 360f;
+                        search.searchDirection = aimRay.direction;
                         search.RefreshCandidates();
 
                         HurtBox targetHurtBox = search.GetResults().FirstOrDefault<HurtBox>();
