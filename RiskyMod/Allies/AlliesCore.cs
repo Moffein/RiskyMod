@@ -11,6 +11,7 @@ namespace RiskyMod.Allies
     {
         public static bool enabled = true;
         public static bool nerfDroneParts = true;
+        public static bool beetleGlandDontRetaliate = true;
 
         public static List<AllyInfo> AllyList = new List<AllyInfo>();
 

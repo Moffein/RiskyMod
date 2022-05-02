@@ -39,6 +39,7 @@ using RiskyMod.VoidFields;
 
 namespace RiskyMod
 {
+    [BepInDependency("com.xoxfaby.BetterUI", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.PlasmaCore.StickyStunter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.MobileTurretBuff", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.FixPlayercount", BepInDependency.DependencyFlags.SoftDependency)]
@@ -80,6 +81,7 @@ namespace RiskyMod
         public static bool AIBlacklistLoaded = false;
         public static bool AIBlacklistUseVanillaBlacklist = true;
         public static bool ZetTweaksLoaded = false;
+        public static bool BetterUILoaded = false;
 
         public static bool ShareSuiteLoaded = false;
         public static bool ShareSuiteCommon = false;
@@ -135,6 +137,8 @@ namespace RiskyMod
 
         private void CheckDependencies()
         {
+            BetterUILoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.xoxfaby.BetterUI");
+
             ZetTweaksLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetTweaks");
             if (ZetTweaksLoaded) ZetTweaksCompat();
 
