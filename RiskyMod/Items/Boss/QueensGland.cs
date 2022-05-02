@@ -21,7 +21,7 @@ namespace RiskyMod.Items.Boss
 				{
 					if (slot == DeployableSlot.BeetleGuardAlly)
 					{
-						return (self.inventory.GetItemCount(RoR2Content.Items.BeetleGland) > 0) ? 1 : 0;
+						return ((self.inventory.GetItemCount(RoR2Content.Items.BeetleGland) > 0) ? 1 : 0) * (RunArtifactManager.instance.IsArtifactEnabled(RoR2Content.Artifacts.swarmsArtifactDef) ? 2 : 1);
 					}
 					else
 					{
