@@ -74,6 +74,7 @@ namespace RiskyMod.Allies
             new DroneTargeting();
             new ModifyBulletAttacks();
             new SuperAttackResist();
+            new EliteDamageModifiers();
             new NoVoidDamage();
             TweakDrones();
         }

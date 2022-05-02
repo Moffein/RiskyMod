@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace RiskyMod.Allies
 {
-    public class TurretDamageResistance
+    public class TurretDamageResist
     {
         public static bool enabled = true;
-        public TurretDamageResistance()
+        public TurretDamageResist()
         {
             if (!enabled) return;
             On.RoR2.HealthComponent.TakeDamage += (orig, self, di) =>
