@@ -45,10 +45,10 @@ namespace RiskyMod.Survivors.Treebot
             if (swapUtilityEffects)
             {
                 sk.utility.skillFamily.variants[0].skillDef.skillDescriptionToken = "TREEBOT_UTILITY_DESCRIPTION_RISKYMOD";
-                sk.utility.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_SONIC_BOOM" };
+                //sk.utility.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_SONIC_BOOM" };
 
-                sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "TREEBOT_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
-                sk.utility.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_SONIC_BOOM", "KEYWORD_WEAK" };
+                //sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "TREEBOT_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
+                //sk.utility.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_SONIC_BOOM", "KEYWORD_WEAK" };
                 new SwapUtilityEffects();
             }
 
