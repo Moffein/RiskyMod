@@ -72,6 +72,8 @@ namespace RiskyMod.Enemies
             new GooLake();
             //new Wetland();
 
+            new RallypointDelta();
+
             //new SirensCall();
             new StadiaJungle();
 

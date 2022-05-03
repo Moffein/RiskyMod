@@ -43,7 +43,7 @@ namespace RiskyMod.Tweaks.RunScaling
 						if (linearize)
                         {
 							float diff = (scaleToInitialDifficulty && Stage.instance) ? Stage.instance.entryDifficultyCoefficient : Run.instance.difficultyCoefficient;
-							trueGold *= 1.4f * Mathf.Pow(diff, 0.25f) / (1 + 0.4f * diff);
+							trueGold *= 1.2f * Mathf.Pow(diff, 0.25f) / (1 + 0.2f * diff);	//1.4 is equilibrium. Set to a lower value to make gold gain slowly increase
                         }
 
 						float finalGold = Mathf.Floor(trueGold);

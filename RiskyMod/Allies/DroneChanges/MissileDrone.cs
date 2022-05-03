@@ -13,7 +13,6 @@ namespace RiskyMod.Allies.DroneChanges
         {
             On.EntityStates.Drone.DroneWeapon.FireMissileBarrage.FireMissile += (orig, self, targetMuzzle) =>
             {
-                bool firedMissile = false;
                 if (self.GetTeam() == TeamIndex.Player)
                 {
                     self.missileCount++;
@@ -48,7 +47,7 @@ namespace RiskyMod.Allies.DroneChanges
                         search.filterByLoS = false;
                         search.searchOrigin = aimRay.origin;
                         search.sortMode = BullseyeSearch.SortMode.Angle;
-                        search.maxDistanceFilter = 60f; //fall back to actual projectiles if the distance is greater than this
+                        search.maxDistanceFilter = 80f; //fall back to actual projectiles if the distance is greater than this
                         search.maxAngleFilter = 360f;
                         search.searchDirection = aimRay.direction;
                         search.RefreshCandidates();
@@ -56,7 +55,6 @@ namespace RiskyMod.Allies.DroneChanges
                         HurtBox targetHurtBox = search.GetResults().FirstOrDefault<HurtBox>();
                         if (targetHurtBox != default)
                         {
-                            firedMissile = true;
                             MicroMissileOrb missileOrb = new MicroMissileOrb();
                             missileOrb.origin = aimRay.origin;
                             missileOrb.damageValue = self.damageStat * FireMissileBarrage.damageCoefficient;
@@ -73,8 +71,10 @@ namespace RiskyMod.Allies.DroneChanges
                         }
                     }
                 }
-
-                if (!firedMissile) orig(self, targetMuzzle);
+                else
+                {
+                    orig(self, targetMuzzle);
+                }
             };
         }
     }

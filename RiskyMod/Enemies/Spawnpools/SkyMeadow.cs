@@ -5,7 +5,6 @@ namespace RiskyMod.Enemies.Spawnpools
 {
     public class SkyMeadow
     {
-
         public static bool enabled = true;
         public SkyMeadow()
         {
@@ -13,34 +12,24 @@ namespace RiskyMod.Enemies.Spawnpools
 
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.AlphaConstruct, DirectorAPI.Stage.SkyMeadow);
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.AlphaConstruct, DirectorAPI.Stage.SkyMeadowSimulacrum);
+            
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.BrassContraption, DirectorAPI.Stage.SkyMeadow);
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.BrassContraption, DirectorAPI.Stage.SkyMeadowSimulacrum);
+
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.MagmaWorm, DirectorAPI.Stage.SkyMeadow);
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.MagmaWorm, DirectorAPI.Stage.SkyMeadowSimulacrum);
+
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.OverloadingWorm, DirectorAPI.Stage.SkyMeadow);
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.OverloadingWorm, DirectorAPI.Stage.SkyMeadowSimulacrum);
 
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Imp, false, DirectorAPI.Stage.SkyMeadow);
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Imp, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
 
-            /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
-            {
-                if (stage.stage == DirectorAPI.Stage.SkyMeadow)
-                {
-                    List<DirectorAPI.DirectorCardHolder> toRemove = new List<DirectorAPI.DirectorCardHolder>();
-                    foreach (DirectorAPI.DirectorCardHolder dch in list)
-                    {
-                        if (dch.Card.spawnCard == SpawnCards.Bronzong)  //dch.Card.spawnCard == SpawnCards.Mushrum
-                        {
-                            toRemove.Add(dch);
-                        }
-                    }
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.GolemBasic, false, DirectorAPI.Stage.SkyMeadow);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.GolemBasic, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
 
-                    foreach (DirectorAPI.DirectorCardHolder dch in toRemove)
-                    {
-                        list.Remove(dch);
-                    }
-
-                    //list.Add(DirectorCards.GolemBasic);   //Feels weird to see Lunar Golems and Golems on the same map.
-                    list.Add(DirectorCards.Imp);
-                    //list.Add(DirectorCards.GreaterWispBasic);
-                    list.Add(DirectorCards.LunarGolemSkyMeadow);    //I think their spawn animation where they fall from the sky fits the map well.
-                }
-            };*/
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.MagmaWorm, false, DirectorAPI.Stage.SkyMeadow);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Reminder, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
         }
     }
 }
