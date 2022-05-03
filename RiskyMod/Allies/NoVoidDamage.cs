@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using UnityEngine.Networking;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Allies
 {
@@ -34,6 +35,9 @@ namespace RiskyMod.Allies
                 }
                 orig(self, damageInfo);
             };
+
+            SceneDef arenaDef = Addressables.LoadAssetAsync<SceneDef>("RoR2/Base/arena/arena.asset").WaitForCompletion();
+            arenaDef.suppressNpcEntry = false;
         }
     }
 }
