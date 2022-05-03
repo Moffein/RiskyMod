@@ -45,7 +45,7 @@ namespace RiskyMod.Allies
             bool ignoreScaling = (ally.tags & AllyTag.DontModifyScaling) == AllyTag.DontModifyScaling;
             if (!ignoreScaling)
             {
-                if ((ally.tags & AllyTag.Drone) > AllyTag.None)
+                if ((ally.tags & AllyTag.Drone) == AllyTag.Drone)
                 {
                     //Don't like how normalization is split between AllyScaling and AlliesCore
                     if (normalizeDroneDamage)
@@ -71,8 +71,6 @@ namespace RiskyMod.Allies
                         cb.baseMaxHealth = 720f;
                         break;
                 }
-                //Gunner Turrets used to have a 20% HP bonus, but see how they perform with the new turret resistance thing
-                //Megadrone and RoboBalls need 0.8x damage penalty
 
                 //Drones always regen to full in 40s
                 if ((ally.tags & AllyTag.DontModifyRegen) != AllyTag.DontModifyRegen)
