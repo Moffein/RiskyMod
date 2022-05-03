@@ -27,7 +27,7 @@ namespace RiskyMod.Allies.DroneChanges
 
 			GameObject megaDroneBrokenObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/MegaDroneBroken.prefab").WaitForCompletion();
 			PurchaseInteraction pi = megaDroneBrokenObject.GetComponent<PurchaseInteraction>();
-			pi.cost = 300;	//Vanilla is 350
+			pi.cost = 250;	//Vanilla is 350
 
 			GameObject megaDroneBodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/MegaDroneBody");
 			if (allowRepair)

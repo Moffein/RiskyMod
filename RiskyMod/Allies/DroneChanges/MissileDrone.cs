@@ -1,11 +1,7 @@
-﻿using RoR2.Orbs;
-using RoR2;
+﻿using RoR2;
 using UnityEngine;
-using System.Linq;
-using EntityStates.Drone.DroneWeapon;
-using UnityEngine.Networking;
 using RoR2.CharacterAI;
-using RiskyMod.Allies.DroneAutofireComponents;
+using RiskyMod.Allies.DroneBehaviors;
 
 namespace RiskyMod.Allies.DroneChanges
 {
