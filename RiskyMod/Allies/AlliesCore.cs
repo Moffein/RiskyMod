@@ -16,6 +16,9 @@ namespace RiskyMod.Allies
         public static bool nerfDroneParts = true;
         public static bool beetleGlandDontRetaliate = true;
 
+        public delegate void ModifyAllies(List<AllyInfo> allyList);
+        public static ModifyAllies ModifyAlliesActions; //Runs after BodyCatalog init
+
         public static List<AllyInfo> AllyList = new List<AllyInfo>();
 
         public static List<string> AllyBodyNames = new List<string>
@@ -39,9 +42,6 @@ namespace RiskyMod.Allies
             "MinorConstructAllyBody"
         };
 
-        public delegate void ModifyAllies(List<AllyInfo> allyList);
-        public static ModifyAllies ModifyAlliesActions; //Runs after BodyCatalog init
-
         private void TweakDrones()
         {
             new GunnerTurret();
@@ -49,11 +49,13 @@ namespace RiskyMod.Allies
             new IncineratorDrone();
             new MissileDrone();
             new GunnerDrone();
+            new HealDrone();
         }
 
         public AlliesCore()
         {
             if (!enabled) return;
+            BuildAllyBodies();
             if (nerfDroneParts)
             {
                 Items.ItemsCore.ModifyItemDefActions += ModifyDroneParts;
@@ -80,7 +82,6 @@ namespace RiskyMod.Allies
 
                 //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireMissileBarrage", "damageCoefficient", "1.7");   //Damage 14 -> 12, coef 1 -> 1.166666667
             }
-            BuildAllyBodies();
             new AllyScaling();
             new DroneTargeting();
             new ModifyBulletAttacks();
@@ -97,16 +98,6 @@ namespace RiskyMod.Allies
 
         private void BuildAllyBodies()
         {
-
-            /*Debug.Log("FireGatling: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.Drone.DroneWeapon.FireGatling", "damageCoefficient"));
-            Debug.Log("FireMegaTurret: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.Drone.DroneWeapon.FireMegaTurret", "damageCoefficient"));
-            Debug.Log("FireMissileBarrage: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.Drone.DroneWeapon.FireMissileBarrage", "damageCoefficient"));
-            Debug.Log("FireTurret: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.Drone.DroneWeapon.FireTurret", "damageCoefficient"));
-            Debug.Log("FireTwinRocket: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.Drone.DroneWeapon.FireTwinRocket", "damageCoefficient"));
-            Debug.Log("Flamethrower: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.Drone.DroneWeapon.Flamethrower", "totalDamageCoefficient"));
-            Debug.Log("Flamethrower: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.Drone.DroneWeapon.Flamethrower", "tickDamageCoefficient"));
-            Debug.Log("HealBeam: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.Drone.DroneWeapon.HealBeam", "healCoefficient"));*/
-
             On.RoR2.BodyCatalog.Init += (orig) =>
             {
                 orig();
@@ -245,14 +236,15 @@ namespace RiskyMod.Allies
         public AllyTag tags = AllyTag.None;
     }
 
-    public enum AllyTag
+    [Flags]
+    public enum AllyTag : uint
     {
-        None,
-        Drone,  //Benefits from Droneman
-        Item,   //Is an item effect
-        Turret,  //Resistance to AOE/Proc
-        DontModifyScaling,
-        UseShield,
-        DontModifyRegen
+        None = 0u,
+        Drone = 1u,  //Benefits from Droneman
+        Item = 2u,   //Is an item effect
+        Turret = 4u,  //Resistance to AOE/Proc
+        DontModifyScaling = 8u,
+        UseShield = 16u,
+        DontModifyRegen = 32u
     }
 }

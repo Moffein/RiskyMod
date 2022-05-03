@@ -21,6 +21,11 @@ namespace RiskyMod.Allies.DroneChanges
             GameObject gunnerDroneObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/drone1body");
             gunnerDroneObject.AddComponent<AutoGunnerDroneBehavior>();
 
+            //Gets run before scaling changes
+            CharacterBody gunnerDroneBody = gunnerDroneObject.GetComponent<CharacterBody>();
+            gunnerDroneBody.baseMaxHealth = 170f;
+            gunnerDroneBody.levelMaxHealth = gunnerDroneBody.baseMaxHealth * 0.3f;
+
             ModifyAI();
         }
 

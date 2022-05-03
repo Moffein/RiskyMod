@@ -8,7 +8,6 @@ namespace RiskyMod.Allies
 {
     public class AllyScaling
     {
-        public static bool enabled = true;
         public static bool normalizeDroneDamage = true;
 
         public static bool noVoidDeath = true;
@@ -19,7 +18,6 @@ namespace RiskyMod.Allies
 
         public AllyScaling()
         {
-            if (!enabled) return;
             AlliesCore.ModifyAlliesActions += ModifyAllies;
         }
 
@@ -33,9 +31,6 @@ namespace RiskyMod.Allies
 
         private void ChangeScaling(AllyInfo ally)
         {
-            //Can be used by external mods who want to do their own thing with custom allies?
-            if (ChangeAllyScalingActions != null) ChangeAllyScalingActions.Invoke(ally);
-
             GameObject bodyPrefab = BodyCatalog.GetBodyPrefab(ally.bodyIndex);
             CharacterBody cb = null;
             if (bodyPrefab)
@@ -44,35 +39,18 @@ namespace RiskyMod.Allies
             }
             if (!bodyPrefab || !cb) return;
 
-            bool ignoreScaling = (ally.tags & AllyTag.DontModifyScaling) == AllyTag.DontModifyScaling;
+            if (noVoidDeath) cb.bodyFlags |= CharacterBody.BodyFlags.ImmuneToVoidDeath;
+            if (noOverheat) cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
 
+            bool ignoreScaling = (ally.tags & AllyTag.DontModifyScaling) == AllyTag.DontModifyScaling;
             if (!ignoreScaling)
             {
-                if (noVoidDeath) cb.bodyFlags |= CharacterBody.BodyFlags.ImmuneToVoidDeath;
-                if (noOverheat) cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
-
-                if ((ally.tags & AllyTag.Drone) == AllyTag.Drone)
+                if ((ally.tags & AllyTag.Drone) > AllyTag.None)
                 {
                     //Don't like how normalization is split between AllyScaling and AlliesCore
                     if (normalizeDroneDamage)
                     {
                         cb.baseDamage = 12f;
-                        //Account for normalized damage values
-                        /*if (cb.name == "BackupDroneBody")
-                        {
-                            cb.baseDamage = 6f; //Shares firing state with Gunner Drones, so needs lower damage. Technically makes drone parts worse on this.
-                        }*/
-
-                        //RoboBallBuddyGreen/Red get damage reduced from 15 -> 12, same as the earlier build with the 0.8x damage penalty
-                    }
-
-                    if (cb.name == "Turret1Body")
-                    {
-                        cb.baseMaxHealth *= 1.2f;
-                    }
-                    else if (cb.name == "Drone1Body" || cb.name == "Drone2Body")
-                    {
-                        cb.baseMaxHealth = 170f;    //vanilla is 150
                     }
                 }
 
@@ -109,6 +87,9 @@ namespace RiskyMod.Allies
                 cb.levelMaxShield = cb.baseMaxShield * 0.2f;
                 cb.autoCalculateLevelStats = false;
             }
+
+            //Can be used by external mods who want to do their own thing with custom allies?
+            if (ChangeAllyScalingActions != null) ChangeAllyScalingActions.Invoke(ally);
         }
     }
 }
