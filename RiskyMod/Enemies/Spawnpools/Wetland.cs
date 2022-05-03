@@ -10,6 +10,7 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.LesserWisp, DirectorAPI.Stage.WetlandAspect);
             /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
             {
                 if (stage.stage == DirectorAPI.Stage.WetlandAspect)

@@ -64,14 +64,6 @@ namespace RiskyMod.Allies
                     cb.baseMaxShield += cb.baseMaxHealth * 0.08f;
                 }
 
-                //Specific Tweaks
-                switch (cb.name)
-                {
-                    case "SquidTurretBody":
-                        cb.baseMaxHealth = 720f;
-                        break;
-                }
-
                 //Drones always regen to full in 40s
                 if ((ally.tags & AllyTag.DontModifyRegen) != AllyTag.DontModifyRegen)
                 {

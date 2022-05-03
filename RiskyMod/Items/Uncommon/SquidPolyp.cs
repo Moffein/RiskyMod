@@ -51,6 +51,11 @@ namespace RiskyMod.Items.Uncommon
                 orig();
                 SquidPolyp.squidTurretBodyIndex = BodyCatalog.FindBodyIndex("SquidTurretBody");
             };
+
+            GameObject squidBodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/squidturretbody");
+            CharacterBody cb = squidBodyObject.GetComponent<CharacterBody>();
+            cb.baseMaxHealth = 480f;
+            cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
         }
         private static void ModifyItem()
         {

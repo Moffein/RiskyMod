@@ -14,6 +14,7 @@ namespace RiskyMod.Allies
     {
         public static bool enabled = true;
         public static bool nerfDroneParts = true;
+        public static bool dronePartsIgnoresAllyCap = true;
         public static bool beetleGlandDontRetaliate = true;
 
         public delegate void ModifyAllies(List<AllyInfo> allyList);
@@ -71,6 +72,23 @@ namespace RiskyMod.Allies
                     c.EmitDelegate<Func<float, DamageInfo, float>>((bodyDamage, damageInfo) => damageInfo.damage);
                 };
             }
+
+            if (dronePartsIgnoresAllyCap)
+            {
+                IL.RoR2.DroneWeaponsBehavior.TrySpawnDrone += (il) =>
+                {
+                    ILCursor c = new ILCursor(il);
+                    c.GotoNext(
+                         x => x.MatchCallvirt<DirectorCore>("TrySpawnObject")
+                        );
+                    c.EmitDelegate<Func<DirectorSpawnRequest, DirectorSpawnRequest>>(spawnRequest =>
+                    {
+                        spawnRequest.ignoreTeamMemberLimit = dronePartsIgnoresAllyCap;
+                        return spawnRequest;
+                    });
+                };
+            }
+
             if (AllyScaling.normalizeDroneDamage)
             {
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireTurret", "damageCoefficient", "0.25");   //Shared with Gunner Drones, but those use a dedicated component to handle attacking now

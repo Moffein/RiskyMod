@@ -70,7 +70,7 @@ namespace RiskyMod.Enemies
             new SnowyForest();
 
             new GooLake();
-            //new Wetland();
+            new Wetland();
 
             new RallypointDelta();
 
@@ -136,10 +136,10 @@ namespace RiskyMod.Enemies
             Imp = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscimp");
             Vulture = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscvulture");
 
-            Golem = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscgolem");
+            Golem = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Golem/cscGolem.asset").WaitForCompletion();
             BeetleGuard = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbeetleguard");
             Mushrum = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscminimushroom");
-            Bison = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbison");
+            Bison = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Bison/cscBison.asset").WaitForCompletion();
 
             Bronzong = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbell");
             GreaterWisp = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscgreaterwisp");

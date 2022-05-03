@@ -5,7 +5,7 @@ namespace RiskyMod.Allies
 {
     public class EliteDamageModifiers
     {
-        public static bool enabled = true;
+        public static bool enabled = false;
         public EliteDamageModifiers()
         {
             if (!enabled) return;

@@ -5,7 +5,7 @@ namespace RiskyMod.Allies
 {
     public class TurretDamageResist
     {
-        public static bool enabled = true;
+        public static bool enabled = false; //Makes them way too tanky
         public TurretDamageResist()
         {
             if (!enabled) return;
