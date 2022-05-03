@@ -10,6 +10,12 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.MagmaWormLoop, false, DirectorAPI.Stage.AbandonedAqueduct);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.MagmaWormLoop, false, DirectorAPI.Stage.AbandonedAqueductSimulacrum);
+
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.ReminderLoop, false, DirectorAPI.Stage.AbandonedAqueduct);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.ReminderLoop, false, DirectorAPI.Stage.AbandonedAqueductSimulacrum);
+
             /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
             {
                 if (stage.stage == DirectorAPI.Stage.AbandonedAqueduct)

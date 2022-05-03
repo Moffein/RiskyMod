@@ -10,40 +10,13 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
-            /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
-            {
-                if (stage.stage == DirectorAPI.Stage.SunderedGrove)
-                {
-                    List<DirectorAPI.DirectorCardHolder> toRemove = new List<DirectorAPI.DirectorCardHolder>();
-                    foreach (DirectorAPI.DirectorCardHolder dch in list)
-                    {
-                        if (dch.Card.spawnCard == SpawnCards.Lemurian
-                        || dch.Card.spawnCard == SpawnCards.GreaterWisp || dch.Card.spawnCard == SpawnCards.Golem || dch.Card.spawnCard == SpawnCards.Mushrum   //Minibosses
-                        || dch.Card.spawnCard == SpawnCards.TitanBlackBeach || dch.Card.spawnCard == SpawnCards.TitanDampCave
-                        || dch.Card.spawnCard == SpawnCards.TitanGolemPlains || dch.Card.spawnCard == SpawnCards.TitanGooLake
-                        || dch.Card.spawnCard == SpawnCards.Vagrant)
-                        {
-                            toRemove.Add(dch);
-                        }
-                    }
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.ClayDunestrider, DirectorAPI.Stage.SunderedGrove);
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.MiniMushrum, DirectorAPI.Stage.SunderedGrove);
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.Lemurian, DirectorAPI.Stage.SunderedGrove);
 
-                    foreach (DirectorAPI.DirectorCardHolder dch in toRemove)
-                    {
-                        list.Remove(dch);
-                    }
-
-                    list.Add(DirectorCards.Mushrum);    //Replace Greater Wisp (this is a miniboss instead of a basic monster)
-
-                    list.Add(DirectorCards.Vulture);    //Replace Lemurian
-
-                    list.Add(DirectorCards.Beetle); //Replace Mushrum (mushrums are considered basic monsters)
-
-                    list.Add(DirectorCards.BeetleGuard);    //Replace Golem
-
-                    list.Add(DirectorCards.BeetleQueen);    //Replace Titan, will this even do anything on this map?
-                    list.Add(DirectorCards.Grovetender);    //Replace Vagrant. Not sure if Vagrants should be removed since they look nice.
-                }
-            };*/
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Grovetender, false, DirectorAPI.Stage.SunderedGrove);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Mushrum, false, DirectorAPI.Stage.SunderedGrove);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Vulture, false, DirectorAPI.Stage.SunderedGrove);
         }
     }
 }

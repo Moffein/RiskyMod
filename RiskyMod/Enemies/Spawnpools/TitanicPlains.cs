@@ -10,6 +10,15 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.Jellyfish, DirectorAPI.Stage.TitanicPlains);
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.Jellyfish, DirectorAPI.Stage.TitanicPlainsSimulacrum);
+
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.AlphaConstruct, DirectorAPI.Stage.TitanicPlains);
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.AlphaConstruct, DirectorAPI.Stage.TitanicPlainsSimulacrum);
+
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.XiConstruct, DirectorAPI.Stage.TitanicPlains);
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.XiConstruct, DirectorAPI.Stage.TitanicPlainsSimulacrum);
+
             //Jellyfish are unique to Distant Roost, Wisps are unique to Titanic Plains.
             /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
             {

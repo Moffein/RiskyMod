@@ -30,41 +30,7 @@ namespace RiskyMod.Items.Uncommon
             {
                 ILCursor c = new ILCursor(il);
 
-                //Change ring threshold
-                c.GotoNext(MoveType.After,
-                     x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "ElementalRingsReady"),
-                     x => x.MatchCallvirt<CharacterBody>("HasBuff")
-                    );
-                c.Emit(OpCodes.Ldarg_1);//damageinfo
-                c.Emit(OpCodes.Ldloc_1);//attacker body
-                c.EmitDelegate<Func<bool, DamageInfo, CharacterBody, bool>>((activateRings, damageInfo, attackerBody) =>
-                {
-                    if (activateRings)
-                    {
-                        if (Crowbar.enabled && DamageAPI.HasModdedDamageType(damageInfo, Crowbar.CrowbarDamage) && damageInfo.attacker && attackerBody)
-                        {
-                            float ringThreshold = 4f;
-                            Inventory inv = attackerBody.inventory;
-                            if (inv)
-                            {
-                                int crowbarCount = inv.GetItemCount(RoR2Content.Items.Crowbar);
-                                if (crowbarCount > 0)
-                                {
-                                    ringThreshold *= Crowbar.GetCrowbarMult(crowbarCount);
-                                }
-                            }
-
-                            if (damageInfo.damage / attackerBody.damage < ringThreshold)
-                            {
-                                activateRings = false;
-                            }
-                        }
-
-                        if (damageInfo.damageType.HasFlag(DamageType.DoT)) activateRings = false;
-                    }
-                    return activateRings;
-                });
-
+                //Jump to IceRing
                 c.GotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "IceRing")
                     );

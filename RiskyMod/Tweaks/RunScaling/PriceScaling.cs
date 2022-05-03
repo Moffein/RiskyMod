@@ -22,7 +22,7 @@ namespace RiskyMod.Tweaks.RunScaling
                 c.GotoNext(MoveType.After, x => x.MatchMul());
                 c.EmitDelegate<Func<float, float>>(price =>
                 {
-                    return price * (Run.instance.difficultyCoefficient * 1.25f - 0.25f);
+                    return price * Run.instance.difficultyCoefficient * ((1 + 0.4f * Run.instance.difficultyCoefficient)/1.4f);
                 });
             };
         }

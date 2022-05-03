@@ -130,12 +130,8 @@ namespace RiskyMod
             CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.directorCreditMultiplier != 1f;
             MonsterGoldRewards.scaleToInitialDifficulty = GeneralCfg.Bind(scalingString, "Gold - Scale to Initial Stage Difficulty", true, "Monsters gold rewards are scaled off of the difficulty at the start of the stage.").Value;
 
-
-            MonsterGoldRewards.scaleToInflation = GeneralCfg.Bind(scalingString, "Gold (EXPERIMENTAL) - Scale to Combat Director Credit Rate", false, "Monsters gold rewards are scaled off of the current combat director credit earn rate.").Value;
-            MonsterGoldRewards.scaleToChestCosts = GeneralCfg.Bind(scalingString, "Gold (EXPERIMENTAL) - Scale to Chest Costs", false, "Monsters gold rewards are increased to the power of 1.25 to match chest scaling. I recommend to use this with Scale to Combat Director Credit Rate.").Value;
-
             MonsterGoldRewards.scaleToDirectorMultiplier = GeneralCfg.Bind(scalingString, "Gold - Scale to Modded Combat Director Credit Multiplier", true, "Monsters gold rewards are divided by the Modded Combat Director Credit Multiplier.").Value;
-            MonsterGoldRewards.enabled = MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToInflation || MonsterGoldRewards.scaleToDirectorMultiplier;
+            MonsterGoldRewards.enabled = MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToDirectorMultiplier;
 
             //doesn't work that well
             //PriceScaling.enabled = GeneralCfg.Bind(scalingString, "Gold - Linear Interactable Price Scaling", true, "Interactable prices are calculated by difficulty * 1.25 instead of difficulty ^ 1.25.").Value;

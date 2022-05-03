@@ -7,9 +7,8 @@ namespace RiskyMod.Tweaks.RunScaling
     {
         public static bool enabled = true;
 		public static bool scaleToInitialDifficulty = true;
-		public static bool scaleToInflation = true;
 		public static bool scaleToDirectorMultiplier = true;
-		public static bool scaleToChestCosts = true;
+		public static bool linearize = true;
 
 		public static float inflationCoefficient = 0.3f;
 
@@ -35,11 +34,17 @@ namespace RiskyMod.Tweaks.RunScaling
 					if (dw && dw.goldReward > 0)
 					{
 						float chestRatio = (scaleToInitialDifficulty && Stage.instance) ? (Stage.instance.entryDifficultyCoefficient / Run.instance.difficultyCoefficient) : 1f;
-						float inflationRatio = scaleToInflation ? (1f + inflationCoefficient) / (1f + inflationCoefficient * Run.instance.difficultyCoefficient) : 1f; //Couldn't find actual code, but wiki claims Combat Director spawning crerdits gets multiplied by this.
+						chestRatio *= chestRatio;	//Gold is a function of difficultyCoefficient squared
+
 						float directorRatio = (scaleToDirectorMultiplier ? CombatDirectorMultiplier.scaledGoldRatio : 1f);
 
-						float trueGold = dw.goldReward * chestRatio * inflationRatio * directorRatio;
-						if (scaleToChestCosts) trueGold = Mathf.Pow(trueGold, 1.25f);
+						float trueGold = dw.goldReward * chestRatio * directorRatio;
+
+						if (linearize)
+                        {
+							float diff = (scaleToInitialDifficulty && Stage.instance) ? Stage.instance.entryDifficultyCoefficient : Run.instance.difficultyCoefficient;
+							trueGold *= 1.4f * Mathf.Pow(diff, 0.25f) / (1 + 0.4f * diff);
+                        }
 
 						float finalGold = Mathf.Floor(trueGold);
 

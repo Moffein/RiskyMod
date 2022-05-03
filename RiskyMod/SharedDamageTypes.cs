@@ -32,6 +32,9 @@ namespace RiskyMod
 
         public static DamageAPI.ModdedDamageType AlwaysIgnite;   //Used for Molten Perforator due to not proccing
 
+
+        public static DamageAPI.ModdedDamageType DontTriggerBands;  //Only used if ElementalRings are enabled
+
         public static GameObject medkitEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect");
 
         public SharedDamageTypes()
@@ -52,9 +55,11 @@ namespace RiskyMod
             Slow50For5s = DamageAPI.ReserveDamageType();
             
             CaptainTaserSource = DamageAPI.ReserveDamageType();
+            DontTriggerBands = DamageAPI.ReserveDamageType();
 
             TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
             TakeDamage.ModifyInitialDamageActions += ApplyAntiFlyingForce;
+            TakeDamage.ModifyInitialDamageActions += DisableBandProc;
 
             OnHitEnemy.OnHitNoAttackerActions += ApplyInterruptOnHit;
 
@@ -67,6 +72,14 @@ namespace RiskyMod
             OnHitEnemy.OnHitAttackerActions += ApplyCaptainTaserSource;
 
             TakeDamage.OnDamageTakenAttackerActions += ApplyAlwaysIgnite;
+        }
+
+        private static void DisableBandProc(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        {
+            if (damageInfo.HasModdedDamageType(DontTriggerBands))
+            {
+                damageInfo.procChainMask.AddProc(ProcType.Rings);
+            }
         }
 
         private static void ApplyAlwaysIgnite(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)

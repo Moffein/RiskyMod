@@ -65,6 +65,42 @@ namespace RiskyMod.Items.Common
                 }
             };
 
+            //Modify Ring Threshold
+            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+
+                //Change ring threshold
+                c.GotoNext(MoveType.After,
+                     x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "ElementalRingsReady"),
+                     x => x.MatchCallvirt<CharacterBody>("HasBuff")
+                    );
+                c.GotoPrev(MoveType.After,
+                    x => x.MatchLdcR4(4f)
+                    );
+
+                c.Emit(OpCodes.Ldarg_1);//damageinfo
+                c.Emit(OpCodes.Ldloc_1);//attacker body
+                c.EmitDelegate<Func<float, DamageInfo, CharacterBody, float>>((ringThreshold, damageInfo, attackerBody) =>
+                {
+                    if (Crowbar.enabled && DamageAPI.HasModdedDamageType(damageInfo, Crowbar.CrowbarDamage) && damageInfo.attacker && attackerBody)
+                    {
+                        Inventory inv = attackerBody.inventory;
+                        if (inv)
+                        {
+                            int crowbarCount = inv.GetItemCount(RoR2Content.Items.Crowbar);
+                            if (crowbarCount > 0)
+                            {
+                                ringThreshold *= Crowbar.GetCrowbarMult(crowbarCount);
+                            }
+                        }
+                    }
+
+                    if (damageInfo.damageType.HasFlag(DamageType.DoT)) ringThreshold = Mathf.Infinity;
+                    return ringThreshold;
+                });
+            };
+
             TakeDamage.ModifyInitialDamageInventoryActions += CrowbarDamageBoost;
         }
         private static void ModifyItem()
