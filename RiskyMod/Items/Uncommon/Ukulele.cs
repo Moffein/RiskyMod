@@ -34,25 +34,17 @@ namespace RiskyMod.Items.Uncommon
                     return origDamage + origDamage * 0.3f * (itemCount - 1);
                 });*/
 
-                //Change proc coefficient
                 c.GotoNext(
-                    x => x.MatchLdcR4(0.2f)
+                    x => x.MatchLdarg(1),
+                    x => x.MatchLdfld<DamageInfo>("position"),
+                    x => x.MatchCallvirt<LightningOrb>("PickNextTarget")
                     );
-                c.Index++;
-                c.EmitDelegate<Func<float, float>> ((originalProcCoefficient) =>
+                c.EmitDelegate<Func<LightningOrb, LightningOrb>>(orb =>
                 {
-                    return RiskyMod.disableProcChains ? 0.1f : originalProcCoefficient;
+                    if (RiskyMod.disableProcChains) orb.procCoefficient = 0.1f;
+                    orb.range = 25f;
+                    return orb;
                 });
-
-                //Remove range scaling
-                c.GotoNext(
-                    x => x.MatchStfld<RoR2.Orbs.LightningOrb>("range")
-                    );
-                c.EmitDelegate<Func<float, float>>((originalRange) =>
-                {
-                    return 5f;  //Added onto 20
-                });
-
             };
         }
         private static void ModifyItem()
