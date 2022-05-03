@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Linq;
 using EntityStates.Drone.DroneWeapon;
 using UnityEngine.Networking;
+using RoR2.CharacterAI;
+using RiskyMod.Allies.DroneAutofireComponents;
 
 namespace RiskyMod.Allies.DroneChanges
 {
@@ -11,71 +13,23 @@ namespace RiskyMod.Allies.DroneChanges
     {
         public MissileDrone()
         {
-            On.EntityStates.Drone.DroneWeapon.FireMissileBarrage.FireMissile += (orig, self, targetMuzzle) =>
+            GameObject missileDroneObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/missiledronebody");
+            missileDroneObject.AddComponent<AutoMissileBehavior>();
+            ModifyAI();
+        }
+
+        private void ModifyAI()
+        {
+            //Vanilla AI is terrible, just disable it and let the AutoMissileBehavior handle the shooting.
+            GameObject masterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/DroneMissileMaster");
+            AISkillDriver[] skillDrivers = masterObject.GetComponents<AISkillDriver>();
+            foreach(AISkillDriver skill in skillDrivers)
             {
-                if (self.GetTeam() == TeamIndex.Player)
+                if (skill.skillSlot == SkillSlot.Primary)
                 {
-                    self.missileCount++;
-                    self.PlayAnimation("Gesture, Additive", "FireMissile");
-                    Ray aimRay = self.GetAimRay();
-                    if (self.modelTransform)
-                    {
-                        ChildLocator component = self.modelTransform.GetComponent<ChildLocator>();
-                        if (component)
-                        {
-                            Transform transform = component.FindChild(targetMuzzle);
-                            if (transform)
-                            {
-                                aimRay.origin = transform.position;
-                            }
-                        }
-                    }
-
-                    if (FireMissileBarrage.effectPrefab)
-                    {
-                        EffectManager.SimpleMuzzleFlash(FireMissileBarrage.effectPrefab, self.gameObject, targetMuzzle, false);
-                    }
-                    if (self.characterBody)
-                    {
-                        self.characterBody.SetAimTimer(2f);
-                    }
-
-                    if (NetworkServer.active)
-                    {
-                        BullseyeSearch search = new BullseyeSearch();
-                        search.teamMaskFilter = TeamMask.GetEnemyTeams(TeamIndex.Player);
-                        search.filterByLoS = false;
-                        search.searchOrigin = aimRay.origin;
-                        search.sortMode = BullseyeSearch.SortMode.Angle;
-                        search.maxDistanceFilter = 80f; //fall back to actual projectiles if the distance is greater than this
-                        search.maxAngleFilter = 360f;
-                        search.searchDirection = aimRay.direction;
-                        search.RefreshCandidates();
-
-                        HurtBox targetHurtBox = search.GetResults().FirstOrDefault<HurtBox>();
-                        if (targetHurtBox != default)
-                        {
-                            MicroMissileOrb missileOrb = new MicroMissileOrb();
-                            missileOrb.origin = aimRay.origin;
-                            missileOrb.damageValue = self.damageStat * FireMissileBarrage.damageCoefficient;
-                            missileOrb.isCrit = self.RollCrit();
-                            missileOrb.teamIndex = TeamIndex.Player;
-                            missileOrb.attacker = self.gameObject;
-                            missileOrb.procChainMask = default;
-                            missileOrb.procChainMask.AddProc(ProcType.Missile);
-                            missileOrb.procCoefficient = RiskyMod.disableProcChains ? 0f : 1f;
-                            missileOrb.damageColorIndex = DamageColorIndex.Item;
-                            missileOrb.target = targetHurtBox;
-                            missileOrb.speed = 25f; //Same as misisleprojectile. Default is 55f
-                            OrbManager.instance.AddOrb(missileOrb);
-                        }
-                    }
+                    skill.skillSlot = SkillSlot.None;
                 }
-                else
-                {
-                    orig(self, targetMuzzle);
-                }
-            };
+            }
         }
     }
 }

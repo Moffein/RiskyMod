@@ -10,6 +10,6 @@
 		"EQUIPMENT_FRUIT_PICKUP_RISKYMOD": "Heal nearby allies on use.",
 		"EQUIPMENT_FRUIT_DESC_RISKYMOD": "Instantly heal all allies within <style=cIsHealing>12m</style> for <style=cIsHealing>50% of their maximum health</style>.",
 		
-		"EQUIPMENT_GUMMYCLONE_DESC_RISKYMOD" : "Spawn a gummy clone that has <style=cIsDamage>350% damage</style> and <style=cIsHealing>700% health</style>. Expires in <style=cIsUtility>30</style> seconds."
+		"EQUIPMENT_GUMMYCLONE_DESC_RISKYMOD" : "Spawn a gummy clone that has <style=cIsDamage>300% damage</style> and <style=cIsHealing>600% health</style>. Expires in <style=cIsUtility>30</style> seconds."
 	}
 }
