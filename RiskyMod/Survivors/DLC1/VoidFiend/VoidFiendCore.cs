@@ -1,6 +1,9 @@
 ﻿using EntityStates;
+using Mono.Cecil.Cil;
+using MonoMod.Cil;
 using RoR2;
 using RoR2.Skills;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -16,10 +19,13 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
         public static bool corruptOnKill = true;
         public static bool noCorruptHeal = true;
         public static bool noCorruptCrit = true;
+        public static bool removeCorruptArmor = true;
 
         public static bool secondaryMultitask = true;
 
         public static bool modifyCorruptCrush = true;
+
+        public static bool removeUtilityMoveSpeedScaling = true;
 
         public static BodyIndex bodyIndex;
         public static GameObject bodyPrefab;
@@ -43,6 +49,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
         {
             ModifyPassive(sk);
             ModifySecondaries(sk);
+            ModifyUtilities(sk);
             ModifySpecials(sk);
         }
 
@@ -110,6 +117,17 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                     return;
                 };
             }
+
+            if (removeCorruptArmor)
+            {
+                R2API.RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
+                {
+                    if (sender.HasBuff(DLC1Content.Buffs.VoidSurvivorCorruptMode))
+                    {
+                        args.armorAdd -= 100f;
+                    }
+                };
+            }
         }
 
         private void ModifySecondaries(SkillLocator sk)
@@ -129,6 +147,40 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
 
                 SkillDef corruptM2 = Addressables.LoadAssetAsync<SkillDef>("RoR2/DLC1/VoidSurvivor/FireCorruptDisk.asset").WaitForCompletion();
                 corruptM2.activationStateMachineName = "RightArmCannon";
+            }
+        }
+
+        private void ModifyUtilities(SkillLocator sk)
+        {
+            //This feels weird. Need better solution.
+            if (removeUtilityMoveSpeedScaling)
+            {
+                /*Debug.Log("Uncorrupted: ");
+                SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/DLC1/VoidSurvivor/EntityStates.VoidSurvivor.VoidBlinkBase+VoidBlinkUp.asset").WaitForCompletion());
+                Debug.Log("\n");
+
+                Debug.Log("Corrupted: ");
+                SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/DLC1/VoidSurvivor/EntityStates.VoidSurvivor.VoidBlinkBase+VoidBlinkDown.asset").WaitForCompletion());
+                Debug.Log("\n");*/
+
+                GameObject targetVFX = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidSurvivor/VoidBlinkVfx.prefab").WaitForCompletion();
+
+                IL.EntityStates.VoidSurvivor.VoidBlinkBase.GetVelocity += (il) =>
+                {
+                    ILCursor c = new ILCursor(il);
+                    c.GotoNext(MoveType.After,
+                         x => x.MatchLdfld<BaseState>("moveSpeedStat")
+                        );
+                    c.Emit(OpCodes.Ldarg_0);    //self
+                    c.EmitDelegate<Func<float, EntityStates.VoidSurvivor.VoidBlinkBase, float>>((moveSpeed, self) =>
+                    {
+                        if (self.blinkVfxPrefab == targetVFX)   //Corrupted uses a different VFX
+                        {
+                            return 7f;
+                        }
+                        return moveSpeed;
+                    });
+                };
             }
         }
 

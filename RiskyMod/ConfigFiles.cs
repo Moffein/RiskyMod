@@ -129,15 +129,15 @@ namespace RiskyMod
             CombatDirectorMultiplier.directorCreditMultiplier = GeneralCfg.Bind(scalingString, "Combat Director Credit Multiplier", 1.4f, "Multiply Combat Director credits by this amount. Set to 1 to disable").Value;
             CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.directorCreditMultiplier != 1f;
             MonsterGoldRewards.scaleToInitialDifficulty = GeneralCfg.Bind(scalingString, "Gold - Scale to Initial Stage Difficulty", true, "Monsters gold rewards are scaled off of the difficulty at the start of the stage.").Value;
-
+            MonsterGoldRewards.linearize = GeneralCfg.Bind(scalingString, "Gold (EXPERIMENTAL) - Modded Gold Reward Scaling", false, "Gold rewards increase at a slower rate compared to Vanilla.").Value;
             MonsterGoldRewards.scaleToDirectorMultiplier = GeneralCfg.Bind(scalingString, "Gold - Scale to Modded Combat Director Credit Multiplier", true, "Monsters gold rewards are divided by the Modded Combat Director Credit Multiplier.").Value;
-            MonsterGoldRewards.enabled = MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToDirectorMultiplier;
+            MonsterGoldRewards.enabled = MonsterGoldRewards.linearize || MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToDirectorMultiplier;
 
             //doesn't work that well
             //PriceScaling.enabled = GeneralCfg.Bind(scalingString, "Gold - Linear Interactable Price Scaling", true, "Interactable prices are calculated by difficulty * 1.25 instead of difficulty ^ 1.25.").Value;
             PriceScaling.enabled = false;
 
-            ModdedScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Modded Scaling", true, "Slightly tweaks how difficulty scaling is calculated by converting exponential increases in to multiplicative increases.").Value;
+            ModdedScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Modded Scaling", true, "Slightly tweaks how difficulty scaling is calculated by reducing the effect extra players have on difficulty.").Value;
             LinearScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling", false, "Makes difficulty scaling linear like in RoR1. Requires Modded Scaling to be enabled.").Value;
 
             NoLevelupHeal.enabled = GeneralCfg.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
@@ -150,6 +150,7 @@ namespace RiskyMod
             //Allies
             AllyScaling.normalizeDroneDamage = GeneralCfg.Bind(allyString, "Normalize Drone Damage", true, "Normalize drone damage stats so that they perform the same when using Spare Drone Parts.").Value;
             AlliesCore.nerfDroneParts = GeneralCfg.Bind(allyString, "Spare Drone Parts Changes", true, "Reduce the damage of Spare Drone Parts.").Value;
+            AlliesCore.dronePartsIgnoresAllyCap = GeneralCfg.Bind(allyString, "Spare Drone Parts - Ignore Ally Cap", true, "Col. Droneman ignores the ally cap.").Value;
             AllyScaling.noVoidDeath = GeneralCfg.Bind(allyString, "No Void Death", true, "Allies are immune to Void implosions.").Value;
             NoVoidDamage.enabled = GeneralCfg.Bind(allyString, "No Void Damage", true, "Allies take no damage from Void fog.").Value;
             AllyScaling.noOverheat = GeneralCfg.Bind(allyString, "No Overheat", true, "Allies are immune to Grandparent Overheat.").Value;
@@ -234,7 +235,10 @@ namespace RiskyMod
             StickyBomb.enabled = ItemCfg.Bind(commonString, "Stickybomb", true, itemConfigDescString).Value;
             TougherTimes.enabled = ItemCfg.Bind(commonString, "Tougher Times", true, itemConfigDescString).Value;
             Warbanner.enabled = ItemCfg.Bind(commonString, "Warbanner", true, itemConfigDescString).Value;
-            StunGrenade.enabled = ItemCfg.Bind(commonString, "Stun Grenade", true, itemConfigDescString).Value;
+
+            //Makes it too easy to stunlock things even at very low stacks.
+            //StunGrenade.enabled = ItemCfg.Bind(commonString, "Stun Grenade", true, itemConfigDescString).Value;
+            StunGrenade.enabled = false;
         }
 
         private static void ConfigUncommonItems()
@@ -326,6 +330,7 @@ namespace RiskyMod
             EmpathyCores.enabled = EmpathyCores.enabled && EmpathyCores.ignoreAllyCap;
 
             DefenseNucleus.enabled = ItemCfg.Bind(bossString, "Defense Nucleus", true, itemConfigDescString).Value;
+            DefenseNucleus.removeAllyScaling = ItemCfg.Bind(bossString, "Defense Nucleus - Remove Ally Count Scaling", true, "Stacks increase ally damage and health instead of max allies.").Value;
             DefenseNucleus.inheritEliteAffix = ItemCfg.Bind(bossString, "Defense Nucleus - Inherit Elite Affix", true, "Defense Nucleus Alpha Constructs inherit the Elite Affix of the enemy that was killed. This removes their spawn VFX.").Value;
             DefenseNucleus.ignoreAllyCap = ItemCfg.Bind(bossString, "Defense Nucleus - Ignore Ally Cap", true, "Defense Nucleus Alpha Constructs ignore the ally cap if changes are enabled.").Value;
         }
@@ -510,8 +515,12 @@ namespace RiskyMod
             VoidFiendCore.corruptMeterTweaks = SurvivorCfg.Bind(voidFiendString, "Corruption Meter Tweaks", true, "Faster decay, slower passive buildup. Corrupted Suppress can be used as long as you have the HP for it. Meant to be used with Corrupt on Kill.").Value;
             VoidFiendCore.noCorruptCrit = SurvivorCfg.Bind(voidFiendString, "No Corruption on Crit", true, "Disables Corruption gain on crit.").Value;
             VoidFiendCore.noCorruptHeal = SurvivorCfg.Bind(voidFiendString, "No Corruption loss on Heal", true, "Disables Corruption loss on heal.").Value;
+            VoidFiendCore.removeCorruptArmor = SurvivorCfg.Bind(voidFiendString, "No Corrupt Mode Bonus Armor", true, "Disables bonus armor while Corrupted.").Value;
             VoidFiendCore.secondaryMultitask = SurvivorCfg.Bind(voidFiendString, "Secondary Multitasking", true, "Drown and Suppress can be fired while charging Flood.").Value;
             VoidFiendCore.modifyCorruptCrush = SurvivorCfg.Bind(voidFiendString, "Corrupted Suppress Changes", true, "Enable changes to this skill.").Value;
+            
+            //Doesn't feel good. Find a better solution.
+            VoidFiendCore.removeUtilityMoveSpeedScaling = false;
         }
 
         private static void ConfigMonsters()

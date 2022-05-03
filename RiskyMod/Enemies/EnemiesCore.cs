@@ -14,7 +14,7 @@ namespace RiskyMod.Enemies
     public class EnemiesCore
     {
         public static bool modifyEnemies = true;
-        public static bool modifySpawns = true;
+        public static bool modifySpawns = false;
 
         public static void DisableRegen(GameObject enemyObject)
         {

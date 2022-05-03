@@ -15,6 +15,7 @@ namespace RiskyMod.Items.DLC1.Boss
         public static bool enabled = true;
         public static bool ignoreAllyCap = true;
         public static bool inheritEliteAffix = true;
+        public static bool removeAllyScaling = true;
 
         public static SpawnCard MinorConstructOnKillCard = Addressables.LoadAssetAsync<SpawnCard>("RoR2/DLC1/MajorAndMinorConstruct/cscMinorConstructOnKill.asset").WaitForCompletion();
         public static GameObject SpawnEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MajorAndMinorConstruct/OmniExplosionVFXMinorConstruct.prefab").WaitForCompletion();
@@ -22,19 +23,22 @@ namespace RiskyMod.Items.DLC1.Boss
         public DefenseNucleus()
         {
             if (!enabled) return;
-            ItemsCore.ModifyItemDefActions += ModifyItem;
 
-            On.RoR2.CharacterMaster.GetDeployableSameSlotLimit += (orig, self, slot) =>
+            if (removeAllyScaling)
             {
-                if (slot == DeployableSlot.MinorConstructOnKill)
+                ItemsCore.ModifyItemDefActions += ModifyItem;
+                On.RoR2.CharacterMaster.GetDeployableSameSlotLimit += (orig, self, slot) =>
                 {
-                    return (self.inventory.GetItemCount(DLC1Content.Items.MinorConstructOnKill) > 0) ? 4 : 0;
-                }
-                else
-                {
-                    return orig(self, slot);
-                }
-            };
+                    if (slot == DeployableSlot.MinorConstructOnKill)
+                    {
+                        return (self.inventory.GetItemCount(DLC1Content.Items.MinorConstructOnKill) > 0) ? 4 : 0;
+                    }
+                    else
+                    {
+                        return orig(self, slot);
+                    }
+                };
+            }
 
             //Rewrite code to directly spawn the Construct if Elite Affix needs to be inherited since the info is lost when firing a projectile
             if (inheritEliteAffix)
@@ -128,11 +132,14 @@ namespace RiskyMod.Items.DLC1.Boss
                             {
                                 if (allyInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) allyInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
 
-                                int stackCount = itemCount - 1;
-                                if (stackCount > 0)
+                                if (removeAllyScaling)
                                 {
-                                    allyInv.GiveItem(RoR2Content.Items.BoostDamage, 10 * stackCount);
-                                    allyInv.GiveItem(RoR2Content.Items.BoostHp, 3 * stackCount);
+                                    int stackCount = itemCount - 1;
+                                    if (stackCount > 0)
+                                    {
+                                        allyInv.GiveItem(RoR2Content.Items.BoostDamage, 10 * stackCount);
+                                        allyInv.GiveItem(RoR2Content.Items.BoostHp, 3 * stackCount);
+                                    }
                                 }
 
                                 if (victimBody.inventory)
