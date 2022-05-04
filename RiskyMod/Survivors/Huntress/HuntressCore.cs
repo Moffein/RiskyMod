@@ -135,6 +135,7 @@ namespace RiskyMod.Survivors.Huntress
                 sk.special.skillFamily.variants[0].skillDef.baseRechargeInterval = 10f;
                 sk.special.skillFamily.variants[0].skillDef.beginSkillCooldownOnSkillEnd = true;
                 sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD";
+                Skills.ArrowRain = sk.special.skillFamily.variants[0].skillDef;
                 new ArrowRainBuff();
 
                 if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
@@ -198,11 +199,12 @@ namespace RiskyMod.Survivors.Huntress
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepterClassic()
         {
-            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.ArrowRainScepter, "HuntressBody", SkillSlot.Special, 0);
+            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.ArrowRainScepter, "HuntressBody", SkillSlot.Special, Skills.ArrowRain);
         }
     }
     public static class Skills
     {
+        public static SkillDef ArrowRain;
         public static SkillDef ArrowRainScepter;
     }
 }

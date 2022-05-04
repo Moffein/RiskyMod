@@ -259,12 +259,12 @@ namespace RiskyMod.Survivors.Commando
         {
             if (suppressiveChanges)
             {
-                ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.BarrageScepter, "CommandoBody", SkillSlot.Special, 0);
+                ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.BarrageScepter, "CommandoBody", SkillSlot.Special, Skills.Barrage);
             }
 
             if (grenadeChanges)
             {
-                ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.GrenadeScepter, "CommandoBody", SkillSlot.Special, 1);
+                ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.GrenadeScepter, "CommandoBody", SkillSlot.Special, Skills.Grenade);
             }
         }
 

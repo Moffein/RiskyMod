@@ -113,6 +113,7 @@ namespace RiskyMod.Survivors.Croco
             //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireDiseaseProjectile", "damageCoefficient", "1");
             sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_SPECIAL_DESCRIPTION_RISKYMOD";
             sk.special.skillFamily.variants[0].skillDef.keywordTokens = new string[] { };
+            Skills.Epidemic = sk.special.skillFamily.variants[0].skillDef;
             new ModifySpecial();
 
             if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
@@ -165,12 +166,13 @@ namespace RiskyMod.Survivors.Croco
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepterClassic()
         {
-            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.EpidemicScepter, "CrocoBody", SkillSlot.Special, 0);
+            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.EpidemicScepter, "CrocoBody", SkillSlot.Special, Skills.Epidemic);
         }
     }
 
     public static class Skills
     {
+        public static SkillDef Epidemic;
         public static SkillDef EpidemicScepter;
     }
 }
