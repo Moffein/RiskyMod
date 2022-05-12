@@ -26,6 +26,29 @@ namespace RiskyMod.Items.Uncommon
                         if (!db)
                         {
                             db = self.gameObject.AddComponent<DaisyBehavior>();
+                            db.wardOrigin = self.transform;
+                        }
+                    }
+                }
+            };
+
+            On.EntityStates.Missions.BrotherEncounter.BrotherEncounterPhaseBaseState.FixedUpdate += (orig, self) =>
+            {
+                orig(self);
+                int daisyCount = Util.GetItemCountForTeam(TeamIndex.Player, RoR2Content.Items.TPHealingNova.itemIndex, false, true);
+                if (daisyCount > 0)
+                {
+                    if (self.childLocator)
+                    {
+                        Transform transform = self.childLocator.FindChild("CenterOrbEffect");
+                        if (transform)
+                        {
+                            DaisyBehavior db = self.gameObject.GetComponent<DaisyBehavior>();
+                            if (!db)
+                            {
+                                db = self.gameObject.AddComponent<DaisyBehavior>();
+                                db.wardOrigin = transform.transform;
+                            }
                         }
                     }
                 }
@@ -43,6 +66,7 @@ namespace RiskyMod.Items.Uncommon
         public static GameObject wardPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/Shrines/ShrineHealingWard");
         public GameObject wardInstance;
         public HealingWard healingWard;
+        public Transform wardOrigin;
 
         public int daisyCount
         {
@@ -57,9 +81,9 @@ namespace RiskyMod.Items.Uncommon
             if (!NetworkServer.active) return;
 
             //Spawn Ward
-            if (!wardInstance)
+            if (!wardInstance && wardOrigin != null)
             {
-                this.wardInstance = UnityEngine.Object.Instantiate<GameObject>(DaisyBehavior.wardPrefab, base.transform.position, base.transform.rotation);
+                this.wardInstance = UnityEngine.Object.Instantiate<GameObject>(DaisyBehavior.wardPrefab, wardOrigin.position, wardOrigin.rotation);
                 this.wardInstance.GetComponent<TeamFilter>().teamIndex = TeamIndex.Player;
                 this.healingWard = this.wardInstance.GetComponent<HealingWard>();
                 NetworkServer.Spawn(this.wardInstance);
