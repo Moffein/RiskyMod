@@ -147,9 +147,10 @@ namespace RiskyMod.Items.Legendary
                     }
                     else //Handle enemy-spawned ghosts
                     {
-                        inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 20 * itemCount);
+                        int lifetime = 10 + 10 * itemCount;
+                        inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, lifetime);
                         MasterSuicideOnTimer mst = characterMaster2.gameObject.AddComponent<MasterSuicideOnTimer>();
-                        mst.lifeTimer = 20f * itemCount;
+                        mst.lifeTimer = lifetime;
                     }
                 }
             }
