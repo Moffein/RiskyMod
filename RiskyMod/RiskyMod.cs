@@ -40,7 +40,6 @@ using RiskyMod.VoidFields;
 namespace RiskyMod
 {
     [BepInDependency(".AVFX_Options..", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.xoxfaby.BetterUI", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.PlasmaCore.StickyStunter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.MobileTurretBuff", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.FixPlayercount", BepInDependency.DependencyFlags.SoftDependency)]
@@ -70,7 +69,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.InteractableLimit", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.8.0")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.8.1")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin

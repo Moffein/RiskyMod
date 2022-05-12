@@ -6,6 +6,7 @@ using System;
 using RiskyMod.SharedHooks;
 using R2API;
 using MonoMod.Cil;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Treebot
 {
@@ -60,6 +61,13 @@ namespace RiskyMod.Survivors.Treebot
             if (fruitChanges)
             {
                 sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD";
+
+                /*Debug.Log("PrepFruitSeed");
+                SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/Base/Treebot/EntityStates.Treebot.TreebotPrepFruitSeed.asset").WaitForCompletion());
+                Debug.Log("\nFireFruitSeed");
+                SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/Base/Treebot/EntityStates.Treebot.TreebotFireFruitSeed.asset").WaitForCompletion());*/
+
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Treebot/EntityStates.Treebot.TreebotFireFruitSeed.asset", "baseDuration", "0.5");//1 in vanilla
 
                 GameObject fruitProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/TreebotFruitSeedProjectile");
                 ProjectileImpactExplosion pie = fruitProjectile.GetComponent<ProjectileImpactExplosion>();
