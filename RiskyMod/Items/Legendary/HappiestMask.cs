@@ -78,13 +78,19 @@ namespace RiskyMod.Items.Legendary
             {
                 if (attackerBody.HasBuff(GhostReady.buffIndex))
                 {
-                    GhostOnKillBehavior gokb = attackerBody.GetComponent<GhostOnKillBehavior>();
-                    if (gokb && gokb.CanSpawnGhost())
+                    TeamIndex attackerTeam = attackerBody.teamComponent ? attackerBody.teamComponent.teamIndex : TeamIndex.None;
+                    TeamIndex victimTeam = victimBody.teamComponent ? victimBody.teamComponent.teamIndex : TeamIndex.None;
+
+                    if (attackerTeam == TeamIndex.Player || victimTeam != TeamIndex.Player || victimBody.isPlayerControlled)
                     {
-                        gokb.AddGhost(SpawnMaskGhost(victimBody, attackerBody, itemCount));
-                        for (int i = 1; i <= 20; i++)
+                        GhostOnKillBehavior gokb = attackerBody.GetComponent<GhostOnKillBehavior>();
+                        if (gokb && gokb.CanSpawnGhost())
                         {
-                            attackerBody.AddTimedBuff(GhostCooldown.buffIndex, i);
+                            gokb.AddGhost(SpawnMaskGhost(victimBody, attackerBody, itemCount));
+                            for (int i = 1; i <= 20; i++)
+                            {
+                                attackerBody.AddTimedBuff(GhostCooldown.buffIndex, i);
+                            }
                         }
                     }
                 }
@@ -133,10 +139,17 @@ namespace RiskyMod.Items.Legendary
                 {
                     if (inventory.GetItemCount(RoR2Content.Items.Ghost) <= 0) inventory.GiveItem(RoR2Content.Items.Ghost);
                     if (inventory.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
-                    inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 30 * itemCount);
+
                     if (ownerBody && ownerBody.teamComponent && ownerBody.teamComponent.teamIndex == TeamIndex.Player)
                     {
                         inventory.GiveItem(RoR2Content.Items.BoostDamage.itemIndex, 105 + 45 * itemCount);
+                        inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 30 * itemCount);
+                    }
+                    else //Handle enemy-spawned ghosts
+                    {
+                        inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 20 * itemCount);
+                        MasterSuicideOnTimer mst = characterMaster2.gameObject.AddComponent<MasterSuicideOnTimer>();
+                        mst.lifeTimer = 20f * itemCount;
                     }
                 }
             }

@@ -81,7 +81,6 @@ namespace RiskyMod
         public static bool AIBlacklistLoaded = false;
         public static bool AIBlacklistUseVanillaBlacklist = true;
         public static bool ZetTweaksLoaded = false;
-        public static bool BetterUILoaded = false;
 
         public static bool ShareSuiteLoaded = false;
         public static bool ShareSuiteCommon = false;
@@ -137,8 +136,6 @@ namespace RiskyMod
 
         private void CheckDependencies()
         {
-            BetterUILoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.xoxfaby.BetterUI");
-
             ZetTweaksLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetTweaks");
             if (ZetTweaksLoaded) ZetTweaksCompat();
 
