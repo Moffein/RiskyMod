@@ -61,6 +61,16 @@ namespace RiskyMod.Tweaks
                                 k++;
                                 vector = rotation * vector;
                             }
+
+                            PickupDef pickupDef = PickupCatalog.GetPickupDef(pickupIndex);
+                            Chat.SendBroadcastChat(new Chat.SimpleChatMessage
+                            {
+                                baseToken = "SHRINE_COMBAT_END_TRIAL_RISKYMOD",
+                                paramTokens = new string[]
+                                {
+                                    "<color=#"+ColorUtility.ToHtmlStringRGB(pickupDef.baseColor)+">"+Language.GetStringFormatted(pickupDef.nameToken) + "</color>"
+                                }
+                            });
                         }
                     }
                 }

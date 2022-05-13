@@ -1,0 +1,6 @@
+{
+	strings:
+	{
+		"SHRINE_COMBAT_END_TRIAL_RISKYMOD": "<style=cShrine>Shrine of Combat defeated!</style> Your bravery has been rewarded with {0}!"
+	}
+}
