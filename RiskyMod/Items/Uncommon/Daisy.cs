@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using RoR2;
 using UnityEngine.Networking;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Uncommon
 {
     public class Daisy
     {
         public static bool enabled = true;
-
 
         public Daisy()
         {
