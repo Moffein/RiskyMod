@@ -15,7 +15,7 @@ namespace RiskyMod.Fixes
                 if (NetworkServer.active && self.teamComponent && self.teamComponent.teamIndex == TeamIndex.Monster
                 && self.inventory && self.inventory.GetItemCount(RoR2Content.Items.InvadingDoppelganger) > 0 && self.inventory.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0)
                 {
-                    if (self.inventory.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) self.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
+                    self.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
                 }
             };
         }
