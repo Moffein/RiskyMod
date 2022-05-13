@@ -107,7 +107,7 @@ namespace EntityStates.RiskyMod.Bandit2
 			}
 			if (base.characterMotor && !base.characterMotor.isGrounded)
 			{
-				base.characterMotor.velocity = new Vector3(base.characterMotor.velocity.x, StealthMode.shortHopVelocity, base.characterMotor.velocity.z);
+				base.SmallHop(base.characterMotor, StealthMode.shortHopVelocity);
 			}
 		}
 
