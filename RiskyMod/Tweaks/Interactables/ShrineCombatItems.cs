@@ -20,7 +20,14 @@ namespace RiskyMod.Tweaks
                 orig(self);
                 if (self.combatDirector)
                 {
-                    self.combatDirector.expRewardCoefficient *= 0.3335f;  //0.2 -> 0.067
+                    if (self.combatDirector.expRewardCoefficient == 0.2f)
+                    {
+                        self.combatDirector.expRewardCoefficient = 0.067f;
+                    }
+                    else if (self.combatDirector.expRewardCoefficient == 0.067f)
+                    {
+                        self.combatDirector.expRewardCoefficient = 0.19f;
+                    }
                 }
             };
             On.RoR2.ShrineCombatBehavior.OnDefeatedServer += (orig, self) =>
