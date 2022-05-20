@@ -24,7 +24,7 @@
 	
 	"ITEM_SLOWONHIT_DESC_RISKYMOD": "<style=cIsUtility>Slow</style> enemies on hit for <style=cIsUtility>-80% movement speed</style> and <style=cIsDamage>-20% attack speed</style> for <style=cIsUtility>2s</style> <style=cStack>(+2s per stack)</style>.",
 	
-	"ITEM_SEED_DESC_RISKYMOD": "Dealing damage <style=cIsHealing>heals</style> you for <style=cIsHealing>5% <style=cStack>(+2.5% per stack)</style></style> of the <style=cIsDamage>damage dealt</style>.",
+	"ITEM_SEED_DESC_RISKYMOD": "Dealing damage <style=cIsHealing>heals</style> you for <style=cIsHealing>1</style> plus an additional <style=cIsHealing>5% <style=cStack>(+2.5% per stack)</style></style> of the <style=cIsDamage>damage dealt</style>.",
 	
 	"ITEM_MISSILE_DESC_RISKYMOD": "<style=cIsDamage>10%</style> chance to fire a missile that deals <style=cIsDamage>300%</style> <style=cStack>(+180% per stack)</style> TOTAL damage.",
 	
