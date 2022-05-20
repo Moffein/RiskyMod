@@ -128,14 +128,22 @@ namespace RiskyMod
             //Run Scaling
             CombatDirectorMultiplier.directorCreditMultiplier = GeneralCfg.Bind(scalingString, "Combat Director Credit Multiplier", 1.4f, "Multiply Combat Director credits by this amount. Set to 1 to disable").Value;
             CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.directorCreditMultiplier != 1f;
-            MonsterGoldRewards.scaleToInitialDifficulty = GeneralCfg.Bind(scalingString, "Gold - Scale to Initial Stage Difficulty", true, "Monsters gold rewards are scaled off of the difficulty at the start of the stage.").Value;
+
+            MonsterGoldRewards.enabled = GeneralCfg.Bind(scalingString, "Gold Scaling Tweaks", true, "Lowers gold earn rate scaling. Mainly makes a difference when looping.").Value;
+            if (!MonsterGoldRewards.enabled)
+            {
+                MonsterGoldRewards.linearize = false;
+                MonsterGoldRewards.scaleToInitialDifficulty = false;
+                if (CombatDirectorMultiplier.enabled)
+                {
+                    MonsterGoldRewards.enabled = true;
+                }
+            }
+
+            /*MonsterGoldRewards.scaleToInitialDifficulty = GeneralCfg.Bind(scalingString, "Gold - Scale to Initial Stage Difficulty", true, "Monsters gold rewards are scaled off of the difficulty at the start of the stage.").Value;
             MonsterGoldRewards.linearize = GeneralCfg.Bind(scalingString, "Gold (EXPERIMENTAL) - Modded Gold Reward Scaling", false, "Gold rewards increase at a slower rate compared to Vanilla.").Value;
             MonsterGoldRewards.scaleToDirectorMultiplier = GeneralCfg.Bind(scalingString, "Gold - Scale to Modded Combat Director Credit Multiplier", true, "Monsters gold rewards are divided by the Modded Combat Director Credit Multiplier.").Value;
-            MonsterGoldRewards.enabled = MonsterGoldRewards.linearize || MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToDirectorMultiplier;
-
-            //doesn't work that well
-            //PriceScaling.enabled = GeneralCfg.Bind(scalingString, "Gold - Linear Interactable Price Scaling", true, "Interactable prices are calculated by difficulty * 1.25 instead of difficulty ^ 1.25.").Value;
-            PriceScaling.enabled = false;
+            MonsterGoldRewards.enabled = MonsterGoldRewards.linearize || MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToDirectorMultiplier;*/
 
             ModdedScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Modded Scaling", true, "Slightly tweaks how difficulty scaling is calculated by reducing the effect extra players have on difficulty.").Value;
             LinearScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling", false, "Makes difficulty scaling linear like in RoR1. Requires Modded Scaling to be enabled.").Value;

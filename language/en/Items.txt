@@ -22,7 +22,7 @@
 	
 	"ITEM_BEAR_DESC_RISKYMOD": "<style=cIsHealing>10%</style> <style=cStack>(+10% per stack)</style> chance to <style=cIsHealing>block</style> incoming damage. <style=cIsUtility>Unaffected by luck</style>.",
 	
-	"ITEM_SLOWONHIT_DESC_RISKYMOD": "<style=cIsUtility>Slow</style> enemies on hit for <style=cIsUtility>-60% movement speed</style> and <style=cIsDamage>-20% attack speed</style> for <style=cIsUtility>2s</style> <style=cStack>(+2s per stack)</style>.",
+	"ITEM_SLOWONHIT_DESC_RISKYMOD": "<style=cIsUtility>Slow</style> enemies on hit for <style=cIsUtility>-80% movement speed</style> and <style=cIsDamage>-20% attack speed</style> for <style=cIsUtility>2s</style> <style=cStack>(+2s per stack)</style>.",
 	
 	"ITEM_SEED_DESC_RISKYMOD": "Dealing damage <style=cIsHealing>heals</style> you for <style=cIsHealing>5% <style=cStack>(+2.5% per stack)</style></style> of the <style=cIsDamage>damage dealt</style>.",
 	

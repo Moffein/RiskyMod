@@ -229,7 +229,6 @@ namespace RiskyMod
             new MonsterGoldRewards();
             new CombatDirectorMultiplier();
             new LoopBossArmor();
-            new PriceScaling();
 
             //Holdouts
             new SmallHoldoutCharging();

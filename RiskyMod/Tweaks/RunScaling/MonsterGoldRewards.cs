@@ -34,7 +34,7 @@ namespace RiskyMod.Tweaks.RunScaling
 					if (dw && dw.goldReward > 0)
 					{
 						float chestRatio = (scaleToInitialDifficulty && Stage.instance) ? (Stage.instance.entryDifficultyCoefficient / Run.instance.difficultyCoefficient) : 1f;
-						chestRatio *= chestRatio;	//Gold is a function of difficultyCoefficient squared
+						//chestRatio *= chestRatio;	//Gold is a function of difficultyCoefficient squared	//Enabling this feels too harsh
 
 						float directorRatio = (scaleToDirectorMultiplier ? CombatDirectorMultiplier.scaledGoldRatio : 1f);
 
