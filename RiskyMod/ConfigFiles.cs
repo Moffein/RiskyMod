@@ -145,7 +145,7 @@ namespace RiskyMod
             MonsterGoldRewards.scaleToDirectorMultiplier = GeneralCfg.Bind(scalingString, "Gold - Scale to Modded Combat Director Credit Multiplier", true, "Monsters gold rewards are divided by the Modded Combat Director Credit Multiplier.").Value;
             MonsterGoldRewards.enabled = MonsterGoldRewards.linearize || MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToDirectorMultiplier;*/
 
-            ModdedScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Modded Scaling", true, "Slightly tweaks how difficulty scaling is calculated by reducing the effect extra players have on difficulty.").Value;
+            ModdedScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Modded Scaling", true, "Lowers the effect of playercount on difficulty scaling. Geared towards large lobbies.").Value;
             LinearScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling", false, "Makes difficulty scaling linear like in RoR1. Requires Modded Scaling to be enabled.").Value;
 
             NoLevelupHeal.enabled = GeneralCfg.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
