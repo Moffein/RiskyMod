@@ -46,7 +46,7 @@ namespace RiskyMod.Items.Uncommon
 			int lopperCount = attackerInventory.GetItemCount(RoR2Content.Items.ExecuteLowHealthElite);
 			if (lopperCount > 0)
 			{
-				if (victimHealth.combinedHealth <= victimHealth.fullCombinedHealth * 0.3f)
+				if (victimHealth.combinedHealth <= victimHealth.fullCombinedHealth * 0.5f)
 				{
 					damageMult.damageMult *= 1f + 0.3f * lopperCount;
 					damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
