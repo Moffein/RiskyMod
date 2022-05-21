@@ -63,11 +63,6 @@ namespace RiskyMod.Survivors.Mage
 
             if (m1AttackSpeed)
             {
-                //Debug.Log("Mage Muzzle Fire: " + MageStockController.fireMuzzleflashEffectPrefab);
-                //Debug.Log("Mage Muzzle Lightning: " + MageStockController.lightningMuzzleflashEffectPrefab);
-                //Debug.Log("Mage Muzzle Ice: " + MageStockController.iceMuzzleflashEffectPrefab);
-
-                //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Mage.Weapon.Flamethrower");
                 MageStockController.StatePairs.Add(typeof(EntityStates.Mage.Weapon.FireFireBolt), MageStockController.fireMuzzleflashEffectPrefab);
                 MageStockController.StatePairs.Add(typeof(EntityStates.Mage.Weapon.FireLightningBolt), MageStockController.lightningMuzzleflashEffectPrefab);
                 bodyPrefab.AddComponent<MageStockController>();

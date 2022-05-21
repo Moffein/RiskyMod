@@ -3,6 +3,7 @@ using RoR2.Orbs;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace EntityStates.RiskyMod.Mage
@@ -57,24 +58,34 @@ namespace EntityStates.RiskyMod.Mage
 		{
 			Util.PlaySound(SpecialLightning.endAttackSoundString, base.gameObject);
 			base.PlayCrossfade("Gesture, Additive", "ExitFlamethrower", 0.1f);
-			if (this.leftFlamethrowerTransform)
-			{
-				EntityState.Destroy(this.leftFlamethrowerTransform.gameObject);
-			}
-			if (this.rightFlamethrowerTransform)
-			{
-				EntityState.Destroy(this.rightFlamethrowerTransform.gameObject);
-			}
 			base.OnExit();
 		}
 
 		private void FireGauntlet(string muzzleString)
 		{
+			EffectManager.SimpleMuzzleFlash(SpecialLightning.gauntletEffectPrefab, base.gameObject, "MuzzleLeft", false);
+			EffectManager.SimpleMuzzleFlash(SpecialLightning.gauntletEffectPrefab, base.gameObject, "MuzzleRight", false);
+
 			//totalTickCount--;
 			Util.PlaySound(SpecialLightning.attackSoundString, base.gameObject); ;
 			Ray aimRay = base.GetAimRay();
 			if (NetworkServer.active)
 			{
+				Vector3 lightningOrigin = aimRay.origin;
+				if (this.leftMuzzleTransform && this.rightMuzzleTransform)
+                {
+					if (rightMuzzle)
+                    {
+						lightningOrigin = this.rightMuzzleTransform.position;
+                    }
+					else
+                    {
+						lightningOrigin = this.leftMuzzleTransform.position;
+                    }
+
+					rightMuzzle = !rightMuzzle;
+                }
+
 				List<HealthComponent> bouncedObjects = new List<HealthComponent>();
 				LightningOrb lo = new LightningOrb
 				{
@@ -91,7 +102,7 @@ namespace EntityStates.RiskyMod.Mage
 					bouncesRemaining = 2,
 					targetsToFindPerBounce = 3,
 					range = SpecialLightning.bounceDistance,
-					origin = aimRay.origin,
+					origin = lightningOrigin,
 					damageType = DamageType.SlowOnHit,
 					speed = 120f
 				};
@@ -123,46 +134,6 @@ namespace EntityStates.RiskyMod.Mage
 			}
 		}
 
-		public void InitFlamethrowerEffect()
-		{
-			if (this.childLocator)
-			{
-				Transform transform = this.childLocator.FindChild("MuzzleLeft");
-				Transform transform2 = this.childLocator.FindChild("MuzzleRight");
-				if (transform)
-				{
-					this.leftFlamethrowerTransform = UnityEngine.Object.Instantiate<GameObject>(SpecialLightning.flamethrowerEffectPrefab, transform).transform;
-				}
-				if (transform2)
-				{
-					this.rightFlamethrowerTransform = UnityEngine.Object.Instantiate<GameObject>(SpecialLightning.flamethrowerEffectPrefab, transform2).transform;
-				}
-				if (this.leftFlamethrowerTransform)
-				{
-					this.leftFlamethrowerTransform.GetComponent<ScaleParticleSystemDuration>().newDuration = this.flamethrowerDuration;
-				}
-				if (this.rightFlamethrowerTransform)
-				{
-					this.rightFlamethrowerTransform.GetComponent<ScaleParticleSystemDuration>().newDuration = this.flamethrowerDuration;
-				}
-			}
-		}
-
-		private void ResetFlamethrowerEffect()
-		{
-			if (this.leftFlamethrowerTransform)
-			{
-				EntityState.Destroy(this.leftFlamethrowerTransform.gameObject);
-				this.leftFlamethrowerTransform = null;
-			}
-			if (this.rightFlamethrowerTransform)
-			{
-				EntityState.Destroy(this.rightFlamethrowerTransform.gameObject);
-				this.rightFlamethrowerTransform = null;
-			}
-			InitFlamethrowerEffect();
-		}
-
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
@@ -173,7 +144,6 @@ namespace EntityStates.RiskyMod.Mage
 				this.hasBegunAttack = true;
 				Util.PlaySound(SpecialLightning.startAttackSoundString, base.gameObject);
 				base.PlayAnimation("Gesture, Additive", "Flamethrower", "Flamethrower.playbackRate", this.flamethrowerDuration);
-				InitFlamethrowerEffect();
 				this.FireGauntlet("MuzzleCenter");
 			}
 			if (this.hasBegunAttack)
@@ -185,7 +155,6 @@ namespace EntityStates.RiskyMod.Mage
 					this.flamethrowerStopwatch -= 1f / tickFrequency;
 					this.FireGauntlet("MuzzleCenter");
 				}
-				this.UpdateFlamethrowerEffect();
 			}
 
 			/*if (effectResetStopwatch > SpecialLightning.effectResetDuration)
@@ -204,40 +173,26 @@ namespace EntityStates.RiskyMod.Mage
 			}
 		}
 
-		private void UpdateFlamethrowerEffect()
-		{
-			Ray aimRay = base.GetAimRay();
-			Vector3 direction = aimRay.direction;
-			Vector3 direction2 = aimRay.direction;
-			if (this.leftFlamethrowerTransform)
-			{
-				this.leftFlamethrowerTransform.forward = direction;
-			}
-			if (this.rightFlamethrowerTransform)
-			{
-				this.rightFlamethrowerTransform.forward = direction2;
-			}
-		}
-
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			return InterruptPriority.Skill;
 		}
 
-		public static GameObject flamethrowerEffectPrefab;
-		public static GameObject tracerEffectPrefab = null;
+		bool rightMuzzle = true; //Keep track of which gauntlet the lightning visually comes out from
+
+		public static GameObject gauntletEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightningLargeWithTrail.prefab").WaitForCompletion();
 		public static float maxDistance = 30f;
 		public static float bounceDistance = 15f;
 		public static float baseEntryDuration = 0.6f;
 		public static float baseAttackDuration = 3f;
-		public static float tickDamageCoefficient = 1.3333333333f;
+		public static float tickDamageCoefficient = 1.6f;
 		public static float procCoefficientPerTick = 1f;
-		public static float baseTickFrequency = 3f;
+		public static float baseTickFrequency = 3.5f;
 		public static float force = 100f;
 
-		public static string startAttackSoundString = "Play_mage_R_start";
-		public static string endAttackSoundString = "Play_mage_R_end";
-		public static string attackSoundString = "Play_mage_m1_cast_lightning";
+		public static string startAttackSoundString = "Play_mage_m2_charge";
+		public static string endAttackSoundString = "Play_mage_m2_shoot";
+		public static string attackSoundString = "Play_mage_r_lightningblast";
 
 		public static float recoilForce = 0f;
 
@@ -258,8 +213,6 @@ namespace EntityStates.RiskyMod.Mage
 		private float flamethrowerDuration;
 		private bool hasBegunAttack;
 		private ChildLocator childLocator;
-		private Transform leftFlamethrowerTransform;
-		private Transform rightFlamethrowerTransform;
 		private Transform leftMuzzleTransform;
 		private Transform rightMuzzleTransform;
 		private bool isCrit;

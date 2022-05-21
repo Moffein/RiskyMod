@@ -44,6 +44,7 @@ using RiskyMod.Tweaks.RunScaling;
 using RiskyMod.VoidFields;
 using RiskyMod.Items.DLC1.Boss;
 using RiskyMod.Items.DLC1.Equipment;
+using RiskyMod.Enemies.Mithrix;
 
 namespace RiskyMod
 {
@@ -94,6 +95,8 @@ namespace RiskyMod
         private const string voidFiendString = "Survivors: Void Fiend";
 
         private const string monsterString = "Monsters";
+        private const string monsterGeneralString = "General";
+        private const string monsterMithrixString = "Mithrix";
 
         public static void Init()
         {
@@ -124,6 +127,7 @@ namespace RiskyMod
             BarrierDecay.enabled = GeneralCfg.Bind(gameMechString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
             TeleExpandOnBossKill.enabled = GeneralCfg.Bind(gameMechString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;
             SmallHoldoutCharging.enabled = GeneralCfg.Bind(gameMechString, "Small Holdout Charging", true, "Void/Moon Holdouts charge at max speed as long as 1 player is charging.").Value;
+            ItemOutOfBounds.enabled = GeneralCfg.Bind(gameMechString, "Item Out of Bounds Teleport", true, "Items that fall out of bounds get teleported back.").Value;
 
             //Run Scaling
             CombatDirectorMultiplier.directorCreditMultiplier = GeneralCfg.Bind(scalingString, "Combat Director Credit Multiplier", 1.4f, "Multiply Combat Director credits by this amount. Set to 1 to disable").Value;
@@ -177,7 +181,8 @@ namespace RiskyMod
             if (SpawnLimits.maxMountainShrines < 0 && SpawnLimits.maxCombatShrines < 0 && SpawnLimits.maxVoidSeeds == 3) SpawnLimits.enabled = false;
 
             //Artifacts
-            VengeancePercentHeal.enabled = GeneralCfg.Bind(artifactString, "Reduce Vengeance Healing", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
+            FixVengeanceLeveling.enabled = GeneralCfg.Bind(monsterGeneralString, "Vengeance - Fix Levels", true, "Fix Vengeance Doppelgangers not leveling up.").Value;
+            VengeancePercentHeal.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Reduce Percent Heals", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
             EnigmaBlacklist.enabled = GeneralCfg.Bind(artifactString, "Enigma Blacklist", true, "Blacklist Lunars and Recycler from the Artifact of Enigma.").Value;
 
             //Void Fields
@@ -534,7 +539,10 @@ namespace RiskyMod
         private static void ConfigMonsters()
         {
             MonsterCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Monsters.cfg"), true);
-            FixVengeanceLeveling.enabled = MonsterCfg.Bind(monsterString, "Fix Vengeance Doppelganger Levels", true, "Fix Vengeance Doppelgangers not leveling up.").Value;
+
+            MonsterFallDamage.enabled = MonsterCfg.Bind(monsterGeneralString, "Lethal Fall Damage", true, "Monsters can die from fall damage.").Value;
+
+            MithrixFallImmune.enabled = MonsterCfg.Bind(monsterMithrixString, "Fall Damage Immunity", true, "Mithrix does not take fall damage.").Value;
 
             Beetle.enabled = MonsterCfg.Bind(monsterString, "Beetle", true, "Enable changes to this monster.").Value;
             Jellyfish.enabled = MonsterCfg.Bind(monsterString, "Jellyfish", true, "Enable changes to this monster.").Value;

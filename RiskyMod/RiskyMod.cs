@@ -256,6 +256,8 @@ namespace RiskyMod
 
             //Misc
             new AIBlacklistItems();
+
+            new ItemOutOfBounds();
         }
 
         private void RunFixes()

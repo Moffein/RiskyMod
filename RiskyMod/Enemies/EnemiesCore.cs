@@ -1,6 +1,7 @@
 ﻿using R2API;
 using RiskyMod.Enemies.Bosses;
 using RiskyMod.Enemies.DLC1;
+using RiskyMod.Enemies.Mithrix;
 using RiskyMod.Enemies.Mobs;
 using RiskyMod.Enemies.Mobs.Lunar;
 using RiskyMod.Enemies.Spawnpools;
@@ -25,8 +26,15 @@ namespace RiskyMod.Enemies
 
         public EnemiesCore()
         {
+            new MonsterFallDamage();
+            Mithrix();
             ModifyEnemies();
             ModifySpawns();
+        }
+
+        private void Mithrix()
+        {
+            new MithrixFallImmune();
         }
 
         private void ModifyEnemies()
