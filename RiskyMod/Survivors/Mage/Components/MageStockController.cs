@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Mage.Components
 {
@@ -18,11 +19,11 @@ namespace RiskyMod.Survivors.Mage.Components
 
         private bool rightMuzzle;
 
-        public static GameObject fireMuzzleflashEffectPrefab;
-        public static GameObject lightningMuzzleflashEffectPrefab;
-        public static GameObject iceMuzzleflashEffectPrefab;
+        public static GameObject fireMuzzleflashEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageFire.prefab").WaitForCompletion();
+        public static GameObject lightningMuzzleflashEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightning.prefab").WaitForCompletion();
+        public static GameObject iceMuzzleflashEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageIce.prefab").WaitForCompletion();
 
-        public static List<Type> ValidStates = new List<Type> { typeof(EntityStates.Mage.Weapon.FireFireBolt), typeof(EntityStates.Mage.Weapon.FireLightningBolt) };
+        public static Dictionary<Type, GameObject> StatePairs = new Dictionary<Type, GameObject>();
 
         private void Awake()
         {
@@ -37,7 +38,7 @@ namespace RiskyMod.Survivors.Mage.Components
         private void FixedUpdate()
         {
             if (!skills.hasAuthority) return;
-            if (skills.primary.stock < skills.primary.maxStock && ValidStates.Contains(skills.primary.activationState.stateType))
+            if (skills.primary.stock < skills.primary.maxStock && StatePairs.ContainsKey(skills.primary.activationState.stateType))
             {
                 if (skills.primary.stock <= 0) delayStopwatch = 0f;
                 if (delayStopwatch > 0f)
@@ -76,19 +77,7 @@ namespace RiskyMod.Survivors.Mage.Components
         private void ShowReloadVFX()
         {
             GameObject currentEffectPrefab = null;
-            if (skills.primary.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireFireBolt))
-            {
-                currentEffectPrefab = fireMuzzleflashEffectPrefab;
-            }
-            else if (skills.primary.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireLightningBolt))
-            {
-                currentEffectPrefab = lightningMuzzleflashEffectPrefab;
-            }
-            else
-            {
-                currentEffectPrefab = iceMuzzleflashEffectPrefab;
-            }
-
+            StatePairs.TryGetValue(skills.primary.activationState.stateType, out currentEffectPrefab);
 
             if (currentEffectPrefab)
             {

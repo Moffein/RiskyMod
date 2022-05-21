@@ -17,6 +17,7 @@ namespace RiskyMod.Tweaks.RunScaling
                 return;
             }
 
+            //This changes the per-player exponential
             IL.RoR2.Run.RecalculateDifficultyCoefficentInternal += (il) =>
             {
                 ILCursor c = new ILCursor(il);

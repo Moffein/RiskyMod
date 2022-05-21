@@ -35,6 +35,7 @@ namespace RiskyMod.Survivors.Mage
         public static bool ionSurgeUtility = true;
 
         public static bool enableFireUtility = true;
+        public static bool enableLightningSpecial = true;
 
         public static bool iceWallRework = true;
 
@@ -62,10 +63,13 @@ namespace RiskyMod.Survivors.Mage
 
             if (m1AttackSpeed)
             {
-                MageStockController.fireMuzzleflashEffectPrefab = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Mage.Weapon.FireFireBolt", "muzzleflashEffectPrefab");
-                MageStockController.lightningMuzzleflashEffectPrefab = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Mage.Weapon.FireLightningBolt", "muzzleflashEffectPrefab");
-                MageStockController.iceMuzzleflashEffectPrefab = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Mage.Weapon.FireIceBolt", "muzzleflashEffectPrefab");
+                //Debug.Log("Mage Muzzle Fire: " + MageStockController.fireMuzzleflashEffectPrefab);
+                //Debug.Log("Mage Muzzle Lightning: " + MageStockController.lightningMuzzleflashEffectPrefab);
+                //Debug.Log("Mage Muzzle Ice: " + MageStockController.iceMuzzleflashEffectPrefab);
 
+                //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Mage.Weapon.Flamethrower");
+                MageStockController.StatePairs.Add(typeof(EntityStates.Mage.Weapon.FireFireBolt), MageStockController.fireMuzzleflashEffectPrefab);
+                MageStockController.StatePairs.Add(typeof(EntityStates.Mage.Weapon.FireLightningBolt), MageStockController.lightningMuzzleflashEffectPrefab);
                 bodyPrefab.AddComponent<MageStockController>();
             }
 
@@ -235,9 +239,42 @@ namespace RiskyMod.Survivors.Mage
                 }
             }
 
-            if (ionSurgeUtility)
+            if (enableLightningSpecial)
             {
+                Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Mage.SpecialLightning));
+                SkillDef skillDef = SkillDef.CreateInstance<SkillDef>();
+                skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Mage.SpecialLightning));
+                skillDef.activationStateMachineName = "Weapon";
+                skillDef.baseMaxStock = 1;
+                skillDef.baseRechargeInterval = 5f;
+                skillDef.beginSkillCooldownOnSkillEnd = true;
+                skillDef.canceledFromSprinting = flamethrowerSprintCancel;
+                skillDef.dontAllowPastMaxStocks = true;
+                skillDef.forceSprintDuringState = false;
+                skillDef.fullRestockOnAssign = true;
+                skillDef.icon = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFlyUp.asset").WaitForCompletion().icon;
+                skillDef.interruptPriority = InterruptPriority.Skill;
+                skillDef.isCombatSkill = true;
+                skillDef.keywordTokens = new string[] { };
+                skillDef.mustKeyPress = true;
+                skillDef.cancelSprintingOnActivation = true;
+                skillDef.rechargeStock = 1;
+                skillDef.requiredStock = 1;
+                skillDef.skillName = "RiskymodMageSpecialSithLightning";
+                skillDef.skillNameToken = "MAGE_SPECIAL_SITHLIGHTNING_NAME_RISKYMOD";
+                skillDef.skillDescriptionToken = "MAGE_SPECIAL_SITHLIGHTNING_DESCRIPTION_RISKYMOD";
+                skillDef.stockToConsume = 1;
+                SneedUtils.SneedUtils.FixSkillName(skillDef);
+                Content.Content.skillDefs.Add(skillDef);
 
+                Skills.SpecialLightning = skillDef;
+                Array.Resize(ref sk.special.skillFamily.variants, sk.special.skillFamily.variants.Length + 1);
+                sk.special.skillFamily.variants[sk.special.skillFamily.variants.Length - 1] = new SkillFamily.Variant
+                {
+                    skillDef = Skills.SpecialLightning,
+                    unlockableDef = null,
+                    viewableNode = new ViewablesCatalog.Node(Skills.SpecialLightning.skillName, false, null)
+                };
             }
         }
 
@@ -303,5 +340,6 @@ namespace RiskyMod.Survivors.Mage
     {
         public static SkillDef PrepIceWall;
         public static SkillDef PrepIonSurge;
+        public static SkillDef SpecialLightning;
     }
 }

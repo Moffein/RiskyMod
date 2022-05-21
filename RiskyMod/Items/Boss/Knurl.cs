@@ -3,6 +3,8 @@ using MonoMod.Cil;
 using RoR2;
 using R2API;
 using RiskyMod.SharedHooks;
+using System;
+using UnityEngine;
 
 namespace RiskyMod.Items.Boss
 {
@@ -12,8 +14,6 @@ namespace RiskyMod.Items.Boss
         public Knurl()
         {
             if (!enabled) return;
-
-            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove Vanilla Effect
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
@@ -26,6 +26,7 @@ namespace RiskyMod.Items.Boss
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
             };
 
+            ItemsCore.ModifyItemDefActions += ModifyItem;
             GetStatCoefficients.HandleStatsInventoryActions += HandleStatsInventory;
         }
 
