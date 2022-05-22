@@ -236,6 +236,11 @@ namespace RiskyMod.Survivors.Mage
 
             if (enableLightningSpecial)
             {
+                EntityStates.RiskyMod.Mage.SpecialLightning.laserEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Junk/Mage/TracerMageLightningLaser.prefab").WaitForCompletion().InstantiateClone("RiskyMod_LaserBoltTracer", false);
+                DestroyOnTimer dt = EntityStates.RiskyMod.Mage.SpecialLightning.laserEffectPrefab.AddComponent<DestroyOnTimer>();
+                dt.duration = 0.5f;
+                Content.Content.effectDefs.Add(new EffectDef(EntityStates.RiskyMod.Mage.SpecialLightning.laserEffectPrefab));
+
                 Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Mage.SpecialLightning));
                 SkillDef skillDef = SkillDef.CreateInstance<SkillDef>();
                 skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Mage.SpecialLightning));

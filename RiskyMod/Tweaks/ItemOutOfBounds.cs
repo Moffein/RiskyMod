@@ -12,6 +12,7 @@ namespace RiskyMod.Tweaks
         {
             if (!enabled) return;
 
+            //Would prefer to handle this with MapZones but don't want to mess with layers to make the collision work.
             On.RoR2.GenericPickupController.Start += (orig, self) =>
             {
                 orig(self);
@@ -45,7 +46,7 @@ namespace RiskyMod.Tweaks
                     Rigidbody rb = base.GetComponent<Rigidbody>();
                     if (rb)
                     {
-                        if (rb.velocity.sqrMagnitude > 9f)
+                        if (rb.velocity.sqrMagnitude > 25f)
                         {
                             AttemptTeleport();
                         }
