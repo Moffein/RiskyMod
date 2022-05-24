@@ -101,9 +101,9 @@ namespace EntityStates.RiskyMod.Mage
 					procChainMask = default,
 					lightningType = LightningOrb.LightningType.MageLightning,
 					damageColorIndex = DamageColorIndex.Default,
-					bouncesRemaining = 0,
-					targetsToFindPerBounce = 1,
-					range = SpecialLightning.maxDistance,
+					bouncesRemaining = 1,
+					targetsToFindPerBounce = 5,
+					range = loadMaxDistance/2f,
 					origin = lightningOrigin,
 					damageType = DamageType.SlowOnHit,
 					speed = 120f
@@ -116,22 +116,33 @@ namespace EntityStates.RiskyMod.Mage
 				search.filterByLoS = false;
 				search.searchOrigin = aimRay.origin;
 				search.sortMode = BullseyeSearch.SortMode.Angle;
-				search.maxDistanceFilter = SpecialLightning.maxDistance;
-				search.maxAngleFilter = 20f;
+				search.maxDistanceFilter = loadMaxDistance;
+				search.maxAngleFilter = 30f;
 				search.searchDirection = aimRay.direction;
 				search.RefreshCandidates();
 
+				/*HurtBox target = search.GetResults().FirstOrDefault();
+				if (target)
+				{
+					lo.target = target;
+					OrbManager.instance.AddOrb(lo);
+					lo.bouncedObjects.Add(target.healthComponent);
+				}*/
+
+				int i = 0;
 				List<HurtBox> targets = search.GetResults().ToList();
 				if (targets.Count > 0)
 				{
 					foreach (HurtBox hb in targets)
 					{
-
 						if (!lo.bouncedObjects.Contains(hb.healthComponent))
 						{
 							lo.target = hb;
 							OrbManager.instance.AddOrb(lo);
 							lo.bouncedObjects.Add(hb.healthComponent);
+
+							i++;
+							if (i >= 3) break;
 						}
 					}
 				}
