@@ -6,10 +6,12 @@
 
   <ItemGroup>
     <None Remove="resources" />
+    <None Remove="RiskyMod_Soundbank.bnk" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="resources" />
+    <EmbeddedResource Include="RiskyMod_Soundbank.bnk" />
   </ItemGroup>
 
   <ItemGroup>

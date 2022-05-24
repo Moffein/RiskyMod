@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{4FE0731A-9F99-42A8-BA8D-104A72DF3F27}" SchemaVersion="97">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{4FE0731A-9F99-42A8-BA8D-104A72DF3F27}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="RiskyMod_Soundbank" ID="{4E5004A6-3CAA-4A69-BCB4-C6403DFC8573}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_RiskyMod_Mage_Special_Lightning" ID="{7E8A5DE7-816C-430B-B074-ED5AC3B5963F}" WorkUnitID="{79591FC6-F133-479C-85D8-3C4F5020F2A2}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Play_RiskyMod_RoR1Lightning" ID="{5EB9FFC4-2BF8-45FB-BBD1-A3303CC85673}" WorkUnitID="{79591FC6-F133-479C-85D8-3C4F5020F2A2}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

@@ -158,16 +158,16 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 		public static float baseDuration = 0.5f;
 		public static float damageCoefficient = 15f;
 		public static GameObject areaIndicatorPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab").WaitForCompletion();
-		public static GameObject muzzleflashEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightningLarge.prefab").WaitForCompletion();
+		public static GameObject muzzleflashEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Junk/Mage/MuzzleflashMageFireLarge.prefab").WaitForCompletion();
 		public static GameObject crosshairOverridePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/SimpleDotCrosshair.prefab").WaitForCompletion();
-		public static string PrepIonSurgeSoundString = "Play_mage_m1_cast_lightning";
+		public static string PrepIonSurgeSoundString = "Play_mage_m1_shoot";
 		public static float maxDistance = 600f;
-		public static string fireSoundString = "Play_mage_R_lightningBlast";
+		public static string fireSoundString = "Play_mage_R_end";
 
 		public static GameObject projectilePrefab;
 
 		//for the guaranteed blastAttack
-		public static GameObject blastEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/OmniImpactVFXLightningMage.prefab").WaitForCompletion();
+		public static GameObject blastEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/OmniExplosionVFX.prefab").WaitForCompletion();
 
 		public static float blastRadius = 8f;//Ion Surge is 14f
 		public static float blastJumpRadius = 14f;

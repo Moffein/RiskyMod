@@ -267,6 +267,16 @@ namespace RiskyMod.Survivors.Mage
                 SneedUtils.SneedUtils.FixSkillName(skillDef);
                 Content.Content.skillDefs.Add(skillDef);
 
+                EntityStates.RiskyMod.Mage.SpecialLightning.gauntletMissEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightning.prefab").WaitForCompletion().InstantiateClone("RiskyMod_MageSpecialLightningMiss", false);
+                EffectComponent ec = EntityStates.RiskyMod.Mage.SpecialLightning.gauntletMissEffectPrefab.GetComponent<EffectComponent>();
+                ec.soundName = "Play_item_proc_chain_lightning";
+                Content.Content.effectDefs.Add(new EffectDef(EntityStates.RiskyMod.Mage.SpecialLightning.gauntletMissEffectPrefab));
+
+                EntityStates.RiskyMod.Mage.SpecialLightning.gauntletEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightningLargeWithTrail.prefab").WaitForCompletion().InstantiateClone("RiskyMod_MageSpecialLightning", false);
+                ec = EntityStates.RiskyMod.Mage.SpecialLightning.gauntletEffectPrefab.GetComponent<EffectComponent>();
+                ec.soundName = "Play_mage_m1_cast_lightning";//"Play_RiskyMod_Mage_Special_Lightning2";//"Play_RiskyMod_RoR1Lightning"; //other SFX too annoying
+                Content.Content.effectDefs.Add(new EffectDef(EntityStates.RiskyMod.Mage.SpecialLightning.gauntletEffectPrefab));
+
                 Skills.SpecialLightning = skillDef;
                 Array.Resize(ref sk.special.skillFamily.variants, sk.special.skillFamily.variants.Length + 1);
                 sk.special.skillFamily.variants[sk.special.skillFamily.variants.Length - 1] = new SkillFamily.Variant

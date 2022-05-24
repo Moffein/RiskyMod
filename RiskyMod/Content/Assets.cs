@@ -25,6 +25,14 @@ namespace RiskyMod.Content
             {
                 assetBundle = AssetBundle.LoadFromStream(stream);
             }
+
+            using (var bankStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("RiskyMod.RiskyMod_Soundbank.bnk"))
+            {
+                var bytes = new byte[bankStream.Length];
+                bankStream.Read(bytes, 0, bytes.Length);
+                R2API.SoundAPI.SoundBanks.Add(bytes);
+            }
+
             LoadSkillIcons();
             LoadScepterSkillIcons();
             LoadBuffIcons();

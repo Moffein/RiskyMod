@@ -1,0 +1,11 @@
+Event	ID	Name			Wwise Object Path	Notes
+	976707025	Play_RiskyMod_RoR1Lightning			\Default Work Unit\Play_RiskyMod_RoR1Lightning	
+	2731411894	Play_RiskyMod_Mage_Special_Lightning			\Default Work Unit\Play_RiskyMod_Mage_Special_Lightning	
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	3673881719	Volume_SFX			\Default Work Unit\Volume_SFX	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	702021822	sndLightningPistol	C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\.cache\Windows\SFX\sndLightningPistol_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Survivors\sndLightningPistol		5355
+	921699460	wChainLightning	C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\.cache\Windows\SFX\wChainLightning_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Survivors\wChainLightning		5365
+

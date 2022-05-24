@@ -63,13 +63,8 @@ namespace EntityStates.RiskyMod.Mage
 
 		private void FireGauntlet(string muzzleString)
 		{
-			EffectManager.SimpleMuzzleFlash(SpecialLightning.gauntletEffectPrefab, base.gameObject, "MuzzleLeft", false);
-			EffectManager.SimpleMuzzleFlash(SpecialLightning.gauntletEffectPrefab, base.gameObject, "MuzzleRight", false);
-
 			//totalTickCount--;
 			Ray aimRay = base.GetAimRay();
-
-			Util.PlaySound(SpecialLightning.attackSoundString, base.gameObject);
 
 			Vector3 lightningOrigin = aimRay.origin;
 			if (this.leftMuzzleTransform && this.rightMuzzleTransform)
@@ -101,12 +96,13 @@ namespace EntityStates.RiskyMod.Mage
 					procChainMask = default,
 					lightningType = LightningOrb.LightningType.MageLightning,
 					damageColorIndex = DamageColorIndex.Default,
-					bouncesRemaining = 1,
-					targetsToFindPerBounce = 5,
-					range = loadMaxDistance/2f,
+					bouncesRemaining = 2,
+					targetsToFindPerBounce = 3,
+					range = loadMaxDistance * 0.375f,
 					origin = lightningOrigin,
-					damageType = DamageType.SlowOnHit,
-					speed = 120f
+					damageType = DamageType.Generic,
+					speed = 120f,
+					//damageCoefficientPerBounce = 0.8f
 				};
 				ModifyAttack(lo);
 
@@ -117,19 +113,25 @@ namespace EntityStates.RiskyMod.Mage
 				search.searchOrigin = aimRay.origin;
 				search.sortMode = BullseyeSearch.SortMode.Angle;
 				search.maxDistanceFilter = loadMaxDistance;
-				search.maxAngleFilter = 30f;
+				search.maxAngleFilter = 45f;
 				search.searchDirection = aimRay.direction;
 				search.RefreshCandidates();
 
-				/*HurtBox target = search.GetResults().FirstOrDefault();
+				GameObject effect = SpecialLightning.gauntletMissEffectPrefab;
+
+				HurtBox target = search.GetResults().FirstOrDefault();
 				if (target)
 				{
 					lo.target = target;
 					OrbManager.instance.AddOrb(lo);
 					lo.bouncedObjects.Add(target.healthComponent);
-				}*/
+					effect = SpecialLightning.gauntletEffectPrefab;
+				}
 
-				int i = 0;
+				EffectManager.SimpleMuzzleFlash(effect, base.gameObject, "MuzzleLeft", true);
+				EffectManager.SimpleMuzzleFlash(effect, base.gameObject, "MuzzleRight", true);
+
+				/*int i = 0;
 				List<HurtBox> targets = search.GetResults().ToList();
 				if (targets.Count > 0)
 				{
@@ -145,7 +147,7 @@ namespace EntityStates.RiskyMod.Mage
 							if (i >= 3) break;
 						}
 					}
-				}
+				}*/
 			}
 
 			if (base.characterMotor)
@@ -200,18 +202,19 @@ namespace EntityStates.RiskyMod.Mage
 
 		bool rightMuzzle = true; //Keep track of which gauntlet the lightning visually comes out from
 
-		public static GameObject gauntletEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightningLargeWithTrail.prefab").WaitForCompletion();
-		public static float maxDistance = 30f;
+		public static GameObject gauntletEffectPrefab;
+		public static GameObject gauntletMissEffectPrefab;
+		public static float maxDistance = 40f;
 		public static float baseEntryDuration = 0.6f;
 		public static float baseAttackDuration = 3f;
-		public static float tickDamageCoefficient = 1.5f;
+		public static float tickDamageCoefficient = 0.8f;
 		public static float procCoefficientPerTick = 1f;
-		public static float baseTickFrequency = 4f;
+		public static float baseTickFrequency = 5f;
 		public static float force = 100f;
 
-		public static string startAttackSoundString = "";//"Play_mage_m2_charge";
-		public static string endAttackSoundString = "";//"Play_mage_m2_shoot";
-		public static string attackSoundString = "Play_mage_m1_cast_lightning";//"Play_mage_r_lightningblast";
+		public static string startAttackSoundString = "Play_mage_m2_shoot";//"Play_mage_m2_charge";
+		public static string endAttackSoundString = "";//"Play_mage_r_lightningblast";
+		//public static string attackSoundString = "Play_item_proc_chain_lightning";//"Play_mage_r_lightningblast"; //"Play_mage_m1_cast_lightning";
 
 		public static float recoilForce = 0f;
 
