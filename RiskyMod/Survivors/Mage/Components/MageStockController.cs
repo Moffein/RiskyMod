@@ -21,7 +21,7 @@ namespace RiskyMod.Survivors.Mage.Components
 
         public static GameObject fireMuzzleflashEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageFire.prefab").WaitForCompletion();
         public static GameObject lightningMuzzleflashEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightning.prefab").WaitForCompletion();
-        public static GameObject iceMuzzleflashEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageIce.prefab").WaitForCompletion();
+        public static GameObject iceMuzzleflashEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Junk/Mage/MuzzleflashMageIce.prefab").WaitForCompletion();
 
         public static Dictionary<Type, GameObject> StatePairs = new Dictionary<Type, GameObject>();
 

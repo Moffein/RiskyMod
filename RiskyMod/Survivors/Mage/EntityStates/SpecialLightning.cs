@@ -69,6 +69,7 @@ namespace EntityStates.RiskyMod.Mage
 			//totalTickCount--;
 			Ray aimRay = base.GetAimRay();
 
+			Util.PlaySound(SpecialLightning.attackSoundString, base.gameObject);
 
 			Vector3 lightningOrigin = aimRay.origin;
 			if (this.leftMuzzleTransform && this.rightMuzzleTransform)
@@ -85,45 +86,44 @@ namespace EntityStates.RiskyMod.Mage
 				rightMuzzle = !rightMuzzle;
 			}
 
-			List<HealthComponent> bouncedObjects = new List<HealthComponent>();
-			LightningOrb lo = new LightningOrb
+			if (NetworkServer.active)
 			{
-				bouncedObjects = bouncedObjects,
-				attacker = base.gameObject,
-				inflictor = base.gameObject,
-				damageValue = base.damageStat * SpecialLightning.tickDamageCoefficient,
-				procCoefficient = SpecialLightning.procCoefficientPerTick,
-				teamIndex = base.GetTeam(),
-				isCrit = this.isCrit,
-				procChainMask = default,
-				lightningType = LightningOrb.LightningType.MageLightning,
-				damageColorIndex = DamageColorIndex.Default,
-				bouncesRemaining = 0,
-				targetsToFindPerBounce = 1,
-				range = SpecialLightning.maxDistance,
-				origin = lightningOrigin,
-				damageType = DamageType.SlowOnHit,
-				speed = 120f
-			};
-			ModifyAttack(lo);
+				List<HealthComponent> bouncedObjects = new List<HealthComponent>();
+				LightningOrb lo = new LightningOrb
+				{
+					bouncedObjects = bouncedObjects,
+					attacker = base.gameObject,
+					inflictor = base.gameObject,
+					damageValue = base.damageStat * SpecialLightning.tickDamageCoefficient,
+					procCoefficient = SpecialLightning.procCoefficientPerTick,
+					teamIndex = base.GetTeam(),
+					isCrit = this.isCrit,
+					procChainMask = default,
+					lightningType = LightningOrb.LightningType.MageLightning,
+					damageColorIndex = DamageColorIndex.Default,
+					bouncesRemaining = 0,
+					targetsToFindPerBounce = 1,
+					range = SpecialLightning.maxDistance,
+					origin = lightningOrigin,
+					damageType = DamageType.SlowOnHit,
+					speed = 120f
+				};
+				ModifyAttack(lo);
 
-			BullseyeSearch search = new BullseyeSearch();
-			search.teamMaskFilter = TeamMask.allButNeutral;
-			search.teamMaskFilter.RemoveTeam(characterBody.teamComponent.teamIndex);
-			search.filterByLoS = false;
-			search.searchOrigin = aimRay.origin;
-			search.sortMode = BullseyeSearch.SortMode.Angle;
-			search.maxDistanceFilter = SpecialLightning.maxDistance;
-			search.maxAngleFilter = 20f;
-			search.searchDirection = aimRay.direction;
-			search.RefreshCandidates();
+				BullseyeSearch search = new BullseyeSearch();
+				search.teamMaskFilter = TeamMask.allButNeutral;
+				search.teamMaskFilter.RemoveTeam(characterBody.teamComponent.teamIndex);
+				search.filterByLoS = false;
+				search.searchOrigin = aimRay.origin;
+				search.sortMode = BullseyeSearch.SortMode.Angle;
+				search.maxDistanceFilter = SpecialLightning.maxDistance;
+				search.maxAngleFilter = 20f;
+				search.searchDirection = aimRay.direction;
+				search.RefreshCandidates();
 
-			List<HurtBox> targets = search.GetResults().ToList();
-			if (targets.Count > 0)
-			{
-				Util.PlaySound(SpecialLightning.attackSoundString, base.gameObject); ;
-				if (NetworkServer.active)
-                {
+				List<HurtBox> targets = search.GetResults().ToList();
+				if (targets.Count > 0)
+				{
 					foreach (HurtBox hb in targets)
 					{
 
@@ -134,33 +134,6 @@ namespace EntityStates.RiskyMod.Mage
 							lo.bouncedObjects.Add(hb.healthComponent);
 						}
 					}
-				}
-			}
-			else
-			{
-				Util.PlaySound(SpecialLightning.whiffSoundString, base.gameObject); ;
-				//Just fire a bulletattack so that it looks like something is happening if targets can't be found
-				if (base.isAuthority)
-				{
-					new BulletAttack
-					{
-						owner = base.gameObject,
-						weapon = base.gameObject,
-						origin = aimRay.origin,
-						aimVector = aimRay.direction,
-						minSpread = 0f,
-						maxSpread = 0f,
-						damage = SpecialLightning.tickDamageCoefficient * this.damageStat,
-						force = SpecialLightning.force,
-						tracerEffectPrefab = SpecialLightning.laserEffectPrefab,
-						muzzleName = rightMuzzle ? "MuzzleRight" : "MuzzleLeft",
-						hitEffectPrefab = null,
-						isCrit = this.isCrit,
-						radius = 1f,
-						smartCollision = false,
-						stopperMask = LayerIndex.world.mask,
-						maxDistance = SpecialLightning.maxDistance - 5f
-					}.Fire();
 				}
 			}
 
@@ -227,8 +200,7 @@ namespace EntityStates.RiskyMod.Mage
 
 		public static string startAttackSoundString = "";//"Play_mage_m2_charge";
 		public static string endAttackSoundString = "";//"Play_mage_m2_shoot";
-		public static string attackSoundString = "Play_mage_r_lightningblast";
-		public static string whiffSoundString = "Play_mage_m1_cast_lightning";
+		public static string attackSoundString = "Play_mage_m1_cast_lightning";//"Play_mage_r_lightningblast";
 
 		public static float recoilForce = 0f;
 

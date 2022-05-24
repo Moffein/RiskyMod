@@ -25,8 +25,6 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
 
         public static bool modifyCorruptCrush = true;
 
-        public static bool removeUtilityMoveSpeedScaling = true;
-
         public static BodyIndex bodyIndex;
         public static GameObject bodyPrefab;
 
@@ -152,36 +150,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
 
         private void ModifyUtilities(SkillLocator sk)
         {
-            //This feels weird. Need better solution.
-            if (removeUtilityMoveSpeedScaling)
-            {
-                /*Debug.Log("Uncorrupted: ");
-                SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/DLC1/VoidSurvivor/EntityStates.VoidSurvivor.VoidBlinkBase+VoidBlinkUp.asset").WaitForCompletion());
-                Debug.Log("\n");
-
-                Debug.Log("Corrupted: ");
-                SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/DLC1/VoidSurvivor/EntityStates.VoidSurvivor.VoidBlinkBase+VoidBlinkDown.asset").WaitForCompletion());
-                Debug.Log("\n");*/
-
-                GameObject targetVFX = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidSurvivor/VoidBlinkVfx.prefab").WaitForCompletion();
-
-                IL.EntityStates.VoidSurvivor.VoidBlinkBase.GetVelocity += (il) =>
-                {
-                    ILCursor c = new ILCursor(il);
-                    c.GotoNext(MoveType.After,
-                         x => x.MatchLdfld<BaseState>("moveSpeedStat")
-                        );
-                    c.Emit(OpCodes.Ldarg_0);    //self
-                    c.EmitDelegate<Func<float, EntityStates.VoidSurvivor.VoidBlinkBase, float>>((moveSpeed, self) =>
-                    {
-                        if (self.blinkVfxPrefab == targetVFX)   //Corrupted uses a different VFX
-                        {
-                            return 7f;
-                        }
-                        return moveSpeed;
-                    });
-                };
-            }
+            new UtilityFallImmune();
         }
 
         private void ModifySpecials(SkillLocator sk)

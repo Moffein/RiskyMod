@@ -15,12 +15,11 @@ namespace RiskyMod.Tweaks.RunScaling
 
         private static void LoopArmor(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (sender.isChampion && sender.isBoss)
+            if (sender.isChampion)// && sender.isBoss
             {
                 if (sender.inventory && sender.inventory.GetItemCount(RoR2Content.Items.InvadingDoppelganger) <= 0 && sender.inventory.GetItemCount(RoR2Content.Items.AdaptiveArmor) <= 0)
                 {
-                    int loops = Run.instance.stageClearCount / 5;
-                    args.armorAdd += loops * 40f;
+                    args.armorAdd += 50f + 10f * (Run.instance.stageClearCount - 5);
                 }
             }
         }

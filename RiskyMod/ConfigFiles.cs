@@ -127,7 +127,8 @@ namespace RiskyMod
             BarrierDecay.enabled = GeneralCfg.Bind(gameMechString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
             TeleExpandOnBossKill.enabled = GeneralCfg.Bind(gameMechString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;
             SmallHoldoutCharging.enabled = GeneralCfg.Bind(gameMechString, "Small Holdout Charging", true, "Void/Moon Holdouts charge at max speed as long as 1 player is charging.").Value;
-            ItemOutOfBounds.enabled = GeneralCfg.Bind(gameMechString, "Item Out of Bounds Teleport", true, "Items that fall out of bounds get teleported back.").Value;
+            //ItemOutOfBounds.enabled = GeneralCfg.Bind(gameMechString, "Item Out of Bounds Teleport", true, "Items that fall out of bounds get teleported back.").Value;
+            ItemOutOfBounds.enabled = false; //Jank code
 
             //Run Scaling
             CombatDirectorMultiplier.directorCreditMultiplier = GeneralCfg.Bind(scalingString, "Combat Director Credit Multiplier", 1.4f, "Multiply Combat Director credits by this amount. Set to 1 to disable").Value;
@@ -214,7 +215,7 @@ namespace RiskyMod
             Shock.enabled = GeneralCfg.Bind(miscString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
             FreezeChampionExecute.enabled = GeneralCfg.Bind(miscString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
             NerfVoidtouched.enabled = GeneralCfg.Bind(miscString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
-            PlayerControlledMonsters.enabled = GeneralCfg.Bind(miscString, "Player-Controlled Monster Regen", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
+            PlayerControlledMonsters.enabled = GeneralCfg.Bind(miscString, "Player-Controlled Monster Tweaks", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
         }
 
         private static void ConfigItems()
@@ -531,9 +532,7 @@ namespace RiskyMod
             VoidFiendCore.removeCorruptArmor = SurvivorCfg.Bind(voidFiendString, "No Corrupt Mode Bonus Armor", true, "Disables bonus armor while Corrupted.").Value;
             VoidFiendCore.secondaryMultitask = SurvivorCfg.Bind(voidFiendString, "Secondary Multitasking", true, "Drown and Suppress can be fired while charging Flood.").Value;
             VoidFiendCore.modifyCorruptCrush = SurvivorCfg.Bind(voidFiendString, "Corrupted Suppress Changes", true, "Enable changes to this skill.").Value;
-            
-            //Doesn't feel good. Find a better solution.
-            VoidFiendCore.removeUtilityMoveSpeedScaling = false;
+            UtilityFallImmune.enabled = SurvivorCfg.Bind(voidFiendString, "Trespass Changes", true, "Enable changes to this skill.").Value;
         }
 
         private static void ConfigMonsters()
