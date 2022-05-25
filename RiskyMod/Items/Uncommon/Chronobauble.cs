@@ -23,6 +23,7 @@ namespace RiskyMod.Items.Uncommon
             {
                 args.attackSpeedMultAdd *= 0.8f;   //Multiply since it's possible to get negative attack speed with subtraction
                 args.moveSpeedReductionMultAdd += 0.2f; //0.6f vanilla is included, goes to 0.8f total
+                args.cooldownMultAdd += 0.2f;
             }
         }
     }
