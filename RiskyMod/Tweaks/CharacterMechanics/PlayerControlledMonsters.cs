@@ -12,6 +12,24 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             if (!enabled) return;
 
             RecalculateStatsAPI.GetStatCoefficients += PlayerControlledMonsterStats;
+
+            On.RoR2.SetStateOnHurt.SetStunInternal += (orig, self, duration) =>
+            {
+                if (self.targetStateMachine && self.targetStateMachine.commonComponents.characterBody && self.targetStateMachine.commonComponents.characterBody.isPlayerControlled) return;
+                orig(self, duration);
+            };
+
+            On.RoR2.SetStateOnHurt.SetShockInternal += (orig, self, duration) =>
+            {
+                if (self.targetStateMachine && self.targetStateMachine.commonComponents.characterBody && self.targetStateMachine.commonComponents.characterBody.isPlayerControlled) return;
+                orig(self, duration);
+            };
+
+            On.RoR2.SetStateOnHurt.SetPainInternal += (orig, self) =>
+            {
+                if (self.targetStateMachine && self.targetStateMachine.commonComponents.characterBody && self.targetStateMachine.commonComponents.characterBody.isPlayerControlled) return;
+                orig(self);
+            };
         }
 
         private static void PlayerControlledMonsterStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
