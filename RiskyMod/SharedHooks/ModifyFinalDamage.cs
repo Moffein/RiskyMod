@@ -16,10 +16,7 @@ namespace RiskyMod.SharedHooks
         public delegate void ModifyFinalDamageDelegate(DamageMult damageMult, DamageInfo damageInfo,
             HealthComponent victim, CharacterBody victimBody,
             CharacterBody attackerBody, Inventory attackerInventory);
-        public static ModifyFinalDamageDelegate ModifyFinalDamageActions = ModifyFinalDamageMethod;
-        private static void ModifyFinalDamageMethod(DamageMult damageMult, DamageInfo damageInfo,
-            HealthComponent victim, CharacterBody victimBody,
-            CharacterBody attackerBody, Inventory attackerInventory) {}
+        public static ModifyFinalDamageDelegate ModifyFinalDamageActions;
 
         public ModifyFinalDamage()
         {
@@ -48,8 +45,11 @@ namespace RiskyMod.SharedHooks
                             if (attackerInventory)
                             {
                                 DamageMult damageMult = new DamageMult();
-                                ModifyFinalDamageActions.Invoke(damageMult, damageInfo, victimHealth, victimBody, attackerBody, attackerInventory);
-                                newDamage *= damageMult.damageMult;
+                                if (ModifyFinalDamageActions != null)
+                                {
+                                    ModifyFinalDamageActions.Invoke(damageMult, damageInfo, victimHealth, victimBody, attackerBody, attackerInventory);
+                                    newDamage *= damageMult.damageMult;
+                                }
                             }
                         }
                     }

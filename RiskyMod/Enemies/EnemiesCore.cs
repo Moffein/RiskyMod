@@ -66,6 +66,7 @@ namespace RiskyMod.Enemies
 
             new VoidInfestor();
             new BlindPest();
+            new XiConstruct();
         }
 
         private void ModifySpawns()

@@ -20,7 +20,7 @@ namespace RiskyMod.Tweaks.RunScaling
                 int stages = Run.instance.stageClearCount;
                 if (stages >= 5 && sender.inventory && sender.inventory.GetItemCount(RoR2Content.Items.InvadingDoppelganger) <= 0 && sender.inventory.GetItemCount(RoR2Content.Items.AdaptiveArmor) <= 0)
                 {
-                    args.armorAdd += 50f + 10f * (stages - 5);
+                    args.armorAdd += 50f;
                 }
             }
         }

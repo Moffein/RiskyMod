@@ -1,6 +1,6 @@
 {
 	strings:
 	{
-		"SHRINE_COMBAT_END_TRIAL_RISKYMOD": "<style=cShrine>Shrine of Combat defeated! You have been rewarded with</style> {0}!"
+		"SHRINE_COMBAT_END_TRIAL_RISKYMOD": "<style=cShrine>The Shrine of Combat dropped </style> {0}"
 	}
 }

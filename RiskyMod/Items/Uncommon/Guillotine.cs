@@ -48,8 +48,11 @@ namespace RiskyMod.Items.Uncommon
 			{
 				if (victimHealth.combinedHealth <= victimHealth.fullCombinedHealth * 0.5f)
 				{
-					damageMult.damageMult *= 1f + 0.3f * lopperCount;
-					damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
+					damageMult.damageMult += 0.3f * lopperCount;
+					if (damageInfo.damageColorIndex == DamageColorIndex.Default)
+                    {
+						damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
+					}
 
 					//Lock the visual effect behind proccing attacks to improve performance
 					if (damageInfo.procCoefficient > 0f)

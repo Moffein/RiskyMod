@@ -34,7 +34,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
 
         private static void PlayerControlledMonsterStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (sender.isPlayerControlled && sender.baseRegen == 0f && sender.levelRegen == 0f)
+            if (sender.isPlayerControlled && sender.baseRegen == 0f && sender.levelRegen == 0f && !sender.bodyFlags.HasFlag(CharacterBody.BodyFlags.ImmuneToExecutes))
             {
                 args.baseRegenAdd += 2f + 0.5f * sender.level;
                 args.armorAdd += 20f;
