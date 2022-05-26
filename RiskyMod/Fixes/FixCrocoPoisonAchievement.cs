@@ -8,9 +8,9 @@ namespace RiskyMod.Fixes
     {
         public FixCrocoPoisonAchievement()
         {
-            On.RoR2.DotController.AddDot += (orig, self, attackerObject, duration, dotIndex, damageMultiplier, maxStacksFromAttacker, totalDamage) =>
+            On.RoR2.DotController.AddDot += (orig, self, attackerObject, duration, dotIndex, damageMultiplier, maxStacksFromAttacker, totalDamage, preUpgradeDotIndex) =>
             {
-                orig(self, attackerObject, duration, dotIndex, damageMultiplier, maxStacksFromAttacker, totalDamage);
+                orig(self, attackerObject, duration, dotIndex, damageMultiplier, maxStacksFromAttacker, totalDamage, preUpgradeDotIndex);
                 if (dotIndex == RoR2.DotController.DotIndex.Blight)
                 {
                     CharacterBody attackerBody = attackerObject.GetComponent<CharacterBody>();

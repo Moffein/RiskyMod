@@ -567,6 +567,7 @@ namespace RiskyMod
             Grandparent.enabled = MonsterCfg.Bind(monsterString, "Grandparent", true, "Enable changes to this monster.").Value;
 
             BlindPest.enabled = MonsterCfg.Bind(monsterString, "Blind Pest", true, "Enable changes to this monster.").Value;
+            XiConstruct.enabled = MonsterCfg.Bind(monsterString, "Xi Construct", true, "Enable changes to this monster.").Value;
 
             VoidInfestor.enabled = MonsterCfg.Bind(monsterString, "Void Infestor", true, "Enable changes to this monster.").Value;
             VoidInfestor.noVoidAllies = MonsterCfg.Bind(monsterString, "Void Infestor - No Ally Infestation", true, "Void Infestors can't possess allies.").Value;

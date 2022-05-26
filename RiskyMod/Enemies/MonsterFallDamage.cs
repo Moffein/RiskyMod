@@ -19,6 +19,8 @@ namespace RiskyMod.Enemies
                     {
                         damageInfo.damageType &= ~DamageType.NonLethal;
                         damageInfo.damageType |= DamageType.BypassOneShotProtection;
+
+                        damageInfo.damage *= 1.5f;
                     }
                 }
                 orig(self, damageInfo);

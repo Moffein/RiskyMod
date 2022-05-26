@@ -35,7 +35,7 @@ namespace RiskyMod.Survivors.Mage
         public static bool ionSurgeUtility = true;
 
         public static bool enableFireUtility = true;
-        public static bool enableLightningSpecial = true;
+        public static bool enableLightningSpecial = false;
 
         public static bool iceWallRework = true;
 
