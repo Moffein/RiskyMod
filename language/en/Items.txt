@@ -122,6 +122,6 @@
 	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "Shoot down nearby projectiles. Recharge rate scales with the amount of drones you have.",
 	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "Shoot down <style=cIsDamage>1</style> <style=cStack>(+1 per stack)</style> projectiles within <style=cIsDamage>20m</style> every <style=cIsDamage>0.5 seconds</style>. <style=cIsUtility>Recharge rate scales with the amount of drones you have</style>.",
 	
-	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "Killing elite monsters spawns an <style=cIsDamage>Alpha Construct</style> with <style=cIsHealing>100% <style=cStack>(+30% per stack)</style> health</style> and <style=cIsDamage>100% <style=cStack>(+100% per stack)</style> damage</style>. Limited to <style=cIsUtility>4</style>."
+	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "Killing elite monsters spawns an <style=cIsDamage>Alpha Construct</style> with <style=cIsHealing>300% <style=cStack>(+150% per stack)</style> health</style> and <style=cIsDamage>300% <style=cStack>(+150% per stack)</style> damage</style>. Limited to <style=cIsUtility>4</style>."
 	}
 }

@@ -137,8 +137,9 @@ namespace RiskyMod.Items.DLC1.Boss
                                     int stackCount = itemCount - 1;
                                     if (stackCount > 0)
                                     {
-                                        allyInv.GiveItem(RoR2Content.Items.BoostDamage, 10 * stackCount);
-                                        allyInv.GiveItem(RoR2Content.Items.BoostHp, 3 * stackCount);
+                                        //20 on first stack because it includes your initial 100% base damage/HP
+                                        allyInv.GiveItem(RoR2Content.Items.BoostDamage, 20 + 15 * stackCount);
+                                        allyInv.GiveItem(RoR2Content.Items.BoostHp, 20 + 15 * stackCount);
                                     }
                                 }
 
