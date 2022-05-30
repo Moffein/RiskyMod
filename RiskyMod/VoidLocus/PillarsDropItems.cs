@@ -75,34 +75,22 @@ namespace RiskyMod.VoidLocus
                                     Vector3 vector = Quaternion.AngleAxis((float)UnityEngine.Random.Range(0, 360), Vector3.up) * (Vector3.up * 40f + Vector3.forward * 5f);
                                     Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
 
+
                                     int k = 0;
                                     while (k < num)
                                     {
-                                        bool overwritePickup = false;
                                         PickupIndex pickupOverwrite = PickupIndex.none;
-                                        if (tier != ItemTier.Tier3) //Don't overwrite legendaries
+                                        bool overwritePickup = false;
+                                        if (tier != ItemTier.Tier3 && !itemShareActive && !RiskyMod.ShareSuiteBoss)
                                         {
-                                            bool replaceBoss = pearlOverwriteChance > 0f;
-                                            if (itemShareActive)
+                                            float pearlChance = pearlOverwriteChance;
+                                            float total = pearlChance;
+                                            if (Run.instance.bossRewardRng.RangeFloat(0f, 100f) < pearlChance)
                                             {
-                                                replaceBoss = replaceBoss && RiskyMod.ShareSuiteBoss;
-                                            }
-                                            else
-                                            {
-                                                replaceBoss = replaceBoss && !RiskyMod.ShareSuiteBoss;
+                                                pickupOverwrite = SelectPearl();
                                             }
 
-                                            if (replaceBoss)
-                                            {
-                                                float pearlChance = (replaceBoss ? pearlOverwriteChance : 0f);
-                                                float total = pearlChance;
-                                                if (Run.instance.bossRewardRng.RangeFloat(0f, 100f) < pearlChance)
-                                                {
-                                                    pickupOverwrite = SelectPearl();
-                                                }
-
-                                                if (pickupOverwrite == PickupIndex.none) overwritePickup = false;
-                                            }
+                                            overwritePickup = !(pickupOverwrite == PickupIndex.none);
                                         }
                                         PickupDropletController.CreatePickupDroplet(overwritePickup ? pickupOverwrite : pickupIndex, holdoutZone.transform.position + rewardPositionOffset, vector);
                                         k++;
