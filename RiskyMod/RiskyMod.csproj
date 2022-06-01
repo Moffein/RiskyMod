@@ -94,6 +94,9 @@
     <Reference Include="Multitudes">
       <HintPath>libs\SoftDependencies\Multitudes.dll</HintPath>
     </Reference>
+    <Reference Include="MultitudesDifficulty">
+      <HintPath>libs\SoftDependencies\MultitudesDifficulty.dll</HintPath>
+    </Reference>
     <Reference Include="R2API">
       <HintPath>libs\R2API\R2API.dll</HintPath>
     </Reference>
@@ -102,6 +105,9 @@
     </Reference>
     <Reference Include="RoR2BepInExPack">
       <HintPath>libs\BepInEx\RoR2BepInExPack.dll</HintPath>
+    </Reference>
+    <Reference Include="RTAutoSprintEx">
+      <HintPath>libs\SoftDependencies\RTAutoSprintEx.dll</HintPath>
     </Reference>
     <Reference Include="ShareSuite">
       <HintPath>libs\SoftDependencies\ShareSuite.dll</HintPath>

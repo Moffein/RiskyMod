@@ -136,7 +136,7 @@ namespace RiskyMod.Survivors.Mage
                 iceSkill.baseMaxStock = 1;
                 iceSkill.baseRechargeInterval = 12f;
                 iceSkill.beginSkillCooldownOnSkillEnd = true;
-                iceSkill.canceledFromSprinting = true;
+                iceSkill.canceledFromSprinting = !RiskyMod.RtAutoSprintLoaded;
                 iceSkill.cancelSprintingOnActivation = true;
                 iceSkill.dontAllowPastMaxStocks = true;
                 iceSkill.forceSprintDuringState = false;
@@ -171,7 +171,7 @@ namespace RiskyMod.Survivors.Mage
                 fireStorm.baseMaxStock = 1;
                 fireStorm.baseRechargeInterval = 12f;
                 fireStorm.beginSkillCooldownOnSkillEnd = true;
-                fireStorm.canceledFromSprinting = true;
+                fireStorm.canceledFromSprinting = !RiskyMod.RtAutoSprintLoaded;
                 fireStorm.cancelSprintingOnActivation = true;
                 fireStorm.dontAllowPastMaxStocks = true;
                 fireStorm.forceSprintDuringState = false;

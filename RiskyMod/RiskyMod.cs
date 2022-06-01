@@ -67,9 +67,10 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.TeleExpansion", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.TPDespair.ZetTweaks", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.InteractableLimit", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.johnedwa.RTAutoSprintEx", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.9.3")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.9.4")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
@@ -81,6 +82,7 @@ namespace RiskyMod
         public static bool AIBlacklistLoaded = false;
         public static bool AIBlacklistUseVanillaBlacklist = true;
         public static bool ZetTweaksLoaded = false;
+        public static bool RtAutoSprintLoaded = false;
 
         public static bool ShareSuiteLoaded = false;
         public static bool ShareSuiteCommon = false;
@@ -186,6 +188,8 @@ namespace RiskyMod
             TeleExpandOnBossKill.enabled = TeleExpandOnBossKill.enabled && !teleExpansionLoaded;
             VoidLocus.ModifyHoldout.enabled = VoidLocus.ModifyHoldout.enabled && !teleExpansionLoaded;
             Moon.ModifyHoldout.enabled = Moon.ModifyHoldout.enabled && !teleExpansionLoaded;
+
+            RtAutoSprintLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx");
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]

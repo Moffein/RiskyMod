@@ -4,6 +4,7 @@ using RoR2.UI;
 using RoR2.Projectile;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using RiskyMod;
 
 namespace EntityStates.RiskyMod.Mage.Weapon
 {
@@ -85,6 +86,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
+
 			this.stopwatch += Time.fixedDeltaTime;
 			if (!base.inputBank.skill3.down && base.isAuthority)//this.stopwatch >= this.duration && 
 			{
