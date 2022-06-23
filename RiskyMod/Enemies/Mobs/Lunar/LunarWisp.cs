@@ -71,24 +71,36 @@ namespace RiskyMod.Enemies.Mobs.Lunar
         {
             IL.EntityStates.LunarWisp.FireLunarGuns.OnFireAuthority += (il) =>
             {
-                ILCursor c = new ILCursor(il);
-                c.GotoNext(
-                     x => x.MatchCallvirt<BulletAttack>("Fire")
-                    );
-                c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
-                {
-                    bulletAttack.falloffModel = BulletAttack.FalloffModel.DefaultBullet;
-                    return bulletAttack;
-                });
+                bool error = true;
 
-                c.GotoNext(
+                ILCursor c = new ILCursor(il);
+                if (c.TryGotoNext(
                      x => x.MatchCallvirt<BulletAttack>("Fire")
-                    );
-                c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                    ))
                 {
-                    bulletAttack.falloffModel = BulletAttack.FalloffModel.DefaultBullet;
-                    return bulletAttack;
-                });
+                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                    {
+                        bulletAttack.falloffModel = BulletAttack.FalloffModel.DefaultBullet;
+                        return bulletAttack;
+                    });
+
+                    if (c.TryGotoNext(
+                     x => x.MatchCallvirt<BulletAttack>("Fire")
+                    ))
+                    {
+                        c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                        {
+                            bulletAttack.falloffModel = BulletAttack.FalloffModel.DefaultBullet;
+                            return bulletAttack;
+                        });
+                        error = false;
+                    }
+                }
+
+                if (error)
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: LunarWisp IL Hook failed");
+                }
             };
         }
     }

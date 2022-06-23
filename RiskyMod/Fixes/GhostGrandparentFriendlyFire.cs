@@ -17,47 +17,60 @@ namespace RiskyMod.Fixes
             IL.RoR2.GrandParentSunController.ServerFixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(MoveType.After,
+                if (c.TryGotoNext(MoveType.After,
                      x => x.MatchLdfld<RoR2.HurtBox>("healthComponent")
-                    );
-                c.Emit(OpCodes.Ldarg_0);    //suncontroller
-                c.EmitDelegate<Func<HealthComponent, GrandParentSunController, HealthComponent>>((victimHealth, self) =>
+                    ))
                 {
-                    GameObject ownerObject = self.ownership.ownerObject;
-                    if (ownerObject)
+                    c.Emit(OpCodes.Ldarg_0);    //suncontroller
+                    c.EmitDelegate<Func<HealthComponent, GrandParentSunController, HealthComponent>>((victimHealth, self) =>
                     {
-                        TeamComponent tc = ownerObject.GetComponent<TeamComponent>();
-                        if (tc && tc.teamIndex == TeamIndex.Player
-                        && victimHealth && victimHealth.body.teamComponent && victimHealth.body.teamComponent.teamIndex == TeamIndex.Player)
+                        GameObject ownerObject = self.ownership.ownerObject;
+                        if (ownerObject)
                         {
-                            return null;
+                            TeamComponent tc = ownerObject.GetComponent<TeamComponent>();
+                            if (tc && tc.teamIndex == TeamIndex.Player
+                            && victimHealth && victimHealth.body.teamComponent && victimHealth.body.teamComponent.teamIndex == TeamIndex.Player)
+                            {
+                                return null;
+                            }
                         }
-                    }
-                    return victimHealth;
-                });
+                        return victimHealth;
+                    });
+                }
+                else
+                {
+                    Debug.LogError("RiskyMod: GhostGrandparentFriendlyFire ServerFixedUpdate IL Hook failed");
+                }
             };
 
             //Handles the visuals
             IL.RoR2.GrandParentSunController.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(MoveType.After,
+
+                if (c.TryGotoNext(MoveType.After,
                      x => x.MatchLdfld<HealthComponent>("body")
-                    );
-                c.Emit(OpCodes.Ldarg_0);    //suncontroller
-                c.EmitDelegate<Func<CharacterBody, GrandParentSunController, CharacterBody>>((victimBody, self) =>
+                    ))
                 {
-                    GameObject ownerObject = self.ownership.ownerObject; if (ownerObject)
+                    c.Emit(OpCodes.Ldarg_0);    //suncontroller
+                    c.EmitDelegate<Func<CharacterBody, GrandParentSunController, CharacterBody>>((victimBody, self) =>
                     {
-                        TeamComponent tc = ownerObject.GetComponent<TeamComponent>();
-                        if (tc && tc.teamIndex == TeamIndex.Player
-                        && victimBody && victimBody.teamComponent && victimBody.teamComponent.teamIndex == TeamIndex.Player)
+                        GameObject ownerObject = self.ownership.ownerObject; if (ownerObject)
                         {
-                            return null;
+                            TeamComponent tc = ownerObject.GetComponent<TeamComponent>();
+                            if (tc && tc.teamIndex == TeamIndex.Player
+                            && victimBody && victimBody.teamComponent && victimBody.teamComponent.teamIndex == TeamIndex.Player)
+                            {
+                                return null;
+                            }
                         }
-                    }
-                    return victimBody;
-                });
+                        return victimBody;
+                    });
+                }
+                else
+                {
+                    Debug.LogError("RiskyMod: GhostGrandparentFriendlyFire FixedUpdate IL Hook failed");
+                }
             };
         }
     }

@@ -31,7 +31,7 @@ namespace RiskyMod.Survivors.Bandit2
                     {
                         self.stockText.gameObject.SetActive(true);
                         self.stockText.fontSize = 12f;
-                        self.stockText.SetText(currentfireMode.ToString() + " (" + self.targetSkill.stock + ")");
+                        self.stockText.SetText(currentfireMode.ToString() + "(" + self.targetSkill.stock + ")");
                     }
                 }
             };

@@ -1,6 +1,7 @@
 ﻿using MonoMod.Cil;
 using System;
 using RoR2;
+using UnityEngine;
 
 namespace RiskyMod.Allies
 {
@@ -15,48 +16,66 @@ namespace RiskyMod.Allies
             IL.EntityStates.Drone.DroneWeapon.FireMegaTurret.FireBullet += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchCallvirt<BulletAttack>("Fire")
-                     );
-                c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                     ))
                 {
-                    bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
-                    bulletAttack.radius = 0.5f;
-                    bulletAttack.smartCollision = true;
-                    return bulletAttack;
-                });
+                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                    {
+                        bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
+                        bulletAttack.radius = 0.5f;
+                        bulletAttack.smartCollision = true;
+                        return bulletAttack;
+                    });
+                }
+                else
+                {
+                    Debug.LogError("RiskyMod: ModifyBulletAttacks DroneWeapon.FireMegaTurret IL Hook failed");
+                }
             };
 
             //Gunner Turret
             IL.EntityStates.Drone.DroneWeapon.FireGatling.OnEnter += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<BulletAttack>("Fire")
-                     );
-                c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                     ))
                 {
-                    bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
-                    bulletAttack.radius = 0.5f;
-                    bulletAttack.smartCollision = true;
-                    return bulletAttack;
-                });
+                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                    {
+                        bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
+                        bulletAttack.radius = 0.5f;
+                        bulletAttack.smartCollision = true;
+                        return bulletAttack;
+                    });
+                }
+                else
+                {
+                    Debug.LogError("RiskyMod: ModifyBulletAttacks DroneWeapon.FireGatling IL Hook failed");
+                }
             };
 
             //Gunner Drone and Backup
             IL.EntityStates.Drone.DroneWeapon.FireTurret.OnEnter += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchCallvirt<BulletAttack>("Fire")
-                     );
-                c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                     ))
                 {
-                    bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
-                    bulletAttack.radius = 0.5f;
-                    bulletAttack.smartCollision = true;
-                    return bulletAttack;
-                });
+                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                    {
+                        bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
+                        bulletAttack.radius = 0.5f;
+                        bulletAttack.smartCollision = true;
+                        return bulletAttack;
+                    });
+                }
+                else
+                {
+                    Debug.LogError("RiskyMod: ModifyBulletAttacks DroneWeapon.FireTurret IL Hook failed");
+                }
             };
         }
     }

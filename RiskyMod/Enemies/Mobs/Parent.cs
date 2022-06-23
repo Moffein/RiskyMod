@@ -47,14 +47,20 @@ namespace RiskyMod.Enemies.Mobs
             IL.EntityStates.ParentMonster.GroundSlam.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchCallvirt<BlastAttack>("Fire")
-                    );
-                c.EmitDelegate<Func<BlastAttack, BlastAttack>>(blastAttack =>
+                    ))
                 {
-                    blastAttack.falloffModel = BlastAttack.FalloffModel.SweetSpot;
-                    return blastAttack;
-                });
+                    c.EmitDelegate<Func<BlastAttack, BlastAttack>>(blastAttack =>
+                    {
+                        blastAttack.falloffModel = BlastAttack.FalloffModel.SweetSpot;
+                        return blastAttack;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Parent IL Hook failed");
+                }
             };
         }
 

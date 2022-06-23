@@ -65,11 +65,17 @@ namespace RiskyMod.Allies
                 IL.RoR2.DroneWeaponsBoostBehavior.OnEnemyHit += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
-                    c.GotoNext(MoveType.After,
+                    if (c.TryGotoNext(MoveType.After,
                          x => x.MatchCallvirt<CharacterBody>("get_damage")
-                        );
-                    c.Emit(OpCodes.Ldarg_1);    //DamageInfo
-                    c.EmitDelegate<Func<float, DamageInfo, float>>((bodyDamage, damageInfo) => damageInfo.damage);
+                        ))
+                    {
+                        c.Emit(OpCodes.Ldarg_1);    //DamageInfo
+                        c.EmitDelegate<Func<float, DamageInfo, float>>((bodyDamage, damageInfo) => damageInfo.damage);
+                    }
+                    else
+                    {
+                        Debug.LogError("RiskyMod: AlliesCore DroneWeaponsBoostBehavior.OnEnemyHit IL Hook failed");
+                    }
                 };
             }
 
@@ -78,14 +84,20 @@ namespace RiskyMod.Allies
                 IL.RoR2.DroneWeaponsBehavior.TrySpawnDrone += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
-                    c.GotoNext(
+                    if (c.TryGotoNext(
                          x => x.MatchCallvirt<DirectorCore>("TrySpawnObject")
-                        );
-                    c.EmitDelegate<Func<DirectorSpawnRequest, DirectorSpawnRequest>>(spawnRequest =>
+                        ))
                     {
-                        spawnRequest.ignoreTeamMemberLimit = dronePartsIgnoresAllyCap;
-                        return spawnRequest;
-                    });
+                        c.EmitDelegate<Func<DirectorSpawnRequest, DirectorSpawnRequest>>(spawnRequest =>
+                        {
+                            spawnRequest.ignoreTeamMemberLimit = dronePartsIgnoresAllyCap;
+                            return spawnRequest;
+                        });
+                    }
+                    else
+                    {
+                        Debug.LogError("RiskyMod: AlliesCore DroneWeaponsBehavior.TrySpawnDrone IL Hook failed");
+                    }
                 };
             }
 

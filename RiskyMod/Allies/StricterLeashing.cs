@@ -14,15 +14,25 @@ namespace RiskyMod.Allies
             {
                 ILCursor c = new ILCursor(il);
 
-                c.GotoNext(
+                bool error = true;
+                if (c.TryGotoNext(
                      x => x.MatchLdcR4(RoR2.Items.MinionLeashBodyBehavior.leashDistSq)
-                    );
-                c.Next.Operand = leashDistSq;
+                    ))
+                {
+                    c.Next.Operand = leashDistSq;
+                    if (c.TryGotoNext(
+                     x => x.MatchLdcR4(RoR2.Items.MinionLeashBodyBehavior.leashDistSq)
+                    ))
+                    {
+                        c.Next.Operand = leashDistSq;
+                        error = false;
+                    }
+                }
 
-                c.GotoNext(
-                     x => x.MatchLdcR4(RoR2.Items.MinionLeashBodyBehavior.leashDistSq)
-                    );
-                c.Next.Operand = leashDistSq;
+                if (error)
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: StricterLeashing IL Hook failed");
+                }
             };
         }
     }

@@ -21,11 +21,17 @@ namespace RiskyMod.Items.Equipment
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                          x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "FullCrit")
-                        );
-                c.Remove();
-                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyBuffDef));
+                        ))
+                {
+                    c.Remove();
+                    c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyBuffDef));
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: CritHud IL Hook failed");
+                }
             };
 
             RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
