@@ -28,26 +28,25 @@ namespace RiskyMod.Items.Equipment
                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyBuffDef));
             };
 
-            //Todo - move to recalculatestatsapi once critdamagemult is fixed
-            On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
-            {
-                orig(self);
+            RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
+        }
 
-                if (self.HasBuff(RoR2Content.Buffs.FullCrit))
+        private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            if (sender.HasBuff(RoR2Content.Buffs.FullCrit))
+            {
+                float crit = 100f;
+                float diff = 100f - sender.crit;
+                if (diff >0f)
                 {
-                    float crit = 100f;
-                    float diff = 100f - self.crit;
-                    if (diff > 0f)
-                    {
-                        crit -= diff;
-                        self.crit += diff;
-                    }
-                    if (crit > 0f)
-                    {
-                        self.critMultiplier += crit * 0.01f;
-                    }
+                    crit -= diff;
+                    args.critAdd += diff;
                 }
-            };
+                if (crit > 0f)
+                {
+                    args.critDamageMultAdd += crit * 0.01f;
+                }
+            }
         }
     }
 }
