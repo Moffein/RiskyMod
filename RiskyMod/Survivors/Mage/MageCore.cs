@@ -300,14 +300,20 @@ namespace RiskyMod.Survivors.Mage
                 IL.EntityStates.Mage.FlyUpState.OnEnter += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
-                    c.GotoNext(
+                    if(c.TryGotoNext(
                          x => x.MatchCallvirt<BlastAttack>("Fire")
-                        );
-                    c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                        ))
                     {
-                        blastAttack.damageType = DamageType.Shock5s;
-                        return blastAttack;
-                    });
+                        c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                        {
+                            blastAttack.damageType = DamageType.Shock5s;
+                            return blastAttack;
+                        });
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogError("RiskyMod: Mage HandleIonSurge IL Hook failed");
+                    }
                 };
 
             }
@@ -317,14 +323,20 @@ namespace RiskyMod.Survivors.Mage
                 IL.EntityStates.Mage.FlyUpState.HandleMovements += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
-                    c.GotoNext(
+                    if(c.TryGotoNext(
                          x => x.MatchLdfld<EntityStates.BaseState>("moveSpeedStat")
-                        );
-                    c.Index++;
-                    c.EmitDelegate<Func<float, float>>(orig =>
+                        ))
                     {
-                        return 7f;
-                    });
+                        c.Index++;
+                        c.EmitDelegate<Func<float, float>>(orig =>
+                        {
+                            return 7f;
+                        });
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogError("RiskyMod: Mage FlyUpState.HandleMovements IL Hook failed");
+                    }
                 };
             }
 

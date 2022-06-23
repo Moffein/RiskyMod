@@ -21,11 +21,17 @@ namespace RiskyMod.Items.Common
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "FlatHealth")
-                    );
-                c.Remove();
-                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                    ))
+                {
+                    c.Remove();
+                    c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: BisonSteak IL Hook failed");
+                }
             };
             GetStatCoefficients.HandleStatsInventoryActions += HandleStatsInventory;
 

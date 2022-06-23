@@ -34,62 +34,78 @@ namespace RiskyMod.Items.Uncommon
 
 			IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
 			{
+				bool error = true;
+
 				ILCursor c = new ILCursor(il);
 
 				//Disable missiles if fired by a Player, since they'll be using an OrbAttack instead.
-				c.GotoNext(MoveType.After,
+				if (c.TryGotoNext(MoveType.After,
 					 x => x.MatchLdsfld(typeof(RoR2Content.Items), "Missile")
-					);
-				c.Emit(OpCodes.Ldloc, 1); //victimBody
-				c.Emit(OpCodes.Ldloc, 4); //master
-				c.Emit(OpCodes.Ldarg_1);	//damageinfo
-				c.EmitDelegate<Func<ItemDef, CharacterBody, CharacterMaster, DamageInfo, ItemDef>>((item, victimBody, master, damageInfo) =>
-				{
-					if (useOrb && master.teamIndex == TeamIndex.Player)
+					))
+                {
+					c.Emit(OpCodes.Ldloc, 1); //victimBody
+					c.Emit(OpCodes.Ldloc, 4); //master
+					c.Emit(OpCodes.Ldarg_1);    //damageinfo
+					c.EmitDelegate<Func<ItemDef, CharacterBody, CharacterMaster, DamageInfo, ItemDef>>((item, victimBody, master, damageInfo) =>
 					{
-						if (alwaysOrb)
+						if (useOrb && master.teamIndex == TeamIndex.Player)
 						{
-							item = RiskyMod.emptyItemDef;
-						}
-						else if (victimBody.healthComponent && victimBody.healthComponent.alive)	//Only fire orb if target is alive to prevent whiffing against already-dead targets.
-						{
-							CharacterBody cb = master.GetBody();
-							if (cb)
+							if (alwaysOrb)
 							{
-								if (damageInfo.damage / cb.damage < projectileDamageTreshold)
+								item = RiskyMod.emptyItemDef;
+							}
+							else if (victimBody.healthComponent && victimBody.healthComponent.alive)    //Only fire orb if target is alive to prevent whiffing against already-dead targets.
+							{
+								CharacterBody cb = master.GetBody();
+								if (cb)
 								{
-									item = RiskyMod.emptyItemDef;
+									if (damageInfo.damage / cb.damage < projectileDamageTreshold)
+									{
+										item = RiskyMod.emptyItemDef;
+									}
 								}
 							}
 						}
-                    }
-					return item;
-				});
-
-				c.GotoNext(
-					 x => x.MatchLdcR4(3f)
-					);
-				c.Next.Operand = stackDamageCoefficient;
-
-				c.GotoNext(
-					 x => x.MatchMul()
-					);
-				c.Index++;
-				c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
-				{
-					return damageCoefficient + initialDamage;
-				});
-
-				if (RiskyMod.disableProcChains)
-				{
-					c.GotoNext(
-					 x => x.MatchLdsfld(typeof(GlobalEventManager.CommonAssets), "missilePrefab")
-					);
-					c.Index++;
-					c.EmitDelegate<Func<GameObject, GameObject>>((projectilePrefab) =>
-					{
-						return missilePrefab;
+						return item;
 					});
+
+					if (c.TryGotoNext(
+						 x => x.MatchLdcR4(3f)
+						))
+					{
+						c.Next.Operand = stackDamageCoefficient;
+
+						if (c.TryGotoNext(
+							 x => x.MatchMul()
+							))
+						{
+							c.Index++;
+							c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
+							{
+								return damageCoefficient + initialDamage;
+							});
+
+							if (RiskyMod.disableProcChains)
+							{
+								if(c.TryGotoNext(
+								 x => x.MatchLdsfld(typeof(GlobalEventManager.CommonAssets), "missilePrefab")
+								))
+								{
+									c.Index++;
+									c.EmitDelegate<Func<GameObject, GameObject>>((projectilePrefab) =>
+									{
+										return missilePrefab;
+									});
+								}
+							}
+							error = false;
+						}
+					}
+				}
+
+				if (error)
+                {
+					UnityEngine.Debug.LogError("RiskyMod: AtG IL Hook failed");
 				}
 			};
 
@@ -137,27 +153,6 @@ namespace RiskyMod.Items.Uncommon
 								if (attackerBody.aimOrigin != null)
 								{
 									HurtBox targetHurtBox = victimBody.mainHurtBox;
-
-									//Change target if victim is dead
-									/*if (victimBody.healthComponent && !victimBody.healthComponent.alive && attackerBody.teamComponent)
-									{
-										BullseyeSearch search = new BullseyeSearch();
-										search.teamMaskFilter = TeamMask.GetEnemyTeams(attackerBody.teamComponent.teamIndex);
-										search.filterByLoS = false;
-										search.searchOrigin = attackerBody.aimOrigin;
-										search.sortMode = BullseyeSearch.SortMode.Angle;
-										search.maxDistanceFilter = 1000f;
-										search.maxAngleFilter = 360f;
-										search.RefreshCandidates();
-										search.FilterOutGameObject(attackerBody.gameObject);
-										search.FilterOutGameObject(victimBody.gameObject);
-
-										targetHurtBox = search.GetResults().FirstOrDefault<HurtBox>();
-										if (targetHurtBox == default)
-                                        {
-											targetHurtBox = victimBody.mainHurtBox;
-                                        }
-									}*/
 
 									int missilesToFire = icbmCount > 0 ? 3 : 1;
 									for (int i = 0; i < missilesToFire; i++)

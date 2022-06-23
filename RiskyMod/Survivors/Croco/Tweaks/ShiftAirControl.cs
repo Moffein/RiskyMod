@@ -15,21 +15,27 @@ namespace RiskyMod.Survivors.Croco
             IL.EntityStates.Croco.BaseLeap.OnEnter += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchStfld<RoR2.CharacterMotor>("airControl")
-                    );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<float, EntityStates.Croco.BaseLeap, float>>((airControl, self) =>
+                    ))
                 {
-                    //Debug.Log(airControl);//0.15
-                    if (self.characterBody)
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<float, EntityStates.Croco.BaseLeap, float>>((airControl, self) =>
                     {
-                        float moveSpeedCoeff = self.characterBody.moveSpeed / (self.characterBody.baseMoveSpeed * (!self.characterBody.isSprinting ? 1f : self.characterBody.sprintingSpeedMultiplier));
-                        moveSpeedCoeff = Mathf.Min(moveSpeedCoeff, 3f);
-                        airControl *= moveSpeedCoeff;
-                    }
-                    return airControl;
-                });
+                        //Debug.Log(airControl);//0.15
+                        if (self.characterBody)
+                        {
+                            float moveSpeedCoeff = self.characterBody.moveSpeed / (self.characterBody.baseMoveSpeed * (!self.characterBody.isSprinting ? 1f : self.characterBody.sprintingSpeedMultiplier));
+                            moveSpeedCoeff = Mathf.Min(moveSpeedCoeff, 3f);
+                            airControl *= moveSpeedCoeff;
+                        }
+                        return airControl;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Croco ShiftAirControl IL Hook failed");
+                }
             };
         }
     }

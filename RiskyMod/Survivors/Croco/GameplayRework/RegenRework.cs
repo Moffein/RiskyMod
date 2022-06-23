@@ -35,15 +35,21 @@ namespace RiskyMod.Survivors.Croco
             IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "CrocoRegen")
-                    );
-                c.Index += 2;
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<bool, CharacterBody, bool>>((hasBuff, self) =>
+                    ))
                 {
-                    return hasBuff || self.HasBuff(CrocoRegen2);
-                });
+                    c.Index += 2;
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<bool, CharacterBody, bool>>((hasBuff, self) =>
+                    {
+                        return hasBuff || self.HasBuff(CrocoRegen2);
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Croco RegenRework UpdateAllTemporaryVisualEffects IL Hook failed");
+                }
             };
 
             SharedHooks.OnHitEnemy.OnHitNoAttackerActions += DamageReducesRegen;
@@ -81,16 +87,27 @@ namespace RiskyMod.Survivors.Croco
         {
             IL.EntityStates.Croco.Slash.OnMeleeHitAuthority += (il) =>
             {
+                bool error = true;
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                         x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "CrocoRegen")
-                       );
-                c.Remove();
-                c.Emit<RegenRework>(OpCodes.Ldsfld, nameof(CrocoRegen2));
-                c.GotoNext(
-                        x => x.MatchLdcR4(0.5f)
-                       );
-                c.Next.Operand = RegenRework.regenDuration;
+                       ))
+                {
+                    c.Remove();
+                    c.Emit<RegenRework>(OpCodes.Ldsfld, nameof(CrocoRegen2));
+                    if(c.TryGotoNext(
+                            x => x.MatchLdcR4(0.5f)
+                           ))
+                    {
+                        c.Next.Operand = RegenRework.regenDuration;
+                        error = false;
+                    }
+                }
+
+                if(error)
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Croco RegenRework Slash IL Hook failed");
+                }
             };
         }
 
@@ -98,16 +115,26 @@ namespace RiskyMod.Survivors.Croco
         {
             IL.EntityStates.Croco.Bite.OnMeleeHitAuthority += (il) =>
             {
+                bool error = true;
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                         x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "CrocoRegen")
-                       );
-                c.Remove();
-                c.Emit<RegenRework>(OpCodes.Ldsfld, nameof(CrocoRegen2));
-                c.GotoNext(
-                        x => x.MatchLdcR4(0.5f)
-                       );
-                c.Next.Operand = RegenRework.regenDuration;
+                       ))
+                {
+                    c.Remove();
+                    c.Emit<RegenRework>(OpCodes.Ldsfld, nameof(CrocoRegen2));
+                    if(c.TryGotoNext(
+                            x => x.MatchLdcR4(0.5f)
+                           ))
+                    {
+                        c.Next.Operand = RegenRework.regenDuration;
+                        error = false;
+                    }
+                }
+                if (error)
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Croco RegenRework Bite IL Hook failed");
+                }
             };
         }
     }

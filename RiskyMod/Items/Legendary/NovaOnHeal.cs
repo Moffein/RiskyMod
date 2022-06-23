@@ -14,24 +14,30 @@ namespace RiskyMod.Items.Legendary
             IL.RoR2.HealthComponent.ServerFixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdloc(8),
                      x => x.MatchLdloc(6),
                      x => x.MatchLdloc(7),
                      x => x.MatchMul(),
                      x => x.MatchStfld<RoR2.Orbs.DevilOrb>("damageValue")
-                    );
-                c.Index += 4;
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<float, HealthComponent, float>>((damage, self) =>
+                    ))
                 {
-                    float newDamage = damage;
-                    if (self.itemCounts.invadingDoppelganger > 0)
+                    c.Index += 4;
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<float, HealthComponent, float>>((damage, self) =>
                     {
-                        damage *= 0.1f;
-                    }
-                    return newDamage;
-                });
+                        float newDamage = damage;
+                        if (self.itemCounts.invadingDoppelganger > 0)
+                        {
+                            damage *= 0.1f;
+                        }
+                        return newDamage;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: NovaOnHeal IL Hook failed");
+                }
             };
         }
     }

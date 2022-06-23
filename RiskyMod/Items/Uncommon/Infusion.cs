@@ -23,11 +23,17 @@ namespace RiskyMod.Items.Uncommon
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "Infusion")
-                    );
-                c.Remove();
-                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                    ))
+                {
+                    c.Remove();
+                    c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Infusion OnCharacterDeath IL Hook failed");
+                }
             };
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
@@ -44,64 +50,70 @@ namespace RiskyMod.Items.Uncommon
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(MoveType.After,
+                if (c.TryGotoNext(MoveType.After,
                      x => x.MatchCallvirt<Inventory>("get_infusionBonus")
-                    );
-                c.Emit(OpCodes.Ldarg_0);//self
-                c.EmitDelegate<Func<int, CharacterBody, int>>((infusionBonus, self) =>
+                    ))
                 {
-                    float newHP = 0f;
-                    float infusionCount = (float)infusionBonus;
-                    int hundredsFulfilled = 0;
-                    while (infusionCount > 0f)
+                    c.Emit(OpCodes.Ldarg_0);//self
+                    c.EmitDelegate<Func<int, CharacterBody, int>>((infusionBonus, self) =>
                     {
-                        float killRequirement = 100f + 150f * hundredsFulfilled;
-                        if (infusionCount <= killRequirement)
+                        float newHP = 0f;
+                        float infusionCount = (float)infusionBonus;
+                        int hundredsFulfilled = 0;
+                        while (infusionCount > 0f)
                         {
-                            newHP += 100f * infusionCount / killRequirement;
-                            infusionCount = 0f;
-                        }
-                        else
-                        {
-                            infusionCount-= killRequirement;
-                            newHP += 100f;
-                            hundredsFulfilled++;
-                        }
-                    }
-                    int hpGained = Mathf.FloorToInt(newHP);
-                    if (NetworkServer.active)
-                    {
-                        int currentInfusionBuffCount = self.GetBuffCount(InfusionBuff.buffIndex);
-                        if (self.inventory && self.inventory.GetItemCount(RoR2Content.Items.Infusion) > 0)
-                        {
-                            if (hpGained != currentInfusionBuffCount)
+                            float killRequirement = 100f + 150f * hundredsFulfilled;
+                            if (infusionCount <= killRequirement)
                             {
-                                if (hpGained > currentInfusionBuffCount)
+                                newHP += 100f * infusionCount / killRequirement;
+                                infusionCount = 0f;
+                            }
+                            else
+                            {
+                                infusionCount -= killRequirement;
+                                newHP += 100f;
+                                hundredsFulfilled++;
+                            }
+                        }
+                        int hpGained = Mathf.FloorToInt(newHP);
+                        if (NetworkServer.active)
+                        {
+                            int currentInfusionBuffCount = self.GetBuffCount(InfusionBuff.buffIndex);
+                            if (self.inventory && self.inventory.GetItemCount(RoR2Content.Items.Infusion) > 0)
+                            {
+                                if (hpGained != currentInfusionBuffCount)
                                 {
-                                    for (int i = 0; i < hpGained - currentInfusionBuffCount; i++)
+                                    if (hpGained > currentInfusionBuffCount)
                                     {
-                                        self.AddBuff(InfusionBuff);
+                                        for (int i = 0; i < hpGained - currentInfusionBuffCount; i++)
+                                        {
+                                            self.AddBuff(InfusionBuff);
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    for (int i = 0; i < currentInfusionBuffCount - hpGained; i++)
+                                    else
                                     {
-                                        self.RemoveBuff(InfusionBuff);
+                                        for (int i = 0; i < currentInfusionBuffCount - hpGained; i++)
+                                        {
+                                            self.RemoveBuff(InfusionBuff);
+                                        }
                                     }
                                 }
                             }
-                        }
-                        else
-                        {
-                            for (int i = 0; i < currentInfusionBuffCount; i++)
+                            else
                             {
-                                self.RemoveBuff(InfusionBuff);
+                                for (int i = 0; i < currentInfusionBuffCount; i++)
+                                {
+                                    self.RemoveBuff(InfusionBuff);
+                                }
                             }
                         }
-                    }
-                    return hpGained;
-                });
+                        return hpGained;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Infusion IL Hook failed");
+                }
             };
         }
         private static void ModifyItem()

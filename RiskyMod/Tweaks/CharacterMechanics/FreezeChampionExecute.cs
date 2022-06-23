@@ -38,15 +38,21 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             IL.RoR2.CharacterModel.UpdateOverlays += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "Slow80")
-                    );
-                c.Index += 2;
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<bool, CharacterModel, bool>>((hasBuff, self) =>
+                    ))
                 {
-                    return hasBuff || (self.body.HasBuff(FreezeDebuff));
-                });
+                    c.Index += 2;
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<bool, CharacterModel, bool>>((hasBuff, self) =>
+                    {
+                        return hasBuff || (self.body.HasBuff(FreezeDebuff));
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: FreezeChampionExecute UpdateOverlays IL Hook failed");
+                }
             };
         }
 
@@ -63,55 +69,80 @@ namespace RiskyMod.Tweaks.CharacterMechanics
         {
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
             {
+                bool error = true;
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(MoveType.After,
+                if(c.TryGotoNext(MoveType.After,
                     x => x.MatchCall<HealthComponent>("get_isInFrozenState")
-                    );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<bool, HealthComponent, bool>>((isFrozen, self) =>
+                    ))
                 {
-                    return isFrozen || self.body.HasBuff(FreezeDebuff);
-                });
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<bool, HealthComponent, bool>>((isFrozen, self) =>
+                    {
+                        return isFrozen || self.body.HasBuff(FreezeDebuff);
+                    });
 
-                c.GotoNext(MoveType.After,
-                    x => x.MatchLdcR4(0.3f)
-                    );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
-                {
-                    return executeThreshold * (self.body.isChampion ? bossExecuteFractionMultiplier : 1f);
-                });
+                    if(c.TryGotoNext(MoveType.After,
+                        x => x.MatchLdcR4(0.3f)
+                        ))
+                    {
+                        c.Emit(OpCodes.Ldarg_0);
+                        c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
+                        {
+                            return executeThreshold * (self.body.isChampion ? bossExecuteFractionMultiplier : 1f);
+                        });
 
-                c.GotoNext(MoveType.After,
-                    x => x.MatchLdcR4(0.3f)
-                    );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
+                        if(c.TryGotoNext(MoveType.After,
+                            x => x.MatchLdcR4(0.3f)
+                            ))
+                        {
+                            c.Emit(OpCodes.Ldarg_0);
+                            c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
+                            {
+                                return executeThreshold * (self.body.isChampion ? bossExecuteFractionMultiplier : 1f);
+                            });
+                            error = false;
+                        }
+                    }
+                }
+                
+                if (error)
                 {
-                    return executeThreshold * (self.body.isChampion ? bossExecuteFractionMultiplier : 1f);
-                });
+                    UnityEngine.Debug.LogError("RiskyMod: FreezeChampionExecute TakeDamage IL Hook failed");
+                }
             };
 
             IL.RoR2.HealthComponent.GetHealthBarValues += (il) =>
             {
-                ILCursor c = new ILCursor(il);
-                c.GotoNext(MoveType.After,
-                    x => x.MatchCall<HealthComponent>("get_isInFrozenState")
-                    );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<bool, HealthComponent, bool>>((isFrozen, self) =>
-                {
-                    return isFrozen || self.body.HasBuff(FreezeDebuff);
-                });
+                bool error = true;
 
-                c.GotoNext(MoveType.After,
-                    x => x.MatchLdcR4(0.3f)
-                    );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
+                ILCursor c = new ILCursor(il);
+                if(c.TryGotoNext(MoveType.After,
+                    x => x.MatchCall<HealthComponent>("get_isInFrozenState")
+                    ))
                 {
-                    return executeThreshold * (self.body.isChampion ? bossExecuteFractionMultiplier : 1f);
-                });
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<bool, HealthComponent, bool>>((isFrozen, self) =>
+                    {
+                        return isFrozen || self.body.HasBuff(FreezeDebuff);
+                    });
+
+                    if (c.TryGotoNext(MoveType.After,
+                        x => x.MatchLdcR4(0.3f)
+                        ))
+                    {
+                        c.Emit(OpCodes.Ldarg_0);
+                        c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
+                        {
+                            return executeThreshold * (self.body.isChampion ? bossExecuteFractionMultiplier : 1f);
+                        });
+                        error = false;
+                    }
+                }
+
+                if (error)
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: FreezeChampionExecute GetHealthBarValues IL Hook failed");
+                }
             };
         }
 

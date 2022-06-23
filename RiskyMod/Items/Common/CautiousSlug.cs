@@ -15,14 +15,20 @@ namespace RiskyMod.Items.Common
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCall<CharacterBody>("get_outOfDanger")
-                    );
-
-                c.GotoNext(
+                    )
+                &&
+                c.TryGotoNext(
                      x => x.MatchLdcR4(3f)
-                    );
-                c.Next.Operand = 4f;
+                    ))
+                {
+                    c.Next.Operand = 4f;
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: CautiousSlug IL Hook failed");
+                }
             };
         }
 

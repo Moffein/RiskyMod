@@ -16,19 +16,25 @@ namespace RiskyMod.Items.Lunar
             IL.RoR2.CharacterBody.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(MoveType.After,
+                if(c.TryGotoNext(MoveType.After,
                      x => x.MatchLdfld<CharacterBody>("outOfDangerStopwatch"), //Isn't there any other way to increase shield recharge delay? This is messing with other items such as red whip, slug, or even the new reworked OSP. -anreol
                      x => x.MatchLdcR4(7f)
-                    );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<float, CharacterBody, float>>((outOfDangerDelay, self) =>
+                    ))
                 {
-                    if (self.inventory)
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<float, CharacterBody, float>>((outOfDangerDelay, self) =>
                     {
-                        outOfDangerDelay += self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly);
-                    }
-                    return outOfDangerDelay;
-                });
+                        if (self.inventory)
+                        {
+                            outOfDangerDelay += self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly);
+                        }
+                        return outOfDangerDelay;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Transcendence IL Hook failed");
+                }
             };
         }
         private static void ModifyItem()

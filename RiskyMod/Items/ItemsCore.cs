@@ -108,7 +108,6 @@ namespace RiskyMod.Items
             new HappiestMask();
             new Clover();
 
-            new LaserScope();
             new BottledChaos();
             new Raincoat();
         }

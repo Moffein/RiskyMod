@@ -20,32 +20,43 @@ namespace RiskyMod.Items.Boss
 
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
+                bool error = true;
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "LightningStrikeOnHit")
-                    );
-
-                c.GotoNext(
+                    )
+                &&
+                c.TryGotoNext(
                     x => x.MatchLdfld<DamageInfo>("damage")
-                    );
-                c.Index += 3;
-                c.Next.Operand = ChargedPerf.stackDamageCoefficient;
-                c.Index += 4;
-                c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
+                    ))
                 {
-                    return damageCoefficient + initialDamage;
-                });
-
-                if (RiskyMod.disableProcChains)
-                {
-                    c.GotoNext(
-                        x => x.MatchCallvirt<RoR2.Orbs.OrbManager>("AddOrb")
-                        );
-                    c.EmitDelegate<Func<RoR2.Orbs.SimpleLightningStrikeOrb, RoR2.Orbs.SimpleLightningStrikeOrb>>((orb) =>
+                    c.Index += 3;
+                    c.Next.Operand = ChargedPerf.stackDamageCoefficient;
+                    c.Index += 4;
+                    c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
                     {
-                        orb.procCoefficient = 0f;
-                        return orb;
+                        return damageCoefficient + initialDamage;
                     });
+
+                    if (RiskyMod.disableProcChains)
+                    {
+                        if(c.TryGotoNext(
+                            x => x.MatchCallvirt<RoR2.Orbs.OrbManager>("AddOrb")
+                            ))
+                        {
+                            c.EmitDelegate<Func<RoR2.Orbs.SimpleLightningStrikeOrb, RoR2.Orbs.SimpleLightningStrikeOrb>>((orb) =>
+                            {
+                                orb.procCoefficient = 0f;
+                                return orb;
+                            });
+                        }
+                    }
+                    error = false;
+                }
+
+                if (error)
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: ChargedPerf IL Hook failed");
                 }
             };
         }

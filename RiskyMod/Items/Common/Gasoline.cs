@@ -15,19 +15,31 @@ namespace RiskyMod.Items.Common
 
             IL.RoR2.GlobalEventManager.ProcIgniteOnKill += (il) =>
             {
+                bool error = true;
+
                 ILCursor c = new ILCursor(il);
 
                 //Increase base range
-                c.GotoNext(
+                if(c.TryGotoNext(
                 x => x.MatchLdcR4(8f)
-                    );
-                c.Next.Operand = 12f;
+                    ))
+                {
+                    c.Next.Operand = 12f;
 
-                //Remove range scaling
-                c.GotoNext(
+                    //Remove range scaling
+                    if (c.TryGotoNext(
                      x => x.MatchLdcR4(4f)
-                    );
-                c.Next.Operand = 0f;
+                    ))
+                    {
+                        c.Next.Operand = 0f;
+                        error = false;
+                    }
+                }
+
+                if (error)
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Gasoline IL Hook failed");
+                }
             };
 		}
 		private static void ModifyItem()

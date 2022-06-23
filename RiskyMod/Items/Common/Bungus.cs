@@ -14,10 +14,16 @@ namespace RiskyMod.Items.Common
             IL.RoR2.CharacterBody.GetNotMoving += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdcR4(1f)
-                    );
-                c.Next.Operand = 0.5f;
+                    ))
+                {
+                    c.Next.Operand = 0.5f;
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Bungus IL Hook failed");
+                }
             };
         }
     }

@@ -19,14 +19,21 @@ namespace RiskyMod.Items.Common
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdfld<CharacterBody>("levelCrit")
-                    );
-
-                c.GotoNext(
+                    )
+                &&
+                c.TryGotoNext(
                      x => x.MatchLdcR4(10f)
-                    );
-                c.Next.Operand = 7f;
+                    )
+                )
+                {
+                    c.Next.Operand = 7f;
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: CritGlasses IL Hook failed");
+                }
             };
         }
         private static void ModifyItem()

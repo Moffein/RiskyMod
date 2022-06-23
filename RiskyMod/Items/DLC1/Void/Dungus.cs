@@ -16,15 +16,27 @@ namespace RiskyMod.Items.DLC1.Void
 
 			IL.RoR2.MushroomVoidBehavior.FixedUpdate += (il) =>
             {
+                bool error = true;
+
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdcR4(0.01f)
-                    );
-                c.Next.Operand = 0.00375f;
-                c.GotoNext(MoveType.After,
-                     x => x.MatchMul()
-                    );
-                c.EmitDelegate<Func<float, float>>(healPercent => healPercent + 0.00375f);
+                    ))
+                {
+                    c.Next.Operand = 0.00375f;
+                    if(c.TryGotoNext(MoveType.After,
+                         x => x.MatchMul()
+                        ))
+                    {
+                        c.EmitDelegate<Func<float, float>>(healPercent => healPercent + 0.00375f);
+                        error = false;
+                    }
+                }
+
+                if (error)
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Dungus IL Hook failed");
+                }
             };
         }
         private static void ModifyItem()

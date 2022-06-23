@@ -28,39 +28,51 @@ namespace RiskyMod.Items.Uncommon
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
+                bool error = true;
                 ILCursor c = new ILCursor(il);
 
                 //Jump to IceRing
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "IceRing")
-                    );
-
-                //Change IceRing damage
-                c.GotoNext(
-                     x => x.MatchLdcR4(2.5f)
-                    );
-                c.Next.Operand = stackDamageCoefficientIce;
-                c.Index += 4;
-                c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
+                    ))
                 {
-                    return damageCoefficient + initialDamageIce;
-                });
+                    //Change IceRing damage
+                    if(c.TryGotoNext(
+                         x => x.MatchLdcR4(2.5f)
+                        ))
+                    {
+                        c.Next.Operand = stackDamageCoefficientIce;
+                        c.Index += 4;
+                        c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
+                        {
+                            return damageCoefficient + initialDamageIce;
+                        });
 
-                //Jump to FireRing
-                c.GotoNext(
-                     x => x.MatchLdstr("Prefabs/Projectiles/FireTornado")
-                    );
+                        //Jump to FireRing
+                        //Change FireRing damage
+                        if (c.TryGotoNext(
+                             x => x.MatchLdstr("Prefabs/Projectiles/FireTornado")
+                            )
+                        &&
+                        c.TryGotoNext(
+                             x => x.MatchLdcR4(3f)
+                            ))
+                        {
+                            c.Next.Operand = stackDamageCoefficientFire;
+                            c.Index += 4;
+                            c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
+                            {
+                                return damageCoefficient + initialDamageFire;
+                            });
+                            error = false;
+                        }
+                    }
+                }
 
-                //Change FireRing damage
-                c.GotoNext(
-                     x => x.MatchLdcR4(3f)
-                    );
-                c.Next.Operand = stackDamageCoefficientFire;
-                c.Index += 4;
-                c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
+                if (error)
                 {
-                    return damageCoefficient + initialDamageFire;
-                });
+                    UnityEngine.Debug.LogError("RiskyMod: ElementalBands IL Hook failed");
+                }
             };
         }
         private static void ModifyItem()

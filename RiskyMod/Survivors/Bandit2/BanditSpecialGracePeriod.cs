@@ -18,26 +18,37 @@ namespace RiskyMod.Survivors.Bandit2
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
+                bool error = true;
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdcI4(4),
                      x => x.MatchAnd(),
                      x => x.MatchLdcI4(4)
-                    );
-                c.EmitDelegate<Func<DamageType, DamageType>>((orig) =>
+                    ))
                 {
-                    return DamageType.Generic;
-                });
+                    c.EmitDelegate<Func<DamageType, DamageType>>((orig) =>
+                    {
+                        return DamageType.Generic;
+                    });
 
-                c.GotoNext(
-                     x => x.MatchLdcI4(268435456),
-                     x => x.MatchAnd(),
-                     x => x.MatchLdcI4(268435456)
-                    );
-                c.EmitDelegate<Func<DamageType, DamageType>>((orig) =>
+                    if(c.TryGotoNext(
+                         x => x.MatchLdcI4(268435456),
+                         x => x.MatchAnd(),
+                         x => x.MatchLdcI4(268435456)
+                        ))
+                    {
+                        c.EmitDelegate<Func<DamageType, DamageType>>((orig) =>
+                        {
+                            return DamageType.Generic;
+                        });
+                        error = false;
+                    }
+                }
+
+                if (error)
                 {
-                    return DamageType.Generic;
-                });
+                    UnityEngine.Debug.LogError("RiskyMod: BanditSpecialGracePeriod IL Hook failed");
+                }
             };
         }
     }

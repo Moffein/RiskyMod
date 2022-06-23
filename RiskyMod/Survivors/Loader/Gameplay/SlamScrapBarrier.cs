@@ -22,22 +22,28 @@ namespace RiskyMod.Survivors.Loader
             IL.EntityStates.Loader.GroundSlam.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCall<GroundSlam>("DetonateAuthority")
-                    );
-                c.Index++;
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<BlastAttack.Result, EntityStates.Loader.GroundSlam, BlastAttack.Result>>((result, self) =>
+                    ))
                 {
-                    if (result.hitCount > 0)
+                    c.Index++;
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<BlastAttack.Result, EntityStates.Loader.GroundSlam, BlastAttack.Result>>((result, self) =>
                     {
-                        if (self.healthComponent)
+                        if (result.hitCount > 0)
                         {
-                            self.healthComponent.AddBarrierAuthority(LoaderMeleeAttack.barrierPercentagePerHit * self.healthComponent.fullBarrier);
+                            if (self.healthComponent)
+                            {
+                                self.healthComponent.AddBarrierAuthority(LoaderMeleeAttack.barrierPercentagePerHit * self.healthComponent.fullBarrier);
+                            }
                         }
-                    }
-                    return result;
-                });
+                        return result;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Loader SlamScrapBarrier IL Hook failed");
+                }
             };
         }
     }

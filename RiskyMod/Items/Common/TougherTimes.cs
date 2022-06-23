@@ -16,13 +16,19 @@ namespace RiskyMod.Items.Common
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdcR4(15f),
                      x => x.MatchLdarg(0),
                      x => x.MatchLdflda(typeof(RoR2.HealthComponent), "itemCounts"),
                      x => x.MatchLdfld(typeof(RoR2.HealthComponent.ItemCounts), "bear")
-                    );
-                c.Next.Operand = 10f;
+                    ))
+                {
+                    c.Next.Operand = 10f;
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: TougherTimes IL Hook failed");
+                }
             };
         }
         private static void ModifyItem()

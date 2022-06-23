@@ -21,10 +21,16 @@ namespace RiskyMod.Tweaks.RunScaling
             IL.RoR2.Run.RecalculateDifficultyCoefficentInternal += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdcR4(0.2f)
-                    );
-                c.Next.Operand = 0.15f;
+                    ))
+                {
+                    c.Next.Operand = 0.15f;
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: ModdedScaling IL Hook failed");
+                }
             };
 		}
     }

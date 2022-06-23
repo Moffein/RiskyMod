@@ -23,39 +23,45 @@ namespace RiskyMod.SharedHooks
 			IL.RoR2.HealthComponent.TakeDamage += (il) =>
 			{
 				ILCursor c = new ILCursor(il);
-				c.GotoNext(
-					 x => x.MatchLdarg(1),
-					 x => x.MatchLdfld<DamageInfo>("damage"),
+				if(c.TryGotoNext(
+                     x => x.MatchLdarg(1),
+                     x => x.MatchLdfld<DamageInfo>("damage"),
                      x => x.MatchStloc(6)
-					);
-				c.Index += 3;
-                c.Emit(OpCodes.Ldloc, 6);
-                c.Emit(OpCodes.Ldarg_0);    //self
-                c.Emit(OpCodes.Ldarg_1);    //damageInfo
-                c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((origDamage, victimHealth, damageInfo) =>
+                    ))
                 {
-                    float newDamage = origDamage;
-                    CharacterBody victimBody = victimHealth.body;
-                    if (victimBody && damageInfo.attacker)
+                    c.Index += 3;
+                    c.Emit(OpCodes.Ldloc, 6);
+                    c.Emit(OpCodes.Ldarg_0);    //self
+                    c.Emit(OpCodes.Ldarg_1);    //damageInfo
+                    c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((origDamage, victimHealth, damageInfo) =>
                     {
-                        CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                        if (attackerBody)
+                        float newDamage = origDamage;
+                        CharacterBody victimBody = victimHealth.body;
+                        if (victimBody && damageInfo.attacker)
                         {
-                            Inventory attackerInventory = attackerBody.inventory;
-                            if (attackerInventory)
+                            CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+                            if (attackerBody)
                             {
-                                DamageMult damageMult = new DamageMult();
-                                if (ModifyFinalDamageActions != null)
+                                Inventory attackerInventory = attackerBody.inventory;
+                                if (attackerInventory)
                                 {
-                                    ModifyFinalDamageActions.Invoke(damageMult, damageInfo, victimHealth, victimBody, attackerBody, attackerInventory);
-                                    newDamage *= damageMult.damageMult;
+                                    DamageMult damageMult = new DamageMult();
+                                    if (ModifyFinalDamageActions != null)
+                                    {
+                                        ModifyFinalDamageActions.Invoke(damageMult, damageInfo, victimHealth, victimBody, attackerBody, attackerInventory);
+                                        newDamage *= damageMult.damageMult;
+                                    }
                                 }
                             }
                         }
-                    }
-                    return newDamage;
-                });
-                c.Emit(OpCodes.Stloc, 6);
+                        return newDamage;
+                    });
+                    c.Emit(OpCodes.Stloc, 6);
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: ModifyFinalDamage IL Hook failed. This will break a lot of things.");
+                }
             };
 		}
     }

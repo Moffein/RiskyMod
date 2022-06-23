@@ -16,43 +16,45 @@ namespace RiskyMod.Items.Uncommon
 
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
+                bool error = true;
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "ExplodeOnDeath")
-                    );
-
-                //Disable Proc Coefficient
-                if (RiskyMod.disableProcChains)
+                    ))
                 {
-                    c.GotoNext(
-                        x => x.MatchStfld<DelayBlast>("position")
-                        );
-                    c.Index--;
-                    c.EmitDelegate<Func<DelayBlast, DelayBlast>>((db) =>
+                    //Disable Proc Coefficient
+                    if (RiskyMod.disableProcChains)
                     {
-                        db.procCoefficient = 0f;
-                        return db;
-                    });
+                        if (c.TryGotoNext(
+                            x => x.MatchStfld<DelayBlast>("position")
+                            ))
+                        {
+                            c.Index--;
+                            c.EmitDelegate<Func<DelayBlast, DelayBlast>>((db) =>
+                            {
+                                db.procCoefficient = 0f;
+                                return db;
+                            });
+                        }
+                    }
+
+                    //Disable Radius Scaling
+                    if(c.TryGotoNext(
+                         x => x.MatchStfld<RoR2.DelayBlast>("radius")
+                        ))
+                    {
+                        c.EmitDelegate<Func<float, float>>((oldRadius) =>
+                        {
+                            return 16f;
+                        });
+                        error = false;
+                    }
                 }
 
-                //Disable Radius Scaling
-                c.GotoNext(
-                     x => x.MatchStfld<RoR2.DelayBlast>("radius")
-                    );
-                c.EmitDelegate<Func<float, float>>((oldRadius) =>
+                if (error)
                 {
-                    return 16f;
-                });
-
-                //Disable falloff
-                /*c.GotoNext(
-                    x => x.MatchStfld<DelayBlast>("falloffModel")
-                    );
-
-                c.EmitDelegate<Func<BlastAttack.FalloffModel, BlastAttack.FalloffModel>>((model) =>
-                {
-                    return BlastAttack.FalloffModel.None;
-                });*/
+                    UnityEngine.Debug.LogError("RiskyMod: WillOWisp IL Hook failed");
+                }
             };
         }
         private static void ModifyItem()

@@ -19,15 +19,21 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             IL.RoR2.HealthComponent.ServerFixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(MoveType.After,
+                if(c.TryGotoNext(MoveType.After,
                      x => x.MatchCallvirt<CharacterBody>("get_barrierDecayRate")
-                    );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<float, HealthComponent, float>>((decayRate, self) =>
+                    ))
                 {
-                    float barrierPercent = self.barrier / self.fullCombinedHealth;
-                    return decayRate * Mathf.Lerp(minDecay, maxDecay, barrierPercent);
-                });
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<float, HealthComponent, float>>((decayRate, self) =>
+                    {
+                        float barrierPercent = self.barrier / self.fullCombinedHealth;
+                        return decayRate * Mathf.Lerp(minDecay, maxDecay, barrierPercent);
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: BarrierDecay IL Hook failed");
+                }
             };
         }
     }

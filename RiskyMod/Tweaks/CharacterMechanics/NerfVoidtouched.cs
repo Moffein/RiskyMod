@@ -15,11 +15,17 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(DLC1Content.Buffs), "EliteVoid")
-                    );
-                c.Remove();
-                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyBuffDef));
+                    ))
+                {
+                    c.Remove();
+                    c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyBuffDef));
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: NerfVoidtouched IL Hook failed");
+                }
             };
 
             //Effect handled in TakeDamage

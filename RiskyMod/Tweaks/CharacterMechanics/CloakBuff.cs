@@ -11,10 +11,16 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             IL.RoR2.CharacterAI.BaseAI.Target.GetBullseyePosition += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdcR4(2f)
-                    );
-                c.Next.Operand = 3f;
+                    ))
+                {
+                    c.Next.Operand = 3f;
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: CloakBuff IL Hook failed");
+                }
             };
         }
     }

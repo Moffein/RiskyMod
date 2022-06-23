@@ -23,11 +23,17 @@ namespace RiskyMod.Items.Legendary
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "HeadHunter")
-                    );
-                c.Remove();
-                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                    ))
+                {
+                    c.Remove();
+                    c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Headhunter OnCharacterDeath IL Hook failed");
+                }
             };
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
@@ -50,15 +56,21 @@ namespace RiskyMod.Items.Legendary
                 IL.RoR2.HealthComponent.TakeDamage += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
-                    c.GotoNext(
+                    if(c.TryGotoNext(
                          x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "AffixLunar")
-                        );
-                    c.Index += 2;
-                    c.Emit(OpCodes.Ldloc_1);
-                    c.EmitDelegate<Func<bool, CharacterBody, bool>>((flag, attackerBody) =>
+                        ))
                     {
-                        return flag || attackerBody.HasBuff(Perfected2.buffIndex);
-                    });
+                        c.Index += 2;
+                        c.Emit(OpCodes.Ldloc_1);
+                        c.EmitDelegate<Func<bool, CharacterBody, bool>>((flag, attackerBody) =>
+                        {
+                            return flag || attackerBody.HasBuff(Perfected2.buffIndex);
+                        });
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogError("RiskyMod: Headhunter Perfected IL Hook failed");
+                    }
                 };
                 RecalculateStatsAPI.GetStatCoefficients += HandlePerfected2Stats;
             }

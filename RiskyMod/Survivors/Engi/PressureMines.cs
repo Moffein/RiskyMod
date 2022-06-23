@@ -17,15 +17,21 @@ namespace RiskyMod.Survivors.Engi
             IL.EntityStates.Engi.Mine.WaitForTarget.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<ProjectileTargetComponent>("get_target")
-                     );
-                c.Index += 2;
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<bool, EntityStates.Engi.Mine.WaitForTarget, bool>>((hasTarget, self) =>
+                     ))
                 {
-                    return hasTarget && ((self.armingStateMachine.state.GetType() == typeof(EntityStates.Engi.Mine.MineArmingFull)));
-                });
+                    c.Index += 2;
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<bool, EntityStates.Engi.Mine.WaitForTarget, bool>>((hasTarget, self) =>
+                    {
+                        return hasTarget && ((self.armingStateMachine.state.GetType() == typeof(EntityStates.Engi.Mine.MineArmingFull)));
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Engi PressureMines IL Hook failed");
+                }
             };
         }
     }

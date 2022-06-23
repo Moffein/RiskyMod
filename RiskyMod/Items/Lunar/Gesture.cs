@@ -17,16 +17,21 @@ namespace RiskyMod.Items.Lunar
             IL.RoR2.EquipmentSlot.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "AutoCastEquipment")
-                    );
+                    ))
+                {
+                    //Why doesn't this work here?
+                    //c.Remove();
+                    //c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
 
-                //Why doesn't this work here?
-                //c.Remove();
-                //c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
-
-                c.Index += 2;
-                c.EmitDelegate<Func<int, int>>(orig => 0);
+                    c.Index += 2;
+                    c.EmitDelegate<Func<int, int>>(orig => 0);
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Gesture IL Hook failed");
+                }
             };
 
             EquipmentSlot.onServerEquipmentActivated += EquipmentSlot_onServerEquipmentActivated;

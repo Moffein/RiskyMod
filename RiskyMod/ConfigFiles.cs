@@ -304,11 +304,6 @@ namespace RiskyMod
             MeatHook.enabled = ItemCfg.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;
             Tesla.enabled = ItemCfg.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
             Raincoat.enabled = ItemCfg.Bind(legendaryString, "Bens Raincoat - Use Modded Icons", false, "Replace the Vanilla buff icons for this item.").Value;
-
-            //Turns out SS2's Gadget increased initial hit damage by 50%, which lead to a 3x total damage multiplier, which is what this item does already.
-            //LaserScope.enabled = ItemCfg.Bind(legendaryString, "Laser Scope", true, itemConfigDescString).Value;
-            LaserScope.enabled = false;
-
         }
 
         private static void ConfigVoidItems()
@@ -345,6 +340,8 @@ namespace RiskyMod
             DefenseNucleus.removeAllyScaling = ItemCfg.Bind(bossString, "Defense Nucleus - Remove Ally Count Scaling", true, "Stacks increase ally damage and health instead of max allies.").Value;
             DefenseNucleus.inheritEliteAffix = ItemCfg.Bind(bossString, "Defense Nucleus - Inherit Elite Affix", true, "Defense Nucleus Alpha Constructs inherit the Elite Affix of the enemy that was killed. This removes their spawn VFX.").Value;
             DefenseNucleus.ignoreAllyCap = ItemCfg.Bind(bossString, "Defense Nucleus - Ignore Ally Cap", true, "Defense Nucleus Alpha Constructs ignore the ally cap if changes are enabled.").Value;
+        
+            Planula.enabled = ItemCfg.Bind(bossString, "Planula", true, "Proc after Stealthkit and Squid. Disable this if you want to use mods that change Planula.").Value;
         }
 
         private static void ConfigLunars()

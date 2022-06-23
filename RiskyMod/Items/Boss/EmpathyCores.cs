@@ -21,19 +21,25 @@ namespace RiskyMod.Items.Boss
             IL.RoR2.DeployableMinionSpawner.SpawnMinion += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<DirectorCore>("TrySpawnObject")
-                    );
-                c.Emit(OpCodes.Ldarg_0);    //DeployableMinionSpawner (self)
-                c.Emit(OpCodes.Ldarg_1);    //SpawnCard
-                c.EmitDelegate<Func<DirectorSpawnRequest, DeployableMinionSpawner, SpawnCard, DirectorSpawnRequest>>((directorSpawnRequest, self, spawnCard) =>
+                    ))
                 {
-                    if (spawnCard == RedBuddyCard || spawnCard == GreenBuddyCard)
+                    c.Emit(OpCodes.Ldarg_0);    //DeployableMinionSpawner (self)
+                    c.Emit(OpCodes.Ldarg_1);    //SpawnCard
+                    c.EmitDelegate<Func<DirectorSpawnRequest, DeployableMinionSpawner, SpawnCard, DirectorSpawnRequest>>((directorSpawnRequest, self, spawnCard) =>
                     {
-                        directorSpawnRequest.ignoreTeamMemberLimit = EmpathyCores.ignoreAllyCap;
-                    }
-                    return directorSpawnRequest;
-                });
+                        if (spawnCard == RedBuddyCard || spawnCard == GreenBuddyCard)
+                        {
+                            directorSpawnRequest.ignoreTeamMemberLimit = EmpathyCores.ignoreAllyCap;
+                        }
+                        return directorSpawnRequest;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: EmpathyCores IL Hook failed");
+                }
             };
         }
     }

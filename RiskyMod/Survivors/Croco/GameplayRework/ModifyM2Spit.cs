@@ -29,19 +29,25 @@ namespace RiskyMod.Survivors.Croco
             IL.EntityStates.Croco.FireSpit.OnEnter += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<ProjectileManager>("FireProjectile")
-                    );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<FireProjectileInfo, EntityStates.Croco.FireSpit, FireProjectileInfo>>((projectileInfo, self) =>
+                    ))
                 {
-                    if (self.projectilePrefab == spitVanilla)
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<FireProjectileInfo, EntityStates.Croco.FireSpit, FireProjectileInfo>>((projectileInfo, self) =>
                     {
-                        projectileInfo.projectilePrefab = spitModded;
-                        projectileInfo.damageTypeOverride = null;
-                    }
-                    return projectileInfo;
-                });
+                        if (self.projectilePrefab == spitVanilla)
+                        {
+                            projectileInfo.projectilePrefab = spitModded;
+                            projectileInfo.damageTypeOverride = null;
+                        }
+                        return projectileInfo;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Croco ModifyM2Spit IL Hook failed");
+                }
             };
         }
     }

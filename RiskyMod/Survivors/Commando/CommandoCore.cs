@@ -53,14 +53,20 @@ namespace RiskyMod.Survivors.Commando
             IL.EntityStates.Commando.CommandoWeapon.FirePistol2.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdcI4(0)
-                    );
-                c.Index++;
-                c.EmitDelegate<Func<int, int>>(zero =>
+                    ))
                 {
-                    return -1000000;
-                });
+                    c.Index++;
+                    c.EmitDelegate<Func<int, int>>(zero =>
+                    {
+                        return -1000000;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: CommandoCore ModifyPrimaries IL Hook failed");
+                }
             };
         }
 

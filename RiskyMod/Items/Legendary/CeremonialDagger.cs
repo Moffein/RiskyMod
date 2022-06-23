@@ -20,14 +20,20 @@ namespace RiskyMod.Items.Legendary
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(GlobalEventManager.CommonAssets), "daggerPrefab")
-                    );
-                c.Index++;
-                c.EmitDelegate<Func<GameObject, GameObject>>((oldPrefab) =>
+                    ))
                 {
-                    return CeremonialDagger.daggerPrefab;
-                });
+                    c.Index++;
+                    c.EmitDelegate<Func<GameObject, GameObject>>((oldPrefab) =>
+                    {
+                        return CeremonialDagger.daggerPrefab;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: CeremonialDagger IL Hook failed");
+                }
             };
 
             daggerPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/DaggerProjectile");//.InstantiateClone("RiskyMod_CeremonialDaggerProjectile", true);

@@ -15,14 +15,20 @@ namespace RiskyMod.Items.Boss
             IL.EntityStates.VagrantNovaItem.ChargeState.OnEnter += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchCallvirt<RoR2.CharacterBody>("get_attackSpeed")
-                    );
-                c.Index++;
-                c.EmitDelegate<Func<float,float>>((attackSpeed) =>
+                    ))
                 {
-                    return 1f;
-                });
+                    c.Index++;
+                    c.EmitDelegate<Func<float, float>>((attackSpeed) =>
+                    {
+                        return 1f;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: GenesisLoop IL Hook failed");
+                }
             };
         }
     }

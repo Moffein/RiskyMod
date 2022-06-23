@@ -20,26 +20,39 @@ namespace RiskyMod.Items.Common
 
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
+                bool error = true;
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "StickyBomb")
-                    );
-
-                //New Damage
-                c.GotoNext(
-                    x => x.MatchLdcR4(1.8f)
-                    );
-                c.Next.Operand = 2.4f;
-
-                //Replace projectile
-                c.GotoNext(
-                    x => x.MatchLdstr("Prefabs/Projectiles/StickyBomb")
-                    );
-                c.Index += 2;
-                c.EmitDelegate<Func<GameObject, GameObject>>((oldPrefab) =>
+                    ))
                 {
-                    return StickyBomb.stickybombPrefab;
-                });
+                    //New Damage
+                    if(c.TryGotoNext(
+                    x => x.MatchLdcR4(1.8f)
+                    ))
+                    {
+                        c.Next.Operand = 2.4f;
+
+                        //Replace projectile
+                        if(c.TryGotoNext(
+                            x => x.MatchLdstr("Prefabs/Projectiles/StickyBomb")
+                            ))
+                        {
+                            c.Index += 2;
+                            c.EmitDelegate<Func<GameObject, GameObject>>((oldPrefab) =>
+                            {
+                                return StickyBomb.stickybombPrefab;
+                            });
+
+                            error = false;
+                        }
+                    }
+                }
+
+                if (error)
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: StickyBomb IL Hook failed");
+                }
             };
 
             //Modify detonation delay

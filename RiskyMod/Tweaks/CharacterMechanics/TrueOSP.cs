@@ -33,54 +33,65 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             //Overwrite vanilla OSP handling
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
             {
+                bool error = true;
+
                 //Remove vanilla OSP check
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<CharacterBody>("get_hasOneShotProtection")
-                    );
-                c.Index++;
-                c.EmitDelegate<Func<bool, bool>>((hasOSP) =>
+                    ))
                 {
-                    return false;
-                });
-
-                //Check for OSP at the end of applying health damage
-                c.GotoNext(
-                     x => x.MatchCall<HealthComponent>("set_Networkhealth")
-                    );
-                c.Emit(OpCodes.Ldarg_0);//healthcomponent
-                c.Emit(OpCodes.Ldarg_1);//damageinfo
-                c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((finalHealth, self, damageInfo) =>
-                {
-                    if (self.body.hasOneShotProtection && (damageInfo.damageType & DamageType.BypassOneShotProtection) != DamageType.BypassOneShotProtection)
+                    c.Index++;
+                    c.EmitDelegate<Func<bool, bool>>((hasOSP) =>
                     {
-                        OSPComponent ospm = self.body.gameObject.GetComponent<OSPComponent>();
-                        if (!ospm)
+                        return false;
+                    });
+
+                    //Check for OSP at the end of applying health damage
+                    if (c.TryGotoNext(
+                     x => x.MatchCall<HealthComponent>("set_Networkhealth")
+                    ))
+                    {
+                        c.Emit(OpCodes.Ldarg_0);//healthcomponent
+                        c.Emit(OpCodes.Ldarg_1);//damageinfo
+                        c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((finalHealth, self, damageInfo) =>
                         {
-                            ospm = self.body.gameObject.AddComponent<OSPComponent>();
-                            ospm.healthComponent = self;
-                            ospm.characterBody = self.body;
-                            if (enableLogging) Debug.Log("Adding OSP Manager to player.");
-                        }
-                        //Check if OSP timer should be triggered
-                        float ospHealthThreshold = self.fullHealth * OSPComponent.ospThreshold;
-                        if (self.health >= ospHealthThreshold && finalHealth < ospHealthThreshold)
-                        {
-                            if (!ShieldGating.enabled || self.shield <= 0f)
+                            if (self.body.hasOneShotProtection && (damageInfo.damageType & DamageType.BypassOneShotProtection) != DamageType.BypassOneShotProtection)
                             {
-                                ospm.StartOSPTimer();
+                                OSPComponent ospm = self.body.gameObject.GetComponent<OSPComponent>();
+                                if (!ospm)
+                                {
+                                    ospm = self.body.gameObject.AddComponent<OSPComponent>();
+                                    ospm.healthComponent = self;
+                                    ospm.characterBody = self.body;
+                                    if (enableLogging) Debug.Log("Adding OSP Manager to player.");
+                                }
+                                //Check if OSP timer should be triggered
+                                float ospHealthThreshold = self.fullHealth * OSPComponent.ospThreshold;
+                                if (self.health >= ospHealthThreshold && finalHealth < ospHealthThreshold)
+                                {
+                                    if (!ShieldGating.enabled || self.shield <= 0f)
+                                    {
+                                        ospm.StartOSPTimer();
+                                    }
+                                }
+                                if (finalHealth <= 0f)
+                                {
+                                    if (ospm.TriggerOSP())
+                                    {
+                                        finalHealth = 1f;
+                                    }
+                                }
                             }
-                        }
-                        if (finalHealth <= 0f)
-                        {
-                            if (ospm.TriggerOSP())
-                            {
-                                finalHealth = 1f;
-                            }
-                        }
+                            return finalHealth;
+                        });
+                        error = false;
                     }
-                    return finalHealth;
-                });
+                }
+                if (error)
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: TrueOSP IL Hook failed");
+                }
             };
         }
 

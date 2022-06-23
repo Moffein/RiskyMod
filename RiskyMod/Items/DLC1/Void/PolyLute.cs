@@ -14,22 +14,33 @@ namespace RiskyMod.Items.DLC1.Void
             ItemsCore.ModifyItemDefActions += ModifyItem;
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
+                bool error = true;
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchStfld<RoR2.Orbs.VoidLightningOrb>("totalStrikes")
-                    );
-                c.EmitDelegate<Func<int, int>>(strikes =>
+                    ))
                 {
-                    return (2 * strikes / 3) + 1;
-                });
+                    c.EmitDelegate<Func<int, int>>(strikes =>
+                    {
+                        return (2 * strikes / 3) + 1;
+                    });
 
-                //Change proc coefficient
-                if (RiskyMod.disableProcChains)
+                    //Change proc coefficient
+                    if (RiskyMod.disableProcChains)
+                    {
+                        if(c.TryGotoNext(
+                             x => x.MatchLdcR4(0.2f)
+                            ))
+                        {
+                            c.Next.Operand = 0.1f;
+                        }
+                    }
+                    error = false;
+                }
+
+                if (error)
                 {
-                    c.GotoNext(
-                         x => x.MatchLdcR4(0.2f)
-                        );
-                    c.Next.Operand = 0.1f;
+                    UnityEngine.Debug.LogError("RiskyMod: Polylute IL Hook failed");
                 }
             };
         }

@@ -18,13 +18,19 @@ namespace RiskyMod.Items.Boss
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(MoveType.After,
+                if(c.TryGotoNext(MoveType.After,
                      x => x.MatchLdfld(typeof(HealthComponent.ItemCounts), "parentEgg")
-                    );
-                c.EmitDelegate<Func<int, int>>(orig =>
+                    ))
                 {
-                    return 0;
-                });
+                    c.EmitDelegate<Func<int, int>>(orig =>
+                    {
+                        return 0;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Planula IL Hook failed");
+                }
             };
 
             SharedHooks.TakeDamage.TakeDamageEndActions += TakeDamageEnd;

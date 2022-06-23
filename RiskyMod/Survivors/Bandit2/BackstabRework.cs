@@ -18,19 +18,25 @@ namespace RiskyMod.Survivors.Bandit2
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(DLC1Content.Items), "ConvertCritChanceToCritDamage")
-                    );
-                c.Index += 2;
-                c.Emit(OpCodes.Ldarg_0); //CharacterBody
-                c.EmitDelegate<Func<int, CharacterBody, int>>((cdCount, self) =>
+                    ))
                 {
-                    if (cdCount < 1 && self.bodyIndex == Bandit2Core.Bandit2Index)
+                    c.Index += 2;
+                    c.Emit(OpCodes.Ldarg_0); //CharacterBody
+                    c.EmitDelegate<Func<int, CharacterBody, int>>((cdCount, self) =>
                     {
-                        cdCount = 1;
-                    }
-                    return cdCount;
-                });
+                        if (cdCount < 1 && self.bodyIndex == Bandit2Core.Bandit2Index)
+                        {
+                            cdCount = 1;
+                        }
+                        return cdCount;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: BackstabRework IL Hook failed");
+                }
             };
 
             RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;

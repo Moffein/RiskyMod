@@ -19,11 +19,17 @@ namespace RiskyMod.Items.Boss
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "Knurl")
-                    );
-                c.Remove();
-                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                    ))
+                {
+                    c.Remove();
+                    c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Knurl IL Hook failed");
+                }
             };
 
             ItemsCore.ModifyItemDefActions += ModifyItem;

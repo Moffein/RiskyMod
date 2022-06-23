@@ -20,11 +20,17 @@ namespace RiskyMod.Tweaks.RunScaling
 				IL.RoR2.Run.RecalculateDifficultyCoefficentInternal += (il) =>
 				{
 					ILCursor c = new ILCursor(il);
-					c.GotoNext(
+					if(c.TryGotoNext(
 						x => x.MatchLdsfld<Run>(nameof(Run.ambientLevelCap))
-						);
-					c.Remove();
-					c.Emit<RemoveLevelCap>(OpCodes.Ldsfld, nameof(RemoveLevelCap.maxLevel));
+						))
+					{
+						c.Remove();
+						c.Emit<RemoveLevelCap>(OpCodes.Ldsfld, nameof(RemoveLevelCap.maxLevel));
+					}
+					else
+					{
+						UnityEngine.Debug.LogError("RiskyMod: RemoveLevelCap IL Hook failed");
+					}
 				};
 			}
 			Run.ambientLevelCap = (int)maxLevel;	//This is for RunScaling.

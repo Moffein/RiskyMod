@@ -31,11 +31,17 @@ namespace RiskyMod.Items.Uncommon
             IL.RoR2.GlobalEventManager.OnInteractionBegin += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "Squid")
-                    );
-                c.Remove();
-                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                    ))
+                {
+                    c.Remove();
+                    c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: SquidPolyp IL Hook failed");
+                }
             };
 
             procEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/claygooorbimpact").InstantiateClone("RiskyMod_SquidPolypProc", false);

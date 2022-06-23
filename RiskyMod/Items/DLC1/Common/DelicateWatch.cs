@@ -57,21 +57,33 @@ namespace RiskyMod.Items.DLC1.Common
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(DLC1Content.Items), "FragileDamageBonus")
-                    );
-                c.Remove();
-                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                    ))
+                {
+                    c.Remove();
+                    c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: DelicateWatch TakeDamage IL Hook failed");
+                }
             };
 
             IL.RoR2.HealthComponent.UpdateLastHitTime += (il) =>
             {
                 ILCursor c = new ILCursor(il);
 
-                c.GotoNext(MoveType.After,
+                if(c.TryGotoNext(MoveType.After,
                      x => x.MatchLdfld(typeof(HealthComponent.ItemCounts), "fragileDamageBonus")
-                    );
-                c.EmitDelegate<Func<int, int>>(val => 0);
+                    ))
+                {
+                    c.EmitDelegate<Func<int, int>>(val => 0);
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: DelicateWatch UpdateLastHitTime IL Hook failed");
+                }
             };
 
             SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += (CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory) =>

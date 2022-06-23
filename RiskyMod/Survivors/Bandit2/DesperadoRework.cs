@@ -18,10 +18,16 @@ namespace RiskyMod.Survivors.Bandit2
             IL.EntityStates.Bandit2.Weapon.FireSidearmSkullRevolver.ModifyBullet += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdcR4(0.1f)
-                    );
-                c.Next.Operand = damagePerBuff;
+                    ))
+                {
+                    c.Next.Operand = damagePerBuff;
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: DesperadoRework IL Hook failed");
+                }
             };
         }
 

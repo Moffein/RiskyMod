@@ -70,15 +70,21 @@ namespace RiskyMod.Survivors.Toolbot
             IL.EntityStates.Toolbot.BaseNailgunState.FireBullet += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<BulletAttack>("Fire")
-                     );
-                c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                     ))
                 {
-                    bulletAttack.radius = 0.2f;
-                    bulletAttack.smartCollision = true;
-                    return bulletAttack;
-                });
+                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                    {
+                        bulletAttack.radius = 0.2f;
+                        bulletAttack.smartCollision = true;
+                        return bulletAttack;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Toolbot Nailgun IL Hook failed");
+                }
             };
             new FixNailgunBurst();
         }
@@ -118,19 +124,25 @@ namespace RiskyMod.Survivors.Toolbot
             IL.EntityStates.Toolbot.FireBuzzsaw.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<CharacterMotor>("ApplyForce")
-                     );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<int, EntityStates.Toolbot.FireBuzzsaw, int>>((orig, self) =>
+                     ))
                 {
-                    if (self.characterMotor && !self.characterMotor.isGrounded && self.characterMotor.velocity.y <= 0f)
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<int, EntityStates.Toolbot.FireBuzzsaw, int>>((orig, self) =>
                     {
-                        //self.characterMotor.velocity.y = 0f;
-                        self.SmallHop(self.characterMotor, 2.5f);
-                    }
-                    return orig;
-                });
+                        if (self.characterMotor && !self.characterMotor.isGrounded && self.characterMotor.velocity.y <= 0f)
+                        {
+                            //self.characterMotor.velocity.y = 0f;
+                            self.SmallHop(self.characterMotor, 2.5f);
+                        }
+                        return orig;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Toolbot Saw IL Hook failed");
+                }
             };
             On.EntityStates.Toolbot.FireBuzzsaw.OnEnter += (orig, self) =>
             {

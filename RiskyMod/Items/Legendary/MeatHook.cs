@@ -10,41 +10,33 @@ namespace RiskyMod.Items.Legendary
         public static bool enabled = true;
         public MeatHook()
         {
-            if (!enabled) return;
-            ItemsCore.ModifyItemDefActions += ModifyItem;
+            if (!enabled || !RiskyMod.disableProcChains) return;
+
+            //ItemsCore.ModifyItemDefActions += ModifyItem;
 
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "BounceNearby")
-                    );
-
-                //Add damage scaling.
-                /*c.GotoNext(
-                    x => x.MatchLdfld<DamageInfo>("damage")
-                    );
-                c.Index++;
-                c.Emit(OpCodes.Ldloc, 13);  //itemcount
-                c.EmitDelegate<Func<float, int, float>>((damage, itemCount) =>
+                    )
+                &&
+                c.TryGotoNext(
+                    x => x.MatchStfld<RoR2.Orbs.BounceOrb>("procCoefficient")
+                    ))
                 {
-                    return damage + 0.3f * damage * (itemCount - 1);
-                });*/
-
-                if (RiskyMod.disableProcChains)
-                {
-                    //Remove proc coefficient
-                    c.GotoNext(
-                        x => x.MatchStfld<RoR2.Orbs.BounceOrb>("procCoefficient")
-                        );
                     c.Index--;
                     c.Next.Operand = 0.1f;
                 }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: MeatHook IL Hook failed");
+                }
             };
         }
-        private static void ModifyItem()
+        /*private static void ModifyItem()
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BounceNearby);
-        }
+        }*/
     }
 }

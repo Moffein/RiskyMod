@@ -44,18 +44,24 @@ namespace RiskyMod.Survivors.Croco
             IL.EntityStates.Croco.FireSpit.OnEnter += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<ProjectileManager>("FireProjectile")
-                    );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<FireProjectileInfo, EntityStates.Croco.FireSpit, FireProjectileInfo>>((projectileInfo, self) =>
+                    ))
                 {
-                    if (self.projectilePrefab == diseaseProjectile)
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<FireProjectileInfo, EntityStates.Croco.FireSpit, FireProjectileInfo>>((projectileInfo, self) =>
                     {
-                        projectileInfo.damageTypeOverride = default;
-                    }
-                    return projectileInfo;
-                });
+                        if (self.projectilePrefab == diseaseProjectile)
+                        {
+                            projectileInfo.damageTypeOverride = default;
+                        }
+                        return projectileInfo;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Croco ModifySpecial IL Hook failed");
+                }
             };
 
             SetupEpidemicVFX();

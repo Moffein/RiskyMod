@@ -17,11 +17,17 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             IL.EntityStates.ShockState.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchLdsfld<ShockState>("healthFractionToForceExit")
-                    );
-                c.Remove();
-                c.Emit<Shock>(OpCodes.Ldsfld, nameof(shockThreshold));
+                    ))
+                {
+                    c.Remove();
+                    c.Emit<Shock>(OpCodes.Ldsfld, nameof(shockThreshold));
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Shock IL Hook failed");
+                }
             };
         }
     }

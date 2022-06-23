@@ -66,16 +66,22 @@ namespace RiskyMod.Items.Legendary
             IL.EntityStates.Headstompers.HeadstompersFall.DoStompExplosionAuthority += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<RoR2.BlastAttack>("Fire")
-                    );
-                c.Emit(OpCodes.Ldloc_0);   //inventory
-                c.EmitDelegate<Func<BlastAttack, Inventory, BlastAttack>>((blastAttack, inventory) =>
+                    ))
                 {
-                    int itemCount = inventory.GetItemCount(RoR2Content.Items.FallBoots);
-                    blastAttack.baseDamage += blastAttack.baseDamage * 0.6f * (itemCount - 1);
-                    return blastAttack;
-                });
+                    c.Emit(OpCodes.Ldloc_0);   //inventory
+                    c.EmitDelegate<Func<BlastAttack, Inventory, BlastAttack>>((blastAttack, inventory) =>
+                    {
+                        int itemCount = inventory.GetItemCount(RoR2Content.Items.FallBoots);
+                        blastAttack.baseDamage += blastAttack.baseDamage * 0.6f * (itemCount - 1);
+                        return blastAttack;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Headstompers IL Hook failed");
+                }
             };
         }
 

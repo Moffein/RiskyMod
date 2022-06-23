@@ -31,14 +31,21 @@ namespace RiskyMod.Items.Equipment
             IL.RoR2.EquipmentSlot.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (
+                c.TryGotoNext(
                      x => x.MatchLdstr("Prefabs/Projectiles/BeamSphere")
-                    );
-                c.Index+= 2;
-                c.EmitDelegate<Func<GameObject, GameObject>>((projectile) =>
+                    ))
                 {
-                    return projectilePrefab;
-                });
+                    c.Index += 2;
+                    c.EmitDelegate<Func<GameObject, GameObject>>((projectile) =>
+                    {
+                        return projectilePrefab;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: BFG IL Hook failed");
+                }
             };
         }
     }

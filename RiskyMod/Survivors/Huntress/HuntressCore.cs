@@ -52,13 +52,19 @@ namespace RiskyMod.Survivors.Huntress
             IL.RoR2.HuntressTracker.SearchForTarget += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchStfld(typeof(BullseyeSearch), "sortMode")
-                    );
-                c.EmitDelegate<Func<BullseyeSearch.SortMode, BullseyeSearch.SortMode>>(orig =>
+                    ))
                 {
-                    return HuntressTargetingMode;
-                });
+                    c.EmitDelegate<Func<BullseyeSearch.SortMode, BullseyeSearch.SortMode>>(orig =>
+                    {
+                        return HuntressTargetingMode;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Huntress SearchForTarget IL Hook failed");
+                }
             };
         }
 
@@ -100,15 +106,21 @@ namespace RiskyMod.Survivors.Huntress
             IL.EntityStates.Huntress.HuntressWeapon.FireSeekingArrow.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCall<EntityState>("get_isAuthority")
-                    );
-                c.Index++;
-                c.Emit(OpCodes.Ldarg_0);    //the entitystate
-                c.EmitDelegate<Func<bool, EntityStates.Huntress.HuntressWeapon.FireSeekingArrow, bool>>((flag, self) =>
+                    ))
                 {
-                    return flag && self.firedArrowCount >= self.maxArrowCount;
-                });
+                    c.Index++;
+                    c.Emit(OpCodes.Ldarg_0);    //the entitystate
+                    c.EmitDelegate<Func<bool, EntityStates.Huntress.HuntressWeapon.FireSeekingArrow, bool>>((flag, self) =>
+                    {
+                        return flag && self.firedArrowCount >= self.maxArrowCount;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Huntress FireSeekingArrow IL Hook failed");
+                }
             };
         }
 

@@ -16,33 +16,46 @@ namespace RiskyMod.Items.Legendary
 
             IL.RoR2.GlobalEventManager.OnHitAll += (il) =>
             {
-                ILCursor c = new ILCursor(il);
-                c.GotoNext(
-                     x => x.MatchLdsfld(typeof(RoR2Content.Items), "Behemoth")
-                    );
+                bool error = true;
 
+                ILCursor c = new ILCursor(il);
+                if (c.TryGotoNext(
+                     x => x.MatchLdsfld(typeof(RoR2Content.Items), "Behemoth")
+                    )
+                &&
                 //Remove range Scaling
-                c.GotoNext(
+                c.TryGotoNext(
                     x => x.MatchLdcR4(1.5f),
                     x => x.MatchLdcR4(2.5f),
                     x => x.MatchLdloc(3)
-                    );
-                c.Index += 3;
-                c.EmitDelegate<Func<int, int>>((itemCount) =>
+                    )
+                )
                 {
-                    return 1;
-                });
+                    c.Index += 3;
+                    c.EmitDelegate<Func<int, int>>((itemCount) =>
+                    {
+                        return 1;
+                    });
 
-                //Add damage scaling
-                c.GotoNext(
-                    x => x.MatchLdcR4(0.6f)
-                    );
-                c.Index++;
-                c.Emit(OpCodes.Ldloc_3);    //itemCount
-                c.EmitDelegate<Func<float, int, float>>((origDamage, itemCount) =>
+                    //Add damage scaling
+                    if(c.TryGotoNext(
+                        x => x.MatchLdcR4(0.6f)
+                        ))
+                    {
+                        c.Index++;
+                        c.Emit(OpCodes.Ldloc_3);    //itemCount
+                        c.EmitDelegate<Func<float, int, float>>((origDamage, itemCount) =>
+                        {
+                            return origDamage + 0.36f * (itemCount - 1);
+                        });
+                        error = false;
+                    }
+                }
+
+                if (error)
                 {
-                    return origDamage + 0.36f * (itemCount - 1);
-                });
+                    UnityEngine.Debug.LogError("RiskyMod: Behemoth IL Hook failed");
+                }
             };
         }
 

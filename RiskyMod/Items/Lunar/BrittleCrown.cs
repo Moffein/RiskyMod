@@ -16,30 +16,37 @@ namespace RiskyMod.Items.Lunar
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "GoldOnHit")
-                    );
-                c.GotoNext(
+                    )
+                    &&
+                c.TryGotoNext(
                      x => x.MatchLdcR4(30f)
-                    );
-                c.Index++;
-                c.Emit(OpCodes.Ldarg_1);
-                c.EmitDelegate<Func<float, DamageInfo, float>>((chance, damageInfo) =>
+                    ))
                 {
-                    if (damageInfo.attacker)
+                    c.Index++;
+                    c.Emit(OpCodes.Ldarg_1);
+                    c.EmitDelegate<Func<float, DamageInfo, float>>((chance, damageInfo) =>
                     {
-                        CharacterBody cb = damageInfo.attacker.GetComponent<CharacterBody>();
-                        if (cb)
+                        if (damageInfo.attacker)
                         {
-                            float damageCoefficient = damageInfo.damage / cb.damage;
-                            if (damageCoefficient > 1f)
+                            CharacterBody cb = damageInfo.attacker.GetComponent<CharacterBody>();
+                            if (cb)
                             {
-                                chance += Mathf.Lerp(0f, 70f, (damageCoefficient - 1f) * 0.111111111f);//Caps out at 100% chance for 1000% damage attacks
+                                float damageCoefficient = damageInfo.damage / cb.damage;
+                                if (damageCoefficient > 1f)
+                                {
+                                    chance += Mathf.Lerp(0f, 70f, (damageCoefficient - 1f) * 0.111111111f);//Caps out at 100% chance for 1000% damage attacks
+                                }
                             }
                         }
-                    }
-                    return chance;
-                });
+                        return chance;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: BrittleCrown IL Hook failed");
+                }
             };
         }
     }

@@ -25,27 +25,42 @@ namespace RiskyMod.Items.DLC1.Void
 
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
+                bool error = true;
+
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(DLC1Content.Buffs), "ElementalRingVoidReady")
-                    );
+                    ))
+                {
+                    //Reduce cooldown
+                    if(c.TryGotoNext(
+                         x => x.MatchLdcR4(20f)
+                        ))
+                    {
+                        c.Next.Operand = 15f;
 
-                //Reduce cooldown
-                c.GotoNext(
-                     x => x.MatchLdcR4(20f)
-                    );
-                c.Next.Operand = 15f;
+                        //Change damage
+                        if (c.TryGotoNext(
+                             x => x.MatchLdcR4(1f)
+                            ))
+                        {
+                            c.Next.Operand = 0.9f;
 
-                //Change damage
-                c.GotoNext(
-                     x => x.MatchLdcR4(1f)
-                    );
-                c.Next.Operand = 0.9f;
+                            if (c.TryGotoNext(MoveType.After,
+                                 x => x.MatchMul()
+                                ))
+                            {
+                                c.EmitDelegate<Func<float, float>>(damageCoefficient => damageCoefficient + 0.6f);
+                                error = false;
+                            }
+                        }
+                    }
+                }
 
-                c.GotoNext(MoveType.After,
-                     x => x.MatchMul()
-                    );
-                c.EmitDelegate<Func<float, float>>(damageCoefficient => damageCoefficient + 0.6f);
+                if (error)
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: VoidRing IL Hook failed");
+                }
             };
         }
 

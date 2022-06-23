@@ -31,11 +31,17 @@ namespace RiskyMod.Items.Common
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "Crowbar")
-                    );
-                c.Remove();
-                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                    ))
+                {
+                    c.Remove();
+                    c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Crowbar TakeDamage IL Hook failed");
+                }
             };
 
             //Effect handled in OnCharacterDeath (for removal)
@@ -70,35 +76,40 @@ namespace RiskyMod.Items.Common
             {
                 ILCursor c = new ILCursor(il);
 
-                //Change ring threshold
-                c.GotoNext(MoveType.After,
+                if (c.TryGotoNext(MoveType.After,
                      x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "ElementalRingsReady"),
                      x => x.MatchCallvirt<CharacterBody>("HasBuff")
-                    );
-                c.GotoPrev(MoveType.After,
+                    )
+                &&
+                c.TryGotoPrev(MoveType.After,
                     x => x.MatchLdcR4(4f)
-                    );
-
-                c.Emit(OpCodes.Ldarg_1);//damageinfo
-                c.Emit(OpCodes.Ldloc_1);//attacker body
-                c.EmitDelegate<Func<float, DamageInfo, CharacterBody, float>>((ringThreshold, damageInfo, attackerBody) =>
+                    ))
                 {
-                    if (Crowbar.enabled && DamageAPI.HasModdedDamageType(damageInfo, Crowbar.CrowbarDamage) && damageInfo.attacker && attackerBody)
+                    c.Emit(OpCodes.Ldarg_1);//damageinfo
+                    c.Emit(OpCodes.Ldloc_1);//attacker body
+                    c.EmitDelegate<Func<float, DamageInfo, CharacterBody, float>>((ringThreshold, damageInfo, attackerBody) =>
                     {
-                        Inventory inv = attackerBody.inventory;
-                        if (inv)
+                        if (Crowbar.enabled && DamageAPI.HasModdedDamageType(damageInfo, Crowbar.CrowbarDamage) && damageInfo.attacker && attackerBody)
                         {
-                            int crowbarCount = inv.GetItemCount(RoR2Content.Items.Crowbar);
-                            if (crowbarCount > 0)
+                            Inventory inv = attackerBody.inventory;
+                            if (inv)
                             {
-                                ringThreshold *= Crowbar.GetCrowbarMult(crowbarCount);
+                                int crowbarCount = inv.GetItemCount(RoR2Content.Items.Crowbar);
+                                if (crowbarCount > 0)
+                                {
+                                    ringThreshold *= Crowbar.GetCrowbarMult(crowbarCount);
+                                }
                             }
                         }
-                    }
 
-                    if (damageInfo.damageType.HasFlag(DamageType.DoT)) ringThreshold = Mathf.Infinity;
-                    return ringThreshold;
-                });
+                        if (damageInfo.damageType.HasFlag(DamageType.DoT)) ringThreshold = Mathf.Infinity;
+                        return ringThreshold;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Crowbar OnHitEnemy IL Hook failed");
+                }
             };
 
             TakeDamage.ModifyInitialDamageInventoryActions += CrowbarDamageBoost;

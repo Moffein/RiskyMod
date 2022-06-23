@@ -21,16 +21,22 @@ namespace RiskyMod.Tweaks
             IL.RoR2.ShrineBloodBehavior.AddShrineStack += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                     x => x.MatchStloc(1)
-                    );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<uint, ShrineBloodBehavior, uint>>((cost, self) =>
+                    ))
                 {
-                    float mult = (float)self.purchaseInteraction.cost / 50f;
-                    int newCost = (int)(chestCost * mult);
-                    return (uint)Mathf.Max((int)cost, newCost);
-                });
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<uint, ShrineBloodBehavior, uint>>((cost, self) =>
+                    {
+                        float mult = (float)self.purchaseInteraction.cost / 50f;
+                        int newCost = (int)(chestCost * mult);
+                        return (uint)Mathf.Max((int)cost, newCost);
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: BloodShrineMinReward IL Hook failed");
+                }
             };
         }
     }

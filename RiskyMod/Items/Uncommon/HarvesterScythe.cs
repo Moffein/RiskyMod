@@ -22,11 +22,17 @@ namespace RiskyMod.Items.Uncommon
             IL.RoR2.GlobalEventManager.OnCrit += (il) =>
 			{
 				ILCursor c = new ILCursor(il);
-				c.GotoNext(
-					 x => x.MatchLdsfld(typeof(RoR2Content.Items), "HealOnCrit")
-					);
-                c.Remove();
-                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+				if(c.TryGotoNext(
+                     x => x.MatchLdsfld(typeof(RoR2Content.Items), "HealOnCrit")
+                    ))
+                {
+                    c.Remove();
+                    c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: HarvesterScythe IL Hook failed");
+                }
             };
 
             scytheBuff = SneedUtils.SneedUtils.CreateBuffDef(
@@ -44,15 +50,21 @@ namespace RiskyMod.Items.Uncommon
             IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "LifeSteal")
-                    );
-                c.Index += 2;
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<bool, CharacterBody, bool>>((hasBuff, self) =>
+                    ))
                 {
-                    return hasBuff || self.HasBuff(HarvesterScythe.scytheBuff);
-                });
+                    c.Index += 2;
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<bool, CharacterBody, bool>>((hasBuff, self) =>
+                    {
+                        return hasBuff || self.HasBuff(HarvesterScythe.scytheBuff);
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: HarvesterScythe UpdateAllTemporaryVisualEffects IL Hook failed");
+                }
             };
 
         }

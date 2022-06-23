@@ -21,11 +21,17 @@ namespace RiskyMod.Items.Uncommon
             IL.RoR2.CharacterBody.AddMultiKill += (il) =>
              {
                  ILCursor c = new ILCursor(il);
-                 c.GotoNext(
+                 if(c.TryGotoNext(
                       x => x.MatchLdsfld(typeof(RoR2Content.Items), "WarCryOnMultiKill")
-                     );
-                 c.Remove();
-                 c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                     ))
+                 {
+                     c.Remove();
+                     c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                 }
+                 else
+                 {
+                     UnityEngine.Debug.LogError("RiskyMod: Berzerker AddMultiKill IL Hook failed");
+                 }
              };
 
             berzerkBuff = SneedUtils.SneedUtils.CreateBuffDef(
@@ -43,15 +49,21 @@ namespace RiskyMod.Items.Uncommon
             IL.RoR2.CharacterBody.OnClientBuffsChanged += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "WarCryBuff")
-                    );
-                c.Index += 2;
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<bool, CharacterBody, bool>>((hasWarCry, self) =>
+                    ))
                 {
-                    return hasWarCry || self.HasBuff(Berzerker.berzerkBuff);
-                });
+                    c.Index += 2;
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<bool, CharacterBody, bool>>((hasWarCry, self) =>
+                    {
+                        return hasWarCry || self.HasBuff(Berzerker.berzerkBuff);
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Berzerker OnClientBuffsChanged IL Hook failed");
+                }
             };
         }
         private static void ModifyItem()

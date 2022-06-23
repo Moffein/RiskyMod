@@ -13,14 +13,20 @@ namespace RiskyMod.Survivors.Croco
             IL.RoR2.DotController.AddDot += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdcR4(50f)
-                    );
-                c.Index += 2;
-                c.EmitDelegate<Func<float, float>>(orig =>
+                    ))
                 {
-                    return float.MaxValue;
-                });
+                    c.Index += 2;
+                    c.EmitDelegate<Func<float, float>>(orig =>
+                    {
+                        return float.MaxValue;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Croco RemovePoisonDamageCap IL Hook failed");
+                }
             };
         }
     }

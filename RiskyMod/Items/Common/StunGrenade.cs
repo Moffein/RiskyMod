@@ -14,15 +14,21 @@ namespace RiskyMod.Items.Common
             IL.RoR2.SetStateOnHurt.OnTakeDamageServer += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(MoveType.After,
+                if(c.TryGotoNext(MoveType.After,
                      x => x.MatchCall(typeof(RoR2.Util), "ConvertAmplificationPercentageIntoReductionPercentage")
-                    );
-                c.Emit(OpCodes.Ldloc_3);    //ItemCount
-                c.Emit(OpCodes.Ldarg_1);    //DamageReport
-                c.EmitDelegate<Func<float, int, DamageReport, float>>((origChance, itemCount, damageReport) =>
+                    ))
                 {
-                    return itemCount * SetStateOnHurt.stunChanceOnHitBaseChancePercent * damageReport.damageInfo.procCoefficient;
-                });
+                    c.Emit(OpCodes.Ldloc_3);    //ItemCount
+                    c.Emit(OpCodes.Ldarg_1);    //DamageReport
+                    c.EmitDelegate<Func<float, int, DamageReport, float>>((origChance, itemCount, damageReport) =>
+                    {
+                        return itemCount * SetStateOnHurt.stunChanceOnHitBaseChancePercent * damageReport.damageInfo.procCoefficient;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: StunGrenade IL Hook failed");
+                }
             };
         }
     }

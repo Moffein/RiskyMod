@@ -47,11 +47,17 @@ namespace RiskyMod.Items.DLC1.Boss
                 IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
-                    c.GotoNext(
+                    if(c.TryGotoNext(
                          x => x.MatchLdsfld(typeof(DLC1Content.Items), "MinorConstructOnKill")
-                        );
-                    c.Remove();
-                    c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                        ))
+                    {
+                        c.Remove();
+                        c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogError("RiskyMod: DefenseNucleus OnCharacterDeath IL Hook failed");
+                    }
                 };
 
                 SharedHooks.OnCharacterDeath.OnCharacterDeathInventoryActions += SpawnEliteConstruct;
@@ -61,40 +67,46 @@ namespace RiskyMod.Items.DLC1.Boss
                 IL.RoR2.Projectile.ProjectileSpawnMaster.SpawnMaster += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
-                    c.GotoNext(
+                    if(c.TryGotoNext(
                          x => x.MatchCallvirt<DirectorCore>("TrySpawnObject")
-                        );
-                    c.Emit(OpCodes.Ldarg_0);    //ProjectileSpawnMaster (self)
-                    c.Emit(OpCodes.Ldloc_2);    //CharacterBody
-                    c.EmitDelegate<Func<DirectorSpawnRequest, ProjectileSpawnMaster, CharacterBody, DirectorSpawnRequest>>((directorSpawnRequest, self, ownerBody) =>
+                        ))
                     {
-                        if (self.spawnCard == DefenseNucleus.MinorConstructOnKillCard)
+                        c.Emit(OpCodes.Ldarg_0);    //ProjectileSpawnMaster (self)
+                        c.Emit(OpCodes.Ldloc_2);    //CharacterBody
+                        c.EmitDelegate<Func<DirectorSpawnRequest, ProjectileSpawnMaster, CharacterBody, DirectorSpawnRequest>>((directorSpawnRequest, self, ownerBody) =>
                         {
-                            //Master already gets nullchecked in the original method
-                            if (ownerBody && ownerBody.master && ownerBody.master.inventory)
+                            if (self.spawnCard == DefenseNucleus.MinorConstructOnKillCard)
                             {
-                                int stackCount = ownerBody.master.inventory.GetItemCount(DLC1Content.Items.MinorConstructOnKill) - 1;
-                                if (stackCount > 0)
+                                //Master already gets nullchecked in the original method
+                                if (ownerBody && ownerBody.master && ownerBody.master.inventory)
                                 {
-                                    directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult spawnResult)
+                                    int stackCount = ownerBody.master.inventory.GetItemCount(DLC1Content.Items.MinorConstructOnKill) - 1;
+                                    if (stackCount > 0)
                                     {
-                                        if (spawnResult.success)
+                                        directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult spawnResult)
                                         {
-                                            Inventory allyInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
-
-                                            if (allyInv && stackCount > 0)
+                                            if (spawnResult.success)
                                             {
-                                                allyInv.GiveItem(RoR2Content.Items.BoostDamage, 10 * stackCount);
-                                                allyInv.GiveItem(RoR2Content.Items.BoostHp, 3 * stackCount);
+                                                Inventory allyInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
+
+                                                if (allyInv && stackCount > 0)
+                                                {
+                                                    allyInv.GiveItem(RoR2Content.Items.BoostDamage, 10 * stackCount);
+                                                    allyInv.GiveItem(RoR2Content.Items.BoostHp, 3 * stackCount);
+                                                }
                                             }
-                                        }
-                                    }));
+                                        }));
+                                    }
                                 }
+                                directorSpawnRequest.ignoreTeamMemberLimit = DefenseNucleus.ignoreAllyCap;
                             }
-                            directorSpawnRequest.ignoreTeamMemberLimit = DefenseNucleus.ignoreAllyCap;
-                        }
-                        return directorSpawnRequest;
-                    });
+                            return directorSpawnRequest;
+                        });
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogError("RiskyMod: DefenseNucleus SpawnMaster IL Hook failed");
+                    }
                 };
             }
         }

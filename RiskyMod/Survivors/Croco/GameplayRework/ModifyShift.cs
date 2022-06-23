@@ -24,16 +24,22 @@ namespace RiskyMod.Survivors.Croco
             IL.EntityStates.Croco.BaseLeap.DetonateAuthority += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<BlastAttack>("Fire")
-                    );
-                c.EmitDelegate<Func<BlastAttack, BlastAttack>>(orig =>
+                    ))
                 {
-                    orig.damageType = DamageType.Stun1s;
-                    orig.AddModdedDamageType(SharedDamageTypes.AntiFlyingForce);
-                    orig.AddModdedDamageType(SharedDamageTypes.CrocoBlight6s);
-                    return orig;
-                });
+                    c.EmitDelegate<Func<BlastAttack, BlastAttack>>(orig =>
+                    {
+                        orig.damageType = DamageType.Stun1s;
+                        orig.AddModdedDamageType(SharedDamageTypes.AntiFlyingForce);
+                        orig.AddModdedDamageType(SharedDamageTypes.CrocoBlight6s);
+                        return orig;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Croco ModifyShift BaseLeap IL Hook failed");
+                }
             };
         }
 
@@ -58,18 +64,24 @@ namespace RiskyMod.Survivors.Croco
             IL.EntityStates.Croco.ChainableLeap.DoImpactAuthority += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchStloc(0)
-                    );
-                c.Emit(OpCodes.Ldarg_0);    //self
-                c.EmitDelegate<Func<BlastAttack.Result, EntityStates.Croco.ChainableLeap, BlastAttack.Result>>((result, self) =>
+                    ))
                 {
-                    self.skillLocator.primary.RunRecharge((float)result.hitCount * cdr);
-                    self.skillLocator.secondary.RunRecharge((float)result.hitCount * cdr);
-                    self.skillLocator.utility.RunRecharge((float)result.hitCount * cdr);
-                    self.skillLocator.special.RunRecharge((float)result.hitCount * cdr);
-                    return result;
-                });
+                    c.Emit(OpCodes.Ldarg_0);    //self
+                    c.EmitDelegate<Func<BlastAttack.Result, EntityStates.Croco.ChainableLeap, BlastAttack.Result>>((result, self) =>
+                    {
+                        self.skillLocator.primary.RunRecharge((float)result.hitCount * cdr);
+                        self.skillLocator.secondary.RunRecharge((float)result.hitCount * cdr);
+                        self.skillLocator.utility.RunRecharge((float)result.hitCount * cdr);
+                        self.skillLocator.special.RunRecharge((float)result.hitCount * cdr);
+                        return result;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Croco ModifyShift ChainableLeap IL Hook failed");
+                }
             };
         }
     }

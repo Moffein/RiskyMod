@@ -46,19 +46,25 @@ namespace RiskyMod.Survivors.Captain
             IL.EntityStates.Captain.Weapon.CallSupplyDropBase.OnEnter += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                     x => x.MatchCall<NetworkServer>("Spawn")
-                   );
-                c.Emit(OpCodes.Ldarg_0);
-                c.EmitDelegate<Func<GameObject, EntityStates.Captain.Weapon.CallSupplyDropBase, GameObject>>((beacon, self) =>
+                   ))
                 {
-                    CaptainDeployableManager cdm = self.gameObject.GetComponent<CaptainDeployableManager>();
-                    if (cdm)
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<GameObject, EntityStates.Captain.Weapon.CallSupplyDropBase, GameObject>>((beacon, self) =>
                     {
-                        cdm.AddBeacon(beacon, self.activatorSkillSlot);
-                    }
-                    return beacon;
-                });
+                        CaptainDeployableManager cdm = self.gameObject.GetComponent<CaptainDeployableManager>();
+                        if (cdm)
+                        {
+                            cdm.AddBeacon(beacon, self.activatorSkillSlot);
+                        }
+                        return beacon;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: BeaconRework IL Hook failed");
+                }
             };
 
             On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>

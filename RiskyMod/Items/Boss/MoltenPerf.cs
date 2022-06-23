@@ -26,33 +26,46 @@ namespace RiskyMod.Items.Boss
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
+                bool error = true;
+
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "FireballsOnHit")
-                    );
-                c.GotoNext(
+                    )
+                &&
+                c.TryGotoNext(
                      x => x.MatchLdfld<DamageInfo>("damage")
-                    );
-                c.Index -= 6;
-                c.Next.Operand = 1.8f;
-                c.Index += 4;
-                c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
+                    ))
                 {
-                    return damageCoefficient + 1.2f;
-                });
-
-
-                if (RiskyMod.disableProcChains)
-                {
-                    c.GotoNext(
-                        x => x.MatchLdstr("Prefabs/Projectiles/FireMeatBall")
-                        );
-                    c.Index += 2;
-                    c.EmitDelegate<Func<GameObject, GameObject>>((oldPrefab) =>
+                    c.Index -= 6;
+                    c.Next.Operand = 1.8f;
+                    c.Index += 4;
+                    c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
                     {
-                        return MoltenPerf.meatballPrefab;
+                        return damageCoefficient + 1.2f;
                     });
+
+
+                    if (RiskyMod.disableProcChains)
+                    {
+                        if (c.TryGotoNext(
+                            x => x.MatchLdstr("Prefabs/Projectiles/FireMeatBall")
+                            ))
+                        {
+                            c.Index += 2;
+                            c.EmitDelegate<Func<GameObject, GameObject>>((oldPrefab) =>
+                            {
+                                return MoltenPerf.meatballPrefab;
+                            });
+                        }
+                    }
+                    error = false;
                 }
+
+               if (error)
+               {
+                    UnityEngine.Debug.LogError("RiskyMod: MoltenPerf IL Hook failed");
+               }
             };
 
             if (RiskyMod.disableProcChains)

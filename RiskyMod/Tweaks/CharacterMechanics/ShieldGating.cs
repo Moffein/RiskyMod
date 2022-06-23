@@ -22,48 +22,54 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchLdloc(7),
                      x => x.MatchLdarg(0),
                      x => x.MatchLdfld<HealthComponent>("shield"),
                      x => x.MatchSub(),
                      x => x.MatchStloc(7),
                      x => x.MatchLdarg(0)
-                    );
-                c.Index += 4;
-                c.Emit(OpCodes.Ldarg_0);
-                c.Emit(OpCodes.Ldarg_1);
-                c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((remainingDamage, self, damageInfo) =>
+                    ))
                 {
-                    bool bypassShield = (damageInfo.damageType & DamageType.BypassArmor) == DamageType.BypassArmor
-                    || (damageInfo.damageType & DamageType.BypassOneShotProtection) == DamageType.BypassOneShotProtection
-                    || (damageInfo.damageType & DamageType.BypassBlock) == DamageType.BypassBlock;
-
-                    bool shieldOnly = self.body.HasBuff(RoR2Content.Buffs.AffixLunar)
-                    || (self.body.inventory && self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
-
-                    bool cursed = self.body.cursePenalty > 1f;  //||self.body.isGlass
-
-                    bool isPlayerTeam = self.body && self.body.teamComponent && (self.body.teamComponent.teamIndex == TeamIndex.Player || self.body.isPlayerControlled);
-
-                    if (!bypassShield && isPlayerTeam)
+                    c.Index += 4;
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.Emit(OpCodes.Ldarg_1);
+                    c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((remainingDamage, self, damageInfo) =>
                     {
-                        if (!DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage) || (shieldOnly && !cursed))
+                        bool bypassShield = (damageInfo.damageType & DamageType.BypassArmor) == DamageType.BypassArmor
+                        || (damageInfo.damageType & DamageType.BypassOneShotProtection) == DamageType.BypassOneShotProtection
+                        || (damageInfo.damageType & DamageType.BypassBlock) == DamageType.BypassBlock;
+
+                        bool shieldOnly = self.body.HasBuff(RoR2Content.Buffs.AffixLunar)
+                        || (self.body.inventory && self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
+
+                        bool cursed = self.body.cursePenalty > 1f;  //||self.body.isGlass
+
+                        bool isPlayerTeam = self.body && self.body.teamComponent && (self.body.teamComponent.teamIndex == TeamIndex.Player || self.body.isPlayerControlled);
+
+                        if (!bypassShield && isPlayerTeam)
                         {
-                            float duration = 0.1f;
-
-                            //ShieldOnly increases grace period since it's your only form of defense against 1shots.
-                            if (shieldOnly)
+                            if (!DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage) || (shieldOnly && !cursed))
                             {
-                                duration = 0.5f;
-                            }
+                                float duration = 0.1f;
 
-                            self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
-                            return 0f;
+                                //ShieldOnly increases grace period since it's your only form of defense against 1shots.
+                                if (shieldOnly)
+                                {
+                                    duration = 0.5f;
+                                }
+
+                                self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
+                                return 0f;
+                            }
                         }
-                    }
-                    return remainingDamage;
-                });
+                        return remainingDamage;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: ShieldGating TakeDamage IL Hook failed");
+                }
             };
         }
 
@@ -74,40 +80,58 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             IL.EntityStates.VagrantMonster.FireMegaNova.Detonate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<BlastAttack>("Fire")
-                    );
-                c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                    ))
                 {
-                    blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                    return blastAttack;
-                });
+                    c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                    {
+                        blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                        return blastAttack;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: ShieldGating IgnoreShieldGate Vagrant IL Hook failed");
+                }
             };
 
             IL.EntityStates.VagrantNovaItem.DetonateState.OnEnter += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<BlastAttack>("Fire")
-                    );
-                c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                    ))
                 {
-                    blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                    return blastAttack;
-                });
+                    c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                    {
+                        blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                        return blastAttack;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: ShieldGating IgnoreShieldGate VagrantNovaItem IL Hook failed");
+                }
             };
 
             IL.EntityStates.ImpBossMonster.BlinkState.ExitCleanup += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<BlastAttack>("Fire")
-                    );
-                c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                    ))
                 {
-                    blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                    return blastAttack;
-                });
+                    c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                    {
+                        blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                        return blastAttack;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: ShieldGating IgnoreShieldGate ImpBossMonster IL Hook failed");
+                }
             };
 
             LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/RoboBallDelayKnockupProjectile").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
@@ -124,14 +148,20 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             IL.EntityStates.BrotherMonster.WeaponSlam.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<BlastAttack>("Fire")
-                    );
-                c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                    ))
                 {
-                    blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                    return blastAttack;
-                });
+                    c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
+                    {
+                        blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                        return blastAttack;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: ShieldGating IgnoreShieldGate BrotherMonster IL Hook failed");
+                }
             };
 
             LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateLeft").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
@@ -140,14 +170,20 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             IL.EntityStates.VoidRaidCrab.SpinBeamAttack.FireBeamBulletAuthority += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<BulletAttack>("Fire")
-                    );
-                c.EmitDelegate<Func<BulletAttack, BulletAttack>>((bulletAttack) =>
+                    ))
                 {
-                    bulletAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                    return bulletAttack;
-                });
+                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>((bulletAttack) =>
+                    {
+                        bulletAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                        return bulletAttack;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: ShieldGating IgnoreShieldGate VoidRaidCrab IL Hook failed");
+                }
             };
         }
     }

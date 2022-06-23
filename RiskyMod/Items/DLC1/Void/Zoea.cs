@@ -67,14 +67,20 @@ namespace RiskyMod.Items.DLC1.Void
             IL.RoR2.VoidMegaCrabItemBehavior.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchCallvirt<DirectorCore>("TrySpawnObject")
-                    );
-                c.EmitDelegate<Func<DirectorSpawnRequest, DirectorSpawnRequest>>((directorSpawnRequest) =>
+                    ))
                 {
-                    directorSpawnRequest.ignoreTeamMemberLimit = Zoea.ignoreAllyCap;
-                    return directorSpawnRequest;
-                });
+                    c.EmitDelegate<Func<DirectorSpawnRequest, DirectorSpawnRequest>>((directorSpawnRequest) =>
+                    {
+                        directorSpawnRequest.ignoreTeamMemberLimit = Zoea.ignoreAllyCap;
+                        return directorSpawnRequest;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Zoea IL Hook failed");
+                }
             };
         }
     }

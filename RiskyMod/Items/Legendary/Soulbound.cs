@@ -15,11 +15,17 @@ namespace RiskyMod.Items.Legendary
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                c.GotoNext(
+                if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "Talisman")
-                    );
-                c.Remove();
-                c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                    ))
+                {
+                    c.Remove();
+                    c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Soulbound IL Hook failed");
+                }
             };
 
             AssistManager.HandleAssistInventoryActions += OnKillEffect;
