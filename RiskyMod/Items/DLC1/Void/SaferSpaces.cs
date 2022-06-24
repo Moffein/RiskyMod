@@ -12,9 +12,6 @@ namespace RiskyMod.Items.DLC1.Void
         public static bool enabled = true;
         public SaferSpaces()
         {
-            //if (!enabled) return;
-            ItemsCore.ModifyItemDefActions += ModifyItem;
-
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -36,11 +33,6 @@ namespace RiskyMod.Items.DLC1.Void
                     UnityEngine.Debug.LogError("RiskyMod: SaferSpaces IL Hook failed");
                 }
             };
-        }
-
-        private void ModifyItem()
-        {
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, DLC1Content.Items.BearVoid);
         }
     }
 }

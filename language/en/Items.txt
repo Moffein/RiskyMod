@@ -70,8 +70,6 @@
 	"ITEM_FALLBOOTS_PICKUP_RISKYMOD": "Increase jump height and air control. Hold \'Interact\' to slam down to the ground.",
 	"ITEM_FALLBOOTS_DESC_RISKYMOD": "Increase <style=cIsUtility>jump height</style> and <style=cIsUtility>air control</style>. Creates a <style=cIsDamage>5m-100m</style> radius <style=cIsDamage>kinetic explosion</style> on hitting the ground, dealing <style=cIsDamage>1000%-10000%</style> <style=cStack>(+600%-6000% per stack)</style> base damage that scales up with <style=cIsDamage>fall distance</style>. Recharges every <style=cIsDamage>10</style> seconds.",
 	
-	"ITEM_BOUNCENEARBY_DESC_RISKYMOD": "<style=cIsDamage>20%</style> <style=cStack>(+20% per stack)</style> chance on hit to <style=cIsDamage>fire homing hooks</style> at up to <style=cIsDamage>10</style> <style=cStack>(+5 per stack)</style> enemies for <style=cIsDamage>100%</style> TOTAL damage.",
-	
 	"ITEM_GHOSTONKILL_PICKUP_RISKYMOD": "Killing an enemy summons a ghost. Recharges over time.",
 	"ITEM_GHOSTONKILL_DESC_RISKYMOD": "Killing an enemy <style=cIsDamage>spawns a ghost</style> of the killed enemy with <style=cIsDamage>1500%</style> <style=cStack>(+450% per stack)</style> damage. Lasts <style=cIsDamage>30s</style> <style=cStack>(+30s per stack)</style>. Recharges every <style=cIsUtility>20</style> seconds. Can have up to <style=cIsUtility>3</style> ghosts at a time.", 
 	
@@ -95,8 +93,6 @@
 	"ITEM_MISSILEVOID_DESC_RISKYMOD": "Gain a <style=cIsHealing>shield</style> equal to <style=cIsHealing>10%</style> of your maximum health. While you have a <style=cIsHealing>shield</style>, hitting an enemy fires a missile that deals <style=cIsDamage>40%</style> <style=cStack>(+24% per stack)</style> TOTAL damage. <style=cIsVoid>Corrupts all AtG Missile Mk. 1s</style>.",
 	
 	"ITEM_EXPLODEONDEATHVOID_DESC_RISKYMOD": "Upon hitting an enemy above <style=cIsDamage>90% health</style>, spawn a <style=cIsDamage>lava pillar</style> in a <style=cIsDamage>12m</style> radius for <style=cIsDamage>350%</style> <style=cStack>(+280% per stack)</style> base damage. <style=cIsVoid>Corrupts all Will-o'-the-wisps</style>.",
-	
-	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>Blocks</style> incoming damage once. Recharges after <style=cIsUtility>15 seconds</style> <style=cStack>(-7% per stack)</style>. <style=cIsVoid>Corrupts all Tougher Times</style>.",
 	
 	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Hits that deal <style=cIsDamage>more than 400% damage</style> also fire a black hole that <style=cIsUtility>draws enemies within 15m into its center</style>. Lasts <style=cIsUtility>5</style> seconds before collapsing, dealing <style=cIsDamage>150%</style> <style=cStack>(+90% per stack)</style> TOTAL damage. Recharges every <style=cIsUtility>15</style> seconds.",
 	
