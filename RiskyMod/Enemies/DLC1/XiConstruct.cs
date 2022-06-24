@@ -17,7 +17,7 @@ namespace RiskyMod.Enemies.DLC1
 
             BuffDef sourceBuff = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/ArmorReductionOnHit/bdPulverized.asset").WaitForCompletion();
             GameObject enemyObject = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MajorAndMinorConstruct/MegaConstructBody.prefab").WaitForCompletion();
-            VulnerableDebuff = SneedUtils.SneedUtils.CreateBuffDef("RiskyModXiConstructVulnerableDebuff", false, false, false, new Color(0.839f * 0.75f, 0.788f * 0.75f, 0.227f * 0.75f), sourceBuff.iconSprite);
+            VulnerableDebuff = SneedUtils.SneedUtils.CreateBuffDef("RiskyModXiConstructVulnerableDebuff", false, false, false, new Color(0.9f * 140f / 255f, 0.9f * 185f / 255f, 0.9f * 191f / 255f), sourceBuff.iconSprite);
 
             ModifyFinalDamage.ModifyFinalDamageActions += VulnerableDebuffAction;
 

@@ -132,6 +132,7 @@ namespace RiskyMod.Survivors.Commando
                 barrageDef.skillNameToken = "COMMANDO_SPECIAL_NAME";
                 barrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD";
                 barrageDef.stockToConsume = 1;
+                SneedUtils.SneedUtils.FixSkillName(barrageDef);
                 Content.Content.skillDefs.Add(barrageDef);
                 sk.special.skillFamily.variants[0].skillDef = barrageDef;
                 OnHitAll.HandleOnHitAllActions += FireBarrage.SuppressiveFireAOE;
@@ -169,6 +170,7 @@ namespace RiskyMod.Survivors.Commando
                 grenadeDef.skillNameToken = "COMMANDO_SPECIAL_ALT1_NAME";
                 grenadeDef.skillDescriptionToken = "COMMANDO_SPECIAL_ALT1_DESCRIPTION_RISKYMOD";
                 grenadeDef.stockToConsume = 1;
+                SneedUtils.SneedUtils.FixSkillName(grenadeDef);
                 Content.Content.skillDefs.Add(grenadeDef);
                 sk.special.skillFamily.variants[1].skillDef = grenadeDef;
 

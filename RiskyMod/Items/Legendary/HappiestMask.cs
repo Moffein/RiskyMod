@@ -82,7 +82,7 @@ namespace RiskyMod.Items.Legendary
             int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.GhostOnKill);
             if (itemCount > 0)
             {
-                if (attackerBody.HasBuff(GhostReady.buffIndex))
+                if (!victimBody.bodyFlags.HasFlag(CharacterBody.BodyFlags.Masterless) && attackerBody.HasBuff(GhostReady.buffIndex))
                 {
                     TeamIndex attackerTeam = attackerBody.teamComponent ? attackerBody.teamComponent.teamIndex : TeamIndex.None;
                     TeamIndex victimTeam = victimBody.teamComponent ? victimBody.teamComponent.teamIndex : TeamIndex.None;
@@ -107,7 +107,7 @@ namespace RiskyMod.Items.Legendary
         {
             if (!NetworkServer.active)
             {
-                Debug.LogWarning("[Server] function 'RoR2.CharacterBody RoR2.Util::TryToCreateGhost(RoR2.CharacterBody, RoR2.CharacterBody, int)' called on client");
+                Debug.LogWarning("[Server] function 'HappiestMask SpawnMaskGhost' called on client");
                 return null;
             }
             if (!targetBody)
@@ -148,7 +148,7 @@ namespace RiskyMod.Items.Legendary
 
                     if (ownerBody && ownerBody.teamComponent && ownerBody.teamComponent.teamIndex == TeamIndex.Player)
                     {
-                        inventory.GiveItem(RoR2Content.Items.BoostDamage.itemIndex, 105 + 45 * itemCount);
+                        inventory.GiveItem(RoR2Content.Items.BoostDamage.itemIndex, 56 + 24 * itemCount);
                         inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 30 * itemCount);
                     }
                     else //Handle enemy-spawned ghosts
