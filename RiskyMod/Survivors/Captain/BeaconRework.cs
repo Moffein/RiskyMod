@@ -1,4 +1,4 @@
-﻿using HG;
+﻿using EntityStates;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
@@ -7,6 +7,7 @@ using RoR2.Orbs;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
@@ -19,6 +20,7 @@ namespace RiskyMod.Survivors.Captain
         {
             public static SkillDef BeaconResupply;
             public static SkillDef BeaconHacking;
+            public static SkillDef BeaconRecharge;
         }
 
         public static bool healCooldown = true;
@@ -26,18 +28,25 @@ namespace RiskyMod.Survivors.Captain
         public static bool shockCooldown = true;
         public static bool resupplyCooldown = true;
 
+        public static bool hackDisable = false;
         public static bool hackChanges= true;
         public static bool shockChanges = true;
         public static bool resupplyChanges = true;
+
+        public static bool skillRechargeDisable = false;
+        public static bool skillRechargeCooldown = true;
+
+        public static SkillFamily BeaconFamily1 = LegacyResourcesAPI.Load<SkillFamily>("skilldefs/captainbody/CaptainSupplyDrop1SkillFamily");
+        public static SkillFamily BeaconFamily2 = LegacyResourcesAPI.Load<SkillFamily>("skilldefs/captainbody/CaptainSupplyDrop2SkillFamily");
 
         public BeaconRework(SkillLocator sk)
         {
             Skills.BeaconResupply = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropEquipmentRestock.asset").WaitForCompletion();
             Skills.BeaconHacking = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropHacking.asset").WaitForCompletion();
-            if (resupplyCooldown) AddCooldown(Skills.BeaconResupply);
-            if (hackCooldown) AddCooldown(Skills.BeaconHacking);
-            if (healCooldown) AddCooldown("RoR2/Base/Captain/CallSupplyDropHealing.asset");
-            if (shockCooldown) AddCooldown("RoR2/Base/Captain/CallSupplyDropShocking.asset");
+            if (resupplyCooldown) AddCooldown(Skills.BeaconResupply, 60f);
+            if (hackCooldown) AddCooldown(Skills.BeaconHacking, 80f);
+            if (healCooldown) AddCooldown("RoR2/Base/Captain/CallSupplyDropHealing.asset", 60f);
+            if (shockCooldown) AddCooldown("RoR2/Base/Captain/CallSupplyDropShocking.asset", 60f);
 
             sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD";
 
@@ -85,16 +94,16 @@ namespace RiskyMod.Survivors.Captain
             ModifyBeacons(sk);
         }
 
-        private void AddCooldown(string address)
+        private void AddCooldown(string address, float cooldown)
         {
             SkillDef sd = Addressables.LoadAssetAsync<SkillDef>(address).WaitForCompletion();
-            AddCooldown(sd);
+            AddCooldown(sd, cooldown);
         }
 
-        private void AddCooldown(SkillDef sd)
+        private void AddCooldown(SkillDef sd, float cooldown)
         {
             sd.rechargeStock = 1;
-            sd.baseRechargeInterval = 60f;
+            sd.baseRechargeInterval = cooldown;
             sd.baseMaxStock = 1;
             sd.beginSkillCooldownOnSkillEnd = false;
 
@@ -111,6 +120,7 @@ namespace RiskyMod.Survivors.Captain
             ModifyBeaconResupply(sk);
             ModifyBeaconHacking(sk);
             ModifyBeaconShocking(sk);
+            AddBeaconSkillRecharge(sk);
         }
 
         private void ModifyBeaconShocking(SkillLocator sk)
@@ -118,6 +128,25 @@ namespace RiskyMod.Survivors.Captain
             if (!shockChanges) return;
             //Debug.Log("Shock Radius: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.CaptainSupplyDrop.ShockZoneMainState", "shockRadius"));//10, same as healing
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.CaptainSupplyDrop.ShockZoneMainState", "shockRadius", "15");
+
+            IL.EntityStates.CaptainSupplyDrop.ShockZoneMainState.Shock += (il) =>
+            {
+                 ILCursor c = new ILCursor(il);
+                 if (c.TryGotoNext(
+                     x => x.MatchCallvirt<BlastAttack>("Fire")
+                    ))
+                 {
+                    c.EmitDelegate<Func<BlastAttack, BlastAttack>>(blastAttack =>
+                    {
+                        blastAttack.AddModdedDamageType(SharedDamageTypes.Slow50For5s);
+                        return blastAttack;
+                    });
+                 }
+                 else
+                 {
+                     UnityEngine.Debug.LogError("RiskyMod: BeaconRework Shock IL Hook failed");
+                 }
+            };
         }
 
         private void ModifyBeaconResupply(SkillLocator sk)
@@ -129,20 +158,145 @@ namespace RiskyMod.Survivors.Captain
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconEquipmentRestoreMain));
             Content.Content.networkedObjectPrefabs.Add(beaconPrefab);
         }
+
         private void ModifyBeaconHacking(SkillLocator sk)
         {
-            if (!hackChanges) return;
-            GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, Hacking.prefab").WaitForCompletion().InstantiateClone("RiskyMod_CaptainSupplySkillRestock", true); ;//, Hacking
+            if (hackDisable)
+            {
+                BeaconFamily1.variants = BeaconFamily1.variants.Where(v => v.skillDef.activationState.stateType != typeof(EntityStates.Captain.Weapon.CallSupplyDropHacking)).ToArray();
+                BeaconFamily2.variants = BeaconFamily2.variants.Where(v => v.skillDef.activationState.stateType != typeof(EntityStates.Captain.Weapon.CallSupplyDropHacking)).ToArray();
+            }
+            else
+            {
+                /*GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, Hacking.prefab").WaitForCompletion().InstantiateClone("RiskyMod_CaptainSupplyHack", true); ;//, Hacking
+                EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
+                esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconPriceReductionMain));
+                Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconPriceReductionMain));
+                Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconPriceReductionInProgress));
+                Content.Content.networkedObjectPrefabs.Add(beaconPrefab);
+
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Captain/EntityStates.Captain.Weapon.CallSupplyDropHacking.asset", "supplyDropPrefab", beaconPrefab);*/
+
+
+                SkillDef hackSkillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropHacking.asset").WaitForCompletion();
+                hackSkillDef.skillDescriptionToken = "CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD";
+
+                //Prevent already-hacked interactables from being re-hacked.
+                On.EntityStates.CaptainSupplyDrop.HackingMainState.PurchaseInteractionIsValidTarget += (orig, purchaseInteraction) =>
+                {
+                    bool flag = orig(purchaseInteraction) && !purchaseInteraction.GetComponent<HackMarker>();
+                    return flag;
+                };
+
+                //Change price once hacking is complete
+                IL.EntityStates.CaptainSupplyDrop.UnlockTargetState.OnEnter += (il) =>
+                {
+                    bool error = true;
+                    ILCursor c = new ILCursor(il);
+                    if (c.TryGotoNext(
+                        x => x.MatchCall<PurchaseInteraction>("set_Networkcost")
+                       ))
+                    {
+                        c.Emit(OpCodes.Ldarg_0);
+                        c.EmitDelegate<Func<int, EntityStates.CaptainSupplyDrop.UnlockTargetState, int>>((newCost, self) =>
+                        {
+                            newCost = self.target.cost;
+                            HackMarker hm = self.target.gameObject.GetComponent<HackMarker>();
+                            if (!hm)
+                            {
+                                hm = self.target.gameObject.AddComponent<HackMarker>();
+                                hm.purchaseInteraction = self.target;
+                                hm.owner = self.gameObject;
+                                hm.origCost = self.target.cost;
+                                hm.newCost = Math.Max(1, Mathf.FloorToInt(self.target.cost * HackMarker.costMult));
+                                newCost = hm.newCost;
+                            }
+                            return newCost;
+                        });
+                        if (c.TryGotoNext(
+                            x => x.MatchCallvirt<Interactor>("AttemptInteraction")
+                           ))
+                        {
+                            c.Emit(OpCodes.Ldarg_0);
+                            c.EmitDelegate<Func<GameObject, EntityStates.CaptainSupplyDrop.UnlockTargetState, GameObject>>((gameObject, self) =>
+                            {
+                                if (self.target.cost > 0)
+                                {
+                                    return null;
+                                }
+                                return gameObject;
+                            });
+                            error = false;
+                        }
+                    }
+
+                    if (error)
+                    {
+                        UnityEngine.Debug.LogError("RiskyMod: BeaconRework Hack UnlockTargetState IL Hook failed");
+                    }
+                };
+            }
+        }
+
+        private void AddBeaconSkillRecharge(SkillLocator sk)
+        {
+            if (skillRechargeDisable) return;
+
+            GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, Plating.prefab").WaitForCompletion().InstantiateClone("RiskyMod_CaptainSupplySkillRestock", true); ;//, Hacking
+            beaconPrefab.GetComponent<GenericDisplayNameProvider>().displayToken = "CAPTAIN_SUPPLY_SKILL_RESTOCK_NAME_RISKYMOD";
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
             esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
-
             Content.Content.networkedObjectPrefabs.Add(beaconPrefab);
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Captain.Weapon.CallSupplyDropHacking", "supplyDropPrefab", beaconPrefab);
-            Skills.BeaconHacking.skillDescriptionToken = "CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD";
+            EntityStates.RiskyMod.Captain.CallSupplyDropSkillRestock._supplyDropPrefab = beaconPrefab;
+
+            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.CallSupplyDropSkillRestock));
+            SkillDef skillRechargeDef = SkillDef.CreateInstance<SkillDef>();
+            skillRechargeDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.CallSupplyDropSkillRestock));
+            skillRechargeDef.activationStateMachineName = "Weapon";
+            skillRechargeDef.baseMaxStock = 1;
+            skillRechargeDef.baseRechargeInterval = 60f;
+            skillRechargeDef.beginSkillCooldownOnSkillEnd = false;
+            skillRechargeDef.canceledFromSprinting = false;
+            skillRechargeDef.dontAllowPastMaxStocks = true;
+            skillRechargeDef.forceSprintDuringState = false;
+            skillRechargeDef.fullRestockOnAssign = true;
+            skillRechargeDef.icon = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropHacking.asset").WaitForCompletion().icon;
+            skillRechargeDef.interruptPriority = EntityStates.InterruptPriority.PrioritySkill;
+            skillRechargeDef.isCombatSkill = true;
+            skillRechargeDef.keywordTokens = new string[] { };
+            skillRechargeDef.mustKeyPress = true;
+            skillRechargeDef.cancelSprintingOnActivation = true;
+            skillRechargeDef.rechargeStock = BeaconRework.skillRechargeCooldown ? 1 : 0;
+            skillRechargeDef.requiredStock = 1;
+            skillRechargeDef.skillName = "BeaconSkillRestock";
+            skillRechargeDef.skillNameToken = "CAPTAIN_SUPPLY_SKILL_RESTOCK_NAME_RISKYMOD";
+            skillRechargeDef.skillDescriptionToken = "CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD";
+            skillRechargeDef.stockToConsume = 1;
+            SneedUtils.SneedUtils.FixSkillName(skillRechargeDef);
+            Content.Content.skillDefs.Add(skillRechargeDef);
+            Skills.BeaconRecharge = skillRechargeDef;
+
+            SkillFamily beaconSkillFamily = BeaconFamily1;
+            Array.Resize(ref beaconSkillFamily.variants, beaconSkillFamily.variants.Length + 1);
+            beaconSkillFamily.variants[beaconSkillFamily.variants.Length - 1] = new SkillFamily.Variant
+            {
+                skillDef = skillRechargeDef,
+                viewableNode = new ViewablesCatalog.Node(skillRechargeDef.skillNameToken, false)
+            };
+
+            beaconSkillFamily = BeaconFamily2;
+            Array.Resize(ref beaconSkillFamily.variants, beaconSkillFamily.variants.Length + 1);
+            beaconSkillFamily.variants[beaconSkillFamily.variants.Length - 1] = new SkillFamily.Variant
+            {
+                skillDef = skillRechargeDef,
+                viewableNode = new ViewablesCatalog.Node(skillRechargeDef.skillNameToken, false)
+            };
+
+            SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/Base/Captain/EntityStates.Captain.Weapon.CallSupplyDropShocking.asset").WaitForCompletion());
 
             //Credits to DestroyedClone for this code
-            UnityEngine.Object.Destroy(beaconPrefab.GetComponent<ModelLocator>()?.modelTransform?.Find("Indicator").gameObject);
+            //UnityEngine.Object.Destroy(beaconPrefab.GetComponent<ModelLocator>()?.modelTransform?.Find("Indicator").gameObject);
         }
 
         public class CaptainDeployableManager : MonoBehaviour
@@ -205,6 +359,28 @@ namespace RiskyMod.Survivors.Captain
                 while (Beacon2Deployables.Count > 0)
                 {
                     UnityEngine.Object.Destroy(Beacon2Deployables.Dequeue());
+                }
+            }
+        }
+
+        public class HackMarker : MonoBehaviour
+        {
+            public static float costMult = 0.6f;
+
+            public int origCost;
+            public int newCost;
+            public GameObject owner;
+            public PurchaseInteraction purchaseInteraction;
+
+            public void FixedUpdate()
+            {
+                if (!owner)
+                {
+                    if (purchaseInteraction)
+                    {
+                        purchaseInteraction.cost = origCost;
+                    }
+                    Destroy(this);
                 }
             }
         }

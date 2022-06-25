@@ -127,7 +127,7 @@ namespace RiskyMod.Items.Uncommon
             int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Infusion);
             if (itemCount > 0)
             {
-                if ((victimBody.bodyFlags & CharacterBody.BodyFlags.Masterless) != CharacterBody.BodyFlags.Masterless)
+                if (!victimBody.bodyFlags.HasFlag(CharacterBody.BodyFlags.Masterless))
                 {
                     InfusionOrb infusionOrb = new InfusionOrb();
                     infusionOrb.origin = victimBody.corePosition;

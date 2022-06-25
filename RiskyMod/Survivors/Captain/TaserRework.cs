@@ -16,6 +16,7 @@ namespace RiskyMod.Survivors.Captain
             GameObject taserPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CaptainTazer").InstantiateClone("RiskyModCaptainTazer", true);
             DamageAPI.ModdedDamageTypeHolderComponent mdc = taserPrefab.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             mdc.Add(SharedDamageTypes.CaptainTaserSource);
+            mdc.Add(SharedDamageTypes.Slow50For5s);
 
             ProjectileDamage pd = taserPrefab.GetComponent<ProjectileDamage>();
             pd.damageType = DamageType.Shock5s;
