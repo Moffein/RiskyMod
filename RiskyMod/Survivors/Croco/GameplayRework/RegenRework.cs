@@ -12,15 +12,15 @@ namespace RiskyMod.Survivors.Croco
     public class RegenRework
     {
         public static BuffDef CrocoRegen2;
-        public static float regenDuration = 1.5f;
+        public static float regenDuration = 2f;
         private static float regenAmount;
-        private static float regenReductionOnHit = 0.36f;
+        //private static float regenReductionOnHit = 0f;
         private static float totalRegenReduction;
 
         public RegenRework()
         {
             regenAmount = 0.1f / regenDuration;
-            totalRegenReduction = regenDuration * regenReductionOnHit;
+            //totalRegenReduction = regenDuration * regenReductionOnHit;
 
             BuffDef bd = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/CrocoRegen");
             CrocoRegen2 = SneedUtils.SneedUtils.CreateBuffDef(
@@ -52,7 +52,7 @@ namespace RiskyMod.Survivors.Croco
                 }
             };
 
-            SharedHooks.OnHitEnemy.OnHitNoAttackerActions += DamageReducesRegen;
+            //SharedHooks.OnHitEnemy.OnHitNoAttackerActions += DamageReducesRegen;
             RecalculateStatsAPI.GetStatCoefficients += HandleStats;
 
             ReplaceM1Regen();
