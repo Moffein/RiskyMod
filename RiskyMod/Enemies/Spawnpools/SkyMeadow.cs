@@ -12,7 +12,10 @@ namespace RiskyMod.Enemies.Spawnpools
 
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.AlphaConstruct, DirectorAPI.Stage.SkyMeadow);
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.AlphaConstruct, DirectorAPI.Stage.SkyMeadowSimulacrum);
-            
+
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.XiConstruct, DirectorAPI.Stage.SkyMeadow);
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.XiConstruct, DirectorAPI.Stage.SkyMeadowSimulacrum);
+
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.BrassContraption, DirectorAPI.Stage.SkyMeadow);
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.BrassContraption, DirectorAPI.Stage.SkyMeadowSimulacrum);
 
@@ -25,8 +28,8 @@ namespace RiskyMod.Enemies.Spawnpools
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Imp, false, DirectorAPI.Stage.SkyMeadow);
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Imp, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
 
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.GolemBasic, false, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.GolemBasic, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
+            /*DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.GolemBasic, false, DirectorAPI.Stage.SkyMeadow);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.GolemBasic, false, DirectorAPI.Stage.SkyMeadowSimulacrum);*/
 
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.MagmaWorm, false, DirectorAPI.Stage.SkyMeadow);
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Reminder, false, DirectorAPI.Stage.SkyMeadowSimulacrum);

@@ -169,16 +169,6 @@ namespace RiskyMod.Survivors.Captain
             }
             else
             {
-                /*GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, Hacking.prefab").WaitForCompletion().InstantiateClone("RiskyMod_CaptainSupplyHack", true); ;//, Hacking
-                EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
-                esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconPriceReductionMain));
-                Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconPriceReductionMain));
-                Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconPriceReductionInProgress));
-                Content.Content.networkedObjectPrefabs.Add(beaconPrefab);
-
-                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Captain/EntityStates.Captain.Weapon.CallSupplyDropHacking.asset", "supplyDropPrefab", beaconPrefab);*/
-
-
                 SkillDef hackSkillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropHacking.asset").WaitForCompletion();
                 hackSkillDef.skillDescriptionToken = "CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD";
 
@@ -189,7 +179,7 @@ namespace RiskyMod.Survivors.Captain
                     return flag;
                 };
 
-                //Change price once hacking is complete
+                //Change price and mark the interactable once hacking is complete.
                 IL.EntityStates.CaptainSupplyDrop.UnlockTargetState.OnEnter += (il) =>
                 {
                     bool error = true;
@@ -314,6 +304,7 @@ namespace RiskyMod.Survivors.Captain
 
             public void FixedUpdate()
             {
+                //Undo price changes if the hack beacon is removed.
                 if (!owner)
                 {
                     if (purchaseInteraction)

@@ -13,6 +13,7 @@ namespace RiskyMod.Enemies.Spawnpools
 
             if (!enabled) return;
 
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Reminder, false, DirectorAPI.Stage.SirensCall);
             /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
             {
                 if (stage.stage == DirectorAPI.Stage.SirensCall)

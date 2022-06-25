@@ -22,6 +22,8 @@ namespace RiskyMod.Content.Enemies
         private void SetupBody()
         {
             bodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/lunargolembody").InstantiateClone("RiskyMod_LunarGolemSkyMeadow", true);
+            DeathRewards dr = bodyObject.GetComponent<DeathRewards>();
+            dr.logUnlockableDef = null;
             Content.bodyPrefabs.Add(bodyObject);
             ModifyStats(bodyObject);
 

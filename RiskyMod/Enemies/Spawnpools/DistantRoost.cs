@@ -14,6 +14,8 @@ namespace RiskyMod.Enemies.Spawnpools
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.LesserWisp, DirectorAPI.Stage.DistantRoost);
 
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Jellyfish, false, DirectorAPI.Stage.DistantRoost);
+
+            //TODO: FIGURE OUT HOW TO ONLY RUN THIS WHEN DLC IS ACTIVE
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.AlphaConstructLoop, false, DirectorAPI.Stage.DistantRoost);
 
             //Jellyfish are unique to Distant Roost, Wisps are unique to Titanic Plains.

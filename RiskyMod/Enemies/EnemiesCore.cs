@@ -15,7 +15,7 @@ namespace RiskyMod.Enemies
     public class EnemiesCore
     {
         public static bool modifyEnemies = true;
-        public static bool modifySpawns = false;
+        public static bool modifySpawns = true;
 
         public static void DisableRegen(GameObject enemyObject)
         {
@@ -101,6 +101,7 @@ namespace RiskyMod.Enemies
 
         public static CharacterSpawnCard Wisp;
         public static CharacterSpawnCard Jellyfish;
+        public static CharacterSpawnCard BlindPestSnowy;
 
         public static CharacterSpawnCard Imp;
         public static CharacterSpawnCard Vulture;
@@ -109,6 +110,7 @@ namespace RiskyMod.Enemies
         public static CharacterSpawnCard BeetleGuard;
         public static CharacterSpawnCard Mushrum;
         public static CharacterSpawnCard Bison;
+        public static CharacterSpawnCard ClayApothecary;
 
         public static CharacterSpawnCard Bronzong;
         public static CharacterSpawnCard GreaterWisp;
@@ -169,6 +171,9 @@ namespace RiskyMod.Enemies
 
             Reminder = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscelectricworm");
 
+            BlindPestSnowy = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/FlyingVermin/cscFlyingVerminSnowy.asset").WaitForCompletion();
+            ClayApothecary = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/ClayGrenadier/cscClayGrenadier.asset").WaitForCompletion();
+
             DirectorCards.Init();
         }
     }
@@ -184,6 +189,7 @@ namespace RiskyMod.Enemies
 
         public static DirectorAPI.DirectorCardHolder Wisp;
         public static DirectorAPI.DirectorCardHolder Jellyfish;
+        public static DirectorAPI.DirectorCardHolder BlindPestSnowy;
 
         public static DirectorAPI.DirectorCardHolder Imp;
         public static DirectorAPI.DirectorCardHolder Vulture;
@@ -192,6 +198,7 @@ namespace RiskyMod.Enemies
         public static DirectorAPI.DirectorCardHolder GolemBasic;
         public static DirectorAPI.DirectorCardHolder BeetleGuard;
         public static DirectorAPI.DirectorCardHolder Mushrum;
+        public static DirectorAPI.DirectorCardHolder ClayApothecary;
         public static DirectorAPI.DirectorCardHolder BisonLoop;
 
         public static DirectorAPI.DirectorCardHolder Bronzong;
@@ -231,6 +238,7 @@ namespace RiskyMod.Enemies
 
             Wisp = BuildDirectorCard(SpawnCards.Wisp, DirectorAPI.MonsterCategory.BasicMonsters);
             Jellyfish = BuildDirectorCard(SpawnCards.Jellyfish, DirectorAPI.MonsterCategory.BasicMonsters, 1, 0, DirectorCore.MonsterSpawnDistance.Far);
+            BlindPestSnowy = BuildDirectorCard(SpawnCards.BlindPestSnowy, DirectorAPI.MonsterCategory.BasicMonsters);
 
             Imp = BuildDirectorCard(SpawnCards.Imp, DirectorAPI.MonsterCategory.BasicMonsters);
             Vulture = BuildDirectorCard(SpawnCards.Vulture, DirectorAPI.MonsterCategory.BasicMonsters);
@@ -239,6 +247,7 @@ namespace RiskyMod.Enemies
             GolemBasic = BuildDirectorCard(SpawnCards.Golem, DirectorAPI.MonsterCategory.BasicMonsters);
             BeetleGuard = BuildDirectorCard(SpawnCards.BeetleGuard, DirectorAPI.MonsterCategory.Minibosses);
             Mushrum = BuildDirectorCard(SpawnCards.Mushrum, DirectorAPI.MonsterCategory.Minibosses); //These are considered basic monsters in Vanilla, but they fit all the criteria of a miniboss enemy.
+            ClayApothecary = BuildDirectorCard(SpawnCards.ClayApothecary, DirectorAPI.MonsterCategory.Minibosses);
             BisonLoop = BuildDirectorCard(SpawnCards.Bison, DirectorAPI.MonsterCategory.Minibosses, 1, 5, DirectorCore.MonsterSpawnDistance.Standard);
 
             Bronzong = BuildDirectorCard(SpawnCards.Bronzong, DirectorAPI.MonsterCategory.Minibosses);  //Basic Monster on SkyMeadow
