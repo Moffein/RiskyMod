@@ -59,7 +59,7 @@ namespace RiskyMod.Survivors.Croco
 
         private void ChainableLeapCooldown()
         {
-            float cdr = 0.7f;
+            float cdr = 1f;
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.ChainableLeap", "refundPerHit", "0");
             IL.EntityStates.Croco.ChainableLeap.DoImpactAuthority += (il) =>
             {

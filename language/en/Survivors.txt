@@ -60,7 +60,7 @@
 	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. Spit toxic bile for <style=cIsDamage>240% damage</style>.",
 	"CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. <style=cIsDamage>Slayer</style>. <style=cIsHealing>Regenerative</style>. Bite an enemy for <style=cIsDamage>360% damage</style>.",
 	"CROCO_UTILITY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. <style=cIsDamage>Stunning</style>. Leap in the air, dealing <style=cIsDamage>320% damage</style>. Leave acid that deals <style=cIsDamage>50% damage per second</style>. Can store up to <style=cIsUtility>2</style> charges.",
-	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. <style=cIsDamage>Stunning</style>. Leap in the air, dealing <style=cIsDamage>320% damage</style>. <style=cIsUtility>Reduce</style> skill cooldowns by <style=cIsUtility>0.7s</style> for every enemy hit.",
+	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. <style=cIsDamage>Stunning</style>. Leap in the air, dealing <style=cIsDamage>320% damage</style>. <style=cIsUtility>Reduce</style> skill cooldowns by <style=cIsUtility>1s</style> for every enemy hit.",
 	"CROCO_SPECIAL_DESCRIPTION_RISKYMOD" : "Release a deadly disease that deals <style=cIsDamage>8x100% damage</style>. The disease spreads to up to <style=cIsDamage>20</style> targets.",
 	"CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD" : "Pandemic",
 	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "Release a deadly disease that deals <style=cIsDamage>15x100% damage</style>. The disease spreads to up to <style=cIsDamage>20</style> targets. If an enemy is killed by Pandemic, <style=cIsHealing>you are healed</style>.",
