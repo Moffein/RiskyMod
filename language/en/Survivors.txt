@@ -6,7 +6,6 @@
 	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "Request a <style=cIsUtility>Supply Beacon</style>. Can request up to 2.",
 	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Restores Skill charges</style> on use.",
 	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Hack</style> all nearby purchasables to reduce their cost by <style=cIsUtility>40%</style>.",
-	"CAPTAIN_SUPPLY_SKILL_RESTOCK_NAME_RISKYMOD" : "Beacon: Recharge",
 	"CAPTAIN_SUPPLY_SKILL_RESTOCK_INTERACTION_RISKYMOD" : "Take Skill Charge",
 	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Recharge Skills</style> and reduce <style=cIsUtility>Equipment</style> cooldown by <style=cIsUtility>20s</style> on use.",
 	

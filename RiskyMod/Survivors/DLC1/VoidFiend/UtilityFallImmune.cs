@@ -31,6 +31,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                 if (damageInfo.damageType.HasFlag(DamageType.FallDamage) && self.body.HasBuff(UtilityBuff))
                 {
                     damageInfo.rejected = true;
+                    damageInfo.damage = 0f;
                 }
                 orig(self, damageInfo);
             };
