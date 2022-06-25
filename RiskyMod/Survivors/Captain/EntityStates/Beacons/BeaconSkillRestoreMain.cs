@@ -22,38 +22,14 @@ namespace EntityStates.RiskyMod.Captain.Beacon
 		//Runs on both Client/Server, but Server is in charge of who actually gets to interact.
 		public override Interactability GetInteractability(Interactor activator)
 		{
-			bool anySkillUsed = false;
-
-			CharacterBody activatorBody = activator.GetComponent<CharacterBody>();
-			if (activatorBody)
+			if (this.energyComponent.energy >= BeaconSkillRestoreMain.activationCost)
 			{
-				if (activatorBody.hasAuthority)
-				{
-					SkillLocator skills = activatorBody.skillLocator;
-					if (skills)
-					{
-						foreach (GenericSkill skill in skills.allSkills)
-						{
-							if (skill.stock < skill.maxStock && skill.skillName != "SupplyDrop1" && skill.skillName != "SupplyDrop2")
-							{
-								anySkillUsed = true;
-								break;
-							}
-						}
-					}
-
-					if (activationCost >= this.energyComponent.energy || !anySkillUsed)
-					{
-						return Interactability.ConditionsNotMet;
-					}
-				}
+				return Interactability.Available;
 			}
 			else
-			{
+            {
 				return Interactability.Disabled;
-			}
-
-			return Interactability.Available;
+            }
 		}
 
 		public override void OnInteractionBegin(Interactor activator)
@@ -67,6 +43,11 @@ namespace EntityStates.RiskyMod.Captain.Beacon
                 {
 					activatorBody.skillLocator.ApplyAmmoPack();
 				}
+
+				if (activatorBody.inventory)
+                {
+					activatorBody.inventory.DeductActiveEquipmentCooldown(BeaconSkillRestoreMain.equipmentRechargeAmount);
+                }
             }
 		}
 
@@ -78,5 +59,6 @@ namespace EntityStates.RiskyMod.Captain.Beacon
 
         public static float activationCost = 100f/3f;
 		public static float rechargeTimePerUse = 20f;
+		public static float equipmentRechargeAmount = 20f;
 	}
 }

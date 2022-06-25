@@ -479,9 +479,6 @@ namespace RiskyMod
             BeaconRework.resupplyCooldown = SurvivorCfg.Bind(captainString, "Beacon: Resupply - Enable Cooldown", true, "Allow this beacon to be re-used on a cooldown.").Value;
             BeaconRework.resupplyChanges = SurvivorCfg.Bind(captainString, "Beacon: Resupply - Enable Changes", true, "Enable changes to the effect of this beacon.").Value;
 
-            BeaconRework.skillRechargeCooldown = SurvivorCfg.Bind(captainString, "Beacon: Recharge - Enable Cooldown", true, "Allow this beacon to be re-used on a cooldown.").Value;
-            BeaconRework.skillRechargeDisable = SurvivorCfg.Bind(captainString, "Beacon: Recharge - Disable", false, "Removes this Beacon from the game.").Value;
-
             CaptainCore.beaconRework = SurvivorCfg.Bind(captainString, "Beacon Changes", true, "Beacons can be replaced on a cooldown and reworks Supply and Hack beacons. Disabling this disables all beacon-related changes.").Value;
             CaptainCore.beaconRework = CaptainCore.beaconRework
                 && (BeaconRework.healCooldown
