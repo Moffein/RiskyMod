@@ -54,7 +54,7 @@ namespace RiskyMod.Survivors.Loader
         {
             if (!modifyStats) return;
             cb.baseMaxHealth = 140f;
-            cb.baseArmor = 12f;
+            cb.baseArmor = 0f;
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
         }
 
