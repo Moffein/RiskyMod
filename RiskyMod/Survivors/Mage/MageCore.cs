@@ -35,9 +35,11 @@ namespace RiskyMod.Survivors.Mage
         public static bool ionSurgeUtility = true;
 
         public static bool enableFireUtility = true;
-        public static bool enableLightningSpecial = false;
+        public static bool enableLightningSpecial = true;
 
         public static bool iceWallRework = true;
+
+        public static int specialLightningVariantIndex; //DestroyedClone Scepter needs variant index
 
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/MageBody");
 
@@ -190,8 +192,8 @@ namespace RiskyMod.Survivors.Mage
                 fireStorm.stockToConsume = 1;
                 SneedUtils.SneedUtils.FixSkillName(fireStorm);
 
-                Skills.PrepIonSurge = fireStorm;
-                Content.Content.skillDefs.Add(Skills.PrepIonSurge);
+                Skills.PrepFireStorm = fireStorm;
+                Content.Content.skillDefs.Add(Skills.PrepFireStorm);
 
                 SkillFamily utilitySkillFamily = sk.utility.skillFamily;
                 Array.Resize(ref utilitySkillFamily.variants, utilitySkillFamily.variants.Length + 1);
@@ -204,18 +206,24 @@ namespace RiskyMod.Survivors.Mage
                 GameObject fireStormProjectile = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/FireTornado").InstantiateClone("RiskyMod_MageFireStorm", true);
 
                 ProjectileSimple ps = fireStormProjectile.GetComponent<ProjectileSimple>();
-                //ps.lifetime = 5f; //Particle doesn't scale to lifetime
+                //ps.lifetime = 6f; //Particle doesn't scale to lifetime. Use FireStormExtender as a hacky solution to this.
 
                 ProjectileOverlapAttack poa = fireStormProjectile.GetComponent<ProjectileOverlapAttack>();
                 poa.overlapProcCoefficient = 1f;
-                //poa.resetInterval = 0.33f;
-                poa.damageCoefficient = poa.resetInterval / ps.lifetime;
+                poa.resetInterval = 0.4f;  //0.3 vanilla
+
+                poa.damageCoefficient = (1f / Mathf.Floor(ps.lifetime / poa.resetInterval)) * 0.5f;  //Div by 2 because 2 projectiles spawn, so damage should be distributed between them.
 
                 ProjectileDamage pd = fireStormProjectile.GetComponent<ProjectileDamage>();
                 pd.damageType = DamageType.IgniteOnHit;
 
                 Content.Content.projectilePrefabs.Add(fireStormProjectile);
                 EntityStates.RiskyMod.Mage.Weapon.PrepFireStorm.projectilePrefab = fireStormProjectile;
+
+                GameObject fireStormProjectile2 = fireStormProjectile.InstantiateClone("RiskyMod_MageFireStorm2", true);
+                Content.Content.projectilePrefabs.Add(fireStormProjectile2);
+                FireStormExtender.projectilePrefab = fireStormProjectile2;
+                fireStormProjectile.AddComponent<FireStormExtender>();  //HACKY
             }
         }
 
@@ -285,7 +293,57 @@ namespace RiskyMod.Survivors.Mage
                     unlockableDef = null,
                     viewableNode = new ViewablesCatalog.Node(Skills.SpecialLightning.skillName, false, null)
                 };
+                specialLightningVariantIndex = sk.special.skillFamily.variants.Length - 1;
             }
+
+            if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
+            {
+                BuildScepterSkillDefs(sk);
+                if (RiskyMod.ScepterPluginLoaded) SetupScepter();
+                if (RiskyMod.ClassicItemsScepterLoaded) SetupScepterClassic();
+            }
+        }
+
+        private void BuildScepterSkillDefs(SkillLocator sk)
+        {
+            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Mage.SpecialLightningScepter));
+            SkillDef skillDef = SkillDef.CreateInstance<SkillDef>();
+            skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Mage.SpecialLightningScepter));
+            skillDef.activationStateMachineName = "Weapon";
+            skillDef.baseMaxStock = 1;
+            skillDef.baseRechargeInterval = 5f;
+            skillDef.beginSkillCooldownOnSkillEnd = true;
+            skillDef.canceledFromSprinting = flamethrowerSprintCancel;
+            skillDef.dontAllowPastMaxStocks = true;
+            skillDef.forceSprintDuringState = false;
+            skillDef.fullRestockOnAssign = true;
+            skillDef.icon = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFlyUp.asset").WaitForCompletion().icon;
+            skillDef.interruptPriority = InterruptPriority.Skill;
+            skillDef.isCombatSkill = true;
+            skillDef.keywordTokens = new string[] { };
+            skillDef.mustKeyPress = true;
+            skillDef.cancelSprintingOnActivation = true;
+            skillDef.rechargeStock = 1;
+            skillDef.requiredStock = 1;
+            skillDef.skillName = "RiskymodMageSpecialSithLightningScepter";
+            skillDef.skillNameToken = "MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_NAME_RISKYMOD";
+            skillDef.skillDescriptionToken = "MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_DESCRIPTION_RISKYMOD";
+            skillDef.stockToConsume = 1;
+            SneedUtils.SneedUtils.FixSkillName(skillDef);
+            Content.Content.skillDefs.Add(skillDef);
+            Skills.SpecialLightningScepter = skillDef;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepter()
+        {
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.SpecialLightningScepter, "MageBody", SkillSlot.Special, specialLightningVariantIndex);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepterClassic()
+        {
+            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.SpecialLightningScepter, "MageBody", SkillSlot.Special, Skills.SpecialLightning);
         }
 
         private void HandleIonSurge(SkillLocator sk)
@@ -361,7 +419,8 @@ namespace RiskyMod.Survivors.Mage
     public static class Skills
     {
         public static SkillDef PrepIceWall;
-        public static SkillDef PrepIonSurge;
+        public static SkillDef PrepFireStorm;
         public static SkillDef SpecialLightning;
+        public static SkillDef SpecialLightningScepter;
     }
 }

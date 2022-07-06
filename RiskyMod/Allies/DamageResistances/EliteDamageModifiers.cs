@@ -3,6 +3,7 @@ using RoR2;
 
 namespace RiskyMod.Allies
 {
+    //Unnecessary. Allies deal good damage now.
     public class EliteDamageModifiers
     {
         public static bool enabled = false;

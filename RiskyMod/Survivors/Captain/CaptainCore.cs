@@ -24,6 +24,12 @@ namespace RiskyMod.Survivors.Captain
         public CaptainCore()
         {
             if (!enabled) return;
+
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.Admiral"))
+            {
+                Debug.LogError("RiskyMod: Loading CaptainCore while Admiral is installed, there may be conflicts. Check your RiskyMod/Admiral config files and adjust accordingly.");
+            }
+
             new Microbots();
             new CaptainOrbitalHiddenRealms();
             ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
@@ -69,7 +75,7 @@ namespace RiskyMod.Survivors.Captain
         {
             ModifyPrimaries(sk);
             ModifySecondaries(sk);
-            ModifyUtilities(sk);
+            //ModifyUtilities(sk);
             ModifyBeacons(sk);
         }
 
@@ -114,16 +120,7 @@ namespace RiskyMod.Survivors.Captain
             {
                 new TaserRework();
                 sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD";
-            }
-        }
-
-        private void ModifyUtilities(SkillLocator sk)
-        {
-            if (nukeChanges)
-            {
-                /*GameObject nukePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CaptainAirstrikeAltProjectile");
-                ProjectileImpactExplosion pie = nukePrefab.GetComponent<ProjectileImpactExplosion>();
-                pie.blastProcCoefficient = 3f;*/
+                if (Tweaks.CharacterMechanics.Shock.enabled) sk.secondary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_SHOCKING_RISKYMOD" };
             }
         }
 

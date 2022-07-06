@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using BepInEx.Configuration;
+using RoR2;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,22 +9,22 @@ namespace RiskyMod.Survivors.Bandit2
 {
     public class BanditFireModes
     {
-        public static bool enabled = false;
+        public static ConfigEntry<bool> enabled;
         public enum Bandit2FireMode { Default, Spam }
         public static Bandit2FireMode currentfireMode = Bandit2FireMode.Default;
-        public static KeyCode defaultButton = KeyCode.None;
-        public static KeyCode spamButton = KeyCode.None;
+        public static ConfigEntry<KeyboardShortcut> defaultButton;
+        public static ConfigEntry<KeyboardShortcut> spamButton;
 
         public BanditFireModes()
         {
-            if (!enabled || !(Bandit2Core.enabled && (Bandit2Core.burstChanges || Bandit2Core.blastChanges))) return;
+            if (!(Bandit2Core.enabled && (Bandit2Core.burstChanges || Bandit2Core.blastChanges))) return;
 
             RiskyMod.FireModeActions += FireMode;
 
             On.RoR2.UI.SkillIcon.Update += (orig, self) =>
             {
                 orig(self);
-                if (self.targetSkill && self.targetSkillSlot == SkillSlot.Primary)
+                if (enabled.Value && self.targetSkill && self.targetSkillSlot == SkillSlot.Primary)
                 {
                     if (self.targetSkill.characterBody.bodyIndex == Bandit2Core.Bandit2Index
                     && (self.targetSkill.skillDef.activationState.stateType == typeof(EntityStates.RiskyMod.Bandit2.Primary.FirePrimaryShotgun)
@@ -52,15 +53,15 @@ namespace RiskyMod.Survivors.Bandit2
         public void FireMode()
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
-            if ((FireSelect.scrollSelection && scroll != 0) || (Input.GetKeyDown(FireSelect.swapButton) || Input.GetKeyDown(FireSelect.prevButton)))
+            if ((FireSelect.scrollSelection.Value && scroll != 0) || (FireSelect.swapButton.Value.IsDown() || FireSelect.prevButton.Value.IsDown()))
             {
                 CycleFireMode();
             }
-            if (Input.GetKeyDown(defaultButton))
+            if (SneedUtils.SneedUtils.GetKeyPressed(BanditFireModes.defaultButton))
             {
                 currentfireMode = Bandit2FireMode.Default;
             }
-            if (Input.GetKeyDown(spamButton))
+            if (SneedUtils.SneedUtils.GetKeyPressed(BanditFireModes.spamButton))
             {
                 currentfireMode = Bandit2FireMode.Spam;
             }

@@ -11,10 +11,10 @@ namespace RiskyMod.Enemies.Spawnpools
             if (!enabled) return;
 
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.MagmaWormLoop, false, DirectorAPI.Stage.AbandonedAqueduct);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.MagmaWormLoop, false, DirectorAPI.Stage.AbandonedAqueductSimulacrum);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.MagmaWorm, false, DirectorAPI.Stage.AbandonedAqueductSimulacrum);
 
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.ReminderLoop, false, DirectorAPI.Stage.AbandonedAqueduct);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.ReminderLoop, false, DirectorAPI.Stage.AbandonedAqueductSimulacrum);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Reminder, false, DirectorAPI.Stage.AbandonedAqueductSimulacrum);
 
             //TODO: FIGURE OUT HOW TO ONLY RUN THIS WHEN DLC IS ACTIVE
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.ClayApothecary, DirectorAPI.Stage.AbandonedAqueduct);

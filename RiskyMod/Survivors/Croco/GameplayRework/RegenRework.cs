@@ -14,8 +14,8 @@ namespace RiskyMod.Survivors.Croco
         public static BuffDef CrocoRegen2;
         public static float regenDuration = 2f;
         private static float regenAmount;
-        //private static float regenReductionOnHit = 0f;
-        private static float totalRegenReduction;
+        //private static float regenReductionOnHit = 0f;    //was 0.36
+        //private static float totalRegenReduction;
 
         public RegenRework()
         {
@@ -68,7 +68,7 @@ namespace RiskyMod.Survivors.Croco
             }
         }
 
-        private static void DamageReducesRegen(DamageInfo damageInfo, CharacterBody victimBody)
+        /*private static void DamageReducesRegen(DamageInfo damageInfo, CharacterBody victimBody)
         {
             if (victimBody.HasBuff(CrocoRegen2))
             {
@@ -81,7 +81,7 @@ namespace RiskyMod.Survivors.Croco
                     }
                 }
             }
-        }
+        }*/
 
         private void ReplaceM1Regen()
         {

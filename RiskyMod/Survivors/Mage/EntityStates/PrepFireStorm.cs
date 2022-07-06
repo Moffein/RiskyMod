@@ -127,7 +127,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			{
 				damage = base.damageStat * PrepFireStorm.damageCoefficient,
 				crit = base.RollCrit(),
-				damageColorIndex = DamageColorIndex.Item,
+				damageColorIndex = DamageColorIndex.Default,
 				position = aimPos,
 				procChainMask = default,
 				force = 0f,
@@ -136,7 +136,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 				rotation = Quaternion.identity,
 				speedOverride = 0f,
 				target = null
-			}); ;
+			});
 
 			if (base.characterMotor && !base.characterMotor.isGrounded && base.characterBody)
 			{
@@ -156,7 +156,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 		}
 
 		public static float baseDuration = 0.5f;
-		public static float damageCoefficient = 15f;
+		public static float damageCoefficient = 18f;
 		public static GameObject areaIndicatorPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab").WaitForCompletion();
 		public static GameObject muzzleflashEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Junk/Mage/MuzzleflashMageFireLarge.prefab").WaitForCompletion();
 		public static GameObject crosshairOverridePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/SimpleDotCrosshair.prefab").WaitForCompletion();

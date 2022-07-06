@@ -68,9 +68,11 @@ namespace RiskyMod
     [BepInDependency("com.TPDespair.ZetTweaks", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.InteractableLimit", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.johnedwa.RTAutoSprintEx", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.ThinkInvisible.Admiral", BepInDependency.DependencyFlags.SoftDependency)]
 
+    [BepInDependency("com.rune580.riskofoptions")]
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.9.7")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.10.0")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
@@ -320,11 +322,11 @@ namespace RiskyMod
         }
 
         public delegate void FireMode();
-        public static FireMode FireModeActions = FireModeMethod;
-        private static void FireModeMethod() { }
+        public static FireMode FireModeActions;
+
         private void Update()
         {
-            FireModeActions.Invoke();
+            if (FireModeActions != null) FireModeActions.Invoke();
         }
     }
 }

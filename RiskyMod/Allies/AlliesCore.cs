@@ -116,6 +116,7 @@ namespace RiskyMod.Allies
             new DroneTargeting();
             new ModifyBulletAttacks();
             new SuperAttackResist();
+            new MushrumResist();
             new EliteDamageModifiers();
             new NoVoidDamage();
             new StricterLeashing();

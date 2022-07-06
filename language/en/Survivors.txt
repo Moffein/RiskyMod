@@ -70,7 +70,11 @@
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Burst into the sky, dealing <style=cIsDamage>800% damage</style>.",
 	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Freezing</style>. Create a barrier that hurts enemies for <style=cIsDamage>100% damage</style> and <style=cIsUtility>pushes</style> you away.",
 	"MAGE_UTILITY_FIRE_NAME_RISKYMOD" : "Blaze Storm",
-	"MAGE_UTILITY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Ignite</style>. Create a fire tornado that deals <style=cIsDamage>10x140% damage</style> and <style=cIsUtility>pushes</style> you away.",
+	"MAGE_UTILITY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Ignite</style>. Create a fire tornado that deals <style=cIsDamage>320% damage per second</style> and <style=cIsUtility>pushes</style> you away.",
+	"MAGE_SPECIAL_SITHLIGHTNING_NAME_RISKYMOD" : "Electrocute",
+	"MAGE_SPECIAL_SITHLIGHTNING_DESCRIPTION_RISKYMOD" : "Electrocute all enemies in front of you for <style=cIsDamage>800% damage</style>.",
+	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_NAME_RISKYMOD" : "Unlimited Power",
+	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_DESCRIPTION_RISKYMOD" : "Electrocute all enemies in front of you for <style=cIsDamage>1600% damage</style>.",
 	
 	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Throw a <style=cIsUtility>Magnetic</style> pylon that <style=cIsDamage>zaps</style> up to <style=cIsDamage>6</style> nearby enemies for <style=cIsDamage>70% damage</style>. Can be <style=cIsUtility>grappled</style>.",
 	

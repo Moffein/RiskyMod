@@ -25,7 +25,6 @@ namespace EntityStates.RiskyMod.Captain
 			charge = 0f;
 		}
 
-		// Token: 0x060045ED RID: 17901 RVA: 0x0011AFE4 File Offset: 0x001191E4
 		public override void OnExit()
 		{
 			if (this.chargeupVfxGameObject)
@@ -71,8 +70,12 @@ namespace EntityStates.RiskyMod.Captain
 				if (!this.released &&
 					(!base.inputBank
 					|| !base.inputBank.skill1.down
-					|| (CaptainFireModes.currentfireMode == CaptainFireModes.CaptainFireMode.Auto)
-					|| (CaptainFireModes.currentfireMode == CaptainFireModes.CaptainFireMode.Charged && charge >= 1f)))
+					|| (CaptainFireModes.enabled.Value &&
+						(CaptainFireModes.currentfireMode == CaptainFireModes.CaptainFireMode.Auto
+						|| (CaptainFireModes.currentfireMode == CaptainFireModes.CaptainFireMode.Charged && charge >= 1f))
+						)
+					)
+				)
 				{
 					this.released = true;
 				}

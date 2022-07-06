@@ -19,7 +19,7 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
 		{
 			buttonReleased = false;
 			baseDuration = _baseDuration;
-			if (BanditFireModes.enabled && BanditFireModes.currentfireMode == BanditFireModes.Bandit2FireMode.Spam) baseDuration = 0.1f;
+			if (BanditFireModes.enabled.Value && BanditFireModes.currentfireMode == BanditFireModes.Bandit2FireMode.Spam) baseDuration = 0.12f;
 			base.OnEnter();
 			duration = baseDuration / this.attackSpeedStat;
 			minDuration = baseMinDuration / this.attackSpeedStat;
@@ -53,7 +53,7 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
         public override void OnExit()
 		{
 			if (!buttonReleased && base.characterBody && base.skillLocator && base.skillLocator.primary.stock > 0
-				&& !(BanditFireModes.enabled && BanditFireModes.currentfireMode == BanditFireModes.Bandit2FireMode.Spam))
+				&& !(BanditFireModes.enabled.Value && BanditFireModes.currentfireMode == BanditFireModes.Bandit2FireMode.Spam))
 			{
 				base.characterBody.SetSpreadBloom(0f, false);
 			}

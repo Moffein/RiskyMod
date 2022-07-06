@@ -1,4 +1,5 @@
-﻿using RiskyMod.Content;
+﻿using BepInEx.Configuration;
+using RiskyMod.Content;
 using RoR2;
 using RoR2.Navigation;
 using RoR2.Skills;
@@ -11,6 +12,19 @@ namespace SneedUtils
 {
     public class SneedUtils
     {
+        //Taken from https://github.com/ToastedOven/CustomEmotesAPI/blob/main/CustomEmotesAPI/CustomEmotesAPI/CustomEmotesAPI.cs
+        public static bool GetKeyPressed(ConfigEntry<KeyboardShortcut> entry)
+        {
+            foreach (var item in entry.Value.Modifiers)
+            {
+                if (!Input.GetKey(item))
+                {
+                    return false;
+                }
+            }
+            return Input.GetKeyDown(entry.Value.MainKey);
+        }
+
         public static Vector3 FindSafeTeleportPosition(GameObject gameObject, Vector3 targetPosition)
         {
             return FindSafeTeleportPosition(gameObject, targetPosition, float.NegativeInfinity, float.NegativeInfinity);
