@@ -43,9 +43,6 @@
     <Reference Include="BepInEx.Preloader">
       <HintPath>libs\BepInEx\BepInEx.Preloader.dll</HintPath>
     </Reference>
-    <Reference Include="BetterUI">
-      <HintPath>libs\SoftDependencies\BetterUI.dll</HintPath>
-    </Reference>
     <Reference Include="ClassicItems">
       <HintPath>libs\SoftDependencies\ClassicItems.dll</HintPath>
     </Reference>
@@ -94,23 +91,17 @@
     <Reference Include="Multitudes">
       <HintPath>libs\SoftDependencies\Multitudes.dll</HintPath>
     </Reference>
-    <Reference Include="MultitudesDifficulty">
-      <HintPath>libs\SoftDependencies\MultitudesDifficulty.dll</HintPath>
-    </Reference>
     <Reference Include="R2API">
       <HintPath>libs\R2API\R2API.dll</HintPath>
     </Reference>
     <Reference Include="RiskOfOptions">
-      <HintPath>libs\SoftDependencies\RiskOfOptions.dll</HintPath>
+      <HintPath>libs\HardDependencies\RiskOfOptions.dll</HintPath>
     </Reference>
     <Reference Include="RoR2">
       <HintPath>libs\RoR2.dll</HintPath>
     </Reference>
     <Reference Include="RoR2BepInExPack">
       <HintPath>libs\BepInEx\RoR2BepInExPack.dll</HintPath>
-    </Reference>
-    <Reference Include="RTAutoSprintEx">
-      <HintPath>libs\SoftDependencies\RTAutoSprintEx.dll</HintPath>
     </Reference>
     <Reference Include="ShareSuite">
       <HintPath>libs\SoftDependencies\ShareSuite.dll</HintPath>
