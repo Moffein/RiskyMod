@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using RoR2;
+using BepInEx.Configuration;
 
 namespace RiskyMod.Survivors.Merc
 {
@@ -8,7 +9,7 @@ namespace RiskyMod.Survivors.Merc
         public static bool enabled = true;
 
         public static bool modifyStats = true;
-        public static bool m1ComboFinishTweak = true;
+        public static ConfigEntry<bool> m1ComboFinishTweak;
 
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/MercBody");
         public MercCore()
@@ -24,17 +25,18 @@ namespace RiskyMod.Survivors.Merc
         }
         private void ModifyPrimaries(SkillLocator sk)
         {
-            if (!m1ComboFinishTweak) return;
-
             On.EntityStates.Merc.Weapon.GroundLight2.OnEnter += (orig, self) =>
             {
-                if (self.isComboFinisher)
+                if (m1ComboFinishTweak.Value)
                 {
-                    self.ignoreAttackSpeed = true;
-                }
-                else
-                {
-                    self.ignoreAttackSpeed = false;
+                    if (self.isComboFinisher)
+                    {
+                        self.ignoreAttackSpeed = true;
+                    }
+                    else
+                    {
+                        self.ignoreAttackSpeed = false;
+                    }
                 }
                  orig(self);
             };

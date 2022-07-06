@@ -405,6 +405,7 @@ namespace RiskyMod
 
             if (Bandit2Core.enabled && (Bandit2Core.blastChanges || Bandit2Core.burstChanges))
             {
+                ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(BanditFireModes.enabled));
                 ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(BanditFireModes.defaultButton));
                 ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(BanditFireModes.spamButton));
             }
@@ -460,7 +461,11 @@ namespace RiskyMod
 
             MercCore.enabled = SurvivorCfg.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             MercCore.modifyStats = SurvivorCfg.Bind(mercString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
-            MercCore.m1ComboFinishTweak = SurvivorCfg.Bind(mercString, "M1 Attack Speed Tweak (Client-Side)", true, "Makes the 3rd hit of Merc's M1 be unaffected by attack speed for use with combo tech.").Value;
+            MercCore.m1ComboFinishTweak = SurvivorCfg.Bind(mercString, "M1 Attack Speed Tweak (Client-Side)", true, "Makes the 3rd hit of Merc's M1 be unaffected by attack speed for use with combo tech.");
+            if (MercCore.enabled)
+            {
+                ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MercCore.m1ComboFinishTweak));
+            }
 
             TreebotCore.enabled = SurvivorCfg.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             TreebotCore.drillChanges = SurvivorCfg.Bind(treebotString, "DIRECTIVE Drill Changes", true, "Enable changes to this skill.").Value;
