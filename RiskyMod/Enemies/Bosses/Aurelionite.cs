@@ -32,7 +32,7 @@ namespace RiskyMod.Enemies.Bosses
 
         private void LaserRework()
         {
-            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireGoldMegaLaser.asset", "damageCoefficient", "1.5");    //Vanilla 1
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireGoldMegaLaser.asset", "damageCoefficient", "1.8");    //Vanilla 1
             Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Titan/ChargeGoldLaser.asset").WaitForCompletion().baseRechargeInterval = 15f;   //Vanilla 20
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.ChargeGoldMegaLaser.asset", "baseDuration", "2"); //Vanilla 3
         }
@@ -42,7 +42,7 @@ namespace RiskyMod.Enemies.Bosses
             GameObject masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Titan/TitanGoldMaster.prefab").WaitForCompletion();
 
             BaseAI ba = masterObject.GetComponent<BaseAI>();
-            ba.aimVectorMaxSpeed = 40f; //Vanilla 180
+            ba.aimVectorMaxSpeed = 60f; //Vanilla 180
 
             AISkillDriver[] aiDrivers = masterObject.GetComponents<AISkillDriver>();
             foreach (AISkillDriver ai in aiDrivers)
@@ -51,6 +51,7 @@ namespace RiskyMod.Enemies.Bosses
                 {
                     ai.minDistance = 0f;
                     ai.maxDistance = 200f;
+                    ai.maxUserHealthFraction = 1f;
                 }
             }
         }

@@ -48,7 +48,7 @@ namespace RiskyMod.Enemies.Bosses
         private void LaserRework()
         {
             Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Titan/TitanBodyLaser.asset").WaitForCompletion().baseRechargeInterval = 15f;   //Vanilla 20
-            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireMegaLaser.asset", "damageCoefficient", "1.5");    //Vanilla 1
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireMegaLaser.asset", "damageCoefficient", "1.8");    //Vanilla 1
             MegaLaserAttackSpeed();
             DisableLaserLock();
             LaserRadius();
@@ -127,7 +127,7 @@ namespace RiskyMod.Enemies.Bosses
                     c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
                     {
                         bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
-                        bulletAttack.radius = 0.15f; //Vanilla 0
+                        bulletAttack.radius = 0.3f; //Vanilla 0
                         return bulletAttack;
                     });
                 }
@@ -143,7 +143,7 @@ namespace RiskyMod.Enemies.Bosses
             GameObject masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Titan/TitanMaster.prefab").WaitForCompletion();
 
             BaseAI ba = masterObject.GetComponent<BaseAI>();
-            ba.aimVectorMaxSpeed = 40f; //Vanilla 180
+            ba.aimVectorMaxSpeed = 60f; //Vanilla 180
 
             AISkillDriver[] aiDrivers = masterObject.GetComponents<AISkillDriver>();
             foreach(AISkillDriver ai in aiDrivers)
