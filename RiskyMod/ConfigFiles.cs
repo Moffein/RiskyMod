@@ -596,12 +596,14 @@ namespace RiskyMod
             LunarGolem.enabled = MonsterCfg.Bind(monsterString, "Lunar Golem", true, "Enable changes to this monster.").Value;
             LunarWisp.enabled = MonsterCfg.Bind(monsterString, "Lunar Wisp", true, "Enable changes to this monster.").Value;
 
+            Titan.enabled = MonsterCfg.Bind(monsterString, "Stone Titan and Aurelionite", true, "Enable changes to this monster.").Value;
             BeetleQueen.enabled = MonsterCfg.Bind(monsterString, "Beetle Queen", true, "Enable changes to this monster.").Value;
             Vagrant.enabled = MonsterCfg.Bind(monsterString, "Wandering Vagrant", true, "Enable changes to this monster.").Value;
             Gravekeeper.enabled = MonsterCfg.Bind(monsterString, "Grovetender", true, "Enable changes to this monster.").Value;
             SCU.enabled = MonsterCfg.Bind(monsterString, "Solus Control Unit", true, "Enable changes to this monster.").Value;
             Worm.enabled = MonsterCfg.Bind(monsterString, "Magma/Overloading Worm", true, "Enable changes to this monster.").Value;
 
+            Aurelionite.modifyStats = MonsterCfg.Bind(monsterString, "Aurelionite", true, "Modify stats.").Value;
             AWU.enabled = MonsterCfg.Bind(monsterString, "Alloy Worship Unit", true, "Enable changes to this monster.").Value;
 
             Grandparent.enabled = MonsterCfg.Bind(monsterString, "Grandparent", true, "Enable changes to this monster.").Value;

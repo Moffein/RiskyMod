@@ -62,8 +62,10 @@ namespace RiskyMod.Enemies
             new SCU();
             new Grandparent();
             new Worm();
+            new Titan();
 
             new AWU();
+            new Aurelionite();
 
             new VoidInfestor();
             new BlindPest();

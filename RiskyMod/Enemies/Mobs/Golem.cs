@@ -13,11 +13,11 @@ namespace RiskyMod.Enemies.Mobs
             if (!enabled) return;
             //GameObject golemObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/golembody");
             RemoveClapFalloff();
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Golem/EntityStates.GolemMonster.ClapState.asset", "damageCoefficient", "1.5");
         }
 
         private void RemoveClapFalloff()
         {
-            //the hitbox is pretty big, so falloff is needed
             IL.EntityStates.GolemMonster.ClapState.FixedUpdate += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -27,7 +27,7 @@ namespace RiskyMod.Enemies.Mobs
                 {
                     c.EmitDelegate<Func<BlastAttack, BlastAttack>>(blastAttack =>
                     {
-                        blastAttack.falloffModel = BlastAttack.FalloffModel.SweetSpot;
+                        blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                         return blastAttack;
                     });
                 }
