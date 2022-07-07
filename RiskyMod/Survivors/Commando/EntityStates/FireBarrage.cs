@@ -67,7 +67,8 @@ namespace EntityStates.RiskyMod.Commando
 					radius = FireBarrage.bulletRadius,
 					smartCollision = true,
 					damageType = DamageType.Stun1s,
-					falloffModel = BulletAttack.FalloffModel.None
+					falloffModel = BulletAttack.FalloffModel.None,
+					procCoefficient = 0.5f
 				};
 				AddDamageType(ba);
 				ba.Fire();
@@ -130,12 +131,12 @@ namespace EntityStates.RiskyMod.Commando
 
 		public static GameObject explosionEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
 		public static float blastRadius = 3f;
-		public static float blastDamageCoefficient = 0.2f;	//Multiply by damage coefficient
+		public static float blastDamageCoefficient = 5f;	//Multiply by damage coefficient
 
 		public static GameObject effectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashBarrage");
 		public static GameObject hitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/HitsparkCommandoBarrage");
 		public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/TracerCommandoBoost");
-		public static float damageCoefficient = 1f;
+		public static float damageCoefficient = 0.2f;
 		public static float force = 100f;
 		public static float minSpread = 0f;
 		public static float maxSpread = 1f;
@@ -178,8 +179,8 @@ namespace EntityStates.RiskyMod.Commando
 				blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
 				blastAttack.crit = damageInfo.crit;
 				blastAttack.procChainMask = damageInfo.procChainMask;
-				blastAttack.procCoefficient = 0.5f;
-				blastAttack.damageColorIndex = DamageColorIndex.Item;
+				blastAttack.procCoefficient = 1f;
+				blastAttack.damageColorIndex = DamageColorIndex.Default;
 				blastAttack.falloffModel = BlastAttack.FalloffModel.None;
 				blastAttack.damageType = damageInfo.damageType;
 				blastAttack.Fire();

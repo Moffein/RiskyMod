@@ -10,7 +10,7 @@ namespace EntityStates.RiskyMod.Commando.Scepter
 		public static new float baseDurationBetweenShots = 0.08f;
 		public static new float baseBulletCount = 10;
 		public static new float blastRadius = 3f;
-		public static new float blastDamageCoefficient = 0.5f;  //Multiply by damage coefficient
+		public static new float blastDamageCoefficient = 1.3f/0.2f;  //Multiply by damage coefficient
 
         public override void LoadStats()
         {
@@ -43,8 +43,8 @@ namespace EntityStates.RiskyMod.Commando.Scepter
 				blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
 				blastAttack.crit = damageInfo.crit;
 				blastAttack.procChainMask = damageInfo.procChainMask;
-				blastAttack.procCoefficient = 0.5f;
-				blastAttack.damageColorIndex = DamageColorIndex.Item;
+				blastAttack.procCoefficient = 1f;
+				blastAttack.damageColorIndex = DamageColorIndex.Default;
 				blastAttack.falloffModel = BlastAttack.FalloffModel.None;
 				blastAttack.damageType = damageInfo.damageType;
 				blastAttack.Fire();

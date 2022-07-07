@@ -41,7 +41,7 @@ namespace RiskyMod.Content.Enemies
             characterSpawnCard.nodeGraphType = MapNodeGroup.GraphType.Ground;
             characterSpawnCard.requiredFlags = NodeFlags.None;
             characterSpawnCard.forbiddenFlags = NodeFlags.NoCharacterSpawn;
-            characterSpawnCard.directorCreditCost = 115;    //Same as old Parents. 115 is Elder Lemurian
+            characterSpawnCard.directorCreditCost = 125;    //115 is Elder Lemurian
             characterSpawnCard.occupyPosition = false;
             characterSpawnCard.loadout = new SerializableLoadout();
             characterSpawnCard.noElites = false;
@@ -55,7 +55,7 @@ namespace RiskyMod.Content.Enemies
         {
             CharacterBody cb = go.GetComponent<CharacterBody>();
 
-            cb.baseMaxHealth = 900f;    //Vanilla is 1615
+            cb.baseMaxHealth = 1000f;    //Vanilla is 1615
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
 
             cb.baseDamage = 35f;

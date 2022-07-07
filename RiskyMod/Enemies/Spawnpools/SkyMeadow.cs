@@ -38,8 +38,8 @@ namespace RiskyMod.Enemies.Spawnpools
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Reminder, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
 
 
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.LunarGolemSkyMeadowBasic, false, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.LunarGolemSkyMeadowBasic, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.LunarGolemSkyMeadow, false, DirectorAPI.Stage.SkyMeadow);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.LunarGolemSkyMeadow, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
         }
     }
 }

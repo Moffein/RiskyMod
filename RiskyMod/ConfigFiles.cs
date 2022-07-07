@@ -305,6 +305,7 @@ namespace RiskyMod
             HeadHunter.perfectedTweak = ItemCfg.Bind(legendaryString, "Wake of Vultures - Perfected Tweak", true, "Perfected Affix gained via Wake of Vultures will not force your health pool to bec").Value;
             Headstompers.enabled = ItemCfg.Bind(legendaryString, "H3AD-ST", true, itemConfigDescString).Value;
             LaserTurbine.enabled = ItemCfg.Bind(legendaryString, "Resonance Disc", true, itemConfigDescString).Value;
+            Scorpion.enabled = ItemCfg.Bind(legendaryString, "Symbiotic Scorpion", true, itemConfigDescString).Value;
 
             //Currently trying this out with the same proc coefficient as Vanilla.
             //MeatHook.enabled = ItemCfg.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;
@@ -599,6 +600,7 @@ namespace RiskyMod
             Vagrant.enabled = MonsterCfg.Bind(monsterString, "Wandering Vagrant", true, "Enable changes to this monster.").Value;
             Gravekeeper.enabled = MonsterCfg.Bind(monsterString, "Grovetender", true, "Enable changes to this monster.").Value;
             SCU.enabled = MonsterCfg.Bind(monsterString, "Solus Control Unit", true, "Enable changes to this monster.").Value;
+            Worm.enabled = MonsterCfg.Bind(monsterString, "Magma/Overloading Worm", true, "Enable changes to this monster.").Value;
 
             AWU.enabled = MonsterCfg.Bind(monsterString, "Alloy Worship Unit", true, "Enable changes to this monster.").Value;
 

@@ -61,6 +61,7 @@ namespace RiskyMod.Enemies
             new Gravekeeper();
             new SCU();
             new Grandparent();
+            new Worm();
 
             new AWU();
 

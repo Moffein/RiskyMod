@@ -24,7 +24,13 @@ namespace RiskyMod.Items.Uncommon
         //Does this need turretblacklist?
         public SquidPolyp()
         {
+            On.RoR2.BodyCatalog.Init += (orig) =>
+            {
+                orig();
+                SquidPolyp.squidTurretBodyIndex = BodyCatalog.FindBodyIndex("SquidTurretBody");
+            };
             if (!enabled) return;
+
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove vanilla effect
@@ -51,12 +57,6 @@ namespace RiskyMod.Items.Uncommon
 
             TakeDamage.HandleOnPercentHpLostActions += OnHpLost;
             TakeDamage.OnDamageTakenAttackerActions += DistractOnHit;
-
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-                SquidPolyp.squidTurretBodyIndex = BodyCatalog.FindBodyIndex("SquidTurretBody");
-            };
 
             GameObject squidBodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/squidturretbody");
             CharacterBody cb = squidBodyObject.GetComponent<CharacterBody>();
