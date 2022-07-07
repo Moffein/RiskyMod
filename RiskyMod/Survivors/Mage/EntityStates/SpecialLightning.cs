@@ -17,6 +17,7 @@ namespace EntityStates.RiskyMod.Mage
 			loadMaxDistance = SpecialLightning.maxDistance;
 			loadBounceDistance = SpecialLightning.bounceDistance;
 			loadTotalDamageCoefficient = SpecialLightning.totalDamageCoefficient;
+			loadBounceCount = SpecialLightning.bounceCount;
 		}
 
 		public virtual void ModifyAttack(LightningOrb lo) { }
@@ -100,8 +101,8 @@ namespace EntityStates.RiskyMod.Mage
 					procChainMask = default,
 					lightningType = LightningOrb.LightningType.MageLightning,
 					damageColorIndex = DamageColorIndex.Default,
-					bouncesRemaining = 2,
-					targetsToFindPerBounce = 3,
+					bouncesRemaining = 1,
+					targetsToFindPerBounce = 6,
 					range = loadBounceDistance,
 					origin = lightningOrigin,
 					damageType = DamageType.Generic,
@@ -117,7 +118,7 @@ namespace EntityStates.RiskyMod.Mage
 				search.searchOrigin = aimRay.origin - aimRay.direction;
 				search.sortMode = BullseyeSearch.SortMode.Angle;
 				search.maxDistanceFilter = loadMaxDistance + 1f;
-				search.maxAngleFilter = 45f;
+				search.maxAngleFilter = base.isAuthority ? 45f : 90f;	//Use a wider search radius for online players to account for lag.
 				search.searchDirection = aimRay.direction;
 				search.RefreshCandidates();
 
@@ -229,7 +230,7 @@ namespace EntityStates.RiskyMod.Mage
 
 		bool rightMuzzle = true; //Keep track of which gauntlet the lightning visually comes out from
 
-		public static float totalDamageCoefficient = 8f;
+		public static float totalDamageCoefficient = 9f;
 		public static GameObject gauntletEffectPrefab;
 		public static GameObject gauntletMissEffectPrefab;
 		public static float maxDistance = 40f;
@@ -239,6 +240,7 @@ namespace EntityStates.RiskyMod.Mage
 		public static float procCoefficientPerTick = 1f;
 		public static float baseTickFrequency = 5f;
 		public static float force = 100f;
+		public static int bounceCount = 1;
 
 		public static string startAttackSoundString = "Play_mage_m2_shoot";//"Play_mage_m2_charge";
 		public static string endAttackSoundString = "";//"Play_mage_r_lightningblast";
@@ -258,7 +260,9 @@ namespace EntityStates.RiskyMod.Mage
 		public float loadTotalDamageCoefficient;
 		public float loadMaxDistance;
 		public float loadBounceDistance;
-		public float tickDamageCoefficient;
+		public float loadBounceCount;
+
+		private float tickDamageCoefficient;
 
 		public static GameObject laserEffectPrefab;
 

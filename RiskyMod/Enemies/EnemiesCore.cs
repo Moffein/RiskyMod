@@ -224,6 +224,7 @@ namespace RiskyMod.Enemies
         public static DirectorAPI.DirectorCardHolder ReminderLoop;
 
         public static DirectorAPI.DirectorCardHolder LunarGolemSkyMeadow;
+        public static DirectorAPI.DirectorCardHolder LunarGolemSkyMeadowBasic;
 
         public static bool logCardInfo = false;
         public static void Init()

@@ -31,7 +31,7 @@ namespace RiskyMod.Items.Uncommon
                 {
                     c.EmitDelegate<Func<LightningOrb, LightningOrb>>(orb =>
                     {
-                        if (RiskyMod.disableProcChains) orb.procCoefficient = 0.1f;
+                        //if (RiskyMod.disableProcChains) orb.procCoefficient = 0.1f;
                         orb.range = 25f;
                         return orb;
                     });

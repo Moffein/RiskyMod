@@ -54,7 +54,7 @@ namespace RiskyMod
         public static ConfigFile ItemCfg;
         public static ConfigFile SurvivorCfg;
         public static ConfigFile MonsterCfg;
-
+        public static ConfigFile SpawnpoolCfg;
         public static ConfigFile GeneralCfg;
 
         public static string ConfigFolderPath { get => System.IO.Path.Combine(BepInEx.Paths.ConfigPath, RiskyMod.pluginInfo.Metadata.GUID); }
@@ -105,6 +105,7 @@ namespace RiskyMod
             ConfigItems();
             ConfigSurvivors();
             ConfigMonsters();
+            ConfigSpawnpools();
         }
 
         private static void ConfigGeneral()
@@ -116,6 +117,7 @@ namespace RiskyMod
             ItemsCore.enabled = GeneralCfg.Bind(coreModuleString, "Item Changes", true, "Enable item changes.").Value;
             SurvivorsCore.enabled = GeneralCfg.Bind(coreModuleString, "Survivor Changes", true, "Enable survivor changes.").Value;
             EnemiesCore.modifyEnemies = GeneralCfg.Bind(coreModuleString, "Monster Changes", true, "Enable enemy changes.").Value;
+            EnemiesCore.modifySpawns = GeneralCfg.Bind(coreModuleString, "Spawnpool Changes (Beta)", false, "Enable spawnpool changes.").Value;
             MoonCore.enabled = GeneralCfg.Bind(coreModuleString, "Moon Changes", true, "Enable Moon changes.").Value;
             VoidLocusCore.enabled = GeneralCfg.Bind(coreModuleString, "Void Locus Changes", true, "Enable Void Locus changes.").Value;
             VoidFieldsCore.enabled = GeneralCfg.Bind(coreModuleString, "Void Fields Changes", true, "Enable Void Fields changes.").Value;
@@ -303,7 +305,11 @@ namespace RiskyMod
             HeadHunter.perfectedTweak = ItemCfg.Bind(legendaryString, "Wake of Vultures - Perfected Tweak", true, "Perfected Affix gained via Wake of Vultures will not force your health pool to bec").Value;
             Headstompers.enabled = ItemCfg.Bind(legendaryString, "H3AD-ST", true, itemConfigDescString).Value;
             LaserTurbine.enabled = ItemCfg.Bind(legendaryString, "Resonance Disc", true, itemConfigDescString).Value;
-            MeatHook.enabled = ItemCfg.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;
+
+            //Currently trying this out with the same proc coefficient as Vanilla.
+            //MeatHook.enabled = ItemCfg.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;
+            MeatHook.enabled = false;
+
             Tesla.enabled = ItemCfg.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
             Raincoat.enabled = ItemCfg.Bind(legendaryString, "Bens Raincoat - Use Modded Icons", false, "Replace the Vanilla buff icons for this item.").Value;
         }
@@ -459,6 +465,8 @@ namespace RiskyMod
             MageCore.flamethrowerSprintCancel = SurvivorCfg.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
             MageCore.flamethrowerRangeExtend = SurvivorCfg.Bind(mageString, "Flamethrower - Increase Range", true, "Increases the range of flamethrower.").Value;
 
+            MageCore.enableLightningSpecial = SurvivorCfg.Bind(mageString, "Electrocture Special Skill", true, "Enables this custom skill.").Value;
+
             MercCore.enabled = SurvivorCfg.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             MercCore.modifyStats = SurvivorCfg.Bind(mercString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
             MercCore.m1ComboFinishTweak = SurvivorCfg.Bind(mercString, "M1 Attack Speed Tweak (Client-Side)", true, "Makes the 3rd hit of Merc's M1 be unaffected by attack speed for use with combo tech.");
@@ -601,6 +609,11 @@ namespace RiskyMod
 
             VoidInfestor.enabled = MonsterCfg.Bind(monsterString, "Void Infestor", true, "Enable changes to this monster.").Value;
             VoidInfestor.noVoidAllies = MonsterCfg.Bind(monsterString, "Void Infestor - No Ally Infestation", true, "Void Infestors can't possess allies.").Value;
+        }
+
+        private static void ConfigSpawnpools()
+        {
+            //SpawnpoolCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Spawnpools.cfg"), true);
         }
     }
 }
