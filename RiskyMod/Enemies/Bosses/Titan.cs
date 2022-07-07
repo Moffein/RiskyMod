@@ -53,7 +53,7 @@ namespace RiskyMod.Enemies.Bosses
             MegaLaserAttackSpeed();
             DisableLaserLock();
             LaserRadius();
-            SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/DLC1/MajorAndMinorConstruct/EntityStates.MajorConstruct.Weapon.FireLaser.asset").WaitForCompletion());
+            //SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/DLC1/MajorAndMinorConstruct/EntityStates.MajorConstruct.Weapon.FireLaser.asset").WaitForCompletion());
         }
 
         private void MegaLaserAttackSpeed()

@@ -72,7 +72,7 @@ namespace RiskyMod
 
     [BepInDependency("com.rune580.riskofoptions")]
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.10.0")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.10.1")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
