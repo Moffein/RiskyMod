@@ -49,10 +49,11 @@ namespace RiskyMod.Enemies.Bosses
         {
             Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Titan/TitanBodyLaser.asset").WaitForCompletion().baseRechargeInterval = 15f;   //Vanilla 20
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireMegaLaser.asset", "damageCoefficient", "1.8");    //Vanilla 1
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireMegaLaser.asset", "fireFrequency", "10");    //Vanilla 8
             MegaLaserAttackSpeed();
             DisableLaserLock();
             LaserRadius();
-            //SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/DLC1/MajorAndMinorConstruct/EntityStates.MajorConstruct.Weapon.FireLaser.asset").WaitForCompletion());
+            SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/DLC1/MajorAndMinorConstruct/EntityStates.MajorConstruct.Weapon.FireLaser.asset").WaitForCompletion());
         }
 
         private void MegaLaserAttackSpeed()
@@ -127,7 +128,7 @@ namespace RiskyMod.Enemies.Bosses
                     c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
                     {
                         bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
-                        bulletAttack.radius = 0.3f; //Vanilla 0
+                        bulletAttack.radius = 0.2f; //Vanilla 0
                         return bulletAttack;
                     });
                 }
