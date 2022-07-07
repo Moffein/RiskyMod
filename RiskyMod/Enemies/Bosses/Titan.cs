@@ -152,6 +152,7 @@ namespace RiskyMod.Enemies.Bosses
                 {
                     ai.minDistance = 0f;
                     ai.maxDistance = 200f;
+                    ai.maxUserHealthFraction = 1f;
                 }
             }
         }
