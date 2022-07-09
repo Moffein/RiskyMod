@@ -69,6 +69,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.InteractableLimit", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.johnedwa.RTAutoSprintEx", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.Admiral", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.kking117.QueenGlandBuff", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.rune580.riskofoptions")]
     [BepInDependency("com.bepis.r2api")]
@@ -85,6 +86,8 @@ namespace RiskyMod
         public static bool AIBlacklistUseVanillaBlacklist = true;
         public static bool ZetTweaksLoaded = false;
         public static bool RtAutoSprintLoaded = false;
+
+        public static bool QueensGlandBuffLoaded = false;
 
         public static bool ShareSuiteLoaded = false;
         public static bool ShareSuiteCommon = false;
@@ -149,6 +152,8 @@ namespace RiskyMod
             FixPlayercount.enabled = FixPlayercount.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.FixPlayercount");
             FixPlayercount.MultitudesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("dev.wildbook.multitudes");
             FixPlayercount.ZetArtifactsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetArtifacts");
+
+            QueensGlandBuffLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.kking117.QueenGlandBuff");
 
             VoidInfestor.noVoidAllies = VoidInfestor.noVoidAllies && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoVoidAllies");
 
@@ -235,6 +240,8 @@ namespace RiskyMod
             new MonsterGoldRewards();
             new CombatDirectorMultiplier();
             new LoopBossArmor();
+            new LoopTeleMountainShrine();
+            new NoBossRepeat();
 
             //Holdouts
             new SmallHoldoutCharging();

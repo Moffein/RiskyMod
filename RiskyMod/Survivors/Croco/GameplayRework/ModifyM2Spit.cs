@@ -2,9 +2,9 @@
 using UnityEngine;
 using RoR2.Projectile;
 using MonoMod.Cil;
+using Mono.Cecil.Cil;
 using System;
 using R2API;
-using Mono.Cecil.Cil;
 
 namespace RiskyMod.Survivors.Croco
 {

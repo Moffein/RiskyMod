@@ -161,7 +161,8 @@ namespace RiskyMod
             RemoveLevelCap.maxLevel = GeneralCfg.Bind(scalingString, "Increase Monster Level Cap - Max Level", 9999f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
             SceneDirectorMonsterRewards.enabled = GeneralCfg.Bind(scalingString, "SceneDirector Monster Rewards", true, "Monsters that spawn with the map now give the same rewards as teleporter monsters.").Value;
 
-            LoopBossArmor.enabled = GeneralCfg.Bind(scalingString, "Loop Boss Armor", true, "Teleporter Bosses gain bonus armor when looping.").Value;
+            LoopBossArmor.enabled = GeneralCfg.Bind(scalingString, "Loop Boss Armor", true, "Bosses gain bonus armor when looping.").Value;
+            LoopTeleMountainShrine.enabled = GeneralCfg.Bind(scalingString, "Loop Teleporter Boss Credits", true, "Teleporter Boss director credits increase by 1 Mountain Shrine every loop.").Value;
 
             //Allies
             AllyScaling.normalizeDroneDamage = GeneralCfg.Bind(allyString, "Normalize Drone Damage", true, "Normalize drone damage stats so that they perform the same when using Spare Drone Parts.").Value;
