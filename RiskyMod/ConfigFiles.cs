@@ -475,6 +475,7 @@ namespace RiskyMod
             {
                 ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MercCore.m1ComboFinishTweak));
             }
+            MercCore.evisTargetingFix = SurvivorCfg.Bind(mercString, "Eviscerate Targeting Fix", true, "Makes Eviscerate less likely to target teammates.").Value;
 
             TreebotCore.enabled = SurvivorCfg.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             TreebotCore.drillChanges = SurvivorCfg.Bind(treebotString, "DIRECTIVE Drill Changes", true, "Enable changes to this skill.").Value;
