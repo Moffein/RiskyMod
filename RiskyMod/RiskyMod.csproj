@@ -91,6 +91,9 @@
     <Reference Include="Multitudes">
       <HintPath>libs\SoftDependencies\Multitudes.dll</HintPath>
     </Reference>
+    <Reference Include="QueenGlandBuff">
+      <HintPath>libs\SoftDependencies\QueenGlandBuff.dll</HintPath>
+    </Reference>
     <Reference Include="R2API">
       <HintPath>libs\R2API\R2API.dll</HintPath>
     </Reference>

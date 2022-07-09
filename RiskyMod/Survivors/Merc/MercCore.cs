@@ -63,8 +63,9 @@ namespace RiskyMod.Survivors.Merc
                         c.Emit(OpCodes.Ldarg_0);//self
                         c.EmitDelegate<Func<Collider[], EntityStates.Merc.EvisDash, Collider[]>>((colliders, self) =>
                         {
+                            if (FriendlyFireManager.friendlyFireMode != FriendlyFireManager.FriendlyFireMode.Off) return colliders;
+
                             //This is inefficient
-                            List<Collider> friendlyHurtboxes = new List<Collider>();
                             List<Collider> enemyHurtboxes = new List<Collider>();
 
                             foreach (Collider cl in colliders)
@@ -76,22 +77,13 @@ namespace RiskyMod.Survivors.Merc
                                     {
                                         enemyHurtboxes.Add(cl);
                                     }
-                                    else if (FriendlyFireManager.friendlyFireMode != FriendlyFireManager.FriendlyFireMode.Off)  //Drop friendly hurtboxes if FF is off
-                                    {
-                                        friendlyHurtboxes.Add(cl);
-                                    }
                                 }
                             }
 
                             //Re-order list so that friendly hurtboxes are at the end
-                            Collider[] finalColliders = new Collider[enemyHurtboxes.Count + friendlyHurtboxes.Count];
+                            Collider[] finalColliders = new Collider[enemyHurtboxes.Count];
                             int index = 0;
                             foreach (Collider cl in enemyHurtboxes)
-                            {
-                                finalColliders[index] = null;
-                                index++;
-                            }
-                            foreach (Collider cl in friendlyHurtboxes)
                             {
                                 finalColliders[index] = null;
                                 index++;

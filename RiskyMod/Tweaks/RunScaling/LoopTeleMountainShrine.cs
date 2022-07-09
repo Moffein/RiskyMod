@@ -22,7 +22,7 @@ namespace RiskyMod.Tweaks.RunScaling
                 {
                     c.EmitDelegate<Func<int, int>>((orig) =>
                     {
-                        return orig + (Mathf.FloorToInt(Run.instance.stageClearCount / 5f));
+                        return orig + Mathf.FloorToInt(Run.instance.stageClearCount / 5f);
                     });
                 }
                 else

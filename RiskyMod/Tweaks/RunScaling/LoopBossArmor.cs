@@ -1,12 +1,14 @@
 ﻿using RoR2;
 using UnityEngine;
 using R2API;
+using System.Collections.Generic;
 
 namespace RiskyMod.Tweaks.RunScaling
 {
     public class LoopBossArmor
     {
         public static bool enabled = true;
+
         public LoopBossArmor()
         {
             if (!enabled) return;

@@ -3,6 +3,7 @@ using RoR2;
 using UnityEngine.Networking;
 using System;
 using R2API;
+using System.Runtime.CompilerServices;
 
 namespace RiskyMod.Items.Boss
 {
@@ -65,8 +66,16 @@ namespace RiskyMod.Items.Boss
 											int glandCount = self.body.inventory ? self.body.inventory.GetItemCount(RoR2Content.Items.BeetleGland) : 0;
 											if (guardInv && glandCount > 0)
 											{
-												guardInv.GiveItem(RoR2Content.Items.BoostDamage, 30 * glandCount);
-												guardInv.GiveItem(RoR2Content.Items.BoostHp, 10 * glandCount);
+
+												int baseDamage = RiskyMod.QueensGlandBuffLoaded ? GetInitialDamageCount() : 30;
+												int stackDamage = RiskyMod.QueensGlandBuffLoaded ? GetStackDamageCount() : 30;
+												int baseHealth = RiskyMod.QueensGlandBuffLoaded ? GetInitialHPCount() : 10;
+												int stackHealth = RiskyMod.QueensGlandBuffLoaded ? GetStackHPCount() : 10;
+
+												int stackCount = glandCount - 1;
+
+												guardInv.GiveItem(RoR2Content.Items.BoostDamage, baseDamage + stackCount * stackDamage);
+												guardInv.GiveItem(RoR2Content.Items.BoostHp, baseHealth + stackCount * stackHealth);
 												if (guardInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) guardInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
 											}
 
@@ -106,6 +115,30 @@ namespace RiskyMod.Items.Boss
 		private static void ModifyItem()
         {
 			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BeetleGland);
+		}
+
+		[MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+		private static int GetInitialDamageCount()
+		{
+			return QueenGlandBuff.MainPlugin.Config_BaseDamage.Value;
+		}
+
+		[MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+		private static int GetStackDamageCount()
+		{
+			return QueenGlandBuff.MainPlugin.Config_StackDamage.Value;
+		}
+
+		[MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+		private static int GetInitialHPCount()
+		{
+			return QueenGlandBuff.MainPlugin.Config_BaseHealth.Value;
+		}
+
+		[MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+		private static int GetStackHPCount()
+		{
+			return QueenGlandBuff.MainPlugin.Config_StackHealth.Value;
 		}
 	}
 

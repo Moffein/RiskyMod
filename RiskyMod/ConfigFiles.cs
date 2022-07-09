@@ -163,6 +163,7 @@ namespace RiskyMod
 
             LoopBossArmor.enabled = GeneralCfg.Bind(scalingString, "Loop Boss Armor", true, "Bosses gain bonus armor when looping.").Value;
             LoopTeleMountainShrine.enabled = GeneralCfg.Bind(scalingString, "Loop Teleporter Boss Credits", true, "Teleporter Boss director credits increase by 1 Mountain Shrine every loop.").Value;
+            NoBossRepeat.enabled = GeneralCfg.Bind(scalingString, "No Teleporter Boss Repeat", true, "Lowers the chance of the same teleporter boss being selected within a loop.").Value;
 
             //Allies
             AllyScaling.normalizeDroneDamage = GeneralCfg.Bind(allyString, "Normalize Drone Damage", true, "Normalize drone damage stats so that they perform the same when using Spare Drone Parts.").Value;
