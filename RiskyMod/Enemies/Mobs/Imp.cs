@@ -13,6 +13,7 @@ namespace RiskyMod.Enemies.Mobs
             EnemiesCore.DisableRegen(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/impbody"));
             ModifyAI();
             RemoveSlashSlow();
+            AddLunge();
         }
 
         private void ModifyAI()
@@ -38,6 +39,11 @@ namespace RiskyMod.Enemies.Mobs
         {
             //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.ImpMonster.DoubleSlash");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.ImpMonster.DoubleSlash", "walkSpeedPenaltyCoefficient", "1");   //0.5 is vanilla
+        }
+
+        private void AddLunge()
+        {
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.ImpMonster.DoubleSlash", "selfForce", "1200");  //Clay Man is 1800. This runs 2x.
         }
     }
 }

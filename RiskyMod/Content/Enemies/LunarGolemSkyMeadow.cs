@@ -41,7 +41,7 @@ namespace RiskyMod.Content.Enemies
             characterSpawnCard.nodeGraphType = MapNodeGroup.GraphType.Ground;
             characterSpawnCard.requiredFlags = NodeFlags.None;
             characterSpawnCard.forbiddenFlags = NodeFlags.NoCharacterSpawn;
-            characterSpawnCard.directorCreditCost = 125;    //115 is Elder Lemurian
+            characterSpawnCard.directorCreditCost = 115;    //115 is Elder Lemurian
             characterSpawnCard.occupyPosition = false;
             characterSpawnCard.loadout = new SerializableLoadout();
             characterSpawnCard.noElites = false;

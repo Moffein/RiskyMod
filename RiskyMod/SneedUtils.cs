@@ -5,6 +5,7 @@ using RoR2.Navigation;
 using RoR2.Skills;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -12,6 +13,25 @@ namespace SneedUtils
 {
     public class SneedUtils
     {
+        //If Inferno Compat is disabled, or if Inferno isn't active, allow the enemy change to be run.
+        public static bool ShouldRunInfernoChange()
+        {
+            return !RiskyMod.Enemies.EnemiesCore.infernoCompat || !CheckInfernoActive();
+        }
+
+        public static bool CheckInfernoActive()
+        {
+            bool infernoActive = false;
+            if (RiskyMod.RiskyMod.InfernoPluginLoaded) infernoActive = CheckInfernoActiveInternal();
+            return infernoActive;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static bool CheckInfernoActiveInternal()
+        {
+            return Run.instance != null && Run.instance.selectedDifficulty == Inferno.Main.InfernoDiffIndex;
+        }
+
         //Taken from https://github.com/ToastedOven/CustomEmotesAPI/blob/main/CustomEmotesAPI/CustomEmotesAPI/CustomEmotesAPI.cs
         public static bool GetKeyPressed(ConfigEntry<KeyboardShortcut> entry)
         {
@@ -208,6 +228,13 @@ namespace SneedUtils
         public static void DumpEntityStateConfig(string entityStateName)
         {
             EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
+            DumpEntityStateConfig(esc);
+        }
+
+
+        public static void DumpAddressableEntityStateConfig(string addressablePath)
+        {
+            EntityStateConfiguration esc = Addressables.LoadAssetAsync<EntityStateConfiguration>(addressablePath).WaitForCompletion();
             DumpEntityStateConfig(esc);
         }
 

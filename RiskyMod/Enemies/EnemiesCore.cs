@@ -16,7 +16,7 @@ namespace RiskyMod.Enemies
     {
         public static bool modifyEnemies = true;
         public static bool modifySpawns = true;
-
+        public static bool infernoCompat = true;
         public static void DisableRegen(GameObject enemyObject)
         {
             CharacterBody cb = enemyObject.GetComponent<CharacterBody>();
@@ -314,6 +314,7 @@ namespace RiskyMod.Enemies
                 Card = dc,
                 MonsterCategory = monsterCategory
             };
+
             return cardHolder;
         }
     }

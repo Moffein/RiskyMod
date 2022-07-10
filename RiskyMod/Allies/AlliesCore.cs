@@ -198,11 +198,11 @@ namespace RiskyMod.Allies
                     case "Drone1Body":
                     case "Drone2Body":
                     case "MissileDroneBody":
-                    case "FlameDroneBody":
                     case "EquipmentDroneBody":
                     case "EmergencyDroneBody":
                         ally.tags |= AllyTag.Drone;
                         break;
+                    case "FlameDroneBody":
                     case "MegaDroneBody":
                         ally.tags |= AllyTag.Drone | AllyTag.UseShield;
                         break;

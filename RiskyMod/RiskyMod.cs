@@ -73,7 +73,7 @@ namespace RiskyMod
 
     [BepInDependency("com.rune580.riskofoptions")]
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.10.2")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.10.3")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
@@ -96,6 +96,8 @@ namespace RiskyMod
         public static bool ShareSuiteBoss = false;
         public static bool ShareSuiteLunar = false;
 
+        public static bool InfernoPluginLoaded = false;
+
         public static bool EnableProjectileCloning = true;
 
         public static ItemDef emptyItemDef = null;
@@ -108,6 +110,12 @@ namespace RiskyMod
 
         public static GameModeIndex classicRunIndex;
         public static GameModeIndex simulacrumIndex;
+
+        public void Start()
+        {
+            //Check for Inferno here since it has a RiskyMod softdependency.
+            InfernoPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("HIFU.Inferno");
+        }
 
         public void Awake()
         {

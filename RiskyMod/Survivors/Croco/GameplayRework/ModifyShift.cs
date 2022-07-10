@@ -59,7 +59,6 @@ namespace RiskyMod.Survivors.Croco
 
         private void ChainableLeapCooldown()
         {
-            float cdr = 1f;
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.ChainableLeap", "refundPerHit", "0");
             IL.EntityStates.Croco.ChainableLeap.DoImpactAuthority += (il) =>
             {
@@ -71,6 +70,7 @@ namespace RiskyMod.Survivors.Croco
                     c.Emit(OpCodes.Ldarg_0);    //self
                     c.EmitDelegate<Func<BlastAttack.Result, EntityStates.Croco.ChainableLeap, BlastAttack.Result>>((result, self) =>
                     {
+                        float cdr = 1f;
                         self.skillLocator.primary.RunRecharge((float)result.hitCount * cdr);
                         self.skillLocator.secondary.RunRecharge((float)result.hitCount * cdr);
                         self.skillLocator.utility.RunRecharge((float)result.hitCount * cdr);
