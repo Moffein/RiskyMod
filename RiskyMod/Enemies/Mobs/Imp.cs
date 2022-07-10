@@ -43,7 +43,7 @@ namespace RiskyMod.Enemies.Mobs
 
         private void AddLunge()
         {
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.ImpMonster.DoubleSlash", "selfForce", "1200");  //Clay Man is 1800. This runs 2x.
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.ImpMonster.DoubleSlash", "selfForce", "1600");  //Clay Man is 1800
         }
     }
 }
