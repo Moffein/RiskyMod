@@ -590,6 +590,7 @@ namespace RiskyMod
             Jellyfish.enabled = MonsterCfg.Bind(monsterString, "Jellyfish", true, "Enable changes to this monster.").Value;
             Imp.enabled = MonsterCfg.Bind(monsterString, "Imp", true, "Enable changes to this monster.").Value;
             HermitCrab.enabled = MonsterCfg.Bind(monsterString, "Hermit Crab", true, "Enable changes to this monster.").Value;
+            Lemurian.enabled = MonsterCfg.Bind(monsterString, "Lemurian", true, "Enable changes to this monster.").Value;
 
             Golem.enabled = MonsterCfg.Bind(monsterString, "Stone Golem", true, "Enable changes to this monster.").Value;
             Mushrum.enabled = MonsterCfg.Bind(monsterString, "Mini Mushrum", true, "Enable changes to this monster.").Value;

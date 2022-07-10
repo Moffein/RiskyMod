@@ -20,7 +20,7 @@ namespace RiskyMod.Enemies.Mobs
             ExpandHitbox(beetleObject);
 
             //SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/Base/Beetle/EntityStates.BeetleMonster.SpawnState.asset").WaitForCompletion());
-            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Beetle/EntityStates.BeetleMonster.SpawnState.asset", "duration", "3");  //5 vanilla
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Beetle/EntityStates.BeetleMonster.SpawnState.asset", "duration", "3.2");  //5 vanilla
         }
 
         private void ModifyStats(GameObject go)

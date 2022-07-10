@@ -81,14 +81,7 @@ namespace RiskyMod.Survivors.Merc
                             }
 
                             //Re-order list so that friendly hurtboxes are at the end
-                            Collider[] finalColliders = new Collider[enemyHurtboxes.Count];
-                            int index = 0;
-                            foreach (Collider cl in enemyHurtboxes)
-                            {
-                                finalColliders[index] = null;
-                                index++;
-                            }
-                            return finalColliders;
+                            return enemyHurtboxes.ToArray();
                         });
                     }
                     else

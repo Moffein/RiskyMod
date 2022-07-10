@@ -44,6 +44,7 @@ namespace RiskyMod.Enemies
             new Jellyfish();
             new Imp();
             new HermitCrab();
+            new Lemurian();
 
             new Golem();
             new Mushrum();
