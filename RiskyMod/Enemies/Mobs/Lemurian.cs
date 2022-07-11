@@ -22,7 +22,7 @@ namespace RiskyMod.Enemies.Mobs
                 {
                     if (self.healthComponent)
                     {
-                        self.healthComponent.TakeDamageForce(self.characterDirection.forward * 1600f, true, false);
+                        self.healthComponent.TakeDamageForce(self.characterDirection.forward * 1400f, true, false);
                     }
                 }
             };
