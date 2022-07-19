@@ -32,7 +32,7 @@ namespace RiskyMod.Enemies.Bosses
 
         private void LaserRework()
         {
-            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireGoldMegaLaser.asset", "damageCoefficient", "1.8");    //Vanilla 1
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireGoldMegaLaser.asset", "damageCoefficient", "1.6");    //Vanilla 1
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireGoldMegaLaser.asset", "fireFrequency", "10");    //Vanilla 8
             Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Titan/ChargeGoldLaser.asset").WaitForCompletion().baseRechargeInterval = 15f;   //Vanilla 20
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.ChargeGoldMegaLaser.asset", "baseDuration", "2"); //Vanilla 3
@@ -52,6 +52,8 @@ namespace RiskyMod.Enemies.Bosses
                 {
                     ai.minDistance = 0f;
                     ai.maxDistance = 200f;
+                    ai.aimType = AISkillDriver.AimType.AtMoveTarget;    //See if this makes it smoother
+                    ai.driverUpdateTimerOverride = 10f;  //laser firing = 8s, laser chargeup = 2s
                 }
             }
         }
