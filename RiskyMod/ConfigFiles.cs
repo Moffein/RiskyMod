@@ -320,7 +320,7 @@ namespace RiskyMod
         private static void ConfigVoidItems()
         {
             Dungus.enabled = ItemCfg.Bind(voidString, "Weeping Fungus", true, itemConfigDescString).Value;
-
+            Needletick.enabled = ItemCfg.Bind(voidString, "Needletick", true, itemConfigDescString).Value;
             SaferSpaces.enabled = ItemCfg.Bind(voidString, "Safer Spaces", true, itemConfigDescString).Value;
 
             PlasmaShrimp.enabled = ItemCfg.Bind(voidString, "Plasma Shrimp", true, itemConfigDescString).Value;
