@@ -87,6 +87,7 @@ namespace RiskyMod.Items
             new Infusion();
             new RedWhip();
             new Daisy();
+            new GhorsTome();
 
             new Harpoon();
         }
@@ -116,6 +117,7 @@ namespace RiskyMod.Items
         private void ModifyVoid()
         {
             new Dungus();
+            new Needletick();
             new SaferSpaces();
             new PlasmaShrimp();
             new VoidWisp();

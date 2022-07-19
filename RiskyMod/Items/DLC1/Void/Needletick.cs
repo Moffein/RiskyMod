@@ -10,12 +10,17 @@ namespace RiskyMod.Items.DLC1.Void
         public Needletick()
         {
             if (!enabled) return;
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
                 int collapseCount = sender.GetBuffCount(DLC1Content.Buffs.Fracture);
                 args.armorAdd -= collapseCount;
             };
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, DLC1Content.Items.BleedOnHitVoid);
         }
     }
 }

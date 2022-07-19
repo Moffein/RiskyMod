@@ -118,8 +118,10 @@
 	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "Shoot down nearby projectiles. Recharge rate scales with the amount of drones you have.",
 	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "Shoot down <style=cIsDamage>1</style> <style=cStack>(+1 per stack)</style> projectiles within <style=cIsDamage>20m</style> every <style=cIsDamage>0.5 seconds</style>. <style=cIsUtility>Recharge rate scales with the amount of drones you have</style>.",
 	
-	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "Killing elite monsters spawns an <style=cIsDamage>Alpha Construct</style> with <style=cIsHealing>300% <style=cStack>(+150% per stack)</style> health</style> and <style=cIsDamage>300% <style=cStack>(+150% per stack)</style> damage</style>. Limited to <style=cIsUtility>4</style>."
+	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "Killing elite monsters spawns an <style=cIsDamage>Alpha Construct</style> with <style=cIsHealing>300% <style=cStack>(+150% per stack)</style> health</style> and <style=cIsDamage>300% <style=cStack>(+150% per stack)</style> damage</style>. Limited to <style=cIsUtility>4</style>.",
 	
 	"ITEM_PERMANENTDEBUFFONHIT_DESC_RISKYMOD": "<style=cIsDamage>100%</style> chance on hit to reduce <style=cIsDamage>armor</style> by <style=cIsDamage>1</style> <style=cStack>(+1 per stack)</style> <style=cIsDamage>permanently</style>.",
+	
+	"ITEM_BLEEDONHITVOID_DESC_RISKYMOD": "<style=cIsDamage>10%</style> <style=cStack>(+10% per stack)</style> chance to <style=cIsDamage>collapse</style> an enemy for <style=cIsDamage>400%</style> base damage and reduce their <style=cIsDamage>armor</style> by <style=cIsDamage>1</style>. <style=cIsVoid>Corrupts all Tri-Tip Daggers</style>."
 	}
 }
