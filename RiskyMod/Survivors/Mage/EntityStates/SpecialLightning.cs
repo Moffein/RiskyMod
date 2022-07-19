@@ -52,7 +52,7 @@ namespace EntityStates.RiskyMod.Mage
 				this.rightMuzzleTransform = this.childLocator.FindChild("MuzzleRight");
 			}
 
-			if (base.isAuthority && base.characterBody)
+			if (base.characterBody)
 			{
 				this.isCrit = Util.CheckRoll(this.critStat, base.characterBody.master);
 			}
@@ -86,53 +86,56 @@ namespace EntityStates.RiskyMod.Mage
 				rightMuzzle = !rightMuzzle;
 			}
 
-			if (NetworkServer.active)
+			List<HealthComponent> bouncedObjects = new List<HealthComponent>();
+			LightningOrb lo = new LightningOrb
 			{
-				List<HealthComponent> bouncedObjects = new List<HealthComponent>();
-				LightningOrb lo = new LightningOrb
+				bouncedObjects = bouncedObjects,
+				attacker = base.gameObject,
+				inflictor = base.gameObject,
+				damageValue = base.damageStat * tickDamageCoefficient,
+				procCoefficient = SpecialLightning.procCoefficientPerTick,
+				teamIndex = base.GetTeam(),
+				isCrit = this.isCrit,
+				procChainMask = default,
+				lightningType = LightningOrb.LightningType.MageLightning,
+				damageColorIndex = DamageColorIndex.Default,
+				bouncesRemaining = 1,
+				targetsToFindPerBounce = 6,
+				range = loadBounceDistance,
+				origin = lightningOrigin,
+				damageType = DamageType.Generic,
+				speed = 120f,
+				//damageCoefficientPerBounce = 0.8f
+			};
+			ModifyAttack(lo);
+
+			BullseyeSearch search = new BullseyeSearch();
+			search.teamMaskFilter = TeamMask.allButNeutral;
+			search.teamMaskFilter.RemoveTeam(characterBody.teamComponent.teamIndex);
+			search.filterByLoS = false;
+			search.searchOrigin = aimRay.origin - aimRay.direction;
+			search.sortMode = BullseyeSearch.SortMode.Angle;
+			search.maxDistanceFilter = loadMaxDistance + 1f;
+			search.maxAngleFilter = base.isAuthority ? 45f : 90f;   //Use a wider search radius for online players to account for lag.
+			search.searchDirection = aimRay.direction;
+			search.RefreshCandidates();
+
+			GameObject effect = SpecialLightning.gauntletMissEffectPrefab;
+
+			HurtBox target = search.GetResults().FirstOrDefault();
+			if (target)
+			{
+				if (NetworkServer.active)
 				{
-					bouncedObjects = bouncedObjects,
-					attacker = base.gameObject,
-					inflictor = base.gameObject,
-					damageValue = base.damageStat * tickDamageCoefficient,
-					procCoefficient = SpecialLightning.procCoefficientPerTick,
-					teamIndex = base.GetTeam(),
-					isCrit = this.isCrit,
-					procChainMask = default,
-					lightningType = LightningOrb.LightningType.MageLightning,
-					damageColorIndex = DamageColorIndex.Default,
-					bouncesRemaining = 1,
-					targetsToFindPerBounce = 6,
-					range = loadBounceDistance,
-					origin = lightningOrigin,
-					damageType = DamageType.Generic,
-					speed = 120f,
-					//damageCoefficientPerBounce = 0.8f
-				};
-				ModifyAttack(lo);
-
-				BullseyeSearch search = new BullseyeSearch();
-				search.teamMaskFilter = TeamMask.allButNeutral;
-				search.teamMaskFilter.RemoveTeam(characterBody.teamComponent.teamIndex);
-				search.filterByLoS = false;
-				search.searchOrigin = aimRay.origin - aimRay.direction;
-				search.sortMode = BullseyeSearch.SortMode.Angle;
-				search.maxDistanceFilter = loadMaxDistance + 1f;
-				search.maxAngleFilter = base.isAuthority ? 45f : 90f;	//Use a wider search radius for online players to account for lag.
-				search.searchDirection = aimRay.direction;
-				search.RefreshCandidates();
-
-				GameObject effect = SpecialLightning.gauntletMissEffectPrefab;
-
-				HurtBox target = search.GetResults().FirstOrDefault();
-				if (target)
-				{
+					lo.bouncedObjects.Add(target.healthComponent);
 					lo.target = target;
 					OrbManager.instance.AddOrb(lo);
-					lo.bouncedObjects.Add(target.healthComponent);
-					effect = SpecialLightning.gauntletEffectPrefab;
 				}
-				else
+				effect = SpecialLightning.gauntletEffectPrefab;
+			}
+			else
+			{
+				if (NetworkServer.active)
 				{
 					//Just fire a bulletattack so that it looks like something is happening if targets can't be found
 					new BulletAttack
@@ -155,28 +158,28 @@ namespace EntityStates.RiskyMod.Mage
 						maxDistance = SpecialLightning.maxDistance - 5f
 					}.Fire();
 				}
-
-				EffectManager.SimpleMuzzleFlash(effect, base.gameObject, "MuzzleLeft", true);
-				EffectManager.SimpleMuzzleFlash(effect, base.gameObject, "MuzzleRight", true);
-
-				/*int i = 0;
-				List<HurtBox> targets = search.GetResults().ToList();
-				if (targets.Count > 0)
-				{
-					foreach (HurtBox hb in targets)
-					{
-						if (!lo.bouncedObjects.Contains(hb.healthComponent))
-						{
-							lo.target = hb;
-							OrbManager.instance.AddOrb(lo);
-							lo.bouncedObjects.Add(hb.healthComponent);
-
-							i++;
-							if (i >= 3) break;
-						}
-					}
-				}*/
 			}
+
+			EffectManager.SimpleMuzzleFlash(effect, base.gameObject, "MuzzleLeft", false);
+			EffectManager.SimpleMuzzleFlash(effect, base.gameObject, "MuzzleRight", false);
+
+			/*int i = 0;
+			List<HurtBox> targets = search.GetResults().ToList();
+			if (targets.Count > 0)
+			{
+				foreach (HurtBox hb in targets)
+				{
+					if (!lo.bouncedObjects.Contains(hb.healthComponent))
+					{
+						lo.target = hb;
+						OrbManager.instance.AddOrb(lo);
+						lo.bouncedObjects.Add(hb.healthComponent);
+
+						i++;
+						if (i >= 3) break;
+					}
+				}
+			}*/
 
 			if (base.characterMotor)
 			{
@@ -230,11 +233,11 @@ namespace EntityStates.RiskyMod.Mage
 
 		bool rightMuzzle = true; //Keep track of which gauntlet the lightning visually comes out from
 
-		public static float totalDamageCoefficient = 9f;
+		public static float totalDamageCoefficient = 10f;
 		public static GameObject gauntletEffectPrefab;
 		public static GameObject gauntletMissEffectPrefab;
 		public static float maxDistance = 40f;
-		public static float bounceDistance = 15f;
+		public static float bounceDistance = 20f;
 		public static float baseEntryDuration = 0.6f;
 		public static float baseAttackDuration = 3f;
 		public static float procCoefficientPerTick = 1f;
