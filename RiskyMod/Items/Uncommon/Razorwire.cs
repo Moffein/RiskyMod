@@ -33,15 +33,15 @@ namespace RiskyMod.Items.Uncommon
             int thornCount = inventory.GetItemCount(RoR2Content.Items.Thorns);
             if (thornCount > 0 && !damageInfo.procChainMask.HasProc(ProcType.Thorns))
             {
-                float hpLostLerp = percentHpLost / 50f; //Was /100f, Lerp should be clamped.
+                float hpLostLerp = percentHpLost / 10f; //Was /100f, Lerp should be clamped.
                 int targetCount = 1 + 2 * thornCount;
                 bool isVengeanceClone = inventory.GetItemCount(RoR2Content.Items.InvadingDoppelganger) > 0; //In case some other mod tries to mess with HealthComponent's itemcount
 
                 bool isCrit = self.body.RollCrit();
                 int stack = thornCount - 1;
-                float damageValue = Mathf.Lerp(0.84f + 0.18f * stack, 4.2f + 0.9f * stack, hpLostLerp) * self.body.damage;
+                float damageValue = (1.6f + 0.4f * stack) * self.body.damage;    //Mathf.Lerp(0.84f + 0.18f * stack, 4.2f + 0.9f * stack, hpLostLerp)
                 float proc = Mathf.Lerp(0.1f, 0.5f, hpLostLerp);
-                float radius = Mathf.Lerp(20f, 50f, hpLostLerp);
+                float radius = 25f; //Mathf.Lerp(20f, 50f, hpLostLerp);
 
                 TeamIndex teamIndex2 = self.body.teamComponent.teamIndex;
                 HurtBox[] hurtBoxes = new SphereSearch
