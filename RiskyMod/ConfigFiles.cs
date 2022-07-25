@@ -190,6 +190,7 @@ namespace RiskyMod
             if (SpawnLimits.maxMountainShrines < 0 && SpawnLimits.maxCombatShrines < 0 && SpawnLimits.maxVoidSeeds == 3) SpawnLimits.enabled = false;
 
             //Artifacts
+            BulwarksAmbry.enabled = GeneralCfg.Bind(artifactString, "Bulwarks Ambry Tweaks", true, "Increase key drop chance and guarantee key drops after a certain amount of kills.").Value;
             VengeanceVoidTeam.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Void Team", true, "Vengeance Doppelgangers are considered part of the Void Team.").Value;
             FixVengeanceLeveling.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Fix Levels", true, "Fix Vengeance Doppelgangers not leveling up.").Value;
             VengeancePercentHeal.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Reduce Percent Heals", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
