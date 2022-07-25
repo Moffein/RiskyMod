@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RiskyMod.Tweaks.Artifacts
+namespace RiskyMod.Tweaks.Artifact
 {
     public class EnigmaBlacklist
     {

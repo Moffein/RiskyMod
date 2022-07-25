@@ -37,7 +37,7 @@ using RiskyMod.Enemies;
 using RiskyMod.Moon;
 using RiskyMod.VoidLocus;
 using RiskyMod.Tweaks.Holdouts;
-using RiskyMod.Tweaks.Artifacts;
+using RiskyMod.Tweaks.Artifact;
 using RiskyMod.Tweaks;
 using RiskyMod.Tweaks.CharacterMechanics;
 using RiskyMod.Tweaks.RunScaling;

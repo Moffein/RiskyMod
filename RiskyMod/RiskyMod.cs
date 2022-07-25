@@ -33,7 +33,7 @@ using RiskyMod.VoidLocus;
 using RiskyMod.Tweaks.RunScaling;
 using RiskyMod.Tweaks.Holdouts;
 using RiskyMod.Tweaks.CharacterMechanics;
-using RiskyMod.Tweaks.Artifacts;
+using RiskyMod.Tweaks.Artifact;
 using RiskyMod.MonoBehaviours;
 using RiskyMod.VoidFields;
 
@@ -272,8 +272,10 @@ namespace RiskyMod
             new PlayerControlledMonsters();
 
             //Artifacts
+            new FixVengeanceLeveling();
             new VengeancePercentHeal();
             new EnigmaBlacklist();
+            new BulwarksAmbry();
 
             //Misc
             new AIBlacklistItems();
@@ -284,7 +286,6 @@ namespace RiskyMod
         private void RunFixes()
         {
             new FixPlayercount();
-            new FixVengeanceLeveling();
             new FixFocusCrystalSelfDamage();
             new PreventArtifactHeal();
             new TreebotFruitingNullref();

@@ -1,6 +1,6 @@
 ﻿using RoR2;
 
-namespace RiskyMod.Tweaks.Artifacts
+namespace RiskyMod.Tweaks.Artifact
 {
     public class VengeancePercentHeal
     {
