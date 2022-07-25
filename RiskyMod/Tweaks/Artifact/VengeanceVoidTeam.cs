@@ -10,7 +10,7 @@ namespace RiskyMod.Tweaks.Artifact
 
         public VengeanceVoidTeam()
         {
-
+            if (!enabled) return;
         }
     }
 }

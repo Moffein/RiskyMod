@@ -31,7 +31,7 @@ namespace RiskyMod.Enemies.Bosses
             };
 
             //ProjectileSetup();
-            AlwaysFireMeatballs();
+            //AlwaysFireMeatballs(); //Laggy
             PrioritizePlayers();
             ReduceFollowDelay(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MagmaWorm/MagmaWormBody.prefab").WaitForCompletion());
             ReduceFollowDelay(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ElectricWorm/ElectricWormBody.prefab").WaitForCompletion());

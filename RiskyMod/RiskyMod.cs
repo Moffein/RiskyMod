@@ -274,6 +274,7 @@ namespace RiskyMod
             //Artifacts
             new FixVengeanceLeveling();
             new VengeancePercentHeal();
+            new VengeanceVoidTeam();
             new EnigmaBlacklist();
             new BulwarksAmbry();
 
