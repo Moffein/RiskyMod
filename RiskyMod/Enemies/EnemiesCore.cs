@@ -54,6 +54,8 @@ namespace RiskyMod.Enemies
 
             new Parent();
 
+            new VoidReaver();
+
             new LunarGolem();
             new LunarWisp();
 

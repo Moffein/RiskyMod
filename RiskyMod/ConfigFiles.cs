@@ -620,6 +620,8 @@ namespace RiskyMod
 
             VoidInfestor.enabled = MonsterCfg.Bind(monsterString, "Void Infestor", true, "Enable changes to this monster.").Value;
             VoidInfestor.noVoidAllies = MonsterCfg.Bind(monsterString, "Void Infestor - No Ally Infestation", true, "Void Infestors can't possess allies.").Value;
+
+            VoidReaver.enabled = MonsterCfg.Bind(monsterString, "Void Reaver", true, "Enable changes to this monster.").Value;
         }
 
         private static void ConfigSpawnpools()
