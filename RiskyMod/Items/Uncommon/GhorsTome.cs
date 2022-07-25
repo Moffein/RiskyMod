@@ -32,7 +32,7 @@ namespace RiskyMod.Items.Uncommon
                                 if (cb && !cb.isPlayerControlled)
                                 {
                                     canPickup = false;
-                                    runOrig = false;
+                                    runOrig = true;
                                 }
                             }
 
