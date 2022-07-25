@@ -23,21 +23,15 @@ namespace RiskyMod.Items.Uncommon
                         TeamIndex objectTeam = TeamComponent.GetObjectTeam(other.gameObject);
                         if (objectTeam == self.teamFilter.teamIndex)
                         {
-                            //On the Player Team, only real players can take Tome gold.
-                            bool canPickup = true;
-                            bool preventNPC = self.teamFilter.teamIndex == TeamIndex.Player;
+                            bool modifyPickup = true;
                             CharacterBody cb = other.gameObject.GetComponent<CharacterBody>();
-                            if (preventNPC)
+                            if (cb && !cb.isPlayerControlled)
                             {
-                                if (cb && !cb.isPlayerControlled)
-                                {
-                                    canPickup = false;
-                                    runOrig = true;
-                                }
+                                modifyPickup = false;
                             }
 
                             //Give gold to single player, instead of splitting it
-                            if (canPickup && cb && cb.master)
+                            if (modifyPickup && cb && cb.master)
                             {
                                 runOrig = false;
                                 self.alive = false;
