@@ -194,6 +194,7 @@ namespace RiskyMod
             FixVengeanceLeveling.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Fix Levels", true, "Fix Vengeance Doppelgangers not leveling up.").Value;
             VengeancePercentHeal.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Reduce Percent Heals", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
             EnigmaBlacklist.enabled = GeneralCfg.Bind(artifactString, "Enigma Blacklist", true, "Blacklist Lunars and Recycler from the Artifact of Enigma.").Value;
+            Sacrifice.enabled = GeneralCfg.Bind(artifactString, "Sacrifice - No Drop Chance Scaling", true, "Increases drop chance when not using Swarms and prevents drop chance from increasing as the run progresses.").Value;
 
             //Void Fields
             VoidFields.ModifyHoldout.enabled = GeneralCfg.Bind(voidFieldsString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
