@@ -11,7 +11,7 @@ namespace RiskyMod.Items.Equipment
 
         private static GameObject HealEffectPrefab;
 
-        public static float healRadius = 12f;
+        public static float healRadius = 20f;
         public Fruit()
         {
             if (!enabled) return;

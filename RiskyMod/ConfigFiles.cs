@@ -358,6 +358,8 @@ namespace RiskyMod
             DefenseNucleus.ignoreAllyCap = ItemCfg.Bind(bossString, "Defense Nucleus - Ignore Ally Cap", true, "Defense Nucleus Alpha Constructs ignore the ally cap if changes are enabled.").Value;
         
             Planula.enabled = ItemCfg.Bind(bossString, "Planula", true, "Proc after Stealthkit and Squid. Disable this if you want to use mods that change Planula.").Value;
+
+            HalcyonSeed.enabled = ItemCfg.Bind(bossString, "Halcyon Seed", true, itemConfigDescString).Value;
         }
 
         private static void ConfigLunars()

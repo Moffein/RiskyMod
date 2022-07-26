@@ -139,6 +139,7 @@ namespace RiskyMod.Items
             new Planula();
             new EmpathyCores();
             new DefenseNucleus();
+            new HalcyonSeed();
         }
 
         private void ModifyLunar()
@@ -163,6 +164,7 @@ namespace RiskyMod.Items
             new Chrysalis();
             new Fruit();
             new Goobo();
+            new Caffeinator();
         }
 
         private void ModifyItemTokens()
