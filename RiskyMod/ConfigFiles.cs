@@ -387,6 +387,7 @@ namespace RiskyMod
             SuperLeech.enabled = ItemCfg.Bind(equipmentString, "Super Massive Leech", true, itemConfigDescString).Value;
             VolcanicEgg.enabled = ItemCfg.Bind(equipmentString, "Volcanic Egg", true, itemConfigDescString).Value;
             Goobo.enabled = ItemCfg.Bind(equipmentString, "Goobo Jr.", true, itemConfigDescString).Value;
+            Caffeinator.enabled = ItemCfg.Bind(equipmentString, "Remote Caffeinator: Trigger Pressure Plates", true, "Remote Caffeinator can be used to press the hidden buttons on Abandoned Aqueduct.").Value;
         }
 
         private static void ConfigFireSelect()
