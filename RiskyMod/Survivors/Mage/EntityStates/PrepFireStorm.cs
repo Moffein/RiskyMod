@@ -86,7 +86,19 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 				overrideRequest.Dispose();
 			}
 
-			if (base.isAuthority) FireBlastJump();
+			//Always fire a blast attack so that Airborne enemies can be hit.
+			if (base.isAuthority && base.characterMotor)
+			{
+				Ray aimRay = base.GetAimRay();
+				Vector3 force = -1f * aimRay.direction * blastForce;
+				if (base.characterMotor.velocity.y < 0)
+				{
+					base.characterMotor.velocity.y = 0;
+					if (aimRay.direction.y < 0f) force += additionalForce;
+				}
+				base.characterMotor.ApplyForce(force, true, false);
+				//FireBlastJump();
+			}
 
 			base.OnExit();
 		}
@@ -156,7 +168,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 		}
 
 		public static float baseDuration = 0.5f;
-		public static float damageCoefficient = 18f;
+		public static float damageCoefficient = 21.6f;
 		public static GameObject areaIndicatorPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab").WaitForCompletion();
 		public static GameObject muzzleflashEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Junk/Mage/MuzzleflashMageFireLarge.prefab").WaitForCompletion();
 		public static GameObject crosshairOverridePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/SimpleDotCrosshair.prefab").WaitForCompletion();

@@ -125,7 +125,18 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			}
 
 			//Always fire a blast attack so that Airborne enemies can be hit.
-			if (base.isAuthority) FireBlastJump();
+			if (base.isAuthority && base.characterMotor)
+			{
+				Ray aimRay = base.GetAimRay();
+				Vector3 force = -1f * aimRay.direction * blastForce;
+				if (base.characterMotor.velocity.y < 0)
+                {
+					base.characterMotor.velocity.y = 0;
+					if (aimRay.direction.y < 0f) force += additionalForce;
+				}
+				base.characterMotor.ApplyForce(force, true, false);
+				//FireBlastJump();
+			}
 
 			base.OnExit();
 		}
@@ -201,7 +212,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 		public static float blastRadius = 6f;//Ion Surge is 14f
 		public static float blastJumpRadius = 14f;
 
-		public static float blastForce = 3200f;	//4000f is railgunner
+		public static float blastForce = 3200f; //4000f is railgunner
 		public static Vector3 additionalForce = 200f * Vector3.up;
 
 		private float duration;
