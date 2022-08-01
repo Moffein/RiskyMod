@@ -13,12 +13,14 @@ namespace RiskyMod.Allies
         public static bool noVoidDeath = true;
         public static bool noOverheat = true;
 
-        public delegate void ChangeAllyScaling(AllyInfo ally);
+        public delegate void ChangeAllyScaling(AllyInfo ally, CharacterBody allyBody);  //allyBody is guaranteed to be non-null
         public static ChangeAllyScaling ChangeAllyScalingActions;
 
         public AllyScaling()
         {
             AlliesCore.ModifyAlliesActions += ModifyAllies;
+            ChangeAllyScalingActions += MegaDrone_Scaling;
+            ChangeAllyScalingActions += FlameDrone_Scaling;
         }
 
         private void ModifyAllies(List<AllyInfo> allies)
@@ -32,15 +34,15 @@ namespace RiskyMod.Allies
         private void ChangeScaling(AllyInfo ally)
         {
             GameObject bodyPrefab = BodyCatalog.GetBodyPrefab(ally.bodyIndex);
-            CharacterBody cb = null;
+            CharacterBody allyBody = null;
             if (bodyPrefab)
             {
-                cb = bodyPrefab.GetComponent<CharacterBody>();
+                allyBody = bodyPrefab.GetComponent<CharacterBody>();
             }
-            if (!bodyPrefab || !cb) return;
+            if (!bodyPrefab || !allyBody) return;
 
-            if (noVoidDeath) cb.bodyFlags |= CharacterBody.BodyFlags.ImmuneToVoidDeath;
-            if (noOverheat) cb.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
+            if (noVoidDeath) allyBody.bodyFlags |= CharacterBody.BodyFlags.ImmuneToVoidDeath;
+            if (noOverheat) allyBody.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
 
             bool ignoreScaling = (ally.tags & AllyTag.DontModifyScaling) == AllyTag.DontModifyScaling;
             if (!ignoreScaling)
@@ -50,36 +52,64 @@ namespace RiskyMod.Allies
                     //Don't like how normalization is split between AllyScaling and AlliesCore
                     if (normalizeDroneDamage)
                     {
-                        cb.baseDamage = 12f;
+                        allyBody.baseDamage = 12f;
                     }
                 }
 
                 if ((ally.tags & AllyTag.Turret) == AllyTag.Turret)
                 {
-                    cb.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
+                    allyBody.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
                 }
 
                 if ((ally.tags & AllyTag.UseShield) == AllyTag.UseShield)
                 {
-                    cb.baseMaxShield += cb.baseMaxHealth * 0.08f;
+                    allyBody.baseMaxShield += allyBody.baseMaxHealth * 0.08f;
                 }
 
                 //Drones always regen to full in 40s
                 if ((ally.tags & AllyTag.DontModifyRegen) != AllyTag.DontModifyRegen)
                 {
-                    cb.baseRegen = cb.baseMaxHealth / 40f;
-                    cb.levelRegen = cb.baseRegen * 0.2f;
+                    allyBody.baseRegen = allyBody.baseMaxHealth / 40f;
+                    allyBody.levelRegen = allyBody.baseRegen * 0.2f;
                 }
 
                 //Set Level Stats
-                cb.levelDamage = cb.baseDamage * 0.3f;
-                cb.levelMaxHealth = cb.baseMaxHealth * 0.2f;
-                cb.levelMaxShield = cb.baseMaxShield * 0.2f;
-                cb.autoCalculateLevelStats = false;
+                allyBody.levelDamage = allyBody.baseDamage * 0.3f;
+                allyBody.levelMaxHealth = allyBody.baseMaxHealth * 0.2f;
+                allyBody.levelMaxShield = allyBody.baseMaxShield * 0.2f;
+                allyBody.autoCalculateLevelStats = false;
             }
 
             //Can be used by external mods who want to do their own thing with custom allies?
-            if (ChangeAllyScalingActions != null) ChangeAllyScalingActions.Invoke(ally);
+            if (ChangeAllyScalingActions != null) ChangeAllyScalingActions.Invoke(ally, allyBody);
+        }
+
+        private void MegaDrone_Scaling(AllyInfo ally, CharacterBody allyBody)
+        {
+            if (ally.bodyName == "MegaDroneBody")
+            {
+                allyBody.baseArmor = 20f;
+
+                if ((ally.tags & AllyTag.DontModifyRegen) != AllyTag.DontModifyRegen)
+                {
+                    allyBody.baseRegen = allyBody.baseMaxHealth / 30f;
+                    allyBody.levelRegen = allyBody.baseRegen * 0.2f;
+                }
+            }
+        }
+
+        private void FlameDrone_Scaling(AllyInfo ally, CharacterBody allyBody)
+        {
+            if (ally.bodyName == "FlameDroneBody")
+            {
+                allyBody.baseArmor = 20f;
+
+                if ((ally.tags & AllyTag.DontModifyRegen) != AllyTag.DontModifyRegen)
+                {
+                    allyBody.baseRegen = allyBody.baseMaxHealth / 20f;
+                    allyBody.levelRegen = allyBody.baseRegen * 0.2f;
+                }
+            }
         }
     }
 }
