@@ -86,18 +86,36 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 				overrideRequest.Dispose();
 			}
 
-			//Always fire a blast attack so that Airborne enemies can be hit.
-			if (base.isAuthority && base.characterMotor)
+			if (base.isAuthority)
 			{
 				Ray aimRay = base.GetAimRay();
-				Vector3 force = -1f * aimRay.direction * blastForce;
-				if (base.characterMotor.velocity.y < 0)
+				Vector3 aimPos = aimRay.origin + aimRay.direction * maxDistance;
+				if (base.characterMotor)
 				{
-					base.characterMotor.velocity.y = 0;
-					if (aimRay.direction.y < 0f) force += additionalForce;
+					Vector3 force = -1f * aimRay.direction * blastForce;
+					if (base.characterMotor.velocity.y < 0)
+					{
+						base.characterMotor.velocity.y = 0;
+						if (aimRay.direction.y < 0f) force += additionalForce;
+					}
+					base.characterMotor.ApplyForce(force, true, false);
+					//FireBlastJump();
 				}
-				base.characterMotor.ApplyForce(force, true, false);
-				//FireBlastJump();
+
+				ProjectileManager.instance.FireProjectile(new FireProjectileInfo
+				{
+					damage = base.damageStat * PrepFireStorm.damageCoefficient,
+					crit = base.RollCrit(),
+					damageColorIndex = DamageColorIndex.Default,
+					position = aimPos,
+					procChainMask = default,
+					force = 0f,
+					owner = base.gameObject,
+					projectilePrefab = PrepFireStorm.projectilePrefab,
+					rotation = Quaternion.identity,
+					speedOverride = 0f,
+					target = null
+				});
 			}
 
 			base.OnExit();
@@ -134,21 +152,6 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 				attackerFiltering = AttackerFiltering.NeverHitSelf
 			};
 			blastAttack.Fire();*/
-
-			ProjectileManager.instance.FireProjectile(new FireProjectileInfo
-			{
-				damage = base.damageStat * PrepFireStorm.damageCoefficient,
-				crit = base.RollCrit(),
-				damageColorIndex = DamageColorIndex.Default,
-				position = aimPos,
-				procChainMask = default,
-				force = 0f,
-				owner = base.gameObject,
-				projectilePrefab = PrepFireStorm.projectilePrefab,
-				rotation = Quaternion.identity,
-				speedOverride = 0f,
-				target = null
-			});
 
 			if (base.characterMotor && !base.characterMotor.isGrounded && base.characterBody)
 			{
