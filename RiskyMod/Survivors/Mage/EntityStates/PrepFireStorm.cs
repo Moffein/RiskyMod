@@ -90,6 +90,12 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			{
 				Ray aimRay = base.GetAimRay();
 				Vector3 aimPos = aimRay.origin + aimRay.direction * maxDistance;
+				RaycastHit raycastHit = default(RaycastHit);
+				if (Util.CharacterRaycast(base.gameObject, aimRay, out raycastHit, maxDistance, LayerIndex.CommonMasks.bullet, QueryTriggerInteraction.UseGlobal))
+				{
+					aimPos = raycastHit.point;
+				}
+
 				if (base.characterMotor)
 				{
 					Vector3 force = -1f * aimRay.direction * blastForce;
