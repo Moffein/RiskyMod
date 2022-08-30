@@ -36,25 +36,28 @@ namespace RiskyMod.Tweaks.Artifact
                         c.EmitDelegate<Func<float, float>>(orig =>
                         {
                             float finalDropChance = orig;
-                            bool swarmsEnabled = RunArtifactManager.instance.IsArtifactEnabled(RoR2Content.Artifacts.swarmsArtifactDef);
-
-                            float baseChance = 10f;
-                            float maxChance = 10f;
-
-                            if (swarmsEnabled)
+                            if (orig > 0f)
                             {
-                                baseChance = 5f;
-                                maxChance = 5f;
-                            }
+                                bool swarmsEnabled = RunArtifactManager.instance.IsArtifactEnabled(RoR2Content.Artifacts.swarmsArtifactDef);
 
-                            if (finalDropChance < baseChance)
-                            {
-                                finalDropChance = baseChance;
-                            }
+                                float baseChance = 10f;
+                                float maxChance = 10f;
 
-                            if (finalDropChance > maxChance)
-                            {
-                                finalDropChance = maxChance;
+                                if (swarmsEnabled)
+                                {
+                                    baseChance = 5f;
+                                    maxChance = 5f;
+                                }
+
+                                if (finalDropChance < baseChance)
+                                {
+                                    finalDropChance = baseChance;
+                                }
+
+                                if (finalDropChance > maxChance)
+                                {
+                                    finalDropChance = maxChance;
+                                }
                             }
 
                             return finalDropChance;
