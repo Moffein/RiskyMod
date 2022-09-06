@@ -9,17 +9,21 @@ namespace RiskyMod.Tweaks.Artifact
         public FixVengeanceLeveling()
         {
             if (!enabled) return;
-            On.RoR2.CharacterBody.Start += (orig2, self) =>
+            RoR2.CharacterMaster.onStartGlobal += RunVengeanceChanges;
+        }
+
+        private void RunVengeanceChanges(CharacterMaster self)
+        {
+            if (NetworkServer.active && self.inventory && self.inventory.GetItemCount(RoR2Content.Items.InvadingDoppelganger) > 0)
             {
-                orig2(self);
-                if (NetworkServer.active && self.teamComponent && self.teamComponent.teamIndex != TeamIndex.Player
-                && self.inventory && self.inventory.GetItemCount(RoR2Content.Items.InvadingDoppelganger) > 0)
-                {
-                    self.inventory.RemoveItem(RoR2Content.Items.UseAmbientLevel, self.inventory.GetItemCount(RoR2Content.Items.UseAmbientLevel));
-                    self.inventory.RemoveItem(RoR2Content.Items.LevelBonus, self.inventory.GetItemCount(RoR2Content.Items.LevelBonus));
-                    self.inventory.GiveItem(RoR2Content.Items.LevelBonus, (int)TeamManager.instance.GetTeamLevel(TeamIndex.Player) - 1);
-                }
-            };
+                int alCount = self.inventory.GetItemCount(RoR2Content.Items.UseAmbientLevel);
+                if (alCount > 0) self.inventory.RemoveItem(RoR2Content.Items.UseAmbientLevel, alCount);
+
+                int lbCount = self.inventory.GetItemCount(RoR2Content.Items.LevelBonus);
+                if (lbCount > 0) self.inventory.RemoveItem(RoR2Content.Items.LevelBonus, lbCount);
+
+                self.inventory.GiveItem(RoR2Content.Items.LevelBonus, (int)TeamManager.instance.GetTeamLevel(TeamIndex.Player) - 1);
+            }
         }
     }
 }
