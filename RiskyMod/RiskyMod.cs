@@ -74,7 +74,7 @@ namespace RiskyMod
 
     [BepInDependency("com.rune580.riskofoptions")]
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.10.14")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.11.0")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
@@ -96,6 +96,8 @@ namespace RiskyMod
         public static bool ShareSuiteLegendary = false;
         public static bool ShareSuiteBoss = false;
         public static bool ShareSuiteLunar = false;
+
+        public static bool inBazaar = false;
 
         public static bool InfernoPluginLoaded = false;
 
@@ -120,6 +122,17 @@ namespace RiskyMod
 
         public void Awake()
         {
+            On.RoR2.Stage.Start += (orig, self) =>
+            {
+                orig(self);
+                inBazaar = false;
+                SceneDef sd = RoR2.SceneCatalog.GetSceneDefForCurrentScene();
+                if (sd && sd.baseSceneName.Equals("bazaar"))
+                {
+                    inBazaar = true;
+                }
+            };
+
             On.RoR2.GameModeCatalog.LoadGameModes += (orig) =>
             {
                 orig();

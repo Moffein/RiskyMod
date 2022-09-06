@@ -1,4 +1,6 @@
-﻿using RoR2;
+﻿using MonoMod.Cil;
+using RoR2;
+using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
@@ -8,6 +10,7 @@ namespace RiskyMod.Items.Uncommon
     public class GhorsTome
     {
         public static bool enabled = true;
+        public static bool disableInBazaar = true;
         public GhorsTome()
         {
             if (!enabled) return;
@@ -16,7 +19,7 @@ namespace RiskyMod.Items.Uncommon
             On.RoR2.MoneyPickup.OnTriggerStay += (orig, self, other) =>
             {
                 bool runOrig = true;
-                if(self.baseObject.name == "BonusMoneyPack(Clone)") //Only modify Tome, in case any other mod wants to add MoneyPickups
+                if (self.baseObject.name == "BonusMoneyPack(Clone)") //Only modify Tome, in case any other mod wants to add MoneyPickups
                 {
                     if (NetworkServer.active && self.alive)
                     {
@@ -51,6 +54,27 @@ namespace RiskyMod.Items.Uncommon
 
                 if (runOrig) orig(self, other);
             };
+
+            if (disableInBazaar)
+            {
+                IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
+                {
+                    ILCursor c = new ILCursor(il);
+                    if (c.TryGotoNext(MoveType.After,
+                         x => x.MatchLdsfld(typeof(RoR2Content.Items), "BonusGoldPackOnKill")
+                        ))
+                    {
+                        c.EmitDelegate<Func<ItemDef, ItemDef>>(origItem =>
+                        {
+                            return RiskyMod.inBazaar ? RiskyMod.emptyItemDef : origItem;
+                        });
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogError("RiskyMod: GhorsTome DisableInBazaar IL Hook failed");
+                    }
+                };
+            }
         }
     }
 }

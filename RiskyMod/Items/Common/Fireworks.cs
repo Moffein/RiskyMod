@@ -24,11 +24,9 @@
 			On.RoR2.FireworkLauncher.FixedUpdate += (orig, self) =>
 			{
 				self.projectilePrefab = Fireworks.projectilePrefab;	//Need to find a better place to put this
-				SceneDef sd = RoR2.SceneCatalog.GetSceneDefForCurrentScene();
-				if (sd && sd.baseSceneName.Equals("bazaar"))
+				if (RiskyMod.inBazaar)
 				{
 					Object.Destroy(self.gameObject);
-					return;
 				}
 				else
 				{

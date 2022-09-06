@@ -261,6 +261,8 @@ namespace RiskyMod
             TougherTimes.enabled = ItemCfg.Bind(commonString, "Tougher Times", true, itemConfigDescString).Value;
             Warbanner.enabled = ItemCfg.Bind(commonString, "Warbanner", true, itemConfigDescString).Value;
 
+            Pennies.disableInBazaar = ItemCfg.Bind(commonString, "Roll of Pennies - Disable in Bazaar", true, "This item does not give gold in the Bazaar Between Time.").Value;
+
             //Makes it too easy to stunlock things even at very low stacks.
             //StunGrenade.enabled = ItemCfg.Bind(commonString, "Stun Grenade", true, itemConfigDescString).Value;
             StunGrenade.enabled = false;
@@ -280,8 +282,13 @@ namespace RiskyMod
             Infusion.enabled = ItemCfg.Bind(uncommonString, "Infusion", true, itemConfigDescString).Value;
             LeechingSeed.enabled = ItemCfg.Bind(uncommonString, "Leeching Seed", true, itemConfigDescString).Value;
             Daisy.enabled = ItemCfg.Bind(uncommonString, "Lepton Daisy", true, itemConfigDescString).Value;
+
             Guillotine.enabled = ItemCfg.Bind(uncommonString, "Old Guillotine", true, itemConfigDescString).Value;
             Guillotine.reduceVFX = ItemCfg.Bind(uncommonString, "Old Guillotine - Reduce VFX", true, "Reduce how often this item's VFX shows up.").Value;
+
+            GhorsTome.enabled = ItemCfg.Bind(uncommonString, "Ghors Tome", true, itemConfigDescString).Value;
+            GhorsTome.enabled = ItemCfg.Bind(uncommonString, "Ghors Tome - Disable in Bazaar", true, "This item does not give gold in the Bazaar Between Time.").Value;
+
             Razorwire.enabled = ItemCfg.Bind(uncommonString, "Razorwire", true, itemConfigDescString).Value;
             RedWhip.enabled = ItemCfg.Bind(uncommonString, "Red Whip", true, itemConfigDescString).Value;
             RoseBuckler.enabled = ItemCfg.Bind(uncommonString, "Rose Buckler", true, itemConfigDescString).Value;

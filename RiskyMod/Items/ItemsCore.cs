@@ -63,6 +63,7 @@ namespace RiskyMod.Items
             new Bungus();
             new StunGrenade();
 
+            new Pennies();
             new DelicateWatch();
         }
 
