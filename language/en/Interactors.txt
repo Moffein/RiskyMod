@@ -1,6 +1,10 @@
 {
 	strings:
 	{
-		"SHRINE_COMBAT_END_TRIAL_RISKYMOD": "<style=cShrine>The Shrine of Combat dropped </style>{0}"
+		"SHRINE_COMBAT_END_TRIAL_RISKYMOD": "<style=cShrine>Shrine of Combat has dropped </style>{0}",
+		
+		"MOON_PILLAR_COMPLETE_RISKYMOD" : "<color=#c6d5ff>{0} has dropped </color>{1}",
+		
+		"VOID_SIGNAL_COMPLETE_RISKYMOD" : "<style=cWorldEvent>Deep Void Signal has dropped </style>{0}"
 	}
 }

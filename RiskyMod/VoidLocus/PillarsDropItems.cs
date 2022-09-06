@@ -39,6 +39,16 @@ namespace RiskyMod.VoidLocus
                             ItemTier tier = PickupCatalog.GetPickupDef(pickupIndex).itemTier;
                             if (pickupIndex != PickupIndex.none)
                             {
+                                PickupDef pickupDef = PickupCatalog.GetPickupDef(pickupIndex);
+                                Chat.SendBroadcastChat(new Chat.SimpleChatMessage
+                                {
+                                    baseToken = "VOID_SIGNAL_COMPLETE_RISKYMOD",
+                                    paramTokens = new string[]
+                                    {
+                                    "<color=#"+ColorUtility.ToHtmlStringRGB(pickupDef.baseColor)+">"+Language.GetStringFormatted(pickupDef.nameToken) + "</color>"
+                                    }
+                                });
+
                                 int participatingPlayerCount = Run.instance.participatingPlayerCount;
                                 if (participatingPlayerCount != 0 && holdoutZone.transform)
                                 {

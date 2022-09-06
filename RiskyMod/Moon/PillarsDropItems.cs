@@ -32,6 +32,25 @@ namespace RiskyMod.Moon
                     ItemTier tier = PickupCatalog.GetPickupDef(pickupIndex).itemTier;
                     if (pickupIndex != PickupIndex.none)
                     {
+                        string pillarName = "Pillar";
+
+                        PurchaseInteraction pu = holdoutZone.gameObject.GetComponent<PurchaseInteraction>();
+                        if (pu)
+                        {
+                            pillarName = pu.GetDisplayName();
+                        }
+
+                        PickupDef pickupDef = PickupCatalog.GetPickupDef(pickupIndex);
+                        Chat.SendBroadcastChat(new Chat.SimpleChatMessage
+                        {
+                            baseToken = "MOON_PILLAR_COMPLETE_RISKYMOD",
+                            paramTokens = new string[]
+                            {
+                                pillarName,
+                                "<color=#"+ColorUtility.ToHtmlStringRGB(pickupDef.baseColor)+">"+Language.GetStringFormatted(pickupDef.nameToken) + "</color>"
+                            }
+                        });
+
                         int participatingPlayerCount = Run.instance.participatingPlayerCount;
                         if (participatingPlayerCount != 0 && holdoutZone.transform)
                         {
