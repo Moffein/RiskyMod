@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using R2API;
 using UnityEngine;
+using System.Runtime.CompilerServices;
 
 namespace RiskyMod.Survivors.Croco
 {
@@ -12,9 +13,37 @@ namespace RiskyMod.Survivors.Croco
             {
                 orig(self, overlapAttack);
                 overlapAttack.damageType = DamageType.BonusToLowHealth;
-                overlapAttack.AddModdedDamageType(SharedDamageTypes.CrocoBlight6s);
                 overlapAttack.AddModdedDamageType(SharedDamageTypes.CrocoBiteHealOnKill);
+
+                if (RiskyMod.SpikestripPlasmaCore)
+                {
+                    DeeprotCompat(overlapAttack, self.skillLocator);
+                }
+                else
+                {
+                    overlapAttack.AddModdedDamageType(SharedDamageTypes.CrocoBlight6s);
+                }
             };
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void DeeprotCompat(OverlapAttack overlapAttack, SkillLocator skillLocator)
+        {
+            bool deeprotEquipped = false;
+            foreach(GenericSkill gs in skillLocator.allSkills)
+            {
+                if (gs.skillDef == PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject.SkillDefinition)
+                {
+                    deeprotEquipped = true;
+                    overlapAttack.damageType = DamageType.PoisonOnHit | DamageType.BlightOnHit; //Check to see if this changes later.
+                    break;
+                }
+            }
+            
+            if (!deeprotEquipped)
+            {
+                overlapAttack.AddModdedDamageType(SharedDamageTypes.CrocoBlight6s);
+            }
         }
 
         private AnimationCurve BuildBiteVelocityCurve()

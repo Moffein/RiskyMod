@@ -5,6 +5,7 @@ using MonoMod.Cil;
 using Mono.Cecil.Cil;
 using System;
 using R2API;
+using System.Runtime.CompilerServices;
 
 namespace RiskyMod.Survivors.Croco
 {
@@ -38,8 +39,15 @@ namespace RiskyMod.Survivors.Croco
                     {
                         if (self.projectilePrefab == spitVanilla)
                         {
-                            projectileInfo.projectilePrefab = spitModded;
-                            projectileInfo.damageTypeOverride = null;
+                            if (RiskyMod.SpikestripPlasmaCore)
+                            {
+                                DeeprotCompat(projectileInfo, self.skillLocator);
+                            }
+                            else
+                            {
+                                projectileInfo.projectilePrefab = spitModded;
+                                projectileInfo.damageTypeOverride = null;
+                            }
                         }
                         return projectileInfo;
                     });
@@ -49,6 +57,27 @@ namespace RiskyMod.Survivors.Croco
                     UnityEngine.Debug.LogError("RiskyMod: Croco ModifyM2Spit IL Hook failed");
                 }
             };
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void DeeprotCompat(FireProjectileInfo projectileInfo, SkillLocator skillLocator)
+        {
+            bool deeprotEquipped = false;
+            foreach (GenericSkill gs in skillLocator.allSkills)
+            {
+                if (gs.skillDef == PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject.SkillDefinition)
+                {
+                    deeprotEquipped = true;
+                    projectileInfo.damageTypeOverride = DamageType.PoisonOnHit | DamageType.BlightOnHit; //Check to see if this changes later.
+                    break;
+                }
+            }
+
+            if (!deeprotEquipped)
+            {
+                projectileInfo.projectilePrefab = spitModded;
+                projectileInfo.damageTypeOverride = null;
+            }
         }
     }
 }

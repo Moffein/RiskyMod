@@ -52,6 +52,9 @@
     <Reference Include="Facepunch.Steamworks">
       <HintPath>libs\Facepunch.Steamworks.dll</HintPath>
     </Reference>
+    <Reference Include="GrooveSaladSpikestripContent">
+      <HintPath>libs\SoftDependencies\GrooveSaladSpikestripContent.dll</HintPath>
+    </Reference>
     <Reference Include="HarmonyXInterop">
       <HintPath>libs\BepInEx\HarmonyXInterop.dll</HintPath>
     </Reference>
@@ -93,6 +96,12 @@
     </Reference>
     <Reference Include="Multitudes">
       <HintPath>libs\SoftDependencies\Multitudes.dll</HintPath>
+    </Reference>
+    <Reference Include="NoopSpikestrip">
+      <HintPath>libs\SoftDependencies\NoopSpikestrip.dll</HintPath>
+    </Reference>
+    <Reference Include="PlasmaCoreSpikestripContent">
+      <HintPath>libs\SoftDependencies\PlasmaCoreSpikestripContent.dll</HintPath>
     </Reference>
     <Reference Include="QueenGlandBuff">
       <HintPath>libs\SoftDependencies\QueenGlandBuff.dll</HintPath>
