@@ -15,7 +15,7 @@ namespace RiskyMod.Survivors.Croco
                 overlapAttack.damageType = DamageType.BonusToLowHealth;
                 overlapAttack.AddModdedDamageType(SharedDamageTypes.CrocoBiteHealOnKill);
 
-                if (RiskyMod.SpikestripPlasmaCore)
+                if (RiskyMod.SpikestripPlasmaCore && self.skillLocator)
                 {
                     DeeprotCompat(overlapAttack, self.skillLocator);
                 }
@@ -32,7 +32,7 @@ namespace RiskyMod.Survivors.Croco
             bool deeprotEquipped = false;
             foreach(GenericSkill gs in skillLocator.allSkills)
             {
-                if (gs.skillDef == PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject.SkillDefinition)
+                if (PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject != null && gs.skillDef == PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject.SkillDefinition)
                 {
                     deeprotEquipped = true;
                     overlapAttack.damageType = DamageType.PoisonOnHit | DamageType.BlightOnHit; //Check to see if this changes later.

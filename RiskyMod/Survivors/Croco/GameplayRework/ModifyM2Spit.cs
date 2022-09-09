@@ -39,7 +39,7 @@ namespace RiskyMod.Survivors.Croco
                     {
                         if (self.projectilePrefab == spitVanilla)
                         {
-                            if (RiskyMod.SpikestripPlasmaCore)
+                            if (RiskyMod.SpikestripPlasmaCore && self.skillLocator)
                             {
                                 DeeprotCompat(projectileInfo, self.skillLocator);
                             }
@@ -65,7 +65,7 @@ namespace RiskyMod.Survivors.Croco
             bool deeprotEquipped = false;
             foreach (GenericSkill gs in skillLocator.allSkills)
             {
-                if (gs.skillDef == PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject.SkillDefinition)
+                if (PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject != null && gs.skillDef == PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject.SkillDefinition)
                 {
                     deeprotEquipped = true;
                     projectileInfo.damageTypeOverride = DamageType.PoisonOnHit | DamageType.BlightOnHit; //Check to see if this changes later.

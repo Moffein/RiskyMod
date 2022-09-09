@@ -32,7 +32,7 @@ namespace RiskyMod.Survivors.Croco
                     c.Emit(OpCodes.Ldarg_0);
                     c.EmitDelegate<Func<BlastAttack, EntityStates.Croco.BaseLeap, BlastAttack>>((blastAttack, self) =>
                     {
-                        if (RiskyMod.SpikestripPlasmaCore)
+                        if (RiskyMod.SpikestripPlasmaCore && self.skillLocator)
                         {
                             DeeprotCompat(blastAttack, self.skillLocator);
                         }
@@ -59,7 +59,7 @@ namespace RiskyMod.Survivors.Croco
             bool deeprotEquipped = false;
             foreach (GenericSkill gs in skillLocator.allSkills)
             {
-                if (gs.skillDef == PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject.SkillDefinition)
+                if (PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject != null && gs.skillDef == PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject.SkillDefinition)
                 {
                     deeprotEquipped = true;
                     blastAttack.damageType = DamageType.Stun1s | DamageType.PoisonOnHit | DamageType.BlightOnHit; //Check to see if this changes later.
