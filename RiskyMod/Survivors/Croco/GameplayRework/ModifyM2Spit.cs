@@ -6,6 +6,7 @@ using Mono.Cecil.Cil;
 using System;
 using R2API;
 using System.Runtime.CompilerServices;
+using RiskyMod.MonoBehaviours;
 
 namespace RiskyMod.Survivors.Croco
 {

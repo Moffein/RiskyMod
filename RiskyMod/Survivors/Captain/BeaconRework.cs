@@ -167,7 +167,7 @@ namespace RiskyMod.Survivors.Captain
                 BeaconFamily1.variants = BeaconFamily1.variants.Where(v => v.skillDef.activationState.stateType != typeof(EntityStates.Captain.Weapon.CallSupplyDropHacking)).ToArray();
                 BeaconFamily2.variants = BeaconFamily2.variants.Where(v => v.skillDef.activationState.stateType != typeof(EntityStates.Captain.Weapon.CallSupplyDropHacking)).ToArray();
             }
-            else
+            else if (hackChanges)
             {
                 SkillDef hackSkillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropHacking.asset").WaitForCompletion();
                 hackSkillDef.skillDescriptionToken = "CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD";
