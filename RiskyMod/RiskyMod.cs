@@ -332,18 +332,6 @@ namespace RiskyMod
             };
         }
 
-        private void Run_onRunStartGlobal(Run obj)
-        {
-            if (NetworkServer.active)
-            {
-                RiskyMod.assistManager = obj.gameObject.GetComponent<AssistManager>();
-                if (!RiskyMod.assistManager)
-                {
-                    RiskyMod.assistManager = obj.gameObject.AddComponent<AssistManager>();
-                }
-            }
-        }
-
         public delegate void FireMode();
         public static FireMode FireModeActions;
 
