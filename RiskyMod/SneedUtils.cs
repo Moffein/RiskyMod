@@ -22,7 +22,7 @@ namespace SneedUtils
         public static bool CheckInfernoActive()
         {
             bool infernoActive = false;
-            if (RiskyMod.RiskyMod.InfernoPluginLoaded) infernoActive = CheckInfernoActiveInternal();
+            if (RiskyMod.SoftDependencies.InfernoPluginLoaded) infernoActive = CheckInfernoActiveInternal();
             return infernoActive;
         }
 

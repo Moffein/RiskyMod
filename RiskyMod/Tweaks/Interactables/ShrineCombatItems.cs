@@ -46,13 +46,13 @@ namespace RiskyMod.Tweaks
                             switch (PickupCatalog.GetPickupDef(pickupIndex).itemTier)
                             {
                                 case ItemTier.Tier1:
-                                    if (RiskyMod.ShareSuiteCommon) num = 1;
+                                    if (SoftDependencies.ShareSuiteCommon) num = 1;
                                     break;
                                 case ItemTier.Tier2:
-                                    if (RiskyMod.ShareSuiteUncommon) num = 1;
+                                    if (SoftDependencies.ShareSuiteUncommon) num = 1;
                                     break;
                                 case ItemTier.Tier3:
-                                    if (RiskyMod.ShareSuiteLegendary) num = 1;
+                                    if (SoftDependencies.ShareSuiteLegendary) num = 1;
                                     break;
                                 default: break;
                             }

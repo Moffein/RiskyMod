@@ -82,31 +82,9 @@ namespace RiskyMod
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
-        public static bool disableProcChains = true;
-
-        public static bool ClassicItemsScepterLoaded = false;
-        public static bool ScepterPluginLoaded = false;
-        public static bool AIBlacklistLoaded = false;
-        public static bool AIBlacklistUseVanillaBlacklist = true;
-        public static bool ZetTweaksLoaded = false;
-        public static bool RtAutoSprintLoaded = false;
-
-        public static bool QueensGlandBuffLoaded = false;
-
-        public static bool ShareSuiteLoaded = false;
-        public static bool ShareSuiteCommon = false;
-        public static bool ShareSuiteUncommon = false;
-        public static bool ShareSuiteLegendary = false;
-        public static bool ShareSuiteBoss = false;
-        public static bool ShareSuiteLunar = false;
-
-        public static bool SpikestripGrooveSalad = false;
-        public static bool SpikestripHeyImNoob = false;
-        public static bool SpikestripPlasmaCore = false;
-
         public static bool inBazaar = false;
 
-        public static bool InfernoPluginLoaded = false;
+        public static bool disableProcChains = true;
 
         public static bool EnableProjectileCloning = true;
 
@@ -124,7 +102,7 @@ namespace RiskyMod
         public void Start()
         {
             //Check for Inferno here since it has a RiskyMod softdependency.
-            InfernoPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("HIFU.Inferno");
+            SoftDependencies.InfernoPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("HIFU.Inferno");
         }
 
         public void Awake()
@@ -172,8 +150,8 @@ namespace RiskyMod
 
         private void CheckDependencies()
         {
-            ZetTweaksLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetTweaks");
-            if (ZetTweaksLoaded) ZetTweaksCompat();
+            SoftDependencies.ZetTweaksLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetTweaks");
+            if (SoftDependencies.ZetTweaksLoaded) ZetTweaksCompat();
 
             NoLevelupHeal.enabled = NoLevelupHeal.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoLevelupHeal");
             RemoveLevelCap.enabled = RemoveLevelCap.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RaiseMonsterLevelCap");
@@ -182,21 +160,21 @@ namespace RiskyMod
             FixPlayercount.MultitudesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("dev.wildbook.multitudes");
             FixPlayercount.ZetArtifactsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetArtifacts");
 
-            QueensGlandBuffLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.kking117.QueenGlandBuff");
+            SoftDependencies.QueensGlandBuffLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.kking117.QueenGlandBuff");
 
             VoidInfestor.noVoidAllies = VoidInfestor.noVoidAllies && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoVoidAllies");
 
-            AIBlacklistLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist");
-            if (AIBlacklistLoaded) HandleAIBlacklist();
-            FixVengeanceLeveling.enabled = FixVengeanceLeveling.enabled && !AIBlacklistLoaded;
+            SoftDependencies.AIBlacklistLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist");
+            if (SoftDependencies.AIBlacklistLoaded) HandleAIBlacklist();
+            FixVengeanceLeveling.enabled = FixVengeanceLeveling.enabled && !SoftDependencies.AIBlacklistLoaded;
 
             PreventArtifactHeal.enabled = PreventArtifactHeal.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.ArtifactReliquaryHealingFix");
             CaptainOrbitalHiddenRealms.enabled = CaptainOrbitalHiddenRealms.enabled
                 && !(BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.PlasmaCore.AlwaysAllowSupplyDrops")|| BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("Charzard4261.CaptainAbilitiesOffworld"));
             CritHud.enabled = CritHud.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.Hypercrit");   //Effect is already a part of hypercrit
 
-            ScepterPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
-            ClassicItemsScepterLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.ClassicItems");
+            SoftDependencies.ScepterPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
+            SoftDependencies.ClassicItemsScepterLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.ClassicItems");
 
             //Croco
             BiggerMeleeHitbox.enabled = BiggerMeleeHitbox.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TheTimeSweeper.AcridHitboxBuff");
@@ -213,8 +191,8 @@ namespace RiskyMod
             Gesture.enabled = Gesture.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.GestureEnigma");
             NerfVoidtouched.enabled = NerfVoidtouched.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EliteReworks");
 
-            ShareSuiteLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.funkfrog_sipondo.sharesuite");
-            if (ShareSuiteLoaded) HandleShareSuite();
+            SoftDependencies.ShareSuiteLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.funkfrog_sipondo.sharesuite");
+            if (SoftDependencies.ShareSuiteLoaded) HandleShareSuite();
 
             SpawnLimits.enabled = SpawnLimits.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.InteractableLimit");
 
@@ -225,19 +203,19 @@ namespace RiskyMod
             VoidLocus.ModifyHoldout.enabled = VoidLocus.ModifyHoldout.enabled && !teleExpansionLoaded;
             Moon.ModifyHoldout.enabled = Moon.ModifyHoldout.enabled && !teleExpansionLoaded;
 
-            RtAutoSprintLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx");
+            SoftDependencies.RtAutoSprintLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx");
 
             Sacrifice.enabled = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.SacrificeTweaks");
 
-            SpikestripGrooveSalad = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.groovesalad.GrooveSaladSpikestripContent");
-            SpikestripHeyImNoob = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.heyimnoob.NoopSpikestripContent");
-            SpikestripPlasmaCore = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.plasmacore.PlasmaCoreSpikestripContent");
+            SoftDependencies.SpikestripGrooveSalad = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.groovesalad.GrooveSaladSpikestripContent");
+            SoftDependencies.SpikestripHeyImNoob = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.heyimnoob.NoopSpikestripContent");
+            SoftDependencies.SpikestripPlasmaCore = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.plasmacore.PlasmaCoreSpikestripContent");
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void ZetTweaksCompat()
         {
-            if (ZetTweaksLoaded)
+            if (SoftDependencies.ZetTweaksLoaded)
             {
                 Allies.DroneChanges.MegaDrone.allowRepair = false;
             }
@@ -252,17 +230,17 @@ namespace RiskyMod
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void HandleAIBlacklist()
         {
-            AIBlacklistUseVanillaBlacklist = AI_Blacklist.AIBlacklist.useVanillaAIBlacklist;
+            SoftDependencies.AIBlacklistUseVanillaBlacklist = AI_Blacklist.AIBlacklist.useVanillaAIBlacklist;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void HandleShareSuite()
         {
-            ShareSuiteCommon = ShareSuite.ShareSuite.WhiteItemsShared.Value;
-            ShareSuiteUncommon = ShareSuite.ShareSuite.GreenItemsShared.Value;
-            ShareSuiteLegendary = ShareSuite.ShareSuite.RedItemsShared.Value;
-            ShareSuiteBoss = ShareSuite.ShareSuite.BossItemsShared.Value;
-            ShareSuiteLunar = ShareSuite.ShareSuite.LunarItemsShared.Value;
+            SoftDependencies.ShareSuiteCommon = ShareSuite.ShareSuite.WhiteItemsShared.Value;
+            SoftDependencies.ShareSuiteUncommon = ShareSuite.ShareSuite.GreenItemsShared.Value;
+            SoftDependencies.ShareSuiteLegendary = ShareSuite.ShareSuite.RedItemsShared.Value;
+            SoftDependencies.ShareSuiteBoss = ShareSuite.ShareSuite.BossItemsShared.Value;
+            SoftDependencies.ShareSuiteLunar = ShareSuite.ShareSuite.LunarItemsShared.Value;
         }
 
         private void RunTweaks()

@@ -12,7 +12,7 @@ namespace RiskyMod.Tweaks
             On.RoR2.ItemCatalog.Init += (orig) =>
             {
                 orig();
-                if (RiskyMod.AIBlacklistUseVanillaBlacklist)
+                if (SoftDependencies.AIBlacklistUseVanillaBlacklist)
                 {
                     SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.Icicle, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.RoboBallBuddy, ItemTag.AIBlacklist);

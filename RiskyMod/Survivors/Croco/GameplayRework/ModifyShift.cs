@@ -32,9 +32,9 @@ namespace RiskyMod.Survivors.Croco
                     c.Emit(OpCodes.Ldarg_0);
                     c.EmitDelegate<Func<BlastAttack, EntityStates.Croco.BaseLeap, BlastAttack>>((blastAttack, self) =>
                     {
-                        if (RiskyMod.SpikestripPlasmaCore && self.skillLocator)
+                        if (CrocoCore.HasDeeprot(self.skillLocator))
                         {
-                            DeeprotCompat(blastAttack, self.skillLocator);
+                            blastAttack.damageType = DamageType.Stun1s | DamageType.PoisonOnHit | DamageType.BlightOnHit;
                         }
                         else
                         {
@@ -50,29 +50,6 @@ namespace RiskyMod.Survivors.Croco
                     UnityEngine.Debug.LogError("RiskyMod: Croco ModifyShift BaseLeap IL Hook failed");
                 }
             };
-        }
-
-
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void DeeprotCompat(BlastAttack blastAttack, SkillLocator skillLocator)
-        {
-            bool deeprotEquipped = false;
-            foreach (GenericSkill gs in skillLocator.allSkills)
-            {
-                if (PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject != null && gs.skillDef == PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject.SkillDefinition)
-                {
-                    deeprotEquipped = true;
-                    blastAttack.damageType = DamageType.Stun1s | DamageType.PoisonOnHit | DamageType.BlightOnHit; //Check to see if this changes later.
-                    break;
-                }
-            }
-
-            if (!deeprotEquipped)
-            {
-                blastAttack.damageType = DamageType.Stun1s;
-                blastAttack.AddModdedDamageType(SharedDamageTypes.AntiFlyingForce);
-                blastAttack.AddModdedDamageType(SharedDamageTypes.CrocoBlight6s);
-            }
         }
 
         private void ModifyAcid()

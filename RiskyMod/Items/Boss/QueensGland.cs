@@ -67,10 +67,10 @@ namespace RiskyMod.Items.Boss
 											if (guardInv && glandCount > 0)
 											{
 
-												int baseDamage = RiskyMod.QueensGlandBuffLoaded ? GetInitialDamageCount() : 30;
-												int stackDamage = RiskyMod.QueensGlandBuffLoaded ? GetStackDamageCount() : 30;
-												int baseHealth = RiskyMod.QueensGlandBuffLoaded ? GetInitialHPCount() : 10;
-												int stackHealth = RiskyMod.QueensGlandBuffLoaded ? GetStackHPCount() : 10;
+												int baseDamage = SoftDependencies.QueensGlandBuffLoaded ? GetInitialDamageCount() : 30;
+												int stackDamage = SoftDependencies.QueensGlandBuffLoaded ? GetStackDamageCount() : 30;
+												int baseHealth = SoftDependencies.QueensGlandBuffLoaded ? GetInitialHPCount() : 10;
+												int stackHealth = SoftDependencies.QueensGlandBuffLoaded ? GetStackHPCount() : 10;
 
 												int stackCount = glandCount - 1;
 

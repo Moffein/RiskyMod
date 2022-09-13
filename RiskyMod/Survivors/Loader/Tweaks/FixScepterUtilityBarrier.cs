@@ -7,7 +7,7 @@ namespace RiskyMod.Survivors.Loader
         //Remove this when Scepter updates and fixes this.
         public FixScepterUtilityBarrier()
         {
-            if (!RiskyMod.ScepterPluginLoaded) return;
+            if (!SoftDependencies.ScepterPluginLoaded) return;
             On.EntityStates.Loader.BaseSwingChargedFist.OnMeleeHitAuthority += (orig, self) =>
             {
                 orig(self);

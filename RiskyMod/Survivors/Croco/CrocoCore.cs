@@ -79,6 +79,8 @@ namespace RiskyMod.Survivors.Croco
             sk.secondary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD" };
             sk.secondary.skillFamily.variants[0].skillDef.baseRechargeInterval = 2f;
             sk.secondary.skillFamily.variants[0].skillDef.mustKeyPress = false;
+            sk.secondary.skillFamily.variants[0].skillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Croco.FireSpitModded));
+            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Croco.FireSpitModded));
             new ModifyM2Spit();
 
             //I hate how this has so many keywords.
@@ -116,12 +118,12 @@ namespace RiskyMod.Survivors.Croco
             Skills.Epidemic = sk.special.skillFamily.variants[0].skillDef;
             new ModifySpecial();
 
-            if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
+            if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
             {
                 BuildScepterSkillDefs(sk);
 
-                if (RiskyMod.ScepterPluginLoaded) SetupScepter();
-                if (RiskyMod.ClassicItemsScepterLoaded) SetupScepterClassic();
+                if (SoftDependencies.ScepterPluginLoaded) SetupScepter();
+                if (SoftDependencies.ClassicItemsScepterLoaded) SetupScepterClassic();
             }
         }
 
@@ -167,6 +169,34 @@ namespace RiskyMod.Survivors.Croco
         private void SetupScepterClassic()
         {
             ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.EpidemicScepter, "CrocoBody", SkillSlot.Special, Skills.Epidemic);
+        }
+
+        public static bool HasDeeprot(SkillLocator sk)
+        {
+            bool hasDeeprot = false;
+            if (SoftDependencies.SpikestripPlasmaCore && sk)
+            {
+                hasDeeprot = HasDeeprotInternal(sk);
+            }
+            return hasDeeprot;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static bool HasDeeprotInternal(SkillLocator sk)
+        {
+            bool deeprotEquipped = false;
+            if (PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject != null)
+            {
+                foreach(GenericSkill gs in sk.allSkills)
+                {
+                    if (gs.skillDef == PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject.SkillDefinition)
+                    {
+                        deeprotEquipped = true;
+                        break;
+                    }
+                }
+            }
+            return deeprotEquipped;
         }
     }
 

@@ -31,7 +31,7 @@ namespace RiskyMod.Survivors.Croco
             diseaseProjectile = ModifyDiseaseProjectile(diseaseProjectile, Epidemic);
             Content.Content.projectilePrefabs.Add(diseaseProjectile);
 
-            if (RiskyMod.ScepterPluginLoaded)
+            if (SoftDependencies.ScepterPluginLoaded)
             {
                 diseaseScepterProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseScepterProjectile", true);
                 diseaseScepterProjectile = ModifyDiseaseProjectile(diseaseScepterProjectile, EpidemicScepter);

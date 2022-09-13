@@ -58,21 +58,21 @@ namespace RiskyMod.VoidLocus
                                     switch (tier)
                                     {
                                         case ItemTier.Tier1:
-                                            if (RiskyMod.ShareSuiteCommon)
+                                            if (SoftDependencies.ShareSuiteCommon)
                                             {
                                                 num = 1;
                                                 itemShareActive = true;
                                             }
                                             break;
                                         case ItemTier.Tier2:
-                                            if (RiskyMod.ShareSuiteUncommon)
+                                            if (SoftDependencies.ShareSuiteUncommon)
                                             {
                                                 num = 1;
                                                 itemShareActive = true;
                                             }
                                             break;
                                         case ItemTier.Tier3:
-                                            if (RiskyMod.ShareSuiteLegendary)
+                                            if (SoftDependencies.ShareSuiteLegendary)
                                             {
                                                 num = 1;
                                                 itemShareActive = true;
@@ -91,7 +91,7 @@ namespace RiskyMod.VoidLocus
                                     {
                                         PickupIndex pickupOverwrite = PickupIndex.none;
                                         bool overwritePickup = false;
-                                        if (tier != ItemTier.Tier3 && !itemShareActive && !RiskyMod.ShareSuiteBoss)
+                                        if (tier != ItemTier.Tier3 && !itemShareActive && !SoftDependencies.ShareSuiteBoss)
                                         {
                                             float pearlChance = pearlOverwriteChance;
                                             float total = pearlChance;

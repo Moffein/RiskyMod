@@ -150,11 +150,11 @@ namespace RiskyMod.Survivors.Huntress
                 Skills.ArrowRain = sk.special.skillFamily.variants[0].skillDef;
                 new ArrowRainBuff();
 
-                if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
+                if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
                 {
                     BuildScepterSkillDefs(sk);
-                    if (RiskyMod.ScepterPluginLoaded) SetupScepter();
-                    if (RiskyMod.ClassicItemsScepterLoaded) SetupScepterClassic();
+                    if (SoftDependencies.ScepterPluginLoaded) SetupScepter();
+                    if (SoftDependencies.ClassicItemsScepterLoaded) SetupScepterClassic();
                 }
             }
 

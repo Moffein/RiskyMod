@@ -138,7 +138,7 @@ namespace RiskyMod.Survivors.Mage
                 iceSkill.baseMaxStock = 1;
                 iceSkill.baseRechargeInterval = 12f;
                 iceSkill.beginSkillCooldownOnSkillEnd = true;
-                iceSkill.canceledFromSprinting = !RiskyMod.RtAutoSprintLoaded;
+                iceSkill.canceledFromSprinting = !SoftDependencies.RtAutoSprintLoaded;
                 iceSkill.cancelSprintingOnActivation = true;
                 iceSkill.dontAllowPastMaxStocks = true;
                 iceSkill.forceSprintDuringState = false;
@@ -173,7 +173,7 @@ namespace RiskyMod.Survivors.Mage
                 fireStorm.baseMaxStock = 1;
                 fireStorm.baseRechargeInterval = 12f;
                 fireStorm.beginSkillCooldownOnSkillEnd = true;
-                fireStorm.canceledFromSprinting = !RiskyMod.RtAutoSprintLoaded;
+                fireStorm.canceledFromSprinting = !SoftDependencies.RtAutoSprintLoaded;
                 fireStorm.cancelSprintingOnActivation = true;
                 fireStorm.dontAllowPastMaxStocks = true;
                 fireStorm.forceSprintDuringState = false;
@@ -296,11 +296,11 @@ namespace RiskyMod.Survivors.Mage
                 specialLightningVariantIndex = sk.special.skillFamily.variants.Length - 1;
             }
 
-            if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
+            if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
             {
                 BuildScepterSkillDefs(sk);
-                if (RiskyMod.ScepterPluginLoaded) SetupScepter();
-                if (RiskyMod.ClassicItemsScepterLoaded) SetupScepterClassic();
+                if (SoftDependencies.ScepterPluginLoaded) SetupScepter();
+                if (SoftDependencies.ClassicItemsScepterLoaded) SetupScepterClassic();
             }
         }
 

@@ -343,11 +343,11 @@ namespace RiskyMod.Survivors.Bandit2
             sk.special._skillFamily.variants[1].skillDef = reuDef;
             Skills.RackEmUp = reuDef;
 
-            if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
+            if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
             {
                 BuildScepterSkillDefs(sk);
-                if (RiskyMod.ScepterPluginLoaded) SetupScepter();
-                if (RiskyMod.ClassicItemsScepterLoaded) SetupScepterClassic();
+                if (SoftDependencies.ScepterPluginLoaded) SetupScepter();
+                if (SoftDependencies.ClassicItemsScepterLoaded) SetupScepterClassic();
             }    
         }
 

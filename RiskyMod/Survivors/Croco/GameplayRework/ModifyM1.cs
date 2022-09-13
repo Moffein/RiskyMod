@@ -18,9 +18,9 @@ namespace RiskyMod.Survivors.Croco
                 orig(self, overlapAttack);
                 if (self.isComboFinisher)
                 {
-                    if (RiskyMod.SpikestripPlasmaCore && self.skillLocator)
+                    if (CrocoCore.HasDeeprot(self.skillLocator))
                     {
-                        DeeprotCompat(overlapAttack, self.skillLocator);
+                        overlapAttack.damageType = DamageType.PoisonOnHit | DamageType.BlightOnHit; //Check to see if this changes later.
                     }
                     else
                     {
@@ -28,26 +28,6 @@ namespace RiskyMod.Survivors.Croco
                     }
                 }
             };
-        }
-
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void DeeprotCompat(OverlapAttack overlapAttack, SkillLocator skillLocator)
-        {
-            bool deeprotEquipped = false;
-            foreach (GenericSkill gs in skillLocator.allSkills)
-            {
-                if (PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject != null && gs.skillDef == PlasmaCoreSpikestripContent.Content.Skills.DeepRot.scriptableObject.SkillDefinition)
-                {
-                    deeprotEquipped = true;
-                    overlapAttack.damageType = DamageType.PoisonOnHit | DamageType.BlightOnHit; //Check to see if this changes later.
-                    break;
-                }
-            }
-
-            if (!deeprotEquipped)
-            {
-                overlapAttack.AddModdedDamageType(SharedDamageTypes.CrocoPoison6s);
-            }
         }
     }
 }

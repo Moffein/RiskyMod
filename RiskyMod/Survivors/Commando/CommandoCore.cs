@@ -177,11 +177,11 @@ namespace RiskyMod.Survivors.Commando
                 Skills.Grenade = grenadeDef;
             }
 
-            if (RiskyMod.ScepterPluginLoaded || RiskyMod.ClassicItemsScepterLoaded)
+            if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
             {
                 BuildScepterSkillDefs(sk);
-                if (RiskyMod.ScepterPluginLoaded) SetupScepter();
-                if (RiskyMod.ClassicItemsScepterLoaded) SetupScepterClassic();
+                if (SoftDependencies.ScepterPluginLoaded) SetupScepter();
+                if (SoftDependencies.ClassicItemsScepterLoaded) SetupScepterClassic();
             }
         }
 
