@@ -96,8 +96,8 @@ namespace RiskyMod.Items.Uncommon
 
                 healingWard.Networkradius = 16f;
                 //healingWard.radius = 16f;
-                float healFraction = 0.0125f + stack * 0.00625f;//0.05f + 0.025f * stack; //div by 4
-                healingWard.healFraction = healFraction;
+                float healFractionPerSecond = 0.05f + stack * 0.025f;
+                healingWard.healFraction = healFractionPerSecond * healingWard.interval;
 
                 //Debug.Log(healingWard.interval); 0.25f
             }
