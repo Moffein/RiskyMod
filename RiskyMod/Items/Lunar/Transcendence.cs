@@ -26,7 +26,11 @@ namespace RiskyMod.Items.Lunar
                     {
                         if (self.inventory)
                         {
-                            outOfDangerDelay += self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly);
+                            int stackCount = self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) - 1;
+                            if (stackCount > 0)
+                            {
+                                outOfDangerDelay += stackCount;
+                            }
                         }
                         return outOfDangerDelay;
                     });
