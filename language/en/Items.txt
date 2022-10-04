@@ -88,7 +88,7 @@
 	"ITEM_KNURL_DESC_RISKYMOD": "<style=cIsHealing>Increase maximum health</style> by <style=cIsHealing>8%</style> <style=cStack>(+8% per stack)</style>, <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>+1.6 hp/s</style> <style=cStack>(+1.6 hp/s per stack)</style>, and <style=cIsHealing>armor</style> by <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style>.",
 		
 	"ITEM_SHIELDONLY_PICKUP_RISKYMOD": "Convert all your health into shield. Increase maximum health... <color=#FF7F7F>BUT increase shield regeneration delay.</color>",
-	"ITEM_SHIELDONLY_DESC_RISKYMOD": "<style=cIsHealing>Convert</style> all but <style=cIsHealing>1 health</style> into <style=cIsHealing>regenerating shields</style>. <style=cIsHealing>Gain 50% <style=cStack>(+25% per stack)</style> maximum health</style>. Increase <style=cIsHealing>shield regeneration delay</style> by <style=cIsHealing>1s</style> <style=cStack>(+1s per stack)</style>.",
+	"ITEM_SHIELDONLY_DESC_RISKYMOD": "<style=cIsHealing>Convert</style> all but <style=cIsHealing>1 health</style> into <style=cIsHealing>regenerating shields</style>. <style=cIsHealing>Gain 50% <style=cStack>(+25% per stack)</style> maximum health</style>. Increase <style=cIsHealing>shield regeneration delay</style> by <style=cIsHealing>0s</style> <style=cStack>(+0.5s per stack)</style>.",
 	
 	"ITEM_MISSILEVOID_DESC_RISKYMOD": "Gain a <style=cIsHealing>shield</style> equal to <style=cIsHealing>10%</style> of your maximum health. While you have a <style=cIsHealing>shield</style>, hitting an enemy fires a missile that deals <style=cIsDamage>40%</style> <style=cStack>(+24% per stack)</style> TOTAL damage. <style=cIsVoid>Corrupts all AtG Missile Mk. 1s</style>.",
 	
