@@ -128,6 +128,35 @@
 												<ActiveSource Name="sndLightningPistol" ID="{7AC8608E-4464-43AD-A4FB-3B76630B20CA}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
+										<Sound Name="wWatch_Cropped" ID="{129180AF-9570-4203-BF15-6D14D193AA69}" ShortID="637029654">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>9</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{B47EC472-ABCA-4269-A2A5-26DA6A5C880C}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{6A2F7F45-54E6-4794-8820-62F86FF8BF17}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="wWatch_Cropped" ID="{2909F7B8-C882-4975-A537-C615E32ED0C0}">
+													<Language>SFX</Language>
+													<AudioFile>wWatch_Cropped.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="983076228"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="wWatch_Cropped" ID="{2909F7B8-C882-4975-A537-C615E32ED0C0}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
 								</ActorMixer>
 							</ChildrenList>

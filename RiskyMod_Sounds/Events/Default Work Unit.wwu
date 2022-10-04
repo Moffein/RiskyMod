@@ -25,6 +25,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_RiskyMod_DelicateWatch_Ready" ID="{30E92446-652D-4781-9816-85E708192D4B}">
+					<ChildrenList>
+						<Action Name="" ID="{5A21493C-A206-4FCB-BF4B-FFF564608271}" ShortID="528090351">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="wWatch_Cropped" ID="{129180AF-9570-4203-BF15-6D14D193AA69}" WorkUnitID="{9B48C112-9402-447F-8BB7-E9697C93E932}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

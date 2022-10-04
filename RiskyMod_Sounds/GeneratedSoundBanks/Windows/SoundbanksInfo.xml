@@ -16,11 +16,19 @@
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="3133930161" Language="SFX" Hash="3240572102">
+		<SoundBank Id="3133930161" Language="SFX" Hash="1659781707">
 			<ObjectPath>\SoundBanks\Default Work Unit\RiskyMod_Soundbank</ObjectPath>
 			<ShortName>RiskyMod_Soundbank</ShortName>
 			<Path>RiskyMod_Soundbank.bnk</Path>
 			<IncludedEvents>
+				<Event Id="3093422771" Name="Play_RiskyMod_DelicateWatch_Ready" ObjectPath="\Events\Default Work Unit\Play_RiskyMod_DelicateWatch_Ready">
+					<IncludedMemoryFiles>
+						<File Id="983076228" Language="SFX">
+							<ShortName>wWatch_Cropped.wav</ShortName>
+							<Path>SFX\wWatch_Cropped_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
 				<Event Id="2731411894" Name="Play_RiskyMod_Mage_Special_Lightning" ObjectPath="\Events\Default Work Unit\Play_RiskyMod_Mage_Special_Lightning">
 					<IncludedMemoryFiles>
 						<File Id="702021822" Language="SFX">

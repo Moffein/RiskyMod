@@ -248,9 +248,7 @@ namespace RiskyMod
             CautiousSlug.enabled = ItemCfg.Bind(commonString, "Cautious Slug", true, itemConfigDescString).Value;
             Crowbar.enabled = ItemCfg.Bind(commonString, "Crowbar", true, itemConfigDescString).Value;
 
-            //Kind of an iffy change. Going to leave this out.
-            //DelicateWatch.enabled = ItemCfg.Bind(commonString, "Delicate Watch", true, itemConfigDescString).Value;
-            DelicateWatch.enabled = false;
+            DelicateWatch.enabled = ItemCfg.Bind(commonString, "Delicate Watch", true, itemConfigDescString).Value;
 
             Fireworks.enabled = ItemCfg.Bind(commonString, "Fireworks", true, itemConfigDescString).Value;
             Fireworks.maxRockets = ItemCfg.Bind(commonString, "Fireworks - Max Rockets", 32, "Max rockets that can spawn from each use. Going above this value raises rocket damage instead.").Value;
@@ -402,11 +400,9 @@ namespace RiskyMod
             FireSelect.scrollSelection = SurvivorCfg.Bind(fireSelectString, "Use Scrollwheel", true, "Mouse Scroll Wheel changes firemode");
             ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(FireSelect.scrollSelection));
 
-            //Currently bugged and doesn't update when changed in-game.
             FireSelect.swapButton = SurvivorCfg.Bind(fireSelectString, "Next Firemode", KeyboardShortcut.Empty, "Button to swap to the next firemode.");
             ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.swapButton));
 
-            //Currently bugged and doesn't update when changed in-game.
             FireSelect.prevButton = SurvivorCfg.Bind(fireSelectString, "Previous Firemode", KeyboardShortcut.Empty, "Button to swap to the previous firemode.");
             ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.prevButton));
 

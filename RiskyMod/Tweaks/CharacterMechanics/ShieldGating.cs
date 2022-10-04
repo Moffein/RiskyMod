@@ -36,12 +36,12 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     c.Emit(OpCodes.Ldarg_1);
                     c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((remainingDamage, self, damageInfo) =>
                     {
+                        bool shieldOnly = self.body.HasBuff(RoR2Content.Buffs.AffixLunar)
+                        || (self.body.inventory && self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
+
                         bool bypassShield = (damageInfo.damageType & DamageType.BypassArmor) == DamageType.BypassArmor
                         || (damageInfo.damageType & DamageType.BypassOneShotProtection) == DamageType.BypassOneShotProtection
                         || (damageInfo.damageType & DamageType.BypassBlock) == DamageType.BypassBlock;
-
-                        bool shieldOnly = self.body.HasBuff(RoR2Content.Buffs.AffixLunar)
-                        || (self.body.inventory && self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
 
                         bool cursed = self.body.cursePenalty > 1f;  //||self.body.isGlass
 

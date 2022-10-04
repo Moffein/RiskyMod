@@ -25,8 +25,8 @@ namespace RiskyMod.Items.DLC1.Common
                 false,
                 false,
                 false,
-                new Color(224f/255f, 182f/255f, 160f/255f),
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Entangle").iconSprite //Todo: unique buff icon
+                new Color(238f/255f, 208f/255f, 186f/255f),
+                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/BanditSkull").iconSprite //Todo: unique buff icon
                 );
 
             On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
@@ -46,12 +46,12 @@ namespace RiskyMod.Items.DLC1.Common
                         else if (!hasBuff && self.outOfDanger)
                         {
                             if (NetworkServer.active) self.AddBuff(WatchIndicatorBuff);
+
+                            RoR2.Util.PlaySound("Play_RiskyMod_DelicateWatch_Ready", self.gameObject);
                         }
                     }
                 }
             };
-
-
 
             //Remove Vanilla Effect
             IL.RoR2.HealthComponent.TakeDamage += (il) =>

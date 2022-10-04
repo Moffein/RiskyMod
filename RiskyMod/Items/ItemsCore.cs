@@ -36,7 +36,7 @@ namespace RiskyMod.Items
         {
             ModifyItemTokens();
             if (!enabled) return;
-            Planula.enabled = Stealthkit.enabled || Razorwire.enabled || SquidPolyp.enabled;
+            Planula.enabled = Planula.enabled && (Stealthkit.enabled || Razorwire.enabled || SquidPolyp.enabled);
             ModifyCommon();
             ModifyUncommon();
             ModifyLegendary();

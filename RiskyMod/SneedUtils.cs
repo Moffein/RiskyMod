@@ -197,6 +197,17 @@ namespace SneedUtils
                 List<ItemTag> tags = itemDef.tags.ToList();
                 tags.Remove(tag);
                 itemDef.tags = tags.ToArray();
+
+                ItemIndex index = itemDef.itemIndex;
+                if (index != ItemIndex.None && ItemCatalog.itemIndicesByTag != null && ItemCatalog.itemIndicesByTag[(int)tag] != null)
+                {
+                    List<ItemIndex> itemList = ItemCatalog.itemIndicesByTag[(int)tag].ToList();
+                    if (itemList.Contains(index))
+                    {
+                        itemList.Remove(index);
+                        ItemCatalog.itemIndicesByTag[(int)tag] = itemList.ToArray();
+                    }
+                }
             }
         }
 
@@ -207,6 +218,17 @@ namespace SneedUtils
                 List<ItemTag> tags = itemDef.tags.ToList();
                 tags.Add(tag);
                 itemDef.tags = tags.ToArray();
+
+                ItemIndex index = itemDef.itemIndex;
+                if (index != ItemIndex.None && ItemCatalog.itemIndicesByTag != null)
+                {
+                    List<ItemIndex> itemList = ItemCatalog.itemIndicesByTag[(int)tag].ToList();
+                    if (!itemList.Contains(index))
+                    {
+                        itemList.Add(index);
+                        ItemCatalog.itemIndicesByTag[(int)tag] = itemList.ToArray();
+                    }
+                }
             }
         }
 
