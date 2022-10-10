@@ -198,8 +198,7 @@ namespace RiskyMod.Survivors.Captain
                                 hm = self.target.gameObject.AddComponent<HackMarker>();
                                 hm.purchaseInteraction = self.target;
                                 hm.owner = self.gameObject;
-                                hm.origCost = self.target.cost;
-                                hm.newCost = Math.Max(1, Mathf.FloorToInt(self.target.cost * HackMarker.costMult));
+                                hm.newCost = Math.Max(1, Mathf.CeilToInt(self.target.cost * HackMarker.costMult));
                                 newCost = hm.newCost;
                             }
                             return newCost;
@@ -295,9 +294,8 @@ namespace RiskyMod.Survivors.Captain
 
         public class HackMarker : MonoBehaviour
         {
-            public static float costMult = 0.6f;
+            public static float costMult = 0.5f;
 
-            public int origCost;
             public int newCost;
             public GameObject owner;
             public PurchaseInteraction purchaseInteraction;
@@ -309,7 +307,7 @@ namespace RiskyMod.Survivors.Captain
                 {
                     if (purchaseInteraction)
                     {
-                        purchaseInteraction.cost = origCost;
+                        purchaseInteraction.cost = Mathf.FloorToInt(purchaseInteraction.cost / costMult);
                     }
                     Destroy(this);
                 }
