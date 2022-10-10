@@ -124,6 +124,8 @@
 	
 	"ITEM_BLEEDONHITVOID_DESC_RISKYMOD": "<style=cIsDamage>10%</style> <style=cStack>(+10% per stack)</style> chance to <style=cIsDamage>collapse</style> an enemy for <style=cIsDamage>400%</style> base damage and reduce their <style=cIsDamage>armor</style> by <style=cIsDamage>1</style>. <style=cIsVoid>Corrupts all Tri-Tip Daggers</style>.",
 	
-	"ITEM_TITANGOLDDURINGTP_DESC_RISKYMOD": "Summon <style=cIsDamage>Aurelionite</style> during the teleporter event. It has <style=cIsDamage>100% <style=cStack>(+50% per stack)</style> damage</style> and <style=cIsHealing>200% <style=cStack>(+100% per stack)</style> health</style>."
+	"ITEM_TITANGOLDDURINGTP_DESC_RISKYMOD": "Summon <style=cIsDamage>Aurelionite</style> during the teleporter event. It has <style=cIsDamage>100% <style=cStack>(+50% per stack)</style> damage</style> and <style=cIsHealing>200% <style=cStack>(+100% per stack)</style> health</style>.",
+	
+	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Prevents <style=cIsUtility>1 <style=cStack>(+1 per stack)</style></style> <style=cIsDamage>debuff</style> and instead grants a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>25%</style> of <style=cIsHealing>maximum health</style>. Recharges every <style=cIsUtility>5</style> seconds</style>."
 	}
 }

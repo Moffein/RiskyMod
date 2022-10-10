@@ -324,7 +324,8 @@ namespace RiskyMod
             MeatHook.enabled = false;
 
             Tesla.enabled = ItemCfg.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
-            Raincoat.enabled = ItemCfg.Bind(legendaryString, "Bens Raincoat - Use Modded Icons", false, "Replace the Vanilla buff icons for this item.").Value;
+            Raincoat.enabled = ItemCfg.Bind(legendaryString, "Bens Raincoat", true, itemConfigDescString).Value;
+            Raincoat.replaceIcons = ItemCfg.Bind(legendaryString, "Bens Raincoat - Use Modded Icons", false, "Replace the Vanilla buff icons for this item.").Value;
         }
 
         private static void ConfigVoidItems()
