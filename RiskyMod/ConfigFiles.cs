@@ -323,7 +323,7 @@ namespace RiskyMod
             //MeatHook.enabled = ItemCfg.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;
             MeatHook.enabled = false;
 
-            //MeatHook.enabled = ItemCfg.Bind(legendaryString, "Aegis", true, itemConfigDescString).Value;
+            //Aegis.enabled = ItemCfg.Bind(legendaryString, "Aegis", true, itemConfigDescString).Value;
             Aegis.enabled = false;
 
             Tesla.enabled = ItemCfg.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
@@ -381,6 +381,7 @@ namespace RiskyMod
             Meteorite.enabled = ItemCfg.Bind(lunarString, "Glowing Meteorite", true, itemConfigDescString).Value;
             ShapedGlass.enabled = ItemCfg.Bind(lunarString, "Shaped Glass", true, itemConfigDescString).Value;
             Transcendence.enabled = ItemCfg.Bind(lunarString, "Transcendence", true, itemConfigDescString).Value;
+            Visions.enabled = ItemCfg.Bind(lunarString, "Visions of Heresy", true, itemConfigDescString).Value;
         }
 
         private static void ConfigEquipment()

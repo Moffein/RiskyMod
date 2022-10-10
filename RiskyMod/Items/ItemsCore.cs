@@ -152,6 +152,7 @@ namespace RiskyMod.Items
             new BrittleCrown();
             new Meteorite();
             new Gesture();
+            new Visions();
         }
 
         private void ModifyEquipment()
