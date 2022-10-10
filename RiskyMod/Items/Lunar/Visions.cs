@@ -13,15 +13,13 @@ namespace RiskyMod.Items.Lunar
     {
         public static bool enabled = true;
 
-        public static LunarPrimaryReloadSkillDef VisionsReloadableSkill;
-
+        //This could be simplified by simply hooking LunarPrimaryReplacementSkill.GetRechargeInterval, but this method ensures that it doesn't double-dip and benefit from both Attack Speed and Cooldown Reduction.
         public Visions()
         {
             if (!enabled) return;
 
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.LunarReplacement.ReloadVisions));
 
-            //Do this instead of using the custom LunarPrimaryReloadSkillDef so that Interrupt Priorities aren't changed.
             On.EntityStates.GlobalSkills.LunarNeedle.FireLunarNeedle.OnEnter += (orig, self) =>
             {
                 orig(self);
@@ -31,6 +29,16 @@ namespace RiskyMod.Items.Lunar
             };
 
             RoR2.CharacterBody.onBodyInventoryChangedGlobal += CharacterBody_onBodyInventoryChangedGlobal;
+
+            On.RoR2.Skills.LunarPrimaryReplacementSkill.GetRechargeInterval += (orig, self, skillSlot) =>
+            {
+                return 0f;
+            };
+
+            On.RoR2.Skills.LunarPrimaryReplacementSkill.GetRechargeStock += (orig, self, skillSlot) =>
+            {
+                return 0;
+            };
         }
 
         private void CharacterBody_onBodyInventoryChangedGlobal(CharacterBody body)
