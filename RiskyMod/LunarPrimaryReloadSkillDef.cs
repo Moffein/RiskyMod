@@ -7,6 +7,7 @@ using UnityEngine;
 namespace RiskyMod
 {
 	//Combined from LunarPrimaryReplacementSkill and ReloadSkillDef
+	//Unused due to needing to change Interrupt Priorities.
 	public class LunarPrimaryReloadSkillDef : SkillDef
 	{
 		public override SkillDef.BaseSkillInstanceData OnAssigned(GenericSkill skillSlot)

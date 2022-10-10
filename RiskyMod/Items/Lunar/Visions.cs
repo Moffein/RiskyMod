@@ -20,55 +20,97 @@ namespace RiskyMod.Items.Lunar
             if (!enabled) return;
 
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.LunarReplacement.ReloadVisions));
-            LunarPrimaryReplacementSkill visionsDef = LegacyResourcesAPI.Load<LunarPrimaryReplacementSkill>("SkillDefs/LunarReplacements/LunarPrimaryReplacement");
 
-            LunarPrimaryReloadSkillDef visionsReloadDef = ScriptableObject.CreateInstance<LunarPrimaryReloadSkillDef>();
-            visionsReloadDef.activationState = new SerializableEntityStateType(typeof(EntityStates.GlobalSkills.LunarNeedle.FireLunarNeedle));
-            visionsReloadDef.activationStateMachineName = "Weapon";
-            visionsReloadDef.baseMaxStock = 12;
-            visionsReloadDef.baseRechargeInterval = 0f;
-            visionsReloadDef.beginSkillCooldownOnSkillEnd = true;
-            visionsReloadDef.canceledFromSprinting = false;
-            visionsReloadDef.cancelSprintingOnActivation = true;
-            visionsReloadDef.dontAllowPastMaxStocks = true;
-            visionsReloadDef.forceSprintDuringState = false;
-            visionsReloadDef.fullRestockOnAssign = true;
-            visionsReloadDef.graceDuration = 0.4f;
-            visionsReloadDef.icon = visionsDef.icon;
-            visionsReloadDef.interruptPriority = InterruptPriority.Skill;
-            visionsReloadDef.rechargeStock = 0;
-            visionsReloadDef.reloadInterruptPriority = InterruptPriority.Any;
-            visionsReloadDef.reloadState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.LunarReplacement.ReloadVisions));
-            visionsReloadDef.requiredStock = 1;
-            visionsReloadDef.resetCooldownTimerOnUse = true;
-            visionsReloadDef.skillDescriptionToken = visionsDef.skillDescriptionToken;
-            visionsReloadDef.skillName = visionsDef.skillName;
-            visionsReloadDef.skillNameToken = visionsDef.skillNameToken;
-            visionsReloadDef.stockToConsume = 1;
-            Content.Content.skillDefs.Add(visionsReloadDef);
-
-            Visions.VisionsReloadableSkill = visionsReloadDef;
-
-            //How does this change interactions with the skills of other characters?
-            On.EntityStates.GlobalSkills.LunarNeedle.FireLunarNeedle.GetMinimumInterruptPriority += (orig, self) =>
+            //Do this instead of using the custom LunarPrimaryReloadSkillDef so that Interrupt Priorities aren't changed.
+            On.EntityStates.GlobalSkills.LunarNeedle.FireLunarNeedle.OnEnter += (orig, self) =>
             {
-                return InterruptPriority.PrioritySkill;
+                orig(self);
+
+                VisionsReloader visRel = self.GetComponent<VisionsReloader>();
+                if (visRel) visRel.FireSkill();
             };
 
-            IL.RoR2.CharacterBody.OnInventoryChanged += (il) =>
+            RoR2.CharacterBody.onBodyInventoryChangedGlobal += CharacterBody_onBodyInventoryChangedGlobal;
+        }
+
+        private void CharacterBody_onBodyInventoryChangedGlobal(CharacterBody body)
+        {
+            if (body.inventory && body.inventory.GetItemCount(RoR2Content.Items.LunarPrimaryReplacement.itemIndex) > 0)
             {
-                ILCursor c = new ILCursor(il);
-                if (c.TryGotoNext(MoveType.After,
-                     x => x.MatchLdsfld(typeof(CharacterBody.CommonAssets), "lunarPrimaryReplacementSkillDef")
-                     ))
+                VisionsReloader visRel = body.GetComponent<VisionsReloader>();
+                if (!visRel) body.gameObject.AddComponent<VisionsReloader>();
+            }
+        }
+    }
+
+    public class VisionsReloader : MonoBehaviour
+    {
+        public static float graceDuration = 0.4f;    //Used when there's still stocks in the mag
+        public static float baseDuration = 2f;
+
+        private CharacterBody body;
+        private SkillLocator skills;
+
+        private float reloadStopwatch;
+        private float delayStopwatch;
+
+        private void Awake()
+        {
+            body = base.GetComponent<CharacterBody>();
+            skills = base.GetComponent<SkillLocator>();
+
+            reloadStopwatch = 0f;
+            delayStopwatch = 0f;
+        }
+
+        private void FixedUpdate()
+        {
+            //Destroy itself when the player no longer has Visions
+            if (body.inventory && body.inventory.GetItemCount(RoR2Content.Items.LunarPrimaryReplacement) <= 0)
+            {
+                Destroy(this);
+                return;
+            }
+
+            if (!skills.hasAuthority) return;
+
+            if (skills.primary.stock < skills.primary.maxStock && skills.primary.skillDef == CharacterBody.CommonAssets.lunarPrimaryReplacementSkillDef)
+            {
+                if (skills.primary.stock <= 0) delayStopwatch = 0f;
+                if (delayStopwatch > 0f)
                 {
-                    c.EmitDelegate<Func<SkillDef, SkillDef>>(orig => Visions.VisionsReloadableSkill);
+                    delayStopwatch -= Time.fixedDeltaTime;
                 }
                 else
                 {
-                    Debug.LogError("RiskyMod: Visions of Heresy IL Hook failed.");
+                    reloadStopwatch -= Time.fixedDeltaTime;
+                    if (reloadStopwatch <= 0f)
+                    {
+                        reloadStopwatch += baseDuration / body.attackSpeed * GetStackMult();
+                        skills.primary.stock = skills.primary.maxStock;
+                    }
                 }
-            };
+            }
+            else
+            {
+                reloadStopwatch = baseDuration / body.attackSpeed;
+            }
+        }
+
+        private float GetStackMult()
+        {
+            float stackMult = 1f;
+            if (body.inventory)
+            {
+                stackMult = Mathf.Max(1f, body.inventory.GetItemCount(RoR2Content.Items.LunarPrimaryReplacement));
+            }
+            return stackMult;
+        }
+
+        public void FireSkill()
+        {
+            delayStopwatch = graceDuration;  //Duration is already scaled to attack speed. InitialDelay is simply for inputs, and is ignored if the mag is empty.
+            reloadStopwatch = baseDuration / body.attackSpeed;// + (skills.primary.stock <= 0 ? duration : 0f);
         }
     }
 }
