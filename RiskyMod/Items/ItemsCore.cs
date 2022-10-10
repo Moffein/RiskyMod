@@ -109,6 +109,7 @@ namespace RiskyMod.Items
             new Behemoth();
             new HappiestMask();
             new Clover();
+            new Aegis();
 
             new BottledChaos();
             new Raincoat();

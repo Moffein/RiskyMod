@@ -323,6 +323,9 @@ namespace RiskyMod
             //MeatHook.enabled = ItemCfg.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;
             MeatHook.enabled = false;
 
+            //MeatHook.enabled = ItemCfg.Bind(legendaryString, "Aegis", true, itemConfigDescString).Value;
+            Aegis.enabled = false;
+
             Tesla.enabled = ItemCfg.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
             Raincoat.enabled = ItemCfg.Bind(legendaryString, "Bens Raincoat", true, itemConfigDescString).Value;
             Raincoat.replaceIcons = ItemCfg.Bind(legendaryString, "Bens Raincoat - Use Modded Icons", false, "Replace the Vanilla buff icons for this item.").Value;
