@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1553636841
+CRC: 1771365200
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 616fdcf6065329605e484cdc97045140
+    Hash: 6ea5d60efd69a96a10a5c8d8f321fbeb
   TypeTreeHash:
     serializedVersion: 2
     Hash: ea5a42e0fd8ea905efa7aa926a3b8944
@@ -14,6 +14,8 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
+- Assets/Resources/Sprites/Buffs/BuffHappiestMaskCooldown.png
+- Assets/Resources/Sprites/Buffs/BuffHappiestMaskReady.png
 - Assets/Resources/Sprites/UI/texUIEquipmentRestock.png
 - Assets/Resources/Sprites/Buffs/BuffRaincoatReady.png
 - Assets/Resources/Sprites/SkillIcons/Scepter/texCommandoR2.png
@@ -25,6 +27,7 @@ Assets:
 - Assets/Resources/Sprites/Buffs/BuffHeadstomperCooldown.png
 - Assets/Resources/Sprites/SkillIcons/Scepter/texAcridR1.png
 - Assets/Resources/Sprites/SkillIcons/Bandit2Desperado.png
+- Assets/Resources/Sprites/Buffs/BuffWatch.png
 - Assets/Resources/Sprites/SkillIcons/Scepter/texCommandoR1.png
 - Assets/Resources/Sprites/SkillIcons/Scepter/texBanditR1.png
 - Assets/Resources/Sprites/Buffs/BuffFreeze.png

@@ -47,8 +47,8 @@ namespace RiskyMod.Items.Legendary
                 false,
                 false,
                 false,
-                new Color(0.9f, 0.9f, 0.9f),
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/BanditSkull").iconSprite
+                Color.white,
+                Content.Assets.BuffIcons.HappiestMaskReady
                 );
 
             GhostCooldown = SneedUtils.SneedUtils.CreateBuffDef(
@@ -56,8 +56,8 @@ namespace RiskyMod.Items.Legendary
                 true,
                 true,
                 false,
-                new Color(88f / 255f, 91f / 255f, 98f / 255f),
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/BanditSkull").iconSprite
+                Color.white,
+                Content.Assets.BuffIcons.HappiestMaskCooldown
                 );
 
             OnCharacterDeath.OnCharacterDeathInventoryActions += TriggerMaskGhost;
@@ -82,7 +82,7 @@ namespace RiskyMod.Items.Legendary
             int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.GhostOnKill);
             if (itemCount > 0)
             {
-                if (!victimBody.bodyFlags.HasFlag(CharacterBody.BodyFlags.Masterless) && attackerBody.HasBuff(GhostReady.buffIndex))
+                if (!victimBody.bodyFlags.HasFlag(CharacterBody.BodyFlags.Masterless) && attackerBody.HasBuff(GhostReady.buffIndex) && !attackerBody.HasBuff(GhostCooldown.buffIndex))
                 {
                     TeamIndex attackerTeam = attackerBody.teamComponent ? attackerBody.teamComponent.teamIndex : TeamIndex.None;
                     TeamIndex victimTeam = victimBody.teamComponent ? victimBody.teamComponent.teamIndex : TeamIndex.None;

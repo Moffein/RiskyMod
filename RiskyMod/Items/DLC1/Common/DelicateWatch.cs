@@ -25,8 +25,8 @@ namespace RiskyMod.Items.DLC1.Common
                 false,
                 false,
                 false,
-                new Color(238f/255f, 208f/255f, 186f/255f),
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/BanditSkull").iconSprite //Todo: unique buff icon
+                Color.white,
+                Content.Assets.BuffIcons.Watch
                 );
 
             On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
