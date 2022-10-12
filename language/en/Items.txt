@@ -126,9 +126,6 @@
 	
 	"ITEM_TITANGOLDDURINGTP_DESC_RISKYMOD": "Summon <style=cIsDamage>Aurelionite</style> during the teleporter event. It has <style=cIsDamage>100% <style=cStack>(+50% per stack)</style> damage</style> and <style=cIsHealing>200% <style=cStack>(+100% per stack)</style> health</style>.",
 	
-	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Prevents <style=cIsUtility>1 <style=cStack>(+1 per stack)</style></style> <style=cIsDamage>debuff</style> and instead grants a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>25%</style> of <style=cIsHealing>maximum health</style>. Recharges every <style=cIsUtility>5</style> seconds</style>.",
-	
-	"ITEM_BARRIERONOVERHEAL_PICKUP_RISKYMOD": "Healing past full grants you a temporary barrier. Gain bonus armor while your temporary barrier is active.",
-	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Healing past full grants you a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>70%</style> of the amount you <style=cIsHealing>healed</style>. Gain <style=cIsHealing>40 armor <style=cStack>(+40 per stack)</style></style> while your <style=cIsHealing>temporary barrier</style> is active."
+	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Prevents <style=cIsUtility>1 <style=cStack>(+1 per stack)</style></style> <style=cIsDamage>debuff</style> and instead grants a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>25%</style> of <style=cIsHealing>maximum health</style>. Recharges every <style=cIsUtility>5</style> seconds</style>."
 	}
 }
