@@ -58,16 +58,16 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
             {
                 Vector3 rhs = Vector3.Cross(Vector3.up, aimRay.direction);
                 Vector3 axis = Vector3.Cross(aimRay.direction, rhs);
-                float num = 0f;
+                float currentSpread = 0f;
                 if (base.characterBody)
                 {
-                    num = base.characterBody.spreadBloomAngle;
+                    currentSpread = base.characterBody.spreadBloomAngle;
                 }
                 float angle = 0f;
                 float num2 = 0f;
                 if (this.bulletCount > 1)
                 {
-                    num2 = UnityEngine.Random.Range(this.minFixedSpreadYaw + num, this.maxFixedSpreadYaw + num) * 2f;
+                    num2 = UnityEngine.Random.Range(this.minFixedSpreadYaw + currentSpread, this.maxFixedSpreadYaw + currentSpread) * 2f;
                     angle = num2 / (float)(this.bulletCount - 1);
                 }
                 Vector3 direction = Quaternion.AngleAxis(-num2 * 0.5f, axis) * aimRay.direction;
