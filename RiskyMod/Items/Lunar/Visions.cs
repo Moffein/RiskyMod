@@ -94,14 +94,13 @@ namespace RiskyMod.Items.Lunar
                     reloadStopwatch -= Time.fixedDeltaTime;
                     if (reloadStopwatch <= 0f)
                     {
-                        reloadStopwatch += baseDuration / body.attackSpeed * GetStackMult();
                         skills.primary.stock = skills.primary.maxStock;
                     }
                 }
             }
             else
             {
-                reloadStopwatch = baseDuration / body.attackSpeed;
+                reloadStopwatch = GetReloadStopwatch();
             }
         }
 
@@ -115,10 +114,15 @@ namespace RiskyMod.Items.Lunar
             return stackMult;
         }
 
+        private float GetReloadStopwatch()
+        {
+            return (baseDuration / body.attackSpeed) * GetStackMult();
+        }
+
         public void FireSkill()
         {
             delayStopwatch = graceDuration;  //Duration is already scaled to attack speed. InitialDelay is simply for inputs, and is ignored if the mag is empty.
-            reloadStopwatch = baseDuration / body.attackSpeed;// + (skills.primary.stock <= 0 ? duration : 0f);
+            reloadStopwatch = GetReloadStopwatch();// + (skills.primary.stock <= 0 ? duration : 0f);
         }
     }
 }
