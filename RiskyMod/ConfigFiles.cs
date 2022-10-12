@@ -460,7 +460,7 @@ namespace RiskyMod
             ToolbotCore.enableNailgunChanges = SurvivorCfg.Bind(toolbotString, "Nailgun Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.enableRebarChanges = SurvivorCfg.Bind(toolbotString, "Rebar Puncher Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.enableScrapChanges = SurvivorCfg.Bind(toolbotString, "Scrap Launcher Changes", true, "Enable changes to this skill.").Value;
-            ToolbotCore.scrapICBM = SurvivorCfg.Bind(toolbotString, "Scrap Launcher ICBM", true, "Scrap Launcher benefits from Pocket ICBM if changes are enabled.").Value;
+            ToolbotCore.scrapICBM = SurvivorCfg.Bind(toolbotString, "Scrap Launcher ICBM", true, "Scrap Launcher benefits from Pocket ICBM if Scrap Launcher Changes are enabled.").Value;
             ToolbotCore.enableSawChanges = SurvivorCfg.Bind(toolbotString, "Power Saw Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.enableSecondarySkillChanges = SurvivorCfg.Bind(toolbotString, "Blast Canister Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.enableRetoolChanges = SurvivorCfg.Bind(toolbotString, "Retool Changes", true, "Enable changes to this skill.").Value;
