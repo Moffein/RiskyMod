@@ -136,6 +136,12 @@ namespace RiskyMod.Items.Uncommon
                                         }
                                         else
                                         {
+                                            if(self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player)
+                                            {
+                                                component6.inventory.GiveItem(Allies.AlliesCore.AllyMarkerItem);
+                                                component6.inventory.GiveItem(Allies.AlliesCore.AllyScalingItem);
+                                                component6.inventory.GiveItem(Allies.AlliesCore.AllyResistAoEItem);
+                                            }
                                             component6.inventory.GiveItem(RoR2Content.Items.BoostHp, 3 * (polypCount - 1));
                                             component6.inventory.GiveItem(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
                                             component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 30);

@@ -25,6 +25,7 @@ namespace RiskyMod.Allies
         public static ItemDef AllyMarkerItem;
         public static ItemDef AllyScalingItem;
         public static ItemDef AllyAllowVoidDeathItem;
+        public static ItemDef AllyResistAoEItem;
 
         public static List<AllyInfo> AllyList = new List<AllyInfo>();
 
@@ -44,9 +45,9 @@ namespace RiskyMod.Allies
             "RoboBallGreenBuddyBody",
             "RoboBallRedBuddyBody",
             "Turret1Body",
-            "SquidTurretBody",
+            //"SquidTurretBody",    //Converted to Ally Items
 
-            "MinorConstructAllyBody"
+            //"MinorConstructAllyBody"    //Converted to Ally Items
         };
 
         private void TweakDrones()
@@ -225,12 +226,6 @@ namespace RiskyMod.Allies
                     case "Turret1Body":
                         ally.tags |= AllyTag.Drone | AllyTag.Turret | AllyTag.UseShield;
                         break;
-                    case "SquidTurretBody":
-                        ally.tags |= AllyTag.Item | AllyTag.Turret;
-                        break;
-                    case "MinorConstructAllyBody":
-                        ally.tags |= AllyTag.Item | AllyTag.Turret | AllyTag.DontModifyRegen;
-                        break;
                     default:
                         break;
                 }
@@ -274,7 +269,41 @@ namespace RiskyMod.Allies
             BuildAllyScalingItem();
             BuildAllyAllowVoidDeathItem();
             BuildAllyRegenItem();
+            BuildAllyResistAoEItem();
         }
+
+        private void BuildAllyResistAoEItem()
+        {
+            if (AlliesCore.AllyResistAoEItem) return;
+            AllyResistAoEItem = ScriptableObject.CreateInstance<ItemDef>();
+            AllyResistAoEItem.canRemove = false;
+            AllyResistAoEItem.name = "RiskyModAllyResistAoEItem";
+            AllyResistAoEItem.deprecatedTier = ItemTier.NoTier;
+            AllyResistAoEItem.descriptionToken = "Gain +300 armor against AoE attacks.";
+            AllyResistAoEItem.nameToken = "NPC Ally AoE Resist";
+            AllyResistAoEItem.pickupToken = "Gain +300 armor against AoE attacks.";
+            AllyResistAoEItem.hidden = true;
+            AllyResistAoEItem.pickupIconSprite = null;
+            AllyResistAoEItem.tags = new[]
+            {
+                ItemTag.WorldUnique,
+                ItemTag.BrotherBlacklist,
+                ItemTag.CannotSteal,
+                ItemTag.CannotDuplicate,
+                ItemTag.AIBlacklist,
+                ItemTag.CannotCopy
+            };
+            ItemDisplayRule[] idr = new ItemDisplayRule[0];
+            ItemAPI.Add(new CustomItem(AllyResistAoEItem, idr));
+
+            if (AlliesCore.enabled) SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += HandleAllyResistAoEItem;
+        }
+
+        private static void HandleAllyResistAoEItem(CharacterBody self, Inventory inventory)
+        {
+            if (inventory.GetItemCount(AlliesCore.AllyResistAoEItem) > 0 && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ResistantToAOE)) self.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
+        }
+
 
         private void BuildAllyAllowVoidDeathItem()
         {
