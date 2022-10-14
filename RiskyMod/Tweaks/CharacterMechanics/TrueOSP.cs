@@ -28,7 +28,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                 );
 
             //Handled in MonoBehaviours.OSPManagerComponent and RecalculateStats
-            On.RoR2.CharacterBody.RecalculateStats += HandleDisableOSPBuff;
+            SharedHooks.RecalculateStats.HandleRecalculateStatsActions += HandleTrueOSP;
 
             //Overwrite vanilla OSP handling
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
@@ -95,13 +95,18 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             };
         }
 
-        private static void HandleDisableOSPBuff(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
+        private static void HandleTrueOSP(CharacterBody self)
         {
-            orig(self);
             if (self.hasOneShotProtection)
             {
                 //Disable vanilla OSP
                 self.oneShotProtectionFraction = 0f;    //I'd like to re-enable the visual, but I need to figure out how to make it not count shields.
+
+                if (self.cursePenalty > 1f || self.HasBuff(RoR2Content.Buffs.AffixLunar) ||
+                    (self.inventory && self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0))
+                {
+                    self.hasOneShotProtection = false;
+                }
 
                 if (self.HasBuff(TrueOSP.DisableOSP))
                 {

@@ -10,7 +10,6 @@ namespace RiskyMod.Tweaks.RunScaling
         {
             if (!enabled) return;
 
-            //Todo: test to see if this glitches out with the AWU shield
             On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
             {
                 float oldLevel = self.level;

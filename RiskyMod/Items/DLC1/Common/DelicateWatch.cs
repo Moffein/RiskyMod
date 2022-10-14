@@ -29,26 +29,21 @@ namespace RiskyMod.Items.DLC1.Common
                 Content.Assets.BuffIcons.Watch
                 );
 
-            On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
+            SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += (self, inventory) =>
             {
-                orig(self);
-
-                if (self.inventory)
+                if (inventory.GetItemCount(DLC1Content.Items.FragileDamageBonus) > 0)
                 {
-                    if (self.inventory.GetItemCount(DLC1Content.Items.FragileDamageBonus) > 0)
+                    bool hasBuff = self.HasBuff(WatchIndicatorBuff);
+                    if (hasBuff && !self.outOfDanger)
                     {
-                        bool hasBuff = self.HasBuff(WatchIndicatorBuff);
-                        if (hasBuff && !self.outOfDanger)
-                        {
-                            if (NetworkServer.active) self.RemoveBuff(WatchIndicatorBuff);
-                            RoR2.Util.PlaySound("Play_item_proc_delicateWatch_break", self.gameObject);
-                        }
-                        else if (!hasBuff && self.outOfDanger)
-                        {
-                            if (NetworkServer.active) self.AddBuff(WatchIndicatorBuff);
+                        if (NetworkServer.active) self.RemoveBuff(WatchIndicatorBuff);
+                        RoR2.Util.PlaySound("Play_item_proc_delicateWatch_break", self.gameObject);
+                    }
+                    else if (!hasBuff && self.outOfDanger)
+                    {
+                        if (NetworkServer.active) self.AddBuff(WatchIndicatorBuff);
 
-                            RoR2.Util.PlaySound("Play_RiskyMod_DelicateWatch_Ready", self.gameObject);
-                        }
+                        RoR2.Util.PlaySound("Play_RiskyMod_DelicateWatch_Ready", self.gameObject);
                     }
                 }
             };

@@ -1,4 +1,7 @@
-﻿using RoR2;
+﻿using Mono.Cecil.Cil;
+using MonoMod.Cil;
+using RoR2;
+using System;
 using UnityEngine;
 
 namespace RiskyMod.Items.DLC1.Equipment
@@ -17,9 +20,35 @@ namespace RiskyMod.Items.DLC1.Equipment
 
             On.RoR2.Projectile.GummyCloneProjectile.SpawnGummyClone += (orig, self) =>
             {
-                self.hpBoostCount = 60; //20 vanilla
-                self.damageBoostCount = 30; //20 vanilla
+                self.hpBoostCount = 50;
+                self.damageBoostCount = 20;
                 orig(self);
+            };
+
+            IL.RoR2.Projectile.GummyCloneProjectile.SpawnGummyClone += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                if (c.TryGotoNext(
+                         x => x.MatchCallvirt<MasterCopySpawnCard>("GiveItem")
+                        ))
+                {
+                    c.Emit(OpCodes.Ldloc_2);    //Projectile Owner's CharacterBody
+                    c.EmitDelegate<Func<MasterCopySpawnCard, CharacterBody, MasterCopySpawnCard>>((spawnCard, ownerBody) =>
+                    {
+                        spawnCard.GiveItem(RoR2Content.Items.UseAmbientLevel);
+                        if (ownerBody.teamComponent && ownerBody.teamComponent.teamIndex == TeamIndex.Player)
+                        {
+                            spawnCard.GiveItem(Allies.AlliesCore.AllyMarkerItem);
+                            spawnCard.GiveItem(Allies.AlliesCore.AllyScalingItem);
+                            spawnCard.GiveItem(Allies.AlliesCore.AllyRegenItem);
+                        }
+                        return spawnCard;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Goobo IL Hook failed");
+                }
             };
         }
     }

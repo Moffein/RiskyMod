@@ -45,8 +45,15 @@ namespace RiskyMod.Items.DLC1.Void
                     Inventory allyInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
                     if (allyInv)
                     {
-                        allyInv.GiveItem(RoR2Content.Items.BoostDamage, 5);
                         if (allyInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) allyInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
+
+                        CharacterMaster cm = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
+                        if (cm && cm.teamIndex == TeamIndex.Player)
+                        {
+                            allyInv.GiveItem(Allies.AlliesCore.AllyMarkerItem);
+                            allyInv.GiveItem(Allies.AlliesCore.AllyScalingItem);
+                            allyInv.GiveItem(Allies.AlliesCore.AllyAllowVoidDeathItem);
+                        }
 
                         if (self.body && self.body.inventory)
                         {

@@ -23,10 +23,10 @@ namespace RiskyMod.Allies
             if (!self.body.isPlayerControlled
                 && attackerBody.bodyIndex == MushrumBodyIndex
                 && (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player)
-                && AlliesCore.IsTurretAlly(self.body.bodyIndex))
+                && ((self.body.inventory && self.body.inventory.GetItemCount(AlliesCore.AllyMarkerItem) > 0) || AlliesCore.IsAlly(self.body.bodyIndex)))
             {
-                damageInfo.procCoefficient *= 0.3333333333f;
-                damageInfo.damage *= 0.3333333333f;
+                damageInfo.procCoefficient *= 0.25f;
+                damageInfo.damage *= 0.25f;
             }
         }
     }

@@ -7,6 +7,7 @@ using Mono.Cecil.Cil;
 using UnityEngine.AddressableAssets;
 using RoR2.Skills;
 using RiskyMod.Allies.DroneChanges;
+using R2API;
 
 namespace RiskyMod.Allies
 {
@@ -19,6 +20,11 @@ namespace RiskyMod.Allies
 
         public delegate void ModifyAllies(List<AllyInfo> allyList);
         public static ModifyAllies ModifyAlliesActions; //Runs after BodyCatalog init
+
+        public static ItemDef AllyRegenItem;
+        public static ItemDef AllyMarkerItem;
+        public static ItemDef AllyScalingItem;
+        public static ItemDef AllyAllowVoidDeathItem;
 
         public static List<AllyInfo> AllyList = new List<AllyInfo>();
 
@@ -55,6 +61,8 @@ namespace RiskyMod.Allies
 
         public AlliesCore()
         {
+            BuildAllyItems();
+
             if (!enabled) return;
             BuildAllyBodies();
             if (nerfDroneParts)
@@ -258,6 +266,153 @@ namespace RiskyMod.Allies
                 }
             }
             return flag;
+        }
+
+        private void BuildAllyItems()
+        {
+            BuildAllyItem();
+            BuildAllyScalingItem();
+            BuildAllyAllowVoidDeathItem();
+            BuildAllyRegenItem();
+        }
+
+        private void BuildAllyAllowVoidDeathItem()
+        {
+            if (AlliesCore.AllyAllowVoidDeathItem) return;
+            AllyAllowVoidDeathItem = ScriptableObject.CreateInstance<ItemDef>();
+            AllyAllowVoidDeathItem.canRemove = false;
+            AllyAllowVoidDeathItem.name = "RiskyModAllyAllowVoidDeathItem";
+            AllyAllowVoidDeathItem.deprecatedTier = ItemTier.NoTier;
+            AllyAllowVoidDeathItem.descriptionToken = "Allows this player-allied NPC to die to Void implosions.";
+            AllyAllowVoidDeathItem.nameToken = "NPC Ally Allow Void Death";
+            AllyAllowVoidDeathItem.pickupToken = "Allows this player-allied NPC to die to Void implosions.";
+            AllyAllowVoidDeathItem.hidden = true;
+            AllyAllowVoidDeathItem.pickupIconSprite = null;
+            AllyAllowVoidDeathItem.tags = new[]
+            {
+                ItemTag.WorldUnique,
+                ItemTag.BrotherBlacklist,
+                ItemTag.CannotSteal,
+                ItemTag.CannotDuplicate,
+                ItemTag.AIBlacklist,
+                ItemTag.CannotCopy
+            };
+            ItemDisplayRule[] idr = new ItemDisplayRule[0];
+            ItemAPI.Add(new CustomItem(AllyAllowVoidDeathItem, idr));
+        }
+        private void BuildAllyRegenItem()
+        {
+            if (AlliesCore.AllyRegenItem) return;
+            AllyRegenItem = ScriptableObject.CreateInstance<ItemDef>();
+            AllyRegenItem.canRemove = false;
+            AllyRegenItem.name = "RiskyModAllyRegenItem";
+            AllyRegenItem.deprecatedTier = ItemTier.NoTier;
+            AllyRegenItem.descriptionToken = "Regenerate to full HP in 1 (+1 per stack) second.";
+            AllyRegenItem.nameToken = "NPC Ally Allow Void Death";
+            AllyRegenItem.pickupToken = "Regenerate to full HP in 1 (+1 per stack) second.";
+            AllyRegenItem.hidden = true;
+            AllyRegenItem.pickupIconSprite = null;
+            AllyRegenItem.tags = new[]
+            {
+                ItemTag.WorldUnique,
+                ItemTag.BrotherBlacklist,
+                ItemTag.CannotSteal,
+                ItemTag.CannotDuplicate,
+                ItemTag.AIBlacklist,
+                ItemTag.CannotCopy
+            };
+            ItemDisplayRule[] idr = new ItemDisplayRule[0];
+            ItemAPI.Add(new CustomItem(AllyRegenItem, idr));
+
+            if (AlliesCore.enabled) SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += AllyRegenItemDelegate;
+        }
+
+        private static void AllyRegenItemDelegate(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
+        {
+            int itemCount = inventory.GetItemCount(AlliesCore.AllyRegenItem);
+            if (itemCount > 0)
+            {
+                float levelFactor = sender.level - 1f;
+
+                float targetRegen = (sender.baseMaxHealth + levelFactor * sender.levelMaxHealth) / itemCount;
+                float currentRegen = sender.baseRegen + levelFactor * sender.levelRegen;
+                args.baseRegenAdd += targetRegen - currentRegen;
+            }
+        }
+
+        private void BuildAllyItem()
+        {
+            if (AlliesCore.AllyMarkerItem) return;
+
+            AllyMarkerItem = ScriptableObject.CreateInstance<ItemDef>();
+            AllyMarkerItem.canRemove = false;
+            AllyMarkerItem.name = "RiskyModAllyItem";
+            AllyMarkerItem.deprecatedTier = ItemTier.NoTier;
+            AllyMarkerItem.descriptionToken = "Gain the bonuses given to player-allied NPCs.";
+            AllyMarkerItem.nameToken = "NPC Ally Marker";
+            AllyMarkerItem.pickupToken = "Gain the bonuses given to player-allied NPCs.";
+            AllyMarkerItem.hidden = true;
+            AllyMarkerItem.pickupIconSprite = null;
+            AllyMarkerItem.tags = new[]
+            {
+                ItemTag.WorldUnique,
+                ItemTag.BrotherBlacklist,
+                ItemTag.CannotSteal,
+                ItemTag.CannotDuplicate,
+                ItemTag.AIBlacklist,
+                ItemTag.CannotCopy
+            };
+            ItemDisplayRule[] idr = new ItemDisplayRule[0];
+            ItemAPI.Add(new CustomItem(AllyMarkerItem, idr));
+
+            if (AllyScaling.noOverheat || AllyScaling.noVoidDeath) SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += AllyMarkerItemDelegate;
+        }
+
+        private static void AllyMarkerItemDelegate (CharacterBody self, Inventory inventory)
+        {
+            if (inventory.GetItemCount(AlliesCore.AllyMarkerItem) > 0)
+            {
+                if (AllyScaling.noOverheat && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.OverheatImmune)) self.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
+                if (AllyScaling.noVoidDeath && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ImmuneToVoidDeath) && inventory.GetItemCount(AlliesCore.AllyAllowVoidDeathItem) <= 0) self.bodyFlags |= CharacterBody.BodyFlags.ImmuneToVoidDeath;
+            }
+        }
+
+        private void BuildAllyScalingItem()
+        {
+            if (AlliesCore.AllyScalingItem) return;
+
+            AllyScalingItem = ScriptableObject.CreateInstance<ItemDef>();
+            AllyScalingItem.canRemove = false;
+            AllyScalingItem.name = "RiskyModAllyScalingItem";
+            AllyScalingItem.deprecatedTier = ItemTier.NoTier;
+            AllyScalingItem.descriptionToken = "Swap HP and Damage scaling.";
+            AllyScalingItem.nameToken = "NPC Ally Scaling";
+            AllyScalingItem.pickupToken = "Swap HP and Damage scaling.";
+            AllyScalingItem.hidden = true;
+            AllyScalingItem.pickupIconSprite = null;
+            AllyScalingItem.tags = new[]
+            {
+                ItemTag.WorldUnique,
+                ItemTag.BrotherBlacklist,
+                ItemTag.CannotSteal,
+                ItemTag.CannotDuplicate,
+                ItemTag.AIBlacklist,
+                ItemTag.CannotCopy
+            };
+            ItemDisplayRule[] idr = new ItemDisplayRule[0];
+            ItemAPI.Add(new CustomItem(AllyScalingItem, idr));
+
+            if (AlliesCore.enabled) SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += AllyScalingItemDelegate;
+        }
+
+        private static void AllyScalingItemDelegate(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
+        {
+            if (inventory.GetItemCount(AlliesCore.AllyScalingItem) > 0)
+            {
+                float levelFactor = sender.level - 1f;
+                args.baseDamageAdd += 0.1f * levelFactor * sender.baseDamage;
+                args.baseHealthAdd -= 0.1f * levelFactor * sender.baseMaxHealth;
+            }
         }
     }
 

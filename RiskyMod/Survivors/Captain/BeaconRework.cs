@@ -73,9 +73,8 @@ namespace RiskyMod.Survivors.Captain
                 }
             };
 
-            On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
+            SharedHooks.RecalculateStats.HandleRecalculateStatsActions += (self) =>
             {
-                orig(self);
                 if (self.bodyIndex == CaptainCore.CaptainIndex)
                 {
                     if (self.skillLocator.special.bonusStockFromBody > 0)
