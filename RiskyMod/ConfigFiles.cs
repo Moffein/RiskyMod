@@ -501,7 +501,7 @@ namespace RiskyMod
 
             TreebotCore.enabled = SurvivorCfg.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             TreebotCore.drillChanges = SurvivorCfg.Bind(treebotString, "DIRECTIVE Drill Changes", true, "Enable changes to this skill.").Value;
-            TreebotCore.swapUtilityEffects = SurvivorCfg.Bind(treebotString, "Utility - Swap Effects", true, "Swaps the effects of REXs Utilities").Value;
+            TreebotCore.defaultUtilityHeal = SurvivorCfg.Bind(treebotString, "DIRECTIVE Disperse Healing", true, "DIRECTIVE Disperse heals for 5% HP per target hit.").Value;
             ModifyUtilityForce.enabled = SurvivorCfg.Bind(treebotString, "Utility - Modify Force", true, "Modifies the force of REXs Utilities.").Value;
             TreebotCore.fruitChanges = SurvivorCfg.Bind(treebotString, "DIRECTIVE Harvest Changes", true, "Enable changes to this skill.").Value;
 

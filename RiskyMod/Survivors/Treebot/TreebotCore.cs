@@ -15,7 +15,7 @@ namespace RiskyMod.Survivors.Treebot
         public static bool enabled = true;
         public static bool drillChanges = true;
 
-        public static bool swapUtilityEffects = true;
+        public static bool defaultUtilityHeal = true;
         public static bool fruitChanges = true;
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/TreebotBody");
         public TreebotCore()
@@ -43,14 +43,14 @@ namespace RiskyMod.Survivors.Treebot
 
         private void ModifyUtilities(SkillLocator sk)
         {
-            if (swapUtilityEffects)
+            if (defaultUtilityHeal)
             {
                 sk.utility.skillFamily.variants[0].skillDef.skillDescriptionToken = "TREEBOT_UTILITY_DESCRIPTION_RISKYMOD";
                 //sk.utility.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_SONIC_BOOM" };
 
                 //sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "TREEBOT_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
                 //sk.utility.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_SONIC_BOOM", "KEYWORD_WEAK" };
-                new SwapUtilityEffects();
+                new DefaultUtilityHeal();
             }
 
             new ModifyUtilityForce();
