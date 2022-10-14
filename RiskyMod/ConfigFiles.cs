@@ -46,6 +46,7 @@ using RiskyMod.Items.DLC1.Boss;
 using RiskyMod.Items.DLC1.Equipment;
 using RiskyMod.Enemies.Mithrix;
 using RiskOfOptions;
+using RiskyMod.Allies.DroneChanges;
 
 namespace RiskyMod
 {
@@ -178,6 +179,7 @@ namespace RiskyMod
             MushrumResist.enabled = GeneralCfg.Bind(allyString, "Mushrum Resistance", true, "Turrets take less damage from Mushrums.").Value;
             StricterLeashing.enabled = GeneralCfg.Bind(allyString, "Stricter Leashing", true, "Reduces the minimum distance required for Allies to teleport to you.").Value;
             AlliesCore.beetleGlandDontRetaliate = GeneralCfg.Bind(allyString, "Queens Gland Guards Dont Retaliate", true, "Queens Gland Guards will not fight back if hurt by their owners.").Value;
+            MegaDrone.allowRepair = GeneralCfg.Bind(allyString, "TC280 - Enable Repairs", true, "TC280s can be repaired like other drones after being destroyed.").Value;
 
             //Interactables
             ShrineCombatItems.enabled = GeneralCfg.Bind(interactString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;

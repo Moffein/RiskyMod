@@ -57,7 +57,6 @@ namespace RiskyMod
     [BepInDependency("com.TheTimeSweeper.AcridHitboxBuff", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.AcridBlightStack", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.LunarWispFalloff", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.Moffein.BeetleQueenPlus", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.NoVoidAllies", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.EliteReworks", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("Charzard4261.CaptainAbilitiesOffworld", BepInDependency.DependencyFlags.SoftDependency)]
@@ -152,61 +151,112 @@ namespace RiskyMod
             SoftDependencies.ZetTweaksLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetTweaks");
             if (SoftDependencies.ZetTweaksLoaded) ZetTweaksCompat();
 
-            NoLevelupHeal.enabled = NoLevelupHeal.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoLevelupHeal");
-            RemoveLevelCap.enabled = RemoveLevelCap.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RaiseMonsterLevelCap");
+            bool noLevelUpHealPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoLevelupHeal");
+            if (noLevelUpHealPluginLoaded && NoLevelupHeal.enabled) Debug.Log("RiskyMod: Disabling NoLevelupHeal because standalone plugin is loaded.");
+            NoLevelupHeal.enabled = NoLevelupHeal.enabled && !noLevelUpHealPluginLoaded;
 
-            FixPlayercount.enabled = FixPlayercount.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.FixPlayercount");
+            bool removeLevelCapPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RaiseMonsterLevelCap");
+            if (removeLevelCapPluginLoaded && RemoveLevelCap.enabled) Debug.Log("RiskyMod: Disabling RemoveLevelCap because standalone plugin is loaded.");
+            RemoveLevelCap.enabled = RemoveLevelCap.enabled && !removeLevelCapPluginLoaded;
+
+            bool fpcPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.FixPlayercount");
+            if (fpcPluginLoaded && FixPlayercount.enabled) Debug.Log("RiskyMod: Disabling FixPlayercount because standalone plugin is loaded.");
+            FixPlayercount.enabled = FixPlayercount.enabled && !fpcPluginLoaded;
             FixPlayercount.MultitudesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("dev.wildbook.multitudes");
             FixPlayercount.ZetArtifactsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetArtifacts");
 
             SoftDependencies.QueensGlandBuffLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.kking117.QueenGlandBuff");
+            if (SoftDependencies.QueensGlandBuffLoaded && QueensGland.enabled) Debug.Log("RiskyMod: QueenGlandBuff loaded. Enabling compatibility code.");
 
-            VoidInfestor.noVoidAllies = VoidInfestor.noVoidAllies && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoVoidAllies");
+            bool nvaPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoVoidAllies");
+            if (nvaPluginLoaded && VoidInfestor.noVoidAllies) Debug.Log("RiskyMod: Disabling NoVoidAllies because standalone plugin is loaded.");
+            VoidInfestor.noVoidAllies = VoidInfestor.noVoidAllies && !nvaPluginLoaded;
 
             SoftDependencies.AIBlacklistLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist");
-            if (SoftDependencies.AIBlacklistLoaded) HandleAIBlacklist();
+            if (SoftDependencies.AIBlacklistLoaded)
+            {
+                HandleAIBlacklist();
+                if (FixVengeanceLeveling.enabled) Debug.Log("RiskyMod: Disabling FixVengeanceLeveling because AI_Blacklist plugin is loaded.");
+            }
             FixVengeanceLeveling.enabled = FixVengeanceLeveling.enabled && !SoftDependencies.AIBlacklistLoaded;
 
-            PreventArtifactHeal.enabled = PreventArtifactHeal.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.ArtifactReliquaryHealingFix");
+            bool pahPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.ArtifactReliquaryHealingFix");
+            if (pahPluginLoaded && PreventArtifactHeal.enabled) Debug.Log("RiskyMod: Disabling PreventArtifactHeal because standalone plugin is loaded.");
+            PreventArtifactHeal.enabled = PreventArtifactHeal.enabled && !pahPluginLoaded;
+
+            bool captainHiddenRealmsPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.PlasmaCore.AlwaysAllowSupplyDrops") || BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("Charzard4261.CaptainAbilitiesOffworld");
+            if (captainHiddenRealmsPluginLoaded && CaptainOrbitalHiddenRealms.enabled) Debug.Log("RiskyMod: Disabling CaptainOrbitalHiddenRealms because standalone plugin is loaded.");
             CaptainOrbitalHiddenRealms.enabled = CaptainOrbitalHiddenRealms.enabled
-                && !(BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.PlasmaCore.AlwaysAllowSupplyDrops")|| BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("Charzard4261.CaptainAbilitiesOffworld"));
-            CritHud.enabled = CritHud.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.Hypercrit");   //Effect is already a part of hypercrit
+                && !captainHiddenRealmsPluginLoaded;
+
+            bool hypercritPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.Hypercrit");
+            if (hypercritPluginLoaded && CritHud.enabled) Debug.Log("RiskyMod: Disabling Ocular HUD changes because Hypercrit is loaded.");
+            CritHud.enabled = CritHud.enabled && !hypercritPluginLoaded;   //Effect is already a part of hypercrit
 
             SoftDependencies.ScepterPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
             SoftDependencies.ClassicItemsScepterLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.ClassicItems");
 
-            Visions.enabled = Visions.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.Heretic");
+            bool moffHereticPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.Heretic");
+            if (moffHereticPluginLoaded && Visions.enabled) Debug.Log("RiskyMod: Disabling Visions of Heresy changes because Moffein's Heretic is loaded.");
+            Visions.enabled = Visions.enabled && !moffHereticPluginLoaded;
 
             //Croco
-            BiggerMeleeHitbox.enabled = BiggerMeleeHitbox.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TheTimeSweeper.AcridHitboxBuff");
-            BlightStack.enabled = BlightStack.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AcridBlightStack");
+            bool ahbPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TheTimeSweeper.AcridHitboxBuff");
+            if (ahbPluginLoaded && BiggerMeleeHitbox.enabled) Debug.Log("RiskyMod: Disabling Acrid BiggerMeleeHitbox because standalone plugin is loaded.");
+            BiggerMeleeHitbox.enabled = BiggerMeleeHitbox.enabled && !ahbPluginLoaded;
+
+            bool blightStackPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AcridBlightStack");
+            if (blightStackPluginLoaded && BlightStack.enabled) Debug.Log("RiskyMod: Disabling Acrid BlightStack because standalone plugin is loaded.");
+            BlightStack.enabled = BlightStack.enabled && !blightStackPluginLoaded;
 
             //Bandit2
-            BackstabRework.enabled = BackstabRework.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BackstabRework");
+            bool backstabReworkPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BackstabRework");
+            if (backstabReworkPluginLoaded && BackstabRework.enabled) Debug.Log("RiskyMod: Disabling Bandit2 BackstabRework because standalone plugin is loaded.");
+            BackstabRework.enabled = BackstabRework.enabled && !backstabReworkPluginLoaded;
 
             //Enemies
-            BeetleQueen.enabled = BeetleQueen.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BeetleQueenPlus");
-            LunarWisp.enableFalloff = LunarWisp.enableFalloff && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.LunarWispFalloff");
+            bool lunarWispFalloffPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.LunarWispFalloff");
+            if (lunarWispFalloffPluginLoaded && LunarWisp.enableFalloff) Debug.Log("RiskyMod: Disabling LunarWispFalloff because standalone plugin is loaded.");
+            LunarWisp.enableFalloff = LunarWisp.enableFalloff && !lunarWispFalloffPluginLoaded;
 
-            FixEnigmaBlacklist.enabled = FixEnigmaBlacklist.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EnigmaBlacklist");
-            Gesture.enabled = Gesture.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.GestureEnigma");
-            NerfVoidtouched.enabled = NerfVoidtouched.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EliteReworks");
+            bool enigmaBlacklistPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EnigmaBlacklist");
+            if (enigmaBlacklistPluginLoaded && FixEnigmaBlacklist.enabled) Debug.Log("RiskyMod: Disabling EnigmaBlacklist because standalone plugin is loaded.");
+            FixEnigmaBlacklist.enabled = FixEnigmaBlacklist.enabled && !enigmaBlacklistPluginLoaded;
+
+            //Gesture is always disabled by default so this shouldn't matter.
+            bool gestureEnigmaPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.GestureEnigma");
+            if (gestureEnigmaPluginLoaded && Gesture.enabled) Debug.Log("RiskyMod: Disabling Gesture of the Drowned changes because GestureEnigma is loaded.");
+            Gesture.enabled = Gesture.enabled && !gestureEnigmaPluginLoaded;
+
+            bool eliteReworksPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EliteReworks");
+            if (eliteReworksPluginLoaded && NerfVoidtouched.enabled) Debug.Log("RiskyMod: Disabling NerfVoidtouched because EliteReworks is loaded.");
+            NerfVoidtouched.enabled = NerfVoidtouched.enabled && !eliteReworksPluginLoaded;
 
             SoftDependencies.ShareSuiteLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.funkfrog_sipondo.sharesuite");
             if (SoftDependencies.ShareSuiteLoaded) HandleShareSuite();
 
-            SpawnLimits.enabled = SpawnLimits.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.InteractableLimit");
+            bool interactableLimitPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.InteractableLimit");
+            if (interactableLimitPluginLoaded && SpawnLimits.enabled) Debug.Log("RiskyMod: Disabling Interactable SpawnLimits changes because InteractableLimit is loaded.");
+            SpawnLimits.enabled = SpawnLimits.enabled && !interactableLimitPluginLoaded;
 
             //No need for this to be static since this doesn't get referenced anywhere else
             bool teleExpansionLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.TeleExpansion");
+
+            if (teleExpansionLoaded && SmallHoldoutCharging.enabled) Debug.Log("RiskyMod: Disabling SmallHoldoutCharging because TeleExpansion is loaded.");
             SmallHoldoutCharging.enabled = SmallHoldoutCharging.enabled && !teleExpansionLoaded;
+
+            if (teleExpansionLoaded && TeleExpandOnBossKill.enabled) Debug.Log("RiskyMod: Disabling TeleExpandOnBossKill because TeleExpansion is loaded.");
             TeleExpandOnBossKill.enabled = TeleExpandOnBossKill.enabled && !teleExpansionLoaded;
+
+            if (teleExpansionLoaded && VoidLocus.ModifyHoldout.enabled) Debug.Log("RiskyMod: Disabling VoidLocus.ModifyHoldout because TeleExpansion is loaded.");
             VoidLocus.ModifyHoldout.enabled = VoidLocus.ModifyHoldout.enabled && !teleExpansionLoaded;
+
+            if (teleExpansionLoaded && Moon.ModifyHoldout.enabled) Debug.Log("RiskyMod: Disabling Moon.ModifyHoldout because TeleExpansion is loaded.");
             Moon.ModifyHoldout.enabled = Moon.ModifyHoldout.enabled && !teleExpansionLoaded;
 
             SoftDependencies.RtAutoSprintLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx");
 
-            Sacrifice.enabled = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.SacrificeTweaks");
+            Sacrifice.enabled = Sacrifice.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.SacrificeTweaks");
 
             SoftDependencies.SpikestripGrooveSalad = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.groovesalad.GrooveSaladSpikestripContent");
             SoftDependencies.SpikestripHeyImNoob = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.heyimnoob.NoopSpikestripContent");
@@ -218,7 +268,8 @@ namespace RiskyMod
         {
             if (SoftDependencies.ZetTweaksLoaded)
             {
-                Allies.DroneChanges.MegaDrone.allowRepair = false;
+                //Allies.DroneChanges.MegaDrone.allowRepair = false;
+                if (Allies.DroneChanges.MegaDrone.allowRepair) Debug.LogError("RiskyMod: MegaDrone.allowRepair is enabled while ZetTweaks is loaded. Disable this feature in the config of ZetTweaks or RiskyMod, or else you will see duplicated MegaDrone corpses.");
             }
         }
 
