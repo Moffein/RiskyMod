@@ -18,7 +18,9 @@ namespace RiskyMod.Survivors.Toolbot
         public static bool enableRebarChanges = true;
         public static bool enableScrapChanges = true;
         public static bool scrapICBM = true;
-        public static bool enableSawChanges = true;
+
+        public static bool sawPhysics = true;
+        public static bool sawBarrierOnHit = true;
 
         public static bool enableSecondarySkillChanges = true;
 
@@ -172,48 +174,55 @@ namespace RiskyMod.Survivors.Toolbot
 
         private void SawChanges(SkillLocator sk)
         {
-            if (!enableSawChanges) return;
-
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireBuzzsaw", "selfForceMagnitude", "0");
-            IL.EntityStates.Toolbot.FireBuzzsaw.FixedUpdate += (il) =>
+            if (sawPhysics)
             {
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
-                     x => x.MatchCallvirt<CharacterMotor>("ApplyForce")
-                     ))
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireBuzzsaw", "selfForceMagnitude", "0");
+                IL.EntityStates.Toolbot.FireBuzzsaw.FixedUpdate += (il) =>
                 {
-                    c.Emit(OpCodes.Ldarg_0);
-                    c.EmitDelegate<Func<int, EntityStates.Toolbot.FireBuzzsaw, int>>((orig, self) =>
+                    ILCursor c = new ILCursor(il);
+                    if (c.TryGotoNext(
+                         x => x.MatchCallvirt<CharacterMotor>("ApplyForce")
+                         ))
                     {
-                        if (self.characterMotor && !self.characterMotor.isGrounded && self.characterMotor.velocity.y <= 0f)
+                        c.Emit(OpCodes.Ldarg_0);
+                        c.EmitDelegate<Func<int, EntityStates.Toolbot.FireBuzzsaw, int>>((orig, self) =>
                         {
-                            //self.characterMotor.velocity.y = 0f;
-                            self.SmallHop(self.characterMotor, 2.5f);
-                        }
-                        return orig;
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: Toolbot Saw IL Hook failed");
-                }
-            };
-            On.EntityStates.Toolbot.FireBuzzsaw.OnEnter += (orig, self) =>
-            {
-                orig(self);
-                self.attack.AddModdedDamageType(SharedDamageTypes.SawBarrier);
-            };
+                            if (self.characterMotor && !self.characterMotor.isGrounded && self.characterMotor.velocity.y <= 0f)
+                            {
+                                //self.characterMotor.velocity.y = 0f;
+                                self.SmallHop(self.characterMotor, 2.5f);
+                            }
+                            return orig;
+                        });
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogError("RiskyMod: Toolbot SawPhysics IL Hook failed");
+                    }
+                };
 
-            sk.primary.skillFamily.variants[3].skillDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD";
-            sk.primary.skillFamily.variants[3].skillDef.cancelSprintingOnActivation = false;
 
-            HitBoxGroup[] hitboxes = ToolbotCore.bodyPrefab.GetComponentsInChildren<HitBoxGroup>();
-            foreach (HitBoxGroup h in hitboxes)
-            {
-                if (h.groupName.Contains("Buzzsaw"))
+                sk.primary.skillFamily.variants[3].skillDef.cancelSprintingOnActivation = false;
+
+                HitBoxGroup[] hitboxes = ToolbotCore.bodyPrefab.GetComponentsInChildren<HitBoxGroup>();
+                foreach (HitBoxGroup h in hitboxes)
                 {
-                    h.hitBoxes[0].transform.localScale *= 1.5f;
+                    if (h.groupName.Contains("Buzzsaw"))
+                    {
+                        h.hitBoxes[0].transform.localScale *= 1.5f;
+                    }
                 }
+            }
+
+            if (sawBarrierOnHit)
+            {
+                On.EntityStates.Toolbot.FireBuzzsaw.OnEnter += (orig, self) =>
+                {
+                    orig(self);
+                    self.attack.AddModdedDamageType(SharedDamageTypes.SawBarrier);
+                };
+
+                sk.primary.skillFamily.variants[3].skillDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD";
             }
         }
 
