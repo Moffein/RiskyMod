@@ -40,7 +40,7 @@ namespace RiskyMod.Items.DLC1.Equipment
                         {
                             spawnCard.GiveItem(Allies.AlliesCore.AllyMarkerItem);
                             spawnCard.GiveItem(Allies.AlliesCore.AllyScalingItem);
-                            spawnCard.GiveItem(Allies.AlliesCore.AllyRegenItem);
+                            spawnCard.GiveItem(Allies.AlliesCore.AllyRegenItem, 40);
                         }
                         return spawnCard;
                     });
