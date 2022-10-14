@@ -22,8 +22,8 @@ namespace RiskyMod.Enemies.Spawnpools
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.MagmaWorm, DirectorAPI.Stage.SkyMeadow);
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.MagmaWorm, DirectorAPI.Stage.SkyMeadowSimulacrum);
 
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.OverloadingWorm, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.OverloadingWorm, DirectorAPI.Stage.SkyMeadowSimulacrum);
+            /*DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.OverloadingWorm, DirectorAPI.Stage.SkyMeadow);
+            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.OverloadingWorm, DirectorAPI.Stage.SkyMeadowSimulacrum);*/
 
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Imp, false, DirectorAPI.Stage.SkyMeadow);
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Imp, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
@@ -34,8 +34,8 @@ namespace RiskyMod.Enemies.Spawnpools
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.MagmaWorm, false, DirectorAPI.Stage.SkyMeadow);
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.MagmaWorm, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
 
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Reminder, false, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Reminder, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
+            /*DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Reminder, false, DirectorAPI.Stage.SkyMeadow);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Reminder, false, DirectorAPI.Stage.SkyMeadowSimulacrum);*/
 
 
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.LunarGolemSkyMeadow, false, DirectorAPI.Stage.SkyMeadow);

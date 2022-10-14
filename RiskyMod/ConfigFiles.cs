@@ -47,6 +47,7 @@ using RiskyMod.Items.DLC1.Equipment;
 using RiskyMod.Enemies.Mithrix;
 using RiskOfOptions;
 using RiskyMod.Allies.DroneChanges;
+using RiskyMod.Enemies.Spawnpools;
 
 namespace RiskyMod
 {
@@ -646,7 +647,21 @@ namespace RiskyMod
 
         private static void ConfigSpawnpools()
         {
-            //SpawnpoolCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Spawnpools.cfg"), true);
+            SpawnpoolCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Spawnpools.cfg"), true);
+
+            TitanicPlains.enabled = SpawnpoolCfg.Bind("Stage 1", "Titanic Plains", true, "Enable spawnpool changes on this stage.").Value;
+            DistantRoost.enabled = SpawnpoolCfg.Bind("Stage 1", "Distant Roost", true, "Enable spawnpool changes on this stage.").Value;
+            SnowyForest.enabled = SpawnpoolCfg.Bind("Stage 1", "Siphoned Forest", true, "Enable spawnpool changes on this stage.").Value;
+
+            GooLake.enabled = SpawnpoolCfg.Bind("Stage 2", "Abandoned Aqueduct", true, "Enable spawnpool changes on this stage.").Value;
+            Wetland.enabled = SpawnpoolCfg.Bind("Stage 2", "Wetland Aspect", true, "Enable spawnpool changes on this stage.").Value;
+
+            //Currently has no spawnpool changes
+            //RallypointDelta.enabled = SpawnpoolCfg.Bind("Stage 3", "Rallypoint Delta", true, "Enable spawnpool changes on this stage.").Value;
+
+            StadiaJungle.enabled = SpawnpoolCfg.Bind("Stage 4", "Stadia Jungle", true, "Enable spawnpool changes on this stage.").Value;
+
+            SkyMeadow.enabled = SpawnpoolCfg.Bind("Stage 5", "Sky Meadow", true, "Enable spawnpool changes on this stage.").Value;
         }
     }
 }

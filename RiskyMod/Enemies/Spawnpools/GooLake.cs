@@ -18,9 +18,11 @@ namespace RiskyMod.Enemies.Spawnpools
 
             //TODO: FIGURE OUT HOW TO ONLY RUN THIS WHEN DLC IS ACTIVE
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.ClayApothecary, DirectorAPI.Stage.AbandonedAqueduct);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.ClayApothecary, DirectorAPI.Stage.AbandonedAqueductSimulacrum);
+            //DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.ClayApothecary, DirectorAPI.Stage.AbandonedAqueductSimulacrum); //No need to modify Simulacrum, they already spawn.
+
+            //Do these even spawn?
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.ClayApothecary, false, DirectorAPI.Stage.AbandonedAqueduct);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.ClayApothecary, false, DirectorAPI.Stage.AbandonedAqueductSimulacrum);
+            //DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.ClayApothecary, false, DirectorAPI.Stage.AbandonedAqueductSimulacrum);
 
             /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
             {
