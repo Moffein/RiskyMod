@@ -148,7 +148,7 @@ namespace RiskyMod.Items.Legendary
 
                     if (ownerBody && ownerBody.teamComponent && ownerBody.teamComponent.teamIndex == TeamIndex.Player)
                     {
-                        inventory.GiveItem(RoR2Content.Items.BoostDamage.itemIndex, 46 + 24 * itemCount);
+                        inventory.GiveItem(RoR2Content.Items.BoostDamage.itemIndex, 32 + 18 * itemCount);
                         inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 30 * itemCount);
                         inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
                         inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
