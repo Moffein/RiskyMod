@@ -108,6 +108,7 @@ namespace RiskyMod.Enemies
         public static CharacterSpawnCard Wisp;
         public static CharacterSpawnCard Jellyfish;
         public static CharacterSpawnCard BlindPestSnowy;
+        public static CharacterSpawnCard BlindVerminSnowy;
 
         public static CharacterSpawnCard Imp;
         public static CharacterSpawnCard Vulture;
@@ -177,6 +178,7 @@ namespace RiskyMod.Enemies
 
             Reminder = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscelectricworm");
 
+            BlindVerminSnowy = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/Vermin/cscVerminSnowy.asset").WaitForCompletion();
             BlindPestSnowy = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/FlyingVermin/cscFlyingVerminSnowy.asset").WaitForCompletion();
             ClayApothecary = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/ClayGrenadier/cscClayGrenadier.asset").WaitForCompletion();
 
@@ -196,6 +198,7 @@ namespace RiskyMod.Enemies
         public static DirectorAPI.DirectorCardHolder Wisp;
         public static DirectorAPI.DirectorCardHolder Jellyfish;
         public static DirectorAPI.DirectorCardHolder BlindPestSnowy;
+        public static DirectorAPI.DirectorCardHolder BlindVerminSnowy;
 
         public static DirectorAPI.DirectorCardHolder Imp;
         public static DirectorAPI.DirectorCardHolder Vulture;
@@ -246,6 +249,7 @@ namespace RiskyMod.Enemies
             Wisp = BuildDirectorCard(SpawnCards.Wisp, DirectorAPI.MonsterCategory.BasicMonsters);
             Jellyfish = BuildDirectorCard(SpawnCards.Jellyfish, DirectorAPI.MonsterCategory.BasicMonsters, 1, 0, DirectorCore.MonsterSpawnDistance.Far);
             BlindPestSnowy = BuildDirectorCard(SpawnCards.BlindPestSnowy, DirectorAPI.MonsterCategory.BasicMonsters);
+            BlindVerminSnowy = BuildDirectorCard(SpawnCards.BlindVerminSnowy, DirectorAPI.MonsterCategory.BasicMonsters);
 
             Imp = BuildDirectorCard(SpawnCards.Imp, DirectorAPI.MonsterCategory.BasicMonsters);
             Vulture = BuildDirectorCard(SpawnCards.Vulture, DirectorAPI.MonsterCategory.BasicMonsters);

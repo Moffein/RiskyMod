@@ -67,7 +67,7 @@ namespace RiskyMod.Items.Boss
 											if (guardInv && glandCount > 0)
 											{
 
-												int baseDamage = SoftDependencies.QueensGlandBuffLoaded ? GetInitialDamageCount() : 30;
+												int baseDamage = SoftDependencies.QueensGlandBuffLoaded ? GetInitialDamageCount() : 20;
 												int stackDamage = SoftDependencies.QueensGlandBuffLoaded ? GetStackDamageCount() : 30;
 												int baseHealth = SoftDependencies.QueensGlandBuffLoaded ? GetInitialHPCount() : 10;
 												int stackHealth = SoftDependencies.QueensGlandBuffLoaded ? GetStackHPCount() : 10;
@@ -91,6 +91,13 @@ namespace RiskyMod.Items.Boss
 													UpdateGlandStats ugs = spawnResult.spawnedInstance.AddComponent<UpdateGlandStats>();
 													ugs.ownerInventory = self.body.inventory;
 													ugs.minionInventory = guardInv;
+												}
+
+												if (guardInv && cm.teamIndex == TeamIndex.Player)
+												{
+													guardInv.GiveItem(Allies.AlliesCore.AllyMarkerItem);
+													guardInv.GiveItem(Allies.AlliesCore.AllyScalingItem);
+													guardInv.GiveItem(Allies.AlliesCore.AllyRegenItem, 40);
 												}
 											}
 										}

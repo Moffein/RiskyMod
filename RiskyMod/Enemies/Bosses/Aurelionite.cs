@@ -19,7 +19,7 @@ namespace RiskyMod.Enemies.Bosses
             {
                 GameObject bodyObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Titan/TitanGoldBody.prefab").WaitForCompletion();
                 CharacterBody cb = bodyObject.GetComponent<CharacterBody>();
-                cb.baseDamage = 50f;
+                cb.baseDamage = 60f;
                 cb.levelDamage = cb.baseDamage * 0.2f;
             }
             if (Titan.enabled)

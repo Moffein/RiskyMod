@@ -75,7 +75,7 @@
 	
 	"ITEM_BEHEMOTH_DESC_RISKYMOD": "All your <style=cIsDamage>attacks explode</style> in a <style=cIsDamage>4m</style> radius for a bonus <style=cIsDamage>60%</style> <style=cStack>(+36% per stack)</style> TOTAL damage to nearby enemies.",
 	
-	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>Recruit a Beetle Guard</style> with bonus <style=cIsDamage>300%</style> <style=cStack>(+300% per stack)</style> damage and <style=cIsHealing>100% <style=cStack>(+100% per stack)</style> health</style>.",
+	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>Recruit a Beetle Guard</style> with bonus <style=cIsDamage>300%</style> <style=cStack>(+300% per stack)</style> damage and <style=cIsHealing>200% <style=cStack>(+100% per stack)</style> health</style>.",
 	
 	"ITEM_FIREBALLSONHIT_DESC_RISKYMOD": "<style=cIsDamage>10%</style> chance on hit to call forth <style=cIsDamage>3 magma balls</style> from an enemy, dealing <style=cIsDamage>300%</style> <style=cStack>(+180% per stack)</style> damage each.",
 	

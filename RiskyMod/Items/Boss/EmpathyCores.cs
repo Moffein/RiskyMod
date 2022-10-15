@@ -41,6 +41,22 @@ namespace RiskyMod.Items.Boss
                     UnityEngine.Debug.LogError("RiskyMod: EmpathyCores IL Hook failed");
                 }
             };
+
+            On.RoR2.Items.RoboBallBuddyBodyBehavior.OnMinionSpawnedServer += (orig, self, spawnResult) =>
+            {
+                orig(self, spawnResult);
+
+                if (spawnResult.spawnedInstance)
+                {
+                    CharacterMaster minionMaster = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
+                    if (minionMaster && minionMaster.teamIndex == TeamIndex.Player && minionMaster.inventory)
+                    {
+                        minionMaster.inventory.GiveItem(Allies.AlliesCore.AllyMarkerItem);
+                        minionMaster.inventory.GiveItem(Allies.AlliesCore.AllyScalingItem);
+                        minionMaster.inventory.GiveItem(Allies.AlliesCore.AllyRegenItem, 40);
+                    }
+                }
+            };
         }
     }
 }

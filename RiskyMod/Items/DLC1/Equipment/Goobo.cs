@@ -28,8 +28,8 @@ namespace RiskyMod.Items.DLC1.Equipment
             IL.RoR2.Projectile.GummyCloneProjectile.SpawnGummyClone += (il) =>
             {
                 ILCursor c = new ILCursor(il);
-                if (c.TryGotoNext(
-                         x => x.MatchCallvirt<MasterCopySpawnCard>("GiveItem")
+                if (c.TryGotoNext(MoveType.After,
+                         x => x.MatchLdloc(3)//MasterCopySpawnCard
                         ))
                 {
                     c.Emit(OpCodes.Ldloc_2);    //Projectile Owner's CharacterBody

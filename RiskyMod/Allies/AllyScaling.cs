@@ -19,8 +19,6 @@ namespace RiskyMod.Allies
         public AllyScaling()
         {
             AlliesCore.ModifyAlliesActions += ModifyAllies;
-            ChangeAllyScalingActions += MegaDrone_Scaling;
-            ChangeAllyScalingActions += FlameDrone_Scaling;
         }
 
         private void ModifyAllies(List<AllyInfo> allies)
@@ -47,15 +45,6 @@ namespace RiskyMod.Allies
             bool ignoreScaling = (ally.tags & AllyTag.DontModifyScaling) == AllyTag.DontModifyScaling;
             if (!ignoreScaling)
             {
-                if ((ally.tags & AllyTag.Drone) == AllyTag.Drone)
-                {
-                    //Don't like how normalization is split between AllyScaling and AlliesCore
-                    if (normalizeDroneDamage)
-                    {
-                        allyBody.baseDamage = 12f;
-                    }
-                }
-
                 if ((ally.tags & AllyTag.Turret) == AllyTag.Turret)
                 {
                     allyBody.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
@@ -80,36 +69,7 @@ namespace RiskyMod.Allies
                 allyBody.autoCalculateLevelStats = false;
             }
 
-            //Can be used by external mods who want to do their own thing with custom allies?
             if (ChangeAllyScalingActions != null) ChangeAllyScalingActions.Invoke(ally, allyBody);
-        }
-
-        private void MegaDrone_Scaling(AllyInfo ally, CharacterBody allyBody)
-        {
-            if (ally.bodyName == "MegaDroneBody")
-            {
-                allyBody.baseArmor = 20f;
-
-                if ((ally.tags & AllyTag.DontModifyRegen) != AllyTag.DontModifyRegen)
-                {
-                    allyBody.baseRegen = allyBody.baseMaxHealth / 30f;
-                    allyBody.levelRegen = allyBody.baseRegen * 0.2f;
-                }
-            }
-        }
-
-        private void FlameDrone_Scaling(AllyInfo ally, CharacterBody allyBody)
-        {
-            if (ally.bodyName == "FlameDroneBody")
-            {
-                allyBody.baseArmor = 20f;
-
-                if ((ally.tags & AllyTag.DontModifyRegen) != AllyTag.DontModifyRegen)
-                {
-                    allyBody.baseRegen = allyBody.baseMaxHealth / 20f;
-                    allyBody.levelRegen = allyBody.baseRegen * 0.2f;
-                }
-            }
         }
     }
 }

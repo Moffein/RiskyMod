@@ -41,13 +41,13 @@ namespace RiskyMod.Allies
             "MegaDroneBody",
             "DroneCommanderBody",
 
-            "BeetleGuardAllyBody",
-            "RoboBallGreenBuddyBody",
-            "RoboBallRedBuddyBody",
+            //"BeetleGuardAllyBody",    //Converted to Ally Items
+            //"RoboBallGreenBuddyBody", //Converted to Ally Items
+            //"RoboBallRedBuddyBody",   //Converted to Ally Items
             "Turret1Body",
             //"SquidTurretBody",    //Converted to Ally Items
 
-            //"MinorConstructAllyBody"    //Converted to Ally Items
+            //"MinorConstructAllyBody"  //Converted to Ally Items
         };
 
         private void TweakDrones()
@@ -58,6 +58,19 @@ namespace RiskyMod.Allies
             new MissileDrone();
             new GunnerDrone();
             new HealDrone();
+        }
+
+        public static void NormalizeDroneDamage(GameObject bodyObject)
+        {
+            if (bodyObject)
+            {
+                CharacterBody cb = bodyObject.GetComponent<CharacterBody>();
+                if (cb)
+                {
+                    cb.baseDamage = 12f;
+                    cb.levelDamage = cb.baseDamage * 0.2f;
+                }
+            }
         }
 
         public AlliesCore()
@@ -120,6 +133,19 @@ namespace RiskyMod.Allies
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireTwinRocket", "damageCoefficient", "4.6667");   //Damage 14 -> 12, coef 4 -> 4.6667
 
                 //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireMissileBarrage", "damageCoefficient", "1.7");   //Damage 14 -> 12, coef 1 -> 1.166666667
+
+                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/drone1body"));
+                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/drone2body"));
+                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/backupdronebody"));
+                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/missiledronebody"));
+                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/equipmentdronebody"));
+                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/emergencydronebody"));
+                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/flamedronebody"));
+                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/megadronebody"));
+                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/dronecommanderbody"));
+                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/turret1body"));
+                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/RoboBallGreenBuddyBody"));
+                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/RoboBallRedBuddyBody"));
             }
             new AllyScaling();
             new DroneTargeting();
@@ -213,15 +239,10 @@ namespace RiskyMod.Allies
                         break;
                     case "FlameDroneBody":
                     case "MegaDroneBody":
-                        ally.tags |= AllyTag.Drone | AllyTag.UseShield;
+                        ally.tags |= AllyTag.Drone | AllyTag.UseShield | AllyTag.DontModifyRegen;
                         break;
                     case "DroneCommanderBody":
-                    case "RoboBallGreenBuddyBody":
-                    case "RoboBallRedBuddyBody":
                         ally.tags |= AllyTag.Drone | AllyTag.Item;
-                        break;
-                    case "BeetleGuardAllyBody":
-                        ally.tags |= AllyTag.Item;
                         break;
                     case "Turret1Body":
                         ally.tags |= AllyTag.Drone | AllyTag.Turret | AllyTag.UseShield;

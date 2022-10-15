@@ -660,6 +660,7 @@ namespace RiskyMod
             //RallypointDelta.enabled = SpawnpoolCfg.Bind("Stage 3", "Rallypoint Delta", true, "Enable spawnpool changes on this stage.").Value;
 
             StadiaJungle.enabled = SpawnpoolCfg.Bind("Stage 4", "Stadia Jungle", true, "Enable spawnpool changes on this stage.").Value;
+            SirensCall.enabled = SpawnpoolCfg.Bind("Stage 4", "Sirens Call", true, "Enable spawnpool changes on this stage.").Value;
 
             SkyMeadow.enabled = SpawnpoolCfg.Bind("Stage 5", "Sky Meadow", true, "Enable spawnpool changes on this stage.").Value;
         }
