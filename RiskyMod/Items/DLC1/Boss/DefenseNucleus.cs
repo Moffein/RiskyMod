@@ -97,6 +97,7 @@ namespace RiskyMod.Items.DLC1.Boss
                                                     {
                                                         allyInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
                                                         allyInv.GiveItem(Allies.AllyItems.AllyScalingItem);
+                                                        allyInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
                                                     }
 
                                                     allyInv.GiveItem(RoR2Content.Items.BoostDamage, 10 * stackCount);
