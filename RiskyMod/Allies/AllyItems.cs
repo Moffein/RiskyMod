@@ -53,7 +53,7 @@ namespace RiskyMod.Allies
             if (inventory.GetItemCount(AllyItems.AllyResistAoEItem) > 0 && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ResistantToAOE)) self.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
         }
 
-
+        //Effect is a part of AllyMarkerItem's delegate
         private static void BuildAllyAllowVoidDeathItem()
         {
             if (AllyItems.AllyAllowVoidDeathItem) return;
@@ -78,6 +78,7 @@ namespace RiskyMod.Allies
             ItemDisplayRule[] idr = new ItemDisplayRule[0];
             ItemAPI.Add(new CustomItem(AllyAllowVoidDeathItem, idr));
         }
+
         private static void BuildAllyRegenItem()
         {
             if (AllyItems.AllyRegenItem) return;

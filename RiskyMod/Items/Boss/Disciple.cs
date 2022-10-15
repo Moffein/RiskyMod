@@ -21,7 +21,7 @@ namespace RiskyMod.Items.Boss
 					damageColorIndex = DamageColorIndex.Item,
 					scale = 1f,
 					effectType = DevilOrb.EffectType.Wisp,
-					procCoefficient = 0f
+					procCoefficient = 0.5f
 				};
 				if (devilOrb.target = devilOrb.PickNextTarget(devilOrb.origin, RoR2.Items.SprintWispBodyBehavior.searchRadius))
 				{
