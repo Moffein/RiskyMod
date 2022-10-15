@@ -106,6 +106,7 @@ namespace RiskyMod.Allies
 
             new StricterLeashing();
             TweakDrones();
+            new CheaperRepairs();
         }
 
         private static void ModifyDroneParts()

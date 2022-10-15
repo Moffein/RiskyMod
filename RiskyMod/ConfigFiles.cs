@@ -181,6 +181,7 @@ namespace RiskyMod
             StricterLeashing.enabled = GeneralCfg.Bind(allyString, "Stricter Leashing", true, "Reduces the minimum distance required for Allies to teleport to you.").Value;
             AlliesCore.beetleGlandDontRetaliate = GeneralCfg.Bind(allyString, "Queens Gland Guards Dont Retaliate", true, "Queens Gland Guards will not fight back if hurt by their owners.").Value;
             MegaDrone.allowRepair = GeneralCfg.Bind(allyString, "TC280 - Enable Repairs", true, "TC280s can be repaired like other drones after being destroyed.").Value;
+            CheaperRepairs.enabled = GeneralCfg.Bind(allyString, "Cheaper Drone Repairs", true, "Repairing drones is cheaper.").Value;
 
             //Interactables
             ShrineCombatItems.enabled = GeneralCfg.Bind(interactString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
