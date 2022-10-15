@@ -30,6 +30,9 @@ namespace RiskyMod.Items.Boss
                         self.inventory.GiveItem(RoR2Content.Items.BoostHp, 10); //Increase initial stack health
                         self.inventory.GiveItem(RoR2Content.Items.AdaptiveArmor);
 
+                        self.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
+                        self.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
+
                         //Debug.Log("Uses Ambient Level: " + (self.inventory.GetItemCount(RoR2Content.Items.UseAmbientLevel) > 0)); //This DOES use ambient level
                     }
                 }

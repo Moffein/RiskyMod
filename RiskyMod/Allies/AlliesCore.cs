@@ -122,6 +122,7 @@ namespace RiskyMod.Allies
             new GunnerDrone();
             new HealDrone();
             new DroneCommander();
+            new EmergencyDrone();
         }
 
         public static void NormalizeDroneDamage(GameObject bodyObject)

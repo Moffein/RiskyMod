@@ -20,7 +20,7 @@ namespace RiskyMod.Allies.DroneChanges
 
             CharacterBody body = AllyPrefabs.IncineratorDrone.GetComponent<CharacterBody>();
             body.baseMaxHealth = 340f;
-            body.levelMaxHealth = body.baseMaxHealth * 0.3f;    //Gets Overwritten by AllyScaling.cs, need to tidy up code some more later.
+            body.levelMaxHealth = body.baseMaxHealth * 0.3f;
             body.baseArmor = 20f;
 
             body.baseRegen = body.baseMaxHealth / 20f;
