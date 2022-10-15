@@ -1,6 +1,8 @@
 ﻿using EntityStates.Drone.DroneWeapon;
+using RoR2.Projectile;
 using MonoMod.Cil;
 using R2API;
+using RiskyMod.Allies.DroneBehaviors;
 using RoR2;
 using RoR2.CharacterAI;
 using System;
@@ -53,7 +55,8 @@ namespace RiskyMod.Allies.DroneChanges
 			megaDroneBody.levelMaxShield = megaDroneBody.baseMaxShield * 0.3f;
 
 			UpgradeMegaTurret();
-			AddUtilitySkill();
+			ModifyRockets();
+			AddPanicShield();
 		}
 
 		private void UpgradeMegaTurret()
@@ -81,6 +84,7 @@ namespace RiskyMod.Allies.DroneChanges
 						bulletAttack.radius = 0.5f;
 						bulletAttack.smartCollision = true;
 						bulletAttack.AddModdedDamageType(MegaDrone.MegaTurretExplosion);
+						bulletAttack.maxDistance = 1000f;
 						return bulletAttack;
 					});
 				}
@@ -119,9 +123,28 @@ namespace RiskyMod.Allies.DroneChanges
 			}
         }
 
-		private void AddUtilitySkill()
+		private void ModifyRockets()
         {
+			GameObject rocketPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/PaladinRocket.prefab").WaitForCompletion().InstantiateClone("RiskyModMegaDroneRocketProjectile", true);
+			Content.Content.projectilePrefabs.Add(rocketPrefab);
 
+			ProjectileImpactExplosion pie = rocketPrefab.GetComponent<ProjectileImpactExplosion>();
+			pie.falloffModel = BlastAttack.FalloffModel.None;
+			//pie.blastRadius = 12f;//Vanilla 8
+
+			SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireTwinRocket", "projectilePrefab", rocketPrefab);
         }
+
+		private void AddPanicShield()
+        {
+			MegaDronePanicShield.shockEffectPrefab = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("prefabs/effects/lightningstakenova"), "RiskyModMegaDronePanicShieldEffect", false);
+
+			EffectComponent ec = MegaDronePanicShield.shockEffectPrefab.GetComponent<EffectComponent>();
+			ec.soundName = "Play_item_proc_deathMark";
+
+			Content.Content.effectDefs.Add(new EffectDef(MegaDronePanicShield.shockEffectPrefab));
+
+			AllyPrefabs.MegaDrone.AddComponent<MegaDronePanicShield>();
+		}
 	}
 }
