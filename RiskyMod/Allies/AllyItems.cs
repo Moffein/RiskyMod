@@ -190,6 +190,11 @@ namespace RiskyMod.Allies
                 float levelFactor = sender.level - 1f;
                 args.baseDamageAdd += 0.1f * levelFactor * sender.baseDamage;
                 args.baseHealthAdd -= 0.1f * levelFactor * sender.baseMaxHealth;
+
+                if (sender.levelMaxShield == sender.baseMaxShield * 0.3f)
+                {
+                    args.baseShieldAdd -= 0.1f * levelFactor * sender.baseMaxShield;
+                }
             }
         }
     }
