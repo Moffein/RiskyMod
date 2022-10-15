@@ -51,9 +51,9 @@ namespace RiskyMod.Items.Boss
                     CharacterMaster minionMaster = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
                     if (minionMaster && minionMaster.teamIndex == TeamIndex.Player && minionMaster.inventory)
                     {
-                        minionMaster.inventory.GiveItem(Allies.AlliesCore.AllyMarkerItem);
-                        minionMaster.inventory.GiveItem(Allies.AlliesCore.AllyScalingItem);
-                        minionMaster.inventory.GiveItem(Allies.AlliesCore.AllyRegenItem, 40);
+                        minionMaster.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
+                        minionMaster.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
+                        minionMaster.inventory.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
                     }
                 }
             };

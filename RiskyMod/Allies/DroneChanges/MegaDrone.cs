@@ -27,9 +27,9 @@ namespace RiskyMod.Allies.DroneChanges
 
 			GameObject megaDroneBrokenObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/MegaDroneBroken.prefab").WaitForCompletion();
 			PurchaseInteraction pi = megaDroneBrokenObject.GetComponent<PurchaseInteraction>();
-			pi.cost = 300;	//Vanilla is 350
+			pi.cost = 300;  //Vanilla is 350
 
-			GameObject megaDroneBodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/MegaDroneBody");
+			GameObject megaDroneBodyObject = AllyPrefabs.MegaDrone;
 			if (allowRepair)
             {
 				CharacterDeathBehavior cdb = megaDroneBodyObject.GetComponent<CharacterDeathBehavior>();
@@ -42,6 +42,8 @@ namespace RiskyMod.Allies.DroneChanges
 			megaDroneBody.baseArmor = 20f;
 			megaDroneBody.baseRegen = megaDroneBody.baseMaxHealth / 30f;
 			megaDroneBody.levelRegen = megaDroneBody.baseRegen * 0.2f;
+			megaDroneBody.baseMaxShield = megaDroneBody.baseMaxHealth * 0.08f;
+			megaDroneBody.levelMaxShield = megaDroneBody.baseMaxShield * 0.3f;
 		}
 	}
 }

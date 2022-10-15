@@ -23,7 +23,7 @@ namespace RiskyMod.Allies
             if (!self.body.isPlayerControlled
                 && attackerBody.bodyIndex == MushrumBodyIndex
                 && (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player)
-                && ((self.body.inventory && self.body.inventory.GetItemCount(AlliesCore.AllyMarkerItem) > 0) || AlliesCore.IsAlly(self.body.bodyIndex)))
+                && (self.body.inventory && self.body.inventory.GetItemCount(AllyItems.AllyMarkerItem) > 0) )
             {
                 damageInfo.procCoefficient *= 0.25f;
                 damageInfo.damage *= 0.25f;

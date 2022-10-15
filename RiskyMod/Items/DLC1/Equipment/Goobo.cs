@@ -38,9 +38,9 @@ namespace RiskyMod.Items.DLC1.Equipment
                         spawnCard.GiveItem(RoR2Content.Items.UseAmbientLevel);
                         if (ownerBody.teamComponent && ownerBody.teamComponent.teamIndex == TeamIndex.Player)
                         {
-                            spawnCard.GiveItem(Allies.AlliesCore.AllyMarkerItem);
-                            spawnCard.GiveItem(Allies.AlliesCore.AllyScalingItem);
-                            spawnCard.GiveItem(Allies.AlliesCore.AllyRegenItem, 40);
+                            spawnCard.GiveItem(Allies.AllyItems.AllyMarkerItem);
+                            spawnCard.GiveItem(Allies.AllyItems.AllyScalingItem);
+                            spawnCard.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
                         }
                         return spawnCard;
                     });

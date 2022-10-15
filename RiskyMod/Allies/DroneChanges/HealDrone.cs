@@ -11,7 +11,7 @@ namespace RiskyMod.Allies.DroneChanges
         public HealDrone()
         {
 
-            GameObject healDroneObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/drone2body");
+            GameObject healDroneObject = AllyPrefabs.HealDrone;
 
             //Gets run before scaling changes
             CharacterBody healDroneBody = healDroneObject.GetComponent<CharacterBody>();

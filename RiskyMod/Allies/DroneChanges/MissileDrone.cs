@@ -9,8 +9,13 @@ namespace RiskyMod.Allies.DroneChanges
     {
         public MissileDrone()
         {
-            GameObject missileDroneObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/missiledronebody");
+            GameObject missileDroneObject = AllyPrefabs.MissileDrone;
             missileDroneObject.AddComponent<AutoMissileBehavior>();
+
+            CharacterBody cb = missileDroneObject.GetComponent<CharacterBody>();
+            cb.baseMaxHealth = 250f;
+            cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
+
             ModifyAI();
         }
 

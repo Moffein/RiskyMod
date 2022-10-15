@@ -95,8 +95,8 @@ namespace RiskyMod.Items.DLC1.Boss
 
                                                     if (ownerBody.master.teamIndex == TeamIndex.Player)
                                                     {
-                                                        allyInv.GiveItem(Allies.AlliesCore.AllyMarkerItem);
-                                                        allyInv.GiveItem(Allies.AlliesCore.AllyScalingItem);
+                                                        allyInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
+                                                        allyInv.GiveItem(Allies.AllyItems.AllyScalingItem);
                                                     }
 
                                                     allyInv.GiveItem(RoR2Content.Items.BoostDamage, 10 * stackCount);
@@ -151,8 +151,8 @@ namespace RiskyMod.Items.DLC1.Boss
                             if (allyInv)
                             {
                                 if (allyInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) allyInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
-                                allyInv.GiveItem(Allies.AlliesCore.AllyMarkerItem);
-                                allyInv.GiveItem(Allies.AlliesCore.AllyScalingItem);
+                                allyInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
+                                allyInv.GiveItem(Allies.AllyItems.AllyScalingItem);
 
                                 if (removeAllyScaling)
                                 {

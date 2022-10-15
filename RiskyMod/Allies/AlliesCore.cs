@@ -11,74 +11,20 @@ using R2API;
 
 namespace RiskyMod.Allies
 {
+
     public class AlliesCore
     {
         public static bool enabled = true;
         public static bool nerfDroneParts = true;
         public static bool dronePartsIgnoresAllyCap = true;
         public static bool beetleGlandDontRetaliate = true;
-
-        public delegate void ModifyAllies(List<AllyInfo> allyList);
-        public static ModifyAllies ModifyAlliesActions; //Runs after BodyCatalog init
-
-        public static ItemDef AllyRegenItem;
-        public static ItemDef AllyMarkerItem;
-        public static ItemDef AllyScalingItem;
-        public static ItemDef AllyAllowVoidDeathItem;
-        public static ItemDef AllyResistAoEItem;
-
-        public static List<AllyInfo> AllyList = new List<AllyInfo>();
-
-        public static List<string> AllyBodyNames = new List<string>
-        {
-            "BackupDroneBody",
-            "Drone1Body",
-            "Drone2Body",
-            "MissileDroneBody",
-            "FlameDroneBody",
-            "EquipmentDroneBody",
-            "EmergencyDroneBody",
-            "MegaDroneBody",
-            "DroneCommanderBody",
-
-            //"BeetleGuardAllyBody",    //Converted to Ally Items
-            //"RoboBallGreenBuddyBody", //Converted to Ally Items
-            //"RoboBallRedBuddyBody",   //Converted to Ally Items
-            "Turret1Body",
-            //"SquidTurretBody",    //Converted to Ally Items
-
-            //"MinorConstructAllyBody"  //Converted to Ally Items
-        };
-
-        private void TweakDrones()
-        {
-            new GunnerTurret();
-            new MegaDrone();
-            new IncineratorDrone();
-            new MissileDrone();
-            new GunnerDrone();
-            new HealDrone();
-        }
-
-        public static void NormalizeDroneDamage(GameObject bodyObject)
-        {
-            if (bodyObject)
-            {
-                CharacterBody cb = bodyObject.GetComponent<CharacterBody>();
-                if (cb)
-                {
-                    cb.baseDamage = 12f;
-                    cb.levelDamage = cb.baseDamage * 0.2f;
-                }
-            }
-        }
+        public static bool normalizeDroneDamage = true;
 
         public AlliesCore()
         {
-            BuildAllyItems();
+            AllyItems.Init();
 
             if (!enabled) return;
-            BuildAllyBodies();
             if (nerfDroneParts)
             {
                 Items.ItemsCore.ModifyItemDefActions += ModifyDroneParts;
@@ -123,7 +69,7 @@ namespace RiskyMod.Allies
                 };
             }
 
-            if (AllyScaling.normalizeDroneDamage)
+            if (AlliesCore.normalizeDroneDamage)
             {
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireTurret", "damageCoefficient", "0.25");   //Shared with Gunner Drones, but those use a dedicated component to handle attacking now
 
@@ -134,26 +80,30 @@ namespace RiskyMod.Allies
 
                 //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireMissileBarrage", "damageCoefficient", "1.7");   //Damage 14 -> 12, coef 1 -> 1.166666667
 
-                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/drone1body"));
-                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/drone2body"));
+                NormalizeDroneDamage(AllyPrefabs.GunnerDrone);
+                NormalizeDroneDamage(AllyPrefabs.HealDrone);
                 NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/backupdronebody"));
-                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/missiledronebody"));
-                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/equipmentdronebody"));
-                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/emergencydronebody"));
-                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/flamedronebody"));
-                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/megadronebody"));
+                NormalizeDroneDamage(AllyPrefabs.MissileDrone);
+                NormalizeDroneDamage(AllyPrefabs.EquipmentDrone);
+                NormalizeDroneDamage(AllyPrefabs.EmergencyDrone);
+                NormalizeDroneDamage(AllyPrefabs.IncineratorDrone);
+                NormalizeDroneDamage(AllyPrefabs.MegaDrone);
                 NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/dronecommanderbody"));
-                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/turret1body"));
+                NormalizeDroneDamage(AllyPrefabs.GunnerTurret);
                 NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/RoboBallGreenBuddyBody"));
                 NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/RoboBallRedBuddyBody"));
             }
+
             new AllyScaling();
+
             new DroneTargeting();
             new ModifyBulletAttacks();
+
             new SuperAttackResist();
             new MushrumResist();
             new EliteDamageModifiers();
             new NoVoidDamage();
+
             new StricterLeashing();
             TweakDrones();
         }
@@ -163,325 +113,28 @@ namespace RiskyMod.Allies
             HG.ArrayUtils.ArrayAppend(ref Items.ItemsCore.changedItemDescs, DLC1Content.Items.DroneWeapons);
         }
 
-        private void BuildAllyBodies()
+        private void TweakDrones()
         {
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-
-                foreach (string str in AllyBodyNames)
-                {
-                    AddBodyInternal(str);
-                }
-
-                if (ModifyAlliesActions != null) ModifyAlliesActions.Invoke(AllyList);
-            };
+            new GunnerTurret();
+            new MegaDrone();
+            new IncineratorDrone();
+            new MissileDrone();
+            new GunnerDrone();
+            new HealDrone();
+            new DroneCommander();
         }
 
-        public static bool AddBody(string bodyname, AllyTag tags)
+        public static void NormalizeDroneDamage(GameObject bodyObject)
         {
-            bool addedSuccessfully = false;
-            BodyIndex index = BodyCatalog.FindBodyIndex(bodyname);
-            if (index != BodyIndex.None)
+            if (bodyObject)
             {
-                //Don't allow duplicates
-                foreach (AllyInfo a in AllyList)
+                CharacterBody cb = bodyObject.GetComponent<CharacterBody>();
+                if (cb)
                 {
-                    if (a.bodyIndex == index)
-                    {
-                        return false;
-                    }
-                }
-
-                AllyInfo ally = new AllyInfo
-                {
-                    bodyName = bodyname,
-                    bodyIndex = index,
-                    tags = tags
-                };
-                AllyList.Add(ally);
-                addedSuccessfully = true;
-            }
-
-            return addedSuccessfully;
-        }
-
-        //This one has preset info about each ally
-        private bool AddBodyInternal(string bodyname)
-        {
-            bool addedSuccessfully = false;
-            BodyIndex index = BodyCatalog.FindBodyIndex(bodyname);
-            if (index != BodyIndex.None)
-            {
-                //Don't allow duplicates
-                foreach (AllyInfo a in AllyList)
-                {
-                    if (a.bodyIndex == index)
-                    {
-                        return false;
-                    }
-                }
-
-                AllyInfo ally = new AllyInfo
-                {
-                    bodyName = bodyname,
-                    bodyIndex = index
-                };
-                switch (bodyname)
-                {
-                    case "BackupDroneBody":
-                    case "Drone1Body":
-                    case "Drone2Body":
-                    case "MissileDroneBody":
-                    case "EquipmentDroneBody":
-                    case "EmergencyDroneBody":
-                        ally.tags |= AllyTag.Drone;
-                        break;
-                    case "FlameDroneBody":
-                    case "MegaDroneBody":
-                        ally.tags |= AllyTag.Drone | AllyTag.UseShield | AllyTag.DontModifyRegen;
-                        break;
-                    case "DroneCommanderBody":
-                        ally.tags |= AllyTag.Drone | AllyTag.Item;
-                        break;
-                    case "Turret1Body":
-                        ally.tags |= AllyTag.Drone | AllyTag.Turret | AllyTag.UseShield;
-                        break;
-                    default:
-                        break;
-                }
-                AllyList.Add(ally);
-                addedSuccessfully = true;
-            }
-
-            return addedSuccessfully;
-        }
-
-        public static bool IsAlly(BodyIndex bodyIndex)
-        {
-            bool flag = false;
-            foreach (AllyInfo ally in AlliesCore.AllyList)
-            {
-                if (ally.bodyIndex == bodyIndex)
-                {
-                    return true;
+                    cb.baseDamage = 12f;
+                    cb.levelDamage = cb.baseDamage * 0.2f;
                 }
             }
-            return flag;
         }
-
-        public static bool IsTurretAlly(BodyIndex bodyIndex)
-        {
-            bool flag = false;
-            foreach (AllyInfo ally in AlliesCore.AllyList)
-            {
-                if (ally.bodyIndex == bodyIndex)
-                {
-                    if ((ally.tags & AllyTag.Turret) == AllyTag.Turret) flag = true;
-                    break;
-                }
-            }
-            return flag;
-        }
-
-        private void BuildAllyItems()
-        {
-            BuildAllyItem();
-            BuildAllyScalingItem();
-            BuildAllyAllowVoidDeathItem();
-            BuildAllyRegenItem();
-            BuildAllyResistAoEItem();
-        }
-
-        private void BuildAllyResistAoEItem()
-        {
-            if (AlliesCore.AllyResistAoEItem) return;
-            AllyResistAoEItem = ScriptableObject.CreateInstance<ItemDef>();
-            AllyResistAoEItem.canRemove = false;
-            AllyResistAoEItem.name = "RiskyModAllyResistAoEItem";
-            AllyResistAoEItem.deprecatedTier = ItemTier.NoTier;
-            AllyResistAoEItem.descriptionToken = "Gain +300 armor against AoE attacks.";
-            AllyResistAoEItem.nameToken = "NPC Ally AoE Resist";
-            AllyResistAoEItem.pickupToken = "Gain +300 armor against AoE attacks.";
-            AllyResistAoEItem.hidden = true;
-            AllyResistAoEItem.pickupIconSprite = null;
-            AllyResistAoEItem.tags = new[]
-            {
-                ItemTag.WorldUnique,
-                ItemTag.BrotherBlacklist,
-                ItemTag.CannotSteal,
-                ItemTag.CannotDuplicate,
-                ItemTag.AIBlacklist,
-                ItemTag.CannotCopy
-            };
-            ItemDisplayRule[] idr = new ItemDisplayRule[0];
-            ItemAPI.Add(new CustomItem(AllyResistAoEItem, idr));
-
-            if (AlliesCore.enabled) SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += HandleAllyResistAoEItem;
-        }
-
-        private static void HandleAllyResistAoEItem(CharacterBody self, Inventory inventory)
-        {
-            if (inventory.GetItemCount(AlliesCore.AllyResistAoEItem) > 0 && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ResistantToAOE)) self.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
-        }
-
-
-        private void BuildAllyAllowVoidDeathItem()
-        {
-            if (AlliesCore.AllyAllowVoidDeathItem) return;
-            AllyAllowVoidDeathItem = ScriptableObject.CreateInstance<ItemDef>();
-            AllyAllowVoidDeathItem.canRemove = false;
-            AllyAllowVoidDeathItem.name = "RiskyModAllyAllowVoidDeathItem";
-            AllyAllowVoidDeathItem.deprecatedTier = ItemTier.NoTier;
-            AllyAllowVoidDeathItem.descriptionToken = "Allows this player-allied NPC to die to Void implosions.";
-            AllyAllowVoidDeathItem.nameToken = "NPC Ally Allow Void Death";
-            AllyAllowVoidDeathItem.pickupToken = "Allows this player-allied NPC to die to Void implosions.";
-            AllyAllowVoidDeathItem.hidden = true;
-            AllyAllowVoidDeathItem.pickupIconSprite = null;
-            AllyAllowVoidDeathItem.tags = new[]
-            {
-                ItemTag.WorldUnique,
-                ItemTag.BrotherBlacklist,
-                ItemTag.CannotSteal,
-                ItemTag.CannotDuplicate,
-                ItemTag.AIBlacklist,
-                ItemTag.CannotCopy
-            };
-            ItemDisplayRule[] idr = new ItemDisplayRule[0];
-            ItemAPI.Add(new CustomItem(AllyAllowVoidDeathItem, idr));
-        }
-        private void BuildAllyRegenItem()
-        {
-            if (AlliesCore.AllyRegenItem) return;
-            AllyRegenItem = ScriptableObject.CreateInstance<ItemDef>();
-            AllyRegenItem.canRemove = false;
-            AllyRegenItem.name = "RiskyModAllyRegenItem";
-            AllyRegenItem.deprecatedTier = ItemTier.NoTier;
-            AllyRegenItem.descriptionToken = "Regenerate to full HP in 1 (+1 per stack) second.";
-            AllyRegenItem.nameToken = "NPC Ally Allow Void Death";
-            AllyRegenItem.pickupToken = "Regenerate to full HP in 1 (+1 per stack) second.";
-            AllyRegenItem.hidden = true;
-            AllyRegenItem.pickupIconSprite = null;
-            AllyRegenItem.tags = new[]
-            {
-                ItemTag.WorldUnique,
-                ItemTag.BrotherBlacklist,
-                ItemTag.CannotSteal,
-                ItemTag.CannotDuplicate,
-                ItemTag.AIBlacklist,
-                ItemTag.CannotCopy
-            };
-            ItemDisplayRule[] idr = new ItemDisplayRule[0];
-            ItemAPI.Add(new CustomItem(AllyRegenItem, idr));
-
-            if (AlliesCore.enabled) SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += AllyRegenItemDelegate;
-        }
-
-        private static void AllyRegenItemDelegate(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
-        {
-            int itemCount = inventory.GetItemCount(AlliesCore.AllyRegenItem);
-            if (itemCount > 0)
-            {
-                float levelFactor = sender.level - 1f;
-
-                float targetRegen = (sender.baseMaxHealth + levelFactor * sender.levelMaxHealth) / itemCount;
-                float currentRegen = sender.baseRegen + levelFactor * sender.levelRegen;
-                args.baseRegenAdd += targetRegen - currentRegen;
-            }
-        }
-
-        private void BuildAllyItem()
-        {
-            if (AlliesCore.AllyMarkerItem) return;
-
-            AllyMarkerItem = ScriptableObject.CreateInstance<ItemDef>();
-            AllyMarkerItem.canRemove = false;
-            AllyMarkerItem.name = "RiskyModAllyItem";
-            AllyMarkerItem.deprecatedTier = ItemTier.NoTier;
-            AllyMarkerItem.descriptionToken = "Gain the bonuses given to player-allied NPCs.";
-            AllyMarkerItem.nameToken = "NPC Ally Marker";
-            AllyMarkerItem.pickupToken = "Gain the bonuses given to player-allied NPCs.";
-            AllyMarkerItem.hidden = true;
-            AllyMarkerItem.pickupIconSprite = null;
-            AllyMarkerItem.tags = new[]
-            {
-                ItemTag.WorldUnique,
-                ItemTag.BrotherBlacklist,
-                ItemTag.CannotSteal,
-                ItemTag.CannotDuplicate,
-                ItemTag.AIBlacklist,
-                ItemTag.CannotCopy
-            };
-            ItemDisplayRule[] idr = new ItemDisplayRule[0];
-            ItemAPI.Add(new CustomItem(AllyMarkerItem, idr));
-
-            if (AllyScaling.noOverheat || AllyScaling.noVoidDeath) SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += AllyMarkerItemDelegate;
-        }
-
-        private static void AllyMarkerItemDelegate (CharacterBody self, Inventory inventory)
-        {
-            if (inventory.GetItemCount(AlliesCore.AllyMarkerItem) > 0)
-            {
-                if (AllyScaling.noOverheat && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.OverheatImmune)) self.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
-                if (AllyScaling.noVoidDeath && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ImmuneToVoidDeath) && inventory.GetItemCount(AlliesCore.AllyAllowVoidDeathItem) <= 0) self.bodyFlags |= CharacterBody.BodyFlags.ImmuneToVoidDeath;
-            }
-        }
-
-        private void BuildAllyScalingItem()
-        {
-            if (AlliesCore.AllyScalingItem) return;
-
-            AllyScalingItem = ScriptableObject.CreateInstance<ItemDef>();
-            AllyScalingItem.canRemove = false;
-            AllyScalingItem.name = "RiskyModAllyScalingItem";
-            AllyScalingItem.deprecatedTier = ItemTier.NoTier;
-            AllyScalingItem.descriptionToken = "Swap HP and Damage scaling.";
-            AllyScalingItem.nameToken = "NPC Ally Scaling";
-            AllyScalingItem.pickupToken = "Swap HP and Damage scaling.";
-            AllyScalingItem.hidden = true;
-            AllyScalingItem.pickupIconSprite = null;
-            AllyScalingItem.tags = new[]
-            {
-                ItemTag.WorldUnique,
-                ItemTag.BrotherBlacklist,
-                ItemTag.CannotSteal,
-                ItemTag.CannotDuplicate,
-                ItemTag.AIBlacklist,
-                ItemTag.CannotCopy
-            };
-            ItemDisplayRule[] idr = new ItemDisplayRule[0];
-            ItemAPI.Add(new CustomItem(AllyScalingItem, idr));
-
-            if (AlliesCore.enabled) SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += AllyScalingItemDelegate;
-        }
-
-        private static void AllyScalingItemDelegate(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
-        {
-            if (inventory.GetItemCount(AlliesCore.AllyScalingItem) > 0)
-            {
-                float levelFactor = sender.level - 1f;
-                args.baseDamageAdd += 0.1f * levelFactor * sender.baseDamage;
-                args.baseHealthAdd -= 0.1f * levelFactor * sender.baseMaxHealth;
-            }
-        }
-    }
-
-    public class AllyInfo
-    {
-        public BodyIndex bodyIndex = BodyIndex.None;
-        public string bodyName;
-        public AllyTag tags = AllyTag.None;
-    }
-
-    [Flags]
-    public enum AllyTag : uint
-    {
-        None = 0u,
-        Drone = 1u,  //Benefits from Droneman
-        Item = 2u,   //Is an item effect
-        Turret = 4u,  //Resistance to AOE/Proc
-        DontModifyScaling = 8u,
-        UseShield = 16u,
-        DontModifyRegen = 32u
     }
 }

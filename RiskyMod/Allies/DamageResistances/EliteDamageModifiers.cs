@@ -19,7 +19,7 @@ namespace RiskyMod.Allies
                 && attackerBody.isElite
                 && (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player)
                 && !(attackerBody.teamComponent && attackerBody.teamComponent.teamIndex == TeamIndex.Player)
-                && ((self.body.inventory && self.body.inventory.GetItemCount(AlliesCore.AllyMarkerItem) > 0) ||AlliesCore.IsAlly(self.body.bodyIndex)))
+                && (self.body.inventory && self.body.inventory.GetItemCount(AllyItems.AllyMarkerItem) > 0))
             {
                 damageInfo.damage *= 0.6666666666f;
             }

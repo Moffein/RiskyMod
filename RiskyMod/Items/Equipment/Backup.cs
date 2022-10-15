@@ -47,7 +47,8 @@ namespace RiskyMod.Items.Equipment
                                 position = position,
                                 rotation = rotation,
                                 summonerBodyObject = self.gameObject,
-                                ignoreTeamMemberLimit = ignoreTeamLimit
+                                ignoreTeamMemberLimit = ignoreTeamLimit,
+                                useAmbientLevel = true
                             }.Perform();
                             if (characterMaster)
                             {
@@ -57,6 +58,13 @@ namespace RiskyMod.Items.Equipment
                                     MasterSuicideOnTimer msot = characterMaster.gameObject.AddComponent<MasterSuicideOnTimer>();
                                     msot.lifeTimer = num + UnityEngine.Random.Range(0f, 3f);
                                     bt.AddHealthcomponent(cb.healthComponent);
+                                }
+
+                                if (characterMaster.teamIndex == TeamIndex.Player && characterMaster.inventory)
+                                {
+                                    characterMaster.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
+                                    characterMaster.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
+                                    characterMaster.inventory.GiveItem(Allies.AllyItems.AllyRegenItem, 40); //Doesn't matter much since it has a DestroyOnTimer
                                 }
                             }
                         }

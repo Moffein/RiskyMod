@@ -8,68 +8,61 @@ namespace RiskyMod.Allies
 {
     public class AllyScaling
     {
-        public static bool normalizeDroneDamage = true;
 
         public static bool noVoidDeath = true;
         public static bool noOverheat = true;
 
-        public delegate void ChangeAllyScaling(AllyInfo ally, CharacterBody allyBody);  //allyBody is guaranteed to be non-null
-        public static ChangeAllyScaling ChangeAllyScalingActions;
-
         public AllyScaling()
         {
-            AlliesCore.ModifyAlliesActions += ModifyAllies;
-        }
-
-        private void ModifyAllies(List<AllyInfo> allies)
-        {
-            foreach (AllyInfo ally in allies)
+            On.RoR2.SummonMasterBehavior.OpenSummonReturnMaster += (orig, self, activator) =>
             {
-                ChangeScaling(ally);
-            }
-        }
+                CharacterMaster summonResult = orig(self, activator);
+                if (summonResult)
+                {
+                    if (summonResult.teamIndex == TeamIndex.Player && summonResult.inventory)
+                    {
+                        if (AllyPrefabs.IsPurchaseableDrone(self.masterPrefab))
+                        {
+                            summonResult.inventory.GiveItem(AllyItems.AllyMarkerItem);
+                            summonResult.inventory.GiveItem(AllyItems.AllyScalingItem);
 
-        private void ChangeScaling(AllyInfo ally)
-        {
-            GameObject bodyPrefab = BodyCatalog.GetBodyPrefab(ally.bodyIndex);
-            CharacterBody allyBody = null;
-            if (bodyPrefab)
+                            if (self.masterPrefab == AllyPrefabs.IncineratorDrone)
+                            {
+                                summonResult.inventory.GiveItem(AllyItems.AllyRegenItem, 20);
+                            }
+                            else if (self.masterPrefab == AllyPrefabs.MegaDrone)
+                            {
+                                summonResult.inventory.GiveItem(AllyItems.AllyRegenItem, 30);
+                            }
+                            else
+                            {
+                                summonResult.inventory.GiveItem(AllyItems.AllyRegenItem, 40);
+                            }
+
+                            if (self.masterPrefab == AllyPrefabs.GunnerTurret)
+                            {
+                                summonResult.inventory.GiveItem(AllyItems.AllyResistAoEItem);
+                            }
+                        }
+                    }
+                }
+                return summonResult;
+            };
+
+            On.RoR2.DroneWeaponsBehavior.OnMasterSpawned += (orig, self, spawnResult) =>
             {
-                allyBody = bodyPrefab.GetComponent<CharacterBody>();
-            }
-            if (!bodyPrefab || !allyBody) return;
-
-            if (noVoidDeath) allyBody.bodyFlags |= CharacterBody.BodyFlags.ImmuneToVoidDeath;
-            if (noOverheat) allyBody.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
-
-            bool ignoreScaling = (ally.tags & AllyTag.DontModifyScaling) == AllyTag.DontModifyScaling;
-            if (!ignoreScaling)
-            {
-                if ((ally.tags & AllyTag.Turret) == AllyTag.Turret)
+                orig(self, spawnResult);
+                if (spawnResult.spawnedInstance)
                 {
-                    allyBody.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
+                    CharacterMaster cm = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
+                    if (cm && cm.teamIndex == TeamIndex.Player && cm.inventory)
+                    {
+                        cm.inventory.GiveItem(AllyItems.AllyMarkerItem);
+                        cm.inventory.GiveItem(AllyItems.AllyRegenItem, 40);
+                        cm.inventory.GiveItem(AllyItems.AllyScalingItem);
+                    }
                 }
-
-                if ((ally.tags & AllyTag.UseShield) == AllyTag.UseShield)
-                {
-                    allyBody.baseMaxShield += allyBody.baseMaxHealth * 0.08f;
-                }
-
-                //Drones always regen to full in 40s
-                if ((ally.tags & AllyTag.DontModifyRegen) != AllyTag.DontModifyRegen)
-                {
-                    allyBody.baseRegen = allyBody.baseMaxHealth / 40f;
-                    allyBody.levelRegen = allyBody.baseRegen * 0.2f;
-                }
-
-                //Set Level Stats
-                allyBody.levelDamage = allyBody.baseDamage * 0.3f;
-                allyBody.levelMaxHealth = allyBody.baseMaxHealth * 0.2f;
-                allyBody.levelMaxShield = allyBody.baseMaxShield * 0.2f;
-                allyBody.autoCalculateLevelStats = false;
-            }
-
-            if (ChangeAllyScalingActions != null) ChangeAllyScalingActions.Invoke(ally, allyBody);
+            };
         }
     }
 }

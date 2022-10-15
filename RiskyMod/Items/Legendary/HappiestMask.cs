@@ -150,8 +150,8 @@ namespace RiskyMod.Items.Legendary
                     {
                         inventory.GiveItem(RoR2Content.Items.BoostDamage.itemIndex, 46 + 24 * itemCount);
                         inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 30 * itemCount);
-                        inventory.GiveItem(Allies.AlliesCore.AllyMarkerItem);
-                        inventory.GiveItem(Allies.AlliesCore.AllyScalingItem);
+                        inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
+                        inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
                     }
                     else //Handle enemy-spawned ghosts
                     {

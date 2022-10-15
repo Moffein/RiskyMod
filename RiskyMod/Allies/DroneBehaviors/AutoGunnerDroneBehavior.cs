@@ -119,7 +119,7 @@ namespace RiskyMod.Allies.DroneBehaviors
             if (targetHurtBox != default)
             {
                 ChainGunOrb chainGunOrb = new ChainGunOrb(orbEffect);
-                chainGunOrb.damageValue = characterBody.damage * AutoGunnerDroneBehavior.damageCoefficient;
+                chainGunOrb.damageValue = characterBody.damage * AutoGunnerDroneBehavior.damageCoefficient * (AlliesCore.normalizeDroneDamage ? 1f : 1.2f);
                 chainGunOrb.isCrit = characterBody.RollCrit();
                 chainGunOrb.teamIndex = characterBody.teamComponent.teamIndex;
                 chainGunOrb.attacker = base.gameObject;

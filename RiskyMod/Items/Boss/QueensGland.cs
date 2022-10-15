@@ -95,9 +95,9 @@ namespace RiskyMod.Items.Boss
 
 												if (guardInv && cm.teamIndex == TeamIndex.Player)
 												{
-													guardInv.GiveItem(Allies.AlliesCore.AllyMarkerItem);
-													guardInv.GiveItem(Allies.AlliesCore.AllyScalingItem);
-													guardInv.GiveItem(Allies.AlliesCore.AllyRegenItem, 40);
+													guardInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
+													guardInv.GiveItem(Allies.AllyItems.AllyScalingItem);
+													guardInv.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
 												}
 											}
 										}

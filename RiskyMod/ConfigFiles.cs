@@ -170,7 +170,7 @@ namespace RiskyMod
             NoBossRepeat.enabled = GeneralCfg.Bind(scalingString, "No Teleporter Boss Repeat", true, "Lowers the chance of the same teleporter boss being selected within a loop.").Value;
 
             //Allies
-            AllyScaling.normalizeDroneDamage = GeneralCfg.Bind(allyString, "Normalize Drone Damage", true, "Normalize drone damage stats so that they perform the same when using Spare Drone Parts.").Value;
+            AlliesCore.normalizeDroneDamage = GeneralCfg.Bind(allyString, "Normalize Drone Damage", true, "Normalize drone damage stats so that they perform the same when using Spare Drone Parts.").Value;
             AlliesCore.nerfDroneParts = GeneralCfg.Bind(allyString, "Spare Drone Parts Changes", true, "Reduce the damage of Spare Drone Parts.").Value;
             AlliesCore.dronePartsIgnoresAllyCap = GeneralCfg.Bind(allyString, "Spare Drone Parts - Ignore Ally Cap", true, "Col. Droneman ignores the ally cap.").Value;
             AllyScaling.noVoidDeath = GeneralCfg.Bind(allyString, "No Void Death", true, "Allies are immune to Void implosions.").Value;

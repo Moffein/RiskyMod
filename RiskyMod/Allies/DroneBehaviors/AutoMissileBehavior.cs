@@ -107,7 +107,7 @@ namespace RiskyMod.Allies.DroneBehaviors
             {
                 MicroMissileOrb missileOrb = new MicroMissileOrb();
                 missileOrb.origin = aimRay.origin;
-                missileOrb.damageValue = characterBody.damage * damageCoefficient;
+                missileOrb.damageValue = characterBody.damage * damageCoefficient * (AlliesCore.normalizeDroneDamage ? 1f : 0.857142857f);  // 12/14
                 missileOrb.isCrit = characterBody.RollCrit();
                 missileOrb.teamIndex = characterBody.teamComponent.teamIndex;
                 missileOrb.attacker = base.gameObject;

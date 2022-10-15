@@ -26,7 +26,7 @@ namespace RiskyMod.Allies
                         && damageInfo.damageType == (DamageType.BypassArmor | DamageType.BypassBlock)
                         && (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player))
                         {
-                            if ((self.body.inventory && self.body.inventory.GetItemCount(AlliesCore.AllyMarkerItem) > 0) || AlliesCore.IsAlly(self.body.bodyIndex))
+                            if (self.body.inventory && self.body.inventory.GetItemCount(AllyItems.AllyMarkerItem) > 0)
                             {
                                 damageInfo.rejected = true;
                             }

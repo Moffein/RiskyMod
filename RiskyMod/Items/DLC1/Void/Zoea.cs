@@ -50,9 +50,9 @@ namespace RiskyMod.Items.DLC1.Void
                         CharacterMaster cm = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
                         if (cm && cm.teamIndex == TeamIndex.Player)
                         {
-                            allyInv.GiveItem(Allies.AlliesCore.AllyMarkerItem);
-                            allyInv.GiveItem(Allies.AlliesCore.AllyScalingItem);
-                            allyInv.GiveItem(Allies.AlliesCore.AllyAllowVoidDeathItem);
+                            allyInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
+                            allyInv.GiveItem(Allies.AllyItems.AllyScalingItem);
+                            allyInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
                         }
 
                         if (self.body && self.body.inventory)
