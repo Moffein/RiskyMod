@@ -33,8 +33,8 @@ namespace RiskyMod.Allies.DroneChanges
 			if (allowRepair)
             {
 				CharacterDeathBehavior cdb = megaDroneBodyObject.GetComponent<CharacterDeathBehavior>();
-				cdb.deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Drone.DeathState));
-				//cdb.deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.MegaDrone.MegaDroneDeathState));
+				//cdb.deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Drone.DeathState));
+				cdb.deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.MegaDrone.MegaDroneDeathState));
 				Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.MegaDrone.MegaDroneDeathState));
 			}
 
@@ -87,20 +87,29 @@ namespace EntityStates.RiskyMod.MegaDrone
 			base.OnExit();
 			Util.PlaySound(MegaDroneDeathState.initialSoundString, base.gameObject);
 			Transform modelTransform = base.GetModelTransform();
-			if (modelTransform && NetworkServer.active)
+
+			base.gameObject.AddComponent<DestroyOnTimer>().duration = 15f;
+			if (modelTransform)
 			{
-				ChildLocator component = modelTransform.GetComponent<ChildLocator>();
-				if (component)
+				modelTransform.gameObject.AddComponent<DestroyOnTimer>().duration = 15f;
+				if (NetworkServer.active)
 				{
-					component.FindChild("LeftJet").gameObject.SetActive(false);
-					component.FindChild("RightJet").gameObject.SetActive(false);
-					if (MegaDroneDeathState.initialEffect)
+					ChildLocator component = modelTransform.GetComponent<ChildLocator>();
+					if (component)
 					{
-						EffectManager.SpawnEffect(MegaDroneDeathState.initialEffect, new EffectData
+						//component.FindChild("LeftJet").gameObject.SetActive(false);
+						//component.FindChild("RightJet").gameObject.SetActive(false);
+						//modelTransform.gameObject.SetActive(false);
+
+
+						if (MegaDroneDeathState.initialEffect)
 						{
-							origin = base.transform.position,
-							scale = MegaDroneDeathState.initialEffectScale
-						}, true);
+							EffectManager.SpawnEffect(MegaDroneDeathState.initialEffect, new EffectData
+							{
+								origin = base.transform.position,
+								scale = MegaDroneDeathState.initialEffectScale
+							}, true);
+						}
 					}
 				}
 			}
@@ -108,6 +117,7 @@ namespace EntityStates.RiskyMod.MegaDrone
 			//Disable gibs
 			Rigidbody component2 = base.GetComponent<Rigidbody>();
 			RagdollController component3 = modelTransform.GetComponent<RagdollController>();
+
 			if (component3 && component2)
 			{
 				component3.BeginRagdoll(component2.velocity * MegaDroneDeathState.velocityMagnitude);
