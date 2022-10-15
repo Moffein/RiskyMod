@@ -12,28 +12,6 @@ namespace RiskyMod.Allies
         {
             if (!enabled) return;
 
-            //MegaDrone
-            IL.EntityStates.Drone.DroneWeapon.FireMegaTurret.FireBullet += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if (c.TryGotoNext(
-                     x => x.MatchCallvirt<BulletAttack>("Fire")
-                     ))
-                {
-                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
-                    {
-                        bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
-                        bulletAttack.radius = 0.5f;
-                        bulletAttack.smartCollision = true;
-                        return bulletAttack;
-                    });
-                }
-                else
-                {
-                    Debug.LogError("RiskyMod: ModifyBulletAttacks DroneWeapon.FireMegaTurret IL Hook failed");
-                }
-            };
-
             //Gunner Turret
             IL.EntityStates.Drone.DroneWeapon.FireGatling.OnEnter += (il) =>
             {
