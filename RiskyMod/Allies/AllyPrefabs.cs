@@ -16,21 +16,21 @@ namespace RiskyMod.Allies
         public static GameObject MegaDrone = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/megadronebody");
 
         //Probably inefficient
-        public static List<GameObject> PurchaseableDroneList = new List<GameObject> 
+        public static List<GameObject> PurchaseableDroneMasterList = new List<GameObject> 
         {
-            LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/turret1body"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/drone1body"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/drone2body"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/missiledronebody"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/equipmentdronebody"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/emergencydronebody"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/flamedronebody"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/megadronebody")
+            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/turret1master"),
+            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/drone1master"),
+            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/drone2master"),
+            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/missiledronemaster"),
+            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/equipmentdronemaster"),
+            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/emergencydronemaster"),
+            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/flamedronemaster"),
+            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/megadronemaster")
         };
 
         public static bool IsPurchaseableDrone(GameObject bodyPrefab)
         {
-            return PurchaseableDroneList.Contains(bodyPrefab);
+            return PurchaseableDroneMasterList.Contains(bodyPrefab);
         }
     }
 }

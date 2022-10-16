@@ -19,17 +19,14 @@ namespace RiskyMod.Allies
             {
                 if (NetworkServer.active)
                 {
-                    if (!self.body.isPlayerControlled)
-                    {
-                        if (!damageInfo.attacker && !damageInfo.inflictor
+                    if (!damageInfo.attacker && !damageInfo.inflictor
                         && damageInfo.damageColorIndex == DamageColorIndex.Void
                         && damageInfo.damageType == (DamageType.BypassArmor | DamageType.BypassBlock)
                         && (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player))
+                    {
+                        if (self.body.inventory && self.body.inventory.GetItemCount(AllyItems.AllyMarkerItem) > 0)
                         {
-                            if (self.body.inventory && self.body.inventory.GetItemCount(AllyItems.AllyMarkerItem) > 0)
-                            {
-                                damageInfo.rejected = true;
-                            }
+                            damageInfo.rejected = true;
                         }
                     }
                 }

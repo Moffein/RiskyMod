@@ -62,7 +62,7 @@ namespace RiskyMod.Allies
             AllyAllowVoidDeathItem.name = "RiskyModAllyAllowVoidDeathItem";
             AllyAllowVoidDeathItem.deprecatedTier = ItemTier.NoTier;
             AllyAllowVoidDeathItem.descriptionToken = "Allows this player-allied NPC to die to Void implosions.";
-            AllyAllowVoidDeathItem.nameToken = "NPC Ally Allow Void Death";
+            AllyAllowVoidDeathItem.nameToken = "RiskyModAllyAllowVoidDeathItem";
             AllyAllowVoidDeathItem.pickupToken = "Allows this player-allied NPC to die to Void implosions.";
             AllyAllowVoidDeathItem.hidden = true;
             AllyAllowVoidDeathItem.pickupIconSprite = null;
@@ -87,7 +87,7 @@ namespace RiskyMod.Allies
             AllyRegenItem.name = "RiskyModAllyRegenItem";
             AllyRegenItem.deprecatedTier = ItemTier.NoTier;
             AllyRegenItem.descriptionToken = "Regenerate to full HP in 1 (+1 per stack) second.";
-            AllyRegenItem.nameToken = "NPC Ally Allow Void Death";
+            AllyRegenItem.nameToken = "RiskyModAllyRegenItem";
             AllyRegenItem.pickupToken = "Regenerate to full HP in 1 (+1 per stack) second.";
             AllyRegenItem.hidden = true;
             AllyRegenItem.pickupIconSprite = null;
@@ -125,10 +125,10 @@ namespace RiskyMod.Allies
 
             AllyMarkerItem = ScriptableObject.CreateInstance<ItemDef>();
             AllyMarkerItem.canRemove = false;
-            AllyMarkerItem.name = "RiskyModAllyItem";
+            AllyMarkerItem.name = "RiskyModAllyMarkerItem";
             AllyMarkerItem.deprecatedTier = ItemTier.NoTier;
             AllyMarkerItem.descriptionToken = "Gain the bonuses given to player-allied NPCs.";
-            AllyMarkerItem.nameToken = "NPC Ally Marker";
+            AllyMarkerItem.nameToken = "RiskyModAllyMarkerItem";
             AllyMarkerItem.pickupToken = "Gain the bonuses given to player-allied NPCs.";
             AllyMarkerItem.hidden = true;
             AllyMarkerItem.pickupIconSprite = null;
@@ -165,7 +165,7 @@ namespace RiskyMod.Allies
             AllyScalingItem.name = "RiskyModAllyScalingItem";
             AllyScalingItem.deprecatedTier = ItemTier.NoTier;
             AllyScalingItem.descriptionToken = "Swap HP and Damage scaling.";
-            AllyScalingItem.nameToken = "NPC Ally Scaling";
+            AllyScalingItem.nameToken = "RiskyModAllyScalingItem";
             AllyScalingItem.pickupToken = "Swap HP and Damage scaling.";
             AllyScalingItem.hidden = true;
             AllyScalingItem.pickupIconSprite = null;
