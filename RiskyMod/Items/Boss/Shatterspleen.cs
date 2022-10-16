@@ -106,7 +106,7 @@ namespace RiskyMod.Items.Boss
         {
             if (inventory.GetItemCount(RoR2Content.Items.BleedOnHitAndExplode) > 0)
             {
-                sender.bleedChance += 5f;
+                sender.bleedChance += 10f;
             }
         }
     }
