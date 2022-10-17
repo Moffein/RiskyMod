@@ -14,7 +14,7 @@ namespace RiskyMod.SharedHooks
     public class TakeDamage
     {
         public delegate void OnPercentHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost);
-        public static OnPercentHpLost HandleOnPercentHpLostActions;
+        public static OnPercentHpLost OnPercentHpLostActions;
 
         public delegate void OnHpLostAttacker(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory inventory, float hpLost);
         public static OnHpLostAttacker OnHpLostAttackerActions;
@@ -80,7 +80,7 @@ namespace RiskyMod.SharedHooks
                                 if (OnHpLostAttackerActions != null)  OnHpLostAttackerActions.Invoke(damageInfo, self, attackerBody, inventory, totalHPLost);
                             }
                             float percentHPLost = totalHPLost / self.fullCombinedHealth * 100f;
-                            if (HandleOnPercentHpLostActions != null) HandleOnPercentHpLostActions.Invoke(damageInfo, self, inventory, percentHPLost);
+                            if (OnPercentHpLostActions != null) OnPercentHpLostActions.Invoke(damageInfo, self, inventory, percentHPLost);
                         }
                     }
                     if (TakeDamageEndActions != null) TakeDamageEndActions.Invoke(damageInfo, self);

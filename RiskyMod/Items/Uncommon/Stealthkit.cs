@@ -21,7 +21,7 @@ namespace RiskyMod.Items.Uncommon
                 return;
             };
 
-            TakeDamage.HandleOnPercentHpLostActions += OnHpLost;
+            TakeDamage.OnPercentHpLostActions += OnHpLost;
         }
         private static void ModifyItem()
         {

@@ -55,7 +55,7 @@ namespace RiskyMod.Items.Uncommon
             ec.soundName = "Play_treeBot_m2_launch";
             Content.Content.effectDefs.Add(new EffectDef(procEffectPrefab));
 
-            TakeDamage.HandleOnPercentHpLostActions += OnHpLost;
+            TakeDamage.OnPercentHpLostActions += OnHpLost;
             TakeDamage.OnDamageTakenAttackerActions += DistractOnHit;
 
             GameObject squidBodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/squidturretbody");
