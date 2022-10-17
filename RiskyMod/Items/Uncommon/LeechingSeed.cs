@@ -32,7 +32,6 @@ namespace RiskyMod.Items.Uncommon
 				}
 			};
 
-			//TakeDamage.OnHpLostAttackerActions += HealOnHitFinalDamage;
 			OnHitEnemy.OnHitAttackerInventoryActions += HealOnHitInitialDamage;
 		}
 		private static void ModifyItem()
@@ -54,19 +53,5 @@ namespace RiskyMod.Items.Uncommon
 				}
 			}
         }
-
-		/*private static void HealOnHitFinalDamage(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory inventory, float hpLost)
-		{
-			if (damageInfo.procCoefficient > 0f && !damageInfo.procChainMask.HasProc(ProcType.HealOnHit) && attackerBody.inventory && attackerBody.healthComponent)
-            {
-				int seedCount = attackerBody.inventory.GetItemCount(RoR2Content.Items.Seed);
-				if (seedCount > 0)
-                {
-					float toHeal = hpLost * (0.025f + 0.025f * seedCount);
-					damageInfo.procChainMask.AddProc(ProcType.HealOnHit);
-					attackerBody.healthComponent.Heal(toHeal * damageInfo.procCoefficient, damageInfo.procChainMask);
-				}
-            }
-		}*/
 	}
 }
