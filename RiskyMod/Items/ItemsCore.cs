@@ -65,6 +65,7 @@ namespace RiskyMod.Items
 
             new Pennies();
             new DelicateWatch();
+            new PowerElixir();
         }
 
         private void ModifyUncommon()

@@ -99,6 +99,7 @@ namespace RiskyMod.Items.Boss
 													guardInv.GiveItem(Allies.AllyItems.AllyScalingItem);
 													guardInv.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
 													guardInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
+													guardInv.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
 												}
 											}
 										}

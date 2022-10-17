@@ -253,6 +253,7 @@ namespace RiskyMod
             Crowbar.enabled = ItemCfg.Bind(commonString, "Crowbar", true, itemConfigDescString).Value;
 
             DelicateWatch.enabled = ItemCfg.Bind(commonString, "Delicate Watch", true, itemConfigDescString).Value;
+            PowerElixir.enabled = ItemCfg.Bind(commonString, "Power Elixir", true, itemConfigDescString).Value;
 
             Fireworks.enabled = ItemCfg.Bind(commonString, "Fireworks", true, itemConfigDescString).Value;
             Fireworks.maxRockets = ItemCfg.Bind(commonString, "Fireworks - Max Rockets", 32, "Max rockets that can spawn from each use. Going above this value raises rocket damage instead.").Value;
@@ -264,6 +265,7 @@ namespace RiskyMod
             Warbanner.enabled = ItemCfg.Bind(commonString, "Warbanner", true, itemConfigDescString).Value;
 
             Pennies.disableInBazaar = ItemCfg.Bind(commonString, "Roll of Pennies - Disable in Bazaar", true, "This item does not give gold in the Bazaar Between Time.").Value;
+
 
             //Makes it too easy to stunlock things even at very low stacks.
             //StunGrenade.enabled = ItemCfg.Bind(commonString, "Stun Grenade", true, itemConfigDescString).Value;

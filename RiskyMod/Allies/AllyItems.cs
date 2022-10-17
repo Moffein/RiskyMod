@@ -10,6 +10,7 @@ namespace RiskyMod.Allies
         public static ItemDef AllyScalingItem;
         public static ItemDef AllyRegenItem;
         public static ItemDef AllyAllowVoidDeathItem;
+        public static ItemDef AllyAllowOverheatDeathItem;
         public static ItemDef AllyResistAoEItem;
 
         public static void Init()
@@ -18,6 +19,7 @@ namespace RiskyMod.Allies
             BuildAllyScalingItem();
             BuildAllyRegenItem();
             BuildAllyAllowVoidDeathItem();
+            BuildAllyAllowOverheatDeathItem();
             BuildAllyResistAoEItem();
         }
 
@@ -77,6 +79,32 @@ namespace RiskyMod.Allies
             };
             ItemDisplayRule[] idr = new ItemDisplayRule[0];
             ItemAPI.Add(new CustomItem(AllyAllowVoidDeathItem, idr));
+        }
+
+        //Effect is a part of AllyMarkerItem's delegate
+        private static void BuildAllyAllowOverheatDeathItem()
+        {
+            if (AllyItems.AllyAllowOverheatDeathItem) return;
+            AllyAllowOverheatDeathItem = ScriptableObject.CreateInstance<ItemDef>();
+            AllyAllowOverheatDeathItem.canRemove = false;
+            AllyAllowOverheatDeathItem.name = "RiskyModAllyAllowOverheatDeathItem";
+            AllyAllowOverheatDeathItem.deprecatedTier = ItemTier.NoTier;
+            AllyAllowOverheatDeathItem.descriptionToken = "Allows this player-allied NPC to die to Grandparent Suns.";
+            AllyAllowOverheatDeathItem.nameToken = "RiskyModAllyAllowOverheatDeathItem";
+            AllyAllowOverheatDeathItem.pickupToken = "Allows this player-allied NPC to die to Grandparent Suns.";
+            AllyAllowOverheatDeathItem.hidden = true;
+            AllyAllowOverheatDeathItem.pickupIconSprite = null;
+            AllyAllowOverheatDeathItem.tags = new[]
+            {
+                ItemTag.WorldUnique,
+                ItemTag.BrotherBlacklist,
+                ItemTag.CannotSteal,
+                ItemTag.CannotDuplicate,
+                ItemTag.AIBlacklist,
+                ItemTag.CannotCopy
+            };
+            ItemDisplayRule[] idr = new ItemDisplayRule[0];
+            ItemAPI.Add(new CustomItem(AllyAllowOverheatDeathItem, idr));
         }
 
         private static void BuildAllyRegenItem()
@@ -151,7 +179,7 @@ namespace RiskyMod.Allies
         {
             if (inventory.GetItemCount(AllyItems.AllyMarkerItem) > 0)
             {
-                if (AllyScaling.noOverheat && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.OverheatImmune)) self.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
+                if (AllyScaling.noOverheat && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.OverheatImmune) && inventory.GetItemCount(AllyItems.AllyAllowOverheatDeathItem) <= 0) self.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
                 if (AllyScaling.noVoidDeath && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ImmuneToVoidDeath) && inventory.GetItemCount(AllyItems.AllyAllowVoidDeathItem) <= 0) self.bodyFlags |= CharacterBody.BodyFlags.ImmuneToVoidDeath;
             }
         }

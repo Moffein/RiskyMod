@@ -77,7 +77,7 @@ namespace RiskyMod
 
     [BepInDependency("com.rune580.riskofoptions")]
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.13.4")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.13.5")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI), nameof(ItemAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
@@ -363,6 +363,7 @@ namespace RiskyMod
             On.RoR2.HealthComponent.TakeDamage += TakeDamage.HealthComponent_TakeDamage;
             On.RoR2.GlobalEventManager.OnCharacterDeath += OnCharacterDeath.GlobalEventManager_OnCharacterDeath;
             On.RoR2.GlobalEventManager.OnHitAll += OnHitAll.GlobalEventManager_OnHitAll;
+            On.RoR2.HealthComponent.UpdateLastHitTime += HealthComponent_UpdateLastHitTime.UpdateLastHitTime;
 
             new ModifyFinalDamage();
         }

@@ -53,6 +53,7 @@ namespace RiskyMod.Items.DLC1.Void
                             allyInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
                             allyInv.GiveItem(Allies.AllyItems.AllyScalingItem);
                             allyInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
+                            allyInv.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
                         }
 
                         if (self.body && self.body.inventory)
