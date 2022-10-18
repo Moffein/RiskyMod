@@ -135,14 +135,14 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 					if (aimRay.direction.y < 0f) force += additionalForce;
 				}
 				base.characterMotor.ApplyForce(force, true, false);
-				//FireBlastJump();
+				FireBlast();
 			}
 
 			base.OnExit();
 		}
 
 		//This runs clientside
-		public void FireBlastJump()
+		public void FireBlast()
         {
 			Ray aimRay = base.GetAimRay();
 			Vector3 aimPos = aimRay.origin + aimRay.direction * maxDistance;
@@ -174,17 +174,6 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 				impactEffect = EffectCatalog.FindEffectIndexFromPrefab(hitEffectPrefab)
             };
 			blastAttack.Fire();
-
-			if (base.characterMotor && !base.characterMotor.isGrounded && base.characterBody)
-            {
-				Vector3 characterPos = base.characterBody.corePosition + Vector3.up;	//Need to shift position up a bit to get it to feel consistent.
-				Vector3 diff = characterPos - aimPos;
-				float distSqr = diff.sqrMagnitude;
-				if (distSqr <= blastJumpRadius * blastJumpRadius)
-                {
-					base.characterMotor.ApplyForce(blastForce * diff.normalized + additionalForce, true, false);
-                }
-            }
 		}
 
 		public override InterruptPriority GetMinimumInterruptPriority()

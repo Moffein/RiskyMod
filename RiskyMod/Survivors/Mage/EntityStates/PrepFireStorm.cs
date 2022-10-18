@@ -105,7 +105,6 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 						if (aimRay.direction.y < 0f) force += additionalForce;
 					}
 					base.characterMotor.ApplyForce(force, true, false);
-					//FireBlastJump();
 				}
 
 				ProjectileManager.instance.FireProjectile(new FireProjectileInfo
@@ -125,50 +124,6 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			}
 
 			base.OnExit();
-		}
-
-		//This runs clientside
-		public void FireBlastJump()
-		{
-			Ray aimRay = base.GetAimRay();
-			Vector3 aimPos = aimRay.origin + aimRay.direction * maxDistance;
-			RaycastHit raycastHit = default(RaycastHit);
-			if (Util.CharacterRaycast(base.gameObject, aimRay, out raycastHit, maxDistance, LayerIndex.CommonMasks.bullet, QueryTriggerInteraction.UseGlobal))
-            {
-				aimPos = raycastHit.point;
-			}
-
-			EffectData effectData = new EffectData();
-			effectData.rotation = Util.QuaternionSafeLookRotation(Vector3.up);
-			effectData.origin = aimPos;
-			EffectManager.SpawnEffect(blastEffectPrefab, effectData, true);
-
-			/*BlastAttack blastAttack = new BlastAttack
-			{
-				radius = blastRadius,
-				procCoefficient = 1f,
-				position = aimPos,
-				attacker = base.gameObject,
-				crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master),
-				baseDamage = base.characterBody.damage * damageCoefficient,
-				falloffModel = BlastAttack.FalloffModel.None,
-				baseForce = 0f,
-				teamIndex = base.GetTeam(),
-				damageType = DamageType.Shock5s,
-				attackerFiltering = AttackerFiltering.NeverHitSelf
-			};
-			blastAttack.Fire();*/
-
-			if (base.characterMotor && !base.characterMotor.isGrounded && base.characterBody)
-			{
-				Vector3 characterPos = base.characterBody.corePosition + Vector3.up;    //Need to shift position up a bit to get it to feel consistent.
-				Vector3 diff = characterPos - aimPos;
-				float distSqr = diff.sqrMagnitude;
-				if (distSqr <= blastJumpRadius * blastJumpRadius)
-				{
-					base.characterMotor.ApplyForce(blastForce * diff.normalized + additionalForce, true, false);
-				}
-			}
 		}
 
 		public override InterruptPriority GetMinimumInterruptPriority()
