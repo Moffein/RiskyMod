@@ -12,7 +12,7 @@ namespace RiskyMod.Enemies.Spawnpools
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.Beetle, DirectorAPI.Stage.SiphonedForest);
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.LesserWisp, DirectorAPI.Stage.SiphonedForest);
 
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.BisonLoop, false, DirectorAPI.Stage.SiphonedForest);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Bison, false, DirectorAPI.Stage.SiphonedForest);
             DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.BlindVerminSnowy, false, DirectorAPI.Stage.SiphonedForest);
         }
     }

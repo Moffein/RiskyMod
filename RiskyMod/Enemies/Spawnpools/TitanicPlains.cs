@@ -18,6 +18,9 @@ namespace RiskyMod.Enemies.Spawnpools
 
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.XiConstruct, DirectorAPI.Stage.TitanicPlains);
             DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.XiConstruct, DirectorAPI.Stage.TitanicPlainsSimulacrum);
+
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.BisonLoop, false, DirectorAPI.Stage.TitanicPlains);
+            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Bison, false, DirectorAPI.Stage.TitanicPlainsSimulacrum);
         }
     }
 }

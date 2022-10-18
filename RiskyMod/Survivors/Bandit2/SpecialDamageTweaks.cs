@@ -14,49 +14,10 @@ namespace RiskyMod.Survivors.Bandit2
 {
     public class SpecialDamageTweaks
     {
-        public static GameObject ricochetOrbEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/DroneWeapons/ChainGunOrbEffect.prefab").WaitForCompletion();
         public SpecialDamageTweaks()
         {
-            OnHitEnemy.OnHitAttackerActions += RicochetBullet;
             OnHitEnemy.OnHitNoAttackerActions += ApplyBuff;
             TakeDamage.ModifyInitialDamageActions += RackEmUpBonus;
-        }
-
-        private static void RicochetBullet(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
-        {
-            if (damageInfo.HasModdedDamageType(Bandit2Core.RevolverRicochet))
-            {
-                ChainGunOrb chainGunOrb = new ChainGunOrb(ricochetOrbEffect);
-                chainGunOrb.damageValue = damageInfo.damage;
-                chainGunOrb.isCrit = damageInfo.crit;
-                chainGunOrb.teamIndex = attackerBody.teamComponent ? attackerBody.teamComponent.teamIndex : TeamIndex.None;
-                chainGunOrb.attacker = damageInfo.attacker;
-                chainGunOrb.procCoefficient = damageInfo.procCoefficient;
-                chainGunOrb.procChainMask = default;//damageInfo.procChainMask;
-                chainGunOrb.origin = damageInfo.position;
-                chainGunOrb.speed = 80f;   //Drone Parts is 600f
-                chainGunOrb.bouncesRemaining = 2;
-                chainGunOrb.bounceRange = 30f;
-                chainGunOrb.damageCoefficientPerBounce = 1f;
-                chainGunOrb.targetsToFindPerBounce = 1;
-                chainGunOrb.canBounceOnSameTarget = false;
-                chainGunOrb.damageColorIndex = damageInfo.damageColorIndex;
-
-                chainGunOrb.damageType = damageInfo.damageType;
-
-                if (damageInfo.HasModdedDamageType(Bandit2Core.ResetRevolverOnKill)) chainGunOrb.AddModdedDamageType(Bandit2Core.ResetRevolverOnKill);
-                if (damageInfo.HasModdedDamageType(Bandit2Core.RackEmUpDamage)) chainGunOrb.AddModdedDamageType(Bandit2Core.RackEmUpDamage);
-                if (damageInfo.HasModdedDamageType(Bandit2Core.SpecialDamage)) chainGunOrb.AddModdedDamageType(Bandit2Core.SpecialDamage);
-
-                chainGunOrb.bouncedObjects = new List<HealthComponent>();
-                if (victimBody && victimBody.healthComponent)
-                {
-                    chainGunOrb.bouncedObjects.Add(victimBody.healthComponent);
-                }
-                chainGunOrb.target = chainGunOrb.PickNextTarget(chainGunOrb.origin);
-
-                if (chainGunOrb.target) OrbManager.instance.AddOrb(chainGunOrb);
-            }
         }
 
         private static void RackEmUpBonus(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)

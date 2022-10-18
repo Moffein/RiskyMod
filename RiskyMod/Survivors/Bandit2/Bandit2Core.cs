@@ -25,7 +25,6 @@ namespace RiskyMod.Survivors.Bandit2
         public static DamageAPI.ModdedDamageType RackEmUpDamage;
 
         public static DamageAPI.ModdedDamageType RevolverRicochet;
-        public static DamageAPI.ModdedDamageType ResetRevolverOnKill;
 
         public static bool enabled = true;
 
@@ -41,7 +40,6 @@ namespace RiskyMod.Survivors.Bandit2
         public static bool specialRework = true;
 
         public static bool enableDesperadoKillStack = true;
-        public static bool enableDesperadoRicochet = false;
 
         public static BodyIndex Bandit2Index;
         private static AnimationCurve knifeVelocity;
@@ -269,7 +267,6 @@ namespace RiskyMod.Survivors.Bandit2
             if (!specialRework) return;
             SpecialDamage = DamageAPI.ReserveDamageType();
             RackEmUpDamage = DamageAPI.ReserveDamageType();
-            ResetRevolverOnKill = DamageAPI.ReserveDamageType();
             RevolverRicochet = DamageAPI.ReserveDamageType();
             SpecialDamageType(sk);
             SpecialDebuff = SneedUtils.SneedUtils.CreateBuffDef(
@@ -454,17 +451,6 @@ namespace RiskyMod.Survivors.Bandit2
             SneedUtils.SneedUtils.FixSkillName(desperadoKillStack);
             Content.Content.skillDefs.Add(Skills.DesperadoKillStack);
 
-            SkillDef desperadoRicochet = ScriptableObject.CreateInstance<SkillDef>();
-            desperadoRicochet.activationState = new SerializableEntityStateType(typeof(BaseState));
-            desperadoRicochet.activationStateMachineName = "Weapon";
-            desperadoRicochet.skillDescriptionToken = "BANDIT2_REVOLVER_RICOCHET_DESCRIPTION_RISKYMOD";
-            desperadoRicochet.skillName = "DesperadoRicochet";
-            desperadoRicochet.skillNameToken = "BANDIT2_REVOLVER_RICOCHET_NAME_RISKYMOD";
-            desperadoRicochet.icon = Assets.SkillIcons.Bandit2Desperado;
-            Skills.DesperadoRicochet = desperadoRicochet;
-            SneedUtils.SneedUtils.FixSkillName(desperadoRicochet);
-            Content.Content.skillDefs.Add(Skills.DesperadoRicochet);
-
             SkillFamily skillFamily = ScriptableObject.CreateInstance<SkillFamily>();
             skillFamily.variants = new SkillFamily.Variant[1];
             skillFamily.variants[0] = new SkillFamily.Variant
@@ -473,17 +459,6 @@ namespace RiskyMod.Survivors.Bandit2
                 unlockableDef = null,
                 viewableNode = new ViewablesCatalog.Node(Skills.Gunslinger.skillName, false, null)
             };
-
-            if (enableDesperadoRicochet)
-            {
-                Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
-                skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
-                {
-                    skillDef = Skills.DesperadoRicochet,
-                    unlockableDef = null,
-                    viewableNode = new ViewablesCatalog.Node(Skills.DesperadoRicochet.skillName, false, null)
-                };
-            }
 
             if (enableDesperadoKillStack)
             {
@@ -526,7 +501,6 @@ namespace RiskyMod.Survivors.Bandit2
     {
         public static SkillDef Gunslinger;
         public static SkillDef DesperadoKillStack;
-        public static SkillDef DesperadoRicochet;
 
         public static SkillDef LightsOut;
         public static SkillDef RackEmUp;

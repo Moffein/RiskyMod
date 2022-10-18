@@ -57,11 +57,6 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
 					{
 						bulletAttack.damageType |= DamageType.GiveSkullOnKill;
 					}
-					else if (selectedPassive == Skills.DesperadoRicochet)
-					{
-						bulletAttack.AddModdedDamageType(Bandit2Core.RevolverRicochet);
-						bulletAttack.AddModdedDamageType(Bandit2Core.ResetRevolverOnKill);
-					}
 
 					bulletAttack.damageType |= DamageType.BonusToLowHealth;
 				}

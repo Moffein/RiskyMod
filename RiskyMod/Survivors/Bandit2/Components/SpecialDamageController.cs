@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 namespace RiskyMod.Survivors.Bandit2.Components
 {
-    public class SpecialDamageController : NetworkBehaviour
+    public class SpecialDamageController : MonoBehaviour
     {
         SkillLocator sk;
         CharacterBody cb;
@@ -43,15 +43,6 @@ namespace RiskyMod.Survivors.Bandit2.Components
         public SkillDef GetPassiveSkillDef()
         {
             return passiveSkillSlot.skillDef;
-        }
-
-        [ClientRpc]
-        public void RpcResetSpecial()
-        {
-            if (base.hasAuthority && sk)
-            {
-                sk.special.Reset();
-            }
         }
     }
 }

@@ -618,6 +618,7 @@ namespace RiskyMod
 
             Golem.enabled = MonsterCfg.Bind(monsterString, "Stone Golem", true, "Enable changes to this monster.").Value;
             Mushrum.enabled = MonsterCfg.Bind(monsterString, "Mini Mushrum", true, "Enable changes to this monster.").Value;
+            Bison.enabled = MonsterCfg.Bind(monsterString, "Bighorn Bison", true, "Enable changes to this monster.").Value;
 
             Bronzong.enabled = MonsterCfg.Bind(monsterString, "Brass Contraption", true, "Enable changes to this monster.").Value;
             GreaterWisp.enabled = MonsterCfg.Bind(monsterString, "Greater Wisp", true, "Enable changes to this monster.").Value;

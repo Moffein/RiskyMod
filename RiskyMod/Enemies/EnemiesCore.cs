@@ -48,6 +48,7 @@ namespace RiskyMod.Enemies
 
             new Golem();
             new Mushrum();
+            new Bison();
 
             new Bronzong();
             new GreaterWisp();
@@ -208,6 +209,7 @@ namespace RiskyMod.Enemies
         public static DirectorAPI.DirectorCardHolder BeetleGuard;
         public static DirectorAPI.DirectorCardHolder Mushrum;
         public static DirectorAPI.DirectorCardHolder ClayApothecary;
+        public static DirectorAPI.DirectorCardHolder Bison;
         public static DirectorAPI.DirectorCardHolder BisonLoop;
 
         public static DirectorAPI.DirectorCardHolder Bronzong;
@@ -259,6 +261,7 @@ namespace RiskyMod.Enemies
             BeetleGuard = BuildDirectorCard(SpawnCards.BeetleGuard, DirectorAPI.MonsterCategory.Minibosses);
             Mushrum = BuildDirectorCard(SpawnCards.Mushrum, DirectorAPI.MonsterCategory.Minibosses); //These are considered basic monsters in Vanilla, but they fit all the criteria of a miniboss enemy.
             ClayApothecary = BuildDirectorCard(SpawnCards.ClayApothecary, DirectorAPI.MonsterCategory.Minibosses);
+            Bison = BuildDirectorCard(SpawnCards.Bison, DirectorAPI.MonsterCategory.Minibosses);
             BisonLoop = BuildDirectorCard(SpawnCards.Bison, DirectorAPI.MonsterCategory.Minibosses, 1, 5, DirectorCore.MonsterSpawnDistance.Standard);
 
             Bronzong = BuildDirectorCard(SpawnCards.Bronzong, DirectorAPI.MonsterCategory.Minibosses);  //Basic Monster on SkyMeadow

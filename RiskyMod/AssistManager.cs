@@ -169,27 +169,6 @@ namespace RiskyMod
                                 EffectManager.SpawnEffect(SharedDamageTypes.medkitEffect, effectData, true);
                             }
                             break;
-                        case DirectAssistType.ResetSpecial:
-                            if (victimBody.master)
-                            {
-                                if (!spawnedBanditSkullEffect)
-                                {
-                                    spawnedBanditSkullEffect = true;
-                                    EffectManager.SpawnEffect(BanditSpecialGracePeriod.skullEffect, new EffectData
-                                    {
-                                        origin = damageInfo.position
-                                    }, true);
-                                }
-                                if (a.attackerBody)
-                                {
-                                    SpecialDamageController sdc = a.attackerBody.GetComponent<SpecialDamageController>();
-                                    if (sdc)
-                                    {
-                                        sdc.RpcResetSpecial();    //TODO: FIX
-                                    }
-                                }
-                            }
-                            break;
                         default:
                             break;
                     }
