@@ -23,6 +23,7 @@ namespace RiskyMod.Allies.DroneBehaviors
         public int missilesLoaded;
         public bool firingBarrage = false;
         public float fireInterval;
+        public HurtBox targetHurtBox;
 
         public void Awake()
         {
@@ -65,7 +66,7 @@ namespace RiskyMod.Allies.DroneBehaviors
                         if (searchStopwatch > searchInterval)
                         {
                             searchStopwatch -= searchInterval;
-                            if (characterBody.teamComponent && SneedUtils.SneedUtils.IsEnemyInSphere(maxActivationDistance, base.transform.position, characterBody.teamComponent.teamIndex))
+                            if (characterBody.teamComponent && AcquireTarget())
                             {
                                 firingBarrage = true;
                                 fireStopwatch = 0f;
@@ -85,7 +86,7 @@ namespace RiskyMod.Allies.DroneBehaviors
             }
         }
 
-        public void FireMissile()
+        public bool AcquireTarget()
         {
             Ray aimRay = characterBody.inputBank ? characterBody.inputBank.GetAimRay() : default;
 
@@ -94,7 +95,7 @@ namespace RiskyMod.Allies.DroneBehaviors
             search.teamMaskFilter = TeamMask.allButNeutral;
             search.teamMaskFilter.RemoveTeam(characterBody.teamComponent.teamIndex);
 
-            search.filterByLoS = false;
+            search.filterByLoS = true;
             search.searchOrigin = aimRay.origin;
             search.sortMode = BullseyeSearch.SortMode.Angle;
             search.maxDistanceFilter = maxActivationDistance;
@@ -102,9 +103,16 @@ namespace RiskyMod.Allies.DroneBehaviors
             search.searchDirection = aimRay.direction;
             search.RefreshCandidates();
 
-            HurtBox targetHurtBox = search.GetResults().FirstOrDefault<HurtBox>();
+            targetHurtBox = search.GetResults().FirstOrDefault<HurtBox>();
+
+            return targetHurtBox != null;
+        }
+
+        public void FireMissile()
+        {
             if (targetHurtBox != default)
             {
+                Ray aimRay = characterBody.inputBank ? characterBody.inputBank.GetAimRay() : default;
                 MicroMissileOrb missileOrb = new MicroMissileOrb();
                 missileOrb.origin = aimRay.origin;
                 missileOrb.damageValue = characterBody.damage * damageCoefficient * (AlliesCore.normalizeDroneDamage ? 1f : 0.857142857f);  // 12/14

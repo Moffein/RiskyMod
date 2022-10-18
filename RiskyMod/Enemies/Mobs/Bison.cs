@@ -39,12 +39,12 @@ namespace RiskyMod.Enemies.Mobs
                 }
             };
 
-            Debug.Log("EntityStates.Bison.Headbutt");
-            SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Bison.Headbutt");
+            Debug.Log("EntityStates.Bison.Charge");
+            SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Bison.Charge");
 
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Bison.Charge", "chargeMovementSpeedCoefficient", "12"); //8 vanilla
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Bison.Charge", "turnSpeed", "600"); //300 vanilla
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Bison.Charge", "selfStunDuration", "1.5"); //3 vanilla
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Bison.Charge", "selfStunDuration", "1"); //3 vanilla
         }
     }
 }

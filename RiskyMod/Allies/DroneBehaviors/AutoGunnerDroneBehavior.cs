@@ -71,12 +71,10 @@ namespace RiskyMod.Allies.DroneBehaviors
                         if (searchStopwatch > searchInterval)
                         {
                             searchStopwatch -= searchInterval;
-                            if (characterBody.teamComponent && SneedUtils.SneedUtils.IsEnemyInSphere(maxActivationDistance, base.transform.position, characterBody.teamComponent.teamIndex))
+                            if (characterBody.teamComponent && AcquireTarget())
                             {
                                 firingBarrage = true;
                                 fireStopwatch = 0f;
-
-                                AcquireTarget();    //Concentrate burst on a single target since this is supposed to look like a bullet weapon
                             }
                         }
                     }
@@ -93,7 +91,7 @@ namespace RiskyMod.Allies.DroneBehaviors
             }
         }
 
-        public void AcquireTarget()
+        public bool AcquireTarget()
         {
             Ray aimRay = characterBody.inputBank ? characterBody.inputBank.GetAimRay() : default;
 
@@ -111,6 +109,8 @@ namespace RiskyMod.Allies.DroneBehaviors
             search.RefreshCandidates();
 
             targetHurtBox = search.GetResults().FirstOrDefault<HurtBox>();
+
+            return targetHurtBox != default;
         }
 
         public void FireBullet()

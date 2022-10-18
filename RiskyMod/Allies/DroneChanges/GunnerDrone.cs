@@ -18,13 +18,12 @@ namespace RiskyMod.Allies.DroneChanges
             Content.Content.effectDefs.Add(new EffectDef(muzzleflash));
             AutoGunnerDroneBehavior.fireEffectPrefab = muzzleflash;
 
-            AllyPrefabs.GunnerDrone.AddComponent<AutoGunnerDroneBehavior>();
-
             //Gets run before scaling changes
             CharacterBody gunnerDroneBody = AllyPrefabs.GunnerDrone.GetComponent<CharacterBody>();
             gunnerDroneBody.baseMaxHealth = 170f;
             gunnerDroneBody.levelMaxHealth = gunnerDroneBody.baseMaxHealth * 0.3f;
 
+            AllyPrefabs.GunnerDrone.AddComponent<AutoGunnerDroneBehavior>();
             ModifyAI();
         }
 
