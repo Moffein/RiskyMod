@@ -100,12 +100,11 @@ namespace RiskyMod.Items.DLC1.Boss
                                                         allyInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
                                                         allyInv.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
                                                         allyInv.GiveItem(Allies.AllyItems.AllyResistAoEItem);
-                                                        allyInv.GiveItem(RoR2Content.Items.HealthDecay, 40);
                                                     }
+                                                    allyInv.GiveItem(RoR2Content.Items.HealthDecay, 40);
 
                                                     if (removeAllyScaling)
                                                     {
-                                                        //Card has built-in inventory, probably.
                                                         allyInv.GiveItem(RoR2Content.Items.BoostDamage, 15 * stackCount);
                                                         allyInv.GiveItem(RoR2Content.Items.BoostHp, 15 * stackCount);
                                                     }
