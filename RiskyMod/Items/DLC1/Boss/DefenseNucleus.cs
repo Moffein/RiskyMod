@@ -103,8 +103,12 @@ namespace RiskyMod.Items.DLC1.Boss
                                                         allyInv.GiveItem(RoR2Content.Items.HealthDecay, 40);
                                                     }
 
-                                                    allyInv.GiveItem(RoR2Content.Items.BoostDamage, 10 * stackCount);
-                                                    allyInv.GiveItem(RoR2Content.Items.BoostHp, 3 * stackCount);
+                                                    if (removeAllyScaling)
+                                                    {
+                                                        //Card has built-in inventory, probably.
+                                                        allyInv.GiveItem(RoR2Content.Items.BoostDamage, 15 * stackCount);
+                                                        allyInv.GiveItem(RoR2Content.Items.BoostHp, 15 * stackCount);
+                                                    }
                                                 }
                                             }
                                         }));
@@ -154,9 +158,17 @@ namespace RiskyMod.Items.DLC1.Boss
                             Inventory allyInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
                             if (allyInv)
                             {
+                                CharacterMaster master = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
                                 if (allyInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) allyInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
-                                allyInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                                allyInv.GiveItem(Allies.AllyItems.AllyScalingItem);
+                                if (master && master.teamIndex == TeamIndex.Player)
+                                {
+                                    allyInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
+                                    allyInv.GiveItem(Allies.AllyItems.AllyScalingItem);
+                                    allyInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
+                                    allyInv.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
+                                    allyInv.GiveItem(Allies.AllyItems.AllyResistAoEItem);
+                                }
+                                allyInv.GiveItem(RoR2Content.Items.HealthDecay, 40);
 
                                 if (removeAllyScaling)
                                 {
