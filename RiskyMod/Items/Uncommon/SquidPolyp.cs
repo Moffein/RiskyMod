@@ -144,7 +144,7 @@ namespace RiskyMod.Items.Uncommon
                                             }
                                             component6.inventory.GiveItem(RoR2Content.Items.BoostHp, 3 * (polypCount - 1));
                                             component6.inventory.GiveItem(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
-                                            component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 30);
+                                            component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 40);
                                         }
                                     }
                                     sq.AddSquid(result.spawnedInstance);
