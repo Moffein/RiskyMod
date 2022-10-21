@@ -16,6 +16,24 @@ namespace RiskyMod.Items.Boss
 
         public EmpathyCores()
         {
+            On.RoR2.Items.RoboBallBuddyBodyBehavior.OnMinionSpawnedServer += (orig, self, spawnResult) =>
+            {
+                orig(self, spawnResult);
+
+                if (spawnResult.spawnedInstance)
+                {
+                    CharacterMaster minionMaster = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
+                    if (minionMaster && minionMaster.teamIndex == TeamIndex.Player && minionMaster.inventory)
+                    {
+                        minionMaster.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
+                        minionMaster.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
+                        minionMaster.inventory.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
+                        minionMaster.inventory.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
+                        //Immune to overheat to be consistent with Drones.
+                    }
+                }
+            };
+
             if (!enabled) return;
 
             IL.RoR2.DeployableMinionSpawner.SpawnMinion += (il) =>
@@ -39,24 +57,6 @@ namespace RiskyMod.Items.Boss
                 else
                 {
                     UnityEngine.Debug.LogError("RiskyMod: EmpathyCores IL Hook failed");
-                }
-            };
-
-            On.RoR2.Items.RoboBallBuddyBodyBehavior.OnMinionSpawnedServer += (orig, self, spawnResult) =>
-            {
-                orig(self, spawnResult);
-
-                if (spawnResult.spawnedInstance)
-                {
-                    CharacterMaster minionMaster = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
-                    if (minionMaster && minionMaster.teamIndex == TeamIndex.Player && minionMaster.inventory)
-                    {
-                        minionMaster.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                        minionMaster.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
-                        minionMaster.inventory.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
-                        minionMaster.inventory.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
-                        //Immune to overheat to be consistent with Drones.
-                    }
                 }
             };
         }

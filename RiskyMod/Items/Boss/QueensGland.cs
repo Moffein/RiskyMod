@@ -11,119 +11,151 @@ namespace RiskyMod.Items.Boss
 	{
 		public static bool enabled = true;
 		public static bool ignoreAllyCap = true;
+		public static BodyIndex BeetleGuardAllyIndex;
+
 		public QueensGland()
 		{
-			if (!enabled) return;
+			if (!enabled)
 			{
-				if (!enabled) return;
-				ItemsCore.ModifyItemDefActions += ModifyItem;
+				HandleBeetleAllyVanilla();
+				return;
+			}
+			ItemsCore.ModifyItemDefActions += ModifyItem;
 
-				On.RoR2.CharacterMaster.GetDeployableSameSlotLimit += (orig, self, slot) =>
+			On.RoR2.CharacterMaster.GetDeployableSameSlotLimit += (orig, self, slot) =>
+			{
+				if (slot == DeployableSlot.BeetleGuardAlly)
 				{
-					if (slot == DeployableSlot.BeetleGuardAlly)
-					{
-						return ((self.inventory.GetItemCount(RoR2Content.Items.BeetleGland) > 0) ? 1 : 0) * (RunArtifactManager.instance.IsArtifactEnabled(RoR2Content.Artifacts.swarmsArtifactDef) ? 2 : 1);
-					}
-					else
-					{
-						return orig(self, slot);
-					}
-				};
+					return ((self.inventory.GetItemCount(RoR2Content.Items.BeetleGland) > 0) ? 1 : 0) * (RunArtifactManager.instance.IsArtifactEnabled(RoR2Content.Artifacts.swarmsArtifactDef) ? 2 : 1);
+				}
+				else
+				{
+					return orig(self, slot);
+				}
+			};
 
-				//Overwrite the Vanilla code since it's obfuscated in DNSPY
-				On.RoR2.Items.BeetleGlandBodyBehavior.FixedUpdate += (orig, self) =>
+			//Overwrite the Vanilla code since it's obfuscated in DNSPY
+			On.RoR2.Items.BeetleGlandBodyBehavior.FixedUpdate += (orig, self) =>
+			{
+				if (NetworkServer.active)
 				{
-					if (NetworkServer.active)
+					SceneDef sd = RoR2.SceneCatalog.GetSceneDefForCurrentScene();
+					if (sd && sd.baseSceneName.Equals("bazaar"))
 					{
-						SceneDef sd = RoR2.SceneCatalog.GetSceneDefForCurrentScene();
-						if (sd && sd.baseSceneName.Equals("bazaar"))
+						return;
+					}
+					if (self.body.master)
+					{
+						if (self.body.master.IsDeployableSlotAvailable(DeployableSlot.BeetleGuardAlly))    //used to be < glandCount
 						{
-							return;
-						}
-						if (self.body.master)
-                        {
-							if (self.body.master.IsDeployableSlotAvailable(DeployableSlot.BeetleGuardAlly))    //used to be < glandCount
+							self.guardResummonCooldown -= Time.fixedDeltaTime;
+							if (self.guardResummonCooldown <= 0f)
 							{
-								self.guardResummonCooldown -= Time.fixedDeltaTime;
-								if (self.guardResummonCooldown <= 0f)
+								DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(LegacyResourcesAPI.Load<SpawnCard>("SpawnCards/CharacterSpawnCards/cscBeetleGuardAlly"), new DirectorPlacementRule
 								{
-									DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(LegacyResourcesAPI.Load<SpawnCard>("SpawnCards/CharacterSpawnCards/cscBeetleGuardAlly"), new DirectorPlacementRule
-									{
-										placementMode = DirectorPlacementRule.PlacementMode.Approximate,
-										minDistance = 3f,
-										maxDistance = 40f,
-										spawnOnTarget = self.transform
-									}, RoR2Application.rng);
-									directorSpawnRequest.summonerBodyObject = self.gameObject;
-									directorSpawnRequest.ignoreTeamMemberLimit = ignoreAllyCap;  //Guards should always be able to spawn. Probably doesn't need a cap since there's only 1 per player.
+									placementMode = DirectorPlacementRule.PlacementMode.Approximate,
+									minDistance = 3f,
+									maxDistance = 40f,
+									spawnOnTarget = self.transform
+								}, RoR2Application.rng);
+								directorSpawnRequest.summonerBodyObject = self.gameObject;
+								directorSpawnRequest.ignoreTeamMemberLimit = ignoreAllyCap;  //Guards should always be able to spawn. Probably doesn't need a cap since there's only 1 per player.
 
-									directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult spawnResult)
+								directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult spawnResult)
+								{
+									if (spawnResult.success && self.body.inventory)
 									{
-										if (spawnResult.success && self.body.inventory)
+										Inventory guardInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
+
+										int glandCount = self.body.inventory ? self.body.inventory.GetItemCount(RoR2Content.Items.BeetleGland) : 0;
+										if (guardInv && glandCount > 0)
 										{
-											Inventory guardInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
 
-											int glandCount = self.body.inventory ? self.body.inventory.GetItemCount(RoR2Content.Items.BeetleGland) : 0;
-											if (guardInv && glandCount > 0)
+											int baseDamage = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetInitialDamageCount() : 20;
+											int stackDamage = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetStackDamageCount() : 30;
+											int baseHealth = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetInitialHPCount() : 10;
+											int stackHealth = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetStackHPCount() : 10;
+
+											int stackCount = glandCount - 1;
+
+											guardInv.GiveItem(RoR2Content.Items.BoostDamage, baseDamage + stackCount * stackDamage);
+											guardInv.GiveItem(RoR2Content.Items.BoostHp, baseHealth + stackCount * stackHealth);
+											if (guardInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) guardInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
+										}
+
+										Deployable d = spawnResult.spawnedInstance.AddComponent<Deployable>();
+										self.body.master.AddDeployable(d, DeployableSlot.BeetleGuardAlly);
+
+										CharacterMaster cm = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
+										if (cm)
+										{
+											CharacterBody body = cm.GetBody();
+											if (body)
 											{
-
-												int baseDamage = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetInitialDamageCount() : 20;
-												int stackDamage = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetStackDamageCount() : 30;
-												int baseHealth = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetInitialHPCount() : 10;
-												int stackHealth = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetStackHPCount() : 10;
-
-												int stackCount = glandCount - 1;
-
-												guardInv.GiveItem(RoR2Content.Items.BoostDamage, baseDamage + stackCount * stackDamage);
-												guardInv.GiveItem(RoR2Content.Items.BoostHp, baseHealth + stackCount * stackHealth);
-												if (guardInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) guardInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
+												UpdateGlandStats ugs = spawnResult.spawnedInstance.AddComponent<UpdateGlandStats>();
+												ugs.ownerInventory = self.body.inventory;
+												ugs.minionInventory = guardInv;
 											}
 
-											Deployable d = spawnResult.spawnedInstance.AddComponent<Deployable>();
-											self.body.master.AddDeployable(d, DeployableSlot.BeetleGuardAlly);
-
-											CharacterMaster cm = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
-											if (cm)
-                                            {
-												CharacterBody body = cm.GetBody();
-												if (body)
-												{
-													UpdateGlandStats ugs = spawnResult.spawnedInstance.AddComponent<UpdateGlandStats>();
-													ugs.ownerInventory = self.body.inventory;
-													ugs.minionInventory = guardInv;
-												}
-
-												if (guardInv && cm.teamIndex == TeamIndex.Player)
-												{
-													guardInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
-													guardInv.GiveItem(Allies.AllyItems.AllyScalingItem);
-													guardInv.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
-													guardInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
-													guardInv.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
-												}
+											if (guardInv && cm.teamIndex == TeamIndex.Player)
+											{
+												guardInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
+												guardInv.GiveItem(Allies.AllyItems.AllyScalingItem);
+												guardInv.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
+												guardInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
+												guardInv.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
 											}
 										}
-									}));
-
-									DirectorCore.instance.TrySpawnObject(directorSpawnRequest);
-
-									if (self.body.master.IsDeployableSlotAvailable(DeployableSlot.BeetleGuardAlly))
-									{
-										self.guardResummonCooldown = 1f;
-										return;
 									}
-									self.guardResummonCooldown = 30f;
+								}));
+
+								DirectorCore.instance.TrySpawnObject(directorSpawnRequest);
+
+								if (self.body.master.IsDeployableSlotAvailable(DeployableSlot.BeetleGuardAlly))
+								{
+									self.guardResummonCooldown = 1f;
+									return;
 								}
+								self.guardResummonCooldown = 30f;
 							}
 						}
 					}
-				};
-			}
+				}
+			};
 		}
 
 		private static void ModifyItem()
         {
 			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BeetleGland);
+		}
+
+		private void HandleBeetleAllyVanilla()
+		{
+			On.RoR2.BodyCatalog.Init += (orig) =>
+			{
+				orig();
+				QueensGland.BeetleGuardAllyIndex = BodyCatalog.FindBodyIndex("BeetleGuardAllyBody");
+			};
+
+			On.RoR2.CharacterBody.Start += (orig, self) =>
+			{
+				orig(self);
+				if (NetworkServer.active && !self.isPlayerControlled && self.bodyIndex == QueensGland.BeetleGuardAllyIndex && self.teamComponent && self.teamComponent.teamIndex == TeamIndex.Player)
+				{
+					if (self.inventory)
+					{
+						self.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
+						self.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
+						int allyRegenCount = self.inventory.GetItemCount(Allies.AllyItems.AllyRegenItem);
+						if (allyRegenCount < 40)
+						{
+							self.inventory.GiveItem(Allies.AllyItems.AllyRegenItem, 40 - allyRegenCount);
+						}
+						self.inventory.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
+						self.inventory.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
+					}
+				}
+			};
 		}
 	}
 

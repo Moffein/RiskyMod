@@ -215,7 +215,7 @@ namespace RiskyMod
             Moon.PillarsDropItems.pearlOverwriteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Pearl Override Chance", 15f, "Chance for nonlegendary Pillar drops to be overwritten with a Pearl.").Value;
 
             //Void Locus
-            RemoveFog.enabled = GeneralCfg.Bind(voidLocusString, "Remove Fog", true, "Removes Void Fog from the map.").Value;
+            RemoveFog.enabled = GeneralCfg.Bind(voidLocusString, "Remove Fog", false, "Removes Void Fog from the map.").Value;
             VoidLocus.ModifyHoldout.enabled = GeneralCfg.Bind(voidLocusString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
             VoidLocus.PillarsDropItems.enabled = GeneralCfg.Bind(voidLocusString, "Signals Drop Items", true, "Pillars drop items for the team when completed.").Value;
             VoidLocus.PillarsDropItems.whiteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Common Chance", 50f, "Chance for Signals to drop Common Items.").Value;

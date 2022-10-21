@@ -11,10 +11,15 @@ namespace RiskyMod.Items.Equipment
     {
         public static bool enabled = true;
         public static bool ignoreTeamLimit = true;
+        public static BodyIndex BackupDroneIndex;
         public static GameObject backupMaster = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterMasters/DroneBackupMaster");
         public Backup()
         {
-            if (!enabled) return;
+            if (!enabled)
+            {
+                HandleBackupVanilla();
+                return;
+            }
             On.RoR2.EquipmentSlot.FireDroneBackup += (orig, self) =>
             {
                 int sliceCount = 4;
@@ -72,6 +77,33 @@ namespace RiskyMod.Items.Equipment
                 }
                 self.subcooldownTimer = 0.5f;
                 return true;
+            };
+        }
+
+        private static void HandleBackupVanilla()
+        {
+            On.RoR2.BodyCatalog.Init += (orig) =>
+            {
+                orig();
+                Backup.BackupDroneIndex = BodyCatalog.FindBodyIndex("BackupDroneBody");
+            };
+
+            On.RoR2.CharacterBody.Start += (orig, self) =>
+            {
+                orig(self);
+                if (NetworkServer.active && !self.isPlayerControlled && self.bodyIndex == Backup.BackupDroneIndex && self.teamComponent && self.teamComponent.teamIndex == TeamIndex.Player)
+                {
+                    if (self.inventory)
+                    {
+                        self.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
+                        self.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
+                        int allyRegenCount = self.inventory.GetItemCount(Allies.AllyItems.AllyRegenItem);
+                        if (allyRegenCount < 40)
+                        {
+                            self.inventory.GiveItem(Allies.AllyItems.AllyRegenItem, 40 - allyRegenCount);
+                        }
+                    }
+                }
             };
         }
     }

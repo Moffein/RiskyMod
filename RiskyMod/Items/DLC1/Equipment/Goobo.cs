@@ -11,19 +11,21 @@ namespace RiskyMod.Items.DLC1.Equipment
         public static bool enabled = true;
         public Goobo()
         {
-            if (!enabled) return;
-            On.RoR2.EquipmentCatalog.Init += (orig) =>
+            if (enabled)
             {
-                orig();
-                HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipDescs, DLC1Content.Equipment.GummyClone);
-            };
+                On.RoR2.EquipmentCatalog.Init += (orig) =>
+                {
+                    orig();
+                    HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipDescs, DLC1Content.Equipment.GummyClone);
+                };
 
-            On.RoR2.Projectile.GummyCloneProjectile.SpawnGummyClone += (orig, self) =>
-            {
-                self.hpBoostCount = 50;
-                self.damageBoostCount = 20;
-                orig(self);
-            };
+                On.RoR2.Projectile.GummyCloneProjectile.SpawnGummyClone += (orig, self) =>
+                {
+                    self.hpBoostCount = 50;
+                    self.damageBoostCount = 20;
+                    orig(self);
+                };
+            }
 
             IL.RoR2.Projectile.GummyCloneProjectile.SpawnGummyClone += (il) =>
             {
@@ -35,7 +37,7 @@ namespace RiskyMod.Items.DLC1.Equipment
                     c.Emit(OpCodes.Ldloc_2);    //Projectile Owner's CharacterBody
                     c.EmitDelegate<Func<MasterCopySpawnCard, CharacterBody, MasterCopySpawnCard>>((spawnCard, ownerBody) =>
                     {
-                        spawnCard.GiveItem(RoR2Content.Items.UseAmbientLevel);
+                        if (Goobo.enabled) spawnCard.GiveItem(RoR2Content.Items.UseAmbientLevel);
                         if (ownerBody.teamComponent && ownerBody.teamComponent.teamIndex == TeamIndex.Player)
                         {
                             spawnCard.GiveItem(Allies.AllyItems.AllyMarkerItem);

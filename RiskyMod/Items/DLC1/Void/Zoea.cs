@@ -14,26 +14,46 @@ namespace RiskyMod.Items.DLC1.Void
 
         public Zoea()
         {
-            if (!enabled) return;
-
-            On.RoR2.VoidMegaCrabItemBehavior.GetMaxProjectiles += (orig, inventory) =>
+            if (enabled)
             {
-                return Math.Min(orig(inventory), maxAllyCount);
-            };
+                On.RoR2.VoidMegaCrabItemBehavior.GetMaxProjectiles += (orig, inventory) =>
+                {
+                    return Math.Min(orig(inventory), maxAllyCount);
+                };
 
-            //Why isn't this getting capped? DNSpy shows the code as calling GetMaxProjectiles when calculating this
-            On.RoR2.CharacterMaster.GetDeployableSameSlotLimit += (orig, self, slot) =>
-            {
-                if (slot == DeployableSlot.VoidMegaCrabItem)
+                //Why isn't this getting capped? DNSpy shows the code as calling GetMaxProjectiles when calculating this
+                On.RoR2.CharacterMaster.GetDeployableSameSlotLimit += (orig, self, slot) =>
                 {
-                    //Vanilla just calls GetMaxProjectiles, but why is it different?
-                    return Math.Min(self.inventory.GetItemCount(DLC1Content.Items.VoidMegaCrabItem), maxAllyCount);
-                }
-                else
+                    if (slot == DeployableSlot.VoidMegaCrabItem)
+                    {
+                        //Vanilla just calls GetMaxProjectiles, but why is it different?
+                        return Math.Min(self.inventory.GetItemCount(DLC1Content.Items.VoidMegaCrabItem), maxAllyCount);
+                    }
+                    else
+                    {
+                        return orig(self, slot);
+                    }
+                };
+
+                IL.RoR2.VoidMegaCrabItemBehavior.FixedUpdate += (il) =>
                 {
-                    return orig(self, slot);
-                }
-            };
+                    ILCursor c = new ILCursor(il);
+                    if (c.TryGotoNext(
+                         x => x.MatchCallvirt<DirectorCore>("TrySpawnObject")
+                        ))
+                    {
+                        c.EmitDelegate<Func<DirectorSpawnRequest, DirectorSpawnRequest>>((directorSpawnRequest) =>
+                        {
+                            directorSpawnRequest.ignoreTeamMemberLimit = Zoea.ignoreAllyCap;
+                            return directorSpawnRequest;
+                        });
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogError("RiskyMod: Zoea IL Hook failed");
+                    }
+                };
+            }
 
 
             On.RoR2.VoidMegaCrabItemBehavior.OnMasterSpawned += (orig, self, spawnResult) =>
@@ -56,7 +76,7 @@ namespace RiskyMod.Items.DLC1.Void
                             allyInv.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
                         }
 
-                        if (self.body && self.body.inventory)
+                        if (Zoea.enabled && self.body && self.body.inventory)
                         {
                             int overstack = self.stack - Zoea.maxAllyCount;
                             if (overstack > 0)
@@ -69,25 +89,6 @@ namespace RiskyMod.Items.DLC1.Void
                             }
                         }
                     }
-                }
-            };
-
-            IL.RoR2.VoidMegaCrabItemBehavior.FixedUpdate += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
-                     x => x.MatchCallvirt<DirectorCore>("TrySpawnObject")
-                    ))
-                {
-                    c.EmitDelegate<Func<DirectorSpawnRequest, DirectorSpawnRequest>>((directorSpawnRequest) =>
-                    {
-                        directorSpawnRequest.ignoreTeamMemberLimit = Zoea.ignoreAllyCap;
-                        return directorSpawnRequest;
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: Zoea IL Hook failed");
                 }
             };
         }

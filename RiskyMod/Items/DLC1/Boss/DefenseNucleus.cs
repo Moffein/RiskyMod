@@ -16,13 +16,19 @@ namespace RiskyMod.Items.DLC1.Boss
         public static bool ignoreAllyCap = true;
         public static bool inheritEliteAffix = true;
         public static bool removeAllyScaling = true;
+        public static BodyIndex MinorConstructAlly;
 
         public static SpawnCard MinorConstructOnKillCard = Addressables.LoadAssetAsync<SpawnCard>("RoR2/DLC1/MajorAndMinorConstruct/cscMinorConstructOnKill.asset").WaitForCompletion();
         public static GameObject SpawnEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MajorAndMinorConstruct/OmniExplosionVFXMinorConstruct.prefab").WaitForCompletion();
 
+        //This code really needs trimming
         public DefenseNucleus()
         {
-            if (!enabled) return;
+            if (!enabled)
+            {
+                HandleAllyScalingVanilla();
+                return;
+            }
 
             if (removeAllyScaling)
             {
@@ -197,6 +203,32 @@ namespace RiskyMod.Items.DLC1.Boss
                     DirectorCore.instance.TrySpawnObject(directorSpawnRequest);
                 }
             }
+        }
+
+        private void HandleAllyScalingVanilla()
+        {
+
+            On.RoR2.BodyCatalog.Init += (orig) =>
+            {
+                orig();
+                DefenseNucleus.MinorConstructAlly = BodyCatalog.FindBodyIndex("MinorConstructAllyBody");
+            };
+
+            On.RoR2.CharacterBody.Start += (orig, self) =>
+            {
+                orig(self);
+                if (NetworkServer.active && !self.isPlayerControlled && self.bodyIndex == DefenseNucleus.MinorConstructAlly && self.teamComponent && self.teamComponent.teamIndex == TeamIndex.Player)
+                {
+                    if (self.inventory)
+                    {
+                        self.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
+                        self.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
+                        self.inventory.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
+                        self.inventory.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
+                        //No regen
+                    }
+                }
+            };
         }
     }
 }

@@ -11,8 +11,10 @@ namespace RiskyMod.Items.Boss
 
         public HalcyonSeed()
         {
-            if (!enabled) return;
-            ItemsCore.ModifyItemDefActions += ModifyItem;
+            if (enabled)
+            {
+                ItemsCore.ModifyItemDefActions += ModifyItem;
+            }
 
             On.RoR2.BodyCatalog.Init += (orig) =>
             {
@@ -27,8 +29,11 @@ namespace RiskyMod.Items.Boss
                 {
                     if (self.inventory)
                     {
-                        self.inventory.GiveItem(RoR2Content.Items.BoostHp, 10); //Increase initial stack health
-                        self.inventory.GiveItem(RoR2Content.Items.AdaptiveArmor);
+                        if (HalcyonSeed.enabled)
+                        {
+                            self.inventory.GiveItem(RoR2Content.Items.BoostHp, 10); //Increase initial stack health
+                            self.inventory.GiveItem(RoR2Content.Items.AdaptiveArmor);
+                        }
 
                         self.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
                         self.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
