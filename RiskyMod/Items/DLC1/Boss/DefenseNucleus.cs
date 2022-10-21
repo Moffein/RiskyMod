@@ -207,7 +207,6 @@ namespace RiskyMod.Items.DLC1.Boss
 
         private void HandleAllyScalingVanilla()
         {
-
             On.RoR2.BodyCatalog.Init += (orig) =>
             {
                 orig();

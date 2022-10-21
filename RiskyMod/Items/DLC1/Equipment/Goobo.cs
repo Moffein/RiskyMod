@@ -37,7 +37,7 @@ namespace RiskyMod.Items.DLC1.Equipment
                     c.Emit(OpCodes.Ldloc_2);    //Projectile Owner's CharacterBody
                     c.EmitDelegate<Func<MasterCopySpawnCard, CharacterBody, MasterCopySpawnCard>>((spawnCard, ownerBody) =>
                     {
-                        if (Goobo.enabled) spawnCard.GiveItem(RoR2Content.Items.UseAmbientLevel);
+                        if (Goobo.enabled) spawnCard.GiveItem(RoR2Content.Items.UseAmbientLevel);   //Is this needed?
                         if (ownerBody.teamComponent && ownerBody.teamComponent.teamIndex == TeamIndex.Player)
                         {
                             spawnCard.GiveItem(Allies.AllyItems.AllyMarkerItem);

@@ -97,11 +97,7 @@ namespace RiskyMod.Items.Equipment
                     {
                         self.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
                         self.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
-                        int allyRegenCount = self.inventory.GetItemCount(Allies.AllyItems.AllyRegenItem);
-                        if (allyRegenCount < 40)
-                        {
-                            self.inventory.GiveItem(Allies.AllyItems.AllyRegenItem, 40 - allyRegenCount);
-                        }
+                        self.inventory.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
                     }
                 }
             };
