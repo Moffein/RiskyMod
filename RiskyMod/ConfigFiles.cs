@@ -216,6 +216,7 @@ namespace RiskyMod
 
             //Void Locus
             RemoveFog.enabled = GeneralCfg.Bind(voidLocusString, "Remove Fog", false, "Removes Void Fog from the map.").Value;
+            VoidLocus.FogDamage.enabled = GeneralCfg.Bind(voidLocusString, "Tweak Fog Damage", true, "Void Fog damage ticks at a constant rate, instead of ramping up like in Simulacrum.").Value && !RemoveFog.enabled;
             VoidLocus.ModifyHoldout.enabled = GeneralCfg.Bind(voidLocusString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
             VoidLocus.PillarsDropItems.enabled = GeneralCfg.Bind(voidLocusString, "Signals Drop Items", true, "Pillars drop items for the team when completed.").Value;
             VoidLocus.PillarsDropItems.whiteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Common Chance", 50f, "Chance for Signals to drop Common Items.").Value;
