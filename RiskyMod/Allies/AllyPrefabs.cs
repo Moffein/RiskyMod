@@ -21,7 +21,7 @@ namespace RiskyMod.Allies
             LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/turret1master"),
             LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/drone1master"),
             LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/drone2master"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/missiledronemaster"),
+            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/dronemissilemaster"),
             LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/equipmentdronemaster"),
             LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/emergencydronemaster"),
             LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/flamedronemaster"),

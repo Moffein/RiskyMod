@@ -127,18 +127,21 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			//Always fire a blast attack so that Airborne enemies can be hit.
 			if (base.isAuthority && base.characterMotor)
 			{
-				Ray aimRay = base.GetAimRay();
-				Vector3 force = -1f * aimRay.direction * blastForce;
-				if (base.characterMotor.velocity.y < 0)
-                {
-					base.characterMotor.velocity.y = 0;
-					if (aimRay.direction.y < 0f) force += additionalForce;
-				}
-				base.characterMotor.ApplyForce(force, true, false);
 				FireBlast();
+				ApplySelfKnockback();
 			}
 
 			base.OnExit();
+		}
+
+		public void ApplySelfKnockback()
+        {
+
+			Ray aimRay = base.GetAimRay();
+			Vector3 force = -1f * aimRay.direction * blastForce;
+			base.characterMotor.velocity = Vector3.zero;
+
+			base.characterMotor.ApplyForce(force, true, false);
 		}
 
 		//This runs clientside
@@ -201,8 +204,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 		public static float blastRadius = 6f;//Ion Surge is 14f
 		public static float blastJumpRadius = 14f;
 
-		public static float blastForce = 3200f; //4000f is railgunner
-		public static Vector3 additionalForce = 200f * Vector3.up;
+		public static float blastForce = 4000f; //4000f is railgunner
 
 		private float duration;
 		private float stopwatch;

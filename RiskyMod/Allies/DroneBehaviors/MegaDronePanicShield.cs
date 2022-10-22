@@ -6,7 +6,7 @@ namespace RiskyMod.Allies.DroneBehaviors
 {
     public class MegaDronePanicShield : MonoBehaviour
     {
-        public static float baseCooldown = 70f;
+        public static float baseCooldown = 100f;
         public static float buffDuration = 10f;
         public static GameObject shockEffectPrefab;
 

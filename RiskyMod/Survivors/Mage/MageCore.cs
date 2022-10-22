@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.AddressableAssets;
 using RoR2.Projectile;
+using BepInEx.Configuration;
 
 namespace RiskyMod.Survivors.Mage
 {
@@ -30,7 +31,7 @@ namespace RiskyMod.Survivors.Mage
         public static bool flamethrowerRangeExtend = true;
 
         public static bool ionSurgeShock = true;
-        public static bool ionSurgeMovementScaling = false;
+        public static ConfigEntry<bool> ionSurgeMovementScaling;
 
         public static bool ionSurgeUtility = true;
 
@@ -376,27 +377,24 @@ namespace RiskyMod.Survivors.Mage
 
             }
 
-            if (!ionSurgeMovementScaling)
+            IL.EntityStates.Mage.FlyUpState.HandleMovements += (il) =>
             {
-                IL.EntityStates.Mage.FlyUpState.HandleMovements += (il) =>
+                ILCursor c = new ILCursor(il);
+                if (c.TryGotoNext(
+                     x => x.MatchLdfld<EntityStates.BaseState>("moveSpeedStat")
+                    ))
                 {
-                    ILCursor c = new ILCursor(il);
-                    if(c.TryGotoNext(
-                         x => x.MatchLdfld<EntityStates.BaseState>("moveSpeedStat")
-                        ))
+                    c.Index++;
+                    c.EmitDelegate<Func<float, float>>(orig =>
                     {
-                        c.Index++;
-                        c.EmitDelegate<Func<float, float>>(orig =>
-                        {
-                            return 7f;
-                        });
-                    }
-                    else
-                    {
-                        UnityEngine.Debug.LogError("RiskyMod: Mage FlyUpState.HandleMovements IL Hook failed");
-                    }
-                };
-            }
+                        return ionSurgeMovementScaling.Value ? 10.15f : orig;//10.15 = 7 * 1.45
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Mage FlyUpState.HandleMovements IL Hook failed");
+                }
+            };
 
             if (ionSurgeUtility)
             {

@@ -30,10 +30,6 @@ namespace RiskyMod.Allies
                             {
                                 summonResult.inventory.GiveItem(AllyItems.AllyRegenItem, 20);
                             }
-                            else if (self.masterPrefab == AllyPrefabs.MegaDrone)
-                            {
-                                summonResult.inventory.GiveItem(AllyItems.AllyRegenItem, 30);
-                            }
                             else
                             {
                                 summonResult.inventory.GiveItem(AllyItems.AllyRegenItem, 40);
