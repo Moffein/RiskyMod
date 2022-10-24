@@ -60,7 +60,7 @@ namespace RiskyMod.Survivors.Croco
             //Ticks twice per second.
             ProjectileDotZone pdz = AcidPuddleProjectile.GetComponent<ProjectileDotZone>();
             //pdz.damageCoefficient = 0.45f;    //default is 0.25, ticks twice per second
-            pdz.overlapProcCoefficient = 0.5f;  //default is 0.1
+            pdz.overlapProcCoefficient = CrocoCore.Cfg.Skills.CausticLeap.acidProcCoefficient;  //default is 0.1
 
             Content.Content.projectilePrefabs.Add(AcidPuddleProjectile);
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.BaseLeap", "projectilePrefab", AcidPuddleProjectile);
@@ -79,7 +79,7 @@ namespace RiskyMod.Survivors.Croco
                     c.Emit(OpCodes.Ldarg_0);    //self
                     c.EmitDelegate<Func<BlastAttack.Result, EntityStates.Croco.ChainableLeap, BlastAttack.Result>>((result, self) =>
                     {
-                        float cdr = 1f;
+                        float cdr = CrocoCore.Cfg.Skills.FrenziedLeap.cooldownReduction;
                         self.skillLocator.primary.RunRecharge((float)result.hitCount * cdr);
                         self.skillLocator.secondary.RunRecharge((float)result.hitCount * cdr);
                         self.skillLocator.utility.RunRecharge((float)result.hitCount * cdr);

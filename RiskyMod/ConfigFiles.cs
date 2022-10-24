@@ -59,6 +59,8 @@ namespace RiskyMod
         public static ConfigFile SpawnpoolCfg;
         public static ConfigFile GeneralCfg;
 
+        public static ConfigFile SurvivorCrocoCfg;
+
         public static string ConfigFolderPath { get => System.IO.Path.Combine(BepInEx.Paths.ConfigPath, RiskyMod.pluginInfo.Metadata.GUID); }
 
         private const string coreModuleString = "00. Core Modules";
@@ -523,6 +525,7 @@ namespace RiskyMod
             LoaderCore.slamChanges = SurvivorCfg.Bind(loaderString, "Thunderslam Changes", true, "Enable changes to this skill.").Value;
             LoaderCore.pylonChanges = SurvivorCfg.Bind(loaderString, "M551 Pylon Changes", true, "Enable changes to this skill.").Value;
 
+            CrocoCore.Cfg.enabled = SurvivorCfg.Bind(crocoString, "0 - Use Separate Config", true, "Generate a separate config file for more in-depth tuning. Overwrites ALL settings for this survivor.").Value;
             CrocoCore.enabled = SurvivorCfg.Bind(crocoString, "Enable Changes", true, "Enable changes to this survivor. Skill options unavailable due to all the changes being too interlinked.").Value;
             CrocoCore.gameplayRework = SurvivorCfg.Bind(crocoString, "Gameplay Rework", true, "A full rework of Acrid's skills.").Value;
             BiggerMeleeHitbox.enabled = SurvivorCfg.Bind(crocoString, "Extend Melee Hitbox", true, "Extends Acrid's melee hitbox so he can hit Vagrants while standing on top of them.").Value;
@@ -530,6 +533,11 @@ namespace RiskyMod
             RemovePoisonDamageCap.enabled = SurvivorCfg.Bind(crocoString, "Remove Poison Damage Cap", true, "Poison no longer has a hidden damage cap.").Value;
             BiggerLeapHitbox.enabled = SurvivorCfg.Bind(crocoString, "Extend Leap Collision Box", true, "Acrid's Shift skills have a larger collision hitbox. Damage radius remains the same.").Value;
             ShiftAirControl.enabled = SurvivorCfg.Bind(crocoString, "Leap Air Control", true, "Acrid's Shift skills gain increased air control at high move speeds.").Value;
+
+            if (CrocoCore.Cfg.enabled)
+            {
+                GenerateCrocoConfig();
+            }
 
             CaptainCore.enabled = SurvivorCfg.Bind(captainString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             CaptainOrbitalHiddenRealms.enabled = SurvivorCfg.Bind(captainString, "Hidden Realm Orbital Skills", true, "Allow Orbital skills in Hiden Realms.").Value;
@@ -674,6 +682,55 @@ namespace RiskyMod
             SirensCall.enabled = SpawnpoolCfg.Bind("Stage 4", "Sirens Call", true, "Enable spawnpool changes on this stage.").Value;
 
             SkyMeadow.enabled = SpawnpoolCfg.Bind("Stage 5", "Sky Meadow", true, "Enable spawnpool changes on this stage.").Value;
+        }
+
+        private static void GenerateCrocoConfig()
+        {
+            SurvivorCrocoCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Acrid.cfg"), true);
+            CrocoCore.enabled = SurvivorCrocoCfg.Bind("00. General", "Enable Changes", true, "Enable changes to this survivor.").Value;
+            CrocoCore.gameplayRework = SurvivorCrocoCfg.Bind("00. General", "Gameplay Rework", true, "A full rework of Acrid's skills. Every option outside of General/Stats requires this to be enabled.").Value;
+            BiggerMeleeHitbox.enabled = SurvivorCrocoCfg.Bind("00. General", "Extend Melee Hitbox", true, "Extends Acrid's melee hitbox so he can hit Vagrants while standing on top of them.").Value;
+            BlightStack.enabled = SurvivorCrocoCfg.Bind("00. General", "Blight Duration Reset", true, "Blight stacks like Bleed.").Value;
+            RemovePoisonDamageCap.enabled = SurvivorCrocoCfg.Bind("00. General", "Remove Poison Damage Cap", true, "Poison no longer has a hidden damage cap.").Value;
+            BiggerLeapHitbox.enabled = SurvivorCrocoCfg.Bind("00. General", "Extend Leap Collision Box", true, "Acrid's Shift skills have a larger collision hitbox. Damage radius remains the same.").Value;
+            ShiftAirControl.enabled = SurvivorCrocoCfg.Bind("00. General", "Leap Air Control", true, "Acrid's Shift skills gain increased air control at high move speeds.").Value;
+
+            CrocoCore.Cfg.Stats.enabled = SurvivorCrocoCfg.Bind("01. Stats", "0 - Enable Stat Changes", true, "Overwrite Acrid's stats with the values in the config.").Value;
+            CrocoCore.Cfg.Stats.health = SurvivorCrocoCfg.Bind("01. Stats", "Health", 160f, "Base health.").Value;
+            CrocoCore.Cfg.Stats.damage = SurvivorCrocoCfg.Bind("01. Stats", "Damage", 12f, "Base damage. Vanilla is 15").Value;
+            CrocoCore.Cfg.Stats.regen = SurvivorCrocoCfg.Bind("01. Stats", "Regen", 2.5f, "Base health regeneration. Affected by difficulty.").Value;
+            CrocoCore.Cfg.Stats.armor = SurvivorCrocoCfg.Bind("01. Stats", "Armor", 20f, "Base armor.").Value;
+
+            CrocoCore.Cfg.Regenerative.healFraction = SurvivorCrocoCfg.Bind("02. Regenerative", "Regenerative Heal Fraction", 0.1f, "How much Regenerative heals. Affected by difficulty.").Value;
+            CrocoCore.Cfg.Regenerative.healDuration = SurvivorCrocoCfg.Bind("02. Regenerative", "Regenerative Heal Duration", 3f, "How long it takes for Regenerative to heal its full amount.").Value;
+
+            CrocoCore.Cfg.Passives.baseDoTDuration = SurvivorCrocoCfg.Bind("03. Passives", "Base DoT Duration", 6f, "How long Poison and Blight last for.").Value;
+            CrocoCore.Cfg.Passives.virulentDurationMult = SurvivorCrocoCfg.Bind("03. Passives", "Virulent Duration Multiplier", 1.8f, "How much to multiply DoT duration by when Virulent is selected.").Value;
+            CrocoCore.Cfg.Passives.contagionSpreadRange = SurvivorCrocoCfg.Bind("03. Passives", "Contagion Spread Range", 30f, "How far Contagion can spread.").Value;
+
+            CrocoCore.Cfg.Skills.ViciousWounds.baseDuration = SurvivorCrocoCfg.Bind("04. Primary - Vicious Wounds", "Base Duration", 1.2f, "Time it takes for each slash. Vanilla is 1.5").Value;
+            CrocoCore.Cfg.Skills.ViciousWounds.damageCoefficient = SurvivorCrocoCfg.Bind("04. Primary - Vicious Wounds", "Damage Coefficient", 2f, "Skill damage.").Value;
+            CrocoCore.Cfg.Skills.ViciousWounds.finisherDamageCoefficient = SurvivorCrocoCfg.Bind("04. Primary - Vicious Wounds", "Finisher Damage Coefficient", 4f, "Damage of the 3rd combo hit.").Value;
+
+            CrocoCore.Cfg.Skills.Neurotoxin.damageCoefficient = SurvivorCrocoCfg.Bind("05. Secondary - Neurotoxin", "Damage Coefficient", 2.4f, "Skill damage.").Value;
+            CrocoCore.Cfg.Skills.Neurotoxin.cooldown = SurvivorCrocoCfg.Bind("05. Secondary - Neurotoxin", "Cooldown", 2f, "Skill cooldown.").Value;
+
+            CrocoCore.Cfg.Skills.Bite.damageCoefficient = SurvivorCrocoCfg.Bind("06. Secondary - Ravenous Bite", "Damage Coefficient", 3.6f, "Skill damage. Vanilla is 3.2").Value;
+            CrocoCore.Cfg.Skills.Bite.cooldown = SurvivorCrocoCfg.Bind("06. Secondary - Ravenous Bite", "Cooldown", 2f, "Skill cooldown.").Value;
+            CrocoCore.Cfg.Skills.Bite.healFractionOnKill = SurvivorCrocoCfg.Bind("06. Secondary - Ravenous Bite", "Heal on Kill Fraction", 0.08f, "How much HP to heal when killing with this skill.").Value;
+
+            CrocoCore.Cfg.Skills.CausticLeap.cooldown = SurvivorCrocoCfg.Bind("07. Utility - Caustic Leap", "Cooldown", 6f, "Skill cooldown.").Value;
+            CrocoCore.Cfg.Skills.CausticLeap.damageCoefficient = SurvivorCrocoCfg.Bind("07. Utility - Caustic Leap", "Damage Coefficient", 3.2f, "Skill damage.").Value;
+            CrocoCore.Cfg.Skills.CausticLeap.acidProcCoefficient = SurvivorCrocoCfg.Bind("07. Utility - Caustic Leap", "Acid Proc Coefficient", 0.5f, "Affects the chance and power of item effects triggered by the acid puddle. Vanilla is 0.1").Value;
+
+            CrocoCore.Cfg.Skills.FrenziedLeap.cooldown = SurvivorCrocoCfg.Bind("08. Utility - Frenzied Leap", "Cooldown", 6f, "Skill cooldown.").Value;
+            CrocoCore.Cfg.Skills.FrenziedLeap.cooldownReduction = SurvivorCrocoCfg.Bind("08. Utility - Frenzied Leap", "Cooldown Reduction", 1f, "Amount of cooldown to refund per enemy hit.").Value;
+            CrocoCore.Cfg.Skills.FrenziedLeap.damageCoefficient = SurvivorCrocoCfg.Bind("08. Utility - Frenzied Leap", "Damage Coefficient", 5.5f, "Skill damage.").Value;
+
+            CrocoCore.Cfg.Skills.Epidemic.cooldown = SurvivorCrocoCfg.Bind("09. Special - Epidemic", "Cooldown", 10f, "Skill cooldown.").Value;
+            CrocoCore.Cfg.Skills.Epidemic.baseTickCount = SurvivorCrocoCfg.Bind("09. Special - Epidemic", "Tick Count", 7, "Number of ticks that Epidemic hits for. Does not include the initial hit that applies it.").Value;
+            CrocoCore.Cfg.Skills.Epidemic.damageCoefficient = SurvivorCrocoCfg.Bind("09. Special - Epidemic", "Damage Coefficient", 1f, "How much damage each tick of Epidemic deals.").Value;
+            CrocoCore.Cfg.Skills.Epidemic.procCoefficient = SurvivorCrocoCfg.Bind("09. Special - Epidemic", "Proc Coefficient", 0.5f, "Affects the chance and power of item effects triggered by this skill.").Value;
         }
     }
 }

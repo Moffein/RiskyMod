@@ -160,7 +160,7 @@ namespace RiskyMod
                         case DirectAssistType.CrocoBiteHealOnKill:
                             if (a.attackerBody)
                             {
-                                a.attackerBody.healthComponent.HealFraction(0.08f, default(ProcChainMask));
+                                a.attackerBody.healthComponent.HealFraction(Survivors.Croco.CrocoCore.Cfg.Skills.Bite.healFractionOnKill, default(ProcChainMask));
                                 EffectData effectData = new EffectData
                                 {
                                     origin = a.attackerBody.corePosition

@@ -8,6 +8,7 @@ using EntityStates;
 using UnityEngine.Networking;
 using RoR2.Orbs;
 using RiskyMod.Content;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Croco
 {
@@ -16,6 +17,82 @@ namespace RiskyMod.Survivors.Croco
         public static bool enabled = true;
         public static bool gameplayRework = true;
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CrocoBody");
+
+        //I don't like how some of these values are used on-the-fly while others are only used during setup.
+        //Add a Set method to handle live value changing?
+        public static class Cfg
+        {
+            public static bool enabled = false; //If set to false, will only use the needed values from this. If set to true, will load all values.
+            public static class Stats
+            {
+                public static bool enabled = true;
+                public static float health = 160f;
+                public static float armor = 20f;
+                public static float damage = 12f;
+                public static float regen = 2.5f;
+            }
+            public static class Regenerative
+            {
+                public static float healFraction = 0.1f;
+                public static float healDuration = 3f;
+            }
+
+            public static class Passives
+            {
+                public static float baseDoTDuration = 6f;
+                public static float virulentDurationMult = 1.8f;
+                public static float contagionSpreadRange = 30f;
+            }
+
+            public static class Skills
+            {
+
+                public static class ViciousWounds
+                {
+                    public static float damageCoefficient = 2f;
+                    public static float finisherDamageCoefficient = 4f;
+                    public static float baseDuration = 1.2f;
+                }
+
+                public static class Neurotoxin
+                {
+                    public static float damageCoefficient = 2.4f;
+                    public static float cooldown = 2f;
+                }
+
+                public static class Bite
+                {
+                    public static float damageCoefficient = 3.6f;
+                    public static float cooldown = 2f;
+                    public static float healFractionOnKill = 0.08f;
+                }
+
+                public static class CausticLeap
+                {
+                    public static float cooldown = 6f;
+                    public static float damageCoefficient = 3.2f;
+                    public static float acidProcCoefficient = 0.5f;
+                }
+
+                public static class FrenziedLeap
+                {
+                    public static float cooldown = 6f;
+                    public static float cooldownReduction = 1f;
+                    public static float damageCoefficient = 5.5f;
+                }
+
+                public static class Epidemic
+                {
+                    public static float cooldown = 10f;
+                    public static int baseTickCount = 7;    //Initial hit is 1 tick
+                    public static float timeBetweenTicks = 0.5f;
+                    public static float damageCoefficient = 1f;
+                    public static float procCoefficient = 0.5f;
+                }
+            }
+        }
+        
+
 
         public CrocoCore()
         {
@@ -36,8 +113,28 @@ namespace RiskyMod.Survivors.Croco
 
         private void ModifyStats(CharacterBody cb)
         {
-            cb.baseDamage = 12f;
-            cb.levelDamage = cb.baseDamage * 0.2f;
+
+            if (CrocoCore.Cfg.enabled)
+            {
+                if (CrocoCore.Cfg.Stats.enabled)
+                {
+                    cb.baseDamage = Cfg.Stats.damage;
+                    cb.levelDamage = cb.baseDamage * 0.2f;
+
+                    cb.baseMaxHealth = Cfg.Stats.health;
+                    cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
+
+                    cb.baseRegen = Cfg.Stats.regen;
+                    cb.levelRegen = cb.baseRegen * 0.2f;
+
+                    cb.baseArmor = Cfg.Stats.armor;
+                }
+            }
+            else
+            {
+                cb.baseDamage = Cfg.Stats.damage;
+                cb.levelDamage = cb.baseDamage * 0.2f;
+            }
         }
 
         private void ModifySkills(SkillLocator sk)
@@ -66,29 +163,46 @@ namespace RiskyMod.Survivors.Croco
         {
             //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "damageCoefficient", "2");
             //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "comboFinisherDamageCoefficient", "5");
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "baseDuration", "1.2");
 
-            sk.primary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_PRIMARY_DESCRIPTION_RISKYMOD";
-            sk.primary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_POISON_RISKYMOD", "KEYWORD_RAPID_REGEN_RISKYMOD" };
+            if (CrocoCore.Cfg.enabled)
+            {
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "damageCoefficient", CrocoCore.Cfg.Skills.ViciousWounds.damageCoefficient.ToString("0.000"));
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "comboFinisherDamageCoefficient", CrocoCore.Cfg.Skills.ViciousWounds.finisherDamageCoefficient.ToString("0.000"));
+            }
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "baseDuration", CrocoCore.Cfg.Skills.ViciousWounds.baseDuration.ToString("0.000"));
+
+            SkillDef primaryDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoSlash.asset").WaitForCompletion();
+            primaryDef.skillDescriptionToken = "CROCO_PRIMARY_DESCRIPTION_RISKYMOD";
+            primaryDef.keywordTokens = new string[] { "KEYWORD_POISON_RISKYMOD", "KEYWORD_RAPID_REGEN_RISKYMOD" };
             new ModifyM1();
         }
 
         private void ModifySecondaries(SkillLocator sk)
         {
-            sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_SECONDARY_DESCRIPTION_RISKYMOD";
-            sk.secondary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD" };
-            sk.secondary.skillFamily.variants[0].skillDef.baseRechargeInterval = 2f;
-            sk.secondary.skillFamily.variants[0].skillDef.mustKeyPress = false;
-            sk.secondary.skillFamily.variants[0].skillDef.activationState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Croco.FireSpitModded));
+            SkillDef spitDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoSpit.asset").WaitForCompletion();
+            spitDef.skillDescriptionToken = "CROCO_SECONDARY_DESCRIPTION_RISKYMOD";
+            spitDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD" };
+            spitDef.mustKeyPress = false;
+            spitDef.activationState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Croco.FireSpitModded));
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Croco.FireSpitModded));
-            new ModifyM2Spit();
 
             //I hate how this has so many keywords.
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Bite", "damageCoefficient", "3.6");
-            sk.secondary.skillFamily.variants[1].skillDef.cancelSprintingOnActivation = false;
-            sk.secondary.skillFamily.variants[1].skillDef.skillDescriptionToken = "CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
-            sk.secondary.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_SLAYER", "KEYWORD_RAPID_REGEN_RISKYMOD" };
-            sk.secondary.skillFamily.variants[1].skillDef.mustKeyPress = false;
+            SkillDef biteDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoBite.asset").WaitForCompletion();
+            biteDef.cancelSprintingOnActivation = false;
+            biteDef.skillDescriptionToken = "CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
+            biteDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_SLAYER", "KEYWORD_RAPID_REGEN_RISKYMOD" };
+            biteDef.mustKeyPress = false;
+
+            if (CrocoCore.Cfg.enabled)
+            {
+                spitDef.baseRechargeInterval = CrocoCore.Cfg.Skills.Neurotoxin.cooldown;
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireSpit", "damageCoefficient", CrocoCore.Cfg.Skills.Neurotoxin.damageCoefficient.ToString("0.000"));
+
+                biteDef.baseRechargeInterval = CrocoCore.Cfg.Skills.Bite.cooldown;
+            }
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Bite", "damageCoefficient", CrocoCore.Cfg.Skills.Bite.damageCoefficient.ToString("0.000"));
+
+            new ModifyM2Spit();
             new ModifyM2Bite();
         }
 
@@ -96,15 +210,24 @@ namespace RiskyMod.Survivors.Croco
         private void ModifyUtilities(SkillLocator sk)
         {
             //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Leap", "blastDamageCoefficient", "3.2");
-            sk.utility.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_UTILITY_DESCRIPTION_RISKYMOD";
-            sk.utility.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_STUNNING" };
+            SkillDef utilityDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoLeap.asset").WaitForCompletion();
+            SkillDef utilityAltDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoChainableLeap.asset").WaitForCompletion();
 
-            //Check to see if the cooldown reset is too crazy.
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.ChainableLeap", "blastDamageCoefficient", "3.2");
-            sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
-            sk.utility.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_STUNNING" };
-            sk.utility.skillFamily.variants[1].skillDef.baseMaxStock = 1;
-            sk.utility.skillFamily.variants[1].skillDef.baseRechargeInterval = 6f;
+            utilityDef.skillDescriptionToken = "CROCO_UTILITY_DESCRIPTION_RISKYMOD";
+            utilityDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_STUNNING" };
+            utilityAltDef.baseRechargeInterval = CrocoCore.Cfg.Skills.CausticLeap.cooldown;
+
+            utilityAltDef.skillDescriptionToken = "CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
+            utilityAltDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD", "KEYWORD_STUNNING" };
+            utilityAltDef.baseMaxStock = 1;
+            utilityAltDef.baseRechargeInterval = CrocoCore.Cfg.Skills.FrenziedLeap.cooldown;
+
+            if (CrocoCore.Cfg.enabled)
+            {
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Leap", "blastDamageCoefficient", CrocoCore.Cfg.Skills.FrenziedLeap.damageCoefficient.ToString("0.000"));
+
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.ChainableLeap", "blastDamageCoefficient", CrocoCore.Cfg.Skills.FrenziedLeap.damageCoefficient.ToString("0.000"));
+            }
             new ModifyShift();
         }
 
@@ -112,10 +235,16 @@ namespace RiskyMod.Survivors.Croco
         //Seems strong, but isn't something you can solely rely on to clear the map like Vanilla poison.
         private void ModifySpecials(SkillLocator sk)
         {
+            SkillDef epidemicDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoDisease.asset").WaitForCompletion();
+
             //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireDiseaseProjectile", "damageCoefficient", "1");
-            sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_SPECIAL_DESCRIPTION_RISKYMOD";
-            sk.special.skillFamily.variants[0].skillDef.keywordTokens = new string[] { };
-            Skills.Epidemic = sk.special.skillFamily.variants[0].skillDef;
+            epidemicDef.skillDescriptionToken = "CROCO_SPECIAL_DESCRIPTION_RISKYMOD";
+            epidemicDef.keywordTokens = new string[] { };
+            if (CrocoCore.Cfg.enabled)
+            {
+                epidemicDef.baseRechargeInterval = CrocoCore.Cfg.Skills.Epidemic.cooldown;
+            }
+            Skills.Epidemic = epidemicDef;
             new ModifySpecial();
 
             if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)

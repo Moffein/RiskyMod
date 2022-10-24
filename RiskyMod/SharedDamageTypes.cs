@@ -33,7 +33,7 @@ namespace RiskyMod
         public static DamageAPI.ModdedDamageType AlwaysIgnite;   //Used for Molten Perforator due to not proccing
 
 
-        public static DamageAPI.ModdedDamageType DontTriggerBands;  //Only used if ElementalRings are enabled
+        public static DamageAPI.ModdedDamageType DontTriggerBands;
 
         public static GameObject medkitEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect");
 
@@ -148,7 +148,7 @@ namespace RiskyMod
                 {
                     extend = true;
                 }
-                float duration = (extend ? 10f : 6f);
+                float duration = Survivors.Croco.CrocoCore.Cfg.Skills.Passives.baseDoTDuration * (extend ? Survivors.Croco.CrocoCore.Cfg.Skills.Passives.virulentDurationMult : 1f);
 
                 int stacks = 1;
                 if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBlightStack)) stacks = Mathf.CeilToInt(damageInfo.damage);
@@ -174,7 +174,7 @@ namespace RiskyMod
                 {
                     extend = true;
                 }
-                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Poison, (extend ? 10f : 6f), 1f);
+                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Poison, Survivors.Croco.CrocoCore.Cfg.Skills.Passives.baseDoTDuration * (extend ? Survivors.Croco.CrocoCore.Cfg.Skills.Passives.virulentDurationMult : 1f), 1f);
             }
         }
 

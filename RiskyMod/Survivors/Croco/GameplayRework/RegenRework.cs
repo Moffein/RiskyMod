@@ -12,14 +12,13 @@ namespace RiskyMod.Survivors.Croco
     public class RegenRework
     {
         public static BuffDef CrocoRegen2;
-        public static float regenDuration = 3f;
         private static float regenAmount;
         //private static float regenReductionOnHit = 0f;    //was 0.36
         //private static float totalRegenReduction;
 
         public RegenRework()
         {
-            regenAmount = 0.1f / regenDuration;
+            regenAmount = CrocoCore.Cfg.Regenerative.healFraction / CrocoCore.Cfg.Regenerative.healDuration;
             //totalRegenReduction = regenDuration * regenReductionOnHit;
 
             BuffDef bd = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/CrocoRegen");
@@ -99,7 +98,7 @@ namespace RiskyMod.Survivors.Croco
                             x => x.MatchLdcR4(0.5f)
                            ))
                     {
-                        c.Next.Operand = RegenRework.regenDuration;
+                        c.Next.Operand = CrocoCore.Cfg.Regenerative.healDuration;
                         error = false;
                     }
                 }
@@ -127,7 +126,7 @@ namespace RiskyMod.Survivors.Croco
                             x => x.MatchLdcR4(0.5f)
                            ))
                     {
-                        c.Next.Operand = RegenRework.regenDuration;
+                        c.Next.Operand = CrocoCore.Cfg.Regenerative.healDuration;
                         error = false;
                     }
                 }

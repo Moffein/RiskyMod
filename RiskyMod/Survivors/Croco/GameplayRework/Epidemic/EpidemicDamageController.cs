@@ -6,11 +6,8 @@ namespace RiskyMod.Survivors.Croco
 {
     public class EpidemicDamageController : MonoBehaviour
     {
-        public static int baseTickCount = 7;    //Initial hit is 1 tick
-        public static int baseTickCountScepter = 14;
-        public static float timeBetweenTicks = 0.5f;
+
         public static float baseLingerDuration = 1f;
-        public static float damageCoefficient = 1f;
 
         public static GameObject impactEffect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/crocodiseaseimpacteffect");
 
@@ -35,7 +32,7 @@ namespace RiskyMod.Survivors.Croco
             }
             stopwatch = 0f;
             lingerStopwatch = 0f;
-            ticksRemaining = scepter ? baseTickCountScepter : baseTickCount;
+            ticksRemaining = CrocoCore.Cfg.Skills.Epidemic.baseTickCount * (scepter ? 2 : 1);
         }
 
         public void Setup(CharacterBody attackerBody, CharacterBody victimBody, DamageInfo damageInfo, bool isScepter = false)
@@ -61,9 +58,9 @@ namespace RiskyMod.Survivors.Croco
             if (ticksRemaining > 0)
             {
                 stopwatch += Time.fixedDeltaTime;
-                if (stopwatch >= timeBetweenTicks)
+                if (stopwatch >= CrocoCore.Cfg.Skills.Epidemic.timeBetweenTicks)
                 {
-                    stopwatch -= timeBetweenTicks;
+                    stopwatch -= CrocoCore.Cfg.Skills.Epidemic.timeBetweenTicks;
                     ticksRemaining--;
                     if (owner && victim && victim.healthComponent)
                     {
@@ -79,7 +76,7 @@ namespace RiskyMod.Survivors.Croco
                             force = 300f * Vector3.down,
                             position = victim.corePosition,
                             procChainMask = default(ProcChainMask),
-                            procCoefficient = 0.5f
+                            procCoefficient = CrocoCore.Cfg.Skills.Epidemic.procCoefficient
                         };
                         victim.healthComponent.TakeDamage(diseaseDamage);
                         GlobalEventManager.instance.OnHitEnemy(diseaseDamage, victim.gameObject);
@@ -127,7 +124,7 @@ namespace RiskyMod.Survivors.Croco
 
         public void SetScepter()
         {
-            ticksRemaining = baseTickCountScepter;
+            ticksRemaining = CrocoCore.Cfg.Skills.Epidemic.baseTickCount * 2;
             scepter = true;
         }
     }

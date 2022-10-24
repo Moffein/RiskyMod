@@ -43,7 +43,7 @@ namespace RiskyMod.Survivors.Croco
 
     public class CrocoAltPassiveTracker : MonoBehaviour
     {
-        public static float spreadRange = 30f;
+        public static float spreadRange = CrocoCore.Cfg.Passives.contagionSpreadRange;
         public void Add(CharacterBody attackerBody, CharacterBody victimBody,DamageAPI.ModdedDamageType damageType, float duration)
         {
             CrocoPoison existing = poisonList.Find(x => x.victimBody == victimBody && x.damageType == damageType);
@@ -118,12 +118,13 @@ namespace RiskyMod.Survivors.Croco
             lightningOrb.bouncesRemaining = 0;
             lightningOrb.lightningType = LightningOrb.LightningType.CrocoDisease;
             lightningOrb.damageColorIndex = DamageColorIndex.Poison;
-            lightningOrb.damageType = DamageType.NonLethal;
+            lightningOrb.damageType = DamageType.NonLethal | DamageType.Silent;
             lightningOrb.range = CrocoAltPassiveTracker.spreadRange;
             lightningOrb.AddModdedDamageType(damageType);
 
             if (damageType == SharedDamageTypes.CrocoBlight6s) lightningOrb.AddModdedDamageType(SharedDamageTypes.CrocoBlightStack);
             if (Items.Common.Crowbar.enabled) lightningOrb.AddModdedDamageType(Items.Common.Crowbar.IgnoreCrowbar);
+            lightningOrb.AddModdedDamageType(SharedDamageTypes.DontTriggerBands);
 
             lightningOrb.bouncedObjects.Add(victimBody.healthComponent);
             lightningOrb.target = lightningOrb.PickNextTarget(victimBody.corePosition);
