@@ -49,11 +49,11 @@ namespace RiskyMod.Items.DLC1.Void
                          x => x.MatchLdcR4(0.4f)
                         ))
                         {
-                            c.Next.Operand = 0.24f; //Stack damage
+                            c.Next.Operand = 0.28f; //Stack damage
                             c.Index += 4;
                             c.EmitDelegate<Func<float, float>>(damage =>
                             {
-                                return damage + 0.16f;  //Add to stack damage to get first stack damage
+                                return damage + 0.14f;  //Add to stack damage to get first stack damage
                             });
                             if (RiskyMod.disableProcChains)
                             {
