@@ -12,7 +12,7 @@ namespace RiskyMod.Items.Boss
     {
         public static bool enabled = true;
         public static float initialDamageCoefficient = 3f;
-        public static float stackDamageCoefficient = 1.8f;
+        public static float stackDamageCoefficient = 2.1f;
         public static GameObject meatballPrefab;
 
         public MoltenPerf()
@@ -38,11 +38,11 @@ namespace RiskyMod.Items.Boss
                     ))
                 {
                     c.Index -= 6;
-                    c.Next.Operand = 1.8f;
+                    c.Next.Operand = MoltenPerf.stackDamageCoefficient;
                     c.Index += 4;
                     c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
                     {
-                        return damageCoefficient + 1.2f;
+                        return damageCoefficient + initialDamage;
                     });
 
 

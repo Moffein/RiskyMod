@@ -533,7 +533,8 @@ namespace RiskyMod
 
             CaptainCore.enabled = SurvivorCfg.Bind(captainString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             CaptainOrbitalHiddenRealms.enabled = SurvivorCfg.Bind(captainString, "Hidden Realm Orbital Skills", true, "Allow Orbital skills in Hiden Realms.").Value;
-            Microbots.enabled = SurvivorCfg.Bind(captainString, "Defensive Microbots Nerf", true, "Defensive Microbots no longer deletes stationary projectiles like gas clouds and Void Reaver mortars.").Value;
+            Microbots.deletionRestrictions = SurvivorCfg.Bind(captainString, "Defensive Microbots Nerf", true, "Defensive Microbots no longer deletes stationary projectiles like gas clouds and Void Reaver mortars.").Value;
+            Microbots.droneScaling = SurvivorCfg.Bind(captainString, "Defensive Microbots Drone Scaling", true, "Defensive Microbots scale with drone count instead of attack speed.").Value;
             CaptainCore.enablePrimarySkillChanges = SurvivorCfg.Bind(captainString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
             CaptainCore.modifyTaser = SurvivorCfg.Bind(captainString, "Power Taser Changes", true, "Enable changes to this skill.").Value;
             CaptainCore.nukeChanges = SurvivorCfg.Bind(captainString, "Diablo Strike Changes", true, "Enable changes to this skill.").Value;

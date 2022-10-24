@@ -257,7 +257,7 @@ namespace RiskyMod.Survivors.Mage
                 skillDef.baseMaxStock = 1;
                 skillDef.baseRechargeInterval = 5f;
                 skillDef.beginSkillCooldownOnSkillEnd = true;
-                skillDef.canceledFromSprinting = flamethrowerSprintCancel;
+                skillDef.canceledFromSprinting = flamethrowerSprintCancel && !SoftDependencies.RtAutoSprintLoaded;
                 skillDef.dontAllowPastMaxStocks = true;
                 skillDef.forceSprintDuringState = false;
                 skillDef.fullRestockOnAssign = true;

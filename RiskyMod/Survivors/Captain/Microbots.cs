@@ -12,71 +12,79 @@ namespace RiskyMod.Survivors.Captain
 {
     public class Microbots
     {
-        public static bool enabled = true;
+        public static bool deletionRestrictions = true;
+		public static bool droneScaling = true;
+
         public Microbots()
         {
-            if (!enabled) return;
-			On.EntityStates.CaptainDefenseMatrixItem.DefenseMatrixOn.DeleteNearbyProjectile += (orig, self) =>
+            if (deletionRestrictions)
 			{
-				Vector3 vector = self.attachedBody ? self.attachedBody.corePosition : Vector3.zero;
-				TeamIndex teamIndex = self.attachedBody ? self.attachedBody.teamComponent.teamIndex : TeamIndex.None;
-				float num = DefenseMatrixOn.projectileEraserRadius * DefenseMatrixOn.projectileEraserRadius;
-				int num2 = 0;
-				int itemStack = self.GetItemStack();
-				bool result = false;
-				List<ProjectileController> instancesList = InstanceTracker.GetInstancesList<ProjectileController>();
-				List<ProjectileController> list = new List<ProjectileController>();
-				int num3 = 0;
-				int count = instancesList.Count;
-				while (num3 < count && num2 < itemStack)
+				On.EntityStates.CaptainDefenseMatrixItem.DefenseMatrixOn.DeleteNearbyProjectile += (orig, self) =>
 				{
-					ProjectileController projectileController = instancesList[num3];
-					if (projectileController.teamFilter.teamIndex != teamIndex && (projectileController.transform.position - vector).sqrMagnitude < num)
+					Vector3 vector = self.attachedBody ? self.attachedBody.corePosition : Vector3.zero;
+					TeamIndex teamIndex = self.attachedBody ? self.attachedBody.teamComponent.teamIndex : TeamIndex.None;
+					float num = DefenseMatrixOn.projectileEraserRadius * DefenseMatrixOn.projectileEraserRadius;
+					int num2 = 0;
+					int itemStack = self.GetItemStack();
+					bool result = false;
+					List<ProjectileController> instancesList = InstanceTracker.GetInstancesList<ProjectileController>();
+					List<ProjectileController> list = new List<ProjectileController>();
+					int num3 = 0;
+					int count = instancesList.Count;
+					while (num3 < count && num2 < itemStack)
 					{
-						bool canDelete = true;
-						if (canDelete && !projectileController.gameObject.GetComponent<ProjectileSimple>())
+						ProjectileController projectileController = instancesList[num3];
+						if (projectileController.teamFilter.teamIndex != teamIndex && (projectileController.transform.position - vector).sqrMagnitude < num)
 						{
-							canDelete = false;
-						}
+							bool canDelete = true;
 
-						if (canDelete)
-                        {
-							list.Add(projectileController);
-							num2++;
-						}
-					}
-					num3++;
-				}
-				int i = 0;
-				int count2 = list.Count;
-				while (i < count2)
-				{
-					ProjectileController projectileController2 = list[i];
-					if (projectileController2)
-					{
-						result = true;
-						Vector3 position = projectileController2.transform.position;
-						Vector3 start = vector;
-						if (DefenseMatrixOn.tracerEffectPrefab)
-						{
-							EffectData effectData = new EffectData
+							if (!projectileController.gameObject.GetComponent<ProjectileSimple>() && !projectileController.gameObject.GetComponent<ProjectileCharacterController>())
 							{
-								origin = position,
-								start = start
-							};
-							EffectManager.SpawnEffect(DefenseMatrixOn.tracerEffectPrefab, effectData, true);
+								canDelete = false;
+							}
+
+							if (canDelete)
+							{
+								list.Add(projectileController);
+								num2++;
+							}
 						}
-						EntityState.Destroy(projectileController2.gameObject);
+						num3++;
 					}
-					i++;
-				}
-				return result;
-			};
+					int i = 0;
+					int count2 = list.Count;
+					while (i < count2)
+					{
+						ProjectileController projectileController2 = list[i];
+						if (projectileController2)
+						{
+							result = true;
+							Vector3 position = projectileController2.transform.position;
+							Vector3 start = vector;
+							if (DefenseMatrixOn.tracerEffectPrefab)
+							{
+								EffectData effectData = new EffectData
+								{
+									origin = position,
+									start = start
+								};
+								EffectManager.SpawnEffect(DefenseMatrixOn.tracerEffectPrefab, effectData, true);
+							}
+							EntityState.Destroy(projectileController2.gameObject);
+						}
+						i++;
+					}
+					return result;
+				};
+			}
 
-			ItemsCore.ModifyItemDefActions += ModifyItem;
+			if (droneScaling)
+			{
+				ItemsCore.ModifyItemDefActions += ModifyItem;
 
-			var getMicrobotRechargeFrequency =
-				new Hook(typeof(EntityStates.CaptainDefenseMatrixItem.DefenseMatrixOn).GetMethodCached("get_rechargeFrequency"), typeof(Microbots).GetMethodCached(nameof(MicrobotsAttackSpeedHook)));
+				var getMicrobotRechargeFrequency =
+					new Hook(typeof(EntityStates.CaptainDefenseMatrixItem.DefenseMatrixOn).GetMethodCached("get_rechargeFrequency"), typeof(Microbots).GetMethodCached(nameof(MicrobotsAttackSpeedHook)));
+			}
 		}
 
 		private static void ModifyItem()

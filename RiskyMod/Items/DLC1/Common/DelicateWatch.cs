@@ -83,7 +83,7 @@ namespace RiskyMod.Items.DLC1.Common
 
             SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += (CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory) =>
             {
-                if (sender.outOfDanger)
+                if (sender.HasBuff(DelicateWatch.WatchIndicatorBuff))
                 {
                     int itemCount = inventory.GetItemCount(DLC1Content.Items.FragileDamageBonus);
                     if (itemCount > 0)

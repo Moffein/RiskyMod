@@ -9,7 +9,7 @@ namespace RiskyMod.Items.Boss
     {
         public static bool enabled = true;
         public static float initialDamageCoefficient = 5f;
-        public static float stackDamageCoefficient = 3f;
+        public static float stackDamageCoefficient = 3.5f;
         public ChargedPerf()
         {
             if (!enabled) return;
