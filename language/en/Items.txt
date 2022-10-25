@@ -2,7 +2,7 @@
 	strings:
 	{
 	"ITEM_FLATHEALTH_PICKUP_RISKYMOD": "Gain max health.",
-	"ITEM_FLATHEALTH_DESC_RISKYMOD": "Increases <style=cIsHealing>maximum health</style> by <style=cIsHealing>1<style=cStack> (+1 per stack)</style> level</style>.",
+	"ITEM_FLATHEALTH_DESC_RISKYMOD": "Increases <style=cIsHealing>maximum health</style> by <style=cIsHealing>1</style><style=cStack> (+1 per stack)</style> level.",
 	
 	"ITEM_CRITGLASSES_PICKUP_RISKYMOD": "Gain 7% chance for hits to 'Critically Strike', dealing double damage.",
 	"ITEM_CRITGLASSES_DESC_RISKYMOD": "Your attacks have a <style=cIsDamage>7%</style> <style=cStack>(+7% per stack)</style> chance to \'<style=cIsDamage>Critically Strike</style>\', dealing <style=cIsDamage>double damage</style>.",
@@ -13,7 +13,7 @@
 	"ITEM_CROWBAR_DESC_RISKYMOD": "Deal <style=cIsDamage>+50%</style> <style=cStack>(+50% per stack)</style> damage on your <style=cIsDamage>first hit</style> against an enemy.",
 	
 	"ITEM_WARDONLEVEL_PICKUP_RISKYMOD": "Drop a Warbanner on level up or starting the Teleporter event. Grants allies armor, damage, attack speed and movement speed.",
-	"ITEM_WARDONLEVEL_DESC_RISKYMOD": "On <style=cIsUtility>level up</style> or starting the <style=cIsUtility>Teleporter event</style>, drop a banner that strengthens all allies within <style=cIsUtility>16m</style> <style=cStack>(+8m per stack)</style>. Raise <style=cIsHealing>armor</style> by <style=cIsHealing>15</style>, raise <style=cIsDamage>damage</style> by <style=cIsDamage>15%</style>, and raise <style=cIsDamage>attack speed</style> and <style=cIsUtility>movement speed</style> by <style=cIsDamage>30%</style>.",
+	"ITEM_WARDONLEVEL_DESC_RISKYMOD": "On <style=cIsUtility>level up</style> or starting the <style=cIsUtility>Teleporter event</style>, drop a banner that strengthens all allies within <style=cIsUtility>16m</style> <style=cStack>(+8m per stack)</style>. Raise <style=cIsHealing>armor</style> by <style=cIsHealing>15</style>, <style=cIsDamage>damage</style> by <style=cIsDamage>15%</style>, and <style=cIsDamage>attack speed</style> and <style=cIsUtility>movement speed</style> by <style=cIsDamage>30%</style>.",
 	
 	"ITEM_IGNITEONKILL_DESC_RISKYMOD": "Killing an enemy <style=cIsDamage>ignites</style> all enemies within <style=cIsDamage>16m</style> for <style=cIsDamage>150%</style> base damage. Additionally, enemies <style=cIsDamage>burn</style> for <style=cIsDamage>150%</style> <style=cStack>(+75% per stack)</style> base damage.",
 	
@@ -38,7 +38,7 @@
 	"ITEM_EXPLODEONDEATH_DESC_RISKYMOD": "On killing an enemy, spawn a <style=cIsDamage>lava pillar</style> in a <style=cIsDamage>16m</style> radius for <style=cIsDamage>350%</style> <style=cStack>(+280% per stack)</style> base damage.",
 	
 	"ITEM_SQUIDTURRET_PICKUP_RISKYMOD": "Taking heavy damage summons a Squid Turret nearby.",
-	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Chance on taking damage to summon a <style=cIsDamage>Squid Turret</style> with <style=cIsHealing>100% <style=cStack>(+30% per stack)</style> health</style> and <style=cIsDamage>100% <style=cStack>(+100% per stack)</style> attack speed</style> that <style=cIsUtility>distracts</style> nearby enemies. Chance increases the more damage you take. Limited to <style=cIsUtility>3</style>.",
+	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Chance on taking damage to summon a <style=cIsDamage>Squid Turret</style> with <style=cIsHealing>100% <style=cStack>(+30% per stack)</style></style> health and <style=cIsDamage>100% <style=cStack>(+100% per stack)</style></style> attack speed that <style=cIsUtility>distracts</style> nearby enemies. Chance increases the more damage you take. Limited to <style=cIsUtility>3</style>.",
 	
 	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>chain lightning</style> for <style=cIsDamage>80%</style> TOTAL damage on up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> targets within <style=cIsDamage>25m</style>.",
 	
@@ -75,7 +75,7 @@
 	
 	"ITEM_BEHEMOTH_DESC_RISKYMOD": "All your <style=cIsDamage>attacks explode</style> in a <style=cIsDamage>4m</style> <style=cStack>(+2.5m per stack)</style> radius for a bonus <style=cIsDamage>60%</style> <style=cStack>(+20% per stack)</style> TOTAL damage to nearby enemies.",
 	
-	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>Recruit a Beetle Guard</style> with bonus <style=cIsDamage>300%</style> <style=cStack>(+300% per stack)</style> damage and <style=cIsHealing>200% <style=cStack>(+100% per stack)</style> health</style>.",
+	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>Recruit a Beetle Guard</style> with bonus <style=cIsDamage>300%</style> <style=cStack>(+300% per stack)</style> damage and <style=cIsHealing>200% <style=cStack>(+100% per stack)</style></style> health.",
 	
 	"ITEM_FIREBALLSONHIT_DESC_RISKYMOD": "<style=cIsDamage>10%</style> chance on hit to call forth <style=cIsDamage>3 magma balls</style> from an enemy, dealing <style=cIsDamage>300%</style> <style=cStack>(+180% per stack)</style> damage each.",
 	

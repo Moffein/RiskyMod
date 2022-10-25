@@ -88,11 +88,10 @@ namespace RiskyMod.Survivors.Croco
                     public static float timeBetweenTicks = 0.5f;
                     public static float damageCoefficient = 1f;
                     public static float procCoefficient = 0.5f;
+                    public static float spreadRange = 30f;
                 }
             }
         }
-        
-
 
         public CrocoCore()
         {

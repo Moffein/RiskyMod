@@ -133,6 +133,9 @@ namespace RiskyMod
             AIBlacklistItems.enabled = GeneralCfg.Bind(gameMechString, "Expanded AI Blacklist", true, "Adds extra items to the AI Blacklist by default.").Value;
             BarrierDecay.enabled = GeneralCfg.Bind(gameMechString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
             TeleExpandOnBossKill.enabled = GeneralCfg.Bind(gameMechString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;
+
+            TeleChargeDuration.enabled = GeneralCfg.Bind(gameMechString, "Tele Charge Duration Increase", false, "Increases teleporter charge duration from 90s to 120s like RoR1.").Value;
+
             SmallHoldoutCharging.enabled = GeneralCfg.Bind(gameMechString, "Small Holdout Charging", true, "Void/Moon Holdouts charge at max speed as long as 1 player is charging.").Value;
             //ItemOutOfBounds.enabled = GeneralCfg.Bind(gameMechString, "Item Out of Bounds Teleport", true, "Items that fall out of bounds get teleported back.").Value;
             ItemOutOfBounds.enabled = false; //Jank code
@@ -731,6 +734,7 @@ namespace RiskyMod
             CrocoCore.Cfg.Skills.Epidemic.baseTickCount = SurvivorCrocoCfg.Bind("09. Special - Epidemic", "Tick Count", 7, "Number of ticks that Epidemic hits for. Does not include the initial hit that applies it.").Value;
             CrocoCore.Cfg.Skills.Epidemic.damageCoefficient = SurvivorCrocoCfg.Bind("09. Special - Epidemic", "Damage Coefficient", 1f, "How much damage each tick of Epidemic deals.").Value;
             CrocoCore.Cfg.Skills.Epidemic.procCoefficient = SurvivorCrocoCfg.Bind("09. Special - Epidemic", "Proc Coefficient", 0.5f, "Affects the chance and power of item effects triggered by this skill.").Value;
+            CrocoCore.Cfg.Skills.Epidemic.spreadRange = SurvivorCrocoCfg.Bind("09. Special - Epidemic", "Spread Range", 30f, "How far Epidemic can spread on each bounce.").Value;
         }
     }
 }

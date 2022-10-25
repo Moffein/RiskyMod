@@ -148,7 +148,7 @@ namespace RiskyMod
                 {
                     extend = true;
                 }
-                float duration = Survivors.Croco.CrocoCore.Cfg.Skills.Passives.baseDoTDuration * (extend ? Survivors.Croco.CrocoCore.Cfg.Skills.Passives.virulentDurationMult : 1f);
+                float duration = Survivors.Croco.CrocoCore.Cfg.Passives.baseDoTDuration * (extend ? Survivors.Croco.CrocoCore.Cfg.Passives.virulentDurationMult : 1f);
 
                 int stacks = 1;
                 if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBlightStack)) stacks = Mathf.CeilToInt(damageInfo.damage);
@@ -174,7 +174,7 @@ namespace RiskyMod
                 {
                     extend = true;
                 }
-                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Poison, Survivors.Croco.CrocoCore.Cfg.Skills.Passives.baseDoTDuration * (extend ? Survivors.Croco.CrocoCore.Cfg.Skills.Passives.virulentDurationMult : 1f), 1f);
+                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Poison, Survivors.Croco.CrocoCore.Cfg.Passives.baseDoTDuration * (extend ? Survivors.Croco.CrocoCore.Cfg.Passives.virulentDurationMult : 1f), 1f);
             }
         }
 

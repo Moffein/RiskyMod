@@ -311,6 +311,7 @@ namespace RiskyMod
             //Holdouts
             new SmallHoldoutCharging();
             new TeleExpandOnBossKill();
+            new TeleChargeDuration();
 
             //Interactables
             new BloodShrineMinReward();

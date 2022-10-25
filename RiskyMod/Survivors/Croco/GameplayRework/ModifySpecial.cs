@@ -72,7 +72,7 @@ namespace RiskyMod.Survivors.Croco
             DamageAPI.ModdedDamageTypeHolderComponent mdc = go.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             mdc.Add(dt);
             ProjectileProximityBeamController pbc = go.GetComponent<ProjectileProximityBeamController>();
-            pbc.attackRange = 40f;
+            pbc.attackRange = CrocoCore.Cfg.Skills.Epidemic.spreadRange * (dt == EpidemicScepter ? 1.5f : 1f);
             return go;
         }
 
