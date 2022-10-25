@@ -689,7 +689,7 @@ namespace RiskyMod
 
         private static void GenerateCrocoConfig()
         {
-            SurvivorCrocoCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Acrid.cfg"), true);
+            SurvivorCrocoCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Survivors_Acrid.cfg"), true);
             CrocoCore.enabled = SurvivorCrocoCfg.Bind("00. General", "Enable Changes", true, "Enable changes to this survivor.").Value;
             CrocoCore.gameplayRework = SurvivorCrocoCfg.Bind("00. General", "Gameplay Rework", true, "A full rework of Acrid's skills. Every option outside of General/Stats requires this to be enabled.").Value;
             BiggerMeleeHitbox.enabled = SurvivorCrocoCfg.Bind("00. General", "Extend Melee Hitbox", true, "Extends Acrid's melee hitbox so he can hit Vagrants while standing on top of them.").Value;
