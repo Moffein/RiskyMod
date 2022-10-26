@@ -5,6 +5,7 @@ using RoR2;
 using RoR2.Projectile;
 using RoR2.Skills;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Captain
 {
@@ -15,7 +16,8 @@ namespace RiskyMod.Survivors.Captain
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CaptainBody");
 
         public static bool modifyTaser = true;
-        public static bool nukeChanges = true;
+        public static bool nukeAmmopackNerf = true;
+        public static bool nukeProc = true;
 
         public static bool beaconRework = true;
 
@@ -47,7 +49,7 @@ namespace RiskyMod.Survivors.Captain
                 CaptainIndex = BodyCatalog.FindBodyIndex("CaptainBody");
             };
 
-            if (nukeChanges || beaconRework)
+            if (nukeAmmopackNerf || beaconRework)
             {
                 On.RoR2.GenericSkill.ApplyAmmoPack += (orig, self) =>
                 {
@@ -56,7 +58,7 @@ namespace RiskyMod.Survivors.Captain
                     {
                         return;
                     }
-                    else if (CaptainCore.nukeChanges && self.activationState.stateType == typeof(EntityStates.Captain.Weapon.SetupAirstrikeAlt))
+                    else if (CaptainCore.nukeAmmopackNerf && self.activationState.stateType == typeof(EntityStates.Captain.Weapon.SetupAirstrikeAlt))
                     {
                         if (self.stock < self.maxStock)
                         {
@@ -68,6 +70,13 @@ namespace RiskyMod.Survivors.Captain
                         orig(self);
                     }
                 };
+            }
+
+            if (nukeProc)
+            {
+                GameObject nukePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainAirstrikeAltProjectile.prefab").WaitForCompletion();
+                ProjectileImpactExplosion pie = nukePrefab.GetComponent<ProjectileImpactExplosion>();
+                pie.blastProcCoefficient = 3f;
             }
         }
 
