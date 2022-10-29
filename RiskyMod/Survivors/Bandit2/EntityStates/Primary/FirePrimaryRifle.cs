@@ -12,7 +12,7 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
 
         private void LoadStats()
         {
-            damageCoefficient = 3.3f;
+            damageCoefficient = 3.6f;
             procCoefficient = 1f;
             bulletCount = 1;
             maxDistance = 1000f;
@@ -23,7 +23,7 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
             maxSpread = 0f;
             spreadPitchScale = 0.5f;
             spreadYawScale = 1.3f;
-            spreadBloomValue = 0.6f;
+            spreadBloomValue = 0.4f;
             recoilAmplitudeY = 1f;
             recoilAmplitudeX = 0.5f;
             muzzleName = "MuzzleShotgun";

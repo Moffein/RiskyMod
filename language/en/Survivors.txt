@@ -10,7 +10,7 @@
 	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Recharge Skills</style> and reduce <style=cIsUtility>Equipment</style> cooldown by <style=cIsUtility>20s</style> on use.",
 	
 	"BANDIT2_PRIMARY_DESC_RISKYMOD" : "Fire a shotgun burst for <style=cIsDamage>5x90% damage</style>. Can hold up to 4 shells.",
-	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD" : "Fire a rifle blast that pierces for <style=cIsDamage>330% damage</style>. Can hold up to 4 bullets.",
+	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD" : "Fire a rifle blast that pierces for <style=cIsDamage>360% damage</style>. Can hold up to 4 bullets.",
 	"BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD" : "All attacks from <style=cIsDamage>behind</style> are <style=cIsDamage>Critical Strikes</style>. All <style=cIsDamage>Critical Strike Chance</style> is converted into <style=cIsDamage>Critical Strike Damage</style>.",
 	"BANDIT2_REVOLVER_NAME_RISKYMOD" : "Gunslinger",
 	"BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD" : "Revolver kills <style=cIsUtility>reset all your cooldowns</style>.",
