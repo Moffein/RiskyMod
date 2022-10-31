@@ -162,13 +162,13 @@ namespace RiskyMod.Survivors.Croco
         {
             //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "damageCoefficient", "2");
             //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "comboFinisherDamageCoefficient", "5");
-
+            
             if (CrocoCore.Cfg.enabled)
             {
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "damageCoefficient", CrocoCore.Cfg.Skills.ViciousWounds.damageCoefficient.ToString("0.000"));
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "comboFinisherDamageCoefficient", CrocoCore.Cfg.Skills.ViciousWounds.finisherDamageCoefficient.ToString("0.000"));
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "damageCoefficient", SneedUtils.SneedUtils.FloatToString(CrocoCore.Cfg.Skills.ViciousWounds.damageCoefficient));
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "comboFinisherDamageCoefficient", SneedUtils.SneedUtils.FloatToString(CrocoCore.Cfg.Skills.ViciousWounds.finisherDamageCoefficient));
             }
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "baseDuration", CrocoCore.Cfg.Skills.ViciousWounds.baseDuration.ToString("0.000"));
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Slash", "baseDuration", SneedUtils.SneedUtils.FloatToString(CrocoCore.Cfg.Skills.ViciousWounds.baseDuration));
 
             SkillDef primaryDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoSlash.asset").WaitForCompletion();
             primaryDef.skillDescriptionToken = "CROCO_PRIMARY_DESCRIPTION_RISKYMOD";
@@ -195,11 +195,11 @@ namespace RiskyMod.Survivors.Croco
             if (CrocoCore.Cfg.enabled)
             {
                 spitDef.baseRechargeInterval = CrocoCore.Cfg.Skills.Neurotoxin.cooldown;
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireSpit", "damageCoefficient", CrocoCore.Cfg.Skills.Neurotoxin.damageCoefficient.ToString("0.000"));
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireSpit", "damageCoefficient", SneedUtils.SneedUtils.FloatToString(CrocoCore.Cfg.Skills.Neurotoxin.damageCoefficient));
 
                 biteDef.baseRechargeInterval = CrocoCore.Cfg.Skills.Bite.cooldown;
             }
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Bite", "damageCoefficient", CrocoCore.Cfg.Skills.Bite.damageCoefficient.ToString("0.000"));
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Bite", "damageCoefficient", SneedUtils.SneedUtils.FloatToString(CrocoCore.Cfg.Skills.Bite.damageCoefficient));
 
             new ModifyM2Spit();
             new ModifyM2Bite();
@@ -223,9 +223,9 @@ namespace RiskyMod.Survivors.Croco
 
             if (CrocoCore.Cfg.enabled)
             {
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Leap", "blastDamageCoefficient", CrocoCore.Cfg.Skills.FrenziedLeap.damageCoefficient.ToString("0.000"));
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.Leap", "blastDamageCoefficient", SneedUtils.SneedUtils.FloatToString(CrocoCore.Cfg.Skills.CausticLeap.damageCoefficient));
 
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.ChainableLeap", "blastDamageCoefficient", CrocoCore.Cfg.Skills.FrenziedLeap.damageCoefficient.ToString("0.000"));
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.ChainableLeap", "blastDamageCoefficient", SneedUtils.SneedUtils.FloatToString(CrocoCore.Cfg.Skills.FrenziedLeap.damageCoefficient));
             }
             new ModifyShift();
         }

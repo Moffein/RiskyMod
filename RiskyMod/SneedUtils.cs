@@ -367,5 +367,13 @@ namespace SneedUtils
             }
             return string.Empty;
         }
+
+        //Embarassing code, there has to be a better way.
+        public static string FloatToString(float f)
+        {
+            int whole = Mathf.FloorToInt(f);
+            int dec = Mathf.FloorToInt((f - whole) * 100f);
+            return whole + "." + dec;
+        }
     }
 }
