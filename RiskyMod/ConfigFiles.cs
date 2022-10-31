@@ -528,7 +528,7 @@ namespace RiskyMod
             LoaderCore.slamChanges = SurvivorCfg.Bind(loaderString, "Thunderslam Changes", true, "Enable changes to this skill.").Value;
             LoaderCore.pylonChanges = SurvivorCfg.Bind(loaderString, "M551 Pylon Changes", true, "Enable changes to this skill.").Value;
 
-            CrocoCore.Cfg.enabled = SurvivorCfg.Bind(crocoString, "0 - Use Separate Config", true, "Generate a separate config file for more in-depth tuning. Overwrites ALL settings for this survivor.").Value;
+            CrocoCore.Cfg.enabled = SurvivorCfg.Bind(crocoString, "0. Use Separate Config", false, "Generate a separate config file for more in-depth tuning. Overwrites ALL settings for this survivor.").Value;
             CrocoCore.enabled = SurvivorCfg.Bind(crocoString, "Enable Changes", true, "Enable changes to this survivor. Skill options unavailable due to all the changes being too interlinked.").Value;
             CrocoCore.gameplayRework = SurvivorCfg.Bind(crocoString, "Gameplay Rework", true, "A full rework of Acrid's skills.").Value;
             BiggerMeleeHitbox.enabled = SurvivorCfg.Bind(crocoString, "Extend Melee Hitbox", true, "Extends Acrid's melee hitbox so he can hit Vagrants while standing on top of them.").Value;
