@@ -10,12 +10,14 @@ using RoR2.Skills;
 using UnityEngine.Networking;
 using RoR2.Projectile;
 using System.Linq;
+using EntityStates.TitanMonster;
 
 namespace RiskyMod.Enemies.Bosses
 {
     public class Titan
     {
         public static bool enabled = true;
+        public static float laserTrackingSpeed = 36f;   //xi is 10
 
         public Titan()
         {
@@ -48,11 +50,11 @@ namespace RiskyMod.Enemies.Bosses
         private void LaserRework()
         {
             Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Titan/TitanBodyLaser.asset").WaitForCompletion().baseRechargeInterval = 15f;   //Vanilla 20
-            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireMegaLaser.asset", "damageCoefficient", "1.6");    //Vanilla 1
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireMegaLaser.asset", "damageCoefficient", "1.5");    //Vanilla 1
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireMegaLaser.asset", "fireFrequency", "10");    //Vanilla 8
 
+            TrackingRework();
             MegaLaserAttackSpeed();
-            DisableLaserLock();
             LaserRadius();
             //SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/DLC1/MajorAndMinorConstruct/EntityStates.MajorConstruct.Weapon.FireLaser.asset").WaitForCompletion());
         }
@@ -94,29 +96,6 @@ namespace RiskyMod.Enemies.Bosses
             };
         }
 
-        private void DisableLaserLock()
-        {
-            On.EntityStates.TitanMonster.ChargeMegaLaser.OnEnter += (orig, self) =>
-            {
-                orig(self);
-                if (self.enemyFinder != null)
-                {
-                    self.enemyFinder.maxAngleFilter = 0f;
-                    self.enemyFinder.maxDistanceFilter = 0f;
-                }
-            };
-
-            On.EntityStates.TitanMonster.FireMegaLaser.UpdateLockOn += (orig, self) =>
-            {
-                if (self.enemyFinder != null)
-                {
-                    self.enemyFinder.maxAngleFilter = 0f;
-                    self.enemyFinder.maxDistanceFilter = 0f;
-                }
-                orig(self);
-            };
-        }
-
         private void LaserRadius()
         {
             IL.EntityStates.TitanMonster.FireMegaLaser.FireBullet += (il) =>
@@ -145,7 +124,7 @@ namespace RiskyMod.Enemies.Bosses
             GameObject masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Titan/TitanMaster.prefab").WaitForCompletion();
 
             BaseAI ba = masterObject.GetComponent<BaseAI>();
-            ba.aimVectorMaxSpeed = 60f; //Vanilla 180
+            ba.aimVectorMaxSpeed = 180f; //Other hitscanners are 60f
 
             AISkillDriver[] aiDrivers = masterObject.GetComponents<AISkillDriver>();
             foreach(AISkillDriver ai in aiDrivers)
@@ -154,7 +133,7 @@ namespace RiskyMod.Enemies.Bosses
                 {
                     ai.minDistance = 0f;
                     ai.maxDistance = 200f;
-                    ai.aimType = AISkillDriver.AimType.AtMoveTarget;    //See if this makes it smoother
+                    ai.aimType = AISkillDriver.AimType.AtCurrentEnemy;    //See if this makes it smoother
                     ai.driverUpdateTimerOverride = 10f; //laser firing = 8s, laser chargeup = 2s
                 }
             }
@@ -230,6 +209,69 @@ namespace RiskyMod.Enemies.Bosses
                         float num = self.ownerCharacterBody ? self.ownerCharacterBody.damage : 1f;
                         ProjectileManager.instance.FireProjectile(self.projectilePrefab, self.fireTransform.position, Util.QuaternionSafeLookRotation(forward), self.owner, self.damageCoefficient * num, self.damageForce, self.isCrit, DamageColorIndex.Default, null, -1f);
                     }
+                }
+            };
+        }
+
+        private void TrackingRework()
+        {
+            //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.MajorConstruct.Weapon.FireLaser");
+            On.EntityStates.TitanMonster.FireMegaLaser.FixedUpdate += (orig, self) =>
+            {
+                self.fixedAge += Time.fixedDeltaTime;
+                self.fireStopwatch += Time.fixedDeltaTime;
+                self.stopwatch += Time.fixedDeltaTime;
+
+                Ray trueAimRay = self.GetAimRay();
+
+                Vector3 muzzlePosition = trueAimRay.origin;
+                if (self.muzzleTransform)
+                {
+                    muzzlePosition = self.muzzleTransform.position;
+                }
+
+                //Find intended Laser aim direction
+                float targetDistance = Mathf.Infinity;
+                Vector3 idealAimDirection = trueAimRay.direction;
+                if (self.lockedOnHurtBox)
+                {
+                    idealAimDirection = self.lockedOnHurtBox.transform.position - muzzlePosition;
+                    targetDistance = idealAimDirection.magnitude;
+                    idealAimDirection.Normalize();
+                }
+
+                self.aimRay.origin = muzzlePosition;
+                self.aimRay.direction = Vector3.RotateTowards(self.aimRay.direction, idealAimDirection, Titan.laserTrackingSpeed * 0.0174532924f * Time.fixedDeltaTime, float.PositiveInfinity); //constant converts euler to radians
+                Vector3 laserEndPoint = muzzlePosition + FireMegaLaser.maxDistance * self.aimRay.direction;
+
+                RaycastHit raycastHit;
+                if (Physics.Raycast(self.aimRay, out raycastHit, FireMegaLaser.maxDistance, LayerIndex.world.mask | LayerIndex.entityPrecise.mask))
+                {
+                    laserEndPoint = raycastHit.point;
+                }
+
+                if (self.laserEffect && self.laserChildLocator)
+                {
+                    self.laserEffect.transform.rotation = Util.QuaternionSafeLookRotation(self.aimRay.direction);
+                    self.laserEffectEnd.transform.position = laserEndPoint;
+                }
+                if (self.fireStopwatch > 1f / FireMegaLaser.fireFrequency)
+                {
+                    string targetMuzzle = "MuzzleLaser";
+                    self.FireBullet(self.modelTransform, self.aimRay, targetMuzzle, FireMegaLaser.maxDistance);
+                    self.UpdateLockOn();
+                    self.fireStopwatch -= 1f / FireMegaLaser.fireFrequency;
+                }
+
+                bool isPlayer = self.characterBody && self.characterBody.isPlayerControlled;
+                bool inputReleased = isPlayer && (!self.inputBank || !self.inputBank.skill4.down);
+                bool minDurationPassed = self.stopwatch > FireMegaLaser.minimumDuration;
+                bool maxDurationPassed = self.stopwatch > FireMegaLaser.maximumDuration;
+
+                if (self.isAuthority && ((inputReleased  && minDurationPassed) || maxDurationPassed))
+                {
+                    self.outer.SetNextStateToMain();
+                    return;
                 }
             };
         }
