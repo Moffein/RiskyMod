@@ -108,7 +108,7 @@
 	
 	"ITEM_CLOVER_DESC_RISKYMOD": "All random effects are rolled <style=cIsUtility>+1</style> <style=cStack>(+1 per stack)</style>times for a <style=cIsUtility>favorable outcome</style>. If your <style=cIsDamage>luck</style> is above <style=cIsUtility>1</style>, increase <style=cIsUtility>ALL stats</style> by <style=cIsUtility>30%</style> <style=cStack>(+30% per stack)</style> instead.",
 	
-	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Gain <style=cIsDamage>Col. Droneman</style>. \nDrones gain <style=cIsDamage>+50%</style> <style=cStack>(+50% per stack)</style> attack speed and cooldown reduction. \nDrones gain <style=cIsDamage>10%</style> chance to fire a <style=cIsDamage>missile</style> on hit, dealing <style=cIsDamage>300%</style> TOTAL damage. \nDrones gain an <style=cIsDamage>automatic chain gun</style> that deals <style=cIsDamage>6x60%</style>damage, bouncing to <style=cIsDamage>2</style> enemies.",
+	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Gain <style=cIsDamage>Col. Droneman</style>. \nDrones gain <style=cIsDamage>+50%</style> <style=cStack>(+50% per stack)</style> attack speed and cooldown reduction. \nDrones gain <style=cIsDamage>10%</style> chance to fire a <style=cIsDamage>missile</style> on hit, dealing <style=cIsDamage>300%</style> TOTAL damage. \nDrones gain an <style=cIsDamage>automatic chain gun</style> that deals <style=cIsDamage>6x50%</style>damage, bouncing to <style=cIsDamage>2</style> enemies.",
 	
 	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "Deal bonus damage while outside of danger.",
 	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Increase damage by <style=cIsDamage>10%</style> <style=cStack>(+10% per stack)</style> while outside of danger.",
@@ -129,6 +129,6 @@
 	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Prevents <style=cIsUtility>1 <style=cStack>(+1 per stack)</style></style> <style=cIsDamage>debuff</style> and instead grants a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>25%</style> of <style=cIsHealing>maximum health</style>. Recharges every <style=cIsUtility>5</style> seconds</style>.",
 	
 	"ITEM_HEALINGPOTION_PICKUP_RISKYMOD" : "Rapidly heal when below half health. Consumed on use.",
-	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "Taking damage to below <style=cIsHealth>50% health</style> <style=cIsUtility>consumes</style> this item, <style=cIsHealing>healing</style> you for <style=cIsHealing>50%</style> of <style=cIsHealing>maximum health</style> over <style=cIsHealing>4</style> seconds.", 
+	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "Taking damage to below <style=cIsHealth>50% health</style> <style=cIsUtility>consumes</style> this item, <style=cIsHealing>healing</style> you for <style=cIsHealing>50%</style> of <style=cIsHealing>maximum health</style> over <style=cIsHealing>8</style> seconds.", 
 	}
 }

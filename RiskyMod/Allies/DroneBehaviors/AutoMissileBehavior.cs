@@ -12,7 +12,7 @@ namespace RiskyMod.Allies.DroneBehaviors
         public static float maxActivationDistance = 80f;
         public static int missilesPerBarrage = 4;
 
-        public static float damageCoefficient = 1.3f;
+        public static float damageCoefficient = 1.1f;
         public static float baseFireInterval = 0.15f;
 
         public SkillLocator skillLocator;

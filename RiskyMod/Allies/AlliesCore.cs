@@ -15,63 +15,19 @@ namespace RiskyMod.Allies
     public class AlliesCore
     {
         public static bool enabled = true;
-        public static bool nerfDroneParts = true;
-        public static bool dronePartsIgnoresAllyCap = true;
         public static bool beetleGlandDontRetaliate = true;
         public static bool normalizeDroneDamage = true;
+        public static bool changeScaling = true;
+        public static bool buffRegen = true;
 
         public AlliesCore()
         {
             AllyItems.Init();
 
             if (!enabled) return;
-            if (nerfDroneParts)
-            {
-                Items.ItemsCore.ModifyItemDefActions += ModifyDroneParts;
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.DroneWeaponsChainGun.FireChainGun", "damageCoefficient", "0.6");   //coef 1 orig
-
-                IL.RoR2.DroneWeaponsBoostBehavior.OnEnemyHit += (il) =>
-                {
-                    ILCursor c = new ILCursor(il);
-                    if (c.TryGotoNext(MoveType.After,
-                         x => x.MatchCallvirt<CharacterBody>("get_damage")
-                        ))
-                    {
-                        c.Emit(OpCodes.Ldarg_1);    //DamageInfo
-                        c.EmitDelegate<Func<float, DamageInfo, float>>((bodyDamage, damageInfo) => damageInfo.damage);
-                    }
-                    else
-                    {
-                        Debug.LogError("RiskyMod: AlliesCore DroneWeaponsBoostBehavior.OnEnemyHit IL Hook failed");
-                    }
-                };
-            }
-
-            if (dronePartsIgnoresAllyCap)
-            {
-                IL.RoR2.DroneWeaponsBehavior.TrySpawnDrone += (il) =>
-                {
-                    ILCursor c = new ILCursor(il);
-                    if (c.TryGotoNext(
-                         x => x.MatchCallvirt<DirectorCore>("TrySpawnObject")
-                        ))
-                    {
-                        c.EmitDelegate<Func<DirectorSpawnRequest, DirectorSpawnRequest>>(spawnRequest =>
-                        {
-                            spawnRequest.ignoreTeamMemberLimit = dronePartsIgnoresAllyCap;
-                            return spawnRequest;
-                        });
-                    }
-                    else
-                    {
-                        Debug.LogError("RiskyMod: AlliesCore DroneWeaponsBehavior.TrySpawnDrone IL Hook failed");
-                    }
-                };
-            }
-
             if (AlliesCore.normalizeDroneDamage)
             {
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireTurret", "damageCoefficient", "0.25");   //Shared with Gunner Drones, but those use a dedicated component to handle attacking now
+                //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireTurret", "damageCoefficient", "0.25");   //Shared with Gunner Drones, but those use a dedicated component to handle attacking now
 
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireGatling", "damageCoefficient", "0.45");   //Damage 18 -> 12, coef 0.3 -> 0.45
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.HealBeam", "healCoefficient", "1.7");   //Damage 10 -> 12, coef 2 -> 1.6667
@@ -82,7 +38,7 @@ namespace RiskyMod.Allies
 
                 NormalizeDroneDamage(AllyPrefabs.GunnerDrone);
                 NormalizeDroneDamage(AllyPrefabs.HealDrone);
-                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/backupdronebody"));
+                //NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/backupdronebody"));
                 NormalizeDroneDamage(AllyPrefabs.MissileDrone);
                 NormalizeDroneDamage(AllyPrefabs.EquipmentDrone);
                 NormalizeDroneDamage(AllyPrefabs.EmergencyDrone);
@@ -107,11 +63,6 @@ namespace RiskyMod.Allies
             new StricterLeashing();
             TweakDrones();
             new CheaperRepairs();
-        }
-
-        private static void ModifyDroneParts()
-        {
-            HG.ArrayUtils.ArrayAppend(ref Items.ItemsCore.changedItemDescs, DLC1Content.Items.DroneWeapons);
         }
 
         private void TweakDrones()

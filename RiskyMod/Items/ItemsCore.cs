@@ -115,6 +115,7 @@ namespace RiskyMod.Items
             new BottledChaos();
             new Raincoat();
             new Scorpion();
+            new SpareDroneParts();
         }
 
         private void ModifyVoid()

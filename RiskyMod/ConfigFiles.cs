@@ -176,8 +176,6 @@ namespace RiskyMod
 
             //Allies
             AlliesCore.normalizeDroneDamage = GeneralCfg.Bind(allyString, "Normalize Drone Damage", true, "Normalize drone damage stats so that they perform the same when using Spare Drone Parts.").Value;
-            AlliesCore.nerfDroneParts = GeneralCfg.Bind(allyString, "Spare Drone Parts Changes", true, "Reduce the damage of Spare Drone Parts.").Value;
-            AlliesCore.dronePartsIgnoresAllyCap = GeneralCfg.Bind(allyString, "Spare Drone Parts - Ignore Ally Cap", true, "Col. Droneman ignores the ally cap.").Value;
             AllyScaling.noVoidDeath = GeneralCfg.Bind(allyString, "No Void Death", true, "Allies are immune to Void implosions.").Value;
             NoVoidDamage.enabled = GeneralCfg.Bind(allyString, "No Void Damage", true, "Allies take no damage from Void fog.").Value;
             AllyScaling.noOverheat = GeneralCfg.Bind(allyString, "No Overheat", true, "Allies are immune to Grandparent Overheat.").Value;
@@ -187,6 +185,8 @@ namespace RiskyMod
             AlliesCore.beetleGlandDontRetaliate = GeneralCfg.Bind(allyString, "Queens Gland Guards Dont Retaliate", true, "Queens Gland Guards will not fight back if hurt by their owners.").Value;
             MegaDrone.allowRepair = GeneralCfg.Bind(allyString, "TC280 - Enable Repairs", true, "TC280s can be repaired like other drones after being destroyed.").Value;
             CheaperRepairs.enabled = GeneralCfg.Bind(allyString, "Cheaper Drone Repairs", true, "Repairing drones is cheaper.").Value;
+            AlliesCore.changeScaling = GeneralCfg.Bind(allyString, "Scaling Changes", true, "Ally HP and Damage scales so that they always perform the same on every stage.").Value;
+            AlliesCore.buffRegen = GeneralCfg.Bind(allyString, "Regen Changes", true, "Most allies regen to full HP in a fixed amount of time.").Value;
 
             //Interactables
             ShrineCombatItems.enabled = GeneralCfg.Bind(interactString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
@@ -326,10 +326,13 @@ namespace RiskyMod
             HappiestMask.scaleCount = ItemCfg.Bind(legendaryString, "Happiest Mask - Stacks Increase Max Ghosts", false, "Extra stacks allow for more ghosts to spawn. Will lag in MP.").Value;
             HappiestMask.noGhostLimit = ItemCfg.Bind(legendaryString, "Happiest Mask - Remove Ghost Limit", false, "Removes the ghost limit at all times. Definitely will lag.").Value;
             HeadHunter.enabled = ItemCfg.Bind(legendaryString, "Wake of Vultures", true, itemConfigDescString).Value;
-            HeadHunter.perfectedTweak = ItemCfg.Bind(legendaryString, "Wake of Vultures - Perfected Tweak", true, "Perfected Affix gained via Wake of Vultures will not force your health pool to bec").Value;
+            HeadHunter.perfectedTweak = ItemCfg.Bind(legendaryString, "Wake of Vultures - Perfected Tweak", true, "Perfected Affix gained via Wake of Vultures will not force your health pool to become shields.").Value;
             Headstompers.enabled = ItemCfg.Bind(legendaryString, "H3AD-ST", true, itemConfigDescString).Value;
             LaserTurbine.enabled = ItemCfg.Bind(legendaryString, "Resonance Disc", true, itemConfigDescString).Value;
             Scorpion.enabled = ItemCfg.Bind(legendaryString, "Symbiotic Scorpion", true, itemConfigDescString).Value;
+
+            SpareDroneParts.enabled = ItemCfg.Bind(legendaryString, "Spare Drone Parts", true, itemConfigDescString).Value;
+            SpareDroneParts.ignoreAllyCap = ItemCfg.Bind(legendaryString, "Spare Drone Parts - Ignore Ally Cap", true, "Col. Droneman ignores the ally cap if changes are enabled.").Value;
 
             //Currently trying this out with the same proc coefficient as Vanilla.
             //MeatHook.enabled = ItemCfg.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;

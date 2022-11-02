@@ -36,7 +36,7 @@ namespace EntityStates.RiskyMod.MegaDrone
 				}
 
 				//Added DestroyOnTimer b elow.
-				//EntityState.Destroy(base.gameObject);
+				EntityState.Destroy(base.gameObject);
 			}
 		}
 
@@ -46,7 +46,6 @@ namespace EntityStates.RiskyMod.MegaDrone
 			Util.PlaySound(MegaDroneDeathState.initialSoundString, base.gameObject);
 			Transform modelTransform = base.GetModelTransform();
 
-			base.gameObject.AddComponent<DestroyOnTimer>().duration = 15f;
 			if (modelTransform)
 			{
 				modelTransform.gameObject.AddComponent<DestroyOnTimer>().duration = 15f;

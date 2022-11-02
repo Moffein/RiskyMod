@@ -131,7 +131,7 @@ namespace RiskyMod.Allies
             ItemDisplayRule[] idr = new ItemDisplayRule[0];
             ItemAPI.Add(new CustomItem(AllyRegenItem, idr));
 
-            if (AlliesCore.enabled) SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += AllyRegenItemDelegate;
+            if (AlliesCore.enabled && AlliesCore.buffRegen) SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += AllyRegenItemDelegate;
         }
 
         private static void AllyRegenItemDelegate(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
@@ -209,7 +209,7 @@ namespace RiskyMod.Allies
             ItemDisplayRule[] idr = new ItemDisplayRule[0];
             ItemAPI.Add(new CustomItem(AllyScalingItem, idr));
 
-            if (AlliesCore.enabled) SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += AllyScalingItemDelegate;
+            if (AlliesCore.enabled && AlliesCore.changeScaling) SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += AllyScalingItemDelegate;
         }
 
         private static void AllyScalingItemDelegate(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)

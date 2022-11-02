@@ -58,7 +58,7 @@ namespace RiskyMod.Items.DLC1.Common
                     {
                         if (self.body.HasBuff(PowerElixir.regenBuff))
                         {
-                            regenAccumulator += Time.fixedDeltaTime * 0.125f * self.fullHealth;
+                            regenAccumulator += Time.fixedDeltaTime * 0.0625f * self.fullHealth;
                         }
                         return regenAccumulator;
                     });
