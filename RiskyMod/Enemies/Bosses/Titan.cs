@@ -17,7 +17,7 @@ namespace RiskyMod.Enemies.Bosses
     public class Titan
     {
         public static bool enabled = true;
-        public static float laserTrackingSpeed = 36f;   //xi is 10
+        public static float laserTrackingSpeed = 30f;   //xi is 10
 
         public Titan()
         {
@@ -49,7 +49,7 @@ namespace RiskyMod.Enemies.Bosses
 
         private void LaserRework()
         {
-            Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Titan/TitanBodyLaser.asset").WaitForCompletion().baseRechargeInterval = 15f;   //Vanilla 20
+            //Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Titan/TitanBodyLaser.asset").WaitForCompletion().baseRechargeInterval = 15f;   //Vanilla 20
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireMegaLaser.asset", "damageCoefficient", "1.5");    //Vanilla 1
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireMegaLaser.asset", "fireFrequency", "10");    //Vanilla 8
 
