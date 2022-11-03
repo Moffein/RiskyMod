@@ -240,7 +240,10 @@ namespace RiskyMod.Enemies.Bosses
                     idealAimDirection.Normalize();
                 }
 
+                Vector3 currentAimDirection = (self.laserEffectEnd.transform.position - muzzlePosition).normalized;
                 self.aimRay.origin = muzzlePosition;
+                self.aimRay.direction = currentAimDirection;
+
                 self.aimRay.direction = Vector3.RotateTowards(self.aimRay.direction, idealAimDirection, Titan.laserTrackingSpeed * 0.0174532924f * Time.fixedDeltaTime, float.PositiveInfinity); //constant converts euler to radians
                 Vector3 laserEndPoint = muzzlePosition + FireMegaLaser.maxDistance * self.aimRay.direction;
 
