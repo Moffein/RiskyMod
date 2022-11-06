@@ -43,7 +43,6 @@ namespace RiskyMod.Enemies.Bosses
             GameObject masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Titan/TitanGoldMaster.prefab").WaitForCompletion();
 
             BaseAI ba = masterObject.GetComponent<BaseAI>();
-            ba.aimVectorMaxSpeed = 60f; //Vanilla 180
 
             AISkillDriver[] aiDrivers = masterObject.GetComponents<AISkillDriver>();
             foreach (AISkillDriver ai in aiDrivers)

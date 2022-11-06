@@ -37,7 +37,6 @@ namespace RiskyMod.Enemies.Mobs
 
         private void RemoveSlashSlow()
         {
-            //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.ImpMonster.DoubleSlash");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.ImpMonster.DoubleSlash", "walkSpeedPenaltyCoefficient", "1");   //0.5 is vanilla
         }
 
