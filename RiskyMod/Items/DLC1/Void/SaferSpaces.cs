@@ -14,6 +14,7 @@ namespace RiskyMod.Items.DLC1.Void
         {
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
             {
+                bool error = true;
                 ILCursor c = new ILCursor(il);
                 if(c.TryGotoNext(
                     x => x.MatchLdfld<HealthComponent>("body"),
@@ -27,8 +28,17 @@ namespace RiskyMod.Items.DLC1.Void
                         body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.1f);
                         return body;
                     });
+
+                    if (c.TryGotoNext(
+                        x => x.MatchLdcR4(15f)
+                        ))
+                    {
+                        c.Next.Operand = 20f;
+                        error = false;
+                    }
                 }
-                else
+
+                if (error)
                 {
                     UnityEngine.Debug.LogError("RiskyMod: SaferSpaces IL Hook failed");
                 }

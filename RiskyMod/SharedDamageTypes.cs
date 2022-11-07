@@ -16,7 +16,6 @@ namespace RiskyMod
         public static DamageAPI.ModdedDamageType ProjectileRainForce;
 
         public static DamageAPI.ModdedDamageType AntiFlyingForce;
-        public static DamageAPI.ModdedDamageType SawBarrier;
 
         public static DamageAPI.ModdedDamageType InterruptOnHit;
 
@@ -43,7 +42,6 @@ namespace RiskyMod
             ProjectileRainForce = DamageAPI.ReserveDamageType();
 
             AntiFlyingForce = DamageAPI.ReserveDamageType();
-            SawBarrier = DamageAPI.ReserveDamageType();
 
             CrocoBlightStack = DamageAPI.ReserveDamageType();
             CrocoBlight6s = DamageAPI.ReserveDamageType();
@@ -68,7 +66,6 @@ namespace RiskyMod
 
             OnHitEnemy.OnHitNoAttackerActions += ApplySlow50For5s;
 
-            OnHitEnemy.OnHitAttackerActions += ApplySawBarrierOnHit;
             OnHitEnemy.OnHitAttackerActions += ApplyCaptainTaserSource;
 
             TakeDamage.OnDamageTakenAttackerActions += ApplyAlwaysIgnite;
@@ -198,17 +195,6 @@ namespace RiskyMod
                         direction *= Mathf.Min(4f, Mathf.Max(rb.mass / 100f, 1f));  //Greater Wisp 300f, SCU 1000f
                         damageInfo.force += 1600f * direction;
                     }
-                }
-            }
-        }
-
-        private static void ApplySawBarrierOnHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
-        {
-            if (damageInfo.HasModdedDamageType(SawBarrier))
-            {
-                if (attackerBody.healthComponent)
-                {
-                    attackerBody.healthComponent.AddBarrier(attackerBody.healthComponent.fullCombinedHealth * 0.006f);
                 }
             }
         }

@@ -5,6 +5,7 @@ namespace RiskyMod.Tweaks.Holdouts
     public class TeleExpandOnBossKill
     {
         public static bool enabled = true;
+        public static bool enableDuringEclipse = false;
         public TeleExpandOnBossKill()
         {
             if (!enabled) return;
@@ -15,9 +16,13 @@ namespace RiskyMod.Tweaks.Holdouts
                 //Minimum charge of 5% to prevent it from instantly expanding when the tele starts before boss is spawned
                 if (self.monstersCleared && self.holdoutZoneController && self.activationState == TeleporterInteraction.ActivationState.Charging && self.chargeFraction > 0.05f)
                 {
-                    if (Util.GetItemCountForTeam(self.holdoutZoneController.chargingTeam, RoR2Content.Items.FocusConvergence.itemIndex, true, true) <= 0)
+                    bool eclipseEnabled = Run.instance.selectedDifficulty >= DifficultyIndex.Eclipse2;
+                    if (enableDuringEclipse || !eclipseEnabled)
                     {
-                        self.holdoutZoneController.currentRadius = 1000000f;
+                        if (Util.GetItemCountForTeam(self.holdoutZoneController.chargingTeam, RoR2Content.Items.FocusConvergence.itemIndex, true, true) <= 0)
+                        {
+                            self.holdoutZoneController.currentRadius = 1000000f;
+                        }
                     }
                 }
             };

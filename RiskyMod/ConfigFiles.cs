@@ -133,6 +133,7 @@ namespace RiskyMod
             AIBlacklistItems.enabled = GeneralCfg.Bind(gameMechString, "Expanded AI Blacklist", true, "Adds extra items to the AI Blacklist by default.").Value;
             BarrierDecay.enabled = GeneralCfg.Bind(gameMechString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
             TeleExpandOnBossKill.enabled = GeneralCfg.Bind(gameMechString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;
+            TeleExpandOnBossKill.enableDuringEclipse = GeneralCfg.Bind(gameMechString, "Tele Expand on Boss Kill - Enable During Eclispe", false, "Enables teleporter expansion when playing on Eclipse 2+.").Value;
 
             TeleChargeDuration.enabled = GeneralCfg.Bind(gameMechString, "Tele Charge Duration Increase", false, "Increases teleporter charge duration from 90s to 120s like RoR1.").Value;
 

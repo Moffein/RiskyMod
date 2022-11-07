@@ -9,6 +9,8 @@ namespace RiskyMod.Items.DLC1.Void
     public class Dungus
     {
         public static bool enabled = true;
+        public static float baseHealPercent = 0.012f;
+        public static float stackHealPercent = 0.006f;
         public Dungus()
         {
             if (!enabled) return;
@@ -23,12 +25,12 @@ namespace RiskyMod.Items.DLC1.Void
                      x => x.MatchLdcR4(0.01f)
                     ))
                 {
-                    c.Next.Operand = 0.00375f;
+                    c.Next.Operand = stackHealPercent * 0.5f;
                     if(c.TryGotoNext(MoveType.After,
                          x => x.MatchMul()
                         ))
                     {
-                        c.EmitDelegate<Func<float, float>>(healPercent => healPercent + 0.00375f);
+                        c.EmitDelegate<Func<float, float>>(healPercent => healPercent + (baseHealPercent - stackHealPercent) * 0.5f);
                         error = false;
                     }
                 }

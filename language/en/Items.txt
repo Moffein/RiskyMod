@@ -15,7 +15,7 @@
 	"ITEM_WARDONLEVEL_PICKUP_RISKYMOD": "Drop a Warbanner on level up or starting the Teleporter event. Grants allies armor, damage, attack speed and movement speed.",
 	"ITEM_WARDONLEVEL_DESC_RISKYMOD": "On <style=cIsUtility>level up</style> or starting the <style=cIsUtility>Teleporter event</style>, drop a banner that strengthens all allies within <style=cIsUtility>16m</style> <style=cStack>(+8m per stack)</style>. Raise <style=cIsHealing>armor</style> by <style=cIsHealing>15</style>, <style=cIsDamage>damage</style> by <style=cIsDamage>15%</style>, and <style=cIsDamage>attack speed</style> and <style=cIsUtility>movement speed</style> by <style=cIsDamage>30%</style>.",
 	
-	"ITEM_IGNITEONKILL_DESC_RISKYMOD": "Killing an enemy <style=cIsDamage>ignites</style> all enemies within <style=cIsDamage>16m</style> for <style=cIsDamage>150%</style> base damage. Additionally, enemies <style=cIsDamage>burn</style> for <style=cIsDamage>150%</style> <style=cStack>(+75% per stack)</style> base damage.",
+	"ITEM_IGNITEONKILL_DESC_RISKYMOD": "Killing an enemy <style=cIsDamage>ignites</style> all enemies within <style=cIsDamage>12m</style> for <style=cIsDamage>150%</style> base damage. Additionally, enemies <style=cIsDamage>burn</style> for <style=cIsDamage>150%</style> <style=cStack>(+75% per stack)</style> base damage.",
 	
 	"ITEM_REPULSIONARMORPLATE_PICKUP_RISKYMOD": "Increase armor by 5.",
 	"ITEM_REPULSIONARMORPLATE_DESC_RISKYMOD": "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>5</style>.",
@@ -45,7 +45,7 @@
 	"ITEM_THORNS_DESC_RISKYMOD": "Getting hit causes you to explode in a burst of razors, dealing <style=cIsDamage>160%</style> <style=cStack>(+40% per stack)</style> damage. Hits up to <style=cIsDamage>3</style> <style=cStack>(+2 per stack)</style> targets in a <style=cIsDamage>25m</style> radius.",
 	
 	"ITEM_SPRINTARMOR_PICKUP_RISKYMOD": "Increase armor. Gain bonus armor while sprinting.",
-	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style>. Gain an additional <style=cIsHealing>20</style> <style=cStack>(+20 per stack)</style> armor while <style=cIsUtility>sprinting</style>.",
+	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style>. Gain an additional <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style> armor while <style=cIsUtility>sprinting</style>.",
 	
 	"ITEM_EXECUTELOWHEALTHELITE_PICKUP_RISKYMOD": "Deal bonus damage to enemies below 50% health.",
 	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Deal <style=cIsDamage>+30%</style> <style=cStack>(+30% per stack)</style> damage to enemies below <style=cIsDamage>50% health</style>.",
@@ -96,13 +96,13 @@
 	
 	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Hits that deal <style=cIsDamage>more than 400% damage</style> also fire a black hole that <style=cIsUtility>draws enemies within 15m into its center</style>. Lasts <style=cIsUtility>5</style> seconds before collapsing, dealing <style=cIsDamage>150%</style> <style=cStack>(+90% per stack)</style> TOTAL damage. Recharges every <style=cIsUtility>15</style> seconds.",
 	
-	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Killing an enemy increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>125%</style>, fading over <style=cIsUtility>3</style> <style=cStack>(+1.5 per stack)</style> seconds.",
+	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Killing an enemy increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>125%</style>, fading over <style=cIsUtility>2</style> <style=cStack>(+1 per stack)</style> seconds.",
 	
 	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> <style=cStack>(+10% per stack)</style>. Leaving combat boosts your <style=cIsUtility>movement speed</style> by an additional <style=cIsUtility>30%</style> <style=cStack>(+30% per stack)</style>.",
 	
 	"ITEM_HEALWHILESAFE_DESC_RISKYMOD": "Increases <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>+4 hp/s</style> <style=cStack>(+4 hp/s per stack)</style>while outside of danger.",
 	
-	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsHealing>Heals</style> for <style=cIsHealing>1.5%</style> <style=cStack>(+0.75% per stack)</style> of your <style=cIsHealing>health</style> every second <style=cIsUtility>while sprinting</style>. <style=cIsVoid>Corrupts all Bustling Fungi</style>.",
+	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsHealing>Heals</style> for <style=cIsHealing>1.2%</style> <style=cStack>(+0.6% per stack)</style> of your <style=cIsHealing>health</style> every second <style=cIsUtility>while sprinting</style>. <style=cIsVoid>Corrupts all Bustling Fungi</style>.",
 	
 	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Create a zone around the Teleporter that <style=cIsHealing>heals</style> for <style=cIsHealing>5%</style> <style=cStack>(+2.5% per stack)</style> of your <style=cIsHealing>health</style> every second. Release a <style=cIsHealing>healing nova </style>during the Teleporter event, <style=cIsHealing>healing</style> all nearby allies for <style=cIsHealing>50%</style> of their maximum health. Occurs <style=cIsHealing>1</style> <style=cStack>(+1 per stack)</style> times.",
 	

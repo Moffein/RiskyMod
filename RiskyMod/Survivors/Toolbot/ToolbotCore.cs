@@ -216,10 +216,27 @@ namespace RiskyMod.Survivors.Toolbot
 
             if (sawBarrierOnHit)
             {
-                On.EntityStates.Toolbot.FireBuzzsaw.OnEnter += (orig, self) =>
+                IL.EntityStates.Toolbot.FireBuzzsaw.FixedUpdate += (il) =>
                 {
-                    orig(self);
-                    self.attack.AddModdedDamageType(SharedDamageTypes.SawBarrier);
+                    ILCursor c = new ILCursor(il);
+                    if (c.TryGotoNext(MoveType.After,
+                         x => x.MatchLdfld(typeof(EntityStates.Toolbot.FireBuzzsaw), "hitOverlapLastTick")
+                         ))
+                    {
+                        c.Emit(OpCodes.Ldarg_0);
+                        c.EmitDelegate<Func<bool, EntityStates.Toolbot.FireBuzzsaw, bool>>((hitEnemy, self) =>
+                        {
+                            if (hitEnemy && self.isAuthority && self.healthComponent)
+                            {
+                                self.healthComponent.AddBarrierAuthority(self.healthComponent.fullCombinedHealth * 0.006f);
+                            }
+                            return hitEnemy;
+                        });
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogError("RiskyMod: Toolbot SawBarrier IL Hook failed");
+                    }
                 };
 
                 sk.primary.skillFamily.variants[3].skillDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD";
