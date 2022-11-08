@@ -16,6 +16,7 @@ namespace RiskyMod
         public static DamageAPI.ModdedDamageType ProjectileRainForce;
 
         public static DamageAPI.ModdedDamageType AntiFlyingForce;
+        public static DamageAPI.ModdedDamageType SawBarrier;
 
         public static DamageAPI.ModdedDamageType InterruptOnHit;
 
@@ -55,6 +56,8 @@ namespace RiskyMod
             CaptainTaserSource = DamageAPI.ReserveDamageType();
             DontTriggerBands = DamageAPI.ReserveDamageType();
 
+            SawBarrier = DamageAPI.ReserveDamageType();
+
             TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
             TakeDamage.ModifyInitialDamageActions += ApplyAntiFlyingForce;
             TakeDamage.ModifyInitialDamageActions += DisableBandProc;
@@ -66,9 +69,21 @@ namespace RiskyMod
 
             OnHitEnemy.OnHitNoAttackerActions += ApplySlow50For5s;
 
+            OnHitEnemy.OnHitAttackerActions += ApplySawBarrierOnHit;
             OnHitEnemy.OnHitAttackerActions += ApplyCaptainTaserSource;
 
             TakeDamage.OnDamageTakenAttackerActions += ApplyAlwaysIgnite;
+        }
+
+        private static void ApplySawBarrierOnHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
+        {
+            if (damageInfo.HasModdedDamageType(SawBarrier))
+            {
+                if (attackerBody.healthComponent)
+                {
+                    attackerBody.healthComponent.AddBarrier(attackerBody.healthComponent.fullCombinedHealth * 0.003f);
+                }
+            }
         }
 
         private static void DisableBandProc(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)

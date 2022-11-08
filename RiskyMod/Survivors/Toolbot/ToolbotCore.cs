@@ -21,6 +21,7 @@ namespace RiskyMod.Survivors.Toolbot
 
         public static bool sawPhysics = true;
         public static bool sawBarrierOnHit = true;
+        public static bool sawHitbox = true;
 
         public static bool enableSecondarySkillChanges = true;
 
@@ -203,7 +204,10 @@ namespace RiskyMod.Survivors.Toolbot
 
 
                 sk.primary.skillFamily.variants[3].skillDef.cancelSprintingOnActivation = false;
+            }
 
+            if (sawHitbox)
+            {
                 HitBoxGroup[] hitboxes = ToolbotCore.bodyPrefab.GetComponentsInChildren<HitBoxGroup>();
                 foreach (HitBoxGroup h in hitboxes)
                 {
@@ -216,6 +220,12 @@ namespace RiskyMod.Survivors.Toolbot
 
             if (sawBarrierOnHit)
             {
+                On.EntityStates.Toolbot.FireBuzzsaw.OnEnter += (orig, self) =>
+                {
+                    orig(self);
+                    self.attack.AddModdedDamageType(SharedDamageTypes.SawBarrier);
+                };
+
                 IL.EntityStates.Toolbot.FireBuzzsaw.FixedUpdate += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
@@ -228,7 +238,7 @@ namespace RiskyMod.Survivors.Toolbot
                         {
                             if (hitEnemy && self.isAuthority && self.healthComponent)
                             {
-                                self.healthComponent.AddBarrierAuthority(self.healthComponent.fullCombinedHealth * 0.006f);
+                                self.healthComponent.AddBarrierAuthority(self.healthComponent.fullCombinedHealth * 0.003f);
                             }
                             return hitEnemy;
                         });
@@ -261,10 +271,10 @@ namespace RiskyMod.Survivors.Toolbot
                     if (self.isAuthority)
                     {
                         GenericSkill skill1 = self.GetPrimarySkill1();
-                        skill1.stock = skill1.maxStock;
+                        if (skill1) skill1.stock = skill1.maxStock;
 
                         GenericSkill skill2 = self.GetPrimarySkill2();
-                        skill2.stock = skill2.maxStock;
+                        if (skill2) skill2.stock = skill2.maxStock;
                     }
                 };
             }

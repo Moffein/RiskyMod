@@ -41,8 +41,10 @@ namespace RiskyMod.Items.DLC1.Equipment
                         if (ownerBody.teamComponent && ownerBody.teamComponent.teamIndex == TeamIndex.Player)
                         {
                             spawnCard.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                            spawnCard.GiveItem(Allies.AllyItems.AllyScalingItem);
-                            spawnCard.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
+                            //spawnCard.GiveItem(Allies.AllyItems.AllyScalingItem);
+                            //spawnCard.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
+                            spawnCard.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
+                            spawnCard.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
                         }
                         return spawnCard;
                     });

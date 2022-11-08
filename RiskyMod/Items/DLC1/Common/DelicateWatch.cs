@@ -31,9 +31,9 @@ namespace RiskyMod.Items.DLC1.Common
 
             SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += (self, inventory) =>
             {
+                bool hasBuff = self.HasBuff(WatchIndicatorBuff);
                 if (inventory.GetItemCount(DLC1Content.Items.FragileDamageBonus) > 0)
                 {
-                    bool hasBuff = self.HasBuff(WatchIndicatorBuff);
                     if (hasBuff && !self.outOfDanger)
                     {
                         if (NetworkServer.active) self.RemoveBuff(WatchIndicatorBuff);
@@ -44,6 +44,13 @@ namespace RiskyMod.Items.DLC1.Common
                         if (NetworkServer.active) self.AddBuff(WatchIndicatorBuff);
 
                         RoR2.Util.PlaySound("Play_RiskyMod_DelicateWatch_Ready", self.gameObject);
+                    }
+                }
+                else
+                {
+                    if (hasBuff && NetworkServer.active)
+                    {
+                        self.RemoveBuff(WatchIndicatorBuff);
                     }
                 }
             };

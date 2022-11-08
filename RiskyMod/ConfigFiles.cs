@@ -478,6 +478,7 @@ namespace RiskyMod
             ToolbotCore.enableScrapChanges = SurvivorCfg.Bind(toolbotString, "Scrap Launcher Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.scrapICBM = SurvivorCfg.Bind(toolbotString, "Scrap Launcher ICBM", true, "Scrap Launcher benefits from Pocket ICBM if Scrap Launcher Changes are enabled.").Value;
             ToolbotCore.sawPhysics = SurvivorCfg.Bind(toolbotString, "Power Saw Physics Changes", true, "Makes Power Saw physics more consistent.").Value;
+            ToolbotCore.sawHitbox = SurvivorCfg.Bind(toolbotString, "Power Saw Hitbox Changes", true, "Increases Power Saw hitbox size by 50%.").Value;
             ToolbotCore.sawBarrierOnHit = SurvivorCfg.Bind(toolbotString, "Power Saw Barrier On Hit", true, "Power Saw gives barrier-on-hit.").Value;
             ToolbotCore.enableSecondarySkillChanges = SurvivorCfg.Bind(toolbotString, "Blast Canister Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.enableRetoolChanges = SurvivorCfg.Bind(toolbotString, "Retool Changes", true, "Enable changes to this skill.").Value;

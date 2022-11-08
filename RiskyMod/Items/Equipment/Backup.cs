@@ -69,7 +69,8 @@ namespace RiskyMod.Items.Equipment
                                 {
                                     characterMaster.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
                                     characterMaster.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
-                                    characterMaster.inventory.GiveItem(Allies.AllyItems.AllyRegenItem, 40); //Doesn't matter much since it has a DestroyOnTimer
+                                    characterMaster.inventory.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
+                                    characterMaster.inventory.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
                                 }
                             }
                         }
