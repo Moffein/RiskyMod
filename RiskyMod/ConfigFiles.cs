@@ -498,16 +498,22 @@ namespace RiskyMod
             MageCore.ionSurgeMovementScaling = SurvivorCfg.Bind(mageString, "Ion Surge - Movement Scaling", false, "Ion Surge jump height scales with movement speed.");
             MageCore.ionSurgeShock = SurvivorCfg.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
 
+            MageCore.utilitySelfKnockback = SurvivorCfg.Bind(mageString, "Utility Self Knockback", true, "Snapfreeze Rework and Blaze Storm apply self-knockback when used midair.");
             MageCore.iceWallRework = SurvivorCfg.Bind(mageString, "Snapfreeze Rework", true, "Snapfreeze can target midair enemies and can be used for mobility.").Value;
             MageCore.enableFireUtility = SurvivorCfg.Bind(mageString, "Blaze Storm Utility Skill", true, "Enables this custom skill.").Value;
             MageCore.flamethrowerSprintCancel = SurvivorCfg.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
             MageCore.flamethrowerRangeExtend = SurvivorCfg.Bind(mageString, "Flamethrower - Increase Range", true, "Increases the range of flamethrower.").Value;
 
-            MageCore.enableLightningSpecial = SurvivorCfg.Bind(mageString, "Electrocture Special Skill", true, "Enables this custom skill.").Value;
+            MageCore.enableLightningSpecial = SurvivorCfg.Bind(mageString, "Electrocute Special Skill", true, "Enables this custom skill.").Value;
 
             if (MageCore.enabled)
             {
                 ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.ionSurgeMovementScaling));
+
+                if (MageCore.iceWallRework || MageCore.enableFireUtility)
+                {
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.utilitySelfKnockback));
+                }
             }
 
             MercCore.enabled = SurvivorCfg.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using RiskyMod;
 using RoR2.Projectile;
+using RiskyMod.Survivors.Mage;
 
 namespace EntityStates.RiskyMod.Mage.Weapon
 {
@@ -98,7 +99,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 
 				if (base.characterMotor)
 				{
-					ApplySelfKnockback();
+					if (MageCore.utilitySelfKnockback.Value) ApplySelfKnockback();
 				}
 
 				ProjectileManager.instance.FireProjectile(new FireProjectileInfo

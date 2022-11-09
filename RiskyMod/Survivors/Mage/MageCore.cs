@@ -44,6 +44,8 @@ namespace RiskyMod.Survivors.Mage
 
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/MageBody");
 
+        public static ConfigEntry<bool> utilitySelfKnockback;
+
         public MageCore()
         {
             if (!enabled) return;

@@ -5,6 +5,7 @@ using RoR2.Projectile;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using RiskyMod;
+using RiskyMod.Survivors.Mage;
 
 namespace EntityStates.RiskyMod.Mage.Weapon
 {
@@ -128,7 +129,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			if (base.isAuthority && base.characterMotor)
 			{
 				FireBlast();
-				ApplySelfKnockback();
+				if (MageCore.utilitySelfKnockback.Value) ApplySelfKnockback();
 			}
 
 			base.OnExit();
