@@ -98,7 +98,7 @@ namespace RiskyMod.Items.DLC1.Common
                 self.body.inventory.RemoveItem(DLC1Content.Items.HealingPotion, 1);
                 self.body.inventory.GiveItem(DLC1Content.Items.HealingPotionConsumed, 1);
                 CharacterMasterNotificationQueue.SendTransformNotification(self.body.master, DLC1Content.Items.HealingPotion.itemIndex, DLC1Content.Items.HealingPotionConsumed.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                self.body.AddTimedBuff(PowerElixir.regenBuff, 4f);
+                self.body.AddTimedBuff(PowerElixir.regenBuff, 8f);
                 EffectData effectData = new EffectData
                 {
                     origin = self.transform.position

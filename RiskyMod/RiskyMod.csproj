@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Items\DLC1\Lunar\**" />
+    <EmbeddedResource Remove="Items\DLC1\Lunar\**" />
+    <None Remove="Items\DLC1\Lunar\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="resources" />
     <None Remove="RiskyMod_Soundbank.bnk" />
   </ItemGroup>
@@ -12,10 +18,6 @@
   <ItemGroup>
     <EmbeddedResource Include="resources" />
     <EmbeddedResource Include="RiskyMod_Soundbank.bnk" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Items\DLC1\Lunar\" />
   </ItemGroup>
 
   <ItemGroup>
