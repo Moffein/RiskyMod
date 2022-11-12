@@ -99,7 +99,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 
 				if (base.characterMotor)
 				{
-					if (MageCore.utilitySelfKnockback.Value) ApplySelfKnockback();
+					if (MageCore.utilitySelfKnockback.Value && !base.characterMotor.isGrounded) ApplySelfKnockback();
 				}
 
 				ProjectileManager.instance.FireProjectile(new FireProjectileInfo

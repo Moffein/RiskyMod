@@ -126,10 +126,10 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 			}
 
 			//Always fire a blast attack so that Airborne enemies can be hit.
-			if (base.isAuthority && base.characterMotor)
+			if (base.isAuthority)
 			{
 				FireBlast();
-				if (MageCore.utilitySelfKnockback.Value) ApplySelfKnockback();
+				if (MageCore.utilitySelfKnockback.Value && base.characterMotor && !base.characterMotor.isGrounded) ApplySelfKnockback();
 			}
 
 			base.OnExit();
