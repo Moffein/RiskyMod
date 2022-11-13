@@ -23,6 +23,7 @@ namespace RiskyMod
         public static bool ShareSuiteLegendary = false;
         public static bool ShareSuiteBoss = false;
         public static bool ShareSuiteLunar = false;
+        public static bool ShareSuiteVoid = false;
 
         public static bool SpikestripGrooveSalad = false;
         public static bool SpikestripHeyImNoob = false;

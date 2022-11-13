@@ -78,7 +78,7 @@ namespace RiskyMod
 
     [BepInDependency("com.rune580.riskofoptions")]
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.13.27")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.14.0")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI), nameof(ItemAPI), nameof(DirectorAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
@@ -99,6 +99,11 @@ namespace RiskyMod
         public static GameModeIndex simulacrumIndex;
 
         private static SceneDef bazaarScene = Addressables.LoadAssetAsync<SceneDef>("RoR2/Base/bazaar/bazaar.asset").WaitForCompletion();
+
+        public static PickupDropTable tier1Drops = Addressables.LoadAssetAsync<PickupDropTable>("RoR2/Base/Common/dtTier1Item.asset").WaitForCompletion();
+        public static PickupDropTable tier2Drops = Addressables.LoadAssetAsync<PickupDropTable>("RoR2/Base/Common/dtTier2Item.asset").WaitForCompletion();
+        public static PickupDropTable tier3Drops = Addressables.LoadAssetAsync<PickupDropTable>("RoR2/Base/Common/dtTier3Item.asset").WaitForCompletion();
+        public static PickupDropTable tierVoidDrops = Addressables.LoadAssetAsync<PickupDropTable>("RoR2/Base/Common/dtVoidChest.asset").WaitForCompletion();
 
         public void Start()
         {
@@ -295,6 +300,7 @@ namespace RiskyMod
             SoftDependencies.ShareSuiteLegendary = ShareSuite.ShareSuite.RedItemsShared.Value;
             SoftDependencies.ShareSuiteBoss = ShareSuite.ShareSuite.BossItemsShared.Value;
             SoftDependencies.ShareSuiteLunar = ShareSuite.ShareSuite.LunarItemsShared.Value;
+            SoftDependencies.ShareSuiteVoid = ShareSuite.ShareSuite.VoidItemsShared.Value;
         }
 
         private void RunTweaks()
@@ -341,7 +347,7 @@ namespace RiskyMod
 
             //Misc
             new AIBlacklistItems();
-
+            new BetterProjectileTracking();
             new ItemOutOfBounds();
         }
 

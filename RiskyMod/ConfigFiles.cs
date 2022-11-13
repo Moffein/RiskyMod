@@ -138,8 +138,6 @@ namespace RiskyMod
             TeleChargeDuration.enabled = GeneralCfg.Bind(gameMechString, "Tele Charge Duration Increase", false, "Increases teleporter charge duration from 90s to 120s like RoR1.").Value;
 
             SmallHoldoutCharging.enabled = GeneralCfg.Bind(gameMechString, "Small Holdout Charging", true, "Void/Moon Holdouts charge at max speed as long as 1 player is charging.").Value;
-            //ItemOutOfBounds.enabled = GeneralCfg.Bind(gameMechString, "Item Out of Bounds Teleport", true, "Items that fall out of bounds get teleported back.").Value;
-            ItemOutOfBounds.enabled = false; //Jank code
 
             //Run Scaling
             CombatDirectorMultiplier.directorCreditMultiplier = GeneralCfg.Bind(scalingString, "Combat Director Credit Multiplier", 1.4f, "Multiply Combat Director credits by this amount. Set to 1 to disable").Value;
@@ -224,20 +222,22 @@ namespace RiskyMod
             RemoveFog.enabled = GeneralCfg.Bind(voidLocusString, "Remove Fog", false, "Removes Void Fog from the map.").Value;
             VoidLocus.FogDamage.enabled = GeneralCfg.Bind(voidLocusString, "Tweak Fog Damage", true, "Void Fog damage ticks at a constant rate, instead of ramping up like in Simulacrum.").Value && !RemoveFog.enabled;
             VoidLocus.ModifyHoldout.enabled = GeneralCfg.Bind(voidLocusString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
-            VoidLocus.PillarsDropItems.enabled = GeneralCfg.Bind(voidLocusString, "Signals Drop Items", true, "Pillars drop items for the team when completed.").Value;
-            VoidLocus.PillarsDropItems.whiteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Common Chance", 50f, "Chance for Signals to drop Common Items.").Value;
+            VoidLocus.PillarsDropItems.enabled = GeneralCfg.Bind(voidLocusString, "Signals Drop Items", true, "Void Signals drop items for the team when completed.").Value;
+            VoidLocus.PillarsDropItems.usePotential = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Drop Void Potential", true, "Void Signals drop Void Potentials. Overwrite chance settings.").Value;
+            VoidLocus.PillarsDropItems.whiteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Common Chance", 45f, "Chance for Signals to drop Common Items.").Value;
             VoidLocus.PillarsDropItems.greenChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Uncommon Chance", 40f, "Chance for Signals to drop Uncommon Items.").Value;
-            VoidLocus.PillarsDropItems.redChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Legendary Chance", 10f, "Chance for Signals to drop Legendary Items.").Value;
-            VoidLocus.PillarsDropItems.lunarChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Lunar Chance", 0f, "Chance for Signals to drop Lunar Items.").Value;
-            VoidLocus.PillarsDropItems.pearlOverwriteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Overwrite with Pearl Chance", 0f, "Chance for nonlegendary Pillar drops to be overwritten with a Pearl.").Value;
+            VoidLocus.PillarsDropItems.redChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Legendary Chance", 5f, "Chance for Signals to drop Legendary Items.").Value;
+            VoidLocus.PillarsDropItems.voidChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Void Chance", 10f, "Chance for Signals to drop Void Items.").Value;
 
             //Misc
+            BetterProjectileTracking.enabled = GeneralCfg.Bind(miscString, "Better Projectile Homing", true, "Homing projectiles target based on angle, instead of distance + angle.").Value;
             FixSlayer.enabled = GeneralCfg.Bind(miscString, "Fix Slayer Procs", true, "Bandit/Acrid bonus damage to low hp effect now applies to procs.").Value;
             CloakBuff.enabled = GeneralCfg.Bind(miscString, "Cloak Buff", true, "Increases delay between position updates while cloaked.").Value;
             Shock.enabled = GeneralCfg.Bind(miscString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
             FreezeChampionExecute.enabled = GeneralCfg.Bind(miscString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
             NerfVoidtouched.enabled = GeneralCfg.Bind(miscString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
             PlayerControlledMonsters.enabled = GeneralCfg.Bind(miscString, "Player-Controlled Monster Tweaks", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
+            ItemOutOfBounds.enabled = GeneralCfg.Bind(miscString, "Item Out of Bounds Teleport", true, "Items that fall out of bounds get teleported back.").Value;
         }
 
         private static void ConfigItems()
@@ -358,6 +358,7 @@ namespace RiskyMod
             VoidRing.enabled = ItemCfg.Bind(voidString, "Singularity Band", true, itemConfigDescString).Value;
 
             Zoea.ignoreAllyCap = ItemCfg.Bind(voidString, "Newly Hatched Zoea - Ignore Ally Cap", true, "Zoea Allies ignore the ally cap.").Value;
+            Zoea.maxAllyCount = ItemCfg.Bind(voidString, "Newly Hatched Zoea - Max Allies per Player", 6, "Max Void allies each player can summon.").Value;
             Zoea.enabled = Zoea.enabled && Zoea.ignoreAllyCap;
         }
 

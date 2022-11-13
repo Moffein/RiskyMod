@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace RiskyMod.VoidLocus
@@ -16,8 +17,10 @@ namespace RiskyMod.VoidLocus
         public static float greenChance = 40f;
         public static float redChance = 10f;
 
-        public static float pearlOverwriteChance = 0f;
-        public static float lunarChance = 0f;
+        public static float voidChance = 10f;
+
+        public static bool usePotential = true;
+        private static GameObject potentialPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/OptionPickup/OptionPickup.prefab").WaitForCompletion();
 
         public PillarsDropItems()
         {
@@ -35,19 +38,12 @@ namespace RiskyMod.VoidLocus
                         if (sd.baseSceneName.Equals("voidstage"))
                         {
                             HoldoutZoneController holdoutZone = self;
-                            PickupIndex pickupIndex = SelectItem();
+                            PickupDropTable dropTable = SelectItem();
+                            PickupIndex pickupIndex = dropTable.GenerateDrop(Run.instance.bossRewardRng);
                             ItemTier tier = PickupCatalog.GetPickupDef(pickupIndex).itemTier;
                             if (pickupIndex != PickupIndex.none)
                             {
                                 PickupDef pickupDef = PickupCatalog.GetPickupDef(pickupIndex);
-                                Chat.SendBroadcastChat(new Chat.SimpleChatMessage
-                                {
-                                    baseToken = "VOID_SIGNAL_COMPLETE_RISKYMOD",
-                                    paramTokens = new string[]
-                                    {
-                                    "<color=#"+ColorUtility.ToHtmlStringRGB(pickupDef.baseColor)+">"+Language.GetStringFormatted(pickupDef.nameToken) + "</color>"
-                                    }
-                                });
 
                                 int participatingPlayerCount = Run.instance.participatingPlayerCount;
                                 if (participatingPlayerCount != 0 && holdoutZone.transform)
@@ -61,21 +57,27 @@ namespace RiskyMod.VoidLocus
                                             if (SoftDependencies.ShareSuiteCommon)
                                             {
                                                 num = 1;
-                                                itemShareActive = true;
                                             }
                                             break;
                                         case ItemTier.Tier2:
                                             if (SoftDependencies.ShareSuiteUncommon)
                                             {
                                                 num = 1;
-                                                itemShareActive = true;
                                             }
                                             break;
                                         case ItemTier.Tier3:
                                             if (SoftDependencies.ShareSuiteLegendary)
                                             {
                                                 num = 1;
-                                                itemShareActive = true;
+                                            }
+                                            break;
+                                        case ItemTier.VoidTier1:
+                                        case ItemTier.VoidTier2:
+                                        case ItemTier.VoidTier3:
+                                        case ItemTier.VoidBoss:
+                                            if (SoftDependencies.ShareSuiteVoid)
+                                            {
+                                                num = 1;
                                             }
                                             break;
                                         default: break;
@@ -85,24 +87,39 @@ namespace RiskyMod.VoidLocus
                                     Vector3 vector = Quaternion.AngleAxis((float)UnityEngine.Random.Range(0, 360), Vector3.up) * (Vector3.up * 40f + Vector3.forward * 5f);
                                     Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
 
+                                    //Roll the rng anyways so that it performs the same with/without the config option. This code is a mess.
+                                    PickupPickerController.Option[] options = PickupPickerController.GenerateOptionsFromDropTable(3, dropTable, Run.instance.bossRewardRng);
+                                    if (options.Length > 0) options[0].pickupIndex = pickupIndex;
+
+                                    if (pickupDef != null && pickupDef.pickupIndex != PickupIndex.none)
+                                    {
+                                        Chat.SendBroadcastChat(new Chat.SimpleChatMessage
+                                        {
+                                            baseToken = "VOID_SIGNAL_COMPLETE_RISKYMOD",
+                                            paramTokens = new string[]
+                                            {
+                                                "<color=#"+ColorUtility.ToHtmlStringRGB(pickupDef.baseColor)+">"+Language.GetStringFormatted(pickupDef.nameToken) + "</color>"
+                                            }
+                                        });
+                                    }
 
                                     int k = 0;
                                     while (k < num)
                                     {
-                                        PickupIndex pickupOverwrite = PickupIndex.none;
-                                        bool overwritePickup = false;
-                                        if (tier != ItemTier.Tier3 && !itemShareActive && !SoftDependencies.ShareSuiteBoss)
+                                        if (usePotential)
                                         {
-                                            float pearlChance = pearlOverwriteChance;
-                                            float total = pearlChance;
-                                            if (Run.instance.bossRewardRng.RangeFloat(0f, 100f) < pearlChance)
+                                            PickupDropletController.CreatePickupDroplet(new GenericPickupController.CreatePickupInfo
                                             {
-                                                pickupOverwrite = SelectPearl();
-                                            }
-
-                                            overwritePickup = !(pickupOverwrite == PickupIndex.none);
+                                                pickupIndex = PickupCatalog.FindPickupIndex(tier),
+                                                pickerOptions = options,
+                                                rotation = Quaternion.identity,
+                                                prefabOverride = potentialPrefab
+                                            }, holdoutZone.transform.position + rewardPositionOffset, vector);
                                         }
-                                        PickupDropletController.CreatePickupDroplet(overwritePickup ? pickupOverwrite : pickupIndex, holdoutZone.transform.position + rewardPositionOffset, vector);
+                                        else
+                                        {
+                                            PickupDropletController.CreatePickupDroplet(pickupIndex, holdoutZone.transform.position + rewardPositionOffset, vector);
+                                        }
                                         k++;
                                         vector = rotation * vector;
                                     }
@@ -145,44 +162,36 @@ namespace RiskyMod.VoidLocus
         }
 
         //Yellow Chance is handled after selecting item
-        private static PickupIndex SelectItem()
+        private static PickupDropTable SelectItem()
         {
-            List<PickupIndex> list;
             Xoroshiro128Plus bossRewardRng = Run.instance.bossRewardRng;
-            PickupIndex selectedPickup = PickupIndex.none;
 
-            float total = whiteChance + greenChance + redChance + lunarChance;
+            float total = whiteChance + greenChance + redChance + voidChance;
 
             if (bossRewardRng.RangeFloat(0f, total) <= whiteChance)//drop white
             {
-                list = Run.instance.availableTier1DropList;
+                return RiskyMod.tier1Drops;
             }
             else
             {
                 total -= whiteChance;
                 if (bossRewardRng.RangeFloat(0f, total) <= greenChance)//drop green
                 {
-                    list = Run.instance.availableTier2DropList;
+                    return RiskyMod.tier2Drops;
                 }
                 else
                 {
                     total -= greenChance;
                     if ((bossRewardRng.RangeFloat(0f, total) <= redChance))
                     {
-                        list = Run.instance.availableTier3DropList;
+                        return RiskyMod.tier3Drops;
                     }
                     else
                     {
-                        list = Run.instance.availableLunarCombinedDropList;
+                        return RiskyMod.tierVoidDrops;
                     }
-
                 }
             }
-            if (list.Count > 0)
-            {
-                selectedPickup = bossRewardRng.NextElementUniform<PickupIndex>(list);
-            }
-            return selectedPickup;
         }
     }
 }
