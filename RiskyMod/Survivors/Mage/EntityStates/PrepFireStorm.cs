@@ -97,10 +97,7 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 					aimPos = raycastHit.point;
 				}
 
-				if (base.characterMotor)
-				{
-					if (MageCore.utilitySelfKnockback.Value && !base.characterMotor.isGrounded) ApplySelfKnockback();
-				}
+				if (MageCore.utilitySelfKnockback.Value && base.characterMotor && !base.characterMotor.isGrounded) ApplySelfKnockback();
 
 				ProjectileManager.instance.FireProjectile(new FireProjectileInfo
 				{
