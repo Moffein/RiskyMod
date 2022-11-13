@@ -39,11 +39,7 @@ namespace RiskyMod.Items.Boss
 			{
 				if (NetworkServer.active)
 				{
-					SceneDef sd = RoR2.SceneCatalog.GetSceneDefForCurrentScene();
-					if (sd && sd.baseSceneName.Equals("bazaar"))
-					{
-						return;
-					}
+					if (RiskyMod.inBazaar) return;
 					if (self.body.master)
 					{
 						if (self.body.master.IsDeployableSlotAvailable(DeployableSlot.BeetleGuardAlly))    //used to be < glandCount

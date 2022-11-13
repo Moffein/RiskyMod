@@ -10,7 +10,7 @@ namespace RiskyMod.Items.DLC1.Void
     {
         public static bool enabled = true;
         public static bool ignoreAllyCap = true;
-        public static int maxAllyCount = 8;
+        public static int maxAllyCount = 6;
 
         public Zoea()
         {
@@ -18,7 +18,7 @@ namespace RiskyMod.Items.DLC1.Void
             {
                 On.RoR2.VoidMegaCrabItemBehavior.GetMaxProjectiles += (orig, inventory) =>
                 {
-                    return Math.Min(orig(inventory), maxAllyCount);
+                    return RiskyMod.inBazaar ? 0 : Math.Min(orig(inventory), maxAllyCount);
                 };
 
                 //Why isn't this getting capped? DNSpy shows the code as calling GetMaxProjectiles when calculating this
@@ -27,7 +27,7 @@ namespace RiskyMod.Items.DLC1.Void
                     if (slot == DeployableSlot.VoidMegaCrabItem)
                     {
                         //Vanilla just calls GetMaxProjectiles, but why is it different?
-                        return Math.Min(self.inventory.GetItemCount(DLC1Content.Items.VoidMegaCrabItem), maxAllyCount);
+                        return RiskyMod.inBazaar ? 0 : Math.Min(self.inventory.GetItemCount(DLC1Content.Items.VoidMegaCrabItem), maxAllyCount);
                     }
                     else
                     {

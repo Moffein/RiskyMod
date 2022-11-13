@@ -346,7 +346,9 @@ namespace RiskyMod
         {
             Dungus.enabled = ItemCfg.Bind(voidString, "Weeping Fungus", true, itemConfigDescString).Value;
 
-            Needletick.enabled = ItemCfg.Bind(voidString, "Needletick", true, itemConfigDescString).Value;
+            //Only re-enable when there's something that actually works.
+            Needletick.enabled = false;
+            //Needletick.enabled = ItemCfg.Bind(voidString, "Needletick", true, itemConfigDescString).Value;
 
             SaferSpaces.enabled = ItemCfg.Bind(voidString, "Safer Spaces", true, itemConfigDescString).Value;
 

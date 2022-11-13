@@ -36,6 +36,7 @@ using RiskyMod.Tweaks.CharacterMechanics;
 using RiskyMod.Tweaks.Artifact;
 using RiskyMod.MonoBehaviours;
 using RiskyMod.VoidFields;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod
 {
@@ -97,6 +98,8 @@ namespace RiskyMod
         public static GameModeIndex classicRunIndex;
         public static GameModeIndex simulacrumIndex;
 
+        private static SceneDef bazaarScene = Addressables.LoadAssetAsync<SceneDef>("RoR2/Base/bazaar/bazaar.asset").WaitForCompletion();
+
         public void Start()
         {
             //Check for Inferno here since it has a RiskyMod softdependency.
@@ -109,8 +112,7 @@ namespace RiskyMod
             {
                 orig(self);
                 inBazaar = false;
-                SceneDef sd = RoR2.SceneCatalog.GetSceneDefForCurrentScene();
-                if (sd && sd.baseSceneName.Equals("bazaar"))
+                if (RoR2.SceneCatalog.GetSceneDefForCurrentScene() == bazaarScene)
                 {
                     inBazaar = true;
                 }
