@@ -1,4 +1,5 @@
 ﻿using System;
+using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
 using RoR2;
@@ -15,8 +16,6 @@ namespace RiskyMod.Items.Legendary
             if (!enabled) return;
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
-            SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += AegisBarrierArmor;
-
             //Stacks no longer give extra barrier. Initial stack barrier increased.
             IL.RoR2.HealthComponent.Heal += (il) =>
             {
@@ -32,14 +31,14 @@ namespace RiskyMod.Items.Legendary
                     ))
                     {
                         c.EmitDelegate<Func<int, int>>(itemCount => 1);
+                        error = false;
 
-                        if (c.TryGotoNext(
+                        /*if (c.TryGotoNext(
                          x => x.MatchLdcR4(0.5f)
                         ))
                         {
-                            c.Next.Operand = 0.7f;
-                            error = false;
-                        }
+                            c.Next.Operand = 1f;
+                        }*/
                     }
                 }
 
@@ -48,20 +47,31 @@ namespace RiskyMod.Items.Legendary
                     UnityEngine.Debug.LogError("RiskyMod: Aegis IL Hook failed");
                 }
             };
-        }
 
-        private static void AegisBarrierArmor(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
-        {
-            if (sender.healthComponent && sender.healthComponent.barrier > 0f)
+            //Apply barrier decay rate modifiers.
+            IL.RoR2.HealthComponent.ServerFixedUpdate += (il) =>
             {
-                int itemCount = inventory.GetItemCount(RoR2Content.Items.BarrierOnOverHeal);
-                args.armorAdd += 40f * itemCount;
-            }
+                ILCursor c = new ILCursor(il);
+                if (c.TryGotoNext(MoveType.After,
+                     x => x.MatchCallvirt<CharacterBody>("get_barrierDecayRate")
+                    ))
+                {
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<float, HealthComponent, float>>((decayRate, self) =>
+                    {
+                        int aegisCount = self.itemCounts.barrierOnOverHeal;
+                        return decayRate / (1f + aegisCount);
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Aegis BarrierDecay IL Hook failed");
+                }
+            };
         }
 
         private static void ModifyItem()
         {
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.BarrierOnOverHeal);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BarrierOnOverHeal);
         }
     }

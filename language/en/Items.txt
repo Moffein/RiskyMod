@@ -122,7 +122,7 @@
 	
 	"ITEM_PERMANENTDEBUFFONHIT_DESC_RISKYMOD": "<style=cIsDamage>100%</style> chance on hit to reduce <style=cIsDamage>armor</style> by <style=cIsDamage>1</style> <style=cStack>(+1 per stack)</style> <style=cIsDamage>permanently</style>.",
 	
-	"ITEM_BLEEDONHITVOID_DESC_RISKYMOD": "<style=cIsDamage>10%</style> <style=cStack>(+10% per stack)</style> chance to <style=cIsDamage>collapse</style> an enemy for <style=cIsDamage>400%</style> base damage and reduce their <style=cIsDamage>armor</style> by <style=cIsDamage>1</style>. <style=cIsVoid>Corrupts all Tri-Tip Daggers</style>.",
+	"ITEM_BLEEDONHITVOID_DESC_RISKYMOD": "<style=cIsDamage>10%</style> <style=cStack>(+10% per stack)</style> chance to <style=cIsDamage>collapse</style> an enemy for <style=cIsDamage>300%</style> base damage. Additional stacks of <style=cIsDamage>collapse</style> deal an extra <style=cIsDamage>20%</style> base damage each. <style=cIsVoid>Corrupts all Tri-Tip Daggers</style>.",
 	
 	"ITEM_TITANGOLDDURINGTP_DESC_RISKYMOD": "Summon <style=cIsDamage>Aurelionite</style> during the teleporter event. It has <style=cIsDamage>100% <style=cStack>(+50% per stack)</style> damage</style> and <style=cIsHealing>200% <style=cStack>(+100% per stack)</style> health</style>.",
 	
@@ -131,6 +131,8 @@
 	"ITEM_HEALINGPOTION_PICKUP_RISKYMOD" : "Rapidly heal when below half health. Consumed on use.",
 	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "Taking damage to below <style=cIsHealth>50% health</style> <style=cIsUtility>consumes</style> this item, <style=cIsHealing>healing</style> you for <style=cIsHealing>50%</style> of <style=cIsHealing>maximum health</style> over <style=cIsHealing>8</style> seconds.",
 	
-	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>Blocks</style> incoming damage once. Recharges after <style=cIsUtility>20 seconds</style> <style=cStack>(-10% per stack)</style>. <style=cIsVoid>Corrupts all Tougher Times</style>."
+	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>Blocks</style> incoming damage once. Recharges after <style=cIsUtility>20 seconds</style> <style=cStack>(-10% per stack)</style>. <style=cIsVoid>Corrupts all Tougher Times</style>.",
+	
+	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Healing past full grants you a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>50%</style> of the amount you <style=cIsHealing>healed</style>. Divides <style=cIsHealing>barrier decay rate</style> by <style=cIsHealing>2 <style=cStack>(+1 per stack)</style></style>."
 	}
 }

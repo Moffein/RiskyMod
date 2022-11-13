@@ -9,6 +9,10 @@ namespace RiskyMod.Items.Lunar
     public class BrittleCrown
     {
         public static bool enabled = true;
+
+        public static float minDamageCoefficient = 2f;
+        public static float maxDamageCoefficient = 12f;
+
         public BrittleCrown()
         {
             if (!enabled) return;
@@ -34,9 +38,11 @@ namespace RiskyMod.Items.Lunar
                             if (cb)
                             {
                                 float damageCoefficient = damageInfo.damage / cb.damage;
-                                if (damageCoefficient > 1f)
+                                float damageDiff = damageCoefficient - BrittleCrown.minDamageCoefficient;
+                                if (damageDiff > 0f)
                                 {
-                                    chance += Mathf.Lerp(0f, 70f, (damageCoefficient - 1f) * 0.111111111f);//Caps out at 100% chance for 1000% damage attacks
+                                    //70f due to 30% base chance
+                                    chance += Mathf.Lerp(0f, 70f, damageDiff / (BrittleCrown.maxDamageCoefficient - BrittleCrown.minDamageCoefficient));
                                 }
                             }
                         }

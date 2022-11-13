@@ -100,7 +100,6 @@ namespace RiskyMod.Items
             new Tesla();
             new FrostRelic();
             new CeremonialDagger();
-            new MeatHook();
             new LaserTurbine();
             new HeadHunter();
             new Headstompers();

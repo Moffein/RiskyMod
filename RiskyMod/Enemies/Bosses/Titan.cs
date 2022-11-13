@@ -133,8 +133,8 @@ namespace RiskyMod.Enemies.Bosses
                 {
                     ai.minDistance = 0f;
                     ai.maxDistance = 200f;
-                    ai.aimType = AISkillDriver.AimType.AtCurrentEnemy;    //See if this makes it smoother
-                    ai.driverUpdateTimerOverride = 10f; //laser firing = 8s, laser chargeup = 2s
+                    ai.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+                    //ai.driverUpdateTimerOverride = 10f; //laser firing = 8s, laser chargeup = 2s
                 }
             }
         }

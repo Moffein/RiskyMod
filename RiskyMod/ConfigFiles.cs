@@ -335,12 +335,7 @@ namespace RiskyMod
             SpareDroneParts.enabled = ItemCfg.Bind(legendaryString, "Spare Drone Parts", true, itemConfigDescString).Value;
             SpareDroneParts.ignoreAllyCap = ItemCfg.Bind(legendaryString, "Spare Drone Parts - Ignore Ally Cap", true, "Col. Droneman ignores the ally cap if changes are enabled.").Value;
 
-            //Currently trying this out with the same proc coefficient as Vanilla.
-            //MeatHook.enabled = ItemCfg.Bind(legendaryString, "Sentient Meat Hook", true, itemConfigDescString).Value;
-            MeatHook.enabled = false;
-
-            //Aegis.enabled = ItemCfg.Bind(legendaryString, "Aegis", true, itemConfigDescString).Value;
-            Aegis.enabled = false;
+            Aegis.enabled = ItemCfg.Bind(legendaryString, "Aegis", true, itemConfigDescString).Value;
 
             Tesla.enabled = ItemCfg.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
             Raincoat.enabled = ItemCfg.Bind(legendaryString, "Bens Raincoat", true, itemConfigDescString).Value;
@@ -350,7 +345,9 @@ namespace RiskyMod
         private static void ConfigVoidItems()
         {
             Dungus.enabled = ItemCfg.Bind(voidString, "Weeping Fungus", true, itemConfigDescString).Value;
+
             Needletick.enabled = ItemCfg.Bind(voidString, "Needletick", true, itemConfigDescString).Value;
+
             SaferSpaces.enabled = ItemCfg.Bind(voidString, "Safer Spaces", true, itemConfigDescString).Value;
 
             PlasmaShrimp.enabled = ItemCfg.Bind(voidString, "Plasma Shrimp", true, itemConfigDescString).Value;
