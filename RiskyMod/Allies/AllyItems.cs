@@ -52,7 +52,7 @@ namespace RiskyMod.Allies
 
         private static void HandleAllyResistAoEItem(CharacterBody self, Inventory inventory)
         {
-            if (inventory.GetItemCount(AllyItems.AllyResistAoEItem) > 0 && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ResistantToAOE)) self.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
+            if (!SoftDependencies.KingKombatArenaActive && inventory.GetItemCount(AllyItems.AllyResistAoEItem) > 0 && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ResistantToAOE)) self.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
         }
 
         //Effect is a part of AllyMarkerItem's delegate
@@ -137,7 +137,7 @@ namespace RiskyMod.Allies
         private static void AllyRegenItemDelegate(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
         {
             int itemCount = inventory.GetItemCount(AllyItems.AllyRegenItem);
-            if (itemCount > 0)
+            if (!SoftDependencies.KingKombatArenaActive && itemCount > 0)
             {
                 float levelFactor = sender.level - 1f;
 
@@ -177,7 +177,7 @@ namespace RiskyMod.Allies
 
         private static void AllyMarkerItemDelegate(CharacterBody self, Inventory inventory)
         {
-            if (inventory.GetItemCount(AllyItems.AllyMarkerItem) > 0)
+            if (!SoftDependencies.KingKombatArenaActive && inventory.GetItemCount(AllyItems.AllyMarkerItem) > 0)
             {
                 if (AllyScaling.noOverheat && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.OverheatImmune) && inventory.GetItemCount(AllyItems.AllyAllowOverheatDeathItem) <= 0) self.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
                 if (AllyScaling.noVoidDeath && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ImmuneToVoidDeath) && inventory.GetItemCount(AllyItems.AllyAllowVoidDeathItem) <= 0) self.bodyFlags |= CharacterBody.BodyFlags.ImmuneToVoidDeath;
@@ -214,7 +214,7 @@ namespace RiskyMod.Allies
 
         private static void AllyScalingItemDelegate(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
         {
-            if (inventory.GetItemCount(AllyItems.AllyScalingItem) > 0)
+            if (!SoftDependencies.KingKombatArenaActive && inventory.GetItemCount(AllyItems.AllyScalingItem) > 0)
             {
                 float levelFactor = sender.level - 1f;
                 args.baseDamageAdd += 0.1f * levelFactor * sender.baseDamage;

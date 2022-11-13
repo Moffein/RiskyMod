@@ -30,5 +30,8 @@ namespace RiskyMod
         public static bool SpikestripPlasmaCore = false;
 
         public static bool InfernoPluginLoaded = false;
+
+        public static bool KingKombatArenaLoaded = false;
+        public static bool KingKombatArenaActive = false;
     }
 }

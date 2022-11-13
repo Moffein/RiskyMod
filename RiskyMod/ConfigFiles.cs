@@ -359,7 +359,7 @@ namespace RiskyMod
 
             Zoea.ignoreAllyCap = ItemCfg.Bind(voidString, "Newly Hatched Zoea - Ignore Ally Cap", true, "Zoea Allies ignore the ally cap.").Value;
             Zoea.maxAllyCount = ItemCfg.Bind(voidString, "Newly Hatched Zoea - Max Allies per Player", 6, "Max Void allies each player can summon.").Value;
-            Zoea.enabled = Zoea.enabled && Zoea.ignoreAllyCap;
+            Zoea.enabled = ItemCfg.Bind(voidString, "Newly Hatched Zoea", true, "Use the Max Allies per Player setting.").Value;
         }
 
         private static void ConfigBossItems()

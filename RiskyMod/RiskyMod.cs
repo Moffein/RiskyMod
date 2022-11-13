@@ -75,10 +75,11 @@ namespace RiskyMod
     [BepInDependency("com.heyimnoob.NoopSpikestripContent", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.plasmacore.PlasmaCoreSpikestripContent", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.Heretic", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.rune580.riskofoptions")]
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.14.0")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.14.1")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI), nameof(ItemAPI), nameof(DirectorAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
@@ -155,6 +156,12 @@ namespace RiskyMod
 
         private void CheckDependencies()
         {
+            SoftDependencies.KingKombatArenaLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Kingpinush.KingKombatArena");
+            if (SoftDependencies.KingKombatArenaLoaded)
+            {
+                On.RoR2.Stage.Start += CheckArenaLoaded;
+            }
+
             SoftDependencies.ZetTweaksLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetTweaks");
             if (SoftDependencies.ZetTweaksLoaded) ZetTweaksCompat();
 
@@ -268,6 +275,18 @@ namespace RiskyMod
             SoftDependencies.SpikestripGrooveSalad = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.groovesalad.GrooveSaladSpikestripContent");
             SoftDependencies.SpikestripHeyImNoob = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.heyimnoob.NoopSpikestripContent");
             SoftDependencies.SpikestripPlasmaCore = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.plasmacore.PlasmaCoreSpikestripContent");
+        }
+
+        private void CheckArenaLoaded(On.RoR2.Stage.orig_Start orig, Stage self)
+        {
+            orig(self);
+            if (SoftDependencies.KingKombatArenaLoaded) SetArena();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static void SetArena()
+        {
+            SoftDependencies.KingKombatArenaActive = NS_KingKombatArena.KingKombatArenaMainPlugin.s_GAME_MODE_ACTIVE;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]

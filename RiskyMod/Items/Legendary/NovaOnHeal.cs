@@ -26,12 +26,11 @@ namespace RiskyMod.Items.Legendary
                     c.Emit(OpCodes.Ldarg_0);
                     c.EmitDelegate<Func<float, HealthComponent, float>>((damage, self) =>
                     {
-                        float newDamage = damage;
                         if (self.itemCounts.invadingDoppelganger > 0)
                         {
                             damage *= 0.1f;
                         }
-                        return newDamage;
+                        return damage;
                     });
                 }
                 else

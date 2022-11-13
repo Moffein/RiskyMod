@@ -60,7 +60,7 @@ namespace RiskyMod.Items.Uncommon
 
             GameObject squidBodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/squidturretbody");
             CharacterBody cb = squidBodyObject.GetComponent<CharacterBody>();
-            cb.baseMaxHealth = 480f;
+            cb.baseMaxHealth = 120f;
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
         }
         private static void ModifyItem()
@@ -136,17 +136,23 @@ namespace RiskyMod.Items.Uncommon
                                         }
                                         else
                                         {
-                                            if(self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player)
+                                            component6.inventory.GiveItem(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
+
+                                            if (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player && !SoftDependencies.KingKombatArenaActive)
                                             {
                                                 component6.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
                                                 component6.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
                                                 component6.inventory.GiveItem(Allies.AllyItems.AllyResistAoEItem);
                                                 component6.inventory.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
                                                 component6.inventory.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
+                                                component6.inventory.GiveItem(RoR2Content.Items.BoostHp, 30 + 4 * 3 * (polypCount - 1));
+                                                component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 40);
                                             }
-                                            component6.inventory.GiveItem(RoR2Content.Items.BoostHp, 3 * (polypCount - 1));
-                                            component6.inventory.GiveItem(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
-                                            component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 40);
+                                            else
+                                            {
+                                                component6.inventory.GiveItem(RoR2Content.Items.BoostHp, 3 * (polypCount - 1));
+                                                component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 20);
+                                            }
                                         }
                                     }
                                     sq.AddSquid(result.spawnedInstance);

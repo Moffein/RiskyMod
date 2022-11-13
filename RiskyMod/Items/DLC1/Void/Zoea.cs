@@ -14,27 +14,8 @@ namespace RiskyMod.Items.DLC1.Void
 
         public Zoea()
         {
-            if (enabled)
+            if (ignoreAllyCap)
             {
-                On.RoR2.VoidMegaCrabItemBehavior.GetMaxProjectiles += (orig, inventory) =>
-                {
-                    return RiskyMod.inBazaar ? 0 : Math.Min(orig(inventory), maxAllyCount);
-                };
-
-                //Why isn't this getting capped? DNSpy shows the code as calling GetMaxProjectiles when calculating this
-                On.RoR2.CharacterMaster.GetDeployableSameSlotLimit += (orig, self, slot) =>
-                {
-                    if (slot == DeployableSlot.VoidMegaCrabItem)
-                    {
-                        //Vanilla just calls GetMaxProjectiles, but why is it different?
-                        return RiskyMod.inBazaar ? 0 : Math.Min(self.inventory.GetItemCount(DLC1Content.Items.VoidMegaCrabItem), maxAllyCount);
-                    }
-                    else
-                    {
-                        return orig(self, slot);
-                    }
-                };
-
                 IL.RoR2.VoidMegaCrabItemBehavior.FixedUpdate += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
@@ -55,6 +36,27 @@ namespace RiskyMod.Items.DLC1.Void
                 };
             }
 
+            if (enabled)
+            {
+                On.RoR2.VoidMegaCrabItemBehavior.GetMaxProjectiles += (orig, inventory) =>
+                {
+                    return RiskyMod.inBazaar ? 0 : Math.Min(orig(inventory), maxAllyCount);
+                };
+
+                //Why isn't this getting capped? DNSpy shows the code as calling GetMaxProjectiles when calculating this
+                On.RoR2.CharacterMaster.GetDeployableSameSlotLimit += (orig, self, slot) =>
+                {
+                    if (slot == DeployableSlot.VoidMegaCrabItem)
+                    {
+                        //Vanilla just calls GetMaxProjectiles, but why is it different?
+                        return RiskyMod.inBazaar ? 0 : Math.Min(self.inventory.GetItemCount(DLC1Content.Items.VoidMegaCrabItem), maxAllyCount);
+                    }
+                    else
+                    {
+                        return orig(self, slot);
+                    }
+                };
+            }
 
             On.RoR2.VoidMegaCrabItemBehavior.OnMasterSpawned += (orig, self, spawnResult) =>
             {

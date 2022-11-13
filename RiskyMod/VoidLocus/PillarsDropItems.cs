@@ -89,7 +89,7 @@ namespace RiskyMod.VoidLocus
 
                                     //Roll the rng anyways so that it performs the same with/without the config option. This code is a mess.
                                     PickupPickerController.Option[] options = PickupPickerController.GenerateOptionsFromDropTable(3, dropTable, Run.instance.bossRewardRng);
-                                    if (options.Length > 0) options[0].pickupIndex = pickupIndex;
+                                    if (options.Length > 0 && options[0].pickupIndex != PickupIndex.none) pickupDef = PickupCatalog.GetPickupDef(options[0].pickupIndex);
 
                                     if (pickupDef != null && pickupDef.pickupIndex != PickupIndex.none)
                                     {
