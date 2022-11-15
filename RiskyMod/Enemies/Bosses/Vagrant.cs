@@ -10,11 +10,18 @@ namespace RiskyMod.Enemies.Bosses
     public class Vagrant
     {
         public static bool enabled = true;
+        public static bool disableProjectileOnKill = true;
         public Vagrant()
         {
-            if (!enabled) return;
-            DisableNovaAttackSpeed();
-            RemoveTrackingBombOnKill();
+            if (enabled)
+            {
+                DisableNovaAttackSpeed();
+            }
+            
+            if (disableProjectileOnKill)
+            {
+                RemoveTrackingBombOnKill();
+            }
         }
 
         private void DisableNovaAttackSpeed()

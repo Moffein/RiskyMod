@@ -5,10 +5,16 @@ namespace RiskyMod.Enemies.Bosses
 {
     public class Gravekeeper
     {
-        public static bool enabled = true;
+        public static bool disableProjectileOnKill = true;
         public Gravekeeper()
         {
-            if (!enabled) return;
+            if (disableProjectileOnKill)
+            {
+                RemoveGrovetenderWispOnKill();
+            }
+        }
+        private void RemoveGrovetenderWispOnKill()
+        {
             GameObject trackingWispObject = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/GravekeeperTrackingFireball");
             HealthComponent hc = trackingWispObject.GetComponent<HealthComponent>();
             hc.globalDeathEventChanceCoefficient = 0f;

@@ -10,15 +10,17 @@ namespace RiskyMod.Enemies.Mobs.Lunar
     public class LunarWisp
     {
         public static bool enabled = true;
-
+        public static bool disableProjectileOnKill = true;
         public static bool enableFalloff = true;
 
         public LunarWisp()
         {
-            if (!enabled) return;
-            EnableStatusConditions();
+            if (enabled)
+            {
+                EnableStatusConditions();
+                EnableBulletFalloff();
+            }
             ModifyProjectile();
-            EnableBulletFalloff();
         }
 
         private void EnableStatusConditions()
@@ -60,11 +62,18 @@ namespace RiskyMod.Enemies.Mobs.Lunar
         private void ModifyProjectile()
         {
             GameObject projectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/lunarwisptrackingbomb");
-            HealthComponent hc = projectile.GetComponent<HealthComponent>();
-            hc.globalDeathEventChanceCoefficient = 0f;
 
-            ProjectileImpactExplosion pie = projectile.GetComponent<ProjectileImpactExplosion>();
-            pie.falloffModel = BlastAttack.FalloffModel.SweetSpot;
+            if (disableProjectileOnKill)
+            {
+                HealthComponent hc = projectile.GetComponent<HealthComponent>();
+                hc.globalDeathEventChanceCoefficient = 0f;
+            }
+
+            if (enabled)
+            {
+                ProjectileImpactExplosion pie = projectile.GetComponent<ProjectileImpactExplosion>();
+                pie.falloffModel = BlastAttack.FalloffModel.SweetSpot;
+            }
         }
 
         private void EnableBulletFalloff()
