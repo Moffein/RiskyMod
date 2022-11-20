@@ -75,7 +75,7 @@ namespace RiskyMod.Survivors.Commando
             if (phaseRoundChanges)
             {
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireFMJ", "projectilePrefab", BuildPhaseRoundProjectile());
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireFMJ", "damageCoefficient", "4.2");
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireFMJ", "damageCoefficient", "4.5");
                 sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD";
             }
 
@@ -342,7 +342,7 @@ namespace RiskyMod.Survivors.Commando
             pbc.minAngleFilter = 0f;
             pbc.maxAngleFilter = 180f;
             pbc.procCoefficient = 0.5f;
-            pbc.damageCoefficient = 0.5f;
+            pbc.damageCoefficient = 0.3333333333f;
             pbc.bounces = 0;
             pbc.lightningType = RoR2.Orbs.LightningOrb.LightningType.Ukulele;
 
