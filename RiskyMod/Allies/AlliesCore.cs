@@ -8,6 +8,7 @@ using UnityEngine.AddressableAssets;
 using RoR2.Skills;
 using RiskyMod.Allies.DroneChanges;
 using R2API;
+using UnityEngine.Networking;
 
 namespace RiskyMod.Allies
 {
@@ -19,6 +20,21 @@ namespace RiskyMod.Allies
         public static bool normalizeDroneDamage = true;
         public static bool changeScaling = true;
         public static bool buffRegen = true;
+
+        public static bool SpikestripCompat = true;
+        public static bool SS2Compat = true;
+        public static bool ChenChillDroneCompat = true;
+        public static bool ChenGradiusCompat = true;
+        public static bool ChenQbDroneCompat = true;
+
+        private static BodyIndex SpikestripBlueLemurian = BodyIndex.None;
+        private static BodyIndex SS2SecurityDrone = BodyIndex.None;
+        private static BodyIndex ChenChillDrone = BodyIndex.None;
+        private static BodyIndex ChenGradiusPsyDroneRed = BodyIndex.None;
+        private static BodyIndex ChenGradiusPsyDroneGreen = BodyIndex.None;
+        private static BodyIndex ChenGradiusLaserDrone1 = BodyIndex.None;
+        private static BodyIndex ChenGradiusLaserDrone2 = BodyIndex.None;
+        private static BodyIndex ChenQbDrone = BodyIndex.None;
 
         public AlliesCore()
         {
@@ -63,6 +79,54 @@ namespace RiskyMod.Allies
             new StricterLeashing();
             TweakDrones();
             new CheaperRepairs();
+
+            On.RoR2.BodyCatalog.Init += (orig) =>
+            {
+                orig();
+                if (SpikestripCompat) SpikestripBlueLemurian = BodyCatalog.FindBodyIndex("BlueLemurianBody");
+                if (SS2Compat) SS2SecurityDrone = BodyCatalog.FindBodyIndex("DroidDroneBody");
+                if (ChenChillDroneCompat) ChenChillDrone = BodyCatalog.FindBodyIndex("ChillDroneBody");
+                if (ChenQbDroneCompat) ChenQbDrone = BodyCatalog.FindBodyIndex("QbDroneBody");
+                if (ChenGradiusCompat)
+                {
+                    ChenGradiusPsyDroneGreen = BodyCatalog.FindBodyIndex("PsyDroneGreenBody");
+                    ChenGradiusPsyDroneRed = BodyCatalog.FindBodyIndex("PsyDroneRedBody");
+                    ChenGradiusLaserDrone1 = BodyCatalog.FindBodyIndex("LaserDrone1Body");
+                    ChenGradiusLaserDrone2 = BodyCatalog.FindBodyIndex("LaserDrone2Body");
+                }
+            };
+
+            RoR2.CharacterMaster.onStartGlobal += ExternalModCompat;
+        }
+
+        private void ExternalModCompat(CharacterMaster master)
+        {
+            if (NetworkServer.active && master.inventory && master.aiComponents.Length > 0 && master.teamIndex == TeamIndex.Player)
+            {
+                CharacterBody masterBody = master.GetBody();
+                if (masterBody && masterBody.bodyIndex != BodyIndex.None)
+                {
+                    if (masterBody.bodyIndex == SpikestripBlueLemurian
+                        || masterBody.bodyIndex == ChenQbDrone
+                        || masterBody.bodyIndex == ChenChillDrone
+                        || masterBody.bodyIndex == ChenGradiusLaserDrone1
+                        || masterBody.bodyIndex == ChenGradiusLaserDrone2
+                        || masterBody.bodyIndex == ChenGradiusPsyDroneGreen
+                        || masterBody.bodyIndex == ChenGradiusPsyDroneRed)
+                    {
+                        master.inventory.GiveItem(AllyItems.AllyMarkerItem);
+                        master.inventory.GiveItem(AllyItems.AllyScalingItem);
+                        master.inventory.GiveItem(AllyItems.AllyRegenItem, 40);
+                    }
+                    else if (masterBody.bodyIndex == SS2SecurityDrone)
+                    {
+                        master.inventory.GiveItem(AllyItems.AllyMarkerItem);
+                        master.inventory.GiveItem(AllyItems.AllyScalingItem);
+                        master.inventory.GiveItem(AllyItems.AllyAllowOverheatDeathItem);
+                        master.inventory.GiveItem(AllyItems.AllyAllowVoidDeathItem);
+                    }
+                }
+            }
         }
 
         private void TweakDrones()

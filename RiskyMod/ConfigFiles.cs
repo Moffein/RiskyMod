@@ -187,6 +187,12 @@ namespace RiskyMod
             AlliesCore.changeScaling = GeneralCfg.Bind(allyString, "Scaling Changes", true, "Ally HP and Damage scales so that they always perform the same on every stage.").Value;
             AlliesCore.buffRegen = GeneralCfg.Bind(allyString, "Regen Changes", true, "Most allies regen to full HP in a fixed amount of time.").Value;
 
+            AlliesCore.ChenChillDroneCompat = GeneralCfg.Bind(allyString, "Compatibility - Chill Drone", true, "Enables ally changes on allies from this mod.").Value;
+            AlliesCore.ChenQbDroneCompat = GeneralCfg.Bind(allyString, "Compatibility - Qb Drone", true, "Enables ally changes on allies from this mod.").Value;
+            AlliesCore.ChenGradiusCompat = GeneralCfg.Bind(allyString, "Compatibility - Gradius Mod", true, "Enables ally changes on allies from this mod.").Value;
+            AlliesCore.SS2Compat = GeneralCfg.Bind(allyString, "Compatibility - Starstorm 2", true, "Enables ally changes on allies from this mod.").Value;
+            AlliesCore.SpikestripCompat = GeneralCfg.Bind(allyString, "Compatibility - Spikestrip", true, "Enables ally changes on allies from this mod.").Value;
+
             //Interactables
             ShrineCombatItems.enabled = GeneralCfg.Bind(interactString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
             BloodShrineMinReward.enabled = GeneralCfg.Bind(interactString, "Shrine of Blood Minimum Reward", true, "Shrine of Blood always gives at least enough money to buy a small chest.").Value;

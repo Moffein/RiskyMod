@@ -88,6 +88,7 @@ namespace SneedUtils
             UnityEngine.Object.Destroy(spawnCard);
             return result;
         }
+
         public static void StunEnemiesInSphere(CharacterBody body, float radius)
         {
             if (body && body.teamComponent)
