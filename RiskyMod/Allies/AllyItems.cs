@@ -139,11 +139,13 @@ namespace RiskyMod.Allies
             int itemCount = inventory.GetItemCount(AllyItems.AllyRegenItem);
             if (!SoftDependencies.KingKombatArenaActive && itemCount > 0)
             {
+                int boostHpCount = inventory.GetItemCount(RoR2Content.Items.BoostHp);
+
                 float levelFactor = sender.level - 1f;
 
                 float targetRegen = (sender.baseMaxHealth + levelFactor * sender.levelMaxHealth) / itemCount;
                 float currentRegen = sender.baseRegen + levelFactor * sender.levelRegen;
-                args.baseRegenAdd += targetRegen - currentRegen;
+                args.baseRegenAdd += (targetRegen - currentRegen) * (1f + 0.1f * boostHpCount);
             }
         }
 
