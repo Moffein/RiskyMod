@@ -56,7 +56,7 @@ namespace RiskyMod.Enemies.Bosses
 
             TrackingRework();
             MegaLaserAttackSpeed();
-            //LaserRadius();
+            LaserRadius();
             //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.MajorConstruct.Weapon.FireLaser");
         }
 
@@ -108,7 +108,7 @@ namespace RiskyMod.Enemies.Bosses
                 {
                     c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
                     {
-                        bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
+                        //bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
                         bulletAttack.radius = 0.2f; //Vanilla 0
                         return bulletAttack;
                     });

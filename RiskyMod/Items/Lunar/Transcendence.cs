@@ -9,6 +9,7 @@ namespace RiskyMod.Items.Lunar
     public class Transcendence
     {
         public static bool enabled = true;
+        public static bool alwaysShieldGate = true;
         public Transcendence()
         {
             if (!enabled) return;
@@ -29,7 +30,7 @@ namespace RiskyMod.Items.Lunar
                             int stackCount = self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) - 1;
                             if (stackCount > 0)
                             {
-                                outOfDangerDelay += 0.5f * stackCount;
+                                outOfDangerDelay += 1f * stackCount;
                             }
                         }
                         return outOfDangerDelay;

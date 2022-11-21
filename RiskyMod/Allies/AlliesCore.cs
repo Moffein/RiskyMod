@@ -72,7 +72,7 @@ namespace RiskyMod.Allies
             new ModifyBulletAttacks();
 
             new SuperAttackResist();
-            new MushrumResist();
+            new DotZoneResist();
             new EliteDamageModifiers();
             new NoVoidDamage();
 

@@ -11,10 +11,11 @@ namespace RiskyMod.Tweaks.CharacterMechanics
     {
         public static DamageAPI.ModdedDamageType IgnoreShieldGateDamage;
         public static bool enabled = true;
+
         public ShieldGating()
         {
             SetupIgnoreShieldGate();    //This is used in other parts of the mod. Should do nothing on its own if ShieldGating isn't enabled.
-            if (!enabled) return;
+            if (!enabled && !Items.Lunar.Transcendence.alwaysShieldGate) return;
 
             //Remove OSP in SharedHooks.RecalculateStats
 
@@ -51,16 +52,20 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                         {
                             if (!DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage) || (shieldOnly && !cursed))
                             {
-                                float duration = 0.1f;
-
-                                //ShieldOnly increases grace period since it's your only form of defense against 1shots.
-                                if (shieldOnly)
+                                //This check lets transcendence shieldgate work when shieldgating is disabled.
+                                if (ShieldGating.enabled || (shieldOnly && Items.Lunar.Transcendence.alwaysShieldGate))
                                 {
-                                    duration = 0.5f;
-                                }
+                                    float duration = 0.1f;
 
-                                self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
-                                return 0f;
+                                    //ShieldOnly increases grace period since it's your only form of defense against 1shots.
+                                    if (shieldOnly)
+                                    {
+                                        duration = 0.5f;
+                                    }
+
+                                    self.body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
+                                    return 0f;
+                                }
                             }
                         }
                         return remainingDamage;

@@ -179,7 +179,7 @@ namespace RiskyMod
             NoVoidDamage.enabled = GeneralCfg.Bind(allyString, "No Void Damage", true, "Allies take no damage from Void fog.").Value;
             AllyScaling.noOverheat = GeneralCfg.Bind(allyString, "No Overheat", true, "Allies are immune to Grandparent Overheat.").Value;
             SuperAttackResist.enabled = GeneralCfg.Bind(allyString, "Superattack Resistance", true, "Allies take less damage from superattacks like Vagrant Novas.").Value;
-            MushrumResist.enabled = GeneralCfg.Bind(allyString, "Mushrum Resistance", true, "Turrets take less damage from Mushrums.").Value;
+            DotZoneResist.enabled = GeneralCfg.Bind(allyString, "Damage Zone Resistance", true, "Allies take less damage from Mushrums gas and Lunar Exploder fire.").Value;
             StricterLeashing.enabled = GeneralCfg.Bind(allyString, "Stricter Leashing", true, "Reduces the minimum distance required for Allies to teleport to you.").Value;
             AlliesCore.beetleGlandDontRetaliate = GeneralCfg.Bind(allyString, "Queens Gland Guards Dont Retaliate", true, "Queens Gland Guards will not fight back if hurt by their owners.").Value;
             MegaDrone.allowRepair = GeneralCfg.Bind(allyString, "TC280 - Enable Repairs", true, "TC280s can be repaired like other drones after being destroyed.").Value;
@@ -403,6 +403,7 @@ namespace RiskyMod
             Meteorite.enabled = ItemCfg.Bind(lunarString, "Glowing Meteorite", true, itemConfigDescString).Value;
             ShapedGlass.enabled = ItemCfg.Bind(lunarString, "Shaped Glass", true, itemConfigDescString).Value;
             Transcendence.enabled = ItemCfg.Bind(lunarString, "Transcendence", true, itemConfigDescString).Value;
+            Transcendence.alwaysShieldGate = ItemCfg.Bind(lunarString, "Transcendence - Always Shield Gate", true, "Enables shieldgating on this item even when shield gating is disabled.").Value;
             Visions.enabled = ItemCfg.Bind(lunarString, "Visions of Heresy", true, itemConfigDescString).Value;
         }
 
@@ -483,7 +484,9 @@ namespace RiskyMod
             ToolbotCore.enableRebarChanges = SurvivorCfg.Bind(toolbotString, "Rebar Puncher Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.enableScrapChanges = SurvivorCfg.Bind(toolbotString, "Scrap Launcher Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.scrapICBM = SurvivorCfg.Bind(toolbotString, "Scrap Launcher ICBM", true, "Scrap Launcher benefits from Pocket ICBM if Scrap Launcher Changes are enabled.").Value;
+
             ToolbotCore.sawPhysics = SurvivorCfg.Bind(toolbotString, "Power Saw Physics Changes", true, "Makes Power Saw physics more consistent.").Value;
+
             ToolbotCore.sawHitbox = SurvivorCfg.Bind(toolbotString, "Power Saw Hitbox Changes", true, "Increases Power Saw hitbox size by 50%.").Value;
             ToolbotCore.sawBarrierOnHit = SurvivorCfg.Bind(toolbotString, "Power Saw Barrier On Hit", true, "Power Saw gives barrier-on-hit.").Value;
             ToolbotCore.enableSecondarySkillChanges = SurvivorCfg.Bind(toolbotString, "Blast Canister Changes", true, "Enable changes to this skill.").Value;

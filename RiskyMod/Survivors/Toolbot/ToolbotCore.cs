@@ -201,10 +201,9 @@ namespace RiskyMod.Survivors.Toolbot
                         UnityEngine.Debug.LogError("RiskyMod: Toolbot SawPhysics IL Hook failed");
                     }
                 };
-
-
-                sk.primary.skillFamily.variants[3].skillDef.cancelSprintingOnActivation = false;
             }
+
+            sk.primary.skillFamily.variants[3].skillDef.cancelSprintingOnActivation = false;
 
             if (sawHitbox)
             {
