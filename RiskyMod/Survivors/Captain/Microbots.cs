@@ -35,7 +35,7 @@ namespace RiskyMod.Survivors.Captain
 					while (num3 < count && num2 < itemStack)
 					{
 						ProjectileController projectileController = instancesList[num3];
-						if (projectileController.teamFilter.teamIndex != teamIndex && (projectileController.transform.position - vector).sqrMagnitude < num)
+						if (!projectileController.cannotBeDeleted && projectileController.teamFilter.teamIndex != teamIndex && (projectileController.transform.position - vector).sqrMagnitude < num)
 						{
 							bool canDelete = true;
 
