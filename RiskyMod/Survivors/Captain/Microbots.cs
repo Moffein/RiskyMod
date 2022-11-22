@@ -7,6 +7,7 @@ using EntityStates;
 using MonoMod.RuntimeDetour;
 using R2API.Utils;
 using RiskyMod.Items;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Captain
 {
@@ -38,7 +39,10 @@ namespace RiskyMod.Survivors.Captain
 						{
 							bool canDelete = true;
 
-							if (!projectileController.gameObject.GetComponent<ProjectileSimple>() && !projectileController.gameObject.GetComponent<ProjectileCharacterController>())
+							ProjectileSimple ps = projectileController.gameObject.GetComponent<ProjectileSimple>();
+							ProjectileCharacterController pcc = projectileController.gameObject.GetComponent<ProjectileCharacterController>();
+
+							if ((!ps || ps && ps.desiredForwardSpeed == 0f) && !pcc)
 							{
 								canDelete = false;
 							}
