@@ -26,6 +26,7 @@ namespace RiskyMod.Allies
         public static bool ChenChillDroneCompat = true;
         public static bool ChenGradiusCompat = true;
         public static bool ChenQbDroneCompat = true;
+        public static bool TinkersSatchelCompat = true;
 
         private static BodyIndex SpikestripBlueLemurian = BodyIndex.None;
         private static BodyIndex SS2SecurityDrone = BodyIndex.None;
@@ -35,6 +36,8 @@ namespace RiskyMod.Allies
         private static BodyIndex ChenGradiusLaserDrone1 = BodyIndex.None;
         private static BodyIndex ChenGradiusLaserDrone2 = BodyIndex.None;
         private static BodyIndex ChenQbDrone = BodyIndex.None;
+        private static BodyIndex TinkerBulwarkDrone = BodyIndex.None;
+        private static BodyIndex TinkerItemDrone = BodyIndex.None;
 
         public AlliesCore()
         {
@@ -94,6 +97,11 @@ namespace RiskyMod.Allies
                     ChenGradiusLaserDrone1 = BodyCatalog.FindBodyIndex("LaserDrone1Body");
                     ChenGradiusLaserDrone2 = BodyCatalog.FindBodyIndex("LaserDrone2Body");
                 }
+                if (TinkersSatchelCompat)
+                {
+                    TinkerItemDrone = BodyCatalog.FindBodyIndex("ItemDroneBody");
+                    TinkerBulwarkDrone = BodyCatalog.FindBodyIndex("BulwarkDroneBody");
+                }
             };
 
             RoR2.CharacterMaster.onStartGlobal += ExternalModCompat;
@@ -106,13 +114,14 @@ namespace RiskyMod.Allies
                 CharacterBody masterBody = master.GetBody();
                 if (masterBody && masterBody.bodyIndex != BodyIndex.None)
                 {
-                    if (masterBody.bodyIndex == SpikestripBlueLemurian
-                        || masterBody.bodyIndex == ChenQbDrone
+                    if (masterBody.bodyIndex == ChenQbDrone
                         || masterBody.bodyIndex == ChenChillDrone
                         || masterBody.bodyIndex == ChenGradiusLaserDrone1
                         || masterBody.bodyIndex == ChenGradiusLaserDrone2
                         || masterBody.bodyIndex == ChenGradiusPsyDroneGreen
-                        || masterBody.bodyIndex == ChenGradiusPsyDroneRed)
+                        || masterBody.bodyIndex == ChenGradiusPsyDroneRed
+                        || masterBody.bodyIndex == TinkerItemDrone
+                        || masterBody.bodyIndex == TinkerBulwarkDrone)
                     {
                         master.inventory.GiveItem(AllyItems.AllyMarkerItem);
                         master.inventory.GiveItem(AllyItems.AllyScalingItem);
@@ -122,6 +131,14 @@ namespace RiskyMod.Allies
                     {
                         master.inventory.GiveItem(AllyItems.AllyMarkerItem);
                         master.inventory.GiveItem(AllyItems.AllyScalingItem);
+                        master.inventory.GiveItem(AllyItems.AllyAllowOverheatDeathItem);
+                        master.inventory.GiveItem(AllyItems.AllyAllowVoidDeathItem);
+                    }
+                    else if (masterBody.bodyIndex == SpikestripBlueLemurian)
+                    {
+                        master.inventory.GiveItem(AllyItems.AllyMarkerItem);
+                        master.inventory.GiveItem(AllyItems.AllyScalingItem);
+                        master.inventory.GiveItem(AllyItems.AllyRegenItem, 40);
                         master.inventory.GiveItem(AllyItems.AllyAllowOverheatDeathItem);
                         master.inventory.GiveItem(AllyItems.AllyAllowVoidDeathItem);
                     }

@@ -192,6 +192,7 @@ namespace RiskyMod
             AlliesCore.ChenGradiusCompat = GeneralCfg.Bind(allyString, "Compatibility - Gradius Mod", true, "Enables ally changes on allies from this mod.").Value;
             AlliesCore.SS2Compat = GeneralCfg.Bind(allyString, "Compatibility - Starstorm 2", true, "Enables ally changes on allies from this mod.").Value;
             AlliesCore.SpikestripCompat = GeneralCfg.Bind(allyString, "Compatibility - Spikestrip", true, "Enables ally changes on allies from this mod.").Value;
+            AlliesCore.TinkersSatchelCompat = GeneralCfg.Bind(allyString, "Compatibility - Tinkers Satchel", true, "Enables ally changes on allies from this mod.").Value;
 
             //Interactables
             ShrineCombatItems.enabled = GeneralCfg.Bind(interactString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
