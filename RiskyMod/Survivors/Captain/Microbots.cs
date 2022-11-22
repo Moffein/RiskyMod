@@ -42,7 +42,7 @@ namespace RiskyMod.Survivors.Captain
 							ProjectileSimple ps = projectileController.gameObject.GetComponent<ProjectileSimple>();
 							ProjectileCharacterController pcc = projectileController.gameObject.GetComponent<ProjectileCharacterController>();
 
-							if ((!ps || ps && ps.desiredForwardSpeed == 0f) && !pcc)
+							if ((!ps || (ps && ps.desiredForwardSpeed == 0f)) && !pcc)
 							{
 								canDelete = false;
 							}
