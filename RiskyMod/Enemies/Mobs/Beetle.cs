@@ -61,7 +61,11 @@ namespace RiskyMod.Enemies.Mobs
             if (hbg.groupName == "Headbutt")
             {
                 Transform hitboxTransform = hbg.hitBoxes[0].transform;
-                hitboxTransform.localScale = new Vector3(hitboxTransform.localScale.x * 2f, hitboxTransform.localScale.y * 3f, hitboxTransform.localScale.z * 2f);
+                //Debug.Log("Beetle Hitbox: " + hitboxTransform.localScale);    //(1.0, 1.0, 1.7)
+                hitboxTransform.localScale = new Vector3(2.5f, 4f, 3.4f);
+
+                //Debug.Log("Beetle Hitbox Pos: " + hitboxTransform.localPosition);   //(0.0, 0.3, 0.2)
+                hitboxTransform.localPosition = new Vector3(0f, 1.3f, 0.2f);
             }
         }
     }
