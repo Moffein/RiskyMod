@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using R2API;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
@@ -10,22 +11,14 @@ namespace RiskyMod.Items.DLC1.Common
     public class PowerElixir
     {
         public static bool enabled = true;
-        public static BuffDef regenBuff;
 
         public PowerElixir()
         {
             if (!enabled) return;
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
-            BuffDef bd = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/CrocoRegen");
-            regenBuff = SneedUtils.SneedUtils.CreateBuffDef(
-                "RiskyMod_HealingPotionBuff",
-                false,
-                false,
-                false,
-                new Color(1f, 100f / 255f, 100f / 255f),
-                bd.iconSprite
-                );
+            //TODO: FIND GOLD POTION ICON
+            //ItemDef healPotionDef = Addressables.LoadAssetAsync<ItemDef>("RoR2/DLC1/HealingPotion/HealingPotion.asset").WaitForCompletion();
 
             IL.RoR2.HealthComponent.UpdateLastHitTime += (il) =>
             {
@@ -45,29 +38,6 @@ namespace RiskyMod.Items.DLC1.Common
 
             SharedHooks.HealthComponent_UpdateLastHitTime.UpdateLastHitTimeActions += TriggerElixir;
             On.RoR2.Stage.Start += StageStartResetElixir;
-
-            IL.RoR2.HealthComponent.ServerFixedUpdate += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if (c.TryGotoNext(MoveType.After,
-                     x => x.MatchLdfld(typeof(HealthComponent), "regenAccumulator")
-                    ))
-                {
-                    c.Emit(OpCodes.Ldarg_0);
-                    c.EmitDelegate<Func<float, HealthComponent, float>>((regenAccumulator, self) =>
-                    {
-                        if (self.body.HasBuff(PowerElixir.regenBuff))
-                        {
-                            regenAccumulator += Time.fixedDeltaTime * 0.0625f * self.fullHealth;
-                        }
-                        return regenAccumulator;
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: PowerElixir ModifyRegenAccumulator IL Hook failed");
-                }
-            };
         }
 
         private static void StageStartResetElixir(On.RoR2.Stage.orig_Start orig, Stage self)
@@ -93,29 +63,22 @@ namespace RiskyMod.Items.DLC1.Common
 
         private static void TriggerElixir (HealthComponent self, float damageValue, Vector3 damagePosition, bool damageIsSilent, GameObject attacker)
         {
-            if (self.itemCounts.healingPotion > 0 && !self.body.HasBuff(PowerElixir.regenBuff))
+            if (self.itemCounts.healingPotion > 0)
             {
-                float healthFraction = self.health / self.fullHealth;
-                if (healthFraction <= 0.5f)
+                if (self.combinedHealthFraction <= 0.5f)
                 {
-                    int stacksToConsume = Mathf.Min(4, Mathf.CeilToInt((1f - healthFraction) / 0.25f)); //Capped at 4 for 100% HP, in case 1 - healthFraction somehow ends up as negative.
-                    stacksToConsume = Mathf.Min(stacksToConsume, self.itemCounts.healingPotion);
+                    self.AddBarrier(self.fullCombinedHealth * 0.5f);
 
-                    if (stacksToConsume > 0)
+                    self.body.inventory.RemoveItem(DLC1Content.Items.HealingPotion, 1);
+                    self.body.inventory.GiveItem(DLC1Content.Items.HealingPotionConsumed, 1);
+                    CharacterMasterNotificationQueue.SendTransformNotification(self.body.master, DLC1Content.Items.HealingPotion.itemIndex, DLC1Content.Items.HealingPotionConsumed.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+
+                    EffectData effectData = new EffectData
                     {
-                        self.body.inventory.RemoveItem(DLC1Content.Items.HealingPotion, stacksToConsume);
-                        self.body.inventory.GiveItem(DLC1Content.Items.HealingPotionConsumed, stacksToConsume);
-                        CharacterMasterNotificationQueue.SendTransformNotification(self.body.master, DLC1Content.Items.HealingPotion.itemIndex, DLC1Content.Items.HealingPotionConsumed.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-
-                        self.body.AddTimedBuff(PowerElixir.regenBuff, 4f * stacksToConsume);
-
-                        EffectData effectData = new EffectData
-                        {
-                            origin = self.transform.position
-                        };
-                        effectData.SetNetworkedObjectReference(self.gameObject);
-                        EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/HealingPotionEffect"), effectData, true);
-                    }
+                        origin = self.transform.position
+                    };
+                    effectData.SetNetworkedObjectReference(self.gameObject);
+                    EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/HealingPotionEffect"), effectData, true);
                 }
             }
         }
