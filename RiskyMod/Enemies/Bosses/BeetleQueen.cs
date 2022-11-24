@@ -41,7 +41,7 @@ namespace RiskyMod.Enemies.Bosses
             ProjectileDotZone pdz = acidProjectile.GetComponent<ProjectileDotZone>();
             pdz.overlapProcCoefficient = 0.3f;
             pdz.resetFrequency = 5f;
-            pdz.lifetime = 20f; //15f
+            pdz.lifetime = 25f; //15f
             Content.Content.projectilePrefabs.Add(acidProjectile);
 
             GameObject spitProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/beetlequeenspit").InstantiateClone("RiskyMod_BeetleQueenSpit", true);
