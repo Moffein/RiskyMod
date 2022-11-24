@@ -58,7 +58,7 @@ namespace RiskyMod.Items.DLC1.Common
                     {
                         if (self.body.HasBuff(PowerElixir.regenBuff))
                         {
-                            regenAccumulator += Time.fixedDeltaTime * 0.05f * self.fullHealth;
+                            regenAccumulator += Time.fixedDeltaTime * 0.0625f * self.fullHealth;
                         }
                         return regenAccumulator;
                     });
@@ -107,7 +107,7 @@ namespace RiskyMod.Items.DLC1.Common
                         self.body.inventory.GiveItem(DLC1Content.Items.HealingPotionConsumed, stacksToConsume);
                         CharacterMasterNotificationQueue.SendTransformNotification(self.body.master, DLC1Content.Items.HealingPotion.itemIndex, DLC1Content.Items.HealingPotionConsumed.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
 
-                        self.body.AddTimedBuff(PowerElixir.regenBuff, 5f * stacksToConsume);
+                        self.body.AddTimedBuff(PowerElixir.regenBuff, 4f * stacksToConsume);
 
                         EffectData effectData = new EffectData
                         {
