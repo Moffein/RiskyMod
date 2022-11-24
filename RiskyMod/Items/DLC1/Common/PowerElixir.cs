@@ -58,7 +58,7 @@ namespace RiskyMod.Items.DLC1.Common
                     {
                         if (self.body.HasBuff(PowerElixir.regenBuff))
                         {
-                            regenAccumulator += Time.fixedDeltaTime * 0.0625f * self.fullHealth;
+                            regenAccumulator += Time.fixedDeltaTime * 0.05f * self.fullHealth;
                         }
                         return regenAccumulator;
                     });
@@ -93,18 +93,30 @@ namespace RiskyMod.Items.DLC1.Common
 
         private static void TriggerElixir (HealthComponent self, float damageValue, Vector3 damagePosition, bool damageIsSilent, GameObject attacker)
         {
-            if (self.itemCounts.healingPotion > 0 && self.health/self.fullHealth <= 0.5f && !self.body.HasBuff(PowerElixir.regenBuff))
+            if (self.itemCounts.healingPotion > 0 && !self.body.HasBuff(PowerElixir.regenBuff))
             {
-                self.body.inventory.RemoveItem(DLC1Content.Items.HealingPotion, 1);
-                self.body.inventory.GiveItem(DLC1Content.Items.HealingPotionConsumed, 1);
-                CharacterMasterNotificationQueue.SendTransformNotification(self.body.master, DLC1Content.Items.HealingPotion.itemIndex, DLC1Content.Items.HealingPotionConsumed.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                self.body.AddTimedBuff(PowerElixir.regenBuff, 8f);
-                EffectData effectData = new EffectData
+                float healthFraction = self.health / self.fullHealth;
+                if (healthFraction <= 0.5f)
                 {
-                    origin = self.transform.position
-                };
-                effectData.SetNetworkedObjectReference(self.gameObject);
-                EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/HealingPotionEffect"), effectData, true);
+                    int stacksToConsume = Mathf.Min(4, Mathf.CeilToInt((1f - healthFraction) / 0.25f)); //Capped at 4 for 100% HP, in case 1 - healthFraction somehow ends up as negative.
+                    stacksToConsume = Mathf.Min(stacksToConsume, self.itemCounts.healingPotion);
+
+                    if (stacksToConsume > 0)
+                    {
+                        self.body.inventory.RemoveItem(DLC1Content.Items.HealingPotion, stacksToConsume);
+                        self.body.inventory.GiveItem(DLC1Content.Items.HealingPotionConsumed, stacksToConsume);
+                        CharacterMasterNotificationQueue.SendTransformNotification(self.body.master, DLC1Content.Items.HealingPotion.itemIndex, DLC1Content.Items.HealingPotionConsumed.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+
+                        self.body.AddTimedBuff(PowerElixir.regenBuff, 5f * stacksToConsume);
+
+                        EffectData effectData = new EffectData
+                        {
+                            origin = self.transform.position
+                        };
+                        effectData.SetNetworkedObjectReference(self.gameObject);
+                        EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/HealingPotionEffect"), effectData, true);
+                    }
+                }
             }
         }
 

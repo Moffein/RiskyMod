@@ -24,7 +24,7 @@
 	
 	"ITEM_SLOWONHIT_DESC_RISKYMOD": "<style=cIsUtility>Slow</style> enemies on hit for <style=cIsUtility>-80% movement speed</style> and <style=cIsDamage>-20% attack speed</style> for <style=cIsUtility>2s</style> <style=cStack>(+2s per stack)</style>.",
 	
-	"ITEM_SEED_DESC_RISKYMOD": "Dealing damage <style=cIsHealing>heals</style> you for <style=cIsHealing>1</style> plus an additional <style=cIsHealing>3% <style=cStack>(+1.5% per stack)</style></style> of the <style=cIsDamage>damage dealt</style>.",
+	"ITEM_SEED_DESC_RISKYMOD": "Dealing damage <style=cIsHealing>heals</style> you for <style=cIsHealing>1</style> plus an additional <style=cIsHealing>2% <style=cStack>(+1% per stack)</style></style> of the <style=cIsDamage>damage dealt</style>.",
 	
 	"ITEM_MISSILE_DESC_RISKYMOD": "<style=cIsDamage>10%</style> chance to fire a missile that deals <style=cIsDamage>300%</style> <style=cStack>(+210% per stack)</style> TOTAL damage.",
 	
@@ -129,7 +129,7 @@
 	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Prevents <style=cIsUtility>1 <style=cStack>(+1 per stack)</style></style> <style=cIsDamage>debuff</style> and instead grants a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>25%</style> of <style=cIsHealing>maximum health</style>. Recharges every <style=cIsUtility>5</style> seconds</style>.",
 	
 	"ITEM_HEALINGPOTION_PICKUP_RISKYMOD" : "Rapidly heal when below half health. Consumed on use.",
-	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "Taking damage to below <style=cIsHealth>50% health</style> <style=cIsUtility>consumes</style> this item, <style=cIsHealing>healing</style> you for <style=cIsHealing>50%</style> of <style=cIsHealing>maximum health</style> over <style=cIsHealing>8</style> seconds.",
+	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "Taking damage to below <style=cIsHealth>50% health</style> <style=cIsUtility>consumes</style> this item, <style=cIsHealing>healing</style> you for <style=cIsHealing>25% <style=cStack>(+25% per stack)</style></style> of your <style=cIsHealing>maximum health</style>.",
 	
 	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>Blocks</style> incoming damage once. Recharges after <style=cIsUtility>20 seconds</style> <style=cStack>(-10% per stack)</style>. <style=cIsVoid>Corrupts all Tougher Times</style>.",
 	

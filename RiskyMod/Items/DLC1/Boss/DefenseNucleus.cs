@@ -165,13 +165,22 @@ namespace RiskyMod.Items.DLC1.Boss
                             {
                                 CharacterMaster master = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
                                 if (allyInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) allyInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
-                                if (master && master.teamIndex == TeamIndex.Player)
+                                if (master)
                                 {
-                                    allyInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                                    allyInv.GiveItem(Allies.AllyItems.AllyScalingItem);
-                                    allyInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
-                                    allyInv.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
-                                    allyInv.GiveItem(Allies.AllyItems.AllyResistAoEItem);
+                                    if (master.teamIndex == TeamIndex.Player)
+                                    {
+                                        allyInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
+                                        allyInv.GiveItem(Allies.AllyItems.AllyScalingItem);
+                                        allyInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
+                                        allyInv.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
+                                        allyInv.GiveItem(Allies.AllyItems.AllyResistAoEItem);
+                                    }
+
+                                    GameObject allyBodyObject = master.GetBodyObject();
+                                    if (allyBodyObject)
+                                    {
+                                        allyBodyObject.transform.rotation *= Quaternion.Euler(-90f, 0f, 0f);
+                                    }
                                 }
                                 allyInv.GiveItem(RoR2Content.Items.HealthDecay, 40);
 
