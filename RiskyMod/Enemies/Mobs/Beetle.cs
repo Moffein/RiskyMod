@@ -65,7 +65,7 @@ namespace RiskyMod.Enemies.Mobs
                 hitboxTransform.localScale = new Vector3(2.5f, 4f, 3.4f);
 
                 //Debug.Log("Beetle Hitbox Pos: " + hitboxTransform.localPosition);   //(0.0, 0.3, 0.2)
-                hitboxTransform.localPosition = new Vector3(0f, 1.3f, 0.2f);
+                hitboxTransform.localPosition = new Vector3(0f, 0.3f, 0.2f);    //y is forward
             }
         }
     }
