@@ -180,7 +180,7 @@ namespace RiskyMod
             FixPlayercount.ZetArtifactsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetArtifacts");
 
             SoftDependencies.QueensGlandBuffLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.kking117.QueenGlandBuff");
-            if (SoftDependencies.QueensGlandBuffLoaded && QueensGland.enabled) Debug.Log("RiskyMod: QueenGlandBuff loaded. Enabling compatibility code.");
+            if (SoftDependencies.QueensGlandBuffLoaded && QueensGland.enabled) Debug.Log("RiskyMod: Disabling Queens Gland changes because QueensGlandBuff is loaded.");
 
             bool nvaPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoVoidAllies");
             if (nvaPluginLoaded && VoidInfestor.noVoidAllies) Debug.Log("RiskyMod: Disabling NoVoidAllies because standalone plugin is loaded.");

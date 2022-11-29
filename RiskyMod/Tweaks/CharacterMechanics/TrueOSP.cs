@@ -3,7 +3,6 @@ using MonoMod.Cil;
 using R2API;
 using RoR2;
 using System;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -38,13 +37,12 @@ namespace RiskyMod.Tweaks.CharacterMechanics
 
                 //Remove vanilla OSP check
                 ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
+                if (c.TryGotoNext(
                      x => x.MatchCallvirt<CharacterBody>("get_hasOneShotProtection")
                     ))
                 {
                     c.Index++;
-                    c.Emit(OpCodes.Ldarg_0);
-                    c.EmitDelegate<Func<bool, HealthComponent, bool>>((hasOSP, self) =>
+                    c.EmitDelegate<Func<bool, bool>>((hasOSP) =>
                     {
                         return false;
                     });

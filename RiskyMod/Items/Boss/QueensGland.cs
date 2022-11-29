@@ -15,7 +15,7 @@ namespace RiskyMod.Items.Boss
 
 		public QueensGland()
 		{
-			if (!enabled)
+			if (!enabled || SoftDependencies.QueensGlandBuffLoaded)
 			{
 				HandleBeetleAllyVanilla();
 				return;
@@ -67,10 +67,10 @@ namespace RiskyMod.Items.Boss
 										if (guardInv && glandCount > 0)
 										{
 
-											int baseDamage = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetInitialDamageCount() : 20;
-											int stackDamage = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetStackDamageCount() : 30;
-											int baseHealth = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetInitialHPCount() : 10;
-											int stackHealth = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetStackHPCount() : 10;
+											int baseDamage = 20;
+											int stackDamage = 30;
+											int baseHealth = 10;
+											int stackHealth = 10;
 
 											int stackCount = glandCount - 1;
 
@@ -151,34 +151,6 @@ namespace RiskyMod.Items.Boss
 		}
 	}
 
-	//https://thunderstore.io/package/kking117/QueenGlandBuff/
-	public static class QueenGlandBuffCompat
-    {
-		[MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-		public static int GetInitialDamageCount()
-		{
-			return QueenGlandBuff.MainPlugin.Config_BaseDamage.Value;
-		}
-
-		[MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-		public static int GetStackDamageCount()
-		{
-			return QueenGlandBuff.MainPlugin.Config_StackDamage.Value;
-		}
-
-		[MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-		public static int GetInitialHPCount()
-		{
-			return QueenGlandBuff.MainPlugin.Config_BaseHealth.Value;
-		}
-
-		[MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-		public static int GetStackHPCount()
-		{
-			return QueenGlandBuff.MainPlugin.Config_StackHealth.Value;
-		}
-	}
-
 	public class UpdateGlandStats : MonoBehaviour
     {
 		public Inventory minionInventory;
@@ -191,10 +163,10 @@ namespace RiskyMod.Items.Boss
 				int glandCount = Math.Max(ownerInventory.GetItemCount(RoR2Content.Items.BeetleGland), 1);
 				int stackCount = glandCount - 1;
 
-				int baseDamage = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetInitialDamageCount() : 20;
-				int stackDamage = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetStackDamageCount() : 30;
-				int baseHealth = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetInitialHPCount() : 10;
-				int stackHealth = SoftDependencies.QueensGlandBuffLoaded ? QueenGlandBuffCompat.GetStackHPCount() : 10;
+				int baseDamage = 20;
+				int stackDamage = 30;
+				int baseHealth = 10;
+				int stackHealth = 10;
 
 				int targetHealthBoost = baseDamage + stackCount * stackDamage;
 				int targetDamageBoost = baseHealth + stackCount * stackHealth;
