@@ -7,8 +7,8 @@ namespace EntityStates.RiskyMod.Commando.Scepter
 {
 	public class FireBarrageScepter : FireBarrage
 	{
-		public static new float baseDurationBetweenShots = 0.08f;
-		public static new float baseBulletCount = 10;
+		public static new float baseDurationBetweenShots = 0.06f;
+		public static new float baseBulletCount = 12;
 		public static new float blastRadius = 3f;
 		public static new float blastDamageCoefficient = 1.3f/0.2f;  //Multiply by damage coefficient
 

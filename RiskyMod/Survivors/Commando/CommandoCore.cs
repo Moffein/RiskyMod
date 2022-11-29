@@ -211,7 +211,7 @@ namespace RiskyMod.Survivors.Commando
                 barrageDef.rechargeStock = 1;
                 barrageDef.requiredStock = 1;
                 barrageDef.skillName = "BarrageScepter";
-                barrageDef.skillNameToken = "COMMANDO_SPECIAL_SCEPTER_NAME";
+                barrageDef.skillNameToken = "COMMANDO_SPECIAL_SCEPTER_NAME_RISKYMOD";
                 barrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD";
                 barrageDef.stockToConsume = 1;
                 Content.Content.skillDefs.Add(barrageDef);
@@ -241,7 +241,7 @@ namespace RiskyMod.Survivors.Commando
                 grenadeDef.rechargeStock = 1;
                 grenadeDef.requiredStock = 1;
                 grenadeDef.skillName = "GrenadeScepter";
-                grenadeDef.skillNameToken = "COMMANDO_SPECIAL_ALT1_SCEPTER_NAME";
+                grenadeDef.skillNameToken = "COMMANDO_SPECIAL_ALT1_SCEPTER_NAME_RISKYMOD";
                 grenadeDef.skillDescriptionToken = "COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD";
                 grenadeDef.stockToConsume = 1;
                 Content.Content.skillDefs.Add(grenadeDef);
