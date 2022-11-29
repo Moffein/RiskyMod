@@ -13,27 +13,11 @@ namespace RiskyMod.Tweaks.CharacterMechanics
     {
         public static bool enabled = true;
         public static BuffDef DisableOSP;
-        public static BuffDef SpikestripPlatedEliteBuff = null;
         public static bool enableLogging = false;
-
-        private void GetPlatedBuff()
-        {
-            EquipmentIndex ei = EquipmentCatalog.FindEquipmentIndex("EQUIPMENT_AFFIXPLATED");
-            if (ei != EquipmentIndex.None)
-            {
-                EquipmentDef ed = EquipmentCatalog.GetEquipmentDef(ei);
-                if (ed && ed.passiveBuffDef && ed.passiveBuffDef.isElite)
-                {
-                    SpikestripPlatedEliteBuff = ed.passiveBuffDef;
-                }
-            }
-        }
 
         public TrueOSP()
         {
             if (!enabled) return;
-
-            if (SoftDependencies.SpikestripGrooveSalad) RoR2.RoR2Application.onLoad += GetPlatedBuff;
 
             DisableOSP = SneedUtils.SneedUtils.CreateBuffDef(
                 "RiskyMod_DisableOSPBuff",
@@ -62,10 +46,6 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     c.Emit(OpCodes.Ldarg_0);
                     c.EmitDelegate<Func<bool, HealthComponent, bool>>((hasOSP, self) =>
                     {
-                        if (self.body && self.body.HasBuff(SpikestripPlatedEliteBuff))
-                        {
-                            return hasOSP;
-                        }
                         return false;
                     });
 
@@ -119,7 +99,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
 
         private static void HandleTrueOSP(CharacterBody self)
         {
-            if (self.hasOneShotProtection && !self.HasBuff(SpikestripPlatedEliteBuff))
+            if (self.hasOneShotProtection)
             {
                 //Disable vanilla OSP
                 self.oneShotProtectionFraction = 0f;    //I'd like to re-enable the visual, but I need to figure out how to make it not count shields.
