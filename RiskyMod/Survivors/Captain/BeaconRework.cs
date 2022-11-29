@@ -142,6 +142,14 @@ namespace RiskyMod.Survivors.Captain
                      UnityEngine.Debug.LogError("RiskyMod: BeaconRework Shock IL Hook failed");
                  }
             };
+
+            /*Transform indicatorTransform = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, Shocking.prefab").WaitForCompletion().GetComponent<ModelLocator>()?.modelTransform?.Find("AreaIndicatorCenter");
+            if (indicatorTransform)
+            {
+                indicatorTransform.gameObject.SetActive(true);
+                Debug.Log("Shock scale: " + indicatorTransform.localScale);
+                indicatorTransform.localScale = new Vector3(1.5f * indicatorTransform.localScale.x, indicatorTransform.localScale.y, 1.5f * indicatorTransform.localScale.z);
+            }*/
         }
 
         private void ModifyBeaconResupply(SkillLocator sk)

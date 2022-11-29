@@ -31,7 +31,7 @@ namespace EntityStates.RiskyMod.Commando.Scepter
 
                 for (int i = 0; i < 5; i++)
                 {
-                    Vector3 spreadDirection = Util.ApplySpread(aimRay.direction, 6f, 12f, 1f, 1f, 0f, this.projectilePitchBonus);
+                    Vector3 spreadDirection = Util.ApplySpread(aimRay.direction, 3f, 9f, 1f, 1f, 0f, this.projectilePitchBonus);
                     ProjectileManager.instance.FireProjectile(this.projectilePrefab, aimRay.origin, Util.QuaternionSafeLookRotation(spreadDirection), base.gameObject, 0.5f*this.damageStat * this.damageCoefficient, fuseTime, crit, DamageColorIndex.Default, null, -1f);
                 }
             }
