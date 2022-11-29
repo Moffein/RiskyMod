@@ -142,39 +142,8 @@ namespace RiskyMod.Survivors.Commando
 
             if (grenadeChanges)
             {
-                ThrowGrenade._projectilePrefab = BuildGrenadeProjectile();
-                CookGrenade.overcookExplosionEffectPrefab = BuildGrenadeOvercookExplosionEffect();
-
-                Content.Content.entityStates.Add(typeof(CookGrenade));
-                Content.Content.entityStates.Add(typeof(ThrowGrenade));
-
-                SkillDef grenadeDef = SkillDef.CreateInstance<SkillDef>();
-                grenadeDef.activationState = new SerializableEntityStateType(typeof(CookGrenade));
-                grenadeDef.activationStateMachineName = "Weapon";
-                grenadeDef.baseMaxStock = 1;
-                grenadeDef.baseRechargeInterval = 7f;
-                grenadeDef.beginSkillCooldownOnSkillEnd = false;
-                grenadeDef.canceledFromSprinting = false;
-                grenadeDef.dontAllowPastMaxStocks = true;
-                grenadeDef.forceSprintDuringState = false;
-                grenadeDef.fullRestockOnAssign = true;
-                grenadeDef.icon = sk.special.skillFamily.variants[1].skillDef.icon;
-                grenadeDef.interruptPriority = InterruptPriority.PrioritySkill;
-                grenadeDef.isCombatSkill = true;
-                grenadeDef.keywordTokens = new string[] { };
-                grenadeDef.mustKeyPress = false;
-                grenadeDef.cancelSprintingOnActivation = true;
-                grenadeDef.rechargeStock = 1;
-                grenadeDef.requiredStock = 1;
-                grenadeDef.skillName = "Grenade";
-                grenadeDef.skillNameToken = "COMMANDO_SPECIAL_ALT1_NAME";
-                grenadeDef.skillDescriptionToken = "COMMANDO_SPECIAL_ALT1_DESCRIPTION_RISKYMOD";
-                grenadeDef.stockToConsume = 1;
-                SneedUtils.SneedUtils.FixSkillName(grenadeDef);
-                Content.Content.skillDefs.Add(grenadeDef);
-                sk.special.skillFamily.variants[1].skillDef = grenadeDef;
-
-                Skills.Grenade = grenadeDef;
+                GameObject moddedGrenade = BuildGrenadeProjectile();
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.ThrowGrenade", "projectilePrefab", moddedGrenade);
             }
 
             if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
@@ -217,36 +186,6 @@ namespace RiskyMod.Survivors.Commando
                 Content.Content.skillDefs.Add(barrageDef);
                 Skills.BarrageScepter = barrageDef;
             }
-            if (grenadeChanges)
-            {
-                ThrowGrenadeScepter._projectilePrefab = BuildGrenadeScepterProjectile();
-                Content.Content.entityStates.Add(typeof(CookGrenadeScepter));
-                Content.Content.entityStates.Add(typeof(ThrowGrenadeScepter));
-                SkillDef grenadeDef = SkillDef.CreateInstance<SkillDef>();
-                grenadeDef.activationState = new SerializableEntityStateType(typeof(CookGrenadeScepter));
-                grenadeDef.activationStateMachineName = "Weapon";
-                grenadeDef.baseMaxStock = 1;
-                grenadeDef.baseRechargeInterval = 6f;
-                grenadeDef.beginSkillCooldownOnSkillEnd = false;
-                grenadeDef.canceledFromSprinting = false;
-                grenadeDef.dontAllowPastMaxStocks = true;
-                grenadeDef.forceSprintDuringState = false;
-                grenadeDef.fullRestockOnAssign = true;
-                grenadeDef.icon = Assets.ScepterSkillIcons.CommandoGrenadeScepter;
-                grenadeDef.interruptPriority = InterruptPriority.PrioritySkill;
-                grenadeDef.isCombatSkill = true;
-                grenadeDef.keywordTokens = new string[] { };
-                grenadeDef.mustKeyPress = false;
-                grenadeDef.cancelSprintingOnActivation = true;
-                grenadeDef.rechargeStock = 1;
-                grenadeDef.requiredStock = 1;
-                grenadeDef.skillName = "GrenadeScepter";
-                grenadeDef.skillNameToken = "COMMANDO_SPECIAL_ALT1_SCEPTER_NAME_RISKYMOD";
-                grenadeDef.skillDescriptionToken = "COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD";
-                grenadeDef.stockToConsume = 1;
-                Content.Content.skillDefs.Add(grenadeDef);
-                Skills.GrenadeScepter = grenadeDef;
-            }
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -256,11 +195,6 @@ namespace RiskyMod.Survivors.Commando
             {
                 AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.BarrageScepter, "CommandoBody", SkillSlot.Special, 0);
             }
-
-            if (grenadeChanges)
-            {
-                AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.GrenadeScepter, "CommandoBody", SkillSlot.Special, 1);
-            }
         }
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepterClassic()
@@ -269,63 +203,23 @@ namespace RiskyMod.Survivors.Commando
             {
                 ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.BarrageScepter, "CommandoBody", SkillSlot.Special, Skills.Barrage);
             }
-
-            if (grenadeChanges)
-            {
-                ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.GrenadeScepter, "CommandoBody", SkillSlot.Special, Skills.Grenade);
-            }
         }
 
-        private GameObject BuildGrenadeScepterProjectile()
-        {
-            GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/CommandoGrenadeProjectile").InstantiateClone("RiskyModFragScepterProjectile", true);
-
-            ProjectileSimple ps = proj.GetComponent<ProjectileSimple>();
-            ps.lifetime = 10f;
-
-            ProjectileImpactExplosion pie = proj.GetComponent<ProjectileImpactExplosion>();
-            pie.timerAfterImpact = false;
-            pie.lifetime = CookGrenade.totalFuseTime;
-            pie.blastRadius = CookGrenadeScepter.selfBlastRadius;
-            pie.falloffModel = BlastAttack.FalloffModel.None;
-
-            ProjectileDamage pd = proj.GetComponent<ProjectileDamage>();
-            pd.damageType = DamageType.Generic;
-
-            proj.AddComponent<GrenadeTimer>();
-
-            Content.Content.projectilePrefabs.Add(proj);
-            return proj;
-        }
         private GameObject BuildGrenadeProjectile()
         {
             GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/CommandoGrenadeProjectile").InstantiateClone("RiskyModFragProjectile", true);
 
-            ProjectileSimple ps = proj.GetComponent<ProjectileSimple>();
-            ps.lifetime = 10f;
-
             ProjectileImpactExplosion pie = proj.GetComponent<ProjectileImpactExplosion>();
-            pie.timerAfterImpact = false;
-            pie.lifetime = CookGrenade.totalFuseTime;
-            pie.blastRadius = CookGrenade.selfBlastRadius;
+            pie.destroyOnWorld = false;
+            pie.destroyOnEnemy = true;
             pie.falloffModel = BlastAttack.FalloffModel.SweetSpot;
 
-            ProjectileDamage pd = proj.GetComponent<ProjectileDamage>();
-            pd.damageType = DamageType.Generic;
-
-            proj.AddComponent<GrenadeTimer>();
+            proj.AddComponent<GrenadeImpactComponent>();
 
             Content.Content.projectilePrefabs.Add(proj);
             return proj;
         }
-        private GameObject BuildGrenadeOvercookExplosionEffect()
-        {
-            GameObject effect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFXCommandoGrenade").InstantiateClone("RiskyModFragOvercookEffect", false);
-            EffectComponent ec = effect.GetComponent<EffectComponent>();
-            ec.soundName = "Play_commando_M2_grenade_explo";
-            Content.Content.effectDefs.Add(new EffectDef(effect));
-            return effect;
-        }
+
         private GameObject BuildPhaseRoundProjectile()
         {
             GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/fmjramping").InstantiateClone("RiskyModPhaseRound", true);
@@ -361,8 +255,6 @@ namespace RiskyMod.Survivors.Commando
     public class Skills
     {
         public static SkillDef Barrage;
-        public static SkillDef Grenade;
         public static SkillDef BarrageScepter;
-        public static SkillDef GrenadeScepter;
     }
 }
