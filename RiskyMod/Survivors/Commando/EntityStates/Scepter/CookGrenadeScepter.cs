@@ -15,5 +15,11 @@ namespace EntityStates.RiskyMod.Commando.Scepter
             radiusInternal = selfBlastRadius;
             selfForceInternal = selfForce;
         }
+
+        public override void SwapToThrowGrenade()
+        {
+            this.grenadeThrown = true;
+            this.outer.SetNextState(new ThrowGrenadeScepter { fuseTime = base.fixedAge });
+        }
     }
 }

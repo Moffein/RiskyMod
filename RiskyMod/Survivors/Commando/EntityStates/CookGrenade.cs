@@ -20,7 +20,7 @@ namespace EntityStates.RiskyMod.Commando
         public static float selfBlastRadius = 14f;
 
         private float stopwatch;
-        private bool grenadeThrown = false;
+        public bool grenadeThrown = false;
         private Animator animator;
         private Transform rightHand;
 

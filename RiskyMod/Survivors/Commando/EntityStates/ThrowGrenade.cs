@@ -37,6 +37,7 @@ namespace EntityStates.RiskyMod.Commando
         public override void FireProjectile()
         {
             //Fuse time is stored in the Force field. Component fetches the real force later.
+            //Fuse Time can now be specified as of SotV. Figure it out later.
             if (base.isAuthority)
             {
                 Ray aimRay = base.GetAimRay();
