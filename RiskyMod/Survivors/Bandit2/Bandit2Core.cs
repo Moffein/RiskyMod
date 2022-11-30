@@ -38,6 +38,7 @@ namespace RiskyMod.Survivors.Bandit2
         public static bool knifeThrowChanges = true;
         public static bool noKnifeCancel = true;
 
+        public static bool utilityChanges = true;
         public static bool utilityFix = true;
 
         public static bool specialRework = true;
@@ -199,13 +200,18 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void ModifyUtilities(SkillLocator sk)
         {
-            if (!utilityFix) return;
-
-            Content.Content.entityStates.Add(typeof(ThrowSmokebomb));
-            Content.Content.entityStates.Add(typeof(StealthMode));
             SkillDef cloakDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Bandit2/ThrowSmokebomb.asset").WaitForCompletion();
-            cloakDef.activationState = new SerializableEntityStateType(typeof(ThrowSmokebomb));
-            cloakDef.mustKeyPress = false;
+            if (utilityFix)
+            {
+                Content.Content.entityStates.Add(typeof(ThrowSmokebomb));
+                Content.Content.entityStates.Add(typeof(StealthMode));
+                cloakDef.activationState = new SerializableEntityStateType(typeof(ThrowSmokebomb));
+                cloakDef.mustKeyPress = false;
+            }
+            if (utilityChanges)
+            {
+                cloakDef.baseRechargeInterval = 7f;
+            }
         }
 
         private void ModifySpecials(SkillLocator sk)
