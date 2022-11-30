@@ -236,7 +236,7 @@ namespace RiskyMod.Survivors.Bandit2
             resetRevolverDef.mustKeyPress = false;
             Skills.LightsOut = resetRevolverDef;
 
-            SkillDef skullRevolverDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Bandit2/ResetRevolver.asset").WaitForCompletion();
+            SkillDef skullRevolverDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Bandit2/SkullRevolver.asset").WaitForCompletion();
             skullRevolverDef.activationState = new SerializableEntityStateType(typeof(PrepRackEmUp));
             skullRevolverDef.beginSkillCooldownOnSkillEnd = true;
             skullRevolverDef.canceledFromSprinting = false;
