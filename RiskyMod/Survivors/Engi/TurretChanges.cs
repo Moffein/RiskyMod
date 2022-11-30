@@ -34,6 +34,7 @@ namespace RiskyMod.Survivors.Engi
 
             GameObject turretBody = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/EngiWalkerTurretBody");
             CharacterBody cb = turretBody.GetComponent<CharacterBody>();
+            cb.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
             cb.damage = 12f;
             cb.levelDamage = cb.damage * 0.2f;
             cb.regen = 1f;
