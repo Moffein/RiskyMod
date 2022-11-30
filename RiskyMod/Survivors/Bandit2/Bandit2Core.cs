@@ -102,6 +102,7 @@ namespace RiskyMod.Survivors.Bandit2
                 burstDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryShotgun));
                 burstDef.skillDescriptionToken = "BANDIT2_PRIMARY_DESC_RISKYMOD";
                 burstDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
+                burstDef.mustKeyPress = false;
             }
 
             if (blastChanges)
@@ -110,6 +111,7 @@ namespace RiskyMod.Survivors.Bandit2
                 blastDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryRifle));
                 blastDef.skillDescriptionToken = "BANDIT2_PRIMARY_ALT_DESC_RISKYMOD";
                 blastDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
+                blastDef.mustKeyPress = false;
             }
         }
 
