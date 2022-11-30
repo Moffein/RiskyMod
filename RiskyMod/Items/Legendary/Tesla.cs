@@ -39,7 +39,7 @@ namespace RiskyMod.Items.Legendary
                     ))
                 {
                     c.Index--;
-                    c.Next.Operand = 20f;
+                    c.Next.Operand = 25f;
 
                     if (c.TryGotoNext(MoveType.After,
                          x => x.MatchLdfld(typeof(RoR2.Items.ShockNearbyBodyBehavior), "teslaResetListInterval"))
