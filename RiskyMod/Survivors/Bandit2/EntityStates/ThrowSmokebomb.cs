@@ -1,4 +1,5 @@
 ﻿using RoR2;
+using UnityEngine;
 
 namespace EntityStates.RiskyMod.Bandit2
 {
@@ -7,7 +8,22 @@ namespace EntityStates.RiskyMod.Bandit2
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			base.PlayAnimation("Gesture, Additive", "ThrowSmokebomb", "ThrowSmokebomb.playbackRate", ThrowSmokebomb.duration);
+
+			bool playAnim = true;
+			Animator modelAnimator = base.GetModelAnimator();
+			if (modelAnimator)
+			{
+				int layerIndex = modelAnimator.GetLayerIndex("Gesture, Additive");
+				if (layerIndex >= 0)
+                {
+					AnimatorStateInfo animStateInfo = modelAnimator.GetCurrentAnimatorStateInfo(layerIndex);
+					if (animStateInfo.IsName("SlashBlade"))
+                    {
+						playAnim = false;
+                    }
+                }
+            }
+			if (playAnim) base.PlayAnimation("Gesture, Additive", "ThrowSmokebomb", "ThrowSmokebomb.playbackRate", ThrowSmokebomb.duration);
 		}
 
 		public override void FixedUpdate()

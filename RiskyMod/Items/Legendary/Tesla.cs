@@ -14,7 +14,6 @@ namespace RiskyMod.Items.Legendary
         public Tesla()
         {
             if (!enabled) return;
-            ItemsCore.ModifyItemDefActions += ModifyItem;
 
             IL.RoR2.Items.ShockNearbyBodyBehavior.FixedUpdate += (il) =>
             {
@@ -40,8 +39,9 @@ namespace RiskyMod.Items.Legendary
                 {
                     c.Index--;
                     c.Next.Operand = 25f;
+                    error2 = false;
 
-                    if (c.TryGotoNext(MoveType.After,
+                    /*if (c.TryGotoNext(MoveType.After,
                          x => x.MatchLdfld(typeof(RoR2.Items.ShockNearbyBodyBehavior), "teslaResetListInterval"))
                         )
                     {
@@ -60,9 +60,8 @@ namespace RiskyMod.Items.Legendary
                             {
                                 return interval / (0.5f + 0.5f * self.stack);
                             });
-                            error2 = false;
                         }
-                    }
+                    }*/
                 }
 
                 if (error || error2)
@@ -70,10 +69,6 @@ namespace RiskyMod.Items.Legendary
                     UnityEngine.Debug.LogError("RiskyMod: Tesla IL Hook failed");
                 }
             };
-        }
-        private static void ModifyItem()
-        {
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.ShockNearby);
         }
     }
 }

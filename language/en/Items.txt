@@ -135,8 +135,6 @@
 	
 	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Healing past full grants you a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>50%</style> of the amount you <style=cIsHealing>healed</style>. Divides <style=cIsHealing>barrier decay rate</style> by <style=cIsHealing>2 <style=cStack>(+1 per stack)</style></style>.",
 
-	"ITEM_SHOCKNEARBY_DESC_RISKYMOD": "Fire out <style=cIsDamage>lightning</style> that hits <style=cIsDamage>3</style> <style=cStack>(+2 per stack)</style> enemies for <style=cIsDamage>200%</style> base damage with <style=cIsDamage>100%</style> <style=cStack>(+50% per stack)</style> fire rate. The Tesla Coil switches off every <style=cIsDamage>10 seconds</style>.",
-
 	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Increase base damage by <style=cIsDamage>100%</style> <style=cStack>(+100% per stack)</style>. <style=cIsHealth>Divide maximum health by 2</style> <style=cStack>(+1 per stack)</style>."
 	}
 }
