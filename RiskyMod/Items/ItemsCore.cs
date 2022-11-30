@@ -92,6 +92,7 @@ namespace RiskyMod.Items
             new GhorsTome();
 
             new Harpoon();
+            new Shuriken();
         }
 
         private void ModifyLegendary()

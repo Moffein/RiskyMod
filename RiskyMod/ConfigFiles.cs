@@ -317,6 +317,8 @@ namespace RiskyMod
             Ukulele.enabled = ItemCfg.Bind(uncommonString, "Ukulele", true, itemConfigDescString).Value;
             WarHorn.enabled = ItemCfg.Bind(uncommonString, "War Horn", true, itemConfigDescString).Value;
             WillOWisp.enabled = ItemCfg.Bind(uncommonString, "Will-o-the-Wisp", true, itemConfigDescString).Value;
+
+            Shuriken.enabled = ItemCfg.Bind(uncommonString, "Shuriken", true, itemConfigDescString).Value;
         }
 
         private static void ConfigLegendaryItems()
