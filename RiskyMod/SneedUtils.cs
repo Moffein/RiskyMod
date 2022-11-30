@@ -166,7 +166,6 @@ namespace SneedUtils
             {
                 if (playerObject == user.cachedBodyObject)
                 {
-                    Debug.Log("Found LocalUser");
                     return true;
                 }
             }
@@ -180,7 +179,6 @@ namespace SneedUtils
             {
                 if (playerBody == user.cachedBody)
                 {
-                    Debug.Log("Found LocalUser");
                     return true;
                 }
             }
