@@ -59,6 +59,10 @@ namespace RiskyMod.Items.Common
             stickybombPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/stickybomb").InstantiateClone("RiskyModStickybomb", true);
             ProjectileImpactExplosion pie = stickybombPrefab.GetComponent<ProjectileImpactExplosion>();
             pie.lifetime = 1.2f;
+
+            Rigidbody rb = stickybombPrefab.GetComponent<Rigidbody>();
+            rb.useGravity = false;
+
             Content.Content.projectilePrefabs.Add(stickybombPrefab);
         }
         private static void ModifyItem()
