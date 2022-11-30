@@ -31,6 +31,11 @@ namespace RiskyMod.Items.Lunar
             };
 
             GetStatCoefficients.HandleStatsInventoryActions += HandleStatsInventory;
+            ItemsCore.ModifyItemDefActions += ModifyItem;
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.LunarDagger);
         }
 
         private void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)

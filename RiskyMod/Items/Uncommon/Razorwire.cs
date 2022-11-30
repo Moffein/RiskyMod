@@ -38,9 +38,9 @@ namespace RiskyMod.Items.Uncommon
 
                 bool isCrit = self.body.RollCrit();
                 int stack = thornCount - 1;
-                float damageValue = (1.6f + 0.4f * stack) * self.body.damage;    //Mathf.Lerp(0.84f + 0.18f * stack, 4.2f + 0.9f * stack, hpLostLerp)
+                float damageValue = (1.6f + 0.4f * stack) * self.body.damage;
                 float proc = damageInfo.damageType.HasFlag(DamageType.DoT) ? 0.1f : 0.5f;
-                float radius = 25f; //Mathf.Lerp(20f, 50f, hpLostLerp);
+                float radius = 25f;
 
                 TeamIndex teamIndex2 = self.body.teamComponent.teamIndex;
                 HurtBox[] hurtBoxes = new SphereSearch
