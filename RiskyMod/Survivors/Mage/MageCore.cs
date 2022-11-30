@@ -120,35 +120,8 @@ namespace RiskyMod.Survivors.Mage
                 //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Mage.Weapon.PrepWall");
                 Content.Content.entityStates.Add(typeof(PrepIceWall));
 
-                SkillDef iceSkill = ScriptableObject.CreateInstance<SkillDef>();
-
-                iceSkill.activationState = new SerializableEntityStateType(typeof(PrepIceWall));
-                iceSkill.activationStateMachineName = "Weapon";
-                iceSkill.baseMaxStock = 1;
-                iceSkill.baseRechargeInterval = 12f;
-                iceSkill.beginSkillCooldownOnSkillEnd = true;
-                iceSkill.canceledFromSprinting = !SoftDependencies.RtAutoSprintLoaded;
-                iceSkill.cancelSprintingOnActivation = true;
-                iceSkill.dontAllowPastMaxStocks = true;
-                iceSkill.forceSprintDuringState = false;
-                iceSkill.fullRestockOnAssign = true;
-                iceSkill.icon = sk.utility.skillFamily.variants[0].skillDef.icon;
-                iceSkill.interruptPriority = InterruptPriority.PrioritySkill;
-                iceSkill.isCombatSkill = true;
-                iceSkill.keywordTokens = new string[] { "KEYWORD_FREEZING" };
-                iceSkill.mustKeyPress = false;
-                iceSkill.rechargeStock = 1;
-                iceSkill.requiredStock = 1;
-                iceSkill.resetCooldownTimerOnUse = false;
-                iceSkill.skillDescriptionToken = "MAGE_UTILITY_ICE_DESCRIPTION";
-                iceSkill.skillNameToken = "MAGE_UTILITY_ICE_NAME";
-                iceSkill.skillName = "RiskyModIceWall";
-                iceSkill.stockToConsume = 1;
-                SneedUtils.SneedUtils.FixSkillName(iceSkill);
-
-                Skills.PrepIceWall = iceSkill;
-                Content.Content.skillDefs.Add(Skills.PrepIceWall);
-                SneedUtils.SneedUtils.ReplaceSkillDef(sk.utility.skillFamily, Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyWall.asset").WaitForCompletion(), Skills.PrepIceWall);
+                SkillDef iceWallDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyWall.asset").WaitForCompletion();
+                iceWallDef.activationState = new SerializableEntityStateType(typeof(PrepIceWall));
             }
 
             if (enableFireUtility)
@@ -399,7 +372,6 @@ namespace RiskyMod.Survivors.Mage
 
     public static class Skills
     {
-        public static SkillDef PrepIceWall;
         public static SkillDef PrepFireStorm;
         public static SkillDef SpecialLightning;
         public static SkillDef SpecialLightningScepter;

@@ -15,6 +15,7 @@ using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Bandit2
 {
@@ -96,67 +97,19 @@ namespace RiskyMod.Survivors.Bandit2
             if (burstChanges)
             {
                 Content.Content.entityStates.Add(typeof(FirePrimaryShotgun));
-                ReloadSkillDef shotgunDef = ReloadSkillDef.CreateInstance<ReloadSkillDef>();
-                shotgunDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryShotgun));
-                shotgunDef.activationStateMachineName = "Weapon";
-                shotgunDef.baseMaxStock = 4;
-                shotgunDef.baseRechargeInterval = 0f;
-                shotgunDef.beginSkillCooldownOnSkillEnd = false;
-                shotgunDef.canceledFromSprinting = false;
-                shotgunDef.dontAllowPastMaxStocks = true;
-                shotgunDef.forceSprintDuringState = false;
-                shotgunDef.fullRestockOnAssign = true;
-                shotgunDef.icon = sk.primary._skillFamily.variants[0].skillDef.icon;
-                shotgunDef.interruptPriority = InterruptPriority.Skill;
-                shotgunDef.isCombatSkill = true;
-                shotgunDef.keywordTokens = new string[] { };
-                shotgunDef.mustKeyPress = false;
-                shotgunDef.cancelSprintingOnActivation = true;
-                shotgunDef.rechargeStock = 0;
-                shotgunDef.requiredStock = 1;
-                shotgunDef.skillName = "FireShotgun";
-                shotgunDef.skillNameToken = "BANDIT2_PRIMARY_NAME";
-                shotgunDef.skillDescriptionToken = "BANDIT2_PRIMARY_DESC_RISKYMOD";
-                shotgunDef.stockToConsume = 1;
-                shotgunDef.graceDuration = 0.4f;
-                shotgunDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
-                shotgunDef.reloadInterruptPriority = InterruptPriority.Any;
-                SneedUtils.SneedUtils.FixSkillName(shotgunDef);
-                Content.Content.skillDefs.Add(shotgunDef);
-                sk.primary._skillFamily.variants[0].skillDef = shotgunDef;
+
+                ReloadSkillDef burstDef = Addressables.LoadAssetAsync<ReloadSkillDef>("RoR2/Base/Bandit2/FireShotgun2.asset").WaitForCompletion();
+                burstDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryShotgun));
+                burstDef.skillDescriptionToken = "BANDIT2_PRIMARY_DESC_RISKYMOD";
+                burstDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
             }
 
             if (blastChanges)
             {
-                Content.Content.entityStates.Add(typeof(FirePrimaryRifle));
-                ReloadSkillDef rifleDef = ReloadSkillDef.CreateInstance<ReloadSkillDef>();
-                rifleDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryRifle));
-                rifleDef.activationStateMachineName = "Weapon";
-                rifleDef.baseMaxStock = 4;
-                rifleDef.baseRechargeInterval = 0f;
-                rifleDef.beginSkillCooldownOnSkillEnd = false;
-                rifleDef.canceledFromSprinting = false;
-                rifleDef.dontAllowPastMaxStocks = true;
-                rifleDef.forceSprintDuringState = false;
-                rifleDef.fullRestockOnAssign = true;
-                rifleDef.icon = sk.primary._skillFamily.variants[1].skillDef.icon;
-                rifleDef.interruptPriority = InterruptPriority.Skill;
-                rifleDef.isCombatSkill = true;
-                rifleDef.keywordTokens = new string[] { };
-                rifleDef.mustKeyPress = false;
-                rifleDef.cancelSprintingOnActivation = true;
-                rifleDef.rechargeStock = 0;
-                rifleDef.requiredStock = 1;
-                rifleDef.skillName = "FireRifle";
-                rifleDef.skillNameToken = "BANDIT2_PRIMARY_ALT_NAME";
-                rifleDef.skillDescriptionToken = "BANDIT2_PRIMARY_ALT_DESC_RISKYMOD";
-                rifleDef.stockToConsume = 1;
-                rifleDef.graceDuration = 0.4f;
-                rifleDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
-                rifleDef.reloadInterruptPriority = InterruptPriority.Any;
-                SneedUtils.SneedUtils.FixSkillName(rifleDef);
-                Content.Content.skillDefs.Add(rifleDef);
-                sk.primary._skillFamily.variants[1].skillDef = rifleDef;
+                ReloadSkillDef blastDef = Addressables.LoadAssetAsync<ReloadSkillDef>("RoR2/Base/Bandit2/Bandit2Blast.asset").WaitForCompletion();
+                blastDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryRifle));
+                blastDef.skillDescriptionToken = "BANDIT2_PRIMARY_ALT_DESC_RISKYMOD";
+                blastDef.reloadState = new SerializableEntityStateType(typeof(EnterReload));
             }
         }
 
@@ -179,9 +132,12 @@ namespace RiskyMod.Survivors.Bandit2
             {
                 new IncreaseKnifeHitboxSize();
                 knifeVelocity = BuildSlashVelocityCurve();
-                sk.secondary.skillFamily.variants[0].skillDef.canceledFromSprinting = false;
 
-                if (noKnifeCancel) sk.secondary.skillFamily.variants[0].skillDef.activationStateMachineName = "KnifeArm";
+                SkillDef knifeSkillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Bandit2/SlashBlade.asset").WaitForCompletion();
+
+                knifeSkillDef.canceledFromSprinting = false;
+
+                if (noKnifeCancel) knifeSkillDef.activationStateMachineName = "KnifeArm";
 
                 On.EntityStates.Bandit2.Weapon.SlashBlade.OnEnter += (orig, self) =>
                 {
@@ -200,9 +156,10 @@ namespace RiskyMod.Survivors.Bandit2
 
             if (knifeThrowChanges)
             {
-                sk.secondary.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SUPERBLEED" };
-                sk.secondary.skillFamily.variants[1].skillDef.skillDescriptionToken = "BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
-                if (noKnifeCancel) sk.secondary.skillFamily.variants[1].skillDef.activationStateMachineName = "KnifeArm";
+                SkillDef shivSkillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Bandit2/Bandit2SerratedShivs.asset").WaitForCompletion();
+                shivSkillDef.keywordTokens = new string[] { "KEYWORD_STUNNING", "KEYWORD_SUPERBLEED" };
+                shivSkillDef.skillDescriptionToken = "BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD";
+                if (noKnifeCancel) shivSkillDef.activationStateMachineName = "KnifeArm";
 
                 On.EntityStates.Bandit2.Weapon.Bandit2FireShiv.FireShiv += (orig, self) =>
                 {
@@ -244,31 +201,9 @@ namespace RiskyMod.Survivors.Bandit2
 
             Content.Content.entityStates.Add(typeof(ThrowSmokebomb));
             Content.Content.entityStates.Add(typeof(StealthMode));
-            SkillDef stealthDef = SkillDef.CreateInstance<SkillDef>();
-            stealthDef.activationState = new SerializableEntityStateType(typeof(ThrowSmokebomb));
-            stealthDef.activationStateMachineName = "Stealth";
-            stealthDef.baseMaxStock = 1;
-            stealthDef.baseRechargeInterval = 6f;
-            stealthDef.beginSkillCooldownOnSkillEnd = false;
-            stealthDef.canceledFromSprinting = false;
-            stealthDef.forceSprintDuringState = true;
-            stealthDef.dontAllowPastMaxStocks = true;
-            stealthDef.fullRestockOnAssign = true;
-            stealthDef.icon = sk.utility._skillFamily.variants[0].skillDef.icon;
-            stealthDef.interruptPriority = InterruptPriority.Skill;
-            stealthDef.isCombatSkill = false;
-            stealthDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
-            stealthDef.mustKeyPress = false;
-            stealthDef.cancelSprintingOnActivation = false;
-            stealthDef.rechargeStock = 1;
-            stealthDef.requiredStock = 1;
-            stealthDef.skillName = "Stealth";
-            stealthDef.skillNameToken = "BANDIT2_UTILITY_NAME";
-            stealthDef.skillDescriptionToken = "BANDIT2_UTILITY_DESCRIPTION";
-            stealthDef.stockToConsume = 1;
-            SneedUtils.SneedUtils.FixSkillName(stealthDef);
-            Content.Content.skillDefs.Add(stealthDef);
-            sk.utility._skillFamily.variants[0].skillDef = stealthDef;
+            SkillDef cloakDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Bandit2/ThrowSmokebomb.asset").WaitForCompletion();
+            cloakDef.activationState = new SerializableEntityStateType(typeof(ThrowSmokebomb));
+            cloakDef.mustKeyPress = false;
         }
 
         private void ModifySpecials(SkillLocator sk)
@@ -293,61 +228,22 @@ namespace RiskyMod.Survivors.Bandit2
             Content.Content.entityStates.Add(typeof(PrepLightsOut));
             Content.Content.entityStates.Add(typeof(FireLightsOut));
 
-            SkillDef lightsOutDef = SkillDef.CreateInstance<SkillDef>();
-            lightsOutDef.activationState = new SerializableEntityStateType(typeof(PrepLightsOut));
-            lightsOutDef.activationStateMachineName = "Weapon";
-            lightsOutDef.baseMaxStock = 1;
-            lightsOutDef.baseRechargeInterval = 4f;
-            lightsOutDef.beginSkillCooldownOnSkillEnd = true;
-            lightsOutDef.canceledFromSprinting = false;
-            lightsOutDef.forceSprintDuringState = false;
-            lightsOutDef.dontAllowPastMaxStocks = true;
-            lightsOutDef.fullRestockOnAssign = true;
-            lightsOutDef.icon = sk.special._skillFamily.variants[0].skillDef.icon;
-            lightsOutDef.interruptPriority = InterruptPriority.Skill;
-            lightsOutDef.isCombatSkill = true;
-            lightsOutDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
-            lightsOutDef.mustKeyPress = false;
-            lightsOutDef.cancelSprintingOnActivation = true;
-            lightsOutDef.rechargeStock = 1;
-            lightsOutDef.requiredStock = 1;
-            lightsOutDef.skillName = "LightsOut";
-            lightsOutDef.skillNameToken = "BANDIT2_SPECIAL_NAME";
-            lightsOutDef.skillDescriptionToken = "BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD";
-            lightsOutDef.stockToConsume = 1;
-            SneedUtils.SneedUtils.FixSkillName(lightsOutDef);
-            Content.Content.skillDefs.Add(lightsOutDef);
-            sk.special._skillFamily.variants[0].skillDef = lightsOutDef;
-            Skills.LightsOut = lightsOutDef;
+            SkillDef resetRevolverDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Bandit2/ResetRevolver.asset").WaitForCompletion();
+            resetRevolverDef.activationState = new SerializableEntityStateType(typeof(PrepLightsOut));
+            resetRevolverDef.beginSkillCooldownOnSkillEnd = true;
+            resetRevolverDef.canceledFromSprinting = false;
+            resetRevolverDef.skillDescriptionToken = "BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD";
+            resetRevolverDef.mustKeyPress = false;
+            Skills.LightsOut = resetRevolverDef;
 
-            SkillDef reuDef = SkillDef.CreateInstance<SkillDef>();
-            Content.Content.entityStates.Add(typeof(PrepRackEmUp));
-            Content.Content.entityStates.Add(typeof(FireRackEmUp));
-            reuDef.activationState = new SerializableEntityStateType(typeof(PrepRackEmUp));
-            reuDef.activationStateMachineName = "Weapon";
-            reuDef.baseMaxStock = 1;
-            reuDef.baseRechargeInterval = 4f;
-            reuDef.beginSkillCooldownOnSkillEnd = true;
-            reuDef.canceledFromSprinting = false;
-            reuDef.forceSprintDuringState = false;
-            reuDef.dontAllowPastMaxStocks = true;
-            reuDef.fullRestockOnAssign = true;
-            reuDef.icon = sk.special._skillFamily.variants[1].skillDef.icon;
-            reuDef.interruptPriority = InterruptPriority.Skill;
-            reuDef.isCombatSkill = true;
-            reuDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
-            reuDef.mustKeyPress = false;
-            reuDef.cancelSprintingOnActivation = true;
-            reuDef.rechargeStock = 1;
-            reuDef.requiredStock = 1;
-            reuDef.skillName = "RackEmUp";
-            reuDef.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME_RISKYMOD";
-            reuDef.skillDescriptionToken = "BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
-            reuDef.stockToConsume = 1;
-            SneedUtils.SneedUtils.FixSkillName(reuDef);
-            Content.Content.skillDefs.Add(reuDef);
-            sk.special._skillFamily.variants[1].skillDef = reuDef;
-            Skills.RackEmUp = reuDef;
+            SkillDef skullRevolverDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Bandit2/ResetRevolver.asset").WaitForCompletion();
+            skullRevolverDef.activationState = new SerializableEntityStateType(typeof(PrepRackEmUp));
+            skullRevolverDef.beginSkillCooldownOnSkillEnd = true;
+            skullRevolverDef.canceledFromSprinting = false;
+            skullRevolverDef.mustKeyPress = false;
+            skullRevolverDef.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME_RISKYMOD";
+            skullRevolverDef.skillDescriptionToken = "BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
+            Skills.RackEmUp = skullRevolverDef;
 
             if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
             {
