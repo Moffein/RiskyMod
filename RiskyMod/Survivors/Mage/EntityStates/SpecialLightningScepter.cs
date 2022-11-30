@@ -9,8 +9,9 @@ namespace EntityStates.RiskyMod.Mage
         public override void LoadStats()
         {
             base.LoadStats();
+            loadMaxDistance = 60f;
             loadBounceDistance = 30f;
-            loadTotalDamageCoefficient = 20f;
+            loadTotalDamageCoefficient = 32f;
             loadBounceCount = 2;
         }
     }

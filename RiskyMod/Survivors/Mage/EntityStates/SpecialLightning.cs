@@ -208,7 +208,7 @@ namespace EntityStates.RiskyMod.Mage
 
 		bool rightMuzzle = true; //Keep track of which gauntlet the lightning visually comes out from
 
-		public static float totalDamageCoefficient = 10f;
+		public static float totalDamageCoefficient = 12f;
 		public static GameObject gauntletEffectPrefab;
 		public static GameObject gauntletMissEffectPrefab;
 		public static float maxDistance = 40f;

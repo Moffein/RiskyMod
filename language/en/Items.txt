@@ -38,7 +38,7 @@
 	"ITEM_EXPLODEONDEATH_DESC_RISKYMOD": "On killing an enemy, spawn a <style=cIsDamage>lava pillar</style> in a <style=cIsDamage>16m</style> radius for <style=cIsDamage>350%</style> <style=cStack>(+280% per stack)</style> base damage.",
 	
 	"ITEM_SQUIDTURRET_PICKUP_RISKYMOD": "Taking heavy damage summons a Squid Turret nearby.",
-	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Chance on taking damage to summon a <style=cIsDamage>Squid Turret</style> with <style=cIsHealing>100% <style=cStack>(+30% per stack)</style></style> health and <style=cIsDamage>100% <style=cStack>(+100% per stack)</style></style> attack speed that <style=cIsUtility>distracts</style> nearby enemies. Chance increases the more damage you take. Limited to <style=cIsUtility>3</style>.",
+	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Chance on taking damage to summon a <style=cIsDamage>Squid Turret</style> with <style=cIsHealing>100% <style=cStack>(+50% per stack)</style></style> health and <style=cIsDamage>100% <style=cStack>(+100% per stack)</style></style> attack speed that <style=cIsUtility>distracts</style> nearby enemies. Chance increases the more damage you take. Limited to <style=cIsUtility>3</style>.",
 	
 	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>chain lightning</style> for <style=cIsDamage>80%</style> TOTAL damage on up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> targets within <style=cIsDamage>25m</style>.",
 	
@@ -135,7 +135,7 @@
 	
 	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Healing past full grants you a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>50%</style> of the amount you <style=cIsHealing>healed</style>. Divides <style=cIsHealing>barrier decay rate</style> by <style=cIsHealing>2 <style=cStack>(+1 per stack)</style></style>.",
 
-	"ITEM_SHOCKNEARBY_DESC_RISKYMOD": "Fire out <style=cIsDamage>lightning</style> that hits <style=cIsDamage>3</style> <style=cStack>(+2 per stack)</style> enemies for <style=cIsDamage>200%</style> base damage every <style=cIsDamage>0.5s</style> with <style=cIsDamage>100%</style> <style=cStack>(+50% per stack)</style> fire rate. The Tesla Coil switches off every <style=cIsDamage>10 seconds</style>.",
+	"ITEM_SHOCKNEARBY_DESC_RISKYMOD": "Fire out <style=cIsDamage>lightning</style> that hits <style=cIsDamage>3</style> <style=cStack>(+2 per stack)</style> enemies for <style=cIsDamage>200%</style> base damage with <style=cIsDamage>100%</style> <style=cStack>(+50% per stack)</style> fire rate. The Tesla Coil switches off every <style=cIsDamage>10 seconds</style>.",
 
 	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Increase base damage by <style=cIsDamage>100%</style> <style=cStack>(+100% per stack)</style>. <style=cIsHealth>Divide maximum health by 2</style> <style=cStack>(+1 per stack)</style>."
 	}
