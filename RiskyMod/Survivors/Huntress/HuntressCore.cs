@@ -79,19 +79,20 @@ namespace RiskyMod.Survivors.Huntress
 
         private void ModifyPrimaries(SkillLocator sk)
         {
+            HuntressTrackingSkillDef defaultPrimary = Addressables.LoadAssetAsync<HuntressTrackingSkillDef>("RoR2/Base/Huntress/HuntressBodyFireSeekingArrow.asset").WaitForCompletion();
+            HuntressTrackingSkillDef altPrimary = Addressables.LoadAssetAsync<HuntressTrackingSkillDef>("RoR2/Base/Huntress/FireFlurrySeekingArrow.asset").WaitForCompletion();
             if (strafeChanges)
             {
-                sk.primary.skillFamily.variants[0].skillDef.skillDescriptionToken = "HUNTRESS_PRIMARY_DESCRIPTION_RISKYMOD";
+                defaultPrimary.skillDescriptionToken = "HUNTRESS_PRIMARY_DESCRIPTION_RISKYMOD";
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireSeekingArrow", "orbDamageCoefficient", "2");
             }
 
             if (flurryChanges)
             {
-                sk.primary.skillFamily.variants[1].skillDef.skillDescriptionToken = "HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD";
+                altPrimary.skillDescriptionToken = "HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD";
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbDamageCoefficient", "1.2");
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbProcCoefficient", "1");
             }
-
 
             //This fixes Flurry losing arrows at high attack speed.
             On.EntityStates.Huntress.HuntressWeapon.FireSeekingArrow.FireOrbArrow += (orig, self) =>
@@ -122,12 +123,26 @@ namespace RiskyMod.Survivors.Huntress
                     UnityEngine.Debug.LogError("RiskyMod: Huntress FireSeekingArrow IL Hook failed");
                 }
             };
+
+            On.EntityStates.Huntress.HuntressWeapon.FireSeekingArrow.OnExit += (orig, self) =>
+            {
+                orig(self);
+                if (NetworkServer.active)
+                {
+                    int remainingArrows = self.maxArrowCount - self.firedArrowCount;
+                    for (int i = 0; i < remainingArrows; i++)
+                    {
+                        self.FireOrbArrow();
+                    }
+                }
+            };
         }
 
         private void ModifySecondaries(SkillLocator sk)
         {
             if (!laserGlaiveChanges) return;
-            sk.secondary.skillFamily.variants[0].skillDef.baseRechargeInterval = 6f;
+            SkillDef glaive = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Huntress/HuntressBodyGlaive.asset").WaitForCompletion();
+            glaive.baseRechargeInterval = 6f;
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.ThrowGlaive", "baseDuration", "0.8");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.ThrowGlaive", "glaiveProcCoefficient", "1");
         }
@@ -136,7 +151,8 @@ namespace RiskyMod.Survivors.Huntress
         {
             if (blinkChanges)
             {
-                sk.utility.skillFamily.variants[0].skillDef.baseRechargeInterval = 6f;
+                SkillDef blink = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Huntress/HuntressBodyBlink.asset").WaitForCompletion();
+                blink.baseRechargeInterval = 6f;
             }
         }
 
@@ -144,10 +160,11 @@ namespace RiskyMod.Survivors.Huntress
         {
             if (arrowRainChanges)
             {
-                sk.special.skillFamily.variants[0].skillDef.baseRechargeInterval = 10f;
-                sk.special.skillFamily.variants[0].skillDef.beginSkillCooldownOnSkillEnd = true;
-                sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD";
-                Skills.ArrowRain = sk.special.skillFamily.variants[0].skillDef;
+                SkillDef arrowRain = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Huntress/HuntressBodyArrowRain.asset").WaitForCompletion();
+                arrowRain.baseRechargeInterval = 10f;
+                arrowRain.beginSkillCooldownOnSkillEnd = true;
+                arrowRain.skillDescriptionToken = "HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD";
+                Skills.ArrowRain = arrowRain;
                 new ArrowRainBuff();
 
                 if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
@@ -160,13 +177,16 @@ namespace RiskyMod.Survivors.Huntress
 
             if (ballistaChanges)
             {
-                sk.special.skillFamily.variants[1].skillDef.baseRechargeInterval = 10f;
-                sk.special.skillFamily.variants[1].skillDef.beginSkillCooldownOnSkillEnd = true;
+                SkillDef ballista = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Huntress/AimArrowSnipe.asset").WaitForCompletion();
+                ballista.baseRechargeInterval = 10f;
+                ballista.beginSkillCooldownOnSkillEnd = true;
             }
         }
 
         private void BuildScepterSkillDefs(SkillLocator sk)
         {
+            SkillDef orig = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Huntress/HuntressBodyArrowRain.asset").WaitForCompletion();
+
             ArrowRainBuff.ScepterProjectileSetup();
 
             Content.Content.entityStates.Add(typeof(BeginArrowRainScepter));
@@ -177,16 +197,16 @@ namespace RiskyMod.Survivors.Huntress
 
             SkillDef arrowRainDef = SkillDef.CreateInstance<SkillDef>();
             arrowRainDef.activationState = new SerializableEntityStateType(typeof(BeginArrowRainScepter));
-            arrowRainDef.activationStateMachineName = sk.special.skillFamily.variants[0].skillDef.activationStateMachineName;
+            arrowRainDef.activationStateMachineName = orig.activationStateMachineName;
             arrowRainDef.baseMaxStock = 1;
             arrowRainDef.baseRechargeInterval = 10f;
-            arrowRainDef.beginSkillCooldownOnSkillEnd = sk.special.skillFamily.variants[0].skillDef.beginSkillCooldownOnSkillEnd;
-            arrowRainDef.canceledFromSprinting = sk.special.skillFamily.variants[0].skillDef.canceledFromSprinting;
+            arrowRainDef.beginSkillCooldownOnSkillEnd = orig.beginSkillCooldownOnSkillEnd;
+            arrowRainDef.canceledFromSprinting = orig.canceledFromSprinting;
             arrowRainDef.dontAllowPastMaxStocks = true;
             arrowRainDef.forceSprintDuringState = false;
             arrowRainDef.fullRestockOnAssign = true;
             arrowRainDef.icon = Assets.ScepterSkillIcons.HuntressArrowRainScepter;
-            arrowRainDef.interruptPriority = sk.special.skillFamily.variants[0].skillDef.interruptPriority;
+            arrowRainDef.interruptPriority = orig.interruptPriority;
             arrowRainDef.isCombatSkill = true;
             arrowRainDef.keywordTokens = new string[] { };
             arrowRainDef.mustKeyPress = false;

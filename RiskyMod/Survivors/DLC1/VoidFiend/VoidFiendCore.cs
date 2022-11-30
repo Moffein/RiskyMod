@@ -141,7 +141,8 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                 NetworkStateMachine nsm = bodyPrefab.GetComponent<NetworkStateMachine>();
                 nsm.stateMachines = nsm.stateMachines.Append(cannonStateMachine).ToArray();
 
-                sk.secondary.skillFamily.variants[0].skillDef.activationStateMachineName = "RightArmCannon";
+                SkillDef m2 = Addressables.LoadAssetAsync<SkillDef>("RoR2/DLC1/VoidSurvivor/ChargeMegaBlaster.asset").WaitForCompletion();
+                m2.activationStateMachineName = "RightArmCannon";
 
                 SkillDef corruptM2 = Addressables.LoadAssetAsync<SkillDef>("RoR2/DLC1/VoidSurvivor/FireCorruptDisk.asset").WaitForCompletion();
                 corruptM2.activationStateMachineName = "RightArmCannon";

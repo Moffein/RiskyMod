@@ -148,13 +148,17 @@ namespace RiskyMod.Survivors.Croco
         private void ModifyPassives(SkillLocator sk)
         {
             GenericSkill passives = bodyPrefab.GetComponent<GenericSkill>();    //Passive is at the top
-            passives.skillFamily.variants[0].skillDef.skillNameToken = "CROCO_PASSIVE_NAME_RISKYMOD";
-            passives.skillFamily.variants[0].skillDef.skillDescriptionToken = "CROCO_PASSIVE_DESCRIPTION_RISKYMOD";
-            passives.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_POISON_RISKYMOD", "KEYWORD_BLIGHT_RISKYMOD" };
 
-            passives.skillFamily.variants[1].skillDef.skillNameToken = "CROCO_PASSIVE_ALT_NAME_RISKYMOD";
-            passives.skillFamily.variants[1].skillDef.skillDescriptionToken = "CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD";
-            passives.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_POISON_RISKYMOD", "KEYWORD_BLIGHT_RISKYMOD" };
+            SkillDef defaultPassive = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoPassivePoison.asset").WaitForCompletion();
+            SkillDef blightPassive = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoPassiveBlight.asset").WaitForCompletion();
+
+            defaultPassive.skillNameToken = "CROCO_PASSIVE_NAME_RISKYMOD";
+            defaultPassive.skillDescriptionToken = "CROCO_PASSIVE_DESCRIPTION_RISKYMOD";
+            defaultPassive.keywordTokens = new string[] { "KEYWORD_POISON_RISKYMOD", "KEYWORD_BLIGHT_RISKYMOD" };
+
+            blightPassive.skillNameToken = "CROCO_PASSIVE_ALT_NAME_RISKYMOD";
+            blightPassive.skillDescriptionToken = "CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD";
+            blightPassive.keywordTokens = new string[] { "KEYWORD_POISON_RISKYMOD", "KEYWORD_BLIGHT_RISKYMOD" };
             new ModifyPassives();
         }
 
@@ -257,7 +261,7 @@ namespace RiskyMod.Survivors.Croco
 
         private void BuildScepterSkillDefs(SkillLocator sk)
         {
-            SkillDef orig = sk.special.skillFamily.variants[0].skillDef;
+            SkillDef orig = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoDisease.asset").WaitForCompletion();
             SkillDef diseaseScepterDef = ScriptableObject.CreateInstance<SkillDef>();
             diseaseScepterDef.activationState = new SerializableEntityStateType(typeof(FireDiseaseProjectileScepter));
             diseaseScepterDef.activationStateMachineName = orig.activationStateMachineName;

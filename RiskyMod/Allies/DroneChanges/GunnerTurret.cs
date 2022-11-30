@@ -1,5 +1,7 @@
 ﻿using RoR2;
+using RoR2.Skills;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Allies.DroneChanges
 {
@@ -9,8 +11,10 @@ namespace RiskyMod.Allies.DroneChanges
         {
             GameObject gunnerTurret = AllyPrefabs.GunnerTurret;
             SkillLocator sk = gunnerTurret.GetComponent<SkillLocator>();
-            sk.primary.skillFamily.variants[0].skillDef.baseMaxStock = 1;
-            sk.primary.skillFamily.variants[0].skillDef.baseRechargeInterval = 0f;
+
+            SkillDef turretSkill = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Drones/Turret1BodyTurret.asset").WaitForCompletion();
+            turretSkill.baseMaxStock = 1;
+            turretSkill.baseRechargeInterval = 0f;
 
             //Gets run before scaling changes
             CharacterBody cb = gunnerTurret.GetComponent<CharacterBody>();

@@ -96,7 +96,7 @@ namespace RiskyMod.Survivors.Merc
         {
             if (!modifyStats) return;
             cb.baseRegen = 2.5f;
-            cb.levelRegen = cb.baseRegen * 0.2f;
+            cb.levelRegen = 0.5f;
         }
     }
 }

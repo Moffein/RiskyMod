@@ -1,6 +1,8 @@
 ﻿using RoR2;
 using UnityEngine;
 using R2API;
+using UnityEngine.AddressableAssets;
+using RoR2.Skills;
 
 namespace RiskyMod.Survivors.Engi
 {
@@ -23,7 +25,9 @@ namespace RiskyMod.Survivors.Engi
 
         private void ModifySecondaries(SkillLocator sk)
         {
-            sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "ENGI_SECONDARY_DESCRIPTION_RISKYMOD";
+            SkillDef mines = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Engi/EngiBodyPlaceMine.asset").WaitForCompletion();
+
+            mines.skillDescriptionToken = "ENGI_SECONDARY_DESCRIPTION_RISKYMOD";
             new PressureMines();
         }
         private void ModifySpecials(SkillLocator sk)

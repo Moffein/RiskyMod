@@ -11,6 +11,7 @@ using RoR2.Skills;
 using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace RiskyMod.Survivors.Commando
@@ -60,7 +61,7 @@ namespace RiskyMod.Survivors.Commando
                     c.Index++;
                     c.EmitDelegate<Func<int, int>>(zero =>
                     {
-                        return -1000000;
+                        return -1000000000;
                     });
                 }
                 else
@@ -72,22 +73,25 @@ namespace RiskyMod.Survivors.Commando
 
         private void ModifySecondaries(SkillLocator sk)
         {
+            SkillDef phaseRoundDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/CommandoBodyFireFMJ.asset").WaitForCompletion();
+            SkillDef phaseBlastDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/CommandoBodyFireShotgunBlast.asset").WaitForCompletion();
             if (phaseRoundChanges)
             {
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireFMJ", "projectilePrefab", BuildPhaseRoundProjectile());
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireFMJ", "damageCoefficient", "4.5");
-                sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD";
+                phaseRoundDef.skillDescriptionToken = "COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD";
             }
 
-            sk.secondary.skillFamily.variants[0].skillDef.mustKeyPress = false;
-            sk.secondary.skillFamily.variants[1].skillDef.mustKeyPress = false;
+            phaseRoundDef.mustKeyPress = false;
+            phaseBlastDef.mustKeyPress = false;
         }
 
         private void ModifyUtilities(SkillLocator sk)
         {
             if (rollChanges)
             {
-                sk.utility.skillFamily.variants[0].skillDef.skillDescriptionToken = "COMMANDO_UTILITY_DESCRIPTION_RISKYMOD";
+                SkillDef rollDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/CommandoBodyRoll.asset").WaitForCompletion();
+                rollDef.skillDescriptionToken = "COMMANDO_UTILITY_DESCRIPTION_RISKYMOD";
                 On.EntityStates.Commando.DodgeState.OnEnter += (orig, self) =>
                 {
                     orig(self);
@@ -110,31 +114,14 @@ namespace RiskyMod.Survivors.Commando
             {
                 SuppressiveFireDamage = DamageAPI.ReserveDamageType();
                 Content.Content.entityStates.Add(typeof(FireBarrage));
-                SkillDef barrageDef = SkillDef.CreateInstance<SkillDef>();
+
+                SkillDef barrageDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/CommandoBodyBarrage.asset").WaitForCompletion();
                 barrageDef.activationState = new SerializableEntityStateType(typeof(FireBarrage));
-                barrageDef.activationStateMachineName = "Weapon";
-                barrageDef.baseMaxStock = 1;
                 barrageDef.baseRechargeInterval = 7f;
-                barrageDef.beginSkillCooldownOnSkillEnd = false;
-                barrageDef.canceledFromSprinting = false;
-                barrageDef.dontAllowPastMaxStocks = true;
-                barrageDef.forceSprintDuringState = false;
-                barrageDef.fullRestockOnAssign = true;
-                barrageDef.icon = sk.special.skillFamily.variants[0].skillDef.icon;
                 barrageDef.interruptPriority = InterruptPriority.PrioritySkill;
-                barrageDef.isCombatSkill = true;
-                barrageDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
-                barrageDef.mustKeyPress = false;
-                barrageDef.cancelSprintingOnActivation = true;
-                barrageDef.rechargeStock = 1;
-                barrageDef.requiredStock = 1;
-                barrageDef.skillName = "Barrage";
-                barrageDef.skillNameToken = "COMMANDO_SPECIAL_NAME";
                 barrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD";
-                barrageDef.stockToConsume = 1;
-                SneedUtils.SneedUtils.FixSkillName(barrageDef);
-                Content.Content.skillDefs.Add(barrageDef);
-                sk.special.skillFamily.variants[0].skillDef = barrageDef;
+                barrageDef.mustKeyPress = false;
+
                 OnHitAll.HandleOnHitAllActions += FireBarrage.SuppressiveFireAOE;
 
                 Skills.Barrage = barrageDef;

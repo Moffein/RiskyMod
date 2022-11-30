@@ -7,6 +7,7 @@ using RiskyMod.SharedHooks;
 using R2API;
 using MonoMod.Cil;
 using UnityEngine.AddressableAssets;
+using RoR2.Skills;
 
 namespace RiskyMod.Survivors.Treebot
 {
@@ -45,11 +46,8 @@ namespace RiskyMod.Survivors.Treebot
         {
             if (defaultUtilityHeal)
             {
-                sk.utility.skillFamily.variants[0].skillDef.skillDescriptionToken = "TREEBOT_UTILITY_DESCRIPTION_RISKYMOD";
-                //sk.utility.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_SONIC_BOOM" };
-
-                //sk.utility.skillFamily.variants[1].skillDef.skillDescriptionToken = "TREEBOT_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
-                //sk.utility.skillFamily.variants[1].skillDef.keywordTokens = new string[] { "KEYWORD_SONIC_BOOM", "KEYWORD_WEAK" };
+                SkillDef utilityDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Treebot/TreebotBodySonicBoom.asset").WaitForCompletion();
+                utilityDef.skillDescriptionToken = "TREEBOT_UTILITY_DESCRIPTION_RISKYMOD";
                 new DefaultUtilityHeal();
             }
 
@@ -60,7 +58,8 @@ namespace RiskyMod.Survivors.Treebot
         {
             if (fruitChanges)
             {
-                sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD";
+                SkillDef fruitDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Treebot/TreebotBodyFireFruitSeed.asset").WaitForCompletion();
+                fruitDef.skillDescriptionToken = "TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD";
 
                 /*Debug.Log("PrepFruitSeed");
                 SneedUtils.SneedUtils.DumpEntityStateConfig(Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/Base/Treebot/EntityStates.Treebot.TreebotPrepFruitSeed.asset").WaitForCompletion());

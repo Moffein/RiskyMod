@@ -8,6 +8,7 @@ using EntityStates;
 using RiskyMod.SharedHooks;
 using Mono.Cecil.Cil;
 using RiskyMod.Survivors.Toolbot.Components;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Toolbot
 {
@@ -52,7 +53,6 @@ namespace RiskyMod.Survivors.Toolbot
 
         private void ModifySkills(SkillLocator sk)
         {
-            //sk.special.skillFamily.variants[0].skillDef.baseRechargeInterval = 0f;
             ModifyPrimaries(sk);
             ModifySecondaries(sk);
             ModifySpecials(sk);
@@ -69,7 +69,10 @@ namespace RiskyMod.Survivors.Toolbot
         private void NailgunChanges(SkillLocator sk)
         {
             if (!enableNailgunChanges) return;
-            sk.primary.skillFamily.variants[0].skillDef.skillDescriptionToken = "TOOLBOT_PRIMARY_DESCRIPTION_RISKYMOD";
+
+            SkillDef nailgunDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Toolbot/ToolbotBodyFireNailgun.asset").WaitForCompletion();
+
+            nailgunDef.skillDescriptionToken = "TOOLBOT_PRIMARY_DESCRIPTION_RISKYMOD";
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.BaseNailgunState", "damageCoefficient", "0.6");
             IL.EntityStates.Toolbot.BaseNailgunState.FireBullet += (il) =>
             {
@@ -96,7 +99,8 @@ namespace RiskyMod.Survivors.Toolbot
         private void RebarChanges(SkillLocator sk)
         {
             if (!enableRebarChanges) return;
-            sk.primary.skillFamily.variants[1].skillDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD";
+            SkillDef railgunDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Toolbot/ToolbotBodyFireSpear.asset").WaitForCompletion();
+            railgunDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD";
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireSpear", "damageCoefficient", "6.6");
         }
 
@@ -104,8 +108,9 @@ namespace RiskyMod.Survivors.Toolbot
         {
             if (!enableScrapChanges) return;
             bodyPrefab.AddComponent<GrenadeStockController>();
-            sk.primary.skillFamily.variants[2].skillDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT2_DESCRIPTION_RISKYMOD";
-            sk.primary.skillFamily.variants[2].skillDef.rechargeStock = 0;
+            SkillDef scrapDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Toolbot/ToolbotBodyFireGrenadeLauncher.asset").WaitForCompletion();
+            scrapDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT2_DESCRIPTION_RISKYMOD";
+            scrapDef.rechargeStock = 0;
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireGrenadeLauncher", "damageCoefficient", "3.9");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireGrenadeLauncher", "maxSpread", "0");
 
@@ -203,7 +208,8 @@ namespace RiskyMod.Survivors.Toolbot
                 };
             }
 
-            sk.primary.skillFamily.variants[3].skillDef.cancelSprintingOnActivation = false;
+            SkillDef sawDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Toolbot/ToolbotBodyFireBuzzsaw.asset").WaitForCompletion();
+            sawDef.cancelSprintingOnActivation = false;
 
             if (sawHitbox)
             {
@@ -248,7 +254,7 @@ namespace RiskyMod.Survivors.Toolbot
                     }
                 };
 
-                sk.primary.skillFamily.variants[3].skillDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD";
+                sawDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD";
             }
         }
 
@@ -256,8 +262,12 @@ namespace RiskyMod.Survivors.Toolbot
         {
             if (!enableSecondarySkillChanges) return;
 
-            DamageAPI.ModdedDamageTypeHolderComponent md = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/CryoCanisterProjectile").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            GameObject nadePrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/CryoCanisterProjectile").InstantiateClone("RiskyModCryoCanister", true);
+            DamageAPI.ModdedDamageTypeHolderComponent md = nadePrefab.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             md.Add(SharedDamageTypes.AntiFlyingForce);
+            Content.Content.projectilePrefabs.Add(nadePrefab);
+
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.AimStunDrone", "projectilePrefab", nadePrefab);
         }
 
         private void ModifySpecials(SkillLocator sk)
@@ -280,9 +290,10 @@ namespace RiskyMod.Survivors.Toolbot
 
             if (enablePowerModeChanges)
             {
+                SkillDef powerSkillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Toolbot/ToolbotDualWield.asset").WaitForCompletion();
                 BuffDef powerDef = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/SmallArmorBoost");
 
-                sk.special.skillFamily.variants[1].skillDef.skillDescriptionToken = "TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
+                powerSkillDef.skillDescriptionToken = "TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
 
                 PowerModeBuff = SneedUtils.SneedUtils.CreateBuffDef(
                 "RiskyMod_PowerModeBuff",

@@ -45,7 +45,8 @@ namespace RiskyMod.Survivors.Captain
             if (healCooldown) AddCooldown("RoR2/Base/Captain/CallSupplyDropHealing.asset", 60f);
             if (shockCooldown) AddCooldown("RoR2/Base/Captain/CallSupplyDropShocking.asset", 60f);
 
-            sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD";
+            SkillDef captainSpecialGeneric = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/PrepSupplyDrop.asset").WaitForCompletion();
+            captainSpecialGeneric.skillDescriptionToken = "CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD";
 
             //Register beacons when they spawn
             CaptainCore.bodyPrefab.AddComponent<CaptainDeployableManager>();

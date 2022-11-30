@@ -95,6 +95,8 @@ namespace RiskyMod.Survivors.Captain
             Content.Content.entityStates.Add(typeof(ChargeShotgun));
             Content.Content.entityStates.Add(typeof(FireShotgun));
 
+            SkillDef captainShotgun = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CaptainShotgun.asset").WaitForCompletion();
+
             SkillDef shotgunDef = SkillDef.CreateInstance<SkillDef>();
             shotgunDef.activationState = new SerializableEntityStateType(typeof(ChargeShotgun));
             shotgunDef.activationStateMachineName = "Weapon";
@@ -105,7 +107,7 @@ namespace RiskyMod.Survivors.Captain
             shotgunDef.dontAllowPastMaxStocks = true;
             shotgunDef.forceSprintDuringState = false;
             shotgunDef.fullRestockOnAssign = true;
-            shotgunDef.icon = sk.primary._skillFamily.variants[0].skillDef.icon;
+            shotgunDef.icon = captainShotgun.icon;
             shotgunDef.interruptPriority = InterruptPriority.Any;
             shotgunDef.isCombatSkill = true;
             shotgunDef.keywordTokens = new string[] { };
@@ -120,7 +122,9 @@ namespace RiskyMod.Survivors.Captain
             SneedUtils.SneedUtils.FixSkillName(shotgunDef);
             Content.Content.skillDefs.Add(shotgunDef);
             Skills.Shotgun = shotgunDef;
-            sk.primary._skillFamily.variants[0].skillDef = Skills.Shotgun;
+
+            //Leave this as a SkillDef replacement to smooth out interaction with Admiral.
+            SneedUtils.SneedUtils.ReplaceSkillDef(sk.primary.skillFamily, Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CaptainShotgun.asset").WaitForCompletion(), Skills.Shotgun);
         }
 
         private void ModifySecondaries(SkillLocator sk)
@@ -128,8 +132,10 @@ namespace RiskyMod.Survivors.Captain
             if (modifyTaser)
             {
                 new TaserRework();
-                sk.secondary.skillFamily.variants[0].skillDef.skillDescriptionToken = "CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD";
-                if (Tweaks.CharacterMechanics.Shock.enabled) sk.secondary.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_SHOCKING_RISKYMOD" };
+
+                SkillDef taserSkill = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CaptainTazer.asset").WaitForCompletion();
+                taserSkill.skillDescriptionToken = "CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD";
+                if (Tweaks.CharacterMechanics.Shock.enabled) taserSkill.keywordTokens = new string[] { "KEYWORD_SHOCKING_RISKYMOD" };
             }
         }
 

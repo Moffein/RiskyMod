@@ -4,8 +4,10 @@ using MonoMod.Cil;
 using R2API;
 using RoR2;
 using RoR2.Projectile;
+using RoR2.Skills;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Loader
 {
@@ -43,11 +45,17 @@ namespace RiskyMod.Survivors.Loader
 
         private void SprintQoL(SkillLocator sk)
         {
-            sk.secondary.skillFamily.variants[0].skillDef.cancelSprintingOnActivation = grappleCancelsSprint;
-            sk.secondary.skillFamily.variants[1].skillDef.cancelSprintingOnActivation = grappleCancelsSprint;
+            SkillDef defaultGrapple = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Loader/FireHook.asset").WaitForCompletion();
+            SkillDef altGrapple = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Loader/FireYankHook.asset").WaitForCompletion();
 
-            sk.utility.skillFamily.variants[0].skillDef.cancelSprintingOnActivation = shiftCancelsSprint;
-            sk.utility.skillFamily.variants[1].skillDef.cancelSprintingOnActivation = shiftCancelsSprint;
+            SkillDef defaultShift = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Loader/ChargeFist.asset").WaitForCompletion();
+            SkillDef altShift = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Loader/ChargeZapFist.asset").WaitForCompletion();
+
+            defaultGrapple.cancelSprintingOnActivation = grappleCancelsSprint;
+            altGrapple.cancelSprintingOnActivation = grappleCancelsSprint;
+
+            defaultShift.cancelSprintingOnActivation = shiftCancelsSprint;
+            altShift.cancelSprintingOnActivation = shiftCancelsSprint;
         }
 
         private void ModifyStats(CharacterBody cb)
@@ -55,7 +63,7 @@ namespace RiskyMod.Survivors.Loader
             if (!modifyStats) return;
             cb.baseMaxHealth = 140f;
             cb.baseArmor = 0f;
-            cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
+            cb.levelMaxHealth = 42f;
         }
 
         private void ModifySkills(SkillLocator sk)
@@ -76,16 +84,18 @@ namespace RiskyMod.Survivors.Loader
         {
             if (pylonChanges)
             {
-                sk.special.skillFamily.variants[0].skillDef.skillDescriptionToken = "LOADER_SPECIAL_DESCRIPTION_RISKYMOD";
-                sk.special.skillFamily.variants[0].skillDef.keywordTokens = new string[] { "KEYWORD_MAGNETIC_RISKYMOD" };
-                sk.special.skillFamily.variants[0].skillDef.cancelSprintingOnActivation = false;
+                SkillDef pylonDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Loader/ThrowPylon.asset").WaitForCompletion();
+                pylonDef.skillDescriptionToken = "LOADER_SPECIAL_DESCRIPTION_RISKYMOD";
+                pylonDef.keywordTokens = new string[] { "KEYWORD_MAGNETIC_RISKYMOD" };
+                pylonDef.cancelSprintingOnActivation = false;
                 SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.throwpylon", "damageCoefficient", "0.7");
                 new PylonMagnet();
             }
 
             if (slamChanges)
             {
-                sk.special.skillFamily.variants[1].skillDef.cancelSprintingOnActivation = false;
+                SkillDef slamDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Loader/GroundSlam.asset").WaitForCompletion();
+                slamDef.cancelSprintingOnActivation = false;
                 new BiggerSlamHitbox();
                 new SlamScrapBarrier();
                 new SlamDamageType();
