@@ -66,54 +66,40 @@ namespace RiskyMod.Survivors.Mage
             //Range increase always gets run now
             new M1Projectiles();
 
+            SkillDef fireBoltDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFireFirebolt.asset").WaitForCompletion();
+            SkillDef plasmaBoltDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFireLightningBolt.asset").WaitForCompletion();
+
             if (m1AttackSpeed)
             {
                 MageStockController.StatePairs.Add(typeof(EntityStates.Mage.Weapon.FireFireBolt), MageStockController.fireMuzzleflashEffectPrefab);
                 MageStockController.StatePairs.Add(typeof(EntityStates.Mage.Weapon.FireLightningBolt), MageStockController.lightningMuzzleflashEffectPrefab);
                 bodyPrefab.AddComponent<MageStockController>();
+
+                fireBoltDef.rechargeStock = 0;
+                plasmaBoltDef.rechargeStock = 0;
+
+                //FireLightningBolt inherits from this
+                On.EntityStates.Mage.Weapon.FireFireBolt.OnEnter += (orig, self) =>
+                {
+                    orig(self);
+                    MageStockController msc = self.gameObject.GetComponent<MageStockController>();
+                    if (msc)
+                    {
+                        msc.FireSkill(self.duration);
+                    }
+                };
             }
 
-            for (int i = 0; i < sk.primary.skillFamily.variants.Length; i++)
+            if (modifyFireBolt)
             {
-                if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireFireBolt))
-                {
-                    if (m1AttackSpeed)
-                    {
-                        sk.primary.skillFamily.variants[i].skillDef.rechargeStock = 0;
-                        //sk.primary.skillFamily.variants[i].skillDef.baseRechargeInterval = 0;
+                fireBoltDef.skillDescriptionToken = "MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD";
+                M1Projectiles.ModifyFireBolt();
+            }
 
-                        //FireLightningBolt inherits from this
-                        On.EntityStates.Mage.Weapon.FireFireBolt.OnEnter += (orig, self) =>
-                        {
-                            orig(self);
-                            MageStockController msc = self.gameObject.GetComponent<MageStockController>();
-                            if (msc)
-                            {
-                                msc.FireSkill(self.duration);
-                            }
-                        };
-                    }
-
-                    if (modifyFireBolt)
-                    {
-                        sk.primary.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD";
-                        M1Projectiles.ModifyFireBolt();
-                    }
-                }
-                else if (sk.primary.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.FireLightningBolt))
-                {
-                    if (m1AttackSpeed)
-                    {
-                        sk.primary.skillFamily.variants[i].skillDef.rechargeStock = 0;
-                        //sk.primary.skillFamily.variants[i].skillDef.baseRechargeInterval = 0;
-                    }
-
-                    if (modifyPlasmaBolt)
-                    {
-                        sk.primary.skillFamily.variants[i].skillDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
-                        M1Projectiles.ModifyLightningBolt();
-                    }
-                }
+            if (modifyPlasmaBolt)
+            {
+                plasmaBoltDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
+                M1Projectiles.ModifyLightningBolt();
             }
         }
 
@@ -154,7 +140,7 @@ namespace RiskyMod.Survivors.Mage
                 iceSkill.rechargeStock = 1;
                 iceSkill.requiredStock = 1;
                 iceSkill.resetCooldownTimerOnUse = false;
-                iceSkill.skillDescriptionToken = "MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD";
+                iceSkill.skillDescriptionToken = "MAGE_UTILITY_ICE_DESCRIPTION";
                 iceSkill.skillNameToken = "MAGE_UTILITY_ICE_NAME";
                 iceSkill.skillName = "RiskyModIceWall";
                 iceSkill.stockToConsume = 1;
@@ -162,7 +148,7 @@ namespace RiskyMod.Survivors.Mage
 
                 Skills.PrepIceWall = iceSkill;
                 Content.Content.skillDefs.Add(Skills.PrepIceWall);
-                sk.utility.skillFamily.variants[0].skillDef = Skills.PrepIceWall;
+                SneedUtils.SneedUtils.ReplaceSkillDef(sk.utility.skillFamily, Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyWall.asset").WaitForCompletion(), Skills.PrepIceWall);
             }
 
             if (enableFireUtility)
@@ -233,16 +219,11 @@ namespace RiskyMod.Survivors.Mage
         private void ModifySpecials(SkillLocator sk)
         {
             //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Mage.Weapon.Flamethrower");
-            for (int i = 0; i < sk.special.skillFamily.variants.Length; i++)
+            SkillDef flamethrowerDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFlamethrower.asset").WaitForCompletion();
+            flamethrowerDef.canceledFromSprinting = flamethrowerSprintCancel;
+            if (flamethrowerRangeExtend)
             {
-                if (sk.special.skillFamily.variants[i].skillDef.activationState.stateType == typeof(EntityStates.Mage.Weapon.Flamethrower))
-                {
-                    sk.special.skillFamily.variants[i].skillDef.canceledFromSprinting = flamethrowerSprintCancel;
-                    if (flamethrowerRangeExtend)
-                    {
-                        SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.Flamethrower", "maxDistance", "25");  //20 vanilla
-                    }
-                }
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.Flamethrower", "maxDistance", "25");  //20 vanilla
             }
 
             if (enableLightningSpecial)

@@ -51,11 +51,11 @@ namespace RiskyMod.SharedHooks
                     {
 						if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)
 						{
-							RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.DirectAssistType.ResetCooldowns);
+							RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.GetDuration(damageInfo.attacker), AssistManager.DirectAssistType.ResetCooldowns);
 						}
 						if ((damageInfo.damageType & DamageType.GiveSkullOnKill) > DamageType.Generic)
 						{
-							RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.duration, AssistManager.DirectAssistType.BanditSkull);
+							RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.GetDuration(damageInfo.attacker), AssistManager.DirectAssistType.BanditSkull);
 						}
 						if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBiteHealOnKill))
                         {

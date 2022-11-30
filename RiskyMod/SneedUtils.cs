@@ -13,6 +13,32 @@ namespace SneedUtils
 {
     public class SneedUtils
     {
+        public static bool ReplaceSkillDef(SkillFamily skillFamily, SkillDef targetSkill, SkillDef newSkill)
+        {
+            bool successfullyReplaced = false;
+
+            SkillFamily.Variant[] skillVariants = skillFamily.variants;
+            if (skillVariants != null && targetSkill != null && newSkill != null)
+            {
+                for (int i = 0; i < skillVariants.Length; i++)
+                {
+                    SkillFamily.Variant variant = skillVariants[i];
+                    if (variant.skillDef == targetSkill)
+                    {
+                        variant.skillDef = newSkill;
+                        successfullyReplaced = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!successfullyReplaced)
+            {
+                Debug.LogError("RiskyMod: Could not replace TargetSkill " + targetSkill);
+            }
+            return successfullyReplaced;
+        }
+
         //If Inferno Compat is disabled, or if Inferno isn't active, allow the enemy change to be run.
         public static bool ShouldRunInfernoChange()
         {
@@ -116,7 +142,7 @@ namespace SneedUtils
 
         public static void FixSkillName(SkillDef skillDef)
         {
-            (skillDef as UnityEngine.Object).name = "RiskyMod_" + skillDef.skillName;
+            (skillDef as UnityEngine.Object).name =skillDef.skillName;// "RiskyMod_" + 
         }
 
         public static BuffDef CreateBuffDef(string name, bool canStack, bool isCooldown, bool isDebuff, Color color, Sprite iconSprite)
@@ -132,6 +158,34 @@ namespace SneedUtils
 
             (bd as UnityEngine.Object).name = bd.name;
             return bd;
+        }
+
+        public static bool IsLocalUser(GameObject playerObject)
+        {
+            foreach (LocalUser user in LocalUserManager.readOnlyLocalUsersList)
+            {
+                if (playerObject == user.cachedBodyObject)
+                {
+                    Debug.Log("Found LocalUser");
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool IsLocalUser(CharacterBody playerBody)
+        {
+            foreach (LocalUser user in LocalUserManager.readOnlyLocalUsersList)
+            {
+                if (playerBody == user.cachedBody)
+                {
+                    Debug.Log("Found LocalUser");
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public static int FindEnemiesInSphere(float radius, Vector3 position, TeamIndex team, bool airborneOnly = false)

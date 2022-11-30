@@ -28,6 +28,8 @@ namespace RiskyMod.Survivors.Bandit2
 
         public static bool enabled = true;
 
+        public static bool modifyStats = true;
+
         public static bool blastChanges = true;
         public static bool burstChanges = true;
 
@@ -52,6 +54,7 @@ namespace RiskyMod.Survivors.Bandit2
             new BanditSpecialGracePeriod();
             new DesperadoRework();
 
+            ModifyStats(bodyPrefab.GetComponent<CharacterBody>());
             ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
 
             On.RoR2.SurvivorCatalog.Init += (orig) =>
@@ -59,6 +62,12 @@ namespace RiskyMod.Survivors.Bandit2
                 orig();
                 Bandit2Index = BodyCatalog.FindBodyIndex("Bandit2Body");
             };
+        }
+
+        private void ModifyStats(CharacterBody cb)
+        {
+            cb.baseMaxHealth = 100f;//110f
+            cb.levelMaxHealth = 30f;//33f
         }
 
         private void ModifySkills(SkillLocator sk)

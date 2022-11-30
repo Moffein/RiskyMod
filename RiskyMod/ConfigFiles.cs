@@ -510,8 +510,8 @@ namespace RiskyMod
             MageCore.ionSurgeMovementScaling = SurvivorCfg.Bind(mageString, "Ion Surge - Movement Scaling", false, "Ion Surge jump height scales with movement speed.");
             MageCore.ionSurgeShock = SurvivorCfg.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
 
-            MageCore.utilitySelfKnockback = SurvivorCfg.Bind(mageString, "Utility Self Knockback", true, "Snapfreeze Rework and Blaze Storm apply self-knockback when used midair.");
-            MageCore.iceWallRework = SurvivorCfg.Bind(mageString, "Snapfreeze Rework", true, "Snapfreeze can target midair enemies and can be used for mobility.").Value;
+            MageCore.utilitySelfKnockback = SurvivorCfg.Bind(mageString, "Utility Mobility", false, "Snapfreeze Rework and Blaze Storm apply self-knockback when used midair.");
+            MageCore.iceWallRework = SurvivorCfg.Bind(mageString, "Snapfreeze Rework", true, "Snapfreeze can target midair enemies.").Value;
             MageCore.enableFireUtility = SurvivorCfg.Bind(mageString, "Blaze Storm Utility Skill", true, "Enables this custom skill.").Value;
             MageCore.flamethrowerSprintCancel = SurvivorCfg.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
             MageCore.flamethrowerRangeExtend = SurvivorCfg.Bind(mageString, "Flamethrower - Increase Range", true, "Increases the range of flamethrower.").Value;
@@ -521,11 +521,6 @@ namespace RiskyMod
             if (MageCore.enabled)
             {
                 ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.ionSurgeMovementScaling));
-
-                if (MageCore.iceWallRework || MageCore.enableFireUtility)
-                {
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.utilitySelfKnockback));
-                }
             }
 
             MercCore.enabled = SurvivorCfg.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
@@ -595,14 +590,17 @@ namespace RiskyMod
             BeaconRework.CaptainDeployableManager.allowLysateStack = SurvivorCfg.Bind(captainString, "Beacon Changes - Infinite Lysate Cell Stacking", false, "If Beacon Changes are enabled, allow stocks to be infinitely increased with Lysate Cells.").Value;
 
             Bandit2Core.enabled = SurvivorCfg.Bind(banditString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+            Bandit2Core.modifyStats = SurvivorCfg.Bind(banditString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
             BanditSpecialGracePeriod.enabled = SurvivorCfg.Bind(banditString, "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;
-            BanditSpecialGracePeriod.duration = SurvivorCfg.Bind(banditString, "Special Grace Period Duration", 1.2f, "Length in seconds of Special Grace Period.").Value;
+            BanditSpecialGracePeriod.durationLocalUser = SurvivorCfg.Bind(banditString, "Special Grace Period Duration (Host)", 0.5f, "Length in seconds of Special Grace Period.").Value;
+            BanditSpecialGracePeriod.durationOnline = SurvivorCfg.Bind(banditString, "Special Grace Period Duration (Client)", 1f, "Length in seconds of Special Grace Period for Online Clients.").Value;
 
             //Not sure if the Special even works if you disable this.
             if (!BanditSpecialGracePeriod.enabled)
             {
                 BanditSpecialGracePeriod.enabled = true;
-                BanditSpecialGracePeriod.duration = 0f;
+                BanditSpecialGracePeriod.durationOnline = 0f;
+                BanditSpecialGracePeriod.durationLocalUser = 0f;
             }
 
             DesperadoRework.enabled = SurvivorCfg.Bind(banditString, "Desperado Persist", false, "Desperado stacks are weaker but last between stages.").Value;

@@ -9,7 +9,10 @@ namespace RiskyMod.Survivors.Bandit2
     public class BanditSpecialGracePeriod
     {
         public static bool enabled = true;
-        public static float duration = 1.2f;
+
+        public static float durationOnline = 1.0f;
+        public static float durationLocalUser = 0.5f;
+
         public static GameObject resetEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/Bandit2ResetEffect");
         public static GameObject skullEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/Bandit2KillEffect");
         public BanditSpecialGracePeriod()
@@ -50,6 +53,16 @@ namespace RiskyMod.Survivors.Bandit2
                     UnityEngine.Debug.LogError("RiskyMod: BanditSpecialGracePeriod IL Hook failed");
                 }
             };
+        }
+
+        public static float GetDuration(GameObject attacker)
+        {
+            return SneedUtils.SneedUtils.IsLocalUser(attacker) ? durationLocalUser : durationOnline;
+        }
+
+        public static float GetDuration(CharacterBody attackerBody)
+        {
+            return SneedUtils.SneedUtils.IsLocalUser(attackerBody) ? durationLocalUser : durationOnline;
         }
     }
 }

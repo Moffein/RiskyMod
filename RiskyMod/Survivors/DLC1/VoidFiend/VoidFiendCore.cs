@@ -72,8 +72,8 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                 On.RoR2.VoidSurvivorController.OnEnable += (orig, self) =>
                 {
                     orig(self);
-                    self.corruptionPerSecondInCombat = 2f;
-                    self.corruptionPerSecondOutOfCombat = 2f;
+                    self.corruptionPerSecondInCombat = 1.6666666667f;   //60s for full corruption
+                    self.corruptionPerSecondOutOfCombat = 1.6666666667f;
                     self.corruptionFractionPerSecondWhileCorrupted = -1f / 12f;
 
                     //Debug.Log(self.maxCorruption); //100

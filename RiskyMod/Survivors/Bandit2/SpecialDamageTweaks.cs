@@ -29,11 +29,12 @@ namespace RiskyMod.Survivors.Bandit2
             }
         }
 
+        //Refreshes buff count while repeatedly hitting enemies for Rack Em Up.
         private static void ApplyBuff(DamageInfo damageInfo, CharacterBody victimBody)
         {
             if (damageInfo.HasModdedDamageType(Bandit2Core.SpecialDamage))
             {
-                float buffDuration = BanditSpecialGracePeriod.enabled ? BanditSpecialGracePeriod.duration : 1.2f;
+                float buffDuration = BanditSpecialGracePeriod.enabled ? BanditSpecialGracePeriod.GetDuration(damageInfo.attacker) : 1f;
                 int specialCount = victimBody.GetBuffCount(Bandit2Core.SpecialDebuff) + 1;
                 victimBody.ClearTimedBuffs(Bandit2Core.SpecialDebuff);
                 for (int i = 0; i < specialCount; i++)
