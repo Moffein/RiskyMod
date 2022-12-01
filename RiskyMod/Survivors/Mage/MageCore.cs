@@ -122,6 +122,7 @@ namespace RiskyMod.Survivors.Mage
 
                 SkillDef iceWallDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyWall.asset").WaitForCompletion();
                 iceWallDef.skillDescriptionToken = "MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD";
+                iceWallDef.canceledFromSprinting = !SoftDependencies.RtAutoSprintLoaded;
                 iceWallDef.activationState = new SerializableEntityStateType(typeof(PrepIceWall));
             }
 

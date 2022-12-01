@@ -648,7 +648,7 @@ namespace RiskyMod
         {
             MonsterCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Monsters.cfg"), true);
 
-
+            AiTargetFinding.enabled = MonsterCfg.Bind(monsterGeneralString, "AI Targetfinding Tweaks", true, "Enables fullvision and disables LoS checks for AI.").Value;
             EnemiesCore.infernoCompat = MonsterCfg.Bind("Compatibility", "Inferno Compatibility", true, "Disable certain changes that may conflict with Inferno.").Value;
 
             MonsterFallDamage.enabled = MonsterCfg.Bind(monsterGeneralString, "Lethal Fall Damage", true, "Monsters can die from fall damage.").Value;
