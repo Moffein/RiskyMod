@@ -23,6 +23,7 @@ namespace RiskyMod.Enemies
                     ))
                 {
                     c.EmitDelegate<Func<bool, bool>>(useFullVision => true);
+
                     if (c.TryGotoNext(
                     MoveType.After,
                     x => x.MatchLdcI4(1)
