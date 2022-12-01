@@ -67,10 +67,18 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                                     if (enableLogging) Debug.Log("Adding OSP Manager to player.");
                                 }
                                 //Check if OSP timer should be triggered
+                                bool shieldOnly = self.body.HasBuff(RoR2Content.Buffs.AffixLunar) || (self.body.inventory && self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
+                                bool shieldOnlyOSP = shieldOnly && !ShieldGating.enabled && !Items.Lunar.Transcendence.alwaysShieldGate;
+
                                 float ospHealthThreshold = self.fullHealth * OSPComponent.ospThreshold;
+                                if (shieldOnlyOSP)
+                                {
+                                    ospHealthThreshold = self.fullCombinedHealth * 0.9f;
+                                }
+
                                 if (self.health >= ospHealthThreshold && finalHealth < ospHealthThreshold)
                                 {
-                                    if (!ShieldGating.enabled || self.shield <= 0f)
+                                    if (shieldOnlyOSP || self.shield <= 0f)
                                     {
                                         ospm.StartOSPTimer();
                                     }
@@ -102,8 +110,8 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                 //Disable vanilla OSP
                 self.oneShotProtectionFraction = 0f;    //I'd like to re-enable the visual, but I need to figure out how to make it not count shields.
 
-                if (self.cursePenalty > 1f || self.HasBuff(RoR2Content.Buffs.AffixLunar) ||
-                    (self.inventory && self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0))
+                bool shieldOnly = self.HasBuff(RoR2Content.Buffs.AffixLunar) || (self.inventory && self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
+                if (self.cursePenalty > 1f || (shieldOnly && (ShieldGating.enabled || Items.Lunar.Transcendence.alwaysShieldGate)))
                 {
                     self.hasOneShotProtection = false;
                 }

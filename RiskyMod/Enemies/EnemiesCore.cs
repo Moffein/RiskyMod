@@ -27,6 +27,7 @@ namespace RiskyMod.Enemies
         public EnemiesCore()
         {
             new MonsterFallDamage();
+            new AiTargetFinding();
             Mithrix();
             ModifyEnemies();
             ModifySpawns();
