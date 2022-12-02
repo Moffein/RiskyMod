@@ -207,6 +207,7 @@ namespace RiskyMod.Survivors.Bandit2
                 Content.Content.entityStates.Add(typeof(StealthMode));
                 cloakDef.activationState = new SerializableEntityStateType(typeof(ThrowSmokebomb));
                 cloakDef.mustKeyPress = false;
+                cloakDef.interruptPriority = InterruptPriority.Skill;
             }
             if (utilityChanges)
             {

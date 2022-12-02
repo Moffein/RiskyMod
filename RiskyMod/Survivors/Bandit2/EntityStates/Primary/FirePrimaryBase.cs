@@ -23,7 +23,22 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
 			base.OnEnter();
 			duration = baseDuration / this.attackSpeedStat;
 			minDuration = baseMinDuration / this.attackSpeedStat;
-			base.PlayAnimation("Gesture, Additive", "FireMainWeapon", "FireMainWeapon.playbackRate", baseAnimDuration/this.attackSpeedStat);
+
+			bool playAnim = true;
+			Animator modelAnimator = base.GetModelAnimator();
+			if (modelAnimator)
+			{
+				int layerIndex = modelAnimator.GetLayerIndex("Gesture, Additive");
+				if (layerIndex >= 0)
+				{
+					AnimatorStateInfo animStateInfo = modelAnimator.GetCurrentAnimatorStateInfo(layerIndex);
+					if (animStateInfo.IsName("SlashBlade"))
+					{
+						playAnim = false;
+					}
+				}
+			}
+			if (playAnim) base.PlayAnimation("Gesture, Additive", "FireMainWeapon", "FireMainWeapon.playbackRate", baseAnimDuration/this.attackSpeedStat);
 		}
 
 		public override void ModifyBullet(BulletAttack bulletAttack)

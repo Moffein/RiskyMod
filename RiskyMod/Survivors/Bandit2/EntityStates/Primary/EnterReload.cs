@@ -19,7 +19,22 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			base.PlayCrossfade("Gesture, Additive", "EnterReload", "Reload.playbackRate", this.duration, 0.1f);
+
+			bool playAnim = true;
+			Animator modelAnimator = base.GetModelAnimator();
+			if (modelAnimator)
+			{
+				int layerIndex = modelAnimator.GetLayerIndex("Gesture, Additive");
+				if (layerIndex >= 0)
+				{
+					AnimatorStateInfo animStateInfo = modelAnimator.GetCurrentAnimatorStateInfo(layerIndex);
+					if (animStateInfo.IsName("SlashBlade"))
+					{
+						playAnim = false;
+					}
+				}
+			}
+			if (playAnim) base.PlayCrossfade("Gesture, Additive", "EnterReload", "Reload.playbackRate", this.duration, 0.1f);
 			//Util.PlaySound(EnterReload.enterSoundString, base.gameObject);
 		}
 

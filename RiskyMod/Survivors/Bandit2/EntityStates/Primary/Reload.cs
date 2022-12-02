@@ -26,7 +26,21 @@ namespace EntityStates.RiskyMod.Bandit2
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			base.PlayAnimation("Gesture, Additive", (base.characterBody.isSprinting && base.characterMotor && base.characterMotor.isGrounded) ? "ReloadSimple" : "Reload", "Reload.playbackRate", this.duration);
+			bool playAnim = true;
+			Animator modelAnimator = base.GetModelAnimator();
+			if (modelAnimator)
+			{
+				int layerIndex = modelAnimator.GetLayerIndex("Gesture, Additive");
+				if (layerIndex >= 0)
+				{
+					AnimatorStateInfo animStateInfo = modelAnimator.GetCurrentAnimatorStateInfo(layerIndex);
+					if (animStateInfo.IsName("SlashBlade"))
+					{
+						playAnim = false;
+					}
+				}
+			}
+			if (playAnim) base.PlayAnimation("Gesture, Additive", (base.characterBody.isSprinting && base.characterMotor && base.characterMotor.isGrounded) ? "ReloadSimple" : "Reload", "Reload.playbackRate", this.duration);
 			Util.PlayAttackSpeedSound(Reload.enterSoundString, base.gameObject, Reload.enterSoundPitch);
 			EffectManager.SimpleMuzzleFlash(Reload.reloadEffectPrefab, base.gameObject, Reload.reloadEffectMuzzleString, false);
 		}
