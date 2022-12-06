@@ -41,37 +41,23 @@ namespace RiskyMod.Moon
                         }
 
                         PickupDef pickupDef = PickupCatalog.GetPickupDef(pickupIndex);
-                        Chat.SendBroadcastChat(new Chat.SimpleChatMessage
-                        {
-                            baseToken = "MOON_PILLAR_COMPLETE_RISKYMOD",
-                            paramTokens = new string[]
-                            {
-                                pillarName,
-                                "<color=#"+ColorUtility.ToHtmlStringRGB(pickupDef.baseColor)+">"+Language.GetStringFormatted(pickupDef.nameToken) + "</color>"
-                            }
-                        });
 
                         int participatingPlayerCount = Run.instance.participatingPlayerCount;
                         if (participatingPlayerCount != 0 && holdoutZone.transform)
                         {
                             int num = participatingPlayerCount;
 
+                            PickupDropTable dropTable;
                             bool itemShareActive = false;
                             switch (tier)
                             {
-                                case ItemTier.Tier1:
-                                    if (SoftDependencies.ShareSuiteCommon)
-                                    {
-                                        num = 1;
-                                        itemShareActive = true;
-                                    }
-                                    break;
                                 case ItemTier.Tier2:
                                     if (SoftDependencies.ShareSuiteUncommon)
                                     {
                                         num = 1;
                                         itemShareActive = true;
                                     }
+                                    dropTable = RiskyMod.tier2Drops;
                                     break;
                                 case ItemTier.Tier3:
                                     if (SoftDependencies.ShareSuiteLegendary)
@@ -79,6 +65,7 @@ namespace RiskyMod.Moon
                                         num = 1;
                                         itemShareActive = true;
                                     }
+                                    dropTable = RiskyMod.tier3Drops;
                                     break;
                                 case ItemTier.Lunar:
                                     if (SoftDependencies.ShareSuiteLunar)
@@ -86,13 +73,39 @@ namespace RiskyMod.Moon
                                         num = 1;
                                         itemShareActive = true;
                                     }
+                                    dropTable = RiskyMod.lunarDrops;
                                     break;
-                                default: break;
+                                default:
+                                    if (SoftDependencies.ShareSuiteCommon)
+                                    {
+                                        num = 1;
+                                        itemShareActive = true;
+                                    }
+                                    dropTable = RiskyMod.tier1Drops;
+                                    break;
                             }
 
                             float angle = 360f / (float)num;
                             Vector3 vector = Quaternion.AngleAxis((float)UnityEngine.Random.Range(0, 360), Vector3.up) * (Vector3.up * 40f + Vector3.forward * 5f);
                             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
+
+
+                            //Roll the rng anyways so that it performs the same with/without the config option. This code is a mess.
+                            PickupPickerController.Option[] options = PickupPickerController.GenerateOptionsFromDropTable(3, dropTable, Run.instance.bossRewardRng);
+                            if (options.Length > 0 && options[0].pickupIndex != PickupIndex.none) pickupDef = PickupCatalog.GetPickupDef(options[0].pickupIndex);
+
+                            if ((pickupDef != null && pickupDef.pickupIndex != PickupIndex.none))
+                            {
+                                Chat.SendBroadcastChat(new Chat.SimpleChatMessage
+                                {
+                                    baseToken = "MOON_PILLAR_COMPLETE_RISKYMOD",
+                                    paramTokens = new string[]
+                                    {
+                                pillarName,
+                                "<color=#"+ColorUtility.ToHtmlStringRGB(pickupDef.baseColor)+">"+Language.GetStringFormatted(pickupDef.nameToken) + "</color>"
+                                    }
+                                });
+                            }
 
                             int k = 0;
                             while (k < num)
@@ -110,7 +123,28 @@ namespace RiskyMod.Moon
 
                                     overwritePickup = !(pickupOverwrite == PickupIndex.none);
                                 }
-                                PickupDropletController.CreatePickupDroplet(overwritePickup ? pickupOverwrite : pickupIndex, holdoutZone.transform.position + rewardPositionOffset, vector);
+
+                                if (!overwritePickup)
+                                {
+                                    if (!SoftDependencies.IsPotentialArtifactActive())
+                                    {
+                                        PickupDropletController.CreatePickupDroplet(pickupDef.pickupIndex, holdoutZone.transform.position + rewardPositionOffset, vector);
+                                    }
+                                    else
+                                    {
+                                        PickupDropletController.CreatePickupDroplet(new GenericPickupController.CreatePickupInfo
+                                        {
+                                            pickupIndex = PickupCatalog.FindPickupIndex(tier),
+                                            pickerOptions = options,
+                                            rotation = Quaternion.identity,
+                                            prefabOverride = RiskyMod.potentialPrefab
+                                        }, holdoutZone.transform.position + rewardPositionOffset, vector);
+                                    }
+                                }
+                                else
+                                {
+                                    PickupDropletController.CreatePickupDroplet(pickupOverwrite, holdoutZone.transform.position + rewardPositionOffset, vector);
+                                }
                                 k++;
                                 vector = rotation * vector;
                             }

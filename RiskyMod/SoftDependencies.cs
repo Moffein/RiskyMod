@@ -1,5 +1,7 @@
-﻿using System;
+﻿using RoR2;
+using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace RiskyMod
@@ -33,5 +35,19 @@ namespace RiskyMod
 
         public static bool KingKombatArenaLoaded = false;
         public static bool KingKombatArenaActive = false;
+
+        public static bool artifactPotentialLoaded = false;
+        public static bool IsPotentialArtifactActive()
+        {
+            bool isActive = false;
+            if (artifactPotentialLoaded) isActive = IsPotentialArtifactActiveInternal();
+            return isActive;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static bool IsPotentialArtifactActiveInternal()
+        {
+            return RunArtifactManager.instance && RunArtifactManager.instance.IsArtifactEnabled(ArtifactOfPotential.PotentialArtifact.Potential);
+        }
     }
 }

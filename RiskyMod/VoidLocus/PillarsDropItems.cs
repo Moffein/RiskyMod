@@ -20,7 +20,6 @@ namespace RiskyMod.VoidLocus
         public static float voidChance = 10f;
 
         public static bool usePotential = true;
-        private static GameObject potentialPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/OptionPickup/OptionPickup.prefab").WaitForCompletion();
 
         public PillarsDropItems()
         {
@@ -106,14 +105,14 @@ namespace RiskyMod.VoidLocus
                                     int k = 0;
                                     while (k < num)
                                     {
-                                        if (usePotential)
+                                        if (usePotential || SoftDependencies.IsPotentialArtifactActive())
                                         {
                                             PickupDropletController.CreatePickupDroplet(new GenericPickupController.CreatePickupInfo
                                             {
                                                 pickupIndex = PickupCatalog.FindPickupIndex(tier),
                                                 pickerOptions = options,
                                                 rotation = Quaternion.identity,
-                                                prefabOverride = potentialPrefab
+                                                prefabOverride = RiskyMod.potentialPrefab
                                             }, holdoutZone.transform.position + rewardPositionOffset, vector);
                                         }
                                         else
@@ -129,36 +128,6 @@ namespace RiskyMod.VoidLocus
                     }
                 }
             };
-        }
-
-        private static PickupIndex SelectPearl()
-        {
-            PickupIndex pearlIndex = PickupCatalog.FindPickupIndex(RoR2Content.Items.Pearl.itemIndex);
-            PickupIndex shinyPearlIndex = PickupCatalog.FindPickupIndex(RoR2Content.Items.ShinyPearl.itemIndex);
-            bool pearlAvailable = pearlIndex != PickupIndex.none && Run.instance.IsItemAvailable(RoR2Content.Items.Pearl.itemIndex);
-            bool shinyPearlAvailable = shinyPearlIndex != PickupIndex.none && Run.instance.IsItemAvailable(RoR2Content.Items.ShinyPearl.itemIndex);
-
-            PickupIndex toReturn = PickupIndex.none;
-            if (pearlAvailable && shinyPearlAvailable)
-            {
-                toReturn = pearlIndex;
-                if (Run.instance.bossRewardRng.RangeFloat(0f, 100f) <= 20f)
-                {
-                    toReturn = shinyPearlIndex;
-                }
-            }
-            else
-            {
-                if (pearlAvailable)
-                {
-                    toReturn = pearlIndex;
-                }
-                else if (shinyPearlAvailable)
-                {
-                    toReturn = shinyPearlIndex;
-                }
-            }
-            return toReturn;
         }
 
         //Yellow Chance is handled after selecting item

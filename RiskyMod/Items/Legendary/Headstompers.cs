@@ -10,6 +10,7 @@ namespace RiskyMod.Items.Legendary
 {
     public class Headstompers
     {
+        public static bool useBuff = true;
         public static bool enabled = true;
 
         public static BuffDef HeadstompersActive;
@@ -87,6 +88,8 @@ namespace RiskyMod.Items.Legendary
 
         private void SetupCooldownBehavior()
         {
+            if (!useBuff) return;
+
             On.EntityStates.Headstompers.HeadstompersCooldown.OnEnter += (orig, self) =>
             {
                 orig(self);

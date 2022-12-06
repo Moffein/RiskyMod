@@ -18,6 +18,8 @@ namespace RiskyMod.Tweaks
             On.RoR2.ShrineCombatBehavior.Awake += (orig, self) =>
             {
                 orig(self);
+                
+                //bad way to do this
                 if (self.combatDirector)
                 {
                     if (self.combatDirector.expRewardCoefficient == 0.2f)
@@ -35,7 +37,9 @@ namespace RiskyMod.Tweaks
                 orig(self);
                 if (NetworkServer.active)
                 {
+                    ItemTier tier = ItemTier.NoTier;
                     PickupIndex pickupIndex = SelectItem();
+                    PickupDef pickupDef = PickupCatalog.GetPickupDef(pickupIndex);
                     if (pickupIndex != PickupIndex.none)
                     {
                         int participatingPlayerCount = Run.instance.participatingPlayerCount;
@@ -43,33 +47,57 @@ namespace RiskyMod.Tweaks
                         {
                             int num = participatingPlayerCount;
 
-                            switch (PickupCatalog.GetPickupDef(pickupIndex).itemTier)
+                            PickupDropTable dropTable;
+                            tier = pickupDef.itemTier;
+                            switch (tier)
                             {
-                                case ItemTier.Tier1:
-                                    if (SoftDependencies.ShareSuiteCommon) num = 1;
-                                    break;
                                 case ItemTier.Tier2:
+                                    dropTable = RiskyMod.tier2Drops;
                                     if (SoftDependencies.ShareSuiteUncommon) num = 1;
                                     break;
                                 case ItemTier.Tier3:
+                                    dropTable = RiskyMod.tier3Drops;
                                     if (SoftDependencies.ShareSuiteLegendary) num = 1;
                                     break;
-                                default: break;
+                                default:
+                                    dropTable = RiskyMod.tier1Drops;
+                                    if (SoftDependencies.ShareSuiteCommon) num = 1;
+                                    break;
                             }
 
                             float angle = 360f / (float)num;
                             Vector3 vector = Quaternion.AngleAxis((float)UnityEngine.Random.Range(0, 360), Vector3.up) * (Vector3.up * 40f + Vector3.forward * 5f);
                             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
 
+                            //Roll the rng anyways so that it performs the same with/without the config option. This code is a mess.
+                            PickupPickerController.Option[] options = PickupPickerController.GenerateOptionsFromDropTable(3, dropTable, Run.instance.bossRewardRng);
+                            if (options.Length > 0 && options[0].pickupIndex != PickupIndex.none)
+                            {
+                                pickupDef = PickupCatalog.GetPickupDef(options[0].pickupIndex);
+                                pickupIndex = pickupDef.pickupIndex;
+                            }
+
                             int k = 0;
                             while (k < num)
                             {
-                                PickupDropletController.CreatePickupDroplet(pickupIndex, self.transform.position + rewardPositionOffset, vector);
+                                if (!SoftDependencies.IsPotentialArtifactActive())
+                                {
+                                    PickupDropletController.CreatePickupDroplet(pickupDef.pickupIndex, self.transform.position + rewardPositionOffset, vector);
+                                }
+                                else
+                                {
+                                    PickupDropletController.CreatePickupDroplet(new GenericPickupController.CreatePickupInfo
+                                    {
+                                        pickupIndex = PickupCatalog.FindPickupIndex(tier),
+                                        pickerOptions = options,
+                                        rotation = Quaternion.identity,
+                                        prefabOverride = RiskyMod.potentialPrefab
+                                    }, self.transform.position + rewardPositionOffset, vector);
+                                }
                                 k++;
                                 vector = rotation * vector;
                             }
 
-                            PickupDef pickupDef = PickupCatalog.GetPickupDef(pickupIndex);
                             Chat.SendBroadcastChat(new Chat.SimpleChatMessage
                             {
                                 baseToken = "SHRINE_COMBAT_END_TRIAL_RISKYMOD",

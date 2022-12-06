@@ -267,6 +267,7 @@ namespace RiskyMod
             Crowbar.enabled = ItemCfg.Bind(commonString, "Crowbar", true, itemConfigDescString).Value;
 
             DelicateWatch.enabled = ItemCfg.Bind(commonString, "Delicate Watch", true, itemConfigDescString).Value;
+            DelicateWatch.useBuff = ItemCfg.Bind(commonString, "Delicate Watch - Show Buff on HUD", true, "Damage bonus from this item is shown as a buff on your HUD.").Value;
             PowerElixir.enabled = ItemCfg.Bind(commonString, "Power Elixir", true, itemConfigDescString).Value;
 
             Fireworks.enabled = ItemCfg.Bind(commonString, "Fireworks", true, itemConfigDescString).Value;
@@ -298,6 +299,7 @@ namespace RiskyMod
             Harpoon.enabled = ItemCfg.Bind(uncommonString, "Hunters Harpoon", true, itemConfigDescString).Value;
             HarvesterScythe.enabled = ItemCfg.Bind(uncommonString, "Harvesters Scythe", false, "Reworks this item to give Crit Chance + Regen on kill.").Value;
             Infusion.enabled = ItemCfg.Bind(uncommonString, "Infusion", true, itemConfigDescString).Value;
+            Infusion.useBuff = ItemCfg.Bind(uncommonString, "Infusion - Show Buff on HUD", true, "HP gained from Infusion is displayed as a buff on your HUD.").Value;
             LeechingSeed.enabled = ItemCfg.Bind(uncommonString, "Leeching Seed", true, itemConfigDescString).Value;
             Daisy.enabled = ItemCfg.Bind(uncommonString, "Lepton Daisy", true, itemConfigDescString).Value;
 
@@ -338,6 +340,7 @@ namespace RiskyMod
             HeadHunter.enabled = ItemCfg.Bind(legendaryString, "Wake of Vultures", true, itemConfigDescString).Value;
             HeadHunter.perfectedTweak = ItemCfg.Bind(legendaryString, "Wake of Vultures - Perfected Tweak", true, "Perfected Affix gained via Wake of Vultures will not force your health pool to become shields.").Value;
             Headstompers.enabled = ItemCfg.Bind(legendaryString, "H3AD-ST", true, itemConfigDescString).Value;
+            Headstompers.useBuff = ItemCfg.Bind(legendaryString, "H3AD-ST - Show Buff on HUD", true, "H3AD-ST cooldown is shown as a buff on your HUD. Disabling this prevents Blast Shower from clearing the item's cooldown.").Value;
             LaserTurbine.enabled = ItemCfg.Bind(legendaryString, "Resonance Disc", true, itemConfigDescString).Value;
             Scorpion.enabled = ItemCfg.Bind(legendaryString, "Symbiotic Scorpion", true, itemConfigDescString).Value;
 

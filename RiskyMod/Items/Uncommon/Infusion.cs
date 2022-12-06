@@ -12,6 +12,7 @@ namespace RiskyMod.Items.Uncommon
 {
     public class Infusion
     {
+        public static bool useBuff = true;
         public static bool enabled = true;
         public static BuffDef InfusionBuff;
         public Infusion()
@@ -76,7 +77,7 @@ namespace RiskyMod.Items.Uncommon
                             }
                         }
                         int hpGained = Mathf.FloorToInt(newHP);
-                        if (NetworkServer.active)
+                        if (NetworkServer.active && Infusion.useBuff)
                         {
                             int currentInfusionBuffCount = self.GetBuffCount(InfusionBuff.buffIndex);
                             if (self.inventory && self.inventory.GetItemCount(RoR2Content.Items.Infusion) > 0)

@@ -33,6 +33,9 @@
     <Reference Include="AncientScepter">
       <HintPath>libs\SoftDependencies\AncientScepter.dll</HintPath>
     </Reference>
+    <Reference Include="ArtifactOfPotential">
+      <HintPath>libs\SoftDependencies\ArtifactOfPotential.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>libs\Assembly-CSharp.dll</HintPath>
     </Reference>

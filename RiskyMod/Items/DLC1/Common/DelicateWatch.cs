@@ -10,6 +10,7 @@ namespace RiskyMod.Items.DLC1.Common
 {
     public class DelicateWatch
     {
+        public static bool useBuff = true;
         public static bool enabled = true;
         public static BuffDef WatchIndicatorBuff;
 
@@ -29,31 +30,34 @@ namespace RiskyMod.Items.DLC1.Common
                 Content.Assets.BuffIcons.Watch
                 );
 
-            SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += (self, inventory) =>
+            if (useBuff)
             {
-                bool hasBuff = self.HasBuff(WatchIndicatorBuff);
-                if (inventory.GetItemCount(DLC1Content.Items.FragileDamageBonus) > 0)
+                SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += (self, inventory) =>
                 {
-                    if (hasBuff && !self.outOfDanger)
+                    bool hasBuff = self.HasBuff(WatchIndicatorBuff);
+                    if (inventory.GetItemCount(DLC1Content.Items.FragileDamageBonus) > 0)
                     {
-                        if (NetworkServer.active) self.RemoveBuff(WatchIndicatorBuff);
-                        RoR2.Util.PlaySound("Play_item_proc_delicateWatch_break", self.gameObject);
-                    }
-                    else if (!hasBuff && self.outOfDanger)
-                    {
-                        if (NetworkServer.active) self.AddBuff(WatchIndicatorBuff);
+                        if (hasBuff && !self.outOfDanger)
+                        {
+                            if (NetworkServer.active) self.RemoveBuff(WatchIndicatorBuff);
+                            RoR2.Util.PlaySound("Play_item_proc_delicateWatch_break", self.gameObject);
+                        }
+                        else if (!hasBuff && self.outOfDanger)
+                        {
+                            if (NetworkServer.active) self.AddBuff(WatchIndicatorBuff);
 
-                        RoR2.Util.PlaySound("Play_RiskyMod_DelicateWatch_Ready", self.gameObject);
+                            RoR2.Util.PlaySound("Play_RiskyMod_DelicateWatch_Ready", self.gameObject);
+                        }
                     }
-                }
-                else
-                {
-                    if (hasBuff && NetworkServer.active)
+                    else
                     {
-                        self.RemoveBuff(WatchIndicatorBuff);
+                        if (hasBuff && NetworkServer.active)
+                        {
+                            self.RemoveBuff(WatchIndicatorBuff);
+                        }
                     }
-                }
-            };
+                };
+            }
 
             //Remove Vanilla Effect
             IL.RoR2.HealthComponent.TakeDamage += (il) =>
@@ -90,7 +94,7 @@ namespace RiskyMod.Items.DLC1.Common
 
             SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += (CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory) =>
             {
-                if (sender.HasBuff(DelicateWatch.WatchIndicatorBuff))
+                if (sender.outOfDanger)
                 {
                     int itemCount = inventory.GetItemCount(DLC1Content.Items.FragileDamageBonus);
                     if (itemCount > 0)
