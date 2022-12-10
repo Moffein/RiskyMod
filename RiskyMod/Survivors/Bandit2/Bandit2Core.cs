@@ -243,6 +243,7 @@ namespace RiskyMod.Survivors.Bandit2
             resetRevolverDef.canceledFromSprinting = false;
             resetRevolverDef.skillDescriptionToken = "BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD";
             resetRevolverDef.mustKeyPress = false;
+            resetRevolverDef.interruptPriority = InterruptPriority.Skill;
             Skills.LightsOut = resetRevolverDef;
 
             SkillDef skullRevolverDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Bandit2/SkullRevolver.asset").WaitForCompletion();
@@ -252,6 +253,7 @@ namespace RiskyMod.Survivors.Bandit2
             skullRevolverDef.mustKeyPress = false;
             skullRevolverDef.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME_RISKYMOD";
             skullRevolverDef.skillDescriptionToken = "BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
+            skullRevolverDef.interruptPriority = InterruptPriority.Skill;
             Skills.RackEmUp = skullRevolverDef;
 
             if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
