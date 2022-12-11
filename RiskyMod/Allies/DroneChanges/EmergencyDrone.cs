@@ -9,7 +9,7 @@ namespace RiskyMod.Allies.DroneChanges
         public EmergencyDrone()
         {
             CharacterBody body = AllyPrefabs.EmergencyDrone.GetComponent<CharacterBody>();
-            body.baseMaxHealth = 340f;
+            body.baseMaxHealth = 360f;
             body.levelMaxHealth = body.baseMaxHealth * 0.3f;
 
             GameObject megaDroneBrokenObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/EmergencyDroneBroken.prefab").WaitForCompletion();

@@ -28,16 +28,16 @@ namespace RiskyMod.Allies
 
                             if (self.masterPrefab == AllyPrefabs.IncineratorDrone)
                             {
-                                summonResult.inventory.GiveItem(AllyItems.AllyRegenItem, 20);
+                                summonResult.inventory.GiveItem(AllyItems.AllyRegenItem, 30);
+                            }
+                            else if (self.masterPrefab == AllyPrefabs.GunnerTurret)
+                            {
+                                summonResult.inventory.GiveItem(AllyItems.AllyRegenItem, 30);
+                                summonResult.inventory.GiveItem(AllyItems.AllyResistAoEItem);
                             }
                             else
                             {
                                 summonResult.inventory.GiveItem(AllyItems.AllyRegenItem, 40);
-                            }
-
-                            if (self.masterPrefab == AllyPrefabs.GunnerTurret)
-                            {
-                                summonResult.inventory.GiveItem(AllyItems.AllyResistAoEItem);
                             }
                         }
                     }

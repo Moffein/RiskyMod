@@ -51,7 +51,7 @@ namespace RiskyMod.Allies.DroneChanges
 			megaDroneBody.baseArmor = 20f;
 			megaDroneBody.baseRegen = megaDroneBody.baseMaxHealth / 30f;
 			megaDroneBody.levelRegen = megaDroneBody.baseRegen * 0.2f;
-			megaDroneBody.baseMaxShield = megaDroneBody.baseMaxHealth * 0.08f;
+			megaDroneBody.baseMaxShield = megaDroneBody.baseMaxHealth * 0.1f;
 			megaDroneBody.levelMaxShield = megaDroneBody.baseMaxShield * 0.3f;
 
 			UpgradeMegaTurret();

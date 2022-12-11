@@ -41,14 +41,14 @@ namespace RiskyMod.Survivors.Mage
         {
             if (!FireBolt) CreateFireBolt();
 
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireFireBolt", "damageCoefficient", "3.9");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireFireBolt", "damageCoefficient", "3.6");
         }
 
         public static void ModifyLightningBolt()
         {
             if (!LightningBolt) CreateLightningBolt();
 
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireLightningBolt", "damageCoefficient", "3.9");
+            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.FireLightningBolt", "damageCoefficient", "3.6");
             /*ProjectileZapChainOnExplosion pzc = LightningBolt.AddComponent<ProjectileZapChainOnExplosion>();
             pzc.damageCoefficient = 0.9f / 2.7f;
             pzc.maxBounces = 20;

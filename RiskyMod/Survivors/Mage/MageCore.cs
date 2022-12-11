@@ -29,6 +29,7 @@ namespace RiskyMod.Survivors.Mage
 
         public static bool flamethrowerSprintCancel = true;
         public static bool flamethrowerRangeExtend = true;
+        public static bool flamethrowerIgniteChance = true;
 
         public static bool ionSurgeShock = true;
         public static ConfigEntry<bool> ionSurgeMovementScaling;
@@ -200,6 +201,7 @@ namespace RiskyMod.Survivors.Mage
             {
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.Flamethrower", "maxDistance", "25");  //20 vanilla
             }
+            if (flamethrowerIgniteChance) SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.Flamethrower", "ignitePercentChance", "100");  //50 vanilla
 
             if (enableLightningSpecial)
             {
@@ -356,6 +358,7 @@ namespace RiskyMod.Survivors.Mage
 
             if (ionSurgeUtility)
             {
+                surgeDef.forceSprintDuringState = false;
                 //Remove Ion Surge from Specials
                 sk.special.skillFamily.variants = sk.special.skillFamily.variants.Where(v => v.skillDef.activationState.stateType != typeof(EntityStates.Mage.FlyUpState)).ToArray();
 

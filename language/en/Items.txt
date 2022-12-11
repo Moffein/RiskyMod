@@ -133,7 +133,7 @@
 	
 	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>Blocks</style> incoming damage once. Recharges after <style=cIsUtility>20 seconds</style> <style=cStack>(-10% per stack)</style>. <style=cIsVoid>Corrupts all Tougher Times</style>.",
 	
-	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Healing past full grants you a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>50%</style> of the amount you <style=cIsHealing>healed</style>. Divides <style=cIsHealing>barrier decay rate</style> by <style=cIsHealing>2 <style=cStack>(+1 per stack)</style></style>.",
+	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Healing past full grants you a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>50% <style=cStack>(+50% per stack)</style></style> of the amount you <style=cIsHealing>healed</style>. Divides <style=cIsHealing>barrier decay rate</style> by <style=cIsHealing>2 <style=cStack>(+1 per stack)</style></style>.",
 
 	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Increase base damage by <style=cIsDamage>100%</style> <style=cStack>(+100% per stack)</style>. <style=cIsHealth>Divide maximum health by 2</style> <style=cStack>(+1 per stack)</style>."
 	}

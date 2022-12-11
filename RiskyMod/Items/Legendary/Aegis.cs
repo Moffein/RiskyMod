@@ -16,38 +16,6 @@ namespace RiskyMod.Items.Legendary
             if (!enabled) return;
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
-            //Stacks no longer give extra barrier. Initial stack barrier increased.
-            IL.RoR2.HealthComponent.Heal += (il) =>
-            {
-                bool error = true;
-
-                ILCursor c = new ILCursor(il);
-                if (c.TryGotoNext(
-                     x => x.MatchLdfld(typeof(HealthComponent.ItemCounts), "barrierOnOverHeal")
-                    ))
-                {
-                    if (c.TryGotoNext(MoveType.After,
-                     x => x.MatchLdfld(typeof(HealthComponent.ItemCounts), "barrierOnOverHeal")
-                    ))
-                    {
-                        c.EmitDelegate<Func<int, int>>(itemCount => 1);
-                        error = false;
-
-                        /*if (c.TryGotoNext(
-                         x => x.MatchLdcR4(0.5f)
-                        ))
-                        {
-                            c.Next.Operand = 1f;
-                        }*/
-                    }
-                }
-
-                if (error)
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: Aegis IL Hook failed");
-                }
-            };
-
             //Apply barrier decay rate modifiers.
             IL.RoR2.HealthComponent.ServerFixedUpdate += (il) =>
             {

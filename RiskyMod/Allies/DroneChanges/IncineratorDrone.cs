@@ -1,4 +1,5 @@
 ﻿using RoR2;
+using RoR2.CharacterAI;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,16 @@ namespace RiskyMod.Allies.DroneChanges
 
             body.baseRegen = body.baseMaxHealth / 20f;
             body.levelRegen = body.baseRegen * 0.2f;
-            body.baseMaxShield = body.baseMaxHealth * 0.08f;
+            body.baseMaxShield = body.baseMaxHealth * 0.1f;
             body.levelMaxShield = body.baseMaxShield * 0.3f;
 
-            GameObject megaDroneBrokenObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/FlameDroneBroken.prefab").WaitForCompletion();
-            PurchaseInteraction pi = megaDroneBrokenObject.GetComponent<PurchaseInteraction>();
+            GameObject brokenDroneObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/FlameDroneBroken.prefab").WaitForCompletion();
+            PurchaseInteraction pi = brokenDroneObject.GetComponent<PurchaseInteraction>();
             pi.cost = 80;	//Vanilla is 100
+
+            GameObject masterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/flamedronemaster");
+            BaseAI masterAI = masterObject.GetComponent<BaseAI>();
+            masterAI.aimVectorMaxSpeed = 180f;
         }
     }
 }

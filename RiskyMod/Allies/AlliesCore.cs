@@ -61,7 +61,7 @@ namespace RiskyMod.Allies
                 NormalizeDroneDamage(AllyPrefabs.MissileDrone);
                 NormalizeDroneDamage(AllyPrefabs.EquipmentDrone);
                 NormalizeDroneDamage(AllyPrefabs.EmergencyDrone);
-                NormalizeDroneDamage(AllyPrefabs.IncineratorDrone);
+                //NormalizeDroneDamage(AllyPrefabs.IncineratorDrone);
                 NormalizeDroneDamage(AllyPrefabs.MegaDrone);
                 NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/dronecommanderbody"));
                 NormalizeDroneDamage(AllyPrefabs.GunnerTurret);

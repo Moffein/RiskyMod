@@ -518,6 +518,7 @@ namespace RiskyMod
             MageCore.enableFireUtility = SurvivorCfg.Bind(mageString, "Blaze Storm Utility Skill", false, "Enables this custom skill.").Value;
             MageCore.flamethrowerSprintCancel = SurvivorCfg.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.").Value;
             MageCore.flamethrowerRangeExtend = SurvivorCfg.Bind(mageString, "Flamethrower - Increase Range", true, "Increases the range of flamethrower.").Value;
+            MageCore.flamethrowerIgniteChance = SurvivorCfg.Bind(mageString, "Flamethrower - Always Ignite", true, "All hits of Flamethrower ignite.").Value;
 
             MageCore.enableLightningSpecial = SurvivorCfg.Bind(mageString, "Electrocute Special Skill", false, "Enables this custom skill.").Value;
 
