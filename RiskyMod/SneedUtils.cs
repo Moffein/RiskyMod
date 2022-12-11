@@ -17,15 +17,13 @@ namespace SneedUtils
         {
             bool successfullyReplaced = false;
 
-            SkillFamily.Variant[] skillVariants = skillFamily.variants;
-            if (skillVariants != null && targetSkill != null && newSkill != null)
+            if (skillFamily.variants != null && targetSkill != null && newSkill != null)
             {
-                for (int i = 0; i < skillVariants.Length; i++)
+                for (int i = 0; i < skillFamily.variants.Length; i++)
                 {
-                    SkillFamily.Variant variant = skillVariants[i];
-                    if (variant.skillDef == targetSkill)
+                    if (skillFamily.variants[i].skillDef == targetSkill)
                     {
-                        variant.skillDef = newSkill;
+                        skillFamily.variants[i].skillDef = newSkill;
                         successfullyReplaced = true;
                         break;
                     }

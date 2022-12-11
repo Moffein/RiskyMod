@@ -124,7 +124,7 @@ namespace RiskyMod.Survivors.Captain
             Skills.Shotgun = shotgunDef;
 
             //Leave this as a SkillDef replacement to smooth out interaction with Admiral.
-            SneedUtils.SneedUtils.ReplaceSkillDef(sk.primary.skillFamily, Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CaptainShotgun.asset").WaitForCompletion(), Skills.Shotgun);
+            SneedUtils.SneedUtils.ReplaceSkillDef(sk.primary.skillFamily, captainShotgun, Skills.Shotgun);
         }
 
         private void ModifySecondaries(SkillLocator sk)
