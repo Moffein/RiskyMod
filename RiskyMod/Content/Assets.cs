@@ -84,7 +84,7 @@ namespace RiskyMod.Content
 
             ScepterSkillIcons.HuntressArrowRainScepter = assetBundle.LoadAsset<Sprite>("texHuntressR1");
 
-            ScepterSkillIcons.CrocoEpidemicScepter = assetBundle.LoadAsset<Sprite>("texCrocoR1");
+            ScepterSkillIcons.CrocoEpidemicScepter = assetBundle.LoadAsset<Sprite>("texAcridR1");
 
             ScepterSkillIcons.LightsOutScepter = assetBundle.LoadAsset<Sprite>("texBanditR1");
             ScepterSkillIcons.RackEmUpScepter = assetBundle.LoadAsset<Sprite>("texBanditR2");
