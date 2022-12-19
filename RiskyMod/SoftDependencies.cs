@@ -8,6 +8,8 @@ namespace RiskyMod
 {
     public class SoftDependencies
     {
+        public static bool ReleasedFromTheVoidLoaded = false;
+
         public static bool ClassicItemsScepterLoaded = false;
         public static bool ScepterPluginLoaded = false;
 
@@ -36,11 +38,11 @@ namespace RiskyMod
         public static bool KingKombatArenaLoaded = false;
         public static bool KingKombatArenaActive = false;
 
-        public static bool artifactPotentialLoaded = false;
+        public static bool ArtifactOfPotentialLoaded = false;
         public static bool IsPotentialArtifactActive()
         {
             bool isActive = false;
-            if (artifactPotentialLoaded) isActive = IsPotentialArtifactActiveInternal();
+            if (ArtifactOfPotentialLoaded) isActive = IsPotentialArtifactActiveInternal();
             return isActive;
         }
 

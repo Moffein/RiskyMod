@@ -160,7 +160,8 @@ namespace RiskyMod
 
         private void CheckDependencies()
         {
-            SoftDependencies.artifactPotentialLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("zombieseatflesh7.ArtifactOfPotential");
+            SoftDependencies.ReleasedFromTheVoidLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Anreol.ReleasedFromTheVoid");
+            SoftDependencies.ArtifactOfPotentialLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("zombieseatflesh7.ArtifactOfPotential");
 
             SoftDependencies.KingKombatArenaLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Kingpinush.KingKombatArena");
             if (SoftDependencies.KingKombatArenaLoaded)
