@@ -28,6 +28,8 @@ namespace RiskyMod.Enemies.Bosses
                 orig();
                 MagmaWormIndex = BodyCatalog.FindBodyIndex("MagmaWormBody");
                 ElectricWormIndex = BodyCatalog.FindBodyIndex("ElectricWormBody");
+                if (MagmaWormIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(MagmaWormIndex);
+                if (ElectricWormIndex  != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(ElectricWormIndex);
             };
 
             //ProjectileSetup();
@@ -68,62 +70,6 @@ namespace RiskyMod.Enemies.Bosses
                     if (component)
                     {
                         component.shouldFireMeatballsOnImpact = true;
-                    }
-                }
-            };
-        }
-
-        private void PrioritizePlayers()
-        {
-            On.RoR2.CharacterAI.BaseAI.UpdateTargets += (orig, self) =>
-            {
-                orig(self);
-                if (self.body && (self.body.bodyIndex == MagmaWormIndex || self.body.bodyIndex == ElectricWormIndex))
-                {
-                    if (self.currentEnemy != null
-                    && self.currentEnemy.characterBody
-                    && !self.currentEnemy.characterBody.isPlayerControlled
-                    && self.currentEnemy.characterBody.bodyIndex != Items.Uncommon.SquidPolyp.squidTurretBodyIndex
-                    && self.currentEnemy.characterBody.teamComponent)
-                    {
-                        TeamIndex enemyTeam = self.currentEnemy.characterBody.teamComponent.teamIndex;
-
-                        List<CharacterBody> targetList = new List<CharacterBody>();
-                        foreach (PlayerCharacterMasterController pc in PlayerCharacterMasterController.instances)
-                        {
-                            if (pc.body && pc.body.teamComponent && pc.body.teamComponent.teamIndex == enemyTeam && pc.body.isPlayerControlled && pc.body.healthComponent && pc.body.healthComponent.alive)
-                            {
-                                targetList.Add(pc.body);
-                            }
-                        }
-
-                        if (targetList.Count > 0)
-                        {
-                            Vector3 myPos = self.body.corePosition;
-                            float shortestDistSqr = Mathf.Infinity;
-                            CharacterBody newTarget = null;
-
-                            foreach (CharacterBody cb in targetList)
-                            {
-                                float sqrDist = (myPos - cb.corePosition).sqrMagnitude;
-                                if (sqrDist < shortestDistSqr)
-                                {
-                                    shortestDistSqr = sqrDist;
-                                    newTarget = cb;
-                                }
-                            }
-
-                            if (newTarget)
-                            {
-                                //Copied from Squid Polyp code
-                                //Debug.Log("Changing worm target");
-                                self.currentEnemy.gameObject = newTarget.gameObject;
-                                self.currentEnemy.bestHurtBox = newTarget.mainHurtBox;
-                                self.enemyAttention = self.enemyAttentionDuration;
-                                self.targetRefreshTimer = 10f;
-                                self.BeginSkillDriver(self.EvaluateSkillDrivers());
-                            }
-                        }
                     }
                 }
             };

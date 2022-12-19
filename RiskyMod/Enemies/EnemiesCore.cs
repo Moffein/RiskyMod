@@ -28,6 +28,7 @@ namespace RiskyMod.Enemies
         {
             new MonsterFallDamage();
             new AiTargetFinding();
+            new PrioritizePlayers();
             Mithrix();
             ModifyEnemies();
             ModifySpawns();
@@ -36,6 +37,7 @@ namespace RiskyMod.Enemies
         private void Mithrix()
         {
             new MithrixFallImmune();
+            new MithrixTargetPrioritization();
         }
 
         private void ModifyEnemies()
