@@ -21,8 +21,8 @@ namespace RiskyMod.Enemies.DLC1.Voidling
 
         private void SetHP(CharacterBody cb)
         {
-            cb.baseMaxHealth = 1500f;   //2000 vanilla
-            cb.levelMaxHealth = 450f;
+            cb.baseMaxHealth = 1400f;   //2000 vanilla
+            cb.levelMaxHealth = 420f;
         }
     }
 }
