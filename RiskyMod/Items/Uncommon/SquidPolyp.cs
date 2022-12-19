@@ -28,7 +28,7 @@ namespace RiskyMod.Items.Uncommon
             {
                 orig();
                 SquidPolyp.squidTurretBodyIndex = BodyCatalog.FindBodyIndex("SquidTurretBody");
-                TakeDamage.distractOnHitBodies.Add(SquidPolyp.squidTurretBodyIndex);
+                if (enabled) TakeDamage.distractOnHitBodies.Add(SquidPolyp.squidTurretBodyIndex);
             };
             if (!enabled) return;
 

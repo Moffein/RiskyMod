@@ -35,7 +35,7 @@ namespace RiskyMod.SharedHooks
         public delegate void TakeDamageEnd(DamageInfo damageInfo, HealthComponent self);
         public static TakeDamageEnd TakeDamageEndActions;
 
-        public static List<BodyIndex> distractOnHitBodies;
+        public static List<BodyIndex> distractOnHitBodies = new List<BodyIndex>();
         public static void DistractOnHit(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
         {
             //Based on https://github.com/DestroyedClone/PoseHelper/blob/master/HighPriorityAggroTest/HPATPlugin.cs

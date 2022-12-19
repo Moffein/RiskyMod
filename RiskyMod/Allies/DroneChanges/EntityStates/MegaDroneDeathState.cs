@@ -21,17 +21,46 @@ namespace EntityStates.RiskyMod.MegaDrone
 						position = base.transform.position,
 					};
 
-					GameObject gameObject = DirectorCore.instance.TrySpawnObject(new DirectorSpawnRequest(spawnCard, placementRule, new Xoroshiro128Plus(0UL)));
-					if (gameObject)
-					{
-						PurchaseInteraction purchaseInteraction = gameObject.GetComponent<PurchaseInteraction>();
-						if (purchaseInteraction && purchaseInteraction.costType == CostTypeIndex.Money)
-						{
-							int cost = Run.instance.GetDifficultyScaledCost(purchaseInteraction.cost);
-							purchaseInteraction.Networkcost = CheaperRepairs.enabled ? Mathf.CeilToInt(cost * 0.5f) : cost;
-						}
+					int spawnCount = 1;
+					ItemIndex droneMeldIndex = ItemCatalog.FindItemIndex("DronemeldInternalStackItem");
+					if (droneMeldIndex != ItemIndex.None && base.characterBody && base.characterBody.inventory)
+                    {
+						spawnCount += base.characterBody.inventory.GetItemCount(droneMeldIndex);
+                    }
 
-						gameObject.transform.rotation = base.transform.rotation;
+					Vector3? desiredPosition = null;
+					Quaternion? desiredRotation = null;
+					for (int i = 0; i < spawnCount; i++)
+					{
+						GameObject gameObject = DirectorCore.instance.TrySpawnObject(new DirectorSpawnRequest(spawnCard, placementRule, new Xoroshiro128Plus(0UL)));
+						if (gameObject)
+						{
+							PurchaseInteraction purchaseInteraction = gameObject.GetComponent<PurchaseInteraction>();
+							if (purchaseInteraction && purchaseInteraction.costType == CostTypeIndex.Money)
+							{
+								int cost = Run.instance.GetDifficultyScaledCost(purchaseInteraction.cost);
+								purchaseInteraction.Networkcost = CheaperRepairs.enabled ? Mathf.CeilToInt(cost * 0.5f) : cost;
+							}
+
+							if (desiredPosition == null)
+							{
+								desiredPosition = gameObject.transform.position;
+							}
+							else
+							{
+								gameObject.transform.position = (Vector3)desiredPosition;
+							}
+
+							if (desiredRotation == null)
+							{
+								gameObject.transform.rotation = base.transform.rotation;
+								desiredRotation = gameObject.transform.rotation;
+							}
+							else
+							{
+								gameObject.transform.rotation = (Quaternion)desiredRotation;
+							}
+						}
 					}
 				}
 

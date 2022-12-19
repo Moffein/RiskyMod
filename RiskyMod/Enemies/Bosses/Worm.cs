@@ -29,12 +29,11 @@ namespace RiskyMod.Enemies.Bosses
                 MagmaWormIndex = BodyCatalog.FindBodyIndex("MagmaWormBody");
                 ElectricWormIndex = BodyCatalog.FindBodyIndex("ElectricWormBody");
                 if (MagmaWormIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(MagmaWormIndex);
-                if (ElectricWormIndex  != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(ElectricWormIndex);
+                if (ElectricWormIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(ElectricWormIndex);
             };
 
             //ProjectileSetup();
             //AlwaysFireMeatballs(); //Laggy
-            PrioritizePlayers();
             ReduceFollowDelay(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MagmaWorm/MagmaWormBody.prefab").WaitForCompletion());
             ReduceFollowDelay(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ElectricWorm/ElectricWormBody.prefab").WaitForCompletion());
         }

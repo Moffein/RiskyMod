@@ -38,6 +38,7 @@ namespace RiskyMod.Enemies
         {
             new MithrixFallImmune();
             new MithrixTargetPrioritization();
+            new ImproveRampAI();
         }
 
         private void ModifyEnemies()
