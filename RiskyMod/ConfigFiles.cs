@@ -48,6 +48,7 @@ using RiskyMod.Enemies.Mithrix;
 using RiskOfOptions;
 using RiskyMod.Allies.DroneChanges;
 using RiskyMod.Enemies.Spawnpools;
+using RiskyMod.Enemies.DLC1.Voidling;
 
 namespace RiskyMod
 {
@@ -102,6 +103,7 @@ namespace RiskyMod
         private const string monsterString = "Monsters";
         private const string monsterGeneralString = "General";
         private const string monsterMithrixString = "Mithrix";
+        private const string monsterVoidlingString = "Voidling";
 
         public static void Init()
         {
@@ -154,11 +156,6 @@ namespace RiskyMod
                 }
             }
 
-            /*MonsterGoldRewards.scaleToInitialDifficulty = GeneralCfg.Bind(scalingString, "Gold - Scale to Initial Stage Difficulty", true, "Monsters gold rewards are scaled off of the difficulty at the start of the stage.").Value;
-            MonsterGoldRewards.linearize = GeneralCfg.Bind(scalingString, "Gold (EXPERIMENTAL) - Modded Gold Reward Scaling", false, "Gold rewards increase at a slower rate compared to Vanilla.").Value;
-            MonsterGoldRewards.scaleToDirectorMultiplier = GeneralCfg.Bind(scalingString, "Gold - Scale to Modded Combat Director Credit Multiplier", true, "Monsters gold rewards are divided by the Modded Combat Director Credit Multiplier.").Value;
-            MonsterGoldRewards.enabled = MonsterGoldRewards.linearize || MonsterGoldRewards.scaleToInitialDifficulty || MonsterGoldRewards.scaleToDirectorMultiplier;*/
-
             ModdedScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Modded Scaling", true, "Lowers the effect of playercount on difficulty scaling. Geared towards large lobbies.").Value;
             LinearScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling", false, "Makes difficulty scaling linear like in RoR1. Requires Modded Scaling to be enabled.").Value;
 
@@ -198,9 +195,12 @@ namespace RiskyMod
             ShrineCombatItems.enabled = GeneralCfg.Bind(interactString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
             BloodShrineMinReward.enabled = GeneralCfg.Bind(interactString, "Shrine of Blood Minimum Reward", true, "Shrine of Blood always gives at least enough money to buy a small chest.").Value;
 
-            SpawnLimits.maxMountainShrines = GeneralCfg.Bind(interactString, "Max Shrines of the Mountain", 5, "Limit how many Mountain Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
-            SpawnLimits.maxCombatShrines = GeneralCfg.Bind(interactString, "Max Shrines of Combat", 5, "Limit how many Combat Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
+            SpawnLimits.maxMountainShrines = GeneralCfg.Bind(interactString, "Max Shrines of the Mountain", -1, "Limit how many Mountain Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
+            SpawnLimits.maxCombatShrines = GeneralCfg.Bind(interactString, "Max Shrines of Combat", -1, "Limit how many Combat Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
             SpawnLimits.maxVoidSeeds = GeneralCfg.Bind(interactString, "Max Void Seeds", 1, "Limit how many Void Seeds can spawn on 1 stage. Vanilla is 3. Set to negative for no limit.").Value;
+
+            ScaleCostWithPlayerCount.scaleCombatShrine = GeneralCfg.Bind(interactString, "Shrine of Combat Director Credit Scaling", true, "Increase director credit cost of this interactable based on the amount of players.").Value;
+            ScaleCostWithPlayerCount.scaleMountainShrine = GeneralCfg.Bind(interactString, "Shrine of the Mountain Director Credit Scaling", true, "Increase director credit cost of this interactable based on the amount of players.").Value;
 
             if (SpawnLimits.maxMountainShrines < 0 && SpawnLimits.maxCombatShrines < 0 && SpawnLimits.maxVoidSeeds == 3) SpawnLimits.enabled = false;
 
@@ -245,6 +245,7 @@ namespace RiskyMod
             NerfVoidtouched.enabled = GeneralCfg.Bind(miscString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
             PlayerControlledMonsters.enabled = GeneralCfg.Bind(miscString, "Player-Controlled Monster Tweaks", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
             ItemOutOfBounds.enabled = GeneralCfg.Bind(miscString, "Item Out of Bounds Teleport", true, "Items that fall out of bounds get teleported back.").Value;
+            NullifyDebuff.enabled = GeneralCfg.Bind(miscString, "Nullify Buff", true, "Void Reaver Nullify only takes 2 stacks to apply.").Value;
         }
 
         private static void ConfigItems()
@@ -657,8 +658,17 @@ namespace RiskyMod
 
             MonsterFallDamage.enabled = MonsterCfg.Bind(monsterGeneralString, "Lethal Fall Damage", true, "Monsters can die from fall damage.").Value;
 
+            MithrixCore.enabled = MonsterCfg.Bind(monsterMithrixString, "Enable Changes", true, "Enable changes to this monster.").Value;
             MithrixFallImmune.enabled = MonsterCfg.Bind(monsterMithrixString, "Fall Damage Immunity", true, "Mithrix does not take fall damage.").Value;
-            MithrixTargetPrioritization.enabled = MonsterCfg.Bind(monsterMithrixString, "Prioritize Players", true, "Mithrix always tries to prioritize targeting players.").Value;
+            MithrixTargetPrioritization.enabled = MonsterCfg.Bind(monsterMithrixString, "Prioritize Players", true, "This monster always tries to prioritize targeting players when possible.").Value;
+
+            //this doesn't seem to actually help much
+            //SprintBashAntiTrimp.enabled = MonsterCfg.Bind(monsterMithrixString, "Sprint Bash Anti Trimp", true, "Prevents Mithrix from launching himself into the sky when using his sprint bash on the ramps.").Value;
+            SprintBashAntiTrimp.enabled = false;
+
+            VoidlingCore.enabled = MonsterCfg.Bind(monsterVoidlingString, "Enable Changes", true, "Enable changes to this monster.").Value;
+            VoidlingTargetPrioritization.enabled = MonsterCfg.Bind(monsterVoidlingString, "Prioritize Players", true, "This monster always tries to prioritize targeting players when possible.").Value;
+            VoidlingFogDamage.enabled = MonsterCfg.Bind(monsterVoidlingString, "Planeterium Void Fog Changes", true, "Makes Planeterium Void Fog behave like the Void Fields.").Value;
 
             Beetle.enabled = MonsterCfg.Bind(monsterString, "Beetle", true, "Enable changes to this monster.").Value;
             Jellyfish.enabled = MonsterCfg.Bind(monsterString, "Jellyfish", true, "Enable changes to this monster.").Value;

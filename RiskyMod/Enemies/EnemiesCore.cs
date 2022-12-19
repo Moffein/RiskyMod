@@ -28,17 +28,10 @@ namespace RiskyMod.Enemies
         {
             new MonsterFallDamage();
             new AiTargetFinding();
-            new PrioritizePlayers();
-            Mithrix();
+            On.RoR2.CharacterAI.BaseAI.UpdateTargets += PrioritizePlayers.AttemptTargetPlayer;
+            new MithrixCore();
             ModifyEnemies();
             ModifySpawns();
-        }
-
-        private void Mithrix()
-        {
-            new MithrixFallImmune();
-            new MithrixTargetPrioritization();
-            new ImproveRampAI();
         }
 
         private void ModifyEnemies()

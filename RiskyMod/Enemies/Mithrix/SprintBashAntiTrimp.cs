@@ -4,20 +4,20 @@ using System.Text;
 
 namespace RiskyMod.Enemies.Mithrix
 {
-    public class ImproveRampAI
+    public class SprintBashAntiTrimp
     {
-        public static bool enabled = true;
+        public static bool enabled = false;
 
-        public ImproveRampAI()
+        public SprintBashAntiTrimp()
         {
             if (!enabled) return;
 
             On.EntityStates.BrotherMonster.SprintBash.FixedUpdate += (orig, self) =>
             {
                 orig(self);
-                if (self.isAuthority && self.characterMotor && self.characterMotor.velocity.y != 0)
+                if (self.isAuthority && self.characterMotor && self.characterMotor.velocity.y > 0f)
                 {
-                    self.characterMotor.velocity.y = 0;
+                    self.characterMotor.velocity.y = 0f;
                 }
             };
         }

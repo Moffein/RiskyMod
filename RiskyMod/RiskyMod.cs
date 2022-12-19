@@ -77,6 +77,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.Heretic", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("zombieseatflesh7.ArtifactOfPotential", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Anreol.ReleasedFromTheVoid", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.rune580.riskofoptions")]
     [BepInDependency("com.bepis.r2api")]
@@ -360,6 +361,7 @@ namespace RiskyMod
             new FreezeChampionExecute();
             new NerfVoidtouched();
             new PlayerControlledMonsters();
+            new NullifyDebuff();
 
             //Artifacts
             new FixVengeanceLeveling();

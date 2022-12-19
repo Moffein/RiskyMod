@@ -13,6 +13,46 @@ namespace SneedUtils
 {
     public class SneedUtils
     {
+        public enum MonsterCategories
+        {
+            BasicMonsters, Minibosses, Champions
+        }
+
+        //Minibosses
+        //Basic Monsters
+        //Champions
+        public static int FindCategoryIndexByName(DirectorCardCategorySelection dcs, MonsterCategories category)
+        {
+            string categoryName;
+            switch(category)
+            {
+                case MonsterCategories.BasicMonsters:
+                    categoryName = "Basic Monsters";
+                    break;
+                case MonsterCategories.Minibosses:
+                    categoryName = "Minibosses";
+                    break;
+                case MonsterCategories.Champions:
+                    categoryName = "Champions";
+                    break;
+                default:
+                    return -1;
+                    break;
+            }
+            return FindCategoryIndexByName(dcs, categoryName);
+        }
+        public static int FindCategoryIndexByName(DirectorCardCategorySelection dcs, string categoryName)
+        {
+            for (int i = 0; i < dcs.categories.Length; i++)
+            {
+                if (string.CompareOrdinal(dcs.categories[i].name, categoryName) == 0)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
         public static bool ReplaceSkillDef(SkillFamily skillFamily, SkillDef targetSkill, SkillDef newSkill)
         {
             bool successfullyReplaced = false;

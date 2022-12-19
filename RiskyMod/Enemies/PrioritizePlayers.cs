@@ -2,6 +2,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using RoR2.CharacterAI;
 
 namespace RiskyMod.Enemies
 {
@@ -10,57 +11,54 @@ namespace RiskyMod.Enemies
         //Enemies in the list will always try to prioritize targeting players.
         public static List<BodyIndex> prioritizePlayersList = new List<BodyIndex>();
 
-        public PrioritizePlayers()
+        public static void AttemptTargetPlayer(On.RoR2.CharacterAI.BaseAI.orig_UpdateTargets orig, BaseAI self)
         {
-            On.RoR2.CharacterAI.BaseAI.UpdateTargets += (orig, self) =>
+            orig(self);
+            if (self.body && self.body.teamComponent && (prioritizePlayersList.Contains(self.body.bodyIndex)))
             {
-                orig(self);
-                if (self.body && self.body.teamComponent && (prioritizePlayersList.Contains(self.body.bodyIndex)))
+                if (self.currentEnemy != null
+                && self.currentEnemy.characterBody
+                && !self.currentEnemy.characterBody.isPlayerControlled
+                && self.currentEnemy.characterBody.teamComponent)
                 {
-                    if (self.currentEnemy != null
-                    && self.currentEnemy.characterBody
-                    && !self.currentEnemy.characterBody.isPlayerControlled
-                    && self.currentEnemy.characterBody.teamComponent)
-                    {
-                        TeamMask enemyTeams = TeamMask.GetEnemyTeams(self.body.teamComponent.teamIndex);
+                    TeamMask enemyTeams = TeamMask.GetEnemyTeams(self.body.teamComponent.teamIndex);
 
-                        List<CharacterBody> targetList = new List<CharacterBody>();
-                        foreach (PlayerCharacterMasterController pc in PlayerCharacterMasterController.instances)
+                    List<CharacterBody> targetList = new List<CharacterBody>();
+                    foreach (PlayerCharacterMasterController pc in PlayerCharacterMasterController.instances)
+                    {
+                        if (pc.body && pc.body.isPlayerControlled && pc.body.teamComponent && enemyTeams.HasTeam(pc.body.teamComponent.teamIndex) && pc.body.healthComponent && pc.body.healthComponent.alive && ((int)pc.body.GetVisibilityLevel(self.body) >= (int)VisibilityLevel.Revealed))
                         {
-                            if (pc.body && pc.body.isPlayerControlled && pc.body.teamComponent &&  enemyTeams.HasTeam(pc.body.teamComponent.teamIndex) && pc.body.healthComponent && pc.body.healthComponent.alive)
+                            targetList.Add(pc.body);
+                        }
+                    }
+
+                    if (targetList.Count > 0)
+                    {
+                        Vector3 myPos = self.body.corePosition;
+                        float shortestDistSqr = Mathf.Infinity;
+                        CharacterBody newTarget = null;
+
+                        foreach (CharacterBody cb in targetList)
+                        {
+                            float sqrDist = (myPos - cb.corePosition).sqrMagnitude;
+                            if (sqrDist < shortestDistSqr)
                             {
-                                targetList.Add(pc.body);
+                                shortestDistSqr = sqrDist;
+                                newTarget = cb;
                             }
                         }
 
-                        if (targetList.Count > 0)
+                        if (newTarget)
                         {
-                            Vector3 myPos = self.body.corePosition;
-                            float shortestDistSqr = Mathf.Infinity;
-                            CharacterBody newTarget = null;
-
-                            foreach (CharacterBody cb in targetList)
-                            {
-                                float sqrDist = (myPos - cb.corePosition).sqrMagnitude;
-                                if (sqrDist < shortestDistSqr)
-                                {
-                                    shortestDistSqr = sqrDist;
-                                    newTarget = cb;
-                                }
-                            }
-
-                            if (newTarget)
-                            {
-                                self.currentEnemy.gameObject = newTarget.gameObject;
-                                self.currentEnemy.bestHurtBox = newTarget.mainHurtBox;
-                                self.enemyAttention = self.enemyAttentionDuration;
-                                self.targetRefreshTimer = 10f;
-                                self.BeginSkillDriver(self.EvaluateSkillDrivers());
-                            }
+                            self.currentEnemy.gameObject = newTarget.gameObject;
+                            self.currentEnemy.bestHurtBox = newTarget.mainHurtBox;
+                            self.enemyAttention = self.enemyAttentionDuration;
+                            self.targetRefreshTimer = 10f;
+                            self.BeginSkillDriver(self.EvaluateSkillDrivers());
                         }
                     }
                 }
-            };
+            }
         }
     }
 }
