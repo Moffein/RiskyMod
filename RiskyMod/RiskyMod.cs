@@ -37,6 +37,7 @@ using RiskyMod.Tweaks.Artifact;
 using RiskyMod.MonoBehaviours;
 using RiskyMod.VoidFields;
 using UnityEngine.AddressableAssets;
+using RiskyMod.Enemies.DLC1.Voidling;
 
 namespace RiskyMod
 {
@@ -77,7 +78,6 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.Heretic", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("zombieseatflesh7.ArtifactOfPotential", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.Anreol.ReleasedFromTheVoid", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.rune580.riskofoptions")]
     [BepInDependency("com.bepis.r2api")]
@@ -160,7 +160,6 @@ namespace RiskyMod
 
         private void CheckDependencies()
         {
-            SoftDependencies.ReleasedFromTheVoidLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Anreol.ReleasedFromTheVoid");
             SoftDependencies.ArtifactOfPotentialLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("zombieseatflesh7.ArtifactOfPotential");
 
             SoftDependencies.KingKombatArenaLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Kingpinush.KingKombatArena");
