@@ -220,6 +220,7 @@ namespace RiskyMod.Items.DLC1.Boss
             {
                 orig();
                 DefenseNucleus.MinorConstructAlly = BodyCatalog.FindBodyIndex("MinorConstructAllyBody");
+                if (enabled) SharedHooks.TakeDamage.distractOnHitBodies.Add(DefenseNucleus.MinorConstructAlly);
             };
 
             On.RoR2.CharacterBody.Start += (orig, self) =>

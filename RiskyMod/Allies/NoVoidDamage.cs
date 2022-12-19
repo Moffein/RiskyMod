@@ -26,6 +26,7 @@ namespace RiskyMod.Allies
                     {
                         if (self.body.inventory && self.body.inventory.GetItemCount(AllyItems.AllyMarkerItem) > 0)
                         {
+							damageInfo.damage = 0f;
                             damageInfo.rejected = true;
                         }
                     }

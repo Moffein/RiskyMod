@@ -6,6 +6,7 @@ using RiskyMod.Tweaks;
 using RoR2;
 using RoR2.Audio;
 using RoR2.CharacterAI;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -33,6 +34,23 @@ namespace RiskyMod.SharedHooks
 
         public delegate void TakeDamageEnd(DamageInfo damageInfo, HealthComponent self);
         public static TakeDamageEnd TakeDamageEndActions;
+
+        public static List<BodyIndex> distractOnHitBodies;
+        public static void DistractOnHit(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        {
+            //Based on https://github.com/DestroyedClone/PoseHelper/blob/master/HighPriorityAggroTest/HPATPlugin.cs
+            if (!self.body.isChampion && self.body.master && self.body.master.aiComponents.Length > 0 && distractOnHitBodies.Contains(attackerBody.bodyIndex))
+            {
+                foreach (BaseAI ai in self.body.master.aiComponents)
+                {
+                    ai.currentEnemy.gameObject = attackerBody.gameObject;
+                    ai.currentEnemy.bestHurtBox = attackerBody.mainHurtBox;
+                    ai.enemyAttention = ai.enemyAttentionDuration;
+                    ai.targetRefreshTimer = 5f;
+                    ai.BeginSkillDriver(ai.EvaluateSkillDrivers());
+                }
+            }
+        }
 
         public static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
