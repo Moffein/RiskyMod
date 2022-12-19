@@ -14,6 +14,7 @@ namespace RiskyMod.Enemies.DLC1.Voidling
 
             new VoidlingTargetPrioritization();
             new VoidlingFogDamage();
+            new VoidlingStats();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using R2API;
 using RiskyMod.Enemies.Bosses;
 using RiskyMod.Enemies.DLC1;
+using RiskyMod.Enemies.DLC1.Voidling;
 using RiskyMod.Enemies.Mithrix;
 using RiskyMod.Enemies.Mobs;
 using RiskyMod.Enemies.Mobs.Lunar;
@@ -30,6 +31,7 @@ namespace RiskyMod.Enemies
             new AiTargetFinding();
             On.RoR2.CharacterAI.BaseAI.UpdateTargets += PrioritizePlayers.AttemptTargetPlayer;
             new MithrixCore();
+            new VoidlingCore();
             ModifyEnemies();
             ModifySpawns();
         }

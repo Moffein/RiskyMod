@@ -351,6 +351,7 @@ namespace RiskyMod
             new BloodShrineMinReward();
             new ShrineCombatItems();
             new SpawnLimits();
+            new ScaleCostWithPlayerCount();
 
             //Character Mechanics
             new TrueOSP();

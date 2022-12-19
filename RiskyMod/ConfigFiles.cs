@@ -667,6 +667,7 @@ namespace RiskyMod
             SprintBashAntiTrimp.enabled = false;
 
             VoidlingCore.enabled = MonsterCfg.Bind(monsterVoidlingString, "Enable Changes", true, "Enable changes to this monster.").Value;
+            VoidlingStats.modifyHP = MonsterCfg.Bind(monsterVoidlingString, "Reduce HP", true, "Reduces Voidling HP.").Value;
             VoidlingTargetPrioritization.enabled = MonsterCfg.Bind(monsterVoidlingString, "Prioritize Players", true, "This monster always tries to prioritize targeting players when possible.").Value;
             VoidlingFogDamage.enabled = MonsterCfg.Bind(monsterVoidlingString, "Planeterium Void Fog Changes", true, "Makes Planeterium Void Fog behave like the Void Fields.").Value;
 
