@@ -123,7 +123,7 @@ namespace RiskyMod
             ItemsCore.enabled = GeneralCfg.Bind(coreModuleString, "Item Changes", true, "Enable item changes.").Value;
             SurvivorsCore.enabled = GeneralCfg.Bind(coreModuleString, "Survivor Changes", true, "Enable survivor changes.").Value;
             EnemiesCore.modifyEnemies = GeneralCfg.Bind(coreModuleString, "Monster Changes", true, "Enable enemy changes.").Value;
-            EnemiesCore.modifySpawns = GeneralCfg.Bind(coreModuleString, "Spawnpool Changes (Beta)", false, "Enable spawnpool changes.").Value;
+            EnemiesCore.modifySpawns = GeneralCfg.Bind(coreModuleString, "Spawnpool Changes", true, "Enable spawnpool changes.").Value;
             MoonCore.enabled = GeneralCfg.Bind(coreModuleString, "Moon Changes", true, "Enable Moon changes.").Value;
             VoidLocusCore.enabled = GeneralCfg.Bind(coreModuleString, "Void Locus Changes", true, "Enable Void Locus changes.").Value;
             VoidFieldsCore.enabled = GeneralCfg.Bind(coreModuleString, "Void Fields Changes", true, "Enable Void Fields changes.").Value;
@@ -725,7 +725,7 @@ namespace RiskyMod
             StadiaJungle.enabled = SpawnpoolCfg.Bind("Stage 4", "Stadia Jungle", true, "Enable spawnpool changes on this stage.").Value;
             SirensCall.enabled = SpawnpoolCfg.Bind("Stage 4", "Sirens Call", true, "Enable spawnpool changes on this stage.").Value;
 
-            //SkyMeadow.enabled = SpawnpoolCfg.Bind("Stage 5", "Sky Meadow", true, "Enable spawnpool changes on this stage.").Value;
+            SkyMeadow.enabled = SpawnpoolCfg.Bind("Stage 5", "Sky Meadow", true, "Enable spawnpool changes on this stage.").Value;
         }
 
         private static void GenerateCrocoConfig()

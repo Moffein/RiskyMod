@@ -18,9 +18,15 @@ namespace RiskyMod.Enemies.Spawnpools
 
         private void ApplyChanges(DirectorCardCategorySelection dccs, bool isDLC, bool isSimulacrum)
         {
+
             SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.AlphaConstruct, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
             SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.XiConstruct, SneedUtils.SneedUtils.MonsterCategories.Champions);
 
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.Mushrum, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.Wisp, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.Bronzong, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Jellyfish, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Imp, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
 
             //Dont know if DLC removes the worms or not. Reset them just to be safe.

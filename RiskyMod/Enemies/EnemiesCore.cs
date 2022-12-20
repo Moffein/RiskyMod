@@ -89,7 +89,7 @@ namespace RiskyMod.Enemies
             new SirensCall();
             new StadiaJungle();
 
-            //new SkyMeadow();
+            new SkyMeadow();
         }
     }
 
