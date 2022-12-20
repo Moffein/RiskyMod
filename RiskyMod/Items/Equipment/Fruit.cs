@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using R2API;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Equipment
 {
@@ -9,7 +10,7 @@ namespace RiskyMod.Items.Equipment
     {
         public static bool enabled = true;
 
-        private static GameObject HealEffectPrefab;
+        private static GameObject healEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/FruitHealEffect");
 
         public static float healRadius = 20f;
         public Fruit()
@@ -22,8 +23,6 @@ namespace RiskyMod.Items.Equipment
                 HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipDescs, RoR2Content.Equipment.Fruit);
                 HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipPickups, RoR2Content.Equipment.Fruit);
             };
-
-            Fruit.HealEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/FruitHealEffect");
 
             On.RoR2.EquipmentSlot.FireFruit += (orig, self) =>
             {
@@ -49,7 +48,7 @@ namespace RiskyMod.Items.Equipment
                         EffectData effectData = new EffectData();
                         effectData.origin = hc.body.corePosition;
                         effectData.SetNetworkedObjectReference(hc.gameObject);
-                        EffectManager.SpawnEffect(Fruit.HealEffectPrefab, effectData, true);
+                        EffectManager.SpawnEffect(Fruit.healEffectPrefab, effectData, true);
                         hc.HealFraction(0.5f, default(ProcChainMask));
                     }
                 }
