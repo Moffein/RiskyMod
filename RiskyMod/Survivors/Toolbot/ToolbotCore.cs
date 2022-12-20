@@ -114,6 +114,11 @@ namespace RiskyMod.Survivors.Toolbot
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireGrenadeLauncher", "damageCoefficient", "3.9");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireGrenadeLauncher", "maxSpread", "0");
 
+            GameObject scrapProjectileModded = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Toolbot/ToolbotGrenadeLauncherProjectile.prefab").WaitForCompletion().InstantiateClone("RiskyModToolbotGrenadeProjectile", true);
+            DamageAPI.ModdedDamageTypeHolderComponent mdc = scrapProjectileModded.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            mdc.Add(SharedDamageTypes.SweetSpotModifier);
+            Content.Content.projectilePrefabs.Add(scrapProjectileModded);
+
             On.EntityStates.Toolbot.FireGrenadeLauncher.OnEnter += (orig, self) =>
             {
                 orig(self);
