@@ -167,7 +167,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
             }
         }
 
-        private static void CorruptionAssist(CharacterBody attackerBody, CharacterBody victimBody, CharacterBody killerBody)
+        private void CorruptionAssist(CharacterBody attackerBody, CharacterBody victimBody, CharacterBody killerBody)
         {
             VoidSurvivorController vsc = attackerBody.gameObject.GetComponent<VoidSurvivorController>();
             if (vsc)

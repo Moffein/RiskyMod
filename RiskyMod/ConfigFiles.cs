@@ -195,8 +195,8 @@ namespace RiskyMod
             ShrineCombatItems.enabled = GeneralCfg.Bind(interactString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
             BloodShrineMinReward.enabled = GeneralCfg.Bind(interactString, "Shrine of Blood Minimum Reward", true, "Shrine of Blood always gives at least enough money to buy a small chest.").Value;
 
-            SpawnLimits.maxMountainShrines = GeneralCfg.Bind(interactString, "Max Shrines of the Mountain", -1, "Limit how many Mountain Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
-            SpawnLimits.maxCombatShrines = GeneralCfg.Bind(interactString, "Max Shrines of Combat", -1, "Limit how many Combat Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
+            SpawnLimits.maxMountainShrines = GeneralCfg.Bind(interactString, "Max Shrines of the Mountain", 5, "Limit how many Mountain Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
+            SpawnLimits.maxCombatShrines = GeneralCfg.Bind(interactString, "Max Shrines of Combat", 5, "Limit how many Combat Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
             SpawnLimits.maxVoidSeeds = GeneralCfg.Bind(interactString, "Max Void Seeds", 1, "Limit how many Void Seeds can spawn on 1 stage. Vanilla is 3. Set to negative for no limit.").Value;
 
             ScaleCostWithPlayerCount.scaleCombatShrine = GeneralCfg.Bind(interactString, "Shrine of Combat Director Credit Scaling", true, "Increase director credit cost of this interactable based on the amount of players.").Value;
