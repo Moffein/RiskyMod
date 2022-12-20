@@ -17,7 +17,7 @@ namespace RiskyMod.Items.Uncommon
             On.RoR2.TeleporterInteraction.ChargingState.FixedUpdate += (orig, self) =>
             {
                 orig(self);
-                if (NetworkServer.active)
+                if (NetworkServer.active && self != null && self.gameObject && self.transform)
                 {
                     int daisyCount = Util.GetItemCountForTeam(TeamIndex.Player, RoR2Content.Items.TPHealingNova.itemIndex, false, true);
                     if (daisyCount > 0)

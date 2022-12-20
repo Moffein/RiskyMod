@@ -14,9 +14,9 @@ namespace RiskyMod.Tweaks.Holdouts
             {
                 orig(self);
                 //Minimum charge of 5% to prevent it from instantly expanding when the tele starts before boss is spawned
-                if (self.monstersCleared && self.holdoutZoneController && self.activationState == TeleporterInteraction.ActivationState.Charging && self.chargeFraction > 0.05f)
+                if (self && self.monstersCleared && self.holdoutZoneController && self.activationState == TeleporterInteraction.ActivationState.Charging && self.chargeFraction > 0.05f)
                 {
-                    bool eclipseEnabled = Run.instance.selectedDifficulty >= DifficultyIndex.Eclipse2;
+                    bool eclipseEnabled = Run.instance && Run.instance.selectedDifficulty >= DifficultyIndex.Eclipse2;
                     if (enableDuringEclipse || !eclipseEnabled)
                     {
                         if (Util.GetItemCountForTeam(self.holdoutZoneController.chargingTeam, RoR2Content.Items.FocusConvergence.itemIndex, true, true) <= 0)
