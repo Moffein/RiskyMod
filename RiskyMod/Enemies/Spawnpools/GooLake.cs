@@ -1,5 +1,7 @@
-﻿using R2API;
-using System.Collections.Generic;
+﻿using RoR2;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+
 
 namespace RiskyMod.Enemies.Spawnpools
 {
@@ -9,29 +11,30 @@ namespace RiskyMod.Enemies.Spawnpools
         public GooLake()
         {
             if (!enabled) return;
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/goolake/dccsGooLakeMonsters.asset").WaitForCompletion(), false, false);
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/goolake/dccsGooLakeMonstersDLC1.asset").WaitForCompletion(), true, false);
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itgoolake/dccsITGooLakeMonsters.asset").WaitForCompletion(), true, true);
+        }
 
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.MagmaWormLoop, false, DirectorAPI.Stage.AbandonedAqueduct);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.MagmaWorm, false, DirectorAPI.Stage.AbandonedAqueductSimulacrum);
-
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.ReminderLoop, false, DirectorAPI.Stage.AbandonedAqueduct);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Reminder, false, DirectorAPI.Stage.AbandonedAqueductSimulacrum);
-
-            //TODO: FIGURE OUT HOW TO ONLY RUN THIS WHEN DLC IS ACTIVE
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.ClayApothecary, DirectorAPI.Stage.AbandonedAqueduct);
-            //DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.ClayApothecary, DirectorAPI.Stage.AbandonedAqueductSimulacrum); //No need to modify Simulacrum, they already spawn.
-
-            //Do these even spawn?
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.ClayApothecary, false, DirectorAPI.Stage.AbandonedAqueduct);
-            //DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.ClayApothecary, false, DirectorAPI.Stage.AbandonedAqueductSimulacrum);
-
-            /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
+        private void ApplyChanges(DirectorCardCategorySelection dccs, bool isDLC, bool isSimulacrum)
+        {
+            if (!isSimulacrum)
             {
-                if (stage.stage == DirectorAPI.Stage.AbandonedAqueduct)
+
+                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.MagmaWormLoop, SneedUtils.SneedUtils.MonsterCategories.Champions);
+                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.ReminderLoop, SneedUtils.SneedUtils.MonsterCategories.Champions);
+
+                if (isDLC)
                 {
-                    list.Add(DirectorCards.MagmaWormLoop);
-                    list.Add(DirectorCards.ReminderLoop);
+                    SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.ClayApothecary, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+                    SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.ClayApothecary, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
                 }
-            };*/
+            }
+            else
+            {
+                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.MagmaWorm, SneedUtils.SneedUtils.MonsterCategories.Champions);
+                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Reminder, SneedUtils.SneedUtils.MonsterCategories.Champions);
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using R2API;
+﻿using RoR2;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Enemies.Spawnpools
 {
@@ -10,36 +11,27 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.AlphaConstruct, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.AlphaConstruct, DirectorAPI.Stage.SkyMeadowSimulacrum);
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/skymeadow/dccsSkyMeadowMonsters.asset").WaitForCompletion(), false, false);
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/skymeadow/dccsSkyMeadowMonstersDLC1.asset").WaitForCompletion(), true, false);
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itskymeadow/dccsITSkyMeadowMonsters.asset").WaitForCompletion(), true, true);
+        }
 
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.XiConstruct, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.XiConstruct, DirectorAPI.Stage.SkyMeadowSimulacrum);
+        private void ApplyChanges(DirectorCardCategorySelection dccs, bool isDLC, bool isSimulacrum)
+        {
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.AlphaConstruct, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.XiConstruct, SneedUtils.SneedUtils.MonsterCategories.Champions);
 
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.BrassContraption, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.BrassContraption, DirectorAPI.Stage.SkyMeadowSimulacrum);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Imp, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
 
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.MagmaWorm, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.MagmaWorm, DirectorAPI.Stage.SkyMeadowSimulacrum);
+            //Dont know if DLC removes the worms or not. Reset them just to be safe.
+            if (!isSimulacrum)
+            {
+                SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.MagmaWorm, SneedUtils.SneedUtils.MonsterCategories.Champions);
+                SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.Reminder, SneedUtils.SneedUtils.MonsterCategories.Champions);
 
-            /*DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.OverloadingWorm, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.OverloadingWorm, DirectorAPI.Stage.SkyMeadowSimulacrum);*/
-
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Imp, false, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Imp, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
-
-            /*DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.GolemBasic, false, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.GolemBasic, false, DirectorAPI.Stage.SkyMeadowSimulacrum);*/
-
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.MagmaWorm, false, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.MagmaWorm, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
-
-            /*DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Reminder, false, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Reminder, false, DirectorAPI.Stage.SkyMeadowSimulacrum);*/
-
-
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.LunarGolemSkyMeadow, false, DirectorAPI.Stage.SkyMeadow);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.LunarGolemSkyMeadow, false, DirectorAPI.Stage.SkyMeadowSimulacrum);
+                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.MagmaWorm, SneedUtils.SneedUtils.MonsterCategories.Champions);
+                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Reminder, SneedUtils.SneedUtils.MonsterCategories.Champions);
+            }
         }
     }
 }

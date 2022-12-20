@@ -1,4 +1,7 @@
-﻿using R2API;
+﻿using RoR2;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+
 namespace RiskyMod.Enemies.Spawnpools
 {
     public class SnowyForest
@@ -8,12 +11,14 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.BlindVerminSnowy, DirectorAPI.Stage.SiphonedForest);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.Beetle, DirectorAPI.Stage.SiphonedForest);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.LesserWisp, DirectorAPI.Stage.SiphonedForest);
+            DirectorCardCategorySelection dccs = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/snowyforest/dccsSnowyForestMonstersDLC1.asset").WaitForCompletion();
 
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.BisonLoop, false, DirectorAPI.Stage.SiphonedForest);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.BlindVerminSnowy, false, DirectorAPI.Stage.SiphonedForest);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.BlindVerminSnowy, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.Beetle, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.Wisp, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.BlindVerminSnowy, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.BisonLoop, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
         }
     }
 }

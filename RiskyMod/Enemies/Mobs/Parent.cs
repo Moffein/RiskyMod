@@ -1,4 +1,5 @@
 ﻿using MonoMod.Cil;
+using R2API;
 using RoR2;
 using System;
 using UnityEngine;
@@ -54,6 +55,7 @@ namespace RiskyMod.Enemies.Mobs
                     c.EmitDelegate<Func<BlastAttack, BlastAttack>>(blastAttack =>
                     {
                         blastAttack.falloffModel = BlastAttack.FalloffModel.SweetSpot;
+                        blastAttack.AddModdedDamageType(SharedDamageTypes.SweetSpotModifier);
                         return blastAttack;
                     });
                 }

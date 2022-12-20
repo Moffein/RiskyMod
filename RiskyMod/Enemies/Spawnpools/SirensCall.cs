@@ -1,7 +1,6 @@
 ﻿using RoR2;
 using UnityEngine;
-using R2API;
-using System.Collections.Generic;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Enemies.Spawnpools
 {
@@ -13,29 +12,13 @@ namespace RiskyMod.Enemies.Spawnpools
 
             if (!enabled) return;
 
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Reminder, false, DirectorAPI.Stage.SirensCall);
-            /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
-            {
-                if (stage.stage == DirectorAPI.Stage.SirensCall)
-                {
-                    List<DirectorAPI.DirectorCardHolder> toRemove = new List<DirectorAPI.DirectorCardHolder>();
-                    foreach (DirectorAPI.DirectorCardHolder dch in list)
-                    {
-                        if (dch.Card.spawnCard == SpawnCards.Beetle)
-                        {
-                            toRemove.Add(dch);
-                        }
-                    }
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/rootjungle/dccsRootJungleMonsters.asset").WaitForCompletion());
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/rootjungle/dccsRootJungleMonstersDLC1.asset").WaitForCompletion());
+        }
 
-                    foreach (DirectorAPI.DirectorCardHolder dch in toRemove)
-                    {
-                        list.Remove(dch);
-                    }
-
-                    list.Add(DirectorCards.Imp);
-                    list.Add(DirectorCards.Reminder);
-                }
-            };*/
+        private void ApplyChanges(DirectorCardCategorySelection dccs)
+        {
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Reminder, SneedUtils.SneedUtils.MonsterCategories.Champions);
         }
     }
 }

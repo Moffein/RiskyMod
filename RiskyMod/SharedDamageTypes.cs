@@ -1,7 +1,10 @@
-﻿using R2API;
+﻿using Mono.Cecil.Cil;
+using MonoMod.Cil;
+using R2API;
 using RiskyMod.SharedHooks;
 using RoR2;
 using RoR2.Orbs;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -32,6 +35,7 @@ namespace RiskyMod
 
         public static DamageAPI.ModdedDamageType AlwaysIgnite;   //Used for Molten Perforator due to not proccing
 
+        public static DamageAPI.ModdedDamageType SweetSpotModifier;
 
         public static DamageAPI.ModdedDamageType DontTriggerBands;
 
@@ -39,6 +43,7 @@ namespace RiskyMod
 
         public SharedDamageTypes()
         {
+            SweetSpotModifier = DamageAPI.ReserveDamageType();   //Makes sweetspot falloff do -50% instead of -75%
             InterruptOnHit = DamageAPI.ReserveDamageType();
             ProjectileRainForce = DamageAPI.ReserveDamageType();
 
@@ -73,6 +78,31 @@ namespace RiskyMod
             OnHitEnemy.OnHitAttackerActions += ApplyCaptainTaserSource;
 
             TakeDamage.OnDamageTakenAttackerActions += ApplyAlwaysIgnite;
+            SetupSweetSpotModifier();
+        }
+
+        private void SetupSweetSpotModifier()
+        {
+            IL.RoR2.BlastAttack.HandleHits += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                if (c.TryGotoNext(MoveType.After, x => x.MatchLdcR4(0.75f)))
+                {
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<float, BlastAttack, float>>((damagePenalty, self) =>
+                    {
+                        if (self.HasModdedDamageType(SweetSpotModifier))
+                        {
+                            damagePenalty *= 0.6666666666f;
+                        }
+                        return damagePenalty;
+                    });
+                }
+                else
+                {
+                    Debug.LogError("RiskyMod: SweetSpotModifier DamateType IL Hook failed.");
+                }
+            };
         }
 
         private static void ApplySawBarrierOnHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)

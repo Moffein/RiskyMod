@@ -1,5 +1,6 @@
-﻿using R2API;
-using System.Collections.Generic;
+﻿using RoR2;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Enemies.Spawnpools
 {
@@ -10,17 +11,20 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.Jellyfish, DirectorAPI.Stage.TitanicPlains);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.Jellyfish, DirectorAPI.Stage.TitanicPlainsSimulacrum);
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/golemplains/dccsGolemplainsMonsters.asset").WaitForCompletion(), false, false);
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/golemplains/dccsGolemplainsMonstersDLC1.asset").WaitForCompletion(), true, false);
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itgolemplains/dccsITGolemplainsMonsters.asset").WaitForCompletion(), true, true);
+        }
 
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.AlphaConstruct, DirectorAPI.Stage.TitanicPlains);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.AlphaConstruct, DirectorAPI.Stage.TitanicPlainsSimulacrum);
+        private void ApplyChanges(DirectorCardCategorySelection dccs, bool isDLC, bool stage1Bisons)
+        {
+            bool removedJelly = SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.Jellyfish, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            bool removedAlpha = SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.AlphaConstruct, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            bool removedXi = SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.XiConstruct, SneedUtils.SneedUtils.MonsterCategories.Champions);
 
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.XiConstruct, DirectorAPI.Stage.TitanicPlains);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.XiConstruct, DirectorAPI.Stage.TitanicPlainsSimulacrum);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, stage1Bisons ? DirectorCards.Bison : DirectorCards.BisonLoop, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
 
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.BisonLoop, false, DirectorAPI.Stage.TitanicPlains);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Bison, false, DirectorAPI.Stage.TitanicPlainsSimulacrum);
+            //Debug.Log("Removed Jelly: " + removedJelly + "\nRemoved Alpha: " + removedAlpha + "\nRemoved Xi: " + removedXi + "\n");
         }
     }
 }

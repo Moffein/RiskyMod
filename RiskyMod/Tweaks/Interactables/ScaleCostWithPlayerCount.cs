@@ -27,8 +27,7 @@ namespace RiskyMod.Tweaks
         {
             if (!scaleMountainShrine && !scaleCombatShrine) return;
 
-            shrineCombatCostInitial = shrineCombat.directorCreditCost;
-            shrineBossCostInitial = shrineBoss.directorCreditCost;
+            RoR2.RoR2Application.onLoad += GetInitialShrineCost;
 
             On.RoR2.SceneDirector.Start += (orig, self) =>
             {
@@ -43,14 +42,20 @@ namespace RiskyMod.Tweaks
             };
         }
 
-        private void SetShrineCombatCost(float costMultiplier)
+        private void GetInitialShrineCost()
+        {
+            shrineCombatCostInitial = shrineCombat.directorCreditCost;
+            shrineBossCostInitial = shrineBoss.directorCreditCost;
+        }
+
+        private static void SetShrineCombatCost(float costMultiplier)
         {
             shrineCombat.directorCreditCost = Mathf.FloorToInt(shrineCombatCostInitial * costMultiplier);
             shrineCombatSandy.directorCreditCost = Mathf.FloorToInt(shrineCombatCostInitial * costMultiplier);
             shrineCombatSnowy.directorCreditCost = Mathf.FloorToInt(shrineCombatCostInitial * costMultiplier);
         }
 
-        private void SetShrineBossCost(float costMultiplier)
+        private static void SetShrineBossCost(float costMultiplier)
         {
             shrineBoss.directorCreditCost = Mathf.FloorToInt(shrineBossCostInitial * costMultiplier);
             shrineBossSandy.directorCreditCost = Mathf.FloorToInt(shrineBossCostInitial * costMultiplier);

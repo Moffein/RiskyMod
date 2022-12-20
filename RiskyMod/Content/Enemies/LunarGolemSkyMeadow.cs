@@ -47,8 +47,8 @@ namespace RiskyMod.Content.Enemies
             characterSpawnCard.noElites = false;
             characterSpawnCard.forbiddenAsBoss = true;
 
-            DirectorCards.LunarGolemSkyMeadow = DirectorCards.BuildDirectorCard(characterSpawnCard, DirectorAPI.MonsterCategory.Minibosses);
-            DirectorCards.LunarGolemSkyMeadowBasic = DirectorCards.BuildDirectorCard(characterSpawnCard, DirectorAPI.MonsterCategory.BasicMonsters);
+            DirectorCards.LunarGolemSkyMeadow = DirectorCards.BuildDirectorCard(characterSpawnCard);
+            DirectorCards.LunarGolemSkyMeadowBasic = DirectorCards.BuildDirectorCard(characterSpawnCard);
         }
 
         private void ModifyStats(GameObject go)

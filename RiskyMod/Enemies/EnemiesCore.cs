@@ -85,14 +85,11 @@ namespace RiskyMod.Enemies
             new SnowyForest();
 
             new GooLake();
-            new Wetland();
 
-            new RallypointDelta();
-
-            //new SirensCall();
+            new SirensCall();
             new StadiaJungle();
 
-            new SkyMeadow();
+            //new SkyMeadow();
         }
     }
 
@@ -135,6 +132,7 @@ namespace RiskyMod.Enemies
         public static CharacterSpawnCard ImpOverlord;
         public static CharacterSpawnCard Grovetender;
         public static CharacterSpawnCard RoboBall;
+        public static CharacterSpawnCard XiConstruct;
 
         public static CharacterSpawnCard Reminder;
 
@@ -182,6 +180,8 @@ namespace RiskyMod.Enemies
             BlindPestSnowy = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/FlyingVermin/cscFlyingVerminSnowy.asset").WaitForCompletion();
             ClayApothecary = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/ClayGrenadier/cscClayGrenadier.asset").WaitForCompletion();
 
+            XiConstruct = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/MajorAndMinorConstruct/cscMegaConstruct.asset").WaitForCompletion();
+
             DirectorCards.Init();
         }
     }
@@ -190,51 +190,49 @@ namespace RiskyMod.Enemies
     {
         public static bool initialized = false;
 
-        public static DirectorAPI.DirectorCardHolder AlphaConstructLoop;
+        public static DirectorCard AlphaConstructLoop;
 
-        public static DirectorAPI.DirectorCardHolder Beetle;
-        public static DirectorAPI.DirectorCardHolder Lemurian;
+        public static DirectorCard Beetle;
+        public static DirectorCard Lemurian;
 
-        public static DirectorAPI.DirectorCardHolder Wisp;
-        public static DirectorAPI.DirectorCardHolder Jellyfish;
-        public static DirectorAPI.DirectorCardHolder BlindPestSnowy;
-        public static DirectorAPI.DirectorCardHolder BlindVerminSnowy;
+        public static DirectorCard Wisp;
+        public static DirectorCard Jellyfish;
+        public static DirectorCard BlindPestSnowy;
+        public static DirectorCard BlindVerminSnowy;
 
-        public static DirectorAPI.DirectorCardHolder Imp;
-        public static DirectorAPI.DirectorCardHolder Vulture;
+        public static DirectorCard Imp;
+        public static DirectorCard Vulture;
 
-        public static DirectorAPI.DirectorCardHolder Golem;
-        public static DirectorAPI.DirectorCardHolder GolemBasic;
-        public static DirectorAPI.DirectorCardHolder BeetleGuard;
-        public static DirectorAPI.DirectorCardHolder Mushrum;
-        public static DirectorAPI.DirectorCardHolder ClayApothecary;
-        public static DirectorAPI.DirectorCardHolder Bison;
-        public static DirectorAPI.DirectorCardHolder BisonLoop;
+        public static DirectorCard Golem;
+        public static DirectorCard BeetleGuard;
+        public static DirectorCard Mushrum;
+        public static DirectorCard ClayApothecary;
+        public static DirectorCard Bison;
+        public static DirectorCard BisonLoop;
 
-        public static DirectorAPI.DirectorCardHolder Bronzong;
-        public static DirectorAPI.DirectorCardHolder GreaterWisp;
-        public static DirectorAPI.DirectorCardHolder GreaterWispBasic;
+        public static DirectorCard Bronzong;
+        public static DirectorCard GreaterWisp;
 
-        public static DirectorAPI.DirectorCardHolder TitanBlackBeach;
-        public static DirectorAPI.DirectorCardHolder TitanDampCave;
-        public static DirectorAPI.DirectorCardHolder TitanGolemPlains;
-        public static DirectorAPI.DirectorCardHolder TitanGooLake;
+        public static DirectorCard TitanBlackBeach;
+        public static DirectorCard TitanDampCave;
+        public static DirectorCard TitanGolemPlains;
+        public static DirectorCard TitanGooLake;
 
-        public static DirectorAPI.DirectorCardHolder Vagrant;
-        public static DirectorAPI.DirectorCardHolder BeetleQueen;
-        public static DirectorAPI.DirectorCardHolder Dunestrider;
+        public static DirectorCard Vagrant;
+        public static DirectorCard BeetleQueen;
+        public static DirectorCard Dunestrider;
 
-        public static DirectorAPI.DirectorCardHolder MagmaWorm;
-        public static DirectorAPI.DirectorCardHolder MagmaWormLoop;
-        public static DirectorAPI.DirectorCardHolder ImpOverlord;
-        public static DirectorAPI.DirectorCardHolder Grovetender;
-        public static DirectorAPI.DirectorCardHolder RoboBall;
+        public static DirectorCard MagmaWorm;
+        public static DirectorCard MagmaWormLoop;
+        public static DirectorCard ImpOverlord;
+        public static DirectorCard Grovetender;
+        public static DirectorCard RoboBall;
 
-        public static DirectorAPI.DirectorCardHolder Reminder;
-        public static DirectorAPI.DirectorCardHolder ReminderLoop;
+        public static DirectorCard Reminder;
+        public static DirectorCard ReminderLoop;
 
-        public static DirectorAPI.DirectorCardHolder LunarGolemSkyMeadow;
-        public static DirectorAPI.DirectorCardHolder LunarGolemSkyMeadowBasic;
+        public static DirectorCard LunarGolemSkyMeadow;
+        public static DirectorCard LunarGolemSkyMeadowBasic;
 
         public static bool logCardInfo = false;
         public static void Init()
@@ -242,73 +240,54 @@ namespace RiskyMod.Enemies
             if (initialized) return;
             initialized = true;
 
-            AlphaConstructLoop = BuildDirectorCard(SpawnCards.AlphaConstruct, DirectorAPI.MonsterCategory.BasicMonsters, 1, 5, DirectorCore.MonsterSpawnDistance.Standard);
+            AlphaConstructLoop = BuildDirectorCard(SpawnCards.AlphaConstruct,  1, 5, DirectorCore.MonsterSpawnDistance.Standard);
 
-            Beetle = BuildDirectorCard(SpawnCards.Beetle, DirectorAPI.MonsterCategory.BasicMonsters);
-            Lemurian = BuildDirectorCard(SpawnCards.Lemurian, DirectorAPI.MonsterCategory.BasicMonsters);
+            Beetle = BuildDirectorCard(SpawnCards.Beetle);
+            Lemurian = BuildDirectorCard(SpawnCards.Lemurian);
 
-            Wisp = BuildDirectorCard(SpawnCards.Wisp, DirectorAPI.MonsterCategory.BasicMonsters);
-            Jellyfish = BuildDirectorCard(SpawnCards.Jellyfish, DirectorAPI.MonsterCategory.BasicMonsters, 1, 0, DirectorCore.MonsterSpawnDistance.Far);
-            BlindPestSnowy = BuildDirectorCard(SpawnCards.BlindPestSnowy, DirectorAPI.MonsterCategory.BasicMonsters);
-            BlindVerminSnowy = BuildDirectorCard(SpawnCards.BlindVerminSnowy, DirectorAPI.MonsterCategory.BasicMonsters);
+            Wisp = BuildDirectorCard(SpawnCards.Wisp);
+            Jellyfish = BuildDirectorCard(SpawnCards.Jellyfish, 1, 0, DirectorCore.MonsterSpawnDistance.Far);
+            BlindPestSnowy = BuildDirectorCard(SpawnCards.BlindPestSnowy);
+            BlindVerminSnowy = BuildDirectorCard(SpawnCards.BlindVerminSnowy);
 
-            Imp = BuildDirectorCard(SpawnCards.Imp, DirectorAPI.MonsterCategory.BasicMonsters);
-            Vulture = BuildDirectorCard(SpawnCards.Vulture, DirectorAPI.MonsterCategory.BasicMonsters);
+            Imp = BuildDirectorCard(SpawnCards.Imp);
+            Vulture = BuildDirectorCard(SpawnCards.Vulture);
 
-            Golem = BuildDirectorCard(SpawnCards.Golem, DirectorAPI.MonsterCategory.Minibosses);
-            GolemBasic = BuildDirectorCard(SpawnCards.Golem, DirectorAPI.MonsterCategory.BasicMonsters);
-            BeetleGuard = BuildDirectorCard(SpawnCards.BeetleGuard, DirectorAPI.MonsterCategory.Minibosses);
-            Mushrum = BuildDirectorCard(SpawnCards.Mushrum, DirectorAPI.MonsterCategory.Minibosses); //These are considered basic monsters in Vanilla, but they fit all the criteria of a miniboss enemy.
-            ClayApothecary = BuildDirectorCard(SpawnCards.ClayApothecary, DirectorAPI.MonsterCategory.Minibosses);
-            Bison = BuildDirectorCard(SpawnCards.Bison, DirectorAPI.MonsterCategory.Minibosses);
-            BisonLoop = BuildDirectorCard(SpawnCards.Bison, DirectorAPI.MonsterCategory.Minibosses, 1, 5, DirectorCore.MonsterSpawnDistance.Standard);
+            Golem = BuildDirectorCard(SpawnCards.Golem);
+            BeetleGuard = BuildDirectorCard(SpawnCards.BeetleGuard);
+            Mushrum = BuildDirectorCard(SpawnCards.Mushrum); //These are considered basic monsters in Vanilla, but they fit all the criteria of a miniboss enemy.
+            ClayApothecary = BuildDirectorCard(SpawnCards.ClayApothecary);
+            Bison = BuildDirectorCard(SpawnCards.Bison);
+            BisonLoop = BuildDirectorCard(SpawnCards.Bison, 1, 5, DirectorCore.MonsterSpawnDistance.Standard);
 
-            Bronzong = BuildDirectorCard(SpawnCards.Bronzong, DirectorAPI.MonsterCategory.Minibosses);  //Basic Monster on SkyMeadow
-            GreaterWisp = BuildDirectorCard(SpawnCards.GreaterWisp, DirectorAPI.MonsterCategory.Minibosses);
-            GreaterWispBasic = BuildDirectorCard(SpawnCards.GreaterWisp, DirectorAPI.MonsterCategory.BasicMonsters);
+            Bronzong = BuildDirectorCard(SpawnCards.Bronzong);  //Basic Monster on SkyMeadow
+            GreaterWisp = BuildDirectorCard(SpawnCards.GreaterWisp);
 
-            TitanBlackBeach = BuildDirectorCard(SpawnCards.TitanBlackBeach, DirectorAPI.MonsterCategory.Champions);
-            TitanDampCave = BuildDirectorCard(SpawnCards.TitanDampCave, DirectorAPI.MonsterCategory.Champions);
-            TitanGolemPlains = BuildDirectorCard(SpawnCards.TitanGolemPlains, DirectorAPI.MonsterCategory.Champions);
-            TitanGooLake = BuildDirectorCard(SpawnCards.TitanGooLake, DirectorAPI.MonsterCategory.Champions);
+            TitanBlackBeach = BuildDirectorCard(SpawnCards.TitanBlackBeach);
+            TitanDampCave = BuildDirectorCard(SpawnCards.TitanDampCave);
+            TitanGolemPlains = BuildDirectorCard(SpawnCards.TitanGolemPlains);
+            TitanGooLake = BuildDirectorCard(SpawnCards.TitanGooLake);
 
-            Vagrant = BuildDirectorCard(SpawnCards.Vagrant, DirectorAPI.MonsterCategory.Champions);
-            BeetleQueen = BuildDirectorCard(SpawnCards.BeetleQueen, DirectorAPI.MonsterCategory.Champions);
-            Dunestrider = BuildDirectorCard(SpawnCards.Dunestrider, DirectorAPI.MonsterCategory.Champions);
+            Vagrant = BuildDirectorCard(SpawnCards.Vagrant);
+            BeetleQueen = BuildDirectorCard(SpawnCards.BeetleQueen);
+            Dunestrider = BuildDirectorCard(SpawnCards.Dunestrider);
 
-            ImpOverlord = BuildDirectorCard(SpawnCards.ImpOverlord, DirectorAPI.MonsterCategory.Champions);
-            Grovetender = BuildDirectorCard(SpawnCards.Grovetender, DirectorAPI.MonsterCategory.Champions);
-            RoboBall = BuildDirectorCard(SpawnCards.RoboBall, DirectorAPI.MonsterCategory.Champions);
-            MagmaWorm = BuildDirectorCard(SpawnCards.MagmaWorm, DirectorAPI.MonsterCategory.Champions);
-            MagmaWormLoop = BuildDirectorCard(SpawnCards.MagmaWorm, DirectorAPI.MonsterCategory.Champions, 1, 5, DirectorCore.MonsterSpawnDistance.Standard);
+            ImpOverlord = BuildDirectorCard(SpawnCards.ImpOverlord);
+            Grovetender = BuildDirectorCard(SpawnCards.Grovetender);
+            RoboBall = BuildDirectorCard(SpawnCards.RoboBall);
+            MagmaWorm = BuildDirectorCard(SpawnCards.MagmaWorm);
+            MagmaWormLoop = BuildDirectorCard(SpawnCards.MagmaWorm, 1, 5, DirectorCore.MonsterSpawnDistance.Standard);
 
-            Reminder = BuildDirectorCard(SpawnCards.Reminder, DirectorAPI.MonsterCategory.Champions);
-            ReminderLoop = BuildDirectorCard(SpawnCards.Reminder, DirectorAPI.MonsterCategory.Champions, 1, 5, DirectorCore.MonsterSpawnDistance.Standard);
-
-            if (logCardInfo)
-            {
-                //Todo: fix for r2api update
-                /*DirectorAPI.MonsterActions += delegate (List<DirectorAPI.DirectorCardHolder> list, DirectorAPI.StageInfo stage)
-                {
-                    foreach (DirectorAPI.DirectorCardHolder dch in list)
-                    {
-                        Debug.Log("Card: " + dch.Card.spawnCard
-                            + "\nCategory: " + dch.MonsterCategory
-                            +  "\nWeight: " + dch.Card.selectionWeight
-                            + "\nDistance: " + dch.Card.spawnDistance
-                            //+ "\nMin Stages: " + dch.Card.minimumStageCompletions
-                            + "\n");
-                    }
-                };*/
-            }
+            Reminder = BuildDirectorCard(SpawnCards.Reminder);
+            ReminderLoop = BuildDirectorCard(SpawnCards.Reminder, 1, 5, DirectorCore.MonsterSpawnDistance.Standard);
         }
 
-        public static DirectorAPI.DirectorCardHolder BuildDirectorCard(CharacterSpawnCard spawnCard, DirectorAPI.MonsterCategory monsterCategory)
+        public static DirectorCard BuildDirectorCard(CharacterSpawnCard spawnCard)
         {
-            return BuildDirectorCard(spawnCard, monsterCategory, 1, 0, DirectorCore.MonsterSpawnDistance.Standard);
+            return BuildDirectorCard(spawnCard, 1, 0, DirectorCore.MonsterSpawnDistance.Standard);
         }
 
-        public static DirectorAPI.DirectorCardHolder BuildDirectorCard(CharacterSpawnCard spawnCard, DirectorAPI.MonsterCategory monsterCategory, int weight, int minStages, DirectorCore.MonsterSpawnDistance spawnDistance)
+        public static DirectorCard BuildDirectorCard(CharacterSpawnCard spawnCard, int weight, int minStages, DirectorCore.MonsterSpawnDistance spawnDistance)
         {
             DirectorCard dc = new DirectorCard
             {
@@ -318,13 +297,7 @@ namespace RiskyMod.Enemies
                 minimumStageCompletions = minStages,
                 spawnDistance = spawnDistance
             };
-            DirectorAPI.DirectorCardHolder cardHolder = new DirectorAPI.DirectorCardHolder
-            {
-                Card = dc,
-                MonsterCategory = monsterCategory
-            };
-
-            return cardHolder;
+            return dc;
         }
     }
 }

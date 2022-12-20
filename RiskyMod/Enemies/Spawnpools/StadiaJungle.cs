@@ -1,5 +1,6 @@
-﻿using R2API;
-using System.Collections.Generic;
+﻿using RoR2;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Enemies.Spawnpools
 {
@@ -10,13 +11,19 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.ClayDunestrider, DirectorAPI.Stage.SunderedGrove);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.MiniMushrum, DirectorAPI.Stage.SunderedGrove);
-            DirectorAPI.Helpers.RemoveExistingMonsterFromStage(DirectorAPI.Helpers.MonsterNames.Lemurian, DirectorAPI.Stage.SunderedGrove);
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/rootjungle/dccsRootJungleMonsters.asset").WaitForCompletion());
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/rootjungle/dccsRootJungleMonstersDLC1.asset").WaitForCompletion());
+        }
 
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Grovetender, false, DirectorAPI.Stage.SunderedGrove);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Mushrum, false, DirectorAPI.Stage.SunderedGrove);
-            DirectorAPI.Helpers.AddNewMonsterToStage(DirectorCards.Vulture, false, DirectorAPI.Stage.SunderedGrove);
+        private void ApplyChanges(DirectorCardCategorySelection dccs)
+        {
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.Lemurian, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.Mushrum, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.Dunestrider, SneedUtils.SneedUtils.MonsterCategories.Champions);
+
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Vulture, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Mushrum, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Grovetender, SneedUtils.SneedUtils.MonsterCategories.Champions);
         }
     }
 }

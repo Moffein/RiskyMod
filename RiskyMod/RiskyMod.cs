@@ -82,7 +82,7 @@ namespace RiskyMod
     [BepInDependency("com.rune580.riskofoptions")]
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.17.0")]
-    [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI), nameof(ItemAPI), nameof(DirectorAPI))]
+    [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI), nameof(ItemAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -251,6 +251,9 @@ namespace RiskyMod
             bool eliteReworksPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EliteReworks");
             if (eliteReworksPluginLoaded && NerfVoidtouched.enabled) Debug.Log("RiskyMod: Disabling NerfVoidtouched because EliteReworks is loaded.");
             NerfVoidtouched.enabled = NerfVoidtouched.enabled && !eliteReworksPluginLoaded;
+
+            if (eliteReworksPluginLoaded && NullifyDebuff.enabled) Debug.Log("RiskyMod: Disabling Nullify Changes because EliteReworks is loaded.");
+            NullifyDebuff.enabled = NullifyDebuff.enabled && !eliteReworksPluginLoaded;
 
             SoftDependencies.ShareSuiteLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.funkfrog_sipondo.sharesuite");
             if (SoftDependencies.ShareSuiteLoaded) HandleShareSuite();

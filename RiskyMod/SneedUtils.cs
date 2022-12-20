@@ -18,6 +18,29 @@ namespace SneedUtils
             BasicMonsters, Minibosses, Champions
         }
 
+        public static bool RemoveMonsterSpawnCardFromCategory(DirectorCardCategorySelection categorySelection, SpawnCard spawnCard, MonsterCategories monsterCategory)
+        {
+            int categoryIndex = FindCategoryIndexByName(categorySelection, monsterCategory);
+            if (categoryIndex >= 0 && categorySelection.categories[categoryIndex].cards != null)
+            {
+                int origLength = categorySelection.categories[categoryIndex].cards.Length;
+                categorySelection.categories[categoryIndex].cards = categorySelection.categories[categoryIndex].cards.Where(dc => dc.spawnCard != spawnCard).ToArray();
+                return categorySelection.categories[categoryIndex].cards.Length < origLength;
+            }
+            return false;
+        }
+
+        public static bool AddMonsterDirectorCardToCategory(DirectorCardCategorySelection categorySelection, DirectorCard directorCard, MonsterCategories monsterCategory)
+        {
+            int categoryIndex = FindCategoryIndexByName(categorySelection, monsterCategory);
+            if (categoryIndex >= 0)
+            {
+                categorySelection.AddCard(categoryIndex, directorCard);
+                return true;
+            }
+            return false;
+        }
+
         //Minibosses
         //Basic Monsters
         //Champions
