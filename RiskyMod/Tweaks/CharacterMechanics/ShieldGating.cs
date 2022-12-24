@@ -92,6 +92,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
                     {
                         blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                        blastAttack.AddModdedDamageType(SharedDamageTypes.ResistedByAllies);
                         return blastAttack;
                     });
                 }
@@ -111,6 +112,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
                     {
                         blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                        blastAttack.AddModdedDamageType(SharedDamageTypes.ResistedByAllies);
                         return blastAttack;
                     });
                 }
@@ -130,6 +132,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
                     {
                         blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                        blastAttack.AddModdedDamageType(SharedDamageTypes.ResistedByAllies);
                         return blastAttack;
                     });
                 }
@@ -139,7 +142,8 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                 }
             };
 
-            LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/RoboBallDelayKnockupProjectile").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
+            GameObject roboBallCircle = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/RoboBallDelayKnockupProjectile");
+            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(roboBallCircle, new DamageAPI.ModdedDamageType[] { IgnoreShieldGateDamage, SharedDamageTypes.ResistedByAllies });
 
             On.EntityStates.BrotherMonster.WeaponSlam.OnEnter += (orig, self) =>
             {
@@ -147,6 +151,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                 if (self.isAuthority)
                 {
                     DamageAPI.AddModdedDamageType(self.weaponAttack, IgnoreShieldGateDamage);
+                    DamageAPI.AddModdedDamageType(self.weaponAttack, SharedDamageTypes.ResistedByAllies);
                 }
             };
 
@@ -160,6 +165,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
                     {
                         blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                        blastAttack.AddModdedDamageType(SharedDamageTypes.ResistedByAllies);
                         return blastAttack;
                     });
                 }
@@ -169,8 +175,11 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                 }
             };
 
-            LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateLeft").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
-            LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateRight").AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(IgnoreShieldGateDamage);
+            GameObject brotherSpinLeft = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateLeft");
+            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(brotherSpinLeft, new DamageAPI.ModdedDamageType[] { IgnoreShieldGateDamage, SharedDamageTypes.ResistedByAllies });
+
+            GameObject brotherSpinRight = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateRight");
+            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(brotherSpinRight, new DamageAPI.ModdedDamageType[] { IgnoreShieldGateDamage, SharedDamageTypes.ResistedByAllies });
 
             IL.EntityStates.VoidRaidCrab.SpinBeamAttack.FireBeamBulletAuthority += (il) =>
             {
@@ -182,6 +191,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     c.EmitDelegate<Func<BulletAttack, BulletAttack>>((bulletAttack) =>
                     {
                         bulletAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                        bulletAttack.AddModdedDamageType(SharedDamageTypes.ResistedByAllies);
                         return bulletAttack;
                     });
                 }

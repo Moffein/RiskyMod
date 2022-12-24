@@ -1,4 +1,5 @@
 ﻿using BepInEx.Configuration;
+using R2API;
 using RiskyMod.Content;
 using RoR2;
 using RoR2.Navigation;
@@ -13,9 +14,33 @@ namespace SneedUtils
 {
     public class SneedUtils
     {
+        public static GameObject teleportHelperPrefab = LegacyResourcesAPI.Load<GameObject>("SpawnCards/HelperPrefab");
         public enum MonsterCategories
         {
             BasicMonsters, Minibosses, Champions
+        }
+
+        public static void AddModdedDamageTypeToProjectile(GameObject projectile, DamageAPI.ModdedDamageType[] moddedDamageTypes)
+        {
+            if (projectile)
+            {
+                DamageAPI.ModdedDamageTypeHolderComponent mdc = projectile.GetComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+                if (!mdc) mdc = projectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+                for (int i = 0; i < moddedDamageTypes.Length; i++)
+                {
+                    mdc.Add(moddedDamageTypes[i]);
+                }
+            }
+        }
+
+        public static void AddModdedDamageTypeToProjectile(GameObject projectile, DamageAPI.ModdedDamageType moddedDamageType)
+        {
+            if (projectile)
+            {
+                DamageAPI.ModdedDamageTypeHolderComponent mdc = projectile.GetComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+                if (!mdc) mdc = projectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+                mdc.Add(moddedDamageType);
+            }
         }
 
         public static bool RemoveMonsterSpawnCardFromCategory(DirectorCardCategorySelection categorySelection, SpawnCard spawnCard, MonsterCategories monsterCategory)
@@ -143,7 +168,7 @@ namespace SneedUtils
             SpawnCard spawnCard = ScriptableObject.CreateInstance<SpawnCard>();
             spawnCard.hullSize = HullClassification.Human;
             spawnCard.nodeGraphType = MapNodeGroup.GraphType.Ground;
-            spawnCard.prefab = LegacyResourcesAPI.Load<GameObject>("SpawnCards/HelperPrefab");
+            spawnCard.prefab = teleportHelperPrefab;
             Vector3 result = vector;
             GameObject teleportGameObject = null;
             if (idealMaxDistance > 0f && idealMinDistance < idealMaxDistance)

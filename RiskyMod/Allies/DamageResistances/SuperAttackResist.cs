@@ -2,6 +2,8 @@
 using RoR2;
 using R2API;
 using RiskyMod.Tweaks.CharacterMechanics;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Allies
 {
@@ -13,18 +15,26 @@ namespace RiskyMod.Allies
         {
             if (!enabled) return;
             TakeDamage.ModifyInitialDamageActions += AddResist;
+
+            SetupResists();
         }
 
         private static void AddResist(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
         {
             if (!self.body.isPlayerControlled
-                && damageInfo.HasModdedDamageType(ShieldGating.IgnoreShieldGateDamage)
+                && (damageInfo.HasModdedDamageType(SharedDamageTypes.ResistedByAllies))
                 && (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player)
                 && (self.body.inventory && self.body.inventory.GetItemCount(AllyItems.AllyMarkerItem) > 0))
             {
-                damageInfo.procCoefficient *= 0.3333333333f;
-                damageInfo.damage *= 0.3333333333f;
+                damageInfo.procCoefficient *= 0.25f;
+                damageInfo.damage *= 0.25f;
             }
+        }
+
+        private void SetupResists()
+        {
+            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherSunderWave.prefab").WaitForCompletion(), SharedDamageTypes.ResistedByAllies);
+            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherSunderWave, Energized.prefab").WaitForCompletion(), SharedDamageTypes.ResistedByAllies);
         }
     }
 }

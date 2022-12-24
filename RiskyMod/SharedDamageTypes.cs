@@ -15,6 +15,7 @@ namespace RiskyMod
     //Keep all the custom damagetypes in 1 place, in case there's a need to re-use them across different parts of the mod.
     public class SharedDamageTypes
     {
+        public static DamageAPI.ModdedDamageType ResistedByAllies;
         public static DamageAPI.ModdedDamageType Ignite50Chance;
         public static DamageAPI.ModdedDamageType ProjectileRainForce;
 
@@ -43,6 +44,7 @@ namespace RiskyMod
 
         public SharedDamageTypes()
         {
+            ResistedByAllies = DamageAPI.ReserveDamageType();
             SweetSpotModifier = DamageAPI.ReserveDamageType();   //Makes sweetspot falloff do -50% instead of -75%
             InterruptOnHit = DamageAPI.ReserveDamageType();
             ProjectileRainForce = DamageAPI.ReserveDamageType();

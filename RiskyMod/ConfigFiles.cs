@@ -181,6 +181,7 @@ namespace RiskyMod
             AlliesCore.beetleGlandDontRetaliate = GeneralCfg.Bind(allyString, "Queens Gland Guards Dont Retaliate", true, "Queens Gland Guards will not fight back if hurt by their owners.").Value;
             MegaDrone.allowRepair = GeneralCfg.Bind(allyString, "TC280 - Enable Repairs", true, "TC280s can be repaired after being destroyed.").Value;
             GunnerTurret.allowRepair = GeneralCfg.Bind(allyString, "Gunner Turret - Enable Repairs", true, "Gunner Turrets can be repaired after being destroyed.").Value;
+            GunnerTurret.teleportToMithrix = GeneralCfg.Bind(allyString, "Gunner Turret - Teleport to Mithrix", true, "Gunner Turrets are teleported to Mithrix's arena at the start of the fight.").Value;
             CheaperRepairs.enabled = GeneralCfg.Bind(allyString, "Cheaper Drone Repairs", true, "Repairing drones is cheaper.").Value;
             AlliesCore.changeScaling = GeneralCfg.Bind(allyString, "Scaling Changes", true, "Ally HP and Damage scales so that they always perform the same on every stage.").Value;
             AlliesCore.buffRegen = GeneralCfg.Bind(allyString, "Regen Changes", true, "Most allies regen to full HP in a fixed amount of time.").Value;

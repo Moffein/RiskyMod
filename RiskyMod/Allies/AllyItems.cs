@@ -52,7 +52,17 @@ namespace RiskyMod.Allies
 
         private static void HandleAllyResistAoEItem(CharacterBody self, Inventory inventory)
         {
-            if (!SoftDependencies.KingKombatArenaActive && inventory.GetItemCount(AllyItems.AllyResistAoEItem) > 0 && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ResistantToAOE)) self.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
+            if (!SoftDependencies.KingKombatArenaActive && inventory.GetItemCount(AllyItems.AllyResistAoEItem) > 0)
+            {
+                if (self.teamComponent && self.teamComponent.teamIndex == TeamIndex.Player)
+                {
+                    if (!self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ResistantToAOE)) self.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
+                }
+                else
+                {
+                    if (self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ResistantToAOE)) self.bodyFlags &= ~CharacterBody.BodyFlags.ResistantToAOE;
+                }
+            }
         }
 
         //Effect is a part of AllyMarkerItem's delegate
@@ -172,6 +182,7 @@ namespace RiskyMod.Allies
             if (AllyScaling.noOverheat || AllyScaling.noVoidDeath) SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += AllyMarkerItemDelegate;
         }
 
+        //Don't try to add player team handling here due to certain enemies naturally having these flags.
         private static void AllyMarkerItemDelegate(CharacterBody self, Inventory inventory)
         {
             if (!SoftDependencies.KingKombatArenaActive && inventory.GetItemCount(AllyItems.AllyMarkerItem) > 0)
@@ -211,7 +222,7 @@ namespace RiskyMod.Allies
 
         private static void AllyScalingItemDelegate(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
         {
-            if (!SoftDependencies.KingKombatArenaActive && inventory.GetItemCount(AllyItems.AllyScalingItem) > 0)
+            if (!SoftDependencies.KingKombatArenaActive && inventory.GetItemCount(AllyItems.AllyScalingItem) > 0 && sender.teamComponent && sender.teamComponent.teamIndex == TeamIndex.Player)
             {
                 float levelFactor = sender.level - 1f;
                 args.baseDamageAdd += 0.1f * levelFactor * sender.baseDamage;
