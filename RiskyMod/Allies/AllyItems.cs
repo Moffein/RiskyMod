@@ -131,21 +131,16 @@ namespace RiskyMod.Allies
             ItemDisplayRule[] idr = new ItemDisplayRule[0];
             ItemAPI.Add(new CustomItem(AllyRegenItem, idr));
 
-            if (AlliesCore.enabled && AlliesCore.buffRegen) SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += AllyRegenItemDelegate;
+            if (AlliesCore.enabled && AlliesCore.buffRegen) SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += AllyRegenItemDelegate;
         }
 
-        private static void AllyRegenItemDelegate(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
+        private static void AllyRegenItemDelegate(CharacterBody sender, Inventory inventory)
         {
             int itemCount = inventory.GetItemCount(AllyItems.AllyRegenItem);
             if (!SoftDependencies.KingKombatArenaActive && itemCount > 0)
             {
-                int boostHpCount = inventory.GetItemCount(RoR2Content.Items.BoostHp);
-
-                float levelFactor = sender.level - 1f;
-
-                float targetRegen = (sender.baseMaxHealth + levelFactor * sender.levelMaxHealth) / itemCount;
-                float currentRegen = sender.baseRegen + levelFactor * sender.levelRegen;
-                args.baseRegenAdd += (targetRegen - currentRegen) * (1f + 0.1f * boostHpCount);
+                float targetRegen = sender.maxHealth / itemCount;
+                if (sender.regen < targetRegen) sender.regen = targetRegen;
             }
         }
 

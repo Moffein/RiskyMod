@@ -7,14 +7,24 @@ namespace RiskyMod.Allies.DroneChanges
 {
     public class GunnerTurret
     {
+        public static bool allowRepair = true;
         public GunnerTurret()
         {
             GameObject gunnerTurret = AllyPrefabs.GunnerTurret;
-            SkillLocator sk = gunnerTurret.GetComponent<SkillLocator>();
 
             SkillDef turretSkill = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Drones/Turret1BodyTurret.asset").WaitForCompletion();
             turretSkill.baseMaxStock = 1;
             turretSkill.baseRechargeInterval = 0f;
+
+            if (GunnerTurret.allowRepair)
+            {
+                CharacterDeathBehavior cdb = gunnerTurret.GetComponent<CharacterDeathBehavior>();
+                if (cdb)
+                {
+                    cdb.deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Turret1.Turret1DeathState));
+                }
+            }
+            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Turret1.Turret1DeathState));
 
             //Gets run before scaling changes
             CharacterBody cb = gunnerTurret.GetComponent<CharacterBody>();

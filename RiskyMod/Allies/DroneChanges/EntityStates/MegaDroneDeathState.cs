@@ -64,7 +64,7 @@ namespace EntityStates.RiskyMod.MegaDrone
 					}
 				}
 
-				//Added DestroyOnTimer b elow.
+				//Added DestroyOnTimer below.
 				EntityState.Destroy(base.gameObject);
 			}
 		}

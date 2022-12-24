@@ -179,7 +179,8 @@ namespace RiskyMod
             DotZoneResist.enabled = GeneralCfg.Bind(allyString, "Damage Zone Resistance", true, "Allies take less damage from Mushrums gas and Lunar Exploder fire.").Value;
             StricterLeashing.enabled = GeneralCfg.Bind(allyString, "Stricter Leashing", true, "Reduces the minimum distance required for Allies to teleport to you.").Value;
             AlliesCore.beetleGlandDontRetaliate = GeneralCfg.Bind(allyString, "Queens Gland Guards Dont Retaliate", true, "Queens Gland Guards will not fight back if hurt by their owners.").Value;
-            MegaDrone.allowRepair = GeneralCfg.Bind(allyString, "TC280 - Enable Repairs", true, "TC280s can be repaired like other drones after being destroyed.").Value;
+            MegaDrone.allowRepair = GeneralCfg.Bind(allyString, "TC280 - Enable Repairs", true, "TC280s can be repaired after being destroyed.").Value;
+            GunnerTurret.allowRepair = GeneralCfg.Bind(allyString, "Gunner Turret - Enable Repairs", true, "Gunner Turrets can be repaired after being destroyed.").Value;
             CheaperRepairs.enabled = GeneralCfg.Bind(allyString, "Cheaper Drone Repairs", true, "Repairing drones is cheaper.").Value;
             AlliesCore.changeScaling = GeneralCfg.Bind(allyString, "Scaling Changes", true, "Ally HP and Damage scales so that they always perform the same on every stage.").Value;
             AlliesCore.buffRegen = GeneralCfg.Bind(allyString, "Regen Changes", true, "Most allies regen to full HP in a fixed amount of time.").Value;
@@ -196,7 +197,7 @@ namespace RiskyMod
             BloodShrineMinReward.enabled = GeneralCfg.Bind(interactString, "Shrine of Blood Minimum Reward", true, "Shrine of Blood always gives at least enough money to buy a small chest.").Value;
 
             SpawnLimits.maxMountainShrines = GeneralCfg.Bind(interactString, "Max Shrines of the Mountain", 5, "Limit how many Mountain Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
-            SpawnLimits.maxCombatShrines = GeneralCfg.Bind(interactString, "Max Shrines of Combat", 5, "Limit how many Combat Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
+            SpawnLimits.maxCombatShrines = GeneralCfg.Bind(interactString, "Max Shrines of Combat", 3, "Limit how many Combat Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
             SpawnLimits.maxVoidSeeds = GeneralCfg.Bind(interactString, "Max Void Seeds", 1, "Limit how many Void Seeds can spawn on 1 stage. Vanilla is 3. Set to negative for no limit.").Value;
 
             ScaleCostWithPlayerCount.scaleCombatShrine = GeneralCfg.Bind(interactString, "Shrine of Combat Director Credit Scaling", true, "Increase director credit cost of this interactable based on the amount of players.").Value;
