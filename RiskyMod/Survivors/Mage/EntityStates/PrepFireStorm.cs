@@ -120,6 +120,11 @@ namespace EntityStates.RiskyMod.Mage.Weapon
 
 		public void ApplySelfKnockback()
 		{
+			EntityStateMachine jetMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Jet");
+			if (jetMachine && jetMachine.state.GetType() == typeof(EntityStates.Mage.JetpackOn))
+			{
+				return;
+			}
 
 			Ray aimRay = base.GetAimRay();
 			Vector3 force = -1f * aimRay.direction * blastForce;
