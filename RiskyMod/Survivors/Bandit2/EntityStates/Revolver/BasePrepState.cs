@@ -8,7 +8,21 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			base.PlayAnimation("Gesture, Additive", "MainToSide", "MainToSide.playbackRate", this.duration);
+			bool playAnim = true;
+			Animator modelAnimator = base.GetModelAnimator();
+			if (modelAnimator)
+			{
+				int layerIndex = modelAnimator.GetLayerIndex("Gesture, Additive");
+				if (layerIndex >= 0)
+				{
+					AnimatorStateInfo animStateInfo = modelAnimator.GetCurrentAnimatorStateInfo(layerIndex);
+					if (animStateInfo.IsName("SlashBlade"))
+					{
+						playAnim = false;
+					}
+				}
+			}
+			if (playAnim) base.PlayAnimation("Gesture, Additive", "MainToSide", "MainToSide.playbackRate", this.duration);
 			Util.PlaySound(enterSoundString, base.gameObject);
 		}
 

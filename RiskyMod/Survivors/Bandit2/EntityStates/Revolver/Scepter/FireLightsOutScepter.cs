@@ -18,7 +18,22 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
 			base.StartAimMode(aimRay, 2f, false);
 			string muzzleName = "MuzzlePistol";
 			Util.PlaySound(attackSoundString, base.gameObject);
-			base.PlayAnimation("Gesture, Additive", "FireSideWeapon", "FireSideWeapon.playbackRate", this.duration);
+
+			bool playAnim = true;
+			Animator modelAnimator = base.GetModelAnimator();
+			if (modelAnimator)
+			{
+				int layerIndex = modelAnimator.GetLayerIndex("Gesture, Additive");
+				if (layerIndex >= 0)
+				{
+					AnimatorStateInfo animStateInfo = modelAnimator.GetCurrentAnimatorStateInfo(layerIndex);
+					if (animStateInfo.IsName("SlashBlade"))
+					{
+						playAnim = false;
+					}
+				}
+			}
+			if (playAnim) base.PlayAnimation("Gesture, Additive", "FireSideWeapon", "FireSideWeapon.playbackRate", this.duration);
 			if (effectPrefab)
 			{
 				EffectManager.SimpleMuzzleFlash(effectPrefab, base.gameObject, muzzleName, false);

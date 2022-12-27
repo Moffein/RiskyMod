@@ -101,16 +101,23 @@ namespace RiskyMod.Survivors.Captain
         {
 			float allyFactor = 1f;
 			if (self.characterBody && self.characterBody.master)
-            {
+			{
+				ItemIndex droneMeldStackItem = ItemCatalog.FindItemIndex("DronemeldInternalStackItem");
 				//based on https://github.com/DestroyedClone/RoR1SkillsPort/blob/master/Loader/ActivateShield.cs
-                foreach (CharacterMaster characterMaster in CharacterMaster.readOnlyInstancesList)
+				foreach (CharacterMaster characterMaster in CharacterMaster.readOnlyInstancesList)
 				{
 					if (characterMaster.minionOwnership && characterMaster.minionOwnership.ownerMaster == self.characterBody.master)
 					{
 						CharacterBody minionBody = characterMaster.GetBody();
 						if (minionBody && !minionBody.isPlayerControlled && (minionBody.bodyFlags &= CharacterBody.BodyFlags.Mechanical) == CharacterBody.BodyFlags.Mechanical)
 						{
-							allyFactor += 0.2f;
+							int mult = 1;
+							if (minionBody.inventory && droneMeldStackItem != ItemIndex.None)
+							{
+								mult += minionBody.inventory.GetItemCount(droneMeldStackItem);
+							}
+
+							allyFactor += 0.2f * mult;
 						}
 					}
 				}

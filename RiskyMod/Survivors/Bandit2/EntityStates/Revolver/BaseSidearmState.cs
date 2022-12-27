@@ -37,7 +37,22 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 			{
 				this.animator.SetLayerWeight(this.bodySideWeaponLayerIndex, 0f);
 			}
-			base.PlayAnimation("Gesture, Additive", this.exitAnimationStateName);
+
+			bool playAnim = true;
+			Animator modelAnimator = base.GetModelAnimator();
+			if (modelAnimator)
+			{
+				int layerIndex = modelAnimator.GetLayerIndex("Gesture, Additive");
+				if (layerIndex >= 0)
+				{
+					AnimatorStateInfo animStateInfo = modelAnimator.GetCurrentAnimatorStateInfo(layerIndex);
+					if (animStateInfo.IsName("SlashBlade"))
+					{
+						playAnim = false;
+					}
+				}
+			}
+			if (playAnim) base.PlayAnimation("Gesture, Additive", this.exitAnimationStateName);
 			if (this.crosshairOverrideRequest != null)
             {
 				this.crosshairOverrideRequest.Dispose();
