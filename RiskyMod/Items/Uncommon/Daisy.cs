@@ -35,26 +35,19 @@ namespace RiskyMod.Items.Uncommon
             On.EntityStates.Missions.BrotherEncounter.BrotherEncounterPhaseBaseState.FixedUpdate += (orig, self) =>
             {
                 orig(self);
-                Debug.Log("\n1");
                 int daisyCount = Util.GetItemCountForTeam(TeamIndex.Player, RoR2Content.Items.TPHealingNova.itemIndex, false, true);
                 if (daisyCount > 0)
                 {
-                    Debug.Log("2");
                     if (self.gameObject && self.childLocator)
                     {
-                        Debug.Log("3");
                         Transform transform = self.childLocator.FindChild("CenterOrbEffect");
-                        Debug.Log("4");
                         if (transform)
                         {
-                            Debug.Log("5");
                             DaisyBehavior db = self.gameObject.GetComponent<DaisyBehavior>();
                             if (!db)
                             {
-                                Debug.Log("6");
                                 db = self.gameObject.AddComponent<DaisyBehavior>();
                                 db.wardOrigin = transform;
-                                Debug.Log("7");
                             }
                         }
                     }
