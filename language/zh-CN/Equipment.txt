@@ -1,7 +1,7 @@
 {
 	strings:
 	{
-		"EQUIPMENT_FIREBALLDASH_DESC_RISKYMOD": "变成<style=cIsDamage>龙之火球</style>持续<style=cIsDamage>5</style>秒，受击可造成<style=cIsDamage>800%的伤害</style>。结束时会引爆，造成1600%的伤害并<style=cIsDamage>眩晕</style>附近敌人。",
+		"EQUIPMENT_FIREBALLDASH_DESC_RISKYMOD": "变成<style=cIsDamage>龙之火球</style>持续<style=cIsDamage>5</style>秒，受击可造成<style=cIsDamage>600%的伤害</style>。结束时会引爆，造成1200%的伤害并<style=cIsDamage>眩晕</style>附近敌人。",
 
 		"EQUIPMENT_BFG_DESC_RISKYMOD": "发射前子卷须，对35米范围内的敌人造成最高<style=cIsDamage>每秒1180%的伤害</style>。接触目标并引爆后，会对20米范围内的敌人造成<style=cIsDamage>8000%的伤害</style>。",
 		

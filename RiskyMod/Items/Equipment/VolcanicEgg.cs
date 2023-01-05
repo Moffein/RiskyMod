@@ -18,9 +18,9 @@ namespace RiskyMod.Items.Equipment
 
             GameObject fireball = LegacyResourcesAPI.Load<GameObject>("prefabs/networkedobjects/FireballVehicle");
             FireballVehicle fv = fireball.GetComponent<FireballVehicle>();
-            fv.blastRadius = 16f;
-            fv.blastDamageCoefficient = 16f;
-            fv.overlapDamageCoefficient = 8f;
+            fv.blastRadius = 14f;
+            fv.blastDamageCoefficient = 12f;
+            fv.overlapDamageCoefficient = 6f;
             fv.blastDamageType = DamageType.IgniteOnHit | DamageType.Stun1s;
         }
     }
