@@ -1,0 +1,12 @@
+{
+	strings:
+	{
+	"KEYWORD_RAPID_REGEN_RISKYMOD" : "<style=cKeywordName>自我恢复</style><style=cSub>在3秒内，恢复最大生命值的<style=cIsHealing>10%</style>。</style>",
+	"KEYWORD_BLIGHT_RISKYMOD" : "<style=cKeywordName>枯萎</style>6秒内持续<style=cSub>造成<style=cIsDamage>360%</style>的基础伤害。<i>枯萎可以叠加。</i></style>",
+	"KEYWORD_POISON_RISKYMOD" : "<style=cKeywordName>毒化</style>6秒内<style=cSub>造成目标最大生命值的<style=cIsDamage>6%</style>的伤害。<i>毒化不能击败敌人。</i></style>",
+	"KEYWORD_INTERRUPT_RISKYMOD" : "<style=cKeywordName>干扰</style><style=cSub>短暂打断敌人的行动。",
+	"KEYWORD_SHOCKING_RISKYMOD" : "<style=cKeywordName>震荡</style><style=cSub>干扰并眩晕敌人5秒。",
+	"KEYWORD_MAGNETIC_RISKYMOD" : "<style=cKeywordName>磁力</style><style=cSub>将空中的轻型敌人拉拢。",
+	"KEYWORD_VOIDCORRUPTION_RISKYMOD" : "<style=cKeywordName>腐化</style><style=cSub>通过受到伤害、击败敌人或持有虚空物品来获得腐化。"
+	}
+}
