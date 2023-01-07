@@ -11,7 +11,7 @@ namespace RiskyMod.Allies.DroneChanges
     public class GunnerTurret
     {
         public static bool allowRepair = true;
-        public static bool teleportToMithrix = true;
+        public static bool teleportWithPlayer = true;
 
         private static BodyIndex GunnerTurretIndex;
 
@@ -54,16 +54,31 @@ namespace RiskyMod.Allies.DroneChanges
             }
 
 
-            if (teleportToMithrix)
+            if (teleportWithPlayer)
             {
                 On.EntityStates.Missions.BrotherEncounter.Phase1.OnEnter += TeleportTurretToMithrix;
+
+                if (!SoftDependencies.TeleporterTurretsLoaded)
+                {
+                    On.RoR2.HoldoutZoneController.OnEnable += HoldoutZoneController_OnEnable;
+                }
             }
+        }
+
+        private void HoldoutZoneController_OnEnable(On.RoR2.HoldoutZoneController.orig_OnEnable orig, HoldoutZoneController self)
+        {
+            orig(self);
+            TeleportTurretsToPlayer();
         }
 
         private void TeleportTurretToMithrix(On.EntityStates.Missions.BrotherEncounter.Phase1.orig_OnEnter orig, EntityStates.Missions.BrotherEncounter.Phase1 self)
         {
             orig(self);
-            
+            TeleportTurretsToPlayer();
+        }
+
+        public static void TeleportTurretsToPlayer()
+        {
             ReadOnlyCollection<TeamComponent> teamMembers = TeamComponent.GetTeamMembers(TeamIndex.Player);
             foreach (TeamComponent tc in teamMembers)
             {

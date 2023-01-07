@@ -37,6 +37,8 @@ namespace RiskyMod
         public static bool KingKombatArenaActive = false;
 
         public static bool ArtifactOfPotentialLoaded = false;
+
+        public static bool TeleporterTurretsLoaded = false;
         public static bool IsPotentialArtifactActive()
         {
             bool isActive = false;
