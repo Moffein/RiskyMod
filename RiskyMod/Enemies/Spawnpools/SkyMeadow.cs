@@ -28,6 +28,7 @@ namespace RiskyMod.Enemies.Spawnpools
 
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Jellyfish, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Imp, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.LunarGolemSkyMeadow, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
 
             //Dont know if DLC removes the worms or not. Reset them just to be safe.
             if (!isSimulacrum)
