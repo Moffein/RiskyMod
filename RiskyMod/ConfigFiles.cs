@@ -49,6 +49,7 @@ using RiskOfOptions;
 using RiskyMod.Allies.DroneChanges;
 using RiskyMod.Enemies.Spawnpools;
 using RiskyMod.Enemies.DLC1.Voidling;
+using System.Runtime.CompilerServices;
 
 namespace RiskyMod
 {
@@ -216,8 +217,10 @@ namespace RiskyMod
 
             //Void Fields
             VoidFields.ModifyHoldout.enabled = GeneralCfg.Bind(voidFieldsString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
-            VoidFields.FogRework.enabled = GeneralCfg.Bind(voidFieldsString, "Fog Rework", true, "Void Fog is only active during holdouts like on Void Locus.").Value;
             VoidFields.ReduceHoldoutCount.enabled = GeneralCfg.Bind(voidFieldsString, "Less Cells", true, "Reduces Cell count from 9 to 5 and speed up enemy progression.").Value;
+
+            //VoidFields.FogRework.enabled = GeneralCfg.Bind(voidFieldsString, "Fog Rework", true, "Void Fog is only active during holdouts like on Void Locus.").Value;
+            VoidFields.FogRework.enabled = false;
 
             //Moon
             Moon.ModifyHoldout.enabled = GeneralCfg.Bind(moonString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
@@ -262,6 +265,49 @@ namespace RiskyMod
             ConfigLunars();
             ConfigEquipment();
             ConfigVoidItems();
+
+            if (SoftDependencies.RiskOfOptionsLoaded) RiskOfOptionsCompat();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static void RiskOfOptionsCompat()
+        {
+            ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(FireSelect.scrollSelection));
+            ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.swapButton));
+            ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.prevButton));
+
+            if (SurvivorsCore.enabled)
+            {
+                if (CaptainCore.enabled && CaptainCore.enablePrimarySkillChanges)
+                {
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(CaptainFireModes.enabled));
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.defaultButton));
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.autoButton));
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.chargeButton));
+                }
+
+                if (Bandit2Core.enabled && (Bandit2Core.blastChanges || Bandit2Core.burstChanges))
+                {
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(BanditFireModes.enabled));
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(BanditFireModes.defaultButton));
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(BanditFireModes.spamButton));
+                }
+
+                if (MageCore.enabled)
+                {
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.ionSurgeMovementScaling));
+
+                    if (MageCore.iceWallRework || MageCore.enableFireUtility)
+                    {
+                        ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.utilitySelfKnockback));
+                    }
+                }
+
+                if (MercCore.enabled)
+                {
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MercCore.m1ComboFinishTweak));
+                }
+            }
         }
 
         private static void ConfigCommonItems()
@@ -437,37 +483,19 @@ namespace RiskyMod
         private static void ConfigFireSelect()
         {
             FireSelect.scrollSelection = SurvivorCfg.Bind(fireSelectString, "Use Scrollwheel", true, "Mouse Scroll Wheel changes firemode");
-            ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(FireSelect.scrollSelection));
 
             FireSelect.swapButton = SurvivorCfg.Bind(fireSelectString, "Next Firemode", KeyboardShortcut.Empty, "Button to swap to the next firemode.");
-            ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.swapButton));
 
             FireSelect.prevButton = SurvivorCfg.Bind(fireSelectString, "Previous Firemode", KeyboardShortcut.Empty, "Button to swap to the previous firemode.");
-            ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.prevButton));
 
             CaptainFireModes.enabled = SurvivorCfg.Bind(fireSelectString, "Captain: Enable Fire Select", false, "Enable firemode selection for Captain's shotgun (requires primary changes to be enabled).");
             CaptainFireModes.defaultButton = SurvivorCfg.Bind(fireSelectString, "Captain: Swap to Default", KeyboardShortcut.Empty, "Button to swap to the Default firemode.");
             CaptainFireModes.autoButton = SurvivorCfg.Bind(fireSelectString, "Captain: Swap to Auto", KeyboardShortcut.Empty, "Button to swap to the Auto firemode.");
             CaptainFireModes.chargeButton = SurvivorCfg.Bind(fireSelectString, "Captain: Swap to Charged", KeyboardShortcut.Empty, "Button to swap to the Charged firemode.");
 
-            if (CaptainCore.enabled && CaptainCore.enablePrimarySkillChanges)
-            {
-                ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(CaptainFireModes.enabled));
-                ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.defaultButton));
-                ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.autoButton));
-                ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.chargeButton));
-            }
-
             BanditFireModes.enabled = SurvivorCfg.Bind(fireSelectString, "Bandit: Enable Fire Select", false, "Enable firemode selection for Bandit's primaries (requires primary changes to be enabled).");
             BanditFireModes.defaultButton = SurvivorCfg.Bind(fireSelectString, "Bandit: Swap to Default", KeyboardShortcut.Empty, "Button to swap to the Default firemode.");
             BanditFireModes.spamButton = SurvivorCfg.Bind(fireSelectString, "Bandit: Swap to Spam", KeyboardShortcut.Empty, "Button to swap to the Spam firemode.");
-
-            if (Bandit2Core.enabled && (Bandit2Core.blastChanges || Bandit2Core.burstChanges))
-            {
-                ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(BanditFireModes.enabled));
-                ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(BanditFireModes.defaultButton));
-                ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(BanditFireModes.spamButton));
-            }
         }
 
         private static void ConfigSurvivors()
@@ -527,23 +555,9 @@ namespace RiskyMod
 
             MageCore.enableLightningSpecial = SurvivorCfg.Bind(mageString, "Electrocute Special Skill", false, "Enables this custom skill.").Value;
 
-            if (MageCore.enabled)
-            {
-                ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.ionSurgeMovementScaling));
-
-                if (MageCore.iceWallRework || MageCore.enableFireUtility)
-                {
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.utilitySelfKnockback));
-                }
-            }
-
             MercCore.enabled = SurvivorCfg.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             MercCore.modifyStats = SurvivorCfg.Bind(mercString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
             MercCore.m1ComboFinishTweak = SurvivorCfg.Bind(mercString, "M1 Attack Speed Tweak (Client-Side)", true, "Makes the 3rd hit of Merc's M1 be unaffected by attack speed for use with combo tech.");
-            if (MercCore.enabled)
-            {
-                ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MercCore.m1ComboFinishTweak));
-            }
             MercCore.evisTargetingFix = SurvivorCfg.Bind(mercString, "Eviscerate Targeting Fix", true, "Makes Eviscerate less likely to target teammates.").Value;
 
             TreebotCore.enabled = SurvivorCfg.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;

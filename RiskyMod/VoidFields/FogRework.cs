@@ -6,7 +6,7 @@ namespace RiskyMod.VoidFields
 {
     public class FogRework
     {
-        public static bool enabled = false;
+        public static bool enabled = true;
 
         public FogRework()
         {

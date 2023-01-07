@@ -8,6 +8,8 @@ namespace RiskyMod
 {
     public class SoftDependencies
     {
+        public static bool RiskOfOptionsLoaded = false;
+
         public static bool ClassicItemsScepterLoaded = false;
         public static bool ScepterPluginLoaded = false;
 

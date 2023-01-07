@@ -80,7 +80,7 @@ namespace RiskyMod
     [BepInDependency("zombieseatflesh7.ArtifactOfPotential", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RuneFoxMods.TeleporterTurrets", BepInDependency.DependencyFlags.SoftDependency)]
 
-    [BepInDependency("com.rune580.riskofoptions")]
+    [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod Beta", "0.18.0")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI), nameof(ItemAPI))]
@@ -161,6 +161,7 @@ namespace RiskyMod
 
         private void CheckDependencies()
         {
+            SoftDependencies.RiskOfOptionsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions");
             SoftDependencies.ArtifactOfPotentialLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("zombieseatflesh7.ArtifactOfPotential");
             SoftDependencies.TeleporterTurretsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RuneFoxMods.TeleporterTurrets");
 
