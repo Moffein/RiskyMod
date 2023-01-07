@@ -67,7 +67,7 @@ namespace RiskyMod.Items.DLC1.Common
             {
                 if (self.combinedHealthFraction <= 0.5f)
                 {
-                    self.AddBarrier(self.fullCombinedHealth * 0.5f);
+                    self.AddBarrier(self.fullCombinedHealth);   //* 0.5f
 
                     self.body.inventory.RemoveItem(DLC1Content.Items.HealingPotion, 1);
                     self.body.inventory.GiveItem(DLC1Content.Items.HealingPotionConsumed, 1);

@@ -129,7 +129,7 @@
 	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "防止<style=cIsUtility>1<style=cStack>个（每层增加1）</style></style><style=cIsDamage>减益效果</style>并施加一道<style=cIsHealing>临时屏障</style>，数值为<style=cIsHealing>最大生命值</style>的<style=cIsHealing>25%</style>。每<style=cIsUtility>5</style>秒充能一次</style>。",
 	
 	"ITEM_HEALINGPOTION_PICKUP_RISKYMOD" : "在生命值较低时立刻获得大量屏障。使用即消耗。",
-	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "受到伤害导致<style=cIsHealth>生命值降到50%</style>以下时会<style=cIsUtility>消耗</style>该物品，并获得<style=cIsHealing>最大生命值</style>的<style=cIsHealing>50%</style>的<style=cIsHealing>临时屏障</style>。",
+	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "受到伤害导致<style=cIsHealth>生命值降到50%</style>以下时会<style=cIsUtility>消耗</style>该物品，并获得<style=cIsHealing>最大生命值</style>的<style=cIsHealing>100%</style>的<style=cIsHealing>临时屏障</style>。",
 	
 	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>格挡</style>一次来袭的伤害。充能时间<style=cIsUtility>20秒</style><style=cStack>（每层减少10%）</style>。<style=cIsVoid>使所有更艰难的时光无效化</style>。",
 	

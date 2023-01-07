@@ -129,7 +129,7 @@
 	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Prevents <style=cIsUtility>1 <style=cStack>(+1 per stack)</style></style> <style=cIsDamage>debuff</style> and instead grants a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>25%</style> of <style=cIsHealing>maximum health</style>. Recharges every <style=cIsUtility>5</style> seconds</style>.",
 	
 	"ITEM_HEALINGPOTION_PICKUP_RISKYMOD" : "Gain a massive barrier at low health. Consumed on use.",
-	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "Gain a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>50% of your health</style> when falling below <style=cIsHealth>50% health</style>.",
+	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "Gain a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>100% of your health</style> when falling below <style=cIsHealth>50% health</style>.",
 	
 	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>Blocks</style> incoming damage once. Recharges after <style=cIsUtility>20 seconds</style> <style=cStack>(-10% per stack)</style>. <style=cIsVoid>Corrupts all Tougher Times</style>.",
 	
