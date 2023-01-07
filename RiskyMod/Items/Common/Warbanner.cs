@@ -32,16 +32,6 @@ namespace RiskyMod.Items.Common
                 orig(self);
                 SpawnBanners();
             };
-
-            //Does this work online?
-            /*On.RoR2.VoidRaidGauntletExitController.OnBodyTeleport += (orig, self, body) =>
-            {
-                orig(self, body);
-                if (NetworkServer.active)
-                {
-                    SpawnBanner(body);
-                }
-            };*/
         }
         private static void ModifyItem()
         {

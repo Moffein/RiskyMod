@@ -16,8 +16,8 @@ namespace RiskyMod.VoidFields
                 {
                     if (sd.baseSceneName.Equals("arena"))
                     {
-                        self.baseRadius *= 2f;  //15f in vanilla
-                        self.baseChargeDuration *= 0.6666666667f;  //60f in vanilla
+                        self.baseRadius *= 4f;  //15f in vanilla
+                        self.baseChargeDuration *= 2f/3f;  //60f in vanilla
                     }
                 }
                 orig(self);

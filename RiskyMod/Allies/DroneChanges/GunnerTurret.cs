@@ -62,6 +62,10 @@ namespace RiskyMod.Allies.DroneChanges
                 {
                     On.RoR2.HoldoutZoneController.OnEnable += HoldoutZoneController_OnEnable;
                 }
+                else
+                {
+                    Debug.LogError("RiskyMod: Disabling GunnerTurret teleport because TeleporterTurrets is installed.");
+                }
             }
         }
 
