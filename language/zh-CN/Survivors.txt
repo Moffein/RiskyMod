@@ -6,7 +6,7 @@
 	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "呼叫一个<style=cIsUtility>补给信标</style>。最多呼叫2次。",
 	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD": "<style=cIsUtility>使用时<style=cIsUtility>为技能充能</style>。",
 	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>破解</style>附近所有可购买物品，这些物品的价格将逐渐下降至<style=cIsUtility>50%</style>。",
-	"CAPTAIN_SUPPLY_SKILL_RESTOCK_INTERACTION_RISKYMOD" : "为技能充能。",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_INTERACTION_RISKYMOD" : "为技能充能",
 	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD" : "使用时<style=cIsUtility>为技能充能</style>并减少<style=cIsUtility>装备</style>冷却时间<style=cIsUtility>20秒</style>。",
 	
 	"BANDIT2_PRIMARY_DESC_RISKYMOD" : "使用霰弹枪射击，造成<style=cIsDamage>5x90%的伤害</style>。最多可发射4发子弹。",
