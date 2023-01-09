@@ -68,6 +68,7 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void ModifyStats(CharacterBody cb)
         {
+            if (!modifyStats) return;
             cb.baseMaxHealth = 100f;//110f
             cb.levelMaxHealth = 30f;//33f
         }

@@ -44,48 +44,59 @@ namespace RiskyMod.Items.Boss
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "BleedOnHitAndExplode")
                     ))
                 {
-                    //Change explosion damage
-                    if(c.TryGotoNext(
-                         x => x.MatchLdcR4(4f)
-                        ))
+                    //Make Collapse count towards the proc condition
+                    if (c.TryGotoNext( MoveType.After, x => x.MatchCallvirt<CharacterBody>("HasBuff")))
                     {
-                        c.Next.Operand = 3.2f;
-                        c.Index += 8;
-                        c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
+                        c.Emit(OpCodes.Ldloc_2);//victimBody
+                        c.Emit(OpCodes.Ldarg_1);//damageReport
+                        c.EmitDelegate<Func<bool, CharacterBody, DamageReport, bool>>((hasBuff, victimBody, damageReport) =>
                         {
-                            return damageCoefficient + 0.8f;
+                            return hasBuff || victimBody.HasBuff(DLC1Content.Buffs.Fracture) || (damageReport != null && damageReport.damageInfo != null && damageReport.damageInfo.dotIndex == DotController.DotIndex.Fracture);
                         });
 
-                        //Change Max HP damage
+                        //Change explosion damage
                         if (c.TryGotoNext(
-                                 x => x.MatchLdcR4(0.15f)
-                                ))
+                             x => x.MatchLdcR4(4f)
+                            ))
                         {
-                            c.Next.Operand = 0.08f;
+                            c.Next.Operand = 3.2f;
                             c.Index += 8;
                             c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
                             {
-                                return damageCoefficient + 0.02f;
+                                return damageCoefficient + 0.8f;
                             });
 
-
-                            //Disable Proc Coefficient
-                            if (RiskyMod.disableProcChains)
-                            {
-                                if(c.TryGotoNext(
-                                    x => x.MatchStfld<DelayBlast>("position")
+                            //Change Max HP damage
+                            if (c.TryGotoNext(
+                                     x => x.MatchLdcR4(0.15f)
                                     ))
+                            {
+                                c.Next.Operand = 0.08f;
+                                c.Index += 8;
+                                c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
                                 {
-                                    c.Index--;
-                                    c.EmitDelegate<Func<DelayBlast, DelayBlast>>((db) =>
-                                    {
-                                        db.procCoefficient = 0f;
-                                        return db;
-                                    });
-                                }
-                            }
+                                    return damageCoefficient + 0.02f;
+                                });
 
-                            error = false;
+
+                                //Disable Proc Coefficient
+                                if (RiskyMod.disableProcChains)
+                                {
+                                    if (c.TryGotoNext(
+                                        x => x.MatchStfld<DelayBlast>("position")
+                                        ))
+                                    {
+                                        c.Index--;
+                                        c.EmitDelegate<Func<DelayBlast, DelayBlast>>((db) =>
+                                        {
+                                            db.procCoefficient = 0f;
+                                            return db;
+                                        });
+                                    }
+                                }
+
+                                error = false;
+                            }
                         }
                     }
                 }
