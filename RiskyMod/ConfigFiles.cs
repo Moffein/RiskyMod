@@ -113,6 +113,54 @@ namespace RiskyMod
             ConfigSurvivors();
             ConfigMonsters();
             ConfigSpawnpools();
+
+            if (SoftDependencies.RiskOfOptionsLoaded) RiskOfOptionsCompat();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static void RiskOfOptionsCompat()
+        {
+            ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(FireSelect.scrollSelection));
+            ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.swapButton));
+            ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.prevButton));
+
+            if (SurvivorsCore.enabled)
+            {
+                if (CaptainCore.enabled && CaptainCore.enablePrimarySkillChanges)
+                {
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(CaptainFireModes.enabled));
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.defaultButton));
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.autoButton));
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.chargeButton));
+                }
+
+                if (Bandit2Core.enabled && (Bandit2Core.blastChanges || Bandit2Core.burstChanges))
+                {
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(BanditFireModes.enabled));
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(BanditFireModes.defaultButton));
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(BanditFireModes.spamButton));
+                }
+
+                if (MageCore.enabled)
+                {
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.ionSurgeMovementScaling));
+
+                    if (MageCore.iceWallRework || MageCore.enableFireUtility)
+                    {
+                        ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.utilitySelfKnockback));
+                    }
+                }
+
+                if (MercCore.enabled)
+                {
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MercCore.m1ComboFinishTweak));
+                }
+
+                if (VoidFiendCore.enabled)
+                {
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(UtilityMoveSpeedScaling.disableScaling));
+                }
+            }
         }
 
         private static void ConfigGeneral()
@@ -265,49 +313,6 @@ namespace RiskyMod
             ConfigLunars();
             ConfigEquipment();
             ConfigVoidItems();
-
-            if (SoftDependencies.RiskOfOptionsLoaded) RiskOfOptionsCompat();
-        }
-
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private static void RiskOfOptionsCompat()
-        {
-            ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(FireSelect.scrollSelection));
-            ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.swapButton));
-            ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.prevButton));
-
-            if (SurvivorsCore.enabled)
-            {
-                if (CaptainCore.enabled && CaptainCore.enablePrimarySkillChanges)
-                {
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(CaptainFireModes.enabled));
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.defaultButton));
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.autoButton));
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.chargeButton));
-                }
-
-                if (Bandit2Core.enabled && (Bandit2Core.blastChanges || Bandit2Core.burstChanges))
-                {
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(BanditFireModes.enabled));
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(BanditFireModes.defaultButton));
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(BanditFireModes.spamButton));
-                }
-
-                if (MageCore.enabled)
-                {
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.ionSurgeMovementScaling));
-
-                    if (MageCore.iceWallRework || MageCore.enableFireUtility)
-                    {
-                        ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.utilitySelfKnockback));
-                    }
-                }
-
-                if (MercCore.enabled)
-                {
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MercCore.m1ComboFinishTweak));
-                }
-            }
         }
 
         private static void ConfigCommonItems()
@@ -664,6 +669,7 @@ namespace RiskyMod
             VoidFiendCore.secondaryMultitask = SurvivorCfg.Bind(voidFiendString, "Secondary Multitasking", true, "Drown and Suppress can be fired while charging Flood.").Value;
             VoidFiendCore.modifyCorruptCrush = SurvivorCfg.Bind(voidFiendString, "Corrupted Suppress Changes", true, "Enable changes to this skill.").Value;
             UtilityFallImmune.enabled = SurvivorCfg.Bind(voidFiendString, "Trespass Changes", true, "Enable changes to this skill.").Value;
+            UtilityMoveSpeedScaling.disableScaling = SurvivorCfg.Bind(voidFiendString, "Trespass - Disable Move Speed Scaling", false, "Prevents Trespass from scaling with move speed..");
 
             ConfigFireSelect();
         }
