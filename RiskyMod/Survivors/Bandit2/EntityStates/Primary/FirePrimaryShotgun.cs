@@ -16,7 +16,7 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
         private void LoadStats()
         {
             damageCoefficient = 0.9f;
-            procCoefficient = 0.6f;
+            procCoefficient = 0.7f;
             bulletCount = 5;
             maxDistance = 1000f;
             bulletRadius = 0.3f;

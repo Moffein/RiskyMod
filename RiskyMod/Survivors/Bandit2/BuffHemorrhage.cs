@@ -45,7 +45,7 @@ namespace RiskyMod.Survivors.Bandit2
                 if (procHemmorrhage)
                 {
                     GlobalEventManager.instance.OnHitEnemy(damageInfo, self.gameObject);
-                    GlobalEventManager.instance.OnHitAll(damageInfo, self.gameObject);
+                    //GlobalEventManager.instance.OnHitAll(damageInfo, self.gameObject);
                 }
             };
         }
