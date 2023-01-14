@@ -99,7 +99,7 @@ namespace RiskyMod.Allies.DroneChanges
 
                         GameObject teleportDestinationHelper = DirectorCore.instance.TrySpawnObject(new DirectorSpawnRequest(spawnCard, new DirectorPlacementRule
                         {
-                            placementMode = DirectorPlacementRule.PlacementMode.NearestNode,
+                            placementMode = DirectorPlacementRule.PlacementMode.Approximate,
                             position = ownerBody.corePosition,
                             minDistance = 5f,
                             maxDistance = 45f
