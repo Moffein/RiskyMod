@@ -298,13 +298,13 @@ namespace RiskyMod.Survivors.Mage
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepter()
         {
-            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.SpecialLightningScepter, "MageBody", SkillSlot.Special, specialLightningVariantIndex);
+            if (MageCore.enableLightningSpecial) AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.SpecialLightningScepter, "MageBody", SkillSlot.Special, specialLightningVariantIndex);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepterClassic()
         {
-            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.SpecialLightningScepter, "MageBody", SkillSlot.Special, Skills.SpecialLightning);
+            if (MageCore.enableLightningSpecial) ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.SpecialLightningScepter, "MageBody", SkillSlot.Special, Skills.SpecialLightning);
         }
 
         private void HandleIonSurge(SkillLocator sk)
