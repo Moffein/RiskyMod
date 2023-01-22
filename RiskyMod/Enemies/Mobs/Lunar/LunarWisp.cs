@@ -15,6 +15,7 @@ namespace RiskyMod.Enemies.Mobs.Lunar
         public static bool disableProjectileOnKill = true;
         public static bool enableFalloff = true;
         public static bool removeHitscan = true;
+        public static bool reduceSpawnrate = true;
 
         public static GameObject shardProjectilePrefab;
 
@@ -31,8 +32,18 @@ namespace RiskyMod.Enemies.Mobs.Lunar
                 {
                     EnableBulletFalloff();
                 }
+                if (reduceSpawnrate)
+                {
+                    ReduceSpawnrate();
+                }
             }
             ModifyProjectile();
+        }
+
+        private void ReduceSpawnrate()
+        {
+            CharacterSpawnCard csc = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/LunarWisp/cscLunarWisp.asset").WaitForCompletion();
+            csc.directorCreditCost = 700; //550 vanilla, 350 for lunar golem
         }
 
         private void EnableStatusConditions()
@@ -134,7 +145,7 @@ namespace RiskyMod.Enemies.Mobs.Lunar
             if (pie) pie.blastDamageCoefficient = 1f;
 
             ProjectileDirectionalTargetFinder pdtf = shardProjectilePrefab.GetComponent<ProjectileDirectionalTargetFinder>();
-            if (pdtf) pdtf.lookCone = 20f;  //was 60f
+            if (pdtf) pdtf.lookCone = 15f;  //was 60f
             //UnityEngine.Object.Destroy(shardProjectilePrefab.GetComponent<ProjectileDirectionalTargetFinder>());
             //UnityEngine.Object.Destroy(shardProjectilePrefab.GetComponent<ProjectileSteerTowardTarget>());
             //UnityEngine.Object.Destroy(shardProjectilePrefab.GetComponent<ProjectileTargetComponent>());
@@ -144,7 +155,7 @@ namespace RiskyMod.Enemies.Mobs.Lunar
             {
                 self.UpdateCrits();
                 bool isCrit = !self.critEndTime.hasPassed;
-                float damage = FireLunarGuns.baseDamagePerSecondCoefficient / self.baseBulletsPerSecond * self.damageStat * 1.5f;   //Supposed to be firing 2 bulletattacks.
+                float damage = FireLunarGuns.baseDamagePerSecondCoefficient / self.baseBulletsPerSecond * self.damageStat;   //Supposed to be firing 2 bulletattacks.
                 self.StartAimMode(0.5f, false);
                 Ray aimRay = self.GetAimRay();
                 ProjectileManager.instance.FireProjectile(shardProjectilePrefab, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), self.gameObject, damage, 0f, isCrit, DamageColorIndex.Default, null, 120f);
