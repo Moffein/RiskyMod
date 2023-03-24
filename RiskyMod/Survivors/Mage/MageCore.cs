@@ -14,6 +14,7 @@ using System.Linq;
 using UnityEngine.AddressableAssets;
 using RoR2.Projectile;
 using BepInEx.Configuration;
+using RiskyMod.Survivors.Mage.SkillTweaks;
 
 namespace RiskyMod.Survivors.Mage
 {
@@ -126,6 +127,8 @@ namespace RiskyMod.Survivors.Mage
                 iceWallDef.canceledFromSprinting = !SoftDependencies.RtAutoSprintLoaded;
                 iceWallDef.activationState = new SerializableEntityStateType(typeof(PrepIceWall));
             }
+
+            new IceWallDefense();
 
             if (enableFireUtility)
             {

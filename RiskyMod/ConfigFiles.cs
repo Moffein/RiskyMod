@@ -711,6 +711,7 @@ namespace RiskyMod
 
             Parent.enabled = MonsterCfg.Bind(monsterString, "Parent", true, "Enable changes to this monster.").Value;
 
+            LunarExploder.enabled = MonsterCfg.Bind(monsterString, "Lunar Exploder", true, "Enable changes to this monster.").Value;
             LunarGolem.enabled = MonsterCfg.Bind(monsterString, "Lunar Golem", true, "Enable changes to this monster.").Value;
             LunarWisp.enabled = MonsterCfg.Bind(monsterString, "Lunar Wisp", true, "Enable changes to this monster.").Value;
             LunarWisp.reduceSpawnrate = MonsterCfg.Bind(monsterString, "Lunar Wisp - Reduce Spawnrate", true, "Increases the director credit cost of this monster.").Value;

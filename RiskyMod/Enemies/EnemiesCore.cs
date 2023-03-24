@@ -58,6 +58,7 @@ namespace RiskyMod.Enemies
 
             new LunarGolem();
             new LunarWisp();
+            new LunarExploder();
 
             new BeetleQueen();
             new Vagrant();
