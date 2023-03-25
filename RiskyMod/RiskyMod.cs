@@ -115,6 +115,7 @@ namespace RiskyMod
         {
             //Check for Inferno here since it has a RiskyMod softdependency.
             SoftDependencies.InfernoPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("HIFU.Inferno");
+            DefenseMatrixManager.Initialize();
         }
 
         public void Awake()
