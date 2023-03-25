@@ -10,6 +10,7 @@ namespace RiskyMod.Survivors.Mage.Components
     {
         public static GameObject projectileDeletionEffectPrefab;
 
+        private GameObject matrixObject;
         private DefenseMatrixManager.DefenseMatrixInfo defenseMatrixInfo;
         private BoxCollider collider;
         private TeamFilter tf;
@@ -17,12 +18,25 @@ namespace RiskyMod.Survivors.Mage.Components
         //Do this in Start because TeamFilter might not be initialized in Awake
         public void Start()
         {
-            if (defenseMatrixInfo == null)
+            if (!matrixObject)
             {
                 tf = base.GetComponent<TeamFilter>();
                 if (tf && tf.teamIndex != TeamIndex.None && base.transform)
                 {
-                    collider = base.GetComponent<BoxCollider>();
+                    GameObject toInstantiate = new GameObject
+                    {
+                        layer = LayerIndex.entityPrecise.intVal
+                    };
+                    BoxCollider bc = toInstantiate.AddComponent<BoxCollider>();
+                    bc.size = new Vector3(2.5f, 2.5f, 7f);
+                    bc.enabled = false;
+
+                    toInstantiate.transform.localPosition = base.transform.localPosition;
+                    toInstantiate.transform.localRotation = base.transform.localRotation;
+                    toInstantiate.transform.localScale = base.transform.localScale;
+
+                    matrixObject = toInstantiate;
+                    collider = matrixObject.GetComponent<BoxCollider>();
                     if (collider)
                     {
                         defenseMatrixInfo = new DefenseMatrixManager.DefenseMatrixInfo(new Collider[] { collider }, tf.teamIndex);
@@ -85,6 +99,7 @@ namespace RiskyMod.Survivors.Mage.Components
         public void OnDestroy()
         {
             if (defenseMatrixInfo != null) DefenseMatrixManager.RemoveMatrix(defenseMatrixInfo);
+            if (matrixObject) Destroy(matrixObject);
         }
     }
 }

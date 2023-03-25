@@ -57,11 +57,6 @@ namespace RiskyMod
             return null;
         }
 
-        public static DefenseMatrixInfo AddMatrix(Collider[] colliders, TeamIndex teamIndex)
-        {
-            return AddMatrix(new DefenseMatrixInfo(colliders, teamIndex));
-        }
-
         public static void RemoveMatrix(DefenseMatrixInfo defenseMatrixInfo)
         {
             activeDefenseMatrices.Remove(defenseMatrixInfo);

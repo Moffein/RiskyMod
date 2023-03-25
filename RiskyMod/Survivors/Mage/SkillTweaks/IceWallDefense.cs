@@ -22,14 +22,15 @@ namespace RiskyMod.Survivors.Mage.SkillTweaks
             modifiedIceWallPillarProjectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MageIcewallPillarProjectile.prefab").WaitForCompletion().InstantiateClone("RiskyModIceWallPillarProjectile", true);
             modifiedIceWallPillarProjectile.AddComponent<IceWallDefenseComponent>();
 
+            //Setting this here causes too many weird interactions to pop up due to the mine trigger collider being affected. Handle the Collider stuff in IceWallDefenseComponent.cs
             //Increase size or else projectiles go through the cracks
-            BoxCollider pillarCollider = modifiedIceWallPillarProjectile.GetComponent<BoxCollider>();
-            pillarCollider.size = new Vector3(2.5f, 2.5f, 7f);
+            //BoxCollider pillarCollider = modifiedIceWallPillarProjectile.GetComponent<BoxCollider>();
+            //pillarCollider.size = new Vector3(2.5f, 2.5f, 7f);
             //Debug.Log("Collider Size: " + pillarCollider.size);  //1, 1, 6.1
             //Debug.Log("Transform Scale: " + modifiedIceWallPillarProjectile.transform.localScale);  //1, 1, 1
 
-            modifiedIceWallPillarProjectile.gameObject.layer = LayerIndex.entityPrecise.intVal; //Needs to be on this layer to work with DefenseMatrixManager
-            pillarCollider.enabled = false; //Gets toggled via DefenseMatrixManager, disabled by default so it doesnt block collision.
+            //modifiedIceWallPillarProjectile.gameObject.layer = LayerIndex.entityPrecise.intVal; //Needs to be on this layer to work with DefenseMatrixManager
+            //pillarCollider.enabled = false; //Gets toggled via DefenseMatrixManager, disabled by default so it doesnt block collision.
 
             Content.Content.projectilePrefabs.Add(modifiedIceWallPillarProjectile);
 
