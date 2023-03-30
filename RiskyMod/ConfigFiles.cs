@@ -549,10 +549,10 @@ namespace RiskyMod
             MageCore.m2RemoveNanobombGravity = SurvivorCfg.Bind(mageString, "Nanobomb - Remove Gravity", true, "Removes projectile drop from Nanobomb so it behaves like it did pre-1.0 update.").Value;
 
             MageCore.ionSurgeUtility = SurvivorCfg.Bind(mageString, "Ion Surge - Move to Utility Slot", true, "Moves Ion Surge to the Utility slot.").Value;
-            MageCore.ionSurgeMovementScaling = SurvivorCfg.Bind(mageString, "Ion Surge - Movement Scaling", false, "Ion Surge jump height scales with movement speed.");
+            MageCore.ionSurgeMovementScaling = SurvivorCfg.Bind(mageString, "Ion Surge - Movement Scaling", false, "(Client-Side) Ion Surge jump height scales with movement speed.");
             MageCore.ionSurgeShock = SurvivorCfg.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
 
-            MageCore.utilitySelfKnockback = SurvivorCfg.Bind(mageString, "Utility Self Knockback", true, "Snapfreeze Rework and Blaze Storm apply self-knockback when used midair.");
+            MageCore.utilitySelfKnockback = SurvivorCfg.Bind(mageString, "Utility Self Knockback", true, "(Client-Side) Snapfreeze Rework and Blaze Storm apply self-knockback when used midair.");
             MageCore.iceWallRework = SurvivorCfg.Bind(mageString, "Snapfreeze Rework", true, "Snapfreeze can target midair enemies.").Value;
             Survivors.Mage.SkillTweaks.IceWallDefense.enabled = SurvivorCfg.Bind(mageString, "Snapfreeze Defense", true, "Snapfreeze blocks ranged attacks from enemies.").Value;
             MageCore.enableFireUtility = SurvivorCfg.Bind(mageString, "Blaze Storm Utility Skill", false, "Enables this custom skill.").Value;
@@ -564,8 +564,10 @@ namespace RiskyMod
 
             MercCore.enabled = SurvivorCfg.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             MercCore.modifyStats = SurvivorCfg.Bind(mercString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
-            MercCore.m1ComboFinishTweak = SurvivorCfg.Bind(mercString, "M1 Attack Speed Tweak (Client-Side)", true, "Makes the 3rd hit of Merc's M1 be unaffected by attack speed for use with combo tech.");
             MercCore.evisTargetingFix = SurvivorCfg.Bind(mercString, "Eviscerate Targeting Fix", true, "Makes Eviscerate less likely to target teammates.").Value;
+            //Should change the name of this to remove (Client-Side), but I don't want to mess with peoples' configs at this point.
+            MercCore.m1ComboFinishTweak = SurvivorCfg.Bind(mercString, "M1 Attack Speed Tweak (Client-Side)", true, "(Client-Side) Makes the 3rd hit of Merc's M1 be unaffected by attack speed for use with combo tech.");
+
 
             TreebotCore.enabled = SurvivorCfg.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             TreebotCore.drillChanges = SurvivorCfg.Bind(treebotString, "DIRECTIVE Drill Changes", true, "Enable changes to this skill.").Value;
@@ -670,7 +672,7 @@ namespace RiskyMod
             VoidFiendCore.secondaryMultitask = SurvivorCfg.Bind(voidFiendString, "Secondary Multitasking", true, "Drown and Suppress can be fired while charging Flood.").Value;
             VoidFiendCore.modifyCorruptCrush = SurvivorCfg.Bind(voidFiendString, "Corrupted Suppress Changes", true, "Enable changes to this skill.").Value;
             UtilityFallImmune.enabled = SurvivorCfg.Bind(voidFiendString, "Trespass Changes", true, "Enable changes to this skill.").Value;
-            UtilityMoveSpeedScaling.disableScaling = SurvivorCfg.Bind(voidFiendString, "Trespass - Disable Move Speed Scaling", false, "Prevents Trespass from scaling with move speed..");
+            UtilityMoveSpeedScaling.disableScaling = SurvivorCfg.Bind(voidFiendString, "Trespass - Disable Move Speed Scaling", false, "(Client-Side) Prevents Trespass from scaling with move speed.");
 
             ConfigFireSelect();
         }
