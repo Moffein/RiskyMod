@@ -120,8 +120,8 @@ namespace RiskyMod
 
         public void Awake()
         {
-            //Check this first since config relies on it.
-            SoftDependencies.RiskOfOptionsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions");
+            //Check this first since config relies on it
+            InitDependencies();
 
             On.RoR2.Stage.Start += (orig, self) =>
             {
@@ -163,18 +163,34 @@ namespace RiskyMod
             AddHooks();
         }
 
-        private void CheckDependencies()
+        //This isn't all the softdependency checks. Some still are in CheckDependencies, this is just a quick fix.
+        private void InitDependencies()
         {
+            SoftDependencies.RiskOfOptionsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions");
             SoftDependencies.ArtifactOfPotentialLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("zombieseatflesh7.ArtifactOfPotential");
             SoftDependencies.TeleporterTurretsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RuneFoxMods.TeleporterTurrets");
-
             SoftDependencies.KingKombatArenaLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Kingpinush.KingKombatArena");
+            SoftDependencies.ZetTweaksLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetTweaks");
+            SoftDependencies.AIBlacklistLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist");
+            SoftDependencies.QueensGlandBuffLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.kking117.QueenGlandBuff");
+            FixPlayercount.MultitudesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("dev.wildbook.multitudes");
+            FixPlayercount.ZetArtifactsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetArtifacts");
+            SoftDependencies.ScepterPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
+            SoftDependencies.ClassicItemsScepterLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.ClassicItems");
+            SoftDependencies.ShareSuiteLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.funkfrog_sipondo.sharesuite");
+            SoftDependencies.RtAutoSprintLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx");
+            SoftDependencies.SpikestripGrooveSalad = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.groovesalad.GrooveSaladSpikestripContent");
+            SoftDependencies.SpikestripHeyImNoob = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.heyimnoob.NoopSpikestripContent");
+            SoftDependencies.SpikestripPlasmaCore = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.plasmacore.PlasmaCoreSpikestripContent");
+        }
+
+        private void CheckDependencies()
+        {
             if (SoftDependencies.KingKombatArenaLoaded)
             {
                 On.RoR2.Stage.Start += CheckArenaLoaded;
             }
 
-            SoftDependencies.ZetTweaksLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetTweaks");
             if (SoftDependencies.ZetTweaksLoaded) ZetTweaksCompat();
 
             bool noLevelUpHealPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoLevelupHeal");
@@ -188,17 +204,13 @@ namespace RiskyMod
             bool fpcPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.FixPlayercount");
             if (fpcPluginLoaded && FixPlayercount.enabled) Debug.Log("RiskyMod: Disabling FixPlayercount because standalone plugin is loaded.");
             FixPlayercount.enabled = FixPlayercount.enabled && !fpcPluginLoaded;
-            FixPlayercount.MultitudesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("dev.wildbook.multitudes");
-            FixPlayercount.ZetArtifactsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetArtifacts");
 
-            SoftDependencies.QueensGlandBuffLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.kking117.QueenGlandBuff");
             if (SoftDependencies.QueensGlandBuffLoaded && QueensGland.enabled) Debug.Log("RiskyMod: Disabling Queens Gland changes because QueensGlandBuff is loaded.");
 
             bool nvaPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoVoidAllies");
             if (nvaPluginLoaded && VoidInfestor.noVoidAllies) Debug.Log("RiskyMod: Disabling NoVoidAllies because standalone plugin is loaded.");
             VoidInfestor.noVoidAllies = VoidInfestor.noVoidAllies && !nvaPluginLoaded;
 
-            SoftDependencies.AIBlacklistLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist");
             if (SoftDependencies.AIBlacklistLoaded)
             {
                 HandleAIBlacklist();
@@ -218,9 +230,6 @@ namespace RiskyMod
             bool hypercritPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.Hypercrit");
             if (hypercritPluginLoaded && CritHud.enabled) Debug.Log("RiskyMod: Disabling Ocular HUD changes because Hypercrit is loaded.");
             CritHud.enabled = CritHud.enabled && !hypercritPluginLoaded;   //Effect is already a part of hypercrit
-
-            SoftDependencies.ScepterPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
-            SoftDependencies.ClassicItemsScepterLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.ClassicItems");
 
             bool moffHereticPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.Heretic");
             if (moffHereticPluginLoaded && Visions.enabled) Debug.Log("RiskyMod: Disabling Visions of Heresy changes because Moffein's Heretic is loaded.");
@@ -261,7 +270,6 @@ namespace RiskyMod
             if (eliteReworksPluginLoaded && NullifyDebuff.enabled) Debug.Log("RiskyMod: Disabling Nullify Changes because EliteReworks is loaded.");
             NullifyDebuff.enabled = NullifyDebuff.enabled && !eliteReworksPluginLoaded;
 
-            SoftDependencies.ShareSuiteLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.funkfrog_sipondo.sharesuite");
             if (SoftDependencies.ShareSuiteLoaded) HandleShareSuite();
 
             bool interactableLimitPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.InteractableLimit");
@@ -283,13 +291,7 @@ namespace RiskyMod
             if (teleExpansionLoaded && Moon.ModifyHoldout.enabled) Debug.Log("RiskyMod: Disabling Moon.ModifyHoldout because TeleExpansion is loaded.");
             Moon.ModifyHoldout.enabled = Moon.ModifyHoldout.enabled && !teleExpansionLoaded;
 
-            SoftDependencies.RtAutoSprintLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.johnedwa.RTAutoSprintEx");
-
             Sacrifice.enabled = Sacrifice.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.SacrificeTweaks");
-
-            SoftDependencies.SpikestripGrooveSalad = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.groovesalad.GrooveSaladSpikestripContent");
-            SoftDependencies.SpikestripHeyImNoob = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.heyimnoob.NoopSpikestripContent");
-            SoftDependencies.SpikestripPlasmaCore = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.plasmacore.PlasmaCoreSpikestripContent");
         }
 
         private void CheckArenaLoaded(On.RoR2.Stage.orig_Start orig, Stage self)
