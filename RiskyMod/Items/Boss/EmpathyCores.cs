@@ -26,7 +26,7 @@ namespace RiskyMod.Items.Boss
                     if (minionMaster && minionMaster.teamIndex == TeamIndex.Player && minionMaster.inventory)
                     {
                         minionMaster.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                        minionMaster.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
+                        //minionMaster.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
                         minionMaster.inventory.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
                         minionMaster.inventory.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
                         //Immune to overheat to be consistent with Drones.

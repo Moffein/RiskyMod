@@ -6,9 +6,9 @@
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Switches\Default Work Unit.wwu" DateLow="1653381133" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\States\Default Work Unit.wwu" DateLow="1653381134" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Soundcaster Sessions\Default Work Unit.wwu" DateLow="1653381134" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\SoundBanks\Default Work Unit.wwu" DateLow="1653382157" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\SoundBanks\Default Work Unit.wwu" DateLow="1664867369" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\RiskyMod_Sounds.wproj" DateLow="1653381133" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\RiskyMod_Sounds.Node.wsettings" DateLow="1660594958" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\RiskyMod_Sounds.Node.wsettings" DateLow="1664868419" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Queries\Factory Queries.wwu" DateLow="1646551843" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Queries\Default Work Unit.wwu" DateLow="1653381134" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Presets\Factory Spatial Audio.wwu" DateLow="1646551843" DateHigh="0"/>
@@ -21,7 +21,7 @@
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Game Parameters\Factory SoundSeed Air Game Syncs.wwu" DateLow="1646551864" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Game Parameters\Factory Motion.wwu" DateLow="1646551864" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Game Parameters\Default Work Unit.wwu" DateLow="1653381316" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Events\Default Work Unit.wwu" DateLow="1653382100" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Events\Default Work Unit.wwu" DateLow="1664866978" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Effects\Factory Reflect.wwu" DateLow="1646551863" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Effects\Factory McDSP Effects.wwu" DateLow="1646551863" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Effects\Factory Mastering Suite.wwu" DateLow="1646551865" DateHigh="0"/>
@@ -44,5 +44,5 @@
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Actor-Mixer Hierarchy\Factory Synth One.wwu" DateLow="1646551843" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Actor-Mixer Hierarchy\Factory SoundSeed Air Objects.wwu" DateLow="1646551864" DateHigh="0"/>
 	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Actor-Mixer Hierarchy\Factory Motion.wwu" DateLow="1653381316" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Actor-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1653382585" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\Actor-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1664866978" DateHigh="0"/>
 </ValidationCache>

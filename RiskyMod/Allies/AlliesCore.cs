@@ -65,8 +65,8 @@ namespace RiskyMod.Allies
                 NormalizeDroneDamage(AllyPrefabs.MegaDrone);
                 NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/dronecommanderbody"));
                 NormalizeDroneDamage(AllyPrefabs.GunnerTurret);
-                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/RoboBallGreenBuddyBody"));
-                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/RoboBallRedBuddyBody"));
+                //NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/RoboBallGreenBuddyBody"));
+                //NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/RoboBallRedBuddyBody"));
             }
 
             new AllyScaling();
