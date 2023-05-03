@@ -62,7 +62,7 @@ namespace RiskyMod.Survivors.Captain
                     {
                         if (self.stock < self.maxStock)
                         {
-                            self.rechargeStopwatch += 0.5f * self.finalRechargeInterval;
+                            self.rechargeStopwatch += Mathf.Max(20f, 0.5f * self.finalRechargeInterval);
                         }
                     }
                     else
