@@ -38,7 +38,7 @@ namespace RiskyMod.Items.Legendary
                             float newRadius = 0f;
                             for (int i = 0; i < itemCount; i++)
                             {
-                                newRadius += Mathf.Max(1f, 4f * Mathf.Pow(0.625f, i));
+                                newRadius += Mathf.Max(1.25f, 4f * Mathf.Pow(0.625f, i));
                             }
                             return newRadius;
                         });

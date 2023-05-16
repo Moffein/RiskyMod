@@ -4,14 +4,14 @@ using EntityStates;
 
 namespace EntityStates.RiskyMod.Captain
 {
-    public class FireShotgun : GenericBulletBaseState
-    {
+	public class FireShotgun : GenericBulletBaseState
+	{
 		public static GameObject _muzzleFlashPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/Muzzleflash1");
 		public static GameObject _tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/TracerCaptainShotgun");
 		public static GameObject _hitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/HitsparkCaptainShotgun");
 
 		private void SetStats()
-        {
+		{
 			this.baseDuration = 0.9f;
 			this.bulletCount = 7;
 			this.maxDistance = 2000f;
@@ -41,20 +41,13 @@ namespace EntityStates.RiskyMod.Captain
 			base.OnEnter();
 			base.PlayAnimation("Gesture, Additive", "FireCaptainShotgun");
 			base.PlayAnimation("Gesture, Override", "FireCaptainShotgun");
-			if (this.attackSpeedStat < 1f)
-            {
-				this.duration = this.baseDuration / this.attackSpeedStat;
-            }
-			else
-			{
-				this.duration = this.baseDuration;
-			}
+			this.duration = this.baseDuration;
 		}
 
 		public override void ModifyBullet(BulletAttack bulletAttack)
 		{
 			base.ModifyBullet(bulletAttack);
-			bulletAttack.minSpread = 0f;	//Needs to be 0 or else weird things happen. Why isn't this vanilla?
+			bulletAttack.minSpread = 0f;    //Needs to be 0 or else weird things happen. Why isn't this vanilla?
 			bulletAttack.bulletCount = (uint)Mathf.FloorToInt((this.bulletCount * Mathf.Max(this.attackSpeedStat, 1f)));
 			bulletAttack.force = this.force * Mathf.Sqrt(bulletCount / 7f);
 			if (tight)
