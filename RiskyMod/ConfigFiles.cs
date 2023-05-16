@@ -539,6 +539,7 @@ namespace RiskyMod
 
             EngiCore.enabled = SurvivorCfg.Bind(engiString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             PressureMines.enabled = SurvivorCfg.Bind(engiString, "Pressure Mine Changes", true, "Pressure Mines only detonate when fully armed.").Value;
+            EngiCore.harpoonRangeTweak = SurvivorCfg.Bind(engiString, "Thermal Harpoon Changes", true, "Increases Thermal Harpoon targeting range.").Value;
             TurretChanges.turretChanges = SurvivorCfg.Bind(engiString, "Stationary Turret Changes", true, "Enable changes to Stationary Turrets.").Value;
             TurretChanges.mobileTurretChanges = SurvivorCfg.Bind(engiString, "Mobile Turret Changes", true, "Enable changes to Mobile Turrets.").Value;
 

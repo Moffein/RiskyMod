@@ -2,8 +2,10 @@
 using MonoMod.Cil;
 using RoR2;
 using RoR2.Projectile;
+using RoR2.Skills;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Engi
 {
@@ -13,6 +15,9 @@ namespace RiskyMod.Survivors.Engi
         public PressureMines()
         {
             if (!enabled) return;
+
+            SkillDef mines = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Engi/EngiBodyPlaceMine.asset").WaitForCompletion();
+            mines.skillDescriptionToken = "ENGI_SECONDARY_DESCRIPTION_RISKYMOD";
 
             IL.EntityStates.Engi.Mine.WaitForTarget.FixedUpdate += (il) =>
             {

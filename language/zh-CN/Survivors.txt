@@ -38,7 +38,6 @@
 	"HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>传送</style>至空中，向目标区域射下箭雨，使区域内所有敌人<style=cIsUtility>减速</style>，并造成<style=cIsDamage>每秒420%的伤害</style>。",
 	"HUNTRESS_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>传送</style>至空中，向目标区域射下箭雨，<style=cIsDamage>点燃</style>区域内所有敌人，并造成<style=cIsDamage>每秒420%的伤害</style>。",
 	
-	"TOOLBOT_PRIMARY_DESCRIPTION_RISKYMOD" : "快速发射钉子，造成<style=cIsDamage>60%的伤害</style>。最后一次性发射<style=cIsDamage>12</style>枚钉子。",
 	"TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD" : "发射一条具有穿透效果的钢筋，造成<style=cIsDamage>660%的伤害</style>。",
 	"TOOLBOT_PRIMARY_ALT2_DESCRIPTION_RISKYMOD" : "发射一枚火箭，爆炸造成<style=cIsDamage>390%的伤害</style>。最多发射4次。",
 	"TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD" : "锯伤周围敌人，造成<style=cIsDamage>每秒1000%的伤害</style>。 击中敌人会获得<style=cIsHealing>临时屏障</style>。",

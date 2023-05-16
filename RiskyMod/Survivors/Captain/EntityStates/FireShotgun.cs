@@ -41,7 +41,14 @@ namespace EntityStates.RiskyMod.Captain
 			base.OnEnter();
 			base.PlayAnimation("Gesture, Additive", "FireCaptainShotgun");
 			base.PlayAnimation("Gesture, Override", "FireCaptainShotgun");
-			this.duration = this.baseDuration;
+			if (this.attackSpeedStat < 1f)
+            {
+				this.duration = this.baseDuration / this.attackSpeedStat;
+            }
+			else
+			{
+				this.duration = this.baseDuration;
+			}
 		}
 
 		public override void ModifyBullet(BulletAttack bulletAttack)

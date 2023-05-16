@@ -111,9 +111,7 @@
 	
 	"ITEM_GHOSTONKILL_PICKUP_RISKYMOD": "击败一名敌人时召唤一只幽灵。随时间充能。",
 	"ITEM_GHOSTONKILL_DESC_RISKYMOD": "击败一名敌人时<style=cIsDamage>召唤一只幽灵</style>造成<style=cIsDamage>600%</style><style=cStack>（每层增加180%）</style>的伤害。持续<style=cIsDamage>30秒</style><style=cStack>（每层增加30）</style>。每<style=cIsUtility>20</style>秒自动充能一次。可以同时拥有<style=cIsUtility>3</style>只幽灵。", 
-	
-	"ITEM_BEHEMOTH_DESC_RISKYMOD": "你的所有<style=cIsDamage>攻击均会爆炸</style>，对<style=cIsDamage>4米</style><style=cStack>（每层增加2.5）</style>范围内的敌人造成<style=cIsDamage>60%</style><style=cStack>（每层增加20%）</style>的额外总伤害。",
-	
+
 	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>召唤一只甲壳虫守卫</style>，可额外造成<style=cIsDamage>300%</style><style=cStack>（每层增加300%）</style>的伤害，并额外拥有<style=cIsHealing>200%<style=cStack>（每层增加100%）</style></style>的生命值。",
 	
 	"ITEM_FIREBALLSONHIT_DESC_RISKYMOD": "命中时有<style=cIsDamage>10%</style>的几率从一名敌人处召唤<style=cIsDamage>3颗岩浆球</style>，每颗造成<style=cIsDamage>300%</style><style=cStack>（每层增加180%）</style>的伤害。",
@@ -268,7 +266,7 @@
 	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "防止<style=cIsUtility>1<style=cStack>个（每层增加1）</style></style><style=cIsDamage>减益效果</style>并施加一道<style=cIsHealing>临时屏障</style>，数值为<style=cIsHealing>最大生命值</style>的<style=cIsHealing>25%</style>。每<style=cIsUtility>5</style>秒充能一次</style>。",
 	
 	"ITEM_HEALINGPOTION_PICKUP_RISKYMOD" : "在生命值较低时立刻获得大量屏障。使用即消耗。",
-	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "受到伤害导致<style=cIsHealth>生命值降到50%</style>以下时会<style=cIsUtility>消耗</style>该物品，并获得<style=cIsHealing>最大生命值</style>的<style=cIsHealing>100%</style>的<style=cIsHealing>临时屏障</style>。",
+	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "受到伤害导致<style=cIsHealth>生命值降到50%</style>以下时会<style=cIsUtility>消耗</style>该物品，并获得<style=cIsHealing>最大生命值</style>的<style=cIsHealing>50%</style>的<style=cIsHealing>临时屏障</style>。",
 	
 	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>格挡</style>一次来袭的伤害。充能时间<style=cIsUtility>20秒</style><style=cStack>（每层减少10%）</style>。<style=cIsVoid>使所有更艰难的时光无效化</style>。",
 	

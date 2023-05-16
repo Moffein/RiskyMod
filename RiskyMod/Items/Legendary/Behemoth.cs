@@ -13,8 +13,6 @@ namespace RiskyMod.Items.Legendary
         {
             if (!enabled) return;
 
-            ItemsCore.ModifyItemDefActions += ModifyItem;
-
             IL.RoR2.GlobalEventManager.OnHitAll += (il) =>
             {
                 bool error = true;
@@ -40,13 +38,13 @@ namespace RiskyMod.Items.Legendary
                             float newRadius = 0f;
                             for (int i = 0; i < itemCount; i++)
                             {
-                                newRadius += 4f * Mathf.Pow(0.625f, i);
+                                newRadius += 4f * Mathf.Pow(0.625f, Mathf.Min(i, 2));
                             }
                             return newRadius;
                         });
 
                         //Change Damage
-                        if (c.TryGotoNext(MoveType.After,
+                        /*if (c.TryGotoNext(MoveType.After,
                             x => x.MatchLdcR4(0.6f)
                             ))
                         {
@@ -55,8 +53,8 @@ namespace RiskyMod.Items.Legendary
                             {
                                 return origDamage + 0.2f * (itemCount - 1);
                             });
-                            error = false;
-                        }
+                        }*/
+                        error = false;
                     }
                 }
 
@@ -65,11 +63,6 @@ namespace RiskyMod.Items.Legendary
                     UnityEngine.Debug.LogError("RiskyMod: Behemoth IL Hook failed");
                 }
             };
-        }
-
-        private static void ModifyItem()
-        {
-            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Behemoth);
         }
     }
 }

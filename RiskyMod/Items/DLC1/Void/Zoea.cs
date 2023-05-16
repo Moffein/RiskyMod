@@ -38,6 +38,7 @@ namespace RiskyMod.Items.DLC1.Void
 
             if (enabled)
             {
+                ItemsCore.ModifyItemDefActions += ModifyItem;
                 On.RoR2.VoidMegaCrabItemBehavior.GetMaxProjectiles += (orig, inventory) =>
                 {
                     return RiskyMod.inBazaar ? 0 : Math.Min(orig(inventory), maxAllyCount);
@@ -93,6 +94,11 @@ namespace RiskyMod.Items.DLC1.Void
                     }
                 }
             };
+        }
+
+        private static void ModifyItem()
+        {
+            SneedUtils.SneedUtils.AddItemTag(DLC1Content.Items.VoidMegaCrabItem, ItemTag.CannotCopy);
         }
     }
 }

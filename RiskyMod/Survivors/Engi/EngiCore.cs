@@ -9,6 +9,7 @@ namespace RiskyMod.Survivors.Engi
     public class EngiCore
     {
         public static bool enabled = true;
+        public static bool harpoonRangeTweak = true;
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/EngiBody");
         public EngiCore()
         {
@@ -20,16 +21,23 @@ namespace RiskyMod.Survivors.Engi
         private void ModifySkills(SkillLocator sk)
         {
             ModifySecondaries(sk);
+            ModifyUtilities(sk);
             ModifySpecials(sk);
         }
 
         private void ModifySecondaries(SkillLocator sk)
         {
-            SkillDef mines = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Engi/EngiBodyPlaceMine.asset").WaitForCompletion();
-
-            mines.skillDescriptionToken = "ENGI_SECONDARY_DESCRIPTION_RISKYMOD";
             new PressureMines();
         }
+
+        private void ModifyUtilities(SkillLocator sk)
+        {
+            if (harpoonRangeTweak)
+            {
+                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Engi.EngiMissilePainter.Paint", "maxDistance", "2000");
+            }
+        }
+
         private void ModifySpecials(SkillLocator sk)
         {
             new TurretChanges();

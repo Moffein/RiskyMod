@@ -38,7 +38,6 @@
 	"HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Teleport</style> into the sky. Target an area to rain arrows, <style=cIsUtility>slowing</style> all enemies and dealing <style=cIsDamage>420% damage per second</style>.",
 	"HUNTRESS_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Teleport</style> into the sky. Target an area to rain arrows, <style=cIsDamage>igniting</style> all enemies and dealing <style=cIsDamage>420% damage per second</style>.",
 	
-	"TOOLBOT_PRIMARY_DESCRIPTION_RISKYMOD" : "Rapidly fire nails for <style=cIsDamage>60% damage</style>. Finishes with a blast of <style=cIsDamage>12</style> nails.",
 	"TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD" : "Fire a piercing rebar that deals <style=cIsDamage>660% damage</style>.",
 	"TOOLBOT_PRIMARY_ALT2_DESCRIPTION_RISKYMOD" : "Fire a rocket that explodes for <style=cIsDamage>390% damage</style>. Hold up to 4.",
 	"TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD" : "Saw nearby enemies for <style=cIsDamage>1000% damage per second</style>. Hitting enemies grants a <style=cIsHealing>temporary barrier</style>.",

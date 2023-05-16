@@ -195,11 +195,14 @@ namespace RiskyMod.Survivors.Commando
         private GameObject BuildGrenadeProjectile()
         {
             GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/CommandoGrenadeProjectile").InstantiateClone("RiskyModFragProjectile", true);
+            DamageAPI.ModdedDamageTypeHolderComponent mdc = proj.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+            mdc.Add(SharedDamageTypes.SweetSpotModifier);
 
             ProjectileImpactExplosion pie = proj.GetComponent<ProjectileImpactExplosion>();
             pie.destroyOnWorld = false;
             pie.destroyOnEnemy = true;
             pie.falloffModel = BlastAttack.FalloffModel.SweetSpot;
+            pie.blastRadius = 12f;
 
             proj.AddComponent<GrenadeImpactComponent>();
 

@@ -72,8 +72,6 @@ namespace RiskyMod.Survivors.Toolbot
 
             SkillDef nailgunDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Toolbot/ToolbotBodyFireNailgun.asset").WaitForCompletion();
 
-            nailgunDef.skillDescriptionToken = "TOOLBOT_PRIMARY_DESCRIPTION_RISKYMOD";
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.BaseNailgunState", "damageCoefficient", "0.6");
             IL.EntityStates.Toolbot.BaseNailgunState.FireBullet += (il) =>
             {
                 ILCursor c = new ILCursor(il);
