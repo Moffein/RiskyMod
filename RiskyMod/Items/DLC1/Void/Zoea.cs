@@ -84,10 +84,7 @@ namespace RiskyMod.Items.DLC1.Void
                             int overstack = self.stack - Zoea.maxAllyCount;
                             if (overstack > 0)
                             {
-                                int targetHPBoost = 3 * overstack;
                                 int targetDamageBoost = 3 * overstack;
-
-                                allyInv.GiveItem(RoR2Content.Items.BoostHp, targetHPBoost);
                                 allyInv.GiveItem(RoR2Content.Items.BoostDamage, targetDamageBoost);
                             }
                         }

@@ -29,7 +29,7 @@ namespace RiskyMod.Survivors.Captain
 
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.Admiral"))
             {
-                Debug.LogError("RiskyMod: Loading CaptainCore while Admiral is installed, there may be conflicts. Check your RiskyMod/Admiral config files and adjust accordingly.");
+                Debug.LogWarning("RiskyMod: Loading CaptainCore while Admiral is installed, there may be conflicts. Check your RiskyMod/Admiral config files and adjust accordingly.");
             }
 
             new Microbots();

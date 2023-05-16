@@ -131,6 +131,7 @@ namespace RiskyMod.Survivors.Commando
             {
                 GameObject moddedGrenade = BuildGrenadeProjectile();
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.ThrowGrenade", "projectilePrefab", moddedGrenade);
+                ThrowGrenadeScepter.projectilePrefab = moddedGrenade;
             }
 
             if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
@@ -152,7 +153,7 @@ namespace RiskyMod.Survivors.Commando
                 barrageDef.activationState = new SerializableEntityStateType(typeof(FireBarrageScepter));
                 barrageDef.activationStateMachineName = "Weapon";
                 barrageDef.baseMaxStock = 1;
-                barrageDef.baseRechargeInterval = 6f;
+                barrageDef.baseRechargeInterval = 7f;
                 barrageDef.beginSkillCooldownOnSkillEnd = false;
                 barrageDef.canceledFromSprinting = false;
                 barrageDef.dontAllowPastMaxStocks = true;
@@ -173,6 +174,35 @@ namespace RiskyMod.Survivors.Commando
                 Content.Content.skillDefs.Add(barrageDef);
                 Skills.BarrageScepter = barrageDef;
             }
+
+            if (grenadeChanges)
+            {
+                SkillDef grenadeDef = SkillDef.CreateInstance<SkillDef>();
+                Content.Content.entityStates.Add(typeof(ThrowGrenadeScepter));
+                grenadeDef.activationState = new SerializableEntityStateType(typeof(ThrowGrenadeScepter));
+                grenadeDef.activationStateMachineName = "Weapon";
+                grenadeDef.baseMaxStock = 2;
+                grenadeDef.baseRechargeInterval = 5f;
+                grenadeDef.beginSkillCooldownOnSkillEnd = false;
+                grenadeDef.canceledFromSprinting = false;
+                grenadeDef.dontAllowPastMaxStocks = true;
+                grenadeDef.forceSprintDuringState = false;
+                grenadeDef.fullRestockOnAssign = true;
+                grenadeDef.icon = Assets.ScepterSkillIcons.CommandoGrenadeScepter;
+                grenadeDef.interruptPriority = InterruptPriority.PrioritySkill;
+                grenadeDef.isCombatSkill = true;
+                grenadeDef.keywordTokens = new string[] {};
+                grenadeDef.mustKeyPress = true;
+                grenadeDef.cancelSprintingOnActivation = true;
+                grenadeDef.rechargeStock = 1;
+                grenadeDef.requiredStock = 1;
+                grenadeDef.skillName = "GrenadeScepter";
+                grenadeDef.skillNameToken = "COMMANDO_SPECIAL_ALT1_SCEPTER_NAME_RISKYMOD";
+                grenadeDef.skillDescriptionToken = "COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD";
+                grenadeDef.stockToConsume = 1;
+                Content.Content.skillDefs.Add(grenadeDef);
+                Skills.GrenadeScepter = grenadeDef;
+            }
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -182,6 +212,10 @@ namespace RiskyMod.Survivors.Commando
             {
                 AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.BarrageScepter, "CommandoBody", SkillSlot.Special, 0);
             }
+            if (grenadeChanges)
+            {
+                AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.GrenadeScepter, "CommandoBody", SkillSlot.Special, 1);
+            }
         }
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepterClassic()
@@ -189,6 +223,10 @@ namespace RiskyMod.Survivors.Commando
             if (suppressiveChanges)
             {
                 ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.BarrageScepter, "CommandoBody", SkillSlot.Special, Skills.Barrage);
+            }
+            if (grenadeChanges)
+            {
+                ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.GrenadeScepter, "CommandoBody", SkillSlot.Special, Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/ThrowGrenade.asset").WaitForCompletion());
             }
         }
 
@@ -246,5 +284,6 @@ namespace RiskyMod.Survivors.Commando
     {
         public static SkillDef Barrage;
         public static SkillDef BarrageScepter;
+        public static SkillDef GrenadeScepter;
     }
 }

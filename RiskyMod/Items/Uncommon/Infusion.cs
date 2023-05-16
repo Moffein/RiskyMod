@@ -7,6 +7,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 using static RiskyMod.Content.Assets;
+using RoR2.Projectile;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -130,11 +131,15 @@ namespace RiskyMod.Items.Uncommon
             {
                 if (!victimBody.bodyFlags.HasFlag(CharacterBody.BodyFlags.Masterless))
                 {
-                    InfusionOrb infusionOrb = new InfusionOrb();
-                    infusionOrb.origin = victimBody.corePosition;
-                    infusionOrb.target = Util.FindBodyMainHurtBox(attackerBody);
-                    infusionOrb.maxHpValue = itemCount;
-                    OrbManager.instance.AddOrb(infusionOrb);
+                    bool isDeathProjectile = victimBody.GetComponent<DeathProjectile>();
+                    if (!isDeathProjectile)
+                    {
+                        InfusionOrb infusionOrb = new InfusionOrb();
+                        infusionOrb.origin = victimBody.corePosition;
+                        infusionOrb.target = Util.FindBodyMainHurtBox(attackerBody);
+                        infusionOrb.maxHpValue = itemCount;
+                        OrbManager.instance.AddOrb(infusionOrb);
+                    }
                 }
             }
         }
