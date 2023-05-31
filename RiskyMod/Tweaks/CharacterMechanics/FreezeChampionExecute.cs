@@ -88,7 +88,16 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                         c.Emit(OpCodes.Ldarg_0);
                         c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
                         {
-                            return executeThreshold * (self.body.isChampion ? bossExecuteFractionMultiplier : 1f);
+                            float threshold = 1f;
+                            if (self.body.isPlayerControlled)
+                            {
+                                threshold = 0f;
+                            }
+                            else if (self.body.isChampion)
+                            {
+                                threshold = bossExecuteFractionMultiplier;
+                            }
+                            return executeThreshold * threshold;
                         });
 
                         if(c.TryGotoNext(MoveType.After,
@@ -98,7 +107,16 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                             c.Emit(OpCodes.Ldarg_0);
                             c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
                             {
-                                return executeThreshold * (self.body.isChampion ? bossExecuteFractionMultiplier : 1f);
+                                float threshold = 1f;
+                                if (self.body.isPlayerControlled)
+                                {
+                                    threshold = 0f;
+                                }
+                                else if (self.body.isChampion)
+                                {
+                                    threshold = bossExecuteFractionMultiplier;
+                                }
+                                return executeThreshold * threshold;
                             });
                             error = false;
                         }
@@ -133,7 +151,16 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                         c.Emit(OpCodes.Ldarg_0);
                         c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
                         {
-                            return executeThreshold * (self.body.isChampion ? bossExecuteFractionMultiplier : 1f);
+                            float threshold = 1f;
+                            if (self.body.isPlayerControlled)
+                            {
+                                threshold = 0f;
+                            }
+                            else if (self.body.isChampion)
+                            {
+                                threshold = bossExecuteFractionMultiplier;
+                            }
+                            return executeThreshold * threshold;
                         });
                         error = false;
                     }
