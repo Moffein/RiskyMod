@@ -93,6 +93,7 @@ namespace RiskyMod.Content
         private static void LoadMiscSprites()
         {
             MiscSprites.CaptainEquipmentRestockBar = assetBundle.LoadAsset<Sprite>("texUIEquipmentRestock");
+            MiscSprites.ModIcon = assetBundle.LoadAsset<Sprite>("texModIcon");
         }
 
         public static class BuffIcons
@@ -131,6 +132,7 @@ namespace RiskyMod.Content
         public static class MiscSprites
         {
             public static Sprite CaptainEquipmentRestockBar;
+            public static Sprite ModIcon;
         }
     }
 }

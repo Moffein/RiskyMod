@@ -1,26 +1,31 @@
 ManifestFileVersion: 0
-CRC: 1771365200
+CRC: 1442478715
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6ea5d60efd69a96a10a5c8d8f321fbeb
+    Hash: 9e201a0fa0b6838eb9c0d5884061dbd2
   TypeTreeHash:
     serializedVersion: 2
-    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+    Hash: 7579feb4afd6aab513e2576ee96e6b63
 HashAppended: 0
 ClassTypes:
 - Class: 28
   Script: {instanceID: 0}
+- Class: 49
+  Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Resources/Sprites/Buffs/BuffHappiestMaskCooldown.png
 - Assets/Resources/Sprites/Buffs/BuffHappiestMaskReady.png
 - Assets/Resources/Sprites/UI/texUIEquipmentRestock.png
 - Assets/Resources/Sprites/Buffs/BuffRaincoatReady.png
+- Assets/Resources/Sprites/UI/texModIcon.png
 - Assets/Resources/Sprites/SkillIcons/Scepter/texCommandoR2.png
 - Assets/Resources/Sprites/SkillIcons/Scepter/texBanditR2.png
 - Assets/Resources/Sprites/Buffs/BuffRaincoatActive.png
+- Assets/Resources/BillingMode.json
 - Assets/Resources/Sprites/SkillIcons/Scepter/texHuntressR1.png
 - Assets/Resources/Sprites/Buffs/BuffRaincoatCooldown.png
 - Assets/Resources/Sprites/SkillIcons/Bandit2Gunslinger.png

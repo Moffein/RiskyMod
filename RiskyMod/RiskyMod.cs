@@ -82,7 +82,7 @@ namespace RiskyMod
 
     [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "1.2.1")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "1.2.2")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI), nameof(ItemAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
@@ -143,7 +143,7 @@ namespace RiskyMod
             pluginInfo = Info;
             Assets.Init();
             ConfigFiles.Init();
-            CheckDependencies();
+            CheckDependencies();    //More dependency checking
 
             ProjectileZapChainOnExplosion.Init();
 
@@ -382,6 +382,7 @@ namespace RiskyMod
             new EnigmaBlacklist();
             new BulwarksAmbry();
             new Sacrifice();
+            new NoVengeanceFallDamage();
 
             //Misc
             new AIBlacklistItems();

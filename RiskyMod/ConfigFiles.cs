@@ -120,6 +120,7 @@ namespace RiskyMod
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private static void RiskOfOptionsCompat()
         {
+            ModSettingsManager.SetModIcon(Content.Assets.MiscSprites.ModIcon);
             ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(FireSelect.scrollSelection));
             ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.swapButton));
             ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.prevButton));
@@ -260,6 +261,7 @@ namespace RiskyMod
             VengeanceVoidTeam.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Void Team", true, "Vengeance Doppelgangers are considered part of the Void Team.").Value;
             FixVengeanceLeveling.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Fix Levels", true, "Fix Vengeance Doppelgangers not leveling up.").Value;
             VengeancePercentHeal.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Reduce Percent Heals", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
+            NoVengeanceFallDamage.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Disable Fall Damage", true, "Vengeance Doppelgangers are immune to fall damage.").Value;
             EnigmaBlacklist.enabled = GeneralCfg.Bind(artifactString, "Enigma Blacklist", true, "Blacklist Lunars and Recycler from the Artifact of Enigma.").Value;
             Sacrifice.enabled = GeneralCfg.Bind(artifactString, "Sacrifice - No Drop Chance Scaling", true, "Increases drop chance when not using Swarms and prevents drop chance from increasing as the run progresses.").Value;
 
