@@ -27,6 +27,7 @@ namespace RiskyMod.Allies
         public static bool ChenGradiusCompat = true;
         public static bool ChenQbDroneCompat = true;
         public static bool TinkersSatchelCompat = true;
+        public static bool MoreDronesCompat = true;
 
         private static BodyIndex SpikestripBlueLemurian = BodyIndex.None;
         private static BodyIndex SS2SecurityDrone = BodyIndex.None;
@@ -38,6 +39,11 @@ namespace RiskyMod.Allies
         private static BodyIndex ChenQbDrone = BodyIndex.None;
         private static BodyIndex TinkerBulwarkDrone = BodyIndex.None;
         private static BodyIndex TinkerItemDrone = BodyIndex.None;
+        private static BodyIndex MDSeekerDrone = BodyIndex.None;
+        private static BodyIndex MDInfernoDrone = BodyIndex.None;
+        private static BodyIndex MDBoosterDrone = BodyIndex.None;
+
+        public static List<BodyIndex> StandardDroneScalingList = new List<BodyIndex>();
 
         public AlliesCore()
         {
@@ -87,20 +93,50 @@ namespace RiskyMod.Allies
             {
                 orig();
                 if (SpikestripCompat) SpikestripBlueLemurian = BodyCatalog.FindBodyIndex("BlueLemurianBody");
-                if (SS2Compat) SS2SecurityDrone = BodyCatalog.FindBodyIndex("DroidDroneBody");
-                if (ChenChillDroneCompat) ChenChillDrone = BodyCatalog.FindBodyIndex("ChillDroneBody");
-                if (ChenQbDroneCompat) ChenQbDrone = BodyCatalog.FindBodyIndex("QbDroneBody");
+                if (SS2Compat)
+                {
+                    SS2SecurityDrone = BodyCatalog.FindBodyIndex("DroidDroneBody");
+                }
+                if (ChenChillDroneCompat)
+                {
+                    ChenChillDrone = BodyCatalog.FindBodyIndex("ChillDroneBody");
+                    StandardDroneScalingList.Add(ChenChillDrone);
+                }
+                if (ChenQbDroneCompat)
+                {
+                    ChenQbDrone = BodyCatalog.FindBodyIndex("QbDroneBody");
+                    StandardDroneScalingList.Add(ChenQbDrone);
+                }
+
                 if (ChenGradiusCompat)
                 {
                     ChenGradiusPsyDroneGreen = BodyCatalog.FindBodyIndex("PsyDroneGreenBody");
                     ChenGradiusPsyDroneRed = BodyCatalog.FindBodyIndex("PsyDroneRedBody");
                     ChenGradiusLaserDrone1 = BodyCatalog.FindBodyIndex("LaserDrone1Body");
                     ChenGradiusLaserDrone2 = BodyCatalog.FindBodyIndex("LaserDrone2Body");
+
+                    StandardDroneScalingList.Add(ChenGradiusPsyDroneGreen);
+                    StandardDroneScalingList.Add(ChenGradiusPsyDroneRed);
+                    StandardDroneScalingList.Add(ChenGradiusLaserDrone1);
+                    StandardDroneScalingList.Add(ChenGradiusLaserDrone2);
                 }
                 if (TinkersSatchelCompat)
                 {
                     TinkerItemDrone = BodyCatalog.FindBodyIndex("ItemDroneBody");
                     TinkerBulwarkDrone = BodyCatalog.FindBodyIndex("BulwarkDroneBody");
+
+                    StandardDroneScalingList.Add(TinkerItemDrone);
+                    StandardDroneScalingList.Add(TinkerBulwarkDrone);
+                }
+                if (MoreDronesCompat)
+                {
+                    MDSeekerDrone = BodyCatalog.FindBodyIndex("ShredderDrone");
+                    MDBoosterDrone = BodyCatalog.FindBodyIndex("BoosterDroneBody");
+                    MDInfernoDrone = BodyCatalog.FindBodyIndex("HellDroneBody");
+
+                    StandardDroneScalingList.Add(MDSeekerDrone);
+                    StandardDroneScalingList.Add(MDBoosterDrone);
+                    StandardDroneScalingList.Add(MDInfernoDrone);
                 }
             };
 
@@ -112,36 +148,27 @@ namespace RiskyMod.Allies
             if (NetworkServer.active && master.inventory && master.aiComponents.Length > 0 && master.teamIndex == TeamIndex.Player)
             {
                 CharacterBody masterBody = master.GetBody();
-                if (masterBody && masterBody.bodyIndex != BodyIndex.None)
+                if (masterBody && masterBody.bodyIndex != BodyIndex.None) return;
+                if (StandardDroneScalingList.Contains(masterBody.bodyIndex))
                 {
-                    if (masterBody.bodyIndex == ChenQbDrone
-                        || masterBody.bodyIndex == ChenChillDrone
-                        || masterBody.bodyIndex == ChenGradiusLaserDrone1
-                        || masterBody.bodyIndex == ChenGradiusLaserDrone2
-                        || masterBody.bodyIndex == ChenGradiusPsyDroneGreen
-                        || masterBody.bodyIndex == ChenGradiusPsyDroneRed
-                        || masterBody.bodyIndex == TinkerItemDrone
-                        || masterBody.bodyIndex == TinkerBulwarkDrone)
-                    {
-                        master.inventory.GiveItem(AllyItems.AllyMarkerItem);
-                        master.inventory.GiveItem(AllyItems.AllyScalingItem);
-                        master.inventory.GiveItem(AllyItems.AllyRegenItem, 40);
-                    }
-                    else if (masterBody.bodyIndex == SS2SecurityDrone)
-                    {
-                        master.inventory.GiveItem(AllyItems.AllyMarkerItem);
-                        master.inventory.GiveItem(AllyItems.AllyScalingItem);
-                        master.inventory.GiveItem(AllyItems.AllyAllowOverheatDeathItem);
-                        master.inventory.GiveItem(AllyItems.AllyAllowVoidDeathItem);
-                    }
-                    else if (masterBody.bodyIndex == SpikestripBlueLemurian)
-                    {
-                        master.inventory.GiveItem(AllyItems.AllyMarkerItem);
-                        master.inventory.GiveItem(AllyItems.AllyScalingItem);
-                        master.inventory.GiveItem(AllyItems.AllyRegenItem, 40);
-                        master.inventory.GiveItem(AllyItems.AllyAllowOverheatDeathItem);
-                        master.inventory.GiveItem(AllyItems.AllyAllowVoidDeathItem);
-                    }
+                    master.inventory.GiveItem(AllyItems.AllyMarkerItem);
+                    master.inventory.GiveItem(AllyItems.AllyScalingItem);
+                    master.inventory.GiveItem(AllyItems.AllyRegenItem, 40);
+                }
+                else if (masterBody.bodyIndex == SS2SecurityDrone)
+                {
+                    master.inventory.GiveItem(AllyItems.AllyMarkerItem);
+                    master.inventory.GiveItem(AllyItems.AllyScalingItem);
+                    master.inventory.GiveItem(AllyItems.AllyAllowOverheatDeathItem);
+                    master.inventory.GiveItem(AllyItems.AllyAllowVoidDeathItem);
+                }
+                else if (masterBody.bodyIndex == SpikestripBlueLemurian)
+                {
+                    master.inventory.GiveItem(AllyItems.AllyMarkerItem);
+                    master.inventory.GiveItem(AllyItems.AllyScalingItem);
+                    master.inventory.GiveItem(AllyItems.AllyRegenItem, 40);
+                    master.inventory.GiveItem(AllyItems.AllyAllowOverheatDeathItem);
+                    master.inventory.GiveItem(AllyItems.AllyAllowVoidDeathItem);
                 }
             }
         }
