@@ -18,11 +18,7 @@ namespace RiskyMod.Tweaks.RunScaling
         {
             if (!enabled) return;
 
-            On.RoR2.Run.Start += (orig, self) =>
-            {
-                orig(self);
-                previousCards.Clear();
-            };
+            RoR2.Run.onRunStartGlobal += Run_onRunStartGlobal;
 
             //Copied from DNSpy
             IL.RoR2.CombatDirector.SetNextSpawnAsBoss += (il) =>
@@ -78,6 +74,11 @@ namespace RiskyMod.Tweaks.RunScaling
                     Debug.LogError("RiskyMod: NoBossRepeat IL Hook failed");
                 }
             };
+        }
+
+        private void Run_onRunStartGlobal(Run obj)
+        {
+            previousCards.Clear();
         }
     }
 }
