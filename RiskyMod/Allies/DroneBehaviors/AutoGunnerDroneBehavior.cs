@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using RoR2.CharacterAI;
 
 namespace RiskyMod.Allies.DroneBehaviors
 {
@@ -45,6 +46,30 @@ namespace RiskyMod.Allies.DroneBehaviors
             cooldownStopwatch = 0f;
             fireStopwatch = 0f;
             fireInterval = baseFireInterval;
+        }
+
+        public HurtBox GetAITarget()
+        {
+            if (!characterBody || characterBody.isPlayerControlled || !characterBody.master || characterBody.master.aiComponents == null || characterBody.master.aiComponents.Length <= 0) return null;
+
+            HurtBox target = null;
+            foreach (BaseAI ai in characterBody.master.aiComponents)
+            {
+                if (ai.currentEnemy != null)
+                {
+                    HurtBox hb = ai.currentEnemy.GetBestHurtBox(out bool hadLOS);
+                    if (hb && hb.enabled)
+                    {
+                        TeamIndex myTeam = characterBody.teamComponent ? characterBody.teamComponent.teamIndex : TeamIndex.None;
+                        if (myTeam != hb.teamIndex)
+                        {
+                            target = hb;
+                            break;
+                        }
+                    }
+                }
+            }
+            return target;
         }
 
         public void FixedUpdate()
@@ -95,20 +120,28 @@ namespace RiskyMod.Allies.DroneBehaviors
         {
             Ray aimRay = characterBody.inputBank ? characterBody.inputBank.GetAimRay() : default;
 
-            BullseyeSearch search = new BullseyeSearch();
+            HurtBox hb = GetAITarget();
+            if (hb && hb.transform && (hb.transform.position - aimRay.origin).sqrMagnitude <= maxActivationDistance * maxActivationDistance)
+            {
+                targetHurtBox = hb;
+            }
+            else
+            {
+                BullseyeSearch search = new BullseyeSearch();
 
-            search.teamMaskFilter = TeamMask.allButNeutral;
-            search.teamMaskFilter.RemoveTeam(characterBody.teamComponent.teamIndex);
+                search.teamMaskFilter = TeamMask.allButNeutral;
+                search.teamMaskFilter.RemoveTeam(characterBody.teamComponent.teamIndex);
 
-            search.filterByLoS = true;
-            search.searchOrigin = aimRay.origin;
-            search.sortMode = BullseyeSearch.SortMode.Angle;
-            search.maxDistanceFilter = maxActivationDistance;
-            search.maxAngleFilter = 360f;
-            search.searchDirection = aimRay.direction;
-            search.RefreshCandidates();
+                search.filterByLoS = true;
+                search.searchOrigin = aimRay.origin;
+                search.sortMode = BullseyeSearch.SortMode.Angle;
+                search.maxDistanceFilter = maxActivationDistance;
+                search.maxAngleFilter = 360f;
+                search.searchDirection = aimRay.direction;
+                search.RefreshCandidates();
 
-            targetHurtBox = search.GetResults().FirstOrDefault<HurtBox>();
+                targetHurtBox = search.GetResults().FirstOrDefault<HurtBox>();
+            }
 
             return targetHurtBox != default;
         }
