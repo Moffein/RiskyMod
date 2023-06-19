@@ -18,11 +18,7 @@ namespace RiskyMod.Tweaks.RunScaling
         {
             if (!enabled) return;
 
-			On.RoR2.Run.Start += (orig, self) =>
-			{
-				goldBank = 0f;
-				orig(self);
-			};
+            RoR2.Run.onRunStartGlobal += ClearGoldBank;
 
 			On.RoR2.CharacterBody.Start += (orig, self) =>
 			{
@@ -64,6 +60,11 @@ namespace RiskyMod.Tweaks.RunScaling
 					}
 				}
 			};
+		}
+
+        private void ClearGoldBank(Run obj)
+		{
+			goldBank = 0f;
 		}
     }
 }

@@ -15,11 +15,7 @@ namespace RiskyMod.Tweaks
             if (!enabled) return;
 
             //Reset killcount on stage start
-            On.RoR2.Stage.Start += (orig, self) =>
-            {
-                killCount = 0;
-                orig(self);
-            };
+            RoR2.Stage.onStageStartGlobal += ResetKillCount;
 
             On.RoR2.ArtifactTrialMissionController.CombatState.OnCharacterDeathGlobal += ArtifactKeyDrop;
 
@@ -32,6 +28,11 @@ namespace RiskyMod.Tweaks
                     self.chanceForKeyDrop = 0.04f;
                 }
             };
+        }
+
+        private void ResetKillCount(Stage obj)
+        {
+            killCount = 0;
         }
 
         private void ArtifactKeyDrop(On.RoR2.ArtifactTrialMissionController.CombatState.orig_OnCharacterDeathGlobal orig, EntityStates.EntityState self, DamageReport damageReport)

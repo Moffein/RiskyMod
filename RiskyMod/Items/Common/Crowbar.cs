@@ -45,31 +45,9 @@ namespace RiskyMod.Items.Common
             };
 
             //Effect handled in OnCharacterDeath (for removal)
+            RoR2.Run.onRunStartGlobal += InitCrowbarManager;
 
-            On.RoR2.Run.Start += (orig, self) =>
-            {
-                orig(self);
-                if (NetworkServer.active)
-                {
-                    Crowbar.crowbarManager = self.gameObject.GetComponent<CrowbarManager>();
-                    if (!Crowbar.crowbarManager)
-                    {
-                        Crowbar.crowbarManager = self.gameObject.AddComponent<CrowbarManager>();
-                    }
-                }
-            };
-
-            On.RoR2.Stage.Start += (orig, self) =>
-            {
-                orig(self);
-                if (NetworkServer.active)
-                {
-                    if (Crowbar.crowbarManager)
-                    {
-                        Crowbar.crowbarManager.ClearList();
-                    }
-                }
-            };
+            RoR2.Stage.onStageStartGlobal += ClearCrowbarList;
 
             //Modify Ring Threshold
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
@@ -114,6 +92,30 @@ namespace RiskyMod.Items.Common
 
             TakeDamage.ModifyInitialDamageInventoryActions += CrowbarDamageBoost;
         }
+
+        private void InitCrowbarManager(Run self)
+        {
+            if (NetworkServer.active)
+            {
+                Crowbar.crowbarManager = self.gameObject.GetComponent<CrowbarManager>();
+                if (!Crowbar.crowbarManager)
+                {
+                    Crowbar.crowbarManager = self.gameObject.AddComponent<CrowbarManager>();
+                }
+            }
+        }
+
+        private void ClearCrowbarList(Stage obj)
+        {
+            if (NetworkServer.active)
+            {
+                if (Crowbar.crowbarManager)
+                {
+                    Crowbar.crowbarManager.ClearList();
+                }
+            }
+        }
+
         private static void ModifyItem()
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Crowbar);

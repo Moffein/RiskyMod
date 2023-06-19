@@ -82,7 +82,7 @@ namespace RiskyMod
 
     [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "1.2.4")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "1.2.5")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI), nameof(ItemAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
@@ -123,15 +123,7 @@ namespace RiskyMod
             //Check this first since config relies on it
             InitDependencies();
 
-            On.RoR2.Stage.Start += (orig, self) =>
-            {
-                orig(self);
-                inBazaar = false;
-                if (RoR2.SceneCatalog.GetSceneDefForCurrentScene() == bazaarScene)
-                {
-                    inBazaar = true;
-                }
-            };
+            RoR2.Stage.onStageStartGlobal += Stage_onStageStartGlobal;
 
             On.RoR2.GameModeCatalog.LoadGameModes += (orig) =>
             {
@@ -163,6 +155,15 @@ namespace RiskyMod
             AddHooks();
         }
 
+        private void Stage_onStageStartGlobal(Stage obj)
+        {
+            inBazaar = false;
+            if (RoR2.SceneCatalog.GetSceneDefForCurrentScene() == bazaarScene)
+            {
+                inBazaar = true;
+            }
+        }
+
         //This isn't all the softdependency checks. Some still are in CheckDependencies, this is just a quick fix.
         private void InitDependencies()
         {
@@ -188,7 +189,7 @@ namespace RiskyMod
         {
             if (SoftDependencies.KingKombatArenaLoaded)
             {
-                On.RoR2.Stage.Start += CheckArenaLoaded;
+                RoR2.Stage.onStageStartGlobal += CheckArenaLoaded;
             }
 
             if (SoftDependencies.ZetTweaksLoaded) ZetTweaksCompat();
@@ -294,9 +295,8 @@ namespace RiskyMod
             Sacrifice.enabled = Sacrifice.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.SacrificeTweaks");
         }
 
-        private void CheckArenaLoaded(On.RoR2.Stage.orig_Start orig, Stage self)
+        private void CheckArenaLoaded(Stage obj)
         {
-            orig(self);
             if (SoftDependencies.KingKombatArenaLoaded) SetArena();
         }
 
@@ -420,18 +420,19 @@ namespace RiskyMod
         private void SetupAssists()
         {
             AssistManager.initialized = true;
-            On.RoR2.Run.Start += (orig, self) =>
+            RoR2.Run.onRunStartGlobal += InitAssistManager;
+        }
+
+        private void InitAssistManager(Run self)
+        {
+            if (NetworkServer.active)
             {
-                orig(self);
-                if (NetworkServer.active)
+                RiskyMod.assistManager = self.gameObject.GetComponent<AssistManager>();
+                if (!RiskyMod.assistManager)
                 {
-                    RiskyMod.assistManager = self.gameObject.GetComponent<AssistManager>();
-                    if (!RiskyMod.assistManager)
-                    {
-                        RiskyMod.assistManager = self.gameObject.AddComponent<AssistManager>();
-                    }
+                    RiskyMod.assistManager = self.gameObject.AddComponent<AssistManager>();
                 }
-            };
+            }
         }
 
         public delegate void FireMode();

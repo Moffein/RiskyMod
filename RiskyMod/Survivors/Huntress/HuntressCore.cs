@@ -95,35 +95,6 @@ namespace RiskyMod.Survivors.Huntress
             }
 
             //This fixes Flurry losing arrows at high attack speed.
-            On.EntityStates.Huntress.HuntressWeapon.FireSeekingArrow.FireOrbArrow += (orig, self) =>
-            {
-                if (!NetworkServer.active)
-                {
-                    self.firedArrowCount++;
-                }
-                orig(self);
-            };
-
-            IL.EntityStates.Huntress.HuntressWeapon.FireSeekingArrow.FixedUpdate += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
-                     x => x.MatchCall<EntityState>("get_isAuthority")
-                    ))
-                {
-                    c.Index++;
-                    c.Emit(OpCodes.Ldarg_0);    //the entitystate
-                    c.EmitDelegate<Func<bool, EntityStates.Huntress.HuntressWeapon.FireSeekingArrow, bool>>((flag, self) =>
-                    {
-                        return flag && self.firedArrowCount >= self.maxArrowCount;
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: Huntress FireSeekingArrow IL Hook failed");
-                }
-            };
-
             On.EntityStates.Huntress.HuntressWeapon.FireSeekingArrow.OnExit += (orig, self) =>
             {
                 orig(self);
@@ -132,6 +103,7 @@ namespace RiskyMod.Survivors.Huntress
                     int remainingArrows = self.maxArrowCount - self.firedArrowCount;
                     for (int i = 0; i < remainingArrows; i++)
                     {
+                        self.arrowReloadTimer = 0f;
                         self.FireOrbArrow();
                     }
                 }

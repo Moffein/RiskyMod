@@ -37,12 +37,11 @@ namespace RiskyMod.Items.DLC1.Common
             };
 
             SharedHooks.HealthComponent_UpdateLastHitTime.UpdateLastHitTimeActions += TriggerElixir;
-            On.RoR2.Stage.Start += StageStartResetElixir;
+            RoR2.Stage.onStageStartGlobal += StageStartResetElixir;
         }
 
-        private static void StageStartResetElixir(On.RoR2.Stage.orig_Start orig, Stage self)
+        private void StageStartResetElixir(Stage obj)
         {
-            orig(self);
             if (CharacterMaster.instancesList != null)
             {
                 foreach (CharacterMaster cm in CharacterMaster.instancesList)

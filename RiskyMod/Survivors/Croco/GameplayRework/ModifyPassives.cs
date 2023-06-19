@@ -13,13 +13,13 @@ namespace RiskyMod.Survivors.Croco
 
         public ModifyPassives()
         {
-            On.RoR2.Run.Start += (orig, self) =>
-            {
-                orig(self);
-                ModifyPassives.PoisonTrackerInstance = self.gameObject.AddComponent<CrocoAltPassiveTracker>();
-            };
-
+            RoR2.Run.onRunStartGlobal += InitPoisonTracker;
             SharedHooks.OnHitEnemy.OnHitAttackerActions += TrackPoison;
+        }
+
+        private void InitPoisonTracker(Run self)
+        {
+            ModifyPassives.PoisonTrackerInstance = self.gameObject.AddComponent<CrocoAltPassiveTracker>();
         }
 
         private static void TrackPoison(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)

@@ -13,11 +13,7 @@ namespace RiskyMod.Tweaks
         public BloodShrineMinReward()
         {
             if (!enabled) return;
-            On.RoR2.Stage.Start += (orig, self) =>
-            {
-                orig(self);
-                chestCost = Run.instance.GetDifficultyScaledCost(25, Run.instance.difficultyCoefficient);
-            };
+            RoR2.Stage.onStageStartGlobal += Stage_onStageStartGlobal;
             IL.RoR2.ShrineBloodBehavior.AddShrineStack += (il) =>
             {
                 ILCursor c = new ILCursor(il);
@@ -38,6 +34,11 @@ namespace RiskyMod.Tweaks
                     UnityEngine.Debug.LogError("RiskyMod: BloodShrineMinReward IL Hook failed");
                 }
             };
+        }
+
+        private void Stage_onStageStartGlobal(Stage obj)
+        {
+            chestCost = Run.instance.GetDifficultyScaledCost(25, Run.instance.difficultyCoefficient);
         }
     }
 }
