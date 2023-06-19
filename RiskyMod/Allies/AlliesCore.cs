@@ -148,7 +148,7 @@ namespace RiskyMod.Allies
             if (NetworkServer.active && master.inventory && master.aiComponents.Length > 0 && master.teamIndex == TeamIndex.Player)
             {
                 CharacterBody masterBody = master.GetBody();
-                if (masterBody && masterBody.bodyIndex != BodyIndex.None) return;
+                if (!masterBody || masterBody.bodyIndex == BodyIndex.None) return;
                 if (StandardDroneScalingList.Contains(masterBody.bodyIndex))
                 {
                     master.inventory.GiveItem(AllyItems.AllyMarkerItem);
