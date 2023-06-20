@@ -9,6 +9,8 @@ namespace RiskyMod.Items.Legendary
         public static bool enabled = true;
         public Brainstalks()
         {
+            if (!enabled) return;
+
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
