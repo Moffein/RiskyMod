@@ -41,17 +41,10 @@ namespace RiskyMod.Items.Equipment
         {
             if (sender.HasBuff(RoR2Content.Buffs.FullCrit))
             {
-                float crit = 100f;
-                float diff = 100f - sender.crit;
-                if (diff >0f)
-                {
-                    crit -= diff;
-                    args.critAdd += diff;
-                }
-                if (crit > 0f)
-                {
-                    args.critDamageMultAdd += crit * 0.01f;
-                }
+                args.critAdd += 100f;
+
+                float critWithoutBuff = sender.crit - 100f;
+                if (critWithoutBuff > 0f) args.critDamageMultAdd += critWithoutBuff * 0.01f;
             }
         }
     }
