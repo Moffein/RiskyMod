@@ -16,7 +16,7 @@ namespace RiskyMod.Allies
             dotZoneDamage = DamageAPI.ReserveDamageType();
 
             if (!enabled) return;
-            TakeDamage.ModifyInitialDamageActions += AddResist;
+            TakeDamage.ModifyInitialDamageNoAttackerActions += AddResist;
         }
 
         public static void AddDotZoneDamageType(GameObject projectile)
@@ -29,7 +29,7 @@ namespace RiskyMod.Allies
             if (!mdc.Has(dotZoneDamage)) mdc.Add(dotZoneDamage);
         }
 
-        private static void AddResist(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        private static void AddResist(DamageInfo damageInfo, HealthComponent self)
         {
             if (!self.body.isPlayerControlled
                 && damageInfo.HasModdedDamageType(dotZoneDamage)

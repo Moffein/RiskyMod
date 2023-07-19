@@ -10,10 +10,10 @@ namespace RiskyMod.Tweaks.Artifact
         public NoVengeanceFallDamage()
         {
             if (!enabled) return;
-            SharedHooks.TakeDamage.ModifyInitialDamageActions += NullifyVengeanceFallDamage;
+            SharedHooks.TakeDamage.ModifyInitialDamageNoAttackerActions += NullifyVengeanceFallDamage;
         }
 
-        private void NullifyVengeanceFallDamage(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        private void NullifyVengeanceFallDamage(DamageInfo damageInfo, HealthComponent self)
         {
             if (damageInfo.damageType.HasFlag(DamageType.FallDamage))
             {

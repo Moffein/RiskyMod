@@ -14,12 +14,12 @@ namespace RiskyMod.Allies
         public SuperAttackResist()
         {
             if (!enabled) return;
-            TakeDamage.ModifyInitialDamageActions += AddResist;
+            TakeDamage.ModifyInitialDamageNoAttackerActions += AddResist;
 
             SetupResists();
         }
 
-        private static void AddResist(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        private static void AddResist(DamageInfo damageInfo, HealthComponent self)
         {
             if (!self.body.isPlayerControlled
                 && (damageInfo.HasModdedDamageType(SharedDamageTypes.ResistedByAllies))

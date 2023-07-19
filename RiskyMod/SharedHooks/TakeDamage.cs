@@ -20,6 +20,9 @@ namespace RiskyMod.SharedHooks
         public delegate void OnHpLostAttacker(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory inventory, float hpLost);
         public static OnHpLostAttacker OnHpLostAttackerActions;
 
+        public delegate void ModifyInitialDamageNoAttacker(DamageInfo damageInfo, HealthComponent self);
+        public static ModifyInitialDamageNoAttacker ModifyInitialDamageNoAttackerActions;
+
         public delegate void ModifyInitialDamage(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody);
         public static ModifyInitialDamage ModifyInitialDamageActions;
 
@@ -55,20 +58,14 @@ namespace RiskyMod.SharedHooks
         public static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
             float oldHP = self.combinedHealth;
-            CharacterBody attackerBody = null;
-            Inventory attackerInventory = null;
-            if (damageInfo.attacker)
+            CharacterBody attackerBody = damageInfo.attacker ? damageInfo.attacker.GetComponent<CharacterBody>() : null;
+            Inventory attackerInventory = attackerBody ? attackerBody.inventory : null;
+
+            ModifyInitialDamageNoAttackerActions?.Invoke(damageInfo, self);
+            if (attackerBody)
             {
-                attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                if (attackerBody)
-                {
-                    if (ModifyInitialDamageActions != null) ModifyInitialDamageActions.Invoke(damageInfo, self, attackerBody);
-                    attackerInventory = attackerBody.inventory;
-                    if (attackerInventory)
-                    {
-                        if (ModifyInitialDamageInventoryActions != null) ModifyInitialDamageInventoryActions.Invoke(damageInfo, self, attackerBody, attackerInventory);
-                    }
-                }
+                ModifyInitialDamageActions?.Invoke(damageInfo, self, attackerBody);
+                if (attackerInventory) ModifyInitialDamageInventoryActions?.Invoke(damageInfo, self, attackerBody, attackerInventory);
             }
 
             orig(self, damageInfo);
@@ -77,13 +74,13 @@ namespace RiskyMod.SharedHooks
             {
                 if (self.alive)
                 {
-                    if (OnDamageTakenActions != null) OnDamageTakenActions.Invoke(damageInfo, self);
+                    OnDamageTakenActions?.Invoke(damageInfo, self);
 
                     if (damageInfo.attacker)
                     {
                         if (attackerBody)
                         {
-                            if (OnDamageTakenAttackerActions != null) OnDamageTakenAttackerActions.Invoke(damageInfo, self, attackerBody);
+                            OnDamageTakenAttackerActions?.Invoke(damageInfo, self, attackerBody);
                         }
                     }
 
@@ -95,13 +92,13 @@ namespace RiskyMod.SharedHooks
                         {
                             if (attackerBody)
                             {
-                                if (OnHpLostAttackerActions != null)  OnHpLostAttackerActions.Invoke(damageInfo, self, attackerBody, inventory, totalHPLost);
+                                OnHpLostAttackerActions?.Invoke(damageInfo, self, attackerBody, inventory, totalHPLost);
                             }
                             float percentHPLost = totalHPLost / self.fullCombinedHealth * 100f;
-                            if (OnPercentHpLostActions != null) OnPercentHpLostActions.Invoke(damageInfo, self, inventory, percentHPLost);
+                            OnPercentHpLostActions?.Invoke(damageInfo, self, inventory, percentHPLost);
                         }
                     }
-                    if (TakeDamageEndActions != null) TakeDamageEndActions.Invoke(damageInfo, self);
+                    TakeDamageEndActions?.Invoke(damageInfo, self);
                 }
             }
         }

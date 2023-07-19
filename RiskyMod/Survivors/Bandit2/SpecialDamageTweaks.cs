@@ -17,10 +17,10 @@ namespace RiskyMod.Survivors.Bandit2
         public SpecialDamageTweaks()
         {
             OnHitEnemy.OnHitNoAttackerActions += ApplyBuff;
-            TakeDamage.ModifyInitialDamageActions += RackEmUpBonus;
+            TakeDamage.ModifyInitialDamageNoAttackerActions += RackEmUpBonus;
         }
 
-        private static void RackEmUpBonus(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        private static void RackEmUpBonus(DamageInfo damageInfo, HealthComponent self)
         {
             if (damageInfo.HasModdedDamageType(Bandit2Core.RackEmUpDamage))
             {

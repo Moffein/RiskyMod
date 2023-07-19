@@ -65,9 +65,9 @@ namespace RiskyMod
 
             SawBarrier = DamageAPI.ReserveDamageType();
 
-            TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
-            TakeDamage.ModifyInitialDamageActions += ApplyAntiFlyingForce;
-            TakeDamage.ModifyInitialDamageActions += DisableBandProc;
+            TakeDamage.ModifyInitialDamageNoAttackerActions += ApplyProjectileRainForce;
+            TakeDamage.ModifyInitialDamageNoAttackerActions += ApplyAntiFlyingForce;
+            TakeDamage.ModifyInitialDamageNoAttackerActions += DisableBandProc;
 
             OnHitEnemy.OnHitNoAttackerActions += ApplyInterruptOnHit;
 
@@ -118,7 +118,7 @@ namespace RiskyMod
             }
         }
 
-        private static void DisableBandProc(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        private static void DisableBandProc(DamageInfo damageInfo, HealthComponent self)
         {
             if (damageInfo.HasModdedDamageType(DontTriggerBands))
             {
@@ -148,7 +148,7 @@ namespace RiskyMod
             }
         }
 
-        private static void ApplyProjectileRainForce(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        private static void ApplyProjectileRainForce(DamageInfo damageInfo, HealthComponent self)
         {
             if (damageInfo.HasModdedDamageType(SharedDamageTypes.ProjectileRainForce))
             {
@@ -222,7 +222,7 @@ namespace RiskyMod
             }
         }
 
-        private static void ApplyAntiFlyingForce(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        private static void ApplyAntiFlyingForce(DamageInfo damageInfo, HealthComponent self)
         {
             if (damageInfo.HasModdedDamageType(AntiFlyingForce))
             {

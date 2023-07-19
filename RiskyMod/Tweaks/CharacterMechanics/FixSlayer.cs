@@ -10,10 +10,10 @@ namespace RiskyMod.Tweaks.CharacterMechanics
         public FixSlayer()
         {
             if (!enabled) return;
-            TakeDamage.ModifyInitialDamageActions += SlayerDamage;
+            TakeDamage.ModifyInitialDamageNoAttackerActions += SlayerDamage;
         }
 
-        private static void SlayerDamage(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        private static void SlayerDamage(DamageInfo damageInfo, HealthComponent self)
         {
 
             if ((damageInfo.damageType & DamageType.BonusToLowHealth) == DamageType.BonusToLowHealth)
