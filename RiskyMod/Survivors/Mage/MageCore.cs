@@ -351,7 +351,7 @@ namespace RiskyMod.Survivors.Mage
                     c.Index++;
                     c.EmitDelegate<Func<float, float>>(orig =>
                     {
-                        return ionSurgeMovementScaling.Value ? 10.15f : orig;//10.15 = 7 * 1.45
+                        return ionSurgeMovementScaling.Value ? orig : 10.15f;//10.15 = 7 * 1.45
                     });
                 }
                 else
