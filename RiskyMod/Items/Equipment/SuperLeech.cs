@@ -37,6 +37,7 @@ namespace RiskyMod.Items.Equipment
         {
             if (attackerBody.HasBuff(RoR2Content.Buffs.LifeSteal))
             {
+                hpLost = Mathf.Max(hpLost, damageInfo.damage);
                 float toHeal = hpLost * 0.2f;
                 attackerBody.healthComponent.Heal(toHeal * damageInfo.procCoefficient, damageInfo.procChainMask);
             }

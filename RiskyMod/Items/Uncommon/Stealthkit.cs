@@ -33,24 +33,21 @@ namespace RiskyMod.Items.Uncommon
         private void OnHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost)
         {
             //Basing this off of https://riskofrain2.fandom.com/wiki/Old_War_Stealthkit Version History
-            if (!self.body.HasBuff(RoR2Content.Buffs.Cloak))
+            int stealthkitCount = inventory.GetItemCount(RoR2Content.Items.Phasing);
+            if (stealthkitCount > 0)
             {
-                int stealthkitCount = inventory.GetItemCount(RoR2Content.Items.Phasing);
-                if (stealthkitCount > 0)
+                if (percentHpLost > 0f)
                 {
-                    if (percentHpLost > 0f)
+                    if (Util.CheckRoll(percentHpLost, self.body.master))
                     {
-                        if (Util.CheckRoll(percentHpLost, self.body.master))
+                        float buffDuration = 1.5f + stealthkitCount * 1.5f;
+                        self.body.AddTimedBuff(RoR2Content.Buffs.Cloak, buffDuration);
+                        self.body.AddTimedBuff(RoR2Content.Buffs.CloakSpeed, buffDuration);
+                        EffectManager.SpawnEffect(Stealthkit.effectPrefab, new EffectData
                         {
-                            float buffDuration = 1.5f + stealthkitCount * 1.5f;
-                            self.body.AddTimedBuff(RoR2Content.Buffs.Cloak, buffDuration);
-                            self.body.AddTimedBuff(RoR2Content.Buffs.CloakSpeed, buffDuration);
-                            EffectManager.SpawnEffect(Stealthkit.effectPrefab, new EffectData
-                            {
-                                origin = self.body.transform.position,
-                                rotation = Quaternion.identity
-                            }, true);
-                        }
+                            origin = self.body.transform.position,
+                            rotation = Quaternion.identity
+                        }, true);
                     }
                 }
             }

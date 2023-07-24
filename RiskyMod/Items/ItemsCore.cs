@@ -140,7 +140,6 @@ namespace RiskyMod.Items
             new Knurl();
             new Disciple();
             new GenesisLoop();
-            new Planula();
             new EmpathyCores();
             new DefenseNucleus();
             new HalcyonSeed();

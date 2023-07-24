@@ -32,7 +32,7 @@ namespace RiskyMod.Items.DLC1.Void
                              x => x.MatchLdcR4(0.2f)
                             ))
                         {
-                            c.Next.Operand = 0.1f;
+                            c.Next.Operand = 0f;
                         }
                     }
                     error = false;

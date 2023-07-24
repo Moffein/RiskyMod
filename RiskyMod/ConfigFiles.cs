@@ -452,8 +452,6 @@ namespace RiskyMod
             DefenseNucleus.removeAllyScaling = ItemCfg.Bind(bossString, "Defense Nucleus - Remove Ally Count Scaling", true, "Stacks increase ally damage and health instead of max allies.").Value;
             DefenseNucleus.inheritEliteAffix = ItemCfg.Bind(bossString, "Defense Nucleus - Inherit Elite Affix", true, "Defense Nucleus Alpha Constructs inherit the Elite Affix of the enemy that was killed. This removes their spawn VFX.").Value;
             DefenseNucleus.ignoreAllyCap = ItemCfg.Bind(bossString, "Defense Nucleus - Ignore Ally Cap", true, "Defense Nucleus Alpha Constructs ignore the ally cap if changes are enabled.").Value;
-        
-            Planula.enabled = ItemCfg.Bind(bossString, "Planula", true, "Proc after Stealthkit and Squid. Disable this if you want to use mods that change Planula.").Value;
 
             HalcyonSeed.enabled = ItemCfg.Bind(bossString, "Halcyon Seed", true, itemConfigDescString).Value;
         }

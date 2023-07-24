@@ -94,8 +94,9 @@ namespace RiskyMod.SharedHooks
                             {
                                 OnHpLostAttackerActions?.Invoke(damageInfo, self, attackerBody, inventory, totalHPLost);
                             }
-                            float percentHPLost = totalHPLost / self.fullCombinedHealth * 100f;
-                            OnPercentHpLostActions?.Invoke(damageInfo, self, inventory, percentHPLost);
+                            float percentHPLost = totalHPLost / self.fullCombinedHealth;
+                            percentHPLost = Mathf.Max(percentHPLost, damageInfo.damage / self.fullCombinedHealth);   //Use this to emulate the actual Early Access Stealthkit Behavior
+                            OnPercentHpLostActions?.Invoke(damageInfo, self, inventory, 100f * percentHPLost);
                         }
                     }
                     TakeDamageEndActions?.Invoke(damageInfo, self);

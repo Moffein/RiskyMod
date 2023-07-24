@@ -18,7 +18,7 @@ namespace RiskyMod.Items.Uncommon
 		public static bool alwaysOrb = false;
 
 		public static float initialDamageCoefficient = 3f;
-		public static float stackDamageCoefficient = 2f;
+		public static float stackDamageCoefficient = 2.1f;
 
 		public static float projectileDamageTreshold = 4f;
 
