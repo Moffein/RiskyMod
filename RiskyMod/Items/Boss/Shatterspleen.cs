@@ -33,7 +33,7 @@ namespace RiskyMod.Items.Boss
                 }
             };
 
-            GetStatCoefficients.HandleStatsInventoryActions += AddBleedChance;
+            RecalculateStats.HandleRecalculateStatsInventoryActions += AddBleedChance;
 
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
@@ -113,11 +113,11 @@ namespace RiskyMod.Items.Boss
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BleedOnHitAndExplode);
         }
 
-        private static void AddBleedChance(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
+        private static void AddBleedChance(CharacterBody self, Inventory inventory)
         {
             if (inventory.GetItemCount(RoR2Content.Items.BleedOnHitAndExplode) > 0)
             {
-                sender.bleedChance += 10f;
+                self.bleedChance += 10f;
             }
         }
     }
