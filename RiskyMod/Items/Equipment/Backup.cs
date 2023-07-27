@@ -39,6 +39,7 @@ namespace RiskyMod.Items.Equipment
 
                     float y = Quaternion.LookRotation(self.GetAimRay().direction).eulerAngles.y;
                     float d = 3f;
+                    int spawnCount = 0;
                     foreach (float num2 in new DegreeSlices(sliceCount, 0.5f))
                     {
                         if (bt.canSpawn)
@@ -57,6 +58,7 @@ namespace RiskyMod.Items.Equipment
                             }.Perform();
                             if (characterMaster)
                             {
+                                spawnCount++;
                                 CharacterBody cb = characterMaster.GetBody();
                                 if (cb && cb.healthComponent)
                                 {
@@ -73,6 +75,15 @@ namespace RiskyMod.Items.Equipment
                                     characterMaster.inventory.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
                                 }
                             }
+                        }
+                    }
+
+                    if (spawnCount < sliceCount)
+                    {
+                        float cooldownRestorePercent = 1f - ((float)spawnCount / (float)sliceCount);
+                        if (self.inventory && self.equipmentIndex == RoR2Content.Equipment.DroneBackup.equipmentIndex)  //Check index just in case it triggered from Chaos or something.
+                        {
+                            self.inventory.DeductActiveEquipmentCooldown(cooldownRestorePercent * self.inventory.CalculateEquipmentCooldownScale());
                         }
                     }
                 }
@@ -107,7 +118,7 @@ namespace RiskyMod.Items.Equipment
 
     public class BackupTracker : MonoBehaviour
     {
-        public static int maxCount = 4;
+        public static int maxCount = 8;
 
         private List<HealthComponent> droneList;
 

@@ -474,7 +474,7 @@ namespace RiskyMod
         {
             Backup.enabled = ItemCfg.Bind(equipmentString, "The Back-Up", true, itemConfigDescString).Value;
             Backup.ignoreTeamLimit = !ItemCfg.Bind(equipmentString, "The Back-Up: Limit Drones", false, "Back-Up drones count towards the ally cap.").Value;
-            BackupTracker.maxCount = ItemCfg.Bind(equipmentString, "The Back-Up: Max Drones", 4, "Max active Backup Drones.").Value;
+            BackupTracker.maxCount = ItemCfg.Bind(equipmentString, "The Back-Up: Max Drones", 8, "Max active Backup Drones.").Value;
             BFG.enabled = ItemCfg.Bind(equipmentString, "Preon Accumulator", true, itemConfigDescString).Value;
             Capacitor.enabled = ItemCfg.Bind(equipmentString, "Royal Capacitor", true, itemConfigDescString).Value;
             Chrysalis.enabled = ItemCfg.Bind(equipmentString, "Milky Chrysalis", true, itemConfigDescString).Value;
