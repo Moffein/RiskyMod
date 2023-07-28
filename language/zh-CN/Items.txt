@@ -10,7 +10,7 @@
 	"ITEM_STICKYBOMB_DESC_RISKYMOD": "命中时有<style=cIsDamage>5%</style><style=cStack>（每层增加5%）</style>的几率在敌人身上放置一颗<style=cIsDamage>炸弹</style>，爆炸时造成<style=cIsDamage>240%</style>的总伤害。",
 	
 	"ITEM_CROWBAR_PICKUP_RISKYMOD": "对敌人的首次攻击会造成额外伤害。",
-	"ITEM_CROWBAR_DESC_RISKYMOD": "对敌人的<style=clsDamage>首次攻击</style>会造成<style=cIsDamage>50%</style><style=cStack>（每层增加50%）</style>的额外伤害。",
+	"ITEM_CROWBAR_DESC_RISKYMOD": "对敌人的<style=clsDamage>首次攻击</style>会造成<style=cIsDamage>45%</style><style=cStack>（每层增加45%）</style>的额外伤害。",
 	
 	"ITEM_WARDONLEVEL_PICKUP_RISKYMOD": "升级或开始传送器事件时放置一面战旗。给友方增加护甲、伤害、移动速度和攻击速度。",
 	"ITEM_WARDONLEVEL_DESC_RISKYMOD": "<style=cIsUtility>升级</style>或开始<style=cIsUtility>传送器事件</style>时放置一面旗帜，强化<style=cIsUtility>16米</style><style=cStack>（每层增加8）</style>内的全体友方，使其<style=cIsHealing>护甲</style> 提升 <style=cIsHealing>15</style>，<style=cIsDamage>伤害</style> 增加，<style=cIsDamage>15%</style>，<style=cIsDamage>攻击</style>和<style=cIsUtility>移动速度</style>增加<style=cIsDamage>30%</style>。",
@@ -272,6 +272,8 @@
 	
 	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "过量治疗会使你获得一道<style=cIsHealing>临时屏障</style>，可阻挡相当于<style=cIsHealing>50%<style=cStack>（每层增加50%）</style></style>已<style=cIsHealing>治疗</style>生命值的伤害。将<style=cIsHealing>屏障减少率</style>除以<style=cIsHealing>2<style=cStack>（每层增加1）</style></style>。",
 
-	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "使基础伤害提高<style=cIsDamage>100%</style><style=cStack>（每层增加100%）</style>，<style=cIsHealing>使最大生命值除以2</style><style=cStack>（每层增加1）</style>。"
+	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "使基础伤害提高<style=cIsDamage>100%</style><style=cStack>（每层增加100%）</style>，<style=cIsHealing>使最大生命值除以2</style><style=cStack>（每层增加1）</style>。",
+	
+	"ITEM_GOLDONHURT_DESC": "<style=cIsDamage>受到来自敌人的伤害</style>时，获得<style=cIsUtility>1<style=cStack>（每层+1）</style>金钱</style>。<style=cIsUtility>会随时间变化。</style>",
 	}
 }

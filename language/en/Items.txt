@@ -10,7 +10,7 @@
 	"ITEM_STICKYBOMB_DESC_RISKYMOD": "<style=cIsDamage>5%</style> <style=cStack>(+5% per stack)</style> chance on hit to attach a <style=cIsDamage>bomb</style> to an enemy, detonating for <style=cIsDamage>240%</style> TOTAL damage.",
 	
 	"ITEM_CROWBAR_PICKUP_RISKYMOD": "Deal bonus damage on your first hit against an enemy.",
-	"ITEM_CROWBAR_DESC_RISKYMOD": "Deal <style=cIsDamage>+50%</style> <style=cStack>(+50% per stack)</style> damage on your <style=cIsDamage>first hit</style> against an enemy.",
+	"ITEM_CROWBAR_DESC_RISKYMOD": "Deal <style=cIsDamage>+45%</style> <style=cStack>(+45% per stack)</style> damage on your <style=cIsDamage>first hit</style> against an enemy.",
 	
 	"ITEM_WARDONLEVEL_PICKUP_RISKYMOD": "Drop a Warbanner on level up or starting the Teleporter event. Grants allies armor, damage, attack speed and movement speed.",
 	"ITEM_WARDONLEVEL_DESC_RISKYMOD": "On <style=cIsUtility>level up</style> or starting the <style=cIsUtility>Teleporter event</style>, drop a banner that strengthens all allies within <style=cIsUtility>16m</style> <style=cStack>(+8m per stack)</style>. Raise <style=cIsHealing>armor</style> by <style=cIsHealing>15</style>, <style=cIsDamage>damage</style> by <style=cIsDamage>15%</style>, and <style=cIsDamage>attack speed</style> and <style=cIsUtility>movement speed</style> by <style=cIsDamage>30%</style>.",
@@ -133,6 +133,8 @@
 	
 	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Healing past full grants you a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>50% <style=cStack>(+50% per stack)</style></style> of the amount you <style=cIsHealing>healed</style>. Divides <style=cIsHealing>barrier decay rate</style> by <style=cIsHealing>2 <style=cStack>(+1 per stack)</style></style>.",
 
-	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Increase base damage by <style=cIsDamage>100%</style> <style=cStack>(+100% per stack)</style>. <style=cIsHealth>Divide maximum health by 2</style> <style=cStack>(+1 per stack)</style>."
+	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Increase base damage by <style=cIsDamage>100%</style> <style=cStack>(+100% per stack)</style>. <style=cIsHealth>Divide maximum health by 2</style> <style=cStack>(+1 per stack)</style>.",
+	
+	"ITEM_GOLDONHURT_DESC_RISKYMOD": "Gain <style=cIsUtility>1 <style=cStack>(+1 per stack)</style> gold</style> on <style=cIsDamage>taking damage</style> from an enemy. <style=cIsUtility>Scales over time.</style>",
 	}
 }

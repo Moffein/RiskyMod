@@ -338,6 +338,7 @@ namespace RiskyMod
             TougherTimes.enabled = ItemCfg.Bind(commonString, "Tougher Times", true, itemConfigDescString).Value;
             Warbanner.enabled = ItemCfg.Bind(commonString, "Warbanner", true, itemConfigDescString).Value;
 
+            Pennies.enabled = ItemCfg.Bind(commonString, "Roll of Pennies", true, itemConfigDescString).Value;
             Pennies.disableInBazaar = ItemCfg.Bind(commonString, "Roll of Pennies - Disable in Bazaar", true, "This item does not give gold in the Bazaar Between Time.").Value;
 
 
