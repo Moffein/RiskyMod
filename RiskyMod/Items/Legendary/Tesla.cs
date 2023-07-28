@@ -18,7 +18,6 @@ namespace RiskyMod.Items.Legendary
             IL.RoR2.Items.ShockNearbyBodyBehavior.FixedUpdate += (il) =>
             {
                 bool error = true;
-                bool error2 = true;
                 ILCursor c = new ILCursor(il);
                 
                 if (RiskyMod.disableProcChains)
@@ -33,38 +32,7 @@ namespace RiskyMod.Items.Legendary
                     }
                 }
 
-                if (c.TryGotoNext(
-                     x => x.MatchStfld<RoR2.Orbs.LightningOrb>("range")
-                    ))
-                {
-                    c.Index--;
-                    c.Next.Operand = 25f;
-                    error2 = false;
-
-                    /*if (c.TryGotoNext(MoveType.After,
-                         x => x.MatchLdfld(typeof(RoR2.Items.ShockNearbyBodyBehavior), "teslaResetListInterval"))
-                        )
-                    {
-                        c.Emit(OpCodes.Ldarg_0);
-                        c.EmitDelegate<Func<float, RoR2.Items.ShockNearbyBodyBehavior, float>>((interval, self) =>
-                        {
-                            return interval / (0.5f + 0.5f * self.stack);
-                        });
-
-                        if (c.TryGotoNext(MoveType.After,
-                         x => x.MatchLdfld(typeof(RoR2.Items.ShockNearbyBodyBehavior), "teslaResetListInterval"))
-                        )
-                        {
-                            c.Emit(OpCodes.Ldarg_0);
-                            c.EmitDelegate<Func<float, RoR2.Items.ShockNearbyBodyBehavior, float>>((interval, self) =>
-                            {
-                                return interval / (0.5f + 0.5f * self.stack);
-                            });
-                        }
-                    }*/
-                }
-
-                if (error || error2)
+                if (error)
                 {
                     UnityEngine.Debug.LogError("RiskyMod: Tesla IL Hook failed");
                 }
