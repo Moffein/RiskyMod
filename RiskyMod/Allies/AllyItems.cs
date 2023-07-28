@@ -189,6 +189,7 @@ namespace RiskyMod.Allies
             {
                 if (AllyScaling.noOverheat && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.OverheatImmune) && inventory.GetItemCount(AllyItems.AllyAllowOverheatDeathItem) <= 0) self.bodyFlags |= CharacterBody.BodyFlags.OverheatImmune;
                 if (AllyScaling.noVoidDeath && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ImmuneToVoidDeath) && inventory.GetItemCount(AllyItems.AllyAllowVoidDeathItem) <= 0) self.bodyFlags |= CharacterBody.BodyFlags.ImmuneToVoidDeath;
+                if (AllyScaling.preventExecute && !self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ImmuneToExecutes)) self.bodyFlags |= CharacterBody.BodyFlags.ImmuneToExecutes;
             }
         }
 

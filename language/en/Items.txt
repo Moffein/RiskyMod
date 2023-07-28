@@ -48,7 +48,7 @@
 	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style>. Gain an additional <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style> armor while <style=cIsUtility>sprinting</style>.",
 	
 	"ITEM_EXECUTELOWHEALTHELITE_PICKUP_RISKYMOD": "Deal bonus damage to enemies below 50% health.",
-	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Deal <style=cIsDamage>+25%</style> <style=cStack>(+25% per stack)</style> damage to enemies below <style=cIsDamage>50% health</style>.",
+	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Deal <style=cIsDamage>+30%</style> <style=cStack>(+30% per stack)</style> damage to enemies below <style=cIsDamage>50% health</style>.",
 	
 	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "Enter a frenzy after killing enemies. Stacks 3 times.",
 	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Killing enemies</style> sends you into a <style=cIsDamage>frenzy</style> for <style=cIsDamage>4s</style>, increasing <style=cIsUtility>movement speed</style> and <style=cIsDamage>attack speed</style> by <style=cIsDamage>12%</style> for each enemy killed. Maximum cap of <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> buffs.",

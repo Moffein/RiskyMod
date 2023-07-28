@@ -54,7 +54,7 @@ namespace RiskyMod.Items.Uncommon
 			{
 				if (victimHealth.combinedHealth <= victimHealth.fullCombinedHealth * 0.5f)
 				{
-					damageMult.damageMult += 0.25f * lopperCount;
+					damageMult.damageMult += 0.3f * lopperCount;
 					if (damageInfo.damageColorIndex == DamageColorIndex.Default)
                     {
 						damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;

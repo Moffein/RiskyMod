@@ -11,6 +11,7 @@ namespace RiskyMod.Allies
 
         public static bool noVoidDeath = true;
         public static bool noOverheat = true;
+        public static bool preventExecute = true;
 
         public AllyScaling()
         {

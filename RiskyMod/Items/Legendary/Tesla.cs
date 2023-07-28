@@ -18,11 +18,12 @@ namespace RiskyMod.Items.Legendary
             IL.RoR2.Items.ShockNearbyBodyBehavior.FixedUpdate += (il) =>
             {
                 bool error = true;
+                bool error2 = true;
                 ILCursor c = new ILCursor(il);
-                
+
                 if (RiskyMod.disableProcChains)
                 {
-                    if(c.TryGotoNext(
+                    if (c.TryGotoNext(
                         x => x.MatchStfld<RoR2.Orbs.LightningOrb>("procCoefficient")
                        ))
                     {
@@ -32,7 +33,16 @@ namespace RiskyMod.Items.Legendary
                     }
                 }
 
-                if (error)
+                if (c.TryGotoNext(
+                     x => x.MatchStfld<RoR2.Orbs.LightningOrb>("range")
+                    ))
+                {
+                    c.Index--;
+                    c.Next.Operand = 25f;
+                    error2 = false;
+                }
+
+                if (error || error2)
                 {
                     UnityEngine.Debug.LogError("RiskyMod: Tesla IL Hook failed");
                 }

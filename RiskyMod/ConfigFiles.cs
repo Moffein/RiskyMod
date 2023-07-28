@@ -219,6 +219,7 @@ namespace RiskyMod
 
             //Allies
             AlliesCore.normalizeDroneDamage = GeneralCfg.Bind(allyString, "Normalize Drone Damage", true, "Normalize drone damage stats so that they perform the same when using Spare Drone Parts.").Value;
+            AllyScaling.preventExecute = GeneralCfg.Bind(allyString, "No Execute", true, "Allies are immune to being executed by Freeze and similar effects.").Value;
             AllyScaling.noVoidDeath = GeneralCfg.Bind(allyString, "No Void Death", true, "Allies are immune to Void implosions.").Value;
             NoVoidDamage.enabled = GeneralCfg.Bind(allyString, "No Void Damage", true, "Allies take no damage from Void fog.").Value;
             AllyScaling.noOverheat = GeneralCfg.Bind(allyString, "No Overheat", true, "Allies are immune to Grandparent Overheat.").Value;
@@ -463,7 +464,7 @@ namespace RiskyMod
             BrittleCrown.enabled = ItemCfg.Bind(lunarString, "Brittle Crown", true, itemConfigDescString).Value;
             Meteorite.enabled = ItemCfg.Bind(lunarString, "Glowing Meteorite", true, itemConfigDescString).Value;
             ShapedGlass.enabled = ItemCfg.Bind(lunarString, "Shaped Glass", true, itemConfigDescString).Value;
-            Transcendence.enabled = ItemCfg.Bind(lunarString, "Transcendence", false, itemConfigDescString).Value;
+            Transcendence.enabled = ItemCfg.Bind(lunarString, "Transcendence", true, itemConfigDescString).Value;
             Transcendence.alwaysShieldGate = ItemCfg.Bind(lunarString, "Transcendence - Always Shield Gate", true, "Enables shieldgating on this item even when shield gating is disabled.").Value;
             Visions.enabled = ItemCfg.Bind(lunarString, "Visions of Heresy", true, itemConfigDescString).Value;
         }
