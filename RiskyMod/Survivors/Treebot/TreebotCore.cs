@@ -70,22 +70,31 @@ namespace RiskyMod.Survivors.Treebot
 
                 GameObject fruitProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/TreebotFruitSeedProjectile");
                 ProjectileImpactExplosion pie = fruitProjectile.GetComponent<ProjectileImpactExplosion>();
-                pie.blastRadius = 4f;
+                pie.blastRadius = 8f;
 
                 new ModifyFruitPickup();
                 new DropFruitOnHit();
 
                 RecalculateStatsAPI.GetStatCoefficients += FruitBuff;
+                SharedHooks.OnHitEnemy.OnHitAttackerActions += FruitHealOnHit;
 
                 //Fruit on-death nullref is located in Fixes section
             }
         }
 
-        private static void FruitBuff(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        private void FruitBuff(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
             if (sender.HasBuff(RoR2Content.Buffs.Fruiting))
             {
                 args.moveSpeedReductionMultAdd += 0.8f;
+            }
+        }
+
+        private void FruitHealOnHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
+        {
+            if (victimBody.HasBuff(RoR2Content.Buffs.Fruiting) && attackerBody.healthComponent)
+            {
+                attackerBody.healthComponent.Heal(damageInfo.damage * 0.05f, default);
             }
         }
     }

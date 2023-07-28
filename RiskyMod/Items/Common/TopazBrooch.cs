@@ -4,7 +4,7 @@ using RoR2;
 
 namespace RiskyMod.Items.Common
 {
-    class TopazBrooch
+    public class TopazBrooch
     {
         public static bool enabled = true;
         public TopazBrooch()

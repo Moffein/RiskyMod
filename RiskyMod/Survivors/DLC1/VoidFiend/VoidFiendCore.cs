@@ -72,8 +72,8 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
                 On.RoR2.VoidSurvivorController.OnEnable += (orig, self) =>
                 {
                     orig(self);
-                    self.corruptionPerSecondInCombat = 1.6666666667f;   //60s for full corruption
-                    self.corruptionPerSecondOutOfCombat = 1.6666666667f;
+                    self.corruptionPerSecondInCombat = 100f/60f;   //60s for full corruption
+                    self.corruptionPerSecondOutOfCombat = 100f/60f;
                     self.corruptionFractionPerSecondWhileCorrupted = -1f / 12f;
 
                     //Debug.Log(self.maxCorruption); //100
@@ -86,8 +86,6 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
 
             if (corruptOnKill)
             {
-                //Which part changes the keyword? PassiveSkill doesn't seem to be it.
-                //"KEYWORD_VOIDCORRUPTION_RISKYMOD"
                 SkillDef passive = Addressables.LoadAssetAsync<SkillDef>("RoR2/DLC1/VoidSurvivor/VoidSurvivorPassive.asset").WaitForCompletion();
                 passive.keywordTokens = new string[] { "KEYWORD_VOIDCORRUPTION_RISKYMOD" };
 
