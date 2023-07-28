@@ -11,13 +11,14 @@ namespace RiskyMod.Moon
     public class LessPillars
     {
         public static bool enabled = true;
+        public static int requiredBatteries = 2;
         public LessPillars()
         {
             if (!enabled) return;
             On.RoR2.MoonBatteryMissionController.Awake += (orig, self) =>
             {
                 orig(self);
-				self._numRequiredBatteries = 2;
+                self._numRequiredBatteries = requiredBatteries;
 			};
         }
     }

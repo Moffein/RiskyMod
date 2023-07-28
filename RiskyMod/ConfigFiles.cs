@@ -274,6 +274,7 @@ namespace RiskyMod
             //Moon
             Moon.ModifyHoldout.enabled = GeneralCfg.Bind(moonString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
             LessPillars.enabled = GeneralCfg.Bind(moonString, "Reduce Pillar Count", true, "Reduce the amount of pillars required to activate the jump pads.").Value;
+            LessPillars.requiredBatteries = GeneralCfg.Bind(moonString, "Reduce Pillar Count - Amount", 2, "Amount of pillars required to activate the jump pads.").Value;
             Moon.PillarsDropItems.enabled = GeneralCfg.Bind(moonString, "Pillars Drop Items", true, "Pillars drop items for the team when completed.").Value;
             Moon.PillarsDropItems.whiteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Common Chance", 50f, "Chance for Pillars to drop Common Items.").Value;
             Moon.PillarsDropItems.greenChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Uncommon Chance", 40f, "Chance for Pillars to drop Uncommon Items.").Value;
