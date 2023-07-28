@@ -32,6 +32,7 @@ namespace RiskyMod.Tweaks
 
             public Vector3 startingPoint;
             private float lifetime = 0f;
+            private bool teleported = false;
 
             public void Awake()
             {
@@ -41,7 +42,7 @@ namespace RiskyMod.Tweaks
             public void FixedUpdate()
             {
                 lifetime += Time.fixedDeltaTime;
-                if (lifetime > PickupTracker.teleportTime)
+                if (!teleported && lifetime > PickupTracker.teleportTime)
                 {
                     Rigidbody rb = base.GetComponent<Rigidbody>();
                     if (rb)
@@ -51,12 +52,18 @@ namespace RiskyMod.Tweaks
                             AttemptTeleport();
                         }
                     }
+                }
+
+                if (teleported)
+                {
                     Destroy(this);
                 }
             }
 
             public void AttemptTeleport()
             {
+                if (teleported) return;
+                teleported = true;
                 TeleportHelper.TeleportGameObject(base.gameObject, SneedUtils.SneedUtils.FindSafeTeleportPosition(base.gameObject, startingPoint));
             }
         }

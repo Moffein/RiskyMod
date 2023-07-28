@@ -348,7 +348,6 @@ namespace RiskyMod
             new SceneDirectorMonsterRewards();
             new MonsterGoldRewards();
             new CombatDirectorMultiplier();
-            new LoopBossArmor();
             new LoopTeleMountainShrine();
             new NoBossRepeat();
 

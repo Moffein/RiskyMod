@@ -214,9 +214,6 @@ namespace RiskyMod
             RemoveLevelCap.maxLevel = GeneralCfg.Bind(scalingString, "Increase Monster Level Cap - Max Level", 9999f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
             SceneDirectorMonsterRewards.enabled = GeneralCfg.Bind(scalingString, "SceneDirector Monster Rewards", true, "Monsters that spawn with the map now give the same rewards as teleporter monsters.").Value;
 
-            //LoopBossArmor.enabled = GeneralCfg.Bind(scalingString, "Loop Boss Armor", true, "Bosses gain bonus armor when looping.").Value;
-            LoopBossArmor.enabled = false;
-
             LoopTeleMountainShrine.enabled = GeneralCfg.Bind(scalingString, "Loop Teleporter Boss Credits", true, "Teleporter Boss director credits increase by 1 Mountain Shrine every loop.").Value;
             NoBossRepeat.enabled = GeneralCfg.Bind(scalingString, "No Teleporter Boss Repeat", true, "Lowers the chance of the same teleporter boss being selected within a loop.").Value;
 
@@ -466,7 +463,7 @@ namespace RiskyMod
             BrittleCrown.enabled = ItemCfg.Bind(lunarString, "Brittle Crown", true, itemConfigDescString).Value;
             Meteorite.enabled = ItemCfg.Bind(lunarString, "Glowing Meteorite", true, itemConfigDescString).Value;
             ShapedGlass.enabled = ItemCfg.Bind(lunarString, "Shaped Glass", true, itemConfigDescString).Value;
-            Transcendence.enabled = ItemCfg.Bind(lunarString, "Transcendence", true, itemConfigDescString).Value;
+            Transcendence.enabled = ItemCfg.Bind(lunarString, "Transcendence", false, itemConfigDescString).Value;
             Transcendence.alwaysShieldGate = ItemCfg.Bind(lunarString, "Transcendence - Always Shield Gate", true, "Enables shieldgating on this item even when shield gating is disabled.").Value;
             Visions.enabled = ItemCfg.Bind(lunarString, "Visions of Heresy", true, itemConfigDescString).Value;
         }
