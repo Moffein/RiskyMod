@@ -70,7 +70,7 @@ namespace RiskyMod.Survivors.Treebot
 
                 GameObject fruitProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/TreebotFruitSeedProjectile");
                 ProjectileImpactExplosion pie = fruitProjectile.GetComponent<ProjectileImpactExplosion>();
-                pie.blastRadius = 8f;
+                pie.blastRadius = 6f;
 
                 new ModifyFruitPickup();
                 new DropFruitOnHit();

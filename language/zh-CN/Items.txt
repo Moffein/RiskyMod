@@ -273,7 +273,5 @@
 	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "过量治疗会使你获得一道<style=cIsHealing>临时屏障</style>，可阻挡相当于<style=cIsHealing>50%<style=cStack>（每层增加50%）</style></style>已<style=cIsHealing>治疗</style>生命值的伤害。将<style=cIsHealing>屏障减少率</style>除以<style=cIsHealing>2<style=cStack>（每层增加1）</style></style>。",
 
 	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "使基础伤害提高<style=cIsDamage>100%</style><style=cStack>（每层增加100%）</style>，<style=cIsHealing>使最大生命值除以2</style><style=cStack>（每层增加1）</style>。",
-	
-	"ITEM_GOLDONHURT_DESC": "<style=cIsDamage>受到来自敌人的伤害</style>时，获得<style=cIsUtility>1<style=cStack>（每层+1）</style>金钱</style>。<style=cIsUtility>会随时间变化。</style>",
 	}
 }

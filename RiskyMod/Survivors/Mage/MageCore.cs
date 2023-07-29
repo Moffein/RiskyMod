@@ -28,7 +28,7 @@ namespace RiskyMod.Survivors.Mage
 
         public static bool m2RemoveNanobombGravity = true;
 
-        public static bool flamethrowerSprintCancel = true;
+        public static ConfigEntry<bool> flamethrowerSprintCancel;
         public static bool flamethrowerRangeExtend = true;
         public static bool flamethrowerIgniteChance = true;
 
@@ -197,9 +197,12 @@ namespace RiskyMod.Survivors.Mage
 
         private void ModifySpecials(SkillLocator sk)
         {
-            //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Mage.Weapon.Flamethrower");
-            SkillDef flamethrowerDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFlamethrower.asset").WaitForCompletion();
-            flamethrowerDef.canceledFromSprinting = flamethrowerSprintCancel;
+            flamethrowerSprintCancel.SettingChanged += ValidateFlamethrowerSprintSettings;
+
+           //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Mage.Weapon.Flamethrower");
+           SkillDef flamethrowerDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFlamethrower.asset").WaitForCompletion();
+            Skills.SpecialFlamethrowerVanilla = flamethrowerDef;
+            flamethrowerDef.canceledFromSprinting = flamethrowerSprintCancel.Value;
             if (flamethrowerRangeExtend)
             {
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.Flamethrower", "maxDistance", "25");  //20 vanilla
@@ -220,7 +223,7 @@ namespace RiskyMod.Survivors.Mage
                 skillDef.baseMaxStock = 1;
                 skillDef.baseRechargeInterval = 5f;
                 skillDef.beginSkillCooldownOnSkillEnd = true;
-                skillDef.canceledFromSprinting = flamethrowerSprintCancel && !SoftDependencies.RtAutoSprintLoaded;
+                skillDef.canceledFromSprinting = flamethrowerSprintCancel.Value && !SoftDependencies.RtAutoSprintLoaded;
                 skillDef.dontAllowPastMaxStocks = true;
                 skillDef.forceSprintDuringState = false;
                 skillDef.fullRestockOnAssign = true;
@@ -268,6 +271,22 @@ namespace RiskyMod.Survivors.Mage
             }
         }
 
+        private void ValidateFlamethrowerSprintSettings(object sender, EventArgs e)
+        {
+            if (Skills.SpecialFlamethrowerVanilla)
+            {
+                Skills.SpecialFlamethrowerVanilla.canceledFromSprinting = flamethrowerSprintCancel.Value;
+            }
+            if (Skills.SpecialLightning)
+            {
+                Skills.SpecialLightning.canceledFromSprinting = !SoftDependencies.RtAutoSprintLoaded && flamethrowerSprintCancel.Value;
+            }
+            if (Skills.SpecialLightningScepter)
+            {
+                Skills.SpecialLightningScepter.canceledFromSprinting = !SoftDependencies.RtAutoSprintLoaded && flamethrowerSprintCancel.Value;
+            }
+        }
+
         private void BuildScepterSkillDefs(SkillLocator sk)
         {
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Mage.SpecialLightningScepter));
@@ -277,7 +296,7 @@ namespace RiskyMod.Survivors.Mage
             skillDef.baseMaxStock = 1;
             skillDef.baseRechargeInterval = 5f;
             skillDef.beginSkillCooldownOnSkillEnd = true;
-            skillDef.canceledFromSprinting = flamethrowerSprintCancel;
+            skillDef.canceledFromSprinting = flamethrowerSprintCancel.Value;
             skillDef.dontAllowPastMaxStocks = true;
             skillDef.forceSprintDuringState = false;
             skillDef.fullRestockOnAssign = true;
@@ -384,5 +403,6 @@ namespace RiskyMod.Survivors.Mage
         public static SkillDef PrepFireStorm;
         public static SkillDef SpecialLightning;
         public static SkillDef SpecialLightningScepter;
+        public static SkillDef SpecialFlamethrowerVanilla;
     }
 }
