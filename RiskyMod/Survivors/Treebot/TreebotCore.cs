@@ -92,9 +92,9 @@ namespace RiskyMod.Survivors.Treebot
 
         private void FruitHealOnHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
         {
-            if (victimBody.HasBuff(RoR2Content.Buffs.Fruiting) && attackerBody.healthComponent)
+            if (victimBody.HasBuff(RoR2Content.Buffs.Fruiting) && attackerBody.healthComponent && damageInfo.procCoefficient > 0f)
             {
-                attackerBody.healthComponent.Heal(damageInfo.damage * 0.05f, default);
+                attackerBody.healthComponent.Heal(damageInfo.damage * 0.1f * damageInfo.procCoefficient, default);
             }
         }
     }

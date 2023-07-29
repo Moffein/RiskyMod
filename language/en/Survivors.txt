@@ -46,7 +46,7 @@
 	"TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "Enter a heavy stance, equipping both your <style=cIsDamage>primary attacks</style> at once. Gain <style=cIsUtility>60 armor</style>, but lose <style=cIsHealth>-60% movement speed</style>.",
 	
 	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "Fire a <style=cIsUtility>Sonic Boom</style> that <style=cIsDamage>Weakens</style> enemies. <style=cIsHealing>Heals for every target hit</style>.",
-	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Inject</style> an enemy for <style=cIsDamage>330% damage</style>. Allies heal for 5% of the damage dealt when attacking <style=cIsDamage>Injected</style> enemies.",
+	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Inject</style> an enemy for <style=cIsDamage>330% damage</style>. Allies <style=cIsHealing>heal</style> for <style=cIsHealing>10%</style> of the damage dealt when attacking <style=cIsDamage>Injected</style> enemies. On death, drop multiple <style=cIsHealing>healing fruits</style> that heal for <style=cIsHealing>25% HP</style>.",
 	
 	"CROCO_PASSIVE_NAME_RISKYMOD" : "Virulent",
 	"CROCO_PASSIVE_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Poison</style> and <color=#B1387F>Blight</color> last <style=cIsDamage>80%</style> longer.",
