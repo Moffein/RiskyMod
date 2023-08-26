@@ -1,8 +1,12 @@
-﻿using R2API;
+﻿using Mono.Cecil.Cil;
+using MonoMod.Cil;
+using R2API;
 using RiskyMod.SharedHooks;
 using RoR2;
+using System;
 using System.Collections.ObjectModel;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace RiskyMod.Items.Common
@@ -11,6 +15,9 @@ namespace RiskyMod.Items.Common
     {
         public static bool enabled = true;
         public static GameObject WarbannerObject;
+        public static BuffDef warbannerBuff;
+
+        public static bool UseModdedBuff = true;
 
         public Warbanner()
         {
@@ -19,7 +26,15 @@ namespace RiskyMod.Items.Common
 
             WarbannerObject = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/WarbannerWard");
 
-            RecalculateStatsAPI.GetStatCoefficients += HandleStats;
+            if (UseModdedBuff)
+            {
+                SetupBuff();
+                RecalculateStatsAPI.GetStatCoefficients += HandleStatsCustom;
+            }
+            else
+            {
+                RecalculateStatsAPI.GetStatCoefficients += HandleStatsVanilla;
+            }
 
             On.EntityStates.Missions.BrotherEncounter.Phase1.OnEnter += (orig, self) =>
             {
@@ -33,10 +48,47 @@ namespace RiskyMod.Items.Common
                 SpawnBanners();
             };
         }
+
         private static void ModifyItem()
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.WardOnLevel);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.WardOnLevel);
+            SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.WardOnLevel, ItemTag.Healing);
+        }
+
+        private void SetupBuff()
+        {
+            BuffDef vanillaWarbanner = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/WardOnLevel/bdWarbanner.asset").WaitForCompletion();
+
+            warbannerBuff = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_WarbannerBuff",
+                false,
+                false,
+                false,
+                vanillaWarbanner.buffColor,
+                vanillaWarbanner.iconSprite
+                );
+
+
+            IL.RoR2.CharacterBody.UpdateAllTemporaryVisualEffects += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                if (c.TryGotoNext(
+                     x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "Warbanner")
+                    ))
+                {
+                    c.Index += 2;
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<bool, CharacterBody, bool>>((hasBuff, self) =>
+                    {
+                        return hasBuff || self.HasBuff(Warbanner.warbannerBuff);
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Warbanner UpdateAllTemporaryVisualEffects IL Hook failed");
+                }
+            };
         }
 
         private void SpawnBanner(CharacterBody body)
@@ -80,13 +132,24 @@ namespace RiskyMod.Items.Common
             }
         }
 
-        private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        private void HandleStatsCustom(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (sender.HasBuff(RoR2Content.Buffs.Warbanner.buffIndex))
+            if (sender.HasBuff(warbannerBuff))
+            {
+                args.moveSpeedMultAdd += 0.3f;
+                args.attackSpeedMultAdd += 0.3f;
+                args.damageMultAdd += 0.15f;
+                args.baseRegenAdd += 0.01f * sender.maxHealth;
+            }
+        }
+
+        private void HandleStatsVanilla(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            if (sender.HasBuff(warbannerBuff))
             {
                 //+30% AtkSpd and MoveSpd already present in vanilla
-                args.armorAdd += 15f;
                 args.damageMultAdd += 0.15f;
+                args.baseRegenAdd += 0.01f * sender.maxHealth;
             }
         }
     }
