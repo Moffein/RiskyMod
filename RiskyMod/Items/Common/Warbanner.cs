@@ -1,6 +1,7 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
+using RiskyMod.MonoBehaviours;
 using RiskyMod.SharedHooks;
 using RoR2;
 using System;
@@ -14,7 +15,7 @@ namespace RiskyMod.Items.Common
     public class Warbanner
     {
         public static bool enabled = true;
-        public static GameObject WarbannerObject;
+        public static GameObject WarbannerObject = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/WarbannerWard");
         public static BuffDef warbannerBuff;
 
         public static bool UseModdedBuff = true;
@@ -24,8 +25,6 @@ namespace RiskyMod.Items.Common
             if (!enabled) return;
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
-            WarbannerObject = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/WarbannerWard");
-
             if (UseModdedBuff)
             {
                 SetupBuff();
@@ -33,6 +32,9 @@ namespace RiskyMod.Items.Common
             }
             else
             {
+                WardHeal wh = WarbannerObject.AddComponent<WardHeal>();
+                wh.healInterval = 1f;
+                wh.healFraction = 0.01f;
                 RecalculateStatsAPI.GetStatCoefficients += HandleStatsVanilla;
             }
 
@@ -89,6 +91,41 @@ namespace RiskyMod.Items.Common
                     UnityEngine.Debug.LogError("RiskyMod: Warbanner UpdateAllTemporaryVisualEffects IL Hook failed");
                 }
             };
+
+            WarbannerObject = WarbannerObject.InstantiateClone("RiskyModWarbannerObject", true);
+            Content.Content.networkedObjectPrefabs.Add(WarbannerObject);
+            WardHeal wh = WarbannerObject.AddComponent<WardHeal>();
+            wh.healInterval = 1f;
+            wh.healFraction = 0.01f;
+
+            BuffWard ward = WarbannerObject.GetComponent<BuffWard>();
+            ward.buffDef = warbannerBuff;
+
+            RoR2.RoR2Application.onLoad += ReplaceWarbanner;
+
+            IL.RoR2.TeleporterInteraction.ChargingState.OnEnter += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+
+                if (c.TryGotoNext(x => x.MatchLdstr("Prefabs/NetworkedObjects/WarbannerWard")))
+                {
+                    c.Index += 2;
+                    c.EmitDelegate<Func<GameObject, GameObject>>(wardObject =>
+                    {
+                        return WarbannerObject;
+                    });
+                }
+                else
+                {
+                    Debug.LogError("RiskyMod: Warbanner TeleporterInteraction IL Hook failed.");
+                }
+            };
+        }
+
+        private void ReplaceWarbanner()
+        {
+            if (!RoR2.Items.WardOnLevelManager.wardPrefab) Debug.LogError("RiskyMod: Warbanner assigned before WardOnLevel Init");
+            RoR2.Items.WardOnLevelManager.wardPrefab = WarbannerObject;
         }
 
         private void SpawnBanner(CharacterBody body)
@@ -139,7 +176,6 @@ namespace RiskyMod.Items.Common
                 args.moveSpeedMultAdd += 0.3f;
                 args.attackSpeedMultAdd += 0.3f;
                 args.damageMultAdd += 0.15f;
-                args.baseRegenAdd += 0.01f * sender.maxHealth;
             }
         }
 
@@ -149,7 +185,6 @@ namespace RiskyMod.Items.Common
             {
                 //+30% AtkSpd and MoveSpd already present in vanilla
                 args.damageMultAdd += 0.15f;
-                args.baseRegenAdd += 0.01f * sender.maxHealth;
             }
         }
     }
