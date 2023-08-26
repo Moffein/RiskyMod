@@ -160,7 +160,7 @@ namespace RiskyMod.Survivors.Captain
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
             esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
-            Content.Content.networkedObjectPrefabs.Add(beaconPrefab);
+            Content.Content.networkedObjectPrefabs.Add(beaconPrefab);//Seems like InstantiateClone auto does this for some reason. TODO: Address, though it seems harmless.
 
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Captain/EntityStates.Captain.Weapon.CallSupplyDropEquipmentRestock.asset", "supplyDropPrefab", beaconPrefab);
 
