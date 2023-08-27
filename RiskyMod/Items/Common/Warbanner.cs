@@ -55,7 +55,6 @@ namespace RiskyMod.Items.Common
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.WardOnLevel);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.WardOnLevel);
-            SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.WardOnLevel, ItemTag.Healing);
         }
 
         private void SetupBuff()
