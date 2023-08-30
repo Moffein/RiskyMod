@@ -180,7 +180,7 @@ namespace RiskyMod.Items.Common
 
         private void HandleStatsVanilla(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (sender.HasBuff(warbannerBuff))
+            if (sender.HasBuff(RoR2Content.Buffs.Warbanner))
             {
                 //+30% AtkSpd and MoveSpd already present in vanilla
                 args.damageMultAdd += 0.15f;
