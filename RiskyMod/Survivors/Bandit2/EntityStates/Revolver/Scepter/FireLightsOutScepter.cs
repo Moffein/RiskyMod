@@ -105,7 +105,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
 
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
-			return InterruptPriority.Any;
+			return (shotsFired >= baseShotCount) ? InterruptPriority.Any : InterruptPriority.Skill;
 		}
 
 		public override void LoadStats()
