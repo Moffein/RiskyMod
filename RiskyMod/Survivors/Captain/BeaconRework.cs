@@ -287,7 +287,12 @@ namespace RiskyMod.Survivors.Captain
             public void AddBeacon(GameObject newBeacon, GenericSkill skill)
             {
                 if (!NetworkServer.active) return;  //Beacons being instantiated/deleted are server-side.
-                int maxBeacons = skillLocator.special.maxStock;
+
+                //Bad way to get stock bonus, but Vanilla does this for Engi Turrets in the Deployable Mangaer code.
+                int inventoryStocks = 0;
+                if (body && body.inventory) inventoryStocks = body.inventory.GetItemCount(DLC1Content.Items.EquipmentMagazineVoid);
+
+                int maxBeacons = 1 + inventoryStocks;
                 if (!allowLysateStack && maxBeacons >= 2) maxBeacons = 2;
                 if (skill == Beacon1)
                 {
