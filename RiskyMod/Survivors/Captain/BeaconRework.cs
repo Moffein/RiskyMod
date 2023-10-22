@@ -48,6 +48,25 @@ namespace RiskyMod.Survivors.Captain
             SkillDef captainSpecialGeneric = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/PrepSupplyDrop.asset").WaitForCompletion();
             captainSpecialGeneric.skillDescriptionToken = "CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD";
 
+            //Disable Vanilla Deployable handling
+            IL.EntityStates.Captain.Weapon.CallSupplyDropBase.OnEnter += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                if (c.TryGotoNext(MoveType.After,
+                   x => x.MatchCallvirt<CharacterBody>("get_master")
+                  ))
+                {
+                    c.EmitDelegate<Func<CharacterMaster, CharacterMaster>>(characterMaster =>
+                    {
+                        return null;
+                    });
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: BeaconRework Deployable IL Hook failed");
+                }
+            };
+
             //Register beacons when they spawn
             CaptainCore.bodyPrefab.AddComponent<CaptainDeployableManager>();
             IL.EntityStates.Captain.Weapon.CallSupplyDropBase.OnEnter += (il) =>
@@ -252,13 +271,17 @@ namespace RiskyMod.Survivors.Captain
             private void Awake()
             {
                 body = base.GetComponent<CharacterBody>();
+
+                Beacon1Deployables = new Queue<GameObject>();
+                Beacon2Deployables = new Queue<GameObject>();
+            }
+
+            private void Start()
+            {
                 skillLocator = base.GetComponent<SkillLocator>();
 
                 Beacon1 = skillLocator.FindSkill("SupplyDrop1");
                 Beacon2 = skillLocator.FindSkill("SupplyDrop2");
-
-                Beacon1Deployables = new Queue<GameObject>();
-                Beacon2Deployables = new Queue<GameObject>();
             }
 
             public void AddBeacon(GameObject newBeacon, GenericSkill skill)
