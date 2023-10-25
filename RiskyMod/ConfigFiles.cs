@@ -232,7 +232,7 @@ namespace RiskyMod
             GunnerTurret.allowRepair = GeneralCfg.Bind(allyString, "Gunner Turret - Enable Repairs", true, "Gunner Turrets can be repaired after being destroyed.").Value;
             GunnerTurret.teleportWithPlayer = GeneralCfg.Bind(allyString, "Gunner Turret - Teleport with Player", true, "Gunner Turrets are teleported to the player when starting the Teleporter event.").Value;
             CheaperRepairs.enabled = GeneralCfg.Bind(allyString, "Cheaper Drone Repairs", true, "Repairing drones is cheaper.").Value;
-            AlliesCore.changeScaling = GeneralCfg.Bind(allyString, "Scaling Changes", true, "Ally HP and Damage scales so that they always perform the same on every stage.").Value;
+            AlliesCore.changeScaling = GeneralCfg.Bind(allyString, "Scaling Changes", false, "Ally HP and Damage scales so that they always perform the same on every stage.").Value;
             AlliesCore.buffRegen = GeneralCfg.Bind(allyString, "Regen Changes", true, "Most allies regen to full HP in a fixed amount of time.").Value;
 
             AlliesCore.ChenChillDroneCompat = GeneralCfg.Bind(allyString, "Compatibility - Chill Drone", true, "Enables ally changes on allies from this mod.").Value;

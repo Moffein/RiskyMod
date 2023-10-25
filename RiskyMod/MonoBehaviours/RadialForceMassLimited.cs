@@ -101,25 +101,29 @@ namespace RiskyMod.MonoBehaviours
 			HealthComponent healthComponent = hurtBox.healthComponent;
 			if (healthComponent && NetworkServer.active)
 			{
-				CharacterMotor characterMotor = healthComponent.body.characterMotor;
-				Vector3 a = hurtBox.transform.position - this.transform.position;
-				float num = 1f - Mathf.Clamp(a.magnitude / this.radius, 0f, 1f - this.forceCoefficientAtEdge);
-				a = a.normalized * this.forceMagnitude * (1f - num);
-				Vector3 velocity;
-				float mass;
-				if (characterMotor)
-				{
-					velocity = characterMotor.velocity;
-					mass = characterMotor.mass;
+				bool isPlayer = healthComponent.body && healthComponent.body.isPlayerControlled;
+				if (!ignorePlayerControlled || !isPlayer)
+                {
+					CharacterMotor characterMotor = healthComponent.body.characterMotor;
+					Vector3 a = hurtBox.transform.position - this.transform.position;
+					float num = 1f - Mathf.Clamp(a.magnitude / this.radius, 0f, 1f - this.forceCoefficientAtEdge);
+					a = a.normalized * this.forceMagnitude * (1f - num);
+					Vector3 velocity;
+					float mass;
+					if (characterMotor)
+					{
+						velocity = characterMotor.velocity;
+						mass = characterMotor.mass;
+					}
+					else
+					{
+						Rigidbody rigidbody = healthComponent.body.rigidbody;
+						velocity = rigidbody.velocity;
+						mass = rigidbody.mass;
+					}
+					velocity.y += Physics.gravity.y * Time.fixedDeltaTime;
+					healthComponent.TakeDamageForce(a - velocity * (this.damping * mass * num), true, false);
 				}
-				else
-				{
-					Rigidbody rigidbody = healthComponent.body.rigidbody;
-					velocity = rigidbody.velocity;
-					mass = rigidbody.mass;
-				}
-				velocity.y += Physics.gravity.y * Time.fixedDeltaTime;
-				healthComponent.TakeDamageForce(a - velocity * (this.damping * mass * num), true, false);
 			}
 		}
 
@@ -130,6 +134,7 @@ namespace RiskyMod.MonoBehaviours
 		public float forceCoefficientAtEdge = 0.5f;
 		public TetherVfxOrigin tetherVfxOrigin;
 		public bool flyingOnly = false;
+		public bool ignorePlayerControlled = false;
 
 		private SphereSearch sphereSearch;
 	}

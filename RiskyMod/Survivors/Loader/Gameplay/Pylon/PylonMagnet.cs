@@ -27,6 +27,7 @@ namespace RiskyMod.Survivors.Loader
             rf.forceCoefficientAtEdge = 0.5f;
             rf.maxMass = 250f;  //Greater wisps are 300. Yank hook is 250.
             rf.flyingOnly = true;
+            rf.ignorePlayerControlled = true;
 
             go.AddComponent<PylonPulseController>();
 
