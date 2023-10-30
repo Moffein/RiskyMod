@@ -31,6 +31,8 @@ namespace RiskyMod.Allies
 
         private static BodyIndex SpikestripBlueLemurian = BodyIndex.None;
         private static BodyIndex SS2SecurityDrone = BodyIndex.None;
+        private static BodyIndex SS2ShockDrone = BodyIndex.None;
+        private static BodyIndex SS2CloneDrone = BodyIndex.None;
         private static BodyIndex ChenChillDrone = BodyIndex.None;
         private static BodyIndex ChenGradiusPsyDroneRed = BodyIndex.None;
         private static BodyIndex ChenGradiusPsyDroneGreen = BodyIndex.None;
@@ -96,6 +98,11 @@ namespace RiskyMod.Allies
                 if (SS2Compat)
                 {
                     SS2SecurityDrone = BodyCatalog.FindBodyIndex("DroidDroneBody");
+                    SS2CloneDrone = BodyCatalog.FindBodyIndex("CloneDroneBody");
+                    SS2ShockDrone = BodyCatalog.FindBodyIndex("ShockDroneBody");
+
+                    StandardDroneScalingList.Add(SS2CloneDrone);
+                    StandardDroneScalingList.Add(SS2ShockDrone);
                 }
                 if (ChenChillDroneCompat)
                 {
