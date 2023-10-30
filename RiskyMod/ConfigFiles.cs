@@ -676,6 +676,7 @@ namespace RiskyMod
             VoidFiendCore.modifyCorruptCrush = SurvivorCfg.Bind(voidFiendString, "Corrupted Suppress Changes", true, "Enable changes to this skill.").Value;
             UtilityFallImmune.enabled = SurvivorCfg.Bind(voidFiendString, "Trespass Changes", true, "Enable changes to this skill.").Value;
             UtilityMoveSpeedScaling.disableScaling = SurvivorCfg.Bind(voidFiendString, "Trespass - Disable Move Speed Scaling", false, "(Client-Side) Prevents Trespass from scaling with move speed.");
+            VoidFiendCore.removePrimarySpread = SurvivorCfg.Bind(voidFiendString, "Remove Primary Spread", true, "Remove random spread from Drown.").Value;
 
             ConfigFireSelect();
         }

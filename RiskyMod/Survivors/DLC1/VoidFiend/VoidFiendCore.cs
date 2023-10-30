@@ -20,6 +20,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
         public static bool noCorruptHeal = true;
         public static bool noCorruptCrit = true;
         public static bool removeCorruptArmor = true;
+        public static bool removePrimarySpread = true;
 
         public static bool secondaryMultitask = true;
 
@@ -46,9 +47,53 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
         private void ModifySkills(SkillLocator sk)
         {
             ModifyPassive(sk);
+            if (removePrimarySpread) RemovePrimarySpread();
             ModifySecondaries(sk);
             ModifyUtilities(sk);
             ModifySpecials(sk);
+        }
+
+        private void RemovePrimarySpread()
+        {
+            IL.EntityStates.VoidSurvivor.Weapon.FireHandBeam.OnEnter += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                if (c.TryGotoNext(
+                     x => x.MatchCallvirt<BulletAttack>("Fire")
+                     ))
+                {
+                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                    {
+                        bulletAttack.minSpread = 0f;
+                        bulletAttack.maxSpread = 0f;
+                        return bulletAttack;
+                    });
+                }
+                else
+                {
+                    Debug.LogError("RiskyMod: VoidFiendCore FireHandBeam.OnEnter IL Hook failed");
+                }
+            };
+
+            IL.EntityStates.VoidSurvivor.Weapon.FireCorruptHandBeam.FireBullet += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                if (c.TryGotoNext(
+                     x => x.MatchCallvirt<BulletAttack>("Fire")
+                     ))
+                {
+                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
+                    {
+                        bulletAttack.minSpread = 0f;
+                        bulletAttack.maxSpread = 0f;
+                        return bulletAttack;
+                    });
+                }
+                else
+                {
+                    Debug.LogError("RiskyMod: VoidFiendCore FireCorruptHandBeam.OnEnter IL Hook failed");
+                }
+            };
         }
 
         private void ModifyPassive(SkillLocator sk)
