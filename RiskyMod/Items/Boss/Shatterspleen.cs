@@ -16,6 +16,23 @@ namespace RiskyMod.Items.Boss
 
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
+            //Remove Vanilla crit
+            IL.RoR2.CharacterBody.RecalculateStats += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                if (c.TryGotoNext(
+                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "BleedOnHitAndExplode")
+                     ))
+                {
+                    c.Remove();
+                    c.Emit<RiskyMod>(OpCodes.Ldsfld, nameof(RiskyMod.emptyItemDef));
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError("RiskyMod: Shatterspleen RecalculateStats IL Hook failed");
+                }
+            };
+
             //Remove Vanilla bleed effect - needs to be recalculated.
             IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
             {
