@@ -551,6 +551,7 @@ namespace RiskyMod
             MageCore.m2RemoveNanobombGravity = SurvivorCfg.Bind(mageString, "Nanobomb - Remove Gravity", true, "Removes projectile drop from Nanobomb so it behaves like it did pre-1.0 update.").Value;
 
             MageCore.ionSurgeUtility = SurvivorCfg.Bind(mageString, "Ion Surge - Move to Utility Slot", true, "Moves Ion Surge to the Utility slot.").Value;
+            MageCore.ionSurgeUtilityKeepSpecial = SurvivorCfg.Bind(mageString, "Ion Surge - Move to Utility Slot - Keep Special", false, "If Ion Surge Utility is enabled, keep the Special version as a selectable skill.").Value;
             MageCore.ionSurgeMovementScaling = SurvivorCfg.Bind(mageString, "Ion Surge - Movement Scaling", false, "(Client-Side) Ion Surge jump height scales with movement speed.");
             MageCore.ionSurgeShock = SurvivorCfg.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
 

@@ -36,6 +36,7 @@ namespace RiskyMod.Survivors.Mage
         public static ConfigEntry<bool> ionSurgeMovementScaling;
 
         public static bool ionSurgeUtility = true;
+        public static bool ionSurgeUtilityKeepSpecial = false;
 
         public static bool enableFireUtility = true;
         public static bool enableLightningSpecial = true;
@@ -383,7 +384,7 @@ namespace RiskyMod.Survivors.Mage
             {
                 surgeDef.forceSprintDuringState = false;
                 //Remove Ion Surge from Specials
-                sk.special.skillFamily.variants = sk.special.skillFamily.variants.Where(v => v.skillDef.activationState.stateType != typeof(EntityStates.Mage.FlyUpState)).ToArray();
+                if (!ionSurgeUtilityKeepSpecial) sk.special.skillFamily.variants = sk.special.skillFamily.variants.Where(v => v.skillDef.activationState.stateType != typeof(EntityStates.Mage.FlyUpState)).ToArray();
 
                 //Add to Utility
                 SkillFamily utilitySkillFamily = sk.utility.skillFamily;
