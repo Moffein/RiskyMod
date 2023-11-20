@@ -295,8 +295,10 @@ namespace RiskyMod
 
             Sacrifice.enabled = Sacrifice.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.SacrificeTweaks");
 
-            if (Survivors.Mage.MageCore.m1AttackSpeed && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.ArtificerM1Reload")) Debug.Log("RiskyMod: Disabling Artificer M1 Reload because standalone mod is loaded.");
-            Survivors.Mage.MageCore.m1AttackSpeed = Survivors.Mage.MageCore.m1AttackSpeed && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.ArtificerM1Reload");
+            //Artificer
+            bool artiM1ReloadLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.ArtificerM1Reload");
+            if (Survivors.Mage.MageCore.m1AttackSpeed && artiM1ReloadLoaded) Debug.Log("RiskyMod: Disabling Artificer M1 Reload because standalone mod is loaded.");
+            Survivors.Mage.MageCore.m1AttackSpeed = Survivors.Mage.MageCore.m1AttackSpeed && !artiM1ReloadLoaded;
         }
 
         private void CheckArenaLoaded(Stage obj)

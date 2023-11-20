@@ -19,6 +19,7 @@ namespace RiskyMod.Survivors.Captain
         public static bool nukeAmmopackNerf = true;
         public static bool nukeProc = true;
 
+        public static bool disableNukeFriendlyFire = false;
         public static bool beaconRework = true;
 
         public static BodyIndex CaptainIndex;
@@ -72,11 +73,15 @@ namespace RiskyMod.Survivors.Captain
                 };
             }
 
+            GameObject nukePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainAirstrikeAltProjectile.prefab").WaitForCompletion();
+            ProjectileImpactExplosion pie = nukePrefab.GetComponent<ProjectileImpactExplosion>();
             if (nukeProc)
             {
-                GameObject nukePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainAirstrikeAltProjectile.prefab").WaitForCompletion();
-                ProjectileImpactExplosion pie = nukePrefab.GetComponent<ProjectileImpactExplosion>();
                 pie.blastProcCoefficient = 3f;
+            }
+            if (disableNukeFriendlyFire)
+            {
+                pie.blastAttackerFiltering = AttackerFiltering.AlwaysHitSelf;
             }
         }
 
