@@ -3,6 +3,7 @@ A full-game overhaul that aims to bring it closer to RoR1's balance. My main pri
 
 I highly recommed installing https://thunderstore.io/package/Moffein/EliteReworks/ to go with this.
 
+Quick change list can be found at https://thunderstore.io/package/Risky_Lives/RiskyMod/wiki/
 Full change list can be found at https://docs.google.com/document/d/1Igxdur0M33fdkcDLYgDEbLE0M4-89gSTorxgdn-oyKs/
 
 Feel free to take features of this mod and release them as standalone as long as you link the original GitHub repo in the README.
