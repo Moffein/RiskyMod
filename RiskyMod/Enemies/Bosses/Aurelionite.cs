@@ -12,6 +12,7 @@ namespace RiskyMod.Enemies.Bosses
     public class Aurelionite
     {
         public static bool modifyStats = true;
+        public static bool enabled = true;
 
         public Aurelionite()
         {
@@ -22,7 +23,7 @@ namespace RiskyMod.Enemies.Bosses
                 cb.baseDamage = 60f;
                 cb.levelDamage = cb.baseDamage * 0.2f;
             }
-            if (Titan.enabled)
+            if (Aurelionite.enabled)
             {
                 LaserRework();
                 ModifyAI();

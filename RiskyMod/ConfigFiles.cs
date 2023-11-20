@@ -728,7 +728,7 @@ namespace RiskyMod
             LunarWisp.enableFalloff = MonsterCfg.Bind(monsterString, "Lunar Wisp - Bullet Falloff", true, "Adds damage falloff to Lunar Wisps bullets. Disabled if Remove Hitscan is enabled.").Value;
             LunarWisp.disableProjectileOnKill = MonsterCfg.Bind(monsterString, "Lunar Wisp - Disable Projectile On-Kill Effects", true, "Prevents on-kill effects from proccing when this monster's projectiles are shot down.").Value;
 
-            Titan.enabled = MonsterCfg.Bind(monsterString, "Stone Titan and Aurelionite", true, "Enable changes to this monster.").Value;
+            Titan.enabled = MonsterCfg.Bind(monsterString, "Stone Titan", true, "Enable changes to this monster.").Value;
             BeetleQueen.enabled = MonsterCfg.Bind(monsterString, "Beetle Queen", true, "Enable changes to this monster.").Value;
             Vagrant.enabled = MonsterCfg.Bind(monsterString, "Wandering Vagrant", true, "Enable changes to this monster.").Value;
             Vagrant.disableProjectileOnKill = MonsterCfg.Bind(monsterString, "Wandering Vagrant - Disable Projectile On-Kill Effects", true, "Prevents on-kill effects from proccing when this monster's projectiles are shot down.").Value;
@@ -736,7 +736,8 @@ namespace RiskyMod
             SCU.enabled = MonsterCfg.Bind(monsterString, "Solus Control Unit", true, "Enable changes to this monster.").Value;
             Worm.enabled = MonsterCfg.Bind(monsterString, "Magma/Overloading Worm", true, "Enable changes to this monster.").Value;
 
-            Aurelionite.modifyStats = MonsterCfg.Bind(monsterString, "Aurelionite", true, "Modify stats.").Value;
+            Aurelionite.enabled = MonsterCfg.Bind(monsterString, "Aurelionite", true, "Enable changes to this monster.").Value;
+            Aurelionite.modifyStats = MonsterCfg.Bind(monsterString, "Aurelionite Stats", true, "Modify stats. (Separate from Aurelionite option)").Value;
             AWU.enabled = MonsterCfg.Bind(monsterString, "Alloy Worship Unit", true, "Enable changes to this monster.").Value;
 
             Grandparent.enabled = MonsterCfg.Bind(monsterString, "Grandparent", true, "Enable changes to this monster.").Value;
