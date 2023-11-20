@@ -119,7 +119,7 @@ namespace RiskyMod.Enemies.Bosses
             //Copied from Aurelionite
             On.EntityStates.TitanMonster.FireFist.PlacePredictedAttack += (orig, self) =>
             {
-                int fistCount = 4;
+                int fistCount = 3;
                 float distanceBetweenFists = 10f;//10
                 float delayBetweenFists = 0.1f;//0.1
 
