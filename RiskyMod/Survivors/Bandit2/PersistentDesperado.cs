@@ -6,12 +6,12 @@ using UnityEngine.Networking;
 
 namespace RiskyMod.Survivors.Bandit2
 {
-    public class DesperadoRework
+    public class PersistentDesperado
     {
         public static bool enabled = true;
         public static float damagePerBuff = 0.01f;
 
-        public DesperadoRework()
+        public PersistentDesperado()
         {
             if (!enabled) return;
 
@@ -26,7 +26,7 @@ namespace RiskyMod.Survivors.Bandit2
                 }
                 else
                 {
-                    UnityEngine.Debug.LogError("RiskyMod: DesperadoRework IL Hook failed");
+                    UnityEngine.Debug.LogError("RiskyMod: PersistentDesperado IL Hook failed");
                 }
             };
         }
@@ -34,7 +34,7 @@ namespace RiskyMod.Survivors.Bandit2
         public static float GetDesperadoMult(CharacterBody cb)
         {
             int buffCount = cb.GetBuffCount(RoR2Content.Buffs.BanditSkull.buffIndex);
-            if (DesperadoRework.enabled)
+            if (PersistentDesperado.enabled)
             {
                 return 1f + buffCount * damagePerBuff;
             }

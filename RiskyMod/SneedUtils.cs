@@ -20,6 +20,15 @@ namespace SneedUtils
             BasicMonsters, Minibosses, Champions
         }
 
+        public static void AddCooldownBuff(CharacterBody body, BuffDef buff, int cooldown)
+        {
+            body.ClearTimedBuffs(buff);
+            for (int i = 0; i < cooldown; i++)
+            {
+                body.AddTimedBuff(buff, i + 1f);
+            }
+        }
+
         public static void AddModdedDamageTypeToProjectile(GameObject projectile, DamageAPI.ModdedDamageType[] moddedDamageTypes)
         {
             if (projectile)

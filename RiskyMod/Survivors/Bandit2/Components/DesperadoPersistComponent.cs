@@ -2,7 +2,7 @@
 
 namespace RiskyMod.Survivors.Bandit2.Components
 {
-    public class DesperadoPersist : MonoBehaviour
+    public class DesperadoPersistComponent : MonoBehaviour
     {
         public int stacks = 0;
         private bool addedHook;
@@ -10,7 +10,7 @@ namespace RiskyMod.Survivors.Bandit2.Components
         private void Awake()
         {
             addedHook = false;
-            if (!DesperadoRework.enabled)
+            if (!PersistentDesperado.enabled)
             {
                 addedHook = true;
                 RoR2.Stage.onServerStageBegin += Stage_onServerStageBegin;

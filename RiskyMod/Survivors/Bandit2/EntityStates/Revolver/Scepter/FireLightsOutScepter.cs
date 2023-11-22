@@ -48,7 +48,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
 				bulletAttack.minSpread = minSpread;
 				bulletAttack.maxSpread = maxSpread;
 				bulletAttack.bulletCount = 1u;
-				bulletAttack.damage = damageCoefficient * this.damageStat * DesperadoRework.GetDesperadoMult(base.characterBody);
+				bulletAttack.damage = damageCoefficient * this.damageStat * PersistentDesperado.GetDesperadoMult(base.characterBody);
 				bulletAttack.force = force;
 				bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
 				bulletAttack.tracerEffectPrefab = tracerEffectPrefab;
@@ -64,16 +64,21 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
 				if (sdc)
 				{
 					SkillDef selectedPassive = sdc.GetPassiveSkillDef();
-					if (selectedPassive == Skills.Gunslinger)
-					{
-						bulletAttack.damageType |= DamageType.ResetCooldownsOnKill;
-					}
-					else if (selectedPassive == Skills.DesperadoKillStack)
+
+                    if (selectedPassive == Skills.Standoff)
+                    {
+                        bulletAttack.AddModdedDamageType(Bandit2Core.StandoffDamage);
+                    }
+                    else if (selectedPassive == Skills.DesperadoKillStack)
 					{
 						bulletAttack.damageType |= DamageType.GiveSkullOnKill;
-					}
+                    }
+                    else
+                    {
+                        bulletAttack.damageType |= DamageType.ResetCooldownsOnKill;
+                    }
 
-					bulletAttack.damageType |= DamageType.BonusToLowHealth;
+                    bulletAttack.damageType |= DamageType.BonusToLowHealth;
 				}
 				DamageAPI.AddModdedDamageType(bulletAttack, Bandit2Core.SpecialDamage);
 

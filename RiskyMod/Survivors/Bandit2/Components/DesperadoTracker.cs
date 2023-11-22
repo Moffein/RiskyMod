@@ -8,18 +8,17 @@ namespace RiskyMod.Survivors.Bandit2.Components
     public class DesperadoTracker : MonoBehaviour
     {
         private CharacterBody characterBody;
-        private DesperadoPersist desperadoPersist;
+        private DesperadoPersistComponent desperadoPersist;
         public void Awake()
         {
             characterBody = base.GetComponent<CharacterBody>();
-            if (!characterBody) Destroy(this);
         }
 
         public void Start()
         {
             if (NetworkServer.active && characterBody.master)
             {
-                desperadoPersist = characterBody.master.GetComponent<DesperadoPersist>();
+                desperadoPersist = characterBody.master.GetComponent<DesperadoPersistComponent>();
                 if (desperadoPersist)
                 {
                     while (characterBody.GetBuffCount(RoR2Content.Buffs.BanditSkull.buffIndex) < desperadoPersist.stacks)
@@ -29,7 +28,7 @@ namespace RiskyMod.Survivors.Bandit2.Components
                 }
                 else
                 {
-                    desperadoPersist = characterBody.master.gameObject.AddComponent<DesperadoPersist>();
+                    desperadoPersist = characterBody.master.gameObject.AddComponent<DesperadoPersistComponent>();
                 }
             }
         }

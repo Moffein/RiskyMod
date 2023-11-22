@@ -142,6 +142,69 @@ namespace RiskyMod
                                 a.attackerBody.AddBuff(RoR2Content.Buffs.BanditSkull);
                             }
                             break;
+                        case DirectAssistType.BanditStandoff:
+                            if (victimBody.master)
+                            {
+                                if (!spawnedBanditSkullEffect)
+                                {
+                                    spawnedBanditSkullEffect = true;
+                                    EffectManager.SpawnEffect(BanditSpecialGracePeriod.skullEffect, new EffectData
+                                    {
+                                        origin = damageInfo.position
+                                    }, true);
+                                }
+
+                                //I hate this
+                                int currentStandoffLevel = 0;
+                                if (a.attackerBody.HasBuff(Bandit2Core.Buffs.Standoff5))
+                                {
+                                    currentStandoffLevel = 5;
+                                }
+                                else if (a.attackerBody.HasBuff(Bandit2Core.Buffs.Standoff4))
+                                {
+                                    currentStandoffLevel = 4;
+                                }
+                                else if (a.attackerBody.HasBuff(Bandit2Core.Buffs.Standoff3))
+                                {
+                                    currentStandoffLevel = 3;
+                                }
+                                else if (a.attackerBody.HasBuff(Bandit2Core.Buffs.Standoff2))
+                                {
+                                    currentStandoffLevel = 2;
+                                }
+                                else if (a.attackerBody.HasBuff(Bandit2Core.Buffs.Standoff1))
+                                {
+                                    currentStandoffLevel = 1;
+                                }
+
+                                a.attackerBody.ClearTimedBuffs(Bandit2Core.Buffs.Standoff5);
+                                a.attackerBody.ClearTimedBuffs(Bandit2Core.Buffs.Standoff4);
+                                a.attackerBody.ClearTimedBuffs(Bandit2Core.Buffs.Standoff3);
+                                a.attackerBody.ClearTimedBuffs(Bandit2Core.Buffs.Standoff2);
+                                a.attackerBody.ClearTimedBuffs(Bandit2Core.Buffs.Standoff1);
+
+                                BuffDef buffToAdd = Bandit2Core.Buffs.Standoff1;
+                                int desiredStandoffLevel = Mathf.Min(currentStandoffLevel + 1, 5);
+                                switch(desiredStandoffLevel)
+                                {
+                                    case 5:
+                                        buffToAdd = Bandit2Core.Buffs.Standoff5;
+                                        break;
+                                    case 4:
+                                        buffToAdd = Bandit2Core.Buffs.Standoff4;
+                                        break;
+                                    case 3:
+                                        buffToAdd = Bandit2Core.Buffs.Standoff3;
+                                        break;
+                                    case 2:
+                                        buffToAdd = Bandit2Core.Buffs.Standoff2;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                SneedUtils.SneedUtils.AddCooldownBuff(a.attackerBody, buffToAdd, 15);
+                            }
+                            break;
                         case DirectAssistType.ResetCooldowns:
                             if (!spawnedResetCooldownEffect)
                             {
@@ -262,6 +325,7 @@ namespace RiskyMod
             ResetCooldowns,
             BanditSkull,
             ResetSpecial,
+            BanditStandoff,
             CrocoBiteHealOnKill
         }
     }

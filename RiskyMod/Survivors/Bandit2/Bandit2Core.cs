@@ -43,19 +43,23 @@ namespace RiskyMod.Survivors.Bandit2
 
         public static bool specialRework = true;
 
-        public static bool enableDesperadoKillStack = true;
-
         public static BodyIndex Bandit2Index;
         private static AnimationCurve knifeVelocity;
 
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/Bandit2Body");
 
+        //Cursed. 5 levels of Standoff, use buff stacks to show duration remaining instead of making a new HUD element.
+        public static class Buffs
+        {
+            public static BuffDef Standoff1, Standoff2, Standoff3, Standoff4, Standoff5;
+        }
+
         public Bandit2Core()
         {
             if (!enabled) return;
-            if (specialRework || DesperadoRework.enabled) Bandit2Core.bodyPrefab.AddComponent<DesperadoTracker>();
+            if (specialRework || PersistentDesperado.enabled) Bandit2Core.bodyPrefab.AddComponent<DesperadoTracker>();
             new BanditSpecialGracePeriod();
-            new DesperadoRework();
+            new PersistentDesperado();
 
             ModifyStats(bodyPrefab.GetComponent<CharacterBody>());
             ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
@@ -361,7 +365,7 @@ namespace RiskyMod.Survivors.Bandit2
             SkillDef desperadoKillStack = ScriptableObject.CreateInstance<SkillDef>();
             desperadoKillStack.activationState = new SerializableEntityStateType(typeof(BaseState));
             desperadoKillStack.activationStateMachineName = "Weapon";
-            desperadoKillStack.skillDescriptionToken = DesperadoRework.enabled ? "BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD" : "BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD";
+            desperadoKillStack.skillDescriptionToken = PersistentDesperado.enabled ? "BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD" : "BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD";
             desperadoKillStack.skillName = "DesperadoKillStack";
             desperadoKillStack.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME";
             desperadoKillStack.icon = Assets.SkillIcons.Bandit2Desperado;
@@ -369,8 +373,24 @@ namespace RiskyMod.Survivors.Bandit2
             SneedUtils.SneedUtils.FixSkillName(desperadoKillStack);
             Content.Content.skillDefs.Add(Skills.DesperadoKillStack);
 
+            SkillDef standoffDef = ScriptableObject.CreateInstance<SkillDef>();
+            standoffDef.activationState = new SerializableEntityStateType(typeof(BaseState));
+            standoffDef.activationStateMachineName = "Weapon";
+            standoffDef.skillDescriptionToken = "BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD";
+            standoffDef.skillName = "Standoff";
+            standoffDef.skillNameToken = "BANDIT2_REVOLVER_STANDOFF_NAME_RISKYMOD";
+            standoffDef.keywordTokens = new string[] { };
+            standoffDef.icon = Assets.assetBundle.LoadAsset<Sprite>("sBanditSkills_8");
+            Skills.Standoff = standoffDef;
+            SneedUtils.SneedUtils.FixSkillName(standoffDef);
+            Content.Content.skillDefs.Add(Skills.Standoff);
+
+            BuildStandoff();
+
             SkillFamily skillFamily = ScriptableObject.CreateInstance<SkillFamily>();
             skillFamily.variants = new SkillFamily.Variant[1];
+
+            //Add Gunslinger
             skillFamily.variants[0] = new SkillFamily.Variant
             {
                 skillDef = Skills.Gunslinger,
@@ -378,20 +398,108 @@ namespace RiskyMod.Survivors.Bandit2
                 viewableNode = new ViewablesCatalog.Node(Skills.Gunslinger.skillName, false, null)
             };
 
-            if (enableDesperadoKillStack)
+            //Add Desperado
+            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
             {
-                Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
-                skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
-                {
-                    skillDef = Skills.DesperadoKillStack,
-                    unlockableDef = null,
-                    viewableNode = new ViewablesCatalog.Node(Skills.DesperadoKillStack.skillName, false, null)
-                };
-            }
+                skillDef = Skills.DesperadoKillStack,
+                unlockableDef = null,
+                viewableNode = new ViewablesCatalog.Node(Skills.DesperadoKillStack.skillName, false, null)
+            };
+
+            //Add Standoff
+            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
+            {
+                skillDef = Skills.Standoff,
+                unlockableDef = null,
+                viewableNode = new ViewablesCatalog.Node(Skills.Standoff.skillName, false, null)
+            };
 
             Content.Content.skillFamilies.Add(skillFamily);
             passive._skillFamily = skillFamily;
         }
+
+        private void BuildStandoff()
+        {
+            #region define buffs
+            Buffs.Standoff1 = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_StandoffBuff1",
+                true,
+                false,
+                false,
+                Color.white,
+                 Assets.assetBundle.LoadAsset<Sprite>("sBanditSkull_0")
+                );
+
+            Buffs.Standoff2 = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_StandoffBuff2",
+                true,
+                false,
+                false,
+                Color.white,
+                 Assets.assetBundle.LoadAsset<Sprite>("sBanditSkull_1")
+                );
+
+            Buffs.Standoff3 = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_StandoffBuff3",
+                true,
+                false,
+                false,
+                Color.white,
+                 Assets.assetBundle.LoadAsset<Sprite>("sBanditSkull_2")
+                );
+
+            Buffs.Standoff4 = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_StandoffBuff4",
+                true,
+                false,
+                false,
+                Color.white,
+                 Assets.assetBundle.LoadAsset<Sprite>("sBanditSkull_3")
+                );
+            
+            Buffs.Standoff5 = SneedUtils.SneedUtils.CreateBuffDef(
+                "RiskyMod_StandoffBuff5",
+                true,
+                false,
+                false,
+                Color.white,
+                 Assets.assetBundle.LoadAsset<Sprite>("sBanditSkull_4")
+                );
+            #endregion
+
+            RecalculateStatsAPI.GetStatCoefficients += StandoffBuffStats;
+
+            //On Kill is handled in assist manager.
+        }
+
+        private void StandoffBuffStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            float standoffMult = 0f;
+            if (sender.HasBuff(Buffs.Standoff5))
+            {
+                standoffMult = 5f;
+            }
+            else if (sender.HasBuff(Buffs.Standoff4))
+            {
+                standoffMult = 4f;
+            }
+            else if (sender.HasBuff(Buffs.Standoff3))
+            {
+                standoffMult = 3f;
+            }
+            else if (sender.HasBuff(Buffs.Standoff2))
+            {
+                standoffMult = 2f;
+            }
+            else if (sender.HasBuff(Buffs.Standoff1))
+            {
+                standoffMult = 1f;
+            }
+            args.damageMultAdd += standoffMult * 0.2f;
+        }
+
         private AnimationCurve BuildSlashVelocityCurve()
         {
             Keyframe kf1 = new Keyframe(0f, 3f, -8.182907104492188f, -3.3333332538604738f, 0f, 0.058712735772132876f);

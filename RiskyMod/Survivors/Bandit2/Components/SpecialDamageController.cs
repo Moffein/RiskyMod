@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 namespace RiskyMod.Survivors.Bandit2.Components
 {
+    [RequireComponent(typeof(CharacterBody), typeof(SkillLocator))]
     public class SpecialDamageController : MonoBehaviour
     {
         SkillLocator sk;
@@ -15,26 +16,15 @@ namespace RiskyMod.Survivors.Bandit2.Components
         public void Awake()
         {
             sk = base.GetComponent<SkillLocator>();
-            if (!sk)
-            {
-                Destroy(this);
-            }
-            else
-            {
-                cb = base.GetComponent<CharacterBody>();
-                if (!cb)
+            cb = base.GetComponent<CharacterBody>();
+            for(int i = 0; i < sk.allSkills.Length; i++)
+               {
+                foreach (SkillFamily.Variant variant in sk.allSkills[i].skillFamily.variants)
                 {
-                    Destroy(this);
-                }
-                else
-                {
-                    for (int i = 0; i < sk.allSkills.Length; i++)
+                    if (variant.skillDef == Bandit2.Skills.Gunslinger)
                     {
-                        if (sk.allSkills[i].skillFamily.variants[0].skillDef == Bandit2.Skills.Gunslinger)
-                        {
-                            passiveSkillSlot = sk.allSkills[i];
-                            break;
-                        }
+                        passiveSkillSlot = sk.allSkills[i];
+                        break;
                     }
                 }
             }

@@ -645,8 +645,8 @@ namespace RiskyMod
                 BanditSpecialGracePeriod.durationLocalUser = 0f;
             }
 
-            DesperadoRework.enabled = SurvivorCfg.Bind(banditString, "Desperado Persist", false, "Desperado stacks are weaker but last between stages.").Value;
-            DesperadoRework.damagePerBuff = SurvivorCfg.Bind(banditString, "Desperado Persist - Damage Multiplier", 0.01f, "Revolver damage multiplier per Desperado stack if Desperado Persist is enabled.").Value;
+            PersistentDesperado.enabled = SurvivorCfg.Bind(banditString, "Desperado Persist", false, "Desperado stacks are weaker but last between stages.").Value;
+            PersistentDesperado.damagePerBuff = SurvivorCfg.Bind(banditString, "Desperado Persist - Damage Multiplier", 0.01f, "Revolver damage multiplier per Desperado stack if Desperado Persist is enabled.").Value;
 
             BackstabRework.enabled = SurvivorCfg.Bind(banditString, "Backstab Changes", true, "Backstabs minicrit for 50% bonus damage and crit chance is converted to crit damage.").Value;
             BuffHemorrhage.ignoreArmor = SurvivorCfg.Bind(banditString, "Hemmorrhage - Ignore Armor", true, "Hemmorrhage damage ignores positive armor.").Value;

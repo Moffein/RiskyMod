@@ -46,6 +46,7 @@ namespace RiskyMod.SharedHooks
 						}
 					}
 
+					//This needs a refactor so that it gets hooked by the things that specifically add it, instead of having the things here.
 					//Run this before triggering on-hit procs so that procs don't kill enemies before this triggers.
 					if (assistsEnabled)
                     {
@@ -61,24 +62,25 @@ namespace RiskyMod.SharedHooks
                         {
 							RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, AssistManager.directAssistLength, AssistManager.DirectAssistType.CrocoBiteHealOnKill);
 						}
+						if (damageInfo.HasModdedDamageType(Bandit2Core.StandoffDamage))
+						{
+                            RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.GetDuration(damageInfo.attacker), AssistManager.DirectAssistType.BanditStandoff);
+                        }
 					}
 				}
 			}
 
 			orig(self, damageInfo, victim);
 
-            if (validDamage)
+            if (validDamage && victimBody)
             {
-				if (victimBody)
-                {
-					if (OnHitNoAttackerActions != null) OnHitNoAttackerActions.Invoke(damageInfo, victimBody);
+                OnHitNoAttackerActions?.Invoke(damageInfo, victimBody);
 
-					if (damageInfo.attacker && attackerBody)
-					{
-						if (OnHitAttackerActions != null) OnHitAttackerActions.Invoke(damageInfo, victimBody, attackerBody);
-						if (attackerInventory && OnHitAttackerInventoryActions != null) OnHitAttackerInventoryActions.Invoke(damageInfo, victimBody, attackerBody, attackerInventory);
-					}
-				}
+                if (damageInfo.attacker && attackerBody)
+                {
+                    if (OnHitAttackerActions != null) OnHitAttackerActions.Invoke(damageInfo, victimBody, attackerBody);
+                    if (attackerInventory && OnHitAttackerInventoryActions != null) OnHitAttackerInventoryActions.Invoke(damageInfo, victimBody, attackerBody, attackerInventory);
+                }
             }
         }
     }
