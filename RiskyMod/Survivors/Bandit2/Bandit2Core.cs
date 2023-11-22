@@ -25,7 +25,7 @@ namespace RiskyMod.Survivors.Bandit2
         public static DamageAPI.ModdedDamageType SpecialDamage;
         public static DamageAPI.ModdedDamageType RackEmUpDamage;
 
-        public static DamageAPI.ModdedDamageType RevolverRicochet;
+        public static DamageAPI.ModdedDamageType StandoffDamage;
 
         public static bool enabled = true;
 
@@ -53,6 +53,7 @@ namespace RiskyMod.Survivors.Bandit2
         public Bandit2Core()
         {
             if (!enabled) return;
+            if (specialRework || DesperadoRework.enabled) Bandit2Core.bodyPrefab.AddComponent<DesperadoTracker>();
             new BanditSpecialGracePeriod();
             new DesperadoRework();
 
@@ -221,13 +222,13 @@ namespace RiskyMod.Survivors.Bandit2
             if (!specialRework) return;
             SpecialDamage = DamageAPI.ReserveDamageType();
             RackEmUpDamage = DamageAPI.ReserveDamageType();
-            RevolverRicochet = DamageAPI.ReserveDamageType();
+            StandoffDamage = DamageAPI.ReserveDamageType();
             SpecialDamageType(sk);
             SpecialDebuff = SneedUtils.SneedUtils.CreateBuffDef(
                 "RiskyModBanditRevolver",
                 true,
                 false,
-                false,
+                true,   //Just set this to true so people aren't confused.
                 new Color(0.8039216f, 0.482352942f, 0.843137264f),
                 LegacyResourcesAPI.Load<BuffDef>("BuffDefs/BanditSkull").iconSprite
                 );
@@ -418,6 +419,7 @@ namespace RiskyMod.Survivors.Bandit2
     {
         public static SkillDef Gunslinger;
         public static SkillDef DesperadoKillStack;
+        public static SkillDef Standoff;
 
         public static SkillDef LightsOut;
         public static SkillDef RackEmUp;
