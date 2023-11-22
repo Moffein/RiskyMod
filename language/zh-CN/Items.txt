@@ -179,7 +179,7 @@
 	
 	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "有<style=cIsDamage>25%</style>的几率发射<style=cIsDamage>连锁闪电</style>，对<style=cIsDamage>25米</style>内的最多<style=cIsDamage>3个<style=cStack>（每层增加2）</style></style>目标造成<style=cIsDamage>80%</style>的总伤害。",
 	
-	"ITEM_THORNS_DESC_RISKYMOD": "被击中后，爆炸射出多发剃刀，造成<style=cIsDamage>160%的伤害</style><style=cStack>（每层增加40%）</style>。最多可击中<style=cIsDamage><style=cIsDamage>25米</style>内的3</style><style=cStack><style=cStack>（每层增加2个）</style>个目标。",
+	"ITEM_THORNS_DESC_RISKYMOD": "被击中后，爆炸射出多发剃刀，造成<style=cIsDamage>160%的伤害</style><style=cStack>（每层增加80%）</style>。最多可击中<style=cIsDamage><style=cIsDamage>25米</style>内的3</style><style=cStack><style=cStack>（每层增加2个）</style>个目标。",
 	
 	"ITEM_SPRINTARMOR_PICKUP_RISKYMOD": "提升护甲。奔跑时可获得额外护甲。",
 	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>护甲提高</style><style=cIsHealing>10点</style><style=cStack>（每层增加10）</style>。<style=cIsUtility>奔跑时</style>护甲额外提高<style=cIsHealing>10点</style> <style=cStack>（每层增加10）</style>。",

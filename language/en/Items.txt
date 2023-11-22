@@ -42,7 +42,7 @@
 	
 	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>chain lightning</style> for <style=cIsDamage>80%</style> TOTAL damage on up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> targets within <style=cIsDamage>25m</style>.",
 	
-	"ITEM_THORNS_DESC_RISKYMOD": "Getting hit causes you to explode in a burst of razors, dealing <style=cIsDamage>160%</style> <style=cStack>(+40% per stack)</style> damage. Hits up to <style=cIsDamage>3</style> <style=cStack>(+2 per stack)</style> targets in a <style=cIsDamage>25m</style> radius.",
+	"ITEM_THORNS_DESC_RISKYMOD": "Getting hit causes you to explode in a burst of razors, dealing <style=cIsDamage>160%</style> <style=cStack>(+80% per stack)</style> damage. Hits up to <style=cIsDamage>3</style> <style=cStack>(+2 per stack)</style> targets in a <style=cIsDamage>25m</style> radius.",
 	
 	"ITEM_SPRINTARMOR_PICKUP_RISKYMOD": "Increase armor. Gain bonus armor while sprinting.",
 	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>Increase armor</style> by <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style>. Gain an additional <style=cIsHealing>10</style> <style=cStack>(+10 per stack)</style> armor while <style=cIsUtility>sprinting</style>.",
