@@ -75,6 +75,7 @@ namespace RiskyMod.Content
         {
             SkillIcons.Bandit2Gunslinger = assetBundle.LoadAsset<Sprite>("Bandit2Gunslinger");
             SkillIcons.Bandit2Desperado = assetBundle.LoadAsset<Sprite>("Bandit2Desperado");
+            SkillIcons.Bandit2Standoff = assetBundle.LoadAsset<Sprite>("Bandit2Standoff");
         }
 
         private static void LoadScepterSkillIcons()
@@ -114,6 +115,7 @@ namespace RiskyMod.Content
         {
             public static Sprite Bandit2Gunslinger;
             public static Sprite Bandit2Desperado;
+            public static Sprite Bandit2Standoff;
         }
 
         public static class ScepterSkillIcons

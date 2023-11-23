@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1786330137
+CRC: 2587068814
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 02147dc8cb31b6348d6828b440370c2a
+    Hash: 97283b80d015721a8c7d1b0d523b36f2
   TypeTreeHash:
     serializedVersion: 2
     Hash: c90fc19e2679e5295d10bd00f33cb4c3
@@ -31,7 +31,6 @@ Assets:
 - Assets/Resources/Sprites/StandoffPlaceholder/sBanditSkull_2.png
 - Assets/Resources/Sprites/SkillIcons/Bandit2Gunslinger.png
 - Assets/Resources/Sprites/Buffs/BuffHeadstomperCooldown.png
-- Assets/Resources/Sprites/StandoffPlaceholder/sBanditSkills_8.png
 - Assets/Resources/Sprites/SkillIcons/Scepter/texAcridR1.png
 - Assets/Resources/Sprites/SkillIcons/Bandit2Desperado.png
 - Assets/Resources/Sprites/Buffs/BuffWatch.png
@@ -41,4 +40,5 @@ Assets:
 - Assets/Resources/Sprites/Buffs/BuffFreeze.png
 - Assets/Resources/Sprites/Buffs/BuffInfusion.png
 - Assets/Resources/Sprites/Buffs/BuffHeadstomperActive.png
+- Assets/Resources/Sprites/SkillIcons/Bandit2Standoff.png
 Dependencies: []

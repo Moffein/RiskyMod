@@ -16,6 +16,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using static RiskyMod.Content.Assets;
 
 namespace RiskyMod.Survivors.Bandit2
 {
@@ -380,7 +381,7 @@ namespace RiskyMod.Survivors.Bandit2
             standoffDef.skillName = "Standoff";
             standoffDef.skillNameToken = "BANDIT2_REVOLVER_STANDOFF_NAME_RISKYMOD";
             standoffDef.keywordTokens = new string[] { };
-            standoffDef.icon = Assets.assetBundle.LoadAsset<Sprite>("sBanditSkills_8");
+            standoffDef.icon = SkillIcons.Bandit2Standoff;
             Skills.Standoff = standoffDef;
             SneedUtils.SneedUtils.FixSkillName(standoffDef);
             Content.Content.skillDefs.Add(Skills.Standoff);
