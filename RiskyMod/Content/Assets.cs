@@ -69,6 +69,12 @@ namespace RiskyMod.Content
             BuffIcons.Watch = assetBundle.LoadAsset<Sprite>("BuffWatch");
             BuffIcons.HappiestMaskReady = assetBundle.LoadAsset<Sprite>("BuffHappiestMaskReady");
             BuffIcons.HappiestMaskCooldown = assetBundle.LoadAsset<Sprite>("BuffHappiestMaskCooldown");
+
+            BuffIcons.Standoff1 = assetBundle.LoadAsset<Sprite>("BuffStandoff1");
+            BuffIcons.Standoff2 = assetBundle.LoadAsset<Sprite>("BuffStandoff2");
+            BuffIcons.Standoff3 = assetBundle.LoadAsset<Sprite>("BuffStandoff3");
+            BuffIcons.Standoff4 = assetBundle.LoadAsset<Sprite>("BuffStandoff4");
+            BuffIcons.Standoff5 = assetBundle.LoadAsset<Sprite>("BuffStandoff5");
         }
 
         private static void LoadSkillIcons()
@@ -109,6 +115,7 @@ namespace RiskyMod.Content
             public static Sprite HappiestMaskReady;
             public static Sprite HappiestMaskCooldown;
             public static Sprite Watch;
+            public static Sprite Standoff1, Standoff2, Standoff3, Standoff4, Standoff5;
         }
 
         public static class SkillIcons

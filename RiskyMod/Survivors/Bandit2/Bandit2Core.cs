@@ -430,7 +430,7 @@ namespace RiskyMod.Survivors.Bandit2
                 false,
                 false,
                 Color.white,
-                 Assets.assetBundle.LoadAsset<Sprite>("sBanditSkull_0")
+                 Assets.BuffIcons.Standoff1
                 );
 
             Buffs.Standoff2 = SneedUtils.SneedUtils.CreateBuffDef(
@@ -439,7 +439,7 @@ namespace RiskyMod.Survivors.Bandit2
                 false,
                 false,
                 Color.white,
-                 Assets.assetBundle.LoadAsset<Sprite>("sBanditSkull_1")
+                 Assets.BuffIcons.Standoff2
                 );
 
             Buffs.Standoff3 = SneedUtils.SneedUtils.CreateBuffDef(
@@ -448,7 +448,7 @@ namespace RiskyMod.Survivors.Bandit2
                 false,
                 false,
                 Color.white,
-                 Assets.assetBundle.LoadAsset<Sprite>("sBanditSkull_2")
+                 Assets.BuffIcons.Standoff3
                 );
 
             Buffs.Standoff4 = SneedUtils.SneedUtils.CreateBuffDef(
@@ -457,7 +457,7 @@ namespace RiskyMod.Survivors.Bandit2
                 false,
                 false,
                 Color.white,
-                 Assets.assetBundle.LoadAsset<Sprite>("sBanditSkull_3")
+                 Assets.BuffIcons.Standoff4
                 );
             
             Buffs.Standoff5 = SneedUtils.SneedUtils.CreateBuffDef(
@@ -466,7 +466,7 @@ namespace RiskyMod.Survivors.Bandit2
                 false,
                 false,
                 Color.white,
-                 Assets.assetBundle.LoadAsset<Sprite>("sBanditSkull_4")
+                 Assets.BuffIcons.Standoff5
                 );
             #endregion
 
