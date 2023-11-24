@@ -296,7 +296,9 @@ namespace RiskyMod.Enemies
                 selectionWeight = weight,
                 preventOverhead = false,
                 minimumStageCompletions = minStages,
-                spawnDistance = spawnDistance
+                spawnDistance = spawnDistance,
+                forbiddenUnlockableDef = null,
+                requiredUnlockableDef = null
             };
             return dc;
         }
