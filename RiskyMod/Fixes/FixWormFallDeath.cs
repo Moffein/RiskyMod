@@ -21,27 +21,34 @@ namespace RiskyMod.Fixes
                 OverloadingWormIndex = BodyCatalog.FindBodyIndex("ElectricWormBody");
             };
 
-            IL.RoR2.MapZone.TryZoneStart += (il) =>
+            On.RoR2.MapZone.TryZoneStart += MapZone_TryZoneStart;
+        }
+
+        private void MapZone_TryZoneStart(On.RoR2.MapZone.orig_TryZoneStart orig, MapZone self, Collider other)
+        {
+            if (other.gameObject)
             {
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
-                     x => x.MatchLdcI4(0),
-                     x => x.MatchStloc(3),
-                     x => x.MatchLdloc(0)
-                    ))
+                CharacterBody body = other.GetComponent<CharacterBody>();
+                if (body)
                 {
-                    c.Index++;
-                    c.Emit(OpCodes.Ldloc, 0);   //CharacterBody
-                    c.EmitDelegate<Func<bool, CharacterBody, bool>>((flag, body) =>
+                    if ((body.bodyIndex == MagmaWormIndex || body.bodyIndex == OverloadingWormIndex)
                     {
-                        return flag || (body.bodyIndex == MagmaWormIndex || body.bodyIndex == OverloadingWormIndex);
-                    });
+                        var teamComponent = body.teamComponent;
+                        if (teamComponent)
+                        {
+                            if (teamComponent.teamIndex != TeamIndex.Player)
+                            {
+                                TeamIndex origIndex = teamComponent.teamIndex;
+                                teamComponent.teamIndex = TeamIndex.Player;
+                                orig(self, other);
+                                teamComponent.teamIndex = origIndex;
+                                return;
+                            }
+                        }
+                    }
                 }
-                else
-                {
-                    Debug.LogError("RiskyMod: FixWormFallDeath IL Hook failed");
-                }
-            };
+            }
+            orig(self, other);
         }
     }
 }
