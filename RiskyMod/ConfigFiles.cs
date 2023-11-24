@@ -208,8 +208,7 @@ namespace RiskyMod
             }
 
             ModdedScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Modded Scaling", true, "Lowers the effect of playercount on difficulty scaling. Geared towards large lobbies.").Value;
-            LinearScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling", false, "Makes difficulty scaling linear like in RoR1.").Value;
-            LinearScaling.swapToNormalScaling = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling - Swap When Outscaled", false, "Swaps to RoR2s per-stage exponential scaling when it outscales linear scaling.").Value;
+            LinearScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling", false, "Makes difficulty scaling linear like in RoR1. Requires Modded Scaling to be enabled.").Value;
 
             NoLevelupHeal.enabled = GeneralCfg.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
             RemoveLevelCap.enabled = GeneralCfg.Bind(scalingString, "Increase Monster Level Cap", true, "Increases Monster Level Cap.").Value;
