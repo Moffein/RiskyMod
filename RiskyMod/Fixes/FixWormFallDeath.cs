@@ -31,7 +31,7 @@ namespace RiskyMod.Fixes
                 CharacterBody body = other.GetComponent<CharacterBody>();
                 if (body)
                 {
-                    if ((body.bodyIndex == MagmaWormIndex || body.bodyIndex == OverloadingWormIndex)
+                    if ((body.bodyIndex == MagmaWormIndex || body.bodyIndex == OverloadingWormIndex))
                     {
                         var teamComponent = body.teamComponent;
                         if (teamComponent)
