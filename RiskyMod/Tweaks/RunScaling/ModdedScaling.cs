@@ -11,11 +11,6 @@ namespace RiskyMod.Tweaks.RunScaling
         public ModdedScaling()
         {
             if (!enabled) return;
-            if (LinearScaling.enabled)
-            {
-                new LinearScaling();
-                return;
-            }
 
             //This changes the per-player exponential
             IL.RoR2.Run.RecalculateDifficultyCoefficentInternal += (il) =>
