@@ -21,7 +21,7 @@
 	"BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>屠杀者</style>。使用左轮手枪快速射击，造成<style=cIsDamage>6x100%的伤害</style>。每次连续命中都会造成<style=cIsDamage>20%</style>的额外伤害。",
 	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>眩晕</style>。在隐匿状态下掷出一枚小刀，造成<style=cIsDamage>240%的伤害</style>。暴击还可以造成<style=cIsHealth>出血</style>。",
 	"BANDIT2_REVOLVER_STANDOFF_NAME_RISKYMOD" : "对峙",
-	"BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD" : "Revolver kills <style=cIsDamage>increase damage by 20%</style> for 15 seconds. Stacks up to <style=cIsDamage>5</style> times.",
+	"BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD" : "使用左轮手枪击杀将<style=cIsDamage>提升20%伤害</style>持续15秒。最多叠加<style=cIsDamage>5</style>次。",
 	
 	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD": "刺杀",
 	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>屠杀者</style>。 使用左轮手枪射出两发子弹，造成<style=cIsDamage>2x1200%的伤害</style>。",
@@ -35,7 +35,7 @@
 	"COMMANDO_SPECIAL_SCEPTER_NAME_RISKYMOD" : "火力压制",
 	"COMMANDO_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>眩晕</style>。发射分裂弹造成<style=cIsDamage>18x150%的伤害</style>。子弹的数量随攻击速度而增加。",
 	"COMMANDO_SPECIAL_ALT1_SCEPTER_NAME_RISKYMOD" : "地毯式轰炸",
-"COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD" : "投掷多个手榴弹，爆炸造成<style=cIsDamage>5x700%的伤害</style>。最多充能2次。",
+	"COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD" : "投掷多个手榴弹，爆炸造成<style=cIsDamage>5x700%的伤害</style>。最多充能2次。",
 	
 	"HUNTRESS_PRIMARY_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>灵巧</style>。快速射出一支追踪箭造成<style=cIsDamage>200%的伤害</style>。",
 	"HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>灵巧</style>。拉弓射出<style=cIsDamage>3枚</style>跟踪箭并造成<style=cIsDamage>3x120%的伤害</style>。如果暴击则发射<style=cIsDamage>6枚</style>跟踪箭。",
