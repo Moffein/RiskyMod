@@ -160,10 +160,10 @@ namespace RiskyMod.Items.DLC1.Boss
                     {
                         if (spawnResult.success)
                         {
+                            CharacterMaster master = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
                             Inventory allyInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
                             if (allyInv)
                             {
-                                CharacterMaster master = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
                                 if (allyInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) allyInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
                                 if (master)
                                 {
@@ -206,7 +206,18 @@ namespace RiskyMod.Items.DLC1.Boss
                             }
 
                             Deployable deployable = spawnResult.spawnedInstance.AddComponent<Deployable>();
-                            attackerBody.master.AddDeployable(deployable, DeployableSlot.MinorConstructOnKill);
+                            if (deployable && attackerBody.master.IsDeployableSlotAvailable(DeployableSlot.MinorConstructOnKill))
+                            {
+                                attackerBody.master.AddDeployable(deployable, DeployableSlot.MinorConstructOnKill);
+                            }
+                            else
+                            {
+                                if (master)
+                                {
+                                    master.TrueKill();
+                                    return;
+                                }
+                            }
                         }
                     }));
                     DirectorCore.instance.TrySpawnObject(directorSpawnRequest);
