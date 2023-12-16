@@ -16,7 +16,12 @@ namespace RiskyMod.Survivors.Bandit2.Components
 
         public void Start()
         {
-            if (NetworkServer.active && characterBody.master)
+            if (!characterBody || !characterBody.master)
+            {
+                Destroy(this);
+                return;
+            }
+            if (NetworkServer.active)
             {
                 desperadoPersist = characterBody.master.GetComponent<DesperadoPersistComponent>();
                 if (desperadoPersist)
@@ -35,7 +40,7 @@ namespace RiskyMod.Survivors.Bandit2.Components
 
         public void FixedUpdate()
         {
-            if (NetworkServer.active && characterBody.healthComponent && characterBody.healthComponent.alive)
+            if (NetworkServer.active && desperadoPersist && characterBody.healthComponent && characterBody.healthComponent.alive)
             {
                 int desperadoCount = characterBody.GetBuffCount(RoR2Content.Buffs.BanditSkull.buffIndex);
                 if (desperadoCount > desperadoPersist.stacks)
