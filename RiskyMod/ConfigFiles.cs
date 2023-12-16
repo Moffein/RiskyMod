@@ -367,6 +367,8 @@ namespace RiskyMod
             Guillotine.enabled = ItemCfg.Bind(uncommonString, "Old Guillotine", true, itemConfigDescString).Value;
             Guillotine.reduceVFX = ItemCfg.Bind(uncommonString, "Old Guillotine - Reduce VFX", true, "Reduce how often this item's VFX shows up.").Value;
 
+            PredatoryInstincts.enabled = ItemCfg.Bind(uncommonString, "Predatory Instincts", true, itemConfigDescString).Value;
+
             GhorsTome.enabled = ItemCfg.Bind(uncommonString, "Ghors Tome", true, itemConfigDescString).Value;
             GhorsTome.disableInBazaar = ItemCfg.Bind(uncommonString, "Ghors Tome - Disable in Bazaar", true, "This item does not give gold in the Bazaar Between Time.").Value;
 

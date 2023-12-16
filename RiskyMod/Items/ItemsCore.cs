@@ -89,6 +89,7 @@ namespace RiskyMod.Items
             new RedWhip();
             new Daisy();
             new GhorsTome();
+            new PredatoryInstincts();
 
             new Harpoon();
             new Shuriken();
