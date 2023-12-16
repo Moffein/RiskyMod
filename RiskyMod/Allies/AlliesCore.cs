@@ -9,6 +9,7 @@ using RoR2.Skills;
 using RiskyMod.Allies.DroneChanges;
 using R2API;
 using UnityEngine.Networking;
+using RiskyMod.Allies.DamageResistances;
 
 namespace RiskyMod.Allies
 {
@@ -86,6 +87,7 @@ namespace RiskyMod.Allies
             new DotZoneResist();
             new EliteDamageModifiers();
             new NoVoidDamage();
+            new AntiSplat();
 
             new StricterLeashing();
             TweakDrones();

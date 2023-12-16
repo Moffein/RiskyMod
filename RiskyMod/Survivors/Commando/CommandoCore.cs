@@ -210,11 +210,11 @@ namespace RiskyMod.Survivors.Commando
         {
             if (suppressiveChanges)
             {
-                AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.BarrageScepter, "CommandoBody", SkillSlot.Special, 0);
+                AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.BarrageScepter, "CommandoBody", Skills.Barrage);
             }
             if (grenadeChanges)
             {
-                AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.GrenadeScepter, "CommandoBody", SkillSlot.Special, 1);
+                AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.GrenadeScepter, "CommandoBody", Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/ThrowGrenade.asset").WaitForCompletion());
             }
         }
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]

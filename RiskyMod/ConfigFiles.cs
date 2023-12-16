@@ -50,6 +50,7 @@ using RiskyMod.Allies.DroneChanges;
 using RiskyMod.Enemies.Spawnpools;
 using RiskyMod.Enemies.DLC1.Voidling;
 using System.Runtime.CompilerServices;
+using RiskyMod.Allies.DamageResistances;
 
 namespace RiskyMod
 {
@@ -222,6 +223,7 @@ namespace RiskyMod
             AlliesCore.normalizeDroneDamage = GeneralCfg.Bind(allyString, "Normalize Drone Damage", true, "Normalize drone damage stats so that they perform the same when using Spare Drone Parts.").Value;
             AllyScaling.preventExecute = GeneralCfg.Bind(allyString, "No Execute", true, "Allies are immune to being executed by Freeze and similar effects.").Value;
             AllyScaling.noVoidDeath = GeneralCfg.Bind(allyString, "No Void Death", true, "Allies are immune to Void implosions.").Value;
+            AntiSplat.enabled = GeneralCfg.Bind(allyString, "No Splat Death", true, "Allies are immune to physics damage.").Value;
             NoVoidDamage.enabled = GeneralCfg.Bind(allyString, "No Void Damage", true, "Allies take no damage from Void fog.").Value;
             AllyScaling.noOverheat = GeneralCfg.Bind(allyString, "No Overheat", true, "Allies are immune to Grandparent Overheat.").Value;
             SuperAttackResist.enabled = GeneralCfg.Bind(allyString, "Superattack Resistance", true, "Allies take less damage from superattacks like Vagrant Novas.").Value;

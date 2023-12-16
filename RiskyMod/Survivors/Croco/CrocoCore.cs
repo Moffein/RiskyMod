@@ -295,7 +295,7 @@ namespace RiskyMod.Survivors.Croco
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepter()
         {
-            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.EpidemicScepter, "CrocoBody", SkillSlot.Special, 0);
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.EpidemicScepter, "CrocoBody", Skills.Epidemic);
         }
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepterClassic()

@@ -197,7 +197,7 @@ namespace RiskyMod.Survivors.Huntress
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepter()
         {
-            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.ArrowRainScepter, "HuntressBody", SkillSlot.Special, 0);
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.ArrowRainScepter, "HuntressBody", Skills.ArrowRain);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
