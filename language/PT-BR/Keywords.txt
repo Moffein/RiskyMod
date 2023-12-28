@@ -1,0 +1,12 @@
+{
+	strings:
+	{
+	"KEYWORD_RAPID_REGEN_RISKYMOD" : "<style=cKeywordName>Regenerativo</style><style=cSub>Cure <style=cIsHealing>10%</style> da sua saúde máxima ao longo de 3s.",
+	"KEYWORD_BLIGHT_RISKYMOD" : "<style=cKeywordName>Blighted</style><style=cSub>Deal <style=cIsDamage>360%</style> base damage over 6s. <i>Blight can stack.</i></style>",
+	"KEYWORD_POISON_RISKYMOD" : "<style=cKeywordName>Poisonous</style><style=cSub>Deal damage equal to <style=cIsDamage>6%</style> of their maximum health over 6s. <i>Poison cannot kill enemies.</i></style>",
+	"KEYWORD_INTERRUPT_RISKYMOD" : "<style=cKeywordName>Interrupting</style><style=cSub>Briefly interrupts an enemy's actions.",
+	"KEYWORD_SHOCKING_RISKYMOD" : "<style=cKeywordName>Shocking</style><style=cSub>Interrupts enemies and stuns them for 5 seconds.",
+	"KEYWORD_MAGNETIC_RISKYMOD" : "<style=cKeywordName>Magnético</style><style=cSub>Pulls light airborne enemies towards its center.",
+	"KEYWORD_VOIDCORRUPTION_RISKYMOD" : "<style=cKeywordName>Corrupção</style><style=cSub>Receba Corrupção ao sofrer dano, abater inimigos ou segurar Itens Nulos."
+	}
+}
