@@ -193,6 +193,9 @@ namespace RiskyMod.Survivors.Bandit2
                                 crit = self.RollCrit(),
                                 damageTypeOverride = new DamageType?(DamageType.SuperBleedOnCrit | DamageType.Stun1s)
                             };
+
+                            //Fire 2 projectiles. Would be cleaner to actually modify the projectile to deal damage twice.
+                            ProjectileManager.instance.FireProjectile(fireProjectileInfo);
                             ProjectileManager.instance.FireProjectile(fireProjectileInfo);
                         }
                     }

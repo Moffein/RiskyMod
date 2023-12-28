@@ -19,7 +19,7 @@
 	"BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>屠杀者</style>。使用左轮手枪射击，造成<style=cIsDamage>600%的伤害</style>。",
 	"BANDIT2_SPECIAL_ALT_NAME_RISKYMOD" : "排队枪毙",
 	"BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>屠杀者</style>。使用左轮手枪快速射击，造成<style=cIsDamage>6x100%的伤害</style>。每次连续命中都会造成<style=cIsDamage>20%</style>的额外伤害。",
-	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>眩晕</style>。在隐匿状态下掷出一枚小刀，造成<style=cIsDamage>240%的伤害</style>。暴击还可以造成<style=cIsHealth>出血</style>。",
+	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>眩晕</style>。在隐匿状态下掷出一枚小刀，造成<style=cIsDamage>2x240%的伤害</style>。暴击还可以造成<style=cIsHealth>出血</style>。",
 	"BANDIT2_REVOLVER_STANDOFF_NAME_RISKYMOD" : "对峙",
 	"BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD" : "使用左轮手枪击杀将<style=cIsDamage>提升20%伤害</style>持续15秒。最多叠加<style=cIsDamage>5</style>次。",
 	
