@@ -104,35 +104,38 @@
 	
 	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Create a zone around the Teleporter that <style=cIsHealing>heals</style> for <style=cIsHealing>5%</style> <style=cStack>(+2.5% per stack)</style> of your <style=cIsHealing>health</style> every second. Release a <style=cIsHealing>healing nova </style>during the Teleporter event, <style=cIsHealing>healing</style> all nearby allies for <style=cIsHealing>50%</style> of their maximum health. Occurs <style=cIsHealing>1</style> <style=cStack>(+1 per stack)</style> times.",
 	
-	"ITEM_CLOVER_DESC_RISKYMOD": "All random effects are rolled <style=cIsUtility>+1</style> <style=cStack>(+1 per stack)</style>times for a <style=cIsUtility>favorable outcome</style>. If your <style=cIsDamage>luck</style> is above <style=cIsUtility>1</style>, increase <style=cIsUtility>ALL stats</style> by <style=cIsUtility>30%</style> <style=cStack>(+30% per stack)</style> instead.",
-	
-	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Gain <style=cIsDamage>Col. Droneman</style>. \nDrones gain <style=cIsDamage>+50%</style> <style=cStack>(+50% per stack)</style> attack speed and cooldown reduction. \nDrones gain <style=cIsDamage>10%</style> chance to fire a <style=cIsDamage>missile</style> on hit, dealing <style=cIsDamage>300%</style> TOTAL damage. \nDrones gain an <style=cIsDamage>automatic chain gun</style> that deals <style=cIsDamage>6x50%</style>damage, bouncing to <style=cIsDamage>2</style> enemies.",
-	
-	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "Deal bonus damage while outside of danger.",
-	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Increase damage by <style=cIsDamage>10%</style> <style=cStack>(+10% per stack)</style> while outside of danger.",
-	
-	"ITEM_CHAINLIGHTNINGVOID_DESC_RISKYMOD": "<style=cIsDamage>25%</style> chance to fire <style=cIsDamage>lightning</style> for <style=cIsDamage>60%</style> TOTAL damage up to <style=cIsDamage>3 <style=cStack>(+2 per stack)</style></style> times. <style=cIsVoid>Corrupts all Ukuleles</style>.",
-	
-	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "Shoot down nearby projectiles. Recharge rate scales with the amount of drones you have.",
-	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "Shoot down <style=cIsDamage>1</style> <style=cStack>(+1 per stack)</style> projectiles within <style=cIsDamage>20m</style> every <style=cIsDamage>0.5 seconds</style>. <style=cIsUtility>Recharge rate scales with the amount of drones you have</style>.",
-	
-	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "Killing elite monsters spawns an <style=cIsDamage>Alpha Construct</style> with <style=cIsHealing>300% <style=cStack>(+150% per stack)</style> health</style> and <style=cIsDamage>300% <style=cStack>(+150% per stack)</style> damage</style> that <style=cIsUtility>distracts</style> nearby enemies. Limited to <style=cIsUtility>4</style>.",
-	
-	"ITEM_PERMANENTDEBUFFONHIT_DESC_RISKYMOD": "<style=cIsDamage>100%</style> chance on hit to reduce <style=cIsDamage>armor</style> by <style=cIsDamage>1</style> <style=cStack>(+1 per stack)</style> <style=cIsDamage>permanently</style>.",
-	
-	"ITEM_BLEEDONHITVOID_DESC_RISKYMOD": "<style=cIsDamage>10%</style> <style=cStack>(+10% per stack)</style> chance to <style=cIsDamage>collapse</style> an enemy for <style=cIsDamage>300%</style> base damage. Additional stacks of <style=cIsDamage>collapse</style> deal an extra <style=cIsDamage>20%</style> base damage each. <style=cIsVoid>Corrupts all Tri-Tip Daggers</style>.",
-	
-	"ITEM_TITANGOLDDURINGTP_DESC_RISKYMOD": "Summon <style=cIsDamage>Aurelionite</style> during the teleporter event. It has <style=cIsDamage>100% <style=cStack>(+50% per stack)</style> damage</style> and <style=cIsHealing>200% <style=cStack>(+100% per stack)</style> health</style>.",
-	
-	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Prevents <style=cIsUtility>1 <style=cStack>(+1 per stack)</style></style> <style=cIsDamage>debuff</style> and instead grants a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>25%</style> of <style=cIsHealing>maximum health</style>. Recharges every <style=cIsUtility>5</style> seconds</style>.",
-	
-	"ITEM_HEALINGPOTION_PICKUP_RISKYMOD" : "Gain a massive barrier at low health. Consumed on use.",
-	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "Gain a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>50% of your health</style> when falling below <style=cIsHealth>50% health</style>.",
-	
-	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>Blocks</style> incoming damage once. Recharges after <style=cIsUtility>20 seconds</style> <style=cStack>(-10% per stack)</style>. <style=cIsVoid>Corrupts all Tougher Times</style>.",
-	
-	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Healing past full grants you a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>50% <style=cStack>(+50% per stack)</style></style> of the amount you <style=cIsHealing>healed</style>. Divides <style=cIsHealing>barrier decay rate</style> by <style=cIsHealing>2 <style=cStack>(+1 per stack)</style></style>.",
+	"ITEM_CLOVER_DESC_RISKYMOD": "Todos os efeitos aleatórios ganham <style=cIsUtility>+1</style> <style=cStack>(+1 por acúmulo)</style>rolagem para obter um <style=cIsUtility>resultado favorável</style>. Caso sua <style=cIsDamage>sorte</style> seja acima de <style=cIsUtility>1</style>, aumenta <style=cIsUtility>TODAS as estatísticas</style> em <style=cIsUtility>30%</style> <style=cStack>(+30% por acúmulo)</style> no lugar.",
 
-	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Increase base damage by <style=cIsDamage>100%</style> <style=cStack>(+100% per stack)</style>. <style=cIsHealth>Divide maximum health by 2</style> <style=cStack>(+1 per stack)</style>.",
+Todos os efeitos aleatórios ganham <style=cIsUtility>+1</style> <style=cStack>(+1 por acúmulo)</style>rolagem para obter um <style=cIsUtility>resultado favorável</style>.",
+  "ITEM_CL
+	
+	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Ganha <style=cIsDamage>Coronel Droneman</style>. \nDrones ganham <style=cIsDamage>+50%</style> <style=cStack>(+50% por acúmulo)</style> de velocidade de ataque e redução de tempo de recarga. \nDrones ganham <style=cIsDamage>10%</style> de chance de disparar um <style=cIsDamage>míssil</style> ao acertar, causando <style=cIsDamage>300%</style> de dano TOTAL. \nDrones ganham uma <style=cIsDamage>metralhadora giratória automática</style> que causa <style=cIsDamage>6x50%</style> de dano, acertando <style=cIsDamage>2</style> inimigos.",
+	
+	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "Causa bônus de dano enquanto fora de perigo.",
+	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Aumenta o dano em <style=cIsDamage>10%</style> <style=cStack>(+10% por acúmulo)</style> enquanto fora de perigo.",
+
+	"ITEM_CHAINLIGHTNINGVOID_DESC_RISKYMOD": "<style=cIsDamage>25%</style> de chance de disparar um <style=cIsDamage>raio</style> em <style=cIsDamage>60%</style> do dano TOTAL até <style=cIsDamage>3 <style=cStack>(+2 por acúmulo)</style></style> vezes. <style=cIsVoid>Corrompe todos os Ukeleles</style>.",
+	
+	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "Derrube projéteis próximos. A taxa de recarga escala com a quantidade de drones em posse.",
+	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "Derrube <style=cIsDamage>1</style> <style=cStack>(+1 por acúmulo)</style> projétil dentro de <style=cIsDamage>20 m</style> a cada <style=cIsDamage>0,5 segundo</style>. <style=cIsUtility> A taxa de recarga escala com a quantidade de drones em posse</style>.",
+
+	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "Abater monstros de elite gera um <style=cIsDamage>Constructo Alfa</style> com um bônus de <style=cIsDamage>300%</style> <style=cStack>(+150% por acúmulo)</style> de dano e <style=cIsHealing>300% de saúde</style> <style=cStack>(+150% por acúmulo)</style> que <style=cIsUtility>distrai</style> inimigos próximos. Limitado a <style=cIsUtility>4</style>.",
+	
+	"ITEM_PERMANENTDEBUFFONHIT_DESC_RISKYMOD": "<style=cIsDamage>100%</style> de chance, ao golpear, de reduzir a <style=cIsDamage>armadura</style> em <style=cIsDamage>1</style> <style=cStack>(+1 por acúmulo)</style> <style=cIsDamage>permanentemente</style>.",
+
+	"ITEM_BLEEDONHITVOID_DESC_RISKYMOD": "<style=cIsDamage>10%</style> <style=cStack>(+10% por acúmulo)</style> de chance de <style=cIsDamage>derrubar</style> um inimigo em <style=cIsDamage>300%</style> de dano base. Acúmulos adicionais de <style=cIsDamage>derrubar</style> causam <style=cIsDamage>20%</style> de dano base extra cada. <style=cIsVoid>Corrompe todas as Adagas Triangulares</style>.",
+
+	"ITEM_TITANGOLDDURINGTP_DESC_RISKYMOD": "Gera <style=cIsDamage>Aurelionita</style> durante um evento de Teleportador. Tem <style=cIsDamage>100% <style=cStack>(+50% por acúmulo)</style> de dano</style> e <style=cIsHealing>200% <style=cStack>(+100% por acúmulo)</style> de saúde</style>.",
+	
+	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Previne <style=cIsUtility>1 <style=cStack>(+1 por acúmulo)</style></style> <style=cIsDamage>penalidade</style>e, em troca, concede uma <style=cIsHealing>barreira temporária</style> de <style=cIsHealing>25%</style> da <style=cIsHealing>saúde máxima</style>. Recarrega a cada <style=cIsUtility>5</style> segundos</style>.",
+	
+	"ITEM_HEALINGPOTION_PICKUP_RISKYMOD" : "Receba uma enrome barreira ao ter pouca saúde. Consumido ao usar.",
+	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "Receba uma <style=cIsHealing>barreira temporária</style> de <style=cIsHealing>50% da saúde máxima</style> ao receber dano com menos de <style=cIsHealth>50% de saúde</style>.",
+	
+	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>Bloqueia</style> dano recebido uma vez. Recarrega após <style=cIsUtility>20 segundos</style> <style=cStack>(-10% por acúmulo)</style>. <style=cIsVoid>Corrompe todos os Tempos Difíceis</style>.",
+
+	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": Curar além do limite concede uma <style=cIsHealing>barreira temporária</style> de <style=cIsHealing>50% <style=cStack>(+50% por acúmulo)</style></style> do total <style=cIsHealing>curado</style>. Divide a <style=cIsHealing>taxa de decaimento da barreira</style> em <style=cIsHealing>2 <style=cStack>(+1 por acúmulo)</style></style>.",
+
+	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Aumenta o dano base em <style=cIsDamage>100%</style> <style=cStack>(+100% por acúmulo)</style>. <style=cIsHealth>Divide a saúde máxima por 2 </style> <style=cStack>(+1 por acúmulo)</style>.",
 	}
 }
