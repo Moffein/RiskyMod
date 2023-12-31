@@ -105,9 +105,6 @@
 	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Create a zone around the Teleporter that <style=cIsHealing>heals</style> for <style=cIsHealing>5%</style> <style=cStack>(+2.5% per stack)</style> of your <style=cIsHealing>health</style> every second. Release a <style=cIsHealing>healing nova </style>during the Teleporter event, <style=cIsHealing>healing</style> all nearby allies for <style=cIsHealing>50%</style> of their maximum health. Occurs <style=cIsHealing>1</style> <style=cStack>(+1 per stack)</style> times.",
 	
 	"ITEM_CLOVER_DESC_RISKYMOD": "Todos os efeitos aleatórios ganham <style=cIsUtility>+1</style> <style=cStack>(+1 por acúmulo)</style>rolagem para obter um <style=cIsUtility>resultado favorável</style>. Caso sua <style=cIsDamage>sorte</style> seja acima de <style=cIsUtility>1</style>, aumenta <style=cIsUtility>TODAS as estatísticas</style> em <style=cIsUtility>30%</style> <style=cStack>(+30% por acúmulo)</style> no lugar.",
-
-Todos os efeitos aleatórios ganham <style=cIsUtility>+1</style> <style=cStack>(+1 por acúmulo)</style>rolagem para obter um <style=cIsUtility>resultado favorável</style>.",
-  "ITEM_CL
 	
 	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Ganha <style=cIsDamage>Coronel Droneman</style>. \nDrones ganham <style=cIsDamage>+50%</style> <style=cStack>(+50% por acúmulo)</style> de velocidade de ataque e redução de tempo de recarga. \nDrones ganham <style=cIsDamage>10%</style> de chance de disparar um <style=cIsDamage>míssil</style> ao acertar, causando <style=cIsDamage>300%</style> de dano TOTAL. \nDrones ganham uma <style=cIsDamage>metralhadora giratória automática</style> que causa <style=cIsDamage>6x50%</style> de dano, acertando <style=cIsDamage>2</style> inimigos.",
 	
