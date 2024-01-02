@@ -1,0 +1,81 @@
+{
+	strings:
+	{
+	"CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD" : "Dispare uma rajada de partículas que causa <style=cIsDamage>7 x 110% de dano</style>. Carregar o ataque diminui a <style=cIsUtility>dispersão</style>. O número de partículas aumenta com a velocidade de ataque.",
+  "CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Eletrizante</style>. Dispare um eletrochoque rápido que causa <style=cIsDamage>100% de dano</style>. Espalha em até <style=cIsDamage>6</style> alvos.",
+	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "Peça um <style=cIsUtility>Farol de Suprimento</style>. O pedido só pode ser feito duas vezes.",
+	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Recarrega as cargas de Habilidade</style> ao usar.",
+	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Hackeie</style> todos os itens compráveis próximos para reduzir seu custo em <style=cIsUtility>50%</style>.",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_INTERACTION_RISKYMOD" : "Receba uma Carga da Habilidade",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Recarrega habilidade</style> e reduz o tempo de recarga do <style=cIsUtility>Equipamento</style> r, <style=cIsUtility>20 s</style> ao usar.",
+	
+	"BANDIT2_PRIMARY_DESC_RISKYMOD" : "Dispare uma rajada de escopeta que causa <style=cIsDamage>5 x 90% de dano</style>. Máximo de 4 cartuchos.",
+	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD" : "Dispare um tiro de fuzil que causa <style=cIsDamage>360% de dano</style>. Máximo de 4 projéteis.",
+	"BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD" : "Todos os ataques <style=cIsDamage>pelas costas</style> são <style=cIsDamage>Acertos Críticos</style>. Toda <style=cIsDamage>Chance de Acerto Crítico</style> é convertida em <style=cIsDamage>Dano de Acerto Crítico</style>.",
+  "BANDIT2_REVOLVER_NAME_RISKYMOD" : "Pistoleiro",
+	"BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD" : "Abates com revólver <style=cIsUtility>reiniciam todos os seus tempos de recarga</style>.",
+	"BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD" : "Abates com revólver concedem <style=cIsDamage>fichas que acumulam</style>, fazendo com que os tiros de revólver causem <style=cIsDamage>10%</style> mais dano.",
+	"BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD": "Abates com revólver concedem <style=cIsDamage>fichas que acumulam</style> para mais dano de revólver.",
+	"BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Assassino</style>. Dispare um tiro de revólver que causa <style=cIsDamage>600% de dano</style>.",
+	"BANDIT2_SPECIAL_ALT_NAME_RISKYMOD" : "Enfileire-os",
+	"BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Assassino</style>. Dispare uma rajada de revólver que causa <style=cIsDamage>6 x 100% de dano</style>. Cada acerto consecutivo causa <style=cIsDamage>20%</style> de dano bônus.",
+	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>. Arremesse uma lâmina oculta que causa <style=cIsDamage>2 x 240% de dano</style>. Acertos Críticos também causam <style=cIsHealth>hemorragia</style>.",
+	"BANDIT2_REVOLVER_STANDOFF_NAME_RISKYMOD" : "Impasse",
+	"BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD" : "Abates com revólver <style=cIsDamage>aumentam o dano em 20%</style> por 15 segundos. Máximo de <style=cIsDamage>5</style> acúmulos.",
+	
+	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD": "Assassinar",
+	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Assassino</style>. Dispare dois tiros de revólver que causam <style=cIsDamage>2 x 1.200% de dano</style>.",
+	"BANDIT2_SPECIAL_ALT_SCEPTER_NAME_RISKYMOD" : "Punhado de Chumbo",
+	"BANDIT2_SPECIAL_ALT_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Assassino</style>. Dispare uma rajada de revólver que causa <style=cIsDamage>12 x 1.200% de dano</style>. Cada acerto consecutivo causa <style=cIsDamage>20%</style> de dano bônus.",
+	
+	"COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD" : "Fire a piercing round for <style=cIsDamage>450% damage</style>. Zaps nearby enemies for an additional <style=cIsDamage>150% damage</style>.",
+	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Roll</style> a short distance and reduce skill cooldowns by <style=cIsUtility>1s</style>.",
+	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Stunning</style>. Fire fragmentation rounds for <style=cIsDamage>6x120% damage</style>. The number of shots increases with attack speed.",
+	
+	"COMMANDO_SPECIAL_SCEPTER_NAME_RISKYMOD" : "Suppressive Barrage",
+	"COMMANDO_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Stunning</style>. Fire fragmentation rounds for <style=cIsDamage>18x150% damage</style>. The number of shots increases with attack speed.",
+	"COMMANDO_SPECIAL_ALT1_SCEPTER_NAME_RISKYMOD" : "Carpet Bomb",
+	"COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD" : "Throw multiple grenades that explode for <style=cIsDamage>5x700% damage</style>. Can hold up to 2.",
+	
+	"HUNTRESS_PRIMARY_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Agile</style>. Quickly fire a seeking arrow for <style=cIsDamage>200% damage</style>.",
+	"HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Agile</style>. Draw back a volley of <style=cIsDamage>3</style> seeking arrows for <style=cIsDamage>3x120% damage</style>. Critical Strikes fire <style=cIsDamage>6</style> arrows.",
+	"HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Teleport</style> into the sky. Target an area to rain arrows, <style=cIsUtility>slowing</style> all enemies and dealing <style=cIsDamage>420% damage per second</style>.",
+	"HUNTRESS_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Teleport</style> into the sky. Target an area to rain arrows, <style=cIsDamage>igniting</style> all enemies and dealing <style=cIsDamage>420% damage per second</style>.",
+	
+	"TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD" : "Fire a piercing rebar that deals <style=cIsDamage>660% damage</style>.",
+	"TOOLBOT_PRIMARY_ALT2_DESCRIPTION_RISKYMOD" : "Fire a rocket that explodes for <style=cIsDamage>390% damage</style>. Hold up to 4.",
+	"TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD" : "Saw nearby enemies for <style=cIsDamage>1000% damage per second</style>. Hitting enemies grants a <style=cIsHealing>temporary barrier</style>.",
+	"TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "Enter a heavy stance, equipping both your <style=cIsDamage>primary attacks</style> at once. Gain <style=cIsUtility>60 armor</style>, but lose <style=cIsHealth>-60% movement speed</style>.",
+	
+	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "Fire a <style=cIsUtility>Sonic Boom</style> that <style=cIsDamage>Weakens</style> enemies. <style=cIsHealing>Heals for every target hit</style>.",
+	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Inject</style> an enemy for <style=cIsDamage>330% damage</style>. Allies <style=cIsHealing>heal</style> for <style=cIsHealing>10%</style> of the damage dealt to <style=cIsDamage>Injected</style> enemies. On death, drop <style=cIsHealing>healing fruits</style> that heal for <style=cIsHealing>25% HP</style>.",
+	
+	"CROCO_PASSIVE_NAME_RISKYMOD" : "Virulent",
+	"CROCO_PASSIVE_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Poison</style> and <color=#B1387F>Blight</color> last <style=cIsDamage>80%</style> longer.",
+	"CROCO_PASSIVE_ALT_NAME_RISKYMOD" : "Contagion",
+	"CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Poison</style> and <color=#B1387F>Blight</color> spread to <style=cIsDamage>1</style> nearby target on kill.",
+	"CROCO_PRIMARY_DESCRIPTION_RISKYMOD" : "Maul an enemy for <style=cIsDamage>200% damage</style>. Every 3rd hit is <style=cIsHealing>Poisonous</style> and <style=cIsHealing>Regenerative</style> and deals <style=cIsDamage>400% damage</style>.",
+	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. Spit toxic bile for <style=cIsDamage>240% damage</style>.",
+	"CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. <style=cIsDamage>Slayer</style>. <style=cIsHealing>Regenerative</style>. Bite an enemy for <style=cIsDamage>360% damage</style>.",
+	"CROCO_UTILITY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. <style=cIsDamage>Stunning</style>. Leap in the air, dealing <style=cIsDamage>320% damage</style>. Leave acid that deals <style=cIsDamage>50% damage per second</style>. Can store up to <style=cIsUtility>2</style> charges.",
+	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Blighted</color>. <style=cIsDamage>Stunning</style>. Leap in the air, dealing <style=cIsDamage>550% damage</style>. <style=cIsUtility>Reduce</style> skill cooldowns by <style=cIsUtility>1s</style> for every enemy hit.",
+	"CROCO_SPECIAL_DESCRIPTION_RISKYMOD" : "Release a deadly disease that deals <style=cIsDamage>8x100% damage</style>. The disease spreads to up to <style=cIsDamage>20</style> targets.",
+	"CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD" : "Pandemic",
+	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "Release a deadly disease that deals <style=cIsDamage>15x100% damage</style>. The disease spreads to up to <style=cIsDamage>20</style> targets. If an enemy is killed by Pandemic, <style=cIsHealing>you are healed</style>.",
+	
+	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Ignite</style>. Fire a bolt for <style=cIsDamage>360% damage</style>. Hold up to 4.</style>",
+	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Fire a bolt for <style=cIsDamage>360% damage</style> that <style=cIsDamage>explodes</style> in a small area. Hold up to 4.</style>",
+	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Burst into the sky, dealing <style=cIsDamage>800% damage</style>.",
+	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Freezing</style>. Create a barrier that hurts enemies for <style=cIsDamage>100% damage</style>. <style=cIsUtility>Pushes you backwards</style> if you are airborne.",
+	"MAGE_UTILITY_FIRE_NAME_RISKYMOD" : "Blaze Storm",
+	"MAGE_UTILITY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Ignite</style>. Create a fire tornado that deals <style=cIsDamage>360% damage per second</style>. <style=cIsUtility>Pushes you backwards</style> if you are airborne.",
+	"MAGE_SPECIAL_SITHLIGHTNING_NAME_RISKYMOD" : "Electrocute",
+	"MAGE_SPECIAL_SITHLIGHTNING_DESCRIPTION_RISKYMOD" : "Electrocute all enemies in front of you for <style=cIsDamage>1000% damage</style>.",
+	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_NAME_RISKYMOD" : "Unlimited Power",
+	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_DESCRIPTION_RISKYMOD" : "Electrocute all enemies in front of you for <style=cIsDamage>2000% damage</style>.",
+	
+	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Lança um pilão flutuante que <style=cIsDamage>acerta</style> até <style=cIsDamage>6</style> inimigos próximos, causando <style=cIsDamage>70% de dano</style>. Pode ser usado para se <style=cIsUtility>agarrar</style>.",
+ 
+	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "Posicione uma mina que causa <style=cIsDamage>900% de dano</style> se for totalmente carregada. Máximo de 4."
+	}
+}
