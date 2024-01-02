@@ -1,0 +1,10 @@
+{
+	strings:
+	{
+		"SHRINE_COMBAT_END_TRIAL_RISKYMOD": "<style=cShrine>Templo de Combate derrubou </style>{0}",
+		
+		"MOON_PILLAR_COMPLETE_RISKYMOD" : "<color=#c6d5ff>{0} recebeu </color>{1}",
+		
+		"VOID_SIGNAL_COMPLETE_RISKYMOD" : "<style=cWorldEvent>Sinal de Nulidade Profunda derrubou </style>{0}"
+	}
+}
