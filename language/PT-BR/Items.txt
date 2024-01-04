@@ -79,7 +79,7 @@
 	
 	"ITEM_LIGHTNINGSTRIKEONHIT_DESC_RISKYMOD": "<style=cIsDamage>10%</style> de chance, ao golpear, de conjurar um relâmpago, causando <style=cIsDamage>500%</style> <style=cStack>(+300% por acúmulo)</style> de dano.",
 
-	"ITEM_BLEEDONHITANDEXPLODE_PICKUP_RISKYMOD": "Bleeding enemies explode on kill.",
+	"ITEM_BLEEDONHITANDEXPLODE_PICKUP_RISKYMOD": "Inimigos sangrando explodem ao serem abatidos.",
 	"ITEM_BLEEDONHITANDEXPLODE_DESC_RISKYMOD": "Ganha <style=cIsDamage>10%</style> de chance de causar <style=cIsDamage>sangramento</style> aos inimigos, causando <style=cIsDamage>240%</style> de dano base. Inimigos <style=cIsDamage>sangrando</style> <style=cIsDamage>explodem</style> ao serem abatidos, causando <style=cIsDamage>400%</style> <style=cStack>(+320% por acúmulo)</style> de dano, mais <style=cIsDamage>10%</style> <style=cStack>(+8% por acúmulo)</style> da saúde máxima deles.",
 	
 	"ITEM_KNURL_PICKUP_RISKYMOD": "Reforça a saúde, a regeneração e a armadura.",
@@ -131,8 +131,8 @@
 	
 	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>Bloqueia</style> dano recebido uma vez. Recarrega após <style=cIsUtility>20 segundos</style> <style=cStack>(-10% por acúmulo)</style>. <style=cIsVoid>Corrompe todos os Tempos Difíceis</style>.",
 
-	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": Curar além do limite concede uma <style=cIsHealing>barreira temporária</style> de <style=cIsHealing>50% <style=cStack>(+50% por acúmulo)</style></style> do total <style=cIsHealing>curado</style>. Divide a <style=cIsHealing>taxa de decaimento da barreira</style> em <style=cIsHealing>2 <style=cStack>(+1 por acúmulo)</style></style>.",
+	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Curar além do limite concede uma <style=cIsHealing>barreira temporária</style> de <style=cIsHealing>50% <style=cStack>(+50% por acúmulo)</style></style> do total <style=cIsHealing>curado</style>. Divide a <style=cIsHealing>taxa de decaimento da barreira</style> em <style=cIsHealing>2 <style=cStack>(+1 por acúmulo)</style></style>.",
 
-	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Aumenta o dano base em <style=cIsDamage>100%</style> <style=cStack>(+100% por acúmulo)</style>. <style=cIsHealth>Divide a saúde máxima por 2 </style> <style=cStack>(+1 por acúmulo)</style>.",
+	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Aumenta o dano base em <style=cIsDamage>100%</style> <style=cStack>(+100% por acúmulo)</style>. <style=cIsHealth>Divide a saúde máxima por 2</style> <style=cStack>(+1 por acúmulo)</style>.",
 	}
 }
