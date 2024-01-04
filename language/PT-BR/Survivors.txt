@@ -45,7 +45,7 @@
 	"TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD" : "Dispare uma barra perfurante que causa <style=cIsDamage>660% de dano</style>.",
 	"TOOLBOT_PRIMARY_ALT2_DESCRIPTION_RISKYMOD" : "Lance um foguete que explode, causando <style=cIsDamage>390% de dano</style>. Máximo de 4.",
 	"TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD" : "Serra os inimigos próximos, causando <style=cIsDamage>1.000% de dano por segundo</style>. Recebe uma <style=cIsHealing>barreira temporária</style> ao atingir inimigos.",
-	"TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "Assuma uma postura de combate pesado, equipando seus dois <style=cIsDamage>ataques primários</style> de uma vez. Receba <style=cIsUtility>60 de armadura</style>, as perca <style=cIsHealth>-60% de velocidade de movimento</style>.",
+	"TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "Assuma uma postura de combate pesado, equipando seus dois <style=cIsDamage>ataques primários</style> de uma vez. Receba <style=cIsUtility>60 de armadura</style>, mas perca <style=cIsHealth>-60% de velocidade de movimento</style>.",
 	
 	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "Dispare um <style=cIsUtility>Estrondo Sônico</style> que <style=cIsDamage>Enfraquece</style> inimigos. <style=cIsHealing>Cura para cada alvo atingido</style>.",
 	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Injeta</style> um inimigo para causar <style=cIsDamage>330% de dano</style>. Aliados são <style=cIsHealing>curados</style> em <style=cIsHealing>10%</style> do dano causado aos inimigos <style=cIsDamage>Injetados</style>. Ao abater, derrube <style=cIsHealing>frutas de cura</style> que curam <style=cIsHealing>25% PV</style>.",
