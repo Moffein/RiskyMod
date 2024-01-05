@@ -45,7 +45,7 @@
 	"TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD" : "Dispare uma barra perfurante que causa <style=cIsDamage>660% de dano</style>.",
 	"TOOLBOT_PRIMARY_ALT2_DESCRIPTION_RISKYMOD" : "Lance um foguete que explode, causando <style=cIsDamage>390% de dano</style>. Máximo de 4.",
 	"TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD" : "Serra os inimigos próximos, causando <style=cIsDamage>1.000% de dano por segundo</style>. Recebe uma <style=cIsHealing>barreira temporária</style> ao atingir inimigos.",
-	"TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "Assuma uma postura de combate pesado, equipando seus dois <style=cIsDamage>ataques primários</style> de uma vez. Receba <style=cIsUtility>60 de armadura</style>, as perca <style=cIsHealth>-60% de velocidade de movimento</style>.",
+	"TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "Assuma uma postura de combate pesado, equipando seus dois <style=cIsDamage>ataques primários</style> de uma vez. Receba <style=cIsUtility>60 de armadura</style>, mas perca <style=cIsHealth>-60% de velocidade de movimento</style>.",
 	
 	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "Dispare um <style=cIsUtility>Estrondo Sônico</style> que <style=cIsDamage>Enfraquece</style> inimigos. <style=cIsHealing>Cura para cada alvo atingido</style>.",
 	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Injeta</style> um inimigo para causar <style=cIsDamage>330% de dano</style>. Aliados são <style=cIsHealing>curados</style> em <style=cIsHealing>10%</style> do dano causado aos inimigos <style=cIsDamage>Injetados</style>. Ao abater, derrube <style=cIsHealing>frutas de cura</style> que curam <style=cIsHealing>25% PV</style>.",
@@ -60,8 +60,8 @@ Venenoso</style>. Lance uma bile tóxica que causa <style=cIsDamage>240% de dano
 	"CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. <style=cIsDamage>Assassino</style>. <style=cIsHealing>Regenerativo</style>. Morda um inimigo, causando <style=cIsDamage>360% de dano</style>.",
 	"CROCO_UTILITY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. <style=cIsDamage>Atordoante</style>. Salte no ar, causando <style=cIsDamage>320% de dano</style>. Deixe uma poça de ácido que causa <style=cIsDamage>50% de dano</style>. Pode acumular até <style=cIsUtility>2</style> cargas.",
 	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. <style=cIsDamage>Atordoante</style>. Salte no ar, causando <style=cIsDamage>550% de dano</style>. <style=cIsUtility>Reduz</style> o tempo de recarga das habilidades em <style=cIsUtility>1 s</style> para cada inimigo atingido.",
-	"CROCO_SPECIAL_DESCRIPTION_RISKYMOD" : "Release a deadly disease that deals <style=cIsDamage>8x100% damage</style>. The disease spreads to up to <style=cIsDamage>20</style> targets.",
-	"CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD" : "Pandemic",
+	"CROCO_SPECIAL_DESCRIPTION_RISKYMOD" : "Libere uma doença mortal que causa <style=cIsDamage>8x100% de dano</style>. A doença se espalha a até <style=cIsDamage>20</style> alvos.",
+	"CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD" : "Pandêmico",
 	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "Libere uma doença mortal que causa <style=cIsDamage>15 x 100% de dano</style>.  A doença se espalha a até <style=cIsDamage>20</style> alvos. <style=cIsHealing>Se cure</style> caso o inimigo seja abatido por Pandemia.",
 
 	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Incendiário</style>. Dispare um raio que causa <style=cIsDamage>360% de dano</style> aos inimigos. Máximo de 4.
