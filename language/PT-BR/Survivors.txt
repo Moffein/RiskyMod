@@ -56,7 +56,6 @@
 	"CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Veneno</style> e <color=#B1387F>Praga</color> espalham em <style=cIsDamage>1</style> alvo próximo ao abater.",
 	"CROCO_PRIMARY_DESCRIPTION_RISKYMOD" : "Surre um inimigo, causando <style=cIsDamage>200% de dano</style>. O terceiro acerto é <style=cIsHealing>Venenoso</style> e <style=cIsHealing>Regenerativo</style> e causa <style=cIsDamage>400% de dano</style>.",
 	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. Lance uma bile tóxica que causa <style=cIsDamage>240% de dano</style>.",
-Venenoso</style>. Lance uma bile tóxica que causa <style=cIsDamage>240% de dano</style>.",
 	"CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. <style=cIsDamage>Assassino</style>. <style=cIsHealing>Regenerativo</style>. Morda um inimigo, causando <style=cIsDamage>360% de dano</style>.",
 	"CROCO_UTILITY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. <style=cIsDamage>Atordoante</style>. Salte no ar, causando <style=cIsDamage>320% de dano</style>. Deixe uma poça de ácido que causa <style=cIsDamage>50% de dano</style>. Pode acumular até <style=cIsUtility>2</style> cargas.",
 	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. <style=cIsDamage>Atordoante</style>. Salte no ar, causando <style=cIsDamage>550% de dano</style>. <style=cIsUtility>Reduz</style> o tempo de recarga das habilidades em <style=cIsUtility>1 s</style> para cada inimigo atingido.",
@@ -64,7 +63,7 @@ Venenoso</style>. Lance uma bile tóxica que causa <style=cIsDamage>240% de dano
 	"CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD" : "Pandêmico",
 	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "Libere uma doença mortal que causa <style=cIsDamage>15 x 100% de dano</style>.  A doença se espalha a até <style=cIsDamage>20</style> alvos. <style=cIsHealing>Se cure</style> caso o inimigo seja abatido por Pandemia.",
 
-	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Incendiário</style>. Dispare um raio que causa <style=cIsDamage>360% de dano</style> aos inimigos. Máximo de 4.
+	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Incendiário</style>. Dispare um raio que causa <style=cIsDamage>360% de dano</style> aos inimigos. Máximo de 4.",
 	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Dispare um raio que causa <style=cIsDamage>360% de dano</style> e <style=cIsDamage>explode</style> em uma pequena área. Máximo de 4.</style>",
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>. Irrompa no céu, causando <style=cIsDamage>800% de dano</style>.",
 	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Congelante</style>. Crie uma barreira que causa <style=cIsDamage>100% de dano</style> aos inimigos. <style=cIsUtility>Impulsiona você para trás</style> caso esteja no ar.",
