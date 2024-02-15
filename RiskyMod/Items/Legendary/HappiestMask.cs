@@ -165,6 +165,7 @@ namespace RiskyMod.Items.Legendary
             CharacterBody body = characterMaster2.GetBody();
             if (body)
             {
+                body.gameObject.AddComponent<FixHealth>();
                 foreach (EntityStateMachine entityStateMachine in body.GetComponents<EntityStateMachine>())
                 {
                     entityStateMachine.initialStateType = entityStateMachine.mainStateType;
@@ -233,6 +234,18 @@ namespace RiskyMod.Items.Legendary
             public void AddGhost(CharacterBody cb)
             {
                 activeGhosts.Add(cb);
+            }
+        }
+        public class FixHealth : MonoBehaviour
+        {
+            private void Start()
+            {
+                if (NetworkServer.active)
+                {
+                    HealthComponent hc = base.GetComponent<HealthComponent>();
+                    if (hc) hc.Networkhealth = hc.fullHealth;
+                }
+                Destroy(this);
             }
         }
     }
