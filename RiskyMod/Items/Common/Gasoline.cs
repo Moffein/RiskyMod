@@ -26,7 +26,7 @@ namespace RiskyMod.Items.Common
                 x => x.MatchLdcR4(8f)
                     ))
                 {
-                    c.Next.Operand = 12f;
+                    c.Next.Operand = 16f;
 
                     //Remove range scaling
                     if (c.TryGotoNext(

@@ -15,7 +15,7 @@
 	"ITEM_WARDONLEVEL_PICKUP_RISKYMOD": "Solte um Estandarte de Guerra ao subir de nível ou no início de um evento de Teleportador. Concede dano, velocidade de ataque e de movimento, e regeneração de saúde aos aliados.",
 	"ITEM_WARDONLEVEL_DESC_RISKYMOD": "Ao <style=cIsUtility>subir de nível</style> ou iniciar o <style=cIsUtility>evento de Teleportador</style>, solte um estandarte que fortalece todos os aliados dentro de <style=cIsUtility>16 m</style> <style=cStack>(+8 m por acúmulo)</style>. Aumenta o <style=cIsDamage>dano</style> em <style=cIsDamage>15%</style>, e a <style=cIsDamage>velocidade de ataque</style> e <style=cIsUtility>de movimento</style> em <style=cIsDamage>30%</style>. Regenera <style=cIsHealing>1%</style> de sua <style=cIsHealing>saúde</style> a cada segundo.",  
 
-	"ITEM_IGNITEONKILL_DESC_RISKYMOD": "Abater um inimigo <style=cIsDamage>incendeia</style> todos os inimigos em um raio de <style=cIsDamage>12 m</style>, causando <style=cIsDamage>150%</style> de dano base. Além disso, os inimigos <style=cIsDamage>queimam</style>, recebendo <style=cIsDamage>150%</style> <style=cStack>(+75% por acúmulo)</style> de dano base.",  
+	"ITEM_IGNITEONKILL_DESC_RISKYMOD": "Abater um inimigo <style=cIsDamage>incendeia</style> todos os inimigos em um raio de <style=cIsDamage>16 m</style>, causando <style=cIsDamage>150%</style> de dano base. Além disso, os inimigos <style=cIsDamage>queimam</style>, recebendo <style=cIsDamage>150%</style> <style=cStack>(+75% por acúmulo)</style> de dano base.",  
 
 	"ITEM_REPULSIONARMORPLATE_PICKUP_RISKYMOD": "Aumenta a armadura em 5.",
 	"ITEM_REPULSIONARMORPLATE_DESC_RISKYMOD": "<style=cIsHealing>Aumenta a armadura</style> em <style=cIsHealing>5</style>.",

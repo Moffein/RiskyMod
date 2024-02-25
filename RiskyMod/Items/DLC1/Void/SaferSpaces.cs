@@ -10,6 +10,8 @@ namespace RiskyMod.Items.DLC1.Void
     public class SaferSpaces
     {
         public static bool enabled = true;
+        public static bool addIframes = false;
+
         public SaferSpaces()
         {
             if (!enabled) return;
@@ -28,7 +30,7 @@ namespace RiskyMod.Items.DLC1.Void
                     c.Index++;
                     c.EmitDelegate<Func<CharacterBody, CharacterBody>>(body =>
                     {
-                        body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.1f);
+                        if (addIframes) body.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.1f);
                         return body;
                     });
 
@@ -36,7 +38,7 @@ namespace RiskyMod.Items.DLC1.Void
                         x => x.MatchLdcR4(15f)
                         ))
                     {
-                        c.Next.Operand = 20f;
+                        c.Next.Operand = 20f / 0.9f;    //alternative is to do itemcount-1, but I don't want to redo the hook
                         error = false;
                     }
                 }

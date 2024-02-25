@@ -15,7 +15,7 @@
 	"ITEM_WARDONLEVEL_PICKUP_RISKYMOD": "在升级或启动传送器事件时放下战旗。给予友方伤害提升、攻击速度、移动速度提升和治疗。",
 	"ITEM_WARDONLEVEL_DESC_RISKYMOD": "在<style=cIsUtility>升级</style>或启动<style=cIsUtility>传送器事件</style>时,放下一个可以加强<style=cIsUtility>16米</style><style=cStack>（每层增加8）</style>范围内的所有友方。提升<style=cIsDamage>伤害</style><style=cIsDamage>15%</style>,和<style=cIsDamage>攻击速度</style>与<style=cIsUtility>移动速度</style><style=cIsDamage>30%</style>。并且每秒<style=cIsHealing>治疗</style>其<style=cIsHealing>生命值</style>的<style=cIsHealing>1%</style>。",
 	
-	"ITEM_IGNITEONKILL_DESC_RISKYMOD": "击败敌人后<style=cIsDamage>点燃</style><style=cIsDamage>12米</style>内的所有敌人，造成<style=cIsDamage>150%</style>的基础伤害。另外，<style=cIsDamage>燃烧</style>可对敌人造成<style=cIsDamage>150%</style><style=cStack>（每层增加75%）</style>的基础伤害。",
+	"ITEM_IGNITEONKILL_DESC_RISKYMOD": "击败敌人后<style=cIsDamage>点燃</style><style=cIsDamage>16米</style>内的所有敌人，造成<style=cIsDamage>150%</style>的基础伤害。另外，<style=cIsDamage>燃烧</style>可对敌人造成<style=cIsDamage>150%</style><style=cStack>（每层增加75%）</style>的基础伤害。",
 	
 	"ITEM_REPULSIONARMORPLATE_PICKUP_RISKYMOD": "增加5点护甲。",
 	"ITEM_REPULSIONARMORPLATE_DESC_RISKYMOD": "增加<style=cIsHealing>5点</style><style=cIsHealing>护甲</style>。",

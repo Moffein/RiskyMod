@@ -426,6 +426,7 @@ namespace RiskyMod
             //Needletick.enabled = ItemCfg.Bind(voidString, "Needletick", true, itemConfigDescString).Value;
 
             SaferSpaces.enabled = ItemCfg.Bind(voidString, "Safer Spaces", true, itemConfigDescString).Value;
+            SaferSpaces.addIframes = ItemCfg.Bind(voidString, "Safer Spaces - I-frames on Proc", false, "Gives brief invincibility when triggering this effect.").Value;
 
             PlasmaShrimp.enabled = ItemCfg.Bind(voidString, "Plasma Shrimp", true, itemConfigDescString).Value;
             VoidWisp.enabled = ItemCfg.Bind(voidString, "Voidsent Flame", true, itemConfigDescString).Value;
