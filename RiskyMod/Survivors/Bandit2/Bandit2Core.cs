@@ -115,6 +115,8 @@ namespace RiskyMod.Survivors.Bandit2
 
             if (blastChanges)
             {
+                Content.Content.entityStates.Add(typeof(FirePrimaryRifle));
+
                 ReloadSkillDef blastDef = Addressables.LoadAssetAsync<ReloadSkillDef>("RoR2/Base/Bandit2/Bandit2Blast.asset").WaitForCompletion();
                 blastDef.activationState = new SerializableEntityStateType(typeof(FirePrimaryRifle));
                 blastDef.skillDescriptionToken = "BANDIT2_PRIMARY_ALT_DESC_RISKYMOD";
