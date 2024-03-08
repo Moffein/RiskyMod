@@ -639,8 +639,8 @@ namespace RiskyMod
             Bandit2Core.enabled = SurvivorCfg.Bind(banditString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             Bandit2Core.modifyStats = SurvivorCfg.Bind(banditString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
             BanditSpecialGracePeriod.enabled = SurvivorCfg.Bind(banditString, "Special Grace Period", true, "Special On-kill effects can trigger if an enemy dies shortly after being hit.").Value;
-            BanditSpecialGracePeriod.durationLocalUser = SurvivorCfg.Bind(banditString, "Special Grace Period Duration (Host)", 0.5f, "Length in seconds of Special Grace Period.").Value;
-            BanditSpecialGracePeriod.durationOnline = SurvivorCfg.Bind(banditString, "Special Grace Period Duration (Client)", 1f, "Length in seconds of Special Grace Period for Online Clients.").Value;
+            BanditSpecialGracePeriod.durationLocalUser = SurvivorCfg.Bind(banditString, "Special Grace Period Duration (Host)", 0.25f, "Length in seconds of Special Grace Period.").Value;
+            BanditSpecialGracePeriod.durationOnline = SurvivorCfg.Bind(banditString, "Special Grace Period Duration (Client)", 0.5f, "Length in seconds of Special Grace Period for Online Clients.").Value;
 
             //Not sure if the Special even works if you disable this.
             if (!BanditSpecialGracePeriod.enabled)
