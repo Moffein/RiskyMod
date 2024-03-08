@@ -518,6 +518,7 @@ namespace RiskyMod
             CommandoCore.rollChanges = SurvivorCfg.Bind(commandoString, "Tactical Dive Changes", true, "Enable changes to this skill.").Value;
             CommandoCore.suppressiveChanges = SurvivorCfg.Bind(commandoString, "Suppressive Fire Changes", true, "Enable changes to this skill.").Value;
             CommandoCore.grenadeChanges = SurvivorCfg.Bind(commandoString, "Frag Grenade Changes", true, "Enable changes to this skill.").Value;
+            CommandoCore.grenadeRemoveFalloff = SurvivorCfg.Bind(commandoString, "Frag Grenade - Remove Falloff", true, "Remove blast falloff from Frag Grenade. Requires Frag Grenade Changes = true.").Value;
 
             HuntressCore.enabled = SurvivorCfg.Bind(huntressString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             HuntressCore.HuntressTargetingMode = SurvivorCfg.Bind(huntressString, "Targeting Mode (Client-Side)", BullseyeSearch.SortMode.Angle, "How Huntress's target prioritization works.").Value;

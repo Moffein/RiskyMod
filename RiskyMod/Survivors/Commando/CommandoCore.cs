@@ -27,6 +27,7 @@ namespace RiskyMod.Survivors.Commando
 
         public static bool suppressiveChanges = true;
         public static bool grenadeChanges = true;
+        public static bool grenadeRemoveFalloff = true;
 
         public static DamageAPI.ModdedDamageType SuppressiveFireDamage;
         public static DamageAPI.ModdedDamageType SuppressiveFireScepterDamage;
@@ -239,8 +240,16 @@ namespace RiskyMod.Survivors.Commando
             ProjectileImpactExplosion pie = proj.GetComponent<ProjectileImpactExplosion>();
             pie.destroyOnWorld = false;
             pie.destroyOnEnemy = true;
-            pie.falloffModel = BlastAttack.FalloffModel.SweetSpot;
             pie.blastRadius = 12f;
+
+            if (grenadeRemoveFalloff)
+            {
+                pie.falloffModel = BlastAttack.FalloffModel.None;
+            }
+            else
+            {
+                pie.falloffModel = BlastAttack.FalloffModel.SweetSpot;
+            }
 
             proj.AddComponent<GrenadeImpactComponent>();
 
