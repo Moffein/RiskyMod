@@ -16,7 +16,7 @@ namespace RiskyMod.Survivors.Croco
                     if (!(self.detonateNextFrame || (self.characterMotor.Motor.GroundingStatus.IsStableOnGround && !self.characterMotor.Motor.LastGroundingStatus.IsStableOnGround))
                     && self.fixedAge >= BaseLeap.minimumDuration)
                     {
-                        if (SneedUtils.SneedUtils.IsEnemyInSphere(4.5f, self.characterBody.footPosition, self.GetTeam(), true))
+                        if (SneedUtils.SneedUtils.IsEnemyInSphere(4f, self.characterBody.footPosition, self.GetTeam(), true))
                         {
                             self.detonateNextFrame = true;
                         }
