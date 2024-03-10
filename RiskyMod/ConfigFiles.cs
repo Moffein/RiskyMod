@@ -584,6 +584,7 @@ namespace RiskyMod
             ModifyUtilityForce.enabled = SurvivorCfg.Bind(treebotString, "Utility - Modify Force", true, "Modifies the force of REXs Utilities.").Value;
             TreebotCore.fruitChanges = SurvivorCfg.Bind(treebotString, "DIRECTIVE Harvest Changes", true, "Enable changes to this skill.").Value;
             DropFruitOnHit.enabled = SurvivorCfg.Bind(treebotString, "DIRECTIVE Harvest - Fruit On Hit", false, "Fruiting enemies have a chance to drop fruits when hit.").Value;
+            SelfDamageTweaks.enabled = SurvivorCfg.Bind(treebotString, "Self Damage Tweaks", true, "Self damage from skills is affected by armor and defensive items.").Value;
 
             LoaderCore.enabled = SurvivorCfg.Bind(loaderString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             LoaderCore.grappleCancelsSprint = SurvivorCfg.Bind(loaderString, "Secondaries Cancel Sprint", false, "Loader's Grapple cancels sprinting.").Value;
