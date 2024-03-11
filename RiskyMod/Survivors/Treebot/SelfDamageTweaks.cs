@@ -17,7 +17,7 @@ namespace RiskyMod.Survivors.Treebot
             {
                 ILCursor c = new ILCursor(il);
 
-                if (c.TryGotoNext(MoveType.After,
+                if (c.TryGotoNext(
                      x => x.MatchCallvirt<HealthComponent>("TakeDamage")
                     ))
                 {
