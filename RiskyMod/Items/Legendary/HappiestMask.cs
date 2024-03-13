@@ -61,14 +61,15 @@ namespace RiskyMod.Items.Legendary
                 );
 
             OnCharacterDeath.OnCharacterDeathInventoryActions += TriggerMaskGhost;
-            On.RoR2.CharacterBody.OnInventoryChanged += (orig, self) =>
+            CharacterBody.onBodyInventoryChangedGlobal += CharacterBody_onBodyInventoryChangedGlobal;
+        }
+
+        private void CharacterBody_onBodyInventoryChangedGlobal(CharacterBody self)
+        {
+            if (NetworkServer.active && self.inventory)
             {
-                orig(self);
-                if (NetworkServer.active)
-                {
-                    self.AddItemBehavior<GhostOnKillBehavior>(self.inventory.GetItemCount(RoR2Content.Items.GhostOnKill));
-                }
-            };
+                self.AddItemBehavior<GhostOnKillBehavior>(self.inventory.GetItemCount(RoR2Content.Items.GhostOnKill));
+            }
         }
 
         private static void ModifyItem()
