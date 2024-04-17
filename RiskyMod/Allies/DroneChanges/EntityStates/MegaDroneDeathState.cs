@@ -28,6 +28,7 @@ namespace EntityStates.RiskyMod.MegaDrone
                     {
 						spawnCount += base.characterBody.inventory.GetItemCount(droneMeldIndex);
                     }
+					if (SoftDependencies.SS2_CheckDroneMarker(base.gameObject)) spawnCount = 0;
 
                     Vector3? desiredPosition = null;
 					Quaternion? desiredRotation = null;

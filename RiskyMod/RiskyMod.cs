@@ -41,6 +41,7 @@ using RiskyMod.Enemies.DLC1.Voidling;
 
 namespace RiskyMod
 {
+    #region softdependencies
     [BepInDependency(".AVFX_Options..", BepInDependency.DependencyFlags.SoftDependency)]    //Does this softdependency actually work? (since RiskyMod clones the projectiles)
     [BepInDependency("com.PlasmaCore.StickyStunter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.MobileTurretBuff", BepInDependency.DependencyFlags.SoftDependency)]
@@ -80,10 +81,11 @@ namespace RiskyMod
     [BepInDependency("zombieseatflesh7.ArtifactOfPotential", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RuneFoxMods.TeleporterTurrets", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.ArtificerM1Reload", BepInDependency.DependencyFlags.SoftDependency)]
-
     [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
+    #endregion
+
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "1.5.18")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "1.5.19")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI), nameof(ItemAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
@@ -116,6 +118,7 @@ namespace RiskyMod
         {
             //Check for Inferno here since it has a RiskyMod softdependency.
             SoftDependencies.InfernoPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("HIFU.Inferno");
+            SoftDependencies.SS2OLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TeamMoonstorm.Starstorm2");
             DefenseMatrixManager.Initialize();
         }
 

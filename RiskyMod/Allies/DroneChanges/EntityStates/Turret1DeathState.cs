@@ -12,7 +12,7 @@ namespace EntityStates.RiskyMod.Turret1
         public override void OnEnter()
         {
             base.OnEnter();
-            if (NetworkServer.active)
+            if (NetworkServer.active && !SoftDependencies.SS2_CheckDroneMarker(base.gameObject))
             {
                 base.OnImpactServer(base.transform.position);
             }
