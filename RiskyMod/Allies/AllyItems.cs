@@ -47,7 +47,7 @@ namespace RiskyMod.Allies
             ItemDisplayRule[] idr = new ItemDisplayRule[0];
             ItemAPI.Add(new CustomItem(AllyResistAoEItem, idr));
 
-            if (AlliesCore.enabled) SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += HandleAllyResistAoEItem;
+            if (AlliesCore.enabled && AlliesCore.turretResistAOE) SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += HandleAllyResistAoEItem;
         }
 
         private static void HandleAllyResistAoEItem(CharacterBody self, Inventory inventory)

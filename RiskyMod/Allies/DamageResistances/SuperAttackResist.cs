@@ -26,8 +26,8 @@ namespace RiskyMod.Allies
                 && (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player)
                 && (self.body.inventory && self.body.inventory.GetItemCount(AllyItems.AllyMarkerItem) > 0))
             {
-                damageInfo.procCoefficient *= 0.25f;
-                damageInfo.damage *= 0.25f;
+                damageInfo.procCoefficient *= 0.5f;
+                damageInfo.damage *= 0.5f;
             }
         }
 
