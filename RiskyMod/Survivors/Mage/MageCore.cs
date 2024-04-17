@@ -8,7 +8,7 @@ using RoR2.Skills;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
 using RiskyMod.Survivors.Mage.Components;
-using EntityStates.RiskyMod.Mage.Weapon;
+using EntityStates.RiskyModStates.Mage.Weapon;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.AddressableAssets;
@@ -187,7 +187,7 @@ namespace RiskyMod.Survivors.Mage
                 pd.damageType = DamageType.IgniteOnHit;
 
                 Content.Content.projectilePrefabs.Add(fireStormProjectile);
-                EntityStates.RiskyMod.Mage.Weapon.PrepFireStorm.projectilePrefab = fireStormProjectile;
+                EntityStates.RiskyModStates.Mage.Weapon.PrepFireStorm.projectilePrefab = fireStormProjectile;
 
                 GameObject fireStormProjectile2 = fireStormProjectile.InstantiateClone("RiskyMod_MageFireStorm2", true);
                 Content.Content.projectilePrefabs.Add(fireStormProjectile2);
@@ -212,14 +212,14 @@ namespace RiskyMod.Survivors.Mage
 
             if (enableLightningSpecial)
             {
-                EntityStates.RiskyMod.Mage.SpecialLightning.laserEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Junk/Mage/TracerMageLightningLaser.prefab").WaitForCompletion().InstantiateClone("RiskyMod_LaserBoltTracer", false);
-                DestroyOnTimer dt = EntityStates.RiskyMod.Mage.SpecialLightning.laserEffectPrefab.AddComponent<DestroyOnTimer>();
+                EntityStates.RiskyModStates.Mage.SpecialLightning.laserEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Junk/Mage/TracerMageLightningLaser.prefab").WaitForCompletion().InstantiateClone("RiskyMod_LaserBoltTracer", false);
+                DestroyOnTimer dt = EntityStates.RiskyModStates.Mage.SpecialLightning.laserEffectPrefab.AddComponent<DestroyOnTimer>();
                 dt.duration = 0.5f;
-                Content.Content.effectDefs.Add(new EffectDef(EntityStates.RiskyMod.Mage.SpecialLightning.laserEffectPrefab));
+                Content.Content.effectDefs.Add(new EffectDef(EntityStates.RiskyModStates.Mage.SpecialLightning.laserEffectPrefab));
 
-                Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Mage.SpecialLightning));
+                Content.Content.entityStates.Add(typeof(EntityStates.RiskyModStates.Mage.SpecialLightning));
                 SkillDef skillDef = SkillDef.CreateInstance<SkillDef>();
-                skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Mage.SpecialLightning));
+                skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyModStates.Mage.SpecialLightning));
                 skillDef.activationStateMachineName = "Weapon";
                 skillDef.baseMaxStock = 1;
                 skillDef.baseRechargeInterval = 5f;
@@ -243,15 +243,15 @@ namespace RiskyMod.Survivors.Mage
                 SneedUtils.SneedUtils.FixSkillName(skillDef);
                 Content.Content.skillDefs.Add(skillDef);
 
-                EntityStates.RiskyMod.Mage.SpecialLightning.gauntletMissEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightning.prefab").WaitForCompletion().InstantiateClone("RiskyMod_MageSpecialLightningMiss", false);
-                EffectComponent ec = EntityStates.RiskyMod.Mage.SpecialLightning.gauntletMissEffectPrefab.GetComponent<EffectComponent>();
+                EntityStates.RiskyModStates.Mage.SpecialLightning.gauntletMissEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightning.prefab").WaitForCompletion().InstantiateClone("RiskyMod_MageSpecialLightningMiss", false);
+                EffectComponent ec = EntityStates.RiskyModStates.Mage.SpecialLightning.gauntletMissEffectPrefab.GetComponent<EffectComponent>();
                 ec.soundName = "Play_item_proc_chain_lightning";
-                Content.Content.effectDefs.Add(new EffectDef(EntityStates.RiskyMod.Mage.SpecialLightning.gauntletMissEffectPrefab));
+                Content.Content.effectDefs.Add(new EffectDef(EntityStates.RiskyModStates.Mage.SpecialLightning.gauntletMissEffectPrefab));
 
-                EntityStates.RiskyMod.Mage.SpecialLightning.gauntletEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightningLargeWithTrail.prefab").WaitForCompletion().InstantiateClone("RiskyMod_MageSpecialLightning", false);
-                ec = EntityStates.RiskyMod.Mage.SpecialLightning.gauntletEffectPrefab.GetComponent<EffectComponent>();
+                EntityStates.RiskyModStates.Mage.SpecialLightning.gauntletEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightningLargeWithTrail.prefab").WaitForCompletion().InstantiateClone("RiskyMod_MageSpecialLightning", false);
+                ec = EntityStates.RiskyModStates.Mage.SpecialLightning.gauntletEffectPrefab.GetComponent<EffectComponent>();
                 ec.soundName = "Play_mage_m1_cast_lightning";//"Play_RiskyMod_Mage_Special_Lightning2";//"Play_RiskyMod_RoR1Lightning"; //other SFX too annoying
-                Content.Content.effectDefs.Add(new EffectDef(EntityStates.RiskyMod.Mage.SpecialLightning.gauntletEffectPrefab));
+                Content.Content.effectDefs.Add(new EffectDef(EntityStates.RiskyModStates.Mage.SpecialLightning.gauntletEffectPrefab));
 
                 Skills.SpecialLightning = skillDef;
                 Array.Resize(ref sk.special.skillFamily.variants, sk.special.skillFamily.variants.Length + 1);
@@ -290,9 +290,9 @@ namespace RiskyMod.Survivors.Mage
 
         private void BuildScepterSkillDefs(SkillLocator sk)
         {
-            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Mage.SpecialLightningScepter));
+            Content.Content.entityStates.Add(typeof(EntityStates.RiskyModStates.Mage.SpecialLightningScepter));
             SkillDef skillDef = SkillDef.CreateInstance<SkillDef>();
-            skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyMod.Mage.SpecialLightningScepter));
+            skillDef.activationState = new SerializableEntityStateType(typeof(EntityStates.RiskyModStates.Mage.SpecialLightningScepter));
             skillDef.activationStateMachineName = "Weapon";
             skillDef.baseMaxStock = 1;
             skillDef.baseRechargeInterval = 5f;

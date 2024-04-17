@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using UnityEngine;
 
 namespace RiskyMod
 {
@@ -41,6 +42,9 @@ namespace RiskyMod
         public static bool ArtifactOfPotentialLoaded = false;
 
         public static bool TeleporterTurretsLoaded = false;
+
+        public static bool SS2OfficialLoaded = false;
+
         public static bool IsPotentialArtifactActive()
         {
             bool isActive = false;
@@ -52,6 +56,19 @@ namespace RiskyMod
         private static bool IsPotentialArtifactActiveInternal()
         {
             return RunArtifactManager.instance && RunArtifactManager.instance.IsArtifactEnabled(ArtifactOfPotential.PotentialArtifact.Potential);
+        }
+
+
+        public static bool SS2HasDroneScrapMarker(GameObject gameObject)
+        {
+            if (SS2OfficialLoaded) return SS2HasDroneScrapMarkerInternal(gameObject);
+            return false;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static bool SS2HasDroneScrapMarkerInternal(GameObject gameObject)
+        {
+            return gameObject.GetComponent<Moonstorm.Starstorm2.Interactables.DroneTable.RefabricatorHardDeathToken>() != null;
         }
     }
 }

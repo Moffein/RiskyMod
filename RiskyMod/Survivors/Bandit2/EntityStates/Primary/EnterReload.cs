@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace EntityStates.RiskyMod.Bandit2.Primary
+namespace EntityStates.RiskyModStates.Bandit2.Primary
 {
     public class EnterReload : BaseState
 	{

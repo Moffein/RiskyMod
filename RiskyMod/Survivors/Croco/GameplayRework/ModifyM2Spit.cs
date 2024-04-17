@@ -16,7 +16,7 @@ namespace RiskyMod.Survivors.Croco
     {
         public ModifyM2Spit()
         {
-            GameObject spitModded = EntityStates.RiskyMod.Croco.FireSpitModded.projectilePrefabVanilla.InstantiateClone("RiskyMod_CrocoSpit", true);
+            GameObject spitModded = EntityStates.RiskyModStates.Croco.FireSpitModded.projectilePrefabVanilla.InstantiateClone("RiskyMod_CrocoSpit", true);
             Content.Content.projectilePrefabs.Add(spitModded);
 
             DamageAPI.ModdedDamageTypeHolderComponent mdc = spitModded.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
@@ -25,7 +25,7 @@ namespace RiskyMod.Survivors.Croco
             ProjectileDamage pd = spitModded.GetComponent<ProjectileDamage>();
             pd.damageType = DamageType.Generic;
 
-            EntityStates.RiskyMod.Croco.FireSpitModded.projectilePrefab = spitModded;
+            EntityStates.RiskyModStates.Croco.FireSpitModded.projectilePrefab = spitModded;
         }
     }
 }

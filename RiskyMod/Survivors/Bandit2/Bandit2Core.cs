@@ -1,8 +1,8 @@
 ﻿using EntityStates;
-using EntityStates.RiskyMod.Bandit2;
-using EntityStates.RiskyMod.Bandit2.Primary;
-using EntityStates.RiskyMod.Bandit2.Revolver;
-using EntityStates.RiskyMod.Bandit2.Revolver.Scepter;
+using EntityStates.RiskyModStates.Bandit2;
+using EntityStates.RiskyModStates.Bandit2.Primary;
+using EntityStates.RiskyModStates.Bandit2.Revolver;
+using EntityStates.RiskyModStates.Bandit2.Revolver.Scepter;
 using MonoMod.RuntimeDetour;
 using R2API;
 using R2API.Utils;
@@ -290,7 +290,7 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.forceSprintDuringState = false;
             lightsOutDef.dontAllowPastMaxStocks = true;
             lightsOutDef.fullRestockOnAssign = true;
-            lightsOutDef.icon = Assets.ScepterSkillIcons.LightsOutScepter;
+            lightsOutDef.icon = Content.Assets.ScepterSkillIcons.LightsOutScepter;
             lightsOutDef.interruptPriority = InterruptPriority.Skill;
             lightsOutDef.isCombatSkill = true;
             lightsOutDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
@@ -319,7 +319,7 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.forceSprintDuringState = false;
             reuDef.dontAllowPastMaxStocks = true;
             reuDef.fullRestockOnAssign = true;
-            reuDef.icon = Assets.ScepterSkillIcons.RackEmUpScepter;
+            reuDef.icon = Content.Assets.ScepterSkillIcons.RackEmUpScepter;
             reuDef.interruptPriority = InterruptPriority.Skill;
             reuDef.isCombatSkill = true;
             reuDef.keywordTokens = new string[] { "KEYWORD_SLAYER" };
@@ -363,7 +363,7 @@ namespace RiskyMod.Survivors.Bandit2
             gunslingerDef.skillName = "Gunslinger";
             gunslingerDef.skillNameToken = "BANDIT2_REVOLVER_NAME_RISKYMOD";
             gunslingerDef.keywordTokens = new string[] {};
-            gunslingerDef.icon = Assets.SkillIcons.Bandit2Gunslinger;
+            gunslingerDef.icon = Content.Assets.SkillIcons.Bandit2Gunslinger;
             Skills.Gunslinger = gunslingerDef;
             SneedUtils.SneedUtils.FixSkillName(gunslingerDef);
             Content.Content.skillDefs.Add(Skills.Gunslinger);
@@ -374,7 +374,7 @@ namespace RiskyMod.Survivors.Bandit2
             desperadoKillStack.skillDescriptionToken = PersistentDesperado.enabled ? "BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD" : "BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD";
             desperadoKillStack.skillName = "DesperadoKillStack";
             desperadoKillStack.skillNameToken = "BANDIT2_SPECIAL_ALT_NAME";
-            desperadoKillStack.icon = Assets.SkillIcons.Bandit2Desperado;
+            desperadoKillStack.icon = Content.Assets.SkillIcons.Bandit2Desperado;
             Skills.DesperadoKillStack = desperadoKillStack;
             SneedUtils.SneedUtils.FixSkillName(desperadoKillStack);
             Content.Content.skillDefs.Add(Skills.DesperadoKillStack);
@@ -435,7 +435,7 @@ namespace RiskyMod.Survivors.Bandit2
                 false,
                 false,
                 Color.white,
-                 Assets.BuffIcons.Standoff1
+                 Content.Assets.BuffIcons.Standoff1
                 );
 
             Buffs.Standoff2 = SneedUtils.SneedUtils.CreateBuffDef(
@@ -444,7 +444,7 @@ namespace RiskyMod.Survivors.Bandit2
                 false,
                 false,
                 Color.white,
-                 Assets.BuffIcons.Standoff2
+                 Content.Assets.BuffIcons.Standoff2
                 );
 
             Buffs.Standoff3 = SneedUtils.SneedUtils.CreateBuffDef(
@@ -453,7 +453,7 @@ namespace RiskyMod.Survivors.Bandit2
                 false,
                 false,
                 Color.white,
-                 Assets.BuffIcons.Standoff3
+                 Content.Assets.BuffIcons.Standoff3
                 );
 
             Buffs.Standoff4 = SneedUtils.SneedUtils.CreateBuffDef(
@@ -462,7 +462,7 @@ namespace RiskyMod.Survivors.Bandit2
                 false,
                 false,
                 Color.white,
-                 Assets.BuffIcons.Standoff4
+                 Content.Assets.BuffIcons.Standoff4
                 );
             
             Buffs.Standoff5 = SneedUtils.SneedUtils.CreateBuffDef(
@@ -471,7 +471,7 @@ namespace RiskyMod.Survivors.Bandit2
                 false,
                 false,
                 Color.white,
-                 Assets.BuffIcons.Standoff5
+                 Content.Assets.BuffIcons.Standoff5
                 );
             #endregion
 

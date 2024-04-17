@@ -8,7 +8,7 @@ using RiskyMod;
 using RoR2.Projectile;
 using RiskyMod.Survivors.Mage;
 
-namespace EntityStates.RiskyMod.Mage.Weapon
+namespace EntityStates.RiskyModStates.Mage.Weapon
 {
     public class PrepFireStorm : BaseState
     {

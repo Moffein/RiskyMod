@@ -4,7 +4,7 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace EntityStates.RiskyMod.Bandit2
+namespace EntityStates.RiskyModStates.Bandit2
 {
     public class StealthMode : BaseState
 	{

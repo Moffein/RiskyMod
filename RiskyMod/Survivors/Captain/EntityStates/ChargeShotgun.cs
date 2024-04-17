@@ -3,7 +3,7 @@ using UnityEngine;
 using EntityStates;
 using RiskyMod.Survivors.Captain;
 
-namespace EntityStates.RiskyMod.Captain
+namespace EntityStates.RiskyModStates.Captain
 {
     public class ChargeShotgun : BaseState
     {

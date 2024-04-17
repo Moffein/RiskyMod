@@ -3,7 +3,7 @@ using RoR2;
 using UnityEngine.Networking;
 using RoR2.Projectile;
 
-namespace EntityStates.RiskyMod.Commando.Scepter
+namespace EntityStates.RiskyModStates.Commando.Scepter
 {
     public class ThrowGrenadeScepter : BaseState
     {

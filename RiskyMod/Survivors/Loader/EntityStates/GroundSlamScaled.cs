@@ -5,7 +5,7 @@ using RiskyMod.Survivors.Loader;
 using RiskyMod.Survivors;
 using RiskyMod;
 
-namespace EntityStates.RiskyMod.Loader
+namespace EntityStates.RiskyModStates.Loader
 {
     public class GroundSlamScaled : BaseCharacterMain
     {

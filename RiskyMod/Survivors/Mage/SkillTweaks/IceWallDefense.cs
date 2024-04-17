@@ -39,7 +39,7 @@ namespace RiskyMod.Survivors.Mage.SkillTweaks
             if (walker) walker.firePillarPrefab = modifiedIceWallPillarProjectile;
             Content.Content.projectilePrefabs.Add(modifiedIceWallWalkerProjectile);
 
-            EntityStates.RiskyMod.Mage.Weapon.PrepIceWall.projectilePrefab = modifiedIceWallWalkerProjectile;
+            EntityStates.RiskyModStates.Mage.Weapon.PrepIceWall.projectilePrefab = modifiedIceWallWalkerProjectile;
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.PrepWall", "projectilePrefab", modifiedIceWallWalkerProjectile);
 
             //Build deletion effect

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EntityStates.RiskyMod.Huntress
+namespace EntityStates.RiskyModStates.Huntress
 {
 	public class BeginArrowRainScepter : EntityStates.Huntress.BaseBeginArrowBarrage
 	{

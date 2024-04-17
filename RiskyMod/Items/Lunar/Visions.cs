@@ -18,7 +18,7 @@ namespace RiskyMod.Items.Lunar
         {
             if (!enabled) return;
 
-            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.LunarReplacement.ReloadVisions));
+            Content.Content.entityStates.Add(typeof(EntityStates.RiskyModStates.LunarReplacement.ReloadVisions));
 
             On.EntityStates.GlobalSkills.LunarNeedle.FireLunarNeedle.OnEnter += (orig, self) =>
             {
@@ -127,7 +127,7 @@ namespace RiskyMod.Items.Lunar
     }
 }
 
-namespace EntityStates.RiskyMod.LunarReplacement
+namespace EntityStates.RiskyModStates.LunarReplacement
 {
     public class ReloadVisions : BaseState
     {

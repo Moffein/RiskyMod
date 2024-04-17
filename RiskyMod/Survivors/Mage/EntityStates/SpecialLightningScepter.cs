@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EntityStates.RiskyMod.Mage
+namespace EntityStates.RiskyModStates.Mage
 {
     public class SpecialLightningScepter : SpecialLightning
     {

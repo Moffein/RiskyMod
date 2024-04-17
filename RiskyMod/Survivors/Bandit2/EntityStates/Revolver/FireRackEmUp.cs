@@ -4,7 +4,7 @@ using RiskyMod.Survivors.Bandit2.Components;
 using RoR2;
 using RoR2.Skills;
 using UnityEngine;
-namespace EntityStates.RiskyMod.Bandit2.Revolver
+namespace EntityStates.RiskyModStates.Bandit2.Revolver
 {
 	public class FireRackEmUp : BaseSidearmState
 	{

@@ -3,7 +3,7 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace EntityStates.RiskyMod.Captain
+namespace EntityStates.RiskyModStates.Captain
 {
     public class CallSupplyDropSkillRestock : CallSupplyDropBase
     {

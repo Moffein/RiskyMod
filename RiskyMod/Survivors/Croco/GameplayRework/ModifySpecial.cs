@@ -36,7 +36,7 @@ namespace RiskyMod.Survivors.Croco
                 diseaseScepterProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/crocodiseaseprojectile").InstantiateClone("RiskyMod_CrocoDiseaseScepterProjectile", true);
                 diseaseScepterProjectile = ModifyDiseaseProjectile(diseaseScepterProjectile, EpidemicScepter);
                 Content.Content.projectilePrefabs.Add(diseaseScepterProjectile);
-                EntityStates.RiskyMod.Croco.FireDiseaseProjectileScepter.projectilePrefab = diseaseScepterProjectile;
+                EntityStates.RiskyModStates.Croco.FireDiseaseProjectileScepter.projectilePrefab = diseaseScepterProjectile;
             }
 
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireDiseaseProjectile", "projectilePrefab", diseaseProjectile);

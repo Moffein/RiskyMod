@@ -43,9 +43,9 @@ namespace RiskyMod.Allies.DroneChanges
             {
 				CharacterDeathBehavior cdb = megaDroneBodyObject.GetComponent<CharacterDeathBehavior>();
 				//cdb.deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.Drone.DeathState));
-				cdb.deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.MegaDrone.MegaDroneDeathState));
+				cdb.deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyModStates.MegaDrone.MegaDroneDeathState));
 			}
-			Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.MegaDrone.MegaDroneDeathState));
+			Content.Content.entityStates.Add(typeof(EntityStates.RiskyModStates.MegaDrone.MegaDroneDeathState));
 
 			CharacterBody megaDroneBody = megaDroneBodyObject.GetComponent<CharacterBody>();
 			megaDroneBody.baseArmor = 20f;

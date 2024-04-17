@@ -6,7 +6,7 @@ using System;
 using EntityStates;
 using Mono.Cecil.Cil;
 using System.Runtime.CompilerServices;
-using EntityStates.RiskyMod.Huntress;
+using EntityStates.RiskyModStates.Huntress;
 using RoR2.Skills;
 using UnityEngine.Networking;
 using UnityEngine.AddressableAssets;
@@ -177,7 +177,7 @@ namespace RiskyMod.Survivors.Huntress
             arrowRainDef.dontAllowPastMaxStocks = true;
             arrowRainDef.forceSprintDuringState = false;
             arrowRainDef.fullRestockOnAssign = true;
-            arrowRainDef.icon = Assets.ScepterSkillIcons.HuntressArrowRainScepter;
+            arrowRainDef.icon = Content.Assets.ScepterSkillIcons.HuntressArrowRainScepter;
             arrowRainDef.interruptPriority = orig.interruptPriority;
             arrowRainDef.isCombatSkill = true;
             arrowRainDef.keywordTokens = new string[] { };

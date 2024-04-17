@@ -1,6 +1,6 @@
 ﻿using EntityStates;
-using EntityStates.RiskyMod.Commando;
-using EntityStates.RiskyMod.Commando.Scepter;
+using EntityStates.RiskyModStates.Commando;
+using EntityStates.RiskyModStates.Commando.Scepter;
 using MonoMod.Cil;
 using R2API;
 using RiskyMod.Content;
@@ -160,7 +160,7 @@ namespace RiskyMod.Survivors.Commando
                 barrageDef.dontAllowPastMaxStocks = true;
                 barrageDef.forceSprintDuringState = false;
                 barrageDef.fullRestockOnAssign = true;
-                barrageDef.icon = Assets.ScepterSkillIcons.CommandoBarrageScepter;
+                barrageDef.icon = Content.Assets.ScepterSkillIcons.CommandoBarrageScepter;
                 barrageDef.interruptPriority = InterruptPriority.PrioritySkill;
                 barrageDef.isCombatSkill = true;
                 barrageDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
@@ -189,7 +189,7 @@ namespace RiskyMod.Survivors.Commando
                 grenadeDef.dontAllowPastMaxStocks = true;
                 grenadeDef.forceSprintDuringState = false;
                 grenadeDef.fullRestockOnAssign = true;
-                grenadeDef.icon = Assets.ScepterSkillIcons.CommandoGrenadeScepter;
+                grenadeDef.icon = Content.Assets.ScepterSkillIcons.CommandoGrenadeScepter;
                 grenadeDef.interruptPriority = InterruptPriority.PrioritySkill;
                 grenadeDef.isCombatSkill = true;
                 grenadeDef.keywordTokens = new string[] {};

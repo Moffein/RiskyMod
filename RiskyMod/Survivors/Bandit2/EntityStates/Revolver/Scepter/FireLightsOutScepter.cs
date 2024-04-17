@@ -5,7 +5,7 @@ using RoR2;
 using RoR2.Skills;
 using UnityEngine;
 
-namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
+namespace EntityStates.RiskyModStates.Bandit2.Revolver.Scepter
 {
     class FireLightsOutScepter : BaseSidearmState
 	{

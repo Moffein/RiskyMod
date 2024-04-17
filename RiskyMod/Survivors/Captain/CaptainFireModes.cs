@@ -25,7 +25,7 @@ namespace RiskyMod.Survivors.Captain
                 {
                     if (enabled.Value)
                     {
-                        if (self.targetSkill.characterBody.bodyIndex == CaptainCore.CaptainIndex && self.targetSkill.skillDef.activationState.stateType == typeof(EntityStates.RiskyMod.Captain.ChargeShotgun))
+                        if (self.targetSkill.characterBody.bodyIndex == CaptainCore.CaptainIndex && self.targetSkill.skillDef.activationState.stateType == typeof(EntityStates.RiskyModStates.Captain.ChargeShotgun))
                         {
                             self.stockText.gameObject.SetActive(true);
                             self.stockText.fontSize = 12f;

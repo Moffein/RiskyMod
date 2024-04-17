@@ -3,7 +3,7 @@ using UnityEngine;
 using R2API;
 using RiskyMod.Survivors.Commando;
 
-namespace EntityStates.RiskyMod.Commando.Scepter
+namespace EntityStates.RiskyModStates.Commando.Scepter
 {
 	public class FireBarrageScepter : FireBarrage
 	{

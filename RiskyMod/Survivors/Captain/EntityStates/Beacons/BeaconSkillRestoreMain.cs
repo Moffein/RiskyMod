@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine;
 
-namespace EntityStates.RiskyMod.Captain.Beacon
+namespace EntityStates.RiskyModStates.Captain.Beacon
 {
     public class BeaconSkillRestoreMain : BaseMainState
 	{

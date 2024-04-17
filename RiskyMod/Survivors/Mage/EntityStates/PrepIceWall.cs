@@ -7,7 +7,7 @@ using UnityEngine.AddressableAssets;
 using RiskyMod;
 using RiskyMod.Survivors.Mage;
 
-namespace EntityStates.RiskyMod.Mage.Weapon
+namespace EntityStates.RiskyModStates.Mage.Weapon
 {
 	public class PrepIceWall : BaseState
 	{

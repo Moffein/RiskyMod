@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
+namespace EntityStates.RiskyModStates.Bandit2.Revolver.Scepter
 {
     class PrepLightsOutScepter : BasePrepState
     {
