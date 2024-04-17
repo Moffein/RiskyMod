@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
-namespace EntityStates.RiskyModStates.MegaDrone
+namespace EntityStates.RiskyMod.MegaDrone
 {
 	public class MegaDroneDeathState : GenericCharacterDeath
 	{
@@ -28,7 +28,6 @@ namespace EntityStates.RiskyModStates.MegaDrone
                     {
 						spawnCount += base.characterBody.inventory.GetItemCount(droneMeldIndex);
                     }
-					if (SoftDependencies.SS2HasDroneScrapMarker(base.gameObject)) spawnCount = 0;
 
                     Vector3? desiredPosition = null;
 					Quaternion? desiredRotation = null;

@@ -1,6 +1,6 @@
 ﻿using RoR2;
 
-namespace EntityStates.RiskyModStates.Loader
+namespace EntityStates.RiskyMod.Loader
 {
 	public class PreGroundSlamScaled : BaseCharacterMain
 	{

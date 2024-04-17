@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EntityStates.RiskyModStates.Bandit2.Revolver.Scepter
+namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
 {
     public class FireRackEmUpScepter : FireRackEmUp
 	{

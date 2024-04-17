@@ -4,7 +4,7 @@ using RoR2.Projectile;
 using R2API;
 using RiskyMod.SharedHooks;
 using System.Runtime.CompilerServices;
-using EntityStates.RiskyModStates.Huntress;
+using EntityStates.RiskyMod.Huntress;
 
 namespace RiskyMod.Survivors.Huntress
 {

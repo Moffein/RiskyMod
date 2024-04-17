@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine;
 
-namespace EntityStates.RiskyModStates.Captain.Beacon
+namespace EntityStates.RiskyMod.Captain.Beacon
 {
     public class BeaconEquipmentRestoreMain : BaseMainState
     {
@@ -50,7 +50,7 @@ namespace EntityStates.RiskyModStates.Captain.Beacon
 		{
 			base.OnEnter();
 			this.energyComponent.chargeRate = activationCost / rechargeTimePerUse;
-			this.energyIndicator.sprite = RiskyMod.Content.Assets.MiscSprites.CaptainEquipmentRestockBar;
+			this.energyIndicator.sprite = global::RiskyMod.Content.Assets.MiscSprites.CaptainEquipmentRestockBar;
 		}
 
 		public static float activationCost = 100f / 2f;

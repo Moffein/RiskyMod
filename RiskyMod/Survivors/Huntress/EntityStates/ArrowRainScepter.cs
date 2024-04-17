@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace EntityStates.RiskyModStates.Huntress
+namespace EntityStates.RiskyMod.Huntress
 {
 	//Was having trouble with certain things being inaccessible when inheriting ArrowRain so I just copypasted the skill.
     public class ArrowRainScepter : EntityStates.Huntress.BaseArrowBarrage

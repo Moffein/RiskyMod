@@ -3,7 +3,7 @@ using R2API;
 using UnityEngine;
 using RoR2.Skills;
 using System.Runtime.CompilerServices;
-using EntityStates.RiskyModStates.Croco;
+using EntityStates.RiskyMod.Croco;
 using EntityStates;
 using UnityEngine.Networking;
 using RoR2.Orbs;
@@ -186,8 +186,8 @@ namespace RiskyMod.Survivors.Croco
             spitDef.skillDescriptionToken = "CROCO_SECONDARY_DESCRIPTION_RISKYMOD";
             spitDef.keywordTokens = new string[] { "KEYWORD_BLIGHT_RISKYMOD" };
             spitDef.mustKeyPress = false;
-            spitDef.activationState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyModStates.Croco.FireSpitModded));
-            Content.Content.entityStates.Add(typeof(EntityStates.RiskyModStates.Croco.FireSpitModded));
+            spitDef.activationState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Croco.FireSpitModded));
+            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Croco.FireSpitModded));
 
             //I hate how this has so many keywords.
             SkillDef biteDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoBite.asset").WaitForCompletion();

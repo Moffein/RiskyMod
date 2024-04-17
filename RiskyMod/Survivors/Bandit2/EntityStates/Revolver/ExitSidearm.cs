@@ -1,4 +1,4 @@
-﻿namespace EntityStates.RiskyModStates.Bandit2.Revolver
+﻿namespace EntityStates.RiskyMod.Bandit2.Revolver
 {
 	public class ExitSidearm : BaseSidearmState
 	{

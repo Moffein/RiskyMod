@@ -80,11 +80,10 @@ namespace RiskyMod
     [BepInDependency("zombieseatflesh7.ArtifactOfPotential", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RuneFoxMods.TeleporterTurrets", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.ArtificerM1Reload", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.TeamMoonstorm.Starstorm2", BepInDependency.DependencyFlags.SoftDependency)]
 
     [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "1.5.17")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "1.5.18")]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI), nameof(ItemAPI))]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
@@ -300,8 +299,6 @@ namespace RiskyMod
             bool artiM1ReloadLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.ArtificerM1Reload");
             if (Survivors.Mage.MageCore.m1AttackSpeed && artiM1ReloadLoaded) Debug.Log("RiskyMod: Disabling Artificer M1 Reload because standalone mod is loaded.");
             Survivors.Mage.MageCore.m1AttackSpeed = Survivors.Mage.MageCore.m1AttackSpeed && !artiM1ReloadLoaded;
-
-            SoftDependencies.SS2OfficialLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TeamMoonstorm.Starstorm2");
         }
 
         private void CheckArenaLoaded(Stage obj)

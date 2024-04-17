@@ -2,7 +2,7 @@
 using RoR2;
 using UnityEngine.Networking;
 
-namespace EntityStates.RiskyModStates.Bandit2.Primary
+namespace EntityStates.RiskyMod.Bandit2.Primary
 {
     public class FirePrimaryShotgun : FirePrimaryBase
     {

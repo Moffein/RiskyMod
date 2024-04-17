@@ -1,8 +1,8 @@
 ﻿using EntityStates;
-using EntityStates.RiskyModStates.Bandit2;
-using EntityStates.RiskyModStates.Bandit2.Primary;
-using EntityStates.RiskyModStates.Bandit2.Revolver;
-using EntityStates.RiskyModStates.Bandit2.Revolver.Scepter;
+using EntityStates.RiskyMod.Bandit2;
+using EntityStates.RiskyMod.Bandit2.Primary;
+using EntityStates.RiskyMod.Bandit2.Revolver;
+using EntityStates.RiskyMod.Bandit2.Revolver.Scepter;
 using MonoMod.RuntimeDetour;
 using R2API;
 using R2API.Utils;

@@ -1,6 +1,6 @@
 ﻿using EntityStates;
-using EntityStates.RiskyModStates.Commando;
-using EntityStates.RiskyModStates.Commando.Scepter;
+using EntityStates.RiskyMod.Commando;
+using EntityStates.RiskyMod.Commando.Scepter;
 using MonoMod.Cil;
 using R2API;
 using RiskyMod.Content;

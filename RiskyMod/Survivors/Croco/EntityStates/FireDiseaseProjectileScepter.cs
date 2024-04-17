@@ -3,7 +3,7 @@ using UnityEngine;
 using R2API;
 using RoR2.Projectile;
 
-namespace EntityStates.RiskyModStates.Croco
+namespace EntityStates.RiskyMod.Croco
 {
 	public class FireDiseaseProjectileScepter : BaseState
 	{

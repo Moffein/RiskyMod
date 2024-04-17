@@ -177,8 +177,8 @@ namespace RiskyMod.Survivors.Captain
             if (!resupplyChanges) return;
             GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, EquipmentRestock.prefab").WaitForCompletion().InstantiateClone("RiskyMod_CaptainSupplyEquipmentRestock", true);
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
-            esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyModStates.Captain.Beacon.BeaconSkillRestoreMain));
-            Content.Content.entityStates.Add(typeof(EntityStates.RiskyModStates.Captain.Beacon.BeaconSkillRestoreMain));
+            esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
+            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
             Content.Content.networkedObjectPrefabs.Add(beaconPrefab);//Seems like InstantiateClone auto does this for some reason. TODO: Address, though it seems harmless.
 
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Captain/EntityStates.Captain.Weapon.CallSupplyDropEquipmentRestock.asset", "supplyDropPrefab", beaconPrefab);

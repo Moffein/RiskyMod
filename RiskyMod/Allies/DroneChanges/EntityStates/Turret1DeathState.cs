@@ -5,14 +5,14 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
-namespace EntityStates.RiskyModStates.Turret1
+namespace EntityStates.RiskyMod.Turret1
 {
     public class Turret1DeathState : EntityStates.Drone.DeathState
     {
         public override void OnEnter()
         {
             base.OnEnter();
-            if (NetworkServer.active && !SoftDependencies.SS2HasDroneScrapMarker(base.gameObject))
+            if (NetworkServer.active)
             {
                 base.OnImpactServer(base.transform.position);
             }

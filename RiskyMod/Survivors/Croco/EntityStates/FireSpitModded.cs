@@ -4,7 +4,7 @@ using RoR2.Projectile;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace EntityStates.RiskyModStates.Croco
+namespace EntityStates.RiskyMod.Croco
 {
 	//Need to copypaste vanilla code to prevent weirdness with SpikeStrip
 	public class FireSpitModded : BaseState

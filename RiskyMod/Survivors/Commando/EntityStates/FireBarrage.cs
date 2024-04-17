@@ -3,7 +3,7 @@ using UnityEngine;
 using R2API;
 using RiskyMod.Survivors.Commando;
 
-namespace EntityStates.RiskyModStates.Commando
+namespace EntityStates.RiskyMod.Commando
 {
 	public class FireBarrage : BaseState
 	{

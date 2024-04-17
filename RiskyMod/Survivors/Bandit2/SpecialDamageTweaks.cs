@@ -1,7 +1,7 @@
 ﻿using RiskyMod.SharedHooks;
 using RoR2;
 using R2API;
-using EntityStates.RiskyModStates.Bandit2.Revolver;
+using EntityStates.RiskyMod.Bandit2.Revolver;
 using MonoMod.Cil;
 using System;
 using Mono.Cecil.Cil;

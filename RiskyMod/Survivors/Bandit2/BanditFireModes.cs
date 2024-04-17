@@ -27,8 +27,8 @@ namespace RiskyMod.Survivors.Bandit2
                 if (enabled.Value && self.targetSkill && self.targetSkillSlot == SkillSlot.Primary)
                 {
                     if (self.targetSkill.characterBody.bodyIndex == Bandit2Core.Bandit2Index
-                    && (self.targetSkill.skillDef.activationState.stateType == typeof(EntityStates.RiskyModStates.Bandit2.Primary.FirePrimaryShotgun)
-                    || self.targetSkill.skillDef.activationState.stateType == typeof(EntityStates.RiskyModStates.Bandit2.Primary.FirePrimaryRifle)))
+                    && (self.targetSkill.skillDef.activationState.stateType == typeof(EntityStates.RiskyMod.Bandit2.Primary.FirePrimaryShotgun)
+                    || self.targetSkill.skillDef.activationState.stateType == typeof(EntityStates.RiskyMod.Bandit2.Primary.FirePrimaryRifle)))
                     {
                         self.stockText.gameObject.SetActive(true);
                         self.stockText.fontSize = 12f;

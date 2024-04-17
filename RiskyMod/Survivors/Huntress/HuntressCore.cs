@@ -6,7 +6,7 @@ using System;
 using EntityStates;
 using Mono.Cecil.Cil;
 using System.Runtime.CompilerServices;
-using EntityStates.RiskyModStates.Huntress;
+using EntityStates.RiskyMod.Huntress;
 using RoR2.Skills;
 using UnityEngine.Networking;
 using UnityEngine.AddressableAssets;

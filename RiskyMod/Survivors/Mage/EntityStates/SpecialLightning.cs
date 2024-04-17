@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
-namespace EntityStates.RiskyModStates.Mage
+namespace EntityStates.RiskyMod.Mage
 {
 	public class SpecialLightning : BaseState
 	{

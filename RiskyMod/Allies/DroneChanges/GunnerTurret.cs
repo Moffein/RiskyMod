@@ -28,10 +28,10 @@ namespace RiskyMod.Allies.DroneChanges
                 CharacterDeathBehavior cdb = gunnerTurret.GetComponent<CharacterDeathBehavior>();
                 if (cdb)
                 {
-                    cdb.deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyModStates.Turret1.Turret1DeathState));
+                    cdb.deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Turret1.Turret1DeathState));
                 }
             }
-            Content.Content.entityStates.Add(typeof(EntityStates.RiskyModStates.Turret1.Turret1DeathState));
+            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Turret1.Turret1DeathState));
 
             //Gets run before scaling changes
             CharacterBody cb = gunnerTurret.GetComponent<CharacterBody>();
