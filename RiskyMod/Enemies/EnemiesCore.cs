@@ -85,6 +85,7 @@ namespace RiskyMod.Enemies
             new DistantRoost();
             new SnowyForest();
 
+            new Wetland();
             new GooLake();
 
             new SirensCall();
@@ -116,6 +117,7 @@ namespace RiskyMod.Enemies
         public static CharacterSpawnCard Mushrum;
         public static CharacterSpawnCard Bison;
         public static CharacterSpawnCard ClayApothecary;
+        public static CharacterSpawnCard Gup, Geep;
 
         public static CharacterSpawnCard Bronzong;
         public static CharacterSpawnCard GreaterWisp;
@@ -180,6 +182,8 @@ namespace RiskyMod.Enemies
             BlindVerminSnowy = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/Vermin/cscVerminSnowy.asset").WaitForCompletion();
             BlindPestSnowy = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/FlyingVermin/cscFlyingVerminSnowy.asset").WaitForCompletion();
             ClayApothecary = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/ClayGrenadier/cscClayGrenadier.asset").WaitForCompletion();
+            Gup = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/Gup/cscGupBody.asset").WaitForCompletion();
+            Geep = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/Gup/cscGeepBody.asset").WaitForCompletion();
 
             XiConstruct = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/MajorAndMinorConstruct/cscMegaConstruct.asset").WaitForCompletion();
 
@@ -210,6 +214,8 @@ namespace RiskyMod.Enemies
         public static DirectorCard ClayApothecary;
         public static DirectorCard Bison;
         public static DirectorCard BisonLoop;
+        public static DirectorCard GupLoop;
+        public static DirectorCard Geep;
 
         public static DirectorCard Bronzong;
         public static DirectorCard GreaterWisp;
@@ -260,6 +266,8 @@ namespace RiskyMod.Enemies
             ClayApothecary = BuildDirectorCard(SpawnCards.ClayApothecary);
             Bison = BuildDirectorCard(SpawnCards.Bison);
             BisonLoop = BuildDirectorCard(SpawnCards.Bison, 1, 5, DirectorCore.MonsterSpawnDistance.Standard);
+            GupLoop = BuildDirectorCard(SpawnCards.Gup, 1, 5, DirectorCore.MonsterSpawnDistance.Standard);
+            Geep = BuildDirectorCard(SpawnCards.Geep);
 
             Bronzong = BuildDirectorCard(SpawnCards.Bronzong);  //Basic Monster on SkyMeadow
             GreaterWisp = BuildDirectorCard(SpawnCards.GreaterWisp);

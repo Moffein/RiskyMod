@@ -766,6 +766,7 @@ namespace RiskyMod
             DistantRoost.enabled = SpawnpoolCfg.Bind("Stage 1", "Distant Roost", true, "Enable spawnpool changes on this stage.").Value;
             SnowyForest.enabled = SpawnpoolCfg.Bind("Stage 1", "Siphoned Forest", true, "Enable spawnpool changes on this stage.").Value;
 
+            Wetland.enabled = SpawnpoolCfg.Bind("Stage 2", "Wetland Aspect", true, "Enable spawnpool changes on this stage.").Value;
             GooLake.enabled = SpawnpoolCfg.Bind("Stage 2", "Abandoned Aqueduct", true, "Enable spawnpool changes on this stage.").Value;
 
             StadiaJungle.enabled = SpawnpoolCfg.Bind("Stage 4", "Stadia Jungle", true, "Enable spawnpool changes on this stage.").Value;
