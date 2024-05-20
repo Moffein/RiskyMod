@@ -92,7 +92,7 @@
 	
 	"ITEM_EXPLODEONDEATHVOID_DESC_RISKYMOD": "Ao golpear um inimigo com <style=cIsDamage>90% de saúde</style> ou mais, ele será <style=cIsDamage>detonado</style> em uma área de <style=cIsDamage>12 m</style> em <style=cIsDamage>350%</style> <style=cStack>(+280% por acúmulo)</style> de dano base. <style=cIsVoid>Corrompe todos os Fogos Fátuos</style>.",
 	
-	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Golpes que causam <style=cIsDamage>mais de 400% de dano</style> também disparam um buraco negro que <style=cIsUtility>atrai inimigos a até 15 m para o centro dele</style>. Dura <style=cIsUtility>5</style> segundos antes de se desfazer, causando <style=cIsDamage>150%</style> <style=cStack>(+90% por acúmulo)</style> de dano TOTAL. Recarrega a cada <style=cIsUtility>15</style> segundos. <style=cIsVoid>Corrompe todos os Cinturões de Kjaro e Runald</style>.",
+	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Golpes que causam <style=cIsDamage>mais de 400% de dano</style> também disparam um buraco negro que <style=cIsUtility>atrai inimigos a até 15 m para o centro dele</style>. Dura <style=cIsUtility>5</style> segundos antes de se desfazer, causando <style=cIsDamage>200%</style> <style=cStack>(+120% por acúmulo)</style> de dano TOTAL. Recarrega a cada <style=cIsUtility>15</style> segundos. <style=cIsVoid>Corrompe todos os Cinturões de Kjaro e Runald</style>.",
 	
 	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Abater um inimigo aumenta a <style=cIsUtility>velocidade de movimento</style> em <style=cIsUtility>125%</style>, que se esvai em <style=cIsUtility>1</style> <style=cStack>(+1 por acúmulo)</style> segundo. <style=cIsDamage>Abates consecutivos aumentam a duração do bônus</style> até um máximo de 25 segundos.",
 	

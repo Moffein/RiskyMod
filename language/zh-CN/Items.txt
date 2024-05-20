@@ -131,7 +131,7 @@
 	
 	"ITEM_EXPLODEONDEATHVOID_DESC_RISKYMOD": "命中<style=cIsDamage>生命值大于或等于90%</style>的敌人时，<style=cIsDamage>引爆</style>它们，爆炸半径<style=cIsDamage>12米</style>，造成<style=cIsDamage>350%</style><style=cStack>（每层增加280%）</style>的基础伤害。<style=cIsVoid>使所有鬼火无效化</style>。",
 	
-	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "攻击造成<style=cIsDamage>至少400%的伤害</style>时，发射一个黑洞，<style=cIsUtility>将15米范围内的敌人吸引至其中心</style>。持续<style=cIsUtility>5</style>秒，之后坍缩，合计造成<style=cIsDamage>150%</style><style=cStack>（每层增加90%）</style>的伤害。充能时间<style=cIsUtility>15</style>秒。",
+	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "攻击造成<style=cIsDamage>至少400%的伤害</style>时，发射一个黑洞，<style=cIsUtility>将15米范围内的敌人吸引至其中心</style>。持续<style=cIsUtility>5</style>秒，之后坍缩，合计造成<style=cIsDamage>200%</style><style=cStack>（每层增加120%）</style>的伤害。充能时间<style=cIsUtility>15</style>秒。",
 	
 	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "击败敌人增加<style=cIsUtility>移动速度</style><style=cIsUtility>125%</style>，在<style=cIsUtility>1</style><style=cStack>（每层增加1）</style>。<style=cIsDamage>连续击杀敌人将使效果持续时间</style>延长到至多25秒。",
 	

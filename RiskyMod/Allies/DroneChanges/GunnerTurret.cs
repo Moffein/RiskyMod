@@ -35,7 +35,7 @@ namespace RiskyMod.Allies.DroneChanges
 
             //Gets run before scaling changes
             CharacterBody cb = gunnerTurret.GetComponent<CharacterBody>();
-            cb.baseMaxHealth = 480f;
+            cb.baseMaxHealth = 500f;
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
             cb.baseMaxShield = cb.baseMaxHealth * 0.1f;
             cb.levelMaxShield = cb.baseMaxShield * 0.3f;

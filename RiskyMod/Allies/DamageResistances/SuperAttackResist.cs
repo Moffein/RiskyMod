@@ -15,8 +15,6 @@ namespace RiskyMod.Allies
         {
             if (!enabled) return;
             TakeDamage.ModifyInitialDamageNoAttackerActions += AddResist;
-
-            SetupResists();
         }
 
         private static void AddResist(DamageInfo damageInfo, HealthComponent self)
@@ -29,12 +27,6 @@ namespace RiskyMod.Allies
                 damageInfo.procCoefficient *= 0.5f;
                 damageInfo.damage *= 0.5f;
             }
-        }
-
-        private void SetupResists()
-        {
-            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherSunderWave.prefab").WaitForCompletion(), SharedDamageTypes.ResistedByAllies);
-            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherSunderWave, Energized.prefab").WaitForCompletion(), SharedDamageTypes.ResistedByAllies);
         }
     }
 }

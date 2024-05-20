@@ -44,13 +44,13 @@ namespace RiskyMod.Items.DLC1.Void
                              x => x.MatchLdcR4(1f)
                             ))
                         {
-                            c.Next.Operand = 0.9f;
+                            c.Next.Operand = 1.2f;
 
                             if (c.TryGotoNext(MoveType.After,
                                  x => x.MatchMul()
                                 ))
                             {
-                                c.EmitDelegate<Func<float, float>>(damageCoefficient => damageCoefficient + 0.6f);
+                                c.EmitDelegate<Func<float, float>>(damageCoefficient => damageCoefficient + 0.8f);
                                 error = false;
                             }
                         }

@@ -173,12 +173,6 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                 }
             };
 
-            GameObject brotherSpinLeft = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateLeft");
-            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(brotherSpinLeft, new DamageAPI.ModdedDamageType[] { IgnoreShieldGateDamage, SharedDamageTypes.ResistedByAllies });
-
-            GameObject brotherSpinRight = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/BrotherUltLineProjectileRotateRight");
-            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(brotherSpinRight, new DamageAPI.ModdedDamageType[] { IgnoreShieldGateDamage, SharedDamageTypes.ResistedByAllies });
-
             IL.EntityStates.VoidRaidCrab.SpinBeamAttack.FireBeamBulletAuthority += (il) =>
             {
                 ILCursor c = new ILCursor(il);
