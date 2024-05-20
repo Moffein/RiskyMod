@@ -11,7 +11,6 @@ namespace RiskyMod.Allies
         public static ItemDef AllyRegenItem;
         public static ItemDef AllyAllowVoidDeathItem;
         public static ItemDef AllyAllowOverheatDeathItem;
-        public static ItemDef AllyResistAoEItem;
 
         public static void Init()
         {
@@ -20,49 +19,6 @@ namespace RiskyMod.Allies
             BuildAllyRegenItem();
             BuildAllyAllowVoidDeathItem();
             BuildAllyAllowOverheatDeathItem();
-            BuildAllyResistAoEItem();
-        }
-
-        private static void BuildAllyResistAoEItem()
-        {
-            if (AllyItems.AllyResistAoEItem) return;
-            AllyResistAoEItem = ScriptableObject.CreateInstance<ItemDef>();
-            AllyResistAoEItem.canRemove = false;
-            AllyResistAoEItem.name = "RiskyModAllyResistAoEItem";
-            AllyResistAoEItem.deprecatedTier = ItemTier.NoTier;
-            AllyResistAoEItem.descriptionToken = "Gain +300 armor against AoE attacks.";
-            AllyResistAoEItem.nameToken = "NPC Ally AoE Resist";
-            AllyResistAoEItem.pickupToken = "Gain +300 armor against AoE attacks.";
-            AllyResistAoEItem.hidden = true;
-            AllyResistAoEItem.pickupIconSprite = null;
-            AllyResistAoEItem.tags = new[]
-            {
-                ItemTag.WorldUnique,
-                ItemTag.BrotherBlacklist,
-                ItemTag.CannotSteal,
-                ItemTag.CannotDuplicate,
-                ItemTag.AIBlacklist,
-                ItemTag.CannotCopy
-            };
-            ItemDisplayRule[] idr = new ItemDisplayRule[0];
-            ItemAPI.Add(new CustomItem(AllyResistAoEItem, idr));
-
-            if (AlliesCore.enabled && AlliesCore.turretResistAOE) SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += HandleAllyResistAoEItem;
-        }
-
-        private static void HandleAllyResistAoEItem(CharacterBody self, Inventory inventory)
-        {
-            if (!SoftDependencies.KingKombatArenaActive && inventory.GetItemCount(AllyItems.AllyResistAoEItem) > 0)
-            {
-                if (self.teamComponent && self.teamComponent.teamIndex == TeamIndex.Player)
-                {
-                    if (!self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ResistantToAOE)) self.bodyFlags |= CharacterBody.BodyFlags.ResistantToAOE;
-                }
-                else
-                {
-                    if (self.bodyFlags.HasFlag(CharacterBody.BodyFlags.ResistantToAOE)) self.bodyFlags &= ~CharacterBody.BodyFlags.ResistantToAOE;
-                }
-            }
         }
 
         //Effect is a part of AllyMarkerItem's delegate

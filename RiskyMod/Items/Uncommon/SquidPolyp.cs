@@ -121,7 +121,6 @@ namespace RiskyMod.Items.Uncommon
                                             {
                                                 component6.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
                                                 component6.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
-                                                component6.inventory.GiveItem(Allies.AllyItems.AllyResistAoEItem);
                                                 component6.inventory.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
                                                 component6.inventory.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
                                                 component6.inventory.GiveItem(RoR2Content.Items.BoostHp, 30 + 4 * 5 * (polypCount - 1));
