@@ -1,4 +1,6 @@
-﻿using RoR2;
+﻿using Moonstorm.Starstorm2.Modules;
+using RoR2;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -88,11 +90,12 @@ namespace RiskyMod.Tweaks
                                 {
                                     PickupDropletController.CreatePickupDroplet(new GenericPickupController.CreatePickupInfo
                                     {
-                                        pickupIndex = PickupCatalog.FindPickupIndex(tier),
                                         pickerOptions = options,
+                                        prefabOverride = RiskyMod.potentialPrefab,
+                                        position = self.transform.position + rewardPositionOffset,
                                         rotation = Quaternion.identity,
-                                        prefabOverride = RiskyMod.potentialPrefab
-                                    }, self.transform.position + rewardPositionOffset, vector);
+                                        pickupIndex = PickupCatalog.FindPickupIndex(tier)
+                                    }, vector);
                                 }
                                 k++;
                                 vector = rotation * vector;

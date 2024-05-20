@@ -109,11 +109,12 @@ namespace RiskyMod.VoidLocus
                                         {
                                             PickupDropletController.CreatePickupDroplet(new GenericPickupController.CreatePickupInfo
                                             {
-                                                pickupIndex = PickupCatalog.FindPickupIndex(tier),
                                                 pickerOptions = options,
+                                                prefabOverride = RiskyMod.potentialPrefab,
+                                                position = holdoutZone.transform.position + rewardPositionOffset,
                                                 rotation = Quaternion.identity,
-                                                prefabOverride = RiskyMod.potentialPrefab
-                                            }, holdoutZone.transform.position + rewardPositionOffset, vector);
+                                                pickupIndex = PickupCatalog.FindPickupIndex(tier)
+                                            }, vector);
                                         }
                                         else
                                         {
