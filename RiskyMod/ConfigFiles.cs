@@ -702,7 +702,7 @@ namespace RiskyMod
 
             MithrixCore.enabled = MonsterCfg.Bind(monsterMithrixString, "Enable Changes", true, "Enable changes to this monster.").Value;
             MithrixFallImmune.enabled = MonsterCfg.Bind(monsterMithrixString, "Fall Damage Immunity", true, "Mithrix does not take fall damage.").Value;
-            MithrixTargetPrioritization.enabled = MonsterCfg.Bind(monsterMithrixString, "Prioritize Players", true, "This monster always tries to prioritize targeting players when possible.").Value;
+            MithrixTargetPrioritization.enabled = MonsterCfg.Bind(monsterMithrixString, "Prioritize Players", false, "This monster always tries to prioritize targeting players when possible.").Value;
 
             //this doesn't seem to actually help much
             //SprintBashAntiTrimp.enabled = MonsterCfg.Bind(monsterMithrixString, "Sprint Bash Anti Trimp", true, "Prevents Mithrix from launching himself into the sky when using his sprint bash on the ramps.").Value;

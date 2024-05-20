@@ -151,7 +151,6 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                 if (self.isAuthority)
                 {
                     DamageAPI.AddModdedDamageType(self.weaponAttack, IgnoreShieldGateDamage);
-                    DamageAPI.AddModdedDamageType(self.weaponAttack, SharedDamageTypes.ResistedByAllies);
                 }
             };
 
@@ -165,7 +164,6 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
                     {
                         blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                        blastAttack.AddModdedDamageType(SharedDamageTypes.ResistedByAllies);
                         return blastAttack;
                     });
                 }
