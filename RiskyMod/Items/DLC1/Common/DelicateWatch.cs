@@ -99,7 +99,7 @@ namespace RiskyMod.Items.DLC1.Common
                     int itemCount = inventory.GetItemCount(DLC1Content.Items.FragileDamageBonus);
                     if (itemCount > 0)
                     {
-                        args.damageMultAdd += 0.1f * itemCount;
+                        args.damageMultAdd += 0.15f * itemCount;
                     }
                 }
             };

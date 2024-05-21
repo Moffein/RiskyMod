@@ -109,7 +109,7 @@
 	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Ganha <style=cIsDamage>Coronel Droneman</style>. \nDrones ganham <style=cIsDamage>+50%</style> <style=cStack>(+50% por acúmulo)</style> de velocidade de ataque e redução de tempo de recarga. \nDrones ganham <style=cIsDamage>10%</style> de chance de disparar um <style=cIsDamage>míssil</style> ao acertar, causando <style=cIsDamage>300%</style> de dano TOTAL. \nDrones ganham uma <style=cIsDamage>metralhadora giratória automática</style> que causa <style=cIsDamage>6x50%</style> de dano, acertando <style=cIsDamage>2</style> inimigos.",
 	
 	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "Causa bônus de dano enquanto fora de perigo.",
-	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Aumenta o dano em <style=cIsDamage>10%</style> <style=cStack>(+10% por acúmulo)</style> enquanto fora de perigo.",
+	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Aumenta o dano em <style=cIsDamage>15%</style> <style=cStack>(+15% por acúmulo)</style> enquanto fora de perigo.",
 
 	"ITEM_CHAINLIGHTNINGVOID_DESC_RISKYMOD": "<style=cIsDamage>25%</style> de chance de disparar um <style=cIsDamage>raio</style> em <style=cIsDamage>60%</style> do dano TOTAL até <style=cIsDamage>3 <style=cStack>(+2 por acúmulo)</style></style> vezes. <style=cIsVoid>Corrompe todos os Ukeleles</style>.",
 	
