@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using EntityStates.Mage.Weapon;
+using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -22,7 +23,7 @@ namespace RiskyMod.Enemies.Spawnpools
             if (removedGup)
             {
                 SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.GupLoop, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
-                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Geep, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Geep, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
             }
         }
     }
