@@ -97,7 +97,17 @@ namespace RiskyMod.Allies
             ItemDisplayRule[] idr = new ItemDisplayRule[0];
             ItemAPI.Add(new CustomItem(AllyRegenItem, idr));
 
-            if (AlliesCore.enabled && AlliesCore.buffRegen) SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += AllyRegenItemDelegate;
+            if (AlliesCore.enabled && AlliesCore.buffRegen)
+            {
+                if (AlliesCore.droneMeldRegen)
+                {
+                    SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += AllyRegenItemDelegate;
+                }
+                else
+                {
+                    SharedHooks.RecalculateStats.HandleRecalculateStatsInventoryActions += AllyRegenItemDelegateNoDroneMeldScaling;
+                }
+            }
         }
 
         private static void AllyRegenItemDelegate(CharacterBody sender, Inventory inventory)
@@ -106,6 +116,16 @@ namespace RiskyMod.Allies
             if (!SoftDependencies.KingKombatArenaActive && itemCount > 0)
             {
                 float targetRegen = sender.maxHealth / itemCount;
+                if (sender.regen < targetRegen) sender.regen = targetRegen;
+            }
+        }
+
+        private static void AllyRegenItemDelegateNoDroneMeldScaling(CharacterBody sender, Inventory inventory)
+        {
+            int itemCount = inventory.GetItemCount(AllyItems.AllyRegenItem);
+            if (!SoftDependencies.KingKombatArenaActive && itemCount > 0)
+            {
+                float targetRegen = (sender.baseMaxHealth + (sender.levelMaxHealth * (sender.level - 1))) / itemCount;
                 if (sender.regen < targetRegen) sender.regen = targetRegen;
             }
         }

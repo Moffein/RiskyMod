@@ -1,7 +1,9 @@
-﻿using RoR2;
+﻿using RiskyMod.Enemies;
+using RoR2;
 using RoR2.CharacterAI;
 using RoR2.Navigation;
 using RoR2.Skills;
+using System;
 using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -12,8 +14,9 @@ namespace RiskyMod.Allies.DroneChanges
     {
         public static bool allowRepair = true;
         public static bool teleportWithPlayer = true;
+        public static bool weakToMithrix = true;
 
-        private static BodyIndex GunnerTurretIndex;
+        private static BodyIndex gunnerTurretBodyIndex;
 
         public GunnerTurret()
         {
@@ -35,23 +38,23 @@ namespace RiskyMod.Allies.DroneChanges
 
             //Gets run before scaling changes
             CharacterBody cb = gunnerTurret.GetComponent<CharacterBody>();
-            cb.baseMaxHealth = 480f;
+            cb.baseMaxHealth = 400f;
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
             cb.baseMaxShield = cb.baseMaxHealth * 0.1f;
             cb.levelMaxShield = cb.baseMaxShield * 0.3f;
-            cb.baseArmor = 0f;
+            cb.baseArmor = 20f;
 
             On.RoR2.BodyCatalog.Init += (orig) =>
             {
                 orig();
-                GunnerTurretIndex = BodyCatalog.FindBodyIndex("Turret1Body");
+                gunnerTurretBodyIndex = BodyCatalog.FindBodyIndex("Turret1Body");
             };
 
             GameObject masterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/turret1master");
             AISkillDriver[] skillDrivers = masterObject.GetComponents<AISkillDriver>();
             foreach (AISkillDriver sd in skillDrivers)
             {
-                if (sd.skillSlot == SkillSlot.Primary && sd.maxDistance < 120f) sd.maxDistance = 120f;
+                if (sd.skillSlot == SkillSlot.Primary && sd.maxDistance < 90f) sd.maxDistance = 90f;
             }
 
 
@@ -67,6 +70,21 @@ namespace RiskyMod.Allies.DroneChanges
                 {
                     Debug.LogError("RiskyMod: Disabling GunnerTurret teleport because TeleporterTurrets is installed.");
                 }
+            }
+
+            if (weakToMithrix)
+            {
+                SharedHooks.TakeDamage.ModifyInitialDamageActions += WeakToMithrixHook;
+            }
+        }
+
+        private void WeakToMithrixHook(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        {
+            if (self.body.bodyIndex == gunnerTurretBodyIndex
+                && (attackerBody.bodyIndex == Enemies.Mithrix.MithrixCore.brotherBodyIndex
+                || attackerBody.bodyIndex == Enemies.Mithrix.MithrixCore.brotherHurtBodyIndex))
+            {
+                damageInfo.damage *= 2f;
             }
         }
 
@@ -87,7 +105,7 @@ namespace RiskyMod.Allies.DroneChanges
             ReadOnlyCollection<TeamComponent> teamMembers = TeamComponent.GetTeamMembers(TeamIndex.Player);
             foreach (TeamComponent tc in teamMembers)
             {
-                if (tc.body && tc.body.bodyIndex == GunnerTurretIndex && tc.body.master && tc.body.master.minionOwnership && tc.body.master.minionOwnership.ownerMaster)
+                if (tc.body && tc.body.bodyIndex == gunnerTurretBodyIndex && tc.body.master && tc.body.master.minionOwnership && tc.body.master.minionOwnership.ownerMaster)
                 {
                     CharacterBody ownerBody = tc.body.master.minionOwnership.ownerMaster.GetBody();
                     if (ownerBody)

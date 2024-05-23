@@ -21,6 +21,7 @@ namespace RiskyMod.Allies
         public static bool normalizeDroneDamage = true;
         public static bool changeScaling = true;
         public static bool buffRegen = true;
+        public static bool droneMeldRegen = true;
 
         public static bool SpikestripCompat = true;
         public static bool SS2Compat = true;

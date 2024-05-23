@@ -236,7 +236,8 @@ namespace RiskyMod
             CheaperRepairs.enabled = GeneralCfg.Bind(allyString, "Cheaper Drone Repairs", true, "Repairing drones is cheaper.").Value;
             AlliesCore.changeScaling = GeneralCfg.Bind(allyString, "Scaling Changes", false, "Ally HP and Damage scales so that they always perform the same on every stage.").Value;
             AlliesCore.buffRegen = GeneralCfg.Bind(allyString, "Regen Changes", true, "Most allies regen to full HP in a fixed amount of time.").Value;
-            
+            AlliesCore.droneMeldRegen = GeneralCfg.Bind(allyString, "Regen Changes - DroneMeld Mod Compatibility", true, "Scale regen with DroneMeld stacks (or any mod that modifies minion HP or lets them gain items).").Value;
+
             AlliesCore.ChenChillDroneCompat = GeneralCfg.Bind(allyString, "Compatibility - Chill Drone", true, "Enables ally changes on allies from this mod.").Value;
             AlliesCore.ChenQbDroneCompat = GeneralCfg.Bind(allyString, "Compatibility - Qb Drone", true, "Enables ally changes on allies from this mod.").Value;
             AlliesCore.ChenGradiusCompat = GeneralCfg.Bind(allyString, "Compatibility - Gradius Mod", true, "Enables ally changes on allies from this mod.").Value;
@@ -701,11 +702,7 @@ namespace RiskyMod
 
             MithrixCore.enabled = MonsterCfg.Bind(monsterMithrixString, "Enable Changes", true, "Enable changes to this monster.").Value;
             MithrixFallImmune.enabled = MonsterCfg.Bind(monsterMithrixString, "Fall Damage Immunity", true, "Mithrix does not take fall damage.").Value;
-            MithrixTargetPrioritization.enabled = MonsterCfg.Bind(monsterMithrixString, "Prioritize Players", false, "This monster always tries to prioritize targeting players when possible.").Value;
-
-            //this doesn't seem to actually help much
-            //SprintBashAntiTrimp.enabled = MonsterCfg.Bind(monsterMithrixString, "Sprint Bash Anti Trimp", true, "Prevents Mithrix from launching himself into the sky when using his sprint bash on the ramps.").Value;
-            SprintBashAntiTrimp.enabled = false;
+            MithrixTargetPrioritization.enabled = MonsterCfg.Bind(monsterMithrixString, "Prioritize Players", false, "Mithrix always tries to prioritize targeting players when possible. May result in him completely ignoring Engi Turrets.").Value;
 
             VoidlingCore.enabled = MonsterCfg.Bind(monsterVoidlingString, "Enable Changes", true, "Enable changes to this monster.").Value;
             VoidlingStats.modifyHP = MonsterCfg.Bind(monsterVoidlingString, "Reduce HP", true, "Reduces Voidling HP.").Value;

@@ -17,6 +17,7 @@ namespace RiskyMod.Items.Uncommon
         public static GameObject procEffectPrefab;
         public static bool scaleCount = false;
         public static bool ignoreAllyCap = true;
+        public static bool weakToMithrix = true;
 
         public static BodyIndex squidTurretBodyIndex;
         public static CharacterSpawnCard squidTurretCard = LegacyResourcesAPI.Load<CharacterSpawnCard>("SpawnCards/CharacterSpawnCards/cscSquidTurret");
@@ -60,9 +61,26 @@ namespace RiskyMod.Items.Uncommon
 
             GameObject squidBodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/squidturretbody");
             CharacterBody cb = squidBodyObject.GetComponent<CharacterBody>();
-            cb.baseMaxHealth = 120f;
+            cb.baseMaxHealth = 100f;
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
+            cb.baseArmor = 20f;
+
+            if (weakToMithrix)
+            {
+                SharedHooks.TakeDamage.ModifyInitialDamageActions += WeakToMithrixHook;
+            }
         }
+
+        private void WeakToMithrixHook(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        {
+            if (self.body.bodyIndex == squidTurretBodyIndex
+                && (attackerBody.bodyIndex == Enemies.Mithrix.MithrixCore.brotherBodyIndex
+                || attackerBody.bodyIndex == Enemies.Mithrix.MithrixCore.brotherHurtBodyIndex))
+            {
+                damageInfo.damage *= 2f;
+            }
+        }
+
         private static void ModifyItem()
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Squid);
