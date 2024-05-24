@@ -49,8 +49,6 @@ namespace RiskyMod.Allies.DroneChanges
 
 			CharacterBody megaDroneBody = megaDroneBodyObject.GetComponent<CharacterBody>();
 			megaDroneBody.baseArmor = 20f;
-			megaDroneBody.baseRegen = megaDroneBody.baseMaxHealth / 30f;
-			megaDroneBody.levelRegen = megaDroneBody.baseRegen * 0.2f;
 			megaDroneBody.baseMaxShield = megaDroneBody.baseMaxHealth * 0.1f;
 			megaDroneBody.levelMaxShield = megaDroneBody.baseMaxShield * 0.3f;
 

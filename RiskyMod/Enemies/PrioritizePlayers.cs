@@ -18,7 +18,7 @@ namespace RiskyMod.Enemies
             {
                 if (self.currentEnemy != null
                 && self.currentEnemy.characterBody
-                && !self.currentEnemy.characterBody.isPlayerControlled
+                && !(IsPlayer(self.currentEnemy.characterBody))
                 && self.currentEnemy.characterBody.teamComponent)
                 {
                     TeamMask enemyTeams = TeamMask.GetEnemyTeams(self.body.teamComponent.teamIndex);
@@ -59,6 +59,16 @@ namespace RiskyMod.Enemies
                     }
                 }
             }
+        }
+
+        private static bool IsPlayer(CharacterBody body)
+        {
+            bool isPlayerControlled = body.isPlayerControlled;
+            bool isAmbientLevel = body.inventory && body.inventory.GetItemCount(RoR2Content.Items.UseAmbientLevel) > 0;
+
+            bool isPlayer = isPlayerControlled || !isAmbientLevel;
+
+            return isPlayer;
         }
     }
 }

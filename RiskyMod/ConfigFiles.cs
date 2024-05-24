@@ -210,6 +210,7 @@ namespace RiskyMod
 
             ModdedScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Modded Scaling", true, "Lowers the effect of playercount on difficulty scaling. Geared towards large lobbies.").Value;
             LinearScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling", false, "Makes difficulty scaling linear like in RoR1. Requires Modded Scaling to be enabled.").Value;
+            LinearScaling.swapToExponential = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling - Swap to Exponential Lategame", false, "Linear Scaling swaps to exponential scaling when it gets outscaled.").Value;
 
             NoLevelupHeal.enabled = GeneralCfg.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
             RemoveLevelCap.enabled = GeneralCfg.Bind(scalingString, "Increase Monster Level Cap", true, "Increases Monster Level Cap.").Value;
@@ -233,6 +234,7 @@ namespace RiskyMod
             MegaDrone.allowRepair = GeneralCfg.Bind(allyString, "TC280 - Enable Repairs", true, "TC280s can be repaired after being destroyed.").Value;
             GunnerTurret.allowRepair = GeneralCfg.Bind(allyString, "Gunner Turret - Enable Repairs", true, "Gunner Turrets can be repaired after being destroyed.").Value;
             GunnerTurret.teleportWithPlayer = GeneralCfg.Bind(allyString, "Gunner Turret - Teleport with Player", true, "Gunner Turrets are teleported to the player when starting the Teleporter event.").Value;
+            GunnerTurret.teleportToMithrix = GeneralCfg.Bind(allyString, "Gunner Turret - Teleport with Player - Mithrix", true, "Gunner Turrets are teleported to the player when fighting Mithrix. Requires Teleport with Player.").Value;
             CheaperRepairs.enabled = GeneralCfg.Bind(allyString, "Cheaper Drone Repairs", true, "Repairing drones is cheaper.").Value;
             AlliesCore.changeScaling = GeneralCfg.Bind(allyString, "Scaling Changes", false, "Ally HP and Damage scales so that they always perform the same on every stage.").Value;
             AlliesCore.buffRegen = GeneralCfg.Bind(allyString, "Regen Changes", true, "Most allies regen to full HP in a fixed amount of time.").Value;
@@ -702,7 +704,7 @@ namespace RiskyMod
 
             MithrixCore.enabled = MonsterCfg.Bind(monsterMithrixString, "Enable Changes", true, "Enable changes to this monster.").Value;
             MithrixFallImmune.enabled = MonsterCfg.Bind(monsterMithrixString, "Fall Damage Immunity", true, "Mithrix does not take fall damage.").Value;
-            MithrixTargetPrioritization.enabled = MonsterCfg.Bind(monsterMithrixString, "Prioritize Players", false, "Mithrix always tries to prioritize targeting players when possible. May result in him completely ignoring Engi Turrets.").Value;
+            MithrixTargetPrioritization.enabled = MonsterCfg.Bind(monsterMithrixString, "Prioritize Players", true, "Mithrix always tries to prioritize targeting players when possible. May result in him completely ignoring Engi Turrets.").Value;
 
             VoidlingCore.enabled = MonsterCfg.Bind(monsterVoidlingString, "Enable Changes", true, "Enable changes to this monster.").Value;
             VoidlingStats.modifyHP = MonsterCfg.Bind(monsterVoidlingString, "Reduce HP", true, "Reduces Voidling HP.").Value;

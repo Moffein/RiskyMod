@@ -13,16 +13,16 @@ namespace RiskyMod.Enemies.Mithrix
 
         public MithrixCore()
         {
-            if (!enabled) return;
-            new MithrixFallImmune();
-            new MithrixTargetPrioritization();
-
             On.RoR2.BodyCatalog.Init += (orig) =>
             {
                 orig();
                 brotherBodyIndex = BodyCatalog.FindBodyIndex("BrotherBody");
                 brotherHurtBodyIndex = BodyCatalog.FindBodyIndex("BrotherHurtBody");
             };
+
+            if (!enabled) return;
+            new MithrixFallImmune();
+            new MithrixTargetPrioritization();
         }
     }
 }

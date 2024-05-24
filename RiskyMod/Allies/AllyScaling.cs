@@ -31,10 +31,6 @@ namespace RiskyMod.Allies
                             {
                                 summonResult.inventory.GiveItem(AllyItems.AllyRegenItem, 30);
                             }
-                            else if (self.masterPrefab == AllyPrefabs.GunnerTurret)
-                            {
-                                summonResult.inventory.GiveItem(AllyItems.AllyRegenItem, 40);
-                            }
                             else
                             {
                                 summonResult.inventory.GiveItem(AllyItems.AllyRegenItem, 40);

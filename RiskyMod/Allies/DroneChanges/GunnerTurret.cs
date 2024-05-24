@@ -14,6 +14,7 @@ namespace RiskyMod.Allies.DroneChanges
     {
         public static bool allowRepair = true;
         public static bool teleportWithPlayer = true;
+        public static bool teleportToMithrix = true;
         public static bool weakToMithrix = true;
 
         private static BodyIndex gunnerTurretBodyIndex;
@@ -60,7 +61,7 @@ namespace RiskyMod.Allies.DroneChanges
 
             if (teleportWithPlayer)
             {
-                On.EntityStates.Missions.BrotherEncounter.Phase1.OnEnter += TeleportTurretToMithrix;
+                if (teleportToMithrix) On.EntityStates.Missions.BrotherEncounter.Phase1.OnEnter += TeleportTurretToMithrix;
 
                 if (!SoftDependencies.TeleporterTurretsLoaded)
                 {
