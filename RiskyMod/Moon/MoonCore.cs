@@ -13,6 +13,7 @@ namespace RiskyMod.Moon
             new LessPillars();
             new PillarsDropItems();
             new ModifyHoldout();
+            new FixVoidTeamBrotherEncounter();
         }
     }
 }

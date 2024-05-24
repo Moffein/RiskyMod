@@ -234,7 +234,7 @@ namespace RiskyMod
             MegaDrone.allowRepair = GeneralCfg.Bind(allyString, "TC280 - Enable Repairs", true, "TC280s can be repaired after being destroyed.").Value;
             GunnerTurret.allowRepair = GeneralCfg.Bind(allyString, "Gunner Turret - Enable Repairs", true, "Gunner Turrets can be repaired after being destroyed.").Value;
             GunnerTurret.teleportWithPlayer = GeneralCfg.Bind(allyString, "Gunner Turret - Teleport with Player", true, "Gunner Turrets are teleported to the player when starting the Teleporter event.").Value;
-            GunnerTurret.teleportToMithrix = GeneralCfg.Bind(allyString, "Gunner Turret - Teleport with Player - Mithrix", true, "Gunner Turrets are teleported to the player when fighting Mithrix. Requires Teleport with Player.").Value;
+            GunnerTurret.teleportToMithrix = GeneralCfg.Bind(allyString, "Gunner Turret - Teleport with Player - Teleport to Mithrix", true, "Gunner Turrets are teleported to the player when fighting Mithrix. Requires Teleport with Player.").Value;
             CheaperRepairs.enabled = GeneralCfg.Bind(allyString, "Cheaper Drone Repairs", true, "Repairing drones is cheaper.").Value;
             AlliesCore.changeScaling = GeneralCfg.Bind(allyString, "Scaling Changes", false, "Ally HP and Damage scales so that they always perform the same on every stage.").Value;
             AlliesCore.buffRegen = GeneralCfg.Bind(allyString, "Regen Changes", true, "Most allies regen to full HP in a fixed amount of time.").Value;
@@ -286,6 +286,7 @@ namespace RiskyMod
             Moon.PillarsDropItems.redChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Legendary Chance", 10f, "Chance for Pillars to drop Legendary Items.").Value;
             Moon.PillarsDropItems.lunarChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Lunar Chance", 0f, "Chance for nonlegendary Pillar drops to be overwritten with a random Lunar item.").Value;
             Moon.PillarsDropItems.pearlOverwriteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Pearl Override Chance", 15f, "Chance for nonlegendary Pillar drops to be overwritten with a Pearl.").Value;
+            Moon.FixVoidTeamBrotherEncounter.enabled = GeneralCfg.Bind(moonString, "Fix Void Team Death", true, "Fixes Void Team Enemies not being killed at the start of the bossfight.").Value;
 
             //Void Locus
             RemoveFog.enabled = GeneralCfg.Bind(voidLocusString, "Remove Fog", false, "Removes Void Fog from the map.").Value;
@@ -709,6 +710,7 @@ namespace RiskyMod
             MithrixCore.enabled = MonsterCfg.Bind(monsterMithrixString, "Enable Changes", true, "Enable changes to this monster.").Value;
             MithrixFallImmune.enabled = MonsterCfg.Bind(monsterMithrixString, "Fall Damage Immunity", true, "Mithrix does not take fall damage.").Value;
             MithrixTargetPrioritization.enabled = MonsterCfg.Bind(monsterMithrixString, "Prioritize Players", true, "Mithrix always tries to prioritize targeting players when possible. May result in him completely ignoring Engi Turrets.").Value;
+            MithrixFreezeImmune.enabled = MonsterCfg.Bind(monsterMithrixString, "Freeze Immunity", false, "Mithrix cannot be frozen.").Value;
 
             VoidlingCore.enabled = MonsterCfg.Bind(monsterVoidlingString, "Enable Changes", true, "Enable changes to this monster.").Value;
             VoidlingStats.modifyHP = MonsterCfg.Bind(monsterVoidlingString, "Reduce HP", true, "Reduces Voidling HP.").Value;

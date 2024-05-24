@@ -63,12 +63,13 @@ namespace RiskyMod.Enemies
 
         private static bool IsPlayer(CharacterBody body)
         {
-            bool isPlayerControlled = body.isPlayerControlled;
+            //Watched Mithrix job to a single engi turret, don't have high hopes for his ability to kill them.
+            /*bool isPlayerControlled = body.isPlayerControlled;
             bool isAmbientLevel = body.inventory && body.inventory.GetItemCount(RoR2Content.Items.UseAmbientLevel) > 0;
 
-            bool isPlayer = isPlayerControlled || !isAmbientLevel;
+            bool isPlayer = isPlayerControlled || !isAmbientLevel;*/
 
-            return isPlayer;
+            return body.isPlayerControlled;
         }
     }
 }
