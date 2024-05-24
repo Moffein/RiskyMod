@@ -92,7 +92,7 @@ namespace RiskyMod.Items.Common
             };
 
             WarbannerObject = WarbannerObject.InstantiateClone("RiskyModWarbannerObject", true);
-            Content.Content.networkedObjectPrefabs.Add(WarbannerObject);    //Seems like InstantiateClone auto does this for some reason. TODO: Address, though it seems harmless.
+            //Content.Content.networkedObjectPrefabs.Add(WarbannerObject);  //InstantiateClone already does this?
             WardHeal wh = WarbannerObject.AddComponent<WardHeal>();
             wh.healInterval = 1f;
             wh.healFraction = 0.01f;

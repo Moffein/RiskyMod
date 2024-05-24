@@ -198,7 +198,7 @@ namespace RiskyMod.Survivors.Mage
             }
 
             //Update skill descriptions based on push setting
-            UpdatePushSetting();
+            UpdatePushSetting(null, null);
         }
 
         private void ModifySpecials(SkillLocator sk)

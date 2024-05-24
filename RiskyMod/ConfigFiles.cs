@@ -571,7 +571,7 @@ namespace RiskyMod
             MageCore.iceWallRework = SurvivorCfg.Bind(mageString, "Snapfreeze Rework", true, "Snapfreeze can target midair enemies.").Value;
             Survivors.Mage.SkillTweaks.IceWallDefense.enabled = SurvivorCfg.Bind(mageString, "Snapfreeze Defense", true, "Snapfreeze blocks ranged attacks from enemies.").Value;
             MageCore.enableFireUtility = SurvivorCfg.Bind(mageString, "Blaze Storm Utility Skill", false, "Enables this custom skill.").Value;
-            MageCore.flamethrowerSprintCancel = SurvivorCfg.Bind(mageString, "Flamethrower - Sprint Cancel", true, "Sprinting cancels Flamethrower.");
+            MageCore.flamethrowerSprintCancel = SurvivorCfg.Bind(mageString, "Flamethrower - Sprint Cancel", true, "(Client-Side) Sprinting cancels Flamethrower.");
             MageCore.flamethrowerRangeExtend = SurvivorCfg.Bind(mageString, "Flamethrower - Increase Range", true, "Increases the range of flamethrower.").Value;
             MageCore.flamethrowerIgniteChance = SurvivorCfg.Bind(mageString, "Flamethrower - Always Ignite", true, "All hits of Flamethrower ignite.").Value;
 

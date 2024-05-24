@@ -41,7 +41,7 @@ namespace RiskyMod.Survivors.Captain
             Skills.BeaconResupply = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropEquipmentRestock.asset").WaitForCompletion();
             Skills.BeaconHacking = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropHacking.asset").WaitForCompletion();
             if (resupplyCooldown) AddCooldown(Skills.BeaconResupply, 60f);
-            if (hackCooldown) AddCooldown(Skills.BeaconHacking, 60f);   //Does this need a longer cooldown?
+            if (hackCooldown) AddCooldown(Skills.BeaconHacking, 60f);
             if (healCooldown) AddCooldown("RoR2/Base/Captain/CallSupplyDropHealing.asset", 60f);
             if (shockCooldown) AddCooldown("RoR2/Base/Captain/CallSupplyDropShocking.asset", 60f);
 
@@ -179,7 +179,7 @@ namespace RiskyMod.Survivors.Captain
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
             esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
-            Content.Content.networkedObjectPrefabs.Add(beaconPrefab);//Seems like InstantiateClone auto does this for some reason. TODO: Address, though it seems harmless.
+            //Content.Content.networkedObjectPrefabs.Add(beaconPrefab); //InstantiateClone already does this?
 
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Captain/EntityStates.Captain.Weapon.CallSupplyDropEquipmentRestock.asset", "supplyDropPrefab", beaconPrefab);
 
