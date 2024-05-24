@@ -14,6 +14,7 @@ namespace RiskyMod.Tweaks.Holdouts
                 int players = orig(holdoutZoneController, origin, chargingRadiusSqr, teamIndex);
                 if (players > 0)
                 {
+                    //This extra check is for Moon2's Escape ship, which has the generic name "HoldoutZone"
                     bool isMoon = false;
                     SceneDef sd = RoR2.SceneCatalog.GetSceneDefForCurrentScene();
                     if (sd.baseSceneName.Equals("moon2") || sd.baseSceneName.Equals("moon"))
@@ -21,7 +22,10 @@ namespace RiskyMod.Tweaks.Holdouts
                         isMoon = true;
                     }
 
-                    if (isMoon || holdoutZoneController.name.Contains("NullSafeZone") || holdoutZoneController.name.Contains("Battery"))
+                    if (isMoon
+                    || holdoutZoneController.name.Contains("NullSafeZone")  //Void Fields
+                    || holdoutZoneController.name.Contains("Battery")   //Moon and Void Locus
+                    || holdoutZoneController.name.Contains("Pillar"))   //Used for PillarRevive
                     {
                         return HoldoutZoneController.CountLivingPlayers(teamIndex);
                     }
