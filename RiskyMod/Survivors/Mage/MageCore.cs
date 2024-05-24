@@ -127,6 +127,8 @@ namespace RiskyMod.Survivors.Mage
                 iceWallDef.skillDescriptionToken = "MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD";
                 iceWallDef.canceledFromSprinting = !SoftDependencies.RtAutoSprintLoaded;
                 iceWallDef.activationState = new SerializableEntityStateType(typeof(PrepIceWall));
+
+                Skills.PrepIceWall = iceWallDef;
             }
 
             new IceWallDefense();
@@ -194,6 +196,9 @@ namespace RiskyMod.Survivors.Mage
                 FireStormExtender.projectilePrefab = fireStormProjectile2;
                 fireStormProjectile.AddComponent<FireStormExtender>();  //HACKY
             }
+
+            //Update skill descriptions based on push setting
+            UpdatePushSetting();
         }
 
         private void ModifySpecials(SkillLocator sk)
@@ -397,10 +402,31 @@ namespace RiskyMod.Survivors.Mage
                 };
             }
         }
+
+        public static void UpdatePushSetting(object sender, System.EventArgs e)
+        {
+            if (utilitySelfKnockback.Value)
+            {
+                if (Skills.PrepFireStorm) Skills.PrepFireStorm.skillDescriptionToken = "MAGE_UTILITY_FIRE_DESCRIPTION_RISKYMOD";
+                if (iceWallRework)
+                {
+                    if (Skills.PrepIceWall) Skills.PrepIceWall.skillDescriptionToken = "MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD";
+                }
+            }
+            else
+            {
+                if (Skills.PrepFireStorm) Skills.PrepFireStorm.skillDescriptionToken = "MAGE_UTILITY_FIRE_DESCRIPTION_NOPUSH_RISKYMOD";
+                if (iceWallRework)
+                {
+                    if (Skills.PrepIceWall) Skills.PrepIceWall.skillDescriptionToken = "MAGE_UTILITY_ICE_DESCRIPTION_NOPUSH_RISKYMOD";
+                }
+            }
+        }
     }
 
     public static class Skills
     {
+        public static SkillDef PrepIceWall;
         public static SkillDef PrepFireStorm;
         public static SkillDef SpecialLightning;
         public static SkillDef SpecialLightningScepter;

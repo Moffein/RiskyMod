@@ -565,6 +565,9 @@ namespace RiskyMod
             MageCore.ionSurgeShock = SurvivorCfg.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
 
             MageCore.utilitySelfKnockback = SurvivorCfg.Bind(mageString, "Utility Self Knockback", true, "(Client-Side) Snapfreeze Rework and Blaze Storm apply self-knockback when used midair.");
+            MageCore.utilitySelfKnockback.SettingChanged += MageCore.UpdatePushSetting;
+
+
             MageCore.iceWallRework = SurvivorCfg.Bind(mageString, "Snapfreeze Rework", true, "Snapfreeze can target midair enemies.").Value;
             Survivors.Mage.SkillTweaks.IceWallDefense.enabled = SurvivorCfg.Bind(mageString, "Snapfreeze Defense", true, "Snapfreeze blocks ranged attacks from enemies.").Value;
             MageCore.enableFireUtility = SurvivorCfg.Bind(mageString, "Blaze Storm Utility Skill", false, "Enables this custom skill.").Value;
