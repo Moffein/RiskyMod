@@ -304,6 +304,7 @@ namespace RiskyMod
             CloakBuff.enabled = GeneralCfg.Bind(miscString, "Cloak Buff", true, "Increases delay between position updates while cloaked.").Value;
             Shock.enabled = GeneralCfg.Bind(miscString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
             FreezeChampionExecute.enabled = GeneralCfg.Bind(miscString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
+            FreezeChampionExecute.nerfFreeze = GeneralCfg.Bind(miscString, "Freeze Executes Bosses - Nerf Freeze Globally", false, "Freeze execute threshold is reduced to 15% globally. Requires Freeze Executes Bosses.").Value;
             NerfVoidtouched.enabled = GeneralCfg.Bind(miscString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
             PlayerControlledMonsters.enabled = GeneralCfg.Bind(miscString, "Player-Controlled Monster Tweaks", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
             ItemOutOfBounds.enabled = GeneralCfg.Bind(miscString, "Item Out of Bounds Teleport", true, "Items that fall out of bounds get teleported back.").Value;

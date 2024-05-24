@@ -14,6 +14,8 @@ namespace RiskyMod.Tweaks.CharacterMechanics
         public static BuffDef FreezeDebuff;
         public static float bossExecuteFractionMultiplier = 0.5f;
 
+        public static bool nerfFreeze = false;
+
         public FreezeChampionExecute()
         {
             if (!enabled) return;
@@ -64,6 +66,20 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             }
         }
 
+        private float GetExecuteThreshold(float executeTreshold, HealthComponent self)
+        {
+            float multiplier = 1f;
+            if (self.body.isPlayerControlled)
+            {
+                multiplier = 0f;
+            }
+            else if (self.body.isChampion || nerfFreeze)
+            {
+                multiplier = bossExecuteFractionMultiplier;
+            }
+            return executeTreshold * multiplier;
+        }
+
         //This doesn't fix Guillotines not stacking with Freeze, but Guillotines are reworked anyways.
         private void ModifyExecuteThreshold()
         {
@@ -88,16 +104,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                         c.Emit(OpCodes.Ldarg_0);
                         c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
                         {
-                            float threshold = 1f;
-                            if (self.body.isPlayerControlled)
-                            {
-                                threshold = 0f;
-                            }
-                            else if (self.body.isChampion)
-                            {
-                                threshold = bossExecuteFractionMultiplier;
-                            }
-                            return executeThreshold * threshold;
+                            return GetExecuteThreshold(executeThreshold, self);
                         });
 
                         if(c.TryGotoNext(MoveType.After,
@@ -107,16 +114,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                             c.Emit(OpCodes.Ldarg_0);
                             c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
                             {
-                                float threshold = 1f;
-                                if (self.body.isPlayerControlled)
-                                {
-                                    threshold = 0f;
-                                }
-                                else if (self.body.isChampion)
-                                {
-                                    threshold = bossExecuteFractionMultiplier;
-                                }
-                                return executeThreshold * threshold;
+                                return GetExecuteThreshold(executeThreshold, self);
                             });
                             error = false;
                         }
@@ -151,16 +149,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                         c.Emit(OpCodes.Ldarg_0);
                         c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
                         {
-                            float threshold = 1f;
-                            if (self.body.isPlayerControlled)
-                            {
-                                threshold = 0f;
-                            }
-                            else if (self.body.isChampion)
-                            {
-                                threshold = bossExecuteFractionMultiplier;
-                            }
-                            return executeThreshold * threshold;
+                            return GetExecuteThreshold(executeThreshold, self);
                         });
                         error = false;
                     }
