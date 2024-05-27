@@ -2,6 +2,7 @@
 	strings:
 	{
 	"CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD" : "Fire a blast of pellets that deal <style=cIsDamage>7x110% damage</style>. Charging narrows the <style=cIsUtility>spread</style>. The number of pellets increases with attack speed.",
+	"CAPTAIN_PRIMARY_DESCRIPTION_VANILLA_RISKYMOD" : "Fire a blast of pellets that deal <style=cIsDamage>7x110% damage</style>. Charging narrows the <style=cIsUtility>spread</style>.",
 	"CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Fire a fast tazer that deals <style=cIsDamage>100% damage</style>. Spreads to up to <style=cIsDamage>6</style> targets.",
 	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "Request a <style=cIsUtility>Supply Beacon</style>. Can request up to 2.",
 	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Restores Skill charges</style> on use.",

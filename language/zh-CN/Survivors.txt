@@ -2,6 +2,7 @@
 	strings:
 	{
 	"CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD" : "喷射一大团弹丸，造成<style=cIsDamage>7x110%的伤害</style>。为攻击充能将缩小<style=cIsUtility>扩散范围</style>。弹丸的数量随着攻击速度的增加而增加。",
+	"CAPTAIN_PRIMARY_DESCRIPTION_VANILLA_RISKYMOD" : "喷射一大团弹丸，造成<style=cIsDamage>7x110%的伤害</style>。为攻击充能将缩小<style=cIsUtility>扩散范围</style>。",
 	"CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>震荡</style>。发射一枚造成<style=cIsDamage>100%伤害</style>的快速电镖。最多弹射至<style=cIsDamage>6</style>个目标。",
 	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "呼叫一个<style=cIsUtility>补给信标</style>。最多呼叫2次。",
 	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD": "<style=cIsUtility>使用时<style=cIsUtility>为技能充能</style>。",

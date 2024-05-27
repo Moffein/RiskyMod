@@ -1,11 +1,14 @@
 ﻿using RoR2;
 using UnityEngine;
 using EntityStates;
+using BepInEx.Configuration;
 
 namespace EntityStates.RiskyMod.Captain
 {
 	public class FireShotgun : GenericBulletBaseState
 	{
+		public static ConfigEntry<bool> scalePellets;
+
 		public static GameObject _muzzleFlashPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/Muzzleflash1");
 		public static GameObject _tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/TracerCaptainShotgun");
 		public static GameObject _hitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/HitsparkCaptainShotgun");
@@ -41,15 +44,20 @@ namespace EntityStates.RiskyMod.Captain
 			base.OnEnter();
 			base.PlayAnimation("Gesture, Additive", "FireCaptainShotgun");
 			base.PlayAnimation("Gesture, Override", "FireCaptainShotgun");
-			this.duration = this.baseDuration;
-		}
+            this.duration = scalePellets.Value ? this.baseDuration : this.baseDuration/this.attackSpeedStat;
+        }
 
 		public override void ModifyBullet(BulletAttack bulletAttack)
 		{
 			base.ModifyBullet(bulletAttack);
 			bulletAttack.minSpread = 0f;    //Needs to be 0 or else weird things happen. Why isn't this vanilla?
-			bulletAttack.bulletCount = (uint)Mathf.FloorToInt((this.bulletCount * Mathf.Max(this.attackSpeedStat, 1f)));
-			bulletAttack.force = this.force * Mathf.Sqrt(bulletCount / 7f);
+
+			if (scalePellets.Value)
+            {
+                bulletAttack.bulletCount = (uint)Mathf.FloorToInt((this.bulletCount * Mathf.Max(this.attackSpeedStat, 1f)));
+                bulletAttack.force = this.force * Mathf.Sqrt(bulletCount / 7f);
+            }
+
 			if (tight)
 			{
 				bulletAttack.falloffModel = BulletAttack.FalloffModel.None;

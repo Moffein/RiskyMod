@@ -131,6 +131,7 @@ namespace RiskyMod
                 if (CaptainCore.enabled && CaptainCore.enablePrimarySkillChanges)
                 {
                     ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(CaptainFireModes.enabled));
+                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(EntityStates.RiskyMod.Captain.FireShotgun.scalePellets));
                     ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.defaultButton));
                     ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.autoButton));
                     ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.chargeButton));
@@ -621,6 +622,10 @@ namespace RiskyMod
             Microbots.deletionRestrictions = SurvivorCfg.Bind(captainString, "Defensive Microbots Nerf", true, "Defensive Microbots no longer deletes stationary projectiles like gas clouds and Void Reaver mortars.").Value;
             Microbots.droneScaling = SurvivorCfg.Bind(captainString, "Defensive Microbots Drone Scaling", true, "Defensive Microbots scale with drone count instead of attack speed.").Value;
             CaptainCore.enablePrimarySkillChanges = SurvivorCfg.Bind(captainString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
+            EntityStates.RiskyMod.Captain.FireShotgun.scalePellets = SurvivorCfg.Bind(captainString, "Enable Primary Skill Changes - Scale Pellets with Attackspeed", true, "Vulcan Shotgun gains extra pellets with attack speed.");
+            EntityStates.RiskyMod.Captain.FireShotgun.scalePellets.SettingChanged += CaptainCore.ScalePellets_SettingChanged;
+
+
             CaptainCore.modifyTaser = SurvivorCfg.Bind(captainString, "Power Taser Changes", true, "Enable changes to this skill.").Value;
             CaptainCore.nukeAmmopackNerf = SurvivorCfg.Bind(captainString, "Diablo Strike Ammopack Nerf", true, "Ammopacks only restore half of Diablo Strike's charge. Intended for use with Beacon: Resupply changes.").Value;
             CaptainCore.nukeProc = SurvivorCfg.Bind(captainString, "Diablo Strike Proc Coeficient", true, "Increases Diablo Strike's proc coefficient.").Value;

@@ -132,6 +132,14 @@ namespace RiskyMod.Survivors.Captain
             SneedUtils.SneedUtils.ReplaceSkillDef(sk.primary.skillFamily, captainShotgun, Skills.Shotgun);
         }
 
+        public static void ScalePellets_SettingChanged(object sender, System.EventArgs e)
+        {
+            if (Skills.Shotgun)
+                Skills.Shotgun.skillDescriptionToken = EntityStates.RiskyMod.Captain.FireShotgun.scalePellets.Value
+                    ? "CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD"
+                    : "CAPTAIN_PRIMARY_DESCRIPTION_VANILLA_RISKYMOD";
+        }
+
         private void ModifySecondaries(SkillLocator sk)
         {
             if (modifyTaser)

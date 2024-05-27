@@ -2,7 +2,8 @@
 	strings:
 	{
 	"CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD" : "Dispare uma rajada de partículas que causa <style=cIsDamage>7 x 110% de dano</style>. Carregar o ataque diminui a <style=cIsUtility>dispersão</style>. O número de partículas aumenta com a velocidade de ataque.",
-  "CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Eletrizante</style>. Dispare um eletrochoque rápido que causa <style=cIsDamage>100% de dano</style>. Espalha em até <style=cIsDamage>6</style> alvos.",
+	"CAPTAIN_PRIMARY_DESCRIPTION_VANILLA_RISKYMOD" : "Dispare uma rajada de partículas que causa <style=cIsDamage>7 x 110% de dano</style>. Carregar o ataque diminui a <style=cIsUtility>dispersão</style>.",
+	"CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Eletrizante</style>. Dispare um eletrochoque rápido que causa <style=cIsDamage>100% de dano</style>. Espalha em até <style=cIsDamage>6</style> alvos.",
 	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "Peça um <style=cIsUtility>Farol de Suprimento</style>. O pedido só pode ser feito duas vezes.",
 	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Recarrega as cargas de Habilidade</style> ao usar.",
 	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Hackeie</style> todos os itens compráveis próximos para reduzir seu custo em <style=cIsUtility>50%</style>.",
