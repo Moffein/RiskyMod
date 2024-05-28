@@ -69,7 +69,7 @@ namespace RiskyMod.Enemies
 
             bool isPlayer = isPlayerControlled || !isAmbientLevel;*/
 
-            return body.isPlayerControlled;
+            return body.isPlayerControlled && body.healthComponent && body.healthComponent.alive;
         }
     }
 }
