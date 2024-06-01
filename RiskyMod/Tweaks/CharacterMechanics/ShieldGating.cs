@@ -4,6 +4,7 @@ using RoR2;
 using System;
 using R2API;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Tweaks.CharacterMechanics
 {
@@ -142,7 +143,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                 }
             };
 
-            GameObject roboBallCircle = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/RoboBallDelayKnockupProjectile");
+            GameObject roboBallCircle = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/RoboBallBoss/RoboBallDelayKnockupProjectile.prefab").WaitForCompletion();
             SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(roboBallCircle, new DamageAPI.ModdedDamageType[] { IgnoreShieldGateDamage, SharedDamageTypes.ResistedByAllies });
 
             On.EntityStates.BrotherMonster.WeaponSlam.OnEnter += (orig, self) =>
@@ -172,6 +173,12 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     UnityEngine.Debug.LogError("RiskyMod: ShieldGating IgnoreShieldGate BrotherMonster IL Hook failed");
                 }
             };
+
+            GameObject pizzaLeft = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherUltLineProjectileRotateLeft.prefab").WaitForCompletion();
+            GameObject pizzaRight = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherUltLineProjectileRotateRight.prefab").WaitForCompletion();
+
+            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(pizzaLeft, IgnoreShieldGateDamage);
+            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(pizzaRight, IgnoreShieldGateDamage);
 
             IL.EntityStates.VoidRaidCrab.SpinBeamAttack.FireBeamBulletAuthority += (il) =>
             {
