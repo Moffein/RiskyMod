@@ -116,7 +116,7 @@
 	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "Derrube projéteis próximos. A taxa de recarga escala com a quantidade de drones em posse.",
 	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "Derrube <style=cIsDamage>1</style> <style=cStack>(+1 por acúmulo)</style> projétil dentro de <style=cIsDamage>20 m</style> a cada <style=cIsDamage>0,5 segundo</style>. <style=cIsUtility> A taxa de recarga escala com a quantidade de drones em posse</style>.",
 
-	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "Abater monstros de elite gera um <style=cIsDamage>Constructo Alfa</style> com um bônus de <style=cIsDamage>300%</style> <style=cStack>(+150% por acúmulo)</style> de dano e <style=cIsHealing>300% de saúde</style> <style=cStack>(+150% por acúmulo)</style> que <style=cIsUtility>distrai</style> inimigos próximos. Limitado a <style=cIsUtility>4</style>.",
+	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "Abater monstros de elite gera um <style=cIsDamage>Constructo Alfa</style> com um bônus de <style=cIsDamage>400%</style> <style=cStack>(+200% por acúmulo)</style> de dano e <style=cIsHealing>400% de saúde</style> <style=cStack>(+200% por acúmulo)</style> que <style=cIsUtility>distrai</style> inimigos próximos. Limitado a <style=cIsUtility>4</style>.",
 	
 	"ITEM_PERMANENTDEBUFFONHIT_DESC_RISKYMOD": "<style=cIsDamage>100%</style> de chance, ao golpear, de reduzir a <style=cIsDamage>armadura</style> em <style=cIsDamage>1</style> <style=cStack>(+1 por acúmulo)</style> <style=cIsDamage>permanentemente</style>.",
 

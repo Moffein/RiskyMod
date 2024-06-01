@@ -17,6 +17,7 @@ namespace RiskyMod.Items.DLC1.Boss
         public static bool inheritEliteAffix = true;
         public static bool removeAllyScaling = true;
         public static BodyIndex MinorConstructAlly;
+        public static bool weakToMithrix = true;
 
         public static SpawnCard MinorConstructOnKillCard = Addressables.LoadAssetAsync<SpawnCard>("RoR2/DLC1/MajorAndMinorConstruct/cscMinorConstructOnKill.asset").WaitForCompletion();
         public static GameObject SpawnEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MajorAndMinorConstruct/OmniExplosionVFXMinorConstruct.prefab").WaitForCompletion();
@@ -28,6 +29,17 @@ namespace RiskyMod.Items.DLC1.Boss
             {
                 HandleAllyScalingVanilla();
                 return;
+            }
+            On.RoR2.BodyCatalog.Init += (orig) =>
+            {
+                orig();
+                DefenseNucleus.MinorConstructAlly = BodyCatalog.FindBodyIndex("MinorConstructAllyBody");
+                if (enabled) SharedHooks.TakeDamage.distractOnHitBodies.Add(DefenseNucleus.MinorConstructAlly);
+            };
+
+            if (weakToMithrix)
+            {
+                SharedHooks.TakeDamage.ModifyInitialDamageActions += WeakToMithrixHook;
             }
 
             if (removeAllyScaling)
@@ -86,8 +98,8 @@ namespace RiskyMod.Items.DLC1.Boss
                                 //Master already gets nullchecked in the original method
                                 if (ownerBody && ownerBody.master && ownerBody.master.inventory)
                                 {
-                                    int stackCount = ownerBody.master.inventory.GetItemCount(DLC1Content.Items.MinorConstructOnKill) - 1;
-                                    if (stackCount > 0)
+                                    int itemCount = ownerBody.master.inventory.GetItemCount(DLC1Content.Items.MinorConstructOnKill);
+                                    if (itemCount > 0)
                                     {
                                         directorSpawnRequest.onSpawnedServer = (Action<SpawnCard.SpawnResult>)Delegate.Combine(directorSpawnRequest.onSpawnedServer, new Action<SpawnCard.SpawnResult>(delegate (SpawnCard.SpawnResult spawnResult)
                                         {
@@ -95,7 +107,7 @@ namespace RiskyMod.Items.DLC1.Boss
                                             {
                                                 Inventory allyInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
 
-                                                if (allyInv && stackCount > 0)
+                                                if (allyInv)
                                                 {
                                                     if (allyInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) allyInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
 
@@ -108,10 +120,16 @@ namespace RiskyMod.Items.DLC1.Boss
                                                     }
                                                     allyInv.GiveItem(RoR2Content.Items.HealthDecay, 40);
 
-                                                    if (removeAllyScaling)
+                                                    allyInv.RemoveItem(RoR2Content.Items.BoostDamage, allyInv.GetItemCount(RoR2Content.Items.BoostDamage));
+                                                    allyInv.RemoveItem(RoR2Content.Items.BoostHp, allyInv.GetItemCount(RoR2Content.Items.BoostHp));
+
+                                                    allyInv.GiveItem(RoR2Content.Items.BoostDamage, 30);
+                                                    allyInv.GiveItem(RoR2Content.Items.BoostHp, 30);
+                                                    int stackCount = itemCount - 1;
+                                                    if (removeAllyScaling && stackCount > 0)
                                                     {
-                                                        allyInv.GiveItem(RoR2Content.Items.BoostDamage, 15 * stackCount);
-                                                        allyInv.GiveItem(RoR2Content.Items.BoostHp, 15 * stackCount);
+                                                        allyInv.GiveItem(RoR2Content.Items.BoostDamage, 20 * stackCount);
+                                                        allyInv.GiveItem(RoR2Content.Items.BoostHp, 20 * stackCount);
                                                     }
                                                 }
                                             }
@@ -130,6 +148,7 @@ namespace RiskyMod.Items.DLC1.Boss
                 };
             }
         }
+
         private static void ModifyItem()
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, DLC1Content.Items.MinorConstructOnKill);
@@ -182,14 +201,19 @@ namespace RiskyMod.Items.DLC1.Boss
                                 }
                                 allyInv.GiveItem(RoR2Content.Items.HealthDecay, 40);
 
+
+                                allyInv.RemoveItem(RoR2Content.Items.BoostDamage, allyInv.GetItemCount(RoR2Content.Items.BoostDamage));
+                                allyInv.RemoveItem(RoR2Content.Items.BoostHp, allyInv.GetItemCount(RoR2Content.Items.BoostHp));
+
+                                allyInv.GiveItem(RoR2Content.Items.BoostDamage, 30);
+                                allyInv.GiveItem(RoR2Content.Items.BoostHp, 30);
                                 if (removeAllyScaling)
                                 {
                                     int stackCount = itemCount - 1;
                                     if (stackCount > 0)
                                     {
-                                        //20 on first stack because it includes your initial 100% base damage/HP
-                                        allyInv.GiveItem(RoR2Content.Items.BoostDamage, 20 + 15 * stackCount);
-                                        allyInv.GiveItem(RoR2Content.Items.BoostHp, 20 + 15 * stackCount);
+                                        allyInv.GiveItem(RoR2Content.Items.BoostDamage, 20 * stackCount);
+                                        allyInv.GiveItem(RoR2Content.Items.BoostHp, 20 * stackCount);
                                     }
                                 }
 
@@ -223,15 +247,18 @@ namespace RiskyMod.Items.DLC1.Boss
             }
         }
 
+        private void WeakToMithrixHook(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
+        {
+            if (self.body.bodyIndex == MinorConstructAlly
+                && (attackerBody.bodyIndex == Enemies.Mithrix.MithrixCore.brotherBodyIndex
+                || attackerBody.bodyIndex == Enemies.Mithrix.MithrixCore.brotherHurtBodyIndex))
+            {
+                damageInfo.damage *= 2f;
+            }
+        }
+
         private void HandleAllyScalingVanilla()
         {
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-                DefenseNucleus.MinorConstructAlly = BodyCatalog.FindBodyIndex("MinorConstructAllyBody");
-                if (enabled) SharedHooks.TakeDamage.distractOnHitBodies.Add(DefenseNucleus.MinorConstructAlly);
-            };
-
             On.RoR2.CharacterBody.Start += (orig, self) =>
             {
                 orig(self);

@@ -155,7 +155,7 @@
 	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "击落附近投射物。充能速率与你拥有的无人机数量有关。",
 	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "每隔<style=cIsDamage>0.5秒</style>击落<style=cIsDamage>20米</style>内的<style=cIsDamage>1枚</style><style=cStack>（每层增加1）</style>投射物。<style=cIsUtility>充能速率与你拥有的无人机数量有关</style>。",
 	
-	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "击败精英怪会生成一个<style=cIsDamage>阿尔法结构体</style>具有<style=cIsHealing>300%<style=cStack>（每层增加150%）</style>生命值</style>和<style=cIsDamage>300%<style=cStack>（每层增加150%）的</style>伤害</style>并<style=cIsUtility>分散</style>附近敌人的注意力。最多生成<style=cIsUtility>4个</style>。",
+	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "击败精英怪会生成一个<style=cIsDamage>阿尔法结构体</style>具有<style=cIsHealing>400%<style=cStack>（每层增加200%）</style>生命值</style>和<style=cIsDamage>400%<style=cStack>（每层增加200%）的</style>伤害</style>并<style=cIsUtility>分散</style>附近敌人的注意力。最多生成<style=cIsUtility>4个</style>。",
 	
 	"ITEM_PERMANENTDEBUFFONHIT_DESC_RISKYMOD": "命中时有<style=cIsDamage>100%</style>的几率使<style=cIsDamage>护甲</style><style=cIsDamage>永久</style>降低<style=cIsDamage>1</style><style=cStack>（每层增加1）点</style>。",
 	
