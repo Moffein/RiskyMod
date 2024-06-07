@@ -239,7 +239,7 @@ namespace RiskyMod
             CheaperRepairs.enabled = GeneralCfg.Bind(allyString, "Cheaper Drone Repairs", true, "Repairing drones is cheaper.").Value;
             AlliesCore.changeScaling = GeneralCfg.Bind(allyString, "Scaling Changes", false, "Ally HP and Damage scales so that they always perform the same on every stage.").Value;
             AlliesCore.buffRegen = GeneralCfg.Bind(allyString, "Regen Changes", true, "Most allies regen to full HP in a fixed amount of time.").Value;
-            AlliesCore.droneMeldRegen = GeneralCfg.Bind(allyString, "Regen Changes - DroneMeld Mod Compatibility", true, "Scale regen with DroneMeld stacks (or any mod that modifies minion HP or lets them gain items).").Value;
+            AlliesCore.droneMeldRegen = GeneralCfg.Bind(allyString, "Regen Changes - DroneMeld Mod Compatibility", false, "Scale regen with DroneMeld stacks (or any mod that modifies minion HP or lets them gain items).").Value;
 
             AlliesCore.ChenChillDroneCompat = GeneralCfg.Bind(allyString, "Compatibility - Chill Drone", true, "Enables ally changes on allies from this mod.").Value;
             AlliesCore.ChenQbDroneCompat = GeneralCfg.Bind(allyString, "Compatibility - Qb Drone", true, "Enables ally changes on allies from this mod.").Value;

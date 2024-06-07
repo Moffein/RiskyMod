@@ -14,7 +14,6 @@ namespace RiskyMod
 {
     public class AssistManager : MonoBehaviour
     {
-        public static bool initialized = false;
         public static float assistLength = 3f;
         public static float directAssistLength = 1.2f;
         private List<Assist> pendingAssists;

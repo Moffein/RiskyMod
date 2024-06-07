@@ -51,7 +51,7 @@
 	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Causa <style=cIsDamage>+30%</style> <style=cStack>(+30% por acúmulo)</style> de dano a inimigos abaixo de <style=cIsDamage>50% de saúde</style>.",
 	
 	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "Entre em frenesi após abater inimigos. Máximo de 3 vezes.",
-	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Abater inimigos</style> faz você entrar em <style=cIsDamage>frenesi</style> por <style=cIsDamage>4 s</style>, aumentando a <style=cIsUtility>velocidade de movimento</style> e a <style=cIsDamage> velocidade de ataque</style> em <style=cIsDamage>12%</style> para cada inimigo abatido. Bônus máximo de <style=cIsDamage>3 <style=cStack>(+2 por acúmulo)</style></style>.",
+	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Abater inimigos</style> faz você entrar em <style=cIsDamage>frenesi</style> por <style=cIsDamage>6 s</style>, aumentando a <style=cIsUtility>velocidade de movimento</style> e a <style=cIsDamage> velocidade de ataque</style> em <style=cIsDamage>15%</style> para cada inimigo abatido. Bônus máximo de <style=cIsDamage>3 <style=cStack>(+2 por acúmulo)</style></style>.",
 
 	"ITEM_HEALONCRIT_PICKUP_RISKYMOD": "Ganhe regeneração de saúde e chance de \'Acerto Crítico\' ao abater. Máximo de 3 vezes.",
 	"ITEM_HEALONCRIT_DESC_RISKYMOD": "Receba <style=cIsDamage>5% de Chance de Crítico</style>. Abater inimigos garante <style=cIsDamage>10% de \'Chance de Crítico\' </style> e aumenta a <style=cIsHealing>regeneração de vida base</style> em <style=cIsHealing>5 PV/s</style> por <style=cIsDamage>4 s</style>. Bônus máximo de <style=cIsDamage>3 <style=cStack>(+2 por acúmulo)</style></style>.",

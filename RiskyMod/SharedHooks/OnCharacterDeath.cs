@@ -43,7 +43,7 @@ namespace RiskyMod.SharedHooks
                         {
 							OnCharacterDeathInventoryActions.Invoke(self, damageReport, attackerBody, attackerInventory, victimBody);
 						}
-						if (AssistManager.initialized && RiskyMod.assistManager)
+						if (RiskyMod.assistManager)
 						{
 							//On-death is handled by assist manager to prevent having a bunch of duplicated code.
 							//Need to add an assist here since it's called before OnHitEnemy.

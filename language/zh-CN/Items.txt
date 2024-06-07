@@ -90,7 +90,7 @@
 	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "对<style=cIsDamage>生命值低于50%</style>的敌人造成<style=cIsDamage>额外30%</style><style=cStack>（每层增加30%）的伤害。",
 	
 	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "击败敌人即可进入狂热状态。最多叠加3层。",
-	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>击败敌人</style>会使你进入<style=cIsDamage>狂热</style>状态，持续<style=cIsDamage>4秒</style>。每击败一名敌人可使<style=cIsUtility>移动速度</style>和<style=cIsDamage>攻击速度</style>均提高<style=cIsUtility>12%</style>。最高可叠加<style=cIsDamage>3<style=cStack>（每层增加2）</style></style> 个增益效果。",
+	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>击败敌人</style>会使你进入<style=cIsDamage>狂热</style>状态，持续<style=cIsDamage>6秒</style>。每击败一名敌人可使<style=cIsUtility>移动速度</style>和<style=cIsDamage>攻击速度</style>均提高<style=cIsUtility>15%</style>。最高可叠加<style=cIsDamage>3<style=cStack>（每层增加2）</style></style> 个增益效果。",
 	
 	"ITEM_HEALONCRIT_PICKUP_RISKYMOD": "击败敌人可增加生命值恢复与暴击几率。最多叠加3层。",
 	"ITEM_HEALONCRIT_DESC_RISKYMOD": "获得<style=cIsDamage>5%的暴击几率</style>，击败敌人会给予你<style=cIsDamage>10%的暴击几率</style>还会使<style=cIsHealing>生命值恢复</style>增加<style=cIsHealing>5 hp/s</style>并持续<style=cIsHealing>4秒</style>。最高可叠加<style=cIsDamage>3</style><style=cStack>（每层增加2）</style></style>个增益效果。",

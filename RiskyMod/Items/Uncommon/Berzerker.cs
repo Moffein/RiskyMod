@@ -77,8 +77,8 @@ namespace RiskyMod.Items.Uncommon
             int berzerkCount = sender.GetBuffCount(Berzerker.berzerkBuff);
             if (berzerkCount > 0)
             {
-                args.moveSpeedMultAdd += 0.12f * berzerkCount;
-                args.attackSpeedMultAdd += 0.12f * berzerkCount;
+                args.moveSpeedMultAdd += 0.15f * berzerkCount;
+                args.attackSpeedMultAdd += 0.15f * berzerkCount;
             }
         }
 
@@ -94,7 +94,7 @@ namespace RiskyMod.Items.Uncommon
                 attackerBody.ClearTimedBuffs(Berzerker.berzerkBuff);
                 for (int i = 0; i < desiredStacks; i++)
                 {
-                    attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 4f);
+                    attackerBody.AddTimedBuff(Berzerker.berzerkBuff, 6f);
                 }
             }
         }
