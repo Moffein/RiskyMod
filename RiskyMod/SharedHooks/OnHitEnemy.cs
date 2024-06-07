@@ -25,7 +25,7 @@ namespace RiskyMod.SharedHooks
 			Inventory attackerInventory = null;
 
 			bool validDamage = NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected;
-			bool assistsEnabled = AssistManager.initialized && RiskyMod.assistManager;
+			bool assistsEnabled = RiskyMod.assistManager != null;
 
 			if (validDamage)
 			{
