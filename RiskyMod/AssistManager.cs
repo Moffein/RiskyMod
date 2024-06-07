@@ -101,6 +101,10 @@ namespace RiskyMod
                         {
                             HandleAssistInventoryActions(a.attackerBody, attackerInventory, victimBody, killerBody);
                         }
+
+                        //Handle Multikill
+                        //If AttackerBody matches DamageInfo, just let Vanilla code run instead.
+                        if (a.attackerBody.gameObject != damageInfo.attacker) a.attackerBody.AddMultiKill(1);
                     }
                     pendingAssists.Remove(a);
                 }
