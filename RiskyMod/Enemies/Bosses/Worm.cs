@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using RoR2.Projectile;
 using static RoR2.HurtBox;
+using System.Linq;
 
 namespace RiskyMod.Enemies.Bosses
 {
@@ -100,12 +101,15 @@ namespace RiskyMod.Enemies.Bosses
             HurtBoxGroup hbg = ml.modelTransform.gameObject.GetComponent<HurtBoxGroup>();
             if (!hbg) return;
 
-            foreach (HurtBox hb in hbg.hurtBoxes)
+            var allHurtboxes = ml.modelTransform.gameObject.GetComponentsInChildren<HurtBox>();
+
+            foreach (HurtBox hb in allHurtboxes)
             {
-                if (hb.name == "EyeHurtbox")
+                if (!hbg.hurtBoxes.Contains(hb))
                 {
-                    hb.isSniperTarget = true;
-                    hb.damageModifier = DamageModifier.SniperTarget;
+                    var list = hbg.hurtBoxes.ToList();
+                    list.Add(hb);
+                    hbg.hurtBoxes = list.ToArray();
                 }
             }
         }
