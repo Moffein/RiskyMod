@@ -94,7 +94,7 @@
 	
 	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Golpes que causam <style=cIsDamage>mais de 400% de dano</style> também disparam um buraco negro que <style=cIsUtility>atrai inimigos a até 15 m para o centro dele</style>. Dura <style=cIsUtility>5</style> segundos antes de se desfazer, causando <style=cIsDamage>200%</style> <style=cStack>(+120% por acúmulo)</style> de dano TOTAL. Recarrega a cada <style=cIsUtility>15</style> segundos. <style=cIsVoid>Corrompe todos os Cinturões de Kjaro e Runald</style>.",
 	
-	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Abater um inimigo aumenta a <style=cIsUtility>velocidade de movimento</style> em <style=cIsUtility>125%</style>, que se esvai em <style=cIsUtility>1</style> <style=cStack>(+1 por acúmulo)</style> segundo. <style=cIsDamage>Abates consecutivos aumentam a duração do bônus</style> até um máximo de 25 segundos.",
+	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Abater um inimigo aumenta a <style=cIsUtility>velocidade de movimento</style> em <style=cIsUtility>125%</style>, que se esvai em <style=cIsUtility>1.5</style> <style=cStack>(+1 por acúmulo)</style> segundos. <style=cIsDamage>Abates consecutivos aumentam a duração do bônus</style> até um máximo de 25 segundos.",
 	
 	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Aumenta a <style=cIsUtility>velocidade de movimento</style> em <style=cIsUtility>10%</style> <style=cStack>(+10% por acúmulo)</style>. Sair de combate concede um bônus de <style=cIsUtility>30%</style> de <style=cIsUtility>velocidade de movimento</style> <style=cStack>(+30% por acúmulo)</style>.",
 

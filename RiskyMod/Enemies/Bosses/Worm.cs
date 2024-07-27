@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using RoR2.Projectile;
+using static RoR2.HurtBox;
 
 namespace RiskyMod.Enemies.Bosses
 {
@@ -34,8 +35,15 @@ namespace RiskyMod.Enemies.Bosses
 
             //ProjectileSetup();
             //AlwaysFireMeatballs(); //Laggy
-            ReduceFollowDelay(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MagmaWorm/MagmaWormBody.prefab").WaitForCompletion());
-            ReduceFollowDelay(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ElectricWorm/ElectricWormBody.prefab").WaitForCompletion());
+
+            GameObject magmaWorm = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MagmaWorm/MagmaWormBody.prefab").WaitForCompletion();
+            GameObject electricWorm = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ElectricWorm/ElectricWormBody.prefab").WaitForCompletion();
+
+            FixHitbox(magmaWorm);
+            FixHitbox(electricWorm);
+
+            ReduceFollowDelay(magmaWorm);
+            ReduceFollowDelay(electricWorm);
         }
 
         //This causes the ground to constantly be filled with fire. Might not be suitable.
@@ -81,6 +89,24 @@ namespace RiskyMod.Enemies.Bosses
             {
                 //Debug.Log("Follow Delay: " + wbp.followDelay);
                 wbp.followDelay = 0.1f;
+            }
+        }
+
+        private void FixHitbox(GameObject bodyPrefab)
+        {
+            ModelLocator ml = bodyPrefab.GetComponent<ModelLocator>();
+            if (!ml || !ml.modelTransform || !ml.modelTransform.gameObject) return;
+
+            HurtBoxGroup hbg = ml.modelTransform.gameObject.GetComponent<HurtBoxGroup>();
+            if (!hbg) return;
+
+            foreach (HurtBox hb in hbg.hurtBoxes)
+            {
+                if (hb.name == "EyeHurtbox")
+                {
+                    hb.isSniperTarget = true;
+                    hb.damageModifier = DamageModifier.SniperTarget;
+                }
             }
         }
     }

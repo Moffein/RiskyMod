@@ -65,7 +65,7 @@ namespace RiskyMod.Items.DLC1.Uncommon
                 int buffsToGive = itemCount;
                 int currentBuffs = attackerBody.GetBuffCount(Harpoon.ReturnsHarpoonBuff);
 
-                SneedUtils.SneedUtils.AddCooldownBuff(attackerBody, Harpoon.ReturnsHarpoonBuff, Mathf.Min(25, buffsToGive + currentBuffs));
+                SneedUtils.SneedUtils.AddCooldownBuff(attackerBody, Harpoon.ReturnsHarpoonBuff, Mathf.Min(25, buffsToGive + currentBuffs), 0.5f);
 
                 /*int stack = itemCount - 1;
                 int num6 = 5;

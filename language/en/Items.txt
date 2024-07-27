@@ -94,7 +94,7 @@
 	
 	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Hits that deal <style=cIsDamage>more than 400% damage</style> also fire a black hole that <style=cIsUtility>draws enemies within 15m into its center</style>. Lasts <style=cIsUtility>5</style> seconds before collapsing, dealing <style=cIsDamage>200%</style> <style=cStack>(+120% per stack)</style> TOTAL damage. Recharges every <style=cIsUtility>15</style> seconds.",
 	
-	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Killing an enemy increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>125%</style> for <style=cIsUtility>1</style> <style=cStack>(+1 per stack)</style> second. <style=cIsDamage>Consecutive kills increase buff duration</style> for up to 25 seconds.",
+	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Killing an enemy increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>125%</style> for <style=cIsUtility>1.5</style> <style=cStack>(+1 per stack)</style> seconds. <style=cIsDamage>Consecutive kills increase buff duration</style> for up to 25 seconds.",
 	
 	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>10%</style> <style=cStack>(+10% per stack)</style>. Leaving combat boosts your <style=cIsUtility>movement speed</style> by an additional <style=cIsUtility>30%</style> <style=cStack>(+30% per stack)</style>.",
 	

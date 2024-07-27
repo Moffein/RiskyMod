@@ -20,12 +20,12 @@ namespace SneedUtils
             BasicMonsters, Minibosses, Champions
         }
 
-        public static void AddCooldownBuff(CharacterBody body, BuffDef buff, int cooldown)
+        public static void AddCooldownBuff(CharacterBody body, BuffDef buff, int cooldown, float bonusDuration = 0f)
         {
             body.ClearTimedBuffs(buff);
             for (int i = 0; i < cooldown; i++)
             {
-                body.AddTimedBuff(buff, i + 1f);
+                body.AddTimedBuff(buff, i + 1f + bonusDuration);
             }
         }
 
