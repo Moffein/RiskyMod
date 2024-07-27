@@ -42,6 +42,7 @@ using RiskyMod.Enemies.DLC1.Voidling;
 namespace RiskyMod
 {
     #region softdependencies
+    [BepInDependency("com.Nuxlar.DetectionFix", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency(".AVFX_Options..", BepInDependency.DependencyFlags.SoftDependency)]    //Does this softdependency actually work? (since RiskyMod clones the projectiles)
     [BepInDependency("com.PlasmaCore.StickyStunter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.MobileTurretBuff", BepInDependency.DependencyFlags.SoftDependency)]
@@ -297,6 +298,10 @@ namespace RiskyMod
             Moon.ModifyHoldout.enabled = Moon.ModifyHoldout.enabled && !teleExpansionLoaded;
 
             Sacrifice.enabled = Sacrifice.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.SacrificeTweaks");
+
+            bool detectionFixLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Nuxlar.DetectionFix");
+            if (detectionFixLoaded && DetectionFix.enabled) Debug.Log("RiskyMod: Disabling Enemies.DetectionFix because DetectionFix is loaded.");
+            DetectionFix.enabled = DetectionFix.enabled && !detectionFixLoaded;
 
             //Artificer
             bool artiM1ReloadLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.ArtificerM1Reload");
