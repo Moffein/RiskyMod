@@ -36,7 +36,10 @@ namespace RiskyMod.Items.Uncommon
                     bool isPrimary = self.characterBody.skillLocator && self == self.characterBody.skillLocator.primary;
                     bool isToolbotAkimbo = (ToolbotCore.enablePowerModeChanges && self.characterBody.HasBuff(ToolbotCore.PowerModeBuff)) || (!ToolbotCore.enablePowerModeChanges && self.characterBody.HasBuff(RoR2Content.Buffs.SmallArmorBoost));
                     isToolbotAkimbo = isToolbotAkimbo && self.skillName == "StunDrone";
-                    if (isPrimary || isToolbotAkimbo)
+
+                    bool isContextualOverride = self.HasSkillOverrideOfPriority(GenericSkill.SkillOverridePriority.Contextual);
+
+                    if ((isPrimary && !isContextualOverride) || isToolbotAkimbo)
                     {
                         self.Reset();
                     }
