@@ -37,9 +37,8 @@
 	
 	"ITEM_EXPLODEONDEATH_DESC_RISKYMOD": "击败一名敌人后，召唤一道<style=cIsDamage>岩浆柱</style>对<style=cIsDamage>16米</style>内的敌人造成<style=cIsDamage>350%</style><style=cStack>（每层增加280%）</style>的基础伤害。",
 	
-	"ITEM_SQUIDTURRET_PICKUP_RISKYMOD": "受到大量伤害时会召唤乌贼机枪塔。",{
-	strings:
-	{
+	"ITEM_SQUIDTURRET_PICKUP_RISKYMOD": "受到大量伤害时会召唤乌贼机枪塔。",
+
 	"ITEM_FLATHEALTH_PICKUP_RISKYMOD": "增加最大生命值。",
 	"ITEM_FLATHEALTH_DESC_RISKYMOD": "<style=cIsHealing>最大生命值</style>随等级增加<style=cIsHealing>1</style><style=cStack>（每层增加1）</style>。",
 	
@@ -87,19 +86,19 @@
 	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>护甲提高</style><style=cIsHealing>10点</style><style=cStack>（每层增加10）</style>。<style=cIsUtility>奔跑时</style>护甲额外提高<style=cIsHealing>10点</style> <style=cStack>（每层增加10）</style>。",
 	
 	"ITEM_EXECUTELOWHEALTHELITE_PICKUP_RISKYMOD": "对生命值低于50%的敌人造成额外伤害。",
-	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "对<style=cIsDamage>生命值低于50%</style>的敌人造成<style=cIsDamage>额外30%</style><style=cStack>（每层增加30%）的伤害。",
+	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "对<style=cIsDamage>生命值低于50%</style>的敌人造成<style=cIsDamage>额外30%</style><style=cStack>（每层增加30%）</style>的伤害。",
 	
 	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "击败敌人即可进入狂热状态。最多叠加3层。",
-	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>击败敌人</style>会使你进入<style=cIsDamage>狂热</style>状态，持续<style=cIsDamage>6秒</style>。每击败一名敌人可使<style=cIsUtility>移动速度</style>和<style=cIsDamage>攻击速度</style>均提高<style=cIsUtility>15%</style>。最高可叠加<style=cIsDamage>3<style=cStack>（每层增加2）</style></style> 个增益效果。",
+	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>击败敌人</style>会使你进入<style=cIsDamage>狂热</style>状态，持续<style=cIsDamage>6秒</style>。每击败一名敌人可使<style=cIsUtility>移动速度</style>和<style=cIsDamage>攻击速度</style>均提高<style=cIsUtility>15%</style>。最高可叠加<style=cIsDamage>3</style><style=cStack>（每层增加2）</style> 个增益效果。",
 	
 	"ITEM_HEALONCRIT_PICKUP_RISKYMOD": "击败敌人可增加生命值恢复与暴击几率。最多叠加3层。",
 	"ITEM_HEALONCRIT_DESC_RISKYMOD": "获得<style=cIsDamage>5%的暴击几率</style>，击败敌人会给予你<style=cIsDamage>10%的暴击几率</style>还会使<style=cIsHealing>生命值恢复</style>增加<style=cIsHealing>5 hp/s</style>并持续<style=cIsHealing>4秒</style>。最高可叠加<style=cIsDamage>3</style><style=cStack>（每层增加2）</style></style>个增益效果。",
 	
 	"ITEM_ENERGIZEDONEQUIPMENTUSE_PICKUP_RISKYMOD": "激活装备使你获得移动和攻击速度加成。",
-	"ITEM_ENERGIZEDONEQUIPMENTUSE_DESC_RISKYMOD": "激活装备可使你获得<style=cIsUtility>50%移动速度加成</style>和<style=cIsDamage>70%攻击速度加成</style>，持续<style=cIsDamage>8秒</style><style=cStack>（每层增加4）。",
+	"ITEM_ENERGIZEDONEQUIPMENTUSE_DESC_RISKYMOD": "激活装备可使你获得<style=cIsUtility>50%移动速度加成</style>和<style=cIsDamage>70%攻击速度加成</style>，持续<style=cIsDamage>8秒</style><style=cStack>（每层增加4）</style>。",
 	
 	"ITEM_INFUSION_PICKUP_RISKYMOD": "击败敌人可永久性增加最大生命值。",
-	"ITEM_INFUSION_DESC_RISKYMOD": "每击败一名敌人，即可<style=cIsHealing>永久性</style>增加<style=cIsHealing>1</style>点生命值<style=cStack>（每层增加1）</style>，从物品中每获得<style=cIsHealing>100点最大生命值</style>会减少从击败敌人中获得的<style=cIsHealth>生命值</style>。",
+	"ITEM_INFUSION_DESC_RISKYMOD": "每击败一名敌人，即可<style=cIsHealing>永久性</style>增加<style=cIsHealing>1</style>点生命值<style=cStack>（每层增加1）</style>，从物品中每获得<style=cIsHealing>100点最大生命值</style>会减少从击败敌人中获得的<style=cIsHealing>生命值</style>。",
 	
 	"ITEM_ICICLE_DESC_RISKYMOD": "使用<style=cIsDamage>寒冰风暴</style>攻击附近的敌人，造成<style=cIsDamage>每秒1200%的伤害</style><style=cStack>（每层增加600%）</style>，并使敌人<style=cIsUtility>减速</style><style=cIsUtility>80%</style>，持续<style=cIsUtility>1.5秒</style>。<style=cIsDamage>每达成一次击败</style>，风暴的半径都会扩大<style=cIsDamage>3米</style>。最大为<style=cIsDamage>24米</style>。",
 	
@@ -173,8 +172,7 @@
 	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "过量治疗会使你获得一道<style=cIsHealing>临时屏障</style>，可阻挡相当于<style=cIsHealing>50%<style=cStack>（每层增加50%）</style></style>已<style=cIsHealing>治疗</style>生命值的伤害。将<style=cIsHealing>屏障减少率</style>除以<style=cIsHealing>2<style=cStack>（每层增加1）</style></style>。",
 
 	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "使基础伤害提高<style=cIsDamage>100%</style><style=cStack>（每层增加100%）</style>，<style=cIsHealing>使最大生命值除以2</style><style=cStack>（每层增加1）</style>。"
-	}
-}
+
 	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "有几率在遭受攻击时召唤一个<style=cIsHealing>100%<style=cStack>（每层增加30%）</style></style>生命值，攻击速度<style=cIsDamage>100%<style=cStack>（每层叠加100%）</style></style>的乌贼机枪塔来吸引周围敌人的仇恨。受到伤害越高几率越大。最多生成3个。",
 	
 	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "有<style=cIsDamage>25%</style>的几率发射<style=cIsDamage>连锁闪电</style>，对<style=cIsDamage>25米</style>内的最多<style=cIsDamage>3个<style=cStack>（每层增加2）</style></style>目标造成<style=cIsDamage>80%</style>的总伤害。",
@@ -185,7 +183,7 @@
 	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>护甲提高</style><style=cIsHealing>10点</style><style=cStack>（每层增加10）</style>。<style=cIsUtility>奔跑时</style>护甲额外提高<style=cIsHealing>10点</style> <style=cStack>（每层增加10）</style>。",
 	
 	"ITEM_EXECUTELOWHEALTHELITE_PICKUP_RISKYMOD": "对生命值低于50%的敌人造成额外伤害。",
-	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "对<style=cIsDamage>生命值低于50%</style>的敌人造成<style=clsDamage>额外30%</style><style=cStack>（每层增加30%）的伤害。",
+	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "对<style=cIsDamage>生命值低于50%</style>的敌人造成<style=cIsDamage>额外30%</style><style=cStack>（每层增加30%）</style>的伤害。",
 	
 	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "击败敌人即可进入狂热状态。最多叠加3层。",
 	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>击败敌人</style>会使你进入<style=cIsDamage>狂热</style>状态，持续<style=cIsDamage>4秒</style>。每击败一名敌人可使<style=cIsUtility>移动速度</style>和<style=cIsDamage>攻击速度</style>均提高<style=cIsUtility>12%</style>。最高可叠加<style=cIsDamage>3<style=cStack>（每层增加2）</style></style> 个增益效果。",
@@ -194,10 +192,10 @@
 	"ITEM_HEALONCRIT_DESC_RISKYMOD": "获得<style=cIsDamage>5%的暴击几率</style>，击败敌人会给予你<style=cIsDamage>10%的暴击几率</style>还会使<style=clsHealing>生命值恢复</style>增加<style=clsHealing>5 hp/s</style>并持续<style=clsHealing>4秒</style>。最高可叠加<style=cIsDamage>3</style><style=cStack>（每层增加2）</style></style>个增益效果。",
 	
 	"ITEM_ENERGIZEDONEQUIPMENTUSE_PICKUP_RISKYMOD": "激活装备使你获得移动和攻击速度加成。",
-	"ITEM_ENERGIZEDONEQUIPMENTUSE_DESC_RISKYMOD": "激活装备可使你获得<style=clsUtility>50%移动速度加成</style>和<style=cIsDamage>70%攻击速度加成</style>，持续<style=cIsDamage>8秒</style><style=cStack>（每层增加4）。",
+	"ITEM_ENERGIZEDONEQUIPMENTUSE_DESC_RISKYMOD": "激活装备可使你获得<style=cIsUtility>50%移动速度加成</style>和<style=cIsDamage>70%攻击速度加成</style>，持续<style=cIsDamage>8秒</style><style=cStack>（每层增加4）</style>。",
 	
 	"ITEM_INFUSION_PICKUP_RISKYMOD": "击败敌人可永久性增加最大生命值。",
-	"ITEM_INFUSION_DESC_RISKYMOD": "每击败一名敌人，即可<style=cIsHealing>永久性</style>增加<style=cIsHealing>1</style>点生命值<style=cStack>（每层增加1）</style>，从物品中每获得<style=clsHealing>100点最大生命值</style>会<style=clsHealth>减少从击败敌人中获得的生命值。",
+	"ITEM_INFUSION_DESC_RISKYMOD": "每击败一名敌人，即可<style=cIsHealing>永久性</style>增加<style=cIsHealing>1</style>点生命值<style=cStack>（每层增加1）</style>，从物品中每获得<style=clsHealing>100点最大生命值</style>会<style=clsHealing>减少从击败敌人中获得的生命值</style>。",
 	
 	"ITEM_ICICLE_DESC_RISKYMOD": "使用<style=cIsDamage>寒冰风暴</style>攻击附近的敌人，造成<style=cIsDamage>每秒1200%的伤害</style><style=cStack>（每层增加600%）</style>，并使敌人<style=cIsUtility>减速</style><style=cIsUtility>80%</style>，持续<style=cIsUtility>1.5秒</style>。<style=cIsDamage>每达成一次击败</style>，风暴的半径都会扩大<style=cIsDamage>3米</style>。最大为<style=cIsDamage>24米</style>。",
 	
