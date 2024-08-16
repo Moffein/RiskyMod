@@ -701,6 +701,24 @@ namespace RiskyMod
             VoidFiendCore.removePrimarySpread = SurvivorCfg.Bind(voidFiendString, "Remove Primary Spread", true, "Remove random spread from Drown.").Value;
 
             ConfigFireSelect();
+
+
+            if (!SurvivorsCore.enabled)
+            {
+                Bandit2Core.enabled = false;
+                CaptainCore.enabled = false;
+                CommandoCore.enabled = false;
+                CrocoCore.enabled = false;
+                RailgunnerCore.enabled = false;
+                VoidFiendCore.enabled = false;
+                EngiCore.enabled = false;
+                HuntressCore.enabled = false;
+                LoaderCore.enabled = false;
+                MageCore.enabled = false;
+                MercCore.enabled = false;
+                ToolbotCore.enabled = false;
+                TreebotCore.enabled = false;
+            }
         }
 
         private static void ConfigMonsters()

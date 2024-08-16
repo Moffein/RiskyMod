@@ -76,7 +76,7 @@ namespace RiskyMod
         public void TriggerAssists(CharacterBody victimBody, CharacterBody killerBody, DamageInfo damageInfo)
         {
             //if (!NetworkServer.active) return; Thing that calls this is already gated behind a network check.
-            if (BanditSpecialGracePeriod.enabled)
+            if (Bandit2Core.enabled && BanditSpecialGracePeriod.enabled)
             {
                 TriggerBanditAssists(victimBody, killerBody, damageInfo);
             }
