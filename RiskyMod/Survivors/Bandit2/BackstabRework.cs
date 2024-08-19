@@ -44,7 +44,7 @@ namespace RiskyMod.Survivors.Bandit2
 
         private static void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (sender.bodyIndex == Bandit2Core.Bandit2Index)
+            if (sender.bodyIndex == Bandit2Core.Bandit2Index && sender.bodyFlags.HasFlag(CharacterBody.BodyFlags.HasBackstabPassive))
             {
                 args.critDamageMultAdd -= 0.5f;
             }
