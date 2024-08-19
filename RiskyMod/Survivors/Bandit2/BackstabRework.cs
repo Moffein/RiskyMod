@@ -26,7 +26,7 @@ namespace RiskyMod.Survivors.Bandit2
                     c.Emit(OpCodes.Ldarg_0); //CharacterBody
                     c.EmitDelegate<Func<int, CharacterBody, int>>((cdCount, self) =>
                     {
-                        if (cdCount < 1 && self.bodyIndex == Bandit2Core.Bandit2Index)
+                        if (cdCount < 1 && self.bodyIndex == Bandit2Core.Bandit2Index && self.bodyFlags.HasFlag(CharacterBody.BodyFlags.HasBackstabPassive))
                         {
                             cdCount = 1;
                         }
