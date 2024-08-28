@@ -409,7 +409,6 @@ namespace RiskyMod
             new FixFocusCrystalSelfDamage();
             new PreventArtifactHeal();
             new TreebotFruitingNullref();
-            new FixLightningStrikeOrbProcCoefficient();
             new FixCrocoPoisonAchievement();
             new FixWormFallDeath();
             new GhostDunestriderFriendlyFire();
