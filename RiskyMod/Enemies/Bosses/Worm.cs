@@ -40,9 +40,6 @@ namespace RiskyMod.Enemies.Bosses
             GameObject magmaWorm = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MagmaWorm/MagmaWormBody.prefab").WaitForCompletion();
             GameObject electricWorm = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ElectricWorm/ElectricWormBody.prefab").WaitForCompletion();
 
-            FixHitbox(magmaWorm);
-            FixHitbox(electricWorm);
-
             ReduceFollowDelay(magmaWorm);
             ReduceFollowDelay(electricWorm);
         }
@@ -90,27 +87,6 @@ namespace RiskyMod.Enemies.Bosses
             {
                 //Debug.Log("Follow Delay: " + wbp.followDelay);
                 wbp.followDelay = 0.1f;
-            }
-        }
-
-        private void FixHitbox(GameObject bodyPrefab)
-        {
-            ModelLocator ml = bodyPrefab.GetComponent<ModelLocator>();
-            if (!ml || !ml.modelTransform || !ml.modelTransform.gameObject) return;
-
-            HurtBoxGroup hbg = ml.modelTransform.gameObject.GetComponent<HurtBoxGroup>();
-            if (!hbg) return;
-
-            var allHurtboxes = ml.modelTransform.gameObject.GetComponentsInChildren<HurtBox>();
-
-            foreach (HurtBox hb in allHurtboxes)
-            {
-                if (!hbg.hurtBoxes.Contains(hb))
-                {
-                    var list = hbg.hurtBoxes.ToList();
-                    list.Add(hb);
-                    hbg.hurtBoxes = list.ToArray();
-                }
             }
         }
     }

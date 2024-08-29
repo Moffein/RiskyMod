@@ -15,7 +15,6 @@ namespace RiskyMod.Survivors.Toolbot
     public class ToolbotCore
     {
         public static bool enabled = true;
-        public static bool enableNailgunChanges = true;
         public static bool enableRebarChanges = true;
         public static bool enableScrapChanges = true;
         public static bool scrapICBM = true;
@@ -60,38 +59,9 @@ namespace RiskyMod.Survivors.Toolbot
 
         private void ModifyPrimaries(SkillLocator sk)
         {
-            NailgunChanges(sk);
             RebarChanges(sk);
             ScrapChanges(sk);
             SawChanges(sk);
-        }
-
-        private void NailgunChanges(SkillLocator sk)
-        {
-            if (!enableNailgunChanges) return;
-
-            SkillDef nailgunDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Toolbot/ToolbotBodyFireNailgun.asset").WaitForCompletion();
-
-            IL.EntityStates.Toolbot.BaseNailgunState.FireBullet += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
-                     x => x.MatchCallvirt<BulletAttack>("Fire")
-                     ))
-                {
-                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
-                    {
-                        bulletAttack.radius = 0.2f;
-                        bulletAttack.smartCollision = true;
-                        return bulletAttack;
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: Toolbot Nailgun IL Hook failed");
-                }
-            };
-            new FixNailgunBurst();
         }
 
         private void RebarChanges(SkillLocator sk)

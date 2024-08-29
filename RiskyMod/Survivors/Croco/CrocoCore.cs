@@ -100,7 +100,6 @@ namespace RiskyMod.Survivors.Croco
             new BlightStack();
             new BiggerMeleeHitbox();
             new BiggerLeapHitbox();
-            new ExtendSpawnInvuln();
             new RemovePoisonDamageCap();
             if (gameplayRework)
             {

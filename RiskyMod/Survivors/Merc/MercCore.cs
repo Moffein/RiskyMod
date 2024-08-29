@@ -13,7 +13,6 @@ namespace RiskyMod.Survivors.Merc
     {
         public static bool enabled = true;
 
-        public static bool evisTargetingFix = true;
         public static bool modifyStats = true;
         public static ConfigEntry<bool> m1ComboFinishTweak;
 
@@ -28,7 +27,6 @@ namespace RiskyMod.Survivors.Merc
         private void ModifySkills(SkillLocator sk)
         {
             ModifyPrimaries(sk);
-            ModifySpecials(sk);
         }
         private void ModifyPrimaries(SkillLocator sk)
         {
@@ -47,49 +45,6 @@ namespace RiskyMod.Survivors.Merc
                 }
                  orig(self);
             };
-        }
-
-        private void ModifySpecials(SkillLocator sk)
-        {
-            if (evisTargetingFix)
-            {
-                IL.EntityStates.Merc.EvisDash.FixedUpdate += (il) =>
-                {
-                    ILCursor c = new ILCursor(il);
-                    if (c.TryGotoNext(MoveType.After,
-                     x => x.MatchCall<Physics>("OverlapSphere")
-                    ))
-                    {
-                        c.Emit(OpCodes.Ldarg_0);//self
-                        c.EmitDelegate<Func<Collider[], EntityStates.Merc.EvisDash, Collider[]>>((colliders, self) =>
-                        {
-                            if (FriendlyFireManager.friendlyFireMode != FriendlyFireManager.FriendlyFireMode.Off) return colliders;
-
-                            //This is inefficient
-                            List<Collider> enemyHurtboxes = new List<Collider>();
-
-                            foreach (Collider cl in colliders)
-                            {
-                                HurtBox hb = cl.GetComponent<HurtBox>();
-                                if (hb && hb.healthComponent != self.healthComponent)
-                                {
-                                    if(hb.teamIndex != self.GetTeam())
-                                    {
-                                        enemyHurtboxes.Add(cl);
-                                    }
-                                }
-                            }
-
-                            //Re-order list so that friendly hurtboxes are at the end
-                            return enemyHurtboxes.ToArray();
-                        });
-                    }
-                    else
-                    {
-                        Debug.LogError("RiskyMod: Merc EvisDash IL Hook failed");
-                    }
-                };
-            }
         }
 
         private void ModifyStats(CharacterBody cb)

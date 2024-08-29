@@ -93,21 +93,6 @@ namespace RiskyMod.Survivors.Huntress
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbDamageCoefficient", "1.2");
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbProcCoefficient", "1");
             }
-
-            //This fixes Flurry losing arrows at high attack speed.
-            On.EntityStates.Huntress.HuntressWeapon.FireSeekingArrow.OnExit += (orig, self) =>
-            {
-                orig(self);
-                if (NetworkServer.active)
-                {
-                    int remainingArrows = self.maxArrowCount - self.firedArrowCount;
-                    for (int i = 0; i < remainingArrows; i++)
-                    {
-                        self.arrowReloadTimer = 0f;
-                        self.FireOrbArrow();
-                    }
-                }
-            };
         }
 
         private void ModifySecondaries(SkillLocator sk)

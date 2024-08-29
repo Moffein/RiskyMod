@@ -12,10 +12,11 @@ namespace RiskyMod.Survivors.DLC1.Railgunner
         public static bool slowFieldChanges = true;
         //public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/RailgunnerBody");
 
+        public static float polarFieldDamageReduction = 0.333333333f;
+
         public RailgunnerCore()
         {
             if (!enabled) return;
-            new FixBungus();
 
             if (slowFieldChanges)
             {
@@ -26,7 +27,7 @@ namespace RiskyMod.Survivors.DLC1.Railgunner
                         ProjectileDamage pd = other.GetComponent<ProjectileDamage>();
                         if (pd)
                         {
-                            pd.damage *= 0.5f;
+                            pd.damage *= polarFieldDamageReduction;
                         }
                     }
                     orig(self, other);
@@ -39,7 +40,7 @@ namespace RiskyMod.Survivors.DLC1.Railgunner
                         ProjectileDamage pd = other.GetComponent<ProjectileDamage>();
                         if (pd && other.GetComponent<ProjectileSimple>())
                         {
-                            pd.damage *= 2f;
+                            pd.damage /= polarFieldDamageReduction;
                         }
                     }
                     orig(self, other);

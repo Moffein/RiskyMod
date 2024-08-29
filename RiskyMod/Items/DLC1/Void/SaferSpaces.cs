@@ -17,7 +17,8 @@ namespace RiskyMod.Items.DLC1.Void
             if (!enabled) return;
 
             ItemsCore.ModifyItemDefActions += ModifyItem;
-            IL.RoR2.HealthComponent.TakeDamage += (il) =>
+            
+            IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
             {
                 bool error = true;
                 ILCursor c = new ILCursor(il);
@@ -38,7 +39,7 @@ namespace RiskyMod.Items.DLC1.Void
                         x => x.MatchLdcR4(15f)
                         ))
                     {
-                        c.Next.Operand = 20f / 0.9f;    //alternative is to do itemcount-1, but I don't want to redo the hook
+                        c.Next.Operand = 20f;   //CD fix is now a part of RiskyFixes
                         error = false;
                     }
                 }

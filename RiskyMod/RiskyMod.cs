@@ -179,8 +179,6 @@ namespace RiskyMod
             SoftDependencies.ZetTweaksLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetTweaks");
             SoftDependencies.AIBlacklistLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AI_Blacklist");
             SoftDependencies.QueensGlandBuffLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.kking117.QueenGlandBuff");
-            FixPlayercount.MultitudesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("dev.wildbook.multitudes");
-            FixPlayercount.ZetArtifactsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TPDespair.ZetArtifacts");
             SoftDependencies.ScepterPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
             SoftDependencies.ClassicItemsScepterLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.ClassicItems");
             SoftDependencies.ShareSuiteLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.funkfrog_sipondo.sharesuite");
@@ -207,10 +205,6 @@ namespace RiskyMod
             if (removeLevelCapPluginLoaded && RemoveLevelCap.enabled) Debug.Log("RiskyMod: Disabling RemoveLevelCap because standalone plugin is loaded.");
             RemoveLevelCap.enabled = RemoveLevelCap.enabled && !removeLevelCapPluginLoaded;
 
-            bool fpcPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.FixPlayercount");
-            if (fpcPluginLoaded && FixPlayercount.enabled) Debug.Log("RiskyMod: Disabling FixPlayercount because standalone plugin is loaded.");
-            FixPlayercount.enabled = FixPlayercount.enabled && !fpcPluginLoaded;
-
             if (SoftDependencies.QueensGlandBuffLoaded && QueensGland.enabled) Debug.Log("RiskyMod: Disabling Queens Gland changes because QueensGlandBuff is loaded.");
 
             bool nvaPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoVoidAllies");
@@ -223,15 +217,6 @@ namespace RiskyMod
                 if (FixVengeanceLeveling.enabled) Debug.Log("RiskyMod: Disabling FixVengeanceLeveling because AI_Blacklist plugin is loaded.");
             }
             FixVengeanceLeveling.enabled = FixVengeanceLeveling.enabled && !SoftDependencies.AIBlacklistLoaded;
-
-            bool pahPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rob.ArtifactReliquaryHealingFix");
-            if (pahPluginLoaded && PreventArtifactHeal.enabled) Debug.Log("RiskyMod: Disabling PreventArtifactHeal because standalone plugin is loaded.");
-            PreventArtifactHeal.enabled = PreventArtifactHeal.enabled && !pahPluginLoaded;
-
-            bool captainHiddenRealmsPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.PlasmaCore.AlwaysAllowSupplyDrops") || BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("Charzard4261.CaptainAbilitiesOffworld");
-            if (captainHiddenRealmsPluginLoaded && CaptainOrbitalHiddenRealms.enabled) Debug.Log("RiskyMod: Disabling CaptainOrbitalHiddenRealms because standalone plugin is loaded.");
-            CaptainOrbitalHiddenRealms.enabled = CaptainOrbitalHiddenRealms.enabled
-                && !captainHiddenRealmsPluginLoaded;
 
             bool hypercritPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.Hypercrit");
             if (hypercritPluginLoaded && CritHud.enabled) Debug.Log("RiskyMod: Disabling Ocular HUD changes because Hypercrit is loaded.");
@@ -259,10 +244,6 @@ namespace RiskyMod
             bool lunarWispFalloffPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.LunarWispFalloff");
             if (lunarWispFalloffPluginLoaded && LunarWisp.enableFalloff) Debug.Log("RiskyMod: Disabling LunarWispFalloff because standalone plugin is loaded.");
             LunarWisp.enableFalloff = LunarWisp.enableFalloff && !lunarWispFalloffPluginLoaded;
-
-            bool enigmaBlacklistPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EnigmaBlacklist");
-            if (enigmaBlacklistPluginLoaded && FixEnigmaBlacklist.enabled) Debug.Log("RiskyMod: Disabling EnigmaBlacklist because standalone plugin is loaded.");
-            FixEnigmaBlacklist.enabled = FixEnigmaBlacklist.enabled && !enigmaBlacklistPluginLoaded;
 
             //Gesture is always disabled by default so this shouldn't matter.
             bool gestureEnigmaPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.GestureEnigma");
@@ -298,15 +279,6 @@ namespace RiskyMod
             Moon.ModifyHoldout.enabled = Moon.ModifyHoldout.enabled && !teleExpansionLoaded;
 
             Sacrifice.enabled = Sacrifice.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.SacrificeTweaks");
-
-            bool detectionFixLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Nuxlar.DetectionFix");
-            if (detectionFixLoaded && DetectionFix.enabled) Debug.Log("RiskyMod: Disabling Enemies.DetectionFix because DetectionFix is loaded.");
-            DetectionFix.enabled = DetectionFix.enabled && !detectionFixLoaded;
-
-            //Artificer
-            bool artiM1ReloadLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.ArtificerM1Reload");
-            if (Survivors.Mage.MageCore.m1AttackSpeed && artiM1ReloadLoaded) Debug.Log("RiskyMod: Disabling Artificer M1 Reload because standalone mod is loaded.");
-            Survivors.Mage.MageCore.m1AttackSpeed = Survivors.Mage.MageCore.m1AttackSpeed && !artiM1ReloadLoaded;
         }
 
         private void CheckArenaLoaded(Stage obj)
@@ -381,7 +353,6 @@ namespace RiskyMod
             new ShieldGating();
             new CloakBuff();
             new Shock();
-            new FixSlayer();
             new BarrierDecay();
             new FreezeChampionExecute();
             new NerfVoidtouched();
@@ -392,7 +363,6 @@ namespace RiskyMod
             new FixVengeanceLeveling();
             new VengeancePercentHeal();
             new VengeanceVoidTeam();
-            new EnigmaBlacklist();
             new BulwarksAmbry();
             new Sacrifice();
             new NoVengeanceFallDamage();
@@ -400,19 +370,11 @@ namespace RiskyMod
             //Misc
             new AIBlacklistItems();
             new BetterProjectileTracking();
-            new ItemOutOfBounds();
         }
 
         private void RunFixes()
         {
-            new FixPlayercount();
-            new FixFocusCrystalSelfDamage();
-            new PreventArtifactHeal();
-            new TreebotFruitingNullref();
             new FixCrocoPoisonAchievement();
-            new FixWormFallDeath();
-            new GhostDunestriderFriendlyFire();
-            new GhostGrandparentFriendlyFire();
         }
         
         private void AddHooks()

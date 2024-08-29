@@ -34,7 +34,6 @@ namespace RiskyMod.Survivors.Captain
             }
 
             new Microbots();
-            new CaptainOrbitalHiddenRealms();
             ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
 
             On.RoR2.EntityStateCatalog.InitializeStateFields += (orig, self) =>

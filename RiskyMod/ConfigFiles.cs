@@ -268,7 +268,6 @@ namespace RiskyMod
             FixVengeanceLeveling.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Fix Levels", true, "Fix Vengeance Doppelgangers not leveling up.").Value;
             VengeancePercentHeal.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Reduce Percent Heals", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
             NoVengeanceFallDamage.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Disable Fall Damage", true, "Vengeance Doppelgangers are immune to fall damage.").Value;
-            EnigmaBlacklist.enabled = GeneralCfg.Bind(artifactString, "Enigma Blacklist", true, "Blacklist Lunars and Recycler from the Artifact of Enigma.").Value;
             Sacrifice.enabled = GeneralCfg.Bind(artifactString, "Sacrifice - No Drop Chance Scaling", true, "Increases drop chance when not using Swarms and prevents drop chance from increasing as the run progresses.").Value;
 
             //Void Fields
@@ -302,14 +301,12 @@ namespace RiskyMod
 
             //Misc
             BetterProjectileTracking.enabled = GeneralCfg.Bind(miscString, "Better Projectile Homing", true, "Homing projectiles target based on angle, instead of distance + angle.").Value;
-            FixSlayer.enabled = GeneralCfg.Bind(miscString, "Fix Slayer Procs", true, "Bandit/Acrid bonus damage to low hp effect now applies to procs.").Value;
             CloakBuff.enabled = GeneralCfg.Bind(miscString, "Cloak Buff", true, "Increases delay between position updates while cloaked.").Value;
             Shock.enabled = GeneralCfg.Bind(miscString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
             FreezeChampionExecute.enabled = GeneralCfg.Bind(miscString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
             FreezeChampionExecute.nerfFreeze = GeneralCfg.Bind(miscString, "Freeze Executes Bosses - Nerf Freeze Globally", false, "Freeze execute threshold is reduced to 15% globally. Requires Freeze Executes Bosses.").Value;
             NerfVoidtouched.enabled = GeneralCfg.Bind(miscString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
             PlayerControlledMonsters.enabled = GeneralCfg.Bind(miscString, "Player-Controlled Monster Tweaks", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
-            ItemOutOfBounds.enabled = GeneralCfg.Bind(miscString, "Item Out of Bounds Teleport", true, "Items that fall out of bounds get teleported back.").Value;
             NullifyDebuff.enabled = GeneralCfg.Bind(miscString, "Nullify Buff", true, "Void Reaver Nullify only takes 2 stacks to apply.").Value;
         }
 
@@ -519,7 +516,6 @@ namespace RiskyMod
         {
             SurvivorCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Survivors.cfg"), true);
             CommandoCore.enabled = SurvivorCfg.Bind(commandoString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            CommandoCore.fixPrimaryFireRate = SurvivorCfg.Bind(commandoString, "Double Tap - Fix Scaling", true, "Fixes Double Tap having a low attack speed cap.").Value;
             CommandoCore.phaseRoundChanges = SurvivorCfg.Bind(commandoString, "Phase Round Changes", true, "Enable changes to this skill.").Value;
             CommandoCore.rollChanges = SurvivorCfg.Bind(commandoString, "Tactical Dive Changes", true, "Enable changes to this skill.").Value;
             CommandoCore.suppressiveChanges = SurvivorCfg.Bind(commandoString, "Suppressive Fire Changes", true, "Enable changes to this skill.").Value;
@@ -537,7 +533,6 @@ namespace RiskyMod
             HuntressCore.ballistaChanges = SurvivorCfg.Bind(huntressString, "Ballista Changes", true, "Enable changes to this skill.").Value;
 
             ToolbotCore.enabled = SurvivorCfg.Bind(toolbotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            ToolbotCore.enableNailgunChanges = SurvivorCfg.Bind(toolbotString, "Nailgun Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.enableRebarChanges = SurvivorCfg.Bind(toolbotString, "Rebar Puncher Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.enableScrapChanges = SurvivorCfg.Bind(toolbotString, "Scrap Launcher Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.scrapICBM = SurvivorCfg.Bind(toolbotString, "Scrap Launcher ICBM", true, "Scrap Launcher benefits from Pocket ICBM if Scrap Launcher Changes are enabled.").Value;
@@ -557,7 +552,6 @@ namespace RiskyMod
             TurretChanges.mobileTurretChanges = SurvivorCfg.Bind(engiString, "Mobile Turret Changes", true, "Enable changes to Mobile Turrets.").Value;
 
             MageCore.enabled = SurvivorCfg.Bind(mageString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            MageCore.m1AttackSpeed = SurvivorCfg.Bind(mageString, "Primary Attack Speed Scaling", true, "Artificer's primary reload scales with attack speed instead of cooldown.").Value;
             MageCore.modifyFireBolt = SurvivorCfg.Bind(mageString, "Fire Bolt Changes", true, "Enable changes to this skill.").Value;
             MageCore.modifyPlasmaBolt = SurvivorCfg.Bind(mageString, "Plasma Bolt Changes", true, "Enable changes to this skill.").Value;
             MageCore.m2RemoveNanobombGravity = SurvivorCfg.Bind(mageString, "Nanobomb - Remove Gravity", true, "Removes projectile drop from Nanobomb so it behaves like it did pre-1.0 update.").Value;
@@ -582,7 +576,6 @@ namespace RiskyMod
 
             MercCore.enabled = SurvivorCfg.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             MercCore.modifyStats = SurvivorCfg.Bind(mercString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
-            MercCore.evisTargetingFix = SurvivorCfg.Bind(mercString, "Eviscerate Targeting Fix", true, "Makes Eviscerate less likely to target teammates.").Value;
             //Should change the name of this to remove (Client-Side), but I don't want to mess with peoples' configs at this point.
             MercCore.m1ComboFinishTweak = SurvivorCfg.Bind(mercString, "M1 Attack Speed Tweak (Client-Side)", true, "(Client-Side) Makes the 3rd hit of Merc's M1 be unaffected by attack speed for use with combo tech.");
 
@@ -618,7 +611,6 @@ namespace RiskyMod
             }
 
             CaptainCore.enabled = SurvivorCfg.Bind(captainString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            CaptainOrbitalHiddenRealms.enabled = SurvivorCfg.Bind(captainString, "Hidden Realm Orbital Skills", true, "Allow Orbital skills in Hiden Realms.").Value;
             Microbots.deletionRestrictions = SurvivorCfg.Bind(captainString, "Defensive Microbots Nerf", true, "Defensive Microbots no longer deletes stationary projectiles like gas clouds and Void Reaver mortars.").Value;
             Microbots.droneScaling = SurvivorCfg.Bind(captainString, "Defensive Microbots Drone Scaling", true, "Defensive Microbots scale with drone count instead of attack speed.").Value;
             CaptainCore.enablePrimarySkillChanges = SurvivorCfg.Bind(captainString, "Enable Primary Skill Changes", true, "Enable primary skill changes for this survivor.").Value;
@@ -684,7 +676,6 @@ namespace RiskyMod
             Bandit2Core.specialRework = SurvivorCfg.Bind(banditString, "Special Rework", true, "Makes Resets/Desperado a selectable passive and adds a new Special skill.").Value;
 
             RailgunnerCore.enabled = SurvivorCfg.Bind(railgunnerString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            Survivors.DLC1.Railgunner.FixBungus.enabled = SurvivorCfg.Bind(railgunnerString, "Fix Bungus", true, "Removes self knockback force when on the ground.").Value;
             RailgunnerCore.slowFieldChanges = SurvivorCfg.Bind(railgunnerString, "Polar Field Device Changes", true, "Enable changes to this skill.").Value;
 
             VoidFiendCore.enabled = SurvivorCfg.Bind(voidFiendString, "Enable Changes", true, "Enable changes to this survivor.").Value;
@@ -725,7 +716,6 @@ namespace RiskyMod
         {
             MonsterCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Monsters.cfg"), true);
 
-            DetectionFix.enabled = MonsterCfg.Bind(monsterGeneralString, "Detection Fix", true, "Fixes negative detection range bug with AI.").Value;
             AiTargetFinding.enabled = MonsterCfg.Bind(monsterGeneralString, "AI Targetfinding Tweaks", true, "Enables fullvision and disables LoS checks for AI.").Value;
             EnemiesCore.infernoCompat = MonsterCfg.Bind("Compatibility", "Inferno Compatibility", true, "Disable certain changes that may conflict with Inferno.").Value;
 

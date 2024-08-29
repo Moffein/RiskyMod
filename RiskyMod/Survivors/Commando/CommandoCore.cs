@@ -19,7 +19,6 @@ namespace RiskyMod.Survivors.Commando
     public class CommandoCore
     {
         public static bool enabled = true;
-        public static bool fixPrimaryFireRate = true;
 
         public static bool phaseRoundChanges = true;
 
@@ -41,35 +40,9 @@ namespace RiskyMod.Survivors.Commando
 
         private void ModifySkills(SkillLocator sk)
         {
-            ModifyPrimaries(sk);
             ModifySecondaries(sk);
             ModifyUtilities(sk);
             ModifySpecials(sk);
-        }
-
-        private void ModifyPrimaries(SkillLocator sk)
-        {
-            if (!fixPrimaryFireRate) return;
-
-            //Removes the reload state completely since this messes with attack speed lategame.
-            IL.EntityStates.Commando.CommandoWeapon.FirePistol2.FixedUpdate += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
-                     x => x.MatchLdcI4(0)
-                    ))
-                {
-                    c.Index++;
-                    c.EmitDelegate<Func<int, int>>(zero =>
-                    {
-                        return -1000000000;
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: CommandoCore ModifyPrimaries IL Hook failed");
-                }
-            };
         }
 
         private void ModifySecondaries(SkillLocator sk)

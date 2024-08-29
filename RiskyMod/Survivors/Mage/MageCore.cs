@@ -22,7 +22,6 @@ namespace RiskyMod.Survivors.Mage
     {
         public static bool enabled = true;
 
-        public static bool m1AttackSpeed = true;
         public static bool modifyFireBolt = true;
         public static bool modifyPlasmaBolt = true;
 
@@ -66,43 +65,19 @@ namespace RiskyMod.Survivors.Mage
 
         private void ModifyPrimaries(SkillLocator sk)
         {
-            //Range increase always gets run now
-            new M1Projectiles();
-
             SkillDef fireBoltDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFireFirebolt.asset").WaitForCompletion();
             SkillDef plasmaBoltDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFireLightningBolt.asset").WaitForCompletion();
 
-            if (m1AttackSpeed)
-            {
-                MageStockController.StatePairs.Add(typeof(EntityStates.Mage.Weapon.FireFireBolt), MageStockController.fireMuzzleflashEffectPrefab);
-                MageStockController.StatePairs.Add(typeof(EntityStates.Mage.Weapon.FireLightningBolt), MageStockController.lightningMuzzleflashEffectPrefab);
-                bodyPrefab.AddComponent<MageStockController>();
 
-                fireBoltDef.rechargeStock = 0;
-                plasmaBoltDef.rechargeStock = 0;
-
-                //FireLightningBolt inherits from this
-                On.EntityStates.Mage.Weapon.FireFireBolt.OnEnter += (orig, self) =>
-                {
-                    orig(self);
-                    MageStockController msc = self.gameObject.GetComponent<MageStockController>();
-                    if (msc)
-                    {
-                        msc.FireSkill(self.duration);
-                    }
-                };
-            }
-
+            //TODO: Did I accidentally delete the thing that changes damage?
             if (modifyFireBolt)
             {
                 fireBoltDef.skillDescriptionToken = "MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD";
-                M1Projectiles.ModifyFireBolt();
             }
 
             if (modifyPlasmaBolt)
             {
                 plasmaBoltDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
-                M1Projectiles.ModifyLightningBolt();
             }
         }
 
