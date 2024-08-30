@@ -97,10 +97,8 @@ namespace RiskyMod.Survivors.Croco
         {
             if (!enabled) return;
             new ShiftAirControl();
-            new BlightStack();
             new BiggerMeleeHitbox();
             new BiggerLeapHitbox();
-            new RemovePoisonDamageCap();
             if (gameplayRework)
             {
                 new RegenRework();

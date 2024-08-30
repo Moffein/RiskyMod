@@ -230,7 +230,6 @@ namespace RiskyMod
             AllyScaling.noOverheat = GeneralCfg.Bind(allyString, "No Overheat", true, "Allies are immune to Grandparent Overheat.").Value;
             SuperAttackResist.enabled = GeneralCfg.Bind(allyString, "Superattack Resistance", true, "Allies take less damage from superattacks like Vagrant Novas.").Value;
             DotZoneResist.enabled = GeneralCfg.Bind(allyString, "Damage Zone Resistance", true, "Allies take less damage from Mushrums gas and Lunar Exploder fire.").Value;
-            StricterLeashing.enabled = GeneralCfg.Bind(allyString, "Stricter Leashing", true, "Reduces the minimum distance required for Allies to teleport to you.").Value;
             AlliesCore.beetleGlandDontRetaliate = GeneralCfg.Bind(allyString, "Queens Gland Guards Dont Retaliate", true, "Queens Gland Guards will not fight back if hurt by their owners.").Value;
             MegaDrone.allowRepair = GeneralCfg.Bind(allyString, "TC280 - Enable Repairs", true, "TC280s can be repaired after being destroyed.").Value;
             GunnerTurret.allowRepair = GeneralCfg.Bind(allyString, "Gunner Turret - Enable Repairs", true, "Gunner Turrets can be repaired after being destroyed.").Value;
@@ -263,11 +262,6 @@ namespace RiskyMod
             if (SpawnLimits.maxMountainShrines < 0 && SpawnLimits.maxCombatShrines < 0 && SpawnLimits.maxVoidSeeds == 3) SpawnLimits.enabled = false;
 
             //Artifacts
-            BulwarksAmbry.enabled = GeneralCfg.Bind(artifactString, "Bulwarks Ambry Tweaks", true, "Increase key drop chance and guarantee key drops after a certain amount of kills.").Value;
-            VengeanceVoidTeam.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Void Team", true, "Vengeance Doppelgangers are considered part of the Void Team.").Value;
-            FixVengeanceLeveling.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Fix Levels", true, "Fix Vengeance Doppelgangers not leveling up.").Value;
-            VengeancePercentHeal.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Reduce Percent Heals", true, "Vengeance Doppelgangers receive reduced healing from percent-based healing effects.").Value;
-            NoVengeanceFallDamage.enabled = GeneralCfg.Bind(artifactString, "Vengeance - Disable Fall Damage", true, "Vengeance Doppelgangers are immune to fall damage.").Value;
             Sacrifice.enabled = GeneralCfg.Bind(artifactString, "Sacrifice - No Drop Chance Scaling", true, "Increases drop chance when not using Swarms and prevents drop chance from increasing as the run progresses.").Value;
 
             //Void Fields
@@ -600,8 +594,6 @@ namespace RiskyMod
             CrocoCore.enabled = SurvivorCfg.Bind(crocoString, "Enable Changes", true, "Enable changes to this survivor. Skill options unavailable due to all the changes being too interlinked.").Value;
             CrocoCore.gameplayRework = SurvivorCfg.Bind(crocoString, "Gameplay Rework", true, "A full rework of Acrid's skills.").Value;
             BiggerMeleeHitbox.enabled = SurvivorCfg.Bind(crocoString, "Extend Melee Hitbox", true, "Extends Acrid's melee hitbox so he can hit Vagrants while standing on top of them.").Value;
-            BlightStack.enabled = SurvivorCfg.Bind(crocoString, "Blight Duration Reset", true, "Blight stacks like Bleed.").Value;
-            RemovePoisonDamageCap.enabled = SurvivorCfg.Bind(crocoString, "Remove Poison Damage Cap", true, "Poison no longer has a hidden damage cap.").Value;
             BiggerLeapHitbox.enabled = SurvivorCfg.Bind(crocoString, "Extend Leap Collision Box", true, "Acrid's Shift skills have a larger collision hitbox. Damage radius remains the same.").Value;
             ShiftAirControl.enabled = SurvivorCfg.Bind(crocoString, "Leap Air Control", false, "Acrid's Shift skills gain increased air control at high move speeds (causes momentum loss).").Value;
 
@@ -716,10 +708,7 @@ namespace RiskyMod
         {
             MonsterCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Monsters.cfg"), true);
 
-            AiTargetFinding.enabled = MonsterCfg.Bind(monsterGeneralString, "AI Targetfinding Tweaks", true, "Enables fullvision and disables LoS checks for AI.").Value;
             EnemiesCore.infernoCompat = MonsterCfg.Bind("Compatibility", "Inferno Compatibility", true, "Disable certain changes that may conflict with Inferno.").Value;
-
-            MonsterFallDamage.enabled = MonsterCfg.Bind(monsterGeneralString, "Lethal Fall Damage", true, "Monsters can die from fall damage.").Value;
 
             MithrixCore.enabled = MonsterCfg.Bind(monsterMithrixString, "Enable Changes", true, "Enable changes to this monster.").Value;
             MithrixFallImmune.enabled = MonsterCfg.Bind(monsterMithrixString, "Fall Damage Immunity", true, "Mithrix does not take fall damage.").Value;
@@ -800,8 +789,6 @@ namespace RiskyMod
             CrocoCore.enabled = SurvivorCrocoCfg.Bind("00. General", "Enable Changes", true, "Enable changes to this survivor.").Value;
             CrocoCore.gameplayRework = SurvivorCrocoCfg.Bind("00. General", "Gameplay Rework", true, "A full rework of Acrid's skills. Every option outside of General/Stats requires this to be enabled.").Value;
             BiggerMeleeHitbox.enabled = SurvivorCrocoCfg.Bind("00. General", "Extend Melee Hitbox", true, "Extends Acrid's melee hitbox so he can hit Vagrants while standing on top of them.").Value;
-            BlightStack.enabled = SurvivorCrocoCfg.Bind("00. General", "Blight Duration Reset", true, "Blight stacks like Bleed.").Value;
-            RemovePoisonDamageCap.enabled = SurvivorCrocoCfg.Bind("00. General", "Remove Poison Damage Cap", true, "Poison no longer has a hidden damage cap.").Value;
             BiggerLeapHitbox.enabled = SurvivorCrocoCfg.Bind("00. General", "Extend Leap Collision Box", true, "Acrid's Shift skills have a larger collision hitbox. Damage radius remains the same.").Value;
             ShiftAirControl.enabled = SurvivorCrocoCfg.Bind("00. General", "Leap Air Control", true, "Acrid's Shift skills gain increased air control at high move speeds.").Value;
 

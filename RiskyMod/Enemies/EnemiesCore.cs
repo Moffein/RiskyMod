@@ -27,8 +27,6 @@ namespace RiskyMod.Enemies
 
         public EnemiesCore()
         {
-            new MonsterFallDamage();
-            new AiTargetFinding();
             On.RoR2.CharacterAI.BaseAI.UpdateTargets += PrioritizePlayers.AttemptTargetPlayer;
             new MithrixCore();
             new VoidlingCore();

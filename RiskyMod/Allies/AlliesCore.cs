@@ -81,7 +81,6 @@ namespace RiskyMod.Allies
 
             new AllyScaling();
 
-            new DroneTargeting();
             new ModifyBulletAttacks();
 
             new SuperAttackResist();
@@ -90,7 +89,6 @@ namespace RiskyMod.Allies
             new NoVoidDamage();
             new AntiSplat();
 
-            new StricterLeashing();
             TweakDrones();
             new CheaperRepairs();
 

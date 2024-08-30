@@ -211,13 +211,6 @@ namespace RiskyMod
             if (nvaPluginLoaded && VoidInfestor.noVoidAllies) Debug.Log("RiskyMod: Disabling NoVoidAllies because standalone plugin is loaded.");
             VoidInfestor.noVoidAllies = VoidInfestor.noVoidAllies && !nvaPluginLoaded;
 
-            if (SoftDependencies.AIBlacklistLoaded)
-            {
-                HandleAIBlacklist();
-                if (FixVengeanceLeveling.enabled) Debug.Log("RiskyMod: Disabling FixVengeanceLeveling because AI_Blacklist plugin is loaded.");
-            }
-            FixVengeanceLeveling.enabled = FixVengeanceLeveling.enabled && !SoftDependencies.AIBlacklistLoaded;
-
             bool hypercritPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.Hypercrit");
             if (hypercritPluginLoaded && CritHud.enabled) Debug.Log("RiskyMod: Disabling Ocular HUD changes because Hypercrit is loaded.");
             CritHud.enabled = CritHud.enabled && !hypercritPluginLoaded;   //Effect is already a part of hypercrit
@@ -230,10 +223,6 @@ namespace RiskyMod
             bool ahbPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TheTimeSweeper.AcridHitboxBuff");
             if (ahbPluginLoaded && BiggerMeleeHitbox.enabled) Debug.Log("RiskyMod: Disabling Acrid BiggerMeleeHitbox because standalone plugin is loaded.");
             BiggerMeleeHitbox.enabled = BiggerMeleeHitbox.enabled && !ahbPluginLoaded;
-
-            bool blightStackPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AcridBlightStack");
-            if (blightStackPluginLoaded && BlightStack.enabled) Debug.Log("RiskyMod: Disabling Acrid BlightStack because standalone plugin is loaded.");
-            BlightStack.enabled = BlightStack.enabled && !blightStackPluginLoaded;
 
             //Bandit2
             bool backstabReworkPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BackstabRework");
@@ -360,12 +349,7 @@ namespace RiskyMod
             new NullifyDebuff();
 
             //Artifacts
-            new FixVengeanceLeveling();
-            new VengeancePercentHeal();
-            new VengeanceVoidTeam();
-            new BulwarksAmbry();
             new Sacrifice();
-            new NoVengeanceFallDamage();
 
             //Misc
             new AIBlacklistItems();
