@@ -2,7 +2,6 @@
 using RiskyMod.Survivors.Captain;
 using RiskyMod.Survivors.Commando;
 using RiskyMod.Survivors.Croco;
-using RiskyMod.Survivors.DLC1.Railgunner;
 using RiskyMod.Survivors.DLC1.VoidFiend;
 using RiskyMod.Survivors.Engi;
 using RiskyMod.Survivors.Huntress;
@@ -34,7 +33,6 @@ namespace RiskyMod.Survivors
             new MercCore();
 
             new VoidFiendCore();
-            new RailgunnerCore();
         }
     }
 }

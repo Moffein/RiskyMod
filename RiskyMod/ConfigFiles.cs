@@ -11,7 +11,6 @@ using RiskyMod.Survivors.Treebot;
 using RiskyMod.Survivors.Captain;
 using RiskyMod.Survivors.Bandit2;
 using System.IO;
-using RiskyMod.Survivors.DLC1.Railgunner;
 using RiskyMod.Survivors.DLC1.VoidFiend;
 using RiskyMod.Survivors;
 using UnityEngine;
@@ -659,9 +658,6 @@ namespace RiskyMod
             Bandit2Core.utilityFix = SurvivorCfg.Bind(banditString, "Smokebomb Fix", true, "Fixes various bugs with Smokebomb.").Value;
             Bandit2Core.specialRework = SurvivorCfg.Bind(banditString, "Special Rework", true, "Makes Resets/Desperado a selectable passive and adds a new Special skill.").Value;
 
-            RailgunnerCore.enabled = SurvivorCfg.Bind(railgunnerString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            RailgunnerCore.slowFieldChanges = SurvivorCfg.Bind(railgunnerString, "Polar Field Device Changes", true, "Enable changes to this skill.").Value;
-
             VoidFiendCore.enabled = SurvivorCfg.Bind(voidFiendString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             VoidFiendCore.fasterCorruptTransition = SurvivorCfg.Bind(voidFiendString, "Faster Corrupt Transition", true, "Speed up the corruption transform animation.").Value;
             VoidFiendCore.corruptOnKill = SurvivorCfg.Bind(voidFiendString, "Corruption on Kill", true, "Gain Corruption on kill. Lowers passive Corruption gain and Corrupted form duration.").Value;
@@ -684,7 +680,6 @@ namespace RiskyMod
                 CaptainCore.enabled = false;
                 CommandoCore.enabled = false;
                 CrocoCore.enabled = false;
-                RailgunnerCore.enabled = false;
                 VoidFiendCore.enabled = false;
                 EngiCore.enabled = false;
                 HuntressCore.enabled = false;
