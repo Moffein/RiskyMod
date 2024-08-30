@@ -20,30 +20,8 @@ namespace RiskyMod.Survivors.Merc
         public MercCore()
         {
             if (!enabled) return;
-            ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
-        }
-
-        private void ModifySkills(SkillLocator sk)
-        {
-            ModifyPrimaries(sk);
-        }
-        private void ModifyPrimaries(SkillLocator sk)
-        {
-            On.EntityStates.Merc.Weapon.GroundLight2.OnEnter += (orig, self) =>
-            {
-                if (m1ComboFinishTweak.Value)
-                {
-                    if (self.isComboFinisher)
-                    {
-                        self.ignoreAttackSpeed = true;
-                    }
-                    else
-                    {
-                        self.ignoreAttackSpeed = false;
-                    }
-                }
-                 orig(self);
-            };
+            //TODO: Buff default shift
+            //Slightly buff Evis? Don't really feel like it needs it but wouldn't be opposed to it.
         }
     }
 }

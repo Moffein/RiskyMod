@@ -35,7 +35,6 @@ namespace RiskyMod.Enemies
             new HermitCrab();
             new Lemurian();
 
-            new Golem();
             new Mushrum();
             new Bison();
 
@@ -52,7 +51,6 @@ namespace RiskyMod.Enemies
             new Vagrant();
             new Gravekeeper();
             new SCU();
-            new Grandparent();
             new Worm();
             new Titan();
 

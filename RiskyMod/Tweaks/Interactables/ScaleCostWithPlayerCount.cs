@@ -36,7 +36,6 @@ namespace RiskyMod.Tweaks
                     int playerCount = Mathf.Max(Run.instance.participatingPlayerCount, 1);
                     float costMult = 1f + ScaleCostWithPlayerCount.extraCostMultiplierPerPlayer * (playerCount - 1);
                     if (scaleCombatShrine) SetShrineCombatCost(costMult);
-                    if (scaleMountainShrine) SetShrineBossCost(costMult);
                 }
                 orig(self);
             };
@@ -45,7 +44,6 @@ namespace RiskyMod.Tweaks
         private void GetInitialShrineCost()
         {
             shrineCombatCostInitial = shrineCombat.directorCreditCost;
-            shrineBossCostInitial = shrineBoss.directorCreditCost;
         }
 
         private static void SetShrineCombatCost(float costMultiplier)
@@ -53,13 +51,6 @@ namespace RiskyMod.Tweaks
             shrineCombat.directorCreditCost = Mathf.FloorToInt(shrineCombatCostInitial * costMultiplier);
             shrineCombatSandy.directorCreditCost = Mathf.FloorToInt(shrineCombatCostInitial * costMultiplier);
             shrineCombatSnowy.directorCreditCost = Mathf.FloorToInt(shrineCombatCostInitial * costMultiplier);
-        }
-
-        private static void SetShrineBossCost(float costMultiplier)
-        {
-            shrineBoss.directorCreditCost = Mathf.FloorToInt(shrineBossCostInitial * costMultiplier);
-            shrineBossSandy.directorCreditCost = Mathf.FloorToInt(shrineBossCostInitial * costMultiplier);
-            shrineBossSnowy.directorCreditCost = Mathf.FloorToInt(shrineBossCostInitial * costMultiplier);
         }
     }
 }

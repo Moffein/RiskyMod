@@ -185,7 +185,6 @@ namespace RiskyMod
             ShieldGating.enabled = GeneralCfg.Bind(gameMechString, "Shield Gating", true, "Shields gate against HP damage.").Value;
             TrueOSP.enabled = GeneralCfg.Bind(gameMechString, "True OSP", true, "Makes OSP work against multihits.").Value;
             AIBlacklistItems.enabled = GeneralCfg.Bind(gameMechString, "Expanded AI Blacklist", true, "Adds extra items to the AI Blacklist by default.").Value;
-            BarrierDecay.enabled = GeneralCfg.Bind(gameMechString, "Barrier Decay", true, "Barrier decays slower at low barrier values.").Value;
             TeleExpandOnBossKill.enabled = GeneralCfg.Bind(gameMechString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;
             TeleExpandOnBossKill.enableDuringEclipse = GeneralCfg.Bind(gameMechString, "Tele Expand on Boss Kill - Enable During Eclispe", false, "Enables teleporter expansion when playing on Eclipse 2+.").Value;
 
@@ -243,8 +242,7 @@ namespace RiskyMod
 
             //Interactables
             ShrineCombatItems.enabled = GeneralCfg.Bind(interactString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
-            BloodShrineMinReward.enabled = GeneralCfg.Bind(interactString, "Shrine of Blood Minimum Reward", true, "Shrine of Blood always gives at least enough money to buy a small chest.").Value;
-
+            
             SpawnLimits.maxMountainShrines = GeneralCfg.Bind(interactString, "Max Shrines of the Mountain", 5, "Limit how many Mountain Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
             SpawnLimits.maxCombatShrines = GeneralCfg.Bind(interactString, "Max Shrines of Combat", 3, "Limit how many Combat Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
             SpawnLimits.maxVoidSeeds = GeneralCfg.Bind(interactString, "Max Void Seeds", 1, "Limit how many Void Seeds can spawn on 1 stage. Vanilla is 3. Set to negative for no limit.").Value;
@@ -288,8 +286,6 @@ namespace RiskyMod
 
             //Misc
             BetterProjectileTracking.enabled = GeneralCfg.Bind(miscString, "Better Projectile Homing", true, "Homing projectiles target based on angle, instead of distance + angle.").Value;
-            CloakBuff.enabled = GeneralCfg.Bind(miscString, "Cloak Buff", true, "Increases delay between position updates while cloaked.").Value;
-            Shock.enabled = GeneralCfg.Bind(miscString, "No Shock Interrupt", true, "Shock is no longer interrupted by damage.").Value;
             FreezeChampionExecute.enabled = GeneralCfg.Bind(miscString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
             FreezeChampionExecute.nerfFreeze = GeneralCfg.Bind(miscString, "Freeze Executes Bosses - Nerf Freeze Globally", false, "Freeze execute threshold is reduced to 15% globally. Requires Freeze Executes Bosses.").Value;
             NerfVoidtouched.enabled = GeneralCfg.Bind(miscString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
@@ -706,7 +702,6 @@ namespace RiskyMod
             HermitCrab.enabled = MonsterCfg.Bind(monsterString, "Hermit Crab", true, "Enable changes to this monster.").Value;
             Lemurian.enabled = MonsterCfg.Bind(monsterString, "Lemurian", true, "Enable changes to this monster.").Value;
 
-            Golem.enabled = MonsterCfg.Bind(monsterString, "Stone Golem", true, "Enable changes to this monster.").Value;
             Mushrum.enabled = MonsterCfg.Bind(monsterString, "Mini Mushrum", true, "Enable changes to this monster.").Value;
             Bison.enabled = MonsterCfg.Bind(monsterString, "Bighorn Bison", true, "Enable changes to this monster.").Value;
 
@@ -730,8 +725,6 @@ namespace RiskyMod
             Aurelionite.enabled = MonsterCfg.Bind(monsterString, "Aurelionite", true, "Enable changes to this monster.").Value;
             Aurelionite.modifyStats = MonsterCfg.Bind(monsterString, "Aurelionite Stats", true, "Modify stats. (Separate from Aurelionite option)").Value;
             AWU.enabled = MonsterCfg.Bind(monsterString, "Alloy Worship Unit", true, "Enable changes to this monster.").Value;
-
-            Grandparent.enabled = MonsterCfg.Bind(monsterString, "Grandparent", true, "Enable changes to this monster.").Value;
 
             BlindPest.enabled = MonsterCfg.Bind(monsterString, "Blind Pest", true, "Enable changes to this monster.").Value;
             XiConstruct.enabled = MonsterCfg.Bind(monsterString, "Xi Construct", true, "Enable changes to this monster.").Value;

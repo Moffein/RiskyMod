@@ -310,7 +310,6 @@ namespace RiskyMod
             new TeleChargeDuration();
 
             //Interactables
-            new BloodShrineMinReward();
             new ShrineCombatItems();
             new SpawnLimits();
             new ScaleCostWithPlayerCount();
@@ -318,9 +317,6 @@ namespace RiskyMod
             //Character Mechanics
             new TrueOSP();
             new ShieldGating();
-            new CloakBuff();
-            new Shock();
-            new BarrierDecay();
             new FreezeChampionExecute();
             new NerfVoidtouched();
             new PlayerControlledMonsters();

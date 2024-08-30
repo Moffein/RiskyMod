@@ -14,7 +14,6 @@ namespace RiskyMod.Enemies.Mobs
             if (!enabled) return;
             //EnableStuns();
             SlamFalloff();
-            LowerCreditCost();
         }
 
         private void EnableStuns()
@@ -64,13 +63,6 @@ namespace RiskyMod.Enemies.Mobs
                     UnityEngine.Debug.LogError("RiskyMod: Parent IL Hook failed");
                 }
             };
-        }
-
-        private void LowerCreditCost()
-        {
-            CharacterSpawnCard csc = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscparent");
-            //Debug.Log("\n\n\n\n\n\nCost: " + csc.directorCreditCost);
-            csc.directorCreditCost = 75;    //65 to be proportional to parent, 75 for Elder Lemurian
         }
     }
 }
