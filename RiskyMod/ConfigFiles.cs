@@ -584,7 +584,6 @@ namespace RiskyMod
             CrocoCore.Cfg.enabled = SurvivorCfg.Bind(crocoString, "0. Use Separate Config", false, "Generate a separate config file for more in-depth tuning. Overwrites ALL settings for this survivor.").Value;
             CrocoCore.enabled = SurvivorCfg.Bind(crocoString, "Enable Changes", true, "Enable changes to this survivor. Skill options unavailable due to all the changes being too interlinked.").Value;
             CrocoCore.gameplayRework = SurvivorCfg.Bind(crocoString, "Gameplay Rework", true, "A full rework of Acrid's skills.").Value;
-            BiggerMeleeHitbox.enabled = SurvivorCfg.Bind(crocoString, "Extend Melee Hitbox", true, "Extends Acrid's melee hitbox so he can hit Vagrants while standing on top of them.").Value;
             BiggerLeapHitbox.enabled = SurvivorCfg.Bind(crocoString, "Extend Leap Collision Box", true, "Acrid's Shift skills have a larger collision hitbox. Damage radius remains the same.").Value;
             ShiftAirControl.enabled = SurvivorCfg.Bind(crocoString, "Leap Air Control", false, "Acrid's Shift skills gain increased air control at high move speeds (causes momentum loss).").Value;
 
@@ -775,7 +774,6 @@ namespace RiskyMod
             SurvivorCrocoCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Survivors_Acrid.cfg"), true);
             CrocoCore.enabled = SurvivorCrocoCfg.Bind("00. General", "Enable Changes", true, "Enable changes to this survivor.").Value;
             CrocoCore.gameplayRework = SurvivorCrocoCfg.Bind("00. General", "Gameplay Rework", true, "A full rework of Acrid's skills. Every option outside of General/Stats requires this to be enabled.").Value;
-            BiggerMeleeHitbox.enabled = SurvivorCrocoCfg.Bind("00. General", "Extend Melee Hitbox", true, "Extends Acrid's melee hitbox so he can hit Vagrants while standing on top of them.").Value;
             BiggerLeapHitbox.enabled = SurvivorCrocoCfg.Bind("00. General", "Extend Leap Collision Box", true, "Acrid's Shift skills have a larger collision hitbox. Damage radius remains the same.").Value;
             ShiftAirControl.enabled = SurvivorCrocoCfg.Bind("00. General", "Leap Air Control", true, "Acrid's Shift skills gain increased air control at high move speeds.").Value;
 

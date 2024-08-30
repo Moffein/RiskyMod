@@ -211,11 +211,6 @@ namespace RiskyMod
             if (moffHereticPluginLoaded && Visions.enabled) Debug.Log("RiskyMod: Disabling Visions of Heresy changes because Moffein's Heretic is loaded.");
             Visions.enabled = Visions.enabled && !moffHereticPluginLoaded;
 
-            //Croco
-            bool ahbPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TheTimeSweeper.AcridHitboxBuff");
-            if (ahbPluginLoaded && BiggerMeleeHitbox.enabled) Debug.Log("RiskyMod: Disabling Acrid BiggerMeleeHitbox because standalone plugin is loaded.");
-            BiggerMeleeHitbox.enabled = BiggerMeleeHitbox.enabled && !ahbPluginLoaded;
-
             //Bandit2
             bool backstabReworkPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BackstabRework");
             if (backstabReworkPluginLoaded && BackstabRework.enabled) Debug.Log("RiskyMod: Disabling Bandit2 BackstabRework because standalone plugin is loaded.");

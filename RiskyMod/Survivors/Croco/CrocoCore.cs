@@ -97,7 +97,6 @@ namespace RiskyMod.Survivors.Croco
         {
             if (!enabled) return;
             new ShiftAirControl();
-            new BiggerMeleeHitbox();
             new BiggerLeapHitbox();
             if (gameplayRework)
             {
