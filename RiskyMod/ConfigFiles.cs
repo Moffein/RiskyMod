@@ -566,11 +566,9 @@ namespace RiskyMod
             TreebotCore.enabled = SurvivorCfg.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             TreebotCore.drillChanges = SurvivorCfg.Bind(treebotString, "DIRECTIVE Drill Changes", true, "Enable changes to this skill.").Value;
             TreebotCore.defaultUtilityHeal = SurvivorCfg.Bind(treebotString, "DIRECTIVE Disperse Healing", true, "DIRECTIVE Disperse heals for 5% HP per target hit.").Value;
-            ModifyUtilityForce.enabled = SurvivorCfg.Bind(treebotString, "Utility - Modify Force", true, "Modifies the force of REXs Utilities.").Value;
             TreebotCore.fruitChanges = SurvivorCfg.Bind(treebotString, "DIRECTIVE Harvest Changes", true, "Enable changes to this skill.").Value;
             DropFruitOnHit.enabled = SurvivorCfg.Bind(treebotString, "DIRECTIVE Harvest - Fruit On Hit", false, "Fruiting enemies have a chance to drop fruits when hit.").Value;
-            SelfDamageTweaks.enabled = SurvivorCfg.Bind(treebotString, "Self Damage Tweaks", true, "Self damage from skills is affected by armor and defensive items.").Value;
-
+            
             LoaderCore.enabled = SurvivorCfg.Bind(loaderString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             LoaderCore.grappleCancelsSprint = SurvivorCfg.Bind(loaderString, "Secondaries Cancel Sprint", false, "Loader's Grapple cancels sprinting.").Value;
             LoaderCore.shiftCancelsSprint = SurvivorCfg.Bind(loaderString, "Utilities Cancel Sprint", false, "Loader's Big Punches cancel sprinting.").Value;

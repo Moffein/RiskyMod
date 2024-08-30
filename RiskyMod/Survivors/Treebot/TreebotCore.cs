@@ -23,7 +23,6 @@ namespace RiskyMod.Survivors.Treebot
         {
             if (!enabled) return;
             ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
-            new SelfDamageTweaks();
         }
 
         private void ModifySkills(SkillLocator sk)
@@ -51,8 +50,6 @@ namespace RiskyMod.Survivors.Treebot
                 utilityDef.skillDescriptionToken = "TREEBOT_UTILITY_DESCRIPTION_RISKYMOD";
                 new DefaultUtilityHeal();
             }
-
-            new ModifyUtilityForce();
         }
 
         private void ModifySpecials(SkillLocator sk)
