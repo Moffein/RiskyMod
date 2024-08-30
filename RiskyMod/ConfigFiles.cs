@@ -520,14 +520,12 @@ namespace RiskyMod
             ToolbotCore.enabled = SurvivorCfg.Bind(toolbotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             ToolbotCore.enableRebarChanges = SurvivorCfg.Bind(toolbotString, "Rebar Puncher Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.enableScrapChanges = SurvivorCfg.Bind(toolbotString, "Scrap Launcher Changes", true, "Enable changes to this skill.").Value;
-            ToolbotCore.scrapICBM = SurvivorCfg.Bind(toolbotString, "Scrap Launcher ICBM", true, "Scrap Launcher benefits from Pocket ICBM if Scrap Launcher Changes are enabled.").Value;
-
+            
             ToolbotCore.sawPhysics = SurvivorCfg.Bind(toolbotString, "Power Saw Physics Changes", true, "Makes Power Saw physics more consistent.").Value;
 
             ToolbotCore.sawHitbox = SurvivorCfg.Bind(toolbotString, "Power Saw Hitbox Changes", true, "Increases Power Saw hitbox size by 50%.").Value;
             ToolbotCore.sawBarrierOnHit = SurvivorCfg.Bind(toolbotString, "Power Saw Barrier On Hit", true, "Power Saw gives barrier-on-hit.").Value;
             ToolbotCore.enableSecondarySkillChanges = SurvivorCfg.Bind(toolbotString, "Blast Canister Changes", true, "Enable changes to this skill.").Value;
-            ToolbotCore.enableRetoolChanges = SurvivorCfg.Bind(toolbotString, "Retool Changes", true, "Enable changes to this skill.").Value;
             ToolbotCore.enablePowerModeChanges = SurvivorCfg.Bind(toolbotString, "Power Mode Changes", true, "Enable changes to this skill.").Value;
 
             EngiCore.enabled = SurvivorCfg.Bind(engiString, "Enable Changes", true, "Enable changes to this survivor.").Value;
@@ -697,7 +695,6 @@ namespace RiskyMod
             EnemiesCore.infernoCompat = MonsterCfg.Bind("Compatibility", "Inferno Compatibility", true, "Disable certain changes that may conflict with Inferno.").Value;
 
             MithrixCore.enabled = MonsterCfg.Bind(monsterMithrixString, "Enable Changes", true, "Enable changes to this monster.").Value;
-            MithrixFallImmune.enabled = MonsterCfg.Bind(monsterMithrixString, "Fall Damage Immunity", true, "Mithrix does not take fall damage.").Value;
             MithrixTargetPrioritization.enabled = MonsterCfg.Bind(monsterMithrixString, "Prioritize Players", true, "Mithrix always tries to prioritize targeting players when possible. May result in him completely ignoring Engi Turrets.").Value;
             MithrixFreezeImmune.enabled = MonsterCfg.Bind(monsterMithrixString, "Freeze Immunity", false, "Mithrix cannot be frozen.").Value;
 
@@ -706,7 +703,6 @@ namespace RiskyMod
             VoidlingTargetPrioritization.enabled = MonsterCfg.Bind(monsterVoidlingString, "Prioritize Players", true, "This monster always tries to prioritize targeting players when possible.").Value;
             VoidlingFogDamage.enabled = MonsterCfg.Bind(monsterVoidlingString, "Planeterium Void Fog Changes", true, "Makes Planeterium Void Fog behave like the Void Fields.").Value;
 
-            Beetle.enabled = MonsterCfg.Bind(monsterString, "Beetle", true, "Enable changes to this monster.").Value;
             Jellyfish.enabled = MonsterCfg.Bind(monsterString, "Jellyfish", true, "Enable changes to this monster.").Value;
             Imp.enabled = MonsterCfg.Bind(monsterString, "Imp", true, "Enable changes to this monster.").Value;
             HermitCrab.enabled = MonsterCfg.Bind(monsterString, "Hermit Crab", true, "Enable changes to this monster.").Value;
@@ -716,13 +712,11 @@ namespace RiskyMod
             Mushrum.enabled = MonsterCfg.Bind(monsterString, "Mini Mushrum", true, "Enable changes to this monster.").Value;
             Bison.enabled = MonsterCfg.Bind(monsterString, "Bighorn Bison", true, "Enable changes to this monster.").Value;
 
-            Bronzong.enabled = MonsterCfg.Bind(monsterString, "Brass Contraption", true, "Enable changes to this monster.").Value;
             GreaterWisp.enabled = MonsterCfg.Bind(monsterString, "Greater Wisp", true, "Enable changes to this monster.").Value;
 
             Parent.enabled = MonsterCfg.Bind(monsterString, "Parent", true, "Enable changes to this monster.").Value;
 
             LunarExploder.enabled = MonsterCfg.Bind(monsterString, "Lunar Exploder", true, "Enable changes to this monster.").Value;
-            LunarGolem.enabled = MonsterCfg.Bind(monsterString, "Lunar Golem", true, "Enable changes to this monster.").Value;
             LunarWisp.enabled = MonsterCfg.Bind(monsterString, "Lunar Wisp", true, "Enable changes to this monster.").Value;
             LunarWisp.removeHitscan = MonsterCfg.Bind(monsterString, "Lunar Wisp - Remove Hitscan", true, "Changes the Lunar Wisp attack from hitscan to projectile.").Value;
             LunarWisp.disableProjectileOnKill = MonsterCfg.Bind(monsterString, "Lunar Wisp - Disable Projectile On-Kill Effects", true, "Prevents on-kill effects from proccing when this monster's projectiles are shot down.").Value;

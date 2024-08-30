@@ -21,7 +21,6 @@ namespace RiskyMod.Enemies.Mithrix
             };
 
             if (!enabled) return;
-            new MithrixFallImmune();
             new MithrixTargetPrioritization();
             new MithrixFreezeImmune();
         }

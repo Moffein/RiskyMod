@@ -18,13 +18,6 @@ namespace RiskyMod.Enemies
         public static bool modifyEnemies = true;
         public static bool modifySpawns = true;
         public static bool infernoCompat = true;
-        public static void DisableRegen(GameObject enemyObject)
-        {
-            CharacterBody cb = enemyObject.GetComponent<CharacterBody>();
-            cb.baseRegen = 0f;
-            cb.levelRegen = 0f;
-        }
-
         public EnemiesCore()
         {
             On.RoR2.CharacterAI.BaseAI.UpdateTargets += PrioritizePlayers.AttemptTargetPlayer;
@@ -37,7 +30,6 @@ namespace RiskyMod.Enemies
         private void ModifyEnemies()
         {
             if (!modifyEnemies) return;
-            new Beetle();
             new Jellyfish();
             new Imp();
             new HermitCrab();
@@ -47,14 +39,12 @@ namespace RiskyMod.Enemies
             new Mushrum();
             new Bison();
 
-            new Bronzong();
             new GreaterWisp();
 
             new Parent();
 
             new VoidReaver();
 
-            new LunarGolem();
             new LunarWisp();
             new LunarExploder();
 

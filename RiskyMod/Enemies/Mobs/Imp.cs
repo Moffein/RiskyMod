@@ -10,7 +10,6 @@ namespace RiskyMod.Enemies.Mobs
         public Imp()
         {
             if (!enabled) return;
-            EnemiesCore.DisableRegen(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/impbody"));
             RemoveSlashSlow();
             AddLunge();
         }

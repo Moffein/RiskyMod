@@ -17,7 +17,6 @@ namespace RiskyMod.Survivors.Toolbot
         public static bool enabled = true;
         public static bool enableRebarChanges = true;
         public static bool enableScrapChanges = true;
-        public static bool scrapICBM = true;
 
         public static bool sawPhysics = true;
         public static bool sawBarrierOnHit = true;
@@ -25,7 +24,6 @@ namespace RiskyMod.Survivors.Toolbot
 
         public static bool enableSecondarySkillChanges = true;
 
-        public static bool enableRetoolChanges = true;
         public static bool enablePowerModeChanges = true;
 
         public static BuffDef PowerModeBuff;
@@ -80,7 +78,6 @@ namespace RiskyMod.Survivors.Toolbot
             scrapDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT2_DESCRIPTION_RISKYMOD";
             scrapDef.rechargeStock = 0;
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireGrenadeLauncher", "damageCoefficient", "3.9");
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireGrenadeLauncher", "maxSpread", "0");
 
             GameObject scrapProjectileModded = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Toolbot/ToolbotGrenadeLauncherProjectile.prefab").WaitForCompletion().InstantiateClone("RiskyModToolbotGrenadeProjectile", true);
             DamageAPI.ModdedDamageTypeHolderComponent mdc = scrapProjectileModded.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
@@ -96,59 +93,6 @@ namespace RiskyMod.Survivors.Toolbot
                     gsc.FireSkill(self.activatorSkillSlot, self.duration);
                 }
             };
-
-            if (scrapICBM)
-            {
-                //Not the best place to hook.
-                On.EntityStates.Toolbot.FireGrenadeLauncher.ModifyProjectileAimRay += (orig, self, aimRay) =>
-                {
-                    if (self.characterBody && self.characterBody.inventory)
-                    {
-                        int icbmCount = self.characterBody.inventory.GetItemCount(DLC1Content.Items.MoreMissile);
-                        int stackCount = icbmCount - 1;
-
-                        if (icbmCount > 0)
-                        {
-                            float damageMult = 1f;
-                            if (stackCount > 0) damageMult += 0.5f * stackCount;
-
-                            self.damageCoefficient *= damageMult;
-
-
-                            Vector3 rhs = Vector3.Cross(Vector3.up, aimRay.direction);
-                            Vector3 axis = Vector3.Cross(aimRay.direction, rhs);
-
-                            float currentSpread = 0f;
-                            float angle = 0f;
-                            float num2 = 0f;
-                            num2 = UnityEngine.Random.Range(1f + currentSpread, 1f + currentSpread) * 3f;   //Bandit is x2
-                            angle = num2 / 2f;  //3 - 1 rockets
-
-                            Vector3 direction = Quaternion.AngleAxis(-num2 * 0.5f, axis) * aimRay.direction;
-                            Quaternion rotation = Quaternion.AngleAxis(angle, axis);
-                            Ray aimRay2 = new Ray(aimRay.origin, direction);
-                            for (int i = 0; i < 3; i++)
-                            {
-                                if (i != 1) //Middle rocket is already fired by vanilla skill
-                                {
-                                    RoR2.Projectile.ProjectileManager.instance.FireProjectile(self.projectilePrefab,
-                                        aimRay2.origin, Util.QuaternionSafeLookRotation(aimRay2.direction),
-                                        self.gameObject,
-                                        self.damageStat * self.damageCoefficient,
-                                        self.force,
-                                        self.RollCrit(),
-                                        DamageColorIndex.Default,
-                                        null,
-                                        -1f);
-                                }
-                                aimRay2.direction = rotation * aimRay2.direction;
-                            }
-                        }
-                    }
-
-                    return orig(self, aimRay);
-                };
-            }
         }
 
         private void SawChanges(SkillLocator sk)
@@ -245,22 +189,6 @@ namespace RiskyMod.Survivors.Toolbot
 
         private void ModifySpecials(SkillLocator sk)
         {
-            if (enableRetoolChanges)
-            {
-                On.EntityStates.Toolbot.ToolbotStanceSwap.OnEnter += (orig, self) =>
-                {
-                    orig(self);
-                    if (self.isAuthority)
-                    {
-                        GenericSkill skill1 = self.GetPrimarySkill1();
-                        if (skill1) skill1.stock = skill1.maxStock;
-
-                        GenericSkill skill2 = self.GetPrimarySkill2();
-                        if (skill2) skill2.stock = skill2.maxStock;
-                    }
-                };
-            }
-
             if (enablePowerModeChanges)
             {
                 SkillDef powerSkillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Toolbot/ToolbotDualWield.asset").WaitForCompletion();

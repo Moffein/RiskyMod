@@ -15,7 +15,6 @@ namespace RiskyMod.Enemies.Mobs
         public Mushrum()
         {
             if (!enabled) return;
-            EnemiesCore.DisableRegen(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/minimushroombody"));
             ReduceProcCoefficient();
         }
 
