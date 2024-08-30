@@ -45,7 +45,6 @@ namespace RiskyMod.Survivors.Bandit2
         public static bool specialRework = true;
 
         public static BodyIndex Bandit2Index;
-        private static AnimationCurve knifeVelocity;
 
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/Bandit2Body");
 
@@ -142,28 +141,8 @@ namespace RiskyMod.Survivors.Bandit2
 
             if (knifeChanges)
             {
-                new IncreaseKnifeHitboxSize();
-                knifeVelocity = BuildSlashVelocityCurve();
-
                 SkillDef knifeSkillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Bandit2/SlashBlade.asset").WaitForCompletion();
-
-                knifeSkillDef.canceledFromSprinting = false;
-
                 if (noKnifeCancel) knifeSkillDef.activationStateMachineName = "KnifeArm";
-
-                On.EntityStates.Bandit2.Weapon.SlashBlade.OnEnter += (orig, self) =>
-                {
-                    orig(self);
-                    if (self.characterBody && self.characterBody.isSprinting)
-                    {
-                        self.ignoreAttackSpeed = true;
-                        self.forceForwardVelocity = true;
-                        self.forwardVelocityCurve = knifeVelocity;
-                    }
-                };
-
-                SneedUtils.SneedUtils.SetEntityStateField("entitystates.bandit2.weapon.slashblade", "ignoreAttackSpeed", "1");
-                var getBandit2SlashBladeMinDuration = new Hook(typeof(EntityStates.Bandit2.Weapon.SlashBlade).GetMethodCached("get_minimumDuration"), typeof(Bandit2Core).GetMethodCached(nameof(GetBandit2SlashBladeMinDurationHook)));
             }
 
             if (knifeThrowChanges)
@@ -203,11 +182,6 @@ namespace RiskyMod.Survivors.Bandit2
                     }
                 };
             }
-        }
-
-        private static float GetBandit2SlashBladeMinDurationHook(EntityStates.Bandit2.Weapon.SlashBlade self)
-        {
-            return 0.3f;
         }
 
         private void ModifyUtilities(SkillLocator sk)
@@ -504,28 +478,6 @@ namespace RiskyMod.Survivors.Bandit2
                 standoffMult = 1f;
             }
             args.damageMultAdd += standoffMult * 0.2f;
-        }
-
-        private AnimationCurve BuildSlashVelocityCurve()
-        {
-            Keyframe kf1 = new Keyframe(0f, 3f, -8.182907104492188f, -3.3333332538604738f, 0f, 0.058712735772132876f);
-            kf1.weightedMode = WeightedMode.None;
-            kf1.tangentMode = 65;
-
-            Keyframe kf2 = new Keyframe(0.3f, 0f, -3.3333332538604738f, -3.3333332538604738f, 0.3333333432674408f, 0.3333333432674408f);    //Time should match up with SlashBlade min duration (hitbox length)
-            kf2.weightedMode = WeightedMode.None;
-            kf2.tangentMode = 34;
-
-            Keyframe[] keyframes = new Keyframe[2];
-            keyframes[0] = kf1;
-            keyframes[1] = kf2;
-
-            return new AnimationCurve
-            {
-                preWrapMode = WrapMode.ClampForever,
-                postWrapMode = WrapMode.ClampForever,
-                keys = keyframes
-            };
         }
     }
 

@@ -34,19 +34,7 @@ namespace RiskyMod.Items.Common
                     ))
                     {
                         c.Next.Operand = 0f;
-
-                        if (c.TryGotoNext(
-                         x => x.MatchStfld(typeof(RoR2.InflictDotInfo), "damageMultiplier")
-                        ))
-                        {
-                            c.Emit(OpCodes.Ldarg_1);
-                            c.EmitDelegate<Func<float, int, float>>((damageMult, itemCount) =>
-                            {
-                                damageMult = 0.75f + 0.25f * itemCount;
-                                return damageMult;
-                            });
-                            error = false;
-                        }
+                        error = false;
                     }
                 }
 

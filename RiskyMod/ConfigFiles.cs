@@ -308,7 +308,6 @@ namespace RiskyMod
         private static void ConfigCommonItems()
         {
             BisonSteak.enabled = ItemCfg.Bind(commonString, "Bison Steak", true, itemConfigDescString).Value;
-            Bungus.enabled = ItemCfg.Bind(commonString, "Bustling Fungus", true, itemConfigDescString).Value;
             CautiousSlug.enabled = ItemCfg.Bind(commonString, "Cautious Slug", true, itemConfigDescString).Value;
             Crowbar.enabled = ItemCfg.Bind(commonString, "Crowbar", true, itemConfigDescString).Value;
 
@@ -353,11 +352,6 @@ namespace RiskyMod
             Guillotine.enabled = ItemCfg.Bind(uncommonString, "Old Guillotine", true, itemConfigDescString).Value;
             Guillotine.reduceVFX = ItemCfg.Bind(uncommonString, "Old Guillotine - Reduce VFX", true, "Reduce how often this item's VFX shows up.").Value;
 
-            PredatoryInstincts.enabled = ItemCfg.Bind(uncommonString, "Predatory Instincts", true, itemConfigDescString).Value;
-
-            GhorsTome.enabled = ItemCfg.Bind(uncommonString, "Ghors Tome", true, itemConfigDescString).Value;
-            GhorsTome.disableInBazaar = ItemCfg.Bind(uncommonString, "Ghors Tome - Disable in Bazaar", true, "This item does not give gold in the Bazaar Between Time.").Value;
-
             Razorwire.enabled = ItemCfg.Bind(uncommonString, "Razorwire", true, itemConfigDescString).Value;
             RedWhip.enabled = ItemCfg.Bind(uncommonString, "Red Whip", true, itemConfigDescString).Value;
             RoseBuckler.enabled = ItemCfg.Bind(uncommonString, "Rose Buckler", true, itemConfigDescString).Value;
@@ -368,14 +362,11 @@ namespace RiskyMod
             Ukulele.enabled = ItemCfg.Bind(uncommonString, "Ukulele", true, itemConfigDescString).Value;
             WarHorn.enabled = ItemCfg.Bind(uncommonString, "War Horn", true, itemConfigDescString).Value;
             WillOWisp.enabled = ItemCfg.Bind(uncommonString, "Will-o-the-Wisp", true, itemConfigDescString).Value;
-
-            Shuriken.enabled = ItemCfg.Bind(uncommonString, "Shuriken", true, itemConfigDescString).Value;
         }
 
         private static void ConfigLegendaryItems()
         {
             Behemoth.enabled = ItemCfg.Bind(legendaryString, "Brilliant Behemoth", true, itemConfigDescString).Value;
-            BottledChaos.enabled = ItemCfg.Bind(legendaryString, "Bottled Chaos", true, itemConfigDescString).Value;
             Brainstalks.enabled = ItemCfg.Bind(legendaryString, "Brainstalks", true, itemConfigDescString).Value;
             CeremonialDagger.enabled = ItemCfg.Bind(legendaryString, "Ceremonial Dagger", true, itemConfigDescString).Value;
             Clover.enabled = ItemCfg.Bind(legendaryString, "57 Leaf Clover", false, "Caps how high the Luck stat can go.").Value;
@@ -458,7 +449,6 @@ namespace RiskyMod
             ShapedGlass.enabled = ItemCfg.Bind(lunarString, "Shaped Glass", true, itemConfigDescString).Value;
             Transcendence.enabled = ItemCfg.Bind(lunarString, "Transcendence", true, itemConfigDescString).Value;
             Transcendence.alwaysShieldGate = ItemCfg.Bind(lunarString, "Transcendence - Always Shield Gate", true, "Enables shieldgating on this item even when shield gating is disabled.").Value;
-            Visions.enabled = ItemCfg.Bind(lunarString, "Visions of Heresy", true, itemConfigDescString).Value;
         }
 
         private static void ConfigEquipment()
@@ -474,7 +464,6 @@ namespace RiskyMod
             SuperLeech.enabled = ItemCfg.Bind(equipmentString, "Super Massive Leech", true, itemConfigDescString).Value;
             VolcanicEgg.enabled = ItemCfg.Bind(equipmentString, "Volcanic Egg", true, itemConfigDescString).Value;
             Goobo.enabled = ItemCfg.Bind(equipmentString, "Goobo Jr.", true, itemConfigDescString).Value;
-            Caffeinator.enabled = ItemCfg.Bind(equipmentString, "Remote Caffeinator: Trigger Pressure Plates", true, "Remote Caffeinator can be used to press the hidden buttons on Abandoned Aqueduct.").Value;
         }
 
         private static void ConfigFireSelect()

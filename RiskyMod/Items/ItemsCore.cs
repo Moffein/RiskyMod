@@ -59,7 +59,6 @@ namespace RiskyMod.Items
             new TopazBrooch();
             new TougherTimes();
             new CautiousSlug();
-            new Bungus();
             new StunGrenade();
 
             new Pennies();
@@ -88,11 +87,8 @@ namespace RiskyMod.Items
             new Infusion();
             new RedWhip();
             new Daisy();
-            new GhorsTome();
-            new PredatoryInstincts();
 
             new Harpoon();
-            new Shuriken();
         }
 
         private void ModifyLegendary()
@@ -104,7 +100,6 @@ namespace RiskyMod.Items
             new LaserTurbine();
             new HeadHunter();
             new Headstompers();
-            new NovaOnHeal();
             new Brainstalks();
             new Soulbound();
             new Behemoth();
@@ -112,7 +107,6 @@ namespace RiskyMod.Items
             new Clover();
             new Aegis();
 
-            new BottledChaos();
             new Raincoat();
             new Scorpion();
             new SpareDroneParts();
@@ -153,7 +147,6 @@ namespace RiskyMod.Items
             new BrittleCrown();
             new Meteorite();
             new Gesture();
-            new Visions();
         }
 
         private void ModifyEquipment()
@@ -168,7 +161,6 @@ namespace RiskyMod.Items
             new Chrysalis();
             new Fruit();
             new Goobo();
-            new Caffeinator();
         }
 
         private void ModifyItemTokens()

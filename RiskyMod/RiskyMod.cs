@@ -207,10 +207,6 @@ namespace RiskyMod
             if (hypercritPluginLoaded && CritHud.enabled) Debug.Log("RiskyMod: Disabling Ocular HUD changes because Hypercrit is loaded.");
             CritHud.enabled = CritHud.enabled && !hypercritPluginLoaded;   //Effect is already a part of hypercrit
 
-            bool moffHereticPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.Heretic");
-            if (moffHereticPluginLoaded && Visions.enabled) Debug.Log("RiskyMod: Disabling Visions of Heresy changes because Moffein's Heretic is loaded.");
-            Visions.enabled = Visions.enabled && !moffHereticPluginLoaded;
-
             //Bandit2
             bool backstabReworkPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BackstabRework");
             if (backstabReworkPluginLoaded && BackstabRework.enabled) Debug.Log("RiskyMod: Disabling Bandit2 BackstabRework because standalone plugin is loaded.");

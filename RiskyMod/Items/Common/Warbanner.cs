@@ -37,18 +37,6 @@ namespace RiskyMod.Items.Common
                 wh.healFraction = 0.01f;
                 RecalculateStatsAPI.GetStatCoefficients += HandleStatsVanilla;
             }
-
-            On.EntityStates.Missions.BrotherEncounter.Phase1.OnEnter += (orig, self) =>
-            {
-                orig(self);
-                SpawnBanners();
-            };
-
-            On.EntityStates.InfiniteTowerSafeWard.Active.OnEnter += (orig, self) =>
-            {
-                orig(self);
-                SpawnBanners();
-            };
         }
 
         private static void ModifyItem()
@@ -125,47 +113,6 @@ namespace RiskyMod.Items.Common
         {
             if (!RoR2.Items.WardOnLevelManager.wardPrefab) Debug.LogError("RiskyMod: Warbanner assigned before WardOnLevel Init");
             RoR2.Items.WardOnLevelManager.wardPrefab = WarbannerObject;
-        }
-
-        private void SpawnBanner(CharacterBody body)
-        {
-            if (body.inventory && body.teamComponent && body.teamComponent.teamIndex == TeamIndex.Player)
-            {
-                int itemCount = body.inventory.GetItemCount(RoR2Content.Items.WardOnLevel);
-                if (itemCount > 0)
-                {
-                    GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(WarbannerObject, body.transform.position, Quaternion.identity);
-                    gameObject.GetComponent<TeamFilter>().teamIndex = TeamIndex.Player;
-                    gameObject.GetComponent<BuffWard>().Networkradius = 8f + 8f * (float)itemCount;
-                    NetworkServer.Spawn(gameObject);
-                }
-            }
-        }
-
-        private void SpawnBanners()
-        {
-            //Taken from TeleporterInteraction
-            ReadOnlyCollection<TeamComponent> teamMembers = TeamComponent.GetTeamMembers(TeamIndex.Player);
-            for (int j = 0; j < teamMembers.Count; j++)
-            {
-                TeamComponent teamComponent = teamMembers[j];
-                CharacterBody body = teamComponent.body;
-                if (body)
-                {
-                    CharacterMaster master = teamComponent.body.master;
-                    if (master)
-                    {
-                        int itemCount = master.inventory.GetItemCount(RoR2Content.Items.WardOnLevel);
-                        if (itemCount > 0)
-                        {
-                            GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(WarbannerObject, body.transform.position, Quaternion.identity);
-                            gameObject.GetComponent<TeamFilter>().teamIndex = TeamIndex.Player;
-                            gameObject.GetComponent<BuffWard>().Networkradius = 8f + 8f * (float)itemCount;
-                            NetworkServer.Spawn(gameObject);
-                        }
-                    }
-                }
-            }
         }
 
         private void HandleStatsCustom(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
