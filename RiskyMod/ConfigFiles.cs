@@ -511,8 +511,6 @@ namespace RiskyMod
             CommandoCore.grenadeRemoveFalloff = SurvivorCfg.Bind(commandoString, "Frag Grenade - Remove Falloff", true, "Remove blast falloff from Frag Grenade. Requires Frag Grenade Changes = true.").Value;
 
             HuntressCore.enabled = SurvivorCfg.Bind(huntressString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            HuntressCore.HuntressTargetingMode = SurvivorCfg.Bind(huntressString, "Targeting Mode (Client-Side)", BullseyeSearch.SortMode.Angle, "How Huntress's target prioritization works.").Value;
-            HuntressCore.increaseAngle = SurvivorCfg.Bind(huntressString, "Increase Targeting Angle", true, "Increase max targeting angle.").Value;
             HuntressCore.strafeChanges = SurvivorCfg.Bind(huntressString, "Strafe Changes", true, "Enable changes to this skill.").Value;
             HuntressCore.flurryChanges = SurvivorCfg.Bind(huntressString, "Flurry Changes", true, "Enable changes to this skill.").Value;
             HuntressCore.laserGlaiveChanges = SurvivorCfg.Bind(huntressString, "Laser Glaive Changes", true, "Enable changes to this skill.").Value;

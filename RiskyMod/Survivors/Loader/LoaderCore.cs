@@ -33,7 +33,6 @@ namespace RiskyMod.Survivors.Loader
 
             loaderBody = bodyPrefab.GetComponent<CharacterBody>();
             SkillLocator sk = bodyPrefab.GetComponent<SkillLocator>();
-            SprintQoL(sk);
 
             new FixScepterUtilityBarrier();
             ModifyStats(loaderBody);
@@ -41,21 +40,6 @@ namespace RiskyMod.Survivors.Loader
 
             //Originally had a big all-around stat nerf, but it pretty much was just nerfing for the sake of nerfing and didn't really expand her gameplay or anything,
             //which is counter to the reason why this mod exists in the first place.
-        }
-
-        private void SprintQoL(SkillLocator sk)
-        {
-            SkillDef defaultGrapple = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Loader/FireHook.asset").WaitForCompletion();
-            SkillDef altGrapple = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Loader/FireYankHook.asset").WaitForCompletion();
-
-            SkillDef defaultShift = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Loader/ChargeFist.asset").WaitForCompletion();
-            SkillDef altShift = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Loader/ChargeZapFist.asset").WaitForCompletion();
-
-            defaultGrapple.cancelSprintingOnActivation = grappleCancelsSprint;
-            altGrapple.cancelSprintingOnActivation = grappleCancelsSprint;
-
-            defaultShift.cancelSprintingOnActivation = shiftCancelsSprint;
-            altShift.cancelSprintingOnActivation = shiftCancelsSprint;
         }
 
         private void ModifyStats(CharacterBody cb)

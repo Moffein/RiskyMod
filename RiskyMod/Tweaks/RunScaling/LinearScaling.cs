@@ -39,7 +39,7 @@ namespace RiskyMod.Tweaks.RunScaling
 				self.difficultyCoefficient = finalDifficulty;
 
 				//Untitled Difficulty Mod overwrites Run.ambientLevelCap
-				self.ambientLevel = Mathf.Min(3f * (finalDifficulty - playerFactor) + 1f, RemoveLevelCap.enabled ? RemoveLevelCap.maxLevel : Run.ambientLevelCap);
+				self.ambientLevel = Mathf.Min(3f * (finalDifficulty - playerFactor) + 1f, 9999);	//Used to be based on RemoveLevelCap settings.
 
 				//Vanilla code
 				int ambientLevelFloor = self.ambientLevelFloor;

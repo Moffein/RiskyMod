@@ -20,7 +20,6 @@ namespace RiskyMod.Survivors.Merc
         public MercCore()
         {
             if (!enabled) return;
-            ModifyStats(bodyPrefab.GetComponent<CharacterBody>());
             ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
         }
 
@@ -45,13 +44,6 @@ namespace RiskyMod.Survivors.Merc
                 }
                  orig(self);
             };
-        }
-
-        private void ModifyStats(CharacterBody cb)
-        {
-            if (!modifyStats) return;
-            cb.baseRegen = 2.5f;
-            cb.levelRegen = 0.5f;
         }
     }
 }

@@ -27,47 +27,13 @@ namespace RiskyMod.Survivors.Huntress
 
         public static bool arrowRainChanges = true;
         public static bool ballistaChanges = true;
-
-        public static bool increaseAngle = true;
-        public static BullseyeSearch.SortMode HuntressTargetingMode = BullseyeSearch.SortMode.Angle;
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/HuntressBody");
 
         public HuntressCore()
         {
             if (!enabled) return;
-            TrackingChanges();
             ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
         }
-
-        private void TrackingChanges()
-        {
-            On.RoR2.HuntressTracker.Start += (orig, self) =>
-            {
-                orig(self);
-                if (increaseAngle)
-                {
-                    self.maxTrackingAngle = 45f;
-                }
-            };
-            IL.RoR2.HuntressTracker.SearchForTarget += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
-                     x => x.MatchStfld(typeof(BullseyeSearch), "sortMode")
-                    ))
-                {
-                    c.EmitDelegate<Func<BullseyeSearch.SortMode, BullseyeSearch.SortMode>>(orig =>
-                    {
-                        return HuntressTargetingMode;
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: Huntress SearchForTarget IL Hook failed");
-                }
-            };
-        }
-
 
         private void ModifySkills(SkillLocator sk)
         {
