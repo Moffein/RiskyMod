@@ -197,14 +197,6 @@ namespace RiskyMod
 
             if (SoftDependencies.ZetTweaksLoaded) ZetTweaksCompat();
 
-            bool noLevelUpHealPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoLevelupHeal");
-            if (noLevelUpHealPluginLoaded && NoLevelupHeal.enabled) Debug.Log("RiskyMod: Disabling NoLevelupHeal because standalone plugin is loaded.");
-            NoLevelupHeal.enabled = NoLevelupHeal.enabled && !noLevelUpHealPluginLoaded;
-
-            bool removeLevelCapPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RaiseMonsterLevelCap");
-            if (removeLevelCapPluginLoaded && RemoveLevelCap.enabled) Debug.Log("RiskyMod: Disabling RemoveLevelCap because standalone plugin is loaded.");
-            RemoveLevelCap.enabled = RemoveLevelCap.enabled && !removeLevelCapPluginLoaded;
-
             if (SoftDependencies.QueensGlandBuffLoaded && QueensGland.enabled) Debug.Log("RiskyMod: Disabling Queens Gland changes because QueensGlandBuff is loaded.");
 
             bool nvaPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.NoVoidAllies");
@@ -318,13 +310,9 @@ namespace RiskyMod
         {
             //RunScaling
             new ModdedScaling();
-            new RemoveLevelCap();
-            new NoLevelupHeal();
-            new SceneDirectorMonsterRewards();
             new MonsterGoldRewards();
             new CombatDirectorMultiplier();
             new LoopTeleMountainShrine();
-            new NoBossRepeat();
 
             //Holdouts
             new SmallHoldoutCharging();

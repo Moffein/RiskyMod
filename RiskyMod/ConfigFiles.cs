@@ -213,14 +213,8 @@ namespace RiskyMod
             LinearScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling", false, "Makes difficulty scaling linear like in RoR1. Requires Modded Scaling to be enabled.").Value;
             LinearScaling.swapToExponential = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling - Swap to Exponential Lategame", false, "Linear Scaling swaps to exponential scaling when it gets outscaled.").Value;
 
-            NoLevelupHeal.enabled = GeneralCfg.Bind(scalingString, "No Levelup Heal", true, "Monsters don't gain HP when leveling up.").Value;
-            RemoveLevelCap.enabled = GeneralCfg.Bind(scalingString, "Increase Monster Level Cap", true, "Increases Monster Level Cap.").Value;
-            RemoveLevelCap.maxLevel = GeneralCfg.Bind(scalingString, "Increase Monster Level Cap - Max Level", 9999f, "Maximum monster level if Increase Monster Level Cap is enabled.").Value;
-            SceneDirectorMonsterRewards.enabled = GeneralCfg.Bind(scalingString, "SceneDirector Monster Rewards", true, "Monsters that spawn with the map now give the same rewards as teleporter monsters.").Value;
-
             LoopTeleMountainShrine.enabled = GeneralCfg.Bind(scalingString, "Loop Teleporter Boss Credits", true, "Teleporter Boss director credits increase by 1 Mountain Shrine every loop.").Value;
-            NoBossRepeat.enabled = GeneralCfg.Bind(scalingString, "No Teleporter Boss Repeat", true, "Lowers the chance of the same teleporter boss being selected within a loop.").Value;
-
+            
             //Allies
             AlliesCore.normalizeDroneDamage = GeneralCfg.Bind(allyString, "Normalize Drone Damage", true, "Normalize drone damage stats so that they perform the same when using Spare Drone Parts.").Value;
             AllyScaling.preventExecute = GeneralCfg.Bind(allyString, "No Execute", true, "Allies are immune to being executed by Freeze and similar effects.").Value;
