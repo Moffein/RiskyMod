@@ -724,9 +724,7 @@ namespace RiskyMod
             LunarExploder.enabled = MonsterCfg.Bind(monsterString, "Lunar Exploder", true, "Enable changes to this monster.").Value;
             LunarGolem.enabled = MonsterCfg.Bind(monsterString, "Lunar Golem", true, "Enable changes to this monster.").Value;
             LunarWisp.enabled = MonsterCfg.Bind(monsterString, "Lunar Wisp", true, "Enable changes to this monster.").Value;
-            LunarWisp.reduceSpawnrate = MonsterCfg.Bind(monsterString, "Lunar Wisp - Reduce Spawnrate", true, "Increases the director credit cost of this monster.").Value;
             LunarWisp.removeHitscan = MonsterCfg.Bind(monsterString, "Lunar Wisp - Remove Hitscan", true, "Changes the Lunar Wisp attack from hitscan to projectile.").Value;
-            LunarWisp.enableFalloff = MonsterCfg.Bind(monsterString, "Lunar Wisp - Bullet Falloff", true, "Adds damage falloff to Lunar Wisps bullets. Disabled if Remove Hitscan is enabled.").Value;
             LunarWisp.disableProjectileOnKill = MonsterCfg.Bind(monsterString, "Lunar Wisp - Disable Projectile On-Kill Effects", true, "Prevents on-kill effects from proccing when this monster's projectiles are shot down.").Value;
 
             Titan.enabled = MonsterCfg.Bind(monsterString, "Stone Titan", true, "Enable changes to this monster.").Value;

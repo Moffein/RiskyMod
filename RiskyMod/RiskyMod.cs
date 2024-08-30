@@ -216,11 +216,6 @@ namespace RiskyMod
             if (backstabReworkPluginLoaded && BackstabRework.enabled) Debug.Log("RiskyMod: Disabling Bandit2 BackstabRework because standalone plugin is loaded.");
             BackstabRework.enabled = BackstabRework.enabled && !backstabReworkPluginLoaded;
 
-            //Enemies
-            bool lunarWispFalloffPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.LunarWispFalloff");
-            if (lunarWispFalloffPluginLoaded && LunarWisp.enableFalloff) Debug.Log("RiskyMod: Disabling LunarWispFalloff because standalone plugin is loaded.");
-            LunarWisp.enableFalloff = LunarWisp.enableFalloff && !lunarWispFalloffPluginLoaded;
-
             //Gesture is always disabled by default so this shouldn't matter.
             bool gestureEnigmaPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.GestureEnigma");
             if (gestureEnigmaPluginLoaded && Gesture.enabled) Debug.Log("RiskyMod: Disabling Gesture of the Drowned changes because GestureEnigma is loaded.");

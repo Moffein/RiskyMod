@@ -13,9 +13,7 @@ namespace RiskyMod.Enemies.Mobs.Lunar
     {
         public static bool enabled = true;
         public static bool disableProjectileOnKill = true;
-        public static bool enableFalloff = true;
         public static bool removeHitscan = true;
-        public static bool reduceSpawnrate = true;
 
         public static GameObject shardProjectilePrefab;
 
@@ -23,63 +21,12 @@ namespace RiskyMod.Enemies.Mobs.Lunar
         {
             if (enabled)
             {
-                EnableStatusConditions();
                 if (removeHitscan)
                 {
                     RemoveHitscan();
                 }
-                else
-                {
-                    EnableBulletFalloff();
-                }
-                if (reduceSpawnrate)
-                {
-                    ReduceSpawnrate();
-                }
             }
             ModifyProjectile();
-        }
-
-        private void ReduceSpawnrate()
-        {
-            CharacterSpawnCard csc = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/LunarWisp/cscLunarWisp.asset").WaitForCompletion();
-            csc.directorCreditCost = 700; //550 vanilla, 350 for lunar golem
-        }
-
-        private void EnableStatusConditions()
-        {
-            GameObject enemyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/lunarwispbody");
-            SetStateOnHurt ssoh = enemyObject.GetComponent<SetStateOnHurt>();
-            if (!ssoh)
-            {
-                ssoh = enemyObject.AddComponent<SetStateOnHurt>();
-            }
-            ssoh.hitThreshold = 0.5f;
-            ssoh.canBeHitStunned = true;
-            ssoh.canBeStunned = true;
-            ssoh.canBeFrozen = true;
-
-            EntityStateMachine body = null;
-            EntityStateMachine weapon = null;
-            EntityStateMachine[] stateMachines = enemyObject.GetComponents<EntityStateMachine>();
-            foreach(EntityStateMachine esm in stateMachines)
-            {
-                switch(esm.customName)
-                {
-                    case "Body":
-                        body = esm;
-                        break;
-                    case "Weapon":
-                        weapon = esm;
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            ssoh.targetStateMachine = body;
-            ssoh.idleStateMachine = new EntityStateMachine[] { weapon };
-            ssoh.hurtState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.HurtStateFlyer));
         }
 
         private void ModifyProjectile()
@@ -97,43 +44,6 @@ namespace RiskyMod.Enemies.Mobs.Lunar
                 ProjectileImpactExplosion pie = projectile.GetComponent<ProjectileImpactExplosion>();
                 pie.falloffModel = BlastAttack.FalloffModel.SweetSpot;
             }
-        }
-
-        private void EnableBulletFalloff()
-        {
-            IL.EntityStates.LunarWisp.FireLunarGuns.OnFireAuthority += (il) =>
-            {
-                bool error = true;
-
-                ILCursor c = new ILCursor(il);
-                if (c.TryGotoNext(
-                     x => x.MatchCallvirt<BulletAttack>("Fire")
-                    ))
-                {
-                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
-                    {
-                        bulletAttack.falloffModel = BulletAttack.FalloffModel.DefaultBullet;
-                        return bulletAttack;
-                    });
-
-                    if (c.TryGotoNext(
-                     x => x.MatchCallvirt<BulletAttack>("Fire")
-                    ))
-                    {
-                        c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
-                        {
-                            bulletAttack.falloffModel = BulletAttack.FalloffModel.DefaultBullet;
-                            return bulletAttack;
-                        });
-                        error = false;
-                    }
-                }
-
-                if (error)
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: LunarWisp IL Hook failed");
-                }
-            };
         }
 
         private void RemoveHitscan()
