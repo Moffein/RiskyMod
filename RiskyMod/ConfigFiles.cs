@@ -190,8 +190,6 @@ namespace RiskyMod
 
             TeleChargeDuration.enabled = GeneralCfg.Bind(gameMechString, "Tele Charge Duration Increase", false, "Increases teleporter charge duration from 90s to 120s like RoR1.").Value;
 
-            SmallHoldoutCharging.enabled = GeneralCfg.Bind(gameMechString, "Small Holdout Charging", true, "Void/Moon Holdouts charge at max speed as long as 1 player is charging.").Value;
-
             //Run Scaling
             CombatDirectorMultiplier.directorCreditMultiplier = GeneralCfg.Bind(scalingString, "Combat Director Credit Multiplier", 1.4f, "Multiply Combat Director credits by this amount. Set to 1 to disable").Value;
             CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.directorCreditMultiplier != 1f;
@@ -240,17 +238,7 @@ namespace RiskyMod
             AlliesCore.TinkersSatchelCompat = GeneralCfg.Bind(allyString, "Compatibility - Tinkers Satchel", true, "Enables ally changes on allies from this mod.").Value;
             AlliesCore.MoreDronesCompat = GeneralCfg.Bind(allyString, "Compatibility - MoreDrones", true, "Enables ally changes on allies from this mod.").Value;
 
-            //Interactables
-            ShrineCombatItems.enabled = GeneralCfg.Bind(interactString, "Shrine of Combat Drops Items", true, "Shrine of Combat drops items for the team on completion.").Value;
-            
-            SpawnLimits.maxMountainShrines = GeneralCfg.Bind(interactString, "Max Shrines of the Mountain", 5, "Limit how many Mountain Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
-            SpawnLimits.maxCombatShrines = GeneralCfg.Bind(interactString, "Max Shrines of Combat", 3, "Limit how many Combat Shrines can spawn on 1 stage. Set to negative for no limit.").Value;
             SpawnLimits.maxVoidSeeds = GeneralCfg.Bind(interactString, "Max Void Seeds", 1, "Limit how many Void Seeds can spawn on 1 stage. Vanilla is 3. Set to negative for no limit.").Value;
-
-            ScaleCostWithPlayerCount.scaleCombatShrine = GeneralCfg.Bind(interactString, "Shrine of Combat Director Credit Scaling", true, "Increase director credit cost of this interactable based on the amount of players.").Value;
-            ScaleCostWithPlayerCount.scaleMountainShrine = GeneralCfg.Bind(interactString, "Shrine of the Mountain Director Credit Scaling", true, "Increase director credit cost of this interactable based on the amount of players.").Value;
-
-            if (SpawnLimits.maxMountainShrines < 0 && SpawnLimits.maxCombatShrines < 0 && SpawnLimits.maxVoidSeeds == 3) SpawnLimits.enabled = false;
 
             //Artifacts
             Sacrifice.enabled = GeneralCfg.Bind(artifactString, "Sacrifice - No Drop Chance Scaling", true, "Increases drop chance when not using Swarms and prevents drop chance from increasing as the run progresses.").Value;
@@ -265,25 +253,12 @@ namespace RiskyMod
             //Moon
             Moon.ModifyHoldout.enabled = GeneralCfg.Bind(moonString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
             LessPillars.enabled = GeneralCfg.Bind(moonString, "Reduce Pillar Count", true, "Reduce the amount of pillars required to activate the jump pads.").Value;
-            Moon.PillarsDropItems.enabled = GeneralCfg.Bind(moonString, "Pillars Drop Items", true, "Pillars drop items for the team when completed.").Value;
-            Moon.PillarsDropItems.whiteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Common Chance", 50f, "Chance for Pillars to drop Common Items.").Value;
-            Moon.PillarsDropItems.greenChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Uncommon Chance", 40f, "Chance for Pillars to drop Uncommon Items.").Value;
-            Moon.PillarsDropItems.redChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Legendary Chance", 10f, "Chance for Pillars to drop Legendary Items.").Value;
-            Moon.PillarsDropItems.lunarChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Lunar Chance", 0f, "Chance for nonlegendary Pillar drops to be overwritten with a random Lunar item.").Value;
-            Moon.PillarsDropItems.pearlOverwriteChance = GeneralCfg.Bind(moonString, "Pillars Drop Items - Pearl Override Chance", 15f, "Chance for nonlegendary Pillar drops to be overwritten with a Pearl.").Value;
-            Moon.FixVoidTeamBrotherEncounter.enabled = GeneralCfg.Bind(moonString, "Fix Void Team Death", true, "Fixes Void Team Enemies not being killed at the start of the bossfight.").Value;
-
+            
             //Void Locus
             RemoveFog.enabled = GeneralCfg.Bind(voidLocusString, "Remove Fog", false, "Removes Void Fog from the map.").Value;
             VoidLocus.FogDamage.enabled = GeneralCfg.Bind(voidLocusString, "Tweak Fog Damage", true, "Void Fog damage ticks at a constant rate, instead of ramping up like in Simulacrum.").Value && !RemoveFog.enabled;
             VoidLocus.ModifyHoldout.enabled = GeneralCfg.Bind(voidLocusString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
-            VoidLocus.PillarsDropItems.enabled = GeneralCfg.Bind(voidLocusString, "Signals Drop Items", true, "Void Signals drop items for the team when completed.").Value;
-            VoidLocus.PillarsDropItems.usePotential = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Drop Void Potential", true, "Void Signals drop Void Potentials. Overwrite chance settings.").Value;
-            VoidLocus.PillarsDropItems.whiteChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Common Chance", 45f, "Chance for Signals to drop Common Items.").Value;
-            VoidLocus.PillarsDropItems.greenChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Uncommon Chance", 40f, "Chance for Signals to drop Uncommon Items.").Value;
-            VoidLocus.PillarsDropItems.redChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Legendary Chance", 5f, "Chance for Signals to drop Legendary Items.").Value;
-            VoidLocus.PillarsDropItems.voidChance = GeneralCfg.Bind(voidLocusString, "Signals Drop Items - Void Chance", 10f, "Chance for Signals to drop Void Items.").Value;
-
+            
             //Misc
             BetterProjectileTracking.enabled = GeneralCfg.Bind(miscString, "Better Projectile Homing", true, "Homing projectiles target based on angle, instead of distance + angle.").Value;
             FreezeChampionExecute.enabled = GeneralCfg.Bind(miscString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
@@ -370,8 +345,6 @@ namespace RiskyMod
             Clover.enabled = ItemCfg.Bind(legendaryString, "57 Leaf Clover", false, "Caps how high the Luck stat can go.").Value;
             Clover.luckCap = ItemCfg.Bind(legendaryString, "57 Leaf Clover - Max Luck", 1f, "Maximum Luck value players can reach. Extra Luck is converted to stat boosts.").Value;
             FrostRelic.enabled = ItemCfg.Bind(legendaryString, "Frost Relic", true, itemConfigDescString).Value;
-            FrostRelic.removeFOV = ItemCfg.Bind(legendaryString, "Frost Relic - Disable FOV Modifier", true, "Disables FOV modifier.").Value;
-            FrostRelic.removeBubble = ItemCfg.Bind(legendaryString, "Frost Relic - Disable Bubble", true, "Disables bubble visuals.").Value;
             HappiestMask.enabled = ItemCfg.Bind(legendaryString, "Happiest Mask", true, itemConfigDescString).Value;
             HappiestMask.scaleCount = ItemCfg.Bind(legendaryString, "Happiest Mask - Stacks Increase Max Ghosts", false, "Extra stacks allow for more ghosts to spawn. Will lag in MP.").Value;
             HappiestMask.noGhostLimit = ItemCfg.Bind(legendaryString, "Happiest Mask - Remove Ghost Limit", false, "Removes the ghost limit at all times. Definitely will lag.").Value;

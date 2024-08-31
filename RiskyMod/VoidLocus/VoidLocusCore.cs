@@ -13,7 +13,6 @@ namespace RiskyMod.VoidLocus
             new RemoveFog();
             new FogDamage();
             new ModifyHoldout();
-            new PillarsDropItems();
         }
     }
 }

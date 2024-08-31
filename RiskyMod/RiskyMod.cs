@@ -50,9 +50,6 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.SacrificeTweaks", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.Hypercrit", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.TheTimeSweeper.AcridHitboxBuff", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.Moffein.AcridBlightStack", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.LunarWispFalloff", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.NoVoidAllies", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.EliteReworks", BepInDependency.DependencyFlags.SoftDependency)]
@@ -72,9 +69,7 @@ namespace RiskyMod
     [BepInDependency("com.plasmacore.PlasmaCoreSpikestripContent", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.Heretic", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("zombieseatflesh7.ArtifactOfPotential", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RuneFoxMods.TeleporterTurrets", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.Moffein.ArtificerM1Reload", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     #endregion
 
@@ -222,9 +217,6 @@ namespace RiskyMod
 
             bool teleExpansionLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.TeleExpansion");
 
-            if (teleExpansionLoaded && SmallHoldoutCharging.enabled) Debug.Log("RiskyMod: Disabling SmallHoldoutCharging because TeleExpansion is loaded.");
-            SmallHoldoutCharging.enabled = SmallHoldoutCharging.enabled && !teleExpansionLoaded;
-
             if (teleExpansionLoaded && TeleExpandOnBossKill.enabled) Debug.Log("RiskyMod: Disabling TeleExpandOnBossKill because TeleExpansion is loaded.");
             TeleExpandOnBossKill.enabled = TeleExpandOnBossKill.enabled && !teleExpansionLoaded;
 
@@ -290,14 +282,11 @@ namespace RiskyMod
             new LoopTeleMountainShrine();
 
             //Holdouts
-            new SmallHoldoutCharging();
             new TeleExpandOnBossKill();
             new TeleChargeDuration();
 
             //Interactables
-            new ShrineCombatItems();
             new SpawnLimits();
-            new ScaleCostWithPlayerCount();
 
             //Character Mechanics
             new TrueOSP();

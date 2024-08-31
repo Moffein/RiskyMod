@@ -11,9 +11,7 @@ namespace RiskyMod.Moon
         {
             if (!enabled) return;
             new LessPillars();
-            new PillarsDropItems();
             new ModifyHoldout();
-            new FixVoidTeamBrotherEncounter();
         }
     }
 }
