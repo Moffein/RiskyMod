@@ -43,29 +43,6 @@ namespace RiskyMod.SharedHooks
                         {
 							OnCharacterDeathInventoryActions.Invoke(self, damageReport, attackerBody, attackerInventory, victimBody);
 						}
-						if (RiskyMod.assistManager)
-						{
-							//On-death is handled by assist manager to prevent having a bunch of duplicated code.
-							//Need to add an assist here since it's called before OnHitEnemy.
-							RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.assistLength);
-							if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)
-							{
-								RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.GetDuration(attackerBody), AssistManager.DirectAssistType.ResetCooldowns);
-							}
-							if ((damageInfo.damageType & DamageType.GiveSkullOnKill) > DamageType.Generic)
-							{
-								RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.GetDuration(attackerBody), AssistManager.DirectAssistType.BanditSkull);
-							}
-							if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBiteHealOnKill))
-							{
-								RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, AssistManager.directAssistLength, AssistManager.DirectAssistType.CrocoBiteHealOnKill);
-                            }
-                            if (damageInfo.HasModdedDamageType(Bandit2Core.StandoffDamage))
-                            {
-                                RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.GetDuration(damageInfo.attacker), AssistManager.DirectAssistType.BanditStandoff);
-                            }
-                            RiskyMod.assistManager.TriggerAssists(victimBody, attackerBody, damageInfo);
-						}
 					}
 				}
 			}

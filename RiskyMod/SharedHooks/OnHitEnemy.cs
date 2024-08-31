@@ -25,50 +25,6 @@ namespace RiskyMod.SharedHooks
 			Inventory attackerInventory = null;
 
 			bool validDamage = NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected;
-			bool assistsEnabled = RiskyMod.assistManager != null;
-
-			if (validDamage)
-			{
-				if (damageInfo.attacker)
-				{
-					attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-					victimBody = victim ? victim.GetComponent<CharacterBody>() : null;
-
-					if (attackerBody)
-                    {
-						attackerInventory = attackerBody.inventory;
-						if (attackerInventory)
-						{
-							if (assistsEnabled)
-							{
-								RiskyMod.assistManager.AddAssist(attackerBody, victimBody, AssistManager.assistLength);
-							}
-						}
-					}
-
-					//This needs a refactor so that it gets hooked by the things that specifically add it, instead of having the things here.
-					//Run this before triggering on-hit procs so that procs don't kill enemies before this triggers.
-					if (assistsEnabled)
-                    {
-						if ((damageInfo.damageType & DamageType.ResetCooldownsOnKill) > DamageType.Generic)
-						{
-							RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.GetDuration(damageInfo.attacker), AssistManager.DirectAssistType.ResetCooldowns);
-						}
-						if ((damageInfo.damageType & DamageType.GiveSkullOnKill) > DamageType.Generic)
-						{
-							RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.GetDuration(damageInfo.attacker), AssistManager.DirectAssistType.BanditSkull);
-						}
-						if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBiteHealOnKill))
-                        {
-							RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, AssistManager.directAssistLength, AssistManager.DirectAssistType.CrocoBiteHealOnKill);
-						}
-						if (damageInfo.HasModdedDamageType(Bandit2Core.StandoffDamage))
-						{
-                            RiskyMod.assistManager.AddDirectAssist(attackerBody, victimBody, BanditSpecialGracePeriod.GetDuration(damageInfo.attacker), AssistManager.DirectAssistType.BanditStandoff);
-                        }
-					}
-				}
-			}
 
 			orig(self, damageInfo, victim);
 

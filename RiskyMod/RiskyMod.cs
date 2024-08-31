@@ -42,19 +42,12 @@ using RiskyMod.Enemies.DLC1.Voidling;
 namespace RiskyMod
 {
     #region softdependencies
-    [BepInDependency("com.Nuxlar.DetectionFix", BepInDependency.DependencyFlags.SoftDependency)]
+    
+    [BepInDependency("com.Moffein.AssistManager", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency(".AVFX_Options..", BepInDependency.DependencyFlags.SoftDependency)]    //Does this softdependency actually work? (since RiskyMod clones the projectiles)
     [BepInDependency("com.PlasmaCore.StickyStunter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.MobileTurretBuff", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.Moffein.FixPlayercount", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.Moffein.NoLevelupHeal", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.Moffein.AI_Blacklist", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("dev.wildbook.multitudes", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.TPDespair.ZetArtifacts", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.SacrificeTweaks", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.rob.ArtifactReliquaryHealingFix", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.Moffein.RaiseMonsterLevelCap", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.PlasmaCore.AlwaysAllowSupplyDrops", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.Hypercrit", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
@@ -97,8 +90,6 @@ namespace RiskyMod
 
         public static ItemDef emptyItemDef = null;
         public static BuffDef emptyBuffDef = null;
-
-        public static AssistManager assistManager = null;
 
         public static PluginInfo pluginInfo;
         public static FileSystem fileSystem { get; private set; }
@@ -156,7 +147,6 @@ namespace RiskyMod
             new SurvivorsCore();
             new FireSelect();
             new EnemiesCore();
-            SetupAssists();
             AddHooks();
         }
 
@@ -230,7 +220,6 @@ namespace RiskyMod
             if (interactableLimitPluginLoaded && SpawnLimits.enabled) Debug.Log("RiskyMod: Disabling Interactable SpawnLimits changes because InteractableLimit is loaded.");
             SpawnLimits.enabled = SpawnLimits.enabled && !interactableLimitPluginLoaded;
 
-            //No need for this to be static since this doesn't get referenced anywhere else
             bool teleExpansionLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.TeleExpansion");
 
             if (teleExpansionLoaded && SmallHoldoutCharging.enabled) Debug.Log("RiskyMod: Disabling SmallHoldoutCharging because TeleExpansion is loaded.");
@@ -343,23 +332,6 @@ namespace RiskyMod
             SharedHooks.TakeDamage.OnDamageTakenAttackerActions += TakeDamage.DistractOnHit;
 
             new ModifyFinalDamage();
-        }
-
-        private void SetupAssists()
-        {
-            RoR2.Run.onRunStartGlobal += InitAssistManager;
-        }
-
-        private void InitAssistManager(Run self)
-        {
-            if (NetworkServer.active)
-            {
-                RiskyMod.assistManager = self.gameObject.GetComponent<AssistManager>();
-                if (!RiskyMod.assistManager)
-                {
-                    RiskyMod.assistManager = self.gameObject.AddComponent<AssistManager>();
-                }
-            }
         }
 
         public delegate void FireMode();

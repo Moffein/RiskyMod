@@ -56,7 +56,6 @@ namespace RiskyMod.Items
             new Crowbar();
             new Warbanner();
             new Gasoline();
-            new TopazBrooch();
             new TougherTimes();
             new CautiousSlug();
             new StunGrenade();
@@ -82,7 +81,6 @@ namespace RiskyMod.Items
             new RoseBuckler();
             new Guillotine();
             new Berzerker();
-            new HarvesterScythe();
             new WarHorn();
             new Infusion();
             new RedWhip();
@@ -97,11 +95,8 @@ namespace RiskyMod.Items
             new Tesla();
             new FrostRelic();
             new CeremonialDagger();
-            new LaserTurbine();
             new HeadHunter();
             new Headstompers();
-            new Brainstalks();
-            new Soulbound();
             new Behemoth();
             new HappiestMask();
             new Clover();
