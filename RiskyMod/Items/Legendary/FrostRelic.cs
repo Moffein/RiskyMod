@@ -8,9 +8,6 @@ namespace RiskyMod.Items.Legendary
     {
         public static bool enabled = true;
 
-        public static bool removeBubble = true;
-        public static bool removeFOV = true;
-
         public FrostRelic()
         {
             if (!enabled) return;
@@ -69,37 +66,6 @@ namespace RiskyMod.Items.Legendary
                     self.actualRadius = 0f;
                 }
             };
-
-            //Disable FOV change
-            if (removeFOV)
-            {
-                On.RoR2.IcicleAuraController.OnIciclesActivated += (orig, self) =>
-                {
-                    orig(self);
-
-                    CameraTargetParams.AimRequest aimRequest = self.aimRequest;
-                    if (aimRequest == null)
-                    {
-                        return;
-                    }
-                    aimRequest.Dispose();
-                };
-            }
-
-            //Remove bubble
-            if (removeBubble)
-            {
-                GameObject indicator = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/IcicleAura");
-                ParticleSystemRenderer[] pr = indicator.GetComponentsInChildren<ParticleSystemRenderer>();
-                foreach (ParticleSystemRenderer p in pr)
-                {
-                    //Debug.Log(p.name);
-                    if (p.name == "Area")
-                    {
-                        Object.Destroy(p);
-                    }
-                }
-            }
         }
         private static void ModifyItem()
         {
