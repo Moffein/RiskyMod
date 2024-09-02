@@ -30,8 +30,6 @@ namespace RiskyMod.Survivors.Engi
         private void ModifyWalkerTurret()
         {
             if (!mobileTurretChanges) return;
-            float range = 45f;
-
             GameObject turretBody = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/EngiWalkerTurretBody");
             CharacterBody cb = turretBody.GetComponent<CharacterBody>();
             cb.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
@@ -40,20 +38,6 @@ namespace RiskyMod.Survivors.Engi
             cb.regen = 1f;
             cb.levelRegen = cb.regen * 0.2f;
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.EngiTurret.EngiTurretWeapon.FireBeam", "damageCoefficient", "2.666666667");
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.EngiTurret.EngiTurretWeapon.FireBeam", "maxDistance", "45");
-
-            Component[] aiDrivers = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/EngiWalkerTurretMaster").GetComponents<AISkillDriver>();
-            foreach (AISkillDriver asd in aiDrivers)
-            {
-                if (asd.customName != "Rest")
-                {
-                    asd.shouldSprint = true;
-                }
-                if (asd.customName == "ChaseAndFireAtEnemy")
-                {
-                    asd.maxDistance = range;
-                }
-            }
         }
     }
 }
