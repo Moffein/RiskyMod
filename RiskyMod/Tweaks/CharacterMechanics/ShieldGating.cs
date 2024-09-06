@@ -25,11 +25,11 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             {
                 ILCursor c = new ILCursor(il);
                 if (c.TryGotoNext(
-                     x => x.MatchLdloc(7),
+                     x => x.MatchLdloc(8),
                      x => x.MatchLdarg(0),
                      x => x.MatchLdfld<HealthComponent>("shield"),
                      x => x.MatchSub(),
-                     x => x.MatchStloc(7),
+                     x => x.MatchStloc(8),
                      x => x.MatchLdarg(0)
                     ))
                 {

@@ -58,7 +58,6 @@ namespace RiskyMod.Survivors.Bandit2
         {
             if (!enabled) return;
             if (specialRework || PersistentDesperado.enabled) Bandit2Core.bodyPrefab.AddComponent<DesperadoTracker>();
-            new BanditSpecialGracePeriod();
             new PersistentDesperado();
 
             ModifyStats(bodyPrefab.GetComponent<CharacterBody>());

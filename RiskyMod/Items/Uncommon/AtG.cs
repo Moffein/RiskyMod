@@ -43,8 +43,8 @@ namespace RiskyMod.Items.Uncommon
 					 x => x.MatchLdsfld(typeof(RoR2Content.Items), "Missile")
 					))
                 {
-					c.Emit(OpCodes.Ldloc, 1); //victimBody
-					c.Emit(OpCodes.Ldloc, 4); //master
+					c.Emit(OpCodes.Ldloc, 2); //victimBody
+					c.Emit(OpCodes.Ldloc, 5); //master
 					c.Emit(OpCodes.Ldarg_1);    //damageinfo
 					c.EmitDelegate<Func<ItemDef, CharacterBody, CharacterMaster, DamageInfo, ItemDef>>((item, victimBody, master, damageInfo) =>
 					{
