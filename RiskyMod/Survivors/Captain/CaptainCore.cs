@@ -148,7 +148,6 @@ namespace RiskyMod.Survivors.Captain
 
                 SkillDef taserSkill = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CaptainTazer.asset").WaitForCompletion();
                 taserSkill.skillDescriptionToken = "CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD";
-                //if (Tweaks.CharacterMechanics.Shock.enabled) taserSkill.keywordTokens = new string[] { "KEYWORD_SHOCKING_RISKYMOD" };
             }
         }
 

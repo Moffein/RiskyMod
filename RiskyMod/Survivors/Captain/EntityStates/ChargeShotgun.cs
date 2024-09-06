@@ -67,13 +67,14 @@ namespace EntityStates.RiskyMod.Captain
 			}
 			if (base.isAuthority)
 			{
-				if (!this.released &&
+				bool fireSelectEnabled = RiskyTweaks.FireSelect.CaptainAutoFire.Enabled.Value;
+				bool isAutoFire = RiskyTweaks.FireSelect.CaptainAutoFire.currentfireMode == RiskyTweaks.FireSelect.CaptainAutoFire.CaptainFireMode.Auto;
+				bool isChargeFire = RiskyTweaks.FireSelect.CaptainAutoFire.currentfireMode == RiskyTweaks.FireSelect.CaptainAutoFire.CaptainFireMode.Charged;
+
+                if (!this.released &&
 					(!base.inputBank
 					|| !base.inputBank.skill1.down
-					|| (CaptainFireModes.enabled.Value &&
-						(CaptainFireModes.currentfireMode == CaptainFireModes.CaptainFireMode.Auto
-						|| (CaptainFireModes.currentfireMode == CaptainFireModes.CaptainFireMode.Charged && charge >= 1f))
-						)
+					|| (fireSelectEnabled && (isAutoFire || (isChargeFire && charge >= 1f)))
 					)
 				)
 				{

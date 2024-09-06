@@ -15,11 +15,18 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
 		private float minDuration;
 		private bool buttonReleased;
 
+		private bool fireSelectEnabled;
+		private bool isSpam;
+
 		public override void OnEnter()
 		{
 			buttonReleased = false;
 			baseDuration = _baseDuration;
-			if (BanditFireModes.enabled.Value && BanditFireModes.currentfireMode == BanditFireModes.Bandit2FireMode.Spam) baseDuration = 0.12f;
+
+			fireSelectEnabled = RiskyTweaks.Tweaks.Survivors.Bandit2.PrimaryAutoFire.Instance.Enabled.Value && RiskyTweaks.Tweaks.Survivors.Bandit2.PrimaryAutoFire.FireMode.Enabled.Value;
+			isSpam = RiskyTweaks.Tweaks.Survivors.Bandit2.PrimaryAutoFire.FireMode.currentfireMode == RiskyTweaks.Tweaks.Survivors.Bandit2.PrimaryAutoFire.FireMode.Bandit2FireMode.Spam;
+
+            if (fireSelectEnabled && isSpam) baseDuration = 0.12f;
 			base.OnEnter();
 			duration = baseDuration / this.attackSpeedStat;
 			minDuration = baseMinDuration / this.attackSpeedStat;
@@ -68,7 +75,7 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
         public override void OnExit()
 		{
 			if (!buttonReleased && base.characterBody && base.skillLocator && base.skillLocator.primary.stock > 0
-				&& !(BanditFireModes.enabled.Value && BanditFireModes.currentfireMode == BanditFireModes.Bandit2FireMode.Spam))
+				&& !(fireSelectEnabled && isSpam))
 			{
 				base.characterBody.SetSpreadBloom(0f, false);
 			}

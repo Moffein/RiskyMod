@@ -143,7 +143,6 @@ namespace RiskyMod
             new MoonCore();
             new VoidLocusCore();
             new SurvivorsCore();
-            new FireSelect();
             new EnemiesCore();
             AddHooks();
         }

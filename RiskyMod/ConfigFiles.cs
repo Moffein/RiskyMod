@@ -121,26 +121,12 @@ namespace RiskyMod
         private static void RiskOfOptionsCompat()
         {
             ModSettingsManager.SetModIcon(Content.Assets.MiscSprites.ModIcon);
-            ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(FireSelect.scrollSelection));
-            ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.swapButton));
-            ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(FireSelect.prevButton));
 
             if (SurvivorsCore.enabled)
             {
                 if (CaptainCore.enabled && CaptainCore.enablePrimarySkillChanges)
                 {
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(CaptainFireModes.enabled));
                     ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(EntityStates.RiskyMod.Captain.FireShotgun.scalePellets));
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.defaultButton));
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.autoButton));
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(CaptainFireModes.chargeButton));
-                }
-
-                if (Bandit2Core.enabled && (Bandit2Core.blastChanges || Bandit2Core.burstChanges))
-                {
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(BanditFireModes.enabled));
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(BanditFireModes.defaultButton));
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(BanditFireModes.spamButton));
                 }
 
                 if (MageCore.enabled)
@@ -430,24 +416,6 @@ namespace RiskyMod
             Goobo.enabled = ItemCfg.Bind(equipmentString, "Goobo Jr.", true, itemConfigDescString).Value;
         }
 
-        private static void ConfigFireSelect()
-        {
-            FireSelect.scrollSelection = SurvivorCfg.Bind(fireSelectString, "Use Scrollwheel", true, "Mouse Scroll Wheel changes firemode");
-
-            FireSelect.swapButton = SurvivorCfg.Bind(fireSelectString, "Next Firemode", KeyboardShortcut.Empty, "Button to swap to the next firemode.");
-
-            FireSelect.prevButton = SurvivorCfg.Bind(fireSelectString, "Previous Firemode", KeyboardShortcut.Empty, "Button to swap to the previous firemode.");
-
-            CaptainFireModes.enabled = SurvivorCfg.Bind(fireSelectString, "Captain: Enable Fire Select", false, "Enable firemode selection for Captain's shotgun (requires primary changes to be enabled).");
-            CaptainFireModes.defaultButton = SurvivorCfg.Bind(fireSelectString, "Captain: Swap to Default", KeyboardShortcut.Empty, "Button to swap to the Default firemode.");
-            CaptainFireModes.autoButton = SurvivorCfg.Bind(fireSelectString, "Captain: Swap to Auto", KeyboardShortcut.Empty, "Button to swap to the Auto firemode.");
-            CaptainFireModes.chargeButton = SurvivorCfg.Bind(fireSelectString, "Captain: Swap to Charged", KeyboardShortcut.Empty, "Button to swap to the Charged firemode.");
-
-            BanditFireModes.enabled = SurvivorCfg.Bind(fireSelectString, "Bandit: Enable Fire Select", false, "Enable firemode selection for Bandit's primaries (requires primary changes to be enabled).");
-            BanditFireModes.defaultButton = SurvivorCfg.Bind(fireSelectString, "Bandit: Swap to Default", KeyboardShortcut.Empty, "Button to swap to the Default firemode.");
-            BanditFireModes.spamButton = SurvivorCfg.Bind(fireSelectString, "Bandit: Swap to Spam", KeyboardShortcut.Empty, "Button to swap to the Spam firemode.");
-        }
-
         private static void ConfigSurvivors()
         {
             SurvivorCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Survivors.cfg"), true);
@@ -597,10 +565,7 @@ namespace RiskyMod
             VoidFiendCore.secondaryMultitask = SurvivorCfg.Bind(voidFiendString, "Secondary Multitasking", true, "Drown and Suppress can be fired while charging Flood.").Value;
             UtilityFallImmune.enabled = SurvivorCfg.Bind(voidFiendString, "Trespass Changes", true, "Enable changes to this skill.").Value;
             UtilityMoveSpeedScaling.disableScaling = SurvivorCfg.Bind(voidFiendString, "Trespass - Disable Move Speed Scaling", false, "(Client-Side) Prevents Trespass from scaling with move speed.");
-            
-            ConfigFireSelect();
-
-
+ 
             if (!SurvivorsCore.enabled)
             {
                 Bandit2Core.enabled = false;
