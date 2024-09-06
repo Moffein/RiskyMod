@@ -24,7 +24,7 @@ namespace RiskyMod.Items.Boss
             float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 
             //Remove Vanilla Effect
-            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            IL.RoR2.GlobalEventManager.ProcessHitEnemy += (il) =>
             {
                 bool error = true;
 

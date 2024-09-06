@@ -28,7 +28,7 @@ namespace EntityStates.RiskyMod.Croco
 			if (base.isAuthority)
 			{
 				bool hasDeeprot = CrocoCore.HasDeeprot(base.skillLocator);
-				DamageType value = this.crocoDamageTypeController ? this.crocoDamageTypeController.GetDamageType() : DamageType.Generic;
+				DamageType value = this.crocoDamageTypeController ? this.crocoDamageTypeController.GetDamageType().damageType : DamageType.Generic;
 				if (!CrocoCore.HasDeeprot(base.skillLocator))
                 {
 					value = DamageType.Generic;

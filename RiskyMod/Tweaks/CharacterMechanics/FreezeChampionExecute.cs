@@ -83,7 +83,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
         //This doesn't fix Guillotines not stacking with Freeze, but Guillotines are reworked anyways.
         private void ModifyExecuteThreshold()
         {
-            IL.RoR2.HealthComponent.TakeDamage += (il) =>
+            IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
             {
                 bool error = true;
                 ILCursor c = new ILCursor(il);

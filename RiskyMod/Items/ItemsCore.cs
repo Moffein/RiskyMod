@@ -60,7 +60,6 @@ namespace RiskyMod.Items
             new CautiousSlug();
             new StunGrenade();
 
-            new Pennies();
             new DelicateWatch();
             new PowerElixir();
         }

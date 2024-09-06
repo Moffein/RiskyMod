@@ -7,7 +7,7 @@ Game Parameter	ID	Name			Wwise Object Path	Notes
 	3673881719	Volume_SFX			\Default Work Unit\Volume_SFX	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	702021822	sndLightningPistol	C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\.cache\Windows\SFX\sndLightningPistol_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Survivors\sndLightningPistol		5355
-	921699460	wChainLightning	C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\.cache\Windows\SFX\wChainLightning_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Survivors\wChainLightning		5365
-	983076228	wWatch_Cropped	C:\Users\Node\RoR2 Mods\RiskyMod\RiskyMod_Sounds\.cache\Windows\SFX\wWatch_Cropped_3F75BDB9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Survivors\wWatch_Cropped		6040
+	702021822	sndLightningPistol	D:\Projects\RoR2 Mods\RiskyMod\RiskyMod_Sounds\.cache\Windows\SFX\sndLightningPistol_8E324C96.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Survivors\sndLightningPistol		5379
+	921699460	wChainLightning	D:\Projects\RoR2 Mods\RiskyMod\RiskyMod_Sounds\.cache\Windows\SFX\wChainLightning_8E324C96.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Survivors\wChainLightning		5389
+	983076228	wWatch_Cropped	D:\Projects\RoR2 Mods\RiskyMod\RiskyMod_Sounds\.cache\Windows\SFX\wWatch_Cropped_8E324C96.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Survivors\wWatch_Cropped		6064
 

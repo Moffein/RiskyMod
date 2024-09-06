@@ -25,14 +25,7 @@ namespace RiskyMod.Enemies.Bosses
         {
             if (!enabled) return;
 
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-                MagmaWormIndex = BodyCatalog.FindBodyIndex("MagmaWormBody");
-                ElectricWormIndex = BodyCatalog.FindBodyIndex("ElectricWormBody");
-                if (MagmaWormIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(MagmaWormIndex);
-                if (ElectricWormIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(ElectricWormIndex);
-            };
+            RoR2Application.onLoad += OnLoad;
 
             //ProjectileSetup();
             //AlwaysFireMeatballs(); //Laggy
@@ -42,6 +35,14 @@ namespace RiskyMod.Enemies.Bosses
 
             ReduceFollowDelay(magmaWorm);
             ReduceFollowDelay(electricWorm);
+        }
+
+        private void OnLoad()
+        {
+            MagmaWormIndex = BodyCatalog.FindBodyIndex("MagmaWormBody");
+            ElectricWormIndex = BodyCatalog.FindBodyIndex("ElectricWormBody");
+            if (MagmaWormIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(MagmaWormIndex);
+            if (ElectricWormIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(ElectricWormIndex);
         }
 
         //This causes the ground to constantly be filled with fire. Might not be suitable.

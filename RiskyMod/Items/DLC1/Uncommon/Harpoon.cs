@@ -16,6 +16,7 @@ namespace RiskyMod.Items.DLC1.Uncommon
         public Harpoon()
         {
             if (!enabled) return;
+            AssistManager.VanillaTweaks.Harpoon.Instance.SetEnabled(false);
             BuffDef originalHarpoonBuff = Addressables.LoadAssetAsync<BuffDef>("RoR2/DLC1/MoveSpeedOnKill/bdKillMoveSpeed.asset").WaitForCompletion();
 
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
@@ -35,7 +36,8 @@ namespace RiskyMod.Items.DLC1.Uncommon
             };
 
             ItemsCore.ModifyItemDefActions += ModifyItem;
-            AssistManager.HandleAssistInventoryActions += OnKillEffect;
+            AssistManager.AssistManager.HandleAssistInventoryCompatibleActions += HandleAssist;
+            SharedHooks.OnCharacterDeath.OnCharacterDeathInventoryActions += ProcItem;
 
             ReturnsHarpoonBuff = SneedUtils.SneedUtils.CreateBuffDef(
                 "RiskyMod_ReturnsHarpoonBuff",
@@ -49,6 +51,17 @@ namespace RiskyMod.Items.DLC1.Uncommon
             RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
         }
 
+        private void ProcItem(GlobalEventManager self, DamageReport damageReport, CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody)
+        {
+            OnKillEffect(attackerBody, attackerInventory);
+        }
+
+        private void HandleAssist(CharacterBody attackerBody, CharacterBody victimBody, DamageType? assistDamageType, System.Collections.Generic.HashSet<DamageAPI.ModdedDamageType> assistModdedDamageTypes, Inventory attackerInventory, CharacterBody killerBody, DamageInfo damageInfo)
+        {
+            if (attackerBody == killerBody) return;
+            OnKillEffect(attackerBody, attackerInventory);
+        }
+
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
             if (sender.HasBuff(Harpoon.ReturnsHarpoonBuff))
@@ -57,7 +70,7 @@ namespace RiskyMod.Items.DLC1.Uncommon
             }
         }
 
-        private static void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
+        private static void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory)
         {
             int itemCount = attackerInventory.GetItemCount(DLC1Content.Items.MoveSpeedOnKill);
             if (itemCount > 0)
@@ -66,15 +79,6 @@ namespace RiskyMod.Items.DLC1.Uncommon
                 int currentBuffs = attackerBody.GetBuffCount(Harpoon.ReturnsHarpoonBuff);
 
                 SneedUtils.SneedUtils.AddCooldownBuff(attackerBody, Harpoon.ReturnsHarpoonBuff, Mathf.Min(25, buffsToGive + currentBuffs), 0.5f);
-
-                /*int stack = itemCount - 1;
-                int num6 = 5;
-                float totalDuration = 2f + (float)stack;
-                attackerBody.ClearTimedBuffs(DLC1Content.Buffs.KillMoveSpeed);
-                for (int i = 0; i < num6; i++)
-                {
-                    attackerBody.AddTimedBuff(DLC1Content.Buffs.KillMoveSpeed, totalDuration * (float)(i + 1) / (float)num6);
-                }*/
 
                 EffectData effectData = new EffectData();
                 effectData.origin = attackerBody.corePosition;

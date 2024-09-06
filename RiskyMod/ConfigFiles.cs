@@ -145,8 +145,6 @@ namespace RiskyMod
 
                 if (MageCore.enabled)
                 {
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.ionSurgeMovementScaling));
-
                     if (MageCore.iceWallRework || MageCore.enableFireUtility)
                     {
                         ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.utilitySelfKnockback));
@@ -256,7 +254,6 @@ namespace RiskyMod
             
             //Void Locus
             RemoveFog.enabled = GeneralCfg.Bind(voidLocusString, "Remove Fog", false, "Removes Void Fog from the map.").Value;
-            VoidLocus.FogDamage.enabled = GeneralCfg.Bind(voidLocusString, "Tweak Fog Damage", true, "Void Fog damage ticks at a constant rate, instead of ramping up like in Simulacrum.").Value && !RemoveFog.enabled;
             VoidLocus.ModifyHoldout.enabled = GeneralCfg.Bind(voidLocusString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
             
             //Misc
@@ -299,9 +296,6 @@ namespace RiskyMod
             TougherTimes.enabled = ItemCfg.Bind(commonString, "Tougher Times", true, itemConfigDescString).Value;
             Warbanner.enabled = ItemCfg.Bind(commonString, "Warbanner", true, itemConfigDescString).Value;
             Warbanner.UseModdedBuff = ItemCfg.Bind(commonString, "Warbanner - Use Custom Buff", true, "Warbanner is handled via a custom buff and GameObject so that it doesn't interfere with other mods that rely on it.").Value;
-
-            Pennies.disableInBazaar = ItemCfg.Bind(commonString, "Roll of Pennies - Disable in Bazaar", true, "This item does not give gold in the Bazaar Between Time.").Value;
-
 
             //Makes it too easy to stunlock things even at very low stacks.
             //StunGrenade.enabled = ItemCfg.Bind(commonString, "Stun Grenade", true, itemConfigDescString).Value;
@@ -496,7 +490,6 @@ namespace RiskyMod
 
             MageCore.ionSurgeUtility = SurvivorCfg.Bind(mageString, "Ion Surge - Move to Utility Slot", true, "Moves Ion Surge to the Utility slot.").Value;
             MageCore.ionSurgeUtilityKeepSpecial = SurvivorCfg.Bind(mageString, "Ion Surge - Move to Utility Slot - Keep Special", false, "If Ion Surge Utility is enabled, keep the Special version as a selectable skill.").Value;
-            MageCore.ionSurgeMovementScaling = SurvivorCfg.Bind(mageString, "Ion Surge - Movement Scaling", false, "(Client-Side) Ion Surge jump height scales with movement speed.");
             MageCore.ionSurgeShock = SurvivorCfg.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
 
             MageCore.utilitySelfKnockback = SurvivorCfg.Bind(mageString, "Utility Self Knockback", true, "(Client-Side) Snapfreeze Rework and Blaze Storm apply self-knockback when used midair.");
@@ -508,8 +501,7 @@ namespace RiskyMod
             MageCore.enableFireUtility = SurvivorCfg.Bind(mageString, "Blaze Storm Utility Skill", false, "Enables this custom skill.").Value;
             MageCore.flamethrowerSprintCancel = SurvivorCfg.Bind(mageString, "Flamethrower - Sprint Cancel", true, "(Client-Side) Sprinting cancels Flamethrower.");
             MageCore.flamethrowerRangeExtend = SurvivorCfg.Bind(mageString, "Flamethrower - Increase Range", true, "Increases the range of flamethrower.").Value;
-            MageCore.flamethrowerIgniteChance = SurvivorCfg.Bind(mageString, "Flamethrower - Always Ignite", true, "All hits of Flamethrower ignite.").Value;
-
+            
             MageCore.enableLightningSpecial = SurvivorCfg.Bind(mageString, "Electrocute Special Skill", false, "Enables this custom skill.").Value;
 
             MercCore.enabled = SurvivorCfg.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
@@ -594,7 +586,6 @@ namespace RiskyMod
             PersistentDesperado.damagePerBuff = SurvivorCfg.Bind(banditString, "Desperado Persist - Damage Multiplier", 0.01f, "Revolver damage multiplier per Desperado stack if Desperado Persist is enabled.").Value;
 
             BackstabRework.enabled = SurvivorCfg.Bind(banditString, "Backstab Changes", true, "Backstabs minicrit for 50% bonus damage and crit chance is converted to crit damage.").Value;
-            BuffHemorrhage.ignoreArmor = SurvivorCfg.Bind(banditString, "Hemmorrhage - Ignore Armor", true, "Hemmorrhage damage ignores positive armor.").Value;
             BuffHemorrhage.enableProcs = SurvivorCfg.Bind(banditString, "Hemmorrhage - Enable Procs", true, "Hemmorrhage damage has a low proc coefficient.").Value;
 
             //BuffHemorrhage.enableCrit = SurvivorCfg.Bind(banditString, "Hemmorrhage - Count as Crit", true, "Hemmorrhagedamage counts as crits.").Value;
@@ -609,18 +600,15 @@ namespace RiskyMod
             Bandit2Core.specialRework = SurvivorCfg.Bind(banditString, "Special Rework", true, "Makes Resets/Desperado a selectable passive and adds a new Special skill.").Value;
 
             VoidFiendCore.enabled = SurvivorCfg.Bind(voidFiendString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            VoidFiendCore.fasterCorruptTransition = SurvivorCfg.Bind(voidFiendString, "Faster Corrupt Transition", true, "Speed up the corruption transform animation.").Value;
             VoidFiendCore.corruptOnKill = SurvivorCfg.Bind(voidFiendString, "Corruption on Kill", true, "Gain Corruption on kill. Lowers passive Corruption gain and Corrupted form duration.").Value;
             VoidFiendCore.corruptMeterTweaks = SurvivorCfg.Bind(voidFiendString, "Corruption Meter Tweaks", true, "Faster decay, slower passive buildup. Corrupted Suppress can be used as long as you have the HP for it. Meant to be used with Corrupt on Kill.").Value;
             VoidFiendCore.noCorruptCrit = SurvivorCfg.Bind(voidFiendString, "No Corruption on Crit", true, "Disables Corruption gain on crit.").Value;
             VoidFiendCore.noCorruptHeal = SurvivorCfg.Bind(voidFiendString, "No Corruption loss on Heal", true, "Disables Corruption loss on heal.").Value;
             VoidFiendCore.removeCorruptArmor = SurvivorCfg.Bind(voidFiendString, "No Corrupt Mode Bonus Armor", true, "Disables bonus armor while Corrupted.").Value;
             VoidFiendCore.secondaryMultitask = SurvivorCfg.Bind(voidFiendString, "Secondary Multitasking", true, "Drown and Suppress can be fired while charging Flood.").Value;
-            VoidFiendCore.modifyCorruptCrush = SurvivorCfg.Bind(voidFiendString, "Corrupted Suppress Changes", true, "Enable changes to this skill.").Value;
             UtilityFallImmune.enabled = SurvivorCfg.Bind(voidFiendString, "Trespass Changes", true, "Enable changes to this skill.").Value;
             UtilityMoveSpeedScaling.disableScaling = SurvivorCfg.Bind(voidFiendString, "Trespass - Disable Move Speed Scaling", false, "(Client-Side) Prevents Trespass from scaling with move speed.");
-            VoidFiendCore.removePrimarySpread = SurvivorCfg.Bind(voidFiendString, "Remove Primary Spread", true, "Remove random spread from Drown.").Value;
-
+            
             ConfigFireSelect();
 
 
@@ -654,8 +642,7 @@ namespace RiskyMod
             VoidlingCore.enabled = MonsterCfg.Bind(monsterVoidlingString, "Enable Changes", true, "Enable changes to this monster.").Value;
             VoidlingStats.modifyHP = MonsterCfg.Bind(monsterVoidlingString, "Reduce HP", true, "Reduces Voidling HP.").Value;
             VoidlingTargetPrioritization.enabled = MonsterCfg.Bind(monsterVoidlingString, "Prioritize Players", true, "This monster always tries to prioritize targeting players when possible.").Value;
-            VoidlingFogDamage.enabled = MonsterCfg.Bind(monsterVoidlingString, "Planeterium Void Fog Changes", true, "Makes Planeterium Void Fog behave like the Void Fields.").Value;
-
+            
             Jellyfish.enabled = MonsterCfg.Bind(monsterString, "Jellyfish", true, "Enable changes to this monster.").Value;
             Imp.enabled = MonsterCfg.Bind(monsterString, "Imp", true, "Enable changes to this monster.").Value;
             HermitCrab.enabled = MonsterCfg.Bind(monsterString, "Hermit Crab", true, "Enable changes to this monster.").Value;

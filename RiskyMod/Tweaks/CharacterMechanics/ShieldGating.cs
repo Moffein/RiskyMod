@@ -21,7 +21,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             //Remove OSP in SharedHooks.RecalculateStats
 
             //Add Shield Gating
-            IL.RoR2.HealthComponent.TakeDamage += (il) =>
+            IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 if (c.TryGotoNext(

@@ -45,11 +45,7 @@ namespace RiskyMod.Allies.DroneChanges
             cb.levelMaxShield = cb.baseMaxShield * 0.3f;
             cb.baseArmor = 20f;
 
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-                gunnerTurretBodyIndex = BodyCatalog.FindBodyIndex("Turret1Body");
-            };
+            RoR2Application.onLoad += OnLoad;
 
             GameObject masterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/turret1master");
             AISkillDriver[] skillDrivers = masterObject.GetComponents<AISkillDriver>();
@@ -77,6 +73,11 @@ namespace RiskyMod.Allies.DroneChanges
             {
                 SharedHooks.TakeDamage.ModifyInitialDamageActions += WeakToMithrixHook;
             }
+        }
+
+        private void OnLoad()
+        {
+            gunnerTurretBodyIndex = BodyCatalog.FindBodyIndex("Turret1Body");
         }
 
         private void WeakToMithrixHook(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo>
+	<Project Name="RiskyMod_Sounds" GUID="{B31B7529-32E3-43B1-AE69-28308E086283}" Generator="2023.1.4.8496"/>
+	<CacheRoot>../.cache</CacheRoot>
+	<Platforms>
+		<Platform Name="Windows" GUID="{553A95CB-CD11-4DBC-BA7D-A1A96006CDFA}" BasePlatform="Windows" BasePlatformGUID="{6E0CB257-C6C8-4C5C-8366-2740DFC441EB}" Path="Windows"/>
+	</Platforms>
+	<Languages>
+		<Language Name="English(US)" Id="684519430" GUID="{90FFAF30-73C5-4E0D-8AA7-DC6B6B614725}" Default="true" UseAsStandIn="true"/>
+	</Languages>
+	<FileHash>{CFEADE41-5C40-EA7A-1E29-D563F02A1A2C}</FileHash>
+</ProjectInfo>

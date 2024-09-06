@@ -92,63 +92,64 @@ namespace RiskyMod.Allies
             TweakDrones();
             new CheaperRepairs();
 
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-                if (SpikestripCompat) SpikestripBlueLemurian = BodyCatalog.FindBodyIndex("BlueLemurianBody");
-                if (SS2Compat)
-                {
-                    SS2SecurityDrone = BodyCatalog.FindBodyIndex("DroidDroneBody");
-                    SS2CloneDrone = BodyCatalog.FindBodyIndex("CloneDroneBody");
-                    SS2ShockDrone = BodyCatalog.FindBodyIndex("ShockDroneBody");
-
-                    StandardDroneScalingList.Add(SS2CloneDrone);
-                    StandardDroneScalingList.Add(SS2ShockDrone);
-                }
-                if (ChenChillDroneCompat)
-                {
-                    ChenChillDrone = BodyCatalog.FindBodyIndex("ChillDroneBody");
-                    StandardDroneScalingList.Add(ChenChillDrone);
-                }
-                if (ChenQbDroneCompat)
-                {
-                    ChenQbDrone = BodyCatalog.FindBodyIndex("QbDroneBody");
-                    StandardDroneScalingList.Add(ChenQbDrone);
-                }
-
-                if (ChenGradiusCompat)
-                {
-                    ChenGradiusPsyDroneGreen = BodyCatalog.FindBodyIndex("PsyDroneGreenBody");
-                    ChenGradiusPsyDroneRed = BodyCatalog.FindBodyIndex("PsyDroneRedBody");
-                    ChenGradiusLaserDrone1 = BodyCatalog.FindBodyIndex("LaserDrone1Body");
-                    ChenGradiusLaserDrone2 = BodyCatalog.FindBodyIndex("LaserDrone2Body");
-
-                    StandardDroneScalingList.Add(ChenGradiusPsyDroneGreen);
-                    StandardDroneScalingList.Add(ChenGradiusPsyDroneRed);
-                    StandardDroneScalingList.Add(ChenGradiusLaserDrone1);
-                    StandardDroneScalingList.Add(ChenGradiusLaserDrone2);
-                }
-                if (TinkersSatchelCompat)
-                {
-                    TinkerItemDrone = BodyCatalog.FindBodyIndex("ItemDroneBody");
-                    TinkerBulwarkDrone = BodyCatalog.FindBodyIndex("BulwarkDroneBody");
-
-                    StandardDroneScalingList.Add(TinkerItemDrone);
-                    StandardDroneScalingList.Add(TinkerBulwarkDrone);
-                }
-                if (MoreDronesCompat)
-                {
-                    MDSeekerDrone = BodyCatalog.FindBodyIndex("ShredderDrone");
-                    MDBoosterDrone = BodyCatalog.FindBodyIndex("BoosterDroneBody");
-                    MDInfernoDrone = BodyCatalog.FindBodyIndex("HellDroneBody");
-
-                    StandardDroneScalingList.Add(MDSeekerDrone);
-                    StandardDroneScalingList.Add(MDBoosterDrone);
-                    StandardDroneScalingList.Add(MDInfernoDrone);
-                }
-            };
+            RoR2Application.onLoad += OnLoad;
 
             RoR2.CharacterMaster.onStartGlobal += ExternalModCompat;
+        }
+
+        private void OnLoad()
+        {
+            if (SpikestripCompat) SpikestripBlueLemurian = BodyCatalog.FindBodyIndex("BlueLemurianBody");
+            if (SS2Compat)
+            {
+                SS2SecurityDrone = BodyCatalog.FindBodyIndex("DroidDroneBody");
+                SS2CloneDrone = BodyCatalog.FindBodyIndex("CloneDroneBody");
+                SS2ShockDrone = BodyCatalog.FindBodyIndex("ShockDroneBody");
+
+                StandardDroneScalingList.Add(SS2CloneDrone);
+                StandardDroneScalingList.Add(SS2ShockDrone);
+            }
+            if (ChenChillDroneCompat)
+            {
+                ChenChillDrone = BodyCatalog.FindBodyIndex("ChillDroneBody");
+                StandardDroneScalingList.Add(ChenChillDrone);
+            }
+            if (ChenQbDroneCompat)
+            {
+                ChenQbDrone = BodyCatalog.FindBodyIndex("QbDroneBody");
+                StandardDroneScalingList.Add(ChenQbDrone);
+            }
+
+            if (ChenGradiusCompat)
+            {
+                ChenGradiusPsyDroneGreen = BodyCatalog.FindBodyIndex("PsyDroneGreenBody");
+                ChenGradiusPsyDroneRed = BodyCatalog.FindBodyIndex("PsyDroneRedBody");
+                ChenGradiusLaserDrone1 = BodyCatalog.FindBodyIndex("LaserDrone1Body");
+                ChenGradiusLaserDrone2 = BodyCatalog.FindBodyIndex("LaserDrone2Body");
+
+                StandardDroneScalingList.Add(ChenGradiusPsyDroneGreen);
+                StandardDroneScalingList.Add(ChenGradiusPsyDroneRed);
+                StandardDroneScalingList.Add(ChenGradiusLaserDrone1);
+                StandardDroneScalingList.Add(ChenGradiusLaserDrone2);
+            }
+            if (TinkersSatchelCompat)
+            {
+                TinkerItemDrone = BodyCatalog.FindBodyIndex("ItemDroneBody");
+                TinkerBulwarkDrone = BodyCatalog.FindBodyIndex("BulwarkDroneBody");
+
+                StandardDroneScalingList.Add(TinkerItemDrone);
+                StandardDroneScalingList.Add(TinkerBulwarkDrone);
+            }
+            if (MoreDronesCompat)
+            {
+                MDSeekerDrone = BodyCatalog.FindBodyIndex("ShredderDrone");
+                MDBoosterDrone = BodyCatalog.FindBodyIndex("BoosterDroneBody");
+                MDInfernoDrone = BodyCatalog.FindBodyIndex("HellDroneBody");
+
+                StandardDroneScalingList.Add(MDSeekerDrone);
+                StandardDroneScalingList.Add(MDBoosterDrone);
+                StandardDroneScalingList.Add(MDInfernoDrone);
+            }
         }
 
         private void ExternalModCompat(CharacterMaster master)

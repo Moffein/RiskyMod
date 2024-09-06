@@ -15,7 +15,7 @@ namespace RiskyMod.Allies
             //damagecolor void
             //bypassblock bypassarmor
 
-            On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
+            On.RoR2.HealthComponent.TakeDamageProcess += (orig, self, damageInfo) =>
             {
                 if (NetworkServer.active)
                 {

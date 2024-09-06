@@ -43,12 +43,6 @@ namespace RiskyMod.Survivors.Captain
                 ChargeShotgun.holdChargeVfxPrefab = EntityStates.Captain.Weapon.ChargeCaptainShotgun.holdChargeVfxPrefab;
             };
 
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-                CaptainIndex = BodyCatalog.FindBodyIndex("CaptainBody");
-            };
-
             if (nukeAmmopackNerf || beaconRework)
             {
                 On.RoR2.GenericSkill.ApplyAmmoPack += (orig, self) =>
@@ -82,6 +76,13 @@ namespace RiskyMod.Survivors.Captain
             {
                 pie.blastAttackerFiltering = AttackerFiltering.AlwaysHitSelf;
             }
+
+            RoR2Application.onLoad += OnLoad;
+        }
+
+        private void OnLoad()
+        {
+            CaptainIndex = BodyCatalog.FindBodyIndex("CaptainBody");
         }
 
         private void ModifySkills(SkillLocator sk)

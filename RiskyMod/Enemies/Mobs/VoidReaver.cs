@@ -19,7 +19,7 @@ namespace RiskyMod.Enemies.Mobs
             if (!enabled) return;
 
             ExtraNullify = DamageAPI.ReserveDamageType();
-            On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
+            On.RoR2.HealthComponent.TakeDamageProcess += (orig, self, damageInfo) =>
             {
                 orig(self, damageInfo);
                 if (NetworkServer.active && !damageInfo.rejected && damageInfo.HasModdedDamageType(VoidReaver.ExtraNullify))

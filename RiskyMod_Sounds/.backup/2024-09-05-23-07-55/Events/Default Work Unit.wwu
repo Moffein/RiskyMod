@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{79591FC6-F133-479C-85D8-3C4F5020F2A2}" SchemaVersion="97">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{79591FC6-F133-479C-85D8-3C4F5020F2A2}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_RiskyMod_RoR1Lightning" ID="{5EB9FFC4-2BF8-45FB-BBD1-A3303CC85673}">
+					<ChildrenList>
+						<Action Name="" ID="{076C568F-2D5B-447B-907E-512A32EDC887}" ShortID="1033531287">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="wChainLightning" ID="{68F5AA9E-F9F6-4F25-8D83-30A5000E9BC8}" WorkUnitID="{9B48C112-9402-447F-8BB7-E9697C93E932}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_RiskyMod_Mage_Special_Lightning" ID="{7E8A5DE7-816C-430B-B074-ED5AC3B5963F}">
+					<ChildrenList>
+						<Action Name="" ID="{0676CB57-8158-474D-9E91-3381C0CA0EF7}" ShortID="947160526">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="sndLightningPistol" ID="{99514D5F-4279-46F3-B582-75A85B422622}" WorkUnitID="{9B48C112-9402-447F-8BB7-E9697C93E932}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_RiskyMod_DelicateWatch_Ready" ID="{30E92446-652D-4781-9816-85E708192D4B}">
+					<ChildrenList>
+						<Action Name="" ID="{5A21493C-A206-4FCB-BF4B-FFF564608271}" ShortID="528090351">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="wWatch_Cropped" ID="{129180AF-9570-4203-BF15-6D14D193AA69}" WorkUnitID="{9B48C112-9402-447F-8BB7-E9697C93E932}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

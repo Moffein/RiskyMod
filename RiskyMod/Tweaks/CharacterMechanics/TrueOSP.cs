@@ -31,7 +31,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             SharedHooks.RecalculateStats.HandleRecalculateStatsActions += HandleTrueOSP;
 
             //Overwrite vanilla OSP handling
-            IL.RoR2.HealthComponent.TakeDamage += (il) =>
+            IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
             {
                 bool error = true;
 

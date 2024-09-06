@@ -20,17 +20,17 @@ namespace RiskyMod.SharedHooks
 
         public ModifyFinalDamage()
         {
-			IL.RoR2.HealthComponent.TakeDamage += (il) =>
+			IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
 			{
 				ILCursor c = new ILCursor(il);
 				if(c.TryGotoNext(
                      x => x.MatchLdarg(1),
                      x => x.MatchLdfld<DamageInfo>("damage"),
-                     x => x.MatchStloc(6)
+                     x => x.MatchStloc(7)
                     ))
                 {
                     c.Index += 3;
-                    c.Emit(OpCodes.Ldloc, 6);
+                    c.Emit(OpCodes.Ldloc, 7);
                     c.Emit(OpCodes.Ldarg_0);    //self
                     c.Emit(OpCodes.Ldarg_1);    //damageInfo
                     c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((origDamage, victimHealth, damageInfo) =>
@@ -56,7 +56,7 @@ namespace RiskyMod.SharedHooks
                         }
                         return newDamage;
                     });
-                    c.Emit(OpCodes.Stloc, 6);
+                    c.Emit(OpCodes.Stloc, 7);
                 }
                 else
                 {

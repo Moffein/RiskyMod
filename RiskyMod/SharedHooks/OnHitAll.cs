@@ -9,7 +9,7 @@ namespace RiskyMod.SharedHooks
         public delegate void OnHitAllDelegate(GlobalEventManager self, DamageInfo damageInfo, GameObject hitObject);
         public static OnHitAllDelegate HandleOnHitAllActions;
 
-        public static void GlobalEventManager_OnHitAll(On.RoR2.GlobalEventManager.orig_OnHitAll orig, GlobalEventManager self, DamageInfo damageInfo, GameObject hitObject)
+        public static void GlobalEventManager_OnHitAll(On.RoR2.GlobalEventManager.orig_OnHitAllProcess orig, GlobalEventManager self, DamageInfo damageInfo, GameObject hitObject)
         {
             orig(self, damageInfo, hitObject);
             if (!NetworkServer.active || damageInfo.procCoefficient == 0f || damageInfo.rejected)

@@ -29,10 +29,8 @@ namespace RiskyMod.Survivors.Mage
 
         public static ConfigEntry<bool> flamethrowerSprintCancel;
         public static bool flamethrowerRangeExtend = true;
-        public static bool flamethrowerIgniteChance = true;
 
         public static bool ionSurgeShock = true;
-        public static ConfigEntry<bool> ionSurgeMovementScaling;
 
         public static bool ionSurgeUtility = true;
         public static bool ionSurgeUtilityKeepSpecial = false;
@@ -188,7 +186,6 @@ namespace RiskyMod.Survivors.Mage
             {
                 SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.Flamethrower", "maxDistance", "25");  //20 vanilla
             }
-            if (flamethrowerIgniteChance) SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.Flamethrower", "ignitePercentChance", "100");  //50 vanilla
 
             if (enableLightningSpecial)
             {
@@ -340,25 +337,6 @@ namespace RiskyMod.Survivors.Mage
                 };
 
             }
-
-            IL.EntityStates.Mage.FlyUpState.HandleMovements += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if (c.TryGotoNext(
-                     x => x.MatchLdfld<EntityStates.BaseState>("moveSpeedStat")
-                    ))
-                {
-                    c.Index++;
-                    c.EmitDelegate<Func<float, float>>(orig =>
-                    {
-                        return ionSurgeMovementScaling.Value ? orig : 10.15f;//10.15 = 7 * 1.45
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: Mage FlyUpState.HandleMovements IL Hook failed");
-                }
-            };
 
             if (ionSurgeUtility)
             {

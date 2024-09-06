@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{9B48C112-9402-447F-8BB7-E9697C93E932}" SchemaVersion="97">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{9B48C112-9402-447F-8BB7-E9697C93E932}" PersistMode="Standalone">
+			<ChildrenList>
+				<ActorMixer Name="Master Mixer" ID="{F4D40D22-ED0F-4260-BB87-D6C78445FC01}" ShortID="517191251">
+					<PropertyList>
+						<Property Name="Volume" Type="Real64">
+							<RTPCList>
+								<RTPC Name="" ID="{A88CCC9A-AD6C-464C-BDBD-4DFFEE1B8AC9}" ShortID="660299216">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="Volume_SFX" ID="{53A6B67D-CDAA-4454-BEDF-4BF9BE571709}" WorkUnitID="{51C59DA9-5A79-4957-9A99-B7BD3B43230F}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{21F4F156-A7F6-4FD5-B8DB-8C4CA54D5B20}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="3"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>0</XPos>
+												<YPos>-200</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>100</XPos>
+												<YPos>0</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
+							</RTPCList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{B47EC472-ABCA-4269-A2A5-26DA6A5C880C}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{6A2F7F45-54E6-4794-8820-62F86FF8BF17}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<ActorMixer Name="SFX Mixer" ID="{1CD76F13-BEB3-47AC-98D3-94514378409F}" ShortID="611000340">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{B47EC472-ABCA-4269-A2A5-26DA6A5C880C}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{6A2F7F45-54E6-4794-8820-62F86FF8BF17}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<ActorMixer Name="Survivors" ID="{64E1C4C7-5556-42EB-A55C-4C8E66A73F36}" ShortID="734061913">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="SurvivorAttenuation" ID="{404E64FD-C3C6-42F6-B0FA-0C2401BC276F}" WorkUnitID="{CF111D38-5D1B-4536-86D8-2B1F7259A13C}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{B47EC472-ABCA-4269-A2A5-26DA6A5C880C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{6A2F7F45-54E6-4794-8820-62F86FF8BF17}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="wChainLightning" ID="{68F5AA9E-F9F6-4F25-8D83-30A5000E9BC8}" ShortID="289672800">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{B47EC472-ABCA-4269-A2A5-26DA6A5C880C}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{6A2F7F45-54E6-4794-8820-62F86FF8BF17}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="wChainLightning" ID="{0E8310CE-7B1F-49C8-9919-761EC270145E}">
+													<Language>SFX</Language>
+													<AudioFile>wChainLightning.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="921699460"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="wChainLightning" ID="{0E8310CE-7B1F-49C8-9919-761EC270145E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sndLightningPistol" ID="{99514D5F-4279-46F3-B582-75A85B422622}" ShortID="384790011">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-10</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{B47EC472-ABCA-4269-A2A5-26DA6A5C880C}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{6A2F7F45-54E6-4794-8820-62F86FF8BF17}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sndLightningPistol" ID="{7AC8608E-4464-43AD-A4FB-3B76630B20CA}">
+													<Language>SFX</Language>
+													<AudioFile>sndLightningPistol.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="702021822"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sndLightningPistol" ID="{7AC8608E-4464-43AD-A4FB-3B76630B20CA}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="wWatch_Cropped" ID="{129180AF-9570-4203-BF15-6D14D193AA69}" ShortID="637029654">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>9</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{B47EC472-ABCA-4269-A2A5-26DA6A5C880C}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{6A2F7F45-54E6-4794-8820-62F86FF8BF17}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="wWatch_Cropped" ID="{2909F7B8-C882-4975-A537-C615E32ED0C0}">
+													<Language>SFX</Language>
+													<AudioFile>wWatch_Cropped.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="983076228"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="wWatch_Cropped" ID="{2909F7B8-C882-4975-A537-C615E32ED0C0}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</ActorMixer>
+							</ChildrenList>
+						</ActorMixer>
+					</ChildrenList>
+				</ActorMixer>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

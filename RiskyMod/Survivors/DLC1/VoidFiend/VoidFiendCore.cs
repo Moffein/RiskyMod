@@ -1,9 +1,11 @@
 ﻿using EntityStates;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using R2API;
 using RoR2;
 using RoR2.Skills;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -14,17 +16,13 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
     {
         public static bool enabled = true;
 
-        public static bool fasterCorruptTransition = true;
         public static bool corruptMeterTweaks = true;
         public static bool corruptOnKill = true;
         public static bool noCorruptHeal = true;
         public static bool noCorruptCrit = true;
         public static bool removeCorruptArmor = true;
-        public static bool removePrimarySpread = true;
 
         public static bool secondaryMultitask = true;
-
-        public static bool modifyCorruptCrush = true;
 
         public static BodyIndex bodyIndex;
         public static GameObject bodyPrefab;
@@ -35,81 +33,25 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
 
             bodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidSurvivor/VoidSurvivorBody.prefab").WaitForCompletion();
 
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-                bodyIndex = BodyCatalog.FindBodyIndex("VoidSurvivor");
-            };
+            RoR2Application.onLoad += OnLoad;
 
             ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
+        }
+
+        private void OnLoad()
+        {
+            bodyIndex = BodyCatalog.FindBodyIndex("VoidSurvivor");
         }
 
         private void ModifySkills(SkillLocator sk)
         {
             ModifyPassive(sk);
-            if (removePrimarySpread) RemovePrimarySpread();
             ModifySecondaries(sk);
             ModifyUtilities(sk);
-            ModifySpecials(sk);
-        }
-
-        private void RemovePrimarySpread()
-        {
-            IL.EntityStates.VoidSurvivor.Weapon.FireHandBeam.OnEnter += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if (c.TryGotoNext(
-                     x => x.MatchCallvirt<BulletAttack>("Fire")
-                     ))
-                {
-                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
-                    {
-                        bulletAttack.minSpread = 0f;
-                        bulletAttack.maxSpread = 0f;
-                        return bulletAttack;
-                    });
-                }
-                else
-                {
-                    Debug.LogError("RiskyMod: VoidFiendCore FireHandBeam.OnEnter IL Hook failed");
-                }
-            };
-
-            IL.EntityStates.VoidSurvivor.Weapon.FireCorruptHandBeam.FireBullet += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if (c.TryGotoNext(
-                     x => x.MatchCallvirt<BulletAttack>("Fire")
-                     ))
-                {
-                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>(bulletAttack =>
-                    {
-                        bulletAttack.minSpread = 0f;
-                        bulletAttack.maxSpread = 0f;
-                        return bulletAttack;
-                    });
-                }
-                else
-                {
-                    Debug.LogError("RiskyMod: VoidFiendCore FireCorruptHandBeam.OnEnter IL Hook failed");
-                }
-            };
         }
 
         private void ModifyPassive(SkillLocator sk)
         {
-            if (fasterCorruptTransition)
-            {
-                //Tweak Corruption transition duration.
-                On.EntityStates.VoidSurvivor.CorruptionTransitionBase.OnEnter += (orig, self) =>
-                {
-                    if (self.duration > 0f) //Exiting has 0 duration by default
-                    {
-                        self.duration = 0.5f;  //Default enter duration is 1f
-                    }
-                    orig(self);
-                };
-            }
 
             if (corruptMeterTweaks)
             {
@@ -136,7 +78,8 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
 
                 //Kills increase Corruption.
                 //Hoping this adds an additional layer of depth to using Void Fiend's Corruption
-                AssistManager.HandleAssistActions += CorruptionAssist;
+                AssistManager.AssistManager.HandleAssistCompatibleActions += CorruptionAssist;
+                GlobalEventManager.onCharacterDeathGlobal += CorruptionOnKill;
             }
 
             if (noCorruptHeal)
@@ -171,6 +114,22 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
             }
         }
 
+        private void CorruptionAssist(CharacterBody attackerBody, CharacterBody victimBody, DamageType? assistDamageType, HashSet<DamageAPI.ModdedDamageType> assistModdedDamageTypes, CharacterBody killerBody, DamageInfo damageInfo)
+        {
+            if (attackerBody == killerBody || attackerBody.bodyIndex != bodyIndex) return;
+            VoidSurvivorController vsc = attackerBody.gameObject.GetComponent<VoidSurvivorController>();
+            if (vsc) vsc.AddCorruption(4f);
+        }
+
+        private void CorruptionOnKill(DamageReport report)
+        {
+            if (report.attacker && report.attackerBodyIndex == bodyIndex)
+            {
+                VoidSurvivorController vsc = report.attacker.GetComponent<VoidSurvivorController>();
+                if (vsc) vsc.AddCorruption(4f);
+            }
+        }
+
         private void ModifySecondaries(SkillLocator sk)
         {
             if (secondaryMultitask)
@@ -196,28 +155,6 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
         {
             new UtilityFallImmune();
             new UtilityMoveSpeedScaling();
-        }
-
-        private void ModifySpecials(SkillLocator sk)
-        {
-            if (modifyCorruptCrush)
-            {
-                SkillDef crushHealth = Addressables.LoadAssetAsync<SkillDef>("RoR2/DLC1/VoidSurvivor/CrushHealth.asset").WaitForCompletion();
-                crushHealth.baseMaxStock = 1;
-                crushHealth.baseRechargeInterval = 0;
-                crushHealth.rechargeStock = 1;
-
-                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC1/VoidSurvivor/EntityStates.VoidSurvivor.Weapon.ChargeCrushHealth.asset", "baseDuration", "0.3"); //vanilla is 1
-            }
-        }
-
-        private void CorruptionAssist(CharacterBody attackerBody, CharacterBody victimBody, CharacterBody killerBody)
-        {
-            VoidSurvivorController vsc = attackerBody.gameObject.GetComponent<VoidSurvivorController>();
-            if (vsc)
-            {
-                vsc.AddCorruption(4f);
-            }
         }
     }
 }

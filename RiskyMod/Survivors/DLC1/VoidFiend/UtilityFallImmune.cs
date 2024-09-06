@@ -26,9 +26,9 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
             };
 
             //Reject fall damage while buff is active
-            On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
+            On.RoR2.HealthComponent.TakeDamageProcess += (orig, self, damageInfo) =>
             {
-                if (damageInfo.damageType.HasFlag(DamageType.FallDamage) && self.body.HasBuff(UtilityBuff))
+                if (damageInfo.damageType.damageType.HasFlag(DamageType.FallDamage) && self.body.HasBuff(UtilityBuff))
                 {
                     damageInfo.rejected = true;
                     damageInfo.damage = 0f;

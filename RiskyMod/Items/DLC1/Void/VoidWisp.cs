@@ -12,7 +12,7 @@ namespace RiskyMod.Items.DLC1.Void
             if (!enabled) return;
 
             ItemsCore.ModifyItemDefActions += ModifyItem;
-            IL.RoR2.HealthComponent.TakeDamage += (il) =>
+            IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
             {
                 bool error = true;
                 ILCursor c = new ILCursor(il);

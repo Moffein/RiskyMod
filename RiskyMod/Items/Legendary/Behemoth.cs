@@ -13,7 +13,7 @@ namespace RiskyMod.Items.Legendary
         {
             if (!enabled) return;
 
-            IL.RoR2.GlobalEventManager.OnHitAll += (il) =>
+            IL.RoR2.GlobalEventManager.OnHitAllProcess += (il) =>
             {
                 bool error = true;
 

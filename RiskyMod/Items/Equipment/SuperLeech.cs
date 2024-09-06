@@ -14,7 +14,7 @@ namespace RiskyMod.Items.Equipment
             if (!enabled) return;
 
             //Remove vanilla effect.
-            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            IL.RoR2.GlobalEventManager.ProcessHitEnemy += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 if(c.TryGotoNext(

@@ -11,7 +11,7 @@ namespace RiskyMod.Survivors.Mage.Components
         public static GameObject projectileDeletionEffectPrefab;
 
         private GameObject matrixObject;
-        private DefenseMatrixManager.DefenseMatrixInfo defenseMatrixInfo;
+        private DefenseMatrixManager.DefenseMatrixManager.DefenseMatrixInfo defenseMatrixInfo;
         private BoxCollider collider;
         private TeamFilter tf;
 
@@ -39,8 +39,8 @@ namespace RiskyMod.Survivors.Mage.Components
                     collider = matrixObject.GetComponent<BoxCollider>();
                     if (collider)
                     {
-                        defenseMatrixInfo = new DefenseMatrixManager.DefenseMatrixInfo(new Collider[] { collider }, tf.teamIndex);
-                        DefenseMatrixManager.AddMatrix(defenseMatrixInfo);
+                        defenseMatrixInfo = new DefenseMatrixManager.DefenseMatrixManager.DefenseMatrixInfo(new Collider[] { collider }, tf.teamIndex);
+                        DefenseMatrixManager.DefenseMatrixManager.AddMatrix(defenseMatrixInfo);
                     }
                 }
             }
@@ -98,7 +98,7 @@ namespace RiskyMod.Survivors.Mage.Components
 
         public void OnDestroy()
         {
-            if (defenseMatrixInfo != null) DefenseMatrixManager.RemoveMatrix(defenseMatrixInfo);
+            if (defenseMatrixInfo != null) DefenseMatrixManager.DefenseMatrixManager.RemoveMatrix(defenseMatrixInfo);
             if (matrixObject) Destroy(matrixObject);
         }
     }

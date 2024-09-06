@@ -73,9 +73,13 @@ namespace RiskyMod
     [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     #endregion
 
-    [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "1.7.5")]
-    [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI), nameof(PrefabAPI), nameof(DamageAPI), nameof(SoundAPI), nameof(ItemAPI))]
+    [BepInDependency(R2API.R2API.PluginGUID)]
+    [BepInDependency(R2API.RecalculateStatsAPI.PluginGUID)]
+    [BepInDependency(R2API.DamageAPI.PluginGUID)]
+    [BepInDependency(R2API.SoundAPI.PluginGUID)]
+    [BepInDependency(R2API.PrefabAPI.PluginGUID)]
+    [BepInDependency(R2API.ItemAPI.PluginGUID)]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "1.8.0")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -106,7 +110,6 @@ namespace RiskyMod
             //Check for Inferno here since it has a RiskyMod softdependency.
             SoftDependencies.InfernoPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("HIFU.Inferno");
             SoftDependencies.SS2OLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.TeamMoonstorm.Starstorm2");
-            DefenseMatrixManager.Initialize();
         }
 
         public void Awake()
@@ -311,12 +314,12 @@ namespace RiskyMod
         
         private void AddHooks()
         {
-            On.RoR2.GlobalEventManager.OnHitEnemy += OnHitEnemy.GlobalEventManager_OnHitEnemy;
+            On.RoR2.GlobalEventManager.ProcessHitEnemy += OnHitEnemy.GlobalEventManager_OnHitEnemy;
             RecalculateStatsAPI.GetStatCoefficients += GetStatCoefficients.RecalculateStatsAPI_GetStatCoefficients;
             On.RoR2.CharacterBody.RecalculateStats += RecalculateStats.CharacterBody_RecalculateStats;
-            On.RoR2.HealthComponent.TakeDamage += TakeDamage.HealthComponent_TakeDamage;
+            On.RoR2.HealthComponent.TakeDamageProcess += TakeDamage.HealthComponent_TakeDamage;
             On.RoR2.GlobalEventManager.OnCharacterDeath += OnCharacterDeath.GlobalEventManager_OnCharacterDeath;
-            On.RoR2.GlobalEventManager.OnHitAll += OnHitAll.GlobalEventManager_OnHitAll;
+            On.RoR2.GlobalEventManager.OnHitAllProcess += OnHitAll.GlobalEventManager_OnHitAll;
             On.RoR2.HealthComponent.UpdateLastHitTime += HealthComponent_UpdateLastHitTime.UpdateLastHitTime;
             SharedHooks.TakeDamage.OnDamageTakenAttackerActions += TakeDamage.DistractOnHit;
 

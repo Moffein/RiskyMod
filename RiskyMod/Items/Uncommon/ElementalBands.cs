@@ -26,7 +26,7 @@ namespace RiskyMod.Items.Uncommon
             float initialDamageIce = initialDamageCoefficientIce - stackDamageCoefficientIce;
 
             //Remove Vanilla Effect
-            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            IL.RoR2.GlobalEventManager.ProcessHitEnemy += (il) =>
             {
                 bool error = true;
                 ILCursor c = new ILCursor(il);

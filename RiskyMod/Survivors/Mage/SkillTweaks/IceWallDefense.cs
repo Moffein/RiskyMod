@@ -17,8 +17,6 @@ namespace RiskyMod.Survivors.Mage.SkillTweaks
         {
             if (!enabled) return;
 
-            DefenseMatrixManager.enabled = true;
-
             modifiedIceWallPillarProjectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MageIcewallPillarProjectile.prefab").WaitForCompletion().InstantiateClone("RiskyModIceWallPillarProjectile", true);
             modifiedIceWallPillarProjectile.AddComponent<IceWallDefenseComponent>();
 

@@ -23,7 +23,7 @@ namespace RiskyMod.Items.DLC1.Void
                 pe.blastProcCoefficient = 0f;   //1.0 default
             }
 
-            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            IL.RoR2.GlobalEventManager.ProcessHitEnemy += (il) =>
             {
                 bool error = true;
 

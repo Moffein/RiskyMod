@@ -34,7 +34,7 @@ namespace RiskyMod.Items.Boss
             };
 
             //Remove Vanilla bleed effect - needs to be recalculated.
-            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            IL.RoR2.GlobalEventManager.ProcessHitEnemy += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 if(c.TryGotoNext(

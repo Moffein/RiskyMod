@@ -12,7 +12,7 @@ namespace RiskyMod.Items.DLC1.Void
         {
             if (!enabled) return;
             ItemsCore.ModifyItemDefActions += ModifyItem;
-            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            IL.RoR2.GlobalEventManager.ProcessHitEnemy += (il) =>
             {
                 bool error = true;
                 ILCursor c = new ILCursor(il);

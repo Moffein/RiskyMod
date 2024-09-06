@@ -16,7 +16,7 @@ namespace RiskyMod.Items.Uncommon
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove Vanilla Effect
-            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            IL.RoR2.GlobalEventManager.ProcessHitEnemy += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 if(c.TryGotoNext(

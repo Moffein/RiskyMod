@@ -60,7 +60,7 @@ namespace RiskyMod.Items.DLC1.Common
             }
 
             //Remove Vanilla Effect
-            IL.RoR2.HealthComponent.TakeDamage += (il) =>
+            IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 if(c.TryGotoNext(

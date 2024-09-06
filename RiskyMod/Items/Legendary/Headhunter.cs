@@ -18,6 +18,7 @@ namespace RiskyMod.Items.Legendary
         {
             if (!enabled) return;
             ItemsCore.ModifyItemDefActions += ModifyItem;
+            AssistManager.VanillaTweaks.Headhunter.Instance.SetEnabled(false);
 
             //Remove Vanilla Effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
@@ -36,7 +37,8 @@ namespace RiskyMod.Items.Legendary
                 }
             };
 
-            AssistManager.HandleAssistInventoryActions += OnKillEffect;
+            AssistManager.AssistManager.HandleAssistInventoryCompatibleActions += AssistEffect;
+            SharedHooks.OnCharacterDeath.OnCharacterDeathInventoryActions += ProcItem;
             ModifyFinalDamage.ModifyFinalDamageActions += EliteBonus;
 
             if (perfectedTweak)
@@ -53,7 +55,7 @@ namespace RiskyMod.Items.Legendary
                 affixLunarDef.iconSprite
                 );
 
-                IL.RoR2.HealthComponent.TakeDamage += (il) =>
+                IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
                     if(c.TryGotoNext(
@@ -75,6 +77,18 @@ namespace RiskyMod.Items.Legendary
                 RecalculateStatsAPI.GetStatCoefficients += HandlePerfected2Stats;
             }
         }
+
+        private void ProcItem(GlobalEventManager self, DamageReport damageReport, CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody)
+        {
+            OnKillEffect(attackerBody, attackerInventory, victimBody);
+        }
+
+        private void AssistEffect(CharacterBody attackerBody, CharacterBody victimBody, DamageType? assistDamageType, System.Collections.Generic.HashSet<DamageAPI.ModdedDamageType> assistModdedDamageTypes, Inventory attackerInventory, CharacterBody killerBody, DamageInfo damageInfo)
+        {
+            if (attackerBody == killerBody) return;
+            OnKillEffect(attackerBody, attackerInventory, victimBody);
+        }
+
         private static void ModifyItem()
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.HeadHunter);
@@ -83,46 +97,33 @@ namespace RiskyMod.Items.Legendary
 
         private void HandlePerfected2Stats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (sender.HasBuff(Perfected2.buffIndex))
-            {
-                args.baseShieldAdd += sender.maxHealth * 0.2f;
-            }
+            if (sender.HasBuff(Perfected2.buffIndex)) args.baseShieldAdd += sender.maxHealth * 0.2f;
         }
 
         private static void EliteBonus(DamageMult damageMult, DamageInfo damageInfo,
             HealthComponent victimHealth, CharacterBody victimBody,
             CharacterBody attackerBody, Inventory attackerInventory)
         {
+            if (!victimBody.isElite) return;
             int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
-            if (hhCount > 0)
-            {
-                if (victimBody.isElite)
-                {
-                    damageMult.damageMult += 0.3f;
-                    if (damageInfo.damageColorIndex == DamageColorIndex.Default)
-                    {
-                        damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
-                    }
-                }
-            }
+            if (hhCount <= 0) return;
+            damageMult.damageMult += 0.3f;
+            if (damageInfo.damageColorIndex == DamageColorIndex.Default) damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
         }
 
-        private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
+        private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody)
         {
-            if (victimBody.isElite)
+            if (!victimBody.isElite) return;
+            int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
+            if (hhCount <= 0) return;
+
+            float duration = 5f + 5f * hhCount;
+            for (int l = 0; l < BuffCatalog.eliteBuffIndices.Length; l++)
             {
-                int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
-                if (hhCount > 0)
+                BuffIndex buffIndex = BuffCatalog.eliteBuffIndices[l];
+                if (victimBody.HasBuff(buffIndex))
                 {
-                    float duration = 5f + 5f * hhCount;
-                    for (int l = 0; l < BuffCatalog.eliteBuffIndices.Length; l++)
-                    {
-                        BuffIndex buffIndex = BuffCatalog.eliteBuffIndices[l];
-                        if (victimBody.HasBuff(buffIndex))
-                        {
-                            attackerBody.AddTimedBuff(buffIndex != RoR2Content.Buffs.AffixLunar.buffIndex ? buffIndex : Perfected2.buffIndex, duration);
-                        }
-                    }
+                    attackerBody.AddTimedBuff(buffIndex != RoR2Content.Buffs.AffixLunar.buffIndex ? buffIndex : Perfected2.buffIndex, duration);
                 }
             }
         }

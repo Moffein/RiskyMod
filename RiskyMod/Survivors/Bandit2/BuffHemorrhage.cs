@@ -7,26 +7,16 @@ namespace RiskyMod.Survivors.Bandit2
     {
         public static bool enabled = true;
 
-        public static bool ignoreArmor = true;
         public static bool enableProcs = true;
         public static bool enableCrit = false;
         public BuffHemorrhage()
         {
-            if (!enabled || (!ignoreArmor && !enableProcs && !enableCrit)) return;
-            On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
+            if (!enabled || (!enableProcs && !enableCrit)) return;
+            On.RoR2.HealthComponent.TakeDamageProcess += (orig, self, damageInfo) =>
             {
                 bool procHemmorrhage = false;
-                if (damageInfo.dotIndex == RoR2.DotController.DotIndex.SuperBleed && damageInfo.damageType.HasFlag(DamageType.DoT) && !damageInfo.damageType.HasFlag(DamageType.AOE) && damageInfo.procCoefficient == 0f)
+                if (damageInfo.dotIndex == RoR2.DotController.DotIndex.SuperBleed && damageInfo.damageType.damageType.HasFlag(DamageType.DoT) && !damageInfo.damageType.damageType.HasFlag(DamageType.AOE) && damageInfo.procCoefficient == 0f)
                 {
-                    if (ignoreArmor)
-                    {
-                        float totalArmor = self.body.armor + self.adaptiveArmorValue;
-                        if (totalArmor > 0f)
-                        {
-                            damageInfo.damage *= (100f + totalArmor) / 100f;
-                        }
-                    }
-
                     if (enableProcs)
                     {
                         damageInfo.procCoefficient = 0.5f;

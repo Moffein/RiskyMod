@@ -18,7 +18,7 @@ namespace RiskyMod.Items.Boss
 
             float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 
-            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            IL.RoR2.GlobalEventManager.ProcessHitEnemy += (il) =>
             {
                 bool error = true;
                 ILCursor c = new ILCursor(il);

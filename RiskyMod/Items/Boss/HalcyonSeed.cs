@@ -16,11 +16,7 @@ namespace RiskyMod.Items.Boss
                 ItemsCore.ModifyItemDefActions += ModifyItem;
             }
 
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-                HalcyonSeed.TitanGoldIndex = BodyCatalog.FindBodyIndex("TitanGoldBody");
-            };
+            RoR2Application.onLoad += OnLoad;
 
             On.RoR2.CharacterBody.Start += (orig, self) =>
             {
@@ -42,6 +38,11 @@ namespace RiskyMod.Items.Boss
                     }
                 }
             };
+        }
+
+        private void OnLoad()
+        {
+            HalcyonSeed.TitanGoldIndex = BodyCatalog.FindBodyIndex("TitanGoldBody");
         }
 
         private static void ModifyItem()

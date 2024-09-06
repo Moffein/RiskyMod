@@ -125,12 +125,6 @@ namespace RiskyMod.Items.Boss
 
 		private void HandleBeetleAllyVanilla()
 		{
-			On.RoR2.BodyCatalog.Init += (orig) =>
-			{
-				orig();
-				QueensGland.BeetleGuardAllyIndex = BodyCatalog.FindBodyIndex("BeetleGuardAllyBody");
-			};
-
 			On.RoR2.CharacterBody.Start += (orig, self) =>
 			{
 				orig(self);
@@ -146,7 +140,14 @@ namespace RiskyMod.Items.Boss
 					}
 				}
 			};
+
+			RoR2Application.onLoad += OnLoad;
 		}
+
+		private void OnLoad()
+		{
+            QueensGland.BeetleGuardAllyIndex = BodyCatalog.FindBodyIndex("BeetleGuardAllyBody");
+        }
 	}
 
 	public class UpdateGlandStats : MonoBehaviour

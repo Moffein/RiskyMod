@@ -14,21 +14,22 @@ namespace RiskyMod.Enemies.DLC1.Voidling
         {
             if (!enabled) return;
 
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-                BodyIndex voidlingIndex = BodyCatalog.FindBodyIndex("MiniVoidRaidCrabBodyBase");
-                if (voidlingIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(voidlingIndex);
+            RoR2Application.onLoad += OnLoad;
+        }
 
-                voidlingIndex = BodyCatalog.FindBodyIndex("MiniVoidRaidCrabBodyPhase1");
-                if (voidlingIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(voidlingIndex);
+        private void OnLoad()
+        {
+            BodyIndex voidlingIndex = BodyCatalog.FindBodyIndex("MiniVoidRaidCrabBodyBase");
+            if (voidlingIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(voidlingIndex);
 
-                voidlingIndex = BodyCatalog.FindBodyIndex("MiniVoidRaidCrabBodyPhase2");
-                if (voidlingIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(voidlingIndex);
+            voidlingIndex = BodyCatalog.FindBodyIndex("MiniVoidRaidCrabBodyPhase1");
+            if (voidlingIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(voidlingIndex);
 
-                voidlingIndex = BodyCatalog.FindBodyIndex("MiniVoidRaidCrabBodyPhase3");
-                if (voidlingIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(voidlingIndex);
-            };
+            voidlingIndex = BodyCatalog.FindBodyIndex("MiniVoidRaidCrabBodyPhase2");
+            if (voidlingIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(voidlingIndex);
+
+            voidlingIndex = BodyCatalog.FindBodyIndex("MiniVoidRaidCrabBodyPhase3");
+            if (voidlingIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(voidlingIndex);
         }
     }
 }

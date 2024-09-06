@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{C4AA5FFA-27C8-411F-8EA9-8D5494E6DE5C}" SchemaVersion="97">
+<WwiseDocument Type="WorkUnit" ID="{C4AA5FFA-27C8-411F-8EA9-8D5494E6DE5C}" SchemaVersion="119">
 	<Presets>
 		<WorkUnit Name="Factory Reflect" ID="{C4AA5FFA-27C8-411F-8EA9-8D5494E6DE5C}" PersistMode="Standalone">
 			<ChildrenList>
-				<AuxBus Name="Early Reflection Auxiliary Bus" ID="{2D1428C1-542C-483E-B0B6-4A856FC681BC}">
+				<AuxBus Name="Legacy Early Reflection Auxiliary Bus" ID="{2D1428C1-542C-483E-B0B6-4A856FC681BC}">
 					<PropertyList>
 						<Property Name="BusChannelConfig" Type="int32">
 							<ValueList>
@@ -14,11 +14,48 @@
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="True"/>
 						<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 					</PropertyList>
-					<ReferenceList>
-						<Reference Name="Effect0" PluginName="Wwise Reflect" CompanyID="0" PluginID="171" PluginType="3">
-							<ObjectRef Name="Wwise_Reflect" ID="{37779A87-4754-4420-8175-3236FA46AA12}" WorkUnitID="{923039AD-F8B4-46D4-BDA7-CB5A6EE595E0}"/>
-						</Reference>
-					</ReferenceList>
+					<ObjectLists>
+						<ObjectList Name="Effects">
+							<Reference>
+								<Local>
+									<EffectSlot Name="" ID="{2901E81D-BBB6-47DB-9FA3-11084AF89FEF}">
+										<ReferenceList>
+											<Reference Name="Effect" PluginName="Wwise Reflect" CompanyID="0" PluginID="171" PluginType="3">
+												<ObjectRef Name="Wwise_Reflect" ID="{37779A87-4754-4420-8175-3236FA46AA12}" WorkUnitID="{923039AD-F8B4-46D4-BDA7-CB5A6EE595E0}"/>
+											</Reference>
+										</ReferenceList>
+									</EffectSlot>
+								</Local>
+							</Reference>
+						</ObjectList>
+					</ObjectLists>
+				</AuxBus>
+				<AuxBus Name="Simplified Early Reflection Auxiliary Bus" ID="{78E8A125-4524-4430-8C49-F31C20AD0D87}">
+					<PropertyList>
+						<Property Name="BusChannelConfig" Type="int32">
+							<ValueList>
+								<Value>768</Value>
+							</ValueList>
+						</Property>
+						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="True"/>
+						<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+					</PropertyList>
+					<ObjectLists>
+						<ObjectList Name="Effects">
+							<Reference>
+								<Local>
+									<EffectSlot Name="" ID="{90E67B12-0B7E-4D2E-A022-F8E3CD2D3BBB}">
+										<ReferenceList>
+											<Reference Name="Effect" PluginName="Wwise Reflect" CompanyID="0" PluginID="171" PluginType="3">
+												<ObjectRef Name="Wwise_Reflect_Simplified" ID="{F36B45F8-FA55-4FCC-A71F-922ACA4EBB3D}" WorkUnitID="{923039AD-F8B4-46D4-BDA7-CB5A6EE595E0}"/>
+											</Reference>
+										</ReferenceList>
+									</EffectSlot>
+								</Local>
+							</Reference>
+						</ObjectList>
+					</ObjectLists>
 				</AuxBus>
 			</ChildrenList>
 		</WorkUnit>

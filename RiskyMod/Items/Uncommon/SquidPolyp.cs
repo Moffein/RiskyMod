@@ -25,12 +25,7 @@ namespace RiskyMod.Items.Uncommon
         //Does this need turretblacklist?
         public SquidPolyp()
         {
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-                SquidPolyp.squidTurretBodyIndex = BodyCatalog.FindBodyIndex("SquidTurretBody");
-                if (enabled) TakeDamage.distractOnHitBodies.Add(SquidPolyp.squidTurretBodyIndex);
-            };
+            RoR2Application.onLoad += OnLoad;
             if (!enabled) return;
 
             ItemsCore.ModifyItemDefActions += ModifyItem;
@@ -69,6 +64,12 @@ namespace RiskyMod.Items.Uncommon
             {
                 SharedHooks.TakeDamage.ModifyInitialDamageActions += WeakToMithrixHook;
             }
+        }
+
+        private void OnLoad()
+        {
+            SquidPolyp.squidTurretBodyIndex = BodyCatalog.FindBodyIndex("SquidTurretBody");
+            if (enabled && ItemsCore.enabled) TakeDamage.distractOnHitBodies.Add(SquidPolyp.squidTurretBodyIndex);
         }
 
         private void WeakToMithrixHook(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)

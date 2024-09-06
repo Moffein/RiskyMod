@@ -17,7 +17,7 @@ namespace RiskyMod.Items.Lunar
         {
             if (!enabled) return;
 
-            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            IL.RoR2.GlobalEventManager.ProcessHitEnemy += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 if(c.TryGotoNext(

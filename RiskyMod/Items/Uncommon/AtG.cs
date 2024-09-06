@@ -32,7 +32,7 @@ namespace RiskyMod.Items.Uncommon
 
 			float initialDamage = initialDamageCoefficient - stackDamageCoefficient;
 
-			IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+			IL.RoR2.GlobalEventManager.ProcessHitEnemy += (il) =>
 			{
 				bool error = true;
 

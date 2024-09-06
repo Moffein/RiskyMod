@@ -15,6 +15,7 @@ namespace RiskyMod.Items.Uncommon
         public Berzerker()
         {
             if (!enabled) return;
+            //AssistManager.VanillaTweaks.Berzerker.Instance.SetEnabled(false); //No need to disable since it targets the general multikill proc
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //Remove Vanilla Effect
@@ -43,7 +44,8 @@ namespace RiskyMod.Items.Uncommon
                 LegacyResourcesAPI.Load<BuffDef>("BuffDefs/WarCryBuff").iconSprite
                 );
 
-            AssistManager.HandleAssistInventoryActions += OnKillEffect;
+            SharedHooks.OnCharacterDeath.OnCharacterDeathInventoryActions += ProcItem;
+            AssistManager.AssistManager.HandleAssistInventoryCompatibleActions += HandleAssist;
             RecalculateStatsAPI.GetStatCoefficients += HandleStats;
 
             IL.RoR2.CharacterBody.OnClientBuffsChanged += (il) =>
@@ -66,6 +68,18 @@ namespace RiskyMod.Items.Uncommon
                 }
             };
         }
+
+        private void HandleAssist(CharacterBody attackerBody, CharacterBody victimBody, DamageType? assistDamageType, System.Collections.Generic.HashSet<DamageAPI.ModdedDamageType> assistModdedDamageTypes, Inventory attackerInventory, CharacterBody killerBody, DamageInfo damageInfo)
+        {
+            if (attackerBody == killerBody) return;
+            OnKillEffect(attackerBody, attackerInventory);
+        }
+
+        private void ProcItem(GlobalEventManager self, DamageReport damageReport, CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody)
+        {
+            OnKillEffect(attackerBody, attackerInventory);
+        }
+
         private static void ModifyItem()
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.WarCryOnMultiKill);
@@ -82,7 +96,7 @@ namespace RiskyMod.Items.Uncommon
             }
         }
 
-        private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
+        private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory)
         {
 
             int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.WarCryOnMultiKill);

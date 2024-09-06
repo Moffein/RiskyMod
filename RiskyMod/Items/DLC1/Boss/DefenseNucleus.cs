@@ -30,12 +30,7 @@ namespace RiskyMod.Items.DLC1.Boss
                 HandleAllyScalingVanilla();
                 return;
             }
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-                DefenseNucleus.MinorConstructAlly = BodyCatalog.FindBodyIndex("MinorConstructAllyBody");
-                if (enabled) SharedHooks.TakeDamage.distractOnHitBodies.Add(DefenseNucleus.MinorConstructAlly);
-            };
+            RoR2Application.onLoad += OnLoad;
 
             if (weakToMithrix)
             {
@@ -147,6 +142,12 @@ namespace RiskyMod.Items.DLC1.Boss
                     }
                 };
             }
+        }
+
+        private void OnLoad()
+        {
+            DefenseNucleus.MinorConstructAlly = BodyCatalog.FindBodyIndex("MinorConstructAllyBody");
+            if (enabled && ItemsCore.enabled) SharedHooks.TakeDamage.distractOnHitBodies.Add(DefenseNucleus.MinorConstructAlly);
         }
 
         private static void ModifyItem()

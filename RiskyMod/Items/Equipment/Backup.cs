@@ -90,16 +90,16 @@ namespace RiskyMod.Items.Equipment
                 self.subcooldownTimer = 0.5f;
                 return true;
             };
+            RoR2Application.onLoad += OnLoad;
+        }
+
+        private void OnLoad()
+        {
+            Backup.BackupDroneIndex = BodyCatalog.FindBodyIndex("BackupDroneBody");
         }
 
         private static void HandleBackupVanilla()
         {
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-                Backup.BackupDroneIndex = BodyCatalog.FindBodyIndex("BackupDroneBody");
-            };
-
             On.RoR2.CharacterBody.Start += (orig, self) =>
             {
                 orig(self);

@@ -28,7 +28,7 @@ namespace RiskyMod.Items.Common
             IgnoreCrowbar = DamageAPI.ReserveDamageType();
             CrowbarDamage = DamageAPI.ReserveDamageType();
             //Remove vanilla effect
-            IL.RoR2.HealthComponent.TakeDamage += (il) =>
+            IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
             {
                 ILCursor c = new ILCursor(il);
                 if(c.TryGotoNext(
@@ -50,7 +50,7 @@ namespace RiskyMod.Items.Common
             RoR2.Stage.onStageStartGlobal += ClearCrowbarList;
 
             //Modify Ring Threshold
-            IL.RoR2.GlobalEventManager.OnHitEnemy += (il) =>
+            IL.RoR2.GlobalEventManager.ProcessHitEnemy += (il) =>
             {
                 ILCursor c = new ILCursor(il);
 
@@ -80,7 +80,7 @@ namespace RiskyMod.Items.Common
                             }
                         }
 
-                        if (damageInfo.damageType.HasFlag(DamageType.DoT)) ringThreshold = Mathf.Infinity;
+                        if (damageInfo.damageType.damageType.HasFlag(DamageType.DoT)) ringThreshold = Mathf.Infinity;
                         return ringThreshold;
                     });
                 }

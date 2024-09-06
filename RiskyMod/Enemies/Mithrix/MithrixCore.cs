@@ -13,16 +13,17 @@ namespace RiskyMod.Enemies.Mithrix
 
         public MithrixCore()
         {
-            On.RoR2.BodyCatalog.Init += (orig) =>
-            {
-                orig();
-                brotherBodyIndex = BodyCatalog.FindBodyIndex("BrotherBody");
-                brotherHurtBodyIndex = BodyCatalog.FindBodyIndex("BrotherHurtBody");
-            };
+            RoR2Application.onLoad += OnLoad;
 
             if (!enabled) return;
             new MithrixTargetPrioritization();
             new MithrixFreezeImmune();
+        }
+
+        private void OnLoad()
+        {
+            brotherBodyIndex = BodyCatalog.FindBodyIndex("BrotherBody");
+            brotherHurtBodyIndex = BodyCatalog.FindBodyIndex("BrotherHurtBody");
         }
     }
 }

@@ -20,6 +20,7 @@ namespace RiskyMod.Items.Uncommon
         {
             if (!enabled) return;
             ItemsCore.ModifyItemDefActions += ModifyItem;
+            AssistManager.VanillaTweaks.Infusion.Instance.SetEnabled(false);
 
             //Remove vanilla effect
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
@@ -37,8 +38,7 @@ namespace RiskyMod.Items.Uncommon
                     UnityEngine.Debug.LogError("RiskyMod: Infusion OnCharacterDeath IL Hook failed");
                 }
             };
-
-            AssistManager.HandleAssistInventoryActions += OnKillEffect;
+            AssistManager.AssistManager.HandleAssistInventoryCompatibleActions += AssistEffect;
 
             InfusionBuff = SneedUtils.SneedUtils.CreateBuffDef(
                 "RiskyMod_InfusionBuff",
@@ -117,14 +117,28 @@ namespace RiskyMod.Items.Uncommon
                     UnityEngine.Debug.LogError("RiskyMod: Infusion IL Hook failed");
                 }
             };
+
+            SharedHooks.OnCharacterDeath.OnCharacterDeathInventoryActions += ProcOnKill;
         }
+
+        private void ProcOnKill(GlobalEventManager self, DamageReport damageReport, CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody)
+        {
+            OnKillEffect(attackerBody, attackerInventory, victimBody);
+        }
+
+        private void AssistEffect(CharacterBody attackerBody, CharacterBody victimBody, DamageType? assistDamageType, System.Collections.Generic.HashSet<DamageAPI.ModdedDamageType> assistModdedDamageTypes, Inventory attackerInventory, CharacterBody killerBody, DamageInfo damageInfo)
+        {
+            if (attackerBody == killerBody) return;
+            OnKillEffect(attackerBody, attackerInventory, victimBody);
+        }
+
         private static void ModifyItem()
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Infusion);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Infusion);
         }
 
-        private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody, CharacterBody killerBody)
+        private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody)
         {
             int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Infusion);
             if (itemCount > 0)
