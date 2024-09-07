@@ -24,6 +24,7 @@ namespace RiskyMod.Enemies.DLC1
 
             GameObject masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/FlyingVermin/FlyingVerminMaster.prefab").WaitForCompletion();
             CharacterMaster cm = masterObject.GetComponent<CharacterMaster>();
+
             AISkillDriver[] skillDrivers = cm.GetComponentsInChildren<AISkillDriver>();
             foreach (AISkillDriver skill in skillDrivers)
             {
@@ -32,6 +33,9 @@ namespace RiskyMod.Enemies.DLC1
                     skill.maxDistance = 50f;    //vanilla 70
                 }
             }
+
+            BaseAI ai = masterObject.GetComponent<BaseAI>();
+            ai.shouldMissFirstOffScreenShot = false;
         }
     }
 }
