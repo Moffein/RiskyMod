@@ -408,7 +408,7 @@ namespace SneedUtils
             DumpEntityStateConfig(esc);
         }
 
-        public static Object GetEntityStateFieldObject(string entityStateName, string fieldName)
+        public static UnityEngine.Object GetEntityStateFieldObject(string entityStateName, string fieldName)
         {
             EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
             for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)
@@ -434,7 +434,7 @@ namespace SneedUtils
             return string.Empty;
         }
 
-        public static bool SetEntityStateField(string entityStateName, string fieldName, Object newObject)
+        public static bool SetEntityStateField(string entityStateName, string fieldName, UnityEngine.Object newObject)
         {
             EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
             for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)
@@ -476,7 +476,7 @@ namespace SneedUtils
             return false;
         }
 
-        public static bool SetAddressableEntityStateField(string fullEntityStatePath, string fieldName, Object newObject)
+        public static bool SetAddressableEntityStateField(string fullEntityStatePath, string fieldName, UnityEngine.Object newObject)
         {
             EntityStateConfiguration esc = Addressables.LoadAssetAsync<EntityStateConfiguration>(fullEntityStatePath).WaitForCompletion();
             for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)
@@ -522,6 +522,30 @@ namespace SneedUtils
             int whole = Mathf.FloorToInt(f);
             int dec = Mathf.FloorToInt((f - whole) * 100f);
             return whole + "." + dec;
+        }
+
+        public static bool AddSkillToFamily(SkillFamily skillFamily, SkillDef skillDef)
+        {
+            if (!skillDef)
+            {
+                Debug.LogError("SkillsReturns: Could not add " + skillDef.skillName + ": SkillDef is null.");
+                return false;
+            }
+
+            if (skillFamily == null)
+            {
+                Debug.LogError("SkillsReturns: Could not add " + skillDef.skillName + ": SkillFamily is null.");
+                return false;
+            }
+
+            System.Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
+            {
+                skillDef = skillDef,
+                unlockableName = "",
+                viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
+            };
+            return true;
         }
     }
 }

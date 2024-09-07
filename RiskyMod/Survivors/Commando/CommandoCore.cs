@@ -21,6 +21,7 @@ namespace RiskyMod.Survivors.Commando
         public static bool enabled = true;
 
         public static bool phaseRoundChanges = true;
+        public static bool lightningRound = true;
 
         public static bool rollChanges = true;
 
@@ -58,6 +59,35 @@ namespace RiskyMod.Survivors.Commando
 
             phaseRoundDef.mustKeyPress = false;
             phaseBlastDef.mustKeyPress = false;
+
+            if (lightningRound)
+            {
+                Content.Content.entityStates.Add(typeof(FireLightningRound));
+                SkillDef skillDef = ScriptableObject.CreateInstance<SkillDef>();
+                skillDef.activationState = new SerializableEntityStateType(typeof(FireLightningRound));
+                skillDef.activationStateMachineName = "Weapon";
+                skillDef.attackSpeedBuffsRestockSpeed = false;
+                skillDef.cancelSprintingOnActivation = true;
+                skillDef.dontAllowPastMaxStocks = true;
+                skillDef.fullRestockOnAssign = true;
+                skillDef.baseMaxStock = 1;
+                skillDef.baseRechargeInterval = 3f;
+                skillDef.beginSkillCooldownOnSkillEnd = false;
+                skillDef.canceledFromSprinting = false;
+                skillDef.isCombatSkill = true;
+                skillDef.interruptPriority = InterruptPriority.Skill;
+                skillDef.mustKeyPress = false;
+                skillDef.skillName = "RiskyModLightningRound";
+                (skillDef as ScriptableObject).name = skillDef.skillName;
+                skillDef.skillNameToken = "COMMANDO_SECONDARY_LIGHTNING_NAME_RISKYMOD";
+                skillDef.skillDescriptionToken = "COMMANDO_SECONDARY_LIGHTNING_DESCRIPTION_RISKYMOD";
+                skillDef.icon = phaseRoundDef.icon; //TODO: GET UNIQUE ICON
+                Content.Content.skillDefs.Add(phaseRoundDef);
+
+                EntityStates.RiskyMod.Commando.FireLightningRound.lightningProjectilePrefab = BuildPhaseLightningProjectile();
+                Skills.PhaseLightning = skillDef;
+                SneedUtils.SneedUtils.AddSkillToFamily(Addressables.LoadAssetAsync<SkillFamily>("RoR2/Base/Commando/CommandoBodySecondaryFamily.asset").WaitForCompletion(), Skills.PhaseLightning);
+            }
         }
 
         private void ModifyUtilities(SkillLocator sk)
@@ -230,9 +260,9 @@ namespace RiskyMod.Survivors.Commando
             return proj;
         }
 
-        private GameObject BuildPhaseRoundProjectile()
+        private GameObject BuildPhaseLightningProjectile()
         {
-            GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/fmjramping").InstantiateClone("RiskyModPhaseRound", true);
+            GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/fmjramping").InstantiateClone("RiskyModPhaseLightning", true);
             //Add Lightning
             ProjectileProximityBeamController pbc = proj.GetComponent<ProjectileProximityBeamController>();
             if (!pbc)
@@ -260,10 +290,28 @@ namespace RiskyMod.Survivors.Commando
             Content.Content.projectilePrefabs.Add(proj);
             return proj;
         }
+
+        private GameObject BuildPhaseRoundProjectile()
+        {
+            GameObject proj = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Commando/FMJRamping.prefab").WaitForCompletion().InstantiateClone("RiskyModPhaseRound", true);
+            GameObject projGhost = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Commando/FMJRampingGhost.prefab").WaitForCompletion().InstantiateClone("RiskyModPhaseRoundGhost", false);
+
+            //Make bigger
+            proj.transform.localScale = Vector3.one * 2f;
+            projGhost.transform.localScale = Vector3.one * 2f;
+
+            //Prevents projectiles from disappearing at long range
+            ProjectileSimple ps = proj.GetComponent<ProjectileSimple>();
+            ps.lifetime = 10f;
+
+            Content.Content.projectilePrefabs.Add(proj);
+            return proj;
+        }
     }
 
     public class Skills
     {
+        public static SkillDef PhaseLightning;
         public static SkillDef Barrage;
         public static SkillDef BarrageScepter;
         public static SkillDef GrenadeScepter;

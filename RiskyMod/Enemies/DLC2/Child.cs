@@ -23,7 +23,7 @@ namespace RiskyMod.Enemies.DLC2
             R2API.DamageAPI.ModdedDamageTypeHolderComponent mdc = projectilePrefab.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             mdc.Add(SharedDamageTypes.SweetSpotModifier);
             Content.Content.projectilePrefabs.Add(projectilePrefab);
-            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC2/Child/EntityStates.ChildMonster.FireTrackingSparkBall.asset", "pojectilePrefab", projectilePrefab);
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC2/Child/EntityStates.ChildMonster.FireTrackingSparkBall.asset", "projectilePrefab", projectilePrefab);
         }
     }
 }
