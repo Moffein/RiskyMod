@@ -138,11 +138,6 @@ namespace RiskyMod
                     ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.flamethrowerSprintCancel));
                 }
 
-                if (MercCore.enabled)
-                {
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MercCore.m1ComboFinishTweak));
-                }
-
                 if (VoidFiendCore.enabled)
                 {
                     ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(UtilityMoveSpeedScaling.disableScaling));
@@ -473,10 +468,7 @@ namespace RiskyMod
             MageCore.enableLightningSpecial = SurvivorCfg.Bind(mageString, "Electrocute Special Skill", false, "Enables this custom skill.").Value;
 
             MercCore.enabled = SurvivorCfg.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            MercCore.modifyStats = SurvivorCfg.Bind(mercString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
-            //Should change the name of this to remove (Client-Side), but I don't want to mess with peoples' configs at this point.
-            MercCore.m1ComboFinishTweak = SurvivorCfg.Bind(mercString, "M1 Attack Speed Tweak (Client-Side)", true, "(Client-Side) Makes the 3rd hit of Merc's M1 be unaffected by attack speed for use with combo tech.");
-
+            MercCore.buffDefaultShift = SurvivorCfg.Bind(mercString, "Blinding Assault - Buff Damage", true, "Buff the damage of this skill.").Value;
 
             TreebotCore.enabled = SurvivorCfg.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             TreebotCore.drillChanges = SurvivorCfg.Bind(treebotString, "DIRECTIVE Drill Changes", true, "Enable changes to this skill.").Value;

@@ -6,6 +6,8 @@ using Mono.Cecil.Cil;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine.AddressableAssets;
+using RoR2.Skills;
 
 namespace RiskyMod.Survivors.Merc
 {
@@ -13,15 +15,19 @@ namespace RiskyMod.Survivors.Merc
     {
         public static bool enabled = true;
 
-        public static bool modifyStats = true;
-        public static ConfigEntry<bool> m1ComboFinishTweak;
+        public static bool buffDefaultShift;
 
-        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/MercBody");
         public MercCore()
         {
             if (!enabled) return;
             //TODO: Buff default shift
             //Slightly buff Evis? Don't really feel like it needs it but wouldn't be opposed to it.
+
+            if (buffDefaultShift)
+            {
+                Addressables.LoadAssetAsync<MercDashSkillDef>("RoR2/Base/Merc/MercBodyAssaulter.asset").WaitForCompletion().skillDescriptionToken = "MERC_UTILITY_DESCRIPTION_RISKYMOD";
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Merc/EntityStates.Merc.Assaulter2.asset", "damageCoefficient", "4.5");
+            }
         }
     }
 }

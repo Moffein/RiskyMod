@@ -48,6 +48,8 @@
 	"TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD" : "锯伤周围敌人，造成<style=cIsDamage>每秒1000%的伤害</style>。 击中敌人会获得<style=cIsHealing>临时屏障</style>。",
 	"TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "进入重装姿态，同时装备两种<style=cIsDamage>主要攻击技能</style>。增加<style=cIsUtility>60点护甲</style>，但失去<style=cIsHealth>60%的移动速度</style>。",
 	
+	"MERC_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsDamage>眩晕</style>。向前冲锋并造成<style=cIsDamage>450%的伤害</style>。只要命中敌人，<style=cIsDamage>就可以再次发起冲锋</style>，最多<style=cIsDamage>3</style>次。",
+	
 	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "发射一次<style=cIsUtility>音爆</style>，<style=cIsDamage>弱化</style>命中的所有敌人。<style=cIsHealing>每命中一个目标便会对你进行一次治疗</style>。",
 	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>注入</style>一个敌人造成<style=cIsDamage>330%</style>的伤害，对被<style=cIsDamage>注入</style>的敌人造成伤害的<style=cIsHealing>10%</style>将<style=cIsHealing>治疗</style>友方。敌人死亡时将掉落<style=cIsHealing>治疗果实</style>恢复<style=cIsHealing>25%生命值</style>。",
 	
