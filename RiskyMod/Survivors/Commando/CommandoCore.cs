@@ -20,6 +20,7 @@ namespace RiskyMod.Survivors.Commando
     {
         public static bool enabled = true;
 
+        public static bool removePrimaryFalloff = true;
         public static bool phaseRoundChanges = true;
         public static bool lightningRound = true;
 
@@ -28,9 +29,7 @@ namespace RiskyMod.Survivors.Commando
         public static bool suppressiveChanges = true;
         public static bool grenadeChanges = true;
         public static bool grenadeRemoveFalloff = true;
-
-        public static DamageAPI.ModdedDamageType SuppressiveFireDamage;
-        public static DamageAPI.ModdedDamageType SuppressiveFireScepterDamage;
+        
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody");
 
         public CommandoCore()
@@ -41,9 +40,18 @@ namespace RiskyMod.Survivors.Commando
 
         private void ModifySkills(SkillLocator sk)
         {
+            ModifyPrimaries(sk);
             ModifySecondaries(sk);
             ModifyUtilities(sk);
             ModifySpecials(sk);
+        }
+
+        private void ModifyPrimaries(SkillLocator sk)
+        {
+            if (removePrimaryFalloff)
+            {
+                IL.EntityStates.Commando.CommandoWeapon.FirePistol2.FireBullet += SharedHooks.BulletAttackHooks.RemoveBulletFalloff;
+            }
         }
 
         private void ModifySecondaries(SkillLocator sk)
@@ -116,19 +124,16 @@ namespace RiskyMod.Survivors.Commando
         {
             if (suppressiveChanges)
             {
-                SuppressiveFireDamage = DamageAPI.ReserveDamageType();
-                Content.Content.entityStates.Add(typeof(FireBarrage));
-
+                SneedUtils.SneedUtils.DumpAddressableEntityStateConfig("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset");
                 SkillDef barrageDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/CommandoBodyBarrage.asset").WaitForCompletion();
-                barrageDef.activationState = new SerializableEntityStateType(typeof(FireBarrage));
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset", "baseBulletCount", "8");
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset", "damageCoefficient", "1.2");
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset", "baseDurationBetweenShots", "0.09");
                 barrageDef.baseRechargeInterval = 7f;
                 barrageDef.interruptPriority = InterruptPriority.PrioritySkill;
-                barrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD";
                 barrageDef.mustKeyPress = false;
-
-                OnHitAll.HandleOnHitAllActions += FireBarrage.SuppressiveFireAOE;
-
-                Skills.Barrage = barrageDef;
+                barrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD";
+                IL.EntityStates.Commando.CommandoWeapon.FireBarrage.FireBullet += SharedHooks.BulletAttackHooks.RemoveBulletFalloff;
             }
 
             if (grenadeChanges)
@@ -237,8 +242,6 @@ namespace RiskyMod.Survivors.Commando
         private GameObject BuildGrenadeProjectile()
         {
             GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/CommandoGrenadeProjectile").InstantiateClone("RiskyModFragProjectile", true);
-            DamageAPI.ModdedDamageTypeHolderComponent mdc = proj.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            mdc.Add(SharedDamageTypes.SweetSpotModifier);
 
             ProjectileImpactExplosion pie = proj.GetComponent<ProjectileImpactExplosion>();
             pie.destroyOnWorld = false;
@@ -252,6 +255,8 @@ namespace RiskyMod.Survivors.Commando
             else
             {
                 pie.falloffModel = BlastAttack.FalloffModel.SweetSpot;
+                DamageAPI.ModdedDamageTypeHolderComponent mdc = proj.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+                mdc.Add(SharedDamageTypes.SweetSpotModifier);
             }
 
             proj.AddComponent<GrenadeImpactComponent>();
@@ -300,7 +305,7 @@ namespace RiskyMod.Survivors.Commando
             proj.transform.localScale = Vector3.one * 2f;
             projGhost.transform.localScale = Vector3.one * 2f;
 
-            proj.GetComponent<ProjectileController>().ghostPrefab = projGhost();
+            proj.GetComponent<ProjectileController>().ghostPrefab = projGhost;
 
             //Prevents projectiles from disappearing at long range
             ProjectileSimple ps = proj.GetComponent<ProjectileSimple>();
