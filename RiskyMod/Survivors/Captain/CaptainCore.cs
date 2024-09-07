@@ -127,6 +127,7 @@ namespace RiskyMod.Survivors.Captain
             SneedUtils.SneedUtils.FixSkillName(shotgunDef);
             Content.Content.skillDefs.Add(shotgunDef);
             Skills.Shotgun = shotgunDef;
+            RiskyTweaks.FireSelect.CaptainAutoFire.targetSkills.Add(shotgunDef);
 
             //Leave this as a SkillDef replacement to smooth out interaction with Admiral.
             SneedUtils.SneedUtils.ReplaceSkillDef(sk.primary.skillFamily, captainShotgun, Skills.Shotgun);
