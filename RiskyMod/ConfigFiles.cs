@@ -228,19 +228,19 @@ namespace RiskyMod
             Sacrifice.enabled = GeneralCfg.Bind(artifactString, "Sacrifice - No Drop Chance Scaling", true, "Increases drop chance when not using Swarms and prevents drop chance from increasing as the run progresses.").Value;
 
             //Void Fields
-            VoidFields.ModifyHoldout.enabled = GeneralCfg.Bind(voidFieldsString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
+            VoidFields.LargerHoldout.enabled = GeneralCfg.Bind(voidFieldsString, "Larger Holdout Zone", true, "Increase radius of holdout zone.").Value;
             VoidFields.ReduceHoldoutCount.enabled = GeneralCfg.Bind(voidFieldsString, "Less Cells", true, "Reduces Cell count from 9 to 5 and speed up enemy progression.").Value;
 
             //VoidFields.FogRework.enabled = GeneralCfg.Bind(voidFieldsString, "Fog Rework", true, "Void Fog is only active during holdouts like on Void Locus.").Value;
             VoidFields.FogRework.enabled = false;
 
             //Moon
-            Moon.ModifyHoldout.enabled = GeneralCfg.Bind(moonString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
+            Moon.LargerHoldouts.enabled = GeneralCfg.Bind(moonString, "Larger Holdout Zone", true, "Increase radius of holdout zone.").Value;
             LessPillars.enabled = GeneralCfg.Bind(moonString, "Reduce Pillar Count", true, "Reduce the amount of pillars required to activate the jump pads.").Value;
             
             //Void Locus
             RemoveFog.enabled = GeneralCfg.Bind(voidLocusString, "Remove Fog", false, "Removes Void Fog from the map.").Value;
-            VoidLocus.ModifyHoldout.enabled = GeneralCfg.Bind(voidLocusString, "Modify Holdout Zone", true, "Increase radius and reduces charge duration.").Value;
+            VoidLocus.LargerHoldout.enabled = GeneralCfg.Bind(voidLocusString, "Larger Holdout Zone", true, "Increase radius of holdout zone.").Value;
             
             //Misc
             BetterProjectileTracking.enabled = GeneralCfg.Bind(miscString, "Better Projectile Homing", true, "Homing projectiles target based on angle, instead of distance + angle.").Value;

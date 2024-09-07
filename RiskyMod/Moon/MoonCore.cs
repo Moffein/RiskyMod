@@ -11,7 +11,7 @@ namespace RiskyMod.Moon
         {
             if (!enabled) return;
             new LessPillars();
-            new ModifyHoldout();
+            new LargerHoldouts();
         }
     }
 }

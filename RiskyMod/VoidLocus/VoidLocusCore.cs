@@ -11,7 +11,7 @@ namespace RiskyMod.VoidLocus
         {
             if (!enabled) return;
             new RemoveFog();
-            new ModifyHoldout();
+            new LargerHoldout();
         }
     }
 }

@@ -222,11 +222,11 @@ namespace RiskyMod
             if (teleExpansionLoaded && TeleExpandOnBossKill.enabled) Debug.Log("RiskyMod: Disabling TeleExpandOnBossKill because TeleExpansion is loaded.");
             TeleExpandOnBossKill.enabled = TeleExpandOnBossKill.enabled && !teleExpansionLoaded;
 
-            if (teleExpansionLoaded && VoidLocus.ModifyHoldout.enabled) Debug.Log("RiskyMod: Disabling VoidLocus.ModifyHoldout because TeleExpansion is loaded.");
-            VoidLocus.ModifyHoldout.enabled = VoidLocus.ModifyHoldout.enabled && !teleExpansionLoaded;
+            if (teleExpansionLoaded && VoidLocus.LargerHoldout.enabled) Debug.Log("RiskyMod: Disabling VoidLocus.ModifyHoldout because TeleExpansion is loaded.");
+            VoidLocus.LargerHoldout.enabled = VoidLocus.LargerHoldout.enabled && !teleExpansionLoaded;
 
-            if (teleExpansionLoaded && Moon.ModifyHoldout.enabled) Debug.Log("RiskyMod: Disabling Moon.ModifyHoldout because TeleExpansion is loaded.");
-            Moon.ModifyHoldout.enabled = Moon.ModifyHoldout.enabled && !teleExpansionLoaded;
+            if (teleExpansionLoaded && Moon.LargerHoldouts.enabled) Debug.Log("RiskyMod: Disabling Moon.ModifyHoldout because TeleExpansion is loaded.");
+            Moon.LargerHoldouts.enabled = Moon.LargerHoldouts.enabled && !teleExpansionLoaded;
 
             Sacrifice.enabled = Sacrifice.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.SacrificeTweaks");
         }
