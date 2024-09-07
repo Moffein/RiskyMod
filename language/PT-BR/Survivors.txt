@@ -44,7 +44,6 @@
 	"HUNTRESS_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Teleporta</style> para o céu. Faz chover flechas em uma área, <style=cIsUtility>incendiando</style> todos os inimigos e <style=cIsDamage>420% de dano por segundo</style>.",
 	
 	"TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD" : "Dispare uma barra perfurante que causa <style=cIsDamage>660% de dano</style>.",
-	"TOOLBOT_PRIMARY_ALT2_DESCRIPTION_RISKYMOD" : "Lance um foguete que explode, causando <style=cIsDamage>390% de dano</style>. Máximo de 4.",
 	"TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD" : "Serra os inimigos próximos, causando <style=cIsDamage>1.000% de dano por segundo</style>. Recebe uma <style=cIsHealing>barreira temporária</style> ao atingir inimigos.",
 	"TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "Assuma uma postura de combate pesado, equipando seus dois <style=cIsDamage>ataques primários</style> de uma vez. Receba <style=cIsUtility>60 de armadura</style>, mas perca <style=cIsHealth>-60% de velocidade de movimento</style>.",
 	

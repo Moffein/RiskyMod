@@ -7,8 +7,8 @@ using RoR2.Skills;
 using EntityStates;
 using RiskyMod.SharedHooks;
 using Mono.Cecil.Cil;
-using RiskyMod.Survivors.Toolbot.Components;
 using UnityEngine.AddressableAssets;
+using RoR2.Projectile;
 
 namespace RiskyMod.Survivors.Toolbot
 {
@@ -58,7 +58,6 @@ namespace RiskyMod.Survivors.Toolbot
         private void ModifyPrimaries(SkillLocator sk)
         {
             RebarChanges(sk);
-            ScrapChanges(sk);
             SawChanges(sk);
         }
 
@@ -68,31 +67,6 @@ namespace RiskyMod.Survivors.Toolbot
             SkillDef railgunDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Toolbot/ToolbotBodyFireSpear.asset").WaitForCompletion();
             railgunDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD";
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireSpear", "damageCoefficient", "6.6");
-        }
-
-        private void ScrapChanges(SkillLocator sk)
-        {
-            if (!enableScrapChanges) return;
-            bodyPrefab.AddComponent<GrenadeStockController>();
-            SkillDef scrapDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Toolbot/ToolbotBodyFireGrenadeLauncher.asset").WaitForCompletion();
-            scrapDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT2_DESCRIPTION_RISKYMOD";
-            scrapDef.rechargeStock = 0;
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireGrenadeLauncher", "damageCoefficient", "3.9");
-
-            GameObject scrapProjectileModded = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Toolbot/ToolbotGrenadeLauncherProjectile.prefab").WaitForCompletion().InstantiateClone("RiskyModToolbotGrenadeProjectile", true);
-            DamageAPI.ModdedDamageTypeHolderComponent mdc = scrapProjectileModded.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            mdc.Add(SharedDamageTypes.SweetSpotModifier);
-            Content.Content.projectilePrefabs.Add(scrapProjectileModded);
-
-            On.EntityStates.Toolbot.FireGrenadeLauncher.OnEnter += (orig, self) =>
-            {
-                orig(self);
-                GrenadeStockController gsc = self.gameObject.GetComponent<GrenadeStockController>();
-                if (gsc)
-                {
-                    gsc.FireSkill(self.activatorSkillSlot, self.duration);
-                }
-            };
         }
 
         private void SawChanges(SkillLocator sk)

@@ -44,7 +44,6 @@
 	"HUNTRESS_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>传送</style>至空中，向目标区域射下箭雨，<style=cIsDamage>点燃</style>区域内所有敌人，并造成<style=cIsDamage>每秒420%的伤害</style>。",
 	
 	"TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD" : "发射一条具有穿透效果的钢筋，造成<style=cIsDamage>660%的伤害</style>。",
-	"TOOLBOT_PRIMARY_ALT2_DESCRIPTION_RISKYMOD" : "发射一枚火箭，爆炸造成<style=cIsDamage>390%的伤害</style>。最多发射4次。",
 	"TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD" : "锯伤周围敌人，造成<style=cIsDamage>每秒1000%的伤害</style>。 击中敌人会获得<style=cIsHealing>临时屏障</style>。",
 	"TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "进入重装姿态，同时装备两种<style=cIsDamage>主要攻击技能</style>。增加<style=cIsUtility>60点护甲</style>，但失去<style=cIsHealth>60%的移动速度</style>。",
 	
