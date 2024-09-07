@@ -300,6 +300,8 @@ namespace RiskyMod.Survivors.Commando
             proj.transform.localScale = Vector3.one * 2f;
             projGhost.transform.localScale = Vector3.one * 2f;
 
+            proj.GetComponent<ProjectileController>().ghostPrefab = projGhost();
+
             //Prevents projectiles from disappearing at long range
             ProjectileSimple ps = proj.GetComponent<ProjectileSimple>();
             ps.lifetime = 10f;
