@@ -55,7 +55,6 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.EliteReworks", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("Charzard4261.CaptainAbilitiesOffworld", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.EnigmaBlacklist", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.Moffein.GestureEnigma", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.BackstabRework", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.funkfrog_sipondo.sharesuite", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.TeleExpansion", BepInDependency.DependencyFlags.SoftDependency)]
@@ -199,11 +198,6 @@ namespace RiskyMod
             if (backstabReworkPluginLoaded && BackstabRework.enabled) Debug.Log("RiskyMod: Disabling Bandit2 BackstabRework because standalone plugin is loaded.");
             BackstabRework.enabled = BackstabRework.enabled && !backstabReworkPluginLoaded;
 
-            //Gesture is always disabled by default so this shouldn't matter.
-            bool gestureEnigmaPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.GestureEnigma");
-            if (gestureEnigmaPluginLoaded && Gesture.enabled) Debug.Log("RiskyMod: Disabling Gesture of the Drowned changes because GestureEnigma is loaded.");
-            Gesture.enabled = Gesture.enabled && !gestureEnigmaPluginLoaded;
-
             bool eliteReworksPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EliteReworks");
             if (eliteReworksPluginLoaded && NerfVoidtouched.enabled) Debug.Log("RiskyMod: Disabling NerfVoidtouched because EliteReworks is loaded.");
             NerfVoidtouched.enabled = NerfVoidtouched.enabled && !eliteReworksPluginLoaded;
@@ -248,7 +242,7 @@ namespace RiskyMod
             if (SoftDependencies.ZetTweaksLoaded)
             {
                 //Allies.DroneChanges.MegaDrone.allowRepair = false;
-                if (Allies.DroneChanges.MegaDrone.allowRepair) Debug.LogError("RiskyMod: MegaDrone.allowRepair is enabled while ZetTweaks is loaded. Disable this feature in the config of ZetTweaks or RiskyMod, or else you will see duplicated MegaDrone corpses.");
+                if (Allies.DroneChanges.MegaDrone.allowRepair) Debug.LogWarning("RiskyMod: MegaDrone.allowRepair is enabled while ZetTweaks is loaded. Disable this feature in the config of ZetTweaks or RiskyMod, or else you will see duplicated MegaDrone corpses.");
             }
         }
 
@@ -323,14 +317,6 @@ namespace RiskyMod
             SharedHooks.TakeDamage.OnDamageTakenAttackerActions += TakeDamage.DistractOnHit;
 
             new ModifyFinalDamage();
-        }
-
-        public delegate void FireMode();
-        public static FireMode FireModeActions;
-
-        private void Update()
-        {
-            if (FireModeActions != null) FireModeActions.Invoke();
         }
     }
 }

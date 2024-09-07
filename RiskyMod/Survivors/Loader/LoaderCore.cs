@@ -45,9 +45,9 @@ namespace RiskyMod.Survivors.Loader
         private void ModifyStats(CharacterBody cb)
         {
             if (!modifyStats) return;
-            cb.baseMaxHealth = 140f;
+            cb.baseMaxHealth = 130f;
             cb.baseArmor = 0f;
-            cb.levelMaxHealth = 42f;
+            cb.levelMaxHealth = 39f;
         }
 
         private void ModifySkills(SkillLocator sk)
@@ -58,10 +58,7 @@ namespace RiskyMod.Survivors.Loader
 
         private void ModifyUtilities(SkillLocator sk)
         {
-            if (zapFistChanges)
-            {
-                new ZapConePosition();
-            }
+            if (zapFistChanges) new ZapConePosition();
         }
 
         private void ModifySpecials(SkillLocator sk)

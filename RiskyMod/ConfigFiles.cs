@@ -261,7 +261,7 @@ namespace RiskyMod
         private static void ConfigCommonItems()
         {
             BisonSteak.enabled = ItemCfg.Bind(commonString, "Bison Steak", true, itemConfigDescString).Value;
-            CautiousSlug.enabled = ItemCfg.Bind(commonString, "Cautious Slug", true, itemConfigDescString).Value;
+            CautiousSlug.enabled = ItemCfg.Bind(commonString, "Cautious Slug", false, itemConfigDescString).Value;
             Crowbar.enabled = ItemCfg.Bind(commonString, "Crowbar", true, itemConfigDescString).Value;
 
             DelicateWatch.enabled = ItemCfg.Bind(commonString, "Delicate Watch", true, itemConfigDescString).Value;
@@ -385,10 +385,6 @@ namespace RiskyMod
 
         private static void ConfigLunars()
         {
-            //Currently split into a separate mod. Will likely remain that way
-            //Gesture.enabled = ItemCfg.Bind(lunarString, "Gesture of the Drowned", true, itemConfigDescString).Value;
-            Gesture.enabled = false;
-
             BrittleCrown.enabled = ItemCfg.Bind(lunarString, "Brittle Crown", true, itemConfigDescString).Value;
             Meteorite.enabled = ItemCfg.Bind(lunarString, "Glowing Meteorite", true, itemConfigDescString).Value;
             ShapedGlass.enabled = ItemCfg.Bind(lunarString, "Shaped Glass", true, itemConfigDescString).Value;
@@ -405,7 +401,7 @@ namespace RiskyMod
             Capacitor.enabled = ItemCfg.Bind(equipmentString, "Royal Capacitor", true, itemConfigDescString).Value;
             Chrysalis.enabled = ItemCfg.Bind(equipmentString, "Milky Chrysalis", true, itemConfigDescString).Value;
             CritHud.enabled = ItemCfg.Bind(equipmentString, "Ocular HUD", true, itemConfigDescString).Value;
-            Fruit.enabled = ItemCfg.Bind(equipmentString, "Foreign Fruit", true, itemConfigDescString).Value;
+            Fruit.enabled = ItemCfg.Bind(equipmentString, "Foreign Fruit", false, itemConfigDescString).Value;
             SuperLeech.enabled = ItemCfg.Bind(equipmentString, "Super Massive Leech", true, itemConfigDescString).Value;
             VolcanicEgg.enabled = ItemCfg.Bind(equipmentString, "Volcanic Egg", true, itemConfigDescString).Value;
             Goobo.enabled = ItemCfg.Bind(equipmentString, "Goobo Jr.", true, itemConfigDescString).Value;
@@ -465,10 +461,10 @@ namespace RiskyMod
             MageCore.flamethrowerSprintCancel = SurvivorCfg.Bind(mageString, "Flamethrower - Sprint Cancel", true, "(Client-Side) Sprinting cancels Flamethrower.");
             MageCore.flamethrowerRangeExtend = SurvivorCfg.Bind(mageString, "Flamethrower - Increase Range", true, "Increases the range of flamethrower.").Value;
             
-            MageCore.enableLightningSpecial = SurvivorCfg.Bind(mageString, "Electrocute Special Skill", false, "Enables this custom skill.").Value;
+            MageCore.enableLightningSpecial = SurvivorCfg.Bind(mageString, "Electrocute Special Skill", false, "Enables this custom skill. May be buggy.").Value;
 
             MercCore.enabled = SurvivorCfg.Bind(mercString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            MercCore.buffDefaultShift = SurvivorCfg.Bind(mercString, "Blinding Assault - Buff Damage", true, "Buff the damage of this skill.").Value;
+            MercCore.buffDefaultShift = SurvivorCfg.Bind(mercString, "Blinding Assault Changes", true, "Buff the damage of this skill.").Value;
 
             TreebotCore.enabled = SurvivorCfg.Bind(treebotString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             TreebotCore.drillChanges = SurvivorCfg.Bind(treebotString, "DIRECTIVE Drill Changes", true, "Enable changes to this skill.").Value;
