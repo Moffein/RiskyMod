@@ -42,8 +42,23 @@ namespace RiskyMod.Survivors.Captain
             Skills.BeaconHacking = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropHacking.asset").WaitForCompletion();
             if (resupplyCooldown) AddCooldown(Skills.BeaconResupply, 60f);
             if (hackCooldown) AddCooldown(Skills.BeaconHacking, 60f);
-            if (healCooldown) AddCooldown("RoR2/Base/Captain/CallSupplyDropHealing.asset", 60f);
-            if (shockCooldown) AddCooldown("RoR2/Base/Captain/CallSupplyDropShocking.asset", 60f);
+            if (healCooldown)
+            {
+                AddCooldown("RoR2/Base/Captain/CallSupplyDropHealing.asset", 60f);
+            }
+            else
+            {
+                Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropHealing.asset").WaitForCompletion().skillDescriptionToken = "CAPTAIN_SUPPLY_HEAL_DESCRIPTION_RISKYMOD_PERMANENT";
+            }
+
+            if (shockCooldown)
+            {
+                AddCooldown("RoR2/Base/Captain/CallSupplyDropShocking.asset", 60f);
+            }
+            else
+            {
+                Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropShocking.asset").WaitForCompletion().skillDescriptionToken = "CAPTAIN_SUPPLY_SHOCKING_DESCRIPTION_RISKYMOD_PERMANENT";
+            }
 
             SkillDef captainSpecialGeneric = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/PrepSupplyDrop.asset").WaitForCompletion();
             captainSpecialGeneric.skillDescriptionToken = "CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD";
@@ -174,7 +189,13 @@ namespace RiskyMod.Survivors.Captain
 
         private void ModifyBeaconResupply(SkillLocator sk)
         {
-            if (!resupplyChanges) return;
+            SkillDef resupplySkillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropEquipmentRestock.asset").WaitForCompletion();
+            if (!resupplyChanges)
+            {
+                string str1 = resupplyCooldown ? "CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD" : "CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD_PERMANENT";
+                resupplySkillDef.skillDescriptionToken = str1;
+                return;
+            }
             GameObject beaconPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainSupplyDrop, EquipmentRestock.prefab").WaitForCompletion().InstantiateClone("RiskyMod_CaptainSupplyEquipmentRestock", true);
             EntityStateMachine esm = beaconPrefab.GetComponent<EntityStateMachine>();
             esm.mainStateType = new EntityStates.SerializableEntityStateType(typeof(EntityStates.RiskyMod.Captain.Beacon.BeaconSkillRestoreMain));
@@ -183,8 +204,8 @@ namespace RiskyMod.Survivors.Captain
 
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Captain/EntityStates.Captain.Weapon.CallSupplyDropEquipmentRestock.asset", "supplyDropPrefab", beaconPrefab);
 
-            SkillDef resupplySkillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropEquipmentRestock.asset").WaitForCompletion();
-            resupplySkillDef.skillDescriptionToken = "CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD";
+            string str = resupplyCooldown ? "CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD" : "CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD_PERMANENT";
+            resupplySkillDef.skillDescriptionToken = str;
         }
 
         private void ModifyBeaconHacking(SkillLocator sk)
@@ -196,8 +217,9 @@ namespace RiskyMod.Survivors.Captain
             }
             else if (hackChanges)
             {
+                string str = hackCooldown ? "CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD" : "CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD_PERMANENT";
                 SkillDef hackSkillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropHacking.asset").WaitForCompletion();
-                hackSkillDef.skillDescriptionToken = "CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD";
+                hackSkillDef.skillDescriptionToken = str;
 
                 //Prevent already-hacked interactables from being re-hacked.
                 On.EntityStates.CaptainSupplyDrop.HackingMainState.PurchaseInteractionIsValidTarget += (orig, purchaseInteraction) =>
@@ -252,6 +274,12 @@ namespace RiskyMod.Survivors.Captain
                         UnityEngine.Debug.LogError("RiskyMod: BeaconRework Hack UnlockTargetState IL Hook failed");
                     }
                 };
+            }
+            else
+            {
+                string str = hackCooldown ? "CAPTAIN_SUPPLY_HACKING_DESCRIPTION" : "CAPTAIN_SUPPLY_HACKING_DESCRIPTION_RISKYMOD_PERMANENT";
+                SkillDef hackSkillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Captain/CallSupplyDropHacking.asset").WaitForCompletion();
+                hackSkillDef.skillDescriptionToken = str;
             }
         }
 

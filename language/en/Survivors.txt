@@ -5,10 +5,17 @@
 	"CAPTAIN_PRIMARY_DESCRIPTION_VANILLA_RISKYMOD" : "Fire a blast of pellets that deal <style=cIsDamage>7x110% damage</style>. Charging narrows the <style=cIsUtility>spread</style>.",
 	"CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Shocking</style>. Fire a fast tazer that deals <style=cIsDamage>100% damage</style>. Spreads to up to <style=cIsDamage>6</style> targets.",
 	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "Request a <style=cIsUtility>Supply Beacon</style>. Can request up to 2.",
-	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Restores Skill charges</style> on use.",
+	
 	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Hack</style> all nearby purchasables to reduce their cost by <style=cIsUtility>50%</style>.",
 	"CAPTAIN_SUPPLY_SKILL_RESTOCK_INTERACTION_RISKYMOD" : "Take Skill Charge",
 	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Recharge Skills</style> and reduce <style=cIsUtility>Equipment</style> cooldown by <style=cIsUtility>20s</style> on use.",
+	
+	"CAPTAIN_SUPPLY_HEAL_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>Permanent</style>. <style=cIsHealing>Heal</style> all nearby allies for <style=cIsHealing>10%</style></style> of their <style=cIsHealing>maximum health</style> every second.",
+	"CAPTAIN_SUPPLY_SHOCKING_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>Permanent</style>. Periodically <style=cIsDamage>Shock</style> all nearby enemies, immobilizing them.",
+	"CAPTAIN_SUPPLY_HACKING_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>Permanent</style>. <style=cIsUtility>Hack</style> all nearby purchasables to a cost of <style=cIsUtility>$0</style> over time.",
+	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>Permanent</style>. <style=cIsUtility>Recharge Equipment</style> on use.",
+	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD_PERMANENT" : "<style=cIsHealth>Permanent</style>. <style=cIsUtility>Hack</style> all nearby purchasables to reduce their cost by <style=cIsUtility>50%</style>.",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD_PERMANENT" : "<style=cIsHealth>Permanent</style>. <style=cIsUtility>Recharge Skills</style> and reduce <style=cIsUtility>Equipment</style> cooldown by <style=cIsUtility>20s</style> on use.",
 	
 	"BANDIT2_PRIMARY_DESC_RISKYMOD" : "Fire a shotgun burst for <style=cIsDamage>5x90% damage</style>. Can hold up to 4 shells.",
 	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD" : "Fire a rifle blast that pierces for <style=cIsDamage>360% damage</style>. Can hold up to 4 bullets.",

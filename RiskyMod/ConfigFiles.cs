@@ -506,8 +506,8 @@ namespace RiskyMod
 
             BeaconRework.healCooldown = SurvivorCfg.Bind(captainString, "Beacon: Healing - Enable Cooldown", true, "Allow this beacon to be re-used on a cooldown.").Value;
 
-            BeaconRework.hackCooldown = SurvivorCfg.Bind(captainString, "Beacon: Hack - Enable Cooldown", true, "Allow this beacon to be re-used on a cooldown.").Value;
-            BeaconRework.hackChanges = SurvivorCfg.Bind(captainString, "Beacon: Hack - Enable Changes", true, "Enable changes to the effect of this beacon.").Value;
+            BeaconRework.hackCooldown = SurvivorCfg.Bind(captainString, "Beacon: Hack - Enable Cooldown", false, "Allow this beacon to be re-used on a cooldown.").Value;
+            BeaconRework.hackChanges = SurvivorCfg.Bind(captainString, "Beacon: Hack - Enable Changes", false, "Enable changes to the effect of this beacon.").Value;
             BeaconRework.hackDisable = SurvivorCfg.Bind(captainString, "Beacon: Hack - Disable", false, "Removes this Beacon from the game.").Value;
 
             BeaconRework.shockCooldown = SurvivorCfg.Bind(captainString, "Beacon: Shocking - Enable Cooldown", true, "Allow this beacon to be re-used on a cooldown.").Value;
