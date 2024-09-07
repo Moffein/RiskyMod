@@ -2,6 +2,7 @@
 using RiskyMod.Enemies.Bosses;
 using RiskyMod.Enemies.DLC1;
 using RiskyMod.Enemies.DLC1.Voidling;
+using RiskyMod.Enemies.DLC2;
 using RiskyMod.Enemies.Mithrix;
 using RiskyMod.Enemies.Mobs;
 using RiskyMod.Enemies.Mobs.Lunar;
@@ -60,6 +61,9 @@ namespace RiskyMod.Enemies
             new VoidInfestor();
             new BlindPest();
             new XiConstruct();
+
+            new Child();
+            new Scorchling();
         }
 
         private void ModifySpawns()

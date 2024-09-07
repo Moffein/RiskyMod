@@ -50,6 +50,7 @@ using RiskyMod.Enemies.Spawnpools;
 using RiskyMod.Enemies.DLC1.Voidling;
 using System.Runtime.CompilerServices;
 using RiskyMod.Allies.DamageResistances;
+using RiskyMod.Enemies.DLC2;
 
 namespace RiskyMod
 {
@@ -621,6 +622,9 @@ namespace RiskyMod
             VoidInfestor.noVoidAllies = MonsterCfg.Bind(monsterString, "Void Infestor - No Ally Infestation", true, "Void Infestors can't possess allies.").Value;
 
             VoidReaver.enabled = MonsterCfg.Bind(monsterString, "Void Reaver", true, "Enable changes to this monster.").Value;
+
+            Child.enabled = MonsterCfg.Bind(monsterString, "Child", true, "Enable changes to this monster.").Value;
+            Scorchling.enabled = MonsterCfg.Bind(monsterString, "Scorch Wurm", true, "Enable changes to this monster.").Value;
         }
 
         private static void ConfigSpawnpools()
