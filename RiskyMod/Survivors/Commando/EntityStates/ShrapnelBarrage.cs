@@ -2,10 +2,11 @@
 using UnityEngine;
 using R2API;
 using RiskyMod.Survivors.Commando;
+using static RoR2.BulletAttack;
 
 namespace EntityStates.RiskyMod.Commando
 {
-	public class FireBarrage : BaseState
+	public class ShrapnelBarrage : BaseState
 	{
 		public virtual void LoadStats()
 		{
@@ -18,7 +19,7 @@ namespace EntityStates.RiskyMod.Commando
 			base.OnEnter();
 			LoadStats();
 			base.characterBody.SetSpreadBloom(0.2f, false);
-			this.duration = FireBarrage.totalDuration;
+			this.duration = ShrapnelBarrage.totalDuration;
 			this.durationBetweenShots = internalBaseDurationBetweenShots / this.attackSpeedStat;
 			this.bulletCount = (int)((float)internalBaseBulletCount * this.attackSpeedStat);
 
@@ -40,54 +41,77 @@ namespace EntityStates.RiskyMod.Commando
 			Ray aimRay = base.GetAimRay();
 			if (this.modelAnimator)
 			{
-				if (FireBarrage.effectPrefab)
+				if (ShrapnelBarrage.effectPrefab)
 				{
-					EffectManager.SimpleMuzzleFlash(FireBarrage.effectPrefab, base.gameObject, muzzleName, false);
+					EffectManager.SimpleMuzzleFlash(ShrapnelBarrage.effectPrefab, base.gameObject, muzzleName, false);
 				}
 				base.PlayAnimation("Gesture Additive, Right", "FirePistol, Right");
 			}
-			base.AddRecoil(-0.8f * FireBarrage.recoilAmplitude, -1f * FireBarrage.recoilAmplitude, -0.1f * FireBarrage.recoilAmplitude, 0.15f * FireBarrage.recoilAmplitude);
+			base.AddRecoil(-0.8f * ShrapnelBarrage.recoilAmplitude, -1f * ShrapnelBarrage.recoilAmplitude, -0.1f * ShrapnelBarrage.recoilAmplitude, 0.15f * ShrapnelBarrage.recoilAmplitude);
 			if (base.isAuthority)
 			{
-				BulletAttack ba = new BulletAttack
-				{
-					owner = base.gameObject,
-					weapon = base.gameObject,
-					origin = aimRay.origin,
-					aimVector = aimRay.direction,
-					minSpread = FireBarrage.minSpread,
-					maxSpread = FireBarrage.maxSpread,
-					bulletCount = 1u,
-					damage = FireBarrage.damageCoefficient * this.damageStat,
-					force = FireBarrage.force,
-					tracerEffectPrefab = FireBarrage.tracerEffectPrefab,
-					muzzleName = muzzleName,
-					hitEffectPrefab = FireBarrage.hitEffectPrefab,
-					isCrit = Util.CheckRoll(this.critStat, base.characterBody.master),
-					radius = FireBarrage.bulletRadius,
-					smartCollision = true,
-					damageType = DamageType.Stun1s,
-					falloffModel = BulletAttack.FalloffModel.None,
-					procCoefficient = 0.5f
-				};
-				AddDamageType(ba);
-				ba.Fire();
-			}
+				triggeredExplosion = false;
+                new BulletAttack
+                {
+                    tracerEffectPrefab = ShrapnelBarrage.tracerEffectPrefab,
+                    damage = 0f,
+                    procCoefficient = 0f,
+                    damageType = DamageType.Silent | DamageType.NonLethal,
+                    owner = base.gameObject,
+                    aimVector = aimRay.direction,
+                    isCrit = false,
+                    minSpread = minSpread,
+                    maxSpread = maxSpread,
+                    origin = aimRay.origin,
+                    maxDistance = 2000f,
+                    muzzleName = muzzleName,
+                    radius = bulletRadius,
+                    hitCallback = ComboHitCallback
+                }.Fire();
+            }
 
-			base.characterBody.AddSpreadBloom(FireBarrage.spreadBloomValue);
+			base.characterBody.AddSpreadBloom(ShrapnelBarrage.spreadBloomValue);
 			this.totalBulletsFired++;
-			Util.PlaySound(FireBarrage.fireBarrageSoundString, base.gameObject);
+			Util.PlaySound(ShrapnelBarrage.fireBarrageSoundString, base.gameObject);
 		}
 
-		public virtual void AddDamageType(BulletAttack ba)
+        protected virtual bool ComboHitCallback(BulletAttack bulletRef, ref BulletHit hitInfo)
         {
-			DamageAPI.AddModdedDamageType(ba, CommandoCore.SuppressiveFireDamage);
-		}
+            if (hitInfo.point != null && !triggeredExplosion && base.characterBody)
+            {
+                triggeredExplosion = true;
 
-		public override void OnExit()
-		{
-			base.OnExit();
-		}
+                Vector3 attackForce = bulletRef.aimVector != null ? force * bulletRef.aimVector.normalized : Vector3.zero;
+
+                //golem explosion effect was definitely not set up to scale 1:1 with radius
+                if (explosionEffectPrefab)
+                {
+                    EffectManager.SpawnEffect(explosionEffectPrefab, new EffectData { origin = hitInfo.point, scale = blastRadius }, true);
+                }
+
+                new BlastAttack()
+                {
+                    attacker = base.gameObject,
+                    attackerFiltering = AttackerFiltering.NeverHitSelf,
+                    baseDamage = this.damageStat * DamageCoefficient,
+                    baseForce = 0f,
+                    bonusForce = attackForce,
+                    canRejectForce = true,
+                    crit = base.RollCrit(),
+                    damageColorIndex = DamageColorIndex.Default,
+                    damageType = DamageType.Stun1s,
+                    falloffModel = BlastAttack.FalloffModel.None,
+                    inflictor = base.gameObject,
+                    position = hitInfo.point,
+                    procChainMask = default,
+                    procCoefficient = 1f,
+                    radius = blastRadius,
+                    teamIndex = base.GetTeam()
+                }.Fire();
+            }
+
+            return false;
+        }
 
 		public override void FixedUpdate()
 		{
@@ -125,24 +149,25 @@ namespace EntityStates.RiskyMod.Commando
 			return InterruptPriority.Skill;
 		}
 
+		protected virtual float DamageCoefficient => 1.2f;
+
+		private bool triggeredExplosion = false;
 		public float internalBaseBulletCount;
 		public float internalBaseDurationBetweenShots;
 
 
 		public static GameObject explosionEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
 		public static float blastRadius = 3f;
-		public static float blastDamageCoefficient = 5f;	//Multiply by damage coefficient
 
 		public static GameObject effectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashBarrage");
 		public static GameObject hitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/HitsparkCommandoBarrage");
 		public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/TracerCommandoBoost");
-		public static float damageCoefficient = 0.2f;
 		public static float force = 100f;
 		public static float minSpread = 0f;
 		public static float maxSpread = 1f;
 		public static float baseDurationBetweenShots = 0.12f;
 		public static float totalDuration = 1f;
-		public static float bulletRadius = 1.5f;
+		public static float bulletRadius = 0.5f;
 		public static int baseBulletCount = 6;
 		public static string fireBarrageSoundString = "Play_commando_m1";
 		public static float recoilAmplitude = 1.5f;
@@ -158,33 +183,5 @@ namespace EntityStates.RiskyMod.Commando
 		private float durationBetweenShots;
 
 		private float maxAttackSpeed;
-
-		public static void SuppressiveFireAOE(GlobalEventManager self, DamageInfo damageInfo, GameObject hitObject)
-		{
-			if (damageInfo.HasModdedDamageType(CommandoCore.SuppressiveFireDamage))
-			{
-				EffectManager.SpawnEffect(explosionEffectPrefab, new EffectData
-				{
-					origin = damageInfo.position,
-					scale = blastRadius,
-					rotation = Util.QuaternionSafeLookRotation(damageInfo.force)
-				}, true);
-				BlastAttack blastAttack = new BlastAttack();
-				blastAttack.position = damageInfo.position;
-				blastAttack.baseDamage = damageInfo.damage * blastDamageCoefficient;
-				blastAttack.baseForce = 0f;
-				blastAttack.radius = blastRadius;
-				blastAttack.attacker = damageInfo.attacker;
-				blastAttack.inflictor = null;
-				blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-				blastAttack.crit = damageInfo.crit;
-				blastAttack.procChainMask = damageInfo.procChainMask;
-				blastAttack.procCoefficient = 1f;
-				blastAttack.damageColorIndex = DamageColorIndex.Default;
-				blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-				blastAttack.damageType = damageInfo.damageType;
-				blastAttack.Fire();
-			}
-		}
 	}
 }

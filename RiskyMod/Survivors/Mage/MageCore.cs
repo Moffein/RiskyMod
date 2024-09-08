@@ -241,11 +241,10 @@ namespace RiskyMod.Survivors.Mage
                 specialLightningVariantIndex = sk.special.skillFamily.variants.Length - 1;
             }
 
-            if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
+            if (SoftDependencies.ScepterPluginLoaded)
             {
                 BuildScepterSkillDefs(sk);
-                if (SoftDependencies.ScepterPluginLoaded) SetupScepter();
-                if (SoftDependencies.ClassicItemsScepterLoaded) SetupScepterClassic();
+                SetupScepter();
             }
         }
 
@@ -299,12 +298,6 @@ namespace RiskyMod.Survivors.Mage
         private void SetupScepter()
         {
             if (MageCore.enableLightningSpecial) AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.SpecialLightningScepter, "MageBody", Skills.SpecialLightning);
-        }
-
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void SetupScepterClassic()
-        {
-            if (MageCore.enableLightningSpecial) ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.SpecialLightningScepter, "MageBody", SkillSlot.Special, Skills.SpecialLightning);
         }
 
         private void HandleIonSurge(SkillLocator sk)

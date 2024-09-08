@@ -22,7 +22,8 @@ namespace RiskyMod.Survivors.Commando
 
         public static bool removePrimaryFalloff = true;
         public static bool phaseRoundChanges = true;
-        public static bool lightningRound = true;
+        public static bool skillLightningRound = true;
+        public static bool skillShrapnelBarrage = true;
 
         public static bool rollChanges = true;
 
@@ -68,7 +69,7 @@ namespace RiskyMod.Survivors.Commando
             phaseRoundDef.mustKeyPress = false;
             phaseBlastDef.mustKeyPress = false;
 
-            if (lightningRound)
+            if (skillLightningRound)
             {
                 Content.Content.entityStates.Add(typeof(FireLightningRound));
                 SkillDef skillDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -89,7 +90,7 @@ namespace RiskyMod.Survivors.Commando
                 (skillDef as ScriptableObject).name = skillDef.skillName;
                 skillDef.skillNameToken = "COMMANDO_SECONDARY_LIGHTNING_NAME_RISKYMOD";
                 skillDef.skillDescriptionToken = "COMMANDO_SECONDARY_LIGHTNING_DESCRIPTION_RISKYMOD";
-                skillDef.icon = phaseRoundDef.icon; //TODO: GET UNIQUE ICON
+                skillDef.icon = phaseRoundDef.icon; //TODO: UNIQUE ICON
                 Content.Content.skillDefs.Add(phaseRoundDef);
 
                 EntityStates.RiskyMod.Commando.FireLightningRound.lightningProjectilePrefab = BuildPhaseLightningProjectile();
@@ -122,10 +123,10 @@ namespace RiskyMod.Survivors.Commando
 
         private void ModifySpecials(SkillLocator sk)
         {
+            SkillDef barrageDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/CommandoBodyBarrage.asset").WaitForCompletion();
             if (suppressiveChanges)
             {
                 SneedUtils.SneedUtils.DumpAddressableEntityStateConfig("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset");
-                SkillDef barrageDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/CommandoBodyBarrage.asset").WaitForCompletion();
                 SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset", "baseBulletCount", "8");
                 SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset", "damageCoefficient", "1.2");
                 SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset", "baseDurationBetweenShots", "0.09");
@@ -143,45 +144,74 @@ namespace RiskyMod.Survivors.Commando
                 ThrowGrenadeScepter.projectilePrefab = moddedGrenade;
             }
 
-            if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
+            if (skillShrapnelBarrage)
+            {
+                SkillDef shrapnelBarrageDef = SkillDef.CreateInstance<SkillDef>();
+                Content.Content.entityStates.Add(typeof(ShrapnelBarrage));
+                shrapnelBarrageDef.activationState = new SerializableEntityStateType(typeof(ShrapnelBarrage));
+                shrapnelBarrageDef.activationStateMachineName = "Weapon";
+                shrapnelBarrageDef.baseMaxStock = 1;
+                shrapnelBarrageDef.baseRechargeInterval = 7f;
+                shrapnelBarrageDef.beginSkillCooldownOnSkillEnd = false;
+                shrapnelBarrageDef.canceledFromSprinting = false;
+                shrapnelBarrageDef.dontAllowPastMaxStocks = true;
+                shrapnelBarrageDef.forceSprintDuringState = false;
+                shrapnelBarrageDef.fullRestockOnAssign = true;
+                shrapnelBarrageDef.icon = barrageDef.icon;  //TODO: UNIQUE ICON
+                shrapnelBarrageDef.interruptPriority = InterruptPriority.PrioritySkill;
+                shrapnelBarrageDef.isCombatSkill = true;
+                shrapnelBarrageDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
+                shrapnelBarrageDef.mustKeyPress = false;
+                shrapnelBarrageDef.cancelSprintingOnActivation = true;
+                shrapnelBarrageDef.rechargeStock = 1;
+                shrapnelBarrageDef.requiredStock = 1;
+                shrapnelBarrageDef.skillName = "RiskyModShrapnelBarrage";
+                shrapnelBarrageDef.skillNameToken = "COMMANDO_SPECIAL_EXPL_NAME_RISKYMOD";
+                shrapnelBarrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_EXPL_DESCRIPTION_RISKYMOD";
+                shrapnelBarrageDef.stockToConsume = 1;
+                (shrapnelBarrageDef as ScriptableObject).name = shrapnelBarrageDef.skillName;
+                Content.Content.skillDefs.Add(shrapnelBarrageDef);
+                SneedUtils.SneedUtils.AddSkillToFamily(Addressables.LoadAssetAsync<SkillFamily>("RoR2/Base/Commando/CommandoBodySpecialFamily.asset").WaitForCompletion(), shrapnelBarrageDef);
+                Skills.ShrapnelBarrage = shrapnelBarrageDef;
+            }
+
+            if (SoftDependencies.ScepterPluginLoaded) ;
             {
                 BuildScepterSkillDefs(sk);
-                if (SoftDependencies.ScepterPluginLoaded) SetupScepter();
-                if (SoftDependencies.ClassicItemsScepterLoaded) SetupScepterClassic();
+                SetupScepter();
             }
         }
 
         private void BuildScepterSkillDefs(SkillLocator sk)
         {
-            if (suppressiveChanges)
+            if (skillShrapnelBarrage)
             {
-                SuppressiveFireScepterDamage = DamageAPI.ReserveDamageType();
-                OnHitAll.HandleOnHitAllActions += FireBarrageScepter.SuppressiveFireScepterAOE;
-                SkillDef barrageDef = SkillDef.CreateInstance<SkillDef>();
-                Content.Content.entityStates.Add(typeof(FireBarrageScepter));
-                barrageDef.activationState = new SerializableEntityStateType(typeof(FireBarrageScepter));
-                barrageDef.activationStateMachineName = "Weapon";
-                barrageDef.baseMaxStock = 1;
-                barrageDef.baseRechargeInterval = 7f;
-                barrageDef.beginSkillCooldownOnSkillEnd = false;
-                barrageDef.canceledFromSprinting = false;
-                barrageDef.dontAllowPastMaxStocks = true;
-                barrageDef.forceSprintDuringState = false;
-                barrageDef.fullRestockOnAssign = true;
-                barrageDef.icon = Content.Assets.ScepterSkillIcons.CommandoBarrageScepter;
-                barrageDef.interruptPriority = InterruptPriority.PrioritySkill;
-                barrageDef.isCombatSkill = true;
-                barrageDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
-                barrageDef.mustKeyPress = false;
-                barrageDef.cancelSprintingOnActivation = true;
-                barrageDef.rechargeStock = 1;
-                barrageDef.requiredStock = 1;
-                barrageDef.skillName = "BarrageScepter";
-                barrageDef.skillNameToken = "COMMANDO_SPECIAL_SCEPTER_NAME_RISKYMOD";
-                barrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD";
-                barrageDef.stockToConsume = 1;
-                Content.Content.skillDefs.Add(barrageDef);
-                Skills.BarrageScepter = barrageDef;
+                SkillDef shrapnelBarrageDef = SkillDef.CreateInstance<SkillDef>();
+                Content.Content.entityStates.Add(typeof(ShrapnelBarrageScepter));
+                shrapnelBarrageDef.activationState = new SerializableEntityStateType(typeof(ShrapnelBarrageScepter));
+                shrapnelBarrageDef.activationStateMachineName = "Weapon";
+                shrapnelBarrageDef.baseMaxStock = 1;
+                shrapnelBarrageDef.baseRechargeInterval = 7f;
+                shrapnelBarrageDef.beginSkillCooldownOnSkillEnd = false;
+                shrapnelBarrageDef.canceledFromSprinting = false;
+                shrapnelBarrageDef.dontAllowPastMaxStocks = true;
+                shrapnelBarrageDef.forceSprintDuringState = false;
+                shrapnelBarrageDef.fullRestockOnAssign = true;
+                shrapnelBarrageDef.icon = Content.Assets.ScepterSkillIcons.CommandoBarrageScepter;  //TODO: UNIQUE ICON
+                shrapnelBarrageDef.interruptPriority = InterruptPriority.PrioritySkill;
+                shrapnelBarrageDef.isCombatSkill = true;
+                shrapnelBarrageDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
+                shrapnelBarrageDef.mustKeyPress = false;
+                shrapnelBarrageDef.cancelSprintingOnActivation = true;
+                shrapnelBarrageDef.rechargeStock = 1;
+                shrapnelBarrageDef.requiredStock = 1;
+                shrapnelBarrageDef.skillName = "RiskyModShrapnelBarrageScepter";
+                shrapnelBarrageDef.skillNameToken = "COMMANDO_SPECIAL_EXPL_SCEPTER_NAME_RISKYMOD";
+                shrapnelBarrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_EXPL_SCEPTER_DESCRIPTION_RISKYMOD";
+                shrapnelBarrageDef.stockToConsume = 1;
+                (shrapnelBarrageDef as ScriptableObject).name = shrapnelBarrageDef.skillName;
+                Content.Content.skillDefs.Add(shrapnelBarrageDef);
+                Skills.ShrapnelBarrageScepter = shrapnelBarrageDef;
             }
 
             if (grenadeChanges)
@@ -217,25 +247,13 @@ namespace RiskyMod.Survivors.Commando
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepter()
         {
-            if (suppressiveChanges)
+            if (skillShrapnelBarrage)
             {
-                AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.BarrageScepter, "CommandoBody", Skills.Barrage);
+                AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.ShrapnelBarrageScepter, "CommandoBody", Skills.ShrapnelBarrage);
             }
             if (grenadeChanges)
             {
                 AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.GrenadeScepter, "CommandoBody", Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/ThrowGrenade.asset").WaitForCompletion());
-            }
-        }
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void SetupScepterClassic()
-        {
-            if (suppressiveChanges)
-            {
-                ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.BarrageScepter, "CommandoBody", SkillSlot.Special, Skills.Barrage);
-            }
-            if (grenadeChanges)
-            {
-                ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.GrenadeScepter, "CommandoBody", SkillSlot.Special, Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/ThrowGrenade.asset").WaitForCompletion());
             }
         }
 
@@ -319,8 +337,8 @@ namespace RiskyMod.Survivors.Commando
     public class Skills
     {
         public static SkillDef PhaseLightning;
-        public static SkillDef Barrage;
-        public static SkillDef BarrageScepter;
+        public static SkillDef ShrapnelBarrage;
+        public static SkillDef ShrapnelBarrageScepter;
         public static SkillDef GrenadeScepter;
     }
 }

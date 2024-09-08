@@ -125,7 +125,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
 		public static GameObject hitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/HitsparkBandit2Pistol");
 		public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/TracerBanditPistol");
 
-		public static float damageCoefficient = 12f;
+		public static float damageCoefficient = 9f;
 		public static float force = 2000f;
 
 		public static float minSpread = 0f;

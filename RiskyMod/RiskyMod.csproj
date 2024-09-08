@@ -69,9 +69,6 @@
     <Reference Include="BepInEx.Preloader">
       <HintPath>libs\BepInEx\BepInEx.Preloader.dll</HintPath>
     </Reference>
-    <Reference Include="ClassicItems">
-      <HintPath>libs\SoftDependencies\ClassicItems.dll</HintPath>
-    </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
       <HintPath>libs\com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>

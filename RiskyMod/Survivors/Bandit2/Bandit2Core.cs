@@ -241,11 +241,10 @@ namespace RiskyMod.Survivors.Bandit2
             skullRevolverDef.interruptPriority = InterruptPriority.Skill;
             Skills.RackEmUp = skullRevolverDef;
 
-            if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
+            if (SoftDependencies.ScepterPluginLoaded)
             {
                 BuildScepterSkillDefs(sk);
-                if (SoftDependencies.ScepterPluginLoaded) SetupScepter();
-                if (SoftDependencies.ClassicItemsScepterLoaded) SetupScepterClassic();
+                SetupScepter();
             }    
         }
 
@@ -315,13 +314,6 @@ namespace RiskyMod.Survivors.Bandit2
         {
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.LightsOutScepter, "Bandit2Body", Skills.LightsOut);
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.RackEmUpScepter, "Bandit2Body", Skills.RackEmUp);
-        }
-
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void SetupScepterClassic()
-        {
-            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.LightsOutScepter, "Bandit2Body", SkillSlot.Special, Skills.LightsOut);
-            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.RackEmUpScepter, "Bandit2Body", SkillSlot.Special, Skills.RackEmUp);
         }
 
         private void SpecialDamageType(SkillLocator sk)

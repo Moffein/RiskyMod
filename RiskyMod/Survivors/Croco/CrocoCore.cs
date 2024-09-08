@@ -246,12 +246,10 @@ namespace RiskyMod.Survivors.Croco
             Skills.Epidemic = epidemicDef;
             new ModifySpecial();
 
-            if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
+            if (SoftDependencies.ScepterPluginLoaded)
             {
                 BuildScepterSkillDefs(sk);
-
-                if (SoftDependencies.ScepterPluginLoaded) SetupScepter();
-                if (SoftDependencies.ClassicItemsScepterLoaded) SetupScepterClassic();
+                SetupScepter();
             }
         }
 
@@ -292,11 +290,6 @@ namespace RiskyMod.Survivors.Croco
         private void SetupScepter()
         {
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.EpidemicScepter, "CrocoBody", Skills.Epidemic);
-        }
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void SetupScepterClassic()
-        {
-            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.EpidemicScepter, "CrocoBody", SkillSlot.Special, Skills.Epidemic);
         }
 
         public static bool HasDeeprot(SkillLocator sk)

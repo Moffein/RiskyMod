@@ -90,11 +90,10 @@ namespace RiskyMod.Survivors.Huntress
                 Skills.ArrowRain = arrowRain;
                 new ArrowRainBuff();
 
-                if (SoftDependencies.ScepterPluginLoaded || SoftDependencies.ClassicItemsScepterLoaded)
+                if (SoftDependencies.ScepterPluginLoaded)
                 {
                     BuildScepterSkillDefs(sk);
-                    if (SoftDependencies.ScepterPluginLoaded) SetupScepter();
-                    if (SoftDependencies.ClassicItemsScepterLoaded) SetupScepterClassic();
+                    SetupScepter();
                 }
             }
 
@@ -149,12 +148,6 @@ namespace RiskyMod.Survivors.Huntress
         private void SetupScepter()
         {
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(Skills.ArrowRainScepter, "HuntressBody", Skills.ArrowRain);
-        }
-
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void SetupScepterClassic()
-        {
-            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(Skills.ArrowRainScepter, "HuntressBody", SkillSlot.Special, Skills.ArrowRain);
         }
     }
     public static class Skills
