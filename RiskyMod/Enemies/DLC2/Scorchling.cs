@@ -22,6 +22,8 @@ namespace RiskyMod.Enemies.DLC2
             CharacterBody body = bodyObject.GetComponent<CharacterBody>();
             body.baseMaxHealth = 480f;
             body.levelMaxHealth = 144f;
+
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC2/Scorchling/EntityStates.Scorchling.LavaBomb.asset", "damageCoefficient", "0.8");
         }
     }
 }

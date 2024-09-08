@@ -126,7 +126,6 @@ namespace RiskyMod.Survivors.Commando
             SkillDef barrageDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/CommandoBodyBarrage.asset").WaitForCompletion();
             if (suppressiveChanges)
             {
-                SneedUtils.SneedUtils.DumpAddressableEntityStateConfig("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset");
                 SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset", "baseBulletCount", "8");
                 SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset", "damageCoefficient", "1.2");
                 SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset", "baseDurationBetweenShots", "0.09");
@@ -175,7 +174,7 @@ namespace RiskyMod.Survivors.Commando
                 Skills.ShrapnelBarrage = shrapnelBarrageDef;
             }
 
-            if (SoftDependencies.ScepterPluginLoaded) ;
+            if (SoftDependencies.ScepterPluginLoaded)
             {
                 BuildScepterSkillDefs(sk);
                 SetupScepter();

@@ -78,6 +78,9 @@ namespace RiskyMod
     [BepInDependency(R2API.SoundAPI.PluginGUID)]
     [BepInDependency(R2API.PrefabAPI.PluginGUID)]
     [BepInDependency(R2API.ItemAPI.PluginGUID)]
+    [BepInDependency("com.Moffein.RiskyTweaks")]
+    [BepInDependency("com.Moffein.AssistManager")]
+    [BepInDependency("com.Moffein.DefenseMatrixManager")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.0.0")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
