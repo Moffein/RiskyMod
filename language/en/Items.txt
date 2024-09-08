@@ -137,6 +137,6 @@
 
 	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Increase base damage by <style=cIsDamage>100%</style> <style=cStack>(+100% per stack)</style>. <style=cIsHealth>Divide maximum health by 2</style> <style=cStack>(+1 per stack)</style>.",
 	
-	"ITEM_STRENGTHENBURN_DESC_RISKYMOD": "<style=cIsDamage>5%</style> chance on hit to <style=cIsDamage>ignite</style> enemies. Ignite effects deal <style=cIsDamage>+300%</style> <style=cStack>(+300% per stack)</style> more damage over time."
+	"ITEM_STRENGTHENBURN_DESC_RISKYMOD": "<style=cIsDamage>5%</style> chance on hit to ignite for <style=cIsDamage>50%</style> TOTAL damage. Ignite effects deal <style=cIsDamage>+300%</style> <style=cStack>(+300% per stack)</style> more damage over time."
 	}
 }
