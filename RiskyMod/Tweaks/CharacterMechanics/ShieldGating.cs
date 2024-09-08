@@ -174,6 +174,15 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                 }
             };
 
+            On.EntityStates.BrotherMonster.SprintBash.OnEnter += (orig, self) =>
+            {
+                orig(self);
+                if (self.isAuthority && self.overlapAttack != null)
+                {
+                    self.overlapAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                }
+            };
+
             GameObject pizzaLeft = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherUltLineProjectileRotateLeft.prefab").WaitForCompletion();
             GameObject pizzaRight = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherUltLineProjectileRotateRight.prefab").WaitForCompletion();
 
