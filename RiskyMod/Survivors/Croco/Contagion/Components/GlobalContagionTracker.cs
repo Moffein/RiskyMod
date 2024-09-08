@@ -3,6 +3,7 @@ using R2API;
 using UnityEngine;
 using System.Collections.Generic;
 using RoR2.Orbs;
+using UnityEngine.Networking;
 
 namespace RiskyMod.Survivors.Croco.Contagion.Components
 {
@@ -17,7 +18,9 @@ namespace RiskyMod.Survivors.Croco.Contagion.Components
 
         private static void InitPoisonTracker(Run self)
         {
-            instance = self.gameObject.AddComponent<GlobalContagionTracker>();
+            if (!NetworkServer.active) return;
+            instance = self.gameObject.GetComponent<GlobalContagionTracker>();
+            if (!instance) instance = self.gameObject.AddComponent<GlobalContagionTracker>();
         }
 
         private static void TrackPoison(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)

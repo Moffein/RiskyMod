@@ -12,10 +12,12 @@ namespace RiskyMod.SharedHooks
 		public delegate void OnHitNoAttacker(DamageInfo damageInfo, CharacterBody victimBody);
 		public static OnHitNoAttacker OnHitNoAttackerActions;
 
-		public delegate void OnHitAttacker(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody);
-		public static OnHitAttacker OnHitAttackerActions;
+        public delegate void OnHitAttacker(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody);
+        public static OnHitAttacker OnHitAttackerActions;
 
-		public delegate void OnHitAttackerInventory(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody, Inventory attackerInventory);
+        public static OnHitAttacker PreOnHitAttackerActions;
+
+        public delegate void OnHitAttackerInventory(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody, Inventory attackerInventory);
 		public static OnHitAttackerInventory OnHitAttackerInventoryActions;
 
 		public static void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_ProcessHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, UnityEngine.GameObject victim)
@@ -26,24 +28,27 @@ namespace RiskyMod.SharedHooks
 
 			bool validDamage = NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected;
             victimBody = victim.GetComponent<CharacterBody>();
+            if (damageInfo.attacker) attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+
+            if (validDamage)
+            {
+                if (attackerBody)
+                {
+                    PreOnHitAttackerActions?.Invoke(damageInfo, victimBody, attackerBody);
+                }
+            }
 
 			orig(self, damageInfo, victim);
 
             if (validDamage)
             {
-                victimBody = victim.GetComponent<CharacterBody>();
                 OnHitNoAttackerActions?.Invoke(damageInfo, victimBody);
-
-                if (damageInfo.attacker)
+                if (attackerBody)
                 {
-                    attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                    if (attackerBody)
-                    {
-                        OnHitAttackerActions?.Invoke(damageInfo, victimBody, attackerBody);
+                    OnHitAttackerActions?.Invoke(damageInfo, victimBody, attackerBody);
 
-                        attackerInventory = attackerBody.inventory;
-                        if (attackerInventory) OnHitAttackerInventoryActions?.Invoke(damageInfo, victimBody, attackerBody, attackerInventory);
-                    }
+                    attackerInventory = attackerBody.inventory;
+                    if (attackerInventory) OnHitAttackerInventoryActions?.Invoke(damageInfo, victimBody, attackerBody, attackerInventory);
                 }
             }
         }

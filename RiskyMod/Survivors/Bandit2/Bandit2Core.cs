@@ -25,7 +25,6 @@ namespace RiskyMod.Survivors.Bandit2
         public static BuffDef SpecialDebuff;
         public static DamageAPI.ModdedDamageType SpecialDamage;
         public static DamageAPI.ModdedDamageType RackEmUpDamage;
-
         public static DamageAPI.ModdedDamageType StandoffDamage;
 
         public static bool enabled = true;
@@ -57,17 +56,17 @@ namespace RiskyMod.Survivors.Bandit2
         public Bandit2Core()
         {
             if (!enabled) return;
-            if (specialRework || PersistentDesperado.enabled) Bandit2Core.bodyPrefab.AddComponent<DesperadoTracker>();
             new PersistentDesperado();
 
             ModifyStats(bodyPrefab.GetComponent<CharacterBody>());
             ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
 
-            On.RoR2.SurvivorCatalog.Init += (orig) =>
-            {
-                orig();
-                Bandit2Index = BodyCatalog.FindBodyIndex("Bandit2Body");
-            };
+            RoR2Application.onLoad += OnLoad;
+        }
+
+        private void OnLoad()
+        {
+            Bandit2Index = BodyCatalog.FindBodyIndex("Bandit2Body");
         }
 
         private void ModifyStats(CharacterBody cb)
@@ -245,9 +244,63 @@ namespace RiskyMod.Survivors.Bandit2
             {
                 BuildScepterSkillDefs(sk);
                 SetupScepter();
-            }    
+            }
         }
 
+        public static void ApplyStandoff(CharacterBody body)
+        {
+            int currentStandoffLevel = 0;
+            if (body.HasBuff(Bandit2Core.Buffs.Standoff5))
+            {
+                currentStandoffLevel = 5;
+            }
+            else if (body.HasBuff(Bandit2Core.Buffs.Standoff4))
+            {
+                currentStandoffLevel = 4;
+            }
+            else if (body.HasBuff(Bandit2Core.Buffs.Standoff3))
+            {
+                currentStandoffLevel = 3;
+            }
+            else if (body.HasBuff(Bandit2Core.Buffs.Standoff2))
+            {
+                currentStandoffLevel = 2;
+            }
+            else if (body.HasBuff(Bandit2Core.Buffs.Standoff1))
+            {
+                currentStandoffLevel = 1;
+            }
+
+            body.ClearTimedBuffs(Bandit2Core.Buffs.Standoff1);
+            body.ClearTimedBuffs(Bandit2Core.Buffs.Standoff2);
+            body.ClearTimedBuffs(Bandit2Core.Buffs.Standoff3);
+            body.ClearTimedBuffs(Bandit2Core.Buffs.Standoff4);
+            body.ClearTimedBuffs(Bandit2Core.Buffs.Standoff5);
+
+            if (currentStandoffLevel < 5) currentStandoffLevel++;
+            BuffDef toAdd = null;
+            switch (currentStandoffLevel)
+            {
+                case 5:
+                    toAdd = Bandit2Core.Buffs.Standoff5;
+                    break;
+                case 4:
+                    toAdd = Bandit2Core.Buffs.Standoff4;
+                    break;
+                case 3:
+                    toAdd = Bandit2Core.Buffs.Standoff3;
+                    break;
+                case 2:
+                    toAdd = Bandit2Core.Buffs.Standoff2;
+                    break;
+                case 1:
+                    toAdd = Bandit2Core.Buffs.Standoff1;
+                    break;
+                default:
+                    break;
+            }
+            if (toAdd) SneedUtils.SneedUtils.AddCooldownBuff(body, toAdd, 15);
+        }
         private void BuildScepterSkillDefs(SkillLocator sk)
         {
             SkillDef lightsOutDef = SkillDef.CreateInstance<SkillDef>();
@@ -442,7 +495,7 @@ namespace RiskyMod.Survivors.Bandit2
 
             RecalculateStatsAPI.GetStatCoefficients += StandoffBuffStats;
 
-            //On Kill is handled in assist manager.
+            //On Kill is handled in SpecialDamageTweaks
         }
 
         private void StandoffBuffStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)

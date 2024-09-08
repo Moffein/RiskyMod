@@ -95,14 +95,9 @@ namespace RiskyMod.Items.Common
 
         private void InitCrowbarManager(Run self)
         {
-            if (NetworkServer.active)
-            {
-                Crowbar.crowbarManager = self.gameObject.GetComponent<CrowbarManager>();
-                if (!Crowbar.crowbarManager)
-                {
-                    Crowbar.crowbarManager = self.gameObject.AddComponent<CrowbarManager>();
-                }
-            }
+            if (!NetworkServer.active) return;
+            Crowbar.crowbarManager = self.gameObject.GetComponent<CrowbarManager>();
+            if (!Crowbar.crowbarManager) Crowbar.crowbarManager = self.gameObject.AddComponent<CrowbarManager>();
         }
 
         private void ClearCrowbarList(Stage obj)

@@ -9,15 +9,68 @@ using UnityEngine;
 using RoR2.Orbs;
 using UnityEngine.AddressableAssets;
 using System.Collections.Generic;
+using static AssistManager.AssistManager;
 
 namespace RiskyMod.Survivors.Bandit2
 {
     public class SpecialDamageTweaks
     {
+        private static GameObject skullEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/Bandit2KillEffect");
         public SpecialDamageTweaks()
         {
             OnHitEnemy.OnHitNoAttackerActions += ApplyBuff;
             TakeDamage.ModifyInitialDamageNoAttackerActions += RackEmUpBonus;
+
+            //Standoff
+            On.RoR2.GlobalEventManager.OnCharacterDeath += ProcStandoffOnKill;
+            OnHitEnemy.PreOnHitAttackerActions += AddStandoffAssist;
+            AssistManager.AssistManager.HandleDirectAssistActions += HandleStandoffAssist;
+        }
+
+        private void HandleStandoffAssist(Assist assist, CharacterBody killerBody, DamageInfo damageInfo)
+        {
+            if (assist.damageType == null
+                && assist.moddedDamageTypes.Contains(Bandit2Core.StandoffDamage)
+                && assist.moddedDamageTypes.Count == 1)
+            {
+                bool isStandoff = damageInfo.HasModdedDamageType(Bandit2Core.StandoffDamage);
+
+                if (!(isStandoff && killerBody == assist.attackerBody))
+                {
+                    Bandit2Core.ApplyStandoff(assist.attackerBody);
+                    if (!isStandoff && !damageInfo.damageType.damageType.HasFlag(DamageType.GiveSkullOnKill))
+                    {
+                        EffectManager.SpawnEffect(skullEffect, new EffectData
+                        {
+                            origin = damageInfo.position
+                        }, true);
+                    }
+                }
+            }
+        }
+
+        private void AddStandoffAssist(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
+        {
+            if (!damageInfo.HasModdedDamageType(Bandit2Core.StandoffDamage)) return;
+            Assist standoffAssist = new Assist(attackerBody, victimBody, AssistManager.AssistManager.GetDirectAssistDurationForAttacker(attackerBody.gameObject));
+            bool added = standoffAssist.moddedDamageTypes.Add(Bandit2Core.StandoffDamage);
+            AssistManager.AssistManager.instance.AddDirectAssist(standoffAssist);
+        }
+
+        private void ProcStandoffOnKill(On.RoR2.GlobalEventManager.orig_OnCharacterDeath orig, GlobalEventManager self, DamageReport damageReport)
+        {
+            orig(self, damageReport);
+            if (damageReport.damageInfo != null && damageReport.damageInfo.HasModdedDamageType(Bandit2Core.StandoffDamage) && damageReport.attackerBody)
+            {
+                Bandit2Core.ApplyStandoff(damageReport.attackerBody);
+                if (!damageReport.damageInfo.damageType.damageType.HasFlag(DamageType.GiveSkullOnKill))
+                {
+                    EffectManager.SpawnEffect(skullEffect, new EffectData
+                    {
+                        origin = damageReport.damageInfo.position
+                    }, true);
+                }
+            }
         }
 
         private static void RackEmUpBonus(DamageInfo damageInfo, HealthComponent self)
