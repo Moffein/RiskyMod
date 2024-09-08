@@ -215,7 +215,8 @@ namespace SneedUtils
             if (body && body.teamComponent)
             {
                 List<HealthComponent> hcList = new List<HealthComponent>();
-                Collider[] array = Physics.OverlapSphere(body.corePosition, radius, LayerIndex.entityPrecise.mask);
+
+                HGPhysics.OverlapSphere(out Collider[] array, body.corePosition, radius);
                 for (int i = 0; i < array.Length; i++)
                 {
                     HurtBox hurtBox = array[i].GetComponent<HurtBox>();
@@ -285,7 +286,7 @@ namespace SneedUtils
         {
             int hitCount = 0;
             List<HealthComponent> hcList = new List<HealthComponent>();
-            Collider[] array = Physics.OverlapSphere(position, radius, LayerIndex.entityPrecise.mask);
+            HGPhysics.OverlapSphere(out Collider[] array, position, radius);
             for (int i = 0; i < array.Length; i++)
             {
                 HurtBox hurtBox = array[i].GetComponent<HurtBox>();
@@ -313,7 +314,7 @@ namespace SneedUtils
         public static bool IsEnemyInSphere(float radius, Vector3 position, TeamIndex team, bool airborneOnly = false)
         {
             List<HealthComponent> hcList = new List<HealthComponent>();
-            Collider[] array = Physics.OverlapSphere(position, radius, LayerIndex.entityPrecise.mask);
+            HGPhysics.OverlapSphere(out Collider[] array, position, radius);
             for (int i = 0; i < array.Length; i++)
             {
                 HurtBox hurtBox = array[i].GetComponent<HurtBox>();

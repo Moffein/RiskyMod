@@ -51,6 +51,7 @@ using RiskyMod.Enemies.DLC1.Voidling;
 using System.Runtime.CompilerServices;
 using RiskyMod.Allies.DamageResistances;
 using RiskyMod.Enemies.DLC2;
+using RiskyMod.Survivors.Croco2.Tweaks;
 
 namespace RiskyMod
 {

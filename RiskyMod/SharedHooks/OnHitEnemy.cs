@@ -25,17 +25,25 @@ namespace RiskyMod.SharedHooks
 			Inventory attackerInventory = null;
 
 			bool validDamage = NetworkServer.active && damageInfo.procCoefficient > 0f && !damageInfo.rejected;
+            victimBody = victim.GetComponent<CharacterBody>();
 
 			orig(self, damageInfo, victim);
 
-            if (validDamage && victimBody)
+            if (validDamage)
             {
+                victimBody = victim.GetComponent<CharacterBody>();
                 OnHitNoAttackerActions?.Invoke(damageInfo, victimBody);
 
-                if (damageInfo.attacker && attackerBody)
+                if (damageInfo.attacker)
                 {
-                    if (OnHitAttackerActions != null) OnHitAttackerActions.Invoke(damageInfo, victimBody, attackerBody);
-                    if (attackerInventory && OnHitAttackerInventoryActions != null) OnHitAttackerInventoryActions.Invoke(damageInfo, victimBody, attackerBody, attackerInventory);
+                    attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+                    if (attackerBody)
+                    {
+                        OnHitAttackerActions?.Invoke(damageInfo, victimBody, attackerBody);
+
+                        attackerInventory = attackerBody.inventory;
+                        if (attackerInventory) OnHitAttackerInventoryActions?.Invoke(damageInfo, victimBody, attackerBody, attackerInventory);
+                    }
                 }
             }
         }

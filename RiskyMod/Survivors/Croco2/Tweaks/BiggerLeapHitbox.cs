@@ -1,6 +1,6 @@
 ﻿using EntityStates.Croco;
 
-namespace RiskyMod.Survivors.Croco
+namespace RiskyMod.Survivors.Croco2.Tweaks
 {
     public class BiggerLeapHitbox
     {
@@ -13,7 +13,7 @@ namespace RiskyMod.Survivors.Croco
                 orig(self);
                 if (self.isAuthority && self.characterMotor)
                 {
-                    if (!(self.detonateNextFrame || (self.characterMotor.Motor.GroundingStatus.IsStableOnGround && !self.characterMotor.Motor.LastGroundingStatus.IsStableOnGround))
+                    if (!(self.detonateNextFrame || self.characterMotor.Motor.GroundingStatus.IsStableOnGround && !self.characterMotor.Motor.LastGroundingStatus.IsStableOnGround)
                     && self.fixedAge >= BaseLeap.minimumDuration)
                     {
                         if (SneedUtils.SneedUtils.IsEnemyInSphere(4f, self.characterBody.footPosition, self.GetTeam(), true))

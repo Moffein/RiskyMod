@@ -95,7 +95,7 @@ namespace RiskyMod
                     {
                         if (self.HasModdedDamageType(SweetSpotModifier))
                         {
-                            damagePenalty *= 0.6666666666f;
+                            damagePenalty *= 2f / 3f;
                         }
                         return damagePenalty;
                     });

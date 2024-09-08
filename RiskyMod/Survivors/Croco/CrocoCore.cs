@@ -96,8 +96,6 @@ namespace RiskyMod.Survivors.Croco
         public CrocoCore()
         {
             if (!enabled) return;
-            new ShiftAirControl();
-            new BiggerLeapHitbox();
             if (gameplayRework)
             {
                 new RegenRework();

@@ -2,6 +2,12 @@
 	strings:
 	{
 	"KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>Retrovirus</style><style=cSub>Primary: Poisonous\nSecondary: Blighted\nUtility: Blighted\nSpecial: Infects for 8x100% damage and can trigger item effects.",
+	
+	"KEYWORD_CONTAGION_PRIMARY_RISKYMOD" : "<style=cKeywordName>Primary</style><style=cIsHealing>Poison</style> on 3rd hit.",
+	"KEYWORD_CONTAGION_SECONDARY_RISKYMOD" :"<style=cKeywordName>Secondary</style><color=#B1387F>Blight</color>.",
+	"KEYWORD_CONTAGION_UTILITY_RISKYMOD" : "<style=cKeywordName>Utility</style><color=#B1387F>Blight</color>.",
+	"KEYWORD_CONTAGION_SPECIAL_RISKYMOD" : "<style=cKeywordName>Special</style><style=cSub><style=cIsDamage>Infects</style> for <style=cIsDamage>6x100% damage</style> and can trigger item effects.",
+	
 	"KEYWORD_RAPID_REGEN_RISKYMOD" : "<style=cKeywordName>Regenerative</style><style=cSub>Heal for <style=cIsHealing>10%</style> of your maximum health over 3s.",
 	"KEYWORD_BLIGHT_RISKYMOD" : "<style=cKeywordName>Blighted</style><style=cSub>Deal <style=cIsDamage>360%</style> base damage over 6s. <i>Blight can stack.</i></style>",
 	"KEYWORD_POISON_RISKYMOD" : "<style=cKeywordName>Poisonous</style><style=cSub>Deal damage equal to <style=cIsDamage>6%</style> of their maximum health over 6s. <i>Poison cannot kill enemies.</i></style>",

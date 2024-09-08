@@ -4,7 +4,7 @@ using MonoMod.Cil;
 using System;
 using UnityEngine;
 
-namespace RiskyMod.Survivors.Croco
+namespace RiskyMod.Survivors.Croco2.Tweaks
 {
     public class ShiftAirControl
     {
@@ -20,7 +20,7 @@ namespace RiskyMod.Survivors.Croco
                     ))
                 {
                     c.Emit(OpCodes.Ldarg_0);
-                    c.EmitDelegate<Func<float, EntityStates.Croco.BaseLeap, float>>((airControl, self) =>
+                    c.EmitDelegate<Func<float, BaseLeap, float>>((airControl, self) =>
                     {
                         //Debug.Log(airControl);//0.15
                         if (self.characterBody)
@@ -34,7 +34,7 @@ namespace RiskyMod.Survivors.Croco
                 }
                 else
                 {
-                    UnityEngine.Debug.LogError("RiskyMod: Croco ShiftAirControl IL Hook failed");
+                    Debug.LogError("RiskyMod: Croco ShiftAirControl IL Hook failed");
                 }
             };
         }

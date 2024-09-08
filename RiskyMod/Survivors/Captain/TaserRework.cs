@@ -8,12 +8,9 @@ namespace RiskyMod.Survivors.Captain
 {
     public class TaserRework
     {
-        public static bool enabled = true;
         public TaserRework()
         {
-            if (!enabled) return;
-
-            GameObject taserPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/CaptainTazer").InstantiateClone("RiskyModCaptainTazer", true);
+            GameObject taserPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainTazer.prefab").WaitForCompletion().InstantiateClone("RiskyModCaptainTazer", true);
             DamageAPI.ModdedDamageTypeHolderComponent mdc = taserPrefab.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
             mdc.Add(SharedDamageTypes.CaptainTaserSource);
             mdc.Add(SharedDamageTypes.Slow50For5s);
@@ -29,11 +26,10 @@ namespace RiskyMod.Survivors.Captain
             psi.destroyOnWorld = false;
             psi.destroyWhenNotAlive = true;
             psi.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainTazerNova.prefab").WaitForCompletion();
-            //spawn impact effect in taser hook
 
             Content.Content.projectilePrefabs.Add(taserPrefab);
 
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Captain.Weapon.FireTazer", "projectilePrefab", taserPrefab);
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Captain/EntityStates.Captain.Weapon.FireTazer.asset", "projectilePrefab", taserPrefab);
         }
     }
 }
