@@ -108,6 +108,8 @@
 	
 	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Gain <style=cIsDamage>Col. Droneman</style>. \nDrones gain <style=cIsDamage>+50%</style> <style=cStack>(+50% per stack)</style> attack speed and cooldown reduction. \nDrones gain <style=cIsDamage>10%</style> chance to fire a <style=cIsDamage>missile</style> on hit, dealing <style=cIsDamage>300%</style> TOTAL damage. \nDrones gain an <style=cIsDamage>automatic chain gun</style> that deals <style=cIsDamage>6x50%</style>damage, bouncing to <style=cIsDamage>2</style> enemies.",
 	
+	"ITEM_CRITDAMAGE_DESC_RISKYMOD": "Gain <style=cIsDamage>5% critical chance</style>. <style=cIsDamage>Critical Strikes</style> deal an additional <style=cIsDamage>100% damage</style><style=cStack>(+100% per stack)</style>.",
+	
 	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "Deal bonus damage while outside of danger.",
 	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Increase damage by <style=cIsDamage>15%</style> <style=cStack>(+15% per stack)</style> while outside of danger.",
 	
@@ -134,5 +136,7 @@
 	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Healing past full grants you a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>50% <style=cStack>(+50% per stack)</style></style> of the amount you <style=cIsHealing>healed</style>. Divides <style=cIsHealing>barrier decay rate</style> by <style=cIsHealing>2 <style=cStack>(+1 per stack)</style></style>.",
 
 	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Increase base damage by <style=cIsDamage>100%</style> <style=cStack>(+100% per stack)</style>. <style=cIsHealth>Divide maximum health by 2</style> <style=cStack>(+1 per stack)</style>.",
+	
+	"ITEM_STRENGTHENBURN_DESC_RISKYMOD": "<style=cIsDamage>5%</style> chance on hit to <style=cIsDamage>ignite</style> enemies. Ignite effects deal <style=cIsDamage>+300%</style> <style=cStack>(+300% per stack)</style> more damage over time."
 	}
 }

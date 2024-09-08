@@ -86,6 +86,7 @@ namespace RiskyMod.Items
             new Daisy();
 
             new Harpoon();
+            new Ignition();
         }
 
         private void ModifyLegendary()
@@ -104,6 +105,7 @@ namespace RiskyMod.Items
             new Raincoat();
             new Scorpion();
             new SpareDroneParts();
+            new LaserScope();
         }
 
         private void ModifyVoid()
