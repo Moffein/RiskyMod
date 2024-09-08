@@ -15,6 +15,8 @@ namespace RiskyMod.Enemies.Spawnpools
 
             ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/foggyswamp/dccsFoggySwampMonsters.asset").WaitForCompletion());
             ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/foggyswamp/dccsFoggySwampMonstersDLC.asset").WaitForCompletion());
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsFoggySwampMonstersDLC2.asset").WaitForCompletion());
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsFoggySwampMonstersDLC2Only.asset").WaitForCompletion());
         }
 
         private void ApplyChanges(DirectorCardCategorySelection dccs)

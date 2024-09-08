@@ -478,8 +478,6 @@ namespace RiskyMod
             DropFruitOnHit.enabled = SurvivorCfg.Bind(treebotString, "DIRECTIVE Harvest - Fruit On Hit", false, "Fruiting enemies have a chance to drop fruits when hit.").Value;
             
             LoaderCore.enabled = SurvivorCfg.Bind(loaderString, "Enable Changes", true, "Enable changes to this survivor.").Value;
-            LoaderCore.grappleCancelsSprint = SurvivorCfg.Bind(loaderString, "Secondaries Cancel Sprint", false, "Loader's Grapple cancels sprinting.").Value;
-            LoaderCore.shiftCancelsSprint = SurvivorCfg.Bind(loaderString, "Utilities Cancel Sprint", false, "Loader's Big Punches cancel sprinting.").Value;
             LoaderCore.modifyStats = SurvivorCfg.Bind(loaderString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
             LoaderCore.zapFistChanges = SurvivorCfg.Bind(loaderString, "Thunder Gauntlet Changes", true, "Enable changes to this skill.").Value;
             LoaderCore.slamChanges = SurvivorCfg.Bind(loaderString, "Thunderslam Changes", true, "Enable changes to this skill.").Value;

@@ -15,9 +15,6 @@ namespace RiskyMod.Survivors.Loader
     {
         public static bool enabled = true;
 
-        public static bool shiftCancelsSprint = false;
-        public static bool grappleCancelsSprint = false;
-
         public static bool modifyStats = true;
 
         public static bool zapFistChanges = true;
@@ -68,15 +65,12 @@ namespace RiskyMod.Survivors.Loader
                 SkillDef pylonDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Loader/ThrowPylon.asset").WaitForCompletion();
                 pylonDef.skillDescriptionToken = "LOADER_SPECIAL_DESCRIPTION_RISKYMOD";
                 pylonDef.keywordTokens = new string[] { "KEYWORD_MAGNETIC_RISKYMOD" };
-                pylonDef.cancelSprintingOnActivation = false;
                 SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.throwpylon", "damageCoefficient", "0.7");
                 new PylonMagnet();
             }
 
             if (slamChanges)
             {
-                SkillDef slamDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Loader/GroundSlam.asset").WaitForCompletion();
-                slamDef.cancelSprintingOnActivation = false;
                 new BiggerSlamHitbox();
                 new SlamScrapBarrier();
                 new SlamDamageType();

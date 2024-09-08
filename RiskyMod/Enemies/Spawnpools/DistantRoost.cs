@@ -13,6 +13,8 @@ namespace RiskyMod.Enemies.Spawnpools
 
             ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/blackbeach/dccsBlackBeachMonsters.asset").WaitForCompletion(), false);
             ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/blackbeach/dccsBlackBeachMonstersDLC.asset").WaitForCompletion(), true);
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsBlackBeachMonstersDLC2.asset").WaitForCompletion(), true);
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsBlackBeachMonstersDLC2Only.asset").WaitForCompletion(), false);
         }
 
         private void ApplyChanges(DirectorCardCategorySelection dccs, bool isDLC)

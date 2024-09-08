@@ -13,6 +13,8 @@ namespace RiskyMod.Enemies.Spawnpools
 
             ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/rootjungle/dccsRootJungleMonsters.asset").WaitForCompletion());
             ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/rootjungle/dccsRootJungleMonstersDLC1.asset").WaitForCompletion());
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsRootJungleMonstersDLC2.asset").WaitForCompletion());
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsRootJungleMonstersDLC2Only.asset").WaitForCompletion());
         }
 
         private void ApplyChanges(DirectorCardCategorySelection dccs)

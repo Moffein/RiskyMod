@@ -14,6 +14,8 @@ namespace RiskyMod.Enemies.Spawnpools
             ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/goolake/dccsGooLakeMonsters.asset").WaitForCompletion(), false, false);
             ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/goolake/dccsGooLakeMonstersDLC1.asset").WaitForCompletion(), true, false);
             ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itgoolake/dccsITGooLakeMonsters.asset").WaitForCompletion(), true, true);
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsGooLakeMonstersDLC2.asset").WaitForCompletion(), true, false);
+            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsGooLakeMonstersDLC2Only.asset").WaitForCompletion(), false, false);
         }
 
         private void ApplyChanges(DirectorCardCategorySelection dccs, bool isDLC, bool isSimulacrum)
