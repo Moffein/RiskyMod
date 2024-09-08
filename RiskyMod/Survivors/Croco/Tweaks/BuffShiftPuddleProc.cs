@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace RiskyMod.Survivors.Croco2.Tweaks
+namespace RiskyMod.Survivors.Croco.Tweaks
 {
     public class BuffShiftPuddleProc
     {

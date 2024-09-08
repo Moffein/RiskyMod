@@ -1,4 +1,5 @@
 ﻿using R2API;
+using RiskyMod.Survivors.Croco.Contagion.Components;
 using RoR2;
 using RoR2.Skills;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace RiskyMod.Survivors.Croco2.Contagion
+namespace RiskyMod.Survivors.Croco.Contagion
 {
     public class ContagionPassive
     {
@@ -28,6 +29,7 @@ namespace RiskyMod.Survivors.Croco2.Contagion
             On.RoR2.CrocoDamageTypeController.GetDamageType += CrocoDamageTypeController_GetDamageType;
             On.EntityStates.Croco.Slash.OnEnter += Slash_OnEnter;
             new ModifySpecial();
+            GlobalContagionTracker.Init();
         }
 
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
@@ -86,11 +88,14 @@ namespace RiskyMod.Survivors.Croco2.Contagion
 
         public static bool HasPassive(SkillLocator skillLocator)
         {
-            foreach(GenericSkill skill in skillLocator.allSkills)
+            if (skillLocator)
             {
-                if (skill.skillFamily == passiveSkillFamily)
+                foreach (GenericSkill skill in skillLocator.allSkills)
                 {
-                    return skill.skillDef == passiveSkillDef;
+                    if (skill.skillFamily == passiveSkillFamily)
+                    {
+                        return skill.skillDef == passiveSkillDef;
+                    }
                 }
             }
             return false;

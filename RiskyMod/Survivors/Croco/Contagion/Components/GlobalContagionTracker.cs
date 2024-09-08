@@ -1,50 +1,47 @@
 ﻿using RoR2;
-using UnityEngine;
 using R2API;
-using RoR2.Projectile;
+using UnityEngine;
 using System.Collections.Generic;
 using RoR2.Orbs;
 
-namespace RiskyMod.Survivors.Croco
+namespace RiskyMod.Survivors.Croco.Contagion.Components
 {
-    public class ModifyPassives
+    public class GlobalContagionTracker : MonoBehaviour
     {
-        public static CrocoAltPassiveTracker PoisonTrackerInstance;
-
-        public ModifyPassives()
+        public static GlobalContagionTracker instance;
+        internal static void Init()
         {
             RoR2.Run.onRunStartGlobal += InitPoisonTracker;
             SharedHooks.OnHitEnemy.OnHitAttackerActions += TrackPoison;
         }
 
-        private void InitPoisonTracker(Run self)
+        private static void InitPoisonTracker(Run self)
         {
-            ModifyPassives.PoisonTrackerInstance = self.gameObject.AddComponent<CrocoAltPassiveTracker>();
+            instance = self.gameObject.AddComponent<GlobalContagionTracker>();
         }
 
         private static void TrackPoison(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
         {
-            CrocoDamageTypeController cd = attackerBody.GetComponent<CrocoDamageTypeController>();
-            if (cd && cd.GetDamageType() == DamageType.BlightOnHit)
+            if (attackerBody.bodyIndex == ContagionPassive.bodyIndex && ContagionPassive.HasPassive(attackerBody.skillLocator))
             {
-                bool isBlight = damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBlight6s);
-                bool isPoison = damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoPoison6s);
-                if (isBlight)
+                bool isBlightModded = damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBlight6s);
+                bool isPoisonModded = damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoPoison6s);
+                bool isBlight = damageInfo.damageType.damageType.HasFlag(DamageType.BlightOnHit);
+                bool isPoison = damageInfo.damageType.damageType.HasFlag(DamageType.PoisonOnHit);
+                if (isBlight || isBlightModded)
                 {
-                    ModifyPassives.PoisonTrackerInstance.Add(attackerBody, victimBody, SharedDamageTypes.CrocoBlight6s, 6f);
+                    instance.Add(attackerBody, victimBody, SharedDamageTypes.CrocoBlight6s, isBlightModded ? 6f : 5f);
                 }
-                if (isPoison)
+
+                if (isPoison || isPoisonModded)
                 {
-                    ModifyPassives.PoisonTrackerInstance.Add(attackerBody, victimBody, SharedDamageTypes.CrocoPoison6s, 6f);
+                    instance.Add(attackerBody, victimBody, SharedDamageTypes.CrocoPoison6s, isPoisonModded ? 6f : 10f);
                 }
             }
         }
-    }
 
-    public class CrocoAltPassiveTracker : MonoBehaviour
-    {
-        public static float spreadRange = CrocoCore.Cfg.Passives.contagionSpreadRange;
-        public void Add(CharacterBody attackerBody, CharacterBody victimBody,DamageAPI.ModdedDamageType damageType, float duration)
+        public static float spreadRange = 30f;
+        public void Add(CharacterBody attackerBody, CharacterBody victimBody, DamageAPI.ModdedDamageType damageType, float duration)
         {
             CrocoPoison existing = poisonList.Find(x => x.victimBody == victimBody && x.damageType == damageType);
             if (existing != null)
@@ -112,14 +109,14 @@ namespace RiskyMod.Survivors.Croco
             lightningOrb.teamIndex = attackerBody.teamComponent.teamIndex;
             lightningOrb.damageValue = stacks;
             lightningOrb.damageCoefficientPerBounce = 1f;
-            lightningOrb.procCoefficient = 0.1f;
+            lightningOrb.procCoefficient = 0.5f;
             lightningOrb.isCrit = attackerBody.RollCrit();
             lightningOrb.origin = victimBody.corePosition;
             lightningOrb.bouncesRemaining = 0;
             lightningOrb.lightningType = LightningOrb.LightningType.CrocoDisease;
             lightningOrb.damageColorIndex = DamageColorIndex.Poison;
             lightningOrb.damageType = DamageType.NonLethal | DamageType.Silent;
-            lightningOrb.range = CrocoAltPassiveTracker.spreadRange;
+            lightningOrb.range = GlobalContagionTracker.spreadRange;
             lightningOrb.AddModdedDamageType(damageType);
 
             if (damageType == SharedDamageTypes.CrocoBlight6s) lightningOrb.AddModdedDamageType(SharedDamageTypes.CrocoBlightStack);

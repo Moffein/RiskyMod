@@ -2,6 +2,7 @@
 using MonoMod.Cil;
 using R2API;
 using RiskyMod.SharedHooks;
+using RiskyMod.Survivors.Croco.Contagion.Components;
 using RoR2;
 using RoR2.Orbs;
 using System;
@@ -32,8 +33,6 @@ namespace RiskyMod
 
         public static DamageAPI.ModdedDamageType CaptainTaserSource;
 
-        public static DamageAPI.ModdedDamageType CrocoBiteHealOnKill;
-
         public static DamageAPI.ModdedDamageType AlwaysIgnite;   //Used for Molten Perforator due to not proccing
 
         public static DamageAPI.ModdedDamageType SweetSpotModifier;
@@ -54,7 +53,6 @@ namespace RiskyMod
             CrocoBlightStack = DamageAPI.ReserveDamageType();
             CrocoBlight6s = DamageAPI.ReserveDamageType();
             CrocoPoison6s = DamageAPI.ReserveDamageType();
-            CrocoBiteHealOnKill = DamageAPI.ReserveDamageType();
 
             AlwaysIgnite = DamageAPI.ReserveDamageType();
 
@@ -186,14 +184,7 @@ namespace RiskyMod
         {
             if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBlight6s))
             {
-                bool extend = false;
-                CrocoDamageTypeController cdc = attackerBody.gameObject.GetComponent<CrocoDamageTypeController>();
-                if (cdc && cdc.GetDamageType() == DamageType.PoisonOnHit)
-                {
-                    extend = true;
-                }
-                float duration = Survivors.Croco.CrocoCore.Cfg.Passives.baseDoTDuration * (extend ? Survivors.Croco.CrocoCore.Cfg.Passives.virulentDurationMult : 1f);
-
+                float duration = 6f;
                 int stacks = 1;
                 if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoBlightStack)) stacks = Mathf.CeilToInt(damageInfo.damage);
 
@@ -201,9 +192,9 @@ namespace RiskyMod
                 {
                     DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Blight, duration, 1f);
 
-                    if (i > 0 && Survivors.Croco.ModifyPassives.PoisonTrackerInstance)
+                    if (i > 0 && GlobalContagionTracker.instance)
                     {
-                        Survivors.Croco.ModifyPassives.PoisonTrackerInstance.Add(attackerBody, victimBody, SharedDamageTypes.CrocoBlight6s, duration);
+                        GlobalContagionTracker.instance.Add(attackerBody, victimBody, SharedDamageTypes.CrocoBlight6s, duration);
                     }
                 }
             }
@@ -212,13 +203,7 @@ namespace RiskyMod
         {
             if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoPoison6s))
             {
-                bool extend = false;
-                CrocoDamageTypeController cdc = attackerBody.gameObject.GetComponent<CrocoDamageTypeController>();
-                if (cdc && cdc.GetDamageType() == DamageType.PoisonOnHit)
-                {
-                    extend = true;
-                }
-                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Poison, Survivors.Croco.CrocoCore.Cfg.Passives.baseDoTDuration * (extend ? Survivors.Croco.CrocoCore.Cfg.Passives.virulentDurationMult : 1f), 1f);
+                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Poison, 6f, 1f);
             }
         }
 

@@ -4,7 +4,7 @@ using MonoMod.Cil;
 using System;
 using UnityEngine;
 
-namespace RiskyMod.Survivors.Croco2.Tweaks
+namespace RiskyMod.Survivors.Croco.Tweaks
 {
     public class ShiftAirControl
     {

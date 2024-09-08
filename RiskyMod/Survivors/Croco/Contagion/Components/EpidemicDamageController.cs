@@ -3,7 +3,7 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace RiskyMod.Survivors.Croco2.Contagion
+namespace RiskyMod.Survivors.Croco.Contagion.Components
 {
     public class EpidemicDamageController : MonoBehaviour
     {
@@ -12,6 +12,7 @@ namespace RiskyMod.Survivors.Croco2.Contagion
 
         public static GameObject impactEffect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/crocodiseaseimpacteffect");
 
+        public float timeBetweenTicks = 0.5f;
         public CharacterBody owner;
         public CharacterBody victim;
         private int ticksRemaining;
@@ -59,9 +60,9 @@ namespace RiskyMod.Survivors.Croco2.Contagion
             if (ticksRemaining > 0)
             {
                 stopwatch += Time.fixedDeltaTime;
-                if (stopwatch >= CrocoCore.Cfg.Skills.Epidemic.timeBetweenTicks)
+                if (stopwatch >= timeBetweenTicks)
                 {
-                    stopwatch -= CrocoCore.Cfg.Skills.Epidemic.timeBetweenTicks;
+                    stopwatch -= timeBetweenTicks;
                     ticksRemaining--;
                     if (owner && victim && victim.healthComponent)
                     {
@@ -77,7 +78,7 @@ namespace RiskyMod.Survivors.Croco2.Contagion
                             force = 300f * Vector3.down,
                             position = victim.corePosition,
                             procChainMask = default,
-                            procCoefficient = CrocoCore.Cfg.Skills.Epidemic.procCoefficient
+                            procCoefficient = 0.5f
                         };
                         victim.healthComponent.TakeDamage(diseaseDamage);
                         GlobalEventManager.instance.OnHitEnemy(diseaseDamage, victim.gameObject);
@@ -106,7 +107,7 @@ namespace RiskyMod.Survivors.Croco2.Contagion
             {
                 victim.RemoveBuff(ModifySpecial.EpidemicDebuff.buffIndex);
             }
-            if (scepter && owner && !(victim && victim.healthComponent && victim.healthComponent.alive))
+            /*if (scepter && owner && !(victim && victim.healthComponent && victim.healthComponent.alive))
             {
                 owner.healthComponent.HealFraction(0.05f, default);
                 EffectData effectData = new EffectData
@@ -115,17 +116,12 @@ namespace RiskyMod.Survivors.Croco2.Contagion
                 };
                 effectData.SetNetworkedObjectReference(owner.gameObject);
                 EffectManager.SpawnEffect(SharedDamageTypes.medkitEffect, effectData, true);
-            }
-
-            /*if (spreadOnDeath && victimKilled && victim && owner)
-            {
-                CrocoAltPassiveTracker.TriggerPoisonSpreadModdedDamage(owner, victim, scepter ? ModifySpecial.EpidemicScepter : ModifySpecial.Epidemic);
             }*/
         }
 
         public void SetScepter()
         {
-            ticksRemaining = CrocoCore.Cfg.Skills.Epidemic.baseTickCount * 2;
+            ticksRemaining = 11;
             scepter = true;
         }
     }

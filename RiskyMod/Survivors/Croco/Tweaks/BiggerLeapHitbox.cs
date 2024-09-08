@@ -1,6 +1,6 @@
 ﻿using EntityStates.Croco;
 
-namespace RiskyMod.Survivors.Croco2.Tweaks
+namespace RiskyMod.Survivors.Croco.Tweaks
 {
     public class BiggerLeapHitbox
     {

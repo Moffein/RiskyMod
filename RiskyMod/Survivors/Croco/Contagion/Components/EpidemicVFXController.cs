@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace RiskyMod.Survivors.Croco2.Contagion
+namespace RiskyMod.Survivors.Croco.Contagion.Components
 {
 
     public class EpidemicVFXController : MonoBehaviour
