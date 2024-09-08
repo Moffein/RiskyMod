@@ -1,9 +1,11 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using RoR2;
+using RoR2.Skills;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Croco.Tweaks
 {
@@ -13,6 +15,7 @@ namespace RiskyMod.Survivors.Croco.Tweaks
         public BuffFrenziedLeap()
         {
             if (!enabled) return;
+            Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoChainableLeap.asset").WaitForCompletion().baseRechargeInterval = 6f;
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.ChainableLeap", "refundPerHit", "0");
             IL.EntityStates.Croco.ChainableLeap.DoImpactAuthority += ChainableLeap_DoImpactAuthority;
         }

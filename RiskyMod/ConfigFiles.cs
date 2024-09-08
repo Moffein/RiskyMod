@@ -489,7 +489,7 @@ namespace RiskyMod
             BiggerLeapHitbox.enabled = SurvivorCfg.Bind(crocoString, "Extend Leap Collision Box", true, "Acrid's Shift skills have a larger collision hitbox. Damage radius remains the same.").Value;
             ShiftAirControl.enabled = SurvivorCfg.Bind(crocoString, "Leap Air Control", false, "Acrid's Shift skills gain increased air control at high move speeds (causes momentum loss).").Value;
             UtilityKnockdown.enabled = SurvivorCfg.Bind(crocoString, "Leap Knockdown", true, "Acrid's Shift skills knock airborne enemies downwards.").Value;
-            BuffFrenziedLeap.enabled = SurvivorCfg.Bind(crocoString, "Frenzied Leap Buff", true, "Increases cooldown reduction from this skill.").Value;
+            BuffFrenziedLeap.enabled = SurvivorCfg.Bind(crocoString, "Frenzied Leap Changes", true, "Enable changes to this skill.").Value;
             BuffShiftPuddleProc.enabled = SurvivorCfg.Bind(crocoString, "Acid Puddle Buff", true, "Buffs proc coefficient of Acid Puddles.").Value;
             ContagionPassive.enabled = SurvivorCfg.Bind(crocoString, "Contagion Passive Skill", true, "Enables the Contagion passive skill.").Value;
 
