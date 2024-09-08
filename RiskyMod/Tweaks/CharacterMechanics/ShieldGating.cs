@@ -208,6 +208,52 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     UnityEngine.Debug.LogError("RiskyMod: ShieldGating IgnoreShieldGate VoidRaidCrab IL Hook failed");
                 }
             };
+
+            IL.EntityStates.FalseSonBoss.CorruptedPaths.DetonateAuthority += BlastAttackIgnoreShieldGate;
+            IL.EntityStates.FalseSonBoss.CorruptedPathsDash.FixedUpdate += BlastAttackIgnoreShieldGate;
+            IL.EntityStates.FalseSonBoss.FissureSlam.DetonateAuthority += BlastAttackIgnoreShieldGate;
+            IL.EntityStates.FalseSonBoss.PrimeDevastator.DetonateAuthority += BlastAttackIgnoreShieldGate;
+            On.EntityStates.FalseSonBoss.HeroRelicSwing.BeginMeleeAttackEffect += (orig, self) =>
+            {
+                orig(self);
+                if (self.overlapAttack != null && !self.overlapAttack.HasModdedDamageType(IgnoreShieldGateDamage))
+                {
+                    self.overlapAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                }
+            };
+            On.EntityStates.FalseSonBoss.HeroRelicSwingLeft.BeginMeleeAttackEffect += (orig, self) =>
+            {
+                orig(self);
+                if (self.overlapAttack != null && !self.overlapAttack.HasModdedDamageType(IgnoreShieldGateDamage))
+                {
+                    self.overlapAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                }
+            };
+            On.EntityStates.FalseSonBoss.SwatAwayPlayersSlam.OnEnter += (orig, self) =>
+            {
+                orig(self);
+                if (self.overlapAttack != null && !self.overlapAttack.HasModdedDamageType(IgnoreShieldGateDamage))
+                {
+                    self.overlapAttack.AddModdedDamageType(IgnoreShieldGateDamage);
+                }
+            };
+        }
+
+        internal static void BlastAttackIgnoreShieldGate(ILContext il)
+        {
+            ILCursor c = new ILCursor(il);
+            if (c.TryGotoNext(x => x.MatchCallvirt(typeof(BlastAttack), "Fire")))
+            {
+                c.EmitDelegate<Func<BlastAttack, BlastAttack>>(orig =>
+                {
+                    orig.AddModdedDamageType(IgnoreShieldGateDamage);
+                    return orig;
+                });
+            }
+            else
+            {
+                Debug.LogError("RiskyMod: ShieldGating GenericBlastAttackIgnoreShieldGate IL Hook failed");
+            }
         }
     }
 }
