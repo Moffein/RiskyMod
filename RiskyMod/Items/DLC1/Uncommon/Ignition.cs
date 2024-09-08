@@ -16,7 +16,7 @@ namespace RiskyMod.Items.DLC1.Uncommon
 
         private void BurnChance(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody, Inventory attackerInventory)
         {
-            if (attackerInventory.GetItemCount(DLC1Content.Items.StrengthenBurn) > 0 && Util.CheckRoll(5f, attackerBody.master))
+            if (attackerInventory.GetItemCount(DLC1Content.Items.StrengthenBurn) > 0 && Util.CheckRoll(5f * damageInfo.procCoefficient, attackerBody.master))
             {
                 InflictDotInfo inflictDotInfo = new InflictDotInfo
                 {
