@@ -4,6 +4,7 @@ using RoR2;
 using RoR2.Projectile;
 using R2API;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Enemies.Bosses
 {
@@ -16,6 +17,7 @@ namespace RiskyMod.Enemies.Bosses
             if (enabled)
             {
                 DisableNovaAttackSpeed();
+                ReduceFalloff();
             }
             
             if (disableProjectileOnKill)
@@ -51,6 +53,31 @@ namespace RiskyMod.Enemies.Bosses
             GameObject projectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/vagranttrackingbomb");
             HealthComponent hc = projectile.GetComponent<HealthComponent>();
             hc.globalDeathEventChanceCoefficient = 0f;
+        }
+
+        private void ReduceFalloff()
+        {
+            {
+                GameObject trackingBomb = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Vagrant/VagrantTrackingBomb.prefab").WaitForCompletion().InstantiateClone("RiskyModVagrantTrackingBomb", true);
+                ProjectileExplosion pe = trackingBomb.GetComponent<ProjectileExplosion>();
+                pe.falloffModel = BlastAttack.FalloffModel.SweetSpot;
+                DamageAPI.ModdedDamageTypeHolderComponent mdc = trackingBomb.GetComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+                if (!mdc) mdc = trackingBomb.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+                mdc.Add(SharedDamageTypes.SweetSpotModifier);
+                Content.Content.projectilePrefabs.Add(trackingBomb);
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Vagrant/EntityStates.VagrantMonster.FireTrackingBomb.asset", "projectilePrefab", trackingBomb);
+            }
+
+            {
+                GameObject cannon = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Vagrant/VagrantCannon.prefab").WaitForCompletion().InstantiateClone("RiskyModVagrantCannon", true);
+                ProjectileExplosion pe = cannon.GetComponent<ProjectileExplosion>();
+                pe.falloffModel = BlastAttack.FalloffModel.SweetSpot;
+                DamageAPI.ModdedDamageTypeHolderComponent mdc = cannon.GetComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+                if (!mdc) mdc = cannon.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+                mdc.Add(SharedDamageTypes.SweetSpotModifier);
+                Content.Content.projectilePrefabs.Add(cannon);
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Vagrant/EntityStates.VagrantMonster.Weapon.JellyBarrage.asset", "projectilePrefab", cannon);
+            }
         }
     }
 }
