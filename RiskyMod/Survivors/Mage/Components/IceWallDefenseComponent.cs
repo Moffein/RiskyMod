@@ -16,7 +16,7 @@ namespace RiskyMod.Survivors.Mage.Components
         private TeamFilter tf;
 
         //Do this in Start because TeamFilter might not be initialized in Awake
-        public void OnEnable()
+        public void Start()
         {
             if (!matrixObject)
             {

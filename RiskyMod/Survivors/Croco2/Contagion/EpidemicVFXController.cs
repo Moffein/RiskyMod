@@ -1,17 +1,17 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace RiskyMod.Survivors.Croco
+namespace RiskyMod.Survivors.Croco2.Contagion
 {
 
     public class EpidemicVFXController : MonoBehaviour
     {
         CharacterBody body;
         BurnEffectController burnEffectController;
-        
+
         private void Awake()
         {
-            body = base.GetComponent<CharacterBody>();
+            body = GetComponent<CharacterBody>();
             burnEffectController = null;
             if (!body)
             {
@@ -29,7 +29,7 @@ namespace RiskyMod.Survivors.Croco
                     {
                         if (body.modelLocator && body.modelLocator.modelTransform)
                         {
-                            burnEffectController = base.gameObject.AddComponent<BurnEffectController>();
+                            burnEffectController = gameObject.AddComponent<BurnEffectController>();
                             burnEffectController.effectType = BurnEffectController.poisonEffect;
                             burnEffectController.target = body.modelLocator.modelTransform.gameObject;
                         }

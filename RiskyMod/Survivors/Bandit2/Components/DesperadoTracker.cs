@@ -14,7 +14,7 @@ namespace RiskyMod.Survivors.Bandit2.Components
             characterBody = base.GetComponent<CharacterBody>();
         }
 
-        public void OnEnable()
+        public void Start()
         {
             if (!characterBody || !characterBody.master)
             {

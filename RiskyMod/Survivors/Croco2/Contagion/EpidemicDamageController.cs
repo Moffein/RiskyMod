@@ -1,8 +1,9 @@
-﻿using RoR2;
+﻿using RiskyMod.Survivors.Croco;
+using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace RiskyMod.Survivors.Croco
+namespace RiskyMod.Survivors.Croco2.Contagion
 {
     public class EpidemicDamageController : MonoBehaviour
     {
@@ -32,7 +33,7 @@ namespace RiskyMod.Survivors.Croco
             }
             stopwatch = 0f;
             lingerStopwatch = 0f;
-            ticksRemaining = CrocoCore.Cfg.Skills.Epidemic.baseTickCount * (scepter ? 2 : 1);
+            ticksRemaining = 5 * (scepter ? 2 : 1);
         }
 
         public void Setup(CharacterBody attackerBody, CharacterBody victimBody, DamageInfo damageInfo, bool isScepter = false)
@@ -68,14 +69,14 @@ namespace RiskyMod.Survivors.Croco
                         {
                             attacker = owner.gameObject,
                             inflictor = owner.gameObject,
-                            damage = this.damage,
+                            damage = damage,
                             damageColorIndex = DamageColorIndex.Default,
                             damageType = DamageType.Generic,
-                            crit = this.crit,
+                            crit = crit,
                             dotIndex = DotController.DotIndex.None,
                             force = 300f * Vector3.down,
                             position = victim.corePosition,
-                            procChainMask = default(ProcChainMask),
+                            procChainMask = default,
                             procCoefficient = CrocoCore.Cfg.Skills.Epidemic.procCoefficient
                         };
                         victim.healthComponent.TakeDamage(diseaseDamage);
@@ -107,7 +108,7 @@ namespace RiskyMod.Survivors.Croco
             }
             if (scepter && owner && !(victim && victim.healthComponent && victim.healthComponent.alive))
             {
-                owner.healthComponent.HealFraction(0.05f, default(ProcChainMask));
+                owner.healthComponent.HealFraction(0.05f, default);
                 EffectData effectData = new EffectData
                 {
                     origin = owner.corePosition

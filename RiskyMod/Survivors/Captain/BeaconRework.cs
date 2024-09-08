@@ -304,7 +304,7 @@ namespace RiskyMod.Survivors.Captain
                 Beacon2Deployables = new Queue<GameObject>();
             }
 
-            private void OnEnable()
+            private void Start()
             {
                 skillLocator = base.GetComponent<SkillLocator>();
 

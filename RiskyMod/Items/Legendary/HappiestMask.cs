@@ -239,7 +239,7 @@ namespace RiskyMod.Items.Legendary
         }
         public class FixHealth : MonoBehaviour
         {
-            private void OnEnable()
+            private void Start()
             {
                 if (NetworkServer.active)
                 {

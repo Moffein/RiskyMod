@@ -9,9 +9,11 @@ using RiskyMod.SharedHooks;
 using UnityEngine.Networking;
 using RoR2.Orbs;
 using RoR2.Stats;
+using RiskyMod.Survivors.Croco2.Contagion;
 
 namespace RiskyMod.Survivors.Croco
 {
+    //HACKY
     public class ModifySpecial
     {
         private static GameObject diseaseProjectile;
