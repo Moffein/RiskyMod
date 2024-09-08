@@ -96,7 +96,8 @@ namespace RiskyMod.Items.Uncommon
             {
                 if (percentHpLost > 0f)
                 {
-                    if (Util.CheckRoll(percentHpLost, self.body.master))
+                    float chance = Mathf.Max(5f, 100f * percentHpLost / 75f);
+                    if (Util.CheckRoll(chance, self.body.master))
                     {
                         SquidMinionComponent sq = self.gameObject.GetComponent<SquidMinionComponent>();
                         if (!sq)

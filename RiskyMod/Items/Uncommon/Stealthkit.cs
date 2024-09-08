@@ -38,7 +38,8 @@ namespace RiskyMod.Items.Uncommon
             {
                 if (percentHpLost > 0f)
                 {
-                    if (Util.CheckRoll(percentHpLost, self.body.master))
+                    float chance = Mathf.Max(5f, 100f * percentHpLost / 75f);
+                    if (Util.CheckRoll(chance, self.body.master))
                     {
                         float buffDuration = 1.5f + stealthkitCount * 1.5f;
                         self.body.AddTimedBuff(RoR2Content.Buffs.Cloak, buffDuration);
