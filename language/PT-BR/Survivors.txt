@@ -9,10 +9,16 @@
 	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Hackeie</style> todos os itens compráveis próximos para reduzir seu custo em <style=cIsUtility>50%</style>.",
 	"CAPTAIN_SUPPLY_SKILL_RESTOCK_INTERACTION_RISKYMOD" : "Receba uma Carga da Habilidade",
 	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Recarrega habilidade</style> e reduz o tempo de recarga do <style=cIsUtility>Equipamento</style> em <style=cIsUtility>20 s</style> ao usar.",
+        "CAPTAIN_SUPPLY_HEAL_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>Permanente</style>. <style=cIsHealing>Cure</style> Cure</style> todos os aliados próximos em <style=cIsHealing>10%</style></style> da <style=cIsHealing>saúde máxima</style> deles a cada segundo.",
+	"CAPTAIN_SUPPLY_SHOCKING_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>Permanente</style>. <style=cIsDamage>Eletrocute</style> periodicamente todos os inimigos próximos, imobilizando-os.",
+	"CAPTAIN_SUPPLY_HACKING_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>Permanente</style>. <style=cIsUtility>Hackeie</style> todos os itens compráveis próximos para um custo de <style=cIsUtility>$0</style> com o tempo.",
+	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>Permanente</style>. <style=cIsUtility>Recarrega o Equipamento</style> ao usar.",
+	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD_PERMANENT" : "<style=cIsHealth>Permanente</style>. <style=cIsUtility>Hackeie</style> todos os itens compráveis próximos para um custo de <style=cIsUtility>50%</style>.",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD_PERMANENT" : "<style=cIsHealth>Permanente</style>. <style=cIsUtility>Recarrega as habilidades</style> e reduz o tempo de recarga dos <style=cIsUtility>Equipmentos</style> em <style=cIsUtility>20s</style> ao usar.",
 	
 	"BANDIT2_PRIMARY_DESC_RISKYMOD" : "Dispare uma rajada de escopeta que causa <style=cIsDamage>5 x 90% de dano</style>. Máximo de 4 cartuchos.",
 	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD" : "Dispare um tiro de fuzil que causa <style=cIsDamage>360% de dano</style>. Máximo de 4 projéteis.",
-	"BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD" : "Todos os ataques <style=cIsDamage>pelas costas</style> são <style=cIsDamage>Acertos Críticos</style>. Toda <style=cIsDamage>Chance de Acerto Crítico</style> é convertida em <style=cIsDamage>Dano de Acerto Crítico</style>.",
+	"BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD" : "Todos os ataques <style=cIsDamage>pelas costas</style> são <style=cIsDamage>Pequenos Acertos Críticos</style>. Toda <style=cIsDamage>Chance de Acerto Crítico</style> é convertida em <style=cIsDamage>Dano de Acerto Crítico</style>.",
   "BANDIT2_REVOLVER_NAME_RISKYMOD" : "Pistoleiro",
 	"BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD" : "Abates com revólver <style=cIsUtility>reiniciam todos os seus tempos de recarga</style>.",
 	"BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD" : "Abates com revólver concedem <style=cIsDamage>fichas que acumulam</style>, fazendo com que os tiros de revólver causem <style=cIsDamage>10%</style> mais dano.",
@@ -29,15 +35,23 @@
 	"BANDIT2_SPECIAL_ALT_SCEPTER_NAME_RISKYMOD" : "Punhado de Chumbo",
 	"BANDIT2_SPECIAL_ALT_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Assassino</style>. Dispare uma rajada de revólver que causa <style=cIsDamage>12 x 100% de dano</style>. Cada acerto consecutivo causa <style=cIsDamage>20%</style> de dano bônus.",
 	
-	"COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD" : "Dispare um projétil <style=cIsDamage>perfurante</style> que causa <style=cIsDamage>450% de dano</style>. Causa <style=cIsDamage>150%</style> mais dano sempre que atravessa um inimigo.",
+	"COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD" : "Dispare um projétil <style=cIsDamage>perfurante</style> que causa <style=cIsDamage>450% de dano</style>. Causa <style=cIsDamage>40%</style> mais dano sempre que atravessa um inimigo.",
         "COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Rola</style> uma pequena distância e reduza o tempo de recarga de hanilidades em <style=cIsUtility>1 s</style>.",
-	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>. Dispare rodadas de fragmentação que causam <style=cIsDamage>6 x 120% de dano</style>. O número de disparos aumenta com a velocidade de ataque.",
+	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>. Dispare rodadas de fragmentação que causam <style=cIsDamage>8 x 120% de dano</style>. O número de disparos aumenta com a velocidade de ataque.",
 
 	"COMMANDO_SPECIAL_SCEPTER_NAME_RISKYMOD" : "Barragem Supressiva",
 	"COMMANDO_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>.  Dispare rodadas de fragmentação que causam <style=cIsDamage>18 x 150% de dano</style>. O número de disparos aumenta com a velocidade de ataque.",
 	"COMMANDO_SPECIAL_ALT1_SCEPTER_NAME_RISKYMOD" : "Bombardeio em Tapete",
 	"COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD" : "Arremesse múltiplas granadas que explodem causando <style=cIsDamage>5 x 700% de dano</style>. Máximo de 2.",
-	
+
+	"COMMANDO_SECONDARY_LIGHTNING_NAME_RISKYMOD": "Relâmpago de Fase",
+	"COMMANDO_SECONDARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Dispare um projétil perfurante para causar <style=cIsDamage>450% de dano</style>. Eletrocuta inimigos próximos, causando um adicional de <style=cIsDamage>150% de dano</style>.",
+	"COMMANDO_SPECIAL_EXPL_NAME_RISKYMOD" : "Saraivada Shrapnel",
+	"COMMANDO_SPECIAL_EXPL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>. Dispare rodadas fragmentadas, causando <style=cIsDamage>6x120% de dano</style>. O número de tiros aumenta com a velocidade de ataque.",
+	"COMMANDO_SPECIAL_EXPL_SCEPTER_NAME_RISKYMOD" : "Rajada Shrapnel",
+	"COMMANDO_SPECIAL_EXPL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>. Dispare rodadas fragmentadas, causando <style=cIsDamage>12x150% de dano</style>. O número de tiros aumenta com a velocidade de ataque.",
+
+
 	"HUNTRESS_PRIMARY_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Ágil</style>. Dispare rapidamente uma flecha teleguiada que causa <style=cIsDamage>200% de dano</style>.",
 	"HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Ágil</style>. Dispare uma rajada de <style=cIsDamage>3</style> flechas teleguiadas que causam <style=cIsDamage>3 x 120% de dano</style>. Acertos Críticos disparam <style=cIsDamage>6</style> flechas.",
 	"HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Teleporta</style> para o céu. Faz chover flechas em uma área, causando <style=cIsUtility>lentidão</style> a todos os inimigos e <style=cIsDamage>420% de dano por segundo</style>.",
@@ -60,10 +74,13 @@
 	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. Lance uma bile tóxica que causa <style=cIsDamage>240% de dano</style>.",
 	"CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. <style=cIsDamage>Assassino</style>. <style=cIsHealing>Regenerativo</style>. Morda um inimigo, causando <style=cIsDamage>360% de dano</style>.",
 	"CROCO_UTILITY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. <style=cIsDamage>Atordoante</style>. Salte no ar, causando <style=cIsDamage>320% de dano</style>. Deixe uma poça de ácido que causa <style=cIsDamage>50% de dano</style>. Pode acumular até <style=cIsUtility>2</style> cargas.",
-	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. <style=cIsDamage>Atordoante</style>. Salte no ar, causando <style=cIsDamage>550% de dano</style>. <style=cIsUtility>Reduz</style> o tempo de recarga das habilidades em <style=cIsUtility>1 s</style> para cada inimigo atingido.",
+	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>. Salte no ar, causando <style=cIsDamage>550% de dano</style>. <style=cIsUtility>Reduz</style> o tempo de recarga em <style=cIsUtility>1s</style> para cada inimigo atingido.",
 	"CROCO_SPECIAL_DESCRIPTION_RISKYMOD" : "Libere uma doença mortal que causa <style=cIsDamage>8x100% de dano</style>. A doença se espalha a até <style=cIsDamage>20</style> alvos.",
 	"CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD" : "Pandêmico",
 	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "Libere uma doença mortal que causa <style=cIsDamage>15 x 100% de dano</style>.  A doença se espalha a até <style=cIsDamage>20</style> alvos. <style=cIsHealing>Se cure</style> caso o inimigo seja abatido por Pandemia.",
+        "CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "Contágio",
+	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>Reduz o dano base em 20%</style>.\nCada abate aplica um diferente efeito de <style=cIsDamage>dano contínuo</style>.\n<style=cIsHealing>Veneno</style> e <color=#B1387F>Praga</color> espalham em até <style=cIsDamage>1</style> inimigo próximo do alvo abatido.",
+	
 
 	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Incendiário</style>. Dispare um raio que causa <style=cIsDamage>300% de dano</style> aos inimigos. Máximo de 4.",
 	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Dispare um raio que causa <style=cIsDamage>360% de dano</style> e <style=cIsDamage>explode</style> em uma pequena área. Máximo de 4.</style>",
@@ -77,6 +94,7 @@
 	"MAGE_SPECIAL_SITHLIGHTNING_DESCRIPTION_RISKYMOD" : "Eletrocuta todos os inimigos à frente causando <style=cIsDamage>1.000% de dano</style>.",
 	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_NAME_RISKYMOD" : "Poder Ilimitado",
 	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_DESCRIPTION_RISKYMOD" : "Eletrocuta todos os inimigos à frente causando <style=cIsDamage>2.000% de dano</style>.",
+	"MAGE_SECONDARY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Congelante</style>. Carregue uma nano-lança <style=cIsDamage>perfurante</style> que causa <style=cIsDamage>400%-1.600%</style> de dano.",
 	
 	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Lança um pilão flutuante que <style=cIsDamage>acerta</style> até <style=cIsDamage>6</style> inimigos próximos, causando <style=cIsDamage>70% de dano</style>. Pode ser usado para se <style=cIsUtility>agarrar</style>.",
  
