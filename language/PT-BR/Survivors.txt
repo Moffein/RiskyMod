@@ -25,9 +25,9 @@
 	"BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD" : "Abates com revólver <style=cIsDamage>aumentam o dano em 20%</style> por 15 segundos. Máximo de <style=cIsDamage>5</style> acúmulos.",
 	
 	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD": "Assassinar",
-	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Assassino</style>. Dispare dois tiros de revólver que causam <style=cIsDamage>2 x 1.200% de dano</style>.",
+	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Assassino</style>. Dispare dois tiros de revólver que causam <style=cIsDamage>2 x 900% de dano</style>.",
 	"BANDIT2_SPECIAL_ALT_SCEPTER_NAME_RISKYMOD" : "Punhado de Chumbo",
-	"BANDIT2_SPECIAL_ALT_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Assassino</style>. Dispare uma rajada de revólver que causa <style=cIsDamage>12 x 1.200% de dano</style>. Cada acerto consecutivo causa <style=cIsDamage>20%</style> de dano bônus.",
+	"BANDIT2_SPECIAL_ALT_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Assassino</style>. Dispare uma rajada de revólver que causa <style=cIsDamage>12 x 100% de dano</style>. Cada acerto consecutivo causa <style=cIsDamage>20%</style> de dano bônus.",
 	
 	"COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD" : "Dispare um projétil <style=cIsDamage>perfurante</style> que causa <style=cIsDamage>450% de dano</style>. Causa <style=cIsDamage>150%</style> mais dano sempre que atravessa um inimigo.",
         "COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Rola</style> uma pequena distância e reduza o tempo de recarga de hanilidades em <style=cIsUtility>1 s</style>.",
@@ -65,7 +65,7 @@
 	"CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD" : "Pandêmico",
 	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "Libere uma doença mortal que causa <style=cIsDamage>15 x 100% de dano</style>.  A doença se espalha a até <style=cIsDamage>20</style> alvos. <style=cIsHealing>Se cure</style> caso o inimigo seja abatido por Pandemia.",
 
-	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Incendiário</style>. Dispare um raio que causa <style=cIsDamage>360% de dano</style> aos inimigos. Máximo de 4.",
+	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Incendiário</style>. Dispare um raio que causa <style=cIsDamage>300% de dano</style> aos inimigos. Máximo de 4.",
 	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Dispare um raio que causa <style=cIsDamage>360% de dano</style> e <style=cIsDamage>explode</style> em uma pequena área. Máximo de 4.</style>",
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>. Irrompa no céu, causando <style=cIsDamage>800% de dano</style>.",
 	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Congelante</style>. Crie uma barreira que causa <style=cIsDamage>100% de dano</style> aos inimigos. <style=cIsUtility>Impulsiona você para trás</style> caso esteja no ar.",

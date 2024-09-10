@@ -20,8 +20,6 @@ namespace RiskyMod.Survivors.Merc
         public MercCore()
         {
             if (!enabled) return;
-            //TODO: Buff default shift
-            //Slightly buff Evis? Don't really feel like it needs it but wouldn't be opposed to it.
 
             if (buffDefaultShift)
             {

@@ -17,9 +17,6 @@
 
 	"ITEM_IGNITEONKILL_DESC_RISKYMOD": "Abater um inimigo <style=cIsDamage>incendeia</style> todos os inimigos em um raio de <style=cIsDamage>16 m</style>, causando <style=cIsDamage>150%</style> de dano base. Além disso, os inimigos <style=cIsDamage>queimam</style>, recebendo <style=cIsDamage>150%</style> <style=cStack>(+75% por acúmulo)</style> de dano base.",  
 
-	"ITEM_REPULSIONARMORPLATE_PICKUP_RISKYMOD": "Aumenta a armadura em 5.",
-	"ITEM_REPULSIONARMORPLATE_DESC_RISKYMOD": "<style=cIsHealing>Aumenta a armadura</style> em <style=cIsHealing>5</style>.",
-
 	"ITEM_BEAR_DESC_RISKYMOD": "<style=cIsHealing>10%</style> <style=cStack>(+10% por acúmulo)</style> de chance de <style=cIsHealing>bloquear</style> danos recebidos. <style=cIsUtility>Sorte não surte efeito</style>.",
 	
 	"ITEM_SLOWONHIT_DESC_RISKYMOD": "Causa lentidão</style> nos inimigos, ao golpear, de <style=cIsUtility>-80% de velocidade de movimento</style> e <style=cIsDamage>-20% de velocidade de ataque</style> por <style=cIsUtility>2 s</style> <style=cStack>(+2 s por acúmulo)</style>.",
@@ -53,16 +50,13 @@
 	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "Entre em frenesi após abater inimigos. Máximo de 3 vezes.",
 	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Abater inimigos</style> faz você entrar em <style=cIsDamage>frenesi</style> por <style=cIsDamage>6 s</style>, aumentando a <style=cIsUtility>velocidade de movimento</style> e a <style=cIsDamage> velocidade de ataque</style> em <style=cIsDamage>15%</style> para cada inimigo abatido. Bônus máximo de <style=cIsDamage>3 <style=cStack>(+2 por acúmulo)</style></style>.",
 
-	"ITEM_HEALONCRIT_PICKUP_RISKYMOD": "Ganhe regeneração de saúde e chance de \'Acerto Crítico\' ao abater. Máximo de 3 vezes.",
-	"ITEM_HEALONCRIT_DESC_RISKYMOD": "Receba <style=cIsDamage>5% de Chance de Crítico</style>. Abater inimigos garante <style=cIsDamage>10% de \'Chance de Crítico\' </style> e aumenta a <style=cIsHealing>regeneração de vida base</style> em <style=cIsHealing>5 PV/s</style> por <style=cIsDamage>4 s</style>. Bônus máximo de <style=cIsDamage>3 <style=cStack>(+2 por acúmulo)</style></style>.",
-	
 	"ITEM_ENERGIZEDONEQUIPMENTUSE_PICKUP_RISKYMOD": "Ativar seu Equipamento concede uma alta velocidade de ataque e movimento.",
 	"ITEM_ENERGIZEDONEQUIPMENTUSE_DESC_RISKYMOD": "Ativar seu Equipamento concede <style=cIsUtility>+50% de velocidade de movimento</style> e <style=cIsDamage>+70% de velocidade de ataque</style> por <style=cIsDamage>8 s</style> <style=cStack>(+4 s por acúmulo)</style>.",
 
 	"ITEM_INFUSION_PICKUP_RISKYMOD": "Abater um inimigo aumenta permanentemente sua saúde máxima.",
 	"ITEM_INFUSION_DESC_RISKYMOD": "Abater um inimigo aumenta <style=cIsHealing>permanentemente sua saúde</style> em <style=cIsHealing>1</style> <style=cStack>(+1 por acúmulo)</style>. A cada <style=cIsHealing>100 de saúde</style> recebida por este item, a saúde recebido ao abater é <style=cIsHealth>reduzida</style>.",
 	
-	"ITEM_ICICLE_DESC_RISKYMOD": "Abater um inimigo cria ao seu redor uma <style=cIsDamage>tempestade de gelo</style> que causa <style=cIsDamage>1.200% <style=cStack>(+600% por acúmulo)</style> de dano por segundo</style> e <style=cIsUtility>lentidão</style> de <style=cIsUtility>80%</style> aos inimigos por <style=cIsUtility>1,5 s</style>. A tempestade <style=cIsDamage>aumenta a cada abate</style>, aumentando seu alcance em <style=cIsDamage>3 m</style>. Acumula até <style=cIsDamage>24 m</style>.",
+	"ITEM_ICICLE_DESC_RISKYMOD": "Abater um inimigo cria ao seu redor uma <style=cIsDamage>tempestade de gelo</style> que causa <style=cIsDamage>1.200% <style=cStack>(+400% por acúmulo)</style> de dano por segundo</style> e <style=cIsUtility>lentidão</style> de <style=cIsUtility>80%</style> aos inimigos por <style=cIsUtility>1,5 s</style>. A tempestade <style=cIsDamage>aumenta a cada abate</style>, aumentando seu alcance em <style=cIsDamage>3 m</style>. Acumula até <style=cIsDamage>18 m</style>.",
 
 	"ITEM_HEADHUNTER_PICKUP_RISKYMOD": "Causa dano extra a elites e rouba temporariamente o poder de elites abatidos.",
 	"ITEM_HEADHUNTER_DESC_RISKYMOD": "Causa <style=cIsDamage>30%</style> de dano extra a monstros elite. Receba o <style=cIsDamage>poder</style> de qualquer monstro de elite abatido por <style=cIsDamage>10 s</style> <style=cStack>(+5 s por acúmulo)</style>.",
@@ -104,9 +98,9 @@
 	
 	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Cria uma zona ao redor do Teleportador que <style=cIsHealing>cura</style> <style=cIsHealing>5%</style> <style=cStack>(+2.5% por acúmulo)</style> da sua <style=cIsHealing>saúde</style> a cada segundo. Libera uma <style=cIsHealing>supernova de cura </style>durante o evento de Teleportador, <style=cIsHealing>curando</style> todos os aliados próximos em <style=cIsHealing>50%</style> de saúde. Ocorre <style=cIsHealing>1</style> <style=cStack>(+1 por acúmulo)</style> vez.",
 
-	"ITEM_CLOVER_DESC_RISKYMOD": "Todos os efeitos aleatórios ganham <style=cIsUtility>+1</style> <style=cStack>(+1 por acúmulo)</style>rolagem para obter um <style=cIsUtility>resultado favorável</style>. Caso sua <style=cIsDamage>sorte</style> seja acima de <style=cIsUtility>1</style>, aumenta <style=cIsUtility>TODAS as estatísticas</style> em <style=cIsUtility>30%</style> <style=cStack>(+30% por acúmulo)</style> no lugar.",
+	"ITEM_CLOVER_DESC_RISKYMOD": "Todos os efeitos aleatórios ganham <style=cIsUtility>+1</style> <style=cStack>(+1 por acúmulo)</style>rolagem para obter um <style=cIsUtility>resultado favorável</style>. Caso sua <style=cIsDamage>sorte</style> seja acima de <style=cIsUtility>1</style>, aumenta <style=cIsUtility>TODAS as estatísticas</style> em <style=cIsUtility>40%</style> <style=cStack>(+40% por acúmulo)</style> no lugar.",
 	
-	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Ganha <style=cIsDamage>Coronel Droneman</style>. \nDrones ganham <style=cIsDamage>+50%</style> <style=cStack>(+50% por acúmulo)</style> de velocidade de ataque e redução de tempo de recarga. \nDrones ganham <style=cIsDamage>10%</style> de chance de disparar um <style=cIsDamage>míssil</style> ao acertar, causando <style=cIsDamage>300%</style> de dano TOTAL. \nDrones ganham uma <style=cIsDamage>metralhadora giratória automática</style> que causa <style=cIsDamage>6x50%</style> de dano, acertando <style=cIsDamage>2</style> inimigos.",
+	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Ganha <style=cIsDamage>Coronel Droneman</style>. \nDrones ganham <style=cIsDamage>+50%</style> <style=cStack>(+50% por acúmulo)</style> de velocidade de ataque e redução de tempo de recarga. \nDrones ganham <style=cIsDamage>10%</style> de chance de disparar um <style=cIsDamage>míssil</style> ao acertar, causando <style=cIsDamage>300%</style> de dano TOTAL. \nDrones ganham uma <style=cIsDamage>metralhadora giratória automática</style> que causa <style=cIsDamage>6x50%</style> de dano, acertando <style=cIsDamage>1</style> inimigos.",
 	
 	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "Causa bônus de dano enquanto fora de perigo.",
 	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Aumenta o dano em <style=cIsDamage>15%</style> <style=cStack>(+15% por acúmulo)</style> enquanto fora de perigo.",

@@ -25,7 +25,7 @@
 	"BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD" : "使用左轮手枪击杀将<style=cIsDamage>提升20%伤害</style>持续15秒。最多叠加<style=cIsDamage>5</style>次。",
 	
 	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD": "刺杀",
-	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>屠杀者</style>。 使用左轮手枪射出两发子弹，造成<style=cIsDamage>2x1200%的伤害</style>。",
+	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>屠杀者</style>。 使用左轮手枪射出两发子弹，造成<style=cIsDamage>2x900%的伤害</style>。",
 	"BANDIT2_SPECIAL_ALT_SCEPTER_NAME_RISKYMOD" : "荒野大枪手",
 	"BANDIT2_SPECIAL_ALT_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>屠杀者</style>。使用左轮手枪快速射击，造成<style=cIsDamage>12x100%的伤害</style>。每次连续命中都会造成<style=cIsDamage>20%</style>的额外伤害。",
 	
@@ -65,7 +65,7 @@
 	"CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD" : "疫病",
 	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "释放一种能够造成<style=cIsDamage>15x100%伤害</style>的致命病毒。病毒将会传播给最多<style=cIsDamage>20</style>名目标。如果病毒击败目标，<style=cIsHealing>你将被治愈</style>。",
 	
-	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>点燃</style>。发射一道火炎，造成<style=cIsDamage>360%的伤害</style>。最多可发射4次。</style>",
+	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>点燃</style>。发射一道火炎，造成<style=cIsDamage>300%的伤害</style>。最多可发射4次。</style>",
 	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "发射一道闪电，造成<style=cIsDamage>360%的伤害</style>并<style=cIsDamage>引爆</style>小片区域。最多发射4次。</style>",
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>震荡</style>。一飞冲天，造成<style=cIsDamage>800%的伤害</style>。",
 	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>冰冻</style>。创造一道能够对敌人造成<style=cIsDamage>100%伤害</style>的屏障。若自身位于空中<style=cIsUtility>则将自身向后推</style>。",

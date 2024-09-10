@@ -6,18 +6,17 @@ namespace RiskyMod.Survivors.Engi
 {
     public class TurretChanges
     {
-        public static bool turretChanges = true;
-        public static bool mobileTurretChanges = true;
+        public static bool normalizeStats = true;
 
         public TurretChanges()
         {
+            if (!normalizeStats) return;
             ModifyTurret();
             ModifyWalkerTurret();
         }
 
         private void ModifyTurret()
         {
-            if (!turretChanges) return;
             GameObject turretBody = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/EngiTurretBody");
             CharacterBody cb = turretBody.GetComponent<CharacterBody>();
             cb.damage = 12f;
@@ -29,10 +28,8 @@ namespace RiskyMod.Survivors.Engi
 
         private void ModifyWalkerTurret()
         {
-            if (!mobileTurretChanges) return;
             GameObject turretBody = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/EngiWalkerTurretBody");
             CharacterBody cb = turretBody.GetComponent<CharacterBody>();
-            cb.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
             cb.damage = 12f;
             cb.levelDamage = cb.damage * 0.2f;
             cb.regen = 1f;

@@ -264,7 +264,6 @@ namespace RiskyMod
         private static void ConfigCommonItems()
         {
             BisonSteak.enabled = ItemCfg.Bind(commonString, "Bison Steak", true, itemConfigDescString).Value;
-            CautiousSlug.enabled = ItemCfg.Bind(commonString, "Cautious Slug", false, itemConfigDescString).Value;
             Crowbar.enabled = ItemCfg.Bind(commonString, "Crowbar", true, itemConfigDescString).Value;
 
             DelicateWatch.enabled = ItemCfg.Bind(commonString, "Delicate Watch", true, itemConfigDescString).Value;
@@ -318,7 +317,7 @@ namespace RiskyMod
 
         private static void ConfigLegendaryItems()
         {
-            Behemoth.enabled = ItemCfg.Bind(legendaryString, "Brilliant Behemoth", true, itemConfigDescString).Value;
+            Behemoth.enabled = ItemCfg.Bind(legendaryString, "Brilliant Behemoth", false, itemConfigDescString).Value;
             CeremonialDagger.enabled = ItemCfg.Bind(legendaryString, "Ceremonial Dagger", true, itemConfigDescString).Value;
             Clover.enabled = ItemCfg.Bind(legendaryString, "57 Leaf Clover", false, "Caps how high the Luck stat can go.").Value;
             Clover.luckCap = ItemCfg.Bind(legendaryString, "57 Leaf Clover - Max Luck", 1f, "Maximum Luck value players can reach. Extra Luck is converted to stat boosts.").Value;
@@ -345,10 +344,6 @@ namespace RiskyMod
         private static void ConfigVoidItems()
         {
             Dungus.enabled = ItemCfg.Bind(voidString, "Weeping Fungus", true, itemConfigDescString).Value;
-
-            //Only re-enable when there's something that actually works.
-            Needletick.enabled = false;
-            //Needletick.enabled = ItemCfg.Bind(voidString, "Needletick", true, itemConfigDescString).Value;
 
             SaferSpaces.enabled = ItemCfg.Bind(voidString, "Safer Spaces", true, itemConfigDescString).Value;
             SaferSpaces.addIframes = ItemCfg.Bind(voidString, "Safer Spaces - I-frames on Proc", false, "Gives brief invincibility when triggering this effect.").Value;
@@ -404,7 +399,6 @@ namespace RiskyMod
             Capacitor.enabled = ItemCfg.Bind(equipmentString, "Royal Capacitor", true, itemConfigDescString).Value;
             Chrysalis.enabled = ItemCfg.Bind(equipmentString, "Milky Chrysalis", true, itemConfigDescString).Value;
             CritHud.enabled = ItemCfg.Bind(equipmentString, "Ocular HUD", true, itemConfigDescString).Value;
-            Fruit.enabled = ItemCfg.Bind(equipmentString, "Foreign Fruit", false, itemConfigDescString).Value;
             SuperLeech.enabled = ItemCfg.Bind(equipmentString, "Super Massive Leech", true, itemConfigDescString).Value;
             VolcanicEgg.enabled = ItemCfg.Bind(equipmentString, "Volcanic Egg", true, itemConfigDescString).Value;
             Goobo.enabled = ItemCfg.Bind(equipmentString, "Goobo Jr.", true, itemConfigDescString).Value;
@@ -444,13 +438,13 @@ namespace RiskyMod
             EngiCore.enabled = SurvivorCfg.Bind(engiString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             PressureMines.enabled = SurvivorCfg.Bind(engiString, "Pressure Mine Changes", true, "Pressure Mines only detonate when fully armed.").Value;
             EngiCore.harpoonRangeTweak = SurvivorCfg.Bind(engiString, "Thermal Harpoon Changes", true, "Increases Thermal Harpoon targeting range.").Value;
-            TurretChanges.turretChanges = SurvivorCfg.Bind(engiString, "Stationary Turret Changes", true, "Enable changes to Stationary Turrets.").Value;
-            TurretChanges.mobileTurretChanges = SurvivorCfg.Bind(engiString, "Mobile Turret Changes", true, "Enable changes to Mobile Turrets.").Value;
-
+            TurretChanges.normalizeStats = SurvivorCfg.Bind(engiString, "Normalize Turret Stats", true, "Reduces Turret base damage to 12 while keeping damage output the same.").Value;
+            
             MageCore.enabled = SurvivorCfg.Bind(mageString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             MageCore.modifyFireBolt = SurvivorCfg.Bind(mageString, "Fire Bolt Changes", true, "Enable changes to this skill.").Value;
             MageCore.modifyPlasmaBolt = SurvivorCfg.Bind(mageString, "Plasma Bolt Changes", true, "Enable changes to this skill.").Value;
-            MageCore.m2RemoveNanobombGravity = SurvivorCfg.Bind(mageString, "Nanobomb - Remove Gravity", true, "Removes projectile drop from Nanobomb so it behaves like it did pre-1.0 update.").Value;
+            MageCore.m2RemoveNanobombGravity = SurvivorCfg.Bind(mageString, "Nanobomb - Remove Gravity", true, "Removes projectile drop from Nanobomb so it behaves like it did in Early Access.").Value;
+            MageCore.buffNanoSpear = SurvivorCfg.Bind(mageString, "Nanospear Changes", true, "Enable changes to this skill.").Value;
 
             MageCore.ionSurgeUtility = SurvivorCfg.Bind(mageString, "Ion Surge - Move to Utility Slot", true, "Moves Ion Surge to the Utility slot.").Value;
             MageCore.ionSurgeUtilityKeepSpecial = SurvivorCfg.Bind(mageString, "Ion Surge - Move to Utility Slot - Keep Special", false, "If Ion Surge Utility is enabled, keep the Special version as a selectable skill.").Value;

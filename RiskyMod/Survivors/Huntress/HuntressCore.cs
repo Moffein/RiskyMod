@@ -75,7 +75,7 @@ namespace RiskyMod.Survivors.Huntress
             if (blinkChanges)
             {
                 SkillDef blink = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Huntress/HuntressBodyBlink.asset").WaitForCompletion();
-                blink.baseRechargeInterval = 6f;
+                blink.baseRechargeInterval = 5f;
             }
         }
 

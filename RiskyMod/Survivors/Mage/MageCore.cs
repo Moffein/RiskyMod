@@ -26,6 +26,7 @@ namespace RiskyMod.Survivors.Mage
         public static bool modifyPlasmaBolt = true;
 
         public static bool m2RemoveNanobombGravity = true;
+        public static bool buffNanoSpear = true;
 
         public static ConfigEntry<bool> flamethrowerSprintCancel;
         public static bool flamethrowerRangeExtend = true;
@@ -67,15 +68,16 @@ namespace RiskyMod.Survivors.Mage
             SkillDef plasmaBoltDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFireLightningBolt.asset").WaitForCompletion();
 
 
-            //TODO: Did I accidentally delete the thing that changes damage?
             if (modifyFireBolt)
             {
                 fireBoltDef.skillDescriptionToken = "MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD";
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Mage/EntityStates.Mage.Weapon.FireFireBolt.asset", "damageCoefficient", "3");
             }
 
             if (modifyPlasmaBolt)
             {
                 plasmaBoltDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Mage/EntityStates.Mage.Weapon.FireLightningBolt.asset", "damageCoefficient", "3.6");
             }
         }
 
@@ -86,6 +88,12 @@ namespace RiskyMod.Survivors.Mage
                 GameObject projectile = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MageLightningBombProjectile");
                 AntiGravityForce agf = projectile.GetComponent<AntiGravityForce>();
                 agf.antiGravityCoefficient = 1f;
+            }
+            if (buffNanoSpear)
+            {
+                SkillDef nanoSpearDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyIceBomb.asset").WaitForCompletion();
+                nanoSpearDef.skillDescriptionToken = "MAGE_SECONDARY_ICE_DESCRIPTION_RISKYMOD";
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Mage/EntityStates.Mage.Weapon.ThrowIcebomb.asset", "maxDamageCoefficient", "16");
             }
         }
 

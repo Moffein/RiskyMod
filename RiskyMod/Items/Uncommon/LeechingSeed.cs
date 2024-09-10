@@ -4,6 +4,7 @@ using R2API;
 using RiskyMod.SharedHooks;
 using RoR2;
 using System;
+using UnityEngine;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -47,6 +48,13 @@ namespace RiskyMod.Items.Uncommon
 				if (itemCount > 0)
 				{
 					float toHeal = 1f + damageInfo.damage * (0.01f + 0.01f * itemCount) * damageInfo.procCoefficient;
+
+					//Ideally want to clamp this to their actual pre-hit health instead
+					if (victimBody.healthComponent)
+					{
+						toHeal = Mathf.Min(toHeal, victimBody.healthComponent.fullCombinedHealth);
+					}
+
 					damageInfo.procChainMask.AddProc(ProcType.HealOnHit);
 					attackerBody.healthComponent.Heal(toHeal, damageInfo.procChainMask);
 

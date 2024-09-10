@@ -8,7 +8,7 @@ namespace RiskyMod.Items.Legendary
 {
     public class Behemoth
     {
-        public static bool enabled = true;
+        public static bool enabled = false;
         public Behemoth()
         {
             if (!enabled) return;

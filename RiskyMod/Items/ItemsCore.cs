@@ -57,7 +57,6 @@ namespace RiskyMod.Items
             new Warbanner();
             new Gasoline();
             new TougherTimes();
-            new CautiousSlug();
             new StunGrenade();
 
             new DelicateWatch();
@@ -111,7 +110,6 @@ namespace RiskyMod.Items
         private void ModifyVoid()
         {
             new Dungus();
-            new Needletick();
             new SaferSpaces();
             new PlasmaShrimp();
             new VoidWisp();
@@ -154,7 +152,6 @@ namespace RiskyMod.Items
             new Backup();
             new SuperLeech();
             new Chrysalis();
-            new Fruit();
             new Goobo();
         }
 

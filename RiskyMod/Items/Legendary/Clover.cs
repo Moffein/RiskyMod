@@ -28,8 +28,8 @@ namespace RiskyMod.Items.Legendary
             if (sender.master && sender.master.luck > luckCap)
             {
                 float boost = sender.master.luck - luckCap;
-                float mult =  boost * 0.3f;
-                float add = boost * 30f;
+                float mult =  boost * 0.4f;
+                float add = boost * 40f;
                 args.healthMultAdd += mult;
                 args.moveSpeedMultAdd += mult;
                 args.regenMultAdd += mult;  //Irradiant Pearls add regen instead of multiplying according to the wiki
