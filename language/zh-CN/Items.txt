@@ -165,7 +165,7 @@
 	
 	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "过量治疗会使你获得一道<style=cIsHealing>临时屏障</style>，可阻挡相当于<style=cIsHealing>50%<style=cStack>（每层增加50%）</style></style>已<style=cIsHealing>治疗</style>生命值的伤害。将<style=cIsHealing>屏障减少率</style>除以<style=cIsHealing>2<style=cStack>（每层增加1）</style></style>。",
 
-	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "使基础伤害提高<style=cIsDamage>100%</style><style=cStack>（每层增加100%）</style>，<style=cIsHealing>使最大生命值除以2</style><style=cStack>（每层增加1）</style>。"
+	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "使基础伤害提高<style=cIsDamage>100%</style><style=cStack>（每层增加100%）</style>，<style=cIsHealing>使最大生命值除以2</style><style=cStack>（每层增加1）</style>。",
 
 	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "有几率在遭受攻击时召唤一个<style=cIsHealing>100%<style=cStack>（每层增加30%）</style></style>生命值，攻击速度<style=cIsDamage>100%<style=cStack>（每层叠加100%）</style></style>的乌贼机枪塔来吸引周围敌人的仇恨。受到伤害越高几率越大。最多生成3个。",
 	
@@ -265,5 +265,10 @@
 	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "过量治疗会使你获得一道<style=cIsHealing>临时屏障</style>，可阻挡相当于<style=cIsHealing>50%<style=cStack>（每层增加50%）</style></style>已<style=cIsHealing>治疗</style>生命值的伤害。将<style=cIsHealing>屏障减少率</style>除以<style=cIsHealing>2<style=cStack>（每层增加1）</style></style>。",
 
 	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "使基础伤害提高<style=cIsDamage>100%</style><style=cStack>（每层增加100%）</style>，<style=cIsHealing>使最大生命值除以2</style><style=cStack>（每层增加1）</style>。",
+
+	"ITEM_STRENGTHENBURN_DESC_RISKYMOD": "击中时有<style=cIsDamage>5%</style>几率<style=cIsDamage>点燃</style>，造成<style=cIsDamage>50%</style>总伤害。<style=cIsDamage>点燃</style>效果造成<style=cIsDamage>300%</style> <style=cStack>(每层增加300%)</style>伤害。",
+		
+	"ITEM_CRITDAMAGE_DESC_RISKYMOD": "获得<style=cIsDamage>5%暴击几率</style>。<style=cIsDamage>暴击</style>造成<style=cIsDamage>100%额外伤害</style><style=cStack>(每层增加100%)</style>。"
+
 	}
 }
