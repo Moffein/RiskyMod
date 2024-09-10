@@ -31,6 +31,10 @@
 - Lowered HP 25%
 - **(RiskyTweaks)** Fog now does fixed damage instead of scaling with time. (Same values as Void Fields)
 
+## False Son
+
+- **(RiskyTweaks)** Removed iframes.
+
 ## Bosses
 
 - Stone Titan
@@ -119,3 +123,4 @@
 - Scorch Wurm
 	- Reduced projectile damage by 20%
 	- HP reduced from 580 -> 480
+	- **(RiskyTweaks)** Removed iframes.

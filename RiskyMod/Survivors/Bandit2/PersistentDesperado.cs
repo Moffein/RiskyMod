@@ -15,7 +15,7 @@ namespace RiskyMod.Survivors.Bandit2
         {
             if (!enabled) return;
 
-            On.RoR2.CharacterBody.OnClientBuffsChanged += CharacterBody_OnClientBuffsChanged;
+            On.RoR2.GlobalEventManager.OnCharacterDeath += GlobalEventManager_OnCharacterDeath;
             On.RoR2.CharacterBody.Start += CharacterBody_Start;
 
             IL.EntityStates.Bandit2.Weapon.FireSidearmSkullRevolver.ModifyBullet += (il) =>
@@ -34,13 +34,16 @@ namespace RiskyMod.Survivors.Bandit2
             };
         }
 
-        private void CharacterBody_Start(On.RoR2.CharacterBody.orig_Start orig, CharacterBody self)
+        private void GlobalEventManager_OnCharacterDeath(On.RoR2.GlobalEventManager.orig_OnCharacterDeath orig, GlobalEventManager self, DamageReport damageReport)
         {
-            orig(self);
-            UpdateDesperado(self);
+            orig(self, damageReport);
+            if (NetworkServer.active && damageReport.attackerBody && damageReport.attackerBody.bodyIndex == Bandit2Core.bodyIndex)
+            {
+                UpdateDesperado(damageReport.attackerBody);
+            }
         }
 
-        private void CharacterBody_OnClientBuffsChanged(On.RoR2.CharacterBody.orig_OnClientBuffsChanged orig, CharacterBody self)
+        private void CharacterBody_Start(On.RoR2.CharacterBody.orig_Start orig, CharacterBody self)
         {
             orig(self);
             UpdateDesperado(self);
@@ -48,7 +51,7 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void UpdateDesperado(CharacterBody self)
         {
-            if (self.bodyIndex == Bandit2Core.Bandit2Index && self.master)
+            if (self.bodyIndex == Bandit2Core.bodyIndex && self.master)
             {
                 DesperadoTracker dt = self.master.GetComponent<DesperadoTracker>();
                 if (!dt) dt = self.master.gameObject.AddComponent<DesperadoTracker>();

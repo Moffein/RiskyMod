@@ -43,7 +43,7 @@ namespace RiskyMod.Survivors.Bandit2
 
         public static bool specialRework = true;
 
-        public static BodyIndex Bandit2Index;
+        public static BodyIndex bodyIndex;
 
         public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/Bandit2Body");
 
@@ -66,7 +66,7 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void OnLoad()
         {
-            Bandit2Index = BodyCatalog.FindBodyIndex("Bandit2Body");
+            bodyIndex = BodyCatalog.FindBodyIndex("Bandit2Body");
         }
 
         private void ModifyStats(CharacterBody cb)

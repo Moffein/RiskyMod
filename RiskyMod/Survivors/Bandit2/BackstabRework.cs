@@ -26,7 +26,7 @@ namespace RiskyMod.Survivors.Bandit2
                     c.Emit(OpCodes.Ldarg_0); //CharacterBody
                     c.EmitDelegate<Func<int, CharacterBody, int>>((cdCount, self) =>
                     {
-                        if (cdCount < 1 && self.bodyIndex == Bandit2Core.Bandit2Index && self.bodyFlags.HasFlag(CharacterBody.BodyFlags.HasBackstabPassive))
+                        if (cdCount < 1 && self.bodyIndex == Bandit2Core.bodyIndex && self.bodyFlags.HasFlag(CharacterBody.BodyFlags.HasBackstabPassive))
                         {
                             cdCount = 1;
                         }
@@ -44,7 +44,7 @@ namespace RiskyMod.Survivors.Bandit2
 
         private static void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (sender.bodyIndex == Bandit2Core.Bandit2Index && sender.bodyFlags.HasFlag(CharacterBody.BodyFlags.HasBackstabPassive))
+            if (sender.bodyIndex == Bandit2Core.bodyIndex && sender.bodyFlags.HasFlag(CharacterBody.BodyFlags.HasBackstabPassive))
             {
                 args.critDamageMultAdd -= 0.5f;
             }
