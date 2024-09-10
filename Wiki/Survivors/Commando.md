@@ -1,6 +1,6 @@
 ## Commando
 
-Mostly the same, with buffs to his less-used skills and no more falloff on his attacks.
+Mostly the same, with buffs to his less-used skills.
 
 ## Primaries
 
