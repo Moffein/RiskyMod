@@ -52,20 +52,17 @@ namespace RiskyMod.Survivors.Bandit2
             {
                 DesperadoTracker dt = self.master.GetComponent<DesperadoTracker>();
                 if (!dt) dt = self.master.gameObject.AddComponent<DesperadoTracker>();
-                if (dt)
+                int current = self.GetBuffCount(RoR2Content.Buffs.BanditSkull);
+                if (current > dt.count)
                 {
-                    int current = self.GetBuffCount(RoR2Content.Buffs.BanditSkull);
-                    if (current > dt.count)
+                    dt.count = current;
+                }
+                else
+                {
+                    int diff = dt.count - current;
+                    for (int i = 0; i < diff; i++)
                     {
-                        dt.count = current;
-                    }
-                    else
-                    {
-                        int diff = dt.count - current;
-                        for (int i = 0; i < diff; i++)
-                        {
-                            self.AddBuff(RoR2Content.Buffs.BanditSkull);
-                        }
+                        self.AddBuff(RoR2Content.Buffs.BanditSkull);
                     }
                 }
             }
