@@ -20,7 +20,6 @@ namespace RiskyMod.Survivors.Commando
     {
         public static bool enabled = true;
 
-        public static bool removePrimaryFalloff = true;
         public static bool phaseRoundChanges = true;
         public static bool skillLightningRound = true;
         public static bool skillShrapnelBarrage = true;
@@ -41,18 +40,9 @@ namespace RiskyMod.Survivors.Commando
 
         private void ModifySkills(SkillLocator sk)
         {
-            ModifyPrimaries(sk);
             ModifySecondaries(sk);
             ModifyUtilities(sk);
             ModifySpecials(sk);
-        }
-
-        private void ModifyPrimaries(SkillLocator sk)
-        {
-            if (removePrimaryFalloff)
-            {
-                IL.EntityStates.Commando.CommandoWeapon.FirePistol2.FireBullet += SharedHooks.BulletAttackHooks.RemoveBulletFalloff;
-            }
         }
 
         private void ModifySecondaries(SkillLocator sk)

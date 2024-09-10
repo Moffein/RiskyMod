@@ -5,7 +5,6 @@ Mostly the same, with buffs to his less-used skills and no more falloff on his a
 ## Primaries
 
 - Double Tap
-	- Removed falloff.
 	- **(RiskyTweaks)** Fixed attack speed cap being lower than intended.
 	
 ## Secondaries
