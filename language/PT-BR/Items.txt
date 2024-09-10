@@ -128,5 +128,9 @@
 	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Curar além do limite concede uma <style=cIsHealing>barreira temporária</style> de <style=cIsHealing>50% <style=cStack>(+50% por acúmulo)</style></style> do total <style=cIsHealing>curado</style>. Divide a <style=cIsHealing>taxa de decaimento da barreira</style> em <style=cIsHealing>2 <style=cStack>(+1 por acúmulo)</style></style>.",
 
 	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Aumenta o dano base em <style=cIsDamage>100%</style> <style=cStack>(+100% por acúmulo)</style>. <style=cIsHealth>Divide a saúde máxima por 2</style> <style=cStack>(+1 por acúmulo)</style>.",
+
+	"ITEM_STRENGTHENBURN_DESC_RISKYMOD": "<style=cIsDamage>5%</style> de chance de <style=cIsDamage>incendiar</style> ao atingir, até <style=cIsDamage>50%</style> de dano TOTAL. Efeitos <style=cIsDamage>incendiários</style> causam <style=cIsDamage>+300%</style> <style=cStack>(+300% por acúmulo)</style> de dano contínuo.",
+		
+	"ITEM_CRITDAMAGE_DESC_RISKYMOD": "Gain <style=cIsDamage>5% de chance de acerto crítico</style>. <style=cIsDamage>Acertos Críticos</style> causam <style=cIsDamage>100% de dano adicional</style><style=cStack>(+100% por acúmulo)</style>.",
 	}
 }
