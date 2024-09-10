@@ -2,7 +2,7 @@ Language Audit:
 
 - Keywords.txt
 	- ADDED:
-		"KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>Retrovirus</style><style=cSub>Primary: Poisonous\nSecondary: Blighted\nUtility: Blighted\nSpecial: Infects for 8x100% damage and can trigger item effects.",
+		"KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>Contagion</style><style=cSub>Primary: Poisonous\nSecondary: Blighted\nUtility: Blighted\nSpecial: Infects for 8x100% damage and can trigger item effects.",
 	
 	- REMOVED:
 		KEYWORD_SHOCKING_RISKYMOD
