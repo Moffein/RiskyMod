@@ -9,10 +9,13 @@ using RoR2;
 using RoR2.Projectile;
 using RoR2.Skills;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
+using static RoR2.Skills.SkillFamily;
 
 namespace RiskyMod.Survivors.Commando
 {
@@ -23,6 +26,9 @@ namespace RiskyMod.Survivors.Commando
         public static bool phaseRoundChanges = true;
         public static bool skillLightningRound = true;
         public static bool skillShrapnelBarrage = true;
+
+        public static bool replacePhaseRound = false;
+        public static bool replaceSuppressive = false;
 
         public static bool rollChanges = true;
 
@@ -81,11 +87,30 @@ namespace RiskyMod.Survivors.Commando
                 skillDef.skillNameToken = "COMMANDO_SECONDARY_LIGHTNING_NAME_RISKYMOD";
                 skillDef.skillDescriptionToken = "COMMANDO_SECONDARY_LIGHTNING_DESCRIPTION_RISKYMOD";
                 skillDef.icon = phaseRoundDef.icon; //TODO: UNIQUE ICON
-                Content.Content.skillDefs.Add(phaseRoundDef);
+                Content.Content.skillDefs.Add(skillDef);
 
                 EntityStates.RiskyMod.Commando.FireLightningRound.lightningProjectilePrefab = BuildPhaseLightningProjectile();
                 Skills.PhaseLightning = skillDef;
-                SneedUtils.SneedUtils.AddSkillToFamily(Addressables.LoadAssetAsync<SkillFamily>("RoR2/Base/Commando/CommandoBodySecondaryFamily.asset").WaitForCompletion(), Skills.PhaseLightning);
+
+                if (replacePhaseRound)
+                {
+                    SkillFamily secondaryFamily = Addressables.LoadAssetAsync<SkillFamily>("RoR2/Base/Commando/CommandoBodySecondaryFamily.asset").WaitForCompletion();
+                    List<SkillFamily.Variant> variantsList = secondaryFamily.variants.Where(variant => variant.skillDef != phaseRoundDef).ToList();
+
+                    var variant = new SkillFamily.Variant
+                    {
+                        skillDef = skillDef,
+                        unlockableName = "",
+                        viewableNode = new ViewablesCatalog.Node(skillDef.skillNameToken, false, null)
+                    };
+                    variantsList.Insert(0, variant);
+                    secondaryFamily.variants = variantsList.ToArray();
+                }
+                else
+                {
+                    SneedUtils.SneedUtils.AddSkillToFamily(Addressables.LoadAssetAsync<SkillFamily>("RoR2/Base/Commando/CommandoBodySecondaryFamily.asset").WaitForCompletion(), Skills.PhaseLightning);
+                }
+                
             }
         }
 
@@ -160,8 +185,26 @@ namespace RiskyMod.Survivors.Commando
                 shrapnelBarrageDef.stockToConsume = 1;
                 (shrapnelBarrageDef as ScriptableObject).name = shrapnelBarrageDef.skillName;
                 Content.Content.skillDefs.Add(shrapnelBarrageDef);
-                SneedUtils.SneedUtils.AddSkillToFamily(Addressables.LoadAssetAsync<SkillFamily>("RoR2/Base/Commando/CommandoBodySpecialFamily.asset").WaitForCompletion(), shrapnelBarrageDef);
                 Skills.ShrapnelBarrage = shrapnelBarrageDef;
+
+                if (replaceSuppressive)
+                {
+                    SkillFamily specialFamily = Addressables.LoadAssetAsync<SkillFamily>("RoR2/Base/Commando/CommandoBodySpecialFamily.asset").WaitForCompletion();
+                    List<SkillFamily.Variant> variantsList = specialFamily.variants.Where(variant => variant.skillDef != barrageDef).ToList();
+
+                    var variant = new SkillFamily.Variant
+                    {
+                        skillDef = shrapnelBarrageDef,
+                        unlockableName = "",
+                        viewableNode = new ViewablesCatalog.Node(shrapnelBarrageDef.skillNameToken, false, null)
+                    };
+                    variantsList.Insert(0, variant);
+                    specialFamily.variants = variantsList.ToArray();
+                }
+                else
+                {
+                    SneedUtils.SneedUtils.AddSkillToFamily(Addressables.LoadAssetAsync<SkillFamily>("RoR2/Base/Commando/CommandoBodySpecialFamily.asset").WaitForCompletion(), shrapnelBarrageDef);
+                }
             }
 
             if (SoftDependencies.ScepterPluginLoaded)

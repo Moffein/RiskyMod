@@ -414,6 +414,9 @@ namespace RiskyMod
             CommandoCore.grenadeChanges = SurvivorCfg.Bind(commandoString, "Frag Grenade Changes", true, "Enable changes to this skill.").Value;
             CommandoCore.grenadeRemoveFalloff = SurvivorCfg.Bind(commandoString, "Frag Grenade - Remove Falloff", true, "Remove blast falloff from Frag Grenade. Requires Frag Grenade Changes = true.").Value;
             CommandoCore.skillLightningRound = SurvivorCfg.Bind(commandoString, "Phase Lightning Secondary Skill", true, "Adds a new secondary skill.").Value;
+            CommandoCore.replacePhaseRound = SurvivorCfg.Bind(commandoString, "Phase Lightning - Replace Default", false, "Removes Phase Round and replaces it with this skill.").Value;
+            CommandoCore.skillShrapnelBarrage = SurvivorCfg.Bind(commandoString, "Shrapnel Barrage Special Skill", true, "Adds a new special skill.").Value;
+            CommandoCore.replaceSuppressive = SurvivorCfg.Bind(commandoString, "Shrapnel Barrage - Replace Default", false, "Removes Suppressive Fire and replaces it with this skill.").Value;
 
             HuntressCore.enabled = SurvivorCfg.Bind(huntressString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             HuntressCore.strafeChanges = SurvivorCfg.Bind(huntressString, "Strafe Changes", true, "Enable changes to this skill.").Value;
