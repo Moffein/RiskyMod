@@ -154,7 +154,6 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
         private void ModifyUtilities(SkillLocator sk)
         {
             new UtilityFallImmune();
-            new UtilityMoveSpeedScaling();
         }
     }
 }

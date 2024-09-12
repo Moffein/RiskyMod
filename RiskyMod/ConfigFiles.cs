@@ -140,11 +140,6 @@ namespace RiskyMod
                     }
                     ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(MageCore.flamethrowerSprintCancel));
                 }
-
-                if (VoidFiendCore.enabled)
-                {
-                    ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(UtilityMoveSpeedScaling.disableScaling));
-                }
             }
         }
 
@@ -548,8 +543,7 @@ namespace RiskyMod
             VoidFiendCore.removeCorruptArmor = SurvivorCfg.Bind(voidFiendString, "No Corrupt Mode Bonus Armor", true, "Disables bonus armor while Corrupted.").Value;
             VoidFiendCore.secondaryMultitask = SurvivorCfg.Bind(voidFiendString, "Secondary Multitasking", true, "Drown and Suppress can be fired while charging Flood.").Value;
             UtilityFallImmune.enabled = SurvivorCfg.Bind(voidFiendString, "Trespass Changes", true, "Enable changes to this skill.").Value;
-            UtilityMoveSpeedScaling.disableScaling = SurvivorCfg.Bind(voidFiendString, "Trespass - Disable Move Speed Scaling", false, "(Client-Side) Prevents Trespass from scaling with move speed.");
- 
+            
             if (!SurvivorsCore.enabled)
             {
                 Bandit2Core.enabled = false;
