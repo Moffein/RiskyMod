@@ -23,7 +23,6 @@ namespace RiskyMod.Survivors.Bandit2
     public class Bandit2Core
     {
         public static BuffDef SpecialDebuff;
-        public static DamageAPI.ModdedDamageType SpecialDamage;
         public static DamageAPI.ModdedDamageType RackEmUpDamage;
         public static DamageAPI.ModdedDamageType StandoffDamage;
 
@@ -202,7 +201,6 @@ namespace RiskyMod.Survivors.Bandit2
         private void ModifySpecials(SkillLocator sk)
         {
             if (!specialRework) return;
-            SpecialDamage = DamageAPI.ReserveDamageType();
             RackEmUpDamage = DamageAPI.ReserveDamageType();
             StandoffDamage = DamageAPI.ReserveDamageType();
             SpecialDamageType(sk);

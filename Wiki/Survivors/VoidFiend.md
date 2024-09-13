@@ -25,7 +25,7 @@ Corruption reworked to be based on killing enemies and no longer scales off of c
 ## Utilities
 
 - Trespass
-	- Uncorrupted form no longer scales with movement speed.
+	- **(RiskyTweaks)** Uncorrupted form no longer scales with movement speed.
 	- Gives fall damage immunity after exiting.
 
 ## Specials

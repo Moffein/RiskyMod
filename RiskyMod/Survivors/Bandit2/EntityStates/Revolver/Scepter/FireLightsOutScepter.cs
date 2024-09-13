@@ -80,7 +80,6 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
 
                     bulletAttack.damageType |= DamageType.BonusToLowHealth;
 				}
-				DamageAPI.AddModdedDamageType(bulletAttack, Bandit2Core.SpecialDamage);
 
 				bulletAttack.Fire();
 			}
