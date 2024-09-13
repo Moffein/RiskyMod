@@ -91,11 +91,6 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
             base.AddRecoil(-3f * scaledRecoilAmplitude, -4f * scaledRecoilAmplitude, -0.5f * scaledRecoilAmplitude, 0.5f * scaledRecoilAmplitude);
         }
 
-		public override void OnExit()
-		{
-			base.OnExit();
-		}
-
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
