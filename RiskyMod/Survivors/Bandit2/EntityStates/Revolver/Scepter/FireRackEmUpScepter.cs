@@ -10,10 +10,5 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver.Scepter
 		{
 			return baseBulletCount;
 		}
-
-		public override void NextState()
-		{
-			this.outer.SetNextState(new FireRackEmUpScepter { shotsFired = this.shotsFired });
-		}
 	}
 }

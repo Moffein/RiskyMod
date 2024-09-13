@@ -218,6 +218,8 @@ namespace RiskyMod.Survivors.Bandit2
             Content.Content.entityStates.Add(typeof(ExitSidearm));
             Content.Content.entityStates.Add(typeof(PrepLightsOut));
             Content.Content.entityStates.Add(typeof(FireLightsOut));
+            Content.Content.entityStates.Add(typeof(PrepRackEmUp));
+            Content.Content.entityStates.Add(typeof(FireRackEmUp));
 
             SkillDef resetRevolverDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Bandit2/ResetRevolver.asset").WaitForCompletion();
             resetRevolverDef.activationState = new SerializableEntityStateType(typeof(PrepLightsOut));
