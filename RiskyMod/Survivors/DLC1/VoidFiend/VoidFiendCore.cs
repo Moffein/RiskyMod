@@ -40,7 +40,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
 
         private void OnLoad()
         {
-            bodyIndex = BodyCatalog.FindBodyIndex("VoidSurvivor");
+            bodyIndex = BodyCatalog.FindBodyIndex("VoidSurvivorBody");
         }
 
         private void ModifySkills(SkillLocator sk)

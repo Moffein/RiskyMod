@@ -44,51 +44,6 @@ namespace RiskyMod.Survivors.Croco.Contagion
             }
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.FireDiseaseProjectile", "projectilePrefab", diseaseProjectile);
             SetupEpidemicVFX();
-
-            if (SoftDependencies.ScepterPluginLoaded)
-            {
-                SetupScepter(BuildScepterSkillDef());
-            }
-        }
-
-        private SkillDef BuildScepterSkillDef()
-        {
-            Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Croco.FireDiseaseProjectileScepter));
-            SkillDef orig = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoDisease.asset").WaitForCompletion();
-            SkillDef diseaseScepterDef = ScriptableObject.CreateInstance<SkillDef>();
-            diseaseScepterDef.activationState = new SerializableEntityStateType(typeof(FireDiseaseProjectileScepter));
-            diseaseScepterDef.activationStateMachineName = orig.activationStateMachineName;
-            diseaseScepterDef.baseMaxStock = 1;
-            diseaseScepterDef.baseRechargeInterval = 10f;
-            diseaseScepterDef.beginSkillCooldownOnSkillEnd = false;
-            diseaseScepterDef.canceledFromSprinting = false;
-            diseaseScepterDef.cancelSprintingOnActivation = orig.cancelSprintingOnActivation;
-            diseaseScepterDef.dontAllowPastMaxStocks = true;
-            diseaseScepterDef.forceSprintDuringState = false;
-            diseaseScepterDef.fullRestockOnAssign = true;
-            diseaseScepterDef.icon = Content.Assets.ScepterSkillIcons.CrocoEpidemicScepter;
-            diseaseScepterDef.interruptPriority = orig.interruptPriority;
-            diseaseScepterDef.isCombatSkill = orig.isCombatSkill;
-            diseaseScepterDef.keywordTokens = orig.keywordTokens;
-            diseaseScepterDef.mustKeyPress = orig.mustKeyPress;
-            diseaseScepterDef.rechargeStock = 1;
-            diseaseScepterDef.requiredStock = 1;
-            diseaseScepterDef.resetCooldownTimerOnUse = orig.resetCooldownTimerOnUse;
-            diseaseScepterDef.skillDescriptionToken = "ANCIENTSCEPTER_CROCO_DISEASENAME";
-            diseaseScepterDef.skillName = "DiseaseScepter";
-            diseaseScepterDef.skillNameToken = "ANCIENTSCEPTER_CROCO_DISEASEDESC";
-            diseaseScepterDef.stockToConsume = 1;
-
-            Content.Content.entityStates.Add(typeof(FireDiseaseProjectileScepter));
-            Content.Content.skillDefs.Add(diseaseScepterDef);
-
-            return diseaseScepterDef;
-        }
-
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void SetupScepter(SkillDef scepterSkill)
-        {
-            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(scepterSkill, "CrocoBody", Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoDisease.asset").WaitForCompletion());
         }
 
         private GameObject ModifyDiseaseProjectile(GameObject go, bool isScepter)
@@ -123,13 +78,6 @@ namespace RiskyMod.Survivors.Croco.Contagion
 
         private static void ApplyEpidemic(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
         {
-            if (damageInfo.HasModdedDamageType(ScepterDamage) && victimBody.healthComponent && attackerBody.healthComponent)
-            {
-                var tracker = victimBody.gameObject.AddComponent<ScepterHealOnKillComponent>();
-                tracker.ownerHealth = attackerBody.healthComponent;
-                tracker.victimHealth = victimBody.healthComponent;
-            }
-
             bool isScepter = damageInfo.HasModdedDamageType(EpidemicScepterDamage);
             bool isDisease = isScepter || damageInfo.HasModdedDamageType(EpidemicDamage);
             if (isDisease)
