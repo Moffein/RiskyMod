@@ -74,9 +74,9 @@ namespace RiskyMod.Survivors.Croco.Contagion
             diseaseScepterDef.rechargeStock = 1;
             diseaseScepterDef.requiredStock = 1;
             diseaseScepterDef.resetCooldownTimerOnUse = orig.resetCooldownTimerOnUse;
-            diseaseScepterDef.skillDescriptionToken = "CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD";
+            diseaseScepterDef.skillDescriptionToken = "ANCIENTSCEPTER_CROCO_DISEASENAME";
             diseaseScepterDef.skillName = "DiseaseScepter";
-            diseaseScepterDef.skillNameToken = "CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD";
+            diseaseScepterDef.skillNameToken = "ANCIENTSCEPTER_CROCO_DISEASEDESC";
             diseaseScepterDef.stockToConsume = 1;
 
             Content.Content.entityStates.Add(typeof(FireDiseaseProjectileScepter));

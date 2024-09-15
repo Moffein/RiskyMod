@@ -3,6 +3,7 @@ using UnityEngine;
 using R2API;
 using RoR2.Projectile;
 using EntityStates;
+using RoR2.Modding;
 
 namespace EntityStates.RiskyMod.Croco
 {
@@ -33,6 +34,12 @@ namespace EntityStates.RiskyMod.Croco
                 fireProjectileInfo.damage = damageStat * damageCoefficient;
                 fireProjectileInfo.force = force;
                 fireProjectileInfo.crit = Util.CheckRoll(critStat, characterBody.master);
+
+                CrocoDamageTypeController cdc = base.GetComponent<CrocoDamageTypeController>();
+                if (cdc)
+                {
+                    fireProjectileInfo.damageTypeOverride = cdc.GetDamageType();
+                }
 
                 ProjectileManager.instance.FireProjectile(fireProjectileInfo);
             }
