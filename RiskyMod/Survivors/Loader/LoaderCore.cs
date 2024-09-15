@@ -31,7 +31,6 @@ namespace RiskyMod.Survivors.Loader
             loaderBody = bodyPrefab.GetComponent<CharacterBody>();
             SkillLocator sk = bodyPrefab.GetComponent<SkillLocator>();
 
-            new FixScepterUtilityBarrier();
             ModifyStats(loaderBody);
             ModifySkills(sk);
 
