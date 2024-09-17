@@ -8,7 +8,7 @@ The general trend is that most survivor kits have been buffed to be on-par with 
 ### [Full Changelist](https://thunderstore.io/package/Risky_Lives/RiskyMod/wiki/)
 
 ### [RiskyStarterPack](https://thunderstore.io/package/Risky_Lives/RiskyStarterPack/)
-- Curated RiskyMod modpack for quick multiplayer hosting.
+- Multiplayer modpack with a bunch of new survivors and items.
 
 **Contact me if you're interested in translating the mod!**
 
@@ -86,3 +86,4 @@ Brazilian Portuguese Translation - Kauzok
 
 - Brazilian Portuguese: Kauzok
 - Chinese: JunJun_W
+- German: tymmey
