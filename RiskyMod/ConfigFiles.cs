@@ -181,6 +181,11 @@ namespace RiskyMod
                     MonsterGoldRewards.enabled = true;
                 }
             }
+            else
+            {
+                MonsterGoldRewards.scaleToDirectorMultiplier = GeneralCfg.Bind(scalingString, "Gold Scaling Tweaks - Scale to Director Multiplier", true, "Proportionally lowers gold scaling by Combat Director Credit Multipier.").Value;
+                MonsterGoldRewards.scaleToDirectorMultiplierStage1 = GeneralCfg.Bind(scalingString, "Gold Scaling Tweaks - Scale to Director Multiplier - Stage 1", false, "Enable the above setting on Stage 1.").Value;
+            }
 
             ModdedScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Modded Scaling", true, "Lowers the effect of playercount on difficulty scaling. Geared towards large lobbies.").Value;
             LinearScaling.enabled = GeneralCfg.Bind(scalingString, "Scaling: Linear Scaling", false, "Makes difficulty scaling linear like in RoR1. Requires Modded Scaling to be enabled.").Value;

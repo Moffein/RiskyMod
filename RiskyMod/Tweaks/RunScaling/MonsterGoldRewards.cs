@@ -8,6 +8,9 @@ namespace RiskyMod.Tweaks.RunScaling
         public static bool enabled = true;
 		public static bool scaleToInitialDifficulty = true;
 		public static bool scaleToDirectorMultiplier = true;
+
+		public static bool scaleToDirectorMultiplierStage1 = false;
+
 		public static bool linearize = true;
 
 		public static float inflationCoefficient = 0.3f;
@@ -32,7 +35,9 @@ namespace RiskyMod.Tweaks.RunScaling
 						float chestRatio = (scaleToInitialDifficulty && Stage.instance) ? (Stage.instance.entryDifficultyCoefficient / Run.instance.difficultyCoefficient) : 1f;
 						//chestRatio *= chestRatio;	//Gold is a function of difficultyCoefficient squared	//Enabling this feels too harsh
 
-						float directorRatio = (scaleToDirectorMultiplier ? CombatDirectorMultiplier.scaledGoldRatio : 1f);
+						float directorRatio = ((scaleToDirectorMultiplier && (scaleToDirectorMultiplierStage1 || Run.instance.stageClearCount > 0))
+						? CombatDirectorMultiplier.scaledGoldRatio : 1f);
+						
 
 						float trueGold = dw.goldReward * chestRatio * directorRatio;
 
