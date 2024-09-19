@@ -313,6 +313,8 @@ namespace RiskyMod
             Ukulele.enabled = ItemCfg.Bind(uncommonString, "Ukulele", true, itemConfigDescString).Value;
             WarHorn.enabled = ItemCfg.Bind(uncommonString, "War Horn", true, itemConfigDescString).Value;
             WillOWisp.enabled = ItemCfg.Bind(uncommonString, "Will-o-the-Wisp", true, itemConfigDescString).Value;
+
+            Ignition.enabled = ItemCfg.Bind(uncommonString, "Ignition Tank", true, itemConfigDescString).Value;
         }
 
         private static void ConfigLegendaryItems()
@@ -339,6 +341,8 @@ namespace RiskyMod
             Tesla.enabled = ItemCfg.Bind(legendaryString, "Unstable Tesla Coil", true, itemConfigDescString).Value;
             Raincoat.enabled = ItemCfg.Bind(legendaryString, "Bens Raincoat", true, itemConfigDescString).Value;
             Raincoat.replaceIcons = ItemCfg.Bind(legendaryString, "Bens Raincoat - Use Modded Icons", false, "Replace the Vanilla buff icons for this item.").Value;
+        
+            LaserScope.enabled = ItemCfg.Bind(legendaryString, "Laser Scope", true, itemConfigDescString).Value;
         }
 
         private static void ConfigVoidItems()
