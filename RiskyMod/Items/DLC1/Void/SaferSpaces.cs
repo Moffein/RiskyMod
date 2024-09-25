@@ -35,12 +35,21 @@ namespace RiskyMod.Items.DLC1.Void
                         return body;
                     });
 
+                    //CD fix is now a part of RiskyFixes
+                    //15 number is used in 2 places now
                     if (c.TryGotoNext(
                         x => x.MatchLdcR4(15f)
                         ))
                     {
-                        c.Next.Operand = 20f;   //CD fix is now a part of RiskyFixes
-                        error = false;
+                        c.Next.Operand = 20f;
+
+                        if (c.TryGotoNext(
+                        x => x.MatchLdcR4(15f)
+                        ))
+                        {
+                            c.Next.Operand = 20f;
+                            error = false;
+                        }
                     }
                 }
 

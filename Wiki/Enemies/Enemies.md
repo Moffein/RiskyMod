@@ -39,7 +39,7 @@
 
 - Stone Titan
 	- Faster attack/skill animations.
-	- Fist count increased from 1 -> 3
+	- Fist count increased from 1 -> 2
 	- Laser now scales with attack speed.
 	- Rock projectiles are more accurate.
 	
