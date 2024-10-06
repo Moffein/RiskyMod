@@ -6,6 +6,7 @@ Mostly the same.
 
 - Pressure Mines
 	- Only detonates when fully armed, for the full 900% damage.
+	- Knockback force increased from 200 -> 4000
 	
 ## Utilities
 
