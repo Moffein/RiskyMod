@@ -23,12 +23,22 @@ namespace EntityStates.RiskyMod.MegaDrone
 					};
 
 					int spawnCount = 1;
-					ItemIndex droneMeldIndex = ItemCatalog.FindItemIndex("DronemeldInternalStackItem");
-					if (droneMeldIndex != ItemIndex.None && base.characterBody && base.characterBody.inventory)
+					if (base.characterBody && base.characterBody.inventory)
                     {
-						spawnCount += base.characterBody.inventory.GetItemCount(droneMeldIndex);
+                        ItemIndex droneMeldIndex = ItemCatalog.FindItemIndex("DronemeldInternalStackItem");
+                        if (droneMeldIndex != ItemIndex.None)
+                        {
+                            spawnCount += base.characterBody.inventory.GetItemCount(droneMeldIndex);
+                        }
+
+                        ItemIndex minionMeldIndex = ItemCatalog.FindItemIndex("MinionMeldInternalStackItem");
+                        if (minionMeldIndex != ItemIndex.None)
+                        {
+                            spawnCount += base.characterBody.inventory.GetItemCount(minionMeldIndex);
+                        }
                     }
-					if (SoftDependencies.SS2_CheckDroneMarker(base.gameObject)) spawnCount = 0;
+
+                    if (SoftDependencies.SS2_CheckDroneMarker(base.gameObject)) spawnCount = 0;
 
                     Vector3? desiredPosition = null;
 					Quaternion? desiredRotation = null;

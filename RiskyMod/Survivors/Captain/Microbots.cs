@@ -101,10 +101,11 @@ namespace RiskyMod.Survivors.Captain
         {
 			float allyFactor = 1f;
 			if (self.characterBody && self.characterBody.master)
-			{
-				ItemIndex droneMeldStackItem = ItemCatalog.FindItemIndex("DronemeldInternalStackItem");
-				//based on https://github.com/DestroyedClone/RoR1SkillsPort/blob/master/Loader/ActivateShield.cs
-				foreach (CharacterMaster characterMaster in CharacterMaster.readOnlyInstancesList)
+            {
+                ItemIndex droneMeldStackItem = ItemCatalog.FindItemIndex("DronemeldInternalStackItem");
+                ItemIndex minionMeldStackItem = ItemCatalog.FindItemIndex("MinionMeldInternalStackItem");
+                //based on https://github.com/DestroyedClone/RoR1SkillsPort/blob/master/Loader/ActivateShield.cs
+                foreach (CharacterMaster characterMaster in CharacterMaster.readOnlyInstancesList)
 				{
 					if (characterMaster.minionOwnership && characterMaster.minionOwnership.ownerMaster == self.characterBody.master)
 					{
@@ -112,10 +113,11 @@ namespace RiskyMod.Survivors.Captain
 						if (minionBody && !minionBody.isPlayerControlled && (minionBody.bodyFlags &= CharacterBody.BodyFlags.Mechanical) == CharacterBody.BodyFlags.Mechanical)
 						{
 							int mult = 1;
-							if (minionBody.inventory && droneMeldStackItem != ItemIndex.None)
-							{
-								mult += minionBody.inventory.GetItemCount(droneMeldStackItem);
-							}
+							if (minionBody.inventory )
+                            {
+                                if (droneMeldStackItem != ItemIndex.None) mult += minionBody.inventory.GetItemCount(droneMeldStackItem);
+                                if (minionMeldStackItem != ItemIndex.None) mult += minionBody.inventory.GetItemCount(minionMeldStackItem);
+                            }
 
 							allyFactor += 0.2f * mult;
 						}
