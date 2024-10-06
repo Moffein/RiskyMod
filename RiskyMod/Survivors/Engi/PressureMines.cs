@@ -12,15 +12,15 @@ namespace RiskyMod.Survivors.Engi
     public class PressureMines
     {
         public static bool enabled = true;
+
         public PressureMines()
         {
             if (!enabled) return;
 
-            //Default 200
+            //Default 200 (600)
             //Spider 1000
             //Railgunner 4000
-            //Debug.Log("Default:");
-            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Engi/EntityStates.Engi.EngiWeapon.FireMines.asset", "force", "4000");
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Engi/EntityStates.Engi.EngiWeapon.FireMines.asset", "force", "1333.333333334");
 
             SkillDef mines = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Engi/EngiBodyPlaceMine.asset").WaitForCompletion();
             mines.skillDescriptionToken = "ENGI_SECONDARY_DESCRIPTION_RISKYMOD";
