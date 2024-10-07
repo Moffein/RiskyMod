@@ -56,7 +56,7 @@ namespace RiskyMod.Survivors.Engi
                         Collider[] colliders = bubbleObject.GetComponentsInChildren<Collider>();
                         foreach (var collider in colliders)
                         {
-                            collider.gameObject.layer = LayerIndex.entityPrecise.intVal;
+                            collider.gameObject.layer = LayerIndex.world.intVal;
                             collider.enabled = false;
                         }
 

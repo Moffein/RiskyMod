@@ -25,7 +25,7 @@ namespace RiskyMod.Survivors.Mage.Components
                 {
                     GameObject toInstantiate = new GameObject
                     {
-                        layer = LayerIndex.entityPrecise.intVal
+                        layer = LayerIndex.world.intVal
                     };
                     BoxCollider bc = toInstantiate.AddComponent<BoxCollider>();
                     bc.size = new Vector3(2.5f, 2.5f, 7f);

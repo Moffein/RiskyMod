@@ -81,7 +81,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RiskyTweaks")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.1.0")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.1.1")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {

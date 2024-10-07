@@ -10,6 +10,11 @@ Mostly the same.
 	
 ## Utilities
 
+- Bubble Shield
+	- No longer blocks allied attacks.
+	- Neutralizes all ranged attacks, both from outside the bubble and inside the bubble.
+	- Projectiles no longer explode when neutralized.
+
 - Thermal Harpoon
 	- Removed targeting range limit.
 	
