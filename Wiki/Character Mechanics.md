@@ -8,14 +8,8 @@
 ## Shield Gating
 
 - Shields now gate against HP damage like in RoR1.
-	- Superattacks from certain bosses bypass it.
-		- Wandering Vagrant Nova
-		- Imp Overlord Teleport
-		- Solus Control Unit Knockup
-		- Mithrix's attacks
-		- False Son's attacks
-		- Voidling laser
-	- Transcendence disables True Oneshot Protection but allows you to shieldgate superattacks.
+	- Champion enemies (bosses) ignore shieldgating.
+	- Transcendence disables True Oneshot Protection but allows you to shieldgate boss attacks.
 
 ## General
 	

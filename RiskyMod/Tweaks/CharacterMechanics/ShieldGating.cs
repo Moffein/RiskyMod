@@ -15,7 +15,6 @@ namespace RiskyMod.Tweaks.CharacterMechanics
 
         public ShieldGating()
         {
-            SetupIgnoreShieldGate();    //This is used in other parts of the mod. Should do nothing on its own if ShieldGating isn't enabled.
             if (!enabled && !Items.Lunar.Transcendence.alwaysShieldGate) return;
 
             //Remove OSP in SharedHooks.RecalculateStats
@@ -51,12 +50,19 @@ namespace RiskyMod.Tweaks.CharacterMechanics
 
                         if (!bypassShield && isPlayerTeam)
                         {
-                            if (!DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage) || (shieldOnly && !cursed))
+                            bool isChampion = false;
+                            if (damageInfo.attacker)
+                            {
+                                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+                                isChampion = attackerBody && attackerBody.isChampion;
+                            }
+
+                            if (!(DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage) || isChampion) || (shieldOnly && !cursed))
                             {
                                 //This check lets transcendence shieldgate work when shieldgating is disabled.
                                 if (ShieldGating.enabled || (shieldOnly && Items.Lunar.Transcendence.alwaysShieldGate))
                                 {
-                                    float duration = 0.1f;
+                                    float duration = Time.fixedDeltaTime;
 
                                     //ShieldOnly increases grace period since it's your only form of defense against 1shots.
                                     if (shieldOnly)
@@ -77,183 +83,6 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     UnityEngine.Debug.LogError("RiskyMod: ShieldGating TakeDamage IL Hook failed");
                 }
             };
-        }
-
-        private void SetupIgnoreShieldGate()
-        {
-            IgnoreShieldGateDamage = DamageAPI.ReserveDamageType();
-
-            IL.EntityStates.VagrantMonster.FireMegaNova.Detonate += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
-                     x => x.MatchCallvirt<BlastAttack>("Fire")
-                    ))
-                {
-                    c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
-                    {
-                        blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                        blastAttack.AddModdedDamageType(SharedDamageTypes.ResistedByAllies);
-                        return blastAttack;
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: ShieldGating IgnoreShieldGate Vagrant IL Hook failed");
-                }
-            };
-
-            IL.EntityStates.VagrantNovaItem.DetonateState.OnEnter += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
-                     x => x.MatchCallvirt<BlastAttack>("Fire")
-                    ))
-                {
-                    c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
-                    {
-                        blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                        blastAttack.AddModdedDamageType(SharedDamageTypes.ResistedByAllies);
-                        return blastAttack;
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: ShieldGating IgnoreShieldGate VagrantNovaItem IL Hook failed");
-                }
-            };
-
-            IL.EntityStates.ImpBossMonster.BlinkState.ExitCleanup += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
-                     x => x.MatchCallvirt<BlastAttack>("Fire")
-                    ))
-                {
-                    c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
-                    {
-                        blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                        blastAttack.AddModdedDamageType(SharedDamageTypes.ResistedByAllies);
-                        return blastAttack;
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: ShieldGating IgnoreShieldGate ImpBossMonster IL Hook failed");
-                }
-            };
-
-            GameObject roboBallCircle = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/RoboBallBoss/RoboBallDelayKnockupProjectile.prefab").WaitForCompletion();
-            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(roboBallCircle, new DamageAPI.ModdedDamageType[] { IgnoreShieldGateDamage, SharedDamageTypes.ResistedByAllies });
-
-            On.EntityStates.BrotherMonster.WeaponSlam.OnEnter += (orig, self) =>
-            {
-                orig(self);
-                if (self.isAuthority)
-                {
-                    DamageAPI.AddModdedDamageType(self.weaponAttack, IgnoreShieldGateDamage);
-                }
-            };
-
-            IL.EntityStates.BrotherMonster.WeaponSlam.FixedUpdate += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
-                     x => x.MatchCallvirt<BlastAttack>("Fire")
-                    ))
-                {
-                    c.EmitDelegate<Func<BlastAttack, BlastAttack>>((blastAttack) =>
-                    {
-                        blastAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                        return blastAttack;
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: ShieldGating IgnoreShieldGate BrotherMonster IL Hook failed");
-                }
-            };
-
-            On.EntityStates.BrotherMonster.SprintBash.OnEnter += (orig, self) =>
-            {
-                orig(self);
-                if (self.isAuthority && self.overlapAttack != null)
-                {
-                    self.overlapAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                }
-            };
-
-            GameObject pizzaLeft = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherUltLineProjectileRotateLeft.prefab").WaitForCompletion();
-            GameObject pizzaRight = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherUltLineProjectileRotateRight.prefab").WaitForCompletion();
-
-            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(pizzaLeft, IgnoreShieldGateDamage);
-            SneedUtils.SneedUtils.AddModdedDamageTypeToProjectile(pizzaRight, IgnoreShieldGateDamage);
-
-            IL.EntityStates.VoidRaidCrab.SpinBeamAttack.FireBeamBulletAuthority += (il) =>
-            {
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
-                     x => x.MatchCallvirt<BulletAttack>("Fire")
-                    ))
-                {
-                    c.EmitDelegate<Func<BulletAttack, BulletAttack>>((bulletAttack) =>
-                    {
-                        bulletAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                        bulletAttack.AddModdedDamageType(SharedDamageTypes.ResistedByAllies);
-                        return bulletAttack;
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: ShieldGating IgnoreShieldGate VoidRaidCrab IL Hook failed");
-                }
-            };
-
-            IL.EntityStates.FalseSonBoss.CorruptedPaths.DetonateAuthority += BlastAttackIgnoreShieldGate;
-            IL.EntityStates.FalseSonBoss.CorruptedPathsDash.FixedUpdate += BlastAttackIgnoreShieldGate;
-            IL.EntityStates.FalseSonBoss.FissureSlam.DetonateAuthority += BlastAttackIgnoreShieldGate;
-            IL.EntityStates.FalseSonBoss.PrimeDevastator.DetonateAuthority += BlastAttackIgnoreShieldGate;
-            On.EntityStates.FalseSonBoss.HeroRelicSwing.BeginMeleeAttackEffect += (orig, self) =>
-            {
-                orig(self);
-                if (self.overlapAttack != null && !self.overlapAttack.HasModdedDamageType(IgnoreShieldGateDamage))
-                {
-                    self.overlapAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                }
-            };
-            On.EntityStates.FalseSonBoss.HeroRelicSwingLeft.BeginMeleeAttackEffect += (orig, self) =>
-            {
-                orig(self);
-                if (self.overlapAttack != null && !self.overlapAttack.HasModdedDamageType(IgnoreShieldGateDamage))
-                {
-                    self.overlapAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                }
-            };
-            On.EntityStates.FalseSonBoss.SwatAwayPlayersSlam.OnEnter += (orig, self) =>
-            {
-                orig(self);
-                if (self.overlapAttack != null && !self.overlapAttack.HasModdedDamageType(IgnoreShieldGateDamage))
-                {
-                    self.overlapAttack.AddModdedDamageType(IgnoreShieldGateDamage);
-                }
-            };
-        }
-
-        internal static void BlastAttackIgnoreShieldGate(ILContext il)
-        {
-            ILCursor c = new ILCursor(il);
-            if (c.TryGotoNext(x => x.MatchCallvirt(typeof(BlastAttack), "Fire")))
-            {
-                c.EmitDelegate<Func<BlastAttack, BlastAttack>>(orig =>
-                {
-                    orig.AddModdedDamageType(IgnoreShieldGateDamage);
-                    return orig;
-                });
-            }
-            else
-            {
-                Debug.LogError("RiskyMod: ShieldGating GenericBlastAttackIgnoreShieldGate IL Hook failed");
-            }
         }
     }
 }
