@@ -6,7 +6,7 @@
 	"KEYWORD_POISON_RISKYMOD" : "<style=cKeywordName>毒化</style>6秒内<style=cSub>造成目标最大生命值的<style=cIsDamage>6%</style>的伤害。<i>毒化不能击败敌人。</i></style>",
 	"KEYWORD_INTERRUPT_RISKYMOD" : "<style=cKeywordName>干扰</style><style=cSub>短暂打断敌人的行动。",
 	"KEYWORD_MAGNETIC_RISKYMOD" : "<style=cKeywordName>磁力</style><style=cSub>将空中的轻型敌人拉拢。",
-	"KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>传染</style><style=cSub>主要：毒化\n次要：枯萎\n辅助：枯萎\n特殊：传染造成8x100%伤害并可触发物品效果。",
+	"KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>传染</style><style=cSub>主要：毒化\n次要：枯萎\n辅助：枯萎\n特殊：传染造成6x100%伤害并可触发物品效果。",
 	"KEYWORD_VOIDCORRUPTION_RISKYMOD" : "<style=cKeywordName>腐化</style><style=cSub>通过受到伤害、击败敌人或持有虚空物品来获得腐化。"
 	}
 }

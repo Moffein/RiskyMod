@@ -1,7 +1,7 @@
 {
 	strings:
 	{
-	"KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>Contagion</style><style=cSub>Primary: Poisonous\nSecondary: Blighted\nUtility: Blighted\nSpecial: Infects for 8x100% damage and can trigger item effects.",
+	"KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>Contagion</style><style=cSub>Primary: Poisonous\nSecondary: Blighted\nUtility: Blighted\nSpecial: Infects for 6x100% damage and can trigger item effects.",
 	
 	"KEYWORD_CONTAGION_PRIMARY_RISKYMOD" : "<style=cKeywordName>Primary</style><style=cIsHealing>Poison</style> on 3rd hit.",
 	"KEYWORD_CONTAGION_SECONDARY_RISKYMOD" :"<style=cKeywordName>Secondary</style><color=#B1387F>Blight</color>.",

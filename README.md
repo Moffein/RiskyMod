@@ -87,3 +87,4 @@ Brazilian Portuguese Translation - Kauzok
 - Brazilian Portuguese: Kauzok
 - Chinese: JunJun_W
 - German: tymmey
+- Russian: inkyarev

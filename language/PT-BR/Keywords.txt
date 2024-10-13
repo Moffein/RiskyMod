@@ -7,6 +7,6 @@
 	"KEYWORD_INTERRUPT_RISKYMOD" : "<style=cKeywordName>Interruptor</style><style=cSub>Interrompe brevemente as ações dos inimigos.",
 	"KEYWORD_MAGNETIC_RISKYMOD" : "<style=cKeywordName>Magnético</style><style=cSub>Atraia inimigos leves que estão no ar em direção ao seu centro.",
 	"KEYWORD_VOIDCORRUPTION_RISKYMOD" : "<style=cKeywordName>Corrupção</style><style=cSub>Receba Corrupção ao sofrer dano, abater inimigos ou segurar Itens Nulos.",
-    "KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>Contágio</style><style=cSub>Primária: Venenoso\nSecundária: Contaminado\nAuxiliar: Contaminado\nEspecial: Infecta, causa 8x100% de dano e pode ativar efeitos de itens.",
+    "KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>Contágio</style><style=cSub>Primária: Venenoso\nSecundária: Contaminado\nAuxiliar: Contaminado\nEspecial: Infecta, causa 6x100% de dano e pode ativar efeitos de itens.",
 	}
 }

@@ -1,7 +1,7 @@
 {
 	strings:
 	{
-	"KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>Ansteckung</style><style=cSub>Primär: Giftig\nSekundär: Verseuchend\nUtility: Verseuchendd\nSpezial: Infizieft für 8x100% Schaden und kann Itemeffekte auslösen.",
+	"KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>Ansteckung</style><style=cSub>Primär: Giftig\nSekundär: Verseuchend\nUtility: Verseuchendd\nSpezial: Infizieft für 6x100% Schaden und kann Itemeffekte auslösen.",
 	
 	"KEYWORD_CONTAGION_PRIMARY_RISKYMOD" : "<style=cKeywordName>Primär</style><style=cIsHealing>Giftig</style> beim dritten Treffer.",
 	"KEYWORD_CONTAGION_SECONDARY_RISKYMOD" : "<style=cKeywordName>Sekundär</style><color=#B1387F>Seuche</color>.",
