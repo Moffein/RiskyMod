@@ -13,11 +13,10 @@ namespace RiskyMod.Items.Common
     public class Crowbar
     {
         public static bool enabled = true;
-        public static DamageAPI.ModdedDamageType CrowbarDamage;
         public static DamageAPI.ModdedDamageType IgnoreCrowbar;
         public static CrowbarManager crowbarManager;
         public static float damageCoefficient = 0.45f;
-
+        public static ModdedProcType CrowbarProc;
 
         public Crowbar()
         {
@@ -26,7 +25,8 @@ namespace RiskyMod.Items.Common
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
             IgnoreCrowbar = DamageAPI.ReserveDamageType();
-            CrowbarDamage = DamageAPI.ReserveDamageType();
+            CrowbarProc = ProcTypeAPI.ReserveProcType();
+
             //Remove vanilla effect
             IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
             {
@@ -67,7 +67,7 @@ namespace RiskyMod.Items.Common
                     c.Emit(OpCodes.Ldloc_1);//attacker body
                     c.EmitDelegate<Func<float, DamageInfo, CharacterBody, float>>((ringThreshold, damageInfo, attackerBody) =>
                     {
-                        if (Crowbar.enabled && DamageAPI.HasModdedDamageType(damageInfo, Crowbar.CrowbarDamage) && damageInfo.attacker && attackerBody)
+                        if (Crowbar.enabled && damageInfo.procChainMask.HasModdedProc(CrowbarProc) && damageInfo.attacker && attackerBody)
                         {
                             Inventory inv = attackerBody.inventory;
                             if (inv)
@@ -131,13 +131,13 @@ namespace RiskyMod.Items.Common
                     && damageInfo.procCoefficient > 0f
                     && damageInfo.damage > 0f
                     && !damageInfo.HasModdedDamageType(Crowbar.IgnoreCrowbar)
-                    && !damageInfo.HasModdedDamageType(Crowbar.CrowbarDamage))
+                    && !damageInfo.procChainMask.HasModdedProc(CrowbarProc))
                 {
                     if (Crowbar.crowbarManager.CanApplyCrowbar(self, attackerBody))
                     {
                         damageInfo.damage *= GetCrowbarMult(crowbarCount);
                         EffectManager.SimpleImpactEffect(HealthComponent.AssetReferences.crowbarImpactEffectPrefab, damageInfo.position, -damageInfo.force, true);
-                        damageInfo.AddModdedDamageType(Crowbar.CrowbarDamage);
+                        damageInfo.procChainMask.AddModdedProc(CrowbarProc);
                     }
                 }
             }
@@ -169,7 +169,8 @@ namespace RiskyMod.Items.Common
                 List<CrowbarTarget> toRemove = new List<CrowbarTarget>();
                 foreach (CrowbarTarget ct in targetList)
                 {
-                    if (ct.victim.combinedHealth >= ct.victim.fullCombinedHealth)
+                    //Don't count Barrier here
+                    if ((ct.victim.health + ct.victim.shield) >= ct.victim.fullCombinedHealth)
                     {
                         toRemove.Add(ct);
                     }

@@ -159,6 +159,9 @@
     <Reference Include="R2API.Prefab">
       <HintPath>libs\R2API\R2API.Prefab.dll</HintPath>
     </Reference>
+    <Reference Include="R2API.ProcType">
+      <HintPath>libs\R2API\R2API.ProcType.dll</HintPath>
+    </Reference>
     <Reference Include="R2API.RecalculateStats">
       <HintPath>libs\R2API\R2API.RecalculateStats.dll</HintPath>
     </Reference>
