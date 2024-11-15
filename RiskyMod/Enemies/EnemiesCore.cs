@@ -75,6 +75,9 @@ namespace RiskyMod.Enemies
             new DistantRoost();
             new SnowyForest();
 
+            new LakesNight();
+            new VillageNight();
+
             new Wetland();
             new GooLake();
 
