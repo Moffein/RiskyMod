@@ -102,7 +102,7 @@ namespace RiskyMod.Enemies
         public static CharacterSpawnCard Imp;
         public static CharacterSpawnCard Vulture;
 
-        public static CharacterSpawnCard Golem;
+        public static CharacterSpawnCard Golem, GolemNature;
         public static CharacterSpawnCard BeetleGuard;
         public static CharacterSpawnCard Mushrum;
         public static CharacterSpawnCard Bison;
@@ -146,6 +146,7 @@ namespace RiskyMod.Enemies
             Vulture = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscvulture");
 
             Golem = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Golem/cscGolem.asset").WaitForCompletion();
+            GolemNature = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Golem/cscGolemNature.asset").WaitForCompletion();
             BeetleGuard = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbeetleguard");
             Mushrum = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscminimushroom");
             Bison = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Bison/cscBison.asset").WaitForCompletion();
@@ -199,6 +200,7 @@ namespace RiskyMod.Enemies
         public static DirectorCard Vulture;
 
         public static DirectorCard Golem;
+        public static DirectorCard GolemNature;
         public static DirectorCard BeetleGuard;
         public static DirectorCard Mushrum;
         public static DirectorCard ClayApothecary;
@@ -251,6 +253,7 @@ namespace RiskyMod.Enemies
             Vulture = BuildDirectorCard(SpawnCards.Vulture);
 
             Golem = BuildDirectorCard(SpawnCards.Golem);
+            Golem = BuildDirectorCard(SpawnCards.GolemNature);
             BeetleGuard = BuildDirectorCard(SpawnCards.BeetleGuard);
             Mushrum = BuildDirectorCard(SpawnCards.Mushrum); //These are considered basic monsters in Vanilla, but they fit all the criteria of a miniboss enemy.
             ClayApothecary = BuildDirectorCard(SpawnCards.ClayApothecary);

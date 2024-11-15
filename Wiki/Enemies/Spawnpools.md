@@ -15,6 +15,21 @@
 	- Removed Lesser Wisps
 	- Blind Vermin can now spawn on the first loop
 	- Added Bighorn Bisons
+	
+- Disturbed Impact
+	- Added Stone Golems
+	- Restricted to Stage 4+:
+		- Elder Lemurians
+		- Parents
+		- Grandparents
+		
+- Viscous Falls
+	- Added Stone Golems
+	- Restricted to Stage 4+:
+		- Elder Lemurians
+		- Parents
+		- Gups
+		- Void Reavers
 
 ## Stage 2
 - Wetland Aspect
