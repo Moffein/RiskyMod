@@ -40,7 +40,14 @@ namespace RiskyMod.Enemies.Spawnpools
                 }
             }
 
-            dccs.AddCard(SneedUtils.SneedUtils.FindCategoryIndexByName(dccs, "Minibosses"), DirectorCards.GolemNature);
+            //I am going to become the joker
+            var index = SneedUtils.SneedUtils.FindCategoryIndexByName(dccs, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+            if (index == -1) index = SneedUtils.SneedUtils.FindCategoryIndexByName(dccs, "Mini Bosses");
+
+            if (index != -1)
+            {
+                dccs.AddCard(index, DirectorCards.GolemNature);
+            }
         }
     }
 }

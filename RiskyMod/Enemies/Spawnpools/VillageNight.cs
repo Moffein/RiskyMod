@@ -38,7 +38,7 @@ namespace RiskyMod.Enemies.Spawnpools
                 }
             }
 
-            dccs.AddCard(SneedUtils.SneedUtils.FindCategoryIndexByName(dccs, "Minibosses"), DirectorCards.Golem);
+            dccs.AddCard(SneedUtils.SneedUtils.FindCategoryIndexByName(dccs, SneedUtils.SneedUtils.MonsterCategories.Minibosses), DirectorCards.GolemNature);
         }
     }
 }

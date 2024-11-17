@@ -256,7 +256,7 @@ namespace RiskyMod.Enemies
             Vulture = BuildDirectorCard(SpawnCards.Vulture);
 
             Golem = BuildDirectorCard(SpawnCards.Golem);
-            Golem = BuildDirectorCard(SpawnCards.GolemNature);
+            GolemNature = BuildDirectorCard(SpawnCards.GolemNature);
             BeetleGuard = BuildDirectorCard(SpawnCards.BeetleGuard);
             Mushrum = BuildDirectorCard(SpawnCards.Mushrum); //These are considered basic monsters in Vanilla, but they fit all the criteria of a miniboss enemy.
             ClayApothecary = BuildDirectorCard(SpawnCards.ClayApothecary);
