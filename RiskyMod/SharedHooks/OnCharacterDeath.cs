@@ -20,30 +20,26 @@ namespace RiskyMod.SharedHooks
         {
             orig(self, damageReport);
 
-			if (NetworkServer.active)
+			if (!NetworkServer.active) return;
+            CharacterBody attackerBody = damageReport.attackerBody;
+            CharacterMaster attackerMaster = damageReport.attackerMaster;
+
+            if (!attackerBody || !attackerMaster) return;
+
+            CharacterBody victimBody = damageReport.victimBody;
+            if (victimBody)
             {
-				CharacterBody attackerBody = damageReport.attackerBody;
-				CharacterMaster attackerMaster = damageReport.attackerMaster;
-				DamageInfo damageInfo = damageReport.damageInfo;
-				CharacterBody victimBody = damageReport.victimBody;
+                if (Crowbar.crowbarManager)
+                {
+                    Crowbar.crowbarManager.Remove(victimBody.healthComponent);
+                }
 
-				if (attackerBody && attackerMaster)
-				{
-					if (victimBody)
-					{
-						if (Crowbar.crowbarManager)
-                        {
-							Crowbar.crowbarManager.Remove(victimBody.healthComponent);
-                        }
-
-                        Inventory attackerInventory = attackerMaster ? attackerMaster.inventory : null;
-                        if (attackerInventory)
-                        {
-							OnCharacterDeathInventoryActions?.Invoke(self, damageReport, attackerBody, attackerInventory, victimBody);
-						}
-					}
-				}
-			}
+                Inventory attackerInventory = attackerMaster ? attackerMaster.inventory : null;
+                if (attackerInventory)
+                {
+                    OnCharacterDeathInventoryActions?.Invoke(self, damageReport, attackerBody, attackerInventory, victimBody);
+                }
+            }
         }
 	}
 }
