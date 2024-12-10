@@ -400,8 +400,6 @@ namespace SneedUtils
             EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
             DumpEntityStateConfig(esc);
         }
-
-
         public static void DumpAddressableEntityStateConfig(string addressablePath)
         {
             EntityStateConfiguration esc = Addressables.LoadAssetAsync<EntityStateConfiguration>(addressablePath).WaitForCompletion();
