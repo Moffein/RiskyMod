@@ -40,8 +40,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                         bool shieldOnly = self.body.HasBuff(RoR2Content.Buffs.AffixLunar)
                         || (self.body.inventory && self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
 
-                        bool bypassShield = !ShieldGating.enabled
-                        || (damageInfo.damageType & DamageType.BypassArmor) == DamageType.BypassArmor
+                        bool bypassShield = (damageInfo.damageType & DamageType.BypassArmor) == DamageType.BypassArmor
                         || (damageInfo.damageType & DamageType.BypassOneShotProtection) == DamageType.BypassOneShotProtection
                         || (damageInfo.damageType & DamageType.BypassBlock) == DamageType.BypassBlock;
 
@@ -57,8 +56,9 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                                 CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
                                 isChampion = attackerBody && attackerBody.isChampion;
                             }
+                            isChampion = isChampion || !ShieldGating.enabled;   //Put the check here so it doesn't overwrite AlwaysShieldGate
 
-                            if (!(DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage) || isChampion) || (shieldOnly && !cursed))
+                            if (!(isChampion || DamageAPI.HasModdedDamageType(damageInfo, IgnoreShieldGateDamage)) || (shieldOnly && !cursed))
                             {
                                 //This check lets transcendence shieldgate work when shieldgating is disabled.
                                 if (ShieldGating.enabled || (shieldOnly && Items.Lunar.Transcendence.alwaysShieldGate))
