@@ -80,6 +80,7 @@ namespace RiskyMod.Survivors.Croco.Contagion.Components
                             procChainMask = default,
                             procCoefficient = 0.5f
                         };
+                        diseaseDamage.damageType.damageSource = DamageSource.Special;
                         victim.healthComponent.TakeDamage(diseaseDamage);
                         GlobalEventManager.instance.OnHitEnemy(diseaseDamage, victim.gameObject);
 

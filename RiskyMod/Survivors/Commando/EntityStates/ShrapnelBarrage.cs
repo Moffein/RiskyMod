@@ -51,23 +51,25 @@ namespace EntityStates.RiskyMod.Commando
 			if (base.isAuthority)
 			{
 				triggeredExplosion = false;
-                new BulletAttack
-                {
-                    tracerEffectPrefab = ShrapnelBarrage.tracerEffectPrefab,
-                    damage = 0f,
-                    procCoefficient = 0f,
-                    damageType = DamageType.Silent | DamageType.NonLethal,
-                    owner = base.gameObject,
-                    aimVector = aimRay.direction,
-                    isCrit = false,
-                    minSpread = minSpread,
-                    maxSpread = maxSpread,
-                    origin = aimRay.origin,
-                    maxDistance = 2000f,
-                    muzzleName = muzzleName,
-                    radius = bulletRadius,
-                    hitCallback = ComboHitCallback
-                }.Fire();
+				var b = new BulletAttack
+				{
+					tracerEffectPrefab = ShrapnelBarrage.tracerEffectPrefab,
+					damage = 0f,
+					procCoefficient = 0f,
+					damageType = DamageType.Silent | DamageType.NonLethal,
+					owner = base.gameObject,
+					aimVector = aimRay.direction,
+					isCrit = false,
+					minSpread = minSpread,
+					maxSpread = maxSpread,
+					origin = aimRay.origin,
+					maxDistance = 2000f,
+					muzzleName = muzzleName,
+					radius = bulletRadius,
+					hitCallback = ComboHitCallback
+				};
+				b.damageType.damageSource = DamageSource.Special;
+				b.Fire();
             }
 
 			base.characterBody.AddSpreadBloom(ShrapnelBarrage.spreadBloomValue);
@@ -83,31 +85,32 @@ namespace EntityStates.RiskyMod.Commando
 
                 Vector3 attackForce = bulletRef.aimVector != null ? force * bulletRef.aimVector.normalized : Vector3.zero;
 
-                //golem explosion effect was definitely not set up to scale 1:1 with radius
                 if (explosionEffectPrefab)
                 {
                     EffectManager.SpawnEffect(explosionEffectPrefab, new EffectData { origin = hitInfo.point, scale = blastRadius }, true);
                 }
 
-                new BlastAttack()
-                {
-                    attacker = base.gameObject,
-                    attackerFiltering = AttackerFiltering.NeverHitSelf,
-                    baseDamage = this.damageStat * DamageCoefficient,
-                    baseForce = 0f,
-                    bonusForce = attackForce,
-                    canRejectForce = true,
-                    crit = base.RollCrit(),
-                    damageColorIndex = DamageColorIndex.Default,
-                    damageType = DamageType.Stun1s,
-                    falloffModel = BlastAttack.FalloffModel.None,
-                    inflictor = base.gameObject,
-                    position = hitInfo.point,
-                    procChainMask = default,
-                    procCoefficient = 1f,
-                    radius = blastRadius,
-                    teamIndex = base.GetTeam()
-                }.Fire();
+				var ba = new BlastAttack()
+				{
+					attacker = base.gameObject,
+					attackerFiltering = AttackerFiltering.NeverHitSelf,
+					baseDamage = this.damageStat * DamageCoefficient,
+					baseForce = 0f,
+					bonusForce = attackForce,
+					canRejectForce = true,
+					crit = base.RollCrit(),
+					damageColorIndex = DamageColorIndex.Default,
+					damageType = DamageType.Stun1s,
+					falloffModel = BlastAttack.FalloffModel.None,
+					inflictor = base.gameObject,
+					position = hitInfo.point,
+					procChainMask = default,
+					procCoefficient = 1f,
+					radius = blastRadius,
+					teamIndex = base.GetTeam()
+				};
+				ba.damageType.damageSource = DamageSource.Special;
+				ba.Fire();
             }
 
             return false;

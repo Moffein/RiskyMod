@@ -44,7 +44,7 @@ namespace RiskyMod.Items.Uncommon
 					))
                 {
 					c.Emit(OpCodes.Ldloc, 2); //victimBody
-					c.Emit(OpCodes.Ldloc, 5); //master
+					c.Emit(OpCodes.Ldloc, 6); //master
 					c.Emit(OpCodes.Ldarg_1);    //damageinfo
 					c.EmitDelegate<Func<ItemDef, CharacterBody, CharacterMaster, DamageInfo, ItemDef>>((item, victimBody, master, damageInfo) =>
 					{

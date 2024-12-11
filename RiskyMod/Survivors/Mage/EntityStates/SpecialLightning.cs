@@ -106,6 +106,7 @@ namespace EntityStates.RiskyMod.Mage
 					speed = 120f,
 					//damageCoefficientPerBounce = 0.8f
 				};
+				lo.damageType.damageSource = DamageSource.Special;
 				ModifyAttack(lo);
 
 				BullseyeSearch search = new BullseyeSearch();

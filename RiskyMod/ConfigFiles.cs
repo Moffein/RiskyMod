@@ -53,6 +53,7 @@ using RiskyMod.Allies.DamageResistances;
 using RiskyMod.Enemies.DLC2;
 using RiskyMod.Survivors.Croco.Tweaks;
 using RiskyMod.Survivors.Croco.Contagion;
+using RiskyMod.Items.DLC2;
 
 namespace RiskyMod
 {
@@ -343,6 +344,8 @@ namespace RiskyMod
             Raincoat.replaceIcons = ItemCfg.Bind(legendaryString, "Bens Raincoat - Use Modded Icons", false, "Replace the Vanilla buff icons for this item.").Value;
         
             LaserScope.enabled = ItemCfg.Bind(legendaryString, "Laser Scope", true, itemConfigDescString).Value;
+
+            Overspill.enabled = ItemCfg.Bind(legendaryString, "Runic Lens", true, itemConfigDescString).Value;
         }
 
         private static void ConfigVoidItems()

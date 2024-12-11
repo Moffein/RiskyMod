@@ -62,6 +62,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
                 bulletAttack.radius = bulletRadius;
                 bulletAttack.smartCollision = true;
                 bulletAttack.maxDistance = 200f;
+                bulletAttack.damageType.damageSource = DamageSource.Special;
 
                 SpecialDamageController sdc = base.GetComponent<SpecialDamageController>();
                 if (sdc)

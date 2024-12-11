@@ -52,6 +52,7 @@ namespace EntityStates.RiskyMod.Bandit2.Primary
 		{
 			base.ModifyBullet(bulletAttack);
 			bulletAttack.falloffModel = BulletAttack.FalloffModel.DefaultBullet;
+			bulletAttack.damageType.damageSource = DamageSource.Primary;
 		}
 
         public override void FixedUpdate()

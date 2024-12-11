@@ -33,3 +33,6 @@
 - Unstable Tesla Coil
 	- Range reduced from 35m -> 25m
 	- Removed proc coefficient.
+	
+- Runic Lens
+	- Removed proc coefficient.

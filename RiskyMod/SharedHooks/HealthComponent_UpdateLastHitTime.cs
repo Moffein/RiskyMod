@@ -12,12 +12,12 @@ namespace RiskyMod.SharedHooks
         public delegate void UpdateLastHitTimeInventoryDelegate(HealthComponent self, float damageValue, Vector3 damagePosition, bool damageIsSilent, GameObject attacker, Inventory inventory);
         public static UpdateLastHitTimeInventoryDelegate UpdateLastHitTimeInventoryActions;
 
-        public static void UpdateLastHitTime(On.RoR2.HealthComponent.orig_UpdateLastHitTime orig, HealthComponent self, float damageValue, Vector3 damagePosition, bool damageIsSilent, GameObject attacker)
+        public static void UpdateLastHitTime(On.RoR2.HealthComponent.orig_UpdateLastHitTime orig, HealthComponent self, float damageValue, Vector3 damagePosition, bool damageIsSilent, GameObject attacker, bool delayedDamage, bool firstHitOfDelayedDamage)
         {
-            orig(self, damageValue, damagePosition, damageIsSilent, attacker);
+            orig(self, damageValue, damagePosition, damageIsSilent, attacker, delayedDamage, firstHitOfDelayedDamage);
             if (NetworkServer.active && self.body && damageValue > 0f)
             {
-                if (UpdateLastHitTimeActions != null) UpdateLastHitTimeActions.Invoke(self, damageValue, damagePosition, damageIsSilent, attacker);
+                UpdateLastHitTimeActions?.Invoke(self, damageValue, damagePosition, damageIsSilent, attacker);
 
                 if (self.body.inventory)
                 {

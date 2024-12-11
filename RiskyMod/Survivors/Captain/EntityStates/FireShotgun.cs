@@ -51,6 +51,7 @@ namespace EntityStates.RiskyMod.Captain
 		{
 			base.ModifyBullet(bulletAttack);
 			bulletAttack.minSpread = 0f;    //Needs to be 0 or else weird things happen. Why isn't this vanilla?
+			bulletAttack.damageType.damageSource = DamageSource.Primary;
 
 			if (scalePellets.Value)
             {

@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 
 namespace EntityStates.RiskyMod.Bandit2
 {
+	//This exists because the vanilla version was bugged at the time, and I have no idea if it's still bugged now.
     public class StealthMode : BaseState
 	{
 
@@ -97,6 +98,7 @@ namespace EntityStates.RiskyMod.Bandit2
 				blastAttack.baseForce = StealthMode.blastAttackForce;
 				blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
 				blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+				blastAttack.damageType.damageSource = DamageSource.Utility;
 
 				blastAttack.Fire();
 			}

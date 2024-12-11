@@ -168,6 +168,7 @@ namespace RiskyMod.Survivors.Mage
 
                 ProjectileDamage pd = fireStormProjectile.GetComponent<ProjectileDamage>();
                 pd.damageType = DamageType.IgniteOnHit;
+                pd.damageType.damageSource = DamageSource.Utility;
 
                 Content.Content.projectilePrefabs.Add(fireStormProjectile);
                 EntityStates.RiskyMod.Mage.Weapon.PrepFireStorm.projectilePrefab = fireStormProjectile;
