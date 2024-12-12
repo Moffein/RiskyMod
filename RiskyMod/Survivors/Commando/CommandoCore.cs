@@ -149,6 +149,8 @@ namespace RiskyMod.Survivors.Commando
                 barrageDef.mustKeyPress = false;
                 barrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD";
                 IL.EntityStates.Commando.CommandoWeapon.FireBarrage.FireBullet += SharedHooks.BulletAttackHooks.RemoveBulletFalloff;
+
+                On.EntityStates.Commando.CommandoWeapon.FireBarrage.GetMinimumInterruptPriority += FireBarrage_GetMinimumInterruptPriority;
             }
 
             if (grenadeChanges)
@@ -212,6 +214,12 @@ namespace RiskyMod.Survivors.Commando
                 BuildScepterSkillDefs(sk);
                 SetupScepter();
             }
+        }
+
+        private InterruptPriority FireBarrage_GetMinimumInterruptPriority(On.EntityStates.Commando.CommandoWeapon.FireBarrage.orig_GetMinimumInterruptPriority orig, EntityStates.Commando.CommandoWeapon.FireBarrage self)
+        {
+            if (self.inputBank && self.inputBank.skill4.down) return InterruptPriority.Pain;
+            return InterruptPriority.Skill;
         }
 
         private void BuildScepterSkillDefs(SkillLocator sk)
