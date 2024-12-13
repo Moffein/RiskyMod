@@ -346,6 +346,7 @@ namespace RiskyMod
             LaserScope.enabled = ItemCfg.Bind(legendaryString, "Laser Scope", true, itemConfigDescString).Value;
 
             Overspill.enabled = ItemCfg.Bind(legendaryString, "Runic Lens", true, itemConfigDescString).Value;
+            WarBonds.enabled = ItemCfg.Bind(legendaryString, "War Bonds", true, itemConfigDescString).Value;
         }
 
         private static void ConfigVoidItems()

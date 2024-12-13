@@ -108,6 +108,7 @@ namespace RiskyMod.Items
             new LaserScope();
 
             new Overspill();
+            new WarBonds();
         }
 
         private void ModifyVoid()
