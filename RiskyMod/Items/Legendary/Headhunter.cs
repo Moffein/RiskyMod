@@ -55,7 +55,11 @@ namespace RiskyMod.Items.Legendary
                 affixLunarDef.iconSprite
                 );
 
-                IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
+                //cope fix for the il hook breaking
+                SharedHooks.OnHitEnemy.OnHitAttackerActions += OnHit;
+
+                //todo: fix
+                /*IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
                     if(c.TryGotoNext(
@@ -73,9 +77,14 @@ namespace RiskyMod.Items.Legendary
                     {
                         UnityEngine.Debug.LogError("RiskyMod: Headhunter Perfected IL Hook failed");
                     }
-                };
+                };*/
                 RecalculateStatsAPI.GetStatCoefficients += HandlePerfected2Stats;
             }
+        }
+
+        private void OnHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
+        {
+            if (attackerBody.HasBuff(Perfected2.buffIndex)) victimBody.AddTimedBuff(RoR2Content.Buffs.Cripple, 3f);
         }
 
         private void ProcItem(GlobalEventManager self, DamageReport damageReport, CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody)

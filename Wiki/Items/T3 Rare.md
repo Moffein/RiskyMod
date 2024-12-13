@@ -36,3 +36,6 @@
 	
 - Runic Lens
 	- Removed proc coefficient.
+	
+- War Bonds
+	- Removed proc coefficient.
