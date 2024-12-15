@@ -92,7 +92,7 @@ namespace RiskyMod.Items.Legendary
             OnKillEffect(attackerBody, attackerInventory, victimBody);
         }
 
-        private void AssistEffect(CharacterBody attackerBody, CharacterBody victimBody, DamageType? assistDamageType, DamageTypeCombo? assistDamageTypeCombo, System.Collections.Generic.HashSet<DamageAPI.ModdedDamageType> assistModdedDamageTypes, Inventory attackerInventory, CharacterBody killerBody, DamageInfo damageInfo)
+        private void AssistEffect(CharacterBody attackerBody, CharacterBody victimBody, DamageType? assistDamageType, DamageTypeExtended? assistDamageTypeExtended, DamageSource? assistDamageSource, System.Collections.Generic.HashSet<DamageAPI.ModdedDamageType> assistModdedDamageTypes, Inventory attackerInventory, CharacterBody killerBody, DamageInfo damageInfo)
         {
             if (attackerBody == killerBody) return;
             OnKillEffect(attackerBody, attackerInventory, victimBody);
