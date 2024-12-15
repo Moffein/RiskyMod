@@ -29,21 +29,17 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void HandleStandoffAssist(Assist assist, CharacterBody killerBody, DamageInfo damageInfo)
         {
-            Debug.Log("HSA 0");
             if (assist.damageType == null
                 && assist.moddedDamageTypes.Contains(Bandit2Core.StandoffDamage)
                 && assist.moddedDamageTypes.Count == 1)
             {
-                Debug.Log("HSA 1");
                 bool isStandoff = damageInfo.HasModdedDamageType(Bandit2Core.StandoffDamage);
 
                 if (!(isStandoff && killerBody == assist.attackerBody))
                 {
-                    Debug.Log("HSA 2");
                     Bandit2Core.ApplyStandoff(assist.attackerBody);
                     if (!isStandoff && !damageInfo.damageType.damageType.HasFlag(DamageType.GiveSkullOnKill))
                     {
-                        Debug.Log("HSA 3");
                         EffectManager.SpawnEffect(skullEffect, new EffectData
                         {
                             origin = damageInfo.position
@@ -55,9 +51,7 @@ namespace RiskyMod.Survivors.Bandit2
 
         private void AddStandoffAssist(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
         {
-            Debug.Log("ASA 0");
             if (!damageInfo.HasModdedDamageType(Bandit2Core.StandoffDamage)) return;
-            Debug.Log("ASA 1");
             Assist standoffAssist = new Assist(attackerBody, victimBody, AssistManager.AssistManager.GetDirectAssistDurationForAttacker(attackerBody.gameObject));
             standoffAssist.moddedDamageTypes.Add(Bandit2Core.StandoffDamage);
             AssistManager.AssistManager.instance.AddDirectAssist(standoffAssist);
@@ -66,14 +60,11 @@ namespace RiskyMod.Survivors.Bandit2
         private void ProcStandoffOnKill(On.RoR2.GlobalEventManager.orig_OnCharacterDeath orig, GlobalEventManager self, DamageReport damageReport)
         {
             orig(self, damageReport);
-            Debug.Log("PS 0, " + damageReport.damageInfo.HasModdedDamageType(Bandit2Core.StandoffDamage));
             if (damageReport.damageInfo != null && damageReport.damageInfo.HasModdedDamageType(Bandit2Core.StandoffDamage) && damageReport.attackerBody)
             {
-                Debug.Log("PS 1");
                 Bandit2Core.ApplyStandoff(damageReport.attackerBody);
                 if (!damageReport.damageInfo.damageType.damageType.HasFlag(DamageType.GiveSkullOnKill))
                 {
-                    Debug.Log("PS 2");
                     EffectManager.SpawnEffect(skullEffect, new EffectData
                     {
                         origin = damageReport.damageInfo.position

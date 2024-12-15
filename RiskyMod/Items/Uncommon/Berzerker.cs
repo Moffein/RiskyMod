@@ -69,7 +69,7 @@ namespace RiskyMod.Items.Uncommon
             };
         }
 
-        private void HandleAssist(CharacterBody attackerBody, CharacterBody victimBody, DamageType? assistDamageType, System.Collections.Generic.HashSet<DamageAPI.ModdedDamageType> assistModdedDamageTypes, Inventory attackerInventory, CharacterBody killerBody, DamageInfo damageInfo)
+        private void HandleAssist(CharacterBody attackerBody, CharacterBody victimBody, DamageType? assistDamageType, DamageTypeCombo? assistDamageTypeCombo, System.Collections.Generic.HashSet<DamageAPI.ModdedDamageType> assistModdedDamageTypes, Inventory attackerInventory, CharacterBody killerBody, DamageInfo damageInfo)
         {
             if (attackerBody == killerBody) return;
             OnKillEffect(attackerBody, attackerInventory);

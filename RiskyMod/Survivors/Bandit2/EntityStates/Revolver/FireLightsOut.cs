@@ -57,7 +57,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 				bulletAttack.radius = bulletRadius;
 				bulletAttack.smartCollision = true;
 				bulletAttack.maxDistance = 1000f;
-                bulletAttack.damageType = DamageTypeCombo.GenericSpecial | DamageType.BonusToLowHealth;
+                bulletAttack.damageType = (DamageTypeCombo) DamageSource.Special | DamageType.BonusToLowHealth;
 
                 SpecialDamageController sdc = base.GetComponent<SpecialDamageController>();
 				if (sdc)
@@ -65,7 +65,6 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
 					SkillDef selectedPassive = sdc.GetPassiveSkillDef();
                     if (selectedPassive == Skills.Standoff)
                     {
-						Debug.Log("Adding standoff");
                         bulletAttack.AddModdedDamageType(Bandit2Core.StandoffDamage);
                     }
 					else if (selectedPassive == Skills.DesperadoKillStack)
