@@ -62,7 +62,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
                 bulletAttack.radius = bulletRadius;
                 bulletAttack.smartCollision = true;
                 bulletAttack.maxDistance = 200f;
-                bulletAttack.damageType.damageSource = DamageSource.Special;
+                bulletAttack.damageType = DamageTypeCombo.GenericSpecial | DamageType.BonusToLowHealth;
 
                 SpecialDamageController sdc = base.GetComponent<SpecialDamageController>();
                 if (sdc)
@@ -80,8 +80,6 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
                     {
                         bulletAttack.damageType |= DamageType.ResetCooldownsOnKill;
                     }
-
-                    bulletAttack.damageType |= DamageType.BonusToLowHealth;
                 }
                 DamageAPI.AddModdedDamageType(bulletAttack, Bandit2Core.RackEmUpDamage);
 
