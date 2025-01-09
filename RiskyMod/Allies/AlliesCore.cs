@@ -30,11 +30,13 @@ namespace RiskyMod.Allies
         public static bool ChenQbDroneCompat = true;
         public static bool TinkersSatchelCompat = true;
         public static bool MoreDronesCompat = true;
+        public static bool SandsweptCompat = true;
 
         private static BodyIndex SpikestripBlueLemurian = BodyIndex.None;
         private static BodyIndex SS2SecurityDrone = BodyIndex.None;
         private static BodyIndex SS2ShockDrone = BodyIndex.None;
         private static BodyIndex SS2CloneDrone = BodyIndex.None;
+        private static BodyIndex SandsweptInfernoDrone = BodyIndex.None;
         private static BodyIndex ChenChillDrone = BodyIndex.None;
         private static BodyIndex ChenGradiusPsyDroneRed = BodyIndex.None;
         private static BodyIndex ChenGradiusPsyDroneGreen = BodyIndex.None;
@@ -108,6 +110,11 @@ namespace RiskyMod.Allies
 
                 StandardDroneScalingList.Add(SS2CloneDrone);
                 StandardDroneScalingList.Add(SS2ShockDrone);
+            }
+            if (SandsweptCompat)
+            {
+                SandsweptInfernoDrone = BodyCatalog.FindBodyIndex("InfernoDroneBody");
+                StandardDroneScalingList.Add(SandsweptInfernoDrone);
             }
             if (ChenChillDroneCompat)
             {
