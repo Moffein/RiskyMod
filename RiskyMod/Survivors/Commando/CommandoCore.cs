@@ -86,7 +86,11 @@ namespace RiskyMod.Survivors.Commando
                 (skillDef as ScriptableObject).name = skillDef.skillName;
                 skillDef.skillNameToken = "COMMANDO_SECONDARY_LIGHTNING_NAME_RISKYMOD";
                 skillDef.skillDescriptionToken = "COMMANDO_SECONDARY_LIGHTNING_DESCRIPTION_RISKYMOD";
-                skillDef.icon = phaseRoundDef.icon; //TODO: UNIQUE ICON
+                skillDef.icon = phaseRoundDef.icon;
+                if (!replacePhaseRound)
+                {
+                    skillDef.icon = Content.Assets.assetBundle.LoadAsset<Sprite>("CommandoLightningRound.png");
+                }
                 Content.Content.skillDefs.Add(skillDef);
 
                 EntityStates.RiskyMod.Commando.FireLightningRound.lightningProjectilePrefab = BuildPhaseLightningProjectile();
@@ -173,7 +177,11 @@ namespace RiskyMod.Survivors.Commando
                 shrapnelBarrageDef.dontAllowPastMaxStocks = true;
                 shrapnelBarrageDef.forceSprintDuringState = false;
                 shrapnelBarrageDef.fullRestockOnAssign = true;
-                shrapnelBarrageDef.icon = barrageDef.icon;  //TODO: UNIQUE ICON
+                shrapnelBarrageDef.icon = barrageDef.icon;
+                if (!replaceSuppressive)
+                {
+                    shrapnelBarrageDef.icon = Content.Assets.assetBundle.LoadAsset<Sprite>("CommandoShrapnelBarrage.png");
+                }
                 shrapnelBarrageDef.interruptPriority = InterruptPriority.PrioritySkill;
                 shrapnelBarrageDef.isCombatSkill = true;
                 shrapnelBarrageDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
@@ -237,7 +245,11 @@ namespace RiskyMod.Survivors.Commando
                 shrapnelBarrageDef.dontAllowPastMaxStocks = true;
                 shrapnelBarrageDef.forceSprintDuringState = false;
                 shrapnelBarrageDef.fullRestockOnAssign = true;
-                shrapnelBarrageDef.icon = Content.Assets.ScepterSkillIcons.CommandoBarrageScepter;  //TODO: UNIQUE ICON
+                shrapnelBarrageDef.icon = Content.Assets.ScepterSkillIcons.CommandoBarrageScepter;
+                if (!replaceSuppressive)
+                {
+                    shrapnelBarrageDef.icon = Content.Assets.assetBundle.LoadAsset<Sprite>("CommandoShrapnelBarrageScepter.png");
+                }
                 shrapnelBarrageDef.interruptPriority = InterruptPriority.PrioritySkill;
                 shrapnelBarrageDef.isCombatSkill = true;
                 shrapnelBarrageDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };

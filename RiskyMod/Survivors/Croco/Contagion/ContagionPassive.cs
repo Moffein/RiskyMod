@@ -61,7 +61,7 @@ namespace RiskyMod.Survivors.Croco.Contagion
             passiveSkillDef = ScriptableObject.CreateInstance<SkillDef>();
             passiveSkillDef.skillName = "RiskyModCrocoPassiveContagion";
             passiveSkillDef.interruptPriority = EntityStates.InterruptPriority.Any;
-            passiveSkillDef.icon = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoPassiveBlight.asset").WaitForCompletion().icon;
+            passiveSkillDef.icon = Content.Assets.assetBundle.LoadAsset<Sprite>("AcridRiskyPassive.png");
             passiveSkillDef.skillNameToken = "CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD";
             passiveSkillDef.skillDescriptionToken = "CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD";
             passiveSkillDef.keywordTokens = new string[]

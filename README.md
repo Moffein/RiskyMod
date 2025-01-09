@@ -72,7 +72,7 @@ Squid Polyp Distraction - DestroyedClone
 
 Language Support - Anreol
 
-Skill Icons - KoobyKarasu, Thingw
+Skill Icons - KoobyKarasu, Thingw, Glad
 
 Acrid Hitbox Tweaks - TheTimesweeper
 
