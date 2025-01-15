@@ -18,7 +18,7 @@ namespace RiskyMod.Tweaks.RunScaling
 
             On.RoR2.CombatDirector.Awake += (orig, self) =>
             {
-                if (Run.instance.gameModeIndex != RiskyMod.simulacrumIndex)
+                if (Run.instance && Run.instance.gameModeIndex != RiskyMod.simulacrumIndex)
                 {
                     self.creditMultiplier *= directorCreditMultiplier;
                 }

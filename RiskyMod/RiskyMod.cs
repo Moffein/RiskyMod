@@ -70,6 +70,7 @@ namespace RiskyMod
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RuneFoxMods.TeleporterTurrets", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.score.DirectorReworkPlus", BepInDependency.DependencyFlags.SoftDependency)]
     #endregion
 
     [BepInDependency(R2API.R2API.PluginGUID)]
@@ -82,7 +83,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RiskyTweaks")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.2.17")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.2.18")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -226,6 +227,10 @@ namespace RiskyMod
             Moon.LargerHoldouts.enabled = Moon.LargerHoldouts.enabled && !teleExpansionLoaded;
 
             Sacrifice.enabled = Sacrifice.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.SacrificeTweaks");
+
+            bool directorReworkLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.score.DirectorReworkPlus");
+            if (directorReworkLoaded) Debug.Log("RiskyMod: Disabling CombatDirectorMultiplier because DirectorReworkPlus is loaded.");
+            CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.enabled && !directorReworkLoaded;
         }
 
         private void CheckArenaLoaded(Stage obj)

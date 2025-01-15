@@ -24,6 +24,24 @@ This mod is compatible with nearly all content mods. The only things that will c
 	
 - Optional Dependencies
 	- EliteReworks, included since RiskyMod is designed with it in mind.
+	
+## Some Config Notes
+
+- Shieldgating
+	- This was added before SotV, when there weren't any items in the game that protected against oneshots. Now that there's 3 items that do that (Safer Spaces, Opal, Warped Echo), I feel this is unnecessary, but I've left it enabled for legacy purposes. If you want to disable this, refer to the following config options:
+		- RiskyMod_General.cfg
+			- Game Mechanics
+				- Shield Gating: False
+		- RiskyMod_Items.cfg
+			- Lunar
+				- Transcendence - Always Shield Gate: False
+				
+- Artificer
+	- If you use mods that add Artificer skills, or want a more Vanilla-ish Artificer experience, refer to the following options:
+		- RiskyMod_Survivors.cfg
+			- Nanobomb - Remove Gravity: False
+			- Ion Surge - Move to Utility Slot: False
+			- Utility Self Knockback : False	
 
 ## Main Features
 
