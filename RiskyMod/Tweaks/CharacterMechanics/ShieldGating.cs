@@ -15,6 +15,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
 
         public ShieldGating()
         {
+            IgnoreShieldGateDamage = DamageAPI.ReserveDamageType();
             if (!enabled && !Items.Lunar.Transcendence.alwaysShieldGate) return;
 
             //Remove OSP in SharedHooks.RecalculateStats
