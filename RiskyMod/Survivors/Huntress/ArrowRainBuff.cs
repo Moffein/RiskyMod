@@ -45,16 +45,20 @@ namespace RiskyMod.Survivors.Huntress
             ILCursor c = new ILCursor(il);
             if (c.TryGotoNext(x => x.MatchCallvirt<ProjectileManager>("FireProjectile")))
             {
-                c.EmitDelegate<Func<FireProjectileInfo, FireProjectileInfo>>(info =>
+                c.EmitDelegate<Func<DamageTypeCombo?, DamageTypeCombo?>>(combo =>
                 {
-                    if (info.damageTypeOverride.HasValue)
+                    if (combo.HasValue)
                     {
-                        DamageTypeCombo combo = info.damageTypeOverride.Value;
-                        combo.AddModdedDamageType(SharedDamageTypes.ProjectileRainForce);
-                        info.damageTypeOverride = combo;
+                        DamageTypeCombo modify = combo.Value;
+                        modify.AddModdedDamageType(SharedDamageTypes.ProjectileRainForce);
+                        return new DamageTypeCombo?(modify);
                     }
-                    return info;
+                    return combo;
                 });
+            }
+            else
+            {
+                Debug.LogError("RiskyMod: ArrowRain_DoFireArrowRain IL Hook failed.");
             }
         }
 

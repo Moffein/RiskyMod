@@ -50,6 +50,10 @@ namespace RiskyMod.Survivors.Captain
                     return info;
                 });
             }
+            else
+            {
+                Debug.LogError("RiskyMod: FireTazer_Fire IL Hook failed.");
+            }
         }
     }
 }
