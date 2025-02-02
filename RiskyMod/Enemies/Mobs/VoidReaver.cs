@@ -28,13 +28,10 @@ namespace RiskyMod.Enemies.Mobs
                 }
             };
 
-            /*NullifierBombProjectileModded = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Nullifier/NullifierBombProjectile.prefab").WaitForCompletion().InstantiateClone("RiskyModNullifierBombProjectile", true);
-            NullifierBombProjectileModded.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(ExtraNullify);
-            Content.Content.projectilePrefabs.Add(NullifierBombProjectileModded);*/
-
             NullifierPreBombProjectileModded = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Nullifier/NullifierPreBombProjectile.prefab").WaitForCompletion().InstantiateClone("RiskyModNullifierPreBombProjectile", true);
-            //NullifierPreBombProjectileModded.GetComponent<ProjectileImpactExplosion>().childrenProjectilePrefab = NullifierBombProjectileModded;
-            NullifierPreBombProjectileModded.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(ExtraNullify);
+
+            ProjectileDamage pd = NullifierPreBombProjectileModded.GetComponent<ProjectileDamage>();
+            pd.damageType.AddModdedDamageType(ExtraNullify);
             Content.Content.projectilePrefabs.Add(NullifierPreBombProjectileModded);
 
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Nullifier/EntityStates.NullifierMonster.FirePortalBomb.asset", "portalBombProjectileEffect", NullifierPreBombProjectileModded);

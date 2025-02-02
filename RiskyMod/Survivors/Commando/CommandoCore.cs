@@ -325,8 +325,8 @@ namespace RiskyMod.Survivors.Commando
             else
             {
                 pie.falloffModel = BlastAttack.FalloffModel.SweetSpot;
-                DamageAPI.ModdedDamageTypeHolderComponent mdc = proj.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-                mdc.Add(SharedDamageTypes.SweetSpotModifier);
+                ProjectileDamage pd = proj.GetComponent<ProjectileDamage>();
+                pd.damageType.AddModdedDamageType(SharedDamageTypes.SweetSpotModifier);
             }
 
             proj.AddComponent<GrenadeImpactComponent>();

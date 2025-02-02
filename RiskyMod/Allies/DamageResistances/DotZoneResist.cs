@@ -3,6 +3,7 @@ using R2API;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using RiskyMod.SharedHooks;
+using RoR2.Projectile;
 
 namespace RiskyMod.Allies
 {
@@ -21,12 +22,11 @@ namespace RiskyMod.Allies
 
         public static void AddDotZoneDamageType(GameObject projectile)
         {
-            DamageAPI.ModdedDamageTypeHolderComponent mdc = projectile.GetComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            if (!mdc)
+            ProjectileDamage pd = projectile.GetComponent<ProjectileDamage>();
+            if (pd)
             {
-                mdc = projectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
+                pd.damageType.AddModdedDamageType(dotZoneDamage);
             }
-            if (!mdc.Has(dotZoneDamage)) mdc.Add(dotZoneDamage);
         }
 
         private static void AddResist(DamageInfo damageInfo, HealthComponent self)

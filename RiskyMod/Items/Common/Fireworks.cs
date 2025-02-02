@@ -4,6 +4,7 @@
 	using UnityEngine;
     using UnityEngine.AddressableAssets;
 	using R2API;
+    using RoR2.Projectile;
 
     public class Fireworks
     {
@@ -17,8 +18,9 @@
 			if (!enabled) return;
 
 			projectilePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Firework/FireworkProjectile.prefab").WaitForCompletion().InstantiateClone("RiskyMod_Fireworks", true);
-			DamageAPI.ModdedDamageTypeHolderComponent mdc = projectilePrefab.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-			mdc.Add(SharedDamageTypes.DontTriggerBands);
+			ProjectileDamage pd = projectilePrefab.GetComponent<ProjectileDamage>();
+			pd.damageType.AddModdedDamageType(SharedDamageTypes.DontTriggerBands);
+
 			Content.Content.projectilePrefabs.Add(projectilePrefab);
 
 			On.RoR2.FireworkLauncher.FixedUpdate += (orig, self) =>

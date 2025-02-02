@@ -29,29 +29,6 @@ namespace SneedUtils
             }
         }
 
-        public static void AddModdedDamageTypeToProjectile(GameObject projectile, DamageAPI.ModdedDamageType[] moddedDamageTypes)
-        {
-            if (projectile)
-            {
-                DamageAPI.ModdedDamageTypeHolderComponent mdc = projectile.GetComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-                if (!mdc) mdc = projectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-                for (int i = 0; i < moddedDamageTypes.Length; i++)
-                {
-                    mdc.Add(moddedDamageTypes[i]);
-                }
-            }
-        }
-
-        public static void AddModdedDamageTypeToProjectile(GameObject projectile, DamageAPI.ModdedDamageType moddedDamageType)
-        {
-            if (projectile)
-            {
-                DamageAPI.ModdedDamageTypeHolderComponent mdc = projectile.GetComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-                if (!mdc) mdc = projectile.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-                mdc.Add(moddedDamageType);
-            }
-        }
-
         public static bool RemoveMonsterSpawnCardFromCategory(DirectorCardCategorySelection categorySelection, SpawnCard spawnCard, MonsterCategories monsterCategory)
         {
             int categoryIndex = FindCategoryIndexByName(categorySelection, monsterCategory);

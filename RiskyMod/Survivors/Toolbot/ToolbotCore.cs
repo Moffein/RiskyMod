@@ -152,13 +152,18 @@ namespace RiskyMod.Survivors.Toolbot
         private void ModifySecondaries(SkillLocator sk)
         {
             if (!enableSecondarySkillChanges) return;
+            On.EntityStates.Toolbot.AimStunDrone.ModifyProjectile += AimStunDrone_ModifyProjectile;
+        }
 
-            GameObject nadePrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/CryoCanisterProjectile").InstantiateClone("RiskyModCryoCanister", true);
-            DamageAPI.ModdedDamageTypeHolderComponent md = nadePrefab.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            md.Add(SharedDamageTypes.AntiFlyingForce);
-            Content.Content.projectilePrefabs.Add(nadePrefab);
-
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.AimStunDrone", "projectilePrefab", nadePrefab);
+        private void AimStunDrone_ModifyProjectile(On.EntityStates.Toolbot.AimStunDrone.orig_ModifyProjectile orig, EntityStates.Toolbot.AimStunDrone self, ref FireProjectileInfo fireProjectileInfo)
+        {
+            orig(self, ref fireProjectileInfo);
+            if (fireProjectileInfo.damageTypeOverride.HasValue)
+            {
+                DamageTypeCombo combo = fireProjectileInfo.damageTypeOverride.Value;
+                combo.AddModdedDamageType(SharedDamageTypes.AntiFlyingForce);
+                fireProjectileInfo.damageTypeOverride = combo;
+            }
         }
 
         private void ModifySpecials(SkillLocator sk)

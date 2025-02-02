@@ -16,6 +16,7 @@ namespace RiskyMod.Survivors.Croco.Contagion
         public static bool enabled = true;
 
         public static SkillDef passiveSkillDef;
+        public static DamageAPI.ModdedDamageType contagionDamageType;
 
         private static SkillFamily passiveSkillFamily = Addressables.LoadAssetAsync<SkillFamily>("RoR2/Base/Croco/CrocoBodyPassiveFamily.asset").WaitForCompletion();
         public static BodyIndex bodyIndex;
@@ -23,6 +24,8 @@ namespace RiskyMod.Survivors.Croco.Contagion
         public ContagionPassive()
         {
             if (!enabled) return;
+            contagionDamageType = DamageAPI.ReserveDamageType();
+            On.RoR2.HealthComponent.TakeDamageProcess += HealthComponent_TakeDamageProcess;
             RoR2Application.onLoad += OnLoad;
             CreateSkillDef();
             RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
@@ -30,6 +33,29 @@ namespace RiskyMod.Survivors.Croco.Contagion
             On.EntityStates.Croco.Slash.OnEnter += Slash_OnEnter;
             new ModifySpecial();
             GlobalContagionTracker.Init();
+        }
+
+        private void HealthComponent_TakeDamageProcess(On.RoR2.HealthComponent.orig_TakeDamageProcess orig, HealthComponent self, DamageInfo damageInfo)
+        {
+            if (damageInfo.damageType.HasModdedDamageType(contagionDamageType) && damageInfo.damageType.IsDamageSourceSkillBased)
+            {
+                switch (damageInfo.damageType.damageSource)
+                {
+                    case DamageSource.Primary:
+                        damageInfo.AddModdedDamageType(SharedDamageTypes.CrocoPoison6s);
+                        break;
+                    case DamageSource.Secondary:
+                    case DamageSource.Utility:
+                        damageInfo.AddModdedDamageType(SharedDamageTypes.CrocoBlight6s);
+                        break;
+                    case DamageSource.Special:
+                        damageInfo.AddModdedDamageType(ModifySpecial.EpidemicDamage);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            orig(self, damageInfo);
         }
 
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
@@ -51,7 +77,7 @@ namespace RiskyMod.Survivors.Croco.Contagion
             {
                 if (self.overlapAttack != null && HasPassive(self.skillLocator))
                 {
-                    self.overlapAttack.AddModdedDamageType(SharedDamageTypes.CrocoPoison6s);
+                    self.overlapAttack.AddModdedDamageType(contagionDamageType);
                 }
             }
         }
@@ -81,7 +107,9 @@ namespace RiskyMod.Survivors.Croco.Contagion
         {
             if (self.passiveSkillSlot && self.passiveSkillSlot.skillDef == passiveSkillDef)
             {
-                return DamageType.BlightOnHit;
+                DamageTypeCombo combo = DamageTypeCombo.Generic;
+                combo.AddModdedDamageType(contagionDamageType);
+                return combo;
             }
             return orig(self);
         }

@@ -61,9 +61,8 @@ namespace RiskyMod.Enemies.Bosses
                 GameObject trackingBomb = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Vagrant/VagrantTrackingBomb.prefab").WaitForCompletion().InstantiateClone("RiskyModVagrantTrackingBomb", true);
                 ProjectileExplosion pe = trackingBomb.GetComponent<ProjectileExplosion>();
                 pe.falloffModel = BlastAttack.FalloffModel.SweetSpot;
-                DamageAPI.ModdedDamageTypeHolderComponent mdc = trackingBomb.GetComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-                if (!mdc) mdc = trackingBomb.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-                mdc.Add(SharedDamageTypes.SweetSpotModifier);
+                ProjectileDamage pd = trackingBomb.GetComponent<ProjectileDamage>();
+                pd.damageType.AddModdedDamageType(SharedDamageTypes.SweetSpotModifier);
                 Content.Content.projectilePrefabs.Add(trackingBomb);
                 SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Vagrant/EntityStates.VagrantMonster.FireTrackingBomb.asset", "projectilePrefab", trackingBomb);
             }
@@ -72,9 +71,8 @@ namespace RiskyMod.Enemies.Bosses
                 GameObject cannon = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Vagrant/VagrantCannon.prefab").WaitForCompletion().InstantiateClone("RiskyModVagrantCannon", true);
                 ProjectileExplosion pe = cannon.GetComponent<ProjectileExplosion>();
                 pe.falloffModel = BlastAttack.FalloffModel.SweetSpot;
-                DamageAPI.ModdedDamageTypeHolderComponent mdc = cannon.GetComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-                if (!mdc) mdc = cannon.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-                mdc.Add(SharedDamageTypes.SweetSpotModifier);
+                ProjectileDamage pd = cannon.GetComponent<ProjectileDamage>();
+                pd.damageType.AddModdedDamageType(SharedDamageTypes.SweetSpotModifier);
                 Content.Content.projectilePrefabs.Add(cannon);
                 SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Vagrant/EntityStates.VagrantMonster.Weapon.JellyBarrage.asset", "projectilePrefab", cannon);
             }

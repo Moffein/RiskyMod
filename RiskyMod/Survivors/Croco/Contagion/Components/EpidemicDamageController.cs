@@ -108,16 +108,6 @@ namespace RiskyMod.Survivors.Croco.Contagion.Components
             {
                 victim.RemoveBuff(ModifySpecial.EpidemicDebuff.buffIndex);
             }
-            /*if (scepter && owner && !(victim && victim.healthComponent && victim.healthComponent.alive))
-            {
-                owner.healthComponent.HealFraction(0.05f, default);
-                EffectData effectData = new EffectData
-                {
-                    origin = owner.corePosition
-                };
-                effectData.SetNetworkedObjectReference(owner.gameObject);
-                EffectManager.SpawnEffect(SharedDamageTypes.medkitEffect, effectData, true);
-            }*/
         }
 
         public void SetScepter()

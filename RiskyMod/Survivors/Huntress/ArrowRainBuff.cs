@@ -5,6 +5,8 @@ using R2API;
 using RiskyMod.SharedHooks;
 using System.Runtime.CompilerServices;
 using EntityStates.RiskyMod.Huntress;
+using MonoMod.Cil;
+using System;
 
 namespace RiskyMod.Survivors.Huntress
 {
@@ -21,8 +23,8 @@ namespace RiskyMod.Survivors.Huntress
             arrowRainObject = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/huntressarrowrain").InstantiateClone("RiskyModArrowRainProjectile", true);
             Content.Content.projectilePrefabs.Add(arrowRainObject);
 
-            DamageAPI.ModdedDamageTypeHolderComponent mdh = arrowRainObject.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            mdh.Add(SharedDamageTypes.ProjectileRainForce);
+            ProjectileDamage pd = arrowRainObject.GetComponent<ProjectileDamage>();
+            pd.damageType.AddModdedDamageType(SharedDamageTypes.ProjectileRainForce);
 
             ProjectileDotZone arrowDotZone = arrowRainObject.GetComponent<ProjectileDotZone>();
             arrowDotZone.overlapProcCoefficient = 0.7f;
@@ -34,6 +36,26 @@ namespace RiskyMod.Survivors.Huntress
 
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "damageCoefficient", "4.2");
             SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "projectilePrefab", ArrowRainBuff.arrowRainObject);
+
+            IL.EntityStates.Huntress.ArrowRain.DoFireArrowRain += ArrowRain_DoFireArrowRain;
+        }
+
+        private void ArrowRain_DoFireArrowRain(MonoMod.Cil.ILContext il)
+        {
+            ILCursor c = new ILCursor(il);
+            if (c.TryGotoNext(x => x.MatchCallvirt<ProjectileManager>("FireProjectile")))
+            {
+                c.EmitDelegate<Func<FireProjectileInfo, FireProjectileInfo>>(info =>
+                {
+                    if (info.damageTypeOverride.HasValue)
+                    {
+                        DamageTypeCombo combo = info.damageTypeOverride.Value;
+                        combo.AddModdedDamageType(SharedDamageTypes.ProjectileRainForce);
+                        info.damageTypeOverride = combo;
+                    }
+                    return info;
+                });
+            }
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -46,8 +68,8 @@ namespace RiskyMod.Survivors.Huntress
                 arrowRainScepterObject.transform.localScale.y,
                 arrowRainScepterObject.transform.localScale.z * 1.5f);
 
-            DamageAPI.ModdedDamageTypeHolderComponent mdh = ArrowRainBuff.arrowRainScepterObject.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>();
-            mdh.Add(SharedDamageTypes.ProjectileRainForce);
+            ProjectileDamage pd = ArrowRainBuff.arrowRainScepterObject.GetComponent<ProjectileDamage>();
+            pd.damageType.AddModdedDamageType(SharedDamageTypes.ProjectileRainForce);
 
             ProjectileDotZone arrowDotZone = ArrowRainBuff.arrowRainScepterObject.GetComponent<ProjectileDotZone>();
             arrowDotZone.overlapProcCoefficient = 0.7f;
