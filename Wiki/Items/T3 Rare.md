@@ -38,4 +38,7 @@
 	- Removed proc coefficient.
 	
 - War Bonds
-	- Removed proc coefficient.
+	- Reverted cost from 50 -> 25
+	
+- Growth Nectar
+	- Buffed stat bonus from 4% -> 5%

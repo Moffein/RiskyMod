@@ -5,7 +5,7 @@
 	"ITEM_FLATHEALTH_DESC_RISKYMOD": "Увеличивает <style=cIsHealing>максимальный запас здоровья</style> на <style=cIsHealing>1</style><style=cStack> (+1 за шт.)</style> уровень.",
 	
 	"ITEM_CRITGLASSES_PICKUP_RISKYMOD": "Дает 7% вероятности выполнить 'Критический Удар', наносящий двойной урон.",
-	"ITEM_CRITGLASSES_DESC_RISKYMOD": "У ваших атак есть вероятность в <style=cIsDamage>7%</style> <style=cStack>(+7% за шт.)</style> выполнить \'<style=cIsDamage>Критический Удар</style>\', наносящий <style=cIsDamage>двойной урон</style>.",
+	"ITEM_CRITGLASSES_DESC_RISKYMOD": "У ваших атак есть вероятность в <style=cIsDamage>10%</style> <style=cStack>(+7% за шт.)</style> выполнить \'<style=cIsDamage>Критический Удар</style>\', наносящий <style=cIsDamage>двойной урон</style>.",
 	
 	"ITEM_STICKYBOMB_DESC_RISKYMOD": "<style=cIsDamage>5%</style> <style=cStack>(+5% за шт.)</style> вероятности при попадании по врагу прикрепить к нему <style=cIsDamage>бомбу</style>, взрыв которой наносит <style=cIsDamage>240%</style> ОБЩЕГО урона.",
 	
@@ -129,5 +129,14 @@
 	
 	"ITEM_CRITDAMAGE_DESC_RISKYMOD": "Дает <style=cIsDamage>5% вероятности Критического Удара</style>. <style=cIsDamage>Критические Удары</style> наносят дополнительные <style=cIsDamage>100% урона</style><style=cStack>(+100% за шт.)</style>.",
 	
+	"ITEM_BARRAGEONBOSS_DESC_RISKYMOD": "Во время битвы с боссом вызывает <style=cIsUtility>5</style> ракет, наносящих урон в размере <style=cIsDamage>2,5% <style=cStack>(+2,5% за шт.)</style> от максимального запаса здоровья босса</style>. За каждые <style=cIsUtility>25 ед.</style> золота, собранных до начала боя, добавляется ещё одна ракета. Всего можно накопить до <style=cIsUtility>20</style> <style=cStack>(+5 за шт.)</style> ракет. <style=cIsUtility>Требуемое количество золота увеличивается со временем.</style>",
+	
+	"ITEM_ATTACKSPEEDPERNEARBYALLYORENEMY_DESC_RISKYMOD": "Увеличивает <style=cIsDamage>скорость атаки</style> на <style=cIsDamage>10%</style> за каждого врага и союзника в радиусе <style=cIsUtility>20 м</style> <style=cStack>(+5 м за шт.)</style>, но не более <style=cIsUtility>4</style> <style=cStack>(+2 за шт.)</style>.",
+	
+	"ITEM_TELEPORTONLOWHEALTH_DESC_RISKYMOD": "Когда здоровья остаётся меньше <style=cIsHealth>25%</style>, даёт <style=cIsHealing>временный барьер</style>, прочность которого равна <style=cIsHealing>100%</style> от <style=cIsHealing>максимального запаса здоровья</style> выжившего. Кроме того, выжившего на <style=cIsUtility>8</style> сек. окружает аура, которая вызывает <style=cIsDamage>Кровотечение</style> у врагов и <style=cIsUtility>телепортирует</style> их на какое-то расстояние. <style=cIsDamage>Если враг умирает от воздействия ауры</style>, её время действия <style=cIsUtility>продлевается</style> на <style=cIsUtility>1 сек</style>. Перезаряжается в начале каждого уровня.",
+	
+	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "При получении урона от любого <style=cIsUtility>навыка</style> враги <style=cIsUtility>подбрасываются в воздух</style> и <style=cIsUtility>оглушаются</style>. При получении урона в воздухе враги снова <style=cIsUtility>подбрасываются</style>, но не более <style=cIsUtility>2</style> <style=cStack>(+1 за шт.) раз</style>. Подброшенные враги получают на <style=cIsDamage>15%</style> больше урона от всех источников за каждое подбрасывание. Перезаряжается <style=cIsUtility>15</style> сек.",
+	
+	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Увеличивает <style=cIsUtility>все параметры</style> на <style=cIsUtility>5%</style> за каждое усиление. Суммируется до <style=cIsUtility>4</style> раз <style=cStack>(+4 за шт.)</style>.",
 	}
 }

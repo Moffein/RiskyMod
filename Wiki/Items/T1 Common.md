@@ -34,6 +34,9 @@
 		- +15% damage
 		- 1% max health healed every second
 	- **(RiskyTweaks)** Spawns in Simulacrum and Mithrix.
+	
+- Bolstering Lantern
+	- Reverted SotS Part 2 nerf, attack speed bonus increased from 7.5% -> 10%
 
 ## Nerfs
 

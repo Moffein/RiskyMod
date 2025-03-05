@@ -75,6 +75,12 @@
 	
 - War Horn
 	- Additional Effect: +50% move speed on trigger.
+	
+- Unstable Transmitter
+	- Barrier gain increased from 35% -> 100%
+	
+- Breaching Fin
+	- Damage bonus increased from +10% -> +15%
 
 ## Nerfs
 

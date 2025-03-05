@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using RiskyFixes.Fixes;
+using RoR2;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;

@@ -16,8 +16,22 @@ namespace RiskyMod.Items.DLC2
         public WarBonds()
         {
             if (!enabled) return;
+            ItemsCore.ModifyItemDefActions += ModifyItem;
 
-            //TODO: Unnerf cost
+            IL.RoR2.BarrageOnBossBehaviour.UpdateExtraMissileMoneyCount += BarrageOnBossBehaviour_UpdateExtraMissileMoneyCount;
+        }
+
+        private void BarrageOnBossBehaviour_UpdateExtraMissileMoneyCount(ILContext il)
+        {
+            ILCursor c = new ILCursor(il);
+            if (c.TryGotoNext(MoveType.After, x => x.MatchLdcI4(50)))
+            {
+                c.EmitDelegate<Func<int, int>>(x => 25);
+            }
+        }
+        private static void ModifyItem()
+        {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, DLC2Content.Items.BarrageOnBoss);
         }
     }
 }

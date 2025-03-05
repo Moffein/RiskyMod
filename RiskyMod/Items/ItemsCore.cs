@@ -62,6 +62,8 @@ namespace RiskyMod.Items
 
             new DelicateWatch();
             new PowerElixir();
+
+            new BolsteringLantern();
         }
 
         private void ModifyUncommon()
@@ -87,6 +89,8 @@ namespace RiskyMod.Items
 
             new Harpoon();
             new Ignition();
+            new UnstableTransmitter();
+            new BreachingFin();
         }
 
         private void ModifyLegendary()
@@ -109,6 +113,7 @@ namespace RiskyMod.Items
 
             new Overspill();
             new WarBonds();
+            new GrowthNectar();
         }
 
         private void ModifyVoid()

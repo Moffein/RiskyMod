@@ -281,6 +281,8 @@ namespace RiskyMod
             Warbanner.enabled = ItemCfg.Bind(commonString, "Warbanner", true, itemConfigDescString).Value;
             Warbanner.UseModdedBuff = ItemCfg.Bind(commonString, "Warbanner - Use Custom Buff", true, "Warbanner is handled via a custom buff and GameObject so that it doesn't interfere with other mods that rely on it.").Value;
 
+            BolsteringLantern.enabled = ItemCfg.Bind(commonString, "Bolstering Lantern", true, itemConfigDescString).Value;
+
             //Makes it too easy to stunlock things even at very low stacks.
             //StunGrenade.enabled = ItemCfg.Bind(commonString, "Stun Grenade", true, itemConfigDescString).Value;
             StunGrenade.enabled = false;
@@ -316,6 +318,9 @@ namespace RiskyMod
             WillOWisp.enabled = ItemCfg.Bind(uncommonString, "Will-o-the-Wisp", true, itemConfigDescString).Value;
 
             Ignition.enabled = ItemCfg.Bind(uncommonString, "Ignition Tank", true, itemConfigDescString).Value;
+
+            UnstableTransmitter.enabled = ItemCfg.Bind(commonString, "Unstable Transmitter", true, itemConfigDescString).Value;
+            BreachingFin.enabled = ItemCfg.Bind(commonString, "Breaching Fin", true, itemConfigDescString).Value;
         }
 
         private static void ConfigLegendaryItems()
@@ -347,6 +352,7 @@ namespace RiskyMod
 
             Overspill.enabled = ItemCfg.Bind(legendaryString, "Runic Lens", true, itemConfigDescString).Value;
             WarBonds.enabled = ItemCfg.Bind(legendaryString, "War Bonds", true, itemConfigDescString).Value;
+            GrowthNectar.enabled = ItemCfg.Bind(legendaryString, "Growth Nectar", true, itemConfigDescString).Value;
         }
 
         private static void ConfigVoidItems()

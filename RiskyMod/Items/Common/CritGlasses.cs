@@ -2,6 +2,7 @@
 using RoR2;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using System;
 
 namespace RiskyMod.Items.Common
 {
@@ -35,7 +36,15 @@ namespace RiskyMod.Items.Common
                     UnityEngine.Debug.LogError("RiskyMod: CritGlasses IL Hook failed");
                 }
             };
+
+            SharedHooks.GetStatCoefficients.HandleStatsInventoryActions += HandleStats;
         }
+
+        private void HandleStats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
+        {
+            if (inventory.GetItemCount(RoR2Content.Items.CritGlasses) > 0) args.critAdd += 3f;
+        }
+
         private static void ModifyItem()
         {
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.CritGlasses);

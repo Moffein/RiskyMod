@@ -5,7 +5,7 @@
 	"ITEM_FLATHEALTH_DESC_RISKYMOD": "Aumenta a <style=cIsHealing>saúde máxima</style> em <style=cIsHealing>1</style> nível<style=cStack> (+1 por acúmulo)</style>.",
 
 	"ITEM_CRITGLASSES_PICKUP_RISKYMOD": "Ganhe 7% de chance de causar Acerto Crítico ao golpear, causando dano em dobro.",
-	"ITEM_CRITGLASSES_DESC_RISKYMOD": "Seus ataques têm <style=cIsDamage>7%</style> <style=cStack>(+7% por acúmulo)</style> de chance de realizar um \'<style=cIsDamage>Acerto Crítico</style>\', causando <style=cIsDamage>dano dobrado</style>.",
+	"ITEM_CRITGLASSES_DESC_RISKYMOD": "Seus ataques têm <style=cIsDamage>10%</style> <style=cStack>(+7% por acúmulo)</style> de chance de realizar um \'<style=cIsDamage>Acerto Crítico</style>\', causando <style=cIsDamage>dano dobrado</style>.",
   
 	"ITEM_STICKYBOMB_DESC_RISKYMOD": "<style=cIsDamage>5%</style> <style=cStack>(+5% por acúmulo)</style> de chance ao golpear, de colocar uma <style=cIsDamage>bomba</style> em um inimigo, que ao detonar causa <style=cIsDamage>240%</style> de dano TOTAL.",
 
@@ -132,5 +132,15 @@
 	"ITEM_STRENGTHENBURN_DESC_RISKYMOD": "<style=cIsDamage>5%</style> de chance de <style=cIsDamage>incendiar</style> ao atingir, até <style=cIsDamage>50%</style> de dano TOTAL. Efeitos <style=cIsDamage>incendiários</style> causam <style=cIsDamage>+300%</style> <style=cStack>(+300% por acúmulo)</style> de dano contínuo.",
 		
 	"ITEM_CRITDAMAGE_DESC_RISKYMOD": "Gain <style=cIsDamage>5% de chance de acerto crítico</style>. <style=cIsDamage>Acertos Críticos</style> causam <style=cIsDamage>100% de dano adicional</style><style=cStack>(+100% por acúmulo)</style>.",
+	
+	"ITEM_BARRAGEONBOSS_DESC_RISKYMOD": "Durante eventos de chefe, <style=cIsUtility>5</style> mísseis bombardeiam a área, causando dano correspondente a <style=cIsDamage>2,5% <style=cStack>(+2,5% por acúmulo)</style> da saúde máxima do chefe</style>. Antes do evento de chefe, concede mísseis adicionais até o máximo de <style=cIsUtility>20</style> <style=cStack>(+5 por acúmulo)</style> a cada <style=cIsUtility>25</style> de ouro obtido. <style=cIsUtility>O requisito de ouro aumenta com o tempo.</style>",
+	
+	"ITEM_ATTACKSPEEDPERNEARBYALLYORENEMY_DESC_RISKYMOD": "Aumenta a sua <style=cIsDamage>velocidade de ataque</style> em <style=cIsDamage>10%</style> por até <style=cIsUtility>4</style> <style=cStack>(+2 por acúmulo)</style> inimigos e aliados dentro de <style=cIsUtility>20</style> <style=cStack>(+5 por acúmulo)</style> metros.",
+	
+	"ITEM_TELEPORTONLOWHEALTH_DESC_RISKYMOD": "Atingir menos de <style=cIsHealth>25% de saúde</style> converte <style=cIsHealing>100%</style> da sua <style=cIsHealing>saúde máxima</style> em uma <style=cIsHealing>barreira temporária</style>. Ganhe uma aura dimensional por <style=cIsUtility>8 s</style> que causa <style=cIsDamage>sangramento</style> e <style=cIsUtility>teleporta</style> os inimigos para longe. <style=cIsDamage>Inimigos abatidos</style> pela aura <style=cIsUtility>aumentam</style> a duração por <style=cIsUtility>1 s</style>. Regenera no início de cada fase.",
+	
+	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "Inimigos no chão atingidos por qualquer <style=cIsUtility>habilidade</style> são <style=cIsUtility>lançados ao ar</style> e <style=cIsUtility>atordoados</style>. Inimigos atingidos enquanto estão no ar são <style=cIsUtility>lançados</style> novamente até <style=cIsUtility>2 vezes</style> <style=cStack>(+1 por acúmulo)</style>. Inimigos lançados sofrem mais <style=cIsDamage>15%</style> de dano de todas as fontes por lançamento. Recarrega após <style=cIsUtility>15 s</style>.",
+	
+	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Concede <style=cIsUtility>5%</style> de aumento em <style=cIsUtility>TODAS as estatísticas</style> para cada reforço até o máximo de <style=cIsUtility>4</style> <style=cStack>(+4 por acúmulo)</style>.",
 	}
 }

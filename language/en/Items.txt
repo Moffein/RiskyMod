@@ -5,7 +5,7 @@
 	"ITEM_FLATHEALTH_DESC_RISKYMOD": "Increases <style=cIsHealing>maximum health</style> by <style=cIsHealing>1</style><style=cStack> (+1 per stack)</style> level.",
 	
 	"ITEM_CRITGLASSES_PICKUP_RISKYMOD": "Gain 7% chance for hits to 'Critically Strike', dealing double damage.",
-	"ITEM_CRITGLASSES_DESC_RISKYMOD": "Your attacks have a <style=cIsDamage>7%</style> <style=cStack>(+7% per stack)</style> chance to \'<style=cIsDamage>Critically Strike</style>\', dealing <style=cIsDamage>double damage</style>.",
+	"ITEM_CRITGLASSES_DESC_RISKYMOD": "Your attacks have a <style=cIsDamage>10%</style> <style=cStack>(+7% per stack)</style> chance to \'<style=cIsDamage>Critically Strike</style>\', dealing <style=cIsDamage>double damage</style>.",
 	
 	"ITEM_STICKYBOMB_DESC_RISKYMOD": "<style=cIsDamage>5%</style> <style=cStack>(+5% per stack)</style> chance on hit to attach a <style=cIsDamage>bomb</style> to an enemy, detonating for <style=cIsDamage>240%</style> TOTAL damage.",
 	
@@ -129,5 +129,14 @@
 	
 	"ITEM_CRITDAMAGE_DESC_RISKYMOD": "Gain <style=cIsDamage>5% critical chance</style>. <style=cIsDamage>Critical Strikes</style> deal an additional <style=cIsDamage>100% damage</style><style=cStack>(+100% per stack)</style>.",
 	
+	"ITEM_BARRAGEONBOSS_DESC_RISKYMOD": "During boss events, <style=cIsUtility>5</style> missiles bombard the area, dealing <style=cIsDamage>2.5% <style=cStack>(+2.5% per stack)</style> of boss' Max Health in damage</style>. Before the boss event, gain additional missiles, up to a maximum of <style=cIsUtility>20</style> <style=cStack>(+5 per stack)</style>, per <style=cIsUtility>25</style> gold gained. <style=cIsUtility>Gold requirement scales over time.</style>",
+	
+	"ITEM_ATTACKSPEEDPERNEARBYALLYORENEMY_DESC_RISKYMOD": "Increase your <style=cIsDamage>attack speed</style> by <style=cIsDamage>10%</style> for up to <style=cIsUtility>4</style> <style=cStack>(+2 per stack)</style> enemies and allies within <style=cIsUtility>20</style> <style=cStack>(+5 per stack)</style> meters.",
+	
+	"ITEM_TELEPORTONLOWHEALTH_DESC_RISKYMOD": "Falling below <style=cIsHealth>25% health</style> gives you <style=cIsHealing>100%</style> of your <style=cIsHealing>maximum health</style> as a <style=cIsHealing>temporary barrier</style>. Gain a dimensional aura for <style=cIsUtility>8s</style> that <style=cIsDamage>bleeds</style> and <style=cIsUtility>teleports</style> away enemies. <style=cIsDamage>Enemies killed</style> by the aura <style=cIsUtility>extend</style> the duration by <style=cIsUtility>1s</style>. At the start of each stage, it regenerates.",
+	
+	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "Grounded enemies hit with any <style=cIsUtility>skill</style> are <style=cIsUtility>launched</style> and <style=cIsUtility>stunned</style>. Enemies hit while airborne are <style=cIsUtility>launched</style> again up to <style=cIsUtility>2 times</style> <style=cStack>(+1 per stack)</style>. Launched enemies take increased damage by <style=cIsDamage>15%</style> from all sources per launch. Recharges after <style=cIsUtility>15s</style>.",
+	
+	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Grants <style=cIsUtility>5%</style> increase to <style=cIsUtility>ALL stats</style> for each buff, up to a maximum of <style=cIsUtility>4</style> <style=cStack>(+4 per stack)</style>.",
 	}
 }

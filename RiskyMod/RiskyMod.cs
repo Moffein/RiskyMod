@@ -81,6 +81,7 @@ namespace RiskyMod
     [BepInDependency(R2API.ItemAPI.PluginGUID)]
     [BepInDependency(R2API.ProcTypeAPI.PluginGUID)]
     [BepInDependency("com.Moffein.RiskyTweaks")]
+    [BepInDependency("com.Moffein.RiskyFixes")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
     [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.2.21")]
