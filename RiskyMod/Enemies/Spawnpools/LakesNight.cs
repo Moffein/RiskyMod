@@ -23,8 +23,13 @@ namespace RiskyMod.Enemies.Spawnpools
                 Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/Gup/cscGupBody.asset").WaitForCompletion(),
             };
 
-            ModifyCards(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/lakesnight/dccsLakesnightMonsters.asset").WaitForCompletion(), cardsToModify);
-            ModifyCards(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/lakesnight/dccsLakesnightMonstersStormOnlyDLC2.asset").WaitForCompletion(), cardsToModify);
+            var basePool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/lakesnight/dccsLakesnightMonsters.asset").WaitForCompletion();
+            var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/lakesnight/dccsLakesnightMonstersDLC1.asset").WaitForCompletion();
+            var dlc2Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/lakesnight/dccsLakesnightMonstersDLC2.asset").WaitForCompletion();
+
+            ModifyCards(basePool, cardsToModify);
+            ModifyCards(dlc1Pool, cardsToModify);
+            ModifyCards(dlc2Pool, cardsToModify);
         }
 
         private void ModifyCards(DirectorCardCategorySelection dccs, List<SpawnCard> cardList)

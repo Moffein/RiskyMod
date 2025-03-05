@@ -53,6 +53,22 @@ namespace RiskyMod.Items.Uncommon
                     }
                 }
             };
+
+            On.EntityStates.MeridianEvent.Phase1.OnEnter += Phase1_OnEnter;
+        }
+
+        private void Phase1_OnEnter(On.EntityStates.MeridianEvent.Phase1.orig_OnEnter orig, EntityStates.MeridianEvent.Phase1 self)
+        {
+            orig(self);
+            if (NetworkServer.active && self.meridianEventTriggerInteraction && self.meridianEventTriggerInteraction.falseSonEntryFXPosition)
+            {
+                DaisyBehavior db = self.gameObject.GetComponent<DaisyBehavior>();
+                if (!db)
+                {
+                    db = self.gameObject.AddComponent<DaisyBehavior>();
+                    db.wardOrigin = self.meridianEventTriggerInteraction.falseSonEntryFXPosition;
+                }
+            }
         }
 
         private static void ModifyItem()

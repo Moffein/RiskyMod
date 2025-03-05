@@ -13,20 +13,9 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/foggyswamp/dccsFoggySwampMonsters.asset").WaitForCompletion());
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/foggyswamp/dccsFoggySwampMonstersDLC.asset").WaitForCompletion());
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsFoggySwampMonstersDLC2.asset").WaitForCompletion());
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsFoggySwampMonstersDLC2Only.asset").WaitForCompletion());
-        }
-
-        private void ApplyChanges(DirectorCardCategorySelection dccs)
-        {
-            bool removedGup = SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/Gup/cscGupBody.asset").WaitForCompletion(), SneedUtils.SneedUtils.MonsterCategories.Minibosses);
-            if (removedGup)
-            {
-                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.GupLoop, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
-                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Geep, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
-            }
+            var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/foggyswamp/dccsFoggySwampMonstersDLC1.asset").WaitForCompletion();
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dlc1Pool, DirectorCards.GupLoop, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dlc1Pool, DirectorCards.Geep, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
         }
     }
 }

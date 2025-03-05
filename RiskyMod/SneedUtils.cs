@@ -75,10 +75,13 @@ namespace SneedUtils
             }
             return FindCategoryIndexByName(dcs, categoryName);
         }
+
         public static int FindCategoryIndexByName(DirectorCardCategorySelection dcs, string categoryName)
         {
+            //Debug.Log("Dumping categories for " + dcs.name);
             for (int i = 0; i < dcs.categories.Length; i++)
             {
+                //Debug.Log(dcs.categories[i].name);
                 if (string.CompareOrdinal(dcs.categories[i].name, categoryName) == 0)
                 {
                     return i;

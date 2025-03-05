@@ -11,21 +11,23 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/golemplains/dccsGolemplainsMonsters.asset").WaitForCompletion(), false);
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/golemplains/dccsGolemplainsMonstersDLC1.asset").WaitForCompletion(), false);
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsGolemplainsMonstersDLC2.asset").WaitForCompletion(), false);
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsGolemplainsMonstersDLC2Only.asset").WaitForCompletion(), false);
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itgolemplains/dccsITGolemplainsMonsters.asset").WaitForCompletion(), true);
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itgolemplains/dccsITGolemplainsMonstersDLC2.asset").WaitForCompletion(), true);
-        }
+            var basePool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/golemplains/dccsGolemplainsMonsters.asset").WaitForCompletion();
+            var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/golemplains/dccsGolemplainsMonstersDLC1.asset").WaitForCompletion();
 
-        private void ApplyChanges(DirectorCardCategorySelection dccs, bool stage1Bisons)
-        {
-            bool removedJelly = SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.Jellyfish, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
-            bool removedAlpha = SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.AlphaConstruct, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
-            bool removedXi = SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.XiConstruct, SneedUtils.SneedUtils.MonsterCategories.Champions);
+            var basePoolIT = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itgolemplains/dccsITGolemplainsMonsters.asset").WaitForCompletion();
 
-            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, stage1Bisons ? DirectorCards.Bison : DirectorCards.BisonLoop, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(basePool, SpawnCards.Jellyfish, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(basePoolIT, SpawnCards.Jellyfish, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1Pool, SpawnCards.AlphaConstruct, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1Pool, SpawnCards.XiConstruct, SneedUtils.SneedUtils.MonsterCategories.Champions);
+
+            //bool removedA = SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(basePoolIT, SpawnCards.AlphaConstruct, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            //bool removedXi = SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(basePoolIT, SpawnCards.XiConstruct, SneedUtils.SneedUtils.MonsterCategories.Champions);
+            //Debug.Log("REmoved from TP Simulacrum: Alpha " + removedA + ", Xi " + removedXi);
+
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.BisonLoop, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePoolIT, DirectorCards.Bison, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
         }
     }
 }

@@ -11,32 +11,19 @@ namespace RiskyMod.Enemies.Spawnpools
         public GooLake()
         {
             if (!enabled) return;
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/goolake/dccsGooLakeMonsters.asset").WaitForCompletion(), false, false);
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/goolake/dccsGooLakeMonstersDLC1.asset").WaitForCompletion(), true, false);
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itgoolake/dccsITGooLakeMonsters.asset").WaitForCompletion(), true, true);
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsGooLakeMonstersDLC2.asset").WaitForCompletion(), true, false);
-            ApplyChanges(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsGooLakeMonstersDLC2Only.asset").WaitForCompletion(), false, false);
-        }
+            var basePool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/goolake/dccsGooLakeMonsters.asset").WaitForCompletion();
+            var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/goolake/dccsGooLakeMonstersDLC1.asset").WaitForCompletion();
 
-        private void ApplyChanges(DirectorCardCategorySelection dccs, bool isDLC, bool isSimulacrum)
-        {
-            if (!isSimulacrum)
-            {
+            var basePoolIT = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itgoolake/dccsITGooLakeMonsters.asset").WaitForCompletion();
+            var dlc1PoolIT = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itgoolake/dccsITGooLakeMonstersDLC1.asset").WaitForCompletion();
 
-                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.MagmaWormLoop, SneedUtils.SneedUtils.MonsterCategories.Champions);
-                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.ReminderLoop, SneedUtils.SneedUtils.MonsterCategories.Champions);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.MagmaWormLoop, SneedUtils.SneedUtils.MonsterCategories.Champions);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.ReminderLoop, SneedUtils.SneedUtils.MonsterCategories.Champions);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePoolIT, DirectorCards.MagmaWormLoop, SneedUtils.SneedUtils.MonsterCategories.Champions);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePoolIT, DirectorCards.ReminderLoop, SneedUtils.SneedUtils.MonsterCategories.Champions);
 
-                if (isDLC)
-                {
-                    SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.ClayApothecary, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
-                    SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.ClayApothecary, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
-                }
-            }
-            else
-            {
-                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.MagmaWorm, SneedUtils.SneedUtils.MonsterCategories.Champions);
-                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Reminder, SneedUtils.SneedUtils.MonsterCategories.Champions);
-            }
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1Pool, SpawnCards.ClayApothecary, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dlc1Pool, DirectorCards.ClayApothecary, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
         }
     }
 }

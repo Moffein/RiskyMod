@@ -643,6 +643,7 @@ namespace RiskyMod
             TitanicPlains.enabled = SpawnpoolCfg.Bind("Stage 1", "Titanic Plains", true, "Enable spawnpool changes on this stage.").Value;
             DistantRoost.enabled = SpawnpoolCfg.Bind("Stage 1", "Distant Roost", true, "Enable spawnpool changes on this stage.").Value;
             SnowyForest.enabled = SpawnpoolCfg.Bind("Stage 1", "Siphoned Forest", true, "Enable spawnpool changes on this stage.").Value;
+            Lakes.enabled = SpawnpoolCfg.Bind("Stage 1", "Verdant Falls", true, "Enable spawnpool changes on this stage.").Value;
 
             VillageNight.enabled = SpawnpoolCfg.Bind("Stage 1", "Disturbed Impact", true, "Enable spawnpool changes on this stage.").Value;
             LakesNight.enabled = SpawnpoolCfg.Bind("Stage 1", "Viscous Falls", true, "Enable spawnpool changes on this stage.").Value;
@@ -650,10 +651,12 @@ namespace RiskyMod
             Wetland.enabled = SpawnpoolCfg.Bind("Stage 2", "Wetland Aspect", true, "Enable spawnpool changes on this stage.").Value;
             GooLake.enabled = SpawnpoolCfg.Bind("Stage 2", "Abandoned Aqueduct", true, "Enable spawnpool changes on this stage.").Value;
 
+            DampCaveSimple.enabled = SpawnpoolCfg.Bind("Stage 4", "Abyssal Depths", true, "Enable spawnpool changes on this stage.").Value;
             StadiaJungle.enabled = SpawnpoolCfg.Bind("Stage 4", "Stadia Jungle", true, "Enable spawnpool changes on this stage.").Value;
             SirensCall.enabled = SpawnpoolCfg.Bind("Stage 4", "Sirens Call", true, "Enable spawnpool changes on this stage.").Value;
 
             SkyMeadow.enabled = SpawnpoolCfg.Bind("Stage 5", "Sky Meadow", true, "Enable spawnpool changes on this stage.").Value;
+            HelminthRoost.enabled = SpawnpoolCfg.Bind("Stage 5", "Helminth Hatchery", true, "Enable spawnpool changes on this stage.").Value;
         }
     }
 }

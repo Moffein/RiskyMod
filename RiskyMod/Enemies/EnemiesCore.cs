@@ -25,7 +25,7 @@ namespace RiskyMod.Enemies
             new MithrixCore();
             new VoidlingCore();
             ModifyEnemies();
-            ModifySpawns();
+            //ModifySpawns();
         }
 
         private void ModifyEnemies()
@@ -68,13 +68,13 @@ namespace RiskyMod.Enemies
 
         private void ModifySpawns()
         {
-            return; //TODO: FIX
             if (!modifySpawns) return;
             SpawnCards.Init();
 
             new TitanicPlains();
             new DistantRoost();
             new SnowyForest();
+            new Lakes();
 
             new LakesNight();
             new VillageNight();
@@ -82,10 +82,12 @@ namespace RiskyMod.Enemies
             new Wetland();
             new GooLake();
 
+            new DampCaveSimple();
             new SirensCall();
             new StadiaJungle();
 
             new SkyMeadow();
+            new HelminthRoost();
         }
     }
 
@@ -230,6 +232,7 @@ namespace RiskyMod.Enemies
         public static DirectorCard ImpOverlord;
         public static DirectorCard Grovetender;
         public static DirectorCard RoboBall;
+        public static DirectorCard XiConstructLoop;
 
         public static DirectorCard Reminder;
         public static DirectorCard ReminderLoop;
@@ -286,6 +289,8 @@ namespace RiskyMod.Enemies
 
             Reminder = BuildDirectorCard(SpawnCards.Reminder);
             ReminderLoop = BuildDirectorCard(SpawnCards.Reminder, 1, 5, DirectorCore.MonsterSpawnDistance.Standard);
+
+            XiConstructLoop = BuildDirectorCard(SpawnCards.XiConstruct, 1, 5, DirectorCore.MonsterSpawnDistance.Standard);
         }
 
         public static DirectorCard BuildDirectorCard(CharacterSpawnCard spawnCard)
