@@ -28,11 +28,11 @@ namespace RiskyMod.Tweaks
                     SneedUtils.SneedUtils.AddItemTag(DLC1Content.Items.BearVoid, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.ExtraShrineItem, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.ExtraStatsOnLevelUp, ItemTag.AIBlacklist);
-                    SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.GoldOnStageStart, ItemTag.AIBlacklist);
+                    SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.BarrageOnBoss, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.IncreasePrimaryDamage, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.LowerPricedChests, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.OnLevelUpFreeUnlock, ItemTag.AIBlacklist);
-                    SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.ResetChests, ItemTag.AIBlacklist);
+                    SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.ItemDropChanceOnKill, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.TeleportOnLowHealth, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.DelayedDamage, ItemTag.AIBlacklist);
                 }

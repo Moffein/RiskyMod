@@ -5,7 +5,7 @@ Mostly the same, with buffs to his less-used skills.
 ## Primaries
 
 - Double Tap
-	- **(RiskyTweaks)** Fixed attack speed cap being lower than intended.
+	- **(RiskyFixes)** Fixed attack speed cap being lower than intended.
 	
 ## Secondaries
 

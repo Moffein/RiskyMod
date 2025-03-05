@@ -68,6 +68,7 @@ namespace RiskyMod.Enemies
 
         private void ModifySpawns()
         {
+            return; //TODO: FIX
             if (!modifySpawns) return;
             SpawnCards.Init();
 
