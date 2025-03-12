@@ -640,6 +640,8 @@ namespace RiskyMod
         {
             SpawnpoolCfg = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"RiskyMod_Spawnpools.cfg"), true);
 
+            EnemiesCore.spawnpoolDLCReplacementFix = SpawnpoolCfg.Bind("General", "Fix DLC Enemy Replacements (Breaks spawnpools without SotV)", true, "Restores SotV enemy replacements.").Value;
+
             TitanicPlains.enabled = SpawnpoolCfg.Bind("Stage 1", "Titanic Plains", true, "Enable spawnpool changes on this stage.").Value;
             DistantRoost.enabled = SpawnpoolCfg.Bind("Stage 1", "Distant Roost", true, "Enable spawnpool changes on this stage.").Value;
             SnowyForest.enabled = SpawnpoolCfg.Bind("Stage 1", "Siphoned Forest", true, "Enable spawnpool changes on this stage.").Value;

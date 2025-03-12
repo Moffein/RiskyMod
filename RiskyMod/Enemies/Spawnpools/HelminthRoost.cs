@@ -14,7 +14,7 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
-            var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/helminthroost/dccsHelminthRoostMonstersDLC1.asset").WaitForCompletion();
+            var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/helminthroost/dccsHelminthRoostMonsters.asset").WaitForCompletion();
             SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1Pool, SpawnCards.Gup, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
         }
     }

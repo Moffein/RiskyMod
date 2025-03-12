@@ -22,7 +22,7 @@ namespace RiskyMod.Enemies.Spawnpools
                 Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Grandparent/cscGrandparent.asset").WaitForCompletion()
             };
 
-            ModifyCards(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/villagenight/dccsVillageNightMonsters.asset").WaitForCompletion(), cardsToModify);
+            ModifyCards(Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/villagenight/dccsVillageNightMonsters_Additional.asset").WaitForCompletion(), cardsToModify);
         }
 
         private void ModifyCards(DirectorCardCategorySelection dccs, List<SpawnCard> cardList)
@@ -38,7 +38,8 @@ namespace RiskyMod.Enemies.Spawnpools
                 }
             }
 
-            dccs.AddCard(SneedUtils.SneedUtils.FindCategoryIndexByName(dccs, SneedUtils.SneedUtils.MonsterCategories.Minibosses), DirectorCards.GolemNature);
+            //not needed anymore?
+            //dccs.AddCard(SneedUtils.SneedUtils.FindCategoryIndexByName(dccs, SneedUtils.SneedUtils.MonsterCategories.Minibosses), DirectorCards.GolemNature);
         }
     }
 }

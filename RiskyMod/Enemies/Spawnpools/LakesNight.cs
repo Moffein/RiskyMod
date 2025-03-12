@@ -24,11 +24,9 @@ namespace RiskyMod.Enemies.Spawnpools
             };
 
             var basePool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/lakesnight/dccsLakesnightMonsters.asset").WaitForCompletion();
-            var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/lakesnight/dccsLakesnightMonstersDLC1.asset").WaitForCompletion();
-            var dlc2Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/lakesnight/dccsLakesnightMonstersDLC2.asset").WaitForCompletion();
+            var dlc2Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/lakesnight/dccsLakesnightMonsters_DLC1.asset").WaitForCompletion();
 
             ModifyCards(basePool, cardsToModify);
-            ModifyCards(dlc1Pool, cardsToModify);
             ModifyCards(dlc2Pool, cardsToModify);
         }
 

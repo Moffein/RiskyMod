@@ -13,10 +13,9 @@ namespace RiskyMod.Enemies.Spawnpools
 
             var basePool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/skymeadow/dccsSkyMeadowMonsters.asset").WaitForCompletion();
             var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/skymeadow/dccsSkyMeadowMonstersDLC1.asset").WaitForCompletion();
-            var dlc2Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/skymeadow/dccsSkyMeadowMonstersDLC2.asset").WaitForCompletion();
+            var dlc2Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/dccsSkyMeadowMonstersDLC2.asset").WaitForCompletion();
 
-            var basePoolIT = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itkymeadow/dccsITSkyMeadowMonsters.asset").WaitForCompletion();
-            var dlc1PoolIT = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itskymeadow/dccsITSkyMeadowMonstersDLC1.asset").WaitForCompletion();
+            var basePoolIT = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itskymeadow/dccsITSkyMeadowMonsters.asset").WaitForCompletion();
             var dlc2PoolIT = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itskymeadow/dccsITSkyMeadowMonstersDLC2.asset").WaitForCompletion();
 
             SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(basePool, SpawnCards.Mushrum, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
@@ -34,9 +33,9 @@ namespace RiskyMod.Enemies.Spawnpools
             SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1Pool, SpawnCards.AlphaConstruct, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
             SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1Pool, SpawnCards.XiConstruct, SneedUtils.SneedUtils.MonsterCategories.Champions);
             SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1Pool, SpawnCards.Gup, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
-            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1PoolIT, SpawnCards.AlphaConstruct, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
-            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1PoolIT, SpawnCards.XiConstruct, SneedUtils.SneedUtils.MonsterCategories.Champions);
-            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1PoolIT, SpawnCards.Gup, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(basePoolIT, SpawnCards.AlphaConstruct, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(basePoolIT, SpawnCards.XiConstruct, SneedUtils.SneedUtils.MonsterCategories.Champions);
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(basePoolIT, SpawnCards.Gup, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
         }
     }
 }

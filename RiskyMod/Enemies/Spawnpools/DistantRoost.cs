@@ -17,9 +17,10 @@ namespace RiskyMod.Enemies.Spawnpools
             SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(basePool, SpawnCards.Wisp, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.Jellyfish, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
 
-            /*var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/blackbeach/dccsBlackBeachMonstersDLC1.asset").WaitForCompletion();
+            //todo: actually make a separate dlc pool for these
+            var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/blackbeach/dccsBlackBeachMonsters.asset").WaitForCompletion();
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dlc1Pool, DirectorCards.AlphaConstructLoop, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
-            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dlc1Pool, DirectorCards.XiConstructLoop, SneedUtils.SneedUtils.MonsterCategories.Champions);*/
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dlc1Pool, DirectorCards.XiConstructLoop, SneedUtils.SneedUtils.MonsterCategories.Champions);
         }
     }
 }

@@ -18,6 +18,11 @@ namespace RiskyMod.Enemies.Spawnpools
         private void ApplyChanges(DirectorCardCategorySelection dccs)
         {
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dccs, DirectorCards.Reminder, SneedUtils.SneedUtils.MonsterCategories.Champions);
+
+            if (EnemiesCore.spawnpoolDLCReplacementFix)
+            {
+                SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dccs, SpawnCards.Beetle, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
+            }
         }
     }
 }

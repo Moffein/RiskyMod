@@ -13,7 +13,8 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
-            var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/foggyswamp/dccsFoggySwampMonstersDLC1.asset").WaitForCompletion();
+            var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/foggyswamp/dccsFoggySwampMonstersDLC.asset").WaitForCompletion();
+            SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1Pool, SpawnCards.Gup, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dlc1Pool, DirectorCards.GupLoop, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(dlc1Pool, DirectorCards.Geep, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
         }

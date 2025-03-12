@@ -20,6 +20,11 @@ namespace RiskyMod.Enemies.Spawnpools
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.Vulture, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.Mushrum, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.Grovetender, SneedUtils.SneedUtils.MonsterCategories.Champions);
+
+            if (EnemiesCore.spawnpoolDLCReplacementFix)
+            {
+                SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(basePool, SpawnCards.LemurianBruiser, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+            }
         }
     }
 }

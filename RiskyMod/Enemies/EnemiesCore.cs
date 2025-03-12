@@ -19,13 +19,14 @@ namespace RiskyMod.Enemies
         public static bool modifyEnemies = true;
         public static bool modifySpawns = true;
         public static bool infernoCompat = true;
+        public static bool spawnpoolDLCReplacementFix = true;
         public EnemiesCore()
         {
             On.RoR2.CharacterAI.BaseAI.UpdateTargets += PrioritizePlayers.AttemptTargetPlayer;
             new MithrixCore();
             new VoidlingCore();
             ModifyEnemies();
-            //ModifySpawns();
+            ModifySpawns();
         }
 
         private void ModifyEnemies()
@@ -82,6 +83,8 @@ namespace RiskyMod.Enemies
             new Wetland();
             new GooLake();
 
+            new FrozenWall();
+
             new DampCaveSimple();
             new SirensCall();
             new StadiaJungle();
@@ -112,6 +115,7 @@ namespace RiskyMod.Enemies
         public static CharacterSpawnCard BeetleGuard;
         public static CharacterSpawnCard Mushrum;
         public static CharacterSpawnCard Bison;
+        public static CharacterSpawnCard LemurianBruiser;
         public static CharacterSpawnCard ClayApothecary;
         public static CharacterSpawnCard Gup, Geep;
 
@@ -156,6 +160,7 @@ namespace RiskyMod.Enemies
             BeetleGuard = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbeetleguard");
             Mushrum = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscminimushroom");
             Bison = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Bison/cscBison.asset").WaitForCompletion();
+            LemurianBruiser = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/LemurianBruiser/cscLemurianBruiser.asset").WaitForCompletion();
 
             Bronzong = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscbell");
             GreaterWisp = LegacyResourcesAPI.Load<CharacterSpawnCard>("spawncards/characterspawncards/cscgreaterwisp");
@@ -183,6 +188,7 @@ namespace RiskyMod.Enemies
             Geep = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/Gup/cscGeepBody.asset").WaitForCompletion();
 
             XiConstruct = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/MajorAndMinorConstruct/cscMegaConstruct.asset").WaitForCompletion();
+
 
             DirectorCards.Init();
         }

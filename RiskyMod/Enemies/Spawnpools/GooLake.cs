@@ -15,7 +15,6 @@ namespace RiskyMod.Enemies.Spawnpools
             var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/Base/goolake/dccsGooLakeMonstersDLC1.asset").WaitForCompletion();
 
             var basePoolIT = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itgoolake/dccsITGooLakeMonsters.asset").WaitForCompletion();
-            var dlc1PoolIT = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC1/itgoolake/dccsITGooLakeMonstersDLC1.asset").WaitForCompletion();
 
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.MagmaWormLoop, SneedUtils.SneedUtils.MonsterCategories.Champions);
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.ReminderLoop, SneedUtils.SneedUtils.MonsterCategories.Champions);
