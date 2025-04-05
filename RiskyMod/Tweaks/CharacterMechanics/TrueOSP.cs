@@ -70,11 +70,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                                 bool shieldOnly = self.body.HasBuff(RoR2Content.Buffs.AffixLunar) || (self.body.inventory && self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
                                 bool shieldOnlyOSP = shieldOnly && !ShieldGating.enabled && !Items.Lunar.Transcendence.alwaysShieldGate;
 
-                                float ospHealthThreshold = self.fullHealth * OSPComponent.ospThreshold;
-                                if (shieldOnlyOSP)
-                                {
-                                    ospHealthThreshold = self.fullCombinedHealth * 0.9f;
-                                }
+                                float ospHealthThreshold = (shieldOnlyOSP ? self.fullCombinedHealth : self.fullHealth) * OSPComponent.ospThreshold;
 
                                 if (self.health >= ospHealthThreshold && finalHealth < ospHealthThreshold)
                                 {
