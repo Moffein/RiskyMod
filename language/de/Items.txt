@@ -131,12 +131,14 @@
 	
 	"ITEM_BARRAGEONBOSS_DESC_RISKYMOD": "Während Boss-Events wird das Gebiet von <style=cIsUtility>5</style> Raketen bombardiert, die <style=cIsDamage>2,5 % <style=cStack>(+2,5 % pro Stapel)</style> der maximalen Boss-Gesundheit als Schaden verursachen</style>. Vor dem Boss-Event erhältst du zusätzliche Raketen, bis maximal <style=cIsUtility>25</style> <style=cStack>(+5 pro Stapel)</style>, pro erhaltenen <style=cIsUtility>50</style> Gold. <style=cIsUtility>Das erforderliche Gold skaliert mit der Zeit.</style>",
 	
-	"ITEM_ATTACKSPEEDPERNEARBYALLYORENEMY_DESC_RISKYMOD": "Erhöht deine <style=cIsDamage>Angriffsgeschwindigkeit</style> um <style=cIsDamage>10 %</style> für bis zu <style=cIsUtility>4</style> <style=cStack>(+2 pro Stapel)</style> Gegner und Verbündete innerhalb von <style=cIsUtility>20</style> <style=cStack>(+5 pro Stapel)</style> Metern.",
+	"ITEM_ATTACKSPEEDPERNEARBYALLYORENEMY_DESC_RISKYMOD": "Erhöht deine <style=cIsDamage>Angriffsgeschwindigkeit</style> um <style=cIsDamage>12 %</style> für bis zu <style=cIsUtility>3</style> <style=cStack>(+2 pro Stapel)</style> Gegner und Verbündete innerhalb von <style=cIsUtility>20</style> <style=cStack>(+5 pro Stapel)</style> Metern.",
 	
 	"ITEM_TELEPORTONLOWHEALTH_DESC_RISKYMOD": "Wenn du unter <style=cIsHealth>25 %</style> Gesundheit fällst, erhältst du eine <style=cIsHealing>temporäre Barriere</style> in Höhe von <style=cIsHealing>100 %</style> deiner <style=cIsHealing>maximalen Gesundheit</style>. Du erhältst außerdem <style=cIsUtility>8 Sek.</style> lang eine Dimensionsaura, die bei Gegnern <style=cIsDamage>Blutung</style> verursacht und sie <style=cIsUtility>wegteleportiert</style>. Pro Gegner, der von der Aura <style=cIsDamage>getötet</style> wird, wird die Dauer um <style=cIsUtility>1 Sek.</style> <style=cIsUtility>verlängert</style>. Wird zu Beginn der Ebene erneuert.",
 	
 	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "Gegner am Boden, die mit einer beliebigen <style=cIsUtility>Fähigkeit</style> getroffen werden, werden <style=cIsUtility>in die Luft geschleudert</style> und <style=cIsUtility>betäubt</style>. Gegner, die in der Luft getroffen werden, werden erneut <style=cIsUtility>hochgeworfen</style>, bis maximal <style=cIsUtility>2-mal</style> <style=cStack>(+1 pro Stapel)</style>. Hochgeschleuderte Gegner erleiden jedes Mal um <style=cIsDamage>15 %</style> erhöhten Schaden aus allen Quellen. Lädt sich nach <style=cIsUtility>15 Sek.</style> wieder auf.",
 	
 	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Verleiht für jeden Buff einen Bonus von <style=cIsUtility>5 %</style> auf <style=cIsUtility>ALLE Werte</style>, bis maximal <style=cIsUtility>4</style> <style=cStack>(+4 pro Stapel)</style>.",
+	
+	"ITEM_SPEEDBOOSTPICKUP_DESC_RISKYMOD": "Spawnt alle <style=cIsUtility>10 Sek.</style> <style=cStack>(-10% pro Stapel)</style> Energiekugeln in der Nähe. Verleiht außerdem <style=cIsUtility>+12 Sek.</style> lang bis zu <style=cIsUtility>3</style><style=cIsUtility>-mal</style> <style=cStack>(+2 pro Stapel)</style> <style=cIsUtility>+12 % Bewegungsgeschwindigkeit</style>."
 	}
 }

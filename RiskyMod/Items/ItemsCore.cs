@@ -64,6 +64,7 @@ namespace RiskyMod.Items
             new PowerElixir();
 
             new BolsteringLantern();
+            new ElusiveAntlers();
         }
 
         private void ModifyUncommon()

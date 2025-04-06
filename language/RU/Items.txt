@@ -131,12 +131,14 @@
 	
 	"ITEM_BARRAGEONBOSS_DESC_RISKYMOD": "Во время битвы с боссом вызывает <style=cIsUtility>5</style> ракет, наносящих урон в размере <style=cIsDamage>2,5% <style=cStack>(+2,5% за шт.)</style> от максимального запаса здоровья босса</style>. За каждые <style=cIsUtility>25 ед.</style> золота, собранных до начала боя, добавляется ещё одна ракета. Всего можно накопить до <style=cIsUtility>20</style> <style=cStack>(+5 за шт.)</style> ракет. <style=cIsUtility>Требуемое количество золота увеличивается со временем.</style>",
 	
-	"ITEM_ATTACKSPEEDPERNEARBYALLYORENEMY_DESC_RISKYMOD": "Увеличивает <style=cIsDamage>скорость атаки</style> на <style=cIsDamage>10%</style> за каждого врага и союзника в радиусе <style=cIsUtility>20 м</style> <style=cStack>(+5 м за шт.)</style>, но не более <style=cIsUtility>4</style> <style=cStack>(+2 за шт.)</style>.",
+	"ITEM_ATTACKSPEEDPERNEARBYALLYORENEMY_DESC_RISKYMOD": "Увеличивает <style=cIsDamage>скорость атаки</style> на <style=cIsDamage>12%</style> за каждого врага и союзника в радиусе <style=cIsUtility>20 м</style> <style=cStack>(+5 м за шт.)</style>, но не более <style=cIsUtility>3</style> <style=cStack>(+2 за шт.)</style>.",
 	
 	"ITEM_TELEPORTONLOWHEALTH_DESC_RISKYMOD": "Когда здоровья остаётся меньше <style=cIsHealth>25%</style>, даёт <style=cIsHealing>временный барьер</style>, прочность которого равна <style=cIsHealing>100%</style> от <style=cIsHealing>максимального запаса здоровья</style> выжившего. Кроме того, выжившего на <style=cIsUtility>8</style> сек. окружает аура, которая вызывает <style=cIsDamage>Кровотечение</style> у врагов и <style=cIsUtility>телепортирует</style> их на какое-то расстояние. <style=cIsDamage>Если враг умирает от воздействия ауры</style>, её время действия <style=cIsUtility>продлевается</style> на <style=cIsUtility>1 сек</style>. Перезаряжается в начале каждого уровня.",
 	
 	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "При получении урона от любого <style=cIsUtility>навыка</style> враги <style=cIsUtility>подбрасываются в воздух</style> и <style=cIsUtility>оглушаются</style>. При получении урона в воздухе враги снова <style=cIsUtility>подбрасываются</style>, но не более <style=cIsUtility>2</style> <style=cStack>(+1 за шт.) раз</style>. Подброшенные враги получают на <style=cIsDamage>15%</style> больше урона от всех источников за каждое подбрасывание. Перезаряжается <style=cIsUtility>15</style> сек.",
 	
 	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Увеличивает <style=cIsUtility>все параметры</style> на <style=cIsUtility>5%</style> за каждое усиление. Суммируется до <style=cIsUtility>4</style> раз <style=cStack>(+4 за шт.)</style>.",
+	
+	"ITEM_SPEEDBOOSTPICKUP_DESC_RISKYMOD": "Каждые <style=cIsUtility>10</style> <style=cStack>(-10% за шт.)</style> сек. создаёт поблизости сферы, увеличивающие скорость передвижения на <style=cIsUtility>12%</style> на <style=cIsUtility>12</style> сек. Их эффект суммируется до <style=cIsUtility>3</style> <style=cStack>(+2 за шт.)</style> <style=cIsUtility>раз</style>."
 	}
 }

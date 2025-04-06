@@ -272,12 +272,14 @@
 	
 	"ITEM_BARRAGEONBOSS_DESC_RISKYMOD": "在首领事件期间，产生<style=cIsUtility>5</style>发导弹轰炸该区域，造成首领最大生命值<style=cIsDamage>2.5%<style=cStack>（每层堆叠+2.5%）</style>的伤害</style>。在首领事件之前，每获得<style=cIsUtility>25</style>金钱即可获得额外的导弹，最多叠加至<style=cIsUtility>20</style>个<style=cStack>（每层堆叠+5）</style>。<style=cIsUtility>所需金钱会随时间变化。</style>",
 
-	"ITEM_ATTACKSPEEDPERNEARBYALLYORENEMY_DESC_RISKYMOD": "20</style><style=cStack>（每层堆叠+5）</style>米内有超过<style=cIsUtility>4</style><style=cStack>（每层堆叠+2）</style>名敌人和盟友时<style=cIsUtility>，你的<style=cIsDamage>攻击速度</style>提高<style=cIsDamage>10%</style>。",
+	"ITEM_ATTACKSPEEDPERNEARBYALLYORENEMY_DESC_RISKYMOD": "20</style><style=cStack>（每层堆叠+5）</style>米内有超过<style=cIsUtility>3</style><style=cStack>（每层堆叠+2）</style>名敌人和盟友时<style=cIsUtility>，你的<style=cIsDamage>攻击速度</style>提高<style=cIsDamage>12%</style>。",
 	
 	"ITEM_TELEPORTONLOWHEALTH_DESC_RISKYMOD": "生命值降至<style=cIsHealth>25%</style>以下时，你将获得一面等同于<style=cIsHealing>100%</style><style=cIsHealing>最大生命值</style>的<style=cIsHealing>临时屏障</style>。获得一个次元光环，持续<style=cIsUtility>8秒</style>，使敌人<style=cIsDamage>流血</style>并将其向远处<style=cIsUtility>传送</style>。光环每<style=cIsDamage>击杀一个敌人</style>，持续时间会<style=cIsUtility>延长</style><style=cIsUtility>1秒</style>。在每个关卡开始时，它都会再生。",
 	
 	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "地面敌人被任意<style=cIsUtility>技能</style>命中都会被<style=cIsUtility>击飞</style>并<style=cIsUtility>眩晕</style>。空中敌人被击中将被再次<style=cIsUtility>击飞</style>，最多<style=cIsUtility>2次</style><style=cStack>（每层堆叠+1）</style>。被击飞的敌人每次被击飞都会使受到的所有来源伤害提高<style=cIsDamage>15%</style>。每隔<style=cIsUtility>15秒</style>充能。",
 	
 	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "每有一个强化，获得<style=cIsUtility>5%</style><style=cIsUtility>全属性</style>加成，最多叠加<style=cIsUtility>4</style>次<style=cStack>（每层堆叠+4）</style>。",
+	
+	"ITEM_SPEEDBOOSTPICKUP_DESC_RISKYMOD": "每隔<style=cIsUtility>10秒</style>在附近生成能量球体<style=cStack>（每层堆叠-10%）</style>，获得<style=cIsUtility>+12%移动速度加成</style>，最多叠加<style=cIsUtility>3</style><style=cStack>（每层堆叠+2）</style><style=cIsUtility>次</style>，持续<style=cIsUtility>12秒</style>。",
 	}
 }
