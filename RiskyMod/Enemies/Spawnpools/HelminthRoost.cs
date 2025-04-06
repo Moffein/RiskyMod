@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using HG;
+using RoR2;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,8 +15,10 @@ namespace RiskyMod.Enemies.Spawnpools
         {
             if (!enabled) return;
 
+            var basePool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/helminthroost/dccsHelminthRoostMonstersDLC2Only.asset").WaitForCompletion();
             var dlc1Pool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/helminthroost/dccsHelminthRoostMonsters.asset").WaitForCompletion();
             SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1Pool, SpawnCards.Gup, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.LunarGolemSkyMeadow, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
         }
     }
 }

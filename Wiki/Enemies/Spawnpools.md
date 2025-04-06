@@ -48,6 +48,9 @@
 	- Mushrums have a lower spawnrate
 	- Added Alloy Vultures
 	- Added Grovetender
+	
+- Abyssal Depths
+	- Removed Gups.
 
 - Siren’s Call
 	- Added Overloading Worms
@@ -56,7 +59,6 @@
 - Sky Meadow
 	- Removed Alpha Constructs
 	- Removed Xi Constructs
-	- Removed Lesser Wisps
 	- Removed Bronzongs
 	- Removed Gups
 	- Added Jellyfish
@@ -64,3 +66,8 @@
 	- Added Lunar Golems
 		- HP/Director Cost is scaled to be the same as Elder Lemurians
 	- Magma Worms now spawn even when SotV is enabled.
+
+- Helminth Hatchery
+	- Removed Gups.
+	- Added Lunar Golems
+		- HP/Director Cost is scaled to be the same as Elder Lemurians
