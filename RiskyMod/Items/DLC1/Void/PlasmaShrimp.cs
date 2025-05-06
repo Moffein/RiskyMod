@@ -30,7 +30,7 @@ namespace RiskyMod.Items.DLC1.Void
                     ))
                     {
                         c.Emit(OpCodes.Ldarg_1);    //damageInfo
-                        c.Emit(OpCodes.Ldloc, 6);    //master
+                        c.Emit(OpCodes.Ldloc, 7);    //master
                         c.EmitDelegate<Func<float, DamageInfo, CharacterMaster, float>>((origShield, damageInfo, master) =>
                         {
                             if (origShield <= 0f) return origShield;//If shield is <= 0, dont bother rolling since the damage will be rejected anywyas.

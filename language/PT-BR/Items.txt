@@ -135,14 +135,9 @@
 	
 	"ITEM_BARRAGEONBOSS_DESC_RISKYMOD": "Durante eventos de chefe, <style=cIsUtility>5</style> mísseis bombardeiam a área, causando dano correspondente a <style=cIsDamage>2,5% <style=cStack>(+2,5% por acúmulo)</style> da saúde máxima do chefe</style>. Antes do evento de chefe, concede mísseis adicionais até o máximo de <style=cIsUtility>20</style> <style=cStack>(+5 por acúmulo)</style> a cada <style=cIsUtility>25</style> de ouro obtido. <style=cIsUtility>O requisito de ouro aumenta com o tempo.</style>",
 	
-	"ITEM_ATTACKSPEEDPERNEARBYALLYORENEMY_DESC_RISKYMOD": "Aumenta a sua <style=cIsDamage>velocidade de ataque</style> em <style=cIsDamage>12%</style> por até <style=cIsUtility>3</style> <style=cStack>(+2 por acúmulo)</style> inimigos e aliados dentro de <style=cIsUtility>20</style> <style=cStack>(+5 por acúmulo)</style> metros.",
-	
 	"ITEM_TELEPORTONLOWHEALTH_DESC_RISKYMOD": "Atingir menos de <style=cIsHealth>25% de saúde</style> converte <style=cIsHealing>100%</style> da sua <style=cIsHealing>saúde máxima</style> em uma <style=cIsHealing>barreira temporária</style>. Ganhe uma aura dimensional por <style=cIsUtility>8 s</style> que causa <style=cIsDamage>sangramento</style> e <style=cIsUtility>teleporta</style> os inimigos para longe. <style=cIsDamage>Inimigos abatidos</style> pela aura <style=cIsUtility>aumentam</style> a duração por <style=cIsUtility>1 s</style>. Regenera no início de cada fase.",
 	
 	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "Inimigos no chão atingidos por qualquer <style=cIsUtility>habilidade</style> são <style=cIsUtility>lançados ao ar</style> e <style=cIsUtility>atordoados</style>. Inimigos atingidos enquanto estão no ar são <style=cIsUtility>lançados</style> novamente até <style=cIsUtility>2 vezes</style> <style=cStack>(+1 por acúmulo)</style>. Inimigos lançados sofrem mais <style=cIsDamage>15%</style> de dano de todas as fontes por lançamento. Recarrega após <style=cIsUtility>15 s</style>.",
 	
 	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Concede <style=cIsUtility>5%</style> de aumento em <style=cIsUtility>TODAS as estatísticas</style> para cada reforço até o máximo de <style=cIsUtility>4</style> <style=cStack>(+4 por acúmulo)</style>.",
-	
-	"ITEM_SPEEDBOOSTPICKUP_DESC_RISKYMOD": "Gera orbes de energia próximos a cada <style=cIsUtility>10 s</style> <style=cStack>(-10% por acúmulo)</style>, que concedem <style=cIsUtility>+12% de velocidade de movimento</style> até <style=cIsUtility>3</style> <style=cStack>(+2 por acúmulo)</style> <style=cIsUtility>vezes</style> por <style=cIsUtility>12 s</style>.",
-	}
 }

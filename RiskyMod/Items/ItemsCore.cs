@@ -62,9 +62,6 @@ namespace RiskyMod.Items
 
             new DelicateWatch();
             new PowerElixir();
-
-            new BolsteringLantern();
-            new ElusiveAntlers();
         }
 
         private void ModifyUncommon()

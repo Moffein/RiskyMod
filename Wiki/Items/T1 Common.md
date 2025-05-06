@@ -34,17 +34,6 @@
 		- +15% damage
 		- 1% max health healed every second
 	- **(RiskyTweaks)** Spawns in Simulacrum and Mithrix.
-	
-- Bolstering Lantern
-	- Max buff stacks reduced from 4 -> 3
-	- Attack speed bonus increased from 7.5% -> 12%
-	
-	*SotS Part 2 nerf made this straight up worse than taking Syringes. New numbers are based around the idea that Focus Crystal is worth 2 generic White items.*
-
-- Elusive Antlers
-	- Max buffs increased from 3 (+1) to 3 (+2)
-	
-	*First stack is great, additional stacks were worse than just taking Hooves.*
 
 ## Nerfs
 

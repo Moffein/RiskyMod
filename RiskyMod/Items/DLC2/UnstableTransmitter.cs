@@ -21,7 +21,7 @@ namespace RiskyMod.Items.DLC2
         private void TeleportOnLowHealthBehavior_TryProc(MonoMod.Cil.ILContext il)
         {
             ILCursor c = new ILCursor(il);
-            if (c.TryGotoNext(MoveType.After, x => x.MatchLdcR4(0.35f)))
+            if (c.TryGotoNext(MoveType.After, x => x.MatchLdcR4(0.6f)))
             {
                 c.EmitDelegate<Func<float, float>>(x => 1f);
             }

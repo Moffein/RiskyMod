@@ -281,9 +281,6 @@ namespace RiskyMod
             Warbanner.enabled = ItemCfg.Bind(commonString, "Warbanner", true, itemConfigDescString).Value;
             Warbanner.UseModdedBuff = ItemCfg.Bind(commonString, "Warbanner - Use Custom Buff", true, "Warbanner is handled via a custom buff and GameObject so that it doesn't interfere with other mods that rely on it.").Value;
 
-            BolsteringLantern.enabled = ItemCfg.Bind(commonString, "Bolstering Lantern", true, itemConfigDescString).Value;
-            ElusiveAntlers.enabled = ItemCfg.Bind(commonString, "Elusive Antlers", true, itemConfigDescString).Value;
-
             //Makes it too easy to stunlock things even at very low stacks.
             //StunGrenade.enabled = ItemCfg.Bind(commonString, "Stun Grenade", true, itemConfigDescString).Value;
             StunGrenade.enabled = false;
