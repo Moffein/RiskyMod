@@ -9,6 +9,5 @@
 	"KEYWORD_VOIDCORRUPTION_RISKYMOD" : "<style=cKeywordName>Corrupção</style><style=cSub>Receba Corrupção ao sofrer dano, abater inimigos ou segurar Itens Nulos.",
     "KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>Contágio</style><style=cSub>Primária: Venenoso\nSecundária: Contaminado\nAuxiliar: Contaminado\nEspecial: Infecta, causa 6x100% de dano e pode ativar efeitos de itens.",
 	"KEYWORD_LOWHEALTHPROTECTION_RISKYMOD": "<style=cKeywordName>Salvação</style><style=cSub>Todos os sobreviventes vivos ganham +7% em todas as estatísticas.",
-	"SEEKER_SECONDARY_TRANQUILITY_DESCRIPTION_RISKYMOD": "<style=cKeywordName>Tranquilidade</style><style=cSub>Cada Tranquilidade aumenta a dano da Mão Invisível em <style=cIsDamage>100%</style>.",
 	}
 }

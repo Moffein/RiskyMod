@@ -1,0 +1,140 @@
+{
+	strings:
+	{
+	"ITEM_FLATHEALTH_PICKUP_RISKYMOD": "Erhöht die Gesundheit.",
+	"ITEM_FLATHEALTH_DESC_RISKYMOD": "Erhöht die <style=cIsHealing>maximale Gesundheit</style> um <style=cIsHealing>1</style><style=cStack> (+1 pro Stapel)</style>.",
+	
+	"ITEM_CRITGLASSES_PICKUP_RISKYMOD": "Erhöht die kritische Trefferchance um 7%. 'Kritische Treffer' verdoppeln den Schaden.",
+	"ITEM_CRITGLASSES_DESC_RISKYMOD": "Deine Angriffe haben eine Chance von <style=cIsDamage>10%</style> <style=cStack>(+7% pro Stapel)</style> '<style=cIsDamage>kritisch zu treffen</style>', und <style=cIsDamage>doppelten Schaden</style> zu verursachen.",
+	
+	"ITEM_STICKYBOMB_DESC_RISKYMOD": "<style=cIsDamage>5%</style> <style=cStack>(+5% pro Stapel)</style> Wahrscheinlichkeit bei einem Treffer eine <style=cIsDamage>Bombe</style> an einen Gegner zu heften, die beim Detonieren <style=cIsDamage>240%</style> GESAMTSCHADEN verursacht.",
+	
+	"ITEM_CROWBAR_PICKUP_RISKYMOD": "Fügt Gegnern mit dem ersten Treffer zusätzlichen Schaden zu.",
+	"ITEM_CROWBAR_DESC_RISKYMOD": "Fügt Gegnern <style=cIsDamage>+45%</style> <style=cStack>(+45% pro Stapel)</style> zusätzlichen Schaden mit dem <style=cIsDamage>ersten Treffer</style> zu.",
+	
+	"ITEM_WARDONLEVEL_PICKUP_RISKYMOD": "Stellt beim Stufenaufstieg oder Auslösen des Teleporter-Events ein Kriegsbanner auf, das den Schaden, die Angriffsgeschwindigkeit, Bewegungsgeschwindigkeit und maximale Gesundheit aller Verbündeten erhöht.",
+	"ITEM_WARDONLEVEL_DESC_RISKYMOD": "Stellt beim <style=cIsUtility>Stufenaufstieg</style> oder Auslösen des <style=cIsUtility>Teleporter-Events</style> ein Kriegsbanner auf, das alle Verbündeten innerhalb von <style=cIsUtility>16m</style> <style=cStack>(+8m pro Stapel)</style> stärkt. Erhöht den <style=cIsDamage>Schaden</style> um <style=cIsDamage>15%</style>, die <style=cIsDamage>Angriffsgeschwindigkeit</style> und <style=cIsUtility>Bewegungsgeschwindigkeit</style> um <style=cIsDamage>30%</style>. Regeneriert außerdem <style=cIsHealing>1%</style> deiner <style=cIsHealing>Gesundheit</style> jede Sekunde.",
+	
+	"ITEM_IGNITEONKILL_DESC_RISKYMOD": "<style=cIsDamage>Entzündet</style> Tod eines Gegners alle Gegner innerhalb von <style=cIsDamage>16m</style> und fügt ihnen dabei <style=cIsDamage>150%</style> Grundschaden zu. <style=cIsDamage>Brennende</style> Gegner erleiden zusätzlich <style=cIsDamage>150%</style> <style=cStack>(+75% pro Stapel)</style> Grundschaden.",
+
+	"ITEM_BEAR_DESC_RISKYMOD": "<style=cIsHealing>10%</style> <style=cStack>(+10% pro Stapel)</style> Wahrscheinlichkeit, eintreffenden Schaden zu <style=cIsHealing>blockieren</style>. <style=cIsUtility>Unbeeinflusst vom Glück</style>.",
+	
+	"ITEM_SLOWONHIT_DESC_RISKYMOD": "<style=cIsUtility>Verlangsame</style> Gegner bei einem Treffer für <style=cIsUtility>2s</style> <style=cStack>(+2s pro Stapel)</style> um <style=cIsUtility>-80% Bewegungsgeschwindigkeit</style> und <style=cIsDamage>-20% Angriffsgeschwindigkeit</style>.",
+	
+	"ITEM_SEED_DESC_RISKYMOD": "Zugefügter Schaden <style=cIsHealing>heilt</style> dich um <style=cIsHealing>1</style> <style=cIsHealing>Gesundheit</style> und zusätzliche <style=cIsHealing>2% </style> <style=cStack>(+1% pro Stapel)</style> des <style=cIsDamage>zugefügten Schadens</style>.",
+	
+	"ITEM_MISSILE_DESC_RISKYMOD": "<style=cIsDamage>10%</style> Wahrscheinlichkeit, eine Rakete abzufeuern, die <style=cIsDamage>300%</style> <style=cStack>(+210% pro Stapel)</style> GESAMTSCHADEN verursacht.",
+	
+	"ITEM_ICERING_DESC_RISKYMOD": "Treffer, die <style=cIsDamage>mehr als 400% Schaden</style> Verursachen, schaden Gegnern zusätzlich mit einer <style=cIsDamage>Runeneis-Explosion</style>, die sie für <style=cIsUtility>3s</style> <style=cStack>(+3s pro Stapel)</style> um <style=cIsUtility>80% verlangsamt</style> und <style=cIsDamage>200%</style> <style=cStack>(+120% pro Stapel)</style> GESAMTSCHADEN verursacht. Lädt sich alle <style=cIsUtility>10</style> Sekunden wieder auf.",
+	
+	"ITEM_FIRERING_DESC_RISKYMOD": "Treffer, die <style=cIsDamage>mehr als 400% Schaden</style> Verursachen, schaden Gegnern zusätzlich mit einem <style=cIsDamage>Runenflammen-Tornado</style>, der <style=cIsDamage>250%</style> <style=cStack>(+150% pro Stapel)</style> GESAMTSCHADEN über Zeit verursacht. Lädt sich alle <style=cIsUtility>10</style> Sekunden wieder auf.",
+	
+	"ITEM_PHASING_PICKUP_RISKYMOD": "Du wirst bei hohen eingehenden Schaden unsichtbar.",
+	"ITEM_PHASING_DESC_RISKYMOD": "Wahrscheinlichkeit bei hohen eingehenden Schaden <style=cIsUtility>40% Bewegungsgeschwindigkeit</style> zu erhalten und für <style=cIsUtility>3s</style> <style=cStack>(+1.5s pro Stapel)</style> <style=cIsUtility>unsichtbar</style> zu werden. Wahrscheinlichkeit erhöht sich, je höher der eingehende Schaden ist.",
+	
+	"ITEM_EXPLODEONDEATH_DESC_RISKYMOD": "Erzeugt beim Tod eines Gegners eine <style=cIsDamage>Lavasäule</style> mit einem Radius von <style=cIsDamage>16m</style>, die <style=cIsDamage>350 %</style> <style=cStack>(+280 % pro Stapel)</style> Basisschaden verursacht.",
+	
+	"ITEM_SQUIDTURRET_PICKUP_RISKYMOD": "Hoher eingehender Schaden aktiviert einen SQUID-Geschützturm in der Nähe.",
+	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Wahrscheinlichkeit bei hohen eingehenden Schaden einen <style=cIsDamage>SQUID-Geschützturm</style>, der Gegner in der Nähe mit <style=cIsHealing>100% </style> <style=cStack>(+50% pro Stapel)</style> Gesundheit und <style=cIsDamage>100% </style> <style=cStack>(+100% pro Stapel)</style> Angriffsgeschwindigkeit <style=cIsUtility>angreift</style>. Wahrscheinlichkeit erhöht sich, je höher der eingehende Schaden ist. Begrenzt auf <style=cIsUtility>3</style>.",
+	
+	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "<style=cIsDamage>25 %</style> Wahrscheinlichkeit, <style=cIsDamage>Kettenblitze</style> für <style=cIsDamage>80 %</style> GESAMTSCHADEN auf bis zu <style=cIsDamage>3</style> <style=cStack>(+2 pro Stapel)</style> Ziele innerhalb von <style=cIsDamage>25m</style> zu feuern.",
+	
+	"ITEM_THORNS_DESC_RISKYMOD": "Wirst du getroffen, explodierst du in einer Salve aus Klingen, die <style=cIsDamage>160%</style> <style=cStack>(+80% pro Stapel)</style> Schaden verursachen. Trifft bis zu <style=cIsDamage>3</style> <style=cStack>(+2 pro Stapel)</style> Ziele in einem <style=cIsDamage>25m</style> Radius.",
+	
+	"ITEM_SPRINTARMOR_PICKUP_RISKYMOD": "Erhöht die Rüstung und reduziert den erlittenen Schaden beim Sprinten.",
+	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>Erhöht die Rüstung</style> um <style=cIsHealing>10</style> <style=cStack>(+10 pro Stapel)</style>. Erhalte <style=cIsUtility>beim Sprinten</style> zusätzlich <style=cIsHealing>10</style> <style=cStack>(+10 pro Stapel)</style> Rüstung.",
+	
+	"ITEM_EXECUTELOWHEALTHELITE_PICKUP_RISKYMOD": "Verursache zusätzlichen Schaden bei Gegnern mit weniger als 50% Gesundheit.",
+	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Verursache <style=cIsDamage>+30%</style> <style=cStack>(+30% pro Stapel)</style> zusätzlichen Schaden bei Gegnern mit weniger als <style=cIsDamage>50% Gesundheit</style>.",
+	
+	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "Verfalle in Raserei, nachdem du Gegner getötet hast. (Bis zu 3 Stapel)",
+	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Töten von Gegnern</style> lässt dich für <style=cIsDamage>6s</style> in <style=cIsDamage>Raserei</style> verfallen, was deine <style=cIsUtility>Bewegungsgeschwindigkeit</style> und <style=cIsDamage>Angriffsgeschwindigkeit</style> um <style=cIsDamage>15%</style> für jeden getöteten Gegner erhöht. Bis zu <style=cIsDamage>3</style> <style=cStack>(+2 pro Stapel)</style> Ladungen.",
+
+	"ITEM_ENERGIZEDONEQUIPMENTUSE_PICKUP_RISKYMOD": "Beim Aktivieren deiner Ausrüstung erhältst du einen Schub auf deine Angriffs- und Bewegungsgeschwindigkeit.",
+	"ITEM_ENERGIZEDONEQUIPMENTUSE_DESC_RISKYMOD": "Beim Aktivieren deiner Ausrüstung erhältst du <style=cIsDamage>8s</style> <style=cStack>(+4s pro Stapel)</style> <style=cIsUtility>+50% Bewegungsgeschwindigkeit</style> und <style=cIsDamage>+70% Angriffsgeschwindigkeit</style>.",
+	
+	"ITEM_INFUSION_PICKUP_RISKYMOD": "Erhöht deine maximale Gesundheit beim Tod eines Gegners.",
+	"ITEM_INFUSION_DESC_RISKYMOD": "Steigert beim Tod eines Gegners <style=cIsHealing>die Gesundheit dauerhaft</style> um <style=cIsHealing>1</style> <style=cStack>(+1 pro Stapel)</style>. Pro <style=cIsHealing>100 erhaltener Gesundheit</style> wird der Gesundheitsbonus durch das Töten von Gegnern <style=cIsHealth>verringet</style>.",
+	
+	"ITEM_ICICLE_DESC_RISKYMOD": "Das Töten eines Gegners umgibt dich mit einem <style=cIsDamage>Eissturm</style>, der <style=cIsDamage>1200% Schaden pro Sekunde</style> <style=cStack>(+400% pro Stapel) Schaden pro Sekunde</style> anrichtet und Gegner <style=cIsUtility>1,5 Sek.</style> lang um <style=cIsUtility>80 %</style> <style=cIsUtility>verlangsamt</style>. Der Sturm <style=cIsDamage>wächst mit jeder Tötung</style>, was seinen Radius um <style=cIsDamage>3m</style> vergrößert. Kann bis zu <style=cIsDamage>18 m</style> gestapelt werden.",
+	
+	"ITEM_HEADHUNTER_PICKUP_RISKYMOD": "Verursache zusätzlichen Schaden gegen Elitegegner und stiehl vorübergehend die Macht der getöteten Elitegegner.",
+	"ITEM_HEADHUNTER_DESC_RISKYMOD": "Verursache <style=cIsDamage>30%</style> zusätzlichen Schaden gegen Elitegegner. Du erhältst für <style=cIsDamage>10s</style> <style=cStack>(+5s pro Stapel)</style> die <style=cIsDamage>Macht</style> jedes getöteten Elite-Monsters.",
+	
+	"ITEM_FALLBOOTS_PICKUP_RISKYMOD": "Erhöht die Sprunghöhe und Kontrolle in der Luft. Halte „Interagieren“ gedrückt, um auf den Boden zu schmettern.",
+	"ITEM_FALLBOOTS_DESC_RISKYMOD": "Erhöht die <style=cIsUtility>Sprunghöhe</style> und verbessert die Kontrolle in der Luft. Erzeugt beim Aufprall auf dem Boden eine <style=cIsDamage>kinetische Explosion</style> mit einem Radius von <style=cIsDamage>5–100 m</style>, die <style=cIsDamage>1.000 % bis 10.000 %</style> Grundschaden verursacht, der mit der <style=cIsDamage>Falldistanz</style> skaliert. Lädt sich in <style=cIsDamage>10</style> Sekunden wieder auf.",
+	
+	"ITEM_GHOSTONKILL_PICKUP_RISKYMOD": "Bei der Tötung eines Gegners, wird einen Geist beschworen. Lädt sich mit der Zeit wieder auf.",
+	"ITEM_GHOSTONKILL_DESC_RISKYMOD": "Bei der Tötung eines Gegners wird <style=cIsDamage>ein Geist des Gegners beschworen</style> der <style=cIsDamage>600%</style> <style=cStack>(+180% pro Stapel)</style> Schaden verursacht. Hält <style=cIsDamage>30s</style> <style=cStack>(+30s pro Stapel)</style>an.<style=cIsUtility>20s Abklingzeit</style>. Bis zu <style=cIsUtility>3</style> Geister können gleichzeitig beschworen werden.", 
+
+	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>Beschwöre eine Käferwache</style> mit <style=cIsDamage>300%</style> <style=cStack>(+300% pro Stapel)</style> zusätzlichen Schaden und <style=cIsHealing>200%</style> <style=cStack>(+100% pro Stapel)</style> maximaler Gesundheit.",
+	
+	"ITEM_FIREBALLSONHIT_DESC_RISKYMOD": "<Chance von <style=cIsDamage>10 %</style>, bei einem Treffer <style=cIsDamage>3 Magmakugeln</style> aus einem Gegner zu beschwören, die <style=cIsDamage>300 %</style> <style=cStack>(+180 % pro Stapel)</style> Schaden verursachen",
+	
+	"ITEM_LIGHTNINGSTRIKEONHIT_DESC_RISKYMOD": "<style=cIsDamage>10 %</style> Wahrscheinlichkeit, bei einem Treffer Blitzschlag zu beschwören, der <style=cIsDamage>500%</style> <style=cStack>(+300 % pro Stapel)</style> Schaden verursacht.",
+	
+	"ITEM_BLEEDONHITANDEXPLODE_PICKUP_RISKYMOD": "Blutende Gegner explodieren jetzt.",
+	"ITEM_BLEEDONHITANDEXPLODE_DESC_RISKYMOD": "Chance von <style=cIsDamage>10%</style>, bei einem Treffer Gegner <style=cIsDamage>bluten</style> zu lassen, was <style=cIsDamage>240% Grundschaden</style> verursacht. <style=cIsDamage>Blutende</style> Gegner <style=cIsDamage>explodieren</style> beim Tod und verursachen <style=cIsDamage>400%</style> <style=cStack>(+320% pro Stapel)</style> Schaden und zusätzlich <style=cIsDamage>10%</style> <style=cStack>(+8% pro Stapel)</style> ihrer maximalen Gesundheit.",
+	
+	"ITEM_KNURL_PICKUP_RISKYMOD": "Erhöht die Gesundheit, Regeneration und Rüstung.",
+	"ITEM_KNURL_DESC_RISKYMOD": "<style=cIsHealing>Erhöht die maximale Gesundheit</style> um<style=cIsHealing>8%</style> <style=cStack>(+8% pro Stapel)</style>, die <style=cIsHealing>Grundgesundheitsregeneration</style> um <style=cIsHealing>+1,6 HP/Sek.<style=cStack>(+1,6 HP/Sek. pro Stapel)</style> und die <style=cIsHealing>Rüstung</style> um <style=cIsHealing>10</style> <style=cStack>(+10 pro Stapel)</style>.",
+		
+	"ITEM_SHIELDONLY_PICKUP_RISKYMOD": "Wandelt deine ganze Gesundheit in einen Schild um. Erhöht die maximale Gesundheit... <color=#FF7F7F>ABER verzögere die Schildregeneration.</color>",
+	"ITEM_SHIELDONLY_DESC_RISKYMOD": "<style=cIsHealing>Konvertiert</style> bis auf <style=cIsHealing>1 Gesundheit</style> deine gesamte Gesundheit in <style=cIsHealing>regenerierende Schilde</style>. <style=cIsHealing>Erlange 50 % <style=cStack>(+25 % pro Stapel)</style> maximale Gesundheit</style>. Verzögert die <style=cIsHealing>Schildregneration</style> um <style=cIsHealing>0s</style> <style=cStack>(+1s pro Stapel)</style>.",
+	
+	"ITEM_MISSILEVOID_DESC_RISKYMOD": "Erhalte einen <style=cIsHealing>Schild</style>, der <style=cIsHealing>10 %</style> deiner maximalen Gesundheit entspricht. Ist der <style=cIsHealing>Schild</style> aktiv, wird bei einem Treffer gegen einen Gegner eine Rakete abgefeuert, die <style=cIsDamage>40%</style> <style=cStack>(+28% pro Stapel)</style> GESAMTSCHADEN verursacht. <style=cIsVoid>Korrumpiert alle AtG-Raketen Mk. 1</style>.",
+	
+	"ITEM_EXPLODEONDEATHVOID_DESC_RISKYMOD": "Beschört beim Treffen eines Gegner mit genau oder mehr als  <style=cIsDamage>90% Gesundheit</style>, eine <style=cIsDamage>Lava Säule</style> mit einem <style=cIsDamage>12m</style> Radius, welche <style=cIsDamage>350%</style> <style=cStack>(+280% pro Stapel)</style> Schaden verursacht. <style=cIsVoid>Korrumpiert alle Irrwische</style>.",
+	
+	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Treffer, die <style=cIsDamage>mehr als 400% Schaden</style> verursachen, erzeugen zusätzlich ein schwarzes Loch, das <style=cIsUtility>Gegner in einem Radius von 15 m in sein Zentrum saugt</style>. Hält <style=cIsUtility>5</style> Sekunden an, bis es in sich zusammenfällt und verursacht <style=cIsDamage>200 %</style> <style=cStack>(+120 % pro Stapel)</style> GESAMTSCHADEN. Lädt sich alle <style=cIsUtility>15</style> Sekunden neu auf.",
+	
+	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Erhöht die <style=cIsUtility>Bewegungsgeschwindigkeit</style> beim Töten eines Gegners um <style=cIsUtility>125 %</style>. Vergeht nach <style=cIsUtility>1,5</style> <style=cStack>(+1 pro Stapel)</style> Sekunden. <style=cIsDamage>Töten weiterer Gegner verlängert die Dauer</style> um bis zu 25 Sekunden.",
+	
+	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Erhöht die <style=cIsUtility>Bewegungsgeschwindigkeit</style> um <style=cIsUtility>10%</style> <style=cStack>(+10% pro Stapel)</style>. Erhöht die <style=cIsUtility>Bewegungsgeschwindigkeit</style> um weitere <style=cIsUtility>30%</style> <style=cStack>(+30% pro Stapel)</style>, wenn du den Kampf verlässt.",
+	
+	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsHealing>Heilt</style> <style=cIsUtility>beim Sprinten</style> <style=cIsHealing>1,2%</style> <style=cStack>(+0,6% pro Stapel)</style> deiner <style=cIsHealing>Gesundheit</style> pro Sekunde. <style=cIsVoid>Korrumpiert alle Lebhaften Pilze</style>.",
+	
+	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Beschwöre einen Bereisch um den Teleporterder, der jede Sekunde für <style=cIsHealing>5%</style> <style=cStack>(+2.5% pro Stapel)</style> deiner <style=cIsHealing>maximalen Gesundheit</style><style=cIsHealing>heilt</style>. Entfessle während einem Teleporter-Event eine <style=cIsHealing>heilende Nova</style> und <style=cIsHealing>heile</style> so alle Verbündeten in der Nähe um <style=cIsHealing>50 %</style> ihrer maximalen Gesundheit. Tritt <style=cIsHealing>1 Mal</style> <style=cStack>(+1 Mal pro Stapel)</style> auf.",
+	
+	"ITEM_CLOVER_DESC_RISKYMOD": "Alle zufälligen Effekte werden <style=cIsUtility>+1</style> <style=cStack>(+1 pro Stapel)</style> Mal für ein <style=cIsUtility>günstiges Ergebnis</style> ausgewürfelt. Ist dein <style=cIsDamage>Glück</style> über <style=cIsUtility>1</style>, dann werden stattdessen <style=cIsUtility>alle Statuswerte</style> um <style=cIsUtility>40%</style> <style=cStack>(+40% pro Stapel)</style> erhöht.",
+	
+	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Erhalte <style=cIsDamage>Colonel Droneman</style>. \n Drohnen erhalten <style=cIsDamage>+50%</style> <style=cStack>(+50% pro Stapel)</style> Angriffsgeschwindigkeit und Reduzierung der Abklingzeit. \nDrohnen erhalten eine Chance von <style=cIsDamage>10%</style> bei einem Treffer eine <style=cIsDamage>Rakete</style> abzufeuern, die <style=cIsDamage>300%</style> GESAMTSCHADEN verursacht. \nDrohnen erhalten eine <style=cIsDamage>automatische Kettenkanone</style>, die <style=cIsDamage>6x 50%</style> Schaden verursacht.",
+	
+	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "Fügt Bonus-Schaden zu, während du dich außerhalb des Kampfes befindest.",
+	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Erhöht Schaden um <style=cIsDamage>15%</style> <style=cStack>(+15% pro Stapel)</style>, während du dich außerhalb des Kampfes befindest.",
+	
+	"ITEM_CHAINLIGHTNINGVOID_DESC_RISKYMOD": "Chance von <style=cIsDamage>25%</style>, <style=cIsDamage>Blitze</style> für <style=cIsDamage>60%</style> GESAMTSCHADEN auf bis zu <style=cIsDamage>3</style> <style=cStack>(+2 pro Stapel)</style> Ziele zu feuern. <style=cIsVoid>Korrumpiert alle Ukulelen</style>.",
+	
+	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "Schießt Projektile in der Nähe ab. Aufladerate erhöht sich mit der Anzahl der Drohnen in deinem Besitz.",
+	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "Schieße alle <style=cIsDamage>0,5 Sekunden</style> <style=cIsDamage>1</style> <style=cStack>(+1 pro Stapel)</style> Projektil innerhalb von <style=cIsDamage>20m</style> ab. <style=cIsUtility>Aufladerate erhöht sich mit der Anzahl der Drohnen in deinem Besitz</style>.",
+	
+	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "Das Töten von Elite-Monstern beschöwrt ein <style=cIsDamage>Alpha-Konstrukt</style> mit <style=cIsHealing>400% <style=cStack>(+200% pro Stapel)</style> Gesundheit</style> und <style=cIsDamage>400% <style=cStack>(+200% pro Stapel)</style> Schaden</style>, das <style=cIsUtility>distracts</style> nahe Gegner angreift. Begrenzt auf <style=cIsUtility>4</style>.",
+	
+	"ITEM_PERMANENTDEBUFFONHIT_DESC_RISKYMOD": "Chance von <style=cIsDamage>100%</style>, bei einem Treffer die <style=cIsDamage>Panzerung</style> <style=cIsDamage>permanent</style> um <style=cIsDamage>1</style> <style=cStack>(+1 pro Stapel)</style> zu reduzieren.",
+	
+	"ITEM_TITANGOLDDURINGTP_DESC_RISKYMOD": "Beschwört beim Teleporter-Event <style=cIsDamage>Aurelionit</style>. Es verursacht <style=cIsDamage>100% <style=cStack>(+50% pro Stapel)</style> Schaden</style> und hat <style=cIsHealing>200% <style=cStack>(+100% pro Stapel)</style> Gesundheit</style>.",
+	
+	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Verhindert <style=cIsUtility>1</style> <style=cStack>(+1 pro Stapel)</style> <style=cIsDamage>Debuff</style> und gewährt stattdessen eine <style=cIsHealing>temporäre Barriere</style> in Höhe von <style=cIsHealing>25%</style> der <style=cIsHealing>maximalen Gesundheit</style>. Lädt sich alle <style=cIsUtility>5</style> Sekunden wieder auf</style>.",
+	
+	"ITEM_HEALINGPOTION_PICKUP_RISKYMOD" : "Erhalte eine starke Barriere, wenn du über wenig Gesundheit verfügst. Wird bei Benutzung verbraucht.",
+	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "Wenn deine Gesundheit unter <style=cIsHealth>50%</style> sinkt, wird dieser Gegenstand <style=cIsUtility>verbraucht</style>, wodurch du eine starke <style=cIsHealing>temporäre Barriere</style> mit <style=cIsHealing>50% deiner maximalen Gesundheit</style> erhältst.",
+	
+	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>Wehrt</style> eingehenden Schaden einmalig <style=cIsHealing>ab</style>. Lädt sich nach <style=cIsUtility>20 Sekunden</style> <style=cStack>(-10% pro Stapel)</style> erneut auf. <style=cIsVoid>Korrumpiert alle Härteren Zeiten</style>.",
+	
+	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Heilung über die volle Gesundheit hinaus verleiht dir eine <style=cIsHealing>temporäre Barriere</style> in Höhe von <style=cIsHealing>50%</style> <style=cStack>(+50% pro Stapel)</style> der </style>Gesundheit, die du geheilt hast</style>. <style=cIsHealing>Verlängert die Verfallsrate deiner Barrieren um 50%</style> <style=cStack>(+50% pro Stapel)</style>..",
+
+	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Erhöht den Grundschaden um <style=cIsDamage>100%</style> <style=cStack>(+100% pro Stapel)</style>. <style=cIsHealing>Senkt die maximale Gesundheit um 50%</style> <style=cStack>(+50% pro Stapel)</style>.",
+	
+	"ITEM_STRENGTHENBURN_DESC_RISKYMOD": "<style=cIsDamage>5%</style> Wahrscheinlichkeit Gegner bei Treffern zu <style=cIsDamage>entzünden</style> und <style=cIsDamage>50%</style> GESAMTSCHADEN zu verursachen. Enzündungseffekte verursachen <style=cIsDamage>+300%</style> <style=cStack>(+300% pro Stapel)</style> Schaden über Zeit.",
+	
+	"ITEM_CRITDAMAGE_DESC_RISKYMOD": "<style=cIsDamage>5%</style> Wahrscheinlichkeit <style=cIsDamage>Kritische Treffer</style> zu landen. <style=cIsDamage>Kritische Treffer</style> verursachen zusätzlich <style=cIsDamage>100% Schaden</style><style=cStack>(+100% pro Stapel)</style>.",
+	
+	"ITEM_BARRAGEONBOSS_DESC_RISKYMOD": "Während Boss-Events wird das Gebiet von <style=cIsUtility>5</style> Raketen bombardiert, die <style=cIsDamage>2,5 % <style=cStack>(+2,5 % pro Stapel)</style> der maximalen Boss-Gesundheit als Schaden verursachen</style>. Vor dem Boss-Event erhältst du zusätzliche Raketen, bis maximal <style=cIsUtility>25</style> <style=cStack>(+5 pro Stapel)</style>, pro erhaltenen <style=cIsUtility>50</style> Gold. <style=cIsUtility>Das erforderliche Gold skaliert mit der Zeit.</style>",
+	
+	"ITEM_TELEPORTONLOWHEALTH_DESC_RISKYMOD": "Wenn du unter <style=cIsHealth>25 %</style> Gesundheit fällst, erhältst du eine <style=cIsHealing>temporäre Barriere</style> in Höhe von <style=cIsHealing>100 %</style> deiner <style=cIsHealing>maximalen Gesundheit</style>. Du erhältst außerdem <style=cIsUtility>8 Sek.</style> lang eine Dimensionsaura, die bei Gegnern <style=cIsDamage>Blutung</style> verursacht und sie <style=cIsUtility>wegteleportiert</style>. Pro Gegner, der von der Aura <style=cIsDamage>getötet</style> wird, wird die Dauer um <style=cIsUtility>1 Sek.</style> <style=cIsUtility>verlängert</style>. Wird zu Beginn der Ebene erneuert.",
+	
+	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "Gegner am Boden, die mit einer beliebigen <style=cIsUtility>Fähigkeit</style> getroffen werden, werden <style=cIsUtility>in die Luft geschleudert</style> und <style=cIsUtility>betäubt</style>. Gegner, die in der Luft getroffen werden, werden erneut <style=cIsUtility>hochgeworfen</style>, bis maximal <style=cIsUtility>2-mal</style> <style=cStack>(+1 pro Stapel)</style>. Hochgeschleuderte Gegner erleiden jedes Mal um <style=cIsDamage>15 %</style> erhöhten Schaden aus allen Quellen. Lädt sich nach <style=cIsUtility>15 Sek.</style> wieder auf.",
+	
+	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Verleiht für jeden Buff einen Bonus von <style=cIsUtility>5 %</style> auf <style=cIsUtility>ALLE Werte</style>, bis maximal <style=cIsUtility>4</style> <style=cStack>(+4 pro Stapel)</style>.",
+	}
+}

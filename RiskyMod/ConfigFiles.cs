@@ -54,6 +54,7 @@ using RiskyMod.Enemies.DLC2;
 using RiskyMod.Survivors.Croco.Tweaks;
 using RiskyMod.Survivors.Croco.Contagion;
 using RiskyMod.Items.DLC2;
+using RiskyMod.Survivors.Seeker;
 
 namespace RiskyMod
 {
@@ -104,6 +105,7 @@ namespace RiskyMod
         private const string mercString = "Survivors: Mercenary";
         private const string railgunnerString = "Survivors: Railgunner";
         private const string voidFiendString = "Survivors: Void Fiend";
+        private const string seekerString = "Survivors: Seeker";
 
         private const string monsterString = "Monsters";
         private const string monsterGeneralString = "General";
@@ -561,7 +563,11 @@ namespace RiskyMod
             VoidFiendCore.removeCorruptArmor = SurvivorCfg.Bind(voidFiendString, "No Corrupt Mode Bonus Armor", true, "Disables bonus armor while Corrupted.").Value;
             VoidFiendCore.secondaryMultitask = SurvivorCfg.Bind(voidFiendString, "Secondary Multitasking", true, "Drown and Suppress can be fired while charging Flood.").Value;
             UtilityFallImmune.enabled = SurvivorCfg.Bind(voidFiendString, "Trespass Changes", true, "Enable changes to this skill.").Value;
-            
+
+            SeekerCore.enabled = SurvivorCfg.Bind(seekerString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+            SeekerCore.noSelfRevive = SurvivorCfg.Bind(seekerString, "No Self Revive", true, "Seeker no longer gains a self-revive at 7 meditate stacks.").Value;
+            SeekerCore.unseenHandScalesDamage = SurvivorCfg.Bind(seekerString, "Unseen Hand scales damage.", true, "Unseen Hand scales damage instead of healing.").Value;
+
             if (!SurvivorsCore.enabled)
             {
                 Bandit2Core.enabled = false;
@@ -576,6 +582,7 @@ namespace RiskyMod
                 MercCore.enabled = false;
                 ToolbotCore.enabled = false;
                 TreebotCore.enabled = false;
+                SeekerCore.enabled = false;
             }
         }
 

@@ -1,0 +1,12 @@
+{
+	strings:
+	{
+		"EQUIPMENT_FIREBALLDASH_DESC_RISKYMOD": "Turn into a <style=cIsDamage>draconic fireball</style> for <style=cIsDamage>5</style> seconds. Deal <style=cIsDamage>600% damage</style> on impact. Detonates at the end for <style=cIsDamage>1200% damage</style> and <style=cIsDamage>stuns</style> nearby monsters.",
+
+		"EQUIPMENT_BFG_DESC_RISKYMOD": "Fires preon tendrils, zapping enemies within 35m for up to <style=cIsDamage>1180% damage/second</style>. On contact, detonate in an enormous 20m explosion for <style=cIsDamage>8000% damage</style>.",
+		
+		"EQUIPMENT_CRITONUSE_DESC_RISKYMOD": "Gain <style=cIsDamage>+100% Critical Strike Chance</style> for 8 seconds. Excess chance is converted into <style=cIsDamage>Critical Strike Damage</style>.",
+		
+		"EQUIPMENT_GUMMYCLONE_DESC_RISKYMOD" : "Spawn a gummy clone that has <style=cIsDamage>300% damage</style> and <style=cIsHealing>600% health</style>. Expires in <style=cIsUtility>30</style> seconds."
+	}
+}

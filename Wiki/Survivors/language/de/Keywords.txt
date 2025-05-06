@@ -16,6 +16,5 @@
 	"KEYWORD_MAGNETIC_RISKYMOD" : "<style=cKeywordName>Magnetisch</style><style=cSub>Zieht Gegner in der Luft zusammen",
 	"KEYWORD_VOIDCORRUPTION_RISKYMOD" : "<style=cKeywordName>Verderbnis</style><style=cSub>Erhalte Verderbnis beim Erhalten von Schaden, Töten von Gegnern, oder beim Besitzen von 3 Void Items.",
 	"KEYWORD_LOWHEALTHPROTECTION_RISKYMOD": "<style=cKeywordName>Rettende Gnade</style><style=cSub>Alle lebenden Überlebenden erhalten +7 % auf alle Werte.",
-	"SEEKER_SECONDARY_TRANQUILITY_DESCRIPTION_RISKYMOD": "<style=cKeywordName>Ruhe</style><style=cSub>Erhöht die Schaden von Unsichtbare Hand für jede Ruhe um <style=cIsDamage>100 %</style>.",
 	}
 }

@@ -16,6 +16,5 @@
 	"KEYWORD_MAGNETIC_RISKYMOD" : "<style=cKeywordName>Магнетизм</style><style=cSub>Притягивает легкие находящиеся в воздухе цели к своему центру.",
 	"KEYWORD_VOIDCORRUPTION_RISKYMOD" : "<style=cKeywordName>Порча</style><style=cSub>Порча накапливается когда вы получаете урон, убиваете врагов или имеете предметы Пустоты.",
 	"KEYWORD_LOWHEALTHPROTECTION_RISKYMOD": "<style=cKeywordName>Спасение</style><style=cSub>Параметры всех живых выживших увеличиваются на 7%.",
-	"SEEKER_SECONDARY_TRANQUILITY_DESCRIPTION_RISKYMOD": "<style=cKeywordName>Спокойствие</style><style=cSub>Увеличивает объём урона от «Невидимой длани» на <style=cIsDamage>100%</style> за каждый заряд «Спокойствия».",
 	}
 }

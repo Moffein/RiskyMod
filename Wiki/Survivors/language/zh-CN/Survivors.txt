@@ -1,0 +1,102 @@
+{
+	strings:
+	{
+	"CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD" : "喷射一大团弹丸，造成<style=cIsDamage>7x110%的伤害</style>。为攻击充能将缩小<style=cIsUtility>扩散范围</style>。弹丸的数量随着攻击速度的增加而增加。",
+	"CAPTAIN_PRIMARY_DESCRIPTION_VANILLA_RISKYMOD" : "喷射一大团弹丸，造成<style=cIsDamage>7x110%的伤害</style>。为攻击充能将缩小<style=cIsUtility>扩散范围</style>。",
+	"CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>震荡</style>。发射一枚造成<style=cIsDamage>100%伤害</style>的快速电镖。最多弹射至<style=cIsDamage>6</style>个目标。",
+	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "呼叫一个<style=cIsUtility>补给信标</style>。最多呼叫2次。",
+	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD": "<style=cIsUtility>使用时<style=cIsUtility>为技能充能</style>。",
+	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>破解</style>附近所有可购买物品，这些物品的价格将逐渐下降至<style=cIsUtility>50%</style>。",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_INTERACTION_RISKYMOD" : "为技能充能。",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD" : "使用时<style=cIsUtility>为技能充能</style>并减少<style=cIsUtility>装备</style>冷却时间<style=cIsUtility>20秒</style>。",
+	"CAPTAIN_SUPPLY_HEAL_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>永久</style>。每秒<style=cIsHealing>治疗</style>附近所有友方<style=cIsHealing>最大生命值</style>的<style=cIsHealing>10%</style></style>。",
+	"CAPTAIN_SUPPLY_SHOCKING_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>永久</style>。周期性<style=cIsDamage>震荡</style>附近所有敌人，定住他们。",
+	"CAPTAIN_SUPPLY_HACKING_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>永久</style>。<style=cIsUtility>侵入</style>附近所有可购买交互物，将其价格降为<style=cIsUtility>$0</style>。",
+	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>永久</style>。使用时<style=cIsUtility>充能装备</style>。",
+	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD_PERMANENT" : "<style=cIsHealth>永久</style>。<style=cIsUtility>侵入</style> 附近所有可购买交互物，将其价格降到<style=cIsUtility>50%</style>。",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD_PERMANENT" : "<style=cIsHealth>永久</style>。使用时<style=cIsUtility>充能技能</style>并减少<style=cIsUtility>装备</style>冷却时间<style=cIsUtility>20秒</style>。",
+			
+	"BANDIT2_PRIMARY_DESC_RISKYMOD" : "使用霰弹枪射击，造成<style=cIsDamage>5x90%的伤害</style>。最多可发射4发子弹。",
+	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD" : "使用步枪射击，造成<style=cIsDamage>360%的伤害</style>。最多可发射4发子弹。",
+	"BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD" : "所有从<style=cIsDamage>背后</style>发起的攻击都会造成<style=cIsDamage>小暴击</style>。所有<style=cIsDamage>暴击几率</style>都会转化为<style=cIsDamage>暴击伤害</style>。",
+	"BANDIT2_REVOLVER_NAME_RISKYMOD" : "枪手",
+	"BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD" : "左轮手枪击败敌人将<style=cIsUtility>重置你所有的冷却时间</style>。",
+	"BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD" : "左轮手枪击败敌人可以<style=cIsDamage>叠加效果</style>，使左轮手枪的伤害提高<style=cIsDamage>10%</style>。",
+	"BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD": "左轮手枪击败敌人可以<style=cIsDamage>叠加效果</style>，使左轮手枪的伤害提高。",
+	"BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>屠杀者</style>。使用左轮手枪射击，造成<style=cIsDamage>600%的伤害</style>。",
+	"BANDIT2_SPECIAL_ALT_NAME_RISKYMOD" : "排队枪毙",
+	"BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>屠杀者</style>。使用左轮手枪快速射击，造成<style=cIsDamage>6x100%的伤害</style>。每次连续命中都会造成<style=cIsDamage>20%</style>的额外伤害。",
+	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>眩晕</style>。在隐匿状态下掷出一枚小刀，造成<style=cIsDamage>2x240%的伤害</style>。暴击还可以造成<style=cIsHealth>出血</style>。",
+	"BANDIT2_REVOLVER_STANDOFF_NAME_RISKYMOD" : "对峙",
+	"BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD" : "使用左轮手枪击杀将<style=cIsDamage>提升20%伤害</style>持续15秒。最多叠加<style=cIsDamage>5</style>次。",
+	
+	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD": "刺杀",
+	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>屠杀者</style>。 使用左轮手枪射出两发子弹，造成<style=cIsDamage>2x900%的伤害</style>。",
+	"BANDIT2_SPECIAL_ALT_SCEPTER_NAME_RISKYMOD" : "荒野大枪手",
+	"BANDIT2_SPECIAL_ALT_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>屠杀者</style>。使用左轮手枪快速射击，造成<style=cIsDamage>12x100%的伤害</style>。每次连续命中都会造成<style=cIsDamage>20%</style>的额外伤害。",
+	
+	"COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD" : "发射穿透弹造成<style=cIsDamage>450%的伤害</style>。每次穿过敌人时，造成<style=cIsDamage>40%</style>额外伤害。",
+	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>翻滚</style>一小段距离，并且减少技能冷却时间<style=cIsUtility>1秒</style>。",
+	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>眩晕</style>。发射分裂弹造成<style=cIsDamage>8x120%的伤害</style>。子弹的数量随攻击速度而增加。",
+	
+	"COMMANDO_SPECIAL_SCEPTER_NAME_RISKYMOD" : "火力压制",
+	"COMMANDO_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>眩晕</style>。发射分裂弹造成<style=cIsDamage>18x150%的伤害</style>。子弹的数量随攻击速度而增加。",
+	"COMMANDO_SPECIAL_ALT1_SCEPTER_NAME_RISKYMOD" : "地毯式轰炸",
+	"COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD" : "投掷多个手榴弹，爆炸造成<style=cIsDamage>5x700%的伤害</style>。最多充能2次。",
+	"COMMANDO_SECONDARY_LIGHTNING_NAME_RISKYMOD": "相位闪电",
+	"COMMANDO_SECONDARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "发射穿透弹造成<style=cIsDamage>450%伤害</style>。电击附近的敌人造成<style=cIsDamage>150%额外伤害</style>。",
+	"COMMANDO_SPECIAL_EXPL_NAME_RISKYMOD" : "破片弹幕",
+	"COMMANDO_SPECIAL_EXPL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>眩晕</style>。发射破片弹造成<style=cIsDamage>6x120%伤害</style>。子弹的数量随攻击速度而增加。",
+	"COMMANDO_SPECIAL_EXPL_SCEPTER_NAME_RISKYMOD" : "破片齐射",
+	"COMMANDO_SPECIAL_EXPL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>眩晕</style>。发射破片弹造成<style=cIsDamage>12x150%伤害</style>。子弹的数量随攻击速度而增加。",
+			
+	
+	"HUNTRESS_PRIMARY_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>灵巧</style>。快速射出一支追踪箭造成<style=cIsDamage>200%的伤害</style>。",
+	"HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>灵巧</style>。拉弓射出<style=cIsDamage>3枚</style>跟踪箭并造成<style=cIsDamage>3x120%的伤害</style>。如果暴击则发射<style=cIsDamage>6枚</style>跟踪箭。",
+	"HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>传送</style>至空中，向目标区域射下箭雨，使区域内所有敌人<style=cIsUtility>减速</style>，并造成<style=cIsDamage>每秒420%的伤害</style>。",
+	"HUNTRESS_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>传送</style>至空中，向目标区域射下箭雨，<style=cIsDamage>点燃</style>区域内所有敌人，并造成<style=cIsDamage>每秒420%的伤害</style>。",
+	
+	"TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD" : "发射一条具有穿透效果的钢筋，造成<style=cIsDamage>660%的伤害</style>。",
+	"TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD" : "锯伤周围敌人，造成<style=cIsDamage>每秒1000%的伤害</style>。 击中敌人会获得<style=cIsHealing>临时屏障</style>。",
+	"TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "进入重装姿态，同时装备两种<style=cIsDamage>主要攻击技能</style>。增加<style=cIsUtility>60点护甲</style>，但失去<style=cIsHealth>60%的移动速度</style>。",
+	
+	"MERC_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsDamage>眩晕</style>。向前冲锋并造成<style=cIsDamage>450%的伤害</style>。只要命中敌人，<style=cIsDamage>就可以再次发起冲锋</style>，最多<style=cIsDamage>3</style>次。",
+	
+	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "发射一次<style=cIsUtility>音爆</style>，<style=cIsDamage>弱化</style>命中的所有敌人。<style=cIsHealing>每命中一个目标便会对你进行一次治疗</style>。",
+	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>注入</style>一个敌人造成<style=cIsDamage>330%</style>的伤害，对被<style=cIsDamage>注入</style>的敌人造成伤害的<style=cIsHealing>10%</style>将<style=cIsHealing>治疗</style>友方。敌人死亡时将掉落<style=cIsHealing>治疗果实</style>恢复<style=cIsHealing>25%生命值</style>。",
+	
+	"CROCO_PASSIVE_NAME_RISKYMOD" : "烈毒",
+	"CROCO_PASSIVE_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>毒化</style>并<color=#B1387F>枯萎</color>造成<style=cIsDamage>80%</style>的伤害。",
+	"CROCO_PASSIVE_ALT_NAME_RISKYMOD" : "传染",
+	"CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>毒化</style>并<color=#B1387F>枯萎</color>一个目标，击败后扩散至<style=cIsDamage>1</style>个附近的目标。",
+	"CROCO_PRIMARY_DESCRIPTION_RISKYMOD" : "袭击一名敌人，造成<style=cIsDamage>200%的伤害</style>。第三次命中时<style=cIsHealing>毒化</style>与<style=cIsHealing>自我恢复</style>并造成<style=cIsDamage>400%伤害</style>。",
+	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>枯萎</color>。喷吐剧毒胆汁并造成<style=cIsDamage>240%的伤害</style>。",
+	"CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<color=#B1387F>枯萎</color>。<style=cIsDamage>屠杀者</style>。<style=cIsHealing>自我恢复</style>。啃咬一名敌人并造成<style=cIsDamage>360%的伤害</style>。",
+	"CROCO_UTILITY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>枯萎</color>。<style=cIsDamage>眩晕</style>。跃至半空，造成<style=cIsDamage>320%的伤害</style>。释放的酸性物质将会造成<style=cIsDamage>每秒50%的伤害</style>。最多可使用<style=cIsUtility>2</style>次。",
+	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>眩晕</style>。跃至半空，造成<style=cIsDamage>550%的伤害</style>。每命中一名敌人，可<style=cIsUtility>缩减</style><style=cIsUtility>1秒</style>的冷却时间。",
+	"CROCO_SPECIAL_DESCRIPTION_RISKYMOD" : "释放一种能够造成<style=cIsDamage>8x100%伤害</style>的致命病毒。病毒将会传播给最多<style=cIsDamage>20</style>名目标。",
+	"CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD" : "疫病",
+	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "释放一种能够造成<style=cIsDamage>15x100%伤害</style>的致命病毒。病毒将会传播给最多<style=cIsDamage>20</style>名目标。如果病毒击败目标，<style=cIsHealing>你将被治愈</style>。",
+	"CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "传染",
+	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>减少20%基础伤害</style>。\n每个技能都会施加不同的<style=cIsDamage>持续伤害</style>效果。\n<style=cIsHealing>毒化</style>和<color=#B1387F>枯萎</color>在击败时扩散到<style=cIsDamage>1</style>个附近的敌人。",
+	
+	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>点燃</style>。发射一道火炎，造成<style=cIsDamage>300%的伤害</style>。最多可发射4次。</style>",
+	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "发射一道闪电，造成<style=cIsDamage>360%的伤害</style>并<style=cIsDamage>引爆</style>小片区域。最多发射4次。</style>",
+	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>震荡</style>。一飞冲天，造成<style=cIsDamage>800%的伤害</style>。",
+	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>冰冻</style>。创造一道能够对敌人造成<style=cIsDamage>100%伤害</style>的屏障。若自身位于空中<style=cIsUtility>则将自身向后推</style>。",
+	"MAGE_UTILITY_ICE_DESCRIPTION_NOPUSH_RISKYMOD" : "<style=cIsUtility>冰冻</style>。创造一道能够对敌人造成<style=cIsDamage>100%伤害</style>的屏障。",
+	"MAGE_UTILITY_FIRE_NAME_RISKYMOD" : "烈焰风暴",
+	"MAGE_UTILITY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>点燃</style>。召唤一道火焰龙卷风，造成<style=cIsDamage>每秒360%的伤害</style>。若自身位于空中<style=cIsUtility>则将自身向后推</style>。",
+	"MAGE_UTILITY_FIRE_DESCRIPTION_NOPUSH_RISKYMOD" : "<style=cIsDamage>点燃</style>。召唤一道火焰龙卷风，造成<style=cIsDamage>每秒360%的伤害</style>。",
+	"MAGE_SPECIAL_SITHLIGHTNING_NAME_RISKYMOD" : "连锁电击",
+	"MAGE_SPECIAL_SITHLIGHTNING_DESCRIPTION_RISKYMOD" : "电击你面前的所有敌人，造成<style=cIsDamage>1000%的伤害</style>。",
+	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_NAME_RISKYMOD" : "力量解放",
+	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_DESCRIPTION_RISKYMOD" : "电击你面前的所有敌人，造成<style=cIsDamage>2000%的伤害</style>。",
+	"MAGE_SECONDARY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>冰冻</style>。充能<style=cIsDamage>穿刺</style>纳米长矛，造成<style=cIsDamage>400%-1600%</style>伤害。",
+
+	
+	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "扔出<style=cIsUtility>飘浮电塔</style>，可<style=cIsDamage>电击</style>最多<style=cIsDamage>6</style>名周围的敌人，造成<style=cIsDamage>70%的伤害</style>。可被<style=cIsUtility>格挡</style>。",
+	
+	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "放置一枚地雷，在完全引爆时造成<style=cIsDamage>900%的伤害</style>。最多放置4枚。"
+	}
+}

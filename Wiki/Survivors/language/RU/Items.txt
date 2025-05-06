@@ -1,0 +1,140 @@
+{
+	strings:
+	{
+	"ITEM_FLATHEALTH_PICKUP_RISKYMOD": "Увеличивает максимальный запас здоровья.",
+	"ITEM_FLATHEALTH_DESC_RISKYMOD": "Увеличивает <style=cIsHealing>максимальный запас здоровья</style> на <style=cIsHealing>1</style><style=cStack> (+1 за шт.)</style> уровень.",
+	
+	"ITEM_CRITGLASSES_PICKUP_RISKYMOD": "Дает 7% вероятности выполнить 'Критический Удар', наносящий двойной урон.",
+	"ITEM_CRITGLASSES_DESC_RISKYMOD": "У ваших атак есть вероятность в <style=cIsDamage>10%</style> <style=cStack>(+7% за шт.)</style> выполнить \'<style=cIsDamage>Критический Удар</style>\', наносящий <style=cIsDamage>двойной урон</style>.",
+	
+	"ITEM_STICKYBOMB_DESC_RISKYMOD": "<style=cIsDamage>5%</style> <style=cStack>(+5% за шт.)</style> вероятности при попадании по врагу прикрепить к нему <style=cIsDamage>бомбу</style>, взрыв которой наносит <style=cIsDamage>240%</style> ОБЩЕГО урона.",
+	
+	"ITEM_CROWBAR_PICKUP_RISKYMOD": "Наносите дополнительный урон при вашем первом попадании по врагу.",
+	"ITEM_CROWBAR_DESC_RISKYMOD": "Наносите <style=cIsDamage>+45%</style> <style=cStack>(+45% за шт.)</style> урона при вашем <style=cIsDamage>первом попадании</style> по врагу.",
+	
+	"ITEM_WARDONLEVEL_PICKUP_RISKYMOD": "Устанавливает Боевой Стяг при повышении уровня или начале события Телепорта. Повышает урон, скорость атаки, движения и дает регенерацию здоровья.",
+	"ITEM_WARDONLEVEL_DESC_RISKYMOD": "При <style=cIsUtility>повышении уровня</style> или начале <style=cIsUtility>события Телепорта</style> устанавливает стяг, усиливающий всех союзников в радиусе <style=cIsUtility>16 м.</style> <style=cStack>(+8 м. за шт.)</style>. Увеличивает <style=cIsDamage>урон</style> на <style=cIsDamage>15%</style>, <style=cIsDamage>скорость атаки</style> и <style=cIsUtility>движения</style> на <style=cIsDamage>30%</style>. Также регенерирует <style=cIsHealing>1%</style> от <style=cIsHealing>здоровья</style> каждую секунду.",
+	
+	"ITEM_IGNITEONKILL_DESC_RISKYMOD": "Убийство врага <style=cIsDamage>поджигает</style> всех врагов в радиусе <style=cIsDamage>16 м.</style>, нанося <style=cIsDamage>150%</style> базового урона. Дополнительно, враги <style=cIsDamage>горят</style>, получая <style=cIsDamage>150%</style> <style=cStack>(+75% за шт.)</style> базового урона.",
+
+	"ITEM_BEAR_DESC_RISKYMOD": "<style=cIsHealing>10%</style> <style=cStack>(+10% за шт.)</style> вероятности <style=cIsHealing>блокировать</style> получаемый урон. <style=cIsUtility>Показатель удачи не учитывается</style>.",
+	
+	"ITEM_SLOWONHIT_DESC_RISKYMOD": "<style=cIsUtility>Замедляет</style> врагов при попадании, снижая <style=cIsUtility>скорость их движения на 80%</style> и <style=cIsDamage>скорость атаки на 20%</style> на <style=cIsUtility>2 секунды</style> <style=cStack>(+2 секунды за шт.)</style>.",
+	
+	"ITEM_SEED_DESC_RISKYMOD": "Нанесение урона <style=cIsHealing>восстанавливает</style> <style=cIsHealing>1 единицу здоровья</style> плюс дополнительно <style=cIsHealing>2% <style=cStack>(+1% за шт.)</style></style> от <style=cIsDamage>нанесенного урона</style>.",
+	
+	"ITEM_MISSILE_DESC_RISKYMOD": "<style=cIsDamage>10%</style> вероятности выпустить ракету, наносящую <style=cIsDamage>300%</style> <style=cStack>(+210% за шт.)</style> ОБЩЕГО урона.",
+	
+	"ITEM_ICERING_DESC_RISKYMOD": "Удары, наносящие <style=cIsDamage>более 400% урона</style>, также поражают врагов <style=cIsDamage>взрывом рунического льда</style>, <style=cIsUtility>замедляя</style> их на <style=cIsUtility>80%</style> на <style=cIsUtility>3 секунды</style> <style=cStack>(+3 секунды за шт.)</style> и нанося <style=cIsDamage>200%</style> <style=cStack>(+120% за шт.)</style> ОБЩЕГО урона. Перезаряжается каждые <style=cIsUtility>10</style> секунд.",
+	
+	"ITEM_FIRERING_DESC_RISKYMOD": "Удары, наносящие <style=cIsDamage>более 400% урона</style> также поражают врагов <style=cIsDamage>руническим огненным торнадо</style>, наносящим <style=cIsDamage>250%</style> <style=cStack>(+150% за шт.)</style> ОБЩЕГО периодического урона. Перезаряжается каждые <style=cIsUtility>10</style> секунд.",
+	
+	"ITEM_PHASING_PICKUP_RISKYMOD": "Дает невидимость при получении большого урона.",
+	"ITEM_PHASING_DESC_RISKYMOD": "Вероятность при получении урона получить <style=cIsUtility>увеличение скорости движения на 40%</style> и <style=cIsUtility>невидимость</style> на <style=cIsUtility>3 секунды</style> <style=cStack>(+1.5 секунды за шт.)</style>. Чем больше урона вы получаете, тем выше вероятность.",
+	
+	"ITEM_EXPLODEONDEATH_DESC_RISKYMOD": "При убийстве врага создает <style=cIsDamage>лавовый столб</style> радиусом <style=cIsDamage>16 м.</style>, наносящий <style=cIsDamage>350%</style> <style=cStack>(+280% за шт.)</style> базового урона.",
+	
+	"ITEM_SQUIDTURRET_PICKUP_RISKYMOD": "Призывает Турель-Кальмара неподалеку при получении большого урона.",
+	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Вероятность при получении урона призвать <style=cIsDamage>Турель-Кальмара</style> со <style=cIsHealing>100% <style=cStack>(+50% за шт.)</style></style> здоровьем и <style=cIsDamage>100% <style=cStack>(+100% за шт.)</style></style> скоростью атаки, <style=cIsUtility>отвлекающую</style> врагов поблизости. Чем больше урона вы получаете, тем выше вероятность. Максимальное количество: <style=cIsUtility>3</style>.",
+	
+	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "<style=cIsDamage>25%</style> вероятности выпустить <style=cIsDamage>цепочку молний</style>, наносящей <style=cIsDamage>80%</style> ОБЩЕГО урона до <style=cIsDamage>3-м <style=cStack>(+2 за шт.)</style></style> целям в радиусе <style=cIsDamage>25 м.</style>",
+	
+	"ITEM_THORNS_DESC_RISKYMOD": "При получении урона выпускается шквал лезвий, наносящих <style=cIsDamage>160%</style> <style=cStack>(+80% за шт.)</style> урона. Поражает до <style=cIsDamage>3-х</style> <style=cStack>(+2 за шт.)</style> целей в радиусе <style=cIsDamage>25 м.</style>",
+	
+	"ITEM_SPRINTARMOR_PICKUP_RISKYMOD": "Увеличивает броню. Дает дополнительную броню во время бега.",
+	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>Увеличивает броню</style> на <style=cIsHealing>10</style> ед. <style=cStack>(+10 за шт.)</style>. Дает дополнительно <style=cIsHealing>10</style> ед. <style=cStack>(+10 за шт.)</style> брони во время <style=cIsUtility>бега</style>.",
+	
+	"ITEM_EXECUTELOWHEALTHELITE_PICKUP_RISKYMOD": "Наносит дополнительный урон врагам, чье здоровье ниже 50%.",
+	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Наносит <style=cIsDamage>+30%</style> <style=cStack>(+30% за шт.)</style> урона врагам, чье здоровье ниже <style=cIsDamage>50%</style>.",
+	
+	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "Приводит в неистовство после убийства врагов. Суммируется до 3-х раз.",
+	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Убийства врагов</style> приводят вас в <style=cIsDamage>неистовство</style> на <style=cIsDamage>6 секунд</style>, увеличивая <style=cIsUtility>скорость движения</style> <style=cIsDamage>атаки</style> на <style=cIsDamage>15%</style> за каждого убитого врага. Максимальный предел суммирования <style=cIsDamage>3 <style=cStack>(+2 за шт.)</style></style> эффекта.",
+
+	"ITEM_ENERGIZEDONEQUIPMENTUSE_PICKUP_RISKYMOD": "При использовании Снаряжения дает всплеск скорости движения и атаки.",
+	"ITEM_ENERGIZEDONEQUIPMENTUSE_DESC_RISKYMOD": "При использовании Снаряжения дает <style=cIsUtility>+50% к скорости движения</style> и <style=cIsDamage>+70% к скорости атаки</style> на <style=cIsDamage>8 секунд</style> <style=cStack>(+4 секунды за шт.)</style>.",
+	
+	"ITEM_INFUSION_PICKUP_RISKYMOD": "Убийство врага навсегда увеличивает максимальный запас здоровья.",
+	"ITEM_INFUSION_DESC_RISKYMOD": "Убийство врага <style=cIsHealing>навсегда</style> увеличивает <style=cIsHealing>здоровье</style> на <style=cIsHealing>1</style> ед. <style=cStack>(+1 за шт.)</style>. Каждые <style=cIsHealing>100 здоровья</style> полученные от этого предмета <style=cIsHealth>уменьшают</style> здоровье получаемое от убийств.",
+	
+	"ITEM_ICICLE_DESC_RISKYMOD": "Убийство врага окружает вас <style=cIsDamage>ледяным штормом</style>, наносящим <style=cIsDamage>1200% <style=cStack>(+400% за шт.)</style> урона в сек.</style> и <style=cIsUtility>замедляющим</style> врагов на <style=cIsUtility>80%</style> на <style=cIsUtility>1.5 секунду</style>. Шторм <style=cIsDamage>растет с каждым убийством</style>, увеличивая свой радиус на <style=cIsDamage>3 м.</style> Суммируется до <style=cIsDamage>18 м.</style>",
+	
+	"ITEM_HEADHUNTER_PICKUP_RISKYMOD": "Наносит дополнительный урон элитам и при их убийстве временно дает их силу.",
+	"ITEM_HEADHUNTER_DESC_RISKYMOD": "Наносит дополнительно <style=cIsDamage>30%</style> урона элитным монстрам. При убийстве элиты, дает ее силу на <style=cIsDamage>10 секунд</style> <style=cStack>(+5 секунд за шт.)</style>.",
+	
+	"ITEM_FALLBOOTS_PICKUP_RISKYMOD": "Увеличивает высоту прыжка и контроль в воздухе. Удерживайте \'Взаимодействие\' чтобы совершить резкий удар вниз.",
+	"ITEM_FALLBOOTS_DESC_RISKYMOD": "Увеличивает <style=cIsUtility>высоту прыжка</style> и <style=cIsUtility>контроль  в воздухе</style>. Создает <style=cIsDamage>кинетический взрыв</style> с радиусом<style=cIsDamage>5-100 м.</style>  при резком приземлении, наносящий <style=cIsDamage>1000%-10000%</style> <style=cStack>(+600%-6000% за шт.)</style> базового урона, зависящего от <style=cIsDamage>высоты падения</style>. Перезаряжается каждые <style=cIsDamage>10</style> секунд.",
+	
+	"ITEM_GHOSTONKILL_PICKUP_RISKYMOD": "Убийство врага вызывает призрак. Перезаряжается за определенное время.",
+	"ITEM_GHOSTONKILL_DESC_RISKYMOD": "Убийство врага <style=cIsDamage>призывает призрака</style> убитого врага с <style=cIsDamage>600%</style> <style=cStack>(+180% за шт.)</style> уроном. Существует <style=cIsDamage>30 секунд</style> <style=cStack>(+30 секунд за шт.)</style>. Перезаряжается каждые <style=cIsUtility>20</style> секунд. Можно иметь до <style=cIsUtility>3-х</style> призраков одновременно.", 
+
+	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>Вербует Жука-Стражника</style> с дополнительным <style=cIsDamage>300%</style> <style=cStack>(+300% за шт.)</style> уроном и <style=cIsHealing>200% <style=cStack>(+100% за шт.)</style></style> здоровьем.",
+	
+	"ITEM_FIREBALLSONHIT_DESC_RISKYMOD": "<style=cIsDamage>10%</style> вероятности при попадании вызвать <style=cIsDamage>3 магмовых шара</style> из врага, наносящий <style=cIsDamage>300%</style> <style=cStack>(+180% за шт.)</style> урона каждый.",
+	
+	"ITEM_LIGHTNINGSTRIKEONHIT_DESC_RISKYMOD": "<style=cIsDamage>10%</style> вероятности при попадании во врага поразить его ударом молнии, наносящий <style=cIsDamage>500%</style> <style=cStack>(+300% за шт.)</style> урона.",
+	
+	"ITEM_BLEEDONHITANDEXPLODE_PICKUP_RISKYMOD": "Кровоточащие враги взрываются при убийстве.",
+	"ITEM_BLEEDONHITANDEXPLODE_DESC_RISKYMOD": "Дает <style=cIsDamage>10%</style> вероятности вызвать <style=cIsDamage>кровотечение</style> у врага, нанося <style=cIsDamage>240%</style> базового урона. <style=cIsDamage>Кровоточащие</style> враги <style=cIsDamage>взрываются</style> после смерти, нанося <style=cIsDamage>400%</style> <style=cStack>(+320% за шт.)</style> урона, плюс дополнительно <style=cIsDamage>10%</style> <style=cStack>(+8% за шт.)</style> от их максимального здоровья.",
+	
+	"ITEM_KNURL_PICKUP_RISKYMOD": "Увеличивает здоровье, регенерацию, и броню.",
+	"ITEM_KNURL_DESC_RISKYMOD": "<style=cIsHealing>Увеличивает максимальный запас здоровья</style> на <style=cIsHealing>8%</style> <style=cStack>(+8% за шт.)</style>, <style=cIsHealing>базовую регенерацию здоровья</style> на <style=cIsHealing>+1.6 оз/сек.</style> <style=cStack>(+1.6 оз/сек. за шт.)</style>, и <style=cIsHealing>броню</style> by <style=cIsHealing>10</style> <style=cStack>(+10 за шт.)</style>.",
+		
+	"ITEM_SHIELDONLY_PICKUP_RISKYMOD": "Конвертирует все здоровье в щит. Увеличивает максимальные запас здоровья... <color=#FF7F7F>НО увеличивает задержку регенерации щита.</color>",
+	"ITEM_SHIELDONLY_DESC_RISKYMOD": "<style=cIsHealing>Конвертирует</style> все кроме <style=cIsHealing>1 единицы здоровья</style> в <style=cIsHealing>регенерирующие щиты</style>. <style=cIsHealing>Дает 50% <style=cStack>(+25% за шт.)</style> к максимальному запасу здоровья</style>. Увеличивает <style=cIsHealing>задержку регенерации щита</style> на <style=cIsHealing>0 секунд</style> <style=cStack>(+1 секунду за шт.)</style>.",
+	
+	"ITEM_MISSILEVOID_DESC_RISKYMOD": "Дает <style=cIsHealing>щит</style> равный <style=cIsHealing>10%</style> максимального запаса здоровья. Пока у вас есть <style=cIsHealing>щит</style>, попадание по врагу выстреливает ракету, наносящую <style=cIsDamage>40%</style> <style=cStack>(+28% за шт.)</style> ОБЩЕГО урона. <style=cIsVoid>Оскверняет все Ракеты «воздух — земля» Mk. 1</style>.",
+	
+	"ITEM_EXPLODEONDEATHVOID_DESC_RISKYMOD": "При попадании по врагу, чье здоровье выше <style=cIsDamage>90%</style>, создает <style=cIsDamage>лавовый столб</style> в радиусе <style=cIsDamage>12 м.</style>, наносящий <style=cIsDamage>350%</style> <style=cStack>(+280% за шт.)</style> базового урона. <style=cIsVoid>Оскверняет все Блуждающие огоньки</style>.",
+	
+	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Удары, наносящие <style=cIsDamage>более 400% урона</style>, также создают черную дыру, которая <style=cIsUtility>притягивает врагов в радиусе 15 м. к своему центру</style>. Длится <style=cIsUtility>5</style> секунд перед коллапсом, наносящим <style=cIsDamage>200%</style> <style=cStack>(+120% за шт.)</style> ОБЩЕГО урона. Перезаряжается каждые <style=cIsUtility>15</style> секунд.",
+	
+	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Убийство врага увеличивает <style=cIsUtility>скорость движения</style> на <style=cIsUtility>125%</style> на <style=cIsUtility>1.5</style> <style=cStack>(+1 за шт.)</style> секунду. <style=cIsDamage>Последовательные убийства увеличивают длительность эффекта</style> до 25 секунд.",
+	
+	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Увеличивает <style=cIsUtility>скорость движения</style> на <style=cIsUtility>10%</style> <style=cStack>(+10% за шт.)</style>. Выход из боя увеличивает <style=cIsUtility>скорость движения</style> на дополнительные <style=cIsUtility>30%</style> <style=cStack>(+30% за шт.)</style>.",
+	
+	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsHealing>Восстанавливает</style> <style=cIsHealing>1.2%</style> <style=cStack>(+0.6% за шт.)</style> <style=cIsHealing>здоровья</style> каждую секунду <style=cIsUtility>во время бега</style>. <style=cIsVoid>Оскверняет все Буйногрибы</style>.",
+	
+	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Создает зону вокруг Телепорта, которая <style=cIsHealing>восстанавливает</style> <style=cIsHealing>5%</style> <style=cStack>(+2.5% за шт.)</style> от <style=cIsHealing>здоровья</style> каждую секунду. Выпускает <style=cIsHealing>исцеляющий взрыв</style> во время события Телепорта, <style=cIsHealing>восстанавливая</style> <style=cIsHealing>50%</style> от максимального запаса здоровья всем союзникам поблизости. Происходит <style=cIsHealing>1</style> <style=cStack>(+1 за шт.)</style> раз.",
+	
+	"ITEM_CLOVER_DESC_RISKYMOD": "Все случайные эффекты получают <style=cIsUtility>+1</style> <style=cStack>(+1 за шт.)</style> дополнительный бросок на <style=cIsUtility>благоприятный исход</style>. Если ваша <style=cIsDamage>удача</style> выше <style=cIsUtility>1</style>, вместо этого увеличивает <style=cIsUtility>ВСЕ характеристики</style> на <style=cIsUtility>40%</style> <style=cStack>(+40% за шт.)</style>.",
+	
+	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Дает <style=cIsDamage>П-ка Дроунмана</style>. \nДроны получают <style=cIsDamage>+50%</style> <style=cStack>(+50% за шт.)</style> к скорости атаки и ускорению восстановления. \nДроны получают <style=cIsDamage>10%</style> вероятности выпустить <style=cIsDamage>ракету</style> при попадании, наносящую <style=cIsDamage>300%</style> ОБЩЕГО урона. \nДроны получают <style=cIsDamage>автоматический цепной пулемет</style>, наносящий <style=cIsDamage>6x50%</style> урона, рикошетящий к <style=cIsDamage>1-у</style> врагу.",
+	
+	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "Наносят дополнительный урон пока вне опасности.",
+	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Увеличивают урон на <style=cIsDamage>15%</style> <style=cStack>(+15% за шт.)</style> пока вне опасности.",
+	
+	"ITEM_CHAINLIGHTNINGVOID_DESC_RISKYMOD": "<style=cIsDamage>25%</style> вероятности выпустить <style=cIsDamage>молнию</style>,наносящую <style=cIsDamage>60%</style> ОБЩЕГО урона до <style=cIsDamage>3-х <style=cStack>(+2 за шт.)</style></style> раз. <style=cIsVoid>Оскверняет все Укулеле</style>.",
+	
+	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "Сбивает снаряды поблизости. Скорость перезарядки зависит от количества имеющихся дронов.",
+	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "Сбивает <style=cIsDamage>1</style> <style=cStack>(+1 за шт.)</style> снаряд в радиусе <style=cIsDamage>20 м.</style> каждую <style=cIsDamage>0.5 секунды</style>. <style=cIsUtility>Скорость перезарядки зависит от количества имеющихся дронов</style>.",
+	
+	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "Убийство элитных монстров призывает <style=cIsDamage>Альфа-Конструкцию</style> с <style=cIsHealing>400% <style=cStack>(+200% за шт.)</style> здоровьем</style> и <style=cIsDamage>400% <style=cStack>(+200% за шт.)</style> уроном</style>, <style=cIsUtility>отвлекающую</style> врагов поблизости. Максимальное количество: <style=cIsUtility>4</style>.",
+	
+	"ITEM_PERMANENTDEBUFFONHIT_DESC_RISKYMOD": "<style=cIsDamage>100%</style> вероятности при попадании <style=cIsDamage>навсегда</style> снизить <style=cIsDamage>броню</style> врага на <style=cIsDamage>1</style> ед. <style=cStack>(+1 за шт.)</style>.",
+	
+	"ITEM_TITANGOLDDURINGTP_DESC_RISKYMOD": "Призывает <style=cIsDamage>Златитана</style> во время события телепорта. Он наносит <style=cIsDamage>100% <style=cStack>(+50% за шт.)</style> урона</style> и имеет <style=cIsHealing>200% <style=cStack>(+100% за шт.)</style> здоровья</style>.",
+	
+	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Предотвращает <style=cIsUtility>1 <style=cStack>(+1 за шт.)</style></style> <style=cIsDamage>негативный эффект</style>, создавая <style=cIsHealing>временный барьер</style> на <style=cIsHealing>25%</style> от <style=cIsHealing>максимального запаса здоровья</style>. Перезаряжается каждые <style=cIsUtility>5</style> секунд</style>.",
+	
+	"ITEM_HEALINGPOTION_PICKUP_RISKYMOD" : "Дает огромный барьер при низком здоровье. Расходуется при использовании.",
+	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "Дает <style=cIsHealing>временный барьер</style> на <style=cIsHealing>50% от здоровья</style> когда здоровье опускается ниже <style=cIsHealth>50%</style>.",
+	
+	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>Блокирует</style> входящий урон один раз. Перезаряжается после <style=cIsUtility>20-ти секунд</style> <style=cStack>(-10% за шт.)</style>. <style=cIsVoid>Оскверняет все Тяжелые времена</style>.",
+	
+	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Лечение сверх максимального запаса здоровья дает <style=cIsHealing>временный барьер</style> на <style=cIsHealing>50% <style=cStack>(+50% за шт.)</style></style> от количества <style=cIsHealing>востановленного здоровья</style>. Уменьшает <style=cIsHealing>скорость убывания барьера</style> в <style=cIsHealing>2 <style=cStack>(+1 за шт.)</style></style> раза.",
+
+	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Увеличивает базовый урон на <style=cIsDamage>100%</style> <style=cStack>(+100% за шт.)</style>. <style=cIsHealth>Снижает максимальный запас здоровья в 2</style> <style=cStack>(+1 за шт.)</style> раза.",
+	
+	"ITEM_STRENGTHENBURN_DESC_RISKYMOD": "<style=cIsDamage>5%</style> вероятности при попадании <style=cIsDamage>поджечь</style> врага, нанося <style=cIsDamage>50%</style> ОБЩЕГО урона. Эффекты <style=cIsDamage>Поджога</style> наносят <style=cIsDamage>+300%</style> <style=cStack>(+300% за шт.)</style> больше периодического урона.",
+	
+	"ITEM_CRITDAMAGE_DESC_RISKYMOD": "Дает <style=cIsDamage>5% вероятности Критического Удара</style>. <style=cIsDamage>Критические Удары</style> наносят дополнительные <style=cIsDamage>100% урона</style><style=cStack>(+100% за шт.)</style>.",
+	
+	"ITEM_BARRAGEONBOSS_DESC_RISKYMOD": "Во время битвы с боссом вызывает <style=cIsUtility>5</style> ракет, наносящих урон в размере <style=cIsDamage>2,5% <style=cStack>(+2,5% за шт.)</style> от максимального запаса здоровья босса</style>. За каждые <style=cIsUtility>25 ед.</style> золота, собранных до начала боя, добавляется ещё одна ракета. Всего можно накопить до <style=cIsUtility>20</style> <style=cStack>(+5 за шт.)</style> ракет. <style=cIsUtility>Требуемое количество золота увеличивается со временем.</style>",
+	
+	"ITEM_TELEPORTONLOWHEALTH_DESC_RISKYMOD": "Когда здоровья остаётся меньше <style=cIsHealth>25%</style>, даёт <style=cIsHealing>временный барьер</style>, прочность которого равна <style=cIsHealing>100%</style> от <style=cIsHealing>максимального запаса здоровья</style> выжившего. Кроме того, выжившего на <style=cIsUtility>8</style> сек. окружает аура, которая вызывает <style=cIsDamage>Кровотечение</style> у врагов и <style=cIsUtility>телепортирует</style> их на какое-то расстояние. <style=cIsDamage>Если враг умирает от воздействия ауры</style>, её время действия <style=cIsUtility>продлевается</style> на <style=cIsUtility>1 сек</style>. Перезаряжается в начале каждого уровня.",
+	
+	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "При получении урона от любого <style=cIsUtility>навыка</style> враги <style=cIsUtility>подбрасываются в воздух</style> и <style=cIsUtility>оглушаются</style>. При получении урона в воздухе враги снова <style=cIsUtility>подбрасываются</style>, но не более <style=cIsUtility>2</style> <style=cStack>(+1 за шт.) раз</style>. Подброшенные враги получают на <style=cIsDamage>15%</style> больше урона от всех источников за каждое подбрасывание. Перезаряжается <style=cIsUtility>15</style> сек.",
+	
+	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Увеличивает <style=cIsUtility>все параметры</style> на <style=cIsUtility>5%</style> за каждое усиление. Суммируется до <style=cIsUtility>4</style> раз <style=cStack>(+4 за шт.)</style>.",
+	}
+}
