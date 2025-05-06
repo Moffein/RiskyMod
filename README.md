@@ -39,7 +39,6 @@ This mod is compatible with nearly all content mods. The only things that will c
 - Artificer
 	- If you use mods that add Artificer skills, or want a more Vanilla-ish Artificer experience, refer to the following options:
 		- RiskyMod_Survivors.cfg
-			- Nanobomb - Remove Gravity: False
 			- Ion Surge - Move to Utility Slot: False
 			- Utility Self Knockback : False	
 
