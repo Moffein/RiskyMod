@@ -32,7 +32,7 @@ namespace RiskyMod.Items.Legendary
                     x => x.MatchAdd()
                     ))
                     {
-                        c.Emit(OpCodes.Ldloc_3);    //itemCount
+                        c.Emit(OpCodes.Ldloc, 5);    //itemCount
                         c.EmitDelegate<Func<float, int, float>>((origRadius, itemCount) =>
                         {
                             float newRadius = 0f;
