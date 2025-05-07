@@ -62,11 +62,15 @@ namespace RiskyMod.Items.Uncommon
             orig(self);
             if (NetworkServer.active && self.meridianEventTriggerInteraction && self.meridianEventTriggerInteraction.falseSonEntryFXPosition)
             {
-                DaisyBehavior db = self.gameObject.GetComponent<DaisyBehavior>();
-                if (!db)
+                int daisyCount = Util.GetItemCountForTeam(TeamIndex.Player, RoR2Content.Items.TPHealingNova.itemIndex, false, true);
+                if (daisyCount > 0)
                 {
-                    db = self.gameObject.AddComponent<DaisyBehavior>();
-                    db.wardOrigin = self.meridianEventTriggerInteraction.falseSonEntryFXPosition;
+                    DaisyBehavior db = self.gameObject.GetComponent<DaisyBehavior>();
+                    if (!db)
+                    {
+                        db = self.gameObject.AddComponent<DaisyBehavior>();
+                        db.wardOrigin = self.meridianEventTriggerInteraction.falseSonEntryFXPosition;
+                    }
                 }
             }
         }
