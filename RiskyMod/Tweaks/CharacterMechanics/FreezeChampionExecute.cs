@@ -5,6 +5,7 @@ using UnityEngine;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
 using RiskyMod.Content;
+using UnityEngine.Networking;
 
 namespace RiskyMod.Tweaks.CharacterMechanics
 {
@@ -181,7 +182,57 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     self.characterBody.RemoveBuff(FreezeDebuff);
                 }
             };
+
             SharedHooks.TakeDamage.OnDamageTakenActions += ApplyDebuff;
+            IL.RoR2.GlobalEventManager.ProcessHitEnemy += GlobalEventManager_ProcessHitEnemy;
+            IL.RoR2.CharacterBody.HandleCascadingBuffs += CharacterBody_HandleCascadingBuffs;
+        }
+
+        private void CharacterBody_HandleCascadingBuffs(ILContext il)
+        {
+            ILCursor c = new ILCursor(il);
+            if (c.TryGotoNext(x => x.MatchLdsfld(typeof(DLC2Content.Buffs), "Frost"))
+                && c.TryGotoNext(MoveType.After, x => x.MatchLdsfld(typeof(DLC2Content.Buffs), "FreezeImmune")))
+            {
+                c.Emit(OpCodes.Ldarg_0);//Characterbody
+                c.EmitDelegate<Func<BuffDef, CharacterBody, BuffDef>>((buff, body) =>
+                {
+                    bool notFreezeImmune = !body.HasBuff(DLC2Content.Buffs.FreezeImmune);
+                    bool notFrozen = !(body.healthComponent && body.healthComponent.isInFrozenState);
+                    if (notFreezeImmune && notFrozen)
+                    {
+                        body.AddTimedBuff(FreezeDebuff, 2f);
+                    }
+                    return buff;
+                });
+            }
+        }
+
+        private void GlobalEventManager_ProcessHitEnemy(ILContext il)
+        {
+            ILCursor c = new ILCursor(il);
+
+            if (c.TryGotoNext(x => x.MatchCall<DamageTypeCombo>("IsChefFrostDamage"))
+                && c.TryGotoNext( x=> x.MatchLdloc(1))
+                && c.TryGotoNext(MoveType.After, x => x.MatchLdloc(1))) //Position before SetStateOnHurt GetComponent
+            {
+                c.EmitDelegate<Func<CharacterBody, CharacterBody>>(body =>
+                {
+                    bool isOiled = body.HasBuff(DLC2Content.Buffs.Oiled);
+                    bool notFreezeImmune = !body.HasBuff(DLC2Content.Buffs.FreezeImmune);
+                    bool notFrozen = !(body.healthComponent && body.healthComponent.isInFrozenState);
+
+                    if (isOiled && notFreezeImmune && notFrozen)
+                    {
+                        body.AddTimedBuff(FreezeDebuff, 2f);    //this is inconsistent with body
+                    }
+                    return body;
+                });
+            }
+            else
+            {
+                Debug.LogError("RiskyMod: FreezeChampionExecute ProcessHitEnemy IL hook failed.");
+            }
         }
 
         private static void ApplyDebuff(DamageInfo damageInfo, HealthComponent self)
