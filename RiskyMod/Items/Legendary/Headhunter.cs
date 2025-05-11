@@ -106,7 +106,13 @@ namespace RiskyMod.Items.Legendary
 
         private void HandlePerfected2Stats(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
-            if (sender.HasBuff(Perfected2.buffIndex)) args.baseShieldAdd += sender.maxHealth * 0.2f;
+            if (sender.HasBuff(Perfected2.buffIndex))
+            {
+                args.baseShieldAdd += sender.baseMaxHealth * 0.25f;
+                args.levelShieldAdd += sender.baseMaxShield * 0.25f;
+                args.healthMultAdd += 0.25f;
+                args.moveSpeedMultAdd += 0.35f;
+            }
         }
 
         private static void EliteBonus(DamageMult damageMult, DamageInfo damageInfo,
