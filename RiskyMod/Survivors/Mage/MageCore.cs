@@ -127,7 +127,6 @@ namespace RiskyMod.Survivors.Mage
                 fireStorm.beginSkillCooldownOnSkillEnd = true;
                 fireStorm.canceledFromSprinting = !SoftDependencies.RtAutoSprintLoaded;
                 fireStorm.cancelSprintingOnActivation = true;
-                fireStorm.dontAllowPastMaxStocks = true;
                 fireStorm.forceSprintDuringState = false;
                 fireStorm.fullRestockOnAssign = true;
                 fireStorm.icon = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFlamethrower.asset").WaitForCompletion().icon;
@@ -211,7 +210,6 @@ namespace RiskyMod.Survivors.Mage
                 skillDef.baseRechargeInterval = 5f;
                 skillDef.beginSkillCooldownOnSkillEnd = true;
                 skillDef.canceledFromSprinting = flamethrowerSprintCancel.Value && !SoftDependencies.RtAutoSprintLoaded;
-                skillDef.dontAllowPastMaxStocks = true;
                 skillDef.forceSprintDuringState = false;
                 skillDef.fullRestockOnAssign = true;
                 skillDef.icon = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFlyUp.asset").WaitForCompletion().icon;
@@ -283,7 +281,6 @@ namespace RiskyMod.Survivors.Mage
             skillDef.baseRechargeInterval = 5f;
             skillDef.beginSkillCooldownOnSkillEnd = true;
             skillDef.canceledFromSprinting = flamethrowerSprintCancel.Value;
-            skillDef.dontAllowPastMaxStocks = true;
             skillDef.forceSprintDuringState = false;
             skillDef.fullRestockOnAssign = true;
             skillDef.icon = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFlyUp.asset").WaitForCompletion().icon;

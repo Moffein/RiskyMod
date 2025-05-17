@@ -313,7 +313,6 @@ namespace RiskyMod.Survivors.Bandit2
             lightsOutDef.beginSkillCooldownOnSkillEnd = true;
             lightsOutDef.canceledFromSprinting = false;
             lightsOutDef.forceSprintDuringState = false;
-            lightsOutDef.dontAllowPastMaxStocks = true;
             lightsOutDef.fullRestockOnAssign = true;
             lightsOutDef.icon = Content.Assets.ScepterSkillIcons.LightsOutScepter;
             lightsOutDef.interruptPriority = InterruptPriority.Skill;
@@ -342,7 +341,6 @@ namespace RiskyMod.Survivors.Bandit2
             reuDef.beginSkillCooldownOnSkillEnd = true;
             reuDef.canceledFromSprinting = false;
             reuDef.forceSprintDuringState = false;
-            reuDef.dontAllowPastMaxStocks = true;
             reuDef.fullRestockOnAssign = true;
             reuDef.icon = Content.Assets.ScepterSkillIcons.RackEmUpScepter;
             reuDef.interruptPriority = InterruptPriority.Skill;

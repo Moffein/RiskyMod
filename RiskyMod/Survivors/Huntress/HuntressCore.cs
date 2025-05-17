@@ -124,7 +124,6 @@ namespace RiskyMod.Survivors.Huntress
             arrowRainDef.baseRechargeInterval = 10f;
             arrowRainDef.beginSkillCooldownOnSkillEnd = orig.beginSkillCooldownOnSkillEnd;
             arrowRainDef.canceledFromSprinting = orig.canceledFromSprinting;
-            arrowRainDef.dontAllowPastMaxStocks = true;
             arrowRainDef.forceSprintDuringState = false;
             arrowRainDef.fullRestockOnAssign = true;
             arrowRainDef.icon = Content.Assets.ScepterSkillIcons.HuntressArrowRainScepter;

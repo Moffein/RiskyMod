@@ -109,7 +109,6 @@ namespace RiskyMod.Survivors.Captain
             shotgunDef.baseRechargeInterval = 0f;
             shotgunDef.beginSkillCooldownOnSkillEnd = false;
             shotgunDef.canceledFromSprinting = false;
-            shotgunDef.dontAllowPastMaxStocks = true;
             shotgunDef.forceSprintDuringState = false;
             shotgunDef.fullRestockOnAssign = true;
             shotgunDef.icon = captainShotgun.icon;

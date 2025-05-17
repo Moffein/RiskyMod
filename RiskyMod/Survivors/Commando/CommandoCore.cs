@@ -73,7 +73,6 @@ namespace RiskyMod.Survivors.Commando
                 skillDef.activationStateMachineName = "Weapon";
                 skillDef.attackSpeedBuffsRestockSpeed = false;
                 skillDef.cancelSprintingOnActivation = true;
-                skillDef.dontAllowPastMaxStocks = true;
                 skillDef.fullRestockOnAssign = true;
                 skillDef.baseMaxStock = 1;
                 skillDef.baseRechargeInterval = 3f;
@@ -174,7 +173,6 @@ namespace RiskyMod.Survivors.Commando
                 shrapnelBarrageDef.baseRechargeInterval = 7f;
                 shrapnelBarrageDef.beginSkillCooldownOnSkillEnd = false;
                 shrapnelBarrageDef.canceledFromSprinting = false;
-                shrapnelBarrageDef.dontAllowPastMaxStocks = true;
                 shrapnelBarrageDef.forceSprintDuringState = false;
                 shrapnelBarrageDef.fullRestockOnAssign = true;
                 shrapnelBarrageDef.icon = barrageDef.icon;
@@ -193,6 +191,7 @@ namespace RiskyMod.Survivors.Commando
                 shrapnelBarrageDef.skillNameToken = "COMMANDO_SPECIAL_EXPL_NAME_RISKYMOD";
                 shrapnelBarrageDef.skillDescriptionToken = "COMMANDO_SPECIAL_EXPL_DESCRIPTION_RISKYMOD";
                 shrapnelBarrageDef.stockToConsume = 1;
+
                 (shrapnelBarrageDef as ScriptableObject).name = shrapnelBarrageDef.skillName;
                 Content.Content.skillDefs.Add(shrapnelBarrageDef);
                 Skills.ShrapnelBarrage = shrapnelBarrageDef;
@@ -242,7 +241,6 @@ namespace RiskyMod.Survivors.Commando
                 shrapnelBarrageDef.baseRechargeInterval = 7f;
                 shrapnelBarrageDef.beginSkillCooldownOnSkillEnd = false;
                 shrapnelBarrageDef.canceledFromSprinting = false;
-                shrapnelBarrageDef.dontAllowPastMaxStocks = true;
                 shrapnelBarrageDef.forceSprintDuringState = false;
                 shrapnelBarrageDef.fullRestockOnAssign = true;
                 shrapnelBarrageDef.icon = Content.Assets.ScepterSkillIcons.CommandoBarrageScepter;
@@ -276,7 +274,6 @@ namespace RiskyMod.Survivors.Commando
                 grenadeDef.baseRechargeInterval = 5f;
                 grenadeDef.beginSkillCooldownOnSkillEnd = false;
                 grenadeDef.canceledFromSprinting = false;
-                grenadeDef.dontAllowPastMaxStocks = true;
                 grenadeDef.forceSprintDuringState = false;
                 grenadeDef.fullRestockOnAssign = true;
                 grenadeDef.icon = Content.Assets.ScepterSkillIcons.CommandoGrenadeScepter;
