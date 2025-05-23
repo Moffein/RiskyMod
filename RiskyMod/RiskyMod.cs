@@ -84,7 +84,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RiskyFixes")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.4.5")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.4.6")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -232,6 +232,10 @@ namespace RiskyMod
             bool directorReworkLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.score.DirectorReworkPlus");
             if (directorReworkLoaded) Debug.Log("RiskyMod: Disabling CombatDirectorMultiplier because DirectorReworkPlus is loaded.");
             CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.enabled && !directorReworkLoaded;
+
+            bool wolfoSpawnpoolFixerLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("Wolfo.DLCSpawnPoolFixer");
+            if (wolfoSpawnpoolFixerLoaded) Debug.Log("RiskyMod: Disabling DLC Enemy Replacement fix because DLCSpawnPoolFixer is loaded.");
+            EnemiesCore.spawnpoolDLCReplacementFix = EnemiesCore.spawnpoolDLCReplacementFix && !wolfoSpawnpoolFixerLoaded;
         }
 
         private void CheckArenaLoaded(Stage obj)
