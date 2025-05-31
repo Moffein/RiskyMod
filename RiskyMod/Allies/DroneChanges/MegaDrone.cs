@@ -15,14 +15,14 @@ namespace RiskyMod.Allies.DroneChanges
     public class MegaDrone
     {
 		public static bool allowRepair = true;
-		public static GameObject explosionEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
-		public static DamageAPI.ModdedDamageType MegaTurretExplosion;
+		public static GameObject explosionEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/OmniExplosionVFXQuick.prefab").WaitForCompletion();
+        public static DamageAPI.ModdedDamageType MegaTurretExplosion;
 
 		public MegaDrone()
 		{
-			GameObject megaDroneMasterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/MegaDroneMaster");
+			GameObject megaDroneMasterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/MegaDroneMaster.prefab").WaitForCompletion();
 
-			AISkillDriver[] aiDrivers = megaDroneMasterObject.GetComponentsInChildren<AISkillDriver>();
+            AISkillDriver[] aiDrivers = megaDroneMasterObject.GetComponentsInChildren<AISkillDriver>();
             for (int i = 0; i < aiDrivers.Length; i++)
             {
                 if (aiDrivers[i].customName == "StopTooCloseTarget")
@@ -35,7 +35,7 @@ namespace RiskyMod.Allies.DroneChanges
             }
 
 			GameObject megaDroneBrokenObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/MegaDroneBroken.prefab").WaitForCompletion();
-			PurchaseInteraction pi = megaDroneBrokenObject.GetComponent<PurchaseInteraction>();
+            PurchaseInteraction pi = megaDroneBrokenObject.GetComponent<PurchaseInteraction>();
 			pi.cost = 300;  //Vanilla is 350
 
 			GameObject megaDroneBodyObject = AllyPrefabs.MegaDrone;
@@ -97,7 +97,7 @@ namespace RiskyMod.Allies.DroneChanges
         {
 			if (damageInfo.HasModdedDamageType(MegaDrone.MegaTurretExplosion))
             {
-				EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick"), new EffectData
+				EffectManager.SpawnEffect(explosionEffectPrefab, new EffectData
 				{
 					origin = damageInfo.position,
 					scale = 3f,
@@ -130,12 +130,12 @@ namespace RiskyMod.Allies.DroneChanges
 			pie.falloffModel = BlastAttack.FalloffModel.None;
 			//pie.blastRadius = 12f;//Vanilla 8
 
-			SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireTwinRocket", "projectilePrefab", rocketPrefab);
+			SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Drones/EntityStates.Drone.DroneWeapon.FireTwinRocket.asset", "projectilePrefab", rocketPrefab);
         }
 
 		private void AddPanicShield()
         {
-			MegaDronePanicShield.shockEffectPrefab = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("prefabs/effects/lightningstakenova"), "RiskyModMegaDronePanicShieldEffect", false);
+			MegaDronePanicShield.shockEffectPrefab = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/EliteLightning/LightningStakeNova.prefab").WaitForCompletion(), "RiskyModMegaDronePanicShieldEffect", false);
 
 			EffectComponent ec = MegaDronePanicShield.shockEffectPrefab.GetComponent<EffectComponent>();
 			ec.soundName = "Play_item_proc_deathMark";

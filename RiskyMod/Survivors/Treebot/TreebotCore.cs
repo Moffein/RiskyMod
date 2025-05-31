@@ -18,7 +18,7 @@ namespace RiskyMod.Survivors.Treebot
 
         public static bool defaultUtilityHeal = true;
         public static bool fruitChanges = true;
-        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/TreebotBody");
+        public static GameObject bodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Treebot/TreebotBody.prefab").WaitForCompletion();
         public TreebotCore()
         {
             if (!enabled) return;
@@ -36,7 +36,7 @@ namespace RiskyMod.Survivors.Treebot
         {
             if (drillChanges)
             {
-                GameObject drillPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/TreebotMortarRain");
+                GameObject drillPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Treebot/TreebotMortarRain.prefab").WaitForCompletion();
                 ProjectileDotZone pdz = drillPrefab.GetComponent<ProjectileDotZone>();
                 pdz.overlapProcCoefficient = 0.7f;
             }
@@ -66,7 +66,7 @@ namespace RiskyMod.Survivors.Treebot
 
                 SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Treebot/EntityStates.Treebot.TreebotFireFruitSeed.asset", "baseDuration", "0.5");//1 in vanilla
 
-                GameObject fruitProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/TreebotFruitSeedProjectile");
+                GameObject fruitProjectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Treebot/TreebotFruitSeedProjectile.prefab").WaitForCompletion();
                 ProjectileImpactExplosion pie = fruitProjectile.GetComponent<ProjectileImpactExplosion>();
                 pie.blastRadius = 6f;
 

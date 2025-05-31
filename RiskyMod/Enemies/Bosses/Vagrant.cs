@@ -50,7 +50,7 @@ namespace RiskyMod.Enemies.Bosses
 
         private void RemoveTrackingBombOnKill()
         {
-            GameObject projectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/vagranttrackingbomb");
+            GameObject projectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Vagrant/VagrantTrackingBomb.prefab").WaitForCompletion();
             HealthComponent hc = projectile.GetComponent<HealthComponent>();
             hc.globalDeathEventChanceCoefficient = 0f;
         }

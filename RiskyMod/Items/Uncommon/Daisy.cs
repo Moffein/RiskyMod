@@ -83,7 +83,7 @@ namespace RiskyMod.Items.Uncommon
 
     public class DaisyBehavior : MonoBehaviour
     {
-        public static GameObject wardPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/Shrines/ShrineHealingWard");
+        public static GameObject wardPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ShrineHealing/ShrineHealingWard.prefab").WaitForCompletion();
         public GameObject wardInstance;
         public HealingWard healingWard;
         public Transform wardOrigin;

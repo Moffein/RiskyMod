@@ -2,6 +2,7 @@
 using RoR2.Projectile;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Enemies.Mobs
 {
@@ -16,7 +17,7 @@ namespace RiskyMod.Enemies.Mobs
 
         private void ChangeFalloff()
         {
-            GameObject projectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/wispcannon");
+            GameObject projectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/GreaterWisp/WispCannon.prefab").WaitForCompletion();
             ProjectileImpactExplosion pie = projectile.GetComponent<ProjectileImpactExplosion>();
             pie.falloffModel = BlastAttack.FalloffModel.SweetSpot;
         }

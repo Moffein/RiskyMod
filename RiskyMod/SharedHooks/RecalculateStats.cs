@@ -1,9 +1,4 @@
-﻿using RiskyMod.Items.Uncommon;
-using RiskyMod.Tweaks;
-using RiskyMod.Tweaks.CharacterMechanics;
-using RoR2;
-using UnityEngine;
-using UnityEngine.Networking;
+﻿using RoR2;
 
 namespace RiskyMod.SharedHooks
 {

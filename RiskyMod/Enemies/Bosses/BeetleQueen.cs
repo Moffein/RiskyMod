@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace RiskyMod.Enemies.Bosses
@@ -36,7 +37,7 @@ namespace RiskyMod.Enemies.Bosses
         private void ModifyProjectile()
         {
 
-            GameObject acidProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/beetlequeenacid").InstantiateClone("RiskyMod_BeetleQueenAcid", true);
+            GameObject acidProjectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Beetle/BeetleQueenAcid.prefab").WaitForCompletion().InstantiateClone("RiskyMod_BeetleQueenAcid", true);
             acidProjectile.transform.localScale = 2f * Vector3.one; //Original scale is (1, 1, 1), Beetle Queen Plus is 2.5x
             ProjectileDotZone pdz = acidProjectile.GetComponent<ProjectileDotZone>();
             pdz.overlapProcCoefficient = 0.3f;
@@ -44,7 +45,7 @@ namespace RiskyMod.Enemies.Bosses
             pdz.lifetime = 25f; //15f
             Content.Content.projectilePrefabs.Add(acidProjectile);
 
-            GameObject spitProjectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/beetlequeenspit").InstantiateClone("RiskyMod_BeetleQueenSpit", true);
+            GameObject spitProjectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Beetle/BeetleQueenSpit.prefab").WaitForCompletion().InstantiateClone("RiskyMod_BeetleQueenSpit", true);
 
             ProjectileImpactExplosion pie = spitProjectile.GetComponent<ProjectileImpactExplosion>();
             //pie.blastDamageCoefficient = 1.3f;
@@ -54,7 +55,7 @@ namespace RiskyMod.Enemies.Bosses
 
             Content.Content.projectilePrefabs.Add(spitProjectile);
 
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.BeetleQueenMonster.FireSpit", "projectilePrefab", spitProjectile);
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Beetle/EntityStates.BeetleQueenMonster.FireSpit.asset", "projectilePrefab", spitProjectile);
         }
 
         private static void ModifyBeetleJuice(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)

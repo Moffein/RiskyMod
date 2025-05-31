@@ -3,6 +3,7 @@ using UnityEngine;
 using RoR2;
 using MonoMod.Cil;
 using System;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Loader
 {
@@ -29,7 +30,7 @@ namespace RiskyMod.Survivors.Loader
                 }
             };
 
-            GameObject projectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/loaderzapcone");
+            GameObject projectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Loader/LoaderZapCone.prefab").WaitForCompletion();
             ProjectileProximityBeamController pbc = projectile.GetComponent<ProjectileProximityBeamController>();
             pbc.attackRange += 1f;
         }

@@ -7,6 +7,7 @@ using RoR2.CharacterAI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace RiskyMod.Items.Uncommon
@@ -20,7 +21,7 @@ namespace RiskyMod.Items.Uncommon
         public static bool weakToMithrix = true;
 
         public static BodyIndex squidTurretBodyIndex;
-        public static CharacterSpawnCard squidTurretCard = LegacyResourcesAPI.Load<CharacterSpawnCard>("SpawnCards/CharacterSpawnCards/cscSquidTurret");
+        public static CharacterSpawnCard squidTurretCard = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Squid/cscSquidTurret.asset").WaitForCompletion();
 
         //Does this need turretblacklist?
         public SquidPolyp()
@@ -47,14 +48,14 @@ namespace RiskyMod.Items.Uncommon
                 }
             };
 
-            procEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/claygooorbimpact").InstantiateClone("RiskyMod_SquidPolypProc", false);
+            procEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/goolake/ClayGooOrbImpact.prefab").WaitForCompletion().InstantiateClone("RiskyMod_SquidPolypProc", false);
             EffectComponent ec = procEffectPrefab.GetComponent<EffectComponent>();
             ec.soundName = "Play_treeBot_m2_launch";
             Content.Content.effectDefs.Add(new EffectDef(procEffectPrefab));
 
             TakeDamage.OnPercentHpLostActions += OnHpLost;
 
-            GameObject squidBodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/squidturretbody");
+            GameObject squidBodyObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Squid/SquidTurretBody.prefab").WaitForCompletion();
             CharacterBody cb = squidBodyObject.GetComponent<CharacterBody>();
             cb.baseMaxHealth = 100f;
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;

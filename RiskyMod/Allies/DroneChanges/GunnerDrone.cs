@@ -30,7 +30,7 @@ namespace RiskyMod.Allies.DroneChanges
         private void ModifyAI()
         {
             //Vanilla AI is terrible, just disable it and let the AutoGunnerDroneBehavior handle the shooting.
-            GameObject masterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/Drone1Master");
+            GameObject masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/Drone1Master.prefab").WaitForCompletion();
             AISkillDriver[] skillDrivers = masterObject.GetComponents<AISkillDriver>();
             foreach (AISkillDriver skill in skillDrivers)
             {

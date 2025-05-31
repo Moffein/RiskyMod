@@ -5,6 +5,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
 using RoR2;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Equipment
 {
@@ -20,7 +21,7 @@ namespace RiskyMod.Items.Equipment
                 HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipDescs, RoR2Content.Equipment.BFG);
             };
 
-            ItemsCore.ChangeEquipmentCooldown(ItemsCore.LoadEquipmentDef("bfg"), 120f);
+            ItemsCore.ChangeEquipmentCooldown(Addressables.LoadAssetAsync<EquipmentDef>("RoR2/Base/BFG/BFG.asset").WaitForCompletion(), 120f);
         }
     }
 }

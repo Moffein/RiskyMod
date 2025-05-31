@@ -27,7 +27,7 @@ namespace RiskyMod.Survivors.Toolbot
         public static bool enablePowerModeChanges = true;
 
         public static BuffDef PowerModeBuff;
-        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/ToolbotBody");
+        public static GameObject bodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Toolbot/ToolbotBody.prefab").WaitForCompletion();
 
         public ToolbotCore()
         {
@@ -66,14 +66,14 @@ namespace RiskyMod.Survivors.Toolbot
             if (!enableRebarChanges) return;
             SkillDef railgunDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Toolbot/ToolbotBodyFireSpear.asset").WaitForCompletion();
             railgunDef.skillDescriptionToken = "TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD";
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireSpear", "damageCoefficient", "6.6");
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Toolbot/EntityStates.Toolbot.FireSpear.asset", "damageCoefficient", "6.6");
         }
 
         private void SawChanges(SkillLocator sk)
         {
             if (sawPhysics)
             {
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.FireBuzzsaw", "selfForceMagnitude", "0");
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Toolbot/EntityStates.Toolbot.FireBuzzsaw.asset", "selfForceMagnitude", "0");
                 IL.EntityStates.Toolbot.FireBuzzsaw.FixedUpdate += (il) =>
                 {
                     ILCursor c = new ILCursor(il);
@@ -171,7 +171,7 @@ namespace RiskyMod.Survivors.Toolbot
             if (enablePowerModeChanges)
             {
                 SkillDef powerSkillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Toolbot/ToolbotDualWield.asset").WaitForCompletion();
-                BuffDef powerDef = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/SmallArmorBoost");
+                BuffDef powerDef = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Common/bdSmallArmorBoost.asset").WaitForCompletion();
 
                 powerSkillDef.skillDescriptionToken = "TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD";
 
@@ -185,7 +185,7 @@ namespace RiskyMod.Survivors.Toolbot
                 );
 
                 RecalculateStatsAPI.GetStatCoefficients += HandlePowerMode;
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Toolbot.ToolbotDualWieldBase", "bonusBuff", PowerModeBuff);
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Toolbot/EntityStates.Toolbot.ToolbotDualWieldBase.asset", "bonusBuff", PowerModeBuff);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Treebot
 {
@@ -10,7 +11,7 @@ namespace RiskyMod.Survivors.Treebot
         {
             if (!enabled) return;
 
-            GameObject fruitPack = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/TreebotFruitPack");
+            GameObject fruitPack = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Treebot/TreebotFruitPack.prefab").WaitForCompletion();
 
             GravitatePickup gp = fruitPack.GetComponentInChildren<GravitatePickup>();
 

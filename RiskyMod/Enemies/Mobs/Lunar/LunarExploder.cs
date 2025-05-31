@@ -22,7 +22,7 @@ namespace RiskyMod.Enemies.Mobs.Lunar
             pdz.overlapProcCoefficient = 0.2f;  //0.5 is vanilla
             Allies.DotZoneResist.AddDotZoneDamageType(modifiedFirePool);
 
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.LunarExploderMonster.DeathState", "projectilePrefab", modifiedFirePool);
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/LunarExploder/EntityStates.LunarExploderMonster.DeathState.asset", "projectilePrefab", modifiedFirePool);
 
             Content.Content.projectilePrefabs.Add(modifiedFirePool);
         }

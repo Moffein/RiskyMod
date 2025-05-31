@@ -7,6 +7,7 @@ using MonoMod.Cil;
 using R2API;
 using System;
 using System.Linq;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -113,14 +114,14 @@ namespace RiskyMod.Items.Uncommon
 
 			if (RiskyMod.disableProcChains)
 			{
-				missilePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MissileProjectile").InstantiateClone("RiskyMod_ATGProjectile", true);
+				missilePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/MissileProjectile.prefab").WaitForCompletion().InstantiateClone("RiskyMod_ATGProjectile", true);
 				ProjectileController pc = missilePrefab.GetComponent<ProjectileController>();
 				pc.procCoefficient = 0f;
 				Content.Content.projectilePrefabs.Add(missilePrefab);
 			}
 			else
             {
-				missilePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MissileProjectile");
+				missilePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/MissileProjectile.prefab").WaitForCompletion();
 
 			}
 		}

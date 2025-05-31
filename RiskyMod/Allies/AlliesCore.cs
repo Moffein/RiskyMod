@@ -60,25 +60,21 @@ namespace RiskyMod.Allies
             {
                 //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireTurret", "damageCoefficient", "0.25");   //Shared with Gunner Drones, but those use a dedicated component to handle attacking now
 
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireGatling", "damageCoefficient", "0.45");   //Damage 18 -> 12, coef 0.3 -> 0.45
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.HealBeam", "healCoefficient", "1.7");   //Damage 10 -> 12, coef 2 -> 1.6667
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireMegaTurret", "damageCoefficient", "2.2");   //Damage 14 -> 12, coef 2.2 -> 2.5667 mult by 0.8
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireTwinRocket", "damageCoefficient", "4.6667");   //Damage 14 -> 12, coef 4 -> 4.6667
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Drones/EntityStates.Drone.DroneWeapon.FireGatling.asset", "damageCoefficient", "0.45");   //Damage 18 -> 12, coef 0.3 -> 0.45
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Drones/EntityStates.Drone.DroneWeapon.HealBeam.asset", "healCoefficient", "1.7");   //Damage 10 -> 12, coef 2 -> 1.6667
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Drones/EntityStates.Drone.DroneWeapon.FireMegaTurret.asset", "damageCoefficient", "2.2");   //Damage 14 -> 12, coef 2.2 -> 2.5667 mult by 0.8
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Drones/EntityStates.Drone.DroneWeapon.FireTwinRocket.asset", "damageCoefficient", "4.6667");   //Damage 14 -> 12, coef 4 -> 4.6667
 
                 //SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Drone.DroneWeapon.FireMissileBarrage", "damageCoefficient", "1.7");   //Damage 14 -> 12, coef 1 -> 1.166666667
 
                 NormalizeDroneDamage(AllyPrefabs.GunnerDrone);
                 NormalizeDroneDamage(AllyPrefabs.HealDrone);
-                //NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/backupdronebody"));
                 NormalizeDroneDamage(AllyPrefabs.MissileDrone);
                 NormalizeDroneDamage(AllyPrefabs.EquipmentDrone);
                 NormalizeDroneDamage(AllyPrefabs.EmergencyDrone);
-                //NormalizeDroneDamage(AllyPrefabs.IncineratorDrone);
                 NormalizeDroneDamage(AllyPrefabs.MegaDrone);
-                NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/dronecommanderbody"));
+                NormalizeDroneDamage(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/DroneCommander/DroneCommanderBody.prefab").WaitForCompletion());
                 NormalizeDroneDamage(AllyPrefabs.GunnerTurret);
-                //NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/RoboBallGreenBuddyBody"));
-                //NormalizeDroneDamage(LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/RoboBallRedBuddyBody"));
             }
 
             new AllyScaling();

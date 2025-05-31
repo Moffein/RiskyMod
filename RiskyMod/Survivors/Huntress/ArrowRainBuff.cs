@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using EntityStates.RiskyMod.Huntress;
 using MonoMod.Cil;
 using System;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Huntress
 {
@@ -20,7 +21,7 @@ namespace RiskyMod.Survivors.Huntress
         {
             if (!enabled) return;
 
-            arrowRainObject = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/huntressarrowrain").InstantiateClone("RiskyModArrowRainProjectile", true);
+            arrowRainObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRain.prefab").WaitForCompletion().InstantiateClone("RiskyModArrowRainProjectile", true);
             Content.Content.projectilePrefabs.Add(arrowRainObject);
 
             ProjectileDamage pd = arrowRainObject.GetComponent<ProjectileDamage>();
@@ -34,8 +35,8 @@ namespace RiskyMod.Survivors.Huntress
             hb.transform.localPosition += 0.5f * Vector3.up;
             hb.transform.localScale = new Vector3(hb.transform.localScale.x, 2f * hb.transform.localScale.y, hb.transform.localScale.z);
 
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "damageCoefficient", "4.2");
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.ArrowRain", "projectilePrefab", ArrowRainBuff.arrowRainObject);
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Huntress/EntityStates.Huntress.ArrowRain.asset", "damageCoefficient", "4.2");
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Huntress/EntityStates.Huntress.ArrowRain.asset", "projectilePrefab", ArrowRainBuff.arrowRainObject);
 
             IL.EntityStates.Huntress.ArrowRain.DoFireArrowRain += ArrowRain_DoFireArrowRain;
         }
@@ -65,7 +66,7 @@ namespace RiskyMod.Survivors.Huntress
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public static void ScepterProjectileSetup()
         {
-            ArrowRainBuff.arrowRainScepterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/huntressarrowrain").InstantiateClone("RiskyModArrowRainScepterProjectile", true);
+            ArrowRainBuff.arrowRainScepterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRain.prefab").WaitForCompletion().InstantiateClone("RiskyModArrowRainScepterProjectile", true);
             Content.Content.projectilePrefabs.Add(ArrowRainBuff.arrowRainScepterObject);
 
             arrowRainScepterObject.transform.localScale = new Vector3(arrowRainScepterObject.transform.localScale.x * 1.5f,

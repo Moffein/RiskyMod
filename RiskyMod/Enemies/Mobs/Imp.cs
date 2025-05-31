@@ -10,18 +10,8 @@ namespace RiskyMod.Enemies.Mobs
         public Imp()
         {
             if (!enabled) return;
-            RemoveSlashSlow();
-            AddLunge();
-        }
-
-        private void RemoveSlashSlow()
-        {
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.ImpMonster.DoubleSlash", "walkSpeedPenaltyCoefficient", "1");   //0.5 is vanilla
-        }
-
-        private void AddLunge()
-        {
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.ImpMonster.DoubleSlash", "selfForce", "1600");  //Clay Man is 1800
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Imp/EntityStates.ImpMonster.DoubleSlash.asset", "walkSpeedPenaltyCoefficient", "1");   //0.5 is vanilla
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Imp/EntityStates.ImpMonster.DoubleSlash.asset", "selfForce", "1600");  //Clay Man is 1800
         }
     }
 }

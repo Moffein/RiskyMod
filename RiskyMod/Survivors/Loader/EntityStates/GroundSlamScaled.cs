@@ -4,6 +4,7 @@ using R2API;
 using RiskyMod.Survivors.Loader;
 using RiskyMod.Survivors;
 using RiskyMod;
+using UnityEngine.AddressableAssets;
 
 namespace EntityStates.RiskyMod.Loader
 {
@@ -133,9 +134,9 @@ namespace EntityStates.RiskyMod.Loader
 		public static float exitVerticalVelocity = 12f;
 		public static float verticalAcceleration = -100f;
 		public static float exitSlowdownCoefficient = 0.2f;
-		public static GameObject blastImpactEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfxloaderlightning");
-		public static GameObject blastEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/loadergroundslam");
-		public static GameObject fistEffectPrefab;
+		public static GameObject blastImpactEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Loader/OmniImpactVFXLoaderLightning.prefab").WaitForCompletion();
+        public static GameObject blastEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Loader/LoaderGroundSlam.prefab").WaitForCompletion();
+        public static GameObject fistEffectPrefab;
 
 		public static float maxDamageBoost = 2f;
 		public static float maxRadiusBoost = 2f;

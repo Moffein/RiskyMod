@@ -3,6 +3,7 @@ using UnityEngine;
 using R2API;
 using RiskyMod.Survivors.Commando;
 using static RoR2.BulletAttack;
+using UnityEngine.AddressableAssets;
 
 namespace EntityStates.RiskyMod.Commando
 {
@@ -159,13 +160,12 @@ namespace EntityStates.RiskyMod.Commando
 		public float internalBaseDurationBetweenShots;
 
 
-		public static GameObject explosionEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
-		public static float blastRadius = 3f;
-
-		public static GameObject effectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashBarrage");
-		public static GameObject hitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/HitsparkCommandoBarrage");
-		public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/TracerCommandoBoost");
-		public static float force = 100f;
+		public static GameObject explosionEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/OmniExplosionVFXQuick.prefab").WaitForCompletion();
+        public static float blastRadius = 3f;
+        public static GameObject effectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/MuzzleflashBarrage.prefab").WaitForCompletion();
+        public static GameObject hitEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Junk/Commando/HitsparkCommandoBarrage.prefab").WaitForCompletion();
+        public static GameObject tracerEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/TracerCommandoBoost.prefab").WaitForCompletion();
+        public static float force = 100f;
 		public static float minSpread = 0f;
 		public static float maxSpread = 1f;
 		public static float baseDurationBetweenShots = 0.12f;

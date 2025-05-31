@@ -3,6 +3,7 @@ using R2API;
 using RoR2;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Enemies.Mobs
 {
@@ -18,7 +19,7 @@ namespace RiskyMod.Enemies.Mobs
 
         private void EnableStuns()
         {
-            GameObject enemyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/parentbody");
+            GameObject enemyObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Parent/ParentBody.prefab").WaitForCompletion();
             SetStateOnHurt ssoh = enemyObject.GetComponent<SetStateOnHurt>();
             ssoh.canBeHitStunned = true;
             ssoh.canBeStunned = true;

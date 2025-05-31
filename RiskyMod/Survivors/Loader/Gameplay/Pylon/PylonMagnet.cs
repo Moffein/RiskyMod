@@ -4,6 +4,7 @@ using R2API;
 using RoR2.Projectile;
 using MonoMod.Cil;
 using RiskyMod.MonoBehaviours;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Loader
 {
@@ -12,10 +13,10 @@ namespace RiskyMod.Survivors.Loader
         public PylonMagnet()
         {
             //Cloning this causes the collision box to be offset above the projectile for some reason.
-            GameObject pylon = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/loaderpylon");//.InstantiateClone("RiskyMod_LoaderPylon", true);
+            GameObject pylon = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Loader/LoaderPylon.prefab").WaitForCompletion();//.InstantiateClone("RiskyMod_LoaderPylon", true);
             pylon = BuildProjectile(pylon);
             //Content.Content.projectilePrefabs.Add(PylonProjectile);
-            SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.throwpylon", "projectilePrefab", pylon);
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Loader/EntityStates.Loader.ThrowPylon.asset", "projectilePrefab", pylon);
         }
 
         private GameObject BuildProjectile(GameObject go)

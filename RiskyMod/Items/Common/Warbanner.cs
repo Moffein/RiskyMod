@@ -15,7 +15,7 @@ namespace RiskyMod.Items.Common
     public class Warbanner
     {
         public static bool enabled = true;
-        public static GameObject WarbannerObject = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/WarbannerWard");
+        public static GameObject WarbannerObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/WardOnLevel/WarbannerWard.prefab").WaitForCompletion();
         public static BuffDef warbannerBuff;
 
         public static bool UseModdedBuff = true;

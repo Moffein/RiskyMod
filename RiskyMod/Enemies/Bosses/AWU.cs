@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Enemies.Bosses
 {
@@ -14,7 +15,7 @@ namespace RiskyMod.Enemies.Bosses
 
         private void ModifyStats()
         {
-            GameObject enemyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/superroboballbossbody");
+            GameObject enemyObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/RoboBallBoss/SuperRoboBallBossBody.prefab").WaitForCompletion();
             CharacterBody cb = enemyObject.GetComponent<CharacterBody>();
 
             cb.baseDamage = 25f;    //orig is 15

@@ -2,6 +2,7 @@
 using UnityEngine;
 using RoR2.CharacterAI;
 using RiskyMod.Allies.DroneBehaviors;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Allies.DroneChanges
 {
@@ -22,7 +23,7 @@ namespace RiskyMod.Allies.DroneChanges
         private void ModifyAI()
         {
             //Vanilla AI is terrible, just disable it and let the AutoMissileBehavior handle the shooting.
-            GameObject masterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/DroneMissileMaster");
+            GameObject masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/DroneMissileMaster.prefab").WaitForCompletion();
             AISkillDriver[] skillDrivers = masterObject.GetComponents<AISkillDriver>();
             foreach(AISkillDriver skill in skillDrivers)
             {

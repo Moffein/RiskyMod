@@ -44,6 +44,8 @@ namespace RiskyMod
         public static bool TeleporterTurretsLoaded = false;
         public static bool SS2OLoaded = false;
 
+        public static bool MoreStatsLoaded = false;
+
         public static bool IsPotentialArtifactActive()
         {
             bool isActive = false;

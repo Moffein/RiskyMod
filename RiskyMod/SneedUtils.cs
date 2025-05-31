@@ -14,10 +14,15 @@ namespace SneedUtils
 {
     public class SneedUtils
     {
-        public static GameObject teleportHelperPrefab = LegacyResourcesAPI.Load<GameObject>("SpawnCards/HelperPrefab");
+        public static GameObject teleportHelperPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/DirectorSpawnProbeHelperPrefab.prefab").WaitForCompletion();
         public enum MonsterCategories
         {
             BasicMonsters, Minibosses, Champions
+        }
+
+        public static bool HasShieldOnly(CharacterBody self)
+        {
+            return self.HasBuff(RoR2Content.Buffs.AffixLunar) || (self.inventory && self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
         }
 
         public static void AddCooldownBuff(CharacterBody body, BuffDef buff, int cooldown, float bonusDuration = 0f)
@@ -375,69 +380,11 @@ namespace SneedUtils
                 }
             }
         }
-        public static void DumpEntityStateConfig(string entityStateName)
-        {
-            EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
-            DumpEntityStateConfig(esc);
-        }
+
         public static void DumpAddressableEntityStateConfig(string addressablePath)
         {
             EntityStateConfiguration esc = Addressables.LoadAssetAsync<EntityStateConfiguration>(addressablePath).WaitForCompletion();
             DumpEntityStateConfig(esc);
-        }
-
-        public static UnityEngine.Object GetEntityStateFieldObject(string entityStateName, string fieldName)
-        {
-            EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
-            for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)
-            {
-                if (esc.serializedFieldsCollection.serializedFields[i].fieldName == fieldName)
-                {
-                    return esc.serializedFieldsCollection.serializedFields[i].fieldValue.objectValue;
-                }
-            }
-            return null;
-        }
-
-        public static string GetEntityStateFieldString(string entityStateName, string fieldName)
-        {
-            EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
-            for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)
-            {
-                if (esc.serializedFieldsCollection.serializedFields[i].fieldName == fieldName)
-                {
-                    return esc.serializedFieldsCollection.serializedFields[i].fieldValue.stringValue;
-                }
-            }
-            return string.Empty;
-        }
-
-        public static bool SetEntityStateField(string entityStateName, string fieldName, UnityEngine.Object newObject)
-        {
-            EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
-            for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)
-            {
-                if (esc.serializedFieldsCollection.serializedFields[i].fieldName == fieldName)
-                {
-                    esc.serializedFieldsCollection.serializedFields[i].fieldValue.objectValue = newObject;
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public static bool SetEntityStateField(string entityStateName, string fieldName, string value)
-        {
-            EntityStateConfiguration esc = LegacyResourcesAPI.Load<EntityStateConfiguration>("entitystateconfigurations/" + entityStateName);
-            for (int i = 0; i < esc.serializedFieldsCollection.serializedFields.Length; i++)
-            {
-                if (esc.serializedFieldsCollection.serializedFields[i].fieldName == fieldName)
-                {
-                    esc.serializedFieldsCollection.serializedFields[i].fieldValue.stringValue = value;
-                    return true;
-                }
-            }
-            return false;
         }
 
         public static bool SetAddressableEntityStateField(string fullEntityStatePath, string fieldName, string value)
@@ -451,6 +398,7 @@ namespace SneedUtils
                     return true;
                 }
             }
+            Debug.LogError("RiskyMod: " + fullEntityStatePath + " does not have field " + fieldName);
             return false;
         }
 
@@ -465,6 +413,7 @@ namespace SneedUtils
                     return true;
                 }
             }
+            Debug.LogError("RiskyMod: " + fullEntityStatePath + " does not have field " + fieldName);
             return false;
         }
 
@@ -478,6 +427,7 @@ namespace SneedUtils
                     return esc.serializedFieldsCollection.serializedFields[i].fieldValue.objectValue;
                 }
             }
+            Debug.LogError("RiskyMod: " + fullEntityStatePath + " does not have field " + fieldName);
             return null;
         }
 
@@ -491,6 +441,7 @@ namespace SneedUtils
                     return esc.serializedFieldsCollection.serializedFields[i].fieldValue.stringValue;
                 }
             }
+            Debug.LogError("RiskyMod: " + fullEntityStatePath + " does not have field " + fieldName);
             return string.Empty;
         }
 

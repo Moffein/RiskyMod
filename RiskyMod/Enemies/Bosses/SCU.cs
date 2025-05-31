@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using RoR2.CharacterAI;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 
 namespace RiskyMod.Enemies.Bosses
@@ -17,7 +18,7 @@ namespace RiskyMod.Enemies.Bosses
 
         private void ModifyAI()
         {
-            GameObject enemyMaster = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/roboballbossmaster");
+            GameObject enemyMaster = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/RoboBallBoss/RoboBallBossMaster.prefab").WaitForCompletion();
             AISkillDriver[] skillDrivers = enemyMaster.GetComponents<AISkillDriver>();
 
             foreach (AISkillDriver ai in skillDrivers)
@@ -31,7 +32,7 @@ namespace RiskyMod.Enemies.Bosses
 
         private void ModifyStats()
         {
-            GameObject enemyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/roboballbossbody");
+            GameObject enemyObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/RoboBallBoss/RoboBallBossBody.prefab").WaitForCompletion();
             CharacterBody cb = enemyObject.GetComponent<CharacterBody>();
 
             cb.baseDamage = 25f;    //orig is 15

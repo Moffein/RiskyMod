@@ -39,7 +39,7 @@ namespace RiskyMod.Survivors.Croco.Contagion
                 false,
                 true,
                 new Color(243f / 255f, 202f / 255f, 107f / 255f),
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Entangle").iconSprite
+                Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Treebot/bdEntangle.asset").WaitForCompletion().iconSprite
                 );
         }
 

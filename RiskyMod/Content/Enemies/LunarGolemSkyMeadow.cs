@@ -3,6 +3,7 @@ using RiskyMod.Enemies;
 using RoR2;
 using RoR2.Navigation;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Content.Enemies
 {
@@ -21,13 +22,13 @@ namespace RiskyMod.Content.Enemies
 
         private void SetupBody()
         {
-            bodyObject = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/lunargolembody").InstantiateClone("RiskyMod_LunarGolemSkyMeadow", true);
+            bodyObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/LunarGolem/LunarGolemBody.prefab").WaitForCompletion().InstantiateClone("RiskyMod_LunarGolemSkyMeadow", true);
             DeathRewards dr = bodyObject.GetComponent<DeathRewards>();
             dr.logUnlockableDef = null;
             Content.bodyPrefabs.Add(bodyObject);
             ModifyStats(bodyObject);
 
-            masterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/lunargolemmaster").InstantiateClone("RiskyMod_LunarGolemSkyMeadowMaster", true);
+            masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/LunarGolem/LunarGolemMaster.prefab").WaitForCompletion().InstantiateClone("RiskyMod_LunarGolemSkyMeadowMaster", true);
             masterObject.GetComponent<CharacterMaster>().bodyPrefab = bodyObject;
         }
 

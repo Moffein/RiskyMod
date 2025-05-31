@@ -10,7 +10,7 @@ namespace RiskyMod.Survivors.Engi
     {
         public static bool enabled = true;
         public static bool harpoonRangeTweak = true;
-        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/EngiBody");
+        public static GameObject bodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiBody.prefab").WaitForCompletion();
         public EngiCore()
         {
             if (!enabled) return;
@@ -35,7 +35,7 @@ namespace RiskyMod.Survivors.Engi
             new BubbleDefenseMatrix();
             if (harpoonRangeTweak)
             {
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Engi.EngiMissilePainter.Paint", "maxDistance", "2000");
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Engi/EntityStates.Engi.EngiMissilePainter.Paint.asset", "maxDistance", "2000");
             }
         }
 

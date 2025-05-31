@@ -35,8 +35,8 @@ namespace RiskyMod.Survivors.Commando
         public static bool suppressiveChanges = true;
         public static bool grenadeChanges = true;
         public static bool grenadeRemoveFalloff = true;
-        
-        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody");
+
+        public static GameObject bodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Commando/CommandoBody.prefab").WaitForCompletion();
 
         public CommandoCore()
         {
@@ -57,8 +57,8 @@ namespace RiskyMod.Survivors.Commando
             SkillDef phaseBlastDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/CommandoBodyFireShotgunBlast.asset").WaitForCompletion();
             if (phaseRoundChanges)
             {
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireFMJ", "projectilePrefab", BuildPhaseRoundProjectile());
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.FireFMJ", "damageCoefficient", "4.5");
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Commando/EntityStates.Commando.CommandoWeapon.FireFMJ.asset", "projectilePrefab", BuildPhaseRoundProjectile());
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Commando/EntityStates.Commando.CommandoWeapon.FireFMJ.asset", "damageCoefficient", "4.5");
                 phaseRoundDef.skillDescriptionToken = "COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD";
             }
 
@@ -134,8 +134,8 @@ namespace RiskyMod.Survivors.Commando
                     }
                 };
                 //SneedUtils.SneedUtils.DumpEntityStateConfig("EntityStates.Commando.DodgeState");  //base speed is 5/2.5
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.DodgeState", "initialSpeedCoefficient", "7.25");
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.DodgeState", "finalSpeedCoefficient", "3.625");
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Commando/EntityStates.Commando.DodgeState.asset", "initialSpeedCoefficient", "7.25");
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Commando/EntityStates.Commando.DodgeState.asset", "finalSpeedCoefficient", "3.625");
             }
         }
 
@@ -159,7 +159,7 @@ namespace RiskyMod.Survivors.Commando
             if (grenadeChanges)
             {
                 GameObject moddedGrenade = BuildGrenadeProjectile();
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Commando.CommandoWeapon.ThrowGrenade", "projectilePrefab", moddedGrenade);
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Commando/EntityStates.Commando.CommandoWeapon.ThrowGrenade.asset", "projectilePrefab", moddedGrenade);
                 ThrowGrenadeScepter.projectilePrefab = moddedGrenade;
             }
 
@@ -308,7 +308,7 @@ namespace RiskyMod.Survivors.Commando
 
         private GameObject BuildGrenadeProjectile()
         {
-            GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/CommandoGrenadeProjectile").InstantiateClone("RiskyModFragProjectile", true);
+            GameObject proj = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Commando/CommandoGrenadeProjectile.prefab").WaitForCompletion().InstantiateClone("RiskyModFragProjectile", true);
 
             ProjectileImpactExplosion pie = proj.GetComponent<ProjectileImpactExplosion>();
             pie.destroyOnWorld = false;
@@ -334,7 +334,7 @@ namespace RiskyMod.Survivors.Commando
 
         private GameObject BuildPhaseLightningProjectile()
         {
-            GameObject proj = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/fmjramping").InstantiateClone("RiskyModPhaseLightning", true);
+            GameObject proj = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Commando/FMJRamping.prefab").WaitForCompletion().InstantiateClone("RiskyModPhaseLightning", true);
             //Add Lightning
             ProjectileProximityBeamController pbc = proj.GetComponent<ProjectileProximityBeamController>();
             if (!pbc)

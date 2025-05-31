@@ -44,7 +44,7 @@ namespace RiskyMod.Survivors.Bandit2
 
         public static BodyIndex bodyIndex;
 
-        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/Bandit2Body");
+        public static GameObject bodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/Bandit2Body.prefab").WaitForCompletion();
 
         //Cursed. 5 levels of Standoff, use buff stacks to show duration remaining instead of making a new HUD element.
         public static class Buffs
@@ -210,7 +210,7 @@ namespace RiskyMod.Survivors.Bandit2
                 false,
                 true,   //Just set this to true so people aren't confused.
                 new Color(0.8039216f, 0.482352942f, 0.843137264f),
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/BanditSkull").iconSprite
+                Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Bandit2/bdBanditSkull.asset").WaitForCompletion().iconSprite
                 );
             new SpecialDamageTweaks();
 

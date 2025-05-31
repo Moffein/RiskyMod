@@ -1,4 +1,7 @@
-﻿namespace RiskyMod.Items.Equipment
+﻿using RoR2;
+using UnityEngine.AddressableAssets;
+
+namespace RiskyMod.Items.Equipment
 {
     public class Capacitor
     {
@@ -6,7 +9,7 @@
         public Capacitor()
         {
             if (!enabled) return;
-            ItemsCore.ChangeEquipmentCooldown(ItemsCore.LoadEquipmentDef("lightning"), 30f);
+            ItemsCore.ChangeEquipmentCooldown(Addressables.LoadAssetAsync<EquipmentDef>("RoR2/Base/Lightning/Lightning.asset").WaitForCompletion(), 30f);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Enemies.Bosses
 {
@@ -15,7 +16,7 @@ namespace RiskyMod.Enemies.Bosses
         }
         private void RemoveGrovetenderWispOnKill()
         {
-            GameObject trackingWispObject = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/GravekeeperTrackingFireball");
+            GameObject trackingWispObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Gravekeeper/GravekeeperTrackingFireball.prefab").WaitForCompletion();
             HealthComponent hc = trackingWispObject.GetComponent<HealthComponent>();
             hc.globalDeathEventChanceCoefficient = 0f;
         }

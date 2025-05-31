@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using RoR2;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Common
 {
@@ -10,7 +11,7 @@ namespace RiskyMod.Items.Common
         {
             if (!enabled) return;
 
-            GameObject healPack = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/HealPack");
+            GameObject healPack = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Tooth/HealPack.prefab").WaitForCompletion();
 
             //This doesn't stop the rolling.
             /*VelocityRandomOnStart vrs = healPack.GetComponent<VelocityRandomOnStart>();

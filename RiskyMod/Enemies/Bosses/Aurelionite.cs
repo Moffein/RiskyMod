@@ -25,18 +25,8 @@ namespace RiskyMod.Enemies.Bosses
             }
             if (Aurelionite.enabled)
             {
-                LaserRework();
                 ModifyAI();
-                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireGoldFist.asset", "exitDuration", "1.5"); //Vanilla 3
             }
-        }
-
-        private void LaserRework()
-        {
-            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireGoldMegaLaser.asset", "damageCoefficient", "1.5");    //Vanilla 1
-            //SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.FireGoldMegaLaser.asset", "fireFrequency", "10");    //Vanilla 8
-            //Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Titan/ChargeGoldLaser.asset").WaitForCompletion().baseRechargeInterval = 15f;   //Vanilla 20
-            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Titan/EntityStates.TitanMonster.ChargeGoldMegaLaser.asset", "baseDuration", "2"); //Vanilla 3
         }
 
         private void ModifyAI()

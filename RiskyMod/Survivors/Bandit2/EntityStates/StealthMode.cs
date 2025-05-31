@@ -2,6 +2,7 @@
 using RiskyMod.Survivors.Bandit2;
 using RoR2;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace EntityStates.RiskyMod.Bandit2
@@ -18,7 +19,7 @@ namespace EntityStates.RiskyMod.Bandit2
 		public static float blastAttackDamageCoefficient = 2f;
 		public static float blastAttackProcCoefficient = 1f;
 		public static float blastAttackForce = 60f;
-		public static GameObject smokeBombEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/Bandit2SmokeBomb");
+		public static GameObject smokeBombEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/Bandit2SmokeBomb.prefab").WaitForCompletion();
 		public static string smokeBombMuzzleString = "MuzzleSmokebomb";
 		public static float shortHopVelocity = 17f;
 

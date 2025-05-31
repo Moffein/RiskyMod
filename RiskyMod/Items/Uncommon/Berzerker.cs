@@ -5,6 +5,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
 using RiskyMod.SharedHooks;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -41,7 +42,7 @@ namespace RiskyMod.Items.Uncommon
                 false,
                 false,
                 new Color(210f / 255f, 50f / 255f, 22f / 255f),
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/WarCryBuff").iconSprite
+                Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/WarCryOnMultiKill/bdWarCryBuff.asset").WaitForCompletion().iconSprite
                 );
 
             SharedHooks.OnCharacterDeath.OnCharacterDeathInventoryActions += ProcItem;

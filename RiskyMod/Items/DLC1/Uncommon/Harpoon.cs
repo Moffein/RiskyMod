@@ -11,7 +11,7 @@ namespace RiskyMod.Items.DLC1.Uncommon
     public class Harpoon
     {
         public static bool enabled = true;
-        private static GameObject effectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MoveSpeedOnKillActivate");
+        private static GameObject effectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MoveSpeedOnKill/MoveSpeedOnKillActivate.prefab").WaitForCompletion();
         public static BuffDef ReturnsHarpoonBuff;
         public Harpoon()
         {

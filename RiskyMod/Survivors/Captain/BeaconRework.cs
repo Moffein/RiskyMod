@@ -33,8 +33,8 @@ namespace RiskyMod.Survivors.Captain
         public static bool shockChanges = true;
         public static bool resupplyChanges = true;
 
-        public static SkillFamily BeaconFamily1 = LegacyResourcesAPI.Load<SkillFamily>("skilldefs/captainbody/CaptainSupplyDrop1SkillFamily");
-        public static SkillFamily BeaconFamily2 = LegacyResourcesAPI.Load<SkillFamily>("skilldefs/captainbody/CaptainSupplyDrop2SkillFamily");
+        public static SkillFamily BeaconFamily1 = Addressables.LoadAssetAsync<SkillFamily>("RoR2/Base/Captain/CaptainSupplyDrop1SkillFamily.asset").WaitForCompletion();
+        public static SkillFamily BeaconFamily2 = Addressables.LoadAssetAsync<SkillFamily>("RoR2/Base/Captain/CaptainSupplyDrop2SkillFamily.asset").WaitForCompletion();
 
         public BeaconRework(SkillLocator sk)
         {
@@ -157,7 +157,7 @@ namespace RiskyMod.Survivors.Captain
         {
             if (!shockChanges) return;
             //Debug.Log("Shock Radius: " + SneedUtils.SneedUtils.GetEntityStateFieldString("EntityStates.CaptainSupplyDrop.ShockZoneMainState", "shockRadius"));//10, same as healing
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.CaptainSupplyDrop.ShockZoneMainState", "shockRadius", "15");
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Captain/EntityStates.CaptainSupplyDrop.ShockZoneMainState.asset", "shockRadius", "15");
 
             IL.EntityStates.CaptainSupplyDrop.ShockZoneMainState.Shock += (il) =>
             {

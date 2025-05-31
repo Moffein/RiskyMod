@@ -18,7 +18,7 @@ namespace RiskyMod.Survivors.Croco.Tweaks
             SkillDef skillDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Croco/CrocoChainableLeap.asset").WaitForCompletion();
             skillDef.baseRechargeInterval = 6f;
             skillDef.skillDescriptionToken = "CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD";
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Croco.ChainableLeap", "refundPerHit", "0");
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Croco/EntityStates.Croco.ChainableLeap.asset", "refundPerHit", "0");
             IL.EntityStates.Croco.ChainableLeap.DoImpactAuthority += ChainableLeap_DoImpactAuthority;
         }
 

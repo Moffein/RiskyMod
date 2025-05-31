@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Boss
 {
@@ -11,8 +12,8 @@ namespace RiskyMod.Items.Boss
         public static bool enabled = true;
         public static bool ignoreAllyCap = true;
 
-        public static SpawnCard RedBuddyCard = LegacyResourcesAPI.Load<SpawnCard>("SpawnCards/CharacterSpawnCards/cscRoboBallRedBuddy");
-        public static SpawnCard GreenBuddyCard = LegacyResourcesAPI.Load<SpawnCard>("SpawnCards/CharacterSpawnCards/cscRoboBallGreenBuddy");
+        public static SpawnCard RedBuddyCard = Addressables.LoadAssetAsync<SpawnCard>("RoR2/Base/RoboBallBuddy/cscRoboBallRedBuddy.asset").WaitForCompletion();
+        public static SpawnCard GreenBuddyCard = Addressables.LoadAssetAsync<SpawnCard>("RoR2/Base/RoboBallBuddy/cscRoboBallGreenBuddy.asset").WaitForCompletion();
 
         public EmpathyCores()
         {

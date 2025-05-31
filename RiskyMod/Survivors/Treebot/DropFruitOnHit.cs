@@ -2,6 +2,7 @@
 using UnityEngine;
 using RiskyMod.SharedHooks;
 using UnityEngine.Networking;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Treebot
 {
@@ -15,8 +16,8 @@ namespace RiskyMod.Survivors.Treebot
         {
             if (!enabled) return;
 
-            fruitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/TreebotFruitDeathEffect");
-            fruitPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/TreebotFruitPack");
+            fruitEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Treebot/TreebotFruitDeathEffect.prefab").WaitForCompletion();
+            fruitPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Treebot/TreebotFruitPack.prefab").WaitForCompletion();
             OnHitEnemy.OnHitAttackerActions += FruitOnHit;
         }
 

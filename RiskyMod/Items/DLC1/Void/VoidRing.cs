@@ -3,6 +3,7 @@ using RoR2;
 using RoR2.Projectile;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.DLC1.Void
 {
@@ -14,7 +15,7 @@ namespace RiskyMod.Items.DLC1.Void
             if (!enabled) return;
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
-            GameObject prefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/ElementalRingVoidBlackHole");
+            GameObject prefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/ElementalRingVoid/ElementalRingVoidBlackHole.prefab").WaitForCompletion();
             ProjectileExplosion pe = prefab.GetComponent<ProjectileExplosion>();
             pe.falloffModel = BlastAttack.FalloffModel.None;
             

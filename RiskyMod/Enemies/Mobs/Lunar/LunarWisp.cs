@@ -31,7 +31,7 @@ namespace RiskyMod.Enemies.Mobs.Lunar
 
         private void ModifyProjectile()
         {
-            GameObject projectile = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/lunarwisptrackingbomb");
+            GameObject projectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/LunarWisp/LunarWispTrackingBomb.prefab").WaitForCompletion();
 
             if (disableProjectileOnKill)
             {
@@ -70,7 +70,7 @@ namespace RiskyMod.Enemies.Mobs.Lunar
                 Ray aimRay = self.GetAimRay();
                 ProjectileManager.instance.FireProjectile(shardProjectilePrefab, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), self.gameObject, damage, 0f, isCrit, DamageColorIndex.Default, null, 120f);
             };
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.LunarWisp.FireLunarGuns", "baseFireInterval", "0.125");
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/LunarWisp/EntityStates.LunarWisp.FireLunarGuns.asset", "baseFireInterval", "0.125");
         }
     }
 }

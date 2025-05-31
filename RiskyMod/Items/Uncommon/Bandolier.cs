@@ -2,6 +2,7 @@
 using UnityEngine;
 using R2API;
 using RiskyMod.Survivors.Toolbot;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Uncommon
 {
@@ -12,7 +13,7 @@ namespace RiskyMod.Items.Uncommon
         {
             if (!enabled) return;
             //Buff lifetime and pickup range
-            GameObject ammoPack = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/AmmoPack");
+            GameObject ammoPack = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandolier/AmmoPack.prefab").WaitForCompletion();
 
             DestroyOnTimer dt = ammoPack.GetComponent<DestroyOnTimer>();
             dt.duration = 14f;

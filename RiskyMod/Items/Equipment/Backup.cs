@@ -3,6 +3,7 @@ using RoR2;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace RiskyMod.Items.Equipment
@@ -12,7 +13,7 @@ namespace RiskyMod.Items.Equipment
         public static bool enabled = true;
         public static bool ignoreTeamLimit = true;
         public static BodyIndex BackupDroneIndex;
-        public static GameObject backupMaster = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterMasters/DroneBackupMaster");
+        public static GameObject backupMaster = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/DroneBackupMaster.prefab").WaitForCompletion();
         public Backup()
         {
             if (!enabled)

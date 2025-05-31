@@ -6,10 +6,6 @@
 		- Scales up to 100% chance at 1200% damage
 		
 - Transcendence
-	- Shield Gating
-		- Increases invulnerability window to 0.5s
-		- Now works against attacks with the BypassShieldgate flag if you are not cursed. (Glass, Eclipse penalty, etc.)
-		- Disables true OSP.
 	- Increases shield regen delay by 0s (+1s)
 	
 - Visions of Heresy

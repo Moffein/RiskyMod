@@ -5,6 +5,7 @@ using RoR2;
 using RoR2.Projectile;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Boss
 {
@@ -70,7 +71,7 @@ namespace RiskyMod.Items.Boss
 
             if (RiskyMod.disableProcChains)
             {
-                meatballPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/FireMeatBall").InstantiateClone("RiskyMod_Perforator", true);
+                meatballPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/FireballsOnHit/FireMeatBall.prefab").WaitForCompletion().InstantiateClone("RiskyMod_Perforator", true);
                 ProjectileImpactExplosion pie = meatballPrefab.GetComponent<ProjectileImpactExplosion>();
                 pie.blastProcCoefficient = 0f;
                 ProjectileDamage pd = meatballPrefab.GetComponent<ProjectileDamage>();

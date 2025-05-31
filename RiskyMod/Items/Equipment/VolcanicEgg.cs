@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 using R2API;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Equipment
 {
@@ -16,7 +17,7 @@ namespace RiskyMod.Items.Equipment
                 HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedEquipDescs, RoR2Content.Equipment.FireBallDash);
             };
 
-            GameObject fireball = LegacyResourcesAPI.Load<GameObject>("prefabs/networkedobjects/FireballVehicle");
+            GameObject fireball = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/FireBallDash/FireballVehicle.prefab").WaitForCompletion();
             FireballVehicle fv = fireball.GetComponent<FireballVehicle>();
             fv.blastRadius = 14f;
             fv.blastDamageCoefficient = 12f;

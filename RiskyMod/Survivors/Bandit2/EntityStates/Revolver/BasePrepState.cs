@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace EntityStates.RiskyMod.Bandit2.Revolver
 {
@@ -49,7 +50,7 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
         protected abstract EntityState GetNextState();
 
 		public static string enterSoundString = "Play_bandit2_R_load";
-		public static GameObject _crosshairOverridePrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/crosshair/Bandit2CrosshairPrepRevolver");
+		public static GameObject _crosshairOverridePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/Bandit2CrosshairPrepRevolver.prefab").WaitForCompletion();
 
 
 		private Animator animator;

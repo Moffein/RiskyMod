@@ -1,31 +1,32 @@
 ﻿using UnityEngine;
 using RoR2;
 using System.Collections.Generic;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Allies
 {
     public static class AllyPrefabs
     {
-        public static GameObject GunnerTurret = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/turret1body");
-        public static GameObject GunnerDrone = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/drone1body");
-        public static GameObject HealDrone = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/drone2body");
-        public static GameObject MissileDrone = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/missiledronebody");
-        public static GameObject EquipmentDrone = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/equipmentdronebody");
-        public static GameObject EmergencyDrone = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/emergencydronebody");
-        public static GameObject IncineratorDrone = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/flamedronebody");
-        public static GameObject MegaDrone = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/megadronebody");
+        public static GameObject GunnerTurret = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/Turret1Body.prefab").WaitForCompletion();
+        public static GameObject GunnerDrone = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/Drone1Body.prefab").WaitForCompletion();
+        public static GameObject HealDrone = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/Drone2Body.prefab").WaitForCompletion();
+        public static GameObject MissileDrone = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/MissileDroneBody.prefab").WaitForCompletion();
+        public static GameObject EquipmentDrone = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/EquipmentDroneBody.prefab").WaitForCompletion();
+        public static GameObject EmergencyDrone = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/EmergencyDroneBody.prefab").WaitForCompletion();
+        public static GameObject IncineratorDrone = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/FlameDroneBody.prefab").WaitForCompletion();
+        public static GameObject MegaDrone = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/MegaDroneBody.prefab").WaitForCompletion();
 
         //Probably inefficient
         public static List<GameObject> PurchaseableDroneMasterList = new List<GameObject> 
         {
-            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/turret1master"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/drone1master"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/drone2master"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/dronemissilemaster"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/equipmentdronemaster"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/emergencydronemaster"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/flamedronemaster"),
-            LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/megadronemaster")
+            Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/Turret1Master.prefab").WaitForCompletion(),
+            Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/Drone1Master.prefab").WaitForCompletion(),
+            Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/Drone2Master.prefab").WaitForCompletion(),
+            Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/DroneMissileMaster.prefab").WaitForCompletion(),
+            Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/EquipmentDroneMaster.prefab").WaitForCompletion(),
+            Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/EmergencyDroneMaster.prefab").WaitForCompletion(),
+            Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/FlameDroneMaster.prefab").WaitForCompletion(),
+            Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/MegaDroneMaster.prefab").WaitForCompletion()
         };
 
         public static bool IsPurchaseableDrone(GameObject bodyPrefab)

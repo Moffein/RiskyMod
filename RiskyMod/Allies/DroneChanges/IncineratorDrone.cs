@@ -33,7 +33,7 @@ namespace RiskyMod.Allies.DroneChanges
             PurchaseInteraction pi = brokenDroneObject.GetComponent<PurchaseInteraction>();
             pi.cost = 80;	//Vanilla is 100
 
-            GameObject masterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/flamedronemaster");
+            GameObject masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/FlameDroneMaster.prefab").WaitForCompletion();
             BaseAI masterAI = masterObject.GetComponent<BaseAI>();
             masterAI.aimVectorMaxSpeed = 180f;
         }

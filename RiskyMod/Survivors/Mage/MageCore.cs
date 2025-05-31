@@ -43,7 +43,7 @@ namespace RiskyMod.Survivors.Mage
 
         public static int specialLightningVariantIndex; //DestroyedClone Scepter needs variant index
 
-        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/MageBody");
+        public static GameObject bodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MageBody.prefab").WaitForCompletion();
 
         public static ConfigEntry<bool> utilitySelfKnockback;
 
@@ -85,7 +85,7 @@ namespace RiskyMod.Survivors.Mage
         {
             if (m2RemoveNanobombGravity)
             {
-                GameObject projectile = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MageLightningBombProjectile");
+                GameObject projectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MageLightningBombProjectile.prefab").WaitForCompletion();
                 AntiGravityForce agf = projectile.GetComponent<AntiGravityForce>();
                 agf.antiGravityCoefficient = 1f;
             }
@@ -154,7 +154,7 @@ namespace RiskyMod.Survivors.Mage
                     viewableNode = new ViewablesCatalog.Node(fireStorm.skillNameToken, false)
                 };
 
-                GameObject fireStormProjectile = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/FireTornado").InstantiateClone("RiskyMod_MageFireStorm", true);
+                GameObject fireStormProjectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ElementalRings/FireTornado.prefab").WaitForCompletion().InstantiateClone("RiskyMod_MageFireStorm", true);
 
                 ProjectileSimple ps = fireStormProjectile.GetComponent<ProjectileSimple>();
                 //ps.lifetime = 6f; //Particle doesn't scale to lifetime. Use FireStormExtender as a hacky solution to this.
@@ -192,7 +192,7 @@ namespace RiskyMod.Survivors.Mage
             flamethrowerDef.canceledFromSprinting = flamethrowerSprintCancel.Value;
             if (flamethrowerRangeExtend)
             {
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.Flamethrower", "maxDistance", "25");  //20 vanilla
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Mage/EntityStates.Mage.Weapon.Flamethrower.asset", "maxDistance", "25");  //20 vanilla
             }
 
             if (enableLightningSpecial)

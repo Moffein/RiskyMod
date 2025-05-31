@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using RoR2;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Allies.DroneChanges
 {
@@ -7,7 +8,7 @@ namespace RiskyMod.Allies.DroneChanges
     {
         public DroneCommander()
         {
-            CharacterBody cb = LegacyResourcesAPI.Load<GameObject>("prefabs/characterbodies/dronecommanderbody").GetComponent<CharacterBody>();
+            CharacterBody cb = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/DroneCommander/DroneCommanderBody.prefab").WaitForCompletion().GetComponent<CharacterBody>();
             cb.baseMaxHealth = 200f;
             cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
             cb.baseMaxShield = cb.baseMaxHealth * 0.08f;

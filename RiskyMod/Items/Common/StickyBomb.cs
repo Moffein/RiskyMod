@@ -5,6 +5,7 @@ using R2API;
 using RoR2.Projectile;
 using UnityEngine;
 using System;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Common
 {
@@ -56,7 +57,7 @@ namespace RiskyMod.Items.Common
             };
 
             //Modify detonation delay
-            stickybombPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/stickybomb").InstantiateClone("RiskyModStickybomb", true);
+            stickybombPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/StickyBomb/StickyBomb.prefab").WaitForCompletion().InstantiateClone("RiskyModStickybomb", true);
             ProjectileImpactExplosion pie = stickybombPrefab.GetComponent<ProjectileImpactExplosion>();
             pie.lifetime = 1.2f;
 

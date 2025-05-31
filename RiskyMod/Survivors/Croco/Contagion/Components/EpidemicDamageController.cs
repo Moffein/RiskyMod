@@ -1,6 +1,7 @@
 ﻿using RiskyMod.Survivors.Croco;
 using RoR2;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace RiskyMod.Survivors.Croco.Contagion.Components
@@ -10,7 +11,7 @@ namespace RiskyMod.Survivors.Croco.Contagion.Components
 
         public static float baseLingerDuration = 1f;
 
-        public static GameObject impactEffect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/crocodiseaseimpacteffect");
+        public static GameObject impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Croco/CrocoDiseaseImpactEffect.prefab").WaitForCompletion();
 
         public float timeBetweenTicks = 0.5f;
         public CharacterBody owner;

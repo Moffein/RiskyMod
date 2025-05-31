@@ -10,7 +10,7 @@ namespace RiskyMod.VoidFields
         {
             if (!enabled) return;
 
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Missions.Arena.NullWard.NullWardBaseState", "wardRadiusOn", "30");  //15 in vanilla 
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/NullSafeWard/EntityStates.Missions.Arena.NullWard.NullWardBaseState.asset", "wardRadiusOn", "30");  //15 in vanilla 
         }
     }
 }

@@ -127,10 +127,10 @@ namespace EntityStates.RiskyMod.MegaDrone
 			}
 		}
 
-		public static SpawnCard spawnCard = LegacyResourcesAPI.Load<SpawnCard>("SpawnCards/InteractableSpawnCard/iscBrokenMegaDrone");
-		public static string initialSoundString = "Play_drone_deathpt1";
+		public static SpawnCard spawnCard = Addressables.LoadAssetAsync<SpawnCard>("RoR2/Base/Drones/iscBrokenMegaDrone.asset").WaitForCompletion();
+        public static string initialSoundString = "Play_drone_deathpt1";
 		public static GameObject initialEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/OmniExplosionVFXDroneDeath.prefab").WaitForCompletion();
-		public static float initialEffectScale = 15f;
+        public static float initialEffectScale = 15f;
 		public static float velocityMagnitude = 1f;
 		public static float explosionForce = 60000f;
 	}

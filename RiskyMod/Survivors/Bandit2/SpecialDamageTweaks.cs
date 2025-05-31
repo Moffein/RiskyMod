@@ -15,7 +15,7 @@ namespace RiskyMod.Survivors.Bandit2
 {
     public class SpecialDamageTweaks
     {
-        private static GameObject skullEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/Bandit2KillEffect");
+        private static GameObject skullEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/Bandit2KillEffect.prefab").WaitForCompletion();
         public SpecialDamageTweaks()
         {
             OnHitEnemy.OnHitNoAttackerActions += ApplyBuff;

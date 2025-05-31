@@ -192,11 +192,6 @@ namespace RiskyMod.Items
         public delegate void ModifyItemDef();
         public static ModifyItemDef ModifyItemDefActions;
 
-        public static EquipmentDef LoadEquipmentDef(string equipmentname)
-        {
-            return LegacyResourcesAPI.Load<EquipmentDef>("equipmentdefs/" + equipmentname);
-        }
-
         public static void ChangeEquipmentCooldown(EquipmentDef ed, float cooldown)
         {
             ed.cooldown = cooldown;

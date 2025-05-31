@@ -4,6 +4,7 @@ using RiskyMod.Survivors.Bandit2.Components;
 using RoR2;
 using RoR2.Skills;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 namespace EntityStates.RiskyMod.Bandit2.Revolver
 {
 	public class FireLightsOut : BaseSidearmState
@@ -104,16 +105,16 @@ namespace EntityStates.RiskyMod.Bandit2.Revolver
         public override void LoadStats()
         {
 			crosshairOverridePrefab = _crosshairOverridePrefab;
-			baseDuration = 1f;
+            baseDuration = 1f;
         }
 
-        public static GameObject _crosshairOverridePrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/crosshair/Bandit2CrosshairPrepRevolverFire");
+        public static GameObject _crosshairOverridePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/Bandit2CrosshairPrepRevolverFire.prefab").WaitForCompletion();
 
-		public static GameObject effectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/MuzzleflashBandit2");
-		public static GameObject hitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/HitsparkBandit2Pistol");
-		public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/TracerBanditPistol");
+        public static GameObject effectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/MuzzleflashBandit2.prefab").WaitForCompletion();
+        public static GameObject hitEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/HitsparkBandit2Pistol.prefab").WaitForCompletion();
+        public static GameObject tracerEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/TracerBanditPistol.prefab").WaitForCompletion();
 
-		public static float damageCoefficient = 6f;
+        public static float damageCoefficient = 6f;
 		public static float force = 2000f;	//vanilla is 1500f
 
 		public static float minSpread = 0f;

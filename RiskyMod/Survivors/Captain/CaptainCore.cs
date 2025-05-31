@@ -13,7 +13,7 @@ namespace RiskyMod.Survivors.Captain
     {
         public static bool enabled = true;
         public static bool enablePrimarySkillChanges = true;
-        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CaptainBody");
+        public static GameObject bodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainBody.prefab").WaitForCompletion();
 
         public static bool modifyTaser = true;
         public static bool nukeAmmopackNerf = true;

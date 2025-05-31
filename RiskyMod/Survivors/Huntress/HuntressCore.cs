@@ -27,7 +27,7 @@ namespace RiskyMod.Survivors.Huntress
 
         public static bool arrowRainChanges = true;
         public static bool ballistaChanges = true;
-        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/HuntressBody");
+        public static GameObject bodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressBody.prefab").WaitForCompletion();
 
         public HuntressCore()
         {
@@ -50,14 +50,14 @@ namespace RiskyMod.Survivors.Huntress
             if (strafeChanges)
             {
                 defaultPrimary.skillDescriptionToken = "HUNTRESS_PRIMARY_DESCRIPTION_RISKYMOD";
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireSeekingArrow", "orbDamageCoefficient", "2");
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Huntress/EntityStates.Huntress.HuntressWeapon.FireSeekingArrow.asset", "orbDamageCoefficient", "2");
             }
 
             if (flurryChanges)
             {
                 altPrimary.skillDescriptionToken = "HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD";
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbDamageCoefficient", "1.2");
-                SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow", "orbProcCoefficient", "1");
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Huntress/EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow.asset", "orbDamageCoefficient", "1.2");
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Huntress/EntityStates.Huntress.HuntressWeapon.FireFlurrySeekingArrow.asset", "orbProcCoefficient", "1");
             }
         }
 
@@ -66,8 +66,8 @@ namespace RiskyMod.Survivors.Huntress
             if (!laserGlaiveChanges) return;
             SkillDef glaive = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Huntress/HuntressBodyGlaive.asset").WaitForCompletion();
             glaive.baseRechargeInterval = 6f;
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.ThrowGlaive", "baseDuration", "0.8");
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Huntress.HuntressWeapon.ThrowGlaive", "glaiveProcCoefficient", "1");
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Huntress/EntityStates.Huntress.HuntressWeapon.ThrowGlaive.asset", "baseDuration", "0.8");
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Huntress/EntityStates.Huntress.HuntressWeapon.ThrowGlaive.asset", "glaiveProcCoefficient", "1");
         }
 
         private void ModifyUtilities(SkillLocator sk)
@@ -114,8 +114,8 @@ namespace RiskyMod.Survivors.Huntress
             Content.Content.entityStates.Add(typeof(BeginArrowRainScepter));
             Content.Content.entityStates.Add(typeof(ArrowRainScepter));
 
-            ArrowRainScepter.muzzleFlashEffect = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Huntress.ArrowRain", "muzzleFlashEffect");
-            ArrowRainScepter.areaIndicatorPrefab = (GameObject)SneedUtils.SneedUtils.GetEntityStateFieldObject("EntityStates.Huntress.ArrowRain", "areaIndicatorPrefab");
+            ArrowRainScepter.muzzleFlashEffect = (GameObject)SneedUtils.SneedUtils.GetAddressableEntityStateFieldObject("RoR2/Base/Huntress/EntityStates.Huntress.ArrowRain.asset", "muzzleFlashEffect");
+            ArrowRainScepter.areaIndicatorPrefab = (GameObject)SneedUtils.SneedUtils.GetAddressableEntityStateFieldObject("RoR2/Base/Huntress/EntityStates.Huntress.ArrowRain.asset", "areaIndicatorPrefab");
 
             SkillDef arrowRainDef = SkillDef.CreateInstance<SkillDef>();
             arrowRainDef.activationState = new SerializableEntityStateType(typeof(BeginArrowRainScepter));

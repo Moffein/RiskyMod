@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 using System;
 using R2API;
 using System.Runtime.CompilerServices;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Boss
 {
@@ -34,14 +35,14 @@ namespace RiskyMod.Items.Boss
 				}
 			};
 
-			//Overwrite the Vanilla code since it's obfuscated in DNSPY
+			//Overwrite the Vanilla code since it's obfuscated in DNSpy
 			On.RoR2.Items.BeetleGlandBodyBehavior.FixedUpdate += (orig, self) =>
 			{
 				if (!NetworkServer.active || RiskyMod.inBazaar || !(self.body.master && self.body.master.IsDeployableSlotAvailable(DeployableSlot.BeetleGuardAlly))) return;
 				self.guardResummonCooldown -= Time.fixedDeltaTime;
 				if (self.guardResummonCooldown <= 0f)
 				{
-					DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(LegacyResourcesAPI.Load<SpawnCard>("SpawnCards/CharacterSpawnCards/cscBeetleGuardAlly"), new DirectorPlacementRule
+					DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/BeetleGland/cscBeetleGuardAlly.asset").WaitForCompletion(), new DirectorPlacementRule
 					{
 						placementMode = DirectorPlacementRule.PlacementMode.Approximate,
 						minDistance = 3f,

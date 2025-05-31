@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace EntityStates.RiskyMod.Bandit2
 {
@@ -9,7 +10,7 @@ namespace EntityStates.RiskyMod.Bandit2
 		public static float exitSoundPitch = 1f;
 		public static string enterSoundString = "Play_bandit2_m1_reload_bullet";
 		public static string exitSoundString = "Play_bandit2_m1_reload_finish";
-		public static GameObject reloadEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/Bandit2Reload");
+		public static GameObject reloadEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/Bandit2Reload.prefab").WaitForCompletion();
 		public static string reloadEffectMuzzleString = "PalmL";
 		public static float baseDuration = 0.3f;
 

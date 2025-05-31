@@ -60,6 +60,7 @@ namespace RiskyMod.Items.DLC1.Common
             }
         }
 
+        private static GameObject healEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/HealingPotion/HealingPotionEffect.prefab").WaitForCompletion();
         private static void TriggerElixir (HealthComponent self, float damageValue, Vector3 damagePosition, bool damageIsSilent, GameObject attacker)
         {
             if (self.itemCounts.healingPotion > 0)
@@ -77,7 +78,7 @@ namespace RiskyMod.Items.DLC1.Common
                         origin = self.transform.position
                     };
                     effectData.SetNetworkedObjectReference(self.gameObject);
-                    EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/HealingPotionEffect"), effectData, true);
+                    EffectManager.SpawnEffect(healEffect, effectData, true);
                 }
             }
         }

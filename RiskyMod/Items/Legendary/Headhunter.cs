@@ -5,6 +5,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
 using RiskyMod.SharedHooks;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Legendary
 {
@@ -44,7 +45,7 @@ namespace RiskyMod.Items.Legendary
             if (perfectedTweak)
             {
                 //Use placeholder Perfected icon so it doesn't force you into shieldonly.
-                BuffDef affixLunarDef = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/AffixLunar");
+                BuffDef affixLunarDef = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/EliteLunar/bdEliteLunar.asset").WaitForCompletion();
 
                 Perfected2 = SneedUtils.SneedUtils.CreateBuffDef(
                 "RiskyMod_Perfected2",

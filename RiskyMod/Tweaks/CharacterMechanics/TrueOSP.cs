@@ -4,6 +4,7 @@ using R2API;
 using RoR2;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace RiskyMod.Tweaks.CharacterMechanics
@@ -12,7 +13,6 @@ namespace RiskyMod.Tweaks.CharacterMechanics
     {
         public static bool enabled = true;
         public static BuffDef DisableOSP;
-        public static bool enableLogging = false;
 
         public TrueOSP()
         {
@@ -24,99 +24,36 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                 false,
                 false,
                 new Color(0.9f * 140f / 255f, 0.9f * 185f / 255f, 0.9f * 191f / 255f),
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/Pulverized").iconSprite
+                 Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/ArmorReductionOnHit/bdPulverized.asset").WaitForCompletion().iconSprite
                 );
 
-            //Handled in MonoBehaviours.OSPManagerComponent and RecalculateStats
             SharedHooks.RecalculateStats.HandleRecalculateStatsActions += HandleTrueOSP;
-
-            //Overwrite vanilla OSP handling
-            IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
-            {
-                bool error = true;
-
-                //Remove vanilla OSP check
-                ILCursor c = new ILCursor(il);
-                if (c.TryGotoNext(
-                     x => x.MatchCallvirt<CharacterBody>("get_hasOneShotProtection")
-                    ))
-                {
-                    c.Index++;
-                    c.EmitDelegate<Func<bool, bool>>((hasOSP) =>
-                    {
-                        return false;
-                    });
-
-                    //Check for OSP at the end of applying health damage
-                    if (c.TryGotoNext(
-                     x => x.MatchCall<HealthComponent>("set_Networkhealth")
-                    ))
-                    {
-                        c.Emit(OpCodes.Ldarg_0);//healthcomponent
-                        c.Emit(OpCodes.Ldarg_1);//damageinfo
-                        c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((finalHealth, self, damageInfo) =>
-                        {
-                            if (self.body.hasOneShotProtection && (damageInfo.damageType & DamageType.BypassOneShotProtection) != DamageType.BypassOneShotProtection)
-                            {
-                                OSPComponent ospm = self.body.gameObject.GetComponent<OSPComponent>();
-                                if (!ospm)
-                                {
-                                    ospm = self.body.gameObject.AddComponent<OSPComponent>();
-                                    ospm.healthComponent = self;
-                                    ospm.characterBody = self.body;
-                                    if (enableLogging) Debug.Log("Adding OSP Manager to player.");
-                                }
-                                //Check if OSP timer should be triggered
-                                bool shieldOnly = self.body.HasBuff(RoR2Content.Buffs.AffixLunar) || (self.body.inventory && self.body.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
-                                bool shieldOnlyOSP = shieldOnly && !ShieldGating.enabled && !Items.Lunar.Transcendence.alwaysShieldGate;
-
-                                float ospHealthThreshold = (shieldOnlyOSP ? self.fullCombinedHealth : self.fullHealth) * OSPComponent.ospThreshold;
-
-                                if (self.health >= ospHealthThreshold && finalHealth < ospHealthThreshold)
-                                {
-                                    if (shieldOnlyOSP || self.shield <= 0f)
-                                    {
-                                        ospm.StartOSPTimer();
-                                    }
-                                }
-                                if (finalHealth <= 0f)
-                                {
-                                    if (ospm.TriggerOSP())
-                                    {
-                                        finalHealth = 1f;
-                                    }
-                                }
-                            }
-                            return finalHealth;
-                        });
-                        error = false;
-                    }
-                }
-                if (error)
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: TrueOSP IL Hook failed");
-                }
-            };
+            IL.RoR2.HealthComponent.TakeDamageProcess += HealthComponent_TakeDamageProcess;
         }
 
         private static void HandleTrueOSP(CharacterBody self)
         {
+
             if (self.hasOneShotProtection)
             {
-                //Disable vanilla OSP
-                self.oneShotProtectionFraction = 0f;    //I'd like to re-enable the visual, but I need to figure out how to make it not count shields.
-
-                bool shieldOnly = self.HasBuff(RoR2Content.Buffs.AffixLunar) || (self.inventory && self.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) > 0);
-                if (self.cursePenalty > 1f || (shieldOnly && (ShieldGating.enabled || Items.Lunar.Transcendence.alwaysShieldGate)))
+                //Can't get ShieldOnly to work so just don't handle it.
+                if (!SneedUtils.SneedUtils.HasShieldOnly(self))
                 {
-                    self.hasOneShotProtection = false;
+                    //Disable vanilla OSP
+                    //I'd like to re-enable the visual, but I need to figure out how to make it not count shields.
+                    self.oneShotProtectionFraction = 0f;
+
+                    if (self.cursePenalty > 1f)
+                    {
+                        self.hasOneShotProtection = false;
+                    }
                 }
 
-                if (self.HasBuff(TrueOSP.DisableOSP))
+                if (self.HasBuff(DisableOSP))
                 {
-                    if (NetworkServer.active && self.outOfDanger)// && (self.healthComponent && self.healthComponent.health/self.healthComponent.fullHealth > OSPManagerComponent.ospThreshold)
+                    if (NetworkServer.active && self.outOfDanger)
                     {
-                        self.RemoveBuff(TrueOSP.DisableOSP);
+                        self.RemoveBuff(DisableOSP);
                     }
                     else
                     {
@@ -124,6 +61,71 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     }
                 }
             }
+        }
+
+        private void HealthComponent_TakeDamageProcess(MonoMod.Cil.ILContext il)
+        {
+            bool error = true;
+
+            //Remove vanilla OSP check
+            ILCursor c = new ILCursor(il);
+            if (c.TryGotoNext(
+                 x => x.MatchCallvirt<CharacterBody>("get_hasOneShotProtection")
+                ))
+            {
+                c.Index++;
+                c.Emit(OpCodes.Ldarg_0);//healthcomponent
+                c.EmitDelegate<Func<bool, HealthComponent, bool>>((hasOSP, self) =>
+                {
+                    return SneedUtils.SneedUtils.HasShieldOnly(self.body) && hasOSP;
+                });
+
+                //Check for OSP at the end of applying health damage
+                if (c.TryGotoNext(
+                 x => x.MatchCall<HealthComponent>("set_Networkhealth")
+                ))
+                {
+                    c.Emit(OpCodes.Ldarg_0);//healthcomponent
+                    c.Emit(OpCodes.Ldarg_1);//damageinfo
+                    c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>(ProcTrueOSP_Health);
+                    error = false;
+                }
+            }
+            if (error)
+            {
+                UnityEngine.Debug.LogError("TrueOSP IL Hook failed");
+            }
+        }
+
+        private float ProcTrueOSP_Health(float finalHealth, HealthComponent self, DamageInfo damageInfo)
+        {
+            if (!(self.body.hasOneShotProtection && (damageInfo.damageType & DamageType.BypassOneShotProtection) != DamageType.BypassOneShotProtection)) return finalHealth;
+
+            //can't get shieldonly to work so just default to vanilla behavior
+            if (SneedUtils.SneedUtils.HasShieldOnly(self.body)) return finalHealth;
+
+            OSPComponent ospm = self.body.gameObject.GetComponent<OSPComponent>();
+            if (!ospm)
+            {
+                ospm = self.body.gameObject.AddComponent<OSPComponent>();
+                ospm.healthComponent = self;
+                ospm.characterBody = self.body;
+            }
+
+            //Check if OSP timer should be triggered
+
+            float ospHealthThreshold = self.fullHealth * OSPComponent.ospThreshold;
+            if (self.health >= ospHealthThreshold && finalHealth < ospHealthThreshold)
+            {
+                ospm.StartOSPTimer();
+            }
+
+            //Save player from death
+            if (finalHealth <= 0f && ospm.TriggerOSP())
+            {
+                finalHealth = 1f;
+            }
+            return finalHealth;
         }
     }
 
@@ -149,40 +151,34 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             if (ospStopwatch > 0f)
             {
                 ospStopwatch -= Time.fixedDeltaTime;
-                if (ospStopwatch <= 0f)
-                {
-                    if (TrueOSP.enableLogging) Debug.Log("OSP timer expired.");
-                }
             }
         }
 
         public void StartOSPTimer()
         {
-            if (ospStopwatch <= 0f && CanTriggerOSP())
+            if (CanTriggerOSP())
             {
                 ospStopwatch = ospTimer;
-                if (TrueOSP.enableLogging) Debug.Log("Starting OSP timer.");
             }
         }
 
         public bool TriggerOSP()
         {
             bool ospTriggered = false;
-            if (CanTriggerOSP())
+            if (CanTriggerOSP() && ospStopwatch > 0f)
             {
                 ospTriggered = true;
                 ospStopwatch = 0f;
                 characterBody.AddBuff(TrueOSP.DisableOSP);
                 characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, ospInvuln);
                 characterBody.outOfDangerStopwatch = 0f;
-                if (TrueOSP.enableLogging) Debug.Log("Triggering OSP");
             }
             return ospTriggered;
         }
 
         public bool CanTriggerOSP()
         {
-            return !characterBody.HasBuff(TrueOSP.DisableOSP) && (healthComponent.health / healthComponent.fullHealth > ospThreshold || ospStopwatch > 0f);
+            return !characterBody.HasBuff(TrueOSP.DisableOSP);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace RiskyMod.Survivors.Mage.SkillTweaks
             Content.Content.projectilePrefabs.Add(modifiedIceWallWalkerProjectile);
 
             EntityStates.RiskyMod.Mage.Weapon.PrepIceWall.projectilePrefab = modifiedIceWallWalkerProjectile;
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Mage.Weapon.PrepWall", "projectilePrefab", modifiedIceWallWalkerProjectile);
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Mage/EntityStates.Mage.Weapon.PrepWall.asset", "projectilePrefab", modifiedIceWallWalkerProjectile);
 
             //Build deletion effect
             GameObject deletionEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/OmniImpactVFXFrozen.prefab").WaitForCompletion().InstantiateClone("RiskyModIceWallDeletionEffect", false);

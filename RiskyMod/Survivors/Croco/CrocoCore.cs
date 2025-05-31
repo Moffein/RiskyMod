@@ -2,13 +2,14 @@
 using RiskyMod.Survivors.Croco.Contagion;
 using RoR2;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Survivors.Croco
 {
     public class CrocoCore
     {
         public static bool enabled = true;
-        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CrocoBody");
+        public static GameObject bodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Croco/CrocoBody.prefab").WaitForCompletion();
 
         public CrocoCore()
         {

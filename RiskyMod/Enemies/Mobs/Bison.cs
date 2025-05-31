@@ -39,9 +39,9 @@ namespace RiskyMod.Enemies.Mobs
                 }
             };
 
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Bison.Charge", "chargeMovementSpeedCoefficient", "12"); //8 vanilla
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Bison.Charge", "turnSpeed", "600"); //300 vanilla
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.Bison.Charge", "selfStunDuration", "1"); //3 vanilla
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Bison/EntityStates.Bison.Charge.asset", "chargeMovementSpeedCoefficient", "12"); //8 vanilla
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Bison/EntityStates.Bison.Charge.asset", "turnSpeed", "600"); //300 vanilla
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Bison/EntityStates.Bison.Charge.asset", "selfStunDuration", "1"); //3 vanilla
         }
     }
 }

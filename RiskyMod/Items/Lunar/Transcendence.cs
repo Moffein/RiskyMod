@@ -3,18 +3,27 @@ using System;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
+using System.Runtime.CompilerServices;
+using MoreStats;
 
 namespace RiskyMod.Items.Lunar
 {
     public class Transcendence
     {
         public static bool enabled = true;
-        public static bool alwaysShieldGate = true;
         public Transcendence()
         {
             if (!enabled) return;
             ItemsCore.ModifyItemDefActions += ModifyItem;
-            IL.RoR2.CharacterBody.UpdateOutOfCombatAndDanger += CharacterBody_UpdateOutOfCombatAndDanger;
+
+            if (!SoftDependencies.MoreStatsLoaded)
+            {
+                IL.RoR2.CharacterBody.UpdateOutOfCombatAndDanger += CharacterBody_UpdateOutOfCombatAndDanger;
+            }
+            else
+            {
+                MoreStatsCompat();
+            }
         }
 
         private void CharacterBody_UpdateOutOfCombatAndDanger(ILContext il)
@@ -42,6 +51,25 @@ namespace RiskyMod.Items.Lunar
             else
             {
                 UnityEngine.Debug.LogError("RiskyMod: Transcendence IL Hook failed");
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void MoreStatsCompat()
+        {
+            MoreStats.StatHooks.GetMoreStatCoefficients += StatHooks_GetMoreStatCoefficients;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void StatHooks_GetMoreStatCoefficients(CharacterBody sender, StatHooks.MoreStatHookEventArgs args)
+        {
+            if (sender.inventory)
+            {
+                int stackCount = sender.inventory.GetItemCount(RoR2Content.Items.ShieldOnly) - 1;
+                if (stackCount > 0)
+                {
+                    args.shieldDelaySecondsIncreaseAddPreMult += 1f * stackCount;
+                }
             }
         }
 

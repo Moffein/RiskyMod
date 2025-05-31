@@ -20,7 +20,7 @@ namespace RiskyMod.Enemies.DLC1
             cb.baseDamage = 15f;    //15 default
             cb.levelDamage = 3f;
 
-            SneedUtils.SneedUtils.SetEntityStateField("EntityStates.FlyingVermin.Weapon.Spit", "damageCoefficient", "1");//2 default
+            SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC1/FlyingVermin/EntityStates.FlyingVermin.Weapon.Spit.asset", "damageCoefficient", "1");//2 default
 
             GameObject masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/FlyingVermin/FlyingVerminMaster.prefab").WaitForCompletion();
             CharacterMaster cm = masterObject.GetComponent<CharacterMaster>();

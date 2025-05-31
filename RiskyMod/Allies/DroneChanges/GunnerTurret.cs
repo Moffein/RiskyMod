@@ -47,7 +47,7 @@ namespace RiskyMod.Allies.DroneChanges
 
             RoR2Application.onLoad += OnLoad;
 
-            GameObject masterObject = LegacyResourcesAPI.Load<GameObject>("prefabs/charactermasters/turret1master");
+            GameObject masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/Turret1Master.prefab").WaitForCompletion();
             AISkillDriver[] skillDrivers = masterObject.GetComponents<AISkillDriver>();
             foreach (AISkillDriver sd in skillDrivers)
             {

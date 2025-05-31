@@ -2,6 +2,7 @@
 using UnityEngine;
 using EntityStates;
 using BepInEx.Configuration;
+using UnityEngine.AddressableAssets;
 
 namespace EntityStates.RiskyMod.Captain
 {
@@ -9,11 +10,11 @@ namespace EntityStates.RiskyMod.Captain
 	{
 		public static ConfigEntry<bool> scalePellets;
 
-		public static GameObject _muzzleFlashPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/muzzleflashes/Muzzleflash1");
-		public static GameObject _tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/TracerCaptainShotgun");
-		public static GameObject _hitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/HitsparkCaptainShotgun");
+		public static GameObject _muzzleFlashPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/Muzzleflash1.prefab").WaitForCompletion();
+        public static GameObject _tracerEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/TracerCaptainShotgun.prefab").WaitForCompletion();
+        public static GameObject _hitEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/HitsparkCaptainShotgun.prefab").WaitForCompletion();
 
-		private void SetStats()
+        private void SetStats()
 		{
 			this.baseDuration = 0.9f;
 			this.bulletCount = 7;

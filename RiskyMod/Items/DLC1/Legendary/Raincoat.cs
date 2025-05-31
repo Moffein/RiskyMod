@@ -3,6 +3,7 @@ using MonoMod.Cil;
 using RoR2;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.DLC1.Legendary
 {
@@ -29,7 +30,7 @@ namespace RiskyMod.Items.DLC1.Legendary
             if (enabled)
             {
                 ItemsCore.ModifyItemDefActions += ModifyItem;
-                BuffDef powerDef = LegacyResourcesAPI.Load<BuffDef>("BuffDefs/SmallArmorBoost");
+                BuffDef powerDef = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Common/bdSmallArmorBoost.asset").WaitForCompletion();
                 Raincoat.DebuffImmune = SneedUtils.SneedUtils.CreateBuffDef(
                     "RiskyMod_RaincoatDebuffImmuneBuff",
                     false,

@@ -39,7 +39,7 @@ namespace RiskyMod
 
         public static DamageAPI.ModdedDamageType DontTriggerBands;
 
-        public static GameObject medkitEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect");
+        public static GameObject medkitEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Medkit/MedkitHealEffect.prefab").WaitForCompletion();
 
         public SharedDamageTypes()
         {

@@ -2,13 +2,14 @@
 using RiskyMod.SharedHooks;
 using RoR2;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Uncommon
 {
     public class Stealthkit
     {
         public static bool enabled = true;
-        public static GameObject effectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ProcStealthkit");
+        public static GameObject effectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Phasing/ProcStealthkit.prefab").WaitForCompletion();
         public Stealthkit()
         {
             if (!enabled) return;

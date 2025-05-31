@@ -2,6 +2,7 @@
 using RoR2;
 using RoR2.Projectile;
 using R2API;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Enemies.Mobs
 {
@@ -20,12 +21,12 @@ namespace RiskyMod.Enemies.Mobs
 
         private void ReduceProcCoefficient()
         {
-            modifiedGas = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/SporeGrenadeProjectileDotZone").InstantiateClone("RiskyModMushrumProjectileDotZone", true);
+            modifiedGas = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MiniMushroom/SporeGrenadeProjectileDotZone.prefab").WaitForCompletion().InstantiateClone("RiskyModMushrumProjectileDotZone", true);
             ProjectileDotZone pdz = modifiedGas.GetComponent<ProjectileDotZone>();
             pdz.overlapProcCoefficient = 0.2f;  //0.5 is vanilla
             Allies.DotZoneResist.AddDotZoneDamageType(modifiedGas);
 
-            modifiedProjectile = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/SporeGrenadeProjectile").InstantiateClone("RiskyModMushrumProjectile", true);
+            modifiedProjectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MiniMushroom/SporeGrenadeProjectile.prefab").WaitForCompletion().InstantiateClone("RiskyModMushrumProjectile", true);
             ProjectileImpactExplosion pie = modifiedProjectile.GetComponent<ProjectileImpactExplosion>();
             pie.childrenProjectilePrefab = modifiedGas;
 

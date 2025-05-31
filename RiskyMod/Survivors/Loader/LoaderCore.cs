@@ -22,7 +22,7 @@ namespace RiskyMod.Survivors.Loader
         public static bool pylonChanges = true;
         public static bool slamChanges = true;
 
-        public static GameObject bodyPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/LoaderBody");
+        public static GameObject bodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Loader/LoaderBody.prefab").WaitForCompletion();
         private CharacterBody loaderBody;
         public LoaderCore()
         {
@@ -64,7 +64,7 @@ namespace RiskyMod.Survivors.Loader
                 SkillDef pylonDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Loader/ThrowPylon.asset").WaitForCompletion();
                 pylonDef.skillDescriptionToken = "LOADER_SPECIAL_DESCRIPTION_RISKYMOD";
                 pylonDef.keywordTokens = new string[] { "KEYWORD_MAGNETIC_RISKYMOD" };
-                SneedUtils.SneedUtils.SetEntityStateField("entitystates.loader.throwpylon", "damageCoefficient", "0.7");
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Loader/EntityStates.Loader.ThrowPylon.asset", "damageCoefficient", "0.7");
                 new PylonMagnet();
             }
 
