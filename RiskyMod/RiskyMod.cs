@@ -72,6 +72,7 @@ namespace RiskyMod
     [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.score.DirectorReworkPlus", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RiskOfBrainrot.MoreStats", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.TrueOSP", BepInDependency.DependencyFlags.SoftDependency)]
     #endregion
 
     [BepInDependency(R2API.R2API.PluginGUID)]
@@ -85,7 +86,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RiskyFixes")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.5.0")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.5.1")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -238,6 +239,10 @@ namespace RiskyMod
             bool wolfoSpawnpoolFixerLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("Wolfo.DLCSpawnPoolFixer");
             if (wolfoSpawnpoolFixerLoaded) Debug.Log("RiskyMod: Disabling DLC Enemy Replacement fix because DLCSpawnPoolFixer is loaded.");
             EnemiesCore.spawnpoolDLCReplacementFix = EnemiesCore.spawnpoolDLCReplacementFix && !wolfoSpawnpoolFixerLoaded;
+
+            bool trueOSPLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.TrueOSP");
+            if (trueOSPLoaded) Debug.Log("RiskyMod: Disabling True OSP because standalone plugin is loaded.");
+            TrueOSP.enabled = TrueOSP.enabled && !trueOSPLoaded;
         }
 
         private void CheckArenaLoaded(Stage obj)
