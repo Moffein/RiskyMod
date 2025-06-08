@@ -157,7 +157,7 @@ namespace RiskyMod.Enemies
 
             Golem = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Golem/cscGolem.asset").WaitForCompletion();
             GolemNature = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Golem/cscGolemNature.asset").WaitForCompletion();
-            BeetleGuard = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Beetle/cscBeetleGuard.asset").WaitForCompletion();
+            BeetleGuard = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/BeetleGuard/cscBeetleGuard.asset").WaitForCompletion();
             Mushrum = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/MiniMushroom/cscMiniMushroom.asset").WaitForCompletion();
             Bison = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Bison/cscBison.asset").WaitForCompletion();
             LemurianBruiser = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/LemurianBruiser/cscLemurianBruiser.asset").WaitForCompletion();
@@ -170,7 +170,7 @@ namespace RiskyMod.Enemies
             TitanGooLake = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Titan/cscTitanGooLake.asset").WaitForCompletion();
 
             Vagrant = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Vagrant/cscVagrant.asset").WaitForCompletion();
-            BeetleQueen = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Beetle/cscBeetleQueen.asset").WaitForCompletion();
+            BeetleQueen = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/BeetleQueen/cscBeetleQueen.asset").WaitForCompletion();
             Dunestrider = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/ClayBoss/cscClayBoss.asset").WaitForCompletion();
 
             MagmaWorm = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/MagmaWorm/cscMagmaWorm.asset").WaitForCompletion();
