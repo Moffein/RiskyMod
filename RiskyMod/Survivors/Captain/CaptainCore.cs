@@ -77,7 +77,7 @@ namespace RiskyMod.Survivors.Captain
                 pie.blastAttackerFiltering = AttackerFiltering.AlwaysHitSelf;
             }
 
-            RoR2Application.onLoad += OnLoad;
+            RoR2Application.onLoadFinished += OnLoad;
         }
 
         private void OnLoad()

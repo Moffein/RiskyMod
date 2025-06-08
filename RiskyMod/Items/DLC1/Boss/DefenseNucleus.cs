@@ -30,7 +30,7 @@ namespace RiskyMod.Items.DLC1.Boss
                 HandleAllyScalingVanilla();
                 return;
             }
-            RoR2Application.onLoad += OnLoad;
+            RoR2Application.onLoadFinished += OnLoad;
 
             if (weakToMithrix)
             {

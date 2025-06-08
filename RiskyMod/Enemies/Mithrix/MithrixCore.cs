@@ -13,7 +13,7 @@ namespace RiskyMod.Enemies.Mithrix
 
         public MithrixCore()
         {
-            RoR2Application.onLoad += OnLoad;
+            RoR2Application.onLoadFinished += OnLoad;
 
             if (!enabled) return;
             new MithrixTargetPrioritization();

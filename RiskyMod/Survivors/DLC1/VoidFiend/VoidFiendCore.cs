@@ -33,7 +33,7 @@ namespace RiskyMod.Survivors.DLC1.VoidFiend
 
             bodyPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidSurvivor/VoidSurvivorBody.prefab").WaitForCompletion();
 
-            RoR2Application.onLoad += OnLoad;
+            RoR2Application.onLoadFinished += OnLoad;
 
             ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
         }

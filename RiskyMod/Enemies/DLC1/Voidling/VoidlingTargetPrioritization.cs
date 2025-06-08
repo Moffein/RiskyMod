@@ -14,7 +14,7 @@ namespace RiskyMod.Enemies.DLC1.Voidling
         {
             if (!enabled) return;
 
-            RoR2Application.onLoad += OnLoad;
+            RoR2Application.onLoadFinished += OnLoad;
         }
 
         private void OnLoad()

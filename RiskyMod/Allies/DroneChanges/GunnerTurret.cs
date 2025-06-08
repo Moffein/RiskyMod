@@ -45,7 +45,7 @@ namespace RiskyMod.Allies.DroneChanges
             cb.levelMaxShield = cb.baseMaxShield * 0.3f;
             cb.baseArmor = 20f;
 
-            RoR2Application.onLoad += OnLoad;
+            RoR2Application.onLoadFinished += OnLoad;
 
             GameObject masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/Turret1Master.prefab").WaitForCompletion();
             AISkillDriver[] skillDrivers = masterObject.GetComponents<AISkillDriver>();

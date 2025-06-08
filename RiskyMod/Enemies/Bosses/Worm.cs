@@ -25,7 +25,7 @@ namespace RiskyMod.Enemies.Bosses
         {
             if (!enabled) return;
 
-            RoR2Application.onLoad += OnLoad;
+            RoR2Application.onLoadFinished += OnLoad;
 
             //ProjectileSetup();
             //AlwaysFireMeatballs(); //Laggy

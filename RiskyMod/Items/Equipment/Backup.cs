@@ -91,7 +91,7 @@ namespace RiskyMod.Items.Equipment
                 self.subcooldownTimer = 0.5f;
                 return true;
             };
-            RoR2Application.onLoad += OnLoad;
+            RoR2Application.onLoadFinished += OnLoad;
         }
 
         private void OnLoad()
