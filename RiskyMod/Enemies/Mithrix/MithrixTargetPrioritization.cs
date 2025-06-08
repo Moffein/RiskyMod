@@ -14,7 +14,7 @@ namespace RiskyMod.Enemies.Mithrix
         {
             if (!enabled) return;
 
-            RoR2Application.onLoadFinished += OnLoad;
+            RoR2Application.onLoad += OnLoad;
         }
 
         private void OnLoad()

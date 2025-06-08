@@ -90,7 +90,7 @@ namespace RiskyMod.Allies
             TweakDrones();
             new CheaperRepairs();
 
-            RoR2Application.onLoadFinished += OnLoad;
+            RoR2Application.onLoad += OnLoad;
 
             RoR2.CharacterMaster.onStartGlobal += ExternalModCompat;
         }

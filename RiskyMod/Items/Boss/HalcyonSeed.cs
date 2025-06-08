@@ -16,7 +16,7 @@ namespace RiskyMod.Items.Boss
                 ItemsCore.ModifyItemDefActions += ModifyItem;
             }
 
-            RoR2Application.onLoadFinished += OnLoad;
+            RoR2Application.onLoad += OnLoad;
 
             On.RoR2.CharacterBody.Start += (orig, self) =>
             {

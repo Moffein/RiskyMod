@@ -142,7 +142,7 @@ namespace RiskyMod.Items.Boss
 				}
 			};
 
-			RoR2Application.onLoadFinished += OnLoad;
+			RoR2Application.onLoad += OnLoad;
 		}
 
 		private void OnLoad()

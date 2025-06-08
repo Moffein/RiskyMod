@@ -60,7 +60,7 @@ namespace RiskyMod.Survivors.Bandit2
             ModifyStats(bodyPrefab.GetComponent<CharacterBody>());
             ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
 
-            RoR2Application.onLoadFinished += OnLoad;
+            RoR2Application.onLoad += OnLoad;
         }
 
         private void OnLoad()

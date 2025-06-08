@@ -26,7 +26,7 @@ namespace RiskyMod.Items.Uncommon
         //Does this need turretblacklist?
         public SquidPolyp()
         {
-            RoR2Application.onLoadFinished += OnLoad;
+            RoR2Application.onLoad += OnLoad;
             if (!enabled) return;
 
             ItemsCore.ModifyItemDefActions += ModifyItem;
