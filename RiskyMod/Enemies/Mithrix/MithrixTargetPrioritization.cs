@@ -13,14 +13,8 @@ namespace RiskyMod.Enemies.Mithrix
         public MithrixTargetPrioritization()
         {
             if (!enabled) return;
-
-            RoR2Application.onLoad += OnLoad;
-        }
-
-        private void OnLoad()
-        {
-            BodyIndex brotherIndex = BodyCatalog.FindBodyIndex("BrotherBody");
-            if (brotherIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(brotherIndex);
+            SneedUtils.SneedUtils.SetPrioritizePlayers(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherMaster.prefab").WaitForCompletion());
+            SneedUtils.SneedUtils.SetPrioritizePlayers(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/ITBrotherMaster.prefab").WaitForCompletion());
         }
     }
 }

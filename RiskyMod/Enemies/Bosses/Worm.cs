@@ -6,15 +6,13 @@ using UnityEngine.AddressableAssets;
 using RoR2.Projectile;
 using static RoR2.HurtBox;
 using System.Linq;
+using RoR2BepInExPack;
 
 namespace RiskyMod.Enemies.Bosses
 {
     public class Worm
     {
         public static bool enabled = true;
-
-        public static BodyIndex MagmaWormIndex;
-        public static BodyIndex ElectricWormIndex;
 
         public static GameObject MagmaWormProjectile;
         public static GameObject ElectricWormProjectile;
@@ -24,25 +22,17 @@ namespace RiskyMod.Enemies.Bosses
         public Worm()
         {
             if (!enabled) return;
-
-            RoR2Application.onLoad += OnLoad;
-
             //ProjectileSetup();
             //AlwaysFireMeatballs(); //Laggy
 
             GameObject magmaWorm = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MagmaWorm/MagmaWormBody.prefab").WaitForCompletion();
             GameObject electricWorm = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ElectricWorm/ElectricWormBody.prefab").WaitForCompletion();
 
+            SneedUtils.SneedUtils.SetPrioritizePlayers(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MagmaWorm/MagmaWormMaster.prefab").WaitForCompletion());
+            SneedUtils.SneedUtils.SetPrioritizePlayers(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ElectricWorm/ElectricWormMaster.prefab").WaitForCompletion());
+
             ReduceFollowDelay(magmaWorm);
             ReduceFollowDelay(electricWorm);
-        }
-
-        private void OnLoad()
-        {
-            MagmaWormIndex = BodyCatalog.FindBodyIndex("MagmaWormBody");
-            ElectricWormIndex = BodyCatalog.FindBodyIndex("ElectricWormBody");
-            if (MagmaWormIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(MagmaWormIndex);
-            if (ElectricWormIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(ElectricWormIndex);
         }
 
         //This causes the ground to constantly be filled with fire. Might not be suitable.

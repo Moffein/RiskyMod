@@ -22,7 +22,6 @@ namespace RiskyMod.Enemies
         public static bool spawnpoolDLCReplacementFix = true;
         public EnemiesCore()
         {
-            On.RoR2.CharacterAI.BaseAI.UpdateTargets += PrioritizePlayers.AttemptTargetPlayer;
             new MithrixCore();
             new VoidlingCore();
             ModifyEnemies();

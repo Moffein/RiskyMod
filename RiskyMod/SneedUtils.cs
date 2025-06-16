@@ -2,6 +2,7 @@
 using R2API;
 using RiskyMod.Content;
 using RoR2;
+using RoR2.CharacterAI;
 using RoR2.Navigation;
 using RoR2.Skills;
 using System.Collections.Generic;
@@ -14,10 +15,29 @@ namespace SneedUtils
 {
     public class SneedUtils
     {
+
         public static GameObject teleportHelperPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/DirectorSpawnProbeHelperPrefab.prefab").WaitForCompletion();
         public enum MonsterCategories
         {
             BasicMonsters, Minibosses, Champions
+        }
+
+        public static void SetPrioritizePlayers(GameObject masterObject)
+        {
+            if (!masterObject)
+            {
+                Debug.LogError("SneedUtils: Attempted to call SetPrioritizePlayers on null gameobject.");
+                return;
+            }
+
+            BaseAI ai = masterObject.GetComponent<BaseAI>();
+            if (!ai)
+            {
+                Debug.LogError("SneedUtils: Attempted to call SetPrioritizePlayers on GameObject without a BaseAI " + masterObject);
+                return;
+            }
+
+            ai.prioritizePlayers = true;
         }
 
         public static bool HasShieldOnly(CharacterBody self)

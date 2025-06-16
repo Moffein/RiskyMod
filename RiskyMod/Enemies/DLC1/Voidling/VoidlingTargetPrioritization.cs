@@ -14,22 +14,10 @@ namespace RiskyMod.Enemies.DLC1.Voidling
         {
             if (!enabled) return;
 
-            RoR2Application.onLoad += OnLoad;
-        }
-
-        private void OnLoad()
-        {
-            BodyIndex voidlingIndex = BodyCatalog.FindBodyIndex("MiniVoidRaidCrabBodyBase");
-            if (voidlingIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(voidlingIndex);
-
-            voidlingIndex = BodyCatalog.FindBodyIndex("MiniVoidRaidCrabBodyPhase1");
-            if (voidlingIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(voidlingIndex);
-
-            voidlingIndex = BodyCatalog.FindBodyIndex("MiniVoidRaidCrabBodyPhase2");
-            if (voidlingIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(voidlingIndex);
-
-            voidlingIndex = BodyCatalog.FindBodyIndex("MiniVoidRaidCrabBodyPhase3");
-            if (voidlingIndex != BodyIndex.None) PrioritizePlayers.prioritizePlayersList.Add(voidlingIndex);
+            SneedUtils.SneedUtils.SetPrioritizePlayers(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidRaidCrab/MiniVoidRaidCrabMasterBase.prefab").WaitForCompletion());
+            SneedUtils.SneedUtils.SetPrioritizePlayers(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidRaidCrab/MiniVoidRaidCrabMasterPhase1.prefab").WaitForCompletion());
+            SneedUtils.SneedUtils.SetPrioritizePlayers(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidRaidCrab/MiniVoidRaidCrabMasterPhase2.prefab").WaitForCompletion());
+            SneedUtils.SneedUtils.SetPrioritizePlayers(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidRaidCrab/MiniVoidRaidCrabMasterPhase3.prefab").WaitForCompletion());
         }
     }
 }
