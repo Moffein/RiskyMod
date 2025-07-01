@@ -19,6 +19,7 @@ namespace RiskyMod.MonoBehaviours
 
 		public void FixedUpdate()
 		{
+			if (!NetworkServer.active) return;
 			List<HurtBox> list = CollectionPool<HurtBox, List<HurtBox>>.RentCollection();
 			this.SearchForTargets(list);
 			int i = 0;

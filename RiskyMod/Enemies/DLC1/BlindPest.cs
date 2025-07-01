@@ -36,6 +36,20 @@ namespace RiskyMod.Enemies.DLC1
 
             BaseAI ai = masterObject.GetComponent<BaseAI>();
             ai.shouldMissFirstOffScreenShot = false;
+
+            ChangeCost("RoR2/DLC1/FlyingVermin/cscFlyingVerminSnowy.asset");
+            ChangeCost("RoR2/DLC1/FlyingVermin/cscFlyingVermin.asset");
+        }
+
+        private void ChangeCost(string addressablePath)
+        {
+            Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/FlyingVermin/cscFlyingVerminSnowy.asset").Completed += BlindPest_Completed;
+        }
+
+        private void BlindPest_Completed(UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationHandle<CharacterSpawnCard> handle)
+        {
+            CharacterSpawnCard csc = handle.Result;
+            csc.directorCreditCost = 20;
         }
     }
 }

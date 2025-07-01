@@ -38,6 +38,7 @@ using RiskyMod.MonoBehaviours;
 using RiskyMod.VoidFields;
 using UnityEngine.AddressableAssets;
 using RiskyMod.Enemies.DLC1.Voidling;
+using static Generics.Dynamics.RigReader;
 
 namespace RiskyMod
 {
@@ -73,6 +74,7 @@ namespace RiskyMod
     [BepInDependency("com.score.DirectorReworkPlus", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RiskOfBrainrot.MoreStats", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.TrueOSP", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.ArtificerPrimaryRework", BepInDependency.DependencyFlags.SoftDependency)]
     #endregion
 
     [BepInDependency(R2API.R2API.PluginGUID)]
@@ -86,7 +88,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RiskyFixes")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.5.6")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.5.7")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -243,6 +245,11 @@ namespace RiskyMod
             bool trueOSPLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.TrueOSP");
             if (trueOSPLoaded) Debug.Log("RiskyMod: Disabling True OSP because standalone plugin is loaded.");
             TrueOSP.enabled = TrueOSP.enabled && !trueOSPLoaded;
+
+            bool artificerPrimaryReworkLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.ArtificerPrimaryRework");
+            if (artificerPrimaryReworkLoaded) Debug.Log("RiskyMod: Disabling Artificer Primary changes because ArtificerPrimaryRework is loaded.");
+            Survivors.Mage.MageCore.modifyFireBolt = Survivors.Mage.MageCore.modifyFireBolt && !artificerPrimaryReworkLoaded;
+            Survivors.Mage.MageCore.modifyPlasmaBolt = Survivors.Mage.MageCore.modifyPlasmaBolt && !artificerPrimaryReworkLoaded;
         }
 
         private void CheckArenaLoaded(Stage obj)
