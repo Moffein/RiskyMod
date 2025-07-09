@@ -24,9 +24,6 @@ namespace RiskyMod.Survivors.Huntress
             arrowRainObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRain.prefab").WaitForCompletion().InstantiateClone("RiskyModArrowRainProjectile", true);
             Content.Content.projectilePrefabs.Add(arrowRainObject);
 
-            ProjectileDamage pd = arrowRainObject.GetComponent<ProjectileDamage>();
-            pd.damageType.AddModdedDamageType(SharedDamageTypes.ProjectileRainForce);
-
             ProjectileDotZone arrowDotZone = arrowRainObject.GetComponent<ProjectileDotZone>();
             arrowDotZone.overlapProcCoefficient = 0.7f;
             arrowDotZone.damageCoefficient = 1f / 3f; //Adjusts DPS value to match the entitystate damagecoefficient
@@ -51,6 +48,8 @@ namespace RiskyMod.Survivors.Huntress
                     if (combo.HasValue)
                     {
                         DamageTypeCombo modify = combo.Value;
+                        modify.damageType |= DamageType.SlowOnHit;
+                        modify.damageSource = DamageSource.Special;
                         modify.AddModdedDamageType(SharedDamageTypes.ProjectileRainForce);
                         return new DamageTypeCombo?(modify);
                     }
@@ -72,9 +71,6 @@ namespace RiskyMod.Survivors.Huntress
             arrowRainScepterObject.transform.localScale = new Vector3(arrowRainScepterObject.transform.localScale.x * 1.5f,
                 arrowRainScepterObject.transform.localScale.y,
                 arrowRainScepterObject.transform.localScale.z * 1.5f);
-
-            ProjectileDamage pd = ArrowRainBuff.arrowRainScepterObject.GetComponent<ProjectileDamage>();
-            pd.damageType.AddModdedDamageType(SharedDamageTypes.ProjectileRainForce);
 
             ProjectileDotZone arrowDotZone = ArrowRainBuff.arrowRainScepterObject.GetComponent<ProjectileDotZone>();
             arrowDotZone.overlapProcCoefficient = 0.7f;

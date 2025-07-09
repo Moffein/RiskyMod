@@ -1,4 +1,7 @@
-﻿using RoR2;
+﻿using R2API;
+using RiskyMod;
+using RiskyMod.Survivors.Huntress;
+using RoR2;
 using RoR2.Projectile;
 using System;
 using System.Collections.Generic;
@@ -62,9 +65,17 @@ namespace EntityStates.RiskyMod.Huntress
 			EffectManager.SimpleMuzzleFlash(muzzleFlashEffect, base.gameObject, "Muzzle", false);
 			if (this.areaIndicatorInstance && this.shouldFireArrowRain)
 			{
-				ProjectileManager.instance.FireProjectile(projectilePrefab, this.areaIndicatorInstance.transform.position,
+				DamageTypeCombo dtc = new DamageTypeCombo()
+				{
+					damageType = DamageType.IgniteOnHit | DamageType.SlowOnHit,
+					damageSource = DamageSource.Special
+				};
+				dtc.AddModdedDamageType(SharedDamageTypes.ProjectileRainForce);
+
+                ProjectileManager.instance.FireProjectile(projectilePrefab, this.areaIndicatorInstance.transform.position,
 					this.areaIndicatorInstance.transform.rotation, base.gameObject, this.damageStat * damageCoefficient, 0f,
-					Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+					Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f,
+					dtc);
 			}
 		}
 
