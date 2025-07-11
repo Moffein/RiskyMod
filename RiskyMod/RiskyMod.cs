@@ -75,6 +75,7 @@ namespace RiskyMod
     [BepInDependency("com.RiskOfBrainrot.MoreStats", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.TrueOSP", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.ArtificerPrimaryRework", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Nuxlar.EclipseRevamped", BepInDependency.DependencyFlags.SoftDependency)]
     #endregion
 
     [BepInDependency(R2API.R2API.PluginGUID)]
@@ -88,7 +89,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RiskyFixes")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.5.8")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.5.9")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -168,6 +169,7 @@ namespace RiskyMod
         //This isn't all the softdependency checks. Some still are in CheckDependencies, this is just a quick fix.
         private void InitDependencies()
         {
+            SoftDependencies.EclipseRevampedLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("Nuxlar.EclipseRevamped");
             SoftDependencies.RiskOfOptionsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions");
             SoftDependencies.ArtifactOfPotentialLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("zombieseatflesh7.ArtifactOfPotential");
             SoftDependencies.TeleporterTurretsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RuneFoxMods.TeleporterTurrets");
@@ -250,6 +252,8 @@ namespace RiskyMod
             if (artificerPrimaryReworkLoaded) Debug.Log("RiskyMod: Disabling Artificer Primary changes because ArtificerPrimaryRework is loaded.");
             Survivors.Mage.MageCore.modifyFireBolt = Survivors.Mage.MageCore.modifyFireBolt && !artificerPrimaryReworkLoaded;
             Survivors.Mage.MageCore.modifyPlasmaBolt = Survivors.Mage.MageCore.modifyPlasmaBolt && !artificerPrimaryReworkLoaded;
+
+            TeleExpandOnBossKill.enableDuringEclipse = TeleExpandOnBossKill.enableDuringEclipse || SoftDependencies.EclipseRevamped_CheckEclipse2Config();
         }
 
         private void CheckArenaLoaded(Stage obj)

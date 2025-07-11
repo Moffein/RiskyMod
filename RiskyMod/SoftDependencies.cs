@@ -45,6 +45,7 @@ namespace RiskyMod
         public static bool SS2OLoaded = false;
 
         public static bool MoreStatsLoaded = false;
+        public static bool EclipseRevampedLoaded = false;
 
         public static bool IsPotentialArtifactActive()
         {
@@ -69,6 +70,19 @@ namespace RiskyMod
         private static bool SS2_CheckDroneMarkerInternal(GameObject gameObject)
         {
             return gameObject.GetComponent<Moonstorm.Starstorm2.Interactables.DroneTable.RefabricatorHardDeathToken>() != null;
+        }
+
+        internal static bool EclipseRevamped_CheckEclipse2Config()
+        {
+            if (EclipseRevampedLoaded) return EclipseRevamped_CheckEclipse2ConfigInternal();
+            return false;
+        }
+
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static bool EclipseRevamped_CheckEclipse2ConfigInternal()
+        {
+            return EclipseRevamped.Main.shouldChangeE2.Value;
         }
     }
 }

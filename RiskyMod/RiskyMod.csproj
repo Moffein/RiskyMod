@@ -78,6 +78,9 @@
     <Reference Include="DefenseMatrixManager">
       <HintPath>libs\HardDependencies\DefenseMatrixManager.dll</HintPath>
     </Reference>
+    <Reference Include="EclipseRevamped">
+      <HintPath>libs\SoftDependencies\EclipseRevamped.dll</HintPath>
+    </Reference>
     <Reference Include="Facepunch.Steamworks">
       <HintPath>libs\Facepunch.Steamworks.dll</HintPath>
     </Reference>
