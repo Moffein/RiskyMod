@@ -9,7 +9,7 @@ using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Legendary
 {
-    class CeremonialDagger
+    public class CeremonialDagger
     {
         public static bool enabled = true;
         public static GameObject daggerPrefab;

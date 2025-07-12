@@ -7,7 +7,7 @@ using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.DLC1.Void
 {
-    class VoidRing
+    public class VoidRing
     {
         public static bool enabled = true;
         public VoidRing()

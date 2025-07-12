@@ -11,7 +11,7 @@ using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Items.Uncommon
 {
-    class AtG
+    public class AtG
     {
         public static bool enabled = true;
 
