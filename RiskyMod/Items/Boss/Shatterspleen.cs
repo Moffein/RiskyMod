@@ -54,7 +54,8 @@ namespace RiskyMod.Items.Boss
 
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
-                bool error = true;
+                int hookCount = 1;
+                int actual = 0;
 
                 ILCursor c = new ILCursor(il);
                 if (c.TryGotoNext(
@@ -94,11 +95,13 @@ namespace RiskyMod.Items.Boss
                                 {
                                     return damageCoefficient + 0.02f;
                                 });
+                                actual++;
 
 
                                 //Disable Proc Coefficient
                                 if (RiskyMod.disableProcChains)
                                 {
+                                    hookCount += 2;
                                     if (c.TryGotoNext(
                                         x => x.MatchStfld<DelayBlast>("position")
                                         ))
@@ -109,15 +112,23 @@ namespace RiskyMod.Items.Boss
                                             db.procCoefficient = 0f;
                                             return db;
                                         });
+                                        actual++;
+                                    }
+
+                                    if (c.TryGotoNext(x => x.MatchStfld<DelayBlast>("falloffModel")))
+                                    {
+                                        c.EmitDelegate<Func<BlastAttack.FalloffModel, BlastAttack.FalloffModel>>((f) =>
+                                        {
+                                            return BlastAttack.FalloffModel.None;
+                                        });
+                                        actual++;
                                     }
                                 }
-
-                                error = false;
                             }
                         }
                     }
                 }
-                if (error)
+                if (hookCount != actual)
                 {
                     UnityEngine.Debug.LogError("RiskyMod: Shatterspleen OnCharacterDeath IL Hook failed");
                 }

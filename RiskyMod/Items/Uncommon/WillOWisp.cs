@@ -16,7 +16,8 @@ namespace RiskyMod.Items.Uncommon
 
             IL.RoR2.GlobalEventManager.OnCharacterDeath += (il) =>
             {
-                bool error = true;
+                int hookCount = 1;
+                int actual = 0;
                 ILCursor c = new ILCursor(il);
                 if(c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "ExplodeOnDeath")
@@ -25,6 +26,7 @@ namespace RiskyMod.Items.Uncommon
                     //Disable Proc Coefficient
                     if (RiskyMod.disableProcChains)
                     {
+                        hookCount++;
                         if (c.TryGotoNext(
                             x => x.MatchStfld<DelayBlast>("position")
                             ))
@@ -35,6 +37,7 @@ namespace RiskyMod.Items.Uncommon
                                 db.procCoefficient = 0f;
                                 return db;
                             });
+                            actual++;
                         }
                     }
 
@@ -47,11 +50,26 @@ namespace RiskyMod.Items.Uncommon
                         {
                             return 16f;
                         });
-                        error = false;
+                        actual++;
+                    }
+
+                    if (RiskyMod.disableProcChains)
+                    {
+                        hookCount++;
+                        if (c.TryGotoNext(
+                            x => x.MatchStfld<DelayBlast>("falloffModel")
+                            ))
+                        {
+                            c.EmitDelegate<Func<BlastAttack.FalloffModel, BlastAttack.FalloffModel>>((f) =>
+                            {
+                                return BlastAttack.FalloffModel.None;
+                            });
+                            actual++;
+                        }
                     }
                 }
 
-                if (error)
+                if (hookCount != actual)
                 {
                     UnityEngine.Debug.LogError("RiskyMod: WillOWisp IL Hook failed");
                 }
