@@ -465,11 +465,11 @@ namespace RiskyMod
             MageCore.m2RemoveNanobombGravity = SurvivorCfg.Bind(mageString, "Nanobomb - Remove Gravity", false, "Removes projectile drop from Nanobomb so it behaves like it did in Early Access.").Value;
             MageCore.buffNanoSpear = SurvivorCfg.Bind(mageString, "Nanospear Changes", true, "Enable changes to this skill.").Value;
 
-            MageCore.ionSurgeUtility = SurvivorCfg.Bind(mageString, "Ion Surge - Move to Utility Slot", true, "Moves Ion Surge to the Utility slot.").Value;
+            MageCore.ionSurgeUtility = SurvivorCfg.Bind(mageString, "Ion Surge - Move to Utility Slot", false, "Moves Ion Surge to the Utility slot.").Value;
             MageCore.ionSurgeUtilityKeepSpecial = SurvivorCfg.Bind(mageString, "Ion Surge - Move to Utility Slot - Keep Special", false, "If Ion Surge Utility is enabled, keep the Special version as a selectable skill.").Value;
             MageCore.ionSurgeShock = SurvivorCfg.Bind(mageString, "Ion Surge - Shock", true, "Ion Surge shocks enemies.").Value;
 
-            MageCore.utilitySelfKnockback = SurvivorCfg.Bind(mageString, "Utility Self Knockback", true, "(Client-Side) Snapfreeze Rework and Blaze Storm apply self-knockback when used midair.");
+            MageCore.utilitySelfKnockback = SurvivorCfg.Bind(mageString, "Utility Self Knockback", false, "(Client-Side) Snapfreeze Rework and Blaze Storm apply self-knockback when used midair.");
             MageCore.utilitySelfKnockback.SettingChanged += MageCore.UpdatePushSetting;
 
 
