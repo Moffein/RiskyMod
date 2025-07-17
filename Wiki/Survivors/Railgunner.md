@@ -5,7 +5,7 @@ Minimal changes.
 ## General
 
 - Skills no longer cancel Bustling Fungus.
-- Cryocharge's freeze can execute bosses at 15% health.
+- Cryocharge's freeze can execute bosses at 10% health.
 
 ## Utilities
 

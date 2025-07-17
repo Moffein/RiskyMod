@@ -13,7 +13,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
     {
         public static bool enabled = true;
         public static BuffDef FreezeDebuff;
-        public static float bossExecuteFractionMultiplier = 0.5f;
+        public static float bossExecuteFractionMultiplier = 1f/3f;
 
         public static bool nerfFreeze = false;
 
