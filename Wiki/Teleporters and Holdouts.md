@@ -3,3 +3,6 @@
 	- Disabled in Eclipse or when Focused Convergence is active.
 
 *Teleporter expansion keeps the initial teleporter radius so that players are encouraged to group up and fight the boss, then let players do their own thing once the boss is dead instead of forcing them to sit around doing nothing.*
+
+- Teleporter radius expands in large lobbies with 5+ players.
+	- +12.5% per extra player, up to a maximum of +100% (12 players).

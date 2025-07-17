@@ -17,3 +17,4 @@
 	
 - Void Seed
 	- Limit per stage reduced from 3 -> 1  (Configurable)
+	- Limit is increased by +1 per loop, up to a max of 3. (Configurable)

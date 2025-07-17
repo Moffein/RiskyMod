@@ -55,6 +55,7 @@ using RiskyMod.Survivors.Croco.Tweaks;
 using RiskyMod.Survivors.Croco.Contagion;
 using RiskyMod.Items.DLC2;
 using RiskyMod.Survivors.Seeker;
+using RiskyMod.Tweaks.Interactables;
 
 namespace RiskyMod
 {
@@ -225,6 +226,7 @@ namespace RiskyMod
             AlliesCore.MoreDronesCompat = GeneralCfg.Bind(allyString, "Compatibility - MoreDrones", true, "Enables ally changes on allies from this mod.").Value;
 
             SpawnLimits.maxVoidSeeds = GeneralCfg.Bind(interactString, "Max Void Seeds", 1, "Limit how many Void Seeds can spawn on 1 stage. Vanilla is 3. Set to negative for no limit.").Value;
+            ExtraVoidSeedPerLoop.maxExtraSeeds = GeneralCfg.Bind(interactString, "Per-Loop Max Extra Void Seeds", 2, "Increases Max Void Seeds per loop by 1 until this number is reached. Set to negative for no limit.").Value;
 
             //Artifacts
             Sacrifice.enabled = GeneralCfg.Bind(artifactString, "Sacrifice - No Drop Chance Scaling", true, "Increases drop chance when not using Swarms and prevents drop chance from increasing as the run progresses.").Value;
