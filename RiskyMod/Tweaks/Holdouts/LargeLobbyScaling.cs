@@ -12,7 +12,7 @@ namespace RiskyMod.Tweaks.Holdouts
     {
         public static bool enabled = true;
 
-        public static float increasePerPlayer = 0.125f;
+        public static float increasePerPlayer = 0.1f;
         public static int maxIncreases = 8;
 
         public LargeLobbyScaling()
