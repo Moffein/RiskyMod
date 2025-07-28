@@ -75,7 +75,7 @@ namespace RiskyMod
     [BepInDependency("com.RiskOfBrainrot.MoreStats", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.TrueOSP", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.ArtificerPrimaryRework", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.Nuxlar.EclipseRevamped", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("Nuxlar.EclipseRevamped", BepInDependency.DependencyFlags.SoftDependency)]
     #endregion
 
     [BepInDependency(R2API.R2API.PluginGUID)]
@@ -89,7 +89,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RiskyFixes")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.6.1")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.6.2")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
