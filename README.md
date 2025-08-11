@@ -24,6 +24,7 @@ This mod is compatible with nearly all content mods. The only things that will c
 	
 - Optional Dependencies
 	- EliteReworks, included since RiskyMod is designed with it in mind.
+	- LinearDamage
 	
 ## Some Config Notes
 
@@ -32,15 +33,6 @@ This mod is compatible with nearly all content mods. The only things that will c
 		- RiskyMod_General.cfg
 			- Game Mechanics
 				- Shield Gating: False
-		- RiskyMod_Items.cfg
-			- Lunar
-				- Transcendence - Always Shield Gate: False
-				
-- Artificer
-	- If you use mods that add Artificer skills, or want a more Vanilla-ish Artificer experience, refer to the following options:
-		- RiskyMod_Survivors.cfg
-			- Ion Surge - Move to Utility Slot: False
-			- Utility Self Knockback : False	
 
 ## Main Features
 
@@ -58,12 +50,6 @@ This mod is compatible with nearly all content mods. The only things that will c
 - Drones scale better.
 - Teleporter radius expands once the boss is dead.
 - Void Fields is shorter and only lasts 5 waves.
-
-## To-do List
-
-- Phase Lightning skill icon.
-- Shrapnel Barrage skill icon.
-- Contagion passive skill icon.
 	
 ## For Developers
 
