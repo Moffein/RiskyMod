@@ -14,7 +14,7 @@ namespace RiskyMod.Allies.DamageResistances
         public AntiSplat()
         {
             if (!enabled) return;
-            TakeDamage.ModifyInitialDamageNoAttackerActions += AddResist;
+            TakeDamage.ModifyInitialDamageActions += AddResist;
         }
 
         //This might be too general.

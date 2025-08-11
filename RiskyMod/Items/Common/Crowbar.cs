@@ -90,7 +90,7 @@ namespace RiskyMod.Items.Common
                 }
             };
 
-            TakeDamage.ModifyInitialDamageInventoryActions += CrowbarDamageBoost;
+            TakeDamage.ModifyInitialDamageAttackerInventoryActions += CrowbarDamageBoost;
         }
 
         private void InitCrowbarManager(Run self)

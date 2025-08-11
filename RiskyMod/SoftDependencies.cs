@@ -10,6 +10,7 @@ namespace RiskyMod
 {
     public class SoftDependencies
     {
+        public static bool LinearDamageLoaded = false;
         public static bool RiskOfOptionsLoaded = false;
 
         public static bool ScepterPluginLoaded = false;

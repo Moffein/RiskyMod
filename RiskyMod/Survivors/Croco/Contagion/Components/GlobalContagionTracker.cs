@@ -13,7 +13,7 @@ namespace RiskyMod.Survivors.Croco.Contagion.Components
         internal static void Init()
         {
             RoR2.Run.onRunStartGlobal += InitPoisonTracker;
-            SharedHooks.OnHitEnemy.OnHitAttackerActions += TrackPoison;
+            SneedHooks.ProcessHitEnemy.OnHitAttackerActions += TrackPoison;
         }
 
         private static void InitPoisonTracker(Run self)

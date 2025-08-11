@@ -34,7 +34,7 @@ namespace RiskyMod.Items.DLC1.Boss
 
             if (weakToMithrix)
             {
-                SharedHooks.TakeDamage.ModifyInitialDamageActions += WeakToMithrixHook;
+                SharedHooks.TakeDamage.ModifyInitialDamageAttackerActions += WeakToMithrixHook;
             }
 
             if (removeAllyScaling)

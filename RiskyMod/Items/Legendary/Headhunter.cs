@@ -6,6 +6,7 @@ using MonoMod.Cil;
 using System;
 using RiskyMod.SharedHooks;
 using UnityEngine.AddressableAssets;
+using SneedHooks;
 
 namespace RiskyMod.Items.Legendary
 {
@@ -40,7 +41,14 @@ namespace RiskyMod.Items.Legendary
 
             AssistManager.AssistManager.HandleAssistInventoryCompatibleActions += AssistEffect;
             SharedHooks.OnCharacterDeath.OnCharacterDeathInventoryActions += ProcItem;
-            ModifyFinalDamage.ModifyFinalDamageActions += EliteBonus;
+            if (SoftDependencies.LinearDamageLoaded)
+            {
+                SneedHooks.ModifyFinalDamage.ModifyFinalDamageAttackerActions += ModifyFinalDamage_Additive;
+            }
+            else
+            {
+                SneedHooks.ModifyFinalDamage.ModifyFinalDamageAttackerActions += ModifyFinalDamage;
+            }
 
             if (perfectedTweak)
             {
@@ -57,7 +65,7 @@ namespace RiskyMod.Items.Legendary
                 );
 
                 //cope fix for the il hook breaking
-                SharedHooks.OnHitEnemy.OnHitAttackerActions += OnHit;
+                SneedHooks.ProcessHitEnemy.OnHitAttackerActions += OnHit;
 
                 //todo: fix
                 /*IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
@@ -81,6 +89,24 @@ namespace RiskyMod.Items.Legendary
                 };*/
                 RecalculateStatsAPI.GetStatCoefficients += HandlePerfected2Stats;
             }
+        }
+
+        private void ModifyFinalDamage(ModifyFinalDamage.DamageModifierArgs damageModifierArgs, DamageInfo damageInfo, HealthComponent victim, CharacterBody victimBody, CharacterBody attackerBody)
+        {
+            if (!victimBody.isElite || !attackerBody.inventory) return;
+            int hhCount = attackerBody.inventory.GetItemCount(RoR2Content.Items.HeadHunter);
+            if (hhCount <= 0) return;
+            damageModifierArgs.damageMultFinal *= 1.3f;
+            if (damageInfo.damageColorIndex == DamageColorIndex.Default) damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
+        }
+
+        private void ModifyFinalDamage_Additive(ModifyFinalDamage.DamageModifierArgs damageModifierArgs, DamageInfo damageInfo, HealthComponent victim, CharacterBody victimBody, CharacterBody attackerBody)
+        {
+            if (!victimBody.isElite || !attackerBody.inventory) return;
+            int hhCount = attackerBody.inventory.GetItemCount(RoR2Content.Items.HeadHunter);
+            if (hhCount <= 0) return;
+            damageModifierArgs.damageMultAdd += 0.3f;
+            if (damageInfo.damageColorIndex == DamageColorIndex.Default) damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
         }
 
         private void OnHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
@@ -114,17 +140,6 @@ namespace RiskyMod.Items.Legendary
                 args.healthMultAdd += 0.25f;
                 args.moveSpeedMultAdd += 0.35f;
             }
-        }
-
-        private static void EliteBonus(DamageMult damageMult, DamageInfo damageInfo,
-            HealthComponent victimHealth, CharacterBody victimBody,
-            CharacterBody attackerBody, Inventory attackerInventory)
-        {
-            if (!victimBody.isElite) return;
-            int hhCount = attackerInventory.GetItemCount(RoR2Content.Items.HeadHunter);
-            if (hhCount <= 0) return;
-            damageMult.damageMult += 0.3f;
-            if (damageInfo.damageColorIndex == DamageColorIndex.Default) damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
         }
 
         private void OnKillEffect(CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody)

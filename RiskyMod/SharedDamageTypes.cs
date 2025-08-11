@@ -63,19 +63,19 @@ namespace RiskyMod
 
             SawBarrier = DamageAPI.ReserveDamageType();
 
-            TakeDamage.ModifyInitialDamageNoAttackerActions += ApplyProjectileRainForce;
-            TakeDamage.ModifyInitialDamageNoAttackerActions += ApplyAntiFlyingForce;
-            TakeDamage.ModifyInitialDamageNoAttackerActions += DisableBandProc;
+            TakeDamage.ModifyInitialDamageActions += ApplyProjectileRainForce;
+            TakeDamage.ModifyInitialDamageActions += ApplyAntiFlyingForce;
+            TakeDamage.ModifyInitialDamageActions += DisableBandProc;
 
-            OnHitEnemy.OnHitNoAttackerActions += ApplyInterruptOnHit;
+            SneedHooks.ProcessHitEnemy.OnHitActions += ApplyInterruptOnHit;
 
-            OnHitEnemy.OnHitAttackerActions += ApplyCrocoBlight;
-            OnHitEnemy.OnHitAttackerActions += ApplyCrocoPoison;
+            SneedHooks.ProcessHitEnemy.OnHitAttackerActions += ApplyCrocoBlight;
+            SneedHooks.ProcessHitEnemy.OnHitAttackerActions += ApplyCrocoPoison;
 
-            OnHitEnemy.OnHitNoAttackerActions += ApplySlow50For5s;
+            SneedHooks.ProcessHitEnemy.OnHitActions += ApplySlow50For5s;
 
-            OnHitEnemy.OnHitAttackerActions += ApplySawBarrierOnHit;
-            OnHitEnemy.OnHitAttackerActions += ApplyCaptainTaserSource;
+            SneedHooks.ProcessHitEnemy.OnHitAttackerActions += ApplySawBarrierOnHit;
+            SneedHooks.ProcessHitEnemy.OnHitAttackerActions += ApplyCaptainTaserSource;
 
             TakeDamage.OnDamageTakenAttackerActions += ApplyAlwaysIgnite;
             SetupSweetSpotModifier();

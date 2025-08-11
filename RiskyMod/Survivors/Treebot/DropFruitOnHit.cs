@@ -18,7 +18,7 @@ namespace RiskyMod.Survivors.Treebot
 
             fruitEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Treebot/TreebotFruitDeathEffect.prefab").WaitForCompletion();
             fruitPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Treebot/TreebotFruitPack.prefab").WaitForCompletion();
-            OnHitEnemy.OnHitAttackerActions += FruitOnHit;
+            SneedHooks.ProcessHitEnemy.OnHitAttackerActions += FruitOnHit;
         }
 
         private static void FruitOnHit(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)

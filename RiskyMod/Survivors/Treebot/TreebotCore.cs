@@ -74,7 +74,7 @@ namespace RiskyMod.Survivors.Treebot
                 new DropFruitOnHit();
 
                 RecalculateStatsAPI.GetStatCoefficients += FruitBuff;
-                SharedHooks.OnHitEnemy.OnHitAttackerActions += FruitHealOnHit;
+                SneedHooks.ProcessHitEnemy.OnHitAttackerActions += FruitHealOnHit;
 
                 //Fruit on-death nullref is located in Fixes section
             }

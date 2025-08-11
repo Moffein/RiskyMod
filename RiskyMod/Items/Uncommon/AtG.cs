@@ -110,7 +110,7 @@ namespace RiskyMod.Items.Uncommon
 				}
 			};
 
-			if (useOrb) SharedHooks.OnHitEnemy.OnHitAttackerInventoryActions += AtGOrb;
+			if (useOrb) SneedHooks.ProcessHitEnemy.OnHitAttackerActions += AtGOrb;
 
 			if (RiskyMod.disableProcChains)
 			{
@@ -126,10 +126,11 @@ namespace RiskyMod.Items.Uncommon
 			}
 		}
 
-		private static void AtGOrb(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody, Inventory attackerInventory)
+		private static void AtGOrb(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
 		{
-			if (!damageInfo.procChainMask.HasProc(ProcType.Missile))
+			if (!damageInfo.procChainMask.HasProc(ProcType.Missile) && attackerBody.inventory)
             {
+				Inventory attackerInventory = attackerBody.inventory;
 				//Only players fire orbs. Enemies fire physical missiles so that you can evade them by using cover.
 				//Based off of Plasma Shrimp code
 				if (attackerBody.teamComponent && attackerBody.teamComponent.teamIndex == TeamIndex.Player)

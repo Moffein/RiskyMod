@@ -20,14 +20,14 @@ namespace RiskyMod.SharedHooks
         public delegate void OnHpLostAttacker(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory inventory, float hpLost);
         public static OnHpLostAttacker OnHpLostAttackerActions;
 
-        public delegate void ModifyInitialDamageNoAttacker(DamageInfo damageInfo, HealthComponent self);
-        public static ModifyInitialDamageNoAttacker ModifyInitialDamageNoAttackerActions;
-
-        public delegate void ModifyInitialDamage(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody);
+        public delegate void ModifyInitialDamage(DamageInfo damageInfo, HealthComponent self);
         public static ModifyInitialDamage ModifyInitialDamageActions;
 
-        public delegate void ModifyInitialDamageInventory(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory attackerInventory);
-        public static ModifyInitialDamageInventory ModifyInitialDamageInventoryActions;
+        public delegate void ModifyInitialDamageAttacker(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody);
+        public static ModifyInitialDamageAttacker ModifyInitialDamageAttackerActions;
+
+        public delegate void ModifyInitialDamageAttackerInventory(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody, Inventory attackerInventory);
+        public static ModifyInitialDamageAttackerInventory ModifyInitialDamageAttackerInventoryActions;
 
         public delegate void OnDamageTaken(DamageInfo damageInfo, HealthComponent self);
         public static OnDamageTaken OnDamageTakenActions;
@@ -58,14 +58,16 @@ namespace RiskyMod.SharedHooks
         public static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamageProcess orig, HealthComponent self, DamageInfo damageInfo)
         {
             float oldHP = self.combinedHealth;
-            CharacterBody attackerBody = damageInfo.attacker ? damageInfo.attacker.GetComponent<CharacterBody>() : null;
-            Inventory attackerInventory = attackerBody ? attackerBody.inventory : null;
+            CharacterBody attackerBody = null;
+            if (damageInfo.attacker) attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+            Inventory attackerInventory = null;
+            if (attackerBody) attackerInventory = attackerBody.inventory;
 
-            ModifyInitialDamageNoAttackerActions?.Invoke(damageInfo, self);
+            ModifyInitialDamageActions?.Invoke(damageInfo, self);
             if (attackerBody)
             {
-                ModifyInitialDamageActions?.Invoke(damageInfo, self, attackerBody);
-                if (attackerInventory) ModifyInitialDamageInventoryActions?.Invoke(damageInfo, self, attackerBody, attackerInventory);
+                ModifyInitialDamageAttackerActions?.Invoke(damageInfo, self, attackerBody);
+                if (attackerInventory) ModifyInitialDamageAttackerInventoryActions?.Invoke(damageInfo, self, attackerBody, attackerInventory);
             }
 
             orig(self, damageInfo);

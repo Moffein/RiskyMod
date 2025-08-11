@@ -63,7 +63,7 @@ namespace RiskyMod.Items.Uncommon
 
             if (weakToMithrix)
             {
-                SharedHooks.TakeDamage.ModifyInitialDamageActions += WeakToMithrixHook;
+                SharedHooks.TakeDamage.ModifyInitialDamageAttackerActions += WeakToMithrixHook;
             }
         }
 

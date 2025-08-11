@@ -15,7 +15,7 @@ namespace RiskyMod.Allies
         public SuperAttackResist()
         {
             if (!enabled) return;
-            TakeDamage.ModifyInitialDamageNoAttackerActions += AddResist;
+            TakeDamage.ModifyInitialDamageActions += AddResist;
             RoR2Application.onLoad += CheckRegigigas;
         }
 
@@ -24,7 +24,7 @@ namespace RiskyMod.Allies
         {
             //RegigigasPlayerBody, not necessary
             regiBody = BodyCatalog.FindBodyIndex("RegigigasBody");
-            if (regiBody != BodyIndex.None) TakeDamage.ModifyInitialDamageActions += AddRegiResist;
+            if (regiBody != BodyIndex.None) TakeDamage.ModifyInitialDamageAttackerActions += AddRegiResist;
         }
 
         private static void AddRegiResist(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)

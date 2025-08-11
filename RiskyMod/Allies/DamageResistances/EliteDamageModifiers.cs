@@ -10,7 +10,7 @@ namespace RiskyMod.Allies
         public EliteDamageModifiers()
         {
             if (!enabled) return;
-            TakeDamage.ModifyInitialDamageActions += AddModifiers;
+            TakeDamage.ModifyInitialDamageAttackerActions += AddModifiers;
         }
         private static void AddModifiers(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
         {

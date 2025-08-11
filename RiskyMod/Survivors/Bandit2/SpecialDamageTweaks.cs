@@ -18,12 +18,12 @@ namespace RiskyMod.Survivors.Bandit2
         private static GameObject skullEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/Bandit2KillEffect.prefab").WaitForCompletion();
         public SpecialDamageTweaks()
         {
-            OnHitEnemy.OnHitNoAttackerActions += ApplyBuff;
-            TakeDamage.ModifyInitialDamageNoAttackerActions += RackEmUpBonus;
+            SneedHooks.ProcessHitEnemy.OnHitActions += ApplyBuff;
+            TakeDamage.ModifyInitialDamageActions += RackEmUpBonus;
 
             //Standoff
             On.RoR2.GlobalEventManager.OnCharacterDeath += ProcStandoffOnKill;
-            OnHitEnemy.PreOnHitAttackerActions += AddStandoffAssist;
+            SneedHooks.ProcessHitEnemy.PreOnHitAttackerActions += AddStandoffAssist;
             AssistManager.AssistManager.HandleDirectAssistActions += HandleStandoffAssist;
         }
 

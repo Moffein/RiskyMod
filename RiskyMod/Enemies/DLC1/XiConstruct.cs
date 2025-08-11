@@ -1,5 +1,7 @@
 ﻿using RiskyMod.SharedHooks;
 using RoR2;
+using SneedHooks;
+using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
@@ -19,7 +21,14 @@ namespace RiskyMod.Enemies.DLC1
             GameObject enemyObject = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MajorAndMinorConstruct/MegaConstructBody.prefab").WaitForCompletion();
             VulnerableDebuff = SneedUtils.SneedUtils.CreateBuffDef("RiskyModXiConstructVulnerableDebuff", false, false, false, new Color(0.9f * 140f / 255f, 0.9f * 185f / 255f, 0.9f * 191f / 255f), sourceBuff.iconSprite);
 
-            ModifyFinalDamage.ModifyFinalDamageActions += VulnerableDebuffAction;
+            if (SoftDependencies.LinearDamageLoaded)
+            {
+                SneedHooks.ModifyFinalDamage.ModifyFinalDamageActions += ModifyfinalDamage_Additive;
+            }
+            else
+            {
+                SneedHooks.ModifyFinalDamage.ModifyFinalDamageActions += ModifyfinalDamage;
+            }
 
             On.EntityStates.MajorConstruct.Weapon.ChargeLaser.OnEnter += (orig, self) =>
             {
@@ -47,13 +56,23 @@ namespace RiskyMod.Enemies.DLC1
             };
         }
 
-        private static void VulnerableDebuffAction(DamageMult damageMult, DamageInfo damageInfo,
-            HealthComponent victim, CharacterBody victimBody,
-            CharacterBody attackerBody, Inventory attackerInventory)
+        private void ModifyfinalDamage(ModifyFinalDamage.DamageModifierArgs damageModifierArgs, DamageInfo damageInfo, HealthComponent victim, CharacterBody victimBody)
         {
             if (victimBody.HasBuff(VulnerableDebuff))
             {
-                damageMult.damageMult += 0.5f;
+                damageModifierArgs.damageMultFinal *= 1.5f;
+                if (damageInfo.damageColorIndex == DamageColorIndex.Default)
+                {
+                    damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
+                }
+            }
+        }
+
+        private void ModifyfinalDamage_Additive(ModifyFinalDamage.DamageModifierArgs damageModifierArgs, DamageInfo damageInfo, HealthComponent victim, CharacterBody victimBody)
+        {
+            if (victimBody.HasBuff(VulnerableDebuff))
+            {
+                damageModifierArgs.damageMultAdd += 0.5f;
                 if (damageInfo.damageColorIndex == DamageColorIndex.Default)
                 {
                     damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;

@@ -33,18 +33,18 @@ namespace RiskyMod.Items.Uncommon
 				}
 			};
 
-			OnHitEnemy.OnHitAttackerInventoryActions += HealOnHitInitialDamage;
+			SneedHooks.ProcessHitEnemy.OnHitAttackerActions += HealOnHitInitialDamage;
 		}
 		private static void ModifyItem()
 		{
 			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Seed);
 		}
 
-		private static void HealOnHitInitialDamage(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody, Inventory attackerInventory)
+		private static void HealOnHitInitialDamage(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
         {
-			if (!damageInfo.procChainMask.HasProc(ProcType.HealOnHit))
+			if (!damageInfo.procChainMask.HasProc(ProcType.HealOnHit) && attackerBody.inventory)
 			{
-				int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.Seed);
+				int itemCount = attackerBody.inventory.GetItemCount(RoR2Content.Items.Seed);
 				if (itemCount > 0)
 				{
 					float toHeal = 1f + damageInfo.damage * (0.01f + 0.01f * itemCount) * damageInfo.procCoefficient;
@@ -57,7 +57,6 @@ namespace RiskyMod.Items.Uncommon
 
 					damageInfo.procChainMask.AddProc(ProcType.HealOnHit);
 					attackerBody.healthComponent.Heal(toHeal, damageInfo.procChainMask);
-
 				}
 			}
         }

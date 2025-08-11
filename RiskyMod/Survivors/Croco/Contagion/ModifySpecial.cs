@@ -31,7 +31,7 @@ namespace RiskyMod.Survivors.Croco.Contagion
         private void SetupDamageType()
         {
             EpidemicDamage = DamageAPI.ReserveDamageType();
-            OnHitEnemy.OnHitAttackerActions += ApplyEpidemic;
+            SneedHooks.ProcessHitEnemy.OnHitAttackerActions += ApplyEpidemic;
 
             EpidemicDebuff = SneedUtils.SneedUtils.CreateBuffDef(
                 "RiskyMod_EpidemicDebuff",

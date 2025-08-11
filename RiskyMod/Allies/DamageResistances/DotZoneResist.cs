@@ -17,7 +17,7 @@ namespace RiskyMod.Allies
             dotZoneDamage = DamageAPI.ReserveDamageType();
 
             if (!enabled) return;
-            TakeDamage.ModifyInitialDamageNoAttackerActions += AddResist;
+            TakeDamage.ModifyInitialDamageActions += AddResist;
         }
 
         public static void AddDotZoneDamageType(GameObject projectile)

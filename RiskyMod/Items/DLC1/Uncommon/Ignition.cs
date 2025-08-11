@@ -11,12 +11,12 @@ namespace RiskyMod.Items.DLC1.Uncommon
         {
             if (!enabled) return;
             ItemsCore.ModifyItemDefActions += ModifyItem;
-            SharedHooks.OnHitEnemy.OnHitAttackerInventoryActions += BurnChance;
+            SneedHooks.ProcessHitEnemy.OnHitAttackerActions += BurnChance;
         }
 
-        private void BurnChance(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody, Inventory attackerInventory)
+        private void BurnChance(DamageInfo damageInfo, CharacterBody victimBody, CharacterBody attackerBody)
         {
-            if (attackerInventory.GetItemCount(DLC1Content.Items.StrengthenBurn) > 0 && Util.CheckRoll(5f * damageInfo.procCoefficient, attackerBody.master))
+            if (attackerBody.inventory && attackerBody.inventory.GetItemCount(DLC1Content.Items.StrengthenBurn) > 0 && Util.CheckRoll(5f * damageInfo.procCoefficient, attackerBody.master))
             {
                 InflictDotInfo inflictDotInfo = new InflictDotInfo
                 {
@@ -26,7 +26,7 @@ namespace RiskyMod.Items.DLC1.Uncommon
                     dotIndex = DotController.DotIndex.Burn,
                     damageMultiplier = 1f
                 };
-                StrengthenBurnUtils.CheckDotForUpgrade(attackerInventory, ref inflictDotInfo);
+                StrengthenBurnUtils.CheckDotForUpgrade(attackerBody.inventory, ref inflictDotInfo);
                 DotController.InflictDot(ref inflictDotInfo);
             }
         }

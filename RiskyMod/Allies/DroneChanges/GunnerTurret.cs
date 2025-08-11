@@ -71,7 +71,7 @@ namespace RiskyMod.Allies.DroneChanges
 
             if (weakToMithrix)
             {
-                SharedHooks.TakeDamage.ModifyInitialDamageActions += WeakToMithrixHook;
+                SharedHooks.TakeDamage.ModifyInitialDamageAttackerActions += WeakToMithrixHook;
             }
         }
 

@@ -76,8 +76,10 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.TrueOSP", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.ArtificerPrimaryRework", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("Nuxlar.EclipseRevamped", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.RiskyLives.LinearDamage", BepInDependency.DependencyFlags.SoftDependency)]
     #endregion
 
+    [BepInDependency("com.RiskyLives.SneedHooks")]
     [BepInDependency(R2API.R2API.PluginGUID)]
     [BepInDependency(R2API.RecalculateStatsAPI.PluginGUID)]
     [BepInDependency(R2API.DamageAPI.PluginGUID)]
@@ -89,7 +91,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RiskyFixes")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.6.2")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.7.0")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -169,6 +171,7 @@ namespace RiskyMod
         //This isn't all the softdependency checks. Some still are in CheckDependencies, this is just a quick fix.
         private void InitDependencies()
         {
+            SoftDependencies.LinearDamageLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskyLives.LinearDamage");
             SoftDependencies.EclipseRevampedLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("Nuxlar.EclipseRevamped");
             SoftDependencies.RiskOfOptionsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions");
             SoftDependencies.ArtifactOfPotentialLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("zombieseatflesh7.ArtifactOfPotential");
@@ -333,7 +336,6 @@ namespace RiskyMod
         
         private void AddHooks()
         {
-            On.RoR2.GlobalEventManager.ProcessHitEnemy += OnHitEnemy.GlobalEventManager_OnHitEnemy;
             RecalculateStatsAPI.GetStatCoefficients += GetStatCoefficients.RecalculateStatsAPI_GetStatCoefficients;
             On.RoR2.CharacterBody.RecalculateStats += RecalculateStats.CharacterBody_RecalculateStats;
             On.RoR2.HealthComponent.TakeDamageProcess += TakeDamage.HealthComponent_TakeDamage;
@@ -341,8 +343,6 @@ namespace RiskyMod
             On.RoR2.GlobalEventManager.OnHitAllProcess += OnHitAll.GlobalEventManager_OnHitAll;
             On.RoR2.HealthComponent.UpdateLastHitTime += HealthComponent_UpdateLastHitTime.UpdateLastHitTime;
             SharedHooks.TakeDamage.OnDamageTakenAttackerActions += TakeDamage.DistractOnHit;
-
-            new ModifyFinalDamage();
         }
     }
 }
