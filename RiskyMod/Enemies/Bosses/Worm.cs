@@ -15,17 +15,22 @@ namespace RiskyMod.Enemies.Bosses
         public static bool enabled = true;
 
         public static GameObject MagmaWormProjectile;
-        public static GameObject ElectricWormProjectile;
+        //public static GameObject ElectricWormProjectile;
         public static GameObject MagmaWormProjectileZone;
-        public static GameObject ElectricWormProjectileZone;
+        //public static GameObject ElectricWormProjectileZone;
 
         public Worm()
         {
             if (!enabled) return;
             //ProjectileSetup();
             //AlwaysFireMeatballs(); //Laggy
+            ProjectileSetup();
 
             GameObject magmaWorm = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MagmaWorm/MagmaWormBody.prefab").WaitForCompletion();
+            CharacterBody magmaWormBody = magmaWorm.GetComponent<CharacterBody>();
+            magmaWormBody.baseDamage = 15f;
+            magmaWormBody.levelDamage = 0.2f * magmaWormBody.baseDamage;
+
             GameObject electricWorm = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ElectricWorm/ElectricWormBody.prefab").WaitForCompletion();
 
             SneedUtils.SneedUtils.SetPrioritizePlayers(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MagmaWorm/MagmaWormMaster.prefab").WaitForCompletion());
@@ -35,8 +40,20 @@ namespace RiskyMod.Enemies.Bosses
             ReduceFollowDelay(electricWorm);
         }
 
-        //This causes the ground to constantly be filled with fire. Might not be suitable.
         private void ProjectileSetup()
+        {
+            MagmaWormProjectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MagmaWorm/MagmaOrbProjectile.prefab").WaitForCompletion().InstantiateClone("RiskyMod_MagmaWormProjectile", true);
+            Content.Content.projectilePrefabs.Add(MagmaWormProjectile);
+            ProjectileImpactExplosion pie = MagmaWormProjectile.GetComponent<ProjectileImpactExplosion>();
+            pie.falloffModel = BlastAttack.FalloffModel.None;
+
+            GameObject magmaWormPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MagmaWorm/MagmaWormBody.prefab").WaitForCompletion();
+            WormBodyPositions2 magmaWormController = magmaWormPrefab.GetComponent<WormBodyPositions2>();
+            magmaWormController.meatballProjectile = MagmaWormProjectile;
+        }
+
+        //This causes the ground to constantly be filled with fire. Might not be suitable.
+        private void ProjectileSetupUnused()
         {
             MagmaWormProjectileZone = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/Molotov/MolotovProjectileDotZone.prefab").WaitForCompletion().InstantiateClone("RiskyMod_MagmaWormProjectileZone", true);
             Content.Content.projectilePrefabs.Add(MagmaWormProjectileZone);

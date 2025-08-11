@@ -48,6 +48,20 @@ namespace RiskyMod
         public static bool MoreStatsLoaded = false;
         public static bool EclipseRevampedLoaded = false;
 
+        public static void LinearDamage_DisableWatch()
+        {
+            if (LinearDamageLoaded) LinearDamage_DisableWatchInternal();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static void LinearDamage_DisableWatchInternal()
+        {
+            if (LinearDamage.Tweaks.Items.DelicateWatch.Instance != null && LinearDamage.Tweaks.Items.DelicateWatch.Instance.Enabled.Value)
+            {
+                LinearDamage.Tweaks.Items.DelicateWatch.Instance.RemoveChanges();
+            }
+        }
+
         public static bool IsPotentialArtifactActive()
         {
             bool isActive = false;

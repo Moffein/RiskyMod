@@ -111,6 +111,9 @@
     <Reference Include="LegacyResourcesAPI">
       <HintPath>libs\LegacyResourcesAPI.dll</HintPath>
     </Reference>
+    <Reference Include="LinearDamage">
+      <HintPath>libs\SoftDependencies\LinearDamage.dll</HintPath>
+    </Reference>
     <Reference Include="MMHOOK_RoR2">
       <HintPath>libs\BepInEx\MMHOOK_RoR2.dll</HintPath>
     </Reference>

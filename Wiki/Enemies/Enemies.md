@@ -25,6 +25,8 @@
 
 - **(RiskyTweaks)** No longer takes fall damage.
 - Prioritizes targeting players.
+- Increased health from 1000 -> 1200 (Halfway between current and the old Anniversary Update value of 1400)
+- Has 50% resistance to Move Speed and Attack Speed reductions.
 	
 ## Voidling
 
@@ -52,7 +54,12 @@
 	- Jelly Barrage and Tracking Bomb now use sweetspot falloff.
 	- Increased maximum falloff damage from 25% -> 50%
 	
-- Magma Worm/Overloading Worm
+- Magma Worm
+	- Prioritizes targeting players.
+	- Increased base damage from 10 -> 15
+	- Removed falloff from fireballs.
+	
+- Overloading Worm
 	- Prioritizes targeting players.
 	
 - Grovetender
@@ -109,6 +116,7 @@
 	- Stun/Shock now cancels attacks.
 	
 - Bighorn Bison
+	- Increased base damage from 12 -> 15
 	- Increased speed while charging.
 	- Lower self-stun duration after charging.
 	

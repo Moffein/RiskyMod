@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using RoR2;
+using UnityEngine.AddressableAssets;
 
 namespace RiskyMod.Enemies.Mobs
 {
@@ -14,6 +15,9 @@ namespace RiskyMod.Enemies.Mobs
         public Bison()
         {
             if (!enabled) return;
+            CharacterBody cb = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bison/BisonBody.prefab").WaitForCompletion().GetComponent<CharacterBody>();
+            cb.baseDamage = 15f;
+            cb.levelDamage = cb.baseDamage * 0.2f;
 
             //Disble snowy material on non snowy stages
             IL.EntityStates.Bison.SpawnState.OnEnter += (il) =>

@@ -597,6 +597,8 @@ namespace RiskyMod
             MithrixCore.enabled = MonsterCfg.Bind(monsterMithrixString, "Enable Changes", true, "Enable changes to this monster.").Value;
             MithrixTargetPrioritization.enabled = MonsterCfg.Bind(monsterMithrixString, "Prioritize Players", true, "Mithrix always tries to prioritize targeting players when possible. May result in him completely ignoring Engi Turrets.").Value;
             MithrixFreezeImmune.enabled = MonsterCfg.Bind(monsterMithrixString, "Freeze Immunity", false, "Mithrix cannot be frozen.").Value;
+            MithrixHealthBuff.enabled = MonsterCfg.Bind(monsterMithrixString, "Health Buff", true, "Buffs Mithrix's health.").Value;
+            MithrixDebuffResist.enabled = MonsterCfg.Bind(monsterMithrixString, "Debuff Resistance", true, "Attack Speed and Move Speed reduction are less effective against Mithrix.").Value;
 
             VoidlingCore.enabled = MonsterCfg.Bind(monsterVoidlingString, "Enable Changes", true, "Enable changes to this monster.").Value;
             VoidlingStats.modifyHP = MonsterCfg.Bind(monsterVoidlingString, "Reduce HP", true, "Reduces Voidling HP.").Value;

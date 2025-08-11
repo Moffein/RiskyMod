@@ -18,6 +18,7 @@ namespace RiskyMod.Enemies.Mithrix
             if (!enabled) return;
             new MithrixTargetPrioritization();
             new MithrixFreezeImmune();
+            new MithrixHealthBuff();
         }
 
         private void OnLoad()

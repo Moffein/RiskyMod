@@ -18,6 +18,7 @@ namespace RiskyMod.Items.DLC1.Common
         {
             if (!enabled) return;
 
+            RoR2Application.onLoad += SoftDependencies.LinearDamage_DisableWatch;
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
             //This is purely cosmetic. The actual damage boost is strictly tied to the Out of Danger stat, rather than the buff itself.
