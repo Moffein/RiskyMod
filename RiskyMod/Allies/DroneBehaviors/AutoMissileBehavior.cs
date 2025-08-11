@@ -30,7 +30,7 @@ namespace RiskyMod.Allies.DroneBehaviors
         {
             characterBody = base.GetComponent<CharacterBody>();
             skillLocator = base.GetComponent<SkillLocator>();
-            if (!characterBody || !skillLocator)
+            if (!characterBody || !skillLocator || (characterBody && characterBody.bodyIndex != BodyCatalog.FindBodyIndex("MissileDroneBody")))
             {
                 Destroy(this);
                 return;
