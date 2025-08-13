@@ -102,6 +102,8 @@ namespace RiskyMod.Survivors.Croco.Contagion.Components
 
         public static void TriggerPoisonSpread(CharacterBody attackerBody, CharacterBody victimBody, DamageAPI.ModdedDamageType damageType, int stacks)
         {
+            if (!victimBody || !attackerBody) return;
+
             LightningOrb lightningOrb = new LightningOrb();
             lightningOrb.arrivalTime = OrbManager.instance.time + 0.4f;
             lightningOrb.bouncedObjects = new List<HealthComponent>();
