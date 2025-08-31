@@ -39,6 +39,7 @@ using RiskyMod.VoidFields;
 using UnityEngine.AddressableAssets;
 using RiskyMod.Enemies.DLC1.Voidling;
 using static Generics.Dynamics.RigReader;
+using RiskyMod.Enemies.Mithrix;
 
 namespace RiskyMod
 {
@@ -77,6 +78,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.ArtificerPrimaryRework", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("Nuxlar.EclipseRevamped", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RiskyLives.LinearDamage", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.RiskyLives.RiskyMithrix", BepInDependency.DependencyFlags.SoftDependency)]
     #endregion
 
     [BepInDependency("com.RiskyLives.SneedHooks")]
@@ -187,6 +189,7 @@ namespace RiskyMod
             SoftDependencies.SpikestripHeyImNoob = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.heyimnoob.NoopSpikestripContent");
             SoftDependencies.SpikestripPlasmaCore = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.plasmacore.PlasmaCoreSpikestripContent");
             SoftDependencies.MoreStatsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskOfBrainrot.MoreStats");
+            SoftDependencies.RiskyMithrixLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskyLives.RiskyMithrix");
         }
 
         private void CheckDependencies()
@@ -257,6 +260,16 @@ namespace RiskyMod
             Survivors.Mage.MageCore.modifyPlasmaBolt = Survivors.Mage.MageCore.modifyPlasmaBolt && !artificerPrimaryReworkLoaded;
 
             TeleExpandOnBossKill.enableDuringEclipse = TeleExpandOnBossKill.enableDuringEclipse || SoftDependencies.EclipseRevamped_CheckEclipse2Config();
+
+            if (SoftDependencies.RiskyMithrixLoaded)
+            {
+                Debug.Log("RiskyMod: Disabling Mithrix changes because RiskyMithrix is loaded.");
+                MithrixCore.enabled = false;
+                MithrixDebuffResist.enabled = false;
+                MithrixFreezeImmune.enabled = false;
+                MithrixHealthBuff.enabled = false;
+                MithrixTargetPrioritization.enabled = false;
+            }
         }
 
         private void CheckArenaLoaded(Stage obj)

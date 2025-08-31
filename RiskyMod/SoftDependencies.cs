@@ -47,6 +47,7 @@ namespace RiskyMod
 
         public static bool MoreStatsLoaded = false;
         public static bool EclipseRevampedLoaded = false;
+        public static bool RiskyMithrixLoaded = false;
 
         public static void LinearDamage_DisableWatch()
         {
