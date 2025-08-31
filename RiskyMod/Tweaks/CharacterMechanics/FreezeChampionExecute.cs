@@ -33,7 +33,8 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                 false,
                 true,
                 Color.white,
-                Content.Assets.BuffIcons.Freeze
+                Content.Assets.BuffIcons.Freeze,
+                true
                 );
 
             RecalculateStatsAPI.GetStatCoefficients += ApplySlow;

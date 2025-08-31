@@ -245,7 +245,7 @@ namespace SneedUtils
             (skillDef as UnityEngine.Object).name =skillDef.skillName;// "RiskyMod_" + 
         }
 
-        public static BuffDef CreateBuffDef(string name, bool canStack, bool isCooldown, bool isDebuff, Color color, Sprite iconSprite)
+        public static BuffDef CreateBuffDef(string name, bool canStack, bool isCooldown, bool isDebuff, Color color, Sprite iconSprite, bool blacklistFromNoxiousThorn = false)
         {
             BuffDef bd = ScriptableObject.CreateInstance<BuffDef>();
             bd.name = name;
@@ -254,6 +254,10 @@ namespace SneedUtils
             bd.isDebuff = isDebuff;
             bd.buffColor = color;
             bd.iconSprite = iconSprite;
+            if (blacklistFromNoxiousThorn)
+            {
+                bd.flags |= BuffDef.Flags.ExcludeFromNoxiousThorns;
+            }
             Content.buffDefs.Add(bd);
 
             (bd as UnityEngine.Object).name = bd.name;

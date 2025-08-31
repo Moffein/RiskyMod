@@ -39,7 +39,8 @@ namespace RiskyMod.Survivors.Croco.Contagion
                 false,
                 true,
                 new Color(243f / 255f, 202f / 255f, 107f / 255f),
-                Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Treebot/bdEntangle.asset").WaitForCompletion().iconSprite
+                Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Treebot/bdEntangle.asset").WaitForCompletion().iconSprite,
+                true
                 );
         }
 
