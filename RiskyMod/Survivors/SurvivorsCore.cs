@@ -9,9 +9,10 @@ using RiskyMod.Survivors.Huntress;
 using RiskyMod.Survivors.Loader;
 using RiskyMod.Survivors.Mage;
 using RiskyMod.Survivors.Merc;
-using RiskyMod.Survivors.Seeker;
+using RiskyMod.Survivors.DLC2.Seeker;
 using RiskyMod.Survivors.Toolbot;
 using RiskyMod.Survivors.Treebot;
+using RiskyMod.Survivors.DLC2.FalseSon;
 
 namespace RiskyMod.Survivors
 {
@@ -35,6 +36,7 @@ namespace RiskyMod.Survivors
             new MercCore();
             new VoidFiendCore();
             new SeekerCore();
+            new FalseSonCore();
         }
     }
 }
