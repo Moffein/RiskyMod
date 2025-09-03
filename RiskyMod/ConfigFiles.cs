@@ -54,8 +54,10 @@ using RiskyMod.Enemies.DLC2;
 using RiskyMod.Survivors.Croco.Tweaks;
 using RiskyMod.Survivors.Croco.Contagion;
 using RiskyMod.Items.DLC2;
-using RiskyMod.Survivors.Seeker;
 using RiskyMod.Tweaks.Interactables;
+using RiskyMod.Survivors.DLC2.Seeker;
+using RiskyMod.Survivors.DLC2;
+using RiskyMod.Survivors.DLC2.FalseSon;
 
 namespace RiskyMod
 {
@@ -107,6 +109,7 @@ namespace RiskyMod
         private const string railgunnerString = "Survivors: Railgunner";
         private const string voidFiendString = "Survivors: Void Fiend";
         private const string seekerString = "Survivors: Seeker";
+        private const string falseSonString = "Survivors: False Son";
 
         private const string monsterString = "Monsters";
         private const string monsterGeneralString = "General";
@@ -570,6 +573,12 @@ namespace RiskyMod
             SeekerCore.noSelfRevive = SurvivorCfg.Bind(seekerString, "No Self Revive", true, "Seeker no longer gains a self-revive at 7 meditate stacks.").Value;
             SeekerCore.unseenHandScalesDamage = SurvivorCfg.Bind(seekerString, "Unseen Hand scales damage.", true, "Unseen Hand scales damage instead of healing.").Value;
 
+            FalseSonCore.enabled = SurvivorCfg.Bind(falseSonString, "Enable Changes", true, "Enable changes to this survivor.").Value;
+            FalseSonCore.modifyBaseStats = SurvivorCfg.Bind(falseSonString, "Modify Base Stats", true, "Enable base stat changes for this survivor.").Value;
+            FalseSonCore.increaseGrowthCost = SurvivorCfg.Bind(falseSonString, "Increase Growth Cost", true, "Increases health required per growth stack to compensate for the health item buffs in this mod.").Value;
+            FalseSonCore.modifyPassive = SurvivorCfg.Bind(falseSonString, "Modify Passive", true, "Increases passive armor and reduces passive health regen.").Value;
+            FalseSonCore.buffLaser = SurvivorCfg.Bind(falseSonString, "Laser of the Father Changes", true, "Enable changes to this skill.").Value;
+
             if (!SurvivorsCore.enabled)
             {
                 Bandit2Core.enabled = false;
@@ -585,6 +594,7 @@ namespace RiskyMod
                 ToolbotCore.enabled = false;
                 TreebotCore.enabled = false;
                 SeekerCore.enabled = false;
+                FalseSonCore.enabled = false;
             }
         }
 

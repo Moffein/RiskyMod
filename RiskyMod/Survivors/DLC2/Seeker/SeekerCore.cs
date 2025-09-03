@@ -8,7 +8,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace RiskyMod.Survivors.Seeker
+namespace RiskyMod.Survivors.DLC2.Seeker
 {
     public class SeekerCore
     {
@@ -86,7 +86,7 @@ namespace RiskyMod.Survivors.Seeker
                     float mult = 1f;
                     if (self.characterBody)
                     {
-                        mult += (float)self.characterBody.GetBuffCount(DLC2Content.Buffs.ChakraBuff) / 6f;
+                        mult += self.characterBody.GetBuffCount(DLC2Content.Buffs.ChakraBuff) / 6f;
                     }
                     return damage * mult;
                 });
