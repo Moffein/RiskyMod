@@ -21,7 +21,7 @@
 	
 	"ITEM_SLOWONHIT_DESC_RISKYMOD": "Causa lentidão</style> nos inimigos, ao golpear, de <style=cIsUtility>-80% de velocidade de movimento</style> e <style=cIsDamage>-20% de velocidade de ataque</style> por <style=cIsUtility>2 s</style> <style=cStack>(+2 s por acúmulo)</style>.",
 
-	"ITEM_SEED_DESC_RISKYMOD": "Causar danos <style=cIsHealing>cura</style> <style=cIsHealing>1</style> e um adicional de <style=cIsHealing>2% <style=cStack>(+1% por acúmulo)</style></style> do <style=cIsDamage>dano causado</style>.",
+	"ITEM_SEED_DESC_RISKYMOD": "Causar danos <style=cIsHealing>cura</style> <style=cIsHealing>1</style> e um adicional de <style=cIsHealing>1% <style=cStack>(+1% por acúmulo)</style></style> do <style=cIsDamage>dano causado</style>.",
 
 	"ITEM_MISSILE_DESC_RISKYMOD": "<style=cIsDamage>10%</style> de chance de disparar um míssil que causa <style=cIsDamage>300%</style> <style=cStack>(+210% por acúmulo)</style> de dano TOTAL.",
 

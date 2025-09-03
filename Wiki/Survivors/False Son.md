@@ -21,6 +21,7 @@ Fixing up his weird proc coefficients and nerfing his survivability a bit.
 
 - Club of the Foraken
 	- **(RiskyTweaks)** Airslam proc coefficient reduced from 1.5 -> 1.0
+	- **(RiskyTweaks)** Removed hidden non-scaling cooldown on the slam.
 
 ## Specials
 

@@ -21,7 +21,7 @@
 	
 	"ITEM_SLOWONHIT_DESC_RISKYMOD": "命中敌人时有几率使其<style=cIsUtility>减速</style><style=cIsUtility>80%</style>并降低<style=clsDamage>20%攻击速度</style>，持续<style=cIsUtility>2秒</style><style=cStack>（每层增加2）</style>。",
 	
-	"ITEM_SEED_DESC_RISKYMOD": "造成伤害时会<style=cIsHealing>治疗</style>自身<style=cIsHealing>1点</style>生命值并额外恢复<style=clsDamage>造成伤害</style>的<style=clsHealing>2%<style=cStack>（每层增加1%）</style>的生命值</style>。",
+	"ITEM_SEED_DESC_RISKYMOD": "造成伤害时会<style=cIsHealing>治疗</style>自身<style=cIsHealing>1点</style>生命值并额外恢复<style=clsDamage>造成伤害</style>的<style=clsHealing>1%<style=cStack>（每层增加1%）</style>的生命值</style>。",
 	
 	"ITEM_MISSILE_DESC_RISKYMOD": "有<style=cIsDamage>10%</style>几率发射一枚导弹，造成<style=cIsDamage>300%</style><style=cStack>（每层增加210%）</style>的总伤害。",
 	

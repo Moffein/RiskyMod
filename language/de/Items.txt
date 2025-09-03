@@ -21,7 +21,7 @@
 	
 	"ITEM_SLOWONHIT_DESC_RISKYMOD": "<style=cIsUtility>Verlangsame</style> Gegner bei einem Treffer für <style=cIsUtility>2s</style> <style=cStack>(+2s pro Stapel)</style> um <style=cIsUtility>-80% Bewegungsgeschwindigkeit</style> und <style=cIsDamage>-20% Angriffsgeschwindigkeit</style>.",
 	
-	"ITEM_SEED_DESC_RISKYMOD": "Zugefügter Schaden <style=cIsHealing>heilt</style> dich um <style=cIsHealing>1</style> <style=cIsHealing>Gesundheit</style> und zusätzliche <style=cIsHealing>2% </style> <style=cStack>(+1% pro Stapel)</style> des <style=cIsDamage>zugefügten Schadens</style>.",
+	"ITEM_SEED_DESC_RISKYMOD": "Zugefügter Schaden <style=cIsHealing>heilt</style> dich um <style=cIsHealing>1</style> <style=cIsHealing>Gesundheit</style> und zusätzliche <style=cIsHealing>1% </style> <style=cStack>(+1% pro Stapel)</style> des <style=cIsDamage>zugefügten Schadens</style>.",
 	
 	"ITEM_MISSILE_DESC_RISKYMOD": "<style=cIsDamage>10%</style> Wahrscheinlichkeit, eine Rakete abzufeuern, die <style=cIsDamage>300%</style> <style=cStack>(+210% pro Stapel)</style> GESAMTSCHADEN verursacht.",
 	

@@ -47,7 +47,7 @@ namespace RiskyMod.Items.Uncommon
 				int itemCount = attackerBody.inventory.GetItemCount(RoR2Content.Items.Seed);
 				if (itemCount > 0)
 				{
-					float toHeal = 1f + damageInfo.damage * (0.01f + 0.01f * itemCount) * damageInfo.procCoefficient;
+					float toHeal = 1f + damageInfo.damage * (0.01f * itemCount) * damageInfo.procCoefficient;
 
 					//Ideally want to clamp this to their actual pre-hit health instead
 					if (victimBody.healthComponent)

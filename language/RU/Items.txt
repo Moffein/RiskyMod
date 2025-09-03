@@ -21,7 +21,7 @@
 	
 	"ITEM_SLOWONHIT_DESC_RISKYMOD": "<style=cIsUtility>Замедляет</style> врагов при попадании, снижая <style=cIsUtility>скорость их движения на 80%</style> и <style=cIsDamage>скорость атаки на 20%</style> на <style=cIsUtility>2 секунды</style> <style=cStack>(+2 секунды за шт.)</style>.",
 	
-	"ITEM_SEED_DESC_RISKYMOD": "Нанесение урона <style=cIsHealing>восстанавливает</style> <style=cIsHealing>1 единицу здоровья</style> плюс дополнительно <style=cIsHealing>2% <style=cStack>(+1% за шт.)</style></style> от <style=cIsDamage>нанесенного урона</style>.",
+	"ITEM_SEED_DESC_RISKYMOD": "Нанесение урона <style=cIsHealing>восстанавливает</style> <style=cIsHealing>1 единицу здоровья</style> плюс дополнительно <style=cIsHealing>1% <style=cStack>(+1% за шт.)</style></style> от <style=cIsDamage>нанесенного урона</style>.",
 	
 	"ITEM_MISSILE_DESC_RISKYMOD": "<style=cIsDamage>10%</style> вероятности выпустить ракету, наносящую <style=cIsDamage>300%</style> <style=cStack>(+210% за шт.)</style> ОБЩЕГО урона.",
 	

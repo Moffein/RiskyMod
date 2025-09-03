@@ -89,7 +89,7 @@ namespace RiskyMod.SharedHooks
                     Inventory inventory = self.body.inventory;
                     if (inventory)
                     {
-                        float totalHPLost = oldHP - self.combinedHealth;
+                        float totalHPLost = oldHP - Mathf.Max(self.combinedHealth, 0f);
                         if (totalHPLost > 0f)
                         {
                             if (attackerBody)
