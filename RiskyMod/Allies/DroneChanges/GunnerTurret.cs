@@ -107,11 +107,30 @@ namespace RiskyMod.Allies.DroneChanges
             ReadOnlyCollection<TeamComponent> teamMembers = TeamComponent.GetTeamMembers(TeamIndex.Player);
             foreach (TeamComponent tc in teamMembers)
             {
+                //Prioritize teleporting to TP, and don't teleport if it is already within the TP zone.
                 if (tc.body && tc.body.bodyIndex == gunnerTurretBodyIndex && tc.body.master && tc.body.master.minionOwnership && tc.body.master.minionOwnership.ownerMaster)
                 {
+                    Vector3? targetPosition = null;
+                    if (TeleporterInteraction.instance)
+                    {
+                        targetPosition = TeleporterInteraction.instance.transform.position;
+                        float baseRange = 90f;
+                        if (TeleporterInteraction.instance.holdoutZoneController)
+                        {
+                            baseRange = TeleporterInteraction.instance.holdoutZoneController.baseRadius;
+                        }
+
+                        if ((tc.body.corePosition - TeleporterInteraction.instance.transform.position).sqrMagnitude < baseRange * baseRange)
+                        {
+                            continue;
+                        }
+                    }
+
                     CharacterBody ownerBody = tc.body.master.minionOwnership.ownerMaster.GetBody();
                     if (ownerBody)
                     {
+                        if (targetPosition == null) targetPosition = ownerBody.corePosition;
+
                         //Copied from Chirr
                         SpawnCard spawnCard = ScriptableObject.CreateInstance<SpawnCard>();
                         spawnCard.hullSize = tc.body.hullClassification;
@@ -121,7 +140,7 @@ namespace RiskyMod.Allies.DroneChanges
                         GameObject teleportDestinationHelper = DirectorCore.instance.TrySpawnObject(new DirectorSpawnRequest(spawnCard, new DirectorPlacementRule
                         {
                             placementMode = DirectorPlacementRule.PlacementMode.Approximate,
-                            position = ownerBody.corePosition,
+                            position = targetPosition.Value,
                             minDistance = 5f,
                             maxDistance = 45f
                         }, RoR2Application.rng));
