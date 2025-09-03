@@ -93,16 +93,16 @@ namespace RiskyMod.Allies.DroneChanges
         private void HoldoutZoneController_OnEnable(On.RoR2.HoldoutZoneController.orig_OnEnable orig, HoldoutZoneController self)
         {
             orig(self);
-            TeleportTurretsToPlayer();
+            TeleportTurretsToPlayer(self);
         }
 
         private void TeleportTurretToMithrix(On.EntityStates.Missions.BrotherEncounter.Phase1.orig_OnEnter orig, EntityStates.Missions.BrotherEncounter.Phase1 self)
         {
             orig(self);
-            TeleportTurretsToPlayer();
+            TeleportTurretsToPlayer(null);
         }
 
-        public static void TeleportTurretsToPlayer()
+        public static void TeleportTurretsToPlayer(HoldoutZoneController holdout)
         {
             ReadOnlyCollection<TeamComponent> teamMembers = TeamComponent.GetTeamMembers(TeamIndex.Player);
             foreach (TeamComponent tc in teamMembers)
@@ -111,16 +111,12 @@ namespace RiskyMod.Allies.DroneChanges
                 if (tc.body && tc.body.bodyIndex == gunnerTurretBodyIndex && tc.body.master && tc.body.master.minionOwnership && tc.body.master.minionOwnership.ownerMaster)
                 {
                     Vector3? targetPosition = null;
-                    if (TeleporterInteraction.instance)
+                    if (holdout)
                     {
-                        targetPosition = TeleporterInteraction.instance.transform.position;
-                        float baseRange = 90f;
-                        if (TeleporterInteraction.instance.holdoutZoneController)
-                        {
-                            baseRange = TeleporterInteraction.instance.holdoutZoneController.baseRadius;
-                        }
+                        targetPosition = holdout.transform.position;
+                        float baseRange = holdout.baseRadius;
 
-                        if ((tc.body.corePosition - TeleporterInteraction.instance.transform.position).sqrMagnitude < baseRange * baseRange)
+                        if ((tc.body.corePosition - targetPosition.Value).sqrMagnitude < baseRange * baseRange)
                         {
                             continue;
                         }
