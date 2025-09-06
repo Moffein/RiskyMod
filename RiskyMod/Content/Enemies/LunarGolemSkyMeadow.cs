@@ -1,4 +1,5 @@
 ﻿using R2API;
+using RiskyMod.Content.Enemies.Components;
 using RiskyMod.Enemies;
 using RoR2;
 using RoR2.Navigation;
@@ -27,6 +28,7 @@ namespace RiskyMod.Content.Enemies
             dr.logUnlockableDef = null;
             Content.bodyPrefabs.Add(bodyObject);
             ModifyStats(bodyObject);
+            bodyObject.AddComponent<SwapToLunarTeam>();
 
             masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/LunarGolem/LunarGolemMaster.prefab").WaitForCompletion().InstantiateClone("RiskyMod_LunarGolemSkyMeadowMaster", true);
             masterObject.GetComponent<CharacterMaster>().bodyPrefab = bodyObject;
