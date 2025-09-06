@@ -1,7 +1,5 @@
-﻿using Mono.Cecil.Cil;
-using MonoMod.Cil;
+﻿using MonoMod.Cil;
 using RoR2;
-using R2API;
 using System;
 using RoR2.Orbs;
 

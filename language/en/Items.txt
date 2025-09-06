@@ -136,5 +136,7 @@
 	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "Grounded enemies hit with any <style=cIsUtility>skill</style> are <style=cIsUtility>launched</style> and <style=cIsUtility>stunned</style>. Enemies hit while airborne are <style=cIsUtility>launched</style> again up to <style=cIsUtility>2 times</style> <style=cStack>(+1 per stack)</style>. Launched enemies take increased damage by <style=cIsDamage>15%</style> from all sources per launch. Recharges after <style=cIsUtility>15s</style>.",
 	
 	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Grants <style=cIsUtility>5%</style> increase to <style=cIsUtility>ALL stats</style> for each buff, up to a maximum of <style=cIsUtility>4</style> <style=cStack>(+4 per stack)</style>.",
+	
+	"ITEM_TRIGGERENEMYDEBUFFS_DESC_RISKYMOD": "Gain <style=cIsDamage>10%</style> chance to <style=cIsDamage>bleed</style> an enemy. On killing an enemy, <style=cIsDamage>transfer 33%</style> of every debuff stack to <style=cIsDamage>1 enemy</style> <style=cStack>(+1 per stack)</style> within <style=cIsUtility>25m</style>.",
 	}
 }

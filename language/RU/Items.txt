@@ -136,5 +136,7 @@
 	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "При получении урона от любого <style=cIsUtility>навыка</style> враги <style=cIsUtility>подбрасываются в воздух</style> и <style=cIsUtility>оглушаются</style>. При получении урона в воздухе враги снова <style=cIsUtility>подбрасываются</style>, но не более <style=cIsUtility>2</style> <style=cStack>(+1 за шт.) раз</style>. Подброшенные враги получают на <style=cIsDamage>15%</style> больше урона от всех источников за каждое подбрасывание. Перезаряжается <style=cIsUtility>15</style> сек.",
 	
 	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Увеличивает <style=cIsUtility>все параметры</style> на <style=cIsUtility>5%</style> за каждое усиление. Суммируется до <style=cIsUtility>4</style> раз <style=cStack>(+4 за шт.)</style>.",
+	
+	"ITEM_TRIGGERENEMYDEBUFFS_DESC_RISKYMOD": "С вероятностью <style=cIsDamage>10%</style> может вызвать у врага <style=cIsDamage>кровотечение</style>. При убийстве врага <style=cIsDamage>переносит 33%</style> всех отрицательных эффектов на <style=cIsDamage>1 врага</style> <style=cStack>(+1 за шт.)</style> в радиусе <style=cIsUtility>25 м</style>.",
 	}
 }

@@ -277,4 +277,6 @@
 	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "地面敌人被任意<style=cIsUtility>技能</style>命中都会被<style=cIsUtility>击飞</style>并<style=cIsUtility>眩晕</style>。空中敌人被击中将被再次<style=cIsUtility>击飞</style>，最多<style=cIsUtility>2次</style><style=cStack>（每层堆叠+1）</style>。被击飞的敌人每次被击飞都会使受到的所有来源伤害提高<style=cIsDamage>15%</style>。每隔<style=cIsUtility>15秒</style>充能。",
 	
 	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "每有一个强化，获得<style=cIsUtility>5%</style><style=cIsUtility>全属性</style>加成，最多叠加<style=cIsUtility>4</style>次<style=cStack>（每层堆叠+4）</style>。",
+	
+	"ITEM_TRIGGERENEMYDEBUFFS_DESC_RISKYMOD": "有<style=cIsDamage>10%</style>的几率使一名敌人<style=cIsDamage>流血</style>。击杀一名敌人时，将每个负面效果的层数<style=cIsDamage>转移33%</style>至<style=cIsUtility>25米</style>内的<style=cIsDamage>1名敌人</style><style=cStack>（每层堆叠+1）</style>身上。",
 }

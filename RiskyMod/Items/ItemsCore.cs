@@ -89,6 +89,7 @@ namespace RiskyMod.Items
             new Ignition();
             new UnstableTransmitter();
             new BreachingFin();
+            new NoxiousThorn();
         }
 
         private void ModifyLegendary()

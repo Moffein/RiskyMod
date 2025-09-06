@@ -136,5 +136,7 @@
 	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "Gegner am Boden, die mit einer beliebigen <style=cIsUtility>Fähigkeit</style> getroffen werden, werden <style=cIsUtility>in die Luft geschleudert</style> und <style=cIsUtility>betäubt</style>. Gegner, die in der Luft getroffen werden, werden erneut <style=cIsUtility>hochgeworfen</style>, bis maximal <style=cIsUtility>2-mal</style> <style=cStack>(+1 pro Stapel)</style>. Hochgeschleuderte Gegner erleiden jedes Mal um <style=cIsDamage>15 %</style> erhöhten Schaden aus allen Quellen. Lädt sich nach <style=cIsUtility>15 Sek.</style> wieder auf.",
 	
 	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Verleiht für jeden Buff einen Bonus von <style=cIsUtility>5 %</style> auf <style=cIsUtility>ALLE Werte</style>, bis maximal <style=cIsUtility>4</style> <style=cStack>(+4 pro Stapel)</style>.",
+	
+	"ITEM_TRIGGERENEMYDEBUFFS_DESC_RISKYMOD": "Du erhältst eine Chance von <style=cIsDamage>10 %</style>, Gegner zum <style=cIsDamage>Bluten</style> zu bringen. Beim Töten eines Gegners <style=cIsDamage>überträgst du 33 %</style> jedes Debuff-Stapels auf <style=cIsDamage>1 Gegner</style> <style=cStack>(+1 pro Stapel)</style> im Radius von <style=cIsUtility>25 m</style>.",
 	}
 }

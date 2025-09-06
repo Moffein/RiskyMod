@@ -140,4 +140,6 @@
 	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "Inimigos no chão atingidos por qualquer <style=cIsUtility>habilidade</style> são <style=cIsUtility>lançados ao ar</style> e <style=cIsUtility>atordoados</style>. Inimigos atingidos enquanto estão no ar são <style=cIsUtility>lançados</style> novamente até <style=cIsUtility>2 vezes</style> <style=cStack>(+1 por acúmulo)</style>. Inimigos lançados sofrem mais <style=cIsDamage>15%</style> de dano de todas as fontes por lançamento. Recarrega após <style=cIsUtility>15 s</style>.",
 	
 	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Concede <style=cIsUtility>5%</style> de aumento em <style=cIsUtility>TODAS as estatísticas</style> para cada reforço até o máximo de <style=cIsUtility>4</style> <style=cStack>(+4 por acúmulo)</style>.",
+	
+	"ITEM_TRIGGERENEMYDEBUFFS_DESC_RISKYMOD": "Ganhe <style=cIsDamage>10%</style> de chance de causar <style=cIsDamage>sangramento</style> a um inimigo. Ao abater, <style=cIsDamage>transfira 33%</style> de cada acúmulo de penalidade a <style=cIsDamage>1 inimigo</style> <style=cStack>(+1 por acúmulo)</style> dentro de <style=cIsUtility>25 m</style>.",
 }
