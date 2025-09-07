@@ -166,7 +166,8 @@ namespace RiskyMod
 
             //Game Mechanics
             RiskyMod.disableProcChains = GeneralCfg.Bind(gameMechString, "Disable Proc Chains", true, "Remove the proc coefficient on most item effects.").Value;
-            ShieldGating.enabled = GeneralCfg.Bind(gameMechString, "Shield Gating", true, "Shields gate against HP damage.").Value;
+            ShieldGating.enabled = GeneralCfg.Bind(gameMechString, "Shield Gating", false, "Shields gate against HP damage.").Value;
+            ShieldGating.disableIfGuardiansHeart = GeneralCfg.Bind(gameMechString, "Shield Gating - Disable if Guardians Heart is Loaded", true, "Shield Gating is disabled if Guardians Heart from ClassicItemsReturns is enabled.").Value;
             TrueOSP.enabled = GeneralCfg.Bind(gameMechString, "True OSP", true, "Makes OSP work against multihits.").Value;
             AIBlacklistItems.enabled = GeneralCfg.Bind(gameMechString, "Expanded AI Blacklist", true, "Adds extra items to the AI Blacklist by default.").Value;
             TeleExpandOnBossKill.enabled = GeneralCfg.Bind(gameMechString, "Tele Expand on Boss Kill", true, "Teleporter expands to cover the whole map when the boss is killed.").Value;
