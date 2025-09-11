@@ -326,8 +326,9 @@ namespace RiskyMod
 
             Ignition.enabled = ItemCfg.Bind(uncommonString, "Ignition Tank", true, itemConfigDescString).Value;
 
-            UnstableTransmitter.enabled = ItemCfg.Bind(commonString, "Unstable Transmitter", true, itemConfigDescString).Value;
-            BreachingFin.enabled = ItemCfg.Bind(commonString, "Breaching Fin", true, itemConfigDescString).Value;
+            UnstableTransmitter.enabled = ItemCfg.Bind(uncommonString, "Unstable Transmitter", true, itemConfigDescString).Value;
+            BreachingFin.enabled = ItemCfg.Bind(uncommonString, "Breaching Fin", true, itemConfigDescString).Value;
+            NoxiousThorn.enabled = ItemCfg.Bind(uncommonString, "Noxious Thorn", true, itemConfigDescString).Value;
         }
 
         private static void ConfigLegendaryItems()
