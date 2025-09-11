@@ -319,6 +319,8 @@ namespace RiskyMod
             SquidPolyp.enabled = ItemCfg.Bind(uncommonString, "Squid Polyp", true, itemConfigDescString).Value;
             SquidPolyp.ignoreAllyCap = ItemCfg.Bind(uncommonString, "Squid Polyp - Ignore Ally Cap", true, "Squid Polyps ignore the ally cap if changes are enabled.").Value;
             SquidPolyp.scaleCount = ItemCfg.Bind(uncommonString, "Squid Polyp - Stacks Increase Max Squids", false, "Extra stacks allow for more squids to spawn. Will lag in MP.").Value;
+            SquidPolyp.cannotCopy = ItemCfg.Bind(uncommonString, "Squid Polyp - CannotCopy Tag", false, "If True, prevent minions like Engi Turrets from receiving this item.").Value;
+            SquidPolyp.minionSquidLimit = ItemCfg.Bind(uncommonString, "Squid Polyp - Minion Squid Limit", -1, "Max squids minions sucha s Engi Turrets can spawn. -1 = same as player.").Value;
             Stealthkit.enabled = ItemCfg.Bind(uncommonString, "Old War Stealthkit", true, itemConfigDescString).Value;
             Ukulele.enabled = ItemCfg.Bind(uncommonString, "Ukulele", true, itemConfigDescString).Value;
             WarHorn.enabled = ItemCfg.Bind(uncommonString, "War Horn", true, itemConfigDescString).Value;

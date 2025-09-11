@@ -20,6 +20,9 @@ namespace RiskyMod.Items.Uncommon
         public static bool ignoreAllyCap = true;
         public static bool weakToMithrix = true;
 
+        public static bool cannotCopy = false;
+        public static int minionSquidLimit = -1;
+
         public static BodyIndex squidTurretBodyIndex;
         public static CharacterSpawnCard squidTurretCard = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Squid/cscSquidTurret.asset").WaitForCompletion();
 
@@ -88,6 +91,7 @@ namespace RiskyMod.Items.Uncommon
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.Squid);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.Squid);
             if (SoftDependencies.AIBlacklistUseVanillaBlacklist) SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.Squid, ItemTag.AIBlacklist);
+            if (cannotCopy) SneedUtils.SneedUtils.AddItemTag(RoR2Content.Items.Squid, ItemTag.CannotCopy);
         }
 
         private static void OnHpLost(DamageInfo damageInfo, HealthComponent self, Inventory inventory, float percentHpLost)
@@ -169,20 +173,33 @@ namespace RiskyMod.Items.Uncommon
     {
         private List<GameObject> squidList;
         private Inventory inventory = null;
+        private bool isMinion;
+        private CharacterBody cb;
 
         public void Awake()
         {
             squidList = new List<GameObject>();
+            isMinion = false;
 
-            CharacterBody cb = base.gameObject.GetComponent<CharacterBody>();
+            cb = base.gameObject.GetComponent<CharacterBody>();
             if (cb && cb.inventory)
             {
                 inventory = cb.inventory;
             }
         }
 
+        public void Start()
+        {
+            isMinion = cb && cb.master && cb.master.minionOwnership && cb.master.minionOwnership.ownerMaster != null;
+        }
+
         public bool CanSpawnSquid()
         {
+            if (isMinion && SquidPolyp.minionSquidLimit >= 0)
+            {
+                return squidList.Count < SquidPolyp.minionSquidLimit;
+            }
+
             if (SquidPolyp.scaleCount)
             {
                 return squidList.Count < 2 + (inventory ? inventory.GetItemCount(RoR2Content.Items.Squid) : -2);
