@@ -37,16 +37,12 @@ namespace RiskyMod.Tweaks.CharacterMechanics
         private void HealthComponent_TakeDamageProcess(ILContext il)
         {
             ILCursor c = new ILCursor(il);
-            if (c.TryGotoNext(
-                 x => x.MatchLdloc(8),
+            if (c.TryGotoNext(MoveType.After,
                  x => x.MatchLdarg(0),
                  x => x.MatchLdfld<HealthComponent>("shield"),
-                 x => x.MatchSub(),
-                 x => x.MatchStloc(8),
-                 x => x.MatchLdarg(0)
+                 x => x.MatchSub()
                 ))
             {
-                c.Index += 4;
                 c.Emit(OpCodes.Ldarg_0);
                 c.Emit(OpCodes.Ldarg_1);
                 c.EmitDelegate<Func<float, HealthComponent, DamageInfo, float>>((remainingDamage, self, damageInfo) =>
