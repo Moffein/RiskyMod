@@ -25,7 +25,7 @@ namespace RiskyMod.Content.Enemies.Components
                 {
                     if (cb.master && cb.master.teamIndex == TeamIndex.Monster)
                     {
-                        cb.master.teamIndex = TeamIndex.Player;
+                        cb.master.teamIndex = TeamIndex.Lunar;
                         if (cb.master.aiComponents != null)
                         {
                             foreach (BaseAI ai in cb.master.aiComponents)
