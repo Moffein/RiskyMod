@@ -86,6 +86,6 @@
 	
 	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "Platziere eine zweistufige Mine, die <style=cIsDamage>900% Schaden</style> verursacht sobald sie voll aufgebaut ist. Maximal 4 platzierte Minen.",
 	
-	"FALSESON_PASSIVE_DESCRIPTION_RISKYMOD": "Unbenutzte Mondstacheln gewähren <style=cIsUtility>+5 % Angriffstempo</style> und <style=cIsUtility>+5 Rüstung</style>. Benutzte Stacheln gewähren <style=cIsUtility>+5 % Bewegungsgeschwindigkeit</style> und <style=cIshealing>+0,5 Gesundheitsregeneration</style>."
+	"FALSESON_PASSIVE_DESCRIPTION_RISKYMOD": "Unbenutzte Mondstacheln gewähren <style=cIsUtility>+5 % Angriffstempo</style> und <style=cIsUtility>+5 Rüstung</style>. Benutzte Stacheln gewähren <style=cIsUtility>+5 % Bewegungsgeschwindigkeit</style> und <style=cIshealing>+0,8 Gesundheitsregeneration</style>."
 	}
 }

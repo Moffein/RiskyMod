@@ -13,7 +13,7 @@ Fixing up his weird proc coefficients and nerfing his survivability a bit.
 
 	*Compensating for the reduced max health, while also making the survivability bonus of holding spikes more relevant.*
 
-- Health Regen bonus per missing spike reduced from +2.5 flat -> +0.5 level-scaled
+- Health Regen bonus per missing spike reduced from +2.5 flat -> +0.8 level-scaled
 
 	*Being able to easily get +10hp/s of regen earlygame trivializes the first few stages. New regen value makes the earlygame regen just a bit higher than other melee survivors, and at level 20 it breaks even with the original flat amount.*
 

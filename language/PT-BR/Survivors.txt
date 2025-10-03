@@ -100,6 +100,6 @@
  
 	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "Posicione uma mina que causa <style=cIsDamage>900% de dano</style> se for totalmente carregada. Máximo de 4.",
 	
-	  "FALSESON_PASSIVE_DESCRIPTION_RISKYMOD": "Espinhos Lunares não usados concedem <style=cIsUtility>+5% de velocidade de ataque</style> e <style=cIsUtility>+5 de armadura</style>. Espinhos usados concedem <style=cIsUtility>+5% de velocidade de movimento</style> e <style=cIshealing>+0,5 de regeneração de saúde</style>."
+	  "FALSESON_PASSIVE_DESCRIPTION_RISKYMOD": "Espinhos Lunares não usados concedem <style=cIsUtility>+5% de velocidade de ataque</style> e <style=cIsUtility>+5 de armadura</style>. Espinhos usados concedem <style=cIsUtility>+5% de velocidade de movimento</style> e <style=cIshealing>+0,8 de regeneração de saúde</style>."
 	}
 }

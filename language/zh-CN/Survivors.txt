@@ -99,6 +99,6 @@
 	
 	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "放置一枚地雷，在完全引爆时造成<style=cIsDamage>900%的伤害</style>。最多放置4枚。",
 	
-  "FALSESON_PASSIVE_DESCRIPTION_RISKYMOD": "未使用的月之刺将提供<style=cIsUtility>+5%攻击速度</style>以及<style=cIsUtility>+5护甲</style>。使用过的尖刺将提供<style=cIsUtility>+5%移动速度</style>以及<style=cIshealing>+0.5生命值再生</style>。"
+  "FALSESON_PASSIVE_DESCRIPTION_RISKYMOD": "未使用的月之刺将提供<style=cIsUtility>+5%攻击速度</style>以及<style=cIsUtility>+5护甲</style>。使用过的尖刺将提供<style=cIsUtility>+5%移动速度</style>以及<style=cIshealing>+0.8生命值再生</style>。"
 	}
 }

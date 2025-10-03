@@ -86,6 +86,6 @@
 	
 	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "Place a mine that deals <style=cIsDamage>900% damage</style> when fully armed. Can place up to 4.",
 	
-	"FALSESON_PASSIVE_DESCRIPTION_RISKYMOD": "Unused Lunar Spikes give <style=cIsUtility>+5% attack speed</style> and <style=cIsUtility>+5 armor</style>. Used spikes give <style=cIsUtility>+5% movement speed</style> and <style=cIshealing>+0.5 health regeneration</style>."
+	"FALSESON_PASSIVE_DESCRIPTION_RISKYMOD": "Unused Lunar Spikes give <style=cIsUtility>+5% attack speed</style> and <style=cIsUtility>+5 armor</style>. Used spikes give <style=cIsUtility>+5% movement speed</style> and <style=cIshealing>+0.8 health regeneration</style>."
 	}
 }

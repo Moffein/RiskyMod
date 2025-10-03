@@ -62,8 +62,8 @@ namespace RiskyMod.Survivors.DLC2.FalseSon
             int buffCount = sender.GetBuffCount(DLC2Content.Buffs.TamperingMSAndHRBonus);
             if (buffCount > 0)
             {
-                args.baseRegenAdd += 0.5f * buffCount;
-                args.levelRegenAdd += 0.1f * buffCount;
+                args.baseRegenAdd += 0.8f * buffCount;
+                args.levelRegenAdd += 0.16f * buffCount;
             }
         }
 

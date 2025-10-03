@@ -86,6 +86,6 @@
 	
 	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "Устанавливает мину, наносящую <style=cIsDamage>900% урона</style> после полной зарядки. Можно поставить до 4-х.",
 	
-  "FALSESON_PASSIVE_DESCRIPTION_RISKYMOD": "Каждый накопленный лунный шип даёт <style=cIsUtility>+5% к скорости атаки</style> и <style=cIsUtility>+5 к защите</style>. Каждый потраченный лунный шип даёт <style=cIsUtility>+5% к скорости движения</style> и <style=cIshealing>+0,5 к восстановлению здоровья</style>.",
+  "FALSESON_PASSIVE_DESCRIPTION_RISKYMOD": "Каждый накопленный лунный шип даёт <style=cIsUtility>+5% к скорости атаки</style> и <style=cIsUtility>+5 к защите</style>. Каждый потраченный лунный шип даёт <style=cIsUtility>+5% к скорости движения</style> и <style=cIshealing>+0,8 к восстановлению здоровья</style>.",
 	}
 }
