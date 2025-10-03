@@ -40,6 +40,7 @@ using UnityEngine.AddressableAssets;
 using RiskyMod.Enemies.DLC1.Voidling;
 using static Generics.Dynamics.RigReader;
 using RiskyMod.Enemies.Mithrix;
+using RiskyMod.Survivors.Commando;
 
 namespace RiskyMod
 {
@@ -79,6 +80,7 @@ namespace RiskyMod
     [BepInDependency("Nuxlar.EclipseRevamped", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RiskyLives.LinearDamage", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RiskyLives.RiskyMithrix", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.RiskySkills", BepInDependency.DependencyFlags.SoftDependency)]
     #endregion
 
     [BepInDependency("com.RiskyLives.SneedHooks")]
@@ -93,7 +95,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RiskyFixes")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.8.1")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.8.2")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -190,6 +192,7 @@ namespace RiskyMod
             SoftDependencies.SpikestripPlasmaCore = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.plasmacore.PlasmaCoreSpikestripContent");
             SoftDependencies.MoreStatsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskOfBrainrot.MoreStats");
             SoftDependencies.RiskyMithrixLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskyLives.RiskyMithrix");
+            SoftDependencies.RiskySkillsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RiskySkills");
         }
 
         private void CheckDependencies()
@@ -269,6 +272,20 @@ namespace RiskyMod
                 MithrixFreezeImmune.enabled = false;
                 MithrixHealthBuff.enabled = false;
                 MithrixTargetPrioritization.enabled = false;
+            }
+
+            if (SoftDependencies.RiskySkillsLoaded)
+            {
+                Debug.Log("RiskyMod: Disabling new skills because RiskyMithrix is loaded.");
+                if (!CommandoCore.replacePhaseRound)
+                {
+                    CommandoCore.skillLightningRound = false;
+                }
+
+                if (!CommandoCore.replaceSuppressive)
+                {
+                    CommandoCore.skillShrapnelBarrage = false;
+                }
             }
         }
 
