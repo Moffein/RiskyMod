@@ -553,6 +553,7 @@ namespace RiskyMod
 
             BackstabRework.enabled = SurvivorCfg.Bind(banditString, "Backstab Changes", true, "Backstabs minicrit for 50% bonus damage and crit chance is converted to crit damage.").Value;
             BuffHemorrhage.enableProcs = SurvivorCfg.Bind(banditString, "Hemmorrhage - Enable Procs", true, "Hemmorrhage damage has a low proc coefficient.").Value;
+            BuffHemorrhage.bypassArmor = SurvivorCfg.Bind(banditString, "Hemmorrhage - Ignore Armor", false, "Hemmorrhage ignores positive armor.").Value;
 
             //BuffHemorrhage.enableCrit = SurvivorCfg.Bind(banditString, "Hemmorrhage - Count as Crit", true, "Hemmorrhagedamage counts as crits.").Value;
             BuffHemorrhage.enableCrit = false;  //hitsound is obnoxious

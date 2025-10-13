@@ -8,36 +8,49 @@ namespace RiskyMod.Survivors.Bandit2
         public static bool enabled = true;
 
         public static bool enableProcs = true;
+        public static bool bypassArmor = false;
         public static bool enableCrit = false;
         public BuffHemorrhage()
         {
             if (!enabled || (!enableProcs && !enableCrit)) return;
-            On.RoR2.HealthComponent.TakeDamageProcess += (orig, self, damageInfo) =>
+
+            if (bypassArmor)
             {
-                bool procHemmorrhage = false;
-                if (damageInfo.dotIndex == RoR2.DotController.DotIndex.SuperBleed && damageInfo.damageType.damageType.HasFlag(DamageType.DoT) && !damageInfo.damageType.damageType.HasFlag(DamageType.AOE) && damageInfo.procCoefficient == 0f)
-                {
-                    if (enableProcs)
-                    {
-                        damageInfo.procCoefficient = 0.5f;
-                        procHemmorrhage = true;
-                    }
+                RiskyTweaks.Tweaks.Survivors.Bandit2.BuffSuperBleed.Instance.AddHook();
+            }
+            else
+            {
+                RiskyTweaks.Tweaks.Survivors.Bandit2.BuffSuperBleed.Instance.RemoveHook();
+            }
 
-                    if (enableCrit)
-                    {
-                        float baseCritMult = BackstabRework.enabled ? 1.5f : 2f;
-                        damageInfo.damage /= baseCritMult;
-                        damageInfo.crit = true;
-                    }
+            On.RoR2.HealthComponent.TakeDamageProcess += HealthComponent_TakeDamageProcess;
+        }
+
+        private void HealthComponent_TakeDamageProcess(On.RoR2.HealthComponent.orig_TakeDamageProcess orig, HealthComponent self, DamageInfo damageInfo)
+        {
+            bool procHemmorrhage = false;
+            if (damageInfo.dotIndex == RoR2.DotController.DotIndex.SuperBleed && damageInfo.damageType.damageType.HasFlag(DamageType.DoT) && !damageInfo.damageType.damageType.HasFlag(DamageType.AOE) && damageInfo.procCoefficient == 0f)
+            {
+                if (enableProcs)
+                {
+                    damageInfo.procCoefficient = 0.5f;
+                    procHemmorrhage = true;
                 }
 
-                orig(self, damageInfo);
-
-                if (procHemmorrhage)
+                if (enableCrit)
                 {
-                    GlobalEventManager.instance.OnHitEnemy(damageInfo, self.gameObject);
+                    float baseCritMult = BackstabRework.enabled ? 1.5f : 2f;
+                    damageInfo.damage /= baseCritMult;
+                    damageInfo.crit = true;
                 }
-            };
+            }
+
+            orig(self, damageInfo);
+
+            if (procHemmorrhage)
+            {
+                GlobalEventManager.instance.OnHitEnemy(damageInfo, self.gameObject);
+            }
         }
     }
 }

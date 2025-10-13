@@ -19,7 +19,6 @@ Squishier, more mobile, and Hemorrhage is much more powerful.
 	
 - Hemorrhage
 	- Increased proc coefficient from 0 -> 0.5
-	- **(RiskyTweaks)** Ignores positive armor.
 	
 ## Primaries
 
