@@ -82,8 +82,8 @@
 	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>Reduz o dano base em 20%</style>.\nCada abate aplica um diferente efeito de <style=cIsDamage>dano contínuo</style>.\n<style=cIsHealing>Veneno</style> e <color=#B1387F>Praga</color> espalham em até <style=cIsDamage>1</style> inimigo próximo do alvo abatido.",
 	
 
-	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Incendiário</style>. Dispare um raio que causa <style=cIsDamage>300% de dano</style> aos inimigos. Máximo de 4.",
-	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Dispare um raio que causa <style=cIsDamage>360% de dano</style> e <style=cIsDamage>explode</style> em uma pequena área. Máximo de 4.</style>",
+	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Incendiário</style>. Dispare um raio que causa <style=cIsDamage>4x70% de dano</style> aos inimigos. Máximo de 4.",
+	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Dispare um raio que causa <style=cIsDamage>4x85% de dano</style> e <style=cIsDamage>explode</style> em uma pequena área. Máximo de 4.</style>",
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>. Irrompa no céu, causando <style=cIsDamage>800% de dano</style>.",
 	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Congelante</style>. Crie uma barreira que causa <style=cIsDamage>100% de dano</style> aos inimigos. <style=cIsUtility>Impulsiona você para trás</style> caso esteja no ar.",
 	"MAGE_UTILITY_ICE_DESCRIPTION_NOPUSH_RISKYMOD" : "<style=cIsUtility>Congelante</style>. Crie uma barreira que causa <style=cIsDamage>100% de dano</style> aos inimigos.",

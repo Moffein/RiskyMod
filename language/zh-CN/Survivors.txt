@@ -80,8 +80,8 @@
 	"CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "传染",
 	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>减少20%基础伤害</style>。\n每个技能都会施加不同的<style=cIsDamage>持续伤害</style>效果。\n<style=cIsHealing>毒化</style>和<color=#B1387F>枯萎</color>在击败时扩散到<style=cIsDamage>1</style>个附近的敌人。",
 	
-	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>点燃</style>。发射一道火炎，造成<style=cIsDamage>300%的伤害</style>。最多可发射4次。</style>",
-	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "发射一道闪电，造成<style=cIsDamage>360%的伤害</style>并<style=cIsDamage>引爆</style>小片区域。最多发射4次。</style>",
+	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>点燃</style>。发射一道火炎，造成<style=cIsDamage>4x70%的伤害</style>。最多可发射4次。</style>",
+	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "发射一道闪电，造成<style=cIsDamage>4x85%的伤害</style>并<style=cIsDamage>引爆</style>小片区域。最多发射4次。</style>",
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>震荡</style>。一飞冲天，造成<style=cIsDamage>800%的伤害</style>。",
 	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>冰冻</style>。创造一道能够对敌人造成<style=cIsDamage>100%伤害</style>的屏障。若自身位于空中<style=cIsUtility>则将自身向后推</style>。",
 	"MAGE_UTILITY_ICE_DESCRIPTION_NOPUSH_RISKYMOD" : "<style=cIsUtility>冰冻</style>。创造一道能够对敌人造成<style=cIsDamage>100%伤害</style>的屏障。",

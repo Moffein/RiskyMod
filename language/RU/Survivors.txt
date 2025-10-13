@@ -68,8 +68,8 @@
 	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>Уменьшает базовый урон на 20%</style>.\nКаждый навык накладывает особый <style=cIsDamage>периодический урон</style>.\nПри убийстве <style=cIsHealing>Яд</style> и <color=#B1387F>Увядание</color> распространяются на ближайшего врага.",
 	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Оглушение</style>. Совершает прыжок в воздух, нанося <style=cIsDamage>550% урона</style>. <style=cIsUtility>Снижает</style> время восстановления этого Навыка на <style=cIsUtility>1 секунду</style> за каждое попадание по врагу.",
 	
-	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Поджог</style>. Выстрел снарядом, наносящим <style=cIsDamage>300% урона</style>. Можно иметь при себе до 4-х снарядов.</style>",
-	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Выстрел снарядом, наносящим <style=cIsDamage>360% урона</style> и <style=cIsDamage>взрывающимся</style> на небольшой площади. Можно иметь при себе до 4-х снарядов.</style>",
+	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Поджог</style>. Выстрел снарядом, наносящим <style=cIsDamage>4x70% урона</style>. Можно иметь при себе до 4-х снарядов.</style>",
+	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Выстрел снарядом, наносящим <style=cIsDamage>4x85% урона</style> и <style=cIsDamage>взрывающимся</style> на небольшой площади. Можно иметь при себе до 4-х снарядов.</style>",
 	"MAGE_SECONDARY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Заморозка</style>. Заряжает <style=cIsDamage>пробивающее</style> нано-копье, наносящее <style=cIsDamage>400%-1600%</style> урона.",
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Оглушение</style>. Выбрасывает энергию вниз, совершая рывок в небо и нанося <style=cIsDamage>800% урона</style>.",
 	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Заморозка</style>. Создает барьер, наносящий <style=cIsDamage>100% урона</style>. <style=cIsUtility>Отталкивает назад</style> если вы в воздухе.",

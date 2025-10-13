@@ -68,8 +68,8 @@
 	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>Reduziert deinen gesamten Schaden um 20%</style>.\nJeder Skill löst einen unterschiedenlichen <style=cIsDamage>Schaden über Zeit</style> Effekt aus.\n<style=cIsHealing>Gift</style> and <color=#B1387F>Seuche</color> verbreiten sich auf bis zu <style=cIsDamage>1</style> Gegner in der Nähe.",
 	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Betäubend</style>. Spring in die Luft und verursache <style=cIsDamage>550 % Schaden</style>. <style=cIsUtility>Reduziere</style> die Abklingzeit dieses Skills um <style=cIsUtility>1s</style> pro getroffenen Gegner.",
 	
-	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Entzünden</style>. Verschieße ein Geschoss, das <style=cIsDamage>300% Schaden</style> verursacht. Verschieße bis zu 4 Geschosse.</style>",
-	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Verschieße ein Geschoss, das <style=cIsDamage>360% Schaden</style> verursacht und in einem kleinen Bereich <style=cIsDamage>explodiert</style>. Verschieße bis zu 4 Geschosse.</style>",
+	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Entzünden</style>. Verschieße ein Geschoss, das <style=cIsDamage>4x70% Schaden</style> verursacht. Verschieße bis zu 4 Geschosse.</style>",
+	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Verschieße ein Geschoss, das <style=cIsDamage>4x85% Schaden</style> verursacht und in einem kleinen Bereich <style=cIsDamage>explodiert</style>. Verschieße bis zu 4 Geschosse.</style>",
 	"MAGE_SECONDARY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Einfrierend</style>. Lade einen <style=cIsDamage>durchdringenden</style> Nanospeer auf, der <style=cIsDamage>400–1.600%</style> Schaden verursacht.",
 	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Schockend</style>. Schieße in den Himmel empor und verursache <style=cIsDamage>800 %</style> Schaden.",
 	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Einfrierend</style>. Erschaffe eine Barriere, die Gegnern <style=cIsDamage>100% Schaden</style> zufügt. <style=cIsUtility>Stößt dich zurück</style>, falls du in der Luft bist.",

@@ -1,14 +1,18 @@
 ManifestFileVersion: 0
-CRC: 911525043
+CRC: 1818236217
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d74360c0d7ecbeae99fa3744ba623b93
+    Hash: de0aadc41d0e32a9828815a5cc4ac945
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c21d61fe394c58399df3c6fb5c7c99b3
+    Hash: 4d1648893e0f96e9a236ac8e8d4dbf6e
 HashAppended: 0
 ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
 - Class: 28
   Script: {instanceID: 0}
 - Class: 213
@@ -45,4 +49,5 @@ Assets:
 - Assets/Resources/Sprites/SkillIcons/Scepter/texAcridR1.png
 - Assets/Resources/Sprites/SkillIcons/Bandit2Desperado.png
 - Assets/Resources/Sprites/SkillIcons/Scepter/texBanditR2.png
+- Assets/Resources/Prefabs/LightningBoltRepeatPrefab.prefab
 Dependencies: []

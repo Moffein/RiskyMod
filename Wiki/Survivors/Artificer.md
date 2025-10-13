@@ -10,11 +10,20 @@ Alongside that are some minor number buffs to help her keep up with the newer hi
 
 ## Primaries
 
-- Fire Bolt
-	- Damage increased from 230% -> 300%
+- Firebolt
+	- Damage split from 280% -> 4x70%
+		- Each DoT tick has a 2.5m blast radius, and sticks to each enemy hit.
+		- Technically allows for double-dipping on damage in scenarios where enemies are grouped up enough to get caught in the AoE, but this is more of a rare bonus than a main feature to play around.
+	- Hitcount scales with attack speed.
+	- CD no longer scales with attack speed.
 	
-- Plasma Bolt
-	- Damage increased from 230% -> 360%
+- Plasmabolt
+	- Damage increased from 280% -> 4x85%, and now slows on hit.
+		- This is a lingering AoE that repeatedly zaps enemies.
+		- Slightly pulls in lightweight enemies.
+	- Radius increased from 6m -> 7.5m
+	- Hitcount scales with attack speed.
+	- CD no longer scales with attack speed.
 	
 ## Secondaries
 	
@@ -33,7 +42,7 @@ Alongside that are some minor number buffs to help her keep up with the newer hi
 ## Specials
 
 - Flamethrower
-	- Ranged increased from 20m -> 25m
+	- Range increased from 20m -> 30m to match CHEF
 	- **(RiskyTweaks)** Applies burn DoT for every tick, to revert the SotV nerf.
 	
 - Ion Surge

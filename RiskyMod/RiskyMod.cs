@@ -261,6 +261,7 @@ namespace RiskyMod
             if (artificerPrimaryReworkLoaded) Debug.Log("RiskyMod: Disabling Artificer Primary changes because ArtificerPrimaryRework is loaded.");
             Survivors.Mage.MageCore.modifyFireBolt = Survivors.Mage.MageCore.modifyFireBolt && !artificerPrimaryReworkLoaded;
             Survivors.Mage.MageCore.modifyPlasmaBolt = Survivors.Mage.MageCore.modifyPlasmaBolt && !artificerPrimaryReworkLoaded;
+            Survivors.Mage.SkillTweaks.PrimaryRework.enabled = Survivors.Mage.MageCore.modifyFireBolt || Survivors.Mage.MageCore.modifyPlasmaBolt;
 
             TeleExpandOnBossKill.enableDuringEclipse = TeleExpandOnBossKill.enableDuringEclipse || SoftDependencies.EclipseRevamped_CheckEclipse2Config();
 

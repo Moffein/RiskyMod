@@ -20,6 +20,7 @@ namespace RiskyMod.Content
         public static List<Type> entityStates = new List<Type>();
         public static List<SkillDef> skillDefs = new List<SkillDef>();
         public static List<SkillFamily> skillFamilies = new List<SkillFamily>();
+        public static List<NetworkSoundEventDef> networkSoundEventDefs = new List<NetworkSoundEventDef>();
 
         public string identifier => "RiskyMod.content";
 
@@ -46,6 +47,7 @@ namespace RiskyMod.Content
             content.entityStateTypes.Add(entityStates.ToArray());
             content.skillDefs.Add(skillDefs.ToArray());
             content.skillFamilies.Add(skillFamilies.ToArray());
+            content.networkSoundEventDefs.Add(networkSoundEventDefs.ToArray());
             yield break;
         }
     }

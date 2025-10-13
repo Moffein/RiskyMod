@@ -290,9 +290,8 @@ namespace SneedUtils
             return false;
         }
 
-        public static int FindEnemiesInSphere(float radius, Vector3 position, TeamIndex team, bool airborneOnly = false)
+        public static List<HealthComponent> FindEnemiesInSphere(float radius, Vector3 position, TeamIndex team, bool airborneOnly = false)
         {
-            int hitCount = 0;
             List<HealthComponent> hcList = new List<HealthComponent>();
             Collider[] array = Physics.OverlapSphere(position, radius, LayerIndex.entityPrecise.mask);
             for (int i = 0; i < array.Length; i++)
@@ -303,20 +302,19 @@ namespace SneedUtils
                     HealthComponent healthComponent = hurtBox.healthComponent;
                     if (healthComponent && !hcList.Contains(healthComponent))
                     {
-                        hcList.Add(healthComponent);
                         if (healthComponent.body && healthComponent.body.teamComponent && healthComponent.body.teamComponent.teamIndex != team)
                         {
                             if (!airborneOnly ||
                                 (healthComponent.body.isFlying ||
                                 (healthComponent.body.characterMotor && !healthComponent.body.characterMotor.isGrounded)))
                             {
-                                hitCount++;
+                                hcList.Add(healthComponent);
                             }
                         }
                     }
                 }
             }
-            return hitCount;
+            return hcList;
         }
 
         public static bool IsEnemyInSphere(float radius, Vector3 position, TeamIndex team, bool airborneOnly = false)

@@ -64,21 +64,7 @@ namespace RiskyMod.Survivors.Mage
 
         private void ModifyPrimaries(SkillLocator sk)
         {
-            SkillDef fireBoltDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFireFirebolt.asset").WaitForCompletion();
-            SkillDef plasmaBoltDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFireLightningBolt.asset").WaitForCompletion();
-
-
-            if (modifyFireBolt)
-            {
-                fireBoltDef.skillDescriptionToken = "MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD";
-                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Mage/EntityStates.Mage.Weapon.FireFireBolt.asset", "damageCoefficient", "3");
-            }
-
-            if (modifyPlasmaBolt)
-            {
-                plasmaBoltDef.skillDescriptionToken = "MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD";
-                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Mage/EntityStates.Mage.Weapon.FireLightningBolt.asset", "damageCoefficient", "3.6");
-            }
+            new PrimaryRework();
         }
 
         private void ModifySecondaries(SkillLocator sk)
@@ -192,7 +178,7 @@ namespace RiskyMod.Survivors.Mage
             flamethrowerDef.canceledFromSprinting = flamethrowerSprintCancel.Value;
             if (flamethrowerRangeExtend)
             {
-                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Mage/EntityStates.Mage.Weapon.Flamethrower.asset", "maxDistance", "25");  //20 vanilla
+                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Mage/EntityStates.Mage.Weapon.Flamethrower.asset", "maxDistance", "30");  //20 vanilla, 30 is CHEF
             }
 
             if (enableLightningSpecial)
