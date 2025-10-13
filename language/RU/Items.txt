@@ -88,7 +88,7 @@
 	
 	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Удары, наносящие <style=cIsDamage>более 400% урона</style>, также создают черную дыру, которая <style=cIsUtility>притягивает врагов в радиусе 15 м. к своему центру</style>. Длится <style=cIsUtility>5</style> секунд перед коллапсом, наносящим <style=cIsDamage>200%</style> <style=cStack>(+120% за шт.)</style> ОБЩЕГО урона. Перезаряжается каждые <style=cIsUtility>15</style> секунд.",
 	
-	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Убийство врага увеличивает <style=cIsUtility>скорость движения</style> на <style=cIsUtility>125%</style> на <style=cIsUtility>1.5</style> <style=cStack>(+1 за шт.)</style> секунду. <style=cIsDamage>Последовательные убийства увеличивают длительность эффекта</style> до 25 секунд.",
+	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Убийство врага увеличивает <style=cIsUtility>скорость движения</style> на <style=cIsUtility>50%</style> на <style=cIsUtility>1.5</style> <style=cStack>(+1 за шт.)</style> секунду. <style=cIsDamage>Последовательные убийства увеличивают длительность эффекта</style> до 25 секунд.",
 	
 	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Увеличивает <style=cIsUtility>скорость движения</style> на <style=cIsUtility>10%</style> <style=cStack>(+10% за шт.)</style>. Выход из боя увеличивает <style=cIsUtility>скорость движения</style> на дополнительные <style=cIsUtility>30%</style> <style=cStack>(+30% за шт.)</style>.",
 	

@@ -88,7 +88,7 @@
 	
 	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Treffer, die <style=cIsDamage>mehr als 400% Schaden</style> verursachen, erzeugen zusätzlich ein schwarzes Loch, das <style=cIsUtility>Gegner in einem Radius von 15 m in sein Zentrum saugt</style>. Hält <style=cIsUtility>5</style> Sekunden an, bis es in sich zusammenfällt und verursacht <style=cIsDamage>200 %</style> <style=cStack>(+120 % pro Stapel)</style> GESAMTSCHADEN. Lädt sich alle <style=cIsUtility>15</style> Sekunden neu auf.",
 	
-	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Erhöht die <style=cIsUtility>Bewegungsgeschwindigkeit</style> beim Töten eines Gegners um <style=cIsUtility>125 %</style>. Vergeht nach <style=cIsUtility>1,5</style> <style=cStack>(+1 pro Stapel)</style> Sekunden. <style=cIsDamage>Töten weiterer Gegner verlängert die Dauer</style> um bis zu 25 Sekunden.",
+	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Erhöht die <style=cIsUtility>Bewegungsgeschwindigkeit</style> beim Töten eines Gegners um <style=cIsUtility>50 %</style>. Vergeht nach <style=cIsUtility>1,5</style> <style=cStack>(+1 pro Stapel)</style> Sekunden. <style=cIsDamage>Töten weiterer Gegner verlängert die Dauer</style> um bis zu 25 Sekunden.",
 	
 	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Erhöht die <style=cIsUtility>Bewegungsgeschwindigkeit</style> um <style=cIsUtility>10%</style> <style=cStack>(+10% pro Stapel)</style>. Erhöht die <style=cIsUtility>Bewegungsgeschwindigkeit</style> um weitere <style=cIsUtility>30%</style> <style=cStack>(+30% pro Stapel)</style>, wenn du den Kampf verlässt.",
 	

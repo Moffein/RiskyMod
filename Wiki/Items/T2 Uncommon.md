@@ -11,7 +11,7 @@
 		- Spawns during Mithrix.
 
 - Hunter's Harpoon
-	- New Effect: Increase move speed by 125% for 1.5s (+1s) on kill, stacks up to 25s.
+	- New Effect: Increase move speed by 50% for 1.5s (+1s) on kill, stacks up to 25s.
 	
 	*From Returns.*
 	

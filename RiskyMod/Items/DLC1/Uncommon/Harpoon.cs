@@ -66,7 +66,7 @@ namespace RiskyMod.Items.DLC1.Uncommon
         {
             if (sender.HasBuff(Harpoon.ReturnsHarpoonBuff))
             {
-                args.moveSpeedMultAdd += 1.25f;
+                args.moveSpeedMultAdd += 0.5f;
             }
         }
 
