@@ -522,6 +522,7 @@ namespace RiskyMod
             CaptainCore.modifyTaser = SurvivorCfg.Bind(captainString, "Power Taser Changes", true, "Enable changes to this skill.").Value;
             CaptainCore.nukeAmmopackNerf = SurvivorCfg.Bind(captainString, "Diablo Strike Ammopack Nerf", true, "Ammopacks only restore half of Diablo Strike's charge. Intended for use with Beacon: Resupply changes.").Value;
             CaptainCore.nukeProc = SurvivorCfg.Bind(captainString, "Diablo Strike Proc Coeficient", true, "Increases Diablo Strike's proc coefficient.").Value;
+            CaptainCore.nukeFalloff = SurvivorCfg.Bind(captainString, "Diablo Strike Remove Falloff", true, "Removes radius falloff from Diablo Strike.").Value;
             CaptainCore.disableNukeFriendlyFire = SurvivorCfg.Bind(captainString, "Diablo Strike Disable Friendly Fire", false, "Diablo Strike only hurts yourself instead of all teammates.").Value;
 
             BeaconRework.healCooldown = SurvivorCfg.Bind(captainString, "Beacon: Healing - Enable Cooldown", true, "Allow this beacon to be re-used on a cooldown.").Value;

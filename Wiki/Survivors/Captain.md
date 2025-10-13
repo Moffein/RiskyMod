@@ -34,6 +34,7 @@ Beacons now refresh on a cooldown.
 
 - Diablo Strike
 	- Increased proc coefficient from 1.0 -> 3.0
+	- Removed falloff.
 	- Bandoliers reduce cooldowns by 20s, instead of a full reduction.
 	
 	*Hacky change due to skill restock beacons being a thing.*

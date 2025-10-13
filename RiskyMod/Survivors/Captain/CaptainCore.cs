@@ -18,6 +18,7 @@ namespace RiskyMod.Survivors.Captain
         public static bool modifyTaser = true;
         public static bool nukeAmmopackNerf = true;
         public static bool nukeProc = true;
+        public static bool nukeFalloff = true;
 
         public static bool disableNukeFriendlyFire = false;
         public static bool beaconRework = true;
@@ -71,6 +72,10 @@ namespace RiskyMod.Survivors.Captain
             if (nukeProc)
             {
                 pie.blastProcCoefficient = 3f;
+            }
+            if (nukeFalloff)
+            {
+                pie.falloffModel = BlastAttack.FalloffModel.None;
             }
             if (disableNukeFriendlyFire)
             {
