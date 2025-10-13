@@ -315,7 +315,7 @@ namespace RiskyMod
 
             Razorwire.enabled = ItemCfg.Bind(uncommonString, "Razorwire", true, itemConfigDescString).Value;
             RedWhip.enabled = ItemCfg.Bind(uncommonString, "Red Whip", true, itemConfigDescString).Value;
-            RoseBuckler.enabled = ItemCfg.Bind(uncommonString, "Rose Buckler", true, itemConfigDescString).Value;
+            RoseBuckler.enabled = ItemCfg.Bind(uncommonString, "Rose Buckler", false, itemConfigDescString).Value;
             SquidPolyp.enabled = ItemCfg.Bind(uncommonString, "Squid Polyp", true, itemConfigDescString).Value;
             SquidPolyp.ignoreAllyCap = ItemCfg.Bind(uncommonString, "Squid Polyp - Ignore Ally Cap", true, "Squid Polyps ignore the ally cap if changes are enabled.").Value;
             SquidPolyp.scaleCount = ItemCfg.Bind(uncommonString, "Squid Polyp - Stacks Increase Max Squids", false, "Extra stacks allow for more squids to spawn. Will lag in MP.").Value;

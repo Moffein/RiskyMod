@@ -69,10 +69,6 @@
 - Red Whip
 	- Additional Effect: Passive +10% move speed
 	
-- Rose Buckler
-	- Gives passive +10 armor
-	- Reduced Sprint Armor from 30 -> 20
-	
 - War Horn
 	- Additional Effect: +50% move speed on trigger.
 	
