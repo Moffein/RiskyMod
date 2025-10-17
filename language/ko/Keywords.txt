@@ -1,0 +1,21 @@
+{
+	strings:
+	{
+	"KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>전염</style><style=cSub>기본: 중독성\n보조: 오염\n유틸리티: 오염\n특수: 6x100%의 피해로 감염시키며 아이템 효과를 발동시킬 수 있습니다.",
+	
+	"KEYWORD_CONTAGION_PRIMARY_RISKYMOD" : "<style=cKeywordName>기본</style>세 번째 타격 시 <style=cIsHealing>중독</style>.",
+	"KEYWORD_CONTAGION_SECONDARY_RISKYMOD" :"<style=cKeywordName>보조</style><color=#B1387F>오염</color>.",
+	"KEYWORD_CONTAGION_UTILITY_RISKYMOD" : "<style=cKeywordName>유틸리티</style><color=#B1387F>오염</color>.",
+	"KEYWORD_CONTAGION_SPECIAL_RISKYMOD" : "<style=cKeywordName>특수</style><style=cSub><style=cIsDamage>6x100%의 피해</style>로 <style=cIsDamage>감염</style>시키며 아이템 효과를 발동시킬 수 있습니다.",
+	
+	"KEYWORD_RAPID_REGEN_RISKYMOD" : "<style=cKeywordName>재생성</style><style=cSub>3초에 걸쳐 최대 체력의 <style=cIsHealing>10%</style>를 치유합니다.",
+	"KEYWORD_BLIGHT_RISKYMOD" : "<style=cKeywordName>오염됨</style><style=cSub>6초에 걸쳐 <style=cIsDamage>360%</style>의 기본 피해를 줍니다. <i>오염은 중첩될 수 있습니다.</i></style>",
+	"KEYWORD_POISON_RISKYMOD" : "<style=cKeywordName>중독성</style><style=cSub>6초에 걸쳐 대상 최대 체력의 <style=cIsDamage>6%</style>에 해당하는 피해를 줍니다. <i>중독은 적을 죽일 수 없습니다.</i></style>",
+	"KEYWORD_INTERRUPT_RISKYMOD" : "<style=cKeywordName>방해</style><style=cSub>적의 행동을 잠시 방해합니다.",
+	"KEYWORD_SHOCKING_RISKYMOD" : "<style=cKeywordName>충격</style><style=cSub>적을 방해하고 5초 동안 기절시킵니다.",
+	"KEYWORD_MAGNETIC_RISKYMOD" : "<style=cKeywordName>자성</style><style=cSub>가벼운 공중의 적들을 중심으로 끌어당깁니다.",
+	"KEYWORD_VOIDCORRUPTION_RISKYMOD" : "<style=cKeywordName>오염</style><style=cSub>피해를 받거나, 적을 처치하거나, 공허 아이템을 보유하여 오염을 얻습니다.",
+	
+	"KEYWORD_LOWHEALTHPROTECTION_RISKYMOD": "<style=cKeywordName>구원의 은총</style><style=cSub>모든 살아있는 생존자들의 모든 능력치가 +7% 증가합니다.",
+	"SEEKER_SECONDARY_TRANQUILITY_DESCRIPTION_RISKYMOD": "<style=cKeywordName>평온</style><style=cSub>평온 하나당 '보이지 않는 손'의 피해량이 <style=cIsDamage>100%</style> 증가합니다."	}
+}

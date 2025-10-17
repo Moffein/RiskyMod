@@ -1,0 +1,11 @@
+{
+	strings:
+	{
+		"EQUIPMENT_FIREBALLDASH_DESC_RISKYMOD": "<style=cIsDamage>5</style>초 동안 <style=cIsDamage>용의 불덩이</style>로 변합니다. 충돌 시 <style=cIsDamage>600%의 피해</style>를 줍니다. 마지막에 폭발하여 <style=cIsDamage>1200%의 피해</style>를 주고 주변 괴물들을 <style=cIsDamage>기절</style>시킵니다.",
+
+		"EQUIPMENT_BFG_DESC_RISKYMOD": "프리온 촉수를 발사하여 35m 내의 적들을 초당 최대 <style=cIsDamage>1180%의 피해</style>로 지집니다. 접촉 시 20m의 거대한 폭발을 일으켜 <style=cIsDamage>8000%의 피해</style>를 줍니다.",
+		
+		"EQUIPMENT_CRITONUSE_DESC_RISKYMOD": "8초 동안 <style=cIsDamage>치명타 확률이 +100%</style> 증가합니다. 초과된 확률은 <style=cIsDamage>치명타 피해량</style>으로 전환됩니다.",
+		
+		"EQUIPMENT_GUMMYCLONE_DESC_RISKYMOD" : "<style=cIsDamage>300%의 공격력</style>과 <style=cIsHealing>600%의 체력</style>을 가진 구미 복제품을 소환합니다. <style=cIsUtility>30</style>초 후에 만료됩니다."	}
+}

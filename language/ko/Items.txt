@@ -1,0 +1,141 @@
+{
+	strings:
+	{
+	"ITEM_FLATHEALTH_PICKUP_RISKYMOD": "최대 체력을 얻습니다.",
+	"ITEM_FLATHEALTH_DESC_RISKYMOD": "<style=cIsHealing>최대 체력</style>이 <style=cIsHealing>1</style><style=cStack>(중첩당 +1)</style> 레벨만큼 증가합니다.",
+	
+	"ITEM_CRITGLASSES_PICKUP_RISKYMOD": "공격이 '치명타'로 적중하여 두 배의 피해를 줄 확률이 7% 증가합니다.",
+	"ITEM_CRITGLASSES_DESC_RISKYMOD": "공격 시 <style=cIsDamage>10%</style> <style=cStack>(중첩당 +7%)</style> 확률로 '<style=cIsDamage>치명타</style>'가 발생하여 <style=cIsDamage>두 배의 피해</style>를 줍니다.",
+	
+	"ITEM_STICKYBOMB_DESC_RISKYMOD": "타격 시 <style=cIsDamage>5%</style> <style=cStack>(중첩당 +5%)</style> 확률로 적에게 <style=cIsDamage>폭탄</style>을 부착하여, 총 피해량의 <style=cIsDamage>240%</style>로 폭발합니다.",
+	
+	"ITEM_CROWBAR_PICKUP_RISKYMOD": "적에게 가하는 첫 공격에 추가 피해를 줍니다.",
+	"ITEM_CROWBAR_DESC_RISKYMOD": "적에게 가하는 <style=cIsDamage>첫 공격</style>에 <style=cIsDamage>+45%</style> <style=cStack>(중첩당 +45%)</style>의 추가 피해를 줍니다.",
+	
+	"ITEM_WARDONLEVEL_PICKUP_RISKYMOD": "레벨 업 또는 텔레포터 이벤트 시작 시 전투 깃발을 떨어뜨립니다. 아군에게 공격력, 공격 속도, 이동 속도, 체력 재생 효과를 부여합니다.",
+	"ITEM_WARDONLEVEL_DESC_RISKYMOD": "<style=cIsUtility>레벨 업</style> 시 또는 <style=cIsUtility>텔레포터 이벤트</style> 시작 시 <style=cIsUtility>16m</style> <style=cStack>(중첩당 +8m)</style> 내의 모든 아군을 강화하는 깃발을 떨어뜨립니다. <style=cIsDamage>공격력</style>을 <style=cIsDamage>15%</style>, <style=cIsDamage>공격 속도</style>와 <style=cIsUtility>이동 속도</style>를 <style=cIsDamage>30%</style> 증가시킵니다. 또한 초당 <style=cIsHealing>체력</style>의 <style=cIsHealing>1%</style>를 재생합니다.",
+	
+	"ITEM_IGNITEONKILL_DESC_RISKYMOD": "적 처치 시 <style=cIsDamage>16m</style> 내의 모든 적을 <style=cIsDamage>점화</style>하여 <style=cIsDamage>150%</style>의 기본 피해를 줍니다. 추가로, 적들은 <style=cIsDamage>150%</style> <style=cStack>(중첩당 +75%)</style>의 기본 피해로 <style=cIsDamage>연소</style>합니다.",
+
+	"ITEM_BEAR_DESC_RISKYMOD": "받는 피해를 <style=cIsHealing>막을</style> 확률 <style=cIsHealing>10%</style> <style=cStack>(중첩당 +10%)</style>. <style=cIsUtility>운의 영향을 받지 않습니다</style>.",
+	
+	"ITEM_SLOWONHIT_DESC_RISKYMOD": "타격 시 <style=cIsUtility>2초</style> <style=cStack>(중첩당 +2초)</style> 동안 적의 <style=cIsUtility>이동 속도</style>를 <style=cIsUtility>-80%</style>, <style=cIsDamage>공격 속도</style>를 <style=cIsDamage>-20%</style>만큼 <style=cIsUtility>감소</style>시킵니다.",
+	
+	"ITEM_SEED_DESC_RISKYMOD": "피해를 주면 <style=cIsHealing>1</style>만큼 <style=cIsHealing>치유</style>하고, 추가로 <style=cIsDamage>가한 피해</style>의 <style=cIsHealing>1% <style=cStack>(중첩당 +1%)</style></style>만큼 치유합니다.",
+	
+	"ITEM_MISSILE_DESC_RISKYMOD": "총 피해량의 <style=cIsDamage>300%</style> <style=cStack>(중첩당 +210%)</style> 피해를 주는 미사일을 발사할 확률 <style=cIsDamage>10%</style>.",
+	
+	"ITEM_ICERING_DESC_RISKYMOD": "<style=cIsDamage>400% 이상의 피해</style>를 주는 공격은 <style=cIsDamage>룬 얼음 폭발</style>로 적을 강타하여 <style=cIsUtility>3초</style> <style=cStack>(중첩당 +3초)</style> 동안 <style=cIsUtility>80%</style> <style=cIsUtility>감속</style>시키고, 총 피해량의 <style=cIsDamage>200%</style> <style=cStack>(중첩당 +120%)</style> 피해를 줍니다. <style=cIsUtility>10</style>초마다 재충전됩니다.",
+	
+	"ITEM_FIRERING_DESC_RISKYMOD": "<style=cIsDamage>400% 이상의 피해</style>를 주는 공격은 <style=cIsDamage>룬 화염 토네이도</style>로 적을 강타하여, 총 피해량의 <style=cIsDamage>250%</style> <style=cStack>(중첩당 +150%)</style> 지속 피해를 줍니다. <style=cIsUtility>10</style>초마다 재충전됩니다.",
+	
+	"ITEM_PHASING_PICKUP_RISKYMOD": "큰 피해를 받으면 투명해집니다.",
+	"ITEM_PHASING_DESC_RISKYMOD": "피해를 받을 시 확률적으로 <style=cIsUtility>3초</style> <style=cStack>(중첩당 +1.5초)</style> 동안 <style=cIsUtility>이동 속도 40%</style> 증가 및 <style=cIsUtility>투명화</style> 효과를 얻습니다. 받는 피해가 클수록 확률이 증가합니다.",
+	
+	"ITEM_EXPLODEONDEATH_DESC_RISKYMOD": "적 처치 시 <style=cIsDamage>16m</style> 반경 내에 <style=cIsDamage>350%</style> <style=cStack>(중첩당 +280%)</style>의 기본 피해를 주는 <style=cIsDamage>용암 기둥</style>을 생성합니다.",
+	
+	"ITEM_SQUIDTURRET_PICKUP_RISKYMOD": "큰 피해를 받으면 근처에 오징어 포탑을 소환합니다.",
+	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "피해를 받을 시 확률적으로 <style=cIsHealing>100% <style=cStack>(중첩당 +50%)</style></style>의 체력과 <style=cIsDamage>100% <style=cStack>(중첩당 +100%)</style></style>의 공격 속도를 가진 <style=cIsDamage>오징어 포탑</style>을 소환하여 근처 적들의 <style=cIsUtility>주의를 끕니다</style>. 받는 피해가 클수록 확률이 증가합니다. 최대 <style=cIsUtility>3</style>개로 제한됩니다.",
+	
+	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "<style=cIsDamage>25m</style> 내의 최대 <style=cIsDamage>3 <style=cStack>(중첩당 +2)</style></style>개의 대상에게 총 피해량의 <style=cIsDamage>80%</style> 피해를 주는 <style=cIsDamage>연쇄 번개</style>를 발사할 확률 <style=cIsDamage>25%</style>.",
+	
+	"ITEM_THORNS_DESC_RISKYMOD": "피격 시 면도날 폭발을 일으켜 <style=cIsDamage>160%</style> <style=cStack>(중첩당 +80%)</style>의 피해를 줍니다. <style=cIsDamage>25m</style> 반경 내의 최대 <style=cIsDamage>3</style> <style=cStack>(중첩당 +2)</style>개의 대상에게 적중합니다.",
+	
+	"ITEM_SPRINTARMOR_PICKUP_RISKYMOD": "방어력을 증가시킵니다. 질주하는 동안 추가 방어력을 얻습니다.",
+	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>방어력</style>이 <style=cIsHealing>10</style> <style=cStack>(중첩당 +10)</style> 증가합니다. <style=cIsUtility>질주</style>하는 동안 추가로 <style=cIsHealing>10</style> <style=cStack>(중첩당 +10)</style>의 방어력을 얻습니다.",
+	
+	"ITEM_EXECUTELOWHEALTHELITE_PICKUP_RISKYMOD": "체력이 50% 미만인 적에게 추가 피해를 줍니다.",
+	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "체력이 <style=cIsDamage>50% 미만</style>인 적에게 <style=cIsDamage>+30%</style> <style=cStack>(중첩당 +30%)</style>의 추가 피해를 줍니다.",
+	
+	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "적 처치 후 광란 상태에 돌입합니다. 3회 중첩됩니다.",
+	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>적 처치 시</style> <style=cIsDamage>6초</style> 동안 <style=cIsDamage>광란</style> 상태에 돌입하여, 처치한 적 하나당 <style=cIsUtility>이동 속도</style>와 <style=cIsDamage>공격 속도</style>가 <style=cIsDamage>15%</style> 증가합니다. 최대 <style=cIsDamage>3 <style=cStack>(중첩당 +2)</style></style>개의 강화 효과까지 중첩됩니다.",
+
+	"ITEM_ENERGIZEDONEQUIPMENTUSE_PICKUP_RISKYMOD": "장비 활성화 시 이동 속도와 공격 속도가 폭발적으로 증가합니다.",
+	"ITEM_ENERGIZEDONEQUIPMENTUSE_DESC_RISKYMOD": "장비 활성화 시 <style=cIsDamage>8초</style> <style=cStack>(중첩당 +4초)</style> 동안 <style=cIsUtility>이동 속도 +50%</style> 및 <style=cIsDamage>공격 속도 +70%</style> 효과를 얻습니다.",
+	
+	"ITEM_INFUSION_PICKUP_RISKYMOD": "적 처치 시 최대 체력이 영구적으로 증가합니다.",
+	"ITEM_INFUSION_DESC_RISKYMOD": "적 처치 시 <style=cIsHealing>체력</style>이 <style=cIsHealing>1</style> <style=cStack>(중첩당 +1)</style>만큼 <style=cIsHealing>영구적으로</style> 증가합니다. 이 아이템으로 얻은 <style=cIsHealing>체력 100</style>마다 처치로 얻는 체력이 <style=cIsHealth>감소</style>합니다.",
+	
+	"ITEM_ICICLE_DESC_RISKYMOD": "적 처치 시 <style=cIsDamage>초당 1200% <style=cStack>(중첩당 +400%)</style>의 피해</style>를 주고 <style=cIsUtility>1.5초</style> 동안 적을 <style=cIsUtility>80%</style> <style=cIsUtility>감속</style>시키는 <style=cIsDamage>얼음 폭풍</style>이 주위를 감쌉니다. 폭풍은 <style=cIsDamage>처치할 때마다 성장</style>하여 반경이 <style=cIsDamage>3m</style>씩 증가합니다. 최대 <style=cIsDamage>18m</style>까지 중첩됩니다.",
+	
+	"ITEM_HEADHUNTER_PICKUP_RISKYMOD": "엘리트에게 추가 피해를 주고, 처치 시 일시적으로 그들의 힘을 얻습니다.",
+	"ITEM_HEADHUNTER_DESC_RISKYMOD": "엘리트 괴물에게 <style=cIsDamage>30%</style>의 추가 피해를 줍니다. 엘리트 처치 시, <style=cIsDamage>10초</style> <style=cStack>(중첩당 +5초)</style> 동안 일시적으로 그 힘을 얻습니다.",
+	
+	"ITEM_FALLBOOTS_PICKUP_RISKYMOD": "점프 높이와 공중 제어력을 증가시킵니다. '상호작용' 키를 누르고 있으면 땅으로 내려찍습니다.",
+	"ITEM_FALLBOOTS_DESC_RISKYMOD": "<style=cIsUtility>점프 높이</style>와 <style=cIsUtility>공중 제어력</style>을 증가시킵니다. 땅에 부딪힐 때 <style=cIsDamage>5m-100m</style> 반경의 <style=cIsDamage>운동 에너지 폭발</style>을 일으켜, <style=cIsDamage>낙하 거리</style>에 따라 증가하는 <style=cIsDamage>1000%-10000%</style> <style=cStack>(중첩당 +600%-6000%)</style>의 기본 피해를 줍니다. <style=cIsDamage>10</style>초마다 재충전됩니다.",
+	
+	"ITEM_GHOSTONKILL_PICKUP_RISKYMOD": "적 처치 시 유령을 소환합니다. 시간이 지나면 재충전됩니다.",
+	"ITEM_GHOSTONKILL_DESC_RISKYMOD": "적 처치 시 <style=cIsDamage>600%</style> <style=cStack>(중첩당 +180%)</style>의 공격력을 가진 <style=cIsDamage>처치된 적의 유령을 소환</style>합니다. <style=cIsDamage>30초</style> <style=cStack>(중첩당 +30초)</style> 동안 지속됩니다. <style=cIsUtility>20</style>초마다 재충전됩니다. 한 번에 최대 <style=cIsUtility>3</style>마리의 유령을 가질 수 있습니다.", 
+
+	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>딱정벌레 경비병을 모집</style>합니다. <style=cIsDamage>300%</style> <style=cStack>(중첩당 +300%)</style>의 추가 공격력과 <style=cIsHealing>200% <style=cStack>(중첩당 +100%)</style></style>의 체력을 가집니다.",
+	
+	"ITEM_FIREBALLSONHIT_DESC_RISKYMOD": "타격 시 <style=cIsDamage>10%</style> 확률로 적에게서 <style=cIsDamage>3개의 마그마 구체</style>를 불러내 각각 <style=cIsDamage>300%</style> <style=cStack>(중첩당 +180%)</style>의 피해를 줍니다.",
+	
+	"ITEM_LIGHTNINGSTRIKEONHIT_DESC_RISKYMOD": "타격 시 <style=cIsDamage>10%</style> 확률로 번개를 내리쳐 <style=cIsDamage>500%</style> <style=cStack>(중첩당 +300%)</style>의 피해를 줍니다.",
+	
+	"ITEM_BLEEDONHITANDEXPLODE_PICKUP_RISKYMOD": "출혈 중인 적은 처치 시 폭발합니다.",
+	"ITEM_BLEEDONHITANDEXPLODE_DESC_RISKYMOD": "적에게 <style=cIsDamage>240%</style>의 기본 피해만큼 <style=cIsDamage>출혈</style>을 일으킬 확률 <style=cIsDamage>10%</style>를 얻습니다. <style=cIsDamage>출혈</style> 중인 적은 사망 시 <style=cIsDamage>폭발</style>하여 <style=cIsDamage>400%</style> <style=cStack>(중첩당 +320%)</style>의 피해와 함께 최대 체력의 추가 <style=cIsDamage>10%</style> <style=cStack>(중첩당 +8%)</style> 피해를 줍니다.",
+	
+	"ITEM_KNURL_PICKUP_RISKYMOD": "체력, 재생력, 방어력을 증폭시킵니다.",
+	"ITEM_KNURL_DESC_RISKYMOD": "<style=cIsHealing>최대 체력</style>이 <style=cIsHealing>8%</style> <style=cStack>(중첩당 +8%)</style>, <style=cIsHealing>기본 체력 재생</style>이 <style=cIsHealing>초당 +1.6</style> <style=cStack>(중첩당 초당 +1.6)</style>, <style=cIsHealing>방어력</style>이 <style=cIsHealing>10</style> <style=cStack>(중첩당 +10)</style> 증가합니다.",
+		
+	"ITEM_SHIELDONLY_PICKUP_RISKYMOD": "모든 체력을 보호막으로 전환합니다. 최대 체력이 증가합니다... <color=#FF7F7F>하지만 보호막 재생 지연 시간이 증가합니다.</color>",
+	"ITEM_SHIELDONLY_DESC_RISKYMOD": "<style=cIsHealing>1의 체력</style>을 제외한 모든 체력을 <style=cIsHealing>재생성 보호막</style>으로 <style=cIsHealing>전환</style>합니다. <style=cIsHealing>최대 체력이 50% <style=cStack>(중첩당 +25%)</style></style> 증가합니다. <style=cIsHealing>보호막 재생 지연 시간</style>이 <style=cIsHealing>0초</style> <style=cStack>(중첩당 +1초)</style> 증가합니다.",
+	
+	"ITEM_MISSILEVOID_DESC_RISKYMOD": "최대 체력의 <style=cIsHealing>10%</style>에 해당하는 <style=cIsHealing>보호막</style>을 얻습니다. <style=cIsHealing>보호막</style>이 있는 동안 적을 공격하면 총 피해량의 <style=cIsDamage>40%</style> <style=cStack>(중첩당 +28%)</style>를 주는 미사일을 발사합니다. <style=cIsVoid>모든 AtG 미사일 Mk. 1을 타락시킵니다</style>.",
+	
+	"ITEM_EXPLODEONDEATHVOID_DESC_RISKYMOD": "체력이 <style=cIsDamage>90% 이상</style>인 적을 공격하면 <style=cIsDamage>12m</style> 반경 내에 <style=cIsDamage>350%</style> <style=cStack>(중첩당 +280%)</style>의 기본 피해를 주는 <style=cIsDamage>용암 기둥</style>을 생성합니다. <style=cIsVoid>모든 성냥불 욋가지를 타락시킵니다</style>.",
+	
+	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "<style=cIsDamage>400% 이상의 피해</style>를 주는 공격은 15m 내의 적들을 중심으로 <style=cIsUtility>끌어당기는</style> 블랙홀을 발사합니다. <style=cIsUtility>5</style>초 동안 지속되다 붕괴하며, 총 피해량의 <style=cIsDamage>200%</style> <style=cStack>(중첩당 +120%)</style> 피해를 줍니다. <style=cIsUtility>15</style>초마다 재충전됩니다.",
+	
+	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "적 처치 시 <style=cIsUtility>1.5</style> <style=cStack>(중첩당 +1)</style>초 동안 <style=cIsUtility>이동 속도</style>가 <style=cIsUtility>50%</style> 증가합니다. <style=cIsDamage>연속 처치 시 강화 효과 지속 시간이 증가</style>하여 최대 25초까지 지속됩니다.",
+	
+	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "<style=cIsUtility>이동 속도</style>가 <style=cIsUtility>10%</style> <style=cStack>(중첩당 +10%)</style> 증가합니다. 전투에서 벗어나면 <style=cIsUtility>이동 속도</style>가 추가로 <style=cIsUtility>30%</style> <style=cStack>(중첩당 +30%)</style> 증가합니다.",
+	
+	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsUtility>질주하는 동안</style> 초당 <style=cIsHealing>체력</style>의 <style=cIsHealing>1.2%</style> <style=cStack>(중첩당 +0.6%)</style>만큼 <style=cIsHealing>치유</style>합니다. <style=cIsVoid>모든 활기찬 균사체를 타락시킵니다</style>.",
+	
+	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "텔레포터 주위에 초당 <style=cIsHealing>체력</style>의 <style=cIsHealing>5%</style> <style=cStack>(중첩당 +2.5%)</style>만큼 <style=cIsHealing>치유</style>하는 구역을 생성합니다. 텔레포터 이벤트 동안 <style=cIsHealing>치유 신성</style>을 방출하여, 근처의 모든 아군을 최대 체력의 <style=cIsHealing>50%</style>만큼 <style=cIsHealing>치유</style>합니다. <style=cIsHealing>1</style> <style=cStack>(중첩당 +1)</style>회 발생합니다.",
+	
+	"ITEM_CLOVER_DESC_RISKYMOD": "모든 무작위 효과는 <style=cIsUtility>유리한 결과</style>를 위해 <style=cIsUtility>+1</style> <style=cStack>(중첩당 +1)</style>회 추가로 굴려집니다. <style=cIsDamage>운</style>이 <style=cIsUtility>1</style>을 초과하면, 대신 <style=cIsUtility>모든 능력치</style>가 <style=cIsUtility>40%</style> <style=cStack>(중첩당 +40%)</style> 증가합니다.",
+	
+	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "<style=cIsDamage>대령 드론맨</style>을 얻습니다. \n드론은 <style=cIsDamage>+50%</style> <style=cStack>(중첩당 +50%)</style>의 공격 속도 및 재사용 대기시간 감소 효과를 얻습니다. \n드론은 타격 시 <style=cIsDamage>10%</style> 확률로 총 피해량의 <style=cIsDamage>300%</style> 피해를 주는 <style=cIsDamage>미사일</style>을 발사합니다. \n드론은 <style=cIsDamage>6x50%</style>의 피해를 주고 적 <style=cIsDamage>1</style>명에게 튕기는 <style=cIsDamage>자동 체인 건</style>을 얻습니다.",
+	
+	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "위험에서 벗어나 있는 동안 추가 피해를 줍니다.",
+	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "위험에서 벗어나 있는 동안 공격력이 <style=cIsDamage>15%</style> <style=cStack>(중첩당 +15%)</style> 증가합니다.",
+	
+	"ITEM_CHAINLIGHTNINGVOID_DESC_RISKYMOD": "최대 <style=cIsDamage>3 <style=cStack>(중첩당 +2)</style></style>회까지 총 피해량의 <style=cIsDamage>60%</style> 피해를 주는 <style=cIsDamage>번개</style>를 발사할 확률 <style=cIsDamage>25%</style>. <style=cIsVoid>모든 우쿨렐레를 타락시킵니다</style>.",
+	
+	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "근처의 투사체를 격추합니다. 재충전 속도는 보유한 드론 수에 따라 증가합니다.",
+	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "<style=cIsDamage>0.5초</style>마다 <style=cIsDamage>20m</style> 내의 <style=cIsDamage>1</style> <style=cStack>(중첩당 +1)</style>개의 투사체를 격추합니다. <style=cIsUtility>재충전 속도는 보유한 드론 수에 따라 증가합니다</style>.",
+	
+	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "엘리트 괴물 처치 시 <style=cIsHealing>400% <style=cStack>(중첩당 +200%)</style>의 체력</style>과 <style=cIsDamage>400% <style=cStack>(중첩당 +200%)</style>의 공격력</style>을 가진 <style=cIsDamage>알파 구조물</style>을 소환하여 근처 적들의 <style=cIsUtility>주의를 끕니다</style>. 최대 <style=cIsUtility>4</style>개로 제한됩니다.",
+	
+	"ITEM_PERMANENTDEBUFFONHIT_DESC_RISKYMOD": "타격 시 <style=cIsDamage>100%</style> 확률로 <style=cIsDamage>방어력</style>을 <style=cIsDamage>1</style> <style=cStack>(중첩당 +1)</style>만큼 <style=cIsDamage>영구적으로</style> 감소시킵니다.",
+	
+	"ITEM_TITANGOLDDURINGTP_DESC_RISKYMOD": "텔레포터 이벤트 동안 <style=cIsDamage>아우렐리오나이트</style>를 소환합니다. <style=cIsDamage>100% <style=cStack>(중첩당 +50%)</style>의 공격력</style>과 <style=cIsHealing>200% <style=cStack>(중첩당 +100%)</style>의 체력</style>을 가집니다.",
+	
+	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "<style=cIsDamage>약화 효과</style> <style=cIsUtility>1 <style=cStack>(중첩당 +1)</style></style>개를 방지하고, 대신 <style=cIsHealing>최대 체력</style>의 <style=cIsHealing>25%</style>에 해당하는 <style=cIsHealing>임시 방벽</style>을 부여합니다. <style=cIsUtility>5</style>초마다 재충전됩니다.",
+	
+	"ITEM_HEALINGPOTION_PICKUP_RISKYMOD" : "체력이 낮을 때 거대한 방벽을 얻습니다. 사용 시 소모됩니다.",
+	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "체력이 <style=cIsHealth>50% 미만</style>으로 떨어지면 <style=cIsHealing>체력의 50%</style>에 해당하는 <style=cIsHealing>임시 방벽</style>을 얻습니다.",
+	
+	"ITEM_BEARVOID_DESC_RISKYMOD": "받는 피해를 한 번 <style=cIsHealing>막습니다</style>. <style=cIsUtility>20초</style> <style=cStack>(중첩당 -10%)</style> 후에 재충전됩니다. <style=cIsVoid>모든 더 힘든 시간을 타락시킵니다</style>.",
+	
+	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "최대 체력 이상으로 치유하면 <style=cIsHealing>치유량</style>의 <style=cIsHealing>50% <style=cStack>(중첩당 +50%)</style></style>에 해당하는 <style=cIsHealing>임시 방벽</style>을 얻습니다. <style=cIsHealing>방벽 감소 속도</style>를 <style=cIsHealing>2 <style=cStack>(중첩당 +1)</style></style>로 나눕니다.",
+
+	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "기본 공격력이 <style=cIsDamage>100%</style> <style=cStack>(중첩당 +100%)</style> 증가합니다. <style=cIsHealth>최대 체력을 2 <style=cStack>(중첩당 +1)</style></style>로 나눕니다.",
+	
+	"ITEM_STRENGTHENBURN_DESC_RISKYMOD": "타격 시 <style=cIsDamage>5%</style> 확률로 총 피해량의 <style=cIsDamage>50%</style>만큼 <style=cIsDamage>점화</style>합니다. <style=cIsDamage>점화</style> 효과는 <style=cIsDamage>+300%</style> <style=cStack>(중첩당 +300%)</style>의 추가 지속 피해를 줍니다.",
+	
+	"ITEM_CRITDAMAGE_DESC_RISKYMOD": "<style=cIsDamage>치명타 확률 5%</style>를 얻습니다. <style=cIsDamage>치명타</style>는 <style=cIsDamage>100%의 추가 피해</style><style=cStack>(중첩당 +100%)</style>를 줍니다.",
+	
+	"ITEM_BARRAGEONBOSS_DESC_RISKYMOD": "보스 이벤트 동안, <style=cIsUtility>5</style>개의 미사일이 지역을 폭격하여 <style=cIsDamage>보스 최대 체력의 2.5% <style=cStack>(중첩당 +2.5%)</style>만큼 피해</style>를 줍니다. 보스 이벤트 전에, <style=cIsUtility>25</style> 골드를 얻을 때마다 추가 미사일을 얻어 최대 <style=cIsUtility>20</style> <style=cStack>(중첩당 +5)</style>개까지 보유할 수 있습니다. <style=cIsUtility>골드 요구량은 시간에 따라 증가합니다.</style>",
+	
+	"ITEM_TELEPORTONLOWHEALTH_DESC_RISKYMOD": "체력이 <style=cIsHealth>25% 미만</style>으로 떨어지면 <style=cIsHealing>최대 체력</style>의 <style=cIsHealing>100%</style>에 해당하는 <style=cIsHealing>임시 방벽</style>을 얻습니다. <style=cIsUtility>8초</style> 동안 적에게 <style=cIsDamage>출혈</style>을 일으키고 <style=cIsUtility>순간이동</style>시키는 차원 오라를 얻습니다. 오라에 의해 <style=cIsDamage>처치된 적</style>은 지속 시간을 <style=cIsUtility>1초</style> <style=cIsUtility>연장</style>합니다. 각 스테이지 시작 시 재생성됩니다.",
+	
+	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "지상에 있는 적이 <style=cIsUtility>스킬</style>에 맞으면 <style=cIsUtility>공중으로 띄워지며</style> <style=cIsUtility>기절</style>합니다. 공중에 있는 동안 맞은 적은 최대 <style=cIsUtility>2</style> <style=cStack>(중첩당 +1)</style>회까지 다시 <style=cIsUtility>띄워집니다</style>. 띄워진 적은 띄워질 때마다 모든 출처로부터 받는 피해가 <style=cIsDamage>15%</style> 증가합니다. <style=cIsUtility>15초</style> 후에 재충전됩니다.",
+	
+	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "각 강화 효과당 <style=cIsUtility>모든 능력치</style>가 <style=cIsUtility>5%</style> 증가하며, 최대 <style=cIsUtility>4</style> <style=cStack>(중첩당 +4)</style>개까지 적용됩니다.",
+	
+	"ITEM_TRIGGERENEMYDEBUFFS_DESC_RISKYMOD": "적에게 <style=cIsDamage>출혈</style>을 일으킬 확률 <style=cIsDamage>10%</style>를 얻습니다. 적 처치 시, <style=cIsUtility>25m</style> 내의 <style=cIsDamage>1</style> <style=cStack>(중첩당 +1)</style>명의 적에게 모든 약화 효과 중첩의 <style=cIsDamage>33%</style>를 <style=cIsDamage>이전</style>합니다."	}
+}

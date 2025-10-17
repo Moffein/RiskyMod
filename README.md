@@ -25,21 +25,12 @@ This mod is compatible with nearly all content mods. The only things that will c
 - Optional Dependencies
 	- EliteReworks, included since RiskyMod is designed with it in mind.
 	- LinearDamage
-	
-## Some Config Notes
-
-- Shieldgating
-	- This was added before SotV, when there weren't any items in the game that protected against oneshots. Now that there's 3 items that do that (Safer Spaces, Opal, Warped Echo), I feel this is unnecessary, but I've left it enabled for legacy purposes. If you want to disable this, refer to the following config options:
-		- RiskyMod_General.cfg
-			- Game Mechanics
-				- Shield Gating: False
 
 ## Main Features
 
 - Oneshot Protection now actually works.
 	- Oneshot = Going from >90% HP to 0% HP in under 0.5s
 	- Once triggered, you have to be out of danger (no damage for 7s) before it can be retriggered.
-- Shields gate against HP damage like the Guardian's Heart in RoR1.
 - Big balance pass over nearly all the items.
 	- Bad items like Squid Polyps and Warbanners have gotten substantial buffs.
 	- Strong damage items like AtGs and Elemental Bands now have lowered damage stacking.
@@ -91,3 +82,4 @@ Brazilian Portuguese Translation - Kauzok
 - Chinese: JunJun_W
 - German: tymmey
 - Russian: inkyarev
+- Korean: bird_wall

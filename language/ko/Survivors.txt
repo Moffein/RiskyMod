@@ -1,0 +1,90 @@
+{
+	strings:
+	{
+	"CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>7x110%의 피해</style>를 주는 산탄을 발사합니다. 충전 시 <style=cIsUtility>탄 퍼짐</style>이 좁아집니다. 산탄의 수는 공격 속도에 따라 증가합니다.",
+	"CAPTAIN_PRIMARY_DESCRIPTION_VANILLA_RISKYMOD" : "<style=cIsDamage>7x110%의 피해</style>를 주는 산탄을 발사합니다. 충전 시 <style=cIsUtility>탄 퍼짐</style>이 좁아집니다.",
+	"CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>충격성</style>. <style=cIsDamage>100%의 피해</style>를 주는 빠른 테이저를 발사합니다. 최대 <style=cIsDamage>6</style>명의 대상에게 퍼집니다.",
+	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>보급 신호기</style>를 요청합니다. 최대 2개까지 요청할 수 있습니다.",
+	
+	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD" : "주변의 모든 구매 가능 항목을 <style=cIsUtility>해킹</style>하여 비용을 <style=cIsUtility>50%</style> 감소시킵니다.",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_INTERACTION_RISKYMOD" : "스킬 충전량 획득",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD" : "사용 시 <style=cIsUtility>스킬을 재충전</style>하고 <style=cIsUtility>장비</style> 재사용 대기시간을 <style=cIsUtility>20초</style> 감소시킵니다.",
+	
+	"CAPTAIN_SUPPLY_HEAL_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>영구적</style>. 초당 주변의 모든 아군을 <style=cIsHealing>최대 체력</style>의 <style=cIsHealing>10%</style>만큼 <style=cIsHealing>치유</style>합니다.",
+	"CAPTAIN_SUPPLY_SHOCKING_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>영구적</style>. 주기적으로 주변의 모든 적을 <style=cIsDamage>감전</style>시켜 움직이지 못하게 합니다.",
+	"CAPTAIN_SUPPLY_HACKING_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>영구적</style>. 시간이 지남에 따라 주변의 모든 구매 가능 항목을 <style=cIsUtility>해킹</style>하여 비용을 <style=cIsUtility>$0</style>으로 만듭니다.",
+	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>영구적</style>. 사용 시 <style=cIsUtility>장비를 재충전</style>합니다.",
+	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD_PERMANENT" : "<style=cIsHealth>영구적</style>. 주변의 모든 구매 가능 항목을 <style=cIsUtility>해킹</style>하여 비용을 <style=cIsUtility>50%</style> 감소시킵니다.",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD_PERMANENT" : "<style=cIsHealth>영구적</style>. 사용 시 <style=cIsUtility>스킬을 재충전</style>하고 <style=cIsUtility>장비</style> 재사용 대기시간을 <style=cIsUtility>20초</style> 감소시킵니다.",
+	
+	"BANDIT2_PRIMARY_DESC_RISKYMOD" : "<style=cIsDamage>5x90%의 피해</style>를 주는 산탄총을 발사합니다. 최대 4발까지 장전할 수 있습니다.",
+	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD" : "<style=cIsDamage>360%의 피해</style>를 주는 관통 소총탄을 발사합니다. 최대 4발까지 장전할 수 있습니다.",
+	"BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>뒤에서</style> 가하는 모든 공격은 <style=cIsDamage>소형 치명타</style>가 됩니다. 모든 <style=cIsDamage>치명타 확률</style>은 <style=cIsDamage>치명타 피해량</style>으로 전환됩니다.",
+	"BANDIT2_REVOLVER_NAME_RISKYMOD" : "건슬링어",
+	"BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD" : "리볼버 처치 시 <style=cIsUtility>모든 재사용 대기시간이 초기화</style>됩니다.",
+	"BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD" : "리볼버 처치 시 리볼버 피해량을 <style=cIsDamage>10%</style> 증가시키는 <style=cIsDamage>중첩 토큰</style>을 얻습니다.",
+	"BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD": "리볼버 처치 시 리볼버 피해량을 증가시키는 <style=cIsDamage>중첩 토큰</style>을 얻습니다.",
+	"BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>학살자</style>. <style=cIsDamage>600%의 피해</style>를 주는 리볼버를 발사합니다.",
+	"BANDIT2_SPECIAL_ALT_NAME_RISKYMOD" : "쓸어 담기",
+	"BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>학살자</style>. <style=cIsDamage>6x100%의 피해</style>를 주는 리볼버를 속사합니다. 연속으로 맞힐 때마다 <style=cIsDamage>20%</style>의 추가 피해를 줍니다.",
+	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>기절성</style>. <style=cIsDamage>2x240%의 피해</style>를 주는 숨겨진 칼날을 던집니다. 치명타는 <style=cIsHealth>과다출혈</style>을 유발합니다.",
+	"BANDIT2_REVOLVER_STANDOFF_NAME_RISKYMOD" : "결투",
+	"BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD" : "리볼버 처치 시 15초 동안 <style=cIsDamage>공격력이 20% 증가</style>합니다. 최대 <style=cIsDamage>5</style>회 중첩됩니다.",
+	
+	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD": "암살",
+	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>학살자</style>. <style=cIsDamage>2x900%의 피해</style>를 주는 리볼버를 두 발 발사합니다.",
+	"BANDIT2_SPECIAL_ALT_SCEPTER_NAME_RISKYMOD" : "한 줌의 납탄",
+	"BANDIT2_SPECIAL_ALT_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>학살자</style>. <style=cIsDamage>12x100%의 피해</style>를 주는 리볼버를 속사합니다. 연속으로 맞힐 때마다 <style=cIsDamage>20%</style>의 추가 피해를 줍니다.",
+	
+	"COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>450%의 피해</style>를 주는 <style=cIsDamage>관통</style>탄을 발사합니다. 적을 통과할 때마다 <style=cIsDamage>40%</style>의 추가 피해를 줍니다.",
+	"COMMANDO_SECONDARY_LIGHTNING_NAME_RISKYMOD": "위상 번개",
+	"COMMANDO_SECONDARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>450%의 피해</style>를 주는 관통탄을 발사합니다. 주변의 적들에게 추가로 <style=cIsDamage>150%의 피해</style>를 줍니다.",
+	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "짧은 거리를 <style=cIsUtility>구르고</style> 스킬 재사용 대기시간을 <style=cIsUtility>1초</style> 감소시킵니다.",
+	
+	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD": "<style=cIsDamage>기절성</style>. <style=cIsDamage>8x120%의 피해</style>를 주는 연사를 합니다. 발사 횟수는 공격 속도에 따라 증가합니다.",
+
+	"COMMANDO_SPECIAL_EXPL_NAME_RISKYMOD" : "파편 포화",
+	"COMMANDO_SPECIAL_EXPL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>기절성</style>. <style=cIsDamage>6x120%의 피해</style>를 주는 파편탄을 발사합니다. 발사 횟수는 공격 속도에 따라 증가합니다.",
+	"COMMANDO_SPECIAL_EXPL_SCEPTER_NAME_RISKYMOD" : "파편 일제사격",
+	"COMMANDO_SPECIAL_EXPL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>기절성</style>. <style=cIsDamage>12x150%의 피해</style>를 주는 파편탄을 발사합니다. 발사 횟수는 공격 속도에 따라 증가합니다.",
+	"COMMANDO_SPECIAL_ALT1_SCEPTER_NAME_RISKYMOD" : "융단 폭격",
+	"COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>5x700%의 피해</style>로 폭발하는 수류탄을 여러 개 던집니다. 최대 2개까지 보유할 수 있습니다.",
+	
+	"HUNTRESS_PRIMARY_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>민첩성</style>. <style=cIsDamage>200%의 피해</style>를 주는 유도 화살을 빠르게 발사합니다.",
+	"HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>민첩성</style>. <style=cIsDamage>3x120%의 피해</style>를 주는 <style=cIsDamage>3</style>발의 유도 화살을 조준하여 발사합니다. 치명타는 <style=cIsDamage>6</style>발의 화살을 발사합니다.",
+	"HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD" : "하늘로 <style=cIsUtility>순간이동</style>합니다. 지역을 지정하여 화살비를 내려 모든 적을 <style=cIsUtility>느리게</style> 하고 <style=cIsDamage>초당 420%의 피해</style>를 줍니다.",
+	"HUNTRESS_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "하늘로 <style=cIsUtility>순간이동</style>합니다. 지역을 지정하여 화살비를 내려 모든 적을 <style=cIsDamage>점화</style>하고 <style=cIsDamage>초당 420%의 피해</style>를 줍니다.",
+	
+	"TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>660%의 피해</style>를 주는 관통 철근을 발사합니다.",
+	"TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD" : "주변의 적들을 베어 <style=cIsDamage>초당 1000%의 피해</style>를 줍니다. 적을 맞히면 <style=cIsHealing>임시 방벽</style>을 얻습니다.",
+	"TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "육중한 자세에 돌입하여 두 <style=cIsDamage>기본 공격</style>을 동시에 장착합니다. <style=cIsUtility>60의 방어력</style>을 얻지만 <style=cIsHealth>이동 속도가 -60%</style> 감소합니다.",
+	
+	"MERC_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsDamage>기절성</style>. 전방으로 돌진하여 <style=cIsDamage>450%의 피해</style>를 줍니다. 적을 맞히면 최대 <style=cIsDamage>3</style>번까지 <style=cIsDamage>다시 돌진할 수 있습니다</style>.",
+	
+	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "적을 <style=cIsDamage>약화</style>시키는 <style=cIsUtility>음속 폭발</style>을 발사합니다. <style=cIsHealing>적중한 대상마다 치유합니다</style>.",
+	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "적에게 <style=cIsDamage>330%의 피해</style>를 주는 <style=cIsDamage>주사</style>를 놓습니다. 아군은 <style=cIsDamage>주사된</style> 적에게 가한 피해의 <style=cIsHealing>10%</style>만큼 <style=cIsHealing>치유</style>합니다. 사망 시, <style=cIsHealing>체력의 25%</style>를 회복시키는 <style=cIsHealing>치유 과일</style>을 떨어뜨립니다.",
+	
+	"CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "전염",
+	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>기본 공격력이 20% 감소합니다</style>.\n각 스킬은 다른 <style=cIsDamage>지속 피해</style> 효과를 적용합니다.\n<style=cIsHealing>중독</style>과 <color=#B1387F>오염</color>은 처치 시 근처의 적 <style=cIsDamage>1</style>명에게 퍼집니다.",
+	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD": "<style=cIsDamage>기절성</style>. 공중으로 도약하여 <style=cIsDamage>550%의 피해</style>를 줍니다. 적중한 적 하나당 재사용 대기시간이 <style=cIsUtility>1초</style> <style=cIsUtility>감소</style>합니다.",
+	
+	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>점화</style>. <style=cIsDamage>4x70%의 피해</style>를 주는 불덩이를 발사합니다. 최대 4개까지 보유합니다.</style>",
+	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "적을 <style=cIsUtility>느리게</style> 하고 <style=cIsDamage>4x85%의 피해</style>를 주는 번개 구체를 발사합니다. 최대 4개까지 보유합니다.</style>",
+	"MAGE_SECONDARY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>빙결</style>. <style=cIsDamage>400%-1600%</style>의 피해를 주는 <style=cIsDamage>관통</style> 나노 창을 충전합니다.",
+	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>충격성</style>. 하늘로 솟구치며 <style=cIsDamage>800%의 피해</style>를 줍니다.",
+	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>빙결</style>. 적에게 <style=cIsDamage>100%의 피해</style>를 주는 방벽을 생성합니다. 공중에 있을 경우 <style=cIsUtility>뒤로 밀려납니다</style>.",
+	"MAGE_UTILITY_ICE_DESCRIPTION_NOPUSH_RISKYMOD" : "<style=cIsUtility>빙결</style>. 적에게 <style=cIsDamage>100%의 피해</style>를 주는 방벽을 생성합니다.",
+	"MAGE_UTILITY_FIRE_NAME_RISKYMOD" : "화염 폭풍",
+	"MAGE_UTILITY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>점화</style>. <style=cIsDamage>초당 360%의 피해</style>를 주는 화염 토네이도를 생성합니다. 공중에 있을 경우 <style=cIsUtility>뒤로 밀려납니다</style>.",
+	"MAGE_UTILITY_FIRE_DESCRIPTION_NOPUSH_RISKYMOD" : "<style=cIsDamage>점화</style>. <style=cIsDamage>초당 360%의 피해</style>를 주는 화염 토네이도를 생성합니다.",
+	"MAGE_SPECIAL_SITHLIGHTNING_NAME_RISKYMOD" : "감전",
+	"MAGE_SPECIAL_SITHLIGHTNING_DESCRIPTION_RISKYMOD" : "전방의 모든 적에게 <style=cIsDamage>1000%의 피해</style>를 주는 감전을 시킵니다.",
+	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_NAME_RISKYMOD" : "무한한 힘",
+	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_DESCRIPTION_RISKYMOD" : "전방의 모든 적에게 <style=cIsDamage>2000%의 피해</style>를 주는 감전을 시킵니다.",
+	
+	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "최대 <style=cIsDamage>6</style>명의 주변 적에게 <style=cIsDamage>70%의 피해</style>를 주는 <style=cIsDamage>자성</style> 파일런을 던집니다. <style=cIsUtility>갈고리</style>를 걸 수 있습니다.",
+	
+	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "완전히 장전되면 <style=cIsDamage>900%의 피해</style>를 주는 지뢰를 설치합니다. 최대 4개까지 설치할 수 있습니다.",
+	
+	"FALSESON_PASSIVE_DESCRIPTION_RISKYMOD": "사용하지 않은 달 가시는 <style=cIsUtility>공격 속도 +5%</style>와 <style=cIsUtility>방어력 +5</style>를 부여합니다. 사용한 가시는 <style=cIsUtility>이동 속도 +5%</style>와 <style=cIshealing>체력 재생 +0.8</style>을 부여합니다."	}
+}
