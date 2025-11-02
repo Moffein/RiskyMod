@@ -10,13 +10,14 @@ namespace RiskyMod.Content.Enemies
 {
     public class LunarGolemSkyMeadow
     {
+        public static bool enabled = true;
         public static GameObject bodyObject;
         public static GameObject masterObject;
         public static CharacterSpawnCard characterSpawnCard;
 
         public LunarGolemSkyMeadow()
         {
-            if (bodyObject) return;
+            if (!enabled || bodyObject) return;
             SetupBody();
             SetupSpawnCard();
         }
@@ -32,6 +33,7 @@ namespace RiskyMod.Content.Enemies
 
             masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/LunarGolem/LunarGolemMaster.prefab").WaitForCompletion().InstantiateClone("RiskyMod_LunarGolemSkyMeadowMaster", true);
             masterObject.GetComponent<CharacterMaster>().bodyPrefab = bodyObject;
+            Content.masterPrefabs.Add(masterObject);
         }
 
         private void SetupSpawnCard()

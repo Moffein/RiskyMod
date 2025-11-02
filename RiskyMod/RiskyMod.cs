@@ -41,6 +41,7 @@ using RiskyMod.Enemies.DLC1.Voidling;
 using static Generics.Dynamics.RigReader;
 using RiskyMod.Enemies.Mithrix;
 using RiskyMod.Survivors.Commando;
+using RiskyMod.Content.Enemies;
 
 namespace RiskyMod
 {
@@ -81,6 +82,7 @@ namespace RiskyMod
     [BepInDependency("com.RiskyLives.LinearDamage", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RiskyLives.RiskyMithrix", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.RiskySkills", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.RiskySleeps.MithrixWank", BepInDependency.DependencyFlags.SoftDependency)]
     #endregion
 
     [BepInDependency("com.RiskyLives.SneedHooks")]
@@ -95,7 +97,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RiskyFixes")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.8.3")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.8.5")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -175,6 +177,7 @@ namespace RiskyMod
         //This isn't all the softdependency checks. Some still are in CheckDependencies, this is just a quick fix.
         private void InitDependencies()
         {
+            SoftDependencies.MithrixWankLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskySleeps.MithrixWank");
             SoftDependencies.LinearDamageLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskyLives.LinearDamage");
             SoftDependencies.EclipseRevampedLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("Nuxlar.EclipseRevamped");
             SoftDependencies.RiskOfOptionsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions");
@@ -287,6 +290,12 @@ namespace RiskyMod
                 {
                     CommandoCore.skillShrapnelBarrage = false;
                 }
+            }
+
+            if (SoftDependencies.MithrixWankLoaded)
+            {
+                Debug.Log("RiskyMod: Disabling Stage 5 Lunar Golems because MithrixWank is loaded.");
+                LunarGolemSkyMeadow.enabled = false;
             }
         }
 

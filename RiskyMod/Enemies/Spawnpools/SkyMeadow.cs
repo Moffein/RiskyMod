@@ -25,10 +25,14 @@ namespace RiskyMod.Enemies.Spawnpools
 
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.Jellyfish, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.Imp, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
-            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.LunarGolemSkyMeadow, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePoolIT, DirectorCards.Jellyfish, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
             SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePoolIT, DirectorCards.Imp, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
-            SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePoolIT, DirectorCards.LunarGolemSkyMeadow, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+
+            if (DirectorCards.LunarGolemSkyMeadow != null)
+            {
+                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePool, DirectorCards.LunarGolemSkyMeadow, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+                SneedUtils.SneedUtils.AddMonsterDirectorCardToCategory(basePoolIT, DirectorCards.LunarGolemSkyMeadow, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
+            }
 
             SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1Pool, SpawnCards.AlphaConstruct, SneedUtils.SneedUtils.MonsterCategories.BasicMonsters);
             SneedUtils.SneedUtils.RemoveMonsterSpawnCardFromCategory(dlc1Pool, SpawnCards.XiConstruct, SneedUtils.SneedUtils.MonsterCategories.Champions);
