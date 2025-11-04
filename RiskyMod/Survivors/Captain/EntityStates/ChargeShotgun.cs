@@ -2,6 +2,7 @@
 using UnityEngine;
 using EntityStates;
 using RiskyMod.Survivors.Captain;
+using UnityEngine.AddressableAssets;
 
 namespace EntityStates.RiskyMod.Captain
 {
@@ -95,9 +96,9 @@ namespace EntityStates.RiskyMod.Captain
 		public static float baseMinChargeDuration = 0.1f;
 		public static float baseChargeDuration = 1.2f;
 		public static string muzzleName = "MuzzleGun";
-		public static GameObject chargeupVfxPrefab;
-		public static GameObject holdChargeVfxPrefab;
-		public static string enterSoundString = "Play_captain_m1_chargeStart";
+		public static GameObject chargeupVfxPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Loader/ChargeLoaderFist.prefab").WaitForCompletion();
+        public static GameObject holdChargeVfxPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/SpearChargedVFX.prefab").WaitForCompletion();
+        public static string enterSoundString = "Play_captain_m1_chargeStart";
 		public static string playChargeSoundString = "Play_captain_m1_shotgun_charge_loop";
 		public static string stopChargeSoundString = "Stop_captain_m1_shotgun_charge_loop";
 
@@ -106,7 +107,7 @@ namespace EntityStates.RiskyMod.Captain
 		private bool released;
 		private GameObject chargeupVfxGameObject;
 		private GameObject holdChargeVfxGameObject;
-		private Transform muzzleTransform;
+        private Transform muzzleTransform;
 		private uint enterSoundID;
 		private float charge;
 	}

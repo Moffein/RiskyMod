@@ -37,13 +37,6 @@ namespace RiskyMod.Survivors.Captain
             new Microbots();
             ModifySkills(bodyPrefab.GetComponent<SkillLocator>());
 
-            On.RoR2.EntityStateCatalog.InitializeStateFields += (orig, self) =>
-            {
-                orig(self);
-                ChargeShotgun.chargeupVfxPrefab = EntityStates.Captain.Weapon.ChargeCaptainShotgun.chargeupVfxPrefab;
-                ChargeShotgun.holdChargeVfxPrefab = EntityStates.Captain.Weapon.ChargeCaptainShotgun.holdChargeVfxPrefab;
-            };
-
             if (nukeAmmopackNerf || beaconRework)
             {
                 On.RoR2.GenericSkill.ApplyAmmoPack += (orig, self) =>
