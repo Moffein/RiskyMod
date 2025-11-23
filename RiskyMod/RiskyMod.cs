@@ -222,12 +222,10 @@ namespace RiskyMod
             if (backstabReworkPluginLoaded && BackstabRework.enabled) Debug.Log("RiskyMod: Disabling Bandit2 BackstabRework because standalone plugin is loaded.");
             BackstabRework.enabled = BackstabRework.enabled && !backstabReworkPluginLoaded;
 
-            bool eliteReworksPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EliteReworks");
-            if (eliteReworksPluginLoaded && NerfVoidtouched.enabled) Debug.Log("RiskyMod: Disabling NerfVoidtouched because EliteReworks is loaded.");
-            NerfVoidtouched.enabled = NerfVoidtouched.enabled && !eliteReworksPluginLoaded;
-
-            if (eliteReworksPluginLoaded && NullifyDebuff.enabled) Debug.Log("RiskyMod: Disabling Nullify Changes because EliteReworks is loaded.");
-            NullifyDebuff.enabled = NullifyDebuff.enabled && !eliteReworksPluginLoaded;
+            //Should be fine if this doublestacks?
+            //bool eliteReworksPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.EliteReworks");
+            //if (eliteReworksPluginLoaded && NullifyDebuff.enabled) Debug.Log("RiskyMod: Disabling Nullify Changes because EliteReworks is loaded.");
+            //NullifyDebuff.enabled = NullifyDebuff.enabled && !eliteReworksPluginLoaded;
 
             if (SoftDependencies.ShareSuiteLoaded) HandleShareSuite();
 
