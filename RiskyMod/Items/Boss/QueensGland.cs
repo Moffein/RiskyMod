@@ -18,7 +18,6 @@ namespace RiskyMod.Items.Boss
 		{
 			if (!enabled || SoftDependencies.QueensGlandBuffLoaded)
 			{
-				HandleBeetleAllyVanilla();
 				return;
 			}
 			ItemsCore.ModifyItemDefActions += ModifyItem;
@@ -94,15 +93,6 @@ namespace RiskyMod.Items.Boss
 									ugs.ownerInventory = self.body.inventory;
 									ugs.minionInventory = guardInv;
 								}
-
-								if (guardInv && master.teamIndex == TeamIndex.Player)
-								{
-									guardInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
-									guardInv.GiveItem(Allies.AllyItems.AllyScalingItem);
-									guardInv.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
-									guardInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
-									guardInv.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
-								}
 							}
 						}
 					}));
@@ -124,27 +114,6 @@ namespace RiskyMod.Items.Boss
 			HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.BeetleGland);
 		}
 
-		private void HandleBeetleAllyVanilla()
-		{
-			On.RoR2.CharacterBody.Start += (orig, self) =>
-			{
-				orig(self);
-				if (NetworkServer.active && !self.isPlayerControlled && self.bodyIndex == QueensGland.BeetleGuardAllyIndex && self.teamComponent && self.teamComponent.teamIndex == TeamIndex.Player)
-				{
-					if (self.inventory)
-					{
-						self.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
-						self.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
-						self.inventory.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
-						self.inventory.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
-						self.inventory.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
-					}
-				}
-			};
-
-			RoR2Application.onLoad += OnLoad;
-		}
-
 		private void OnLoad()
 		{
             QueensGland.BeetleGuardAllyIndex = BodyCatalog.FindBodyIndex("BeetleGuardAllyBody");
@@ -160,7 +129,7 @@ namespace RiskyMod.Items.Boss
         {
 			if (NetworkServer.active && ownerInventory && minionInventory)
             {
-				int glandCount = Math.Max(ownerInventory.GetItemCount(RoR2Content.Items.BeetleGland), 1);
+				int glandCount = Math.Max(ownerInventory.GetItemCountEffective(RoR2Content.Items.BeetleGland), 1);
 				int stackCount = glandCount - 1;
 
 				int baseDamage = 20;
@@ -171,18 +140,18 @@ namespace RiskyMod.Items.Boss
 				int targetHealthBoost = baseDamage + stackCount * stackDamage;
 				int targetDamageBoost = baseHealth + stackCount * stackHealth;
 
-				int currentHealthBoost = minionInventory.GetItemCount(RoR2Content.Items.BoostHp);
-				int currentDamageBoost = minionInventory.GetItemCount(RoR2Content.Items.BoostDamage);
+				int currentHealthBoost = minionInventory.GetItemCountEffective(RoR2Content.Items.BoostHp);
+				int currentDamageBoost = minionInventory.GetItemCountEffective(RoR2Content.Items.BoostDamage);
 
 				if (currentHealthBoost != targetHealthBoost)
 				{
 					if (currentHealthBoost < targetHealthBoost)
 					{
-						minionInventory.GiveItem(RoR2Content.Items.BoostHp, targetHealthBoost - currentHealthBoost);
+						minionInventory.GiveItemPermanent(RoR2Content.Items.BoostHp, targetHealthBoost - currentHealthBoost);
 					}
 					else if (currentHealthBoost > targetHealthBoost)
 					{
-						minionInventory.RemoveItem(RoR2Content.Items.BoostHp, currentHealthBoost - targetHealthBoost);
+						minionInventory.RemoveItemPermanent(RoR2Content.Items.BoostHp, currentHealthBoost - targetHealthBoost);
 					}
 				}
 
@@ -190,11 +159,11 @@ namespace RiskyMod.Items.Boss
 				{
 					if (currentDamageBoost < targetDamageBoost)
 					{
-						minionInventory.GiveItem(RoR2Content.Items.BoostDamage, targetDamageBoost - currentDamageBoost);
+						minionInventory.GiveItemPermanent(RoR2Content.Items.BoostDamage, targetDamageBoost - currentDamageBoost);
 					}
 					else if (currentDamageBoost > targetDamageBoost)
 					{
-						minionInventory.RemoveItem(RoR2Content.Items.BoostDamage, currentDamageBoost - targetDamageBoost);
+						minionInventory.RemoveItemPermanent(RoR2Content.Items.BoostDamage, currentDamageBoost - targetDamageBoost);
 					}
 				}
 			}

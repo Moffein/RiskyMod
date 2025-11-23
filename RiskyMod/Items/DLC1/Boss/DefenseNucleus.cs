@@ -27,7 +27,6 @@ namespace RiskyMod.Items.DLC1.Boss
         {
             if (!enabled)
             {
-                HandleAllyScalingVanilla();
                 return;
             }
             RoR2Application.onLoad += OnLoad;
@@ -104,27 +103,19 @@ namespace RiskyMod.Items.DLC1.Boss
 
                                                 if (allyInv)
                                                 {
-                                                    if (allyInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) allyInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
+                                                    if (allyInv.GetItemCountPermanent(RoR2Content.Items.UseAmbientLevel) <= 0) allyInv.GiveItemPermanent(RoR2Content.Items.UseAmbientLevel);
+                                                    allyInv.GiveItemPermanent(RoR2Content.Items.HealthDecay, 40);
 
-                                                    if (ownerBody.master.teamIndex == TeamIndex.Player)
-                                                    {
-                                                        allyInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                                                        allyInv.GiveItem(Allies.AllyItems.AllyScalingItem);
-                                                        allyInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
-                                                        allyInv.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
-                                                    }
-                                                    allyInv.GiveItem(RoR2Content.Items.HealthDecay, 40);
+                                                    allyInv.RemoveItemPermanent(RoR2Content.Items.BoostDamage, allyInv.GetItemCountPermanent(RoR2Content.Items.BoostDamage));
+                                                    allyInv.RemoveItemPermanent(RoR2Content.Items.BoostHp, allyInv.GetItemCountPermanent(RoR2Content.Items.BoostHp));
 
-                                                    allyInv.RemoveItem(RoR2Content.Items.BoostDamage, allyInv.GetItemCount(RoR2Content.Items.BoostDamage));
-                                                    allyInv.RemoveItem(RoR2Content.Items.BoostHp, allyInv.GetItemCount(RoR2Content.Items.BoostHp));
-
-                                                    allyInv.GiveItem(RoR2Content.Items.BoostDamage, 30);
-                                                    allyInv.GiveItem(RoR2Content.Items.BoostHp, 30);
+                                                    allyInv.GiveItemPermanent(RoR2Content.Items.BoostDamage, 30);
+                                                    allyInv.GiveItemPermanent(RoR2Content.Items.BoostHp, 30);
                                                     int stackCount = itemCount - 1;
                                                     if (removeAllyScaling && stackCount > 0)
                                                     {
-                                                        allyInv.GiveItem(RoR2Content.Items.BoostDamage, 20 * stackCount);
-                                                        allyInv.GiveItem(RoR2Content.Items.BoostHp, 20 * stackCount);
+                                                        allyInv.GiveItemPermanent(RoR2Content.Items.BoostDamage, 20 * stackCount);
+                                                        allyInv.GiveItemPermanent(RoR2Content.Items.BoostHp, 20 * stackCount);
                                                     }
                                                 }
                                             }
@@ -183,38 +174,30 @@ namespace RiskyMod.Items.DLC1.Boss
                             Inventory allyInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
                             if (allyInv)
                             {
-                                if (allyInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) allyInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
+                                if (allyInv.GetItemCountPermanent(RoR2Content.Items.UseAmbientLevel) <= 0) allyInv.GiveItemPermanent(RoR2Content.Items.UseAmbientLevel);
                                 if (master)
                                 {
-                                    if (master.teamIndex == TeamIndex.Player)
-                                    {
-                                        allyInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                                        allyInv.GiveItem(Allies.AllyItems.AllyScalingItem);
-                                        allyInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
-                                        allyInv.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
-                                    }
-
                                     GameObject allyBodyObject = master.GetBodyObject();
                                     if (allyBodyObject)
                                     {
                                         allyBodyObject.transform.rotation *= Quaternion.Euler(-90f, 0f, 0f);
                                     }
                                 }
-                                allyInv.GiveItem(RoR2Content.Items.HealthDecay, 40);
+                                allyInv.GiveItemPermanent(RoR2Content.Items.HealthDecay, 40);
 
 
-                                allyInv.RemoveItem(RoR2Content.Items.BoostDamage, allyInv.GetItemCount(RoR2Content.Items.BoostDamage));
-                                allyInv.RemoveItem(RoR2Content.Items.BoostHp, allyInv.GetItemCount(RoR2Content.Items.BoostHp));
+                                allyInv.RemoveItemPermanent(RoR2Content.Items.BoostDamage, allyInv.GetItemCount(RoR2Content.Items.BoostDamage));
+                                allyInv.RemoveItemPermanent(RoR2Content.Items.BoostHp, allyInv.GetItemCount(RoR2Content.Items.BoostHp));
 
-                                allyInv.GiveItem(RoR2Content.Items.BoostDamage, 30);
-                                allyInv.GiveItem(RoR2Content.Items.BoostHp, 30);
+                                allyInv.GiveItemPermanent(RoR2Content.Items.BoostDamage, 30);
+                                allyInv.GiveItemPermanent(RoR2Content.Items.BoostHp, 30);
                                 if (removeAllyScaling)
                                 {
                                     int stackCount = itemCount - 1;
                                     if (stackCount > 0)
                                     {
-                                        allyInv.GiveItem(RoR2Content.Items.BoostDamage, 20 * stackCount);
-                                        allyInv.GiveItem(RoR2Content.Items.BoostHp, 20 * stackCount);
+                                        allyInv.GiveItemPermanent(RoR2Content.Items.BoostDamage, 20 * stackCount);
+                                        allyInv.GiveItemPermanent(RoR2Content.Items.BoostHp, 20 * stackCount);
                                     }
                                 }
 
@@ -223,7 +206,7 @@ namespace RiskyMod.Items.DLC1.Boss
                                     EquipmentDef ed = EquipmentCatalog.GetEquipmentDef(victimBody.inventory.currentEquipmentIndex);
                                     if (ed && ed.passiveBuffDef && ed.passiveBuffDef.isElite)
                                     {
-                                        allyInv.SetEquipmentIndex(victimBody.inventory.currentEquipmentIndex);
+                                        allyInv.SetEquipmentIndex(victimBody.inventory.currentEquipmentIndex, false);
                                     }
                                 }
                             }
@@ -256,25 +239,6 @@ namespace RiskyMod.Items.DLC1.Boss
             {
                 damageInfo.damage *= 2f;
             }
-        }
-
-        private void HandleAllyScalingVanilla()
-        {
-            On.RoR2.CharacterBody.Start += (orig, self) =>
-            {
-                orig(self);
-                if (NetworkServer.active && !self.isPlayerControlled && self.bodyIndex == DefenseNucleus.MinorConstructAlly && self.teamComponent && self.teamComponent.teamIndex == TeamIndex.Player)
-                {
-                    if (self.inventory)
-                    {
-                        self.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                        self.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
-                        self.inventory.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
-                        self.inventory.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
-                        //No regen
-                    }
-                }
-            };
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using RiskyMod;
 using RiskyMod.Allies;
 using RoR2;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
@@ -9,6 +10,7 @@ namespace EntityStates.RiskyMod.MegaDrone
 {
 	public class MegaDroneDeathState : GenericCharacterDeath
 	{
+		public int droneUpgradeCount = 0;
 		public override void OnEnter()
 		{
 			if (NetworkServer.active)
@@ -23,7 +25,9 @@ namespace EntityStates.RiskyMod.MegaDrone
 					};
 
 					int spawnCount = 1;
-					if (base.characterBody && base.characterBody.inventory)
+
+					//Probably obsolete due to vanilla drone scrapper
+					/*if (base.characterBody && base.characterBody.inventory)
                     {
                         ItemIndex droneMeldIndex = ItemCatalog.FindItemIndex("DronemeldInternalStackItem");
                         if (droneMeldIndex != ItemIndex.None)
@@ -36,9 +40,7 @@ namespace EntityStates.RiskyMod.MegaDrone
                         {
                             spawnCount += base.characterBody.inventory.GetItemCount(minionMeldIndex);
                         }
-                    }
-
-                    if (SoftDependencies.SS2_CheckDroneMarker(base.gameObject)) spawnCount = 0;
+                    }*/
 
                     Vector3? desiredPosition = null;
 					Quaternion? desiredRotation = null;
@@ -50,8 +52,13 @@ namespace EntityStates.RiskyMod.MegaDrone
 							PurchaseInteraction purchaseInteraction = gameObject.GetComponent<PurchaseInteraction>();
 							if (purchaseInteraction && purchaseInteraction.costType == CostTypeIndex.Money)
 							{
-								int cost = Run.instance.GetDifficultyScaledCost(purchaseInteraction.cost);
-								purchaseInteraction.Networkcost = CheaperRepairs.enabled ? Mathf.CeilToInt(cost * 0.5f) : cost;
+
+								//Jank, share the cost coefficient of vanilla drones
+								float costCoefficient = new EntityStates.Drone.DeathState().costCoefficient;
+
+
+                                float upgradeScalar = 1f + (float)droneUpgradeCount * 0.2f;
+                                purchaseInteraction.Networkcost = Mathf.RoundToInt((float)Run.instance.GetDifficultyScaledCost(purchaseInteraction.cost) * costCoefficient * upgradeScalar);
 							}
 
 							if (desiredPosition == null)
@@ -72,6 +79,9 @@ namespace EntityStates.RiskyMod.MegaDrone
 							{
 								gameObject.transform.rotation = (Quaternion)desiredRotation;
 							}
+
+							SummonMasterBehavior smb = gameObject.GetComponent<SummonMasterBehavior>();
+							smb.droneUpgradeCount = droneUpgradeCount;
 						}
 					}
 				}

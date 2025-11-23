@@ -78,18 +78,6 @@ namespace RiskyMod
             return RunArtifactManager.instance && RunArtifactManager.instance.IsArtifactEnabled(ArtifactOfPotential.PotentialArtifact.Potential);
         }
 
-        public static bool SS2_CheckDroneMarker(GameObject gameObject)
-        {
-            if (SS2OLoaded) return SS2_CheckDroneMarkerInternal(gameObject);
-            return false;
-        }
-
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private static bool SS2_CheckDroneMarkerInternal(GameObject gameObject)
-        {
-            return gameObject.GetComponent<Moonstorm.Starstorm2.Interactables.DroneTable.RefabricatorHardDeathToken>() != null;
-        }
-
         internal static bool EclipseRevamped_CheckEclipse2Config()
         {
             if (EclipseRevampedLoaded) return EclipseRevamped_CheckEclipse2ConfigInternal();

@@ -24,7 +24,6 @@ namespace RiskyMod.Enemies.Mobs
             modifiedGas = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MiniMushroom/SporeGrenadeProjectileDotZone.prefab").WaitForCompletion().InstantiateClone("RiskyModMushrumProjectileDotZone", true);
             ProjectileDotZone pdz = modifiedGas.GetComponent<ProjectileDotZone>();
             pdz.overlapProcCoefficient = 0.2f;  //0.5 is vanilla
-            Allies.DotZoneResist.AddDotZoneDamageType(modifiedGas);
 
             modifiedProjectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/MiniMushroom/SporeGrenadeProjectile.prefab").WaitForCompletion().InstantiateClone("RiskyModMushrumProjectile", true);
             ProjectileImpactExplosion pie = modifiedProjectile.GetComponent<ProjectileImpactExplosion>();

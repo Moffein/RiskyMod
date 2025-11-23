@@ -20,7 +20,6 @@ namespace RiskyMod.Enemies.Mobs.Lunar
             modifiedFirePool = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/LunarExploder/LunarExploderProjectileDotZone.prefab").WaitForCompletion().InstantiateClone("RiskyModLunarExploderProjectileDotZone", true);
             ProjectileDotZone pdz = modifiedFirePool.GetComponent<ProjectileDotZone>();
             pdz.overlapProcCoefficient = 0.2f;  //0.5 is vanilla
-            Allies.DotZoneResist.AddDotZoneDamageType(modifiedFirePool);
 
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/LunarExploder/EntityStates.LunarExploderMonster.DeathState.asset", "projectilePrefab", modifiedFirePool);
 

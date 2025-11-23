@@ -18,7 +18,6 @@ namespace RiskyMod.Items.Equipment
         {
             if (!enabled)
             {
-                HandleBackupVanilla();
                 return;
             }
             On.RoR2.EquipmentSlot.FireDroneBackup += (orig, self) =>
@@ -67,14 +66,6 @@ namespace RiskyMod.Items.Equipment
                                     msot.lifeTimer = num + UnityEngine.Random.Range(0f, 3f);
                                     bt.AddHealthcomponent(cb.healthComponent);
                                 }
-
-                                if (characterMaster.teamIndex == TeamIndex.Player && characterMaster.inventory)
-                                {
-                                    characterMaster.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                                    characterMaster.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
-                                    characterMaster.inventory.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
-                                    characterMaster.inventory.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
-                                }
                             }
                         }
                     }
@@ -97,23 +88,6 @@ namespace RiskyMod.Items.Equipment
         private void OnLoad()
         {
             Backup.BackupDroneIndex = BodyCatalog.FindBodyIndex("BackupDroneBody");
-        }
-
-        private static void HandleBackupVanilla()
-        {
-            On.RoR2.CharacterBody.Start += (orig, self) =>
-            {
-                orig(self);
-                if (NetworkServer.active && !self.isPlayerControlled && self.bodyIndex == Backup.BackupDroneIndex && self.teamComponent && self.teamComponent.teamIndex == TeamIndex.Player)
-                {
-                    if (self.inventory)
-                    {
-                        self.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                        self.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
-                        self.inventory.GiveItem(Allies.AllyItems.AllyRegenItem, 40);
-                    }
-                }
-            };
         }
     }
 

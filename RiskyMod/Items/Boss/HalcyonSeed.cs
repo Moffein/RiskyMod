@@ -7,42 +7,26 @@ namespace RiskyMod.Items.Boss
     public class HalcyonSeed
     {
         public static bool enabled = true;
-        public static BodyIndex TitanGoldIndex;
 
         public HalcyonSeed()
         {
-            if (enabled)
-            {
-                ItemsCore.ModifyItemDefActions += ModifyItem;
-            }
-
-            RoR2Application.onLoad += OnLoad;
-
-            On.RoR2.CharacterBody.Start += (orig, self) =>
-            {
-                orig(self);
-                if (NetworkServer.active && !self.isPlayerControlled && self.bodyIndex == TitanGoldIndex && self.teamComponent && self.teamComponent.teamIndex == TeamIndex.Player)
-                {
-                    if (self.inventory)
-                    {
-                        if (HalcyonSeed.enabled)
-                        {
-                            self.inventory.GiveItem(RoR2Content.Items.BoostHp, 10); //Increase initial stack health
-                            self.inventory.GiveItem(RoR2Content.Items.AdaptiveArmor);
-                        }
-
-                        self.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                        self.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
-
-                        //Debug.Log("Uses Ambient Level: " + (self.inventory.GetItemCount(RoR2Content.Items.UseAmbientLevel) > 0)); //This DOES use ambient level
-                    }
-                }
-            };
+            if (!enabled) return;
+            ItemsCore.ModifyItemDefActions += ModifyItem;
+            On.RoR2.CharacterBody.Start += CharacterBody_Start;
         }
 
-        private void OnLoad()
+        private void CharacterBody_Start(On.RoR2.CharacterBody.orig_Start orig, CharacterBody self)
         {
-            HalcyonSeed.TitanGoldIndex = BodyCatalog.FindBodyIndex("TitanGoldBody");
+            orig(self);
+            if (!self.isPlayerControlled && self.bodyIndex == RoR2Content.BodyPrefabs.TitanGoldBody.bodyIndex && self.teamComponent && self.teamComponent.teamIndex == TeamIndex.Player)
+            {
+                if (NetworkServer.active)
+                {
+                    self.inventory.GiveItemPermanent(RoR2Content.Items.BoostHp, 10); //Increase initial stack health
+                    self.inventory.GiveItemPermanent(RoR2Content.Items.AdaptiveArmor);
+                }
+                self.bodyFlags |= CharacterBody.BodyFlags.ImmuneToVoidDeath | CharacterBody.BodyFlags.OverheatImmune | CharacterBody.BodyFlags.ImmuneToExecutes | CharacterBody.BodyFlags.ImmuneToLava;
+            }
         }
 
         private static void ModifyItem()

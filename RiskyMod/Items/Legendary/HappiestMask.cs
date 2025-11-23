@@ -144,20 +144,18 @@ namespace RiskyMod.Items.Legendary
                 Inventory inventory = characterMaster2.inventory;
                 if (inventory)
                 {
-                    if (inventory.GetItemCount(RoR2Content.Items.Ghost) <= 0) inventory.GiveItem(RoR2Content.Items.Ghost);
-                    if (inventory.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
+                    if (inventory.GetItemCountPermanent(RoR2Content.Items.Ghost) <= 0) inventory.GiveItemPermanent(RoR2Content.Items.Ghost);
+                    if (inventory.GetItemCountPermanent(RoR2Content.Items.UseAmbientLevel) <= 0) inventory.GiveItemPermanent(RoR2Content.Items.UseAmbientLevel);
 
                     if (ownerBody && ownerBody.teamComponent && ownerBody.teamComponent.teamIndex == TeamIndex.Player)
                     {
-                        inventory.GiveItem(RoR2Content.Items.BoostDamage.itemIndex, 32 + 18 * itemCount);
-                        inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 30 * itemCount);
-                        inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                        inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
+                        inventory.GiveItemPermanent(RoR2Content.Items.BoostDamage.itemIndex, 32 + 18 * itemCount);
+                        inventory.GiveItemPermanent(RoR2Content.Items.HealthDecay.itemIndex, 30 * itemCount);
                     }
                     else //Handle enemy-spawned ghosts
                     {
                         int lifetime = 10 + 10 * itemCount;
-                        inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, lifetime);
+                        inventory.GiveItemPermanent(RoR2Content.Items.HealthDecay.itemIndex, lifetime);
                         MasterSuicideOnTimer mst = characterMaster2.gameObject.AddComponent<MasterSuicideOnTimer>();
                         mst.lifeTimer = lifetime;
                     }

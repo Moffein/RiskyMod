@@ -15,17 +15,12 @@ namespace RiskyMod.Allies.DroneChanges
         public static bool allowRepair = true;
         public static bool teleportWithPlayer = true;
         public static bool teleportToMithrix = true;
-        public static bool weakToMithrix = true;
 
         private static BodyIndex gunnerTurretBodyIndex;
 
         public GunnerTurret()
         {
-            GameObject gunnerTurret = AllyPrefabs.GunnerTurret;
-
-            SkillDef turretSkill = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Drones/Turret1BodyTurret.asset").WaitForCompletion();
-            turretSkill.baseMaxStock = 1;
-            turretSkill.baseRechargeInterval = 0f;
+            GameObject gunnerTurret = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/Turret1Body.prefab").WaitForCompletion();
 
             if (GunnerTurret.allowRepair)
             {
@@ -36,23 +31,6 @@ namespace RiskyMod.Allies.DroneChanges
                 }
             }
             Content.Content.entityStates.Add(typeof(EntityStates.RiskyMod.Turret1.Turret1DeathState));
-
-            //Gets run before scaling changes
-            CharacterBody cb = gunnerTurret.GetComponent<CharacterBody>();
-            cb.baseMaxHealth = 400f;
-            cb.levelMaxHealth = cb.baseMaxHealth * 0.3f;
-            cb.baseMaxShield = cb.baseMaxHealth * 0.1f;
-            cb.levelMaxShield = cb.baseMaxShield * 0.3f;
-            cb.baseArmor = 20f;
-
-            RoR2Application.onLoad += OnLoad;
-
-            GameObject masterObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/Turret1Master.prefab").WaitForCompletion();
-            AISkillDriver[] skillDrivers = masterObject.GetComponents<AISkillDriver>();
-            foreach (AISkillDriver sd in skillDrivers)
-            {
-                if (sd.skillSlot == SkillSlot.Primary && sd.maxDistance < 90f) sd.maxDistance = 90f;
-            }
 
 
             if (teleportWithPlayer)
@@ -67,26 +45,6 @@ namespace RiskyMod.Allies.DroneChanges
                 {
                     Debug.LogError("RiskyMod: Disabling GunnerTurret teleport because TeleporterTurrets is installed.");
                 }
-            }
-
-            if (weakToMithrix)
-            {
-                SharedHooks.TakeDamage.ModifyInitialDamageAttackerActions += WeakToMithrixHook;
-            }
-        }
-
-        private void OnLoad()
-        {
-            gunnerTurretBodyIndex = BodyCatalog.FindBodyIndex("Turret1Body");
-        }
-
-        private void WeakToMithrixHook(DamageInfo damageInfo, HealthComponent self, CharacterBody attackerBody)
-        {
-            if (self.body.bodyIndex == gunnerTurretBodyIndex
-                && (attackerBody.bodyIndex == Enemies.Mithrix.MithrixCore.brotherBodyIndex
-                || attackerBody.bodyIndex == Enemies.Mithrix.MithrixCore.brotherHurtBodyIndex))
-            {
-                damageInfo.damage *= 2f;
             }
         }
 

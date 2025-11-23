@@ -20,10 +20,9 @@ namespace RiskyMod.Allies.DamageResistances
         //This might be too general.
         private static void AddResist(DamageInfo damageInfo, HealthComponent self)
         {
-
             if (!self.body.isPlayerControlled
                 && (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player)
-                && (self.body.inventory && self.body.inventory.GetItemCount(AllyItems.AllyMarkerItem) > 0))
+                && self.body.isFlying)
             {
                 //Splat damage can have an attacker.
                 //&& damageInfo.damageColorIndex == DamageColorIndex.Default    //Certain modded skills overwrite damagecolor

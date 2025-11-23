@@ -203,31 +203,12 @@ namespace RiskyMod
             LoopTeleMountainShrine.enabled = GeneralCfg.Bind(scalingString, "Loop Teleporter Boss Credits", true, "Teleporter Boss director credits increase by 1 Mountain Shrine every loop.").Value;
             
             //Allies
-            AlliesCore.normalizeDroneDamage = GeneralCfg.Bind(allyString, "Normalize Drone Damage", true, "Normalize drone damage stats so that they perform the same when using Spare Drone Parts.").Value;
-            AllyScaling.preventExecute = GeneralCfg.Bind(allyString, "No Execute", true, "Allies are immune to being executed by Freeze and similar effects.").Value;
-            AllyScaling.noVoidDeath = GeneralCfg.Bind(allyString, "No Void Death", true, "Allies are immune to Void implosions.").Value;
             AntiSplat.enabled = GeneralCfg.Bind(allyString, "No Splat Death", true, "Allies are immune to physics damage.").Value;
             NoVoidDamage.enabled = GeneralCfg.Bind(allyString, "No Void Damage", true, "Allies take no damage from Void fog.").Value;
-            AllyScaling.noOverheat = GeneralCfg.Bind(allyString, "No Overheat", true, "Allies are immune to Grandparent Overheat.").Value;
-            SuperAttackResist.enabled = GeneralCfg.Bind(allyString, "Superattack Resistance", true, "Allies take less damage from superattacks like Vagrant Novas.").Value;
-            DotZoneResist.enabled = GeneralCfg.Bind(allyString, "Damage Zone Resistance", true, "Allies take less damage from Mushrums gas and Lunar Exploder fire.").Value;
-            AlliesCore.beetleGlandDontRetaliate = GeneralCfg.Bind(allyString, "Queens Gland Guards Dont Retaliate", true, "Queens Gland Guards will not fight back if hurt by their owners.").Value;
             MegaDrone.allowRepair = GeneralCfg.Bind(allyString, "TC280 - Enable Repairs", true, "TC280s can be repaired after being destroyed.").Value;
             GunnerTurret.allowRepair = GeneralCfg.Bind(allyString, "Gunner Turret - Enable Repairs", true, "Gunner Turrets can be repaired after being destroyed.").Value;
             GunnerTurret.teleportWithPlayer = GeneralCfg.Bind(allyString, "Gunner Turret - Teleport with Player", true, "Gunner Turrets are teleported to the player when starting the Teleporter event.").Value;
             GunnerTurret.teleportToMithrix = GeneralCfg.Bind(allyString, "Gunner Turret - Teleport with Player - Teleport to Mithrix", true, "Gunner Turrets are teleported to the player when fighting Mithrix. Requires Teleport with Player.").Value;
-            CheaperRepairs.enabled = GeneralCfg.Bind(allyString, "Cheaper Drone Repairs", true, "Repairing drones is cheaper.").Value;
-            AlliesCore.changeScaling = GeneralCfg.Bind(allyString, "Scaling Changes", false, "Ally HP and Damage scales so that they always perform the same on every stage.").Value;
-            AlliesCore.buffRegen = GeneralCfg.Bind(allyString, "Regen Changes", true, "Most allies regen to full HP in a fixed amount of time.").Value;
-            AlliesCore.droneMeldRegen = GeneralCfg.Bind(allyString, "Regen Changes - DroneMeld Mod Compatibility", false, "Scale regen with DroneMeld stacks (or any mod that modifies minion HP or lets them gain items).").Value;
-
-            AlliesCore.ChenChillDroneCompat = GeneralCfg.Bind(allyString, "Compatibility - Chill Drone", true, "Enables ally changes on allies from this mod.").Value;
-            AlliesCore.ChenQbDroneCompat = GeneralCfg.Bind(allyString, "Compatibility - Qb Drone", true, "Enables ally changes on allies from this mod.").Value;
-            AlliesCore.ChenGradiusCompat = GeneralCfg.Bind(allyString, "Compatibility - Gradius Mod", true, "Enables ally changes on allies from this mod.").Value;
-            AlliesCore.SS2Compat = GeneralCfg.Bind(allyString, "Compatibility - Starstorm 2", true, "Enables ally changes on allies from this mod.").Value;
-            AlliesCore.SpikestripCompat = GeneralCfg.Bind(allyString, "Compatibility - Spikestrip", true, "Enables ally changes on allies from this mod.").Value;
-            AlliesCore.TinkersSatchelCompat = GeneralCfg.Bind(allyString, "Compatibility - Tinkers Satchel", true, "Enables ally changes on allies from this mod.").Value;
-            AlliesCore.MoreDronesCompat = GeneralCfg.Bind(allyString, "Compatibility - MoreDrones", true, "Enables ally changes on allies from this mod.").Value;
 
             SpawnLimits.maxVoidSeeds = GeneralCfg.Bind(interactString, "Max Void Seeds", 1, "Limit how many Void Seeds can spawn on 1 stage. Vanilla is 3. Set to negative for no limit.").Value;
             ExtraVoidSeedPerLoop.maxExtraSeeds = GeneralCfg.Bind(interactString, "Per-Loop Max Extra Void Seeds", 2, "Increases Max Void Seeds per loop by 1 until this number is reached. Set to negative for no limit.").Value;
@@ -321,7 +302,7 @@ namespace RiskyMod
             SquidPolyp.ignoreAllyCap = ItemCfg.Bind(uncommonString, "Squid Polyp - Ignore Ally Cap", true, "Squid Polyps ignore the ally cap if changes are enabled.").Value;
             SquidPolyp.scaleCount = ItemCfg.Bind(uncommonString, "Squid Polyp - Stacks Increase Max Squids", false, "Extra stacks allow for more squids to spawn. Will lag in MP.").Value;
             SquidPolyp.cannotCopy = ItemCfg.Bind(uncommonString, "Squid Polyp - CannotCopy Tag", false, "If True, prevent minions like Engi Turrets from receiving this item.").Value;
-            SquidPolyp.minionSquidLimit = ItemCfg.Bind(uncommonString, "Squid Polyp - Minion Squid Limit", -1, "Max squids minions sucha s Engi Turrets can spawn. -1 = same as player.").Value;
+            SquidPolyp.shareCountWithMinions = ItemCfg.Bind(uncommonString, "Squid Polyp - Share Count with Minions", false, "If True, minions such as Engi Turrets will share their squid count with their owner.").Value;
             Stealthkit.enabled = ItemCfg.Bind(uncommonString, "Old War Stealthkit", true, itemConfigDescString).Value;
             Ukulele.enabled = ItemCfg.Bind(uncommonString, "Ukulele", true, itemConfigDescString).Value;
             WarHorn.enabled = ItemCfg.Bind(uncommonString, "War Horn", true, itemConfigDescString).Value;

@@ -19,9 +19,9 @@ namespace RiskyMod.Items.Uncommon
         public static bool scaleCount = false;
         public static bool ignoreAllyCap = true;
         public static bool weakToMithrix = true;
+        public static bool shareCountWithMinions = true;
 
         public static bool cannotCopy = false;
-        public static int minionSquidLimit = -1;
 
         public static BodyIndex squidTurretBodyIndex;
         public static CharacterSpawnCard squidTurretCard = Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Squid/cscSquidTurret.asset").WaitForCompletion();
@@ -131,30 +131,26 @@ namespace RiskyMod.Items.Uncommon
                                     CharacterMaster component6 = result.spawnedInstance.GetComponent<CharacterMaster>();
                                     if (component6.inventory)
                                     {
-                                        if (component6.inventory.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) component6.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel);
+                                        if (component6.inventory.GetItemCountPermanent(RoR2Content.Items.UseAmbientLevel) <= 0) component6.inventory.GiveItemPermanent(RoR2Content.Items.UseAmbientLevel);
                                         if (self.itemCounts.invadingDoppelganger > 0)
                                         {
                                             //Doppelganger Turrets decay faster and deal less damage.
-                                            component6.inventory.GiveItem(RoR2Content.Items.InvadingDoppelganger);
-                                            component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 10);
+                                            component6.inventory.GiveItemPermanent(RoR2Content.Items.InvadingDoppelganger);
+                                            component6.inventory.GiveItemPermanent(RoR2Content.Items.HealthDecay, 10);
                                         }
                                         else
                                         {
-                                            component6.inventory.GiveItem(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
+                                            component6.inventory.GiveItemPermanent(RoR2Content.Items.BoostAttackSpeed, 10 * (polypCount - 1));
 
                                             if (self.body.teamComponent && self.body.teamComponent.teamIndex == TeamIndex.Player && !SoftDependencies.KingKombatArenaActive)
                                             {
-                                                component6.inventory.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                                                component6.inventory.GiveItem(Allies.AllyItems.AllyScalingItem);
-                                                component6.inventory.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
-                                                component6.inventory.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
-                                                component6.inventory.GiveItem(RoR2Content.Items.BoostHp, 30 + 4 * 5 * (polypCount - 1));
-                                                component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 40);
+                                                component6.inventory.GiveItemPermanent(RoR2Content.Items.BoostHp, 30 + 4 * 5 * (polypCount - 1));
+                                                component6.inventory.GiveItemPermanent(RoR2Content.Items.HealthDecay, 40);
                                             }
                                             else
                                             {
-                                                component6.inventory.GiveItem(RoR2Content.Items.BoostHp, 5 * (polypCount - 1));
-                                                component6.inventory.GiveItem(RoR2Content.Items.HealthDecay, 20);
+                                                component6.inventory.GiveItemPermanent(RoR2Content.Items.BoostHp, 5 * (polypCount - 1));
+                                                component6.inventory.GiveItemPermanent(RoR2Content.Items.HealthDecay, 20);
                                             }
                                         }
                                     }
@@ -171,14 +167,15 @@ namespace RiskyMod.Items.Uncommon
 
     public class SquidMinionComponent : MonoBehaviour
     {
-        private List<GameObject> squidList;
+        public List<GameObject> squidList;
         private Inventory inventory = null;
         private bool isMinion;
         private CharacterBody cb;
 
+
         public void Awake()
         {
-            squidList = new List<GameObject>();
+            if (squidList == null) squidList = new List<GameObject>();
             isMinion = false;
 
             cb = base.gameObject.GetComponent<CharacterBody>();
@@ -191,18 +188,34 @@ namespace RiskyMod.Items.Uncommon
         public void Start()
         {
             isMinion = cb && cb.master && cb.master.minionOwnership && cb.master.minionOwnership.ownerMaster != null;
+            if (isMinion && SquidPolyp.shareCountWithMinions)
+            {
+                CharacterBody ownerBody = cb.master.minionOwnership.ownerMaster.GetBody();
+                if (ownerBody && ownerBody.inventory)
+                {
+                    cb = ownerBody;
+                    inventory = ownerBody.inventory;
+
+                    SquidMinionComponent smc = ownerBody.GetComponent<SquidMinionComponent>();
+                    if (!smc) smc = ownerBody.gameObject.AddComponent<SquidMinionComponent>();
+                    if (smc.squidList == null)
+                    {
+                        smc.squidList = squidList;
+                    }
+                    else
+                    {
+                        squidList = smc.squidList;
+                    }
+                }
+            }
         }
+
 
         public bool CanSpawnSquid()
         {
-            if (isMinion && SquidPolyp.minionSquidLimit >= 0)
-            {
-                return squidList.Count < SquidPolyp.minionSquidLimit;
-            }
-
             if (SquidPolyp.scaleCount)
             {
-                return squidList.Count < 2 + (inventory ? inventory.GetItemCount(RoR2Content.Items.Squid) : -2);
+                return squidList.Count < 2 + (inventory ? inventory.GetItemCountEffective(RoR2Content.Items.Squid) : -2);
             }
             else
             {

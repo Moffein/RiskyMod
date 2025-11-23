@@ -50,7 +50,7 @@ namespace RiskyMod.Items.DLC1.Void
                     if (slot == DeployableSlot.VoidMegaCrabItem)
                     {
                         //Vanilla just calls GetMaxProjectiles, but why is it different?
-                        return RiskyMod.inBazaar ? 0 : Math.Min(self.inventory.GetItemCount(DLC1Content.Items.VoidMegaCrabItem), maxAllyCount);
+                        return RiskyMod.inBazaar ? 0 : Math.Min(self.inventory.GetItemCountEffective(DLC1Content.Items.VoidMegaCrabItem), maxAllyCount);
                     }
                     else
                     {
@@ -68,16 +68,7 @@ namespace RiskyMod.Items.DLC1.Void
                     Inventory allyInv = spawnResult.spawnedInstance.GetComponent<Inventory>();
                     if (allyInv)
                     {
-                        if (allyInv.GetItemCount(RoR2Content.Items.UseAmbientLevel) <= 0) allyInv.GiveItem(RoR2Content.Items.UseAmbientLevel);
-
-                        CharacterMaster cm = spawnResult.spawnedInstance.GetComponent<CharacterMaster>();
-                        if (cm && cm.teamIndex == TeamIndex.Player)
-                        {
-                            allyInv.GiveItem(Allies.AllyItems.AllyMarkerItem);
-                            allyInv.GiveItem(Allies.AllyItems.AllyScalingItem);
-                            allyInv.GiveItem(Allies.AllyItems.AllyAllowVoidDeathItem);
-                            allyInv.GiveItem(Allies.AllyItems.AllyAllowOverheatDeathItem);
-                        }
+                        if (allyInv.GetItemCountPermanent(RoR2Content.Items.UseAmbientLevel) <= 0) allyInv.GiveItemPermanent(RoR2Content.Items.UseAmbientLevel);
 
                         if (Zoea.enabled && self.body && self.body.inventory)
                         {
@@ -85,7 +76,7 @@ namespace RiskyMod.Items.DLC1.Void
                             if (overstack > 0)
                             {
                                 int targetDamageBoost = 3 * overstack;
-                                allyInv.GiveItem(RoR2Content.Items.BoostDamage, targetDamageBoost);
+                                allyInv.GiveItemPermanent(RoR2Content.Items.BoostDamage, targetDamageBoost);
                             }
                         }
                     }
