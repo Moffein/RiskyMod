@@ -101,7 +101,7 @@ namespace RiskyMod.Items.Boss
                                 //Disable Proc Coefficient
                                 if (RiskyMod.disableProcChains)
                                 {
-                                    hookCount += 2;
+                                    hookCount += 1;
                                     if (c.TryGotoNext(
                                         x => x.MatchStfld<DelayBlast>("position")
                                         ))
@@ -115,14 +115,14 @@ namespace RiskyMod.Items.Boss
                                         actual++;
                                     }
 
-                                    if (c.TryGotoNext(x => x.MatchStfld<DelayBlast>("falloffModel")))
+                                    /*if (c.TryGotoNext(x => x.MatchStfld<DelayBlast>("falloffModel")))
                                     {
                                         c.EmitDelegate<Func<BlastAttack.FalloffModel, BlastAttack.FalloffModel>>((f) =>
                                         {
                                             return BlastAttack.FalloffModel.None;
                                         });
                                         actual++;
-                                    }
+                                    }*/
                                 }
                             }
                         }

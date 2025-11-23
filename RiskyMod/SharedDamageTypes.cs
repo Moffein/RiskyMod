@@ -190,7 +190,7 @@ namespace RiskyMod
 
                 for (int i = 0; i < stacks; i++)
                 {
-                    DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Blight, duration, 1f);
+                    DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, damageInfo.inflictedHurtbox, DotController.DotIndex.Blight, duration, 1f);
 
                     if (i > 0 && GlobalContagionTracker.instance)
                     {
@@ -203,7 +203,7 @@ namespace RiskyMod
         {
             if (damageInfo.HasModdedDamageType(SharedDamageTypes.CrocoPoison6s))
             {
-                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, DotController.DotIndex.Poison, 6f, 1f);
+                DotController.InflictDot(victimBody.gameObject, damageInfo.attacker, damageInfo.inflictedHurtbox, DotController.DotIndex.Poison, 6f, 1f);
             }
         }
 

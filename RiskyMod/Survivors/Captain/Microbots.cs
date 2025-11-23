@@ -115,8 +115,9 @@ namespace RiskyMod.Survivors.Captain
 							int mult = 1;
 							if (minionBody.inventory )
                             {
-                                if (droneMeldStackItem != ItemIndex.None) mult += minionBody.inventory.GetItemCount(droneMeldStackItem);
-                                if (minionMeldStackItem != ItemIndex.None) mult += minionBody.inventory.GetItemCount(minionMeldStackItem);
+                                if (droneMeldStackItem != ItemIndex.None) mult += minionBody.inventory.GetItemCountEffective(droneMeldStackItem);
+                                if (minionMeldStackItem != ItemIndex.None) mult += minionBody.inventory.GetItemCountEffective(minionMeldStackItem);
+                                mult += minionBody.inventory.GetItemCountEffective(DLC3Content.Items.DroneUpgradeHidden);
                             }
 
 							allyFactor += 0.2f * mult;

@@ -29,7 +29,6 @@ namespace RiskyMod.Survivors.Mage
         public static bool buffNanoSpear = true;
 
         public static ConfigEntry<bool> flamethrowerSprintCancel;
-        public static bool flamethrowerRangeExtend = true;
 
         public static bool ionSurgeShock = true;
 
@@ -176,10 +175,6 @@ namespace RiskyMod.Survivors.Mage
            SkillDef flamethrowerDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Mage/MageBodyFlamethrower.asset").WaitForCompletion();
             Skills.SpecialFlamethrowerVanilla = flamethrowerDef;
             flamethrowerDef.canceledFromSprinting = flamethrowerSprintCancel.Value;
-            if (flamethrowerRangeExtend)
-            {
-                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Mage/EntityStates.Mage.Weapon.Flamethrower.asset", "maxDistance", "30");  //20 vanilla, 30 is CHEF
-            }
 
             if (enableLightningSpecial)
             {

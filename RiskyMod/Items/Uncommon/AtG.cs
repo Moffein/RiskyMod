@@ -39,70 +39,77 @@ namespace RiskyMod.Items.Uncommon
 
 				ILCursor c = new ILCursor(il);
 
-				//Disable missiles if fired by a Player, since they'll be using an OrbAttack instead.
-				if (c.TryGotoNext(MoveType.After,
-					 x => x.MatchLdsfld(typeof(RoR2Content.Items), "Missile")
-					))
-                {
-					c.Emit(OpCodes.Ldloc, 1); //victimBody
-					c.Emit(OpCodes.Ldloc, 7); //master
-					c.Emit(OpCodes.Ldarg_1);    //damageinfo
-					c.EmitDelegate<Func<ItemDef, CharacterBody, CharacterMaster, DamageInfo, ItemDef>>((item, victimBody, master, damageInfo) =>
-					{
-						if (useOrb && master.teamIndex == TeamIndex.Player)
-						{
-							if (alwaysOrb)
-							{
-								item = RiskyMod.emptyItemDef;
-							}
-							else if (victimBody.healthComponent && victimBody.healthComponent.alive)    //Only fire orb if target is alive to prevent whiffing against already-dead targets.
-							{
-								CharacterBody cb = master.GetBody();
-								if (cb)
-								{
-									if (damageInfo.damage / cb.damage < projectileDamageTreshold)
-									{
-										item = RiskyMod.emptyItemDef;
-									}
-								}
-							}
-						}
-						return item;
-					});
+				int victimBodyLoc = 1;//todo: set up dynamic match
+				int masterLoc = -1;
+				if (c.TryGotoNext(x => x.MatchCallvirt<CharacterBody>("get_master"), x => x.MatchStloc(out masterLoc)))
+				{
+                    //Disable missiles if fired by a Player, since they'll be using an OrbAttack instead.
+                    if (c.TryGotoNext(MoveType.After,
+                         x => x.MatchLdsfld(typeof(RoR2Content.Items), "Missile")
+                        ))
+                    {
+                        c.Emit(OpCodes.Ldloc, victimBodyLoc); //victimBody
 
-					if (c.TryGotoNext(
-						 x => x.MatchLdcR4(3f)
-						))
-					{
-						c.Next.Operand = stackDamageCoefficient;
+                        c.Emit(OpCodes.Ldloc, masterLoc); //master
 
-						if (c.TryGotoNext(
-							 x => x.MatchMul()
-							))
-						{
-							c.Index++;
-							c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
-							{
-								return damageCoefficient + initialDamage;
-							});
+                        c.Emit(OpCodes.Ldarg_1);    //damageinfo
+                        c.EmitDelegate<Func<ItemDef, CharacterBody, CharacterMaster, DamageInfo, ItemDef>>((item, victimBody, master, damageInfo) =>
+                        {
+                            if (useOrb && master.teamIndex == TeamIndex.Player)
+                            {
+                                if (alwaysOrb)
+                                {
+                                    item = RiskyMod.emptyItemDef;
+                                }
+                                else if (victimBody.healthComponent && victimBody.healthComponent.alive)    //Only fire orb if target is alive to prevent whiffing against already-dead targets.
+                                {
+                                    CharacterBody cb = master.GetBody();
+                                    if (cb)
+                                    {
+                                        if (damageInfo.damage / cb.damage < projectileDamageTreshold)
+                                        {
+                                            item = RiskyMod.emptyItemDef;
+                                        }
+                                    }
+                                }
+                            }
+                            return item;
+                        });
 
-							if (RiskyMod.disableProcChains)
-							{
-								if(c.TryGotoNext(
-								 x => x.MatchLdsfld(typeof(GlobalEventManager.CommonAssets), "missilePrefab")
-								))
-								{
-									c.Index++;
-									c.EmitDelegate<Func<GameObject, GameObject>>((projectilePrefab) =>
-									{
-										return missilePrefab;
-									});
-								}
-							}
-							error = false;
-						}
-					}
-				}
+                        if (c.TryGotoNext(
+                             x => x.MatchLdcR4(3f)
+                            ))
+                        {
+                            c.Next.Operand = stackDamageCoefficient;
+
+                            if (c.TryGotoNext(
+                                 x => x.MatchMul()
+                                ))
+                            {
+                                c.Index++;
+                                c.EmitDelegate<Func<float, float>>((damageCoefficient) =>
+                                {
+                                    return damageCoefficient + initialDamage;
+                                });
+
+                                if (RiskyMod.disableProcChains)
+                                {
+                                    if (c.TryGotoNext(
+                                     x => x.MatchLdsfld(typeof(GlobalEventManager.CommonAssets), "missilePrefab")
+                                    ))
+                                    {
+                                        c.Index++;
+                                        c.EmitDelegate<Func<GameObject, GameObject>>((projectilePrefab) =>
+                                        {
+                                            return missilePrefab;
+                                        });
+                                    }
+                                }
+                                error = false;
+                            }
+                        }
+                    }
+                }
 
 				if (error)
                 {

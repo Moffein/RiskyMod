@@ -16,26 +16,21 @@ namespace RiskyMod.Items.Legendary
             if (!enabled) return;
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
-            //Apply barrier decay rate modifiers.
-            IL.RoR2.HealthComponent.ServerFixedUpdate += (il) =>
+            IL.RoR2.HealthComponent.GetBarrierDecayRate += HealthComponent_GetBarrierDecayRate;
+        }
+
+        private void HealthComponent_GetBarrierDecayRate(ILContext il)
+        {
+            ILCursor c = new ILCursor(il);
+            if (c.TryGotoNext(MoveType.After, x => x.MatchCall<Mathf>("Lerp")))
             {
-                ILCursor c = new ILCursor(il);
-                if (c.TryGotoNext(MoveType.After,
-                     x => x.MatchCallvirt<CharacterBody>("get_barrierDecayRate")
-                    ))
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<float, HealthComponent, float>>((decayRate, self) =>
                 {
-                    c.Emit(OpCodes.Ldarg_0);
-                    c.EmitDelegate<Func<float, HealthComponent, float>>((decayRate, self) =>
-                    {
-                        int aegisCount = self.itemCounts.barrierOnOverHeal;
-                        return decayRate / (1f + aegisCount);
-                    });
-                }
-                else
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: Aegis BarrierDecay IL Hook failed");
-                }
-            };
+                    int aegisCount = self.itemCounts.barrierOnOverHeal;
+                    return decayRate / (1f + aegisCount);
+                });
+            }
         }
 
         private static void ModifyItem()

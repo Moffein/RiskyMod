@@ -371,6 +371,7 @@ namespace RiskyMod.Survivors.Bandit2
         {
             bodyPrefab.AddComponent<SpecialDamageController>();
             GenericSkill passive = bodyPrefab.AddComponent<GenericSkill>();
+            passive.loadoutTitleToken = "BANDIT2_REVOLVER_LOADOUT_TITLE";
 
             SkillDef gunslingerDef = ScriptableObject.CreateInstance<SkillDef>();
             gunslingerDef.activationState = new SerializableEntityStateType(typeof(BaseState));
