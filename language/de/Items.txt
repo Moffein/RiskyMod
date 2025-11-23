@@ -94,7 +94,8 @@
 	
 	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsHealing>Heilt</style> <style=cIsUtility>beim Sprinten</style> <style=cIsHealing>1,2%</style> <style=cStack>(+0,6% pro Stapel)</style> deiner <style=cIsHealing>Gesundheit</style> pro Sekunde. <style=cIsVoid>Korrumpiert alle Lebhaften Pilze</style>.",
 	
-	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Beschwöre einen Bereisch um den Teleporterder, der jede Sekunde für <style=cIsHealing>5%</style> <style=cStack>(+2.5% pro Stapel)</style> deiner <style=cIsHealing>maximalen Gesundheit</style><style=cIsHealing>heilt</style>. Entfessle während einem Teleporter-Event eine <style=cIsHealing>heilende Nova</style> und <style=cIsHealing>heile</style> so alle Verbündeten in der Nähe um <style=cIsHealing>50 %</style> ihrer maximalen Gesundheit. Tritt <style=cIsHealing>1 Mal</style> <style=cStack>(+1 Mal pro Stapel)</style> auf.",
+	"ITEM_TPHEALINGNOVA_PICKUP_RISKYMOD" : "Beschwöre einen Heilzone um den Teleporterder.",
+	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Beschwöre einen Heilzone um den Teleporterder, der jede Sekunde für <style=cIsHealing>5%</style> <style=cStack>(+2.5% pro Stapel)</style> deiner <style=cIsHealing>maximalen Gesundheit</style><style=cIsHealing>heilt</style>.",
 	
 	"ITEM_CLOVER_DESC_RISKYMOD": "Alle zufälligen Effekte werden <style=cIsUtility>+1</style> <style=cStack>(+1 pro Stapel)</style> Mal für ein <style=cIsUtility>günstiges Ergebnis</style> ausgewürfelt. Ist dein <style=cIsDamage>Glück</style> über <style=cIsUtility>1</style>, dann werden stattdessen <style=cIsUtility>alle Statuswerte</style> um <style=cIsUtility>40%</style> <style=cStack>(+40% pro Stapel)</style> erhöht.",
 	

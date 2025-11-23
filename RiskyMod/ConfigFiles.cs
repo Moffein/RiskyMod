@@ -309,6 +309,7 @@ namespace RiskyMod
             Infusion.useBuff = ItemCfg.Bind(uncommonString, "Infusion - Show Buff on HUD", true, "HP gained from Infusion is displayed as a buff on your HUD.").Value;
             LeechingSeed.enabled = ItemCfg.Bind(uncommonString, "Leeching Seed", true, itemConfigDescString).Value;
             Daisy.enabled = ItemCfg.Bind(uncommonString, "Lepton Daisy", true, itemConfigDescString).Value;
+            Daisy.disableHealPulse = ItemCfg.Bind(uncommonString, "Lepton Daisy - Disable Heal Pulse", true, "Disables the Vanilla Heal Pulse if Lepton Daisy rework is enabled.").Value;
 
             Guillotine.enabled = ItemCfg.Bind(uncommonString, "Old Guillotine", true, itemConfigDescString).Value;
             Guillotine.reduceVFX = ItemCfg.Bind(uncommonString, "Old Guillotine - Reduce VFX", true, "Reduce how often this item's VFX shows up.").Value;

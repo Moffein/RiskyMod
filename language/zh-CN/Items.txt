@@ -134,7 +134,8 @@
 	
 	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsUtility>奔跑期间</style>每秒为你<style=cIsHealing>恢复</style><style=cIsHealing>生命值</style>的<style=cIsHealing>1.2%</style><style=cStack>（每层增加0.6%）</style>。<style=cIsVoid>使所有爆裂真菌无效化</style>。",
 	
-	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "在传送器周围生成一个区域，每秒<style=cIsHealing>治疗</style><style=cIsHealing>5%</style><style=cStack>（每层增加2.5%）</style><style=cIsHealing>生命值</style>。在传送事件中释放<style=cIsHealing>治疗新星</style> , <style=cIsHealing>治疗</style>附近所有友方，使其恢复<style=cIsHealing>50%</style>的最大生命值。释放<style=cIsHealing>1次</style><style=cStack>（每层增加1）</style>。",
+	"ITEM_TPHEALINGNOVA_PICKUP_RISKYMOD" : "在传送器周围生成一个治疗区域。",
+	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "在传送器周围生成一个区域，每秒<style=cIsHealing>治疗</style><style=cIsHealing>5%</style><style=cStack>（每层增加2.5%）</style><style=cIsHealing>生命值</style>。",
 	
 	"ITEM_CLOVER_DESC_RISKYMOD": "所有随机效果都会<style=cIsUtility>额外判定1</style> <style=cStack>（每层增加1）</style>次，<style=cIsUtility>取更有利的效果</style>。如果你的<style=cIsDamage>幸运值</style>大于<style=cIsUtility>1</style>，增加<style=cIsUtility>所有属性</style><style=cIsUtility>40%</style><style=cStack>（每层增加40%）</style>。",
 	

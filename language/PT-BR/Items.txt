@@ -96,7 +96,8 @@
 	
 	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsHealing>Cura</style> em <style=cIsHealing>1.2%</style> <style=cStack>(+0.6% por acúmulo)</style> da <style=cIsHealing>saúde</style> por segundo <style=cIsUtility>ao correr</style>. <style=cIsVoid>Corrompe todos os Fungos Vibrantes</style>.",
 	
-	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Cria uma zona ao redor do Teleportador que <style=cIsHealing>cura</style> <style=cIsHealing>5%</style> <style=cStack>(+2.5% por acúmulo)</style> da sua <style=cIsHealing>saúde</style> a cada segundo. Libera uma <style=cIsHealing>supernova de cura </style>durante o evento de Teleportador, <style=cIsHealing>curando</style> todos os aliados próximos em <style=cIsHealing>50%</style> de saúde. Ocorre <style=cIsHealing>1</style> <style=cStack>(+1 por acúmulo)</style> vez.",
+	"ITEM_TPHEALINGNOVA_PICKUP_RISKYMOD" : "Cria uma zona de cura ao redor do Teletransportador.",
+	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Cria uma zona ao redor do Teleportador que <style=cIsHealing>cura</style> <style=cIsHealing>5%</style> <style=cStack>(+2.5% por acúmulo)</style> da sua <style=cIsHealing>saúde</style> a cada segundo.",
 
 	"ITEM_CLOVER_DESC_RISKYMOD": "Todos os efeitos aleatórios ganham <style=cIsUtility>+1</style> <style=cStack>(+1 por acúmulo)</style>rolagem para obter um <style=cIsUtility>resultado favorável</style>. Caso sua <style=cIsDamage>sorte</style> seja acima de <style=cIsUtility>1</style>, aumenta <style=cIsUtility>TODAS as estatísticas</style> em <style=cIsUtility>40%</style> <style=cStack>(+40% por acúmulo)</style> no lugar.",
 	

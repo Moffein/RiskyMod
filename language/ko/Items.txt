@@ -94,7 +94,8 @@
 	
 	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsUtility>질주하는 동안</style> 초당 <style=cIsHealing>체력</style>의 <style=cIsHealing>1.2%</style> <style=cStack>(중첩당 +0.6%)</style>만큼 <style=cIsHealing>치유</style>합니다. <style=cIsVoid>모든 활기찬 균사체를 타락시킵니다</style>.",
 	
-	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "텔레포터 주위에 초당 <style=cIsHealing>체력</style>의 <style=cIsHealing>5%</style> <style=cStack>(중첩당 +2.5%)</style>만큼 <style=cIsHealing>치유</style>하는 구역을 생성합니다. 텔레포터 이벤트 동안 <style=cIsHealing>치유 신성</style>을 방출하여, 근처의 모든 아군을 최대 체력의 <style=cIsHealing>50%</style>만큼 <style=cIsHealing>치유</style>합니다. <style=cIsHealing>1</style> <style=cStack>(중첩당 +1)</style>회 발생합니다.",
+	"ITEM_TPHEALINGNOVA_PICKUP_RISKYMOD" : "텔레포터 주변에 치유 구역을 만듭니다.",
+	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "텔레포터 주위에 초당 <style=cIsHealing>체력</style>의 <style=cIsHealing>5%</style> <style=cStack>(중첩당 +2.5%)</style>만큼 <style=cIsHealing>치유</style>하는 구역을 생성합니다.",
 	
 	"ITEM_CLOVER_DESC_RISKYMOD": "모든 무작위 효과는 <style=cIsUtility>유리한 결과</style>를 위해 <style=cIsUtility>+1</style> <style=cStack>(중첩당 +1)</style>회 추가로 굴려집니다. <style=cIsDamage>운</style>이 <style=cIsUtility>1</style>을 초과하면, 대신 <style=cIsUtility>모든 능력치</style>가 <style=cIsUtility>40%</style> <style=cStack>(중첩당 +40%)</style> 증가합니다.",
 	

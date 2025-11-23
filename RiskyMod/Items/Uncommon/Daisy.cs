@@ -8,53 +8,67 @@ namespace RiskyMod.Items.Uncommon
     public class Daisy
     {
         public static bool enabled = true;
-
+        public static bool disableHealPulse = true;
         public Daisy()
         {
             if (!enabled) return;
             ItemsCore.ModifyItemDefActions += ModifyItem;
 
-            On.RoR2.TeleporterInteraction.ChargingState.FixedUpdate += (orig, self) =>
+            On.RoR2.HoldoutZoneController.Start += spawnOnHoldout;
+            On.EntityStates.Missions.BrotherEncounter.BrotherEncounterPhaseBaseState.FixedUpdate += SpawnOnMithrix;
+
+            On.EntityStates.MeridianEvent.Phase1.OnEnter += Phase1_OnEnter;
+
+            if (disableHealPulse)
             {
-                orig(self);
-                if (NetworkServer.active && self != null && self.gameObject && self.transform)
+                On.EntityStates.TeleporterHealNovaController.TeleporterHealNovaGeneratorMain.Pulse += DisableHealPulse;
+            }
+        }
+
+        private void spawnOnHoldout(On.RoR2.HoldoutZoneController.orig_Start orig, HoldoutZoneController self)
+        {
+            orig(self);
+            if (NetworkServer.active && self != null && self.gameObject && self.transform)
+            {
+                int daisyCount = Util.GetItemCountForTeam(TeamIndex.Player, RoR2Content.Items.TPHealingNova.itemIndex, false, true);
+                if (daisyCount > 0)
                 {
-                    int daisyCount = Util.GetItemCountForTeam(TeamIndex.Player, RoR2Content.Items.TPHealingNova.itemIndex, false, true);
-                    if (daisyCount > 0)
+                    DaisyBehavior db = self.gameObject.GetComponent<DaisyBehavior>();
+                    if (!db)
+                    {
+                        db = self.gameObject.AddComponent<DaisyBehavior>();
+                        db.wardOrigin = self.transform;
+                        db.holdout = self;
+                    }
+                }
+            }
+        }
+
+        private void SpawnOnMithrix(On.EntityStates.Missions.BrotherEncounter.BrotherEncounterPhaseBaseState.orig_FixedUpdate orig, EntityStates.Missions.BrotherEncounter.BrotherEncounterPhaseBaseState self)
+        {
+            orig(self);
+            int daisyCount = Util.GetItemCountForTeam(TeamIndex.Player, RoR2Content.Items.TPHealingNova.itemIndex, false, true);
+            if (daisyCount > 0)
+            {
+                if (self.gameObject && self.childLocator)
+                {
+                    Transform transform = self.childLocator.FindChild("CenterOrbEffect");
+                    if (transform)
                     {
                         DaisyBehavior db = self.gameObject.GetComponent<DaisyBehavior>();
                         if (!db)
                         {
                             db = self.gameObject.AddComponent<DaisyBehavior>();
-                            db.wardOrigin = self.transform;
+                            db.wardOrigin = transform;
                         }
                     }
                 }
-            };
+            }
+        }
 
-            On.EntityStates.Missions.BrotherEncounter.BrotherEncounterPhaseBaseState.FixedUpdate += (orig, self) =>
-            {
-                orig(self);
-                int daisyCount = Util.GetItemCountForTeam(TeamIndex.Player, RoR2Content.Items.TPHealingNova.itemIndex, false, true);
-                if (daisyCount > 0)
-                {
-                    if (self.gameObject && self.childLocator)
-                    {
-                        Transform transform = self.childLocator.FindChild("CenterOrbEffect");
-                        if (transform)
-                        {
-                            DaisyBehavior db = self.gameObject.GetComponent<DaisyBehavior>();
-                            if (!db)
-                            {
-                                db = self.gameObject.AddComponent<DaisyBehavior>();
-                                db.wardOrigin = transform;
-                            }
-                        }
-                    }
-                }
-            };
-
-            On.EntityStates.MeridianEvent.Phase1.OnEnter += Phase1_OnEnter;
+        private void DisableHealPulse(On.EntityStates.TeleporterHealNovaController.TeleporterHealNovaGeneratorMain.orig_Pulse orig, EntityStates.TeleporterHealNovaController.TeleporterHealNovaGeneratorMain self)
+        {
+            return;
         }
 
         private void Phase1_OnEnter(On.EntityStates.MeridianEvent.Phase1.orig_OnEnter orig, EntityStates.MeridianEvent.Phase1 self)
@@ -77,6 +91,7 @@ namespace RiskyMod.Items.Uncommon
 
         private static void ModifyItem()
         {
+            HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemPickups, RoR2Content.Items.TPHealingNova);
             HG.ArrayUtils.ArrayAppend(ref ItemsCore.changedItemDescs, RoR2Content.Items.TPHealingNova);
         }
     }
@@ -87,6 +102,7 @@ namespace RiskyMod.Items.Uncommon
         public GameObject wardInstance;
         public HealingWard healingWard;
         public Transform wardOrigin;
+        public HoldoutZoneController holdout;
 
         public int daisyCount
         {
@@ -100,13 +116,25 @@ namespace RiskyMod.Items.Uncommon
         {
             if (!NetworkServer.active) return;
 
+            //Shut off ward if holdout is charged. Doesn't do anything if no holdout is assigned.
+            bool isFullCharge = holdout && holdout.charge >= 1f;
+            if (isFullCharge)
+            {
+                if (wardInstance)
+                {
+                    Destroy(wardInstance);
+                    wardInstance = null;
+                }
+                return;
+            }
+
             //Spawn Ward
             if (!wardInstance && wardOrigin != null)
             {
-                this.wardInstance = UnityEngine.Object.Instantiate<GameObject>(DaisyBehavior.wardPrefab, wardOrigin.position, wardOrigin.rotation);
-                this.wardInstance.GetComponent<TeamFilter>().teamIndex = TeamIndex.Player;
-                this.healingWard = this.wardInstance.GetComponent<HealingWard>();
-                NetworkServer.Spawn(this.wardInstance);
+                wardInstance = UnityEngine.Object.Instantiate<GameObject>(DaisyBehavior.wardPrefab, wardOrigin.position, wardOrigin.rotation);
+                wardInstance.GetComponent<TeamFilter>().teamIndex = TeamIndex.Player;
+                healingWard = wardInstance.GetComponent<HealingWard>();
+                NetworkServer.Spawn(wardInstance);
             }
 
             //Update Ward Stats
@@ -115,11 +143,8 @@ namespace RiskyMod.Items.Uncommon
                 int stack = Mathf.Max(0, daisyCount - 1);
 
                 healingWard.Networkradius = 16f;
-                //healingWard.radius = 16f;
                 float healFractionPerSecond = 0.05f + stack * 0.025f;
                 healingWard.healFraction = healFractionPerSecond * healingWard.interval;
-
-                //Debug.Log(healingWard.interval); 0.25f
             }
         }
     }

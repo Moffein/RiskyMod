@@ -94,7 +94,8 @@
 	
 	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsHealing>Восстанавливает</style> <style=cIsHealing>1.2%</style> <style=cStack>(+0.6% за шт.)</style> <style=cIsHealing>здоровья</style> каждую секунду <style=cIsUtility>во время бега</style>. <style=cIsVoid>Оскверняет все Буйногрибы</style>.",
 	
-	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Создает зону вокруг Телепорта, которая <style=cIsHealing>восстанавливает</style> <style=cIsHealing>5%</style> <style=cStack>(+2.5% за шт.)</style> от <style=cIsHealing>здоровья</style> каждую секунду. Выпускает <style=cIsHealing>исцеляющий взрыв</style> во время события Телепорта, <style=cIsHealing>восстанавливая</style> <style=cIsHealing>50%</style> от максимального запаса здоровья всем союзникам поблизости. Происходит <style=cIsHealing>1</style> <style=cStack>(+1 за шт.)</style> раз.",
+	"ITEM_TPHEALINGNOVA_PICKUP_RISKYMOD" : "Создайте зону исцеления вокруг телепорта.",
+	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Создает зону вокруг Телепорта, которая <style=cIsHealing>восстанавливает</style> <style=cIsHealing>5%</style> <style=cStack>(+2.5% за шт.)</style> от <style=cIsHealing>здоровья</style> каждую секунду.",
 	
 	"ITEM_CLOVER_DESC_RISKYMOD": "Все случайные эффекты получают <style=cIsUtility>+1</style> <style=cStack>(+1 за шт.)</style> дополнительный бросок на <style=cIsUtility>благоприятный исход</style>. Если ваша <style=cIsDamage>удача</style> выше <style=cIsUtility>1</style>, вместо этого увеличивает <style=cIsUtility>ВСЕ характеристики</style> на <style=cIsUtility>40%</style> <style=cStack>(+40% за шт.)</style>.",
 	
