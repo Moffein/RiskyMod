@@ -35,6 +35,7 @@ namespace RiskyMod.Tweaks
                     SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.ItemDropChanceOnKill, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.TeleportOnLowHealth, ItemTag.AIBlacklist);
                     SneedUtils.SneedUtils.AddItemTag(DLC2Content.Items.DelayedDamage, ItemTag.AIBlacklist);
+                    SneedUtils.SneedUtils.AddItemTag(DLC3Content.Items.ShieldBooster, ItemTag.AIBlacklist);
                 }
             };
         }

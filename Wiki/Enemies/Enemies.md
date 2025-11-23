@@ -1,12 +1,12 @@
 ## General
 
-- **(RiskyTweaks)** Enemy fall damage increased 50% and can now die from falls.
+- **(RiskyTweaks)** Enemy fall damage increased 100% and can now die from falls.
 - **(RiskyTweaks)** AI now always knows where the player is so that they get stuck less.
 - **(RiskyTweaks)** Removed passive HP regen from all enemies.
 	- Active HP regen skills unaffected. (ex. Mushrum healing, Mending Elites)
 - Most explosive/AoE attacks now use SweetSpot falloff instead of Linear falloff.
 	- Linear falloff scales damage from 100% to 0% based on how far away you are from the center of the blast.
-	- Sweetspot deals 100% damage in the inner half of the radius, 25% damage in the outer half.
+	- Sweetspot deals 100% damage in the inner half of the radius, 25% damage in the outer half. (In this mod, Sweetspot is increased to 50% min damage on some enemies)
 
 ## Expanded AI blacklist
 
@@ -15,6 +15,7 @@
 - Shuriken
 - Shipping Request Form
 - Regenerating Scrap
+- Shield Booster
 - Tesla Coil
 - N'kuhana's Opinion
 - Frost Relic
