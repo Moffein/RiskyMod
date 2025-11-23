@@ -30,6 +30,7 @@
 	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Оглушение</style>. Метает скрытый клинок, наносящим <style=cIsDamage>2x240% урона</style>. Критические Удары также накладывают <style=cIsHealth>кровотечение</style>.",
 	"BANDIT2_REVOLVER_STANDOFF_NAME_RISKYMOD" : "Противостояние",
 	"BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD" : "Убийства из револьвера <style=cIsDamage>увеличивают весь наносимый урон на 20%</style> на 15 seconds. Складывается до <style=cIsDamage>5</style> раз.",
+	"BANDIT2_REVOLVER_LOADOUT_TITLE_RISKYMOD" : "Револьвер",
 	
 	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD": "Убить",
 	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Убийца</style>. Два раза стреляет из револьвера, нанося <style=cIsDamage>2x900% урона</style>.",

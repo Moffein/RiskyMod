@@ -30,6 +30,7 @@
 	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>기절성</style>. <style=cIsDamage>2x240%의 피해</style>를 주는 숨겨진 칼날을 던집니다. 치명타는 <style=cIsHealth>과다출혈</style>을 유발합니다.",
 	"BANDIT2_REVOLVER_STANDOFF_NAME_RISKYMOD" : "결투",
 	"BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD" : "리볼버 처치 시 15초 동안 <style=cIsDamage>공격력이 20% 증가</style>합니다. 최대 <style=cIsDamage>5</style>회 중첩됩니다.",
+	"BANDIT2_REVOLVER_LOADOUT_TITLE_RISKYMOD" : "리볼버",
 	
 	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD": "암살",
 	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>학살자</style>. <style=cIsDamage>2x900%의 피해</style>를 주는 리볼버를 두 발 발사합니다.",

@@ -29,6 +29,7 @@
 	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>. Arremesse uma lâmina oculta que causa <style=cIsDamage>2 x 240% de dano</style>. Acertos Críticos também causam <style=cIsHealth>hemorragia</style>.",
 	"BANDIT2_REVOLVER_STANDOFF_NAME_RISKYMOD" : "Impasse",
 	"BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD" : "Abates com revólver <style=cIsDamage>aumentam o dano em 20%</style> por 15 segundos. Máximo de <style=cIsDamage>5</style> acúmulos.",
+	"BANDIT2_REVOLVER_LOADOUT_TITLE_RISKYMOD" : "Revólver",
 	
 	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD": "Assassinar",
 	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Assassino</style>. Dispare dois tiros de revólver que causam <style=cIsDamage>2 x 900% de dano</style>.",

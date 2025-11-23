@@ -30,6 +30,7 @@
 	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Betäubend</style>. Wirf eine verborgene Klinge, die <style=cIsDamage>2x 240%</style> Schaden verursacht. Kritische Treffer fügen <style=cIsHealth>Ausbluten</style> zu.",
 	"BANDIT2_REVOLVER_STANDOFF_NAME_RISKYMOD" : "Standoff",
 	"BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD" : "Tötungen mit dem Revolver erhöhen für 15 Sekunden den <style=cIsDamage>Schaden um 20%</style>. Bis zu <style=cIsDamage>5</style> Ladungen.",
+	"BANDIT2_REVOLVER_LOADOUT_TITLE_RISKYMOD" : "Revolver",
 	
 	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD": "Attentat",
 	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Schlächter</style>. Feuere zwei Schüße mit dem Revolver, die <style=cIsDamage>2x 900% Schaden</style> verursachen.",

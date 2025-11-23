@@ -12,6 +12,8 @@
 	
 - Power Elixir
 	- New Effect: Gain 50% health as barrier when falling below 50% health. Recharges every stage.
+	
+	*This is in a weird spot now that Unstable Transmitter is a thing. Honestly just disable this item.*
 
 ## Buffs
 
@@ -20,9 +22,6 @@
 	
 - Monster Tooth
 	- Lifetime and pickup radius doubled.
-
-- Personal Shield Generator
-	- Shield Gating.
 	
 - Stickybomb
 	- Increased damage from 180% -> 240%
@@ -31,7 +30,7 @@
 
 - Warbanner
 	- Added extra effects:
-		- +15% damage
+		- +10% damage
 		- 1% max health healed every second
 	- **(RiskyTweaks)** Spawns in Simulacrum and Mithrix.
 
@@ -40,7 +39,7 @@
 - Tougher Times
 	- Block stat reduced from 15 -> 10
 	
-	*3 nerfed Bears = 2 unnerfed Bears*
+	*3 nerfed Bears = 2 unnerfed Bears, this is the value used by Hermit's Scarf in Returns.*
 
 ## Tweaks
 

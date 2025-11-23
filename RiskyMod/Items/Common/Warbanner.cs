@@ -121,7 +121,7 @@ namespace RiskyMod.Items.Common
             {
                 args.moveSpeedMultAdd += 0.3f;
                 args.attackSpeedMultAdd += 0.3f;
-                args.damageMultAdd += 0.15f;
+                args.damageMultAdd += 0.1f;
             }
         }
 
@@ -130,7 +130,7 @@ namespace RiskyMod.Items.Common
             if (sender.HasBuff(RoR2Content.Buffs.Warbanner))
             {
                 //+30% AtkSpd and MoveSpd already present in vanilla
-                args.damageMultAdd += 0.15f;
+                args.damageMultAdd += 0.1f;
             }
         }
     }
