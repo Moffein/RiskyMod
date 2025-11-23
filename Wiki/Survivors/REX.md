@@ -16,6 +16,5 @@ Buffs to Mechanical skills.
 
 - DIRECTIVE: Harvest
 	- Allies heal 10% of damage done to fruiting enemies.
-	- Fruiting enemies are now slowed 80%
+	- Fruiting enemies are now slowed 80% and executed below 30% HP.
 	- Fruit pickup range increased 60%
-	- Increased projectile impact AoE from 2m -> 6m

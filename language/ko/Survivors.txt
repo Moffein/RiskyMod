@@ -83,7 +83,7 @@
 	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_NAME_RISKYMOD" : "무한한 힘",
 	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_DESCRIPTION_RISKYMOD" : "전방의 모든 적에게 <style=cIsDamage>2000%의 피해</style>를 주는 감전을 시킵니다.",
 	
-	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "최대 <style=cIsDamage>6</style>명의 주변 적에게 <style=cIsDamage>70%의 피해</style>를 주는 <style=cIsDamage>자성</style> 파일런을 던집니다. <style=cIsUtility>갈고리</style>를 걸 수 있습니다.",
+	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "최대 <style=cIsDamage>6</style>명의 주변 적에게 <style=cIsDamage>100%의 피해</style>를 주는 <style=cIsDamage>자성</style> 파일런을 던집니다. <style=cIsUtility>갈고리</style>를 걸 수 있습니다.",
 	
 	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "완전히 장전되면 <style=cIsDamage>900%의 피해</style>를 주는 지뢰를 설치합니다. 최대 4개까지 설치할 수 있습니다.",
 	

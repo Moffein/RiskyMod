@@ -83,7 +83,7 @@
 	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_NAME_RISKYMOD" : "Unendliche Kraft",
 	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_DESCRIPTION_RISKYMOD" : "Schocke alle Gegner vor dir mit einem Stromschlag, der <style=cIsDamage>2000% Schaden</style> verursacht.",
 	
-	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Wirf einen <style=cIsUtility>magnetischen</style> Pylon der bis zu <style=cIsDamage>6</style> Gegnern in der Nähe <style=cIsDamage>Stromschläge</style> mit <style=cIsDamage>70%</style> Schaden verpassen kann. Kann als Halterung für den <style=cIsUtility>Greifhaken</style> verwendet werden.",
+	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Wirf einen <style=cIsUtility>magnetischen</style> Pylon der bis zu <style=cIsDamage>6</style> Gegnern in der Nähe <style=cIsDamage>Stromschläge</style> mit <style=cIsDamage>100%</style> Schaden verpassen kann. Kann als Halterung für den <style=cIsUtility>Greifhaken</style> verwendet werden.",
 	
 	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "Platziere eine zweistufige Mine, die <style=cIsDamage>900% Schaden</style> verursacht sobald sie voll aufgebaut ist. Maximal 4 platzierte Minen.",
 	

@@ -96,7 +96,7 @@
 	"MAGE_SECONDARY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>冰冻</style>。充能<style=cIsDamage>穿刺</style>纳米长矛，造成<style=cIsDamage>400%-1600%</style>伤害。",
 
 	
-	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "扔出<style=cIsUtility>飘浮电塔</style>，可<style=cIsDamage>电击</style>最多<style=cIsDamage>6</style>名周围的敌人，造成<style=cIsDamage>70%的伤害</style>。可被<style=cIsUtility>格挡</style>。",
+	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "扔出<style=cIsUtility>飘浮电塔</style>，可<style=cIsDamage>电击</style>最多<style=cIsDamage>6</style>名周围的敌人，造成<style=cIsDamage>100%的伤害</style>。可被<style=cIsUtility>格挡</style>。",
 	
 	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "放置一枚地雷，在完全引爆时造成<style=cIsDamage>900%的伤害</style>。最多放置4枚。",
 	

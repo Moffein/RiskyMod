@@ -97,7 +97,7 @@
 	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_DESCRIPTION_RISKYMOD" : "Eletrocuta todos os inimigos à frente causando <style=cIsDamage>2.000% de dano</style>.",
 	"MAGE_SECONDARY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Congelante</style>. Carregue uma nano-lança <style=cIsDamage>perfurante</style> que causa <style=cIsDamage>400%-1.600%</style> de dano.",
 	
-	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Lança um pilão flutuante que <style=cIsDamage>acerta</style> até <style=cIsDamage>6</style> inimigos próximos, causando <style=cIsDamage>70% de dano</style>. Pode ser usado para se <style=cIsUtility>agarrar</style>.",
+	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Lança um pilão flutuante que <style=cIsDamage>acerta</style> até <style=cIsDamage>6</style> inimigos próximos, causando <style=cIsDamage>100% de dano</style>. Pode ser usado para se <style=cIsUtility>agarrar</style>.",
  
 	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "Posicione uma mina que causa <style=cIsDamage>900% de dano</style> se for totalmente carregada. Máximo de 4.",
 	

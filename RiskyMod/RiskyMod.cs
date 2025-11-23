@@ -46,6 +46,7 @@ using RiskyMod.Content.Enemies;
 namespace RiskyMod
 {
     #region softdependencies
+    [BepInDependency("com.Moffein.AdditiveExecutes", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RiskySleeps.ClassicItemsReturns", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.AssistManager", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency(".AVFX_Options..", BepInDependency.DependencyFlags.SoftDependency)]    //Does this softdependency actually work? (since RiskyMod clones the projectiles)
@@ -196,6 +197,7 @@ namespace RiskyMod
             SoftDependencies.MoreStatsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskOfBrainrot.MoreStats");
             SoftDependencies.RiskyMithrixLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskyLives.RiskyMithrix");
             SoftDependencies.RiskySkillsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RiskySkills");
+            SoftDependencies.AdditiveExecutesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AdditiveExecutes";
         }
 
         private void CheckDependencies()

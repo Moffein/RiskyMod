@@ -83,7 +83,7 @@
 	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_NAME_RISKYMOD" : "Unlimited Power",
 	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_DESCRIPTION_RISKYMOD" : "Electrocute all enemies in front of you for <style=cIsDamage>2000% damage</style>.",
 	
-	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Throw a <style=cIsUtility>Magnetic</style> pylon that <style=cIsDamage>zaps</style> up to <style=cIsDamage>6</style> nearby enemies for <style=cIsDamage>70% damage</style>. Can be <style=cIsUtility>grappled</style>.",
+	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Throw a <style=cIsUtility>Magnetic</style> pylon that <style=cIsDamage>zaps</style> up to <style=cIsDamage>6</style> nearby enemies for <style=cIsDamage>100% damage</style>. Can be <style=cIsUtility>grappled</style>.",
 	
 	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "Place a mine that deals <style=cIsDamage>900% damage</style> when fully armed. Can place up to 4.",
 	

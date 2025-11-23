@@ -73,10 +73,34 @@ namespace RiskyMod.Survivors.Treebot
                 new ModifyFruitPickup();
                 new DropFruitOnHit();
 
-                RecalculateStatsAPI.GetStatCoefficients += FruitBuff;
+                if (SoftDependencies.AdditiveExecutesLoaded)
+                {
+                    ExecuteAPI.CalculateAdditiveExecuteThreshold += FruitExecuteAdditive;
+                }
+                else
+                {
+                    ExecuteAPI.CalculateExecuteThreshold += FruitExecute;
+                }
+                    RecalculateStatsAPI.GetStatCoefficients += FruitBuff;
                 SneedHooks.ProcessHitEnemy.OnHitAttackerActions += FruitHealOnHit;
 
                 //Fruit on-death nullref is located in Fixes section
+            }
+        }
+
+        private void FruitExecute(CharacterBody victimBody, ref float highestExecuteThreshold)
+        {
+            if (victimBody.HasBuff(RoR2Content.Buffs.Fruiting) && highestExecuteThreshold < 0.3f)
+            {
+                highestExecuteThreshold = 0.3f;
+            }
+        }
+
+        private void FruitExecuteAdditive(CharacterBody victimBody, ref float executeFractionAdd)
+        {
+            if (victimBody.HasBuff(RoR2Content.Buffs.Fruiting))
+            {
+                executeFractionAdd += (1f / 0.7f) - 1;
             }
         }
 
