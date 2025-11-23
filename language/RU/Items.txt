@@ -99,7 +99,7 @@
 	
 	"ITEM_CLOVER_DESC_RISKYMOD": "Все случайные эффекты получают <style=cIsUtility>+1</style> <style=cStack>(+1 за шт.)</style> дополнительный бросок на <style=cIsUtility>благоприятный исход</style>. Если ваша <style=cIsDamage>удача</style> выше <style=cIsUtility>1</style>, вместо этого увеличивает <style=cIsUtility>ВСЕ характеристики</style> на <style=cIsUtility>40%</style> <style=cStack>(+40% за шт.)</style>.",
 	
-	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Дает <style=cIsDamage>П-ка Дроунмана</style>. \nДроны получают <style=cIsDamage>+50%</style> <style=cStack>(+50% за шт.)</style> к скорости атаки и ускорению восстановления. \nДроны получают <style=cIsDamage>10%</style> вероятности выпустить <style=cIsDamage>ракету</style> при попадании, наносящую <style=cIsDamage>300%</style> ОБЩЕГО урона. \nДроны получают <style=cIsDamage>автоматический цепной пулемет</style>, наносящий <style=cIsDamage>6x50%</style> урона, рикошетящий к <style=cIsDamage>1-у</style> врагу.",
+	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Дает <style=cIsDamage>П-ка Дроунмана</style>. \nДроны получают <style=cIsDamage>+25%</style> <style=cStack>(+25% за шт.)</style> к скорости атаки и ускорению восстановления. \nДроны получают <style=cIsDamage>10%</style> вероятности выпустить <style=cIsDamage>ракету</style> при попадании, наносящую <style=cIsDamage>150%</style> ОБЩЕГО урона. \nДроны получают <style=cIsDamage>автоматический цепной пулемет</style>, наносящий <style=cIsDamage>6x50%</style> урона, рикошетящий к <style=cIsDamage>1-у</style> врагу.",
 	
 	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "Наносят дополнительный урон пока вне опасности.",
 	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Увеличивают урон на <style=cIsDamage>15%</style> <style=cStack>(+15% за шт.)</style> пока вне опасности.",

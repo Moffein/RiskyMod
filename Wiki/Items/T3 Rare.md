@@ -18,6 +18,9 @@
 	- Additional Effect: +30% damage against Elites on the first stack.
 	- Duration increased from 8s (+5s) -> 10s (+5s)
 	- Perfected Elites give +20% shields instead of fully converting your healthbar.
+	
+- Growth Nectar
+	- Buffed stat bonus from 4% -> 5%
 
 ## Nerfs
 
@@ -25,10 +28,8 @@
 	- Removed proc coefficient.
 
 - Spare Drone Parts
-	- Chaingun damage reduced from 100% -> 50%
-		- Ricochet damage reduced by an additional 50% (multiplicative)
+	- Chaingun ricochet damage reduced by an additional 50% (multiplicative)
 	- Chaingun ricochet count reduced from 2 -> 1
-	- Missile damage now scales off of hit damage instead of base damage.
 
 - Unstable Tesla Coil
 	- Range reduced from 35m -> 25m
@@ -36,9 +37,3 @@
 	
 - Runic Lens
 	- Removed proc coefficient.
-	
-- War Bonds
-	- Reverted cost from 50 -> 25
-	
-- Growth Nectar
-	- Buffed stat bonus from 4% -> 5%

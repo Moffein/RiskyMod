@@ -38,7 +38,7 @@ namespace RiskyMod.Items.DLC1.Legendary
             if (enabled)
             {
                 Items.ItemsCore.ModifyItemDefActions += ModifyDroneParts;
-                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC1/DroneWeapons/EntityStates.DroneWeaponsChainGun.FireChainGun.asset", "damageCoefficient", "0.5");   //1
+                //SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC1/DroneWeapons/EntityStates.DroneWeaponsChainGun.FireChainGun.asset", "damageCoefficient", "0.5");   //1
                 SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC1/DroneWeapons/EntityStates.DroneWeaponsChainGun.FireChainGun.asset", "damageCoefficientPerBounce", "0.5");
                 SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC1/DroneWeapons/EntityStates.DroneWeaponsChainGun.FireChainGun.asset", "additionalBounces", "1");
 

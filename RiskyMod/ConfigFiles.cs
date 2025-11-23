@@ -306,7 +306,6 @@ namespace RiskyMod
 
             Ignition.enabled = ItemCfg.Bind(uncommonString, "Ignition Tank", true, itemConfigDescString).Value;
 
-            UnstableTransmitter.enabled = ItemCfg.Bind(uncommonString, "Unstable Transmitter", true, itemConfigDescString).Value;
             BreachingFin.enabled = ItemCfg.Bind(uncommonString, "Breaching Fin", true, itemConfigDescString).Value;
             NoxiousThorn.enabled = ItemCfg.Bind(uncommonString, "Noxious Thorn", true, itemConfigDescString).Value;
         }
@@ -339,7 +338,6 @@ namespace RiskyMod
             LaserScope.enabled = ItemCfg.Bind(legendaryString, "Laser Scope", true, itemConfigDescString).Value;
 
             Overspill.enabled = ItemCfg.Bind(legendaryString, "Runic Lens", true, itemConfigDescString).Value;
-            WarBonds.enabled = ItemCfg.Bind(legendaryString, "War Bonds", true, itemConfigDescString).Value;
             GrowthNectar.enabled = ItemCfg.Bind(legendaryString, "Growth Nectar", true, itemConfigDescString).Value;
         }
 

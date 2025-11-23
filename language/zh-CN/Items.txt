@@ -139,7 +139,7 @@
 	
 	"ITEM_CLOVER_DESC_RISKYMOD": "所有随机效果都会<style=cIsUtility>额外判定1</style> <style=cStack>（每层增加1）</style>次，<style=cIsUtility>取更有利的效果</style>。如果你的<style=cIsDamage>幸运值</style>大于<style=cIsUtility>1</style>，增加<style=cIsUtility>所有属性</style><style=cIsUtility>40%</style><style=cStack>（每层增加40%）</style>。",
 	
-	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "获得<style=cIsDamage>德鲁曼上校</style>。\n无人机获得<style=cIsDamage>50%</style><style=cStack>（每层增加50%）</style>攻击速度和冷却时间缩减。\n无人机获得<style=cIsDamage>10%</style>的几率在命中时发射一枚<style=cIsDamage>导弹</style>，造成<style=cIsDamage>300%</style>的总伤害。\n无人机获得<style=cIsDamage>自动链式机枪</style>，造成<style=cIsDamage>6x50%</style>的伤害，可弹射命中<style=cIsDamage>1</style>名敌人。",
+	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "获得<style=cIsDamage>德鲁曼上校</style>。\n无人机获得<style=cIsDamage>25%</style><style=cStack>（每层增加25%）</style>攻击速度和冷却时间缩减。\n无人机获得<style=cIsDamage>10%</style>的几率在命中时发射一枚<style=cIsDamage>导弹</style>，造成<style=cIsDamage>150%</style>的总伤害。\n无人机获得<style=cIsDamage>自动链式机枪</style>，造成<style=cIsDamage>6x50%</style>的伤害，可弹射命中<style=cIsDamage>1</style>名敌人。",
 	
 	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "脱战后造成额外伤害。",
 	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "脱战后增加<style=cIsDamage>15%</style>伤害<style=cStack>（每层增加15%）</style>。",

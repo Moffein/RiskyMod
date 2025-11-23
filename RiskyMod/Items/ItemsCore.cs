@@ -87,7 +87,6 @@ namespace RiskyMod.Items
 
             new Harpoon();
             new Ignition();
-            new UnstableTransmitter();
             new BreachingFin();
             new NoxiousThorn();
         }
@@ -111,7 +110,6 @@ namespace RiskyMod.Items
             new LaserScope();
 
             new Overspill();
-            new WarBonds();
             new GrowthNectar();
         }
 
