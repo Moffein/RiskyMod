@@ -221,9 +221,6 @@ namespace RiskyMod
             VoidFields.LargerHoldout.enabled = GeneralCfg.Bind(voidFieldsString, "Larger Holdout Zone", true, "Increase radius of holdout zone.").Value;
             VoidFields.ReduceHoldoutCount.enabled = GeneralCfg.Bind(voidFieldsString, "Less Cells", true, "Reduces Cell count from 9 to 5 and speed up enemy progression.").Value;
 
-            //VoidFields.FogRework.enabled = GeneralCfg.Bind(voidFieldsString, "Fog Rework", true, "Void Fog is only active during holdouts like on Void Locus.").Value;
-            VoidFields.FogRework.enabled = false;
-
             //Moon
             Moon.LargerHoldouts.enabled = GeneralCfg.Bind(moonString, "Larger Holdout Zone", true, "Increase radius of holdout zone.").Value;
             LessPillars.enabled = GeneralCfg.Bind(moonString, "Reduce Pillar Count", true, "Reduce the amount of pillars required to activate the jump pads.").Value;

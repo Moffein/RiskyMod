@@ -12,7 +12,6 @@ namespace RiskyMod.VoidFields
             if (!enabled) return;
 
             new LargerHoldout();
-            new FogRework();
             new ReduceHoldoutCount();
         }
     }
