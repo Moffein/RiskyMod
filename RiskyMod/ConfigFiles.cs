@@ -181,6 +181,7 @@ namespace RiskyMod
             CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.directorCreditMultiplier != 1f;
 
             MonsterGoldRewards.enabled = GeneralCfg.Bind(scalingString, "Gold Scaling Tweaks", true, "Lowers gold earn rate scaling. Mainly makes a difference when looping.").Value;
+            MonsterGoldRewards.inflationCoefficient = GeneralCfg.Bind(scalingString, "Gold Scaling Tweaks - Inflation Coefficient", 0.3f, "Lowers how fast gold gain scales against chest prices. 0 = Vanilla, 0.4 = Equilibrium").Value;
             if (!MonsterGoldRewards.enabled)
             {
                 MonsterGoldRewards.linearize = false;
@@ -235,7 +236,6 @@ namespace RiskyMod
             BetterProjectileTracking.enabled = GeneralCfg.Bind(miscString, "Better Projectile Homing", true, "Homing projectiles target based on angle, instead of distance + angle.").Value;
             FreezeChampionExecute.enabled = GeneralCfg.Bind(miscString, "Freeze Executes Bosses", true, "Freeze counts as a debuff and can execute bosses at 15% HP.").Value;
             FreezeChampionExecute.nerfFreeze = GeneralCfg.Bind(miscString, "Freeze Executes Bosses - Nerf Freeze Globally", false, "Freeze execute threshold is reduced to 15% globally. Requires Freeze Executes Bosses.").Value;
-            NerfVoidtouched.enabled = GeneralCfg.Bind(miscString, "Nerf Voidtouched", true, "Replaces Voidtouched Collapse with Nullify.").Value;
             PlayerControlledMonsters.enabled = GeneralCfg.Bind(miscString, "Player-Controlled Monster Tweaks", true, "Gives players health regen + armor when playing as monsters via mods.").Value;
             NullifyDebuff.enabled = GeneralCfg.Bind(miscString, "Nullify Buff", true, "Void Reaver Nullify only takes 2 stacks to apply.").Value;
         }
