@@ -67,7 +67,9 @@
 	
 	"CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "Contagion",
 	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>Reduce base damage by 20%</style>.\nEach skill applies a different <style=cIsDamage>damage over time</style> effect.\n<style=cIsHealing>Poison</style> and <color=#B1387F>Blight</color> spread to <style=cIsDamage>1</style> nearby enemy on kill.",
+	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD_NOSPREAD" : "<style=cIsHealth>Reduce base damage by 20%</style>.\nEach skill applies a different <style=cIsDamage>damage over time</style> effect.",
 	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Stunning</style>. Leap in the air, dealing <style=cIsDamage>550% damage</style>. <style=cIsUtility>Reduce</style> the cooldown by <style=cIsUtility>1s</style> for every enemy hit.",
+	"CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD": "Attacks that apply <style=cIsHealing>Poison</style> apply <color=#B1387F>Blight</color> instead, dealing <style=cIsDamage>60% damage per second</style> and increasing damage taken by <style=cIsDamage>5%</style> per stack.",
 	
 	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Ignite</style>. Fire a bolt for <style=cIsDamage>4x70% damage</style>. Hold up to 4.</style>",
 	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Fire a bolt that <style=cIsUtility>slows</style> and zaps enemies for <style=cIsDamage>4x85% damage</style>. Hold up to 4.</style>",

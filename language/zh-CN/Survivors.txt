@@ -67,9 +67,7 @@
 	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>注入</style>一个敌人造成<style=cIsDamage>330%</style>的伤害，对被<style=cIsDamage>注入</style>的敌人造成伤害的<style=cIsHealing>10%</style>将<style=cIsHealing>治疗</style>友方。敌人死亡时将掉落<style=cIsHealing>治疗果实</style>恢复<style=cIsHealing>25%生命值</style>。",
 	
 	"CROCO_PASSIVE_NAME_RISKYMOD" : "烈毒",
-	"CROCO_PASSIVE_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>毒化</style>并<color=#B1387F>枯萎</color>造成<style=cIsDamage>80%</style>的伤害。",
 	"CROCO_PASSIVE_ALT_NAME_RISKYMOD" : "传染",
-	"CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>毒化</style>并<color=#B1387F>枯萎</color>一个目标，击败后扩散至<style=cIsDamage>1</style>个附近的目标。",
 	"CROCO_PRIMARY_DESCRIPTION_RISKYMOD" : "袭击一名敌人，造成<style=cIsDamage>200%的伤害</style>。第三次命中时<style=cIsHealing>毒化</style>与<style=cIsHealing>自我恢复</style>并造成<style=cIsDamage>400%伤害</style>。",
 	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>枯萎</color>。喷吐剧毒胆汁并造成<style=cIsDamage>240%的伤害</style>。",
 	"CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<color=#B1387F>枯萎</color>。<style=cIsDamage>屠杀者</style>。<style=cIsHealing>自我恢复</style>。啃咬一名敌人并造成<style=cIsDamage>360%的伤害</style>。",
@@ -80,6 +78,7 @@
 	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "释放一种能够造成<style=cIsDamage>15x100%伤害</style>的致命病毒。病毒将会传播给最多<style=cIsDamage>20</style>名目标。如果病毒击败目标，<style=cIsHealing>你将被治愈</style>。",
 	"CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "传染",
 	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>减少20%基础伤害</style>。\n每个技能都会施加不同的<style=cIsDamage>持续伤害</style>效果。\n<style=cIsHealing>毒化</style>和<color=#B1387F>枯萎</color>在击败时扩散到<style=cIsDamage>1</style>个附近的敌人。",
+	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD_NOSPREAD" : "<style=cIsHealth>减少20%基础伤害</style>。\n每个技能都会施加不同的<style=cIsDamage>持续伤害</style>效果。",
 	
 	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>点燃</style>。发射一道火炎，造成<style=cIsDamage>4x70%的伤害</style>。最多可发射4次。</style>",
 	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "发射一道闪电，造成<style=cIsDamage>4x85%的伤害</style>并<style=cIsDamage>引爆</style>小片区域。最多发射4次。</style>",

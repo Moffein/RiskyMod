@@ -68,9 +68,7 @@
 	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Injeta</style> um inimigo para causar <style=cIsDamage>330% de dano</style>. Aliados são <style=cIsHealing>curados</style> em <style=cIsHealing>10%</style> do dano causado aos inimigos <style=cIsDamage>Injetados</style>. Ao abater, derrube <style=cIsHealing>frutas de cura</style> que curam <style=cIsHealing>25% PV</style>.",
 	
 	"CROCO_PASSIVE_NAME_RISKYMOD" : "Virulento",
-	"CROCO_PASSIVE_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Veneno</style> e <color=#B1387F>Praga</color> duram <style=cIsDamage>80%</style> mais.",
 	"CROCO_PASSIVE_ALT_NAME_RISKYMOD" : "Contágio",
-	"CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsHealing>Veneno</style> e <color=#B1387F>Praga</color> espalham em <style=cIsDamage>1</style> alvo próximo ao abater.",
 	"CROCO_PRIMARY_DESCRIPTION_RISKYMOD" : "Surre um inimigo, causando <style=cIsDamage>200% de dano</style>. O terceiro acerto é <style=cIsHealing>Venenoso</style> e <style=cIsHealing>Regenerativo</style> e causa <style=cIsDamage>400% de dano</style>.",
 	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. Lance uma bile tóxica que causa <style=cIsDamage>240% de dano</style>.",
 	"CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. <style=cIsDamage>Assassino</style>. <style=cIsHealing>Regenerativo</style>. Morda um inimigo, causando <style=cIsDamage>360% de dano</style>.",
@@ -79,8 +77,9 @@
 	"CROCO_SPECIAL_DESCRIPTION_RISKYMOD" : "Libere uma doença mortal que causa <style=cIsDamage>8x100% de dano</style>. A doença se espalha a até <style=cIsDamage>20</style> alvos.",
 	"CROCO_SPECIAL_NAME_SCEPTER_RISKYMOD" : "Pandêmico",
 	"CROCO_SPECIAL_DESCRIPTION_SCEPTER_RISKYMOD" : "Libere uma doença mortal que causa <style=cIsDamage>15 x 100% de dano</style>.  A doença se espalha a até <style=cIsDamage>20</style> alvos. <style=cIsHealing>Se cure</style> caso o inimigo seja abatido por Pandemia.",
-        "CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "Contágio",
+    "CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "Contágio",
 	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>Reduz o dano base em 20%</style>.\nCada abate aplica um diferente efeito de <style=cIsDamage>dano contínuo</style>.\n<style=cIsHealing>Veneno</style> e <color=#B1387F>Praga</color> espalham em até <style=cIsDamage>1</style> inimigo próximo do alvo abatido.",
+	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD_NOSPREAD" : "<style=cIsHealth>Reduz o dano base em 20%</style>.\nCada abate aplica um diferente efeito de <style=cIsDamage>dano contínuo</style>.",
 	
 
 	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Incendiário</style>. Dispare um raio que causa <style=cIsDamage>4x70% de dano</style> aos inimigos. Máximo de 4.",

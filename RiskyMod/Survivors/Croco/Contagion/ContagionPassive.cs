@@ -15,6 +15,9 @@ namespace RiskyMod.Survivors.Croco.Contagion
     {
         public static bool enabled = true;
 
+        public static bool useDebuffSpread;
+        public static bool useUniqueSpecialDebuff;
+
         public static SkillDef passiveSkillDef;
         public static DamageAPI.ModdedDamageType contagionDamageType;
 
@@ -32,7 +35,10 @@ namespace RiskyMod.Survivors.Croco.Contagion
             On.RoR2.CrocoDamageTypeController.GetDamageType += CrocoDamageTypeController_GetDamageType;
             On.EntityStates.Croco.Slash.OnEnter += Slash_OnEnter;
             new ModifySpecial();
-            GlobalContagionTracker.Init();
+            if (useDebuffSpread)
+            {
+                GlobalContagionTracker.Init();
+            }
         }
 
         private void HealthComponent_TakeDamageProcess(On.RoR2.HealthComponent.orig_TakeDamageProcess orig, HealthComponent self, DamageInfo damageInfo)
@@ -42,14 +48,21 @@ namespace RiskyMod.Survivors.Croco.Contagion
                 switch (damageInfo.damageType.damageSource)
                 {
                     case DamageSource.Primary:
-                        damageInfo.AddModdedDamageType(SharedDamageTypes.CrocoPoison6s);
+                        damageInfo.damageType |= DamageType.PoisonOnHit;
                         break;
                     case DamageSource.Secondary:
                     case DamageSource.Utility:
-                        damageInfo.AddModdedDamageType(SharedDamageTypes.CrocoBlight6s);
+                        damageInfo.damageType |= DamageType.BlightOnHit;
                         break;
                     case DamageSource.Special:
-                        damageInfo.AddModdedDamageType(ModifySpecial.EpidemicDamage);
+                        if (useUniqueSpecialDebuff)
+                        {
+                            damageInfo.AddModdedDamageType(ModifySpecial.EpidemicDamage);
+                        }
+                        else
+                        {
+                            damageInfo.damageType |= DamageType.BlightOnHit;
+                        }
                         break;
                     default:
                         break;
@@ -89,13 +102,13 @@ namespace RiskyMod.Survivors.Croco.Contagion
             passiveSkillDef.interruptPriority = EntityStates.InterruptPriority.Any;
             passiveSkillDef.icon = Content.Assets.assetBundle.LoadAsset<Sprite>("AcridRiskyPassive.png");
             passiveSkillDef.skillNameToken = "CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD";
-            passiveSkillDef.skillDescriptionToken = "CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD";
+            passiveSkillDef.skillDescriptionToken = useDebuffSpread ? "CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD_NOSPREAD";
             passiveSkillDef.keywordTokens = new string[]
             {
                 "KEYWORD_CONTAGION_PRIMARY_RISKYMOD",
                 "KEYWORD_CONTAGION_SECONDARY_RISKYMOD",
                 "KEYWORD_CONTAGION_UTILITY_RISKYMOD",
-                "KEYWORD_CONTAGION_SPECIAL_RISKYMOD"
+                useUniqueSpecialDebuff ? "KEYWORD_CONTAGION_SPECIAL_RISKYMOD" : "KEYWORD_CONTAGION_SPECIAL_RISKYMOD_BLIGHT"
             };
             (passiveSkillDef as ScriptableObject).name = passiveSkillDef.skillName;
             Content.Content.skillDefs.Add(passiveSkillDef);

@@ -7,6 +7,7 @@
 	"KEYWORD_CONTAGION_SECONDARY_RISKYMOD" : "<style=cKeywordName>Sekundär</style><color=#B1387F>Seuche</color>.",
 	"KEYWORD_CONTAGION_UTILITY_RISKYMOD" : "<style=cKeywordName>Utility</style><color=#B1387F>Seuche</color>.",
 	"KEYWORD_CONTAGION_SPECIAL_RISKYMOD" : "<style=cKeywordName>Spezial</style><style=cSub><style=cIsDamage>Infiziert</style> für<style=cIsDamage>6x100% Schaden</style> und kann Itemeffekte auslösen.",
+	"KEYWORD_CONTAGION_SPECIAL_RISKYMOD_BLIGHT" : "<style=cKeywordName>Spezial</style><color=#B1387F>Seuche</color>.",
 	
 	"KEYWORD_RAPID_REGEN_RISKYMOD" : "<style=cKeywordName>Regenrierend</style><style=cSub>Heile <style=cIsHealing>10%</style> deiner maximalen Gesundheit über 3 Sekunden.",
 	"KEYWORD_BLIGHT_RISKYMOD" : "<style=cKeywordName>Versucht</style><style=cSub>Füge <style=cIsDamage>360%</style> Grundschaden über 6s zu. <i>Seuche ist stapelbar.</i></style>",

@@ -56,7 +56,6 @@ using RiskyMod.Survivors.Croco.Contagion;
 using RiskyMod.Items.DLC2;
 using RiskyMod.Tweaks.Interactables;
 using RiskyMod.Survivors.DLC2.Seeker;
-using RiskyMod.Survivors.DLC2;
 using RiskyMod.Survivors.DLC2.FalseSon;
 
 namespace RiskyMod
@@ -482,12 +481,15 @@ namespace RiskyMod
             LoaderCore.pylonChanges = SurvivorCfg.Bind(loaderString, "M551 Pylon Changes", true, "Enable changes to this skill.").Value;
 
             CrocoCore.enabled = SurvivorCfg.Bind(crocoString, "Enable Changes", true, "Enable changes to this survivor. Skill options unavailable due to all the changes being too interlinked.").Value;
+            BlightReturns.enabled = SurvivorCfg.Bind(crocoString, "Blight Returns", true, "Reworks Blight to be similar to Corrosive Wounds from Returns.").Value;
             BiggerLeapHitbox.enabled = SurvivorCfg.Bind(crocoString, "Extend Leap Collision Box", true, "Acrid's Shift skills have a larger collision hitbox. Damage radius remains the same.").Value;
             ShiftAirControl.enabled = SurvivorCfg.Bind(crocoString, "Leap Air Control", false, "Acrid's Shift skills gain increased air control at high move speeds (causes momentum loss).").Value;
             UtilityKnockdown.enabled = SurvivorCfg.Bind(crocoString, "Leap Knockdown", true, "Acrid's Shift skills knock airborne enemies downwards.").Value;
             BuffFrenziedLeap.enabled = SurvivorCfg.Bind(crocoString, "Frenzied Leap Changes", true, "Enable changes to this skill.").Value;
             BuffShiftPuddleProc.enabled = SurvivorCfg.Bind(crocoString, "Acid Puddle Buff", true, "Buffs proc coefficient of Acid Puddles.").Value;
             ContagionPassive.enabled = SurvivorCfg.Bind(crocoString, "Contagion Passive Skill", true, "Enables the Contagion passive skill.").Value;
+            ContagionPassive.useDebuffSpread = SurvivorCfg.Bind(crocoString, "Contagion - Debuff Spread on Kill", false, "Contagion makes Blight and Poison spread on kill.").Value;
+            ContagionPassive.useUniqueSpecialDebuff = SurvivorCfg.Bind(crocoString, "Contagion - Unique Special Debuff", true, "Contagion uses a unique DoT for Epidemic.").Value;
 
             CaptainCore.enabled = SurvivorCfg.Bind(captainString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             Microbots.deletionRestrictions = SurvivorCfg.Bind(captainString, "Defensive Microbots Nerf", true, "Defensive Microbots no longer deletes stationary projectiles like gas clouds and Void Reaver mortars.").Value;

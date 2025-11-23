@@ -42,10 +42,12 @@ using static Generics.Dynamics.RigReader;
 using RiskyMod.Enemies.Mithrix;
 using RiskyMod.Survivors.Commando;
 using RiskyMod.Content.Enemies;
+using RiskyMod.Survivors.Croco.Tweaks;
 
 namespace RiskyMod
 {
     #region softdependencies
+    [BepInDependency("com.Moffein.BlightReturnsRework", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.AdditiveExecutes", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RiskySleeps.ClassicItemsReturns", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.AssistManager", BepInDependency.DependencyFlags.SoftDependency)]
@@ -197,7 +199,8 @@ namespace RiskyMod
             SoftDependencies.MoreStatsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskOfBrainrot.MoreStats");
             SoftDependencies.RiskyMithrixLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskyLives.RiskyMithrix");
             SoftDependencies.RiskySkillsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RiskySkills");
-            SoftDependencies.AdditiveExecutesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AdditiveExecutes";
+            SoftDependencies.AdditiveExecutesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AdditiveExecutes");
+            SoftDependencies.BlightReturnsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BlightReturnsRework");
         }
 
         private void CheckDependencies()
@@ -205,6 +208,12 @@ namespace RiskyMod
             if (SoftDependencies.KingKombatArenaLoaded)
             {
                 RoR2.Stage.onStageStartGlobal += CheckArenaLoaded;
+            }
+
+            if (BlightReturns.enabled && SoftDependencies.BlightReturnsLoaded)
+            {
+                Debug.Log("RiskyMod: Disabling BlightReturns because standalone plugin is loaded.");
+                BlightReturns.enabled = false;
             }
 
             if (SoftDependencies.ZetTweaksLoaded) ZetTweaksCompat();
@@ -361,7 +370,6 @@ namespace RiskyMod
             new TrueOSP();
             new ShieldGating();
             new FreezeChampionExecute();
-            new NerfVoidtouched();
             new PlayerControlledMonsters();
             new NullifyDebuff();
 

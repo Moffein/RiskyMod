@@ -67,6 +67,7 @@
 	
 	"CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "Ansteckung",
 	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>Reduziert deinen gesamten Schaden um 20%</style>.\nJeder Skill löst einen unterschiedenlichen <style=cIsDamage>Schaden über Zeit</style> Effekt aus.\n<style=cIsHealing>Gift</style> and <color=#B1387F>Seuche</color> verbreiten sich auf bis zu <style=cIsDamage>1</style> Gegner in der Nähe.",
+	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD_NOSPREAD" : "<style=cIsHealth>Reduziert deinen gesamten Schaden um 20%</style>.\nJeder Skill löst einen unterschiedenlichen <style=cIsDamage>Schaden über Zeit</style> Effekt aus.",
 	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Betäubend</style>. Spring in die Luft und verursache <style=cIsDamage>550 % Schaden</style>. <style=cIsUtility>Reduziere</style> die Abklingzeit dieses Skills um <style=cIsUtility>1s</style> pro getroffenen Gegner.",
 	
 	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Entzünden</style>. Verschieße ein Geschoss, das <style=cIsDamage>4x70% Schaden</style> verursacht. Verschieße bis zu 4 Geschosse.</style>",

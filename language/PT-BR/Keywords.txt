@@ -6,9 +6,16 @@
 	"KEYWORD_POISON_RISKYMOD" : "<style=cKeywordName>Venenoso</style><style=cSub>Cause dano igual a <style=cIsDamage>6%</style> da saúde máxima deles ao longo de 6 s. <i>Veneno não pode abater inimigos.</i></style>",
 	"KEYWORD_INTERRUPT_RISKYMOD" : "<style=cKeywordName>Interruptor</style><style=cSub>Interrompe brevemente as ações dos inimigos.",
 	"KEYWORD_MAGNETIC_RISKYMOD" : "<style=cKeywordName>Magnético</style><style=cSub>Atraia inimigos leves que estão no ar em direção ao seu centro.",
-	"KEYWORD_VOIDCORRUPTION_RISKYMOD" : "<style=cKeywordName>Corrupção</style><style=cSub>Receba Corrupção ao sofrer dano, abater inimigos ou segurar Itens Nulos.",
-    "KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>Contágio</style><style=cSub>Primária: Venenoso\nSecundária: Contaminado\nAuxiliar: Contaminado\nEspecial: Infecta, causa 6x100% de dano e pode ativar efeitos de itens.",
 	"KEYWORD_LOWHEALTHPROTECTION_RISKYMOD": "<style=cKeywordName>Salvação</style><style=cSub>Todos os sobreviventes vivos ganham +7% em todas as estatísticas.",
 	"SEEKER_SECONDARY_TRANQUILITY_DESCRIPTION_RISKYMOD": "<style=cKeywordName>Tranquilidade</style><style=cSub>Cada Tranquilidade aumenta a dano da Mão Invisível em <style=cIsDamage>100%</style>.",
+	
+	"KEYWORD_VOIDCORRUPTION_RISKYMOD" : "<style=cKeywordName>Corrupção</style><style=cSub>Receba Corrupção ao sofrer dano, abater inimigos ou segurar Itens Nulos.",
+	
+    "KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>Contágio</style><style=cSub>Primária: Venenoso\nSecundária: Contaminado\nAuxiliar: Contaminado\nEspecial: Infecta, causa 6x100% de dano e pode ativar efeitos de itens.",
+	"KEYWORD_CONTAGION_PRIMARY_RISKYMOD" : "<style=cKeywordName>Primária</style><style=cIsHealing>Veneno</style>.",
+	"KEYWORD_CONTAGION_SECONDARY_RISKYMOD" :"<style=cKeywordName>Secundária</style><color=#B1387F>Praga</color>.",
+	"KEYWORD_CONTAGION_UTILITY_RISKYMOD" : "<style=cKeywordName>Auxiliar</style><color=#B1387F>Praga</color>.",
+	"KEYWORD_CONTAGION_SPECIAL_RISKYMOD" : "<style=cKeywordName>Especial</style><style=cSub><style=cIsDamage>Infects</style> for <style=cIsDamage>6x100% damage</style> and can trigger item effects.",
+	"KEYWORD_CONTAGION_SPECIAL_RISKYMOD_BLIGHT" : "<style=cKeywordName>Especial</style><color=#B1387F>Praga</color>.",
 	}
 }

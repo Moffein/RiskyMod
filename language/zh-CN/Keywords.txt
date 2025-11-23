@@ -6,9 +6,16 @@
 	"KEYWORD_POISON_RISKYMOD" : "<style=cKeywordName>毒化</style>6秒内<style=cSub>造成目标最大生命值的<style=cIsDamage>6%</style>的伤害。<i>毒化不能击败敌人。</i></style>",
 	"KEYWORD_INTERRUPT_RISKYMOD" : "<style=cKeywordName>干扰</style><style=cSub>短暂打断敌人的行动。",
 	"KEYWORD_MAGNETIC_RISKYMOD" : "<style=cKeywordName>磁力</style><style=cSub>将空中的轻型敌人拉拢。",
-	"KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>传染</style><style=cSub>主要：毒化\n次要：枯萎\n辅助：枯萎\n特殊：传染造成6x100%伤害并可触发物品效果。",
 	"KEYWORD_VOIDCORRUPTION_RISKYMOD" : "<style=cKeywordName>腐化</style><style=cSub>通过受到伤害、击败敌人或持有虚空物品来获得腐化。",
 	"KEYWORD_LOWHEALTHPROTECTION_RISKYMOD": "<style=cKeywordName>救赎赐福</style><style=cSub>所有活着的幸存者获得+7%的全部属性。",
 	"SEEKER_SECONDARY_TRANQUILITY_DESCRIPTION_RISKYMOD": "<style=cKeywordName>宁静</style><style=cSub>每层宁静使隐秘之手的伤害提高<style=cIsDamage>100%</style>。",
+	
+	"KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>传染</style><style=cSub>主要：毒化\n次要：枯萎\n辅助：枯萎\n特殊：传染造成6x100%伤害并可触发物品效果。",
+	
+	"KEYWORD_CONTAGION_PRIMARY_RISKYMOD" : "<style=cKeywordName>主要技能</style><style=cIsHealing>毒化</style>",
+	"KEYWORD_CONTAGION_SECONDARY_RISKYMOD" :"<style=cKeywordName>次要技能</style><color=#B1387F>枯萎</color>.",
+	"KEYWORD_CONTAGION_UTILITY_RISKYMOD" : "<style=cKeywordName>辅助技能</style><color=#B1387F>枯萎</color>.",
+	"KEYWORD_CONTAGION_SPECIAL_RISKYMOD" : "<style=cKeywordName>特殊技能</style><style=cSub>传染造成<style=cIsDamage>6x100%</style>伤害并可触发物品效果。",
+	"KEYWORD_CONTAGION_SPECIAL_RISKYMOD_BLIGHT" : "<style=cKeywordName>特殊技能</style><color=#B1387F>枯萎</color>.",
 	}
 }

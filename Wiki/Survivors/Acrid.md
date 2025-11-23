@@ -12,10 +12,13 @@ This mod used to have a gameplay rework, but that's been condensed into a select
 - **(RiskyTweaks)** Poisonous
 	- Removed hidden damage cap.
 	
-- **(RiskyTweaks)** Blight
-	- Resets duration on stack.
+- Blight
+	- Duration refreshes on new stack.
+	- Now gives +5% damage vulnerability per stack.
+	- DoT damage no longer scales with stack.
+	- Duration increased from 5s -> 10s.
 	
-	*Nonscaling flat damage falls off hard, and is immediately apparent in loops/multiplayer. Duration reset on stack is limited by Acrid's cooldowns, and is pretty much exclusively a single-target thing due to how short the duration is.*
+	*Shifts this towards being based aroud amplifying Acrid's direct damage. Increased duration means that earlygame, a single Epidemic can kill a Lemurian from full health.*
 	
 - Contagion **(New)**
 	- Reduces base damage by 20%.
@@ -25,7 +28,6 @@ This mod used to have a gameplay rework, but that's been condensed into a select
 		- Utility: Blight
 		- Special: Infects for 6x100% damage, can trigger item effects.
 			- 0.5 proc coefficient
-	- Poison and Blight spread to 1 nearby enemy on kill.
 	
 	*Gameplay rework is now a selectable alt passive to improve cross-mod compatibility.*
 	

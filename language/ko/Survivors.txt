@@ -67,6 +67,7 @@
 	
 	"CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "전염",
 	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>기본 공격력이 20% 감소합니다</style>.\n각 스킬은 다른 <style=cIsDamage>지속 피해</style> 효과를 적용합니다.\n<style=cIsHealing>중독</style>과 <color=#B1387F>오염</color>은 처치 시 근처의 적 <style=cIsDamage>1</style>명에게 퍼집니다.",
+	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD_NOSPREAD" : "<style=cIsHealth>기본 공격력이 20% 감소합니다</style>.\n각 스킬은 다른 <style=cIsDamage>지속 피해</style> 효과를 적용합니다.",
 	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD": "<style=cIsDamage>기절성</style>. 공중으로 도약하여 <style=cIsDamage>550%의 피해</style>를 줍니다. 적중한 적 하나당 재사용 대기시간이 <style=cIsUtility>1초</style> <style=cIsUtility>감소</style>합니다.",
 	
 	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>점화</style>. <style=cIsDamage>4x70%의 피해</style>를 주는 불덩이를 발사합니다. 최대 4개까지 보유합니다.</style>",

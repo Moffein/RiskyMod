@@ -21,6 +21,7 @@ namespace RiskyMod.Survivors.Croco
             new BiggerLeapHitbox();
             new ShiftAirControl();
             new ContagionPassive();
+            new BlightReturns();
         }
     }
 }
