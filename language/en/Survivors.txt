@@ -63,7 +63,7 @@
 	"MERC_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Stunning</style>. Dash forward, dealing <style=cIsDamage>450% damage</style>. If you hit an enemy, <style=cIsDamage>you can dash again</style>, up to <style=cIsDamage>3</style> total.",
 	
 	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "Fire a <style=cIsUtility>Sonic Boom</style> that <style=cIsDamage>Weakens</style> enemies. <style=cIsHealing>Heals for every target hit</style>.",
-	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Inject</style> an enemy for <style=cIsDamage>330% damage</style>. Allies <style=cIsHealing>heal</style> for <style=cIsHealing>10%</style> of the damage dealt to <style=cIsDamage>Injected</style> enemies. On death, drop <style=cIsHealing>healing fruits</style> that heal for <style=cIsHealing>25% HP</style>.",
+	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Inject</style> an enemy for <style=cIsDamage>330% damage</style>. Allies <style=cIsHealing>heal</style> for <style=cIsHealing>10%</style> of the damage dealt to <style=cIsDamage>Injected</style> enemies. <style=cIsDamage>Injected</style> enemies are <style=cIsHealth>instantly killed</style> below <style=cIsHealth>20% health</style> and drop <style=cIsHealing>healing fruits</style>.",
 	
 	"CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "Contagion",
 	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>Reduce base damage by 20%</style>.\nEach skill applies a different <style=cIsDamage>damage over time</style> effect.\n<style=cIsHealing>Poison</style> and <color=#B1387F>Blight</color> spread to <style=cIsDamage>1</style> nearby enemy on kill.",

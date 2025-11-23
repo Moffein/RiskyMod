@@ -63,7 +63,7 @@
 	"MERC_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsDamage>기절성</style>. 전방으로 돌진하여 <style=cIsDamage>450%의 피해</style>를 줍니다. 적을 맞히면 최대 <style=cIsDamage>3</style>번까지 <style=cIsDamage>다시 돌진할 수 있습니다</style>.",
 	
 	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "적을 <style=cIsDamage>약화</style>시키는 <style=cIsUtility>음속 폭발</style>을 발사합니다. <style=cIsHealing>적중한 대상마다 치유합니다</style>.",
-	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "적에게 <style=cIsDamage>330%의 피해</style>를 주는 <style=cIsDamage>주사</style>를 놓습니다. 아군은 <style=cIsDamage>주사된</style> 적에게 가한 피해의 <style=cIsHealing>10%</style>만큼 <style=cIsHealing>치유</style>합니다. 사망 시, <style=cIsHealing>체력의 25%</style>를 회복시키는 <style=cIsHealing>치유 과일</style>을 떨어뜨립니다.",
+	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "적에게 <style=cIsDamage>330% 피해</style>를 입히고 <style=cIsDamage>주입</style>을 하는 화살을 발사합니다. 아군은 <style=cIsDamage>주사된</style> 적에게 가한 피해의 <style=cIsHealing>10%</style>만큼 <style=cIsHealing>치유</style>합니다. <style=cIsDamage>주사된</style> 적은 <style=cIsHealth>생명력이 20%</style> 이하로 떨어지면 <style=cIsHealth>즉시 사망</style>하며, <style=cIsHealing>치유의 과일</style>를 남깁니다.",
 	
 	"CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "전염",
 	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>기본 공격력이 20% 감소합니다</style>.\n각 스킬은 다른 <style=cIsDamage>지속 피해</style> 효과를 적용합니다.\n<style=cIsHealing>중독</style>과 <color=#B1387F>오염</color>은 처치 시 근처의 적 <style=cIsDamage>1</style>명에게 퍼집니다.",

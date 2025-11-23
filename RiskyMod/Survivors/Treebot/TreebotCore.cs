@@ -67,8 +67,8 @@ namespace RiskyMod.Survivors.Treebot
                 SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Treebot/EntityStates.Treebot.TreebotFireFruitSeed.asset", "baseDuration", "0.5");//1 in vanilla
 
                 GameObject fruitProjectile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Treebot/TreebotFruitSeedProjectile.prefab").WaitForCompletion();
-                ProjectileImpactExplosion pie = fruitProjectile.GetComponent<ProjectileImpactExplosion>();
-                pie.blastRadius = 6f;
+                //ProjectileImpactExplosion pie = fruitProjectile.GetComponent<ProjectileImpactExplosion>();
+                //pie.blastRadius = 6f;
 
                 new ModifyFruitPickup();
                 new DropFruitOnHit();
@@ -90,9 +90,9 @@ namespace RiskyMod.Survivors.Treebot
 
         private void FruitExecute(CharacterBody victimBody, ref float highestExecuteThreshold)
         {
-            if (victimBody.HasBuff(RoR2Content.Buffs.Fruiting) && highestExecuteThreshold < 0.3f)
+            if (victimBody.HasBuff(RoR2Content.Buffs.Fruiting) && highestExecuteThreshold < 0.23f)
             {
-                highestExecuteThreshold = 0.3f;
+                highestExecuteThreshold = 0.2f;
             }
         }
 
@@ -100,7 +100,7 @@ namespace RiskyMod.Survivors.Treebot
         {
             if (victimBody.HasBuff(RoR2Content.Buffs.Fruiting))
             {
-                executeFractionAdd += (1f / 0.7f) - 1;
+                executeFractionAdd += 0.25f;// (1/0.8) - 1
             }
         }
 

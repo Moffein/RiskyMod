@@ -22,7 +22,6 @@ Less tanky, but mechanically the same.
 - M551 Pylon
 	- Attracts lightweight enemies.
 		- Anything that can be pulled by Spiked Fist.
-	- Reduced damage from 100% -> 70%
 	
 - Thunderslam
 	- Knocks airborne enemies downwards.
