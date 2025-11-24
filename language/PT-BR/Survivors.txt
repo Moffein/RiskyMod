@@ -65,10 +65,11 @@
 	"MERC_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Atordoante</style>. Realize uma investida, causando <style=cIsDamage>450% de dano</style>. Se acertar um inimigo, <style=cIsDamage>você pode realizar outra investida</style>. Máximo de <style=cIsDamage>3</style>.",
 	
 	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "Dispare um <style=cIsUtility>Estrondo Sônico</style> que <style=cIsDamage>Enfraquece</style> inimigos. <style=cIsHealing>Cura para cada alvo atingido</style>.",
-	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Injeta</style> um inimigo para causar <style=cIsDamage>330% de dano</style>. Aliados são <style=cIsHealing>curados</style> em <style=cIsHealing>10%</style> do dano causado aos inimigos <style=cIsDamage>Injetados</style>. Ao abater, derrube <style=cIsHealing>frutas de cura</style> que curam <style=cIsHealing>25% PV</style>.",
+	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Injeta</style> um inimigo causando <style=cIsDamage>330% de dano</style>. Aliados são <style=cIsHealing>curados</style> em <style=cIsHealing>10%</style> do dano causado aos inimigos <style=cIsDamage>injetados</style>. Inimigos <style=cIsDamage>injetados</style> com menos de <style=cIsHealth>0% de saúde</style> são <style=cIsHealth>abatidos instantaneamente</style> e geram <style=cIsHealing>frutas de cura</style>.",
 	
 	"CROCO_PASSIVE_NAME_RISKYMOD" : "Virulento",
 	"CROCO_PASSIVE_ALT_NAME_RISKYMOD" : "Contágio",
+	"CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD": "Ataques que inflijam <style=cIsHealing>Veneno</style> aplicam <color=#B1387F>Praga</color> ao invés, causando <style=cIsDamage>60% de dano por segundo</style> e aumentando o dano recebido em <style=cIsDamage>5%</style> por acúmulo.",
 	"CROCO_PRIMARY_DESCRIPTION_RISKYMOD" : "Surre um inimigo, causando <style=cIsDamage>200% de dano</style>. O terceiro acerto é <style=cIsHealing>Venenoso</style> e <style=cIsHealing>Regenerativo</style> e causa <style=cIsDamage>400% de dano</style>.",
 	"CROCO_SECONDARY_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. Lance uma bile tóxica que causa <style=cIsDamage>240% de dano</style>.",
 	"CROCO_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<color=#B1387F>Praga</color>. <style=cIsDamage>Assassino</style>. <style=cIsHealing>Regenerativo</style>. Morda um inimigo, causando <style=cIsDamage>360% de dano</style>.",

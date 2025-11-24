@@ -49,7 +49,6 @@ namespace RiskyMod
     #region softdependencies
     [BepInDependency("com.Moffein.BlightReturnsRework", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.AdditiveExecutes", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.RiskySleeps.ClassicItemsReturns", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.AssistManager", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency(".AVFX_Options..", BepInDependency.DependencyFlags.SoftDependency)]    //Does this softdependency actually work? (since RiskyMod clones the projectiles)
     [BepInDependency("com.PlasmaCore.StickyStunter", BepInDependency.DependencyFlags.SoftDependency)]
@@ -100,7 +99,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RiskyFixes")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.9.0")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.9.2")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -166,6 +165,16 @@ namespace RiskyMod
             new SurvivorsCore();
             new EnemiesCore();
             AddHooks();
+
+            RoR2Application.onLoad += OnLoad;
+        }
+
+        private void OnLoad()
+        {
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskySleeps.ClassicItemsReturns"))
+            {
+                Sacrifice.dropChance = 8f;
+            }
         }
 
         private void Stage_onStageStartGlobal(Stage obj)
@@ -256,10 +265,6 @@ namespace RiskyMod
             Moon.LargerHoldouts.enabled = Moon.LargerHoldouts.enabled && !teleExpansionLoaded;
 
             Sacrifice.enabled = Sacrifice.enabled && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.SacrificeTweaks");
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskySleeps.ClassicItemsReturns"))
-            {
-                Sacrifice.dropChance = 8f;
-            }
 
             bool directorReworkLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.score.DirectorReworkPlus");
             if (directorReworkLoaded) Debug.Log("RiskyMod: Disabling CombatDirectorMultiplier because DirectorReworkPlus is loaded.");

@@ -205,6 +205,7 @@ namespace RiskyMod
             //Allies
             AntiSplat.enabled = GeneralCfg.Bind(allyString, "No Splat Death", true, "Allies are immune to physics damage.").Value;
             NoVoidDamage.enabled = GeneralCfg.Bind(allyString, "No Void Damage", true, "Allies take no damage from Void fog.").Value;
+            NoVoidDamage.alliesInVoidFields = GeneralCfg.Bind(allyString, "Drones in Void Fields", true, "Drones spawn in Void Fields.").Value;
             MegaDrone.allowRepair = GeneralCfg.Bind(allyString, "TC280 - Enable Repairs", true, "TC280s can be repaired after being destroyed.").Value;
             GunnerTurret.allowRepair = GeneralCfg.Bind(allyString, "Gunner Turret - Enable Repairs", true, "Gunner Turrets can be repaired after being destroyed.").Value;
             GunnerTurret.teleportWithPlayer = GeneralCfg.Bind(allyString, "Gunner Turret - Teleport with Player", true, "Gunner Turrets are teleported to the player when starting the Teleporter event.").Value;
