@@ -148,13 +148,13 @@ namespace RiskyMod
 
         private static void ApplyProjectileRainForce(DamageInfo damageInfo, HealthComponent self)
         {
-            if (damageInfo.HasModdedDamageType(SharedDamageTypes.ProjectileRainForce))
+            if (damageInfo.HasModdedDamageType(SharedDamageTypes.ProjectileRainForce) )
             {
                 if (damageInfo.inflictor && damageInfo.inflictor.transform)
                 {
                     Vector3 direction = -damageInfo.inflictor.transform.up;
                     CharacterBody cb = self.body;
-                    if (cb)
+                    if (cb && cb.bodyIndex != DLC3Content.BodyPrefabs.SolusHeartBody.bodyIndex)
                     {
                         //Scale force to match mass
                         Rigidbody rb = cb.rigidbody;
@@ -213,7 +213,7 @@ namespace RiskyMod
             {
                 Vector3 direction = Vector3.down;
                 CharacterBody cb = self.body;
-                if (cb && cb.isFlying)
+                if (cb && cb.isFlying && cb.bodyIndex != DLC3Content.BodyPrefabs.SolusHeartBody.bodyIndex)
                 {
                     //Scale force to match mass
                     Rigidbody rb = cb.rigidbody;
