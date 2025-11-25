@@ -79,7 +79,7 @@ Brazilian Portuguese Translation - Kauzok
 ## Translations
 
 - Brazilian Portuguese: Kauzok
-- Chinese: JunJun_W
+- Chinese: JunJun_W, White-Biggy
 - German: tymmey
 - Russian: inkyarev
 - Korean: bird_wall
