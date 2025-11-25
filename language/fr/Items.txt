@@ -1,0 +1,144 @@
+{
+	strings:
+	{
+	"ITEM_FLATHEALTH_PICKUP_RISKYMOD": "Augmente la vie maximale.",
+	"ITEM_FLATHEALTH_DESC_RISKYMOD": "Améliore les <style=cIsHealing>PV max</style> l'équivalent de <style=cIsHealing>1</style><style=cStack> (+1 par cumul)</style> niveau d'expérience.",
+	
+	"ITEM_CRITGLASSES_PICKUP_RISKYMOD": "Gagnez 7% de chance par coup d'infliger des 'Coups critiques', doublant les dégâts.",
+	"ITEM_CRITGLASSES_DESC_RISKYMOD": "Vos attaques ont <style=cIsDamage>10%</style> <style=cStack>(+7% par cumul)</style> de chance de porter un <style=cIsDamage>coup critique</style>qui inflige le <style=cIsDamage>double de dégâts</style>.",
+	
+	"ITEM_STICKYBOMB_DESC_RISKYMOD": "En cas d'attaque réussie, <style=cIsDamage>5%</style> <style=cStack>(+5% par cumul)</style> de chance d'attacher une  <style=cIsDamage>bombe</style> à un ennemi, qui explose pour <style=cIsDamage>240%</style> de dégâts totaux.",
+	
+	"ITEM_CROWBAR_PICKUP_RISKYMOD": "Le premier coup infligé à un ennemi inflige des dégâts supplémentaire.",
+	"ITEM_CROWBAR_DESC_RISKYMOD": "Inflige <style=cIsDamage>+45%</style> <style=cStack>(+45% par cumul)</style> de dégâts supplémentaire lors de votre <style=cIsDamage>premier coup</style> contre un ennemi.",
+	
+	"ITEM_WARDONLEVEL_PICKUP_RISKYMOD": "Pose une Bannière de guerre en montant de niveau ou en démarrant un évènement de téléporteur. Améliore l'attaque, la vitesse d'attaque, la vitesse de déplacement, et la régénération de vie des alliés.",
+	"ITEM_WARDONLEVEL_DESC_RISKYMOD": "En cas de <style=cIsUtility>gain de niveau</style> ou au lancement d'un <style=cIsUtility>évènement de téléporteur</style>, fait apparaître une bannière qui renforce tout les alliés situés dans un rayon de <style=cIsUtility>16m</style> <style=cStack>(+8m par cumul)</style>. Améliore les <style=cIsDamage>dégâts</style> de <style=cIsDamage>10%</style>, et la <style=cIsDamage>vitesse d'attaque</style> et la <style=cIsUtility>vitesse de déplacement</style> de <style=cIsDamage>30%</style>. Régénère aussi <style=cIsHealing>1%</style> de vos <style=cIsHealing>PV max</style> à chaque seconde.",
+	
+	"ITEM_IGNITEONKILL_DESC_RISKYMOD": "En cas d'ennemi tué, <style=cIsDamage>enflamme</style> tous les ennemis dans un rayon de <style=cIsDamage>16m</style> et inflige <style=cIsDamage>150%</style> des dégâts de base. Les ennemis subissent également des <style=cIsDamage>brûlures</style> pour un montant de <style=cIsDamage>150%</style> <style=cStack>(+75% par cumul)</style> des dégâts de base.",
+
+	"ITEM_BEAR_DESC_RISKYMOD": "<style=cIsHealing>10%</style> <style=cStack>(+10% par cumul)</style> de chance de <style=cIsHealing>bloquer</style> les dégâts. <style=cIsUtility>Non déterminé par la chance</style>.",
+	
+	"ITEM_SLOWONHIT_DESC_RISKYMOD": "En cas d'attaque réussie, <style=cIsUtility>ralentit</style> les ennemis de <style=cIsUtility>-80% de la vitesse de déplacement</style> et <style=cIsDamage>-20% de la vitesse d'attaque</style> pendant <style=cIsUtility>2s</style> <style=cStack>(+2s par cumul)</style>.",
+	
+	"ITEM_SEED_DESC_RISKYMOD": "Infliger des dégâts vous permet de vous <style=cIsHealing>soigner</style> pour <style=cIsHealing>1</style> plus <style=cIsHealing>1% <style=cStack>(+1% par cumul)</style></style> des <style=cIsDamage>dégâts infligés</style>.",
+	
+	"ITEM_MISSILE_DESC_RISKYMOD": "<style=cIsDamage>10%</style> de chance de lancer un missile qui inflige <style=cIsDamage>300%</style> <style=cStack>(+210% par cumul)</style> de dégâts totaux.",
+	
+	"ITEM_ICERING_DESC_RISKYMOD": "Les coups infligeant <style=cIsDamage>plus de 400% de dégâts</style> frappent les ennemis d'une <style=cIsDamage>explosion de glace runique</style>, qui les <style=cIsUtility>ralentit</style> de <style=cIsUtility>80%</style> pendant <style=cIsUtility>3s</style> <style=cStack>(+3s par cumul)</style> et inflige <style=cIsDamage>200%</style> <style=cStack>(+120% par cumul)</style> de dégâts TOTAUX. Se recharge toutes les <style=cIsUtility>10</style> secondes.",
+	
+	"ITEM_FIRERING_DESC_RISKYMOD": "Les coups infligeant <style=cIsDamage>plus de 400% de dégâts</style> frappent les ennemis d'une <style=cIsDamage>tornade de flammes runique</style>, qui inflige <style=cIsDamage>250%</style> <style=cStack>(+150% par cumul)</style> de dégâts continus TOTAUX. Se recharge toutes les <style=cIsUtility>10</style> secondes.",
+	
+	"ITEM_PHASING_PICKUP_RISKYMOD": "Devenez invisible en prenant des dégâts importants.",
+	"ITEM_PHASING_DESC_RISKYMOD": "Chance en prenant des dégâts de gagner <style=cIsUtility>40% de vitesse de déplacement</style> et de <style=cIsUtility>l'invisibilité</style> pendant <style=cIsUtility>3s</style> <style=cStack>(+1.5s par cumul)</style>. La chance augmente avec les dégâts subis.",
+	
+	"ITEM_EXPLODEONDEATH_DESC_RISKYMOD": "En cas d'ennemi tué, fait apparaître un <style=cIsDamage>pillier de lave</style> dans un rayon de <style=cIsDamage>16m</style> infligeant <style=cIsDamage>350%</style> <style=cStack>(+280% par cumul)</style> de dégâts de base.",
+	
+	"ITEM_SQUIDTURRET_PICKUP_RISKYMOD": "Prendre des dégâts importants fait apparaître une Tourelle calamar proche.",
+	"ITEM_SQUIDTURRET_DESC_RISKYMOD": "Chance en prenant des dégâts de faire apparaître une <style=cIsDamage>Tourelle Calamar</style> avec <style=cIsHealing>100% <style=cStack>(+50% par cumul)</style></style> de vie et <style=cIsDamage>100% <style=cStack>(+100% par cumul)</style></style> de vitesse d'attaque qui <style=cIsUtility>distrait</style> les ennemis proche. La chance augmente avec les dégâts subis. Limité à <style=cIsUtility>3</style>.",
+	
+	"ITEM_CHAINLIGHTNING_DESC_RISKYMOD": "<style=cIsDamage>25%</style> de chance de lancer une <style=cIsDamage>chaîne électrique</style> pour <style=cIsDamage>80%</style> de dégâts totaux à un maximum de <style=cIsDamage>3 <style=cStack>(+2 par cumul)</style></style> cibles dans un rayon de <style=cIsDamage>25m</style>.",
+	
+	"ITEM_THORNS_DESC_RISKYMOD": "Quand vous subissez une attaque, vous explosez dans une déflagration de lames, qui inflige <style=cIsDamage>160%</style> <style=cStack>(+80% par cumul)</style> de dégâts. Frappe jusqu'à <style=cIsDamage>3</style> <style=cStack>(+2 par cumul)</style> cibles dans un rayon de <style=cIsDamage>25m</style>.",
+	
+	"ITEM_SPRINTARMOR_PICKUP_RISKYMOD": "Augmente l'armure. Courir améliore davantage l'armure.",
+	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>Augmente l'armure</style> de <style=cIsHealing>10</style> <style=cStack>(+10 par cumul)</style>. Améliore l'armure de  <style=cIsHealing>10</style> <style=cStack>(+10 par cumul)</style> supplémentaire lorsque vous <style=cIsUtility>courrez</style>.",
+	
+	"ITEM_EXECUTELOWHEALTHELITE_PICKUP_RISKYMOD": "Inflige des dégâts bonus aux ennemis sous 50% de vie.",
+	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Inflige <style=cIsDamage>+30%</style> <style=cStack>(+30% par cumul)</style> de dégâts aux ennemis sous <style=cIsDamage>50% de vie</style>.",
+	
+	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "Passez en mode frénésie après avoir tué un ennemi. Se cumule 3 fois.",
+	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Tuer un ennemi</style> vous fait passer en mode <style=cIsDamage>Frénésie</style> pendant <style=cIsDamage>6s</style>, augmentant <style=cIsUtility>la vitesse de déplacement</style> et <style=cIsDamage>la vitesse d'attaque</style> de <style=cIsDamage>15%</style> pour chaque ennemi tué. Cumul maximum de <style=cIsDamage>3 <style=cStack>(+2 par cumul)</style></style> bonus.",
+
+	"ITEM_ENERGIZEDONEQUIPMENTUSE_PICKUP_RISKYMOD": "Activer votre équipement vous donne de la vitesse de déplacement et de la vitesse d'attaque.",
+	"ITEM_ENERGIZEDONEQUIPMENTUSE_DESC_RISKYMOD": "Activer votre équipement vous donne <style=cIsUtility>+50% de vitesse de déplacement</style> et <style=cIsDamage>+70% de vitesse d'attaque</style> pendant <style=cIsDamage>8s</style> <style=cStack>(+4s par cumul)</style>.",
+	
+	"ITEM_INFUSION_PICKUP_RISKYMOD": "Tuer un ennemi augmente de manière permanente la vie maximale.",
+	"ITEM_INFUSION_DESC_RISKYMOD": "En cas d'ennemi tué, augmente vos <style=cIsHealing>PV de façon permanente</style> de <style=cIsHealing>1</style> <style=cStack>(+1 par cumul)</style>. Tous les <style=cIsHealing>100 PV</style> gagné de cet objet <style=cIsHealth>réduit</style> les PV gagnés par victime.",
+	
+	"ITEM_ICICLE_DESC_RISKYMOD": "En cas d'ennemi tué, vous entoure d'une <style=cIsDamage>tempête de glace</style> qui inflige <style=cIsDamage>1200% <style=cStack>(+400% par cumul)</style> de dégâts par seconde</style> et <style=cIsUtility>ralentit</style> les ennemis de <style=cIsUtility>80%</style> pendant <style=cIsUtility>1.5s</style>. La tempête <style=cIsDamage>grossit à chaque ennemi tué</style>, augmentant son rayon de <style=cIsDamage>3m</style>. Cumul jusqu'à <style=cIsDamage>18m</style>.",
+	
+	"ITEM_HEADHUNTER_PICKUP_RISKYMOD": "Infligez des dégâts bonus aux élites, et gagnez temporairement leur pouvoir a leur mort.",
+	"ITEM_HEADHUNTER_DESC_RISKYMOD": "Inflige <style=cIsDamage>30%</style> de dégâts supplémentaire aux monstres d'élite. En tuant un élite, gagnez leur pouvoir pendant  <style=cIsDamage>10s</style> <style=cStack>(+5s par cumul)</style>.",
+	
+	"ITEM_FALLBOOTS_PICKUP_RISKYMOD": "Augmente la hauteur de saut et le contrôle aérien. Maintenez \'Interagir\' pour vous écraser au sol.",
+	"ITEM_FALLBOOTS_DESC_RISKYMOD": "Améliore la <style=cIsUtility>hauteur de saut</style> et le <style=cIsUtility>contrôle aérien</style>. Crée une <style=cIsDamage>explosion cinétique</style> d'un rayon de <style=cIsDamage>5m à 100m</style> au contact avec le sol, qui inflige <style=cIsDamage>1000% à 10000%</style> <style=cStack>(+600% à 6000% par cumul)</style> des dégâts de base, et augmente proportionnellement à votre <style=cIsDamage>distance de chute</style>. Se recharge en <style=cIsDamage>10</style> secondes.",
+	
+	"ITEM_GHOSTONKILL_PICKUP_RISKYMOD": "Tuer un ennemi fait apparaître un fantôme. Se recharge avec le temps.",
+	"ITEM_GHOSTONKILL_DESC_RISKYMOD": "Tuer un ennemi fait <style=cIsDamage>apparaître un fantôme</style> de l'ennemi tué qui inflige <style=cIsDamage>600%</style> <style=cStack>(+180% par cumul)</style> de dégâts. Dure <style=cIsDamage>30s</style> <style=cStack>(+30s par cumul)</style>. Se recharge toutes les <style=cIsUtility>20</style> secondes. Peut avoir jusqu'à <style=cIsUtility>3</style> fantômes a la fois.", 
+
+	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>Recrutez un soldat scarabée</style> avec <style=cIsDamage>300%</style> <style=cStack>(+300% par cumul)</style> de dégâts et <style=cIsHealing>200% <style=cStack>(+100% par cumul)</style></style> de PV.",
+	
+	"ITEM_FIREBALLSONHIT_DESC_RISKYMOD": "En cas d'attaque réussie, <style=cIsDamage>10%</style> de chance d'invoquer <style=cIsDamage>3 boules de magma</style> depuis un ennemi, infligeant chacune <style=cIsDamage>300%</style> <style=cStack>(+180% par cumul)</style> de dégâts.",
+	
+	"ITEM_LIGHTNINGSTRIKEONHIT_DESC_RISKYMOD": "En cas d'attaque réussie, <style=cIsDamage>10%</style> de chance d'invoquer un éclair infligeant <style=cIsDamage>500%</style> <style=cStack>(+300% par cumul)</style> de dégâts.",
+	
+	"ITEM_BLEEDONHITANDEXPLODE_PICKUP_RISKYMOD": "Les ennemis qui saignent explosent à leur mort.",
+	"ITEM_BLEEDONHITANDEXPLODE_DESC_RISKYMOD": "Gagnez <style=cIsDamage>10%</style> de chance d'infliger du <style=cIsDamage>saignement</style> aux ennemis pour <style=cIsDamage>240%</style> de dégâts de base. Les ennemis qui <style=cIsDamage>saignent</style> <style=cIsDamage>explosent</style> à leur mort pour <style=cIsDamage>400%</style> <style=cStack>(+320% par cumul)</style> de dégâts, plus un bonus de <style=cIsDamage>10%</style> <style=cStack>(+8% par cumul)</style> de leur PV max.",
+	
+	"ITEM_KNURL_PICKUP_RISKYMOD": "Augmente les PV, la régénération, et l'armure.",
+	"ITEM_KNURL_DESC_RISKYMOD": "<style=cIsHealing>Augmente les PV max</style> de <style=cIsHealing>8%</style> <style=cStack>(+8% par cumul)</style>, <style=cIsHealing>la récupération de PV de base</style> de <style=cIsHealing>+1.6 PV/s</style> <style=cStack>(+1.6 PV/s par cumul)</style>, et <style=cIsHealing>l'armure</style> de <style=cIsHealing>10</style> <style=cStack>(+10 par cumul)</style>.",
+		
+	"ITEM_SHIELDONLY_PICKUP_RISKYMOD": "Convertit tout les PV en vie. Augmente la vie maximale... <color=#FF7F7F>MAIS augmente le délai de régénération de bouclier.</color>",
+	"ITEM_SHIELDONLY_DESC_RISKYMOD": "<style=cIsHealing>Convertit</style> tous les <style=cIsHealing>PV sauf 1</style> en <style=cIsHealing>bouclier</style>. <style=cIsHealing>Offre 50% <style=cStack>(+25% par cumul)</style> de PV max</style>. Augmente le <style=cIsHealing>délai de régénération du bouclier</style> de <style=cIsHealing>0s</style> <style=cStack>(+1s par cumul)</style>.",
+	
+	"ITEM_MISSILEVOID_DESC_RISKYMOD": "Vous gagnez un <style=cIsHealing>bouclier</style> égal à <style=cIsHealing>10%</style> de vos PV max. Tant que le <style=cIsHealing>bouclier</style> est actif, lancez un missile qui inflige <style=cIsDamage>40%</style> <style=cStack>(+28% par cumul)</style> de dégâts TOTAUX. <style=cIsVoid>Corrompt tous les missiles AtG Mk. 1</style>.",
+	
+	"ITEM_EXPLODEONDEATHVOID_DESC_RISKYMOD": "Quand vous touchez un ennemi ayant <style=cIsDamage>90% de ses PV</style> ou plus, fait apparaître un <style=cIsDamage>pillier de lave</style> dans un rayon de <style=cIsDamage>12m</style> infligeant <style=cIsDamage>350%</style> <style=cStack>(+280% par cumul)</style> de dégâts de base. <style=cIsVoid>Corrompt tous les feux follets</style>.",
+	
+	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Les coups infligeant <style=cIsDamage>plus de 400% de dégâts</style> activent aussi un trou noir qui <style=cIsUtility>aspire les ennemis dans un rayon de 15m</style>. Implose au bout de <style=cIsUtility>5</style> secondes, infligeant <style=cIsDamage>200%</style> <style=cStack>(+120% par cumul)</style> de dégâts TOTAUX. Se recharge toutes les <style=cIsUtility>15</style> secondes.",
+	
+	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Tuer un ennemi améliore la <style=cIsUtility>vitesse de déplacement</style> de <style=cIsUtility>50%</style> pendant <style=cIsUtility>1.5</style> <style=cStack>(+1 par cumul)</style> secondes. <style=cIsDamage>Les victimes consécutives augmentent la durée du bonus</style> pendant 25 secondes maximum.",
+	
+	"ITEM_SPRINTOUTOFCOMBAT_DESC_RISKYMOD": "Augmente la <style=cIsUtility>vitesse de déplacement</style> de <style=cIsUtility>10%</style> <style=cStack>(+10% par cumul)</style>. Quitter le combat améliore votre <style=cIsUtility>vitesse de déplacement</style> de <style=cIsUtility>30%</style> <style=cStack>(+30% par cumul)</style> supplémentaire.",
+	
+	"ITEM_MUSHROOMVOID_DESC_RISKYMOD": "<style=cIsHealing>Soigne</style> <style=cIsHealing>1.2%</style> <style=cStack>(+0.6% par cumul)</style> de vos <style=cIsHealing>PV</style> par seconde <style=cIsUtility>quand vous sprintez</style>. <style=cIsVoid>Corrompt tous les champignons revigorants</style>.",
+	
+	"ITEM_TPHEALINGNOVA_PICKUP_RISKYMOD" : "Crée une zone de soin autour du téléporteur.",
+	"ITEM_TPHEALINGNOVA_DESC_RISKYMOD" : "Crée une zone autour du téléporteur qui <style=cIsHealing>soigne</style> <style=cIsHealing>5%</style> <style=cStack>(+2.5% par cumul)</style> de vos <style=cIsHealing>PV</style> à chaque secondes.",
+	
+	"ITEM_CLOVER_DESC_RISKYMOD": "Tous les effets aléatoires ont <style=cIsUtility>+1</style> <style=cStack>(+1 par cumul)</style> chance de plus de <style=cIsUtility>réussir</style>. Si votre <style=cIsDamage>chance</style> est au dessus de <style=cIsUtility>1</style>, augmente à la place <style=cIsUtility>TOUTES les stats</style> de <style=cIsUtility>40%</style> <style=cStack>(+40% par cumul)</style>.",
+	
+	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Obtenez le <style=cIsDamage>Col. Droneman</style>. \nLes drones gagnent <style=cIsDamage>+25%</style> <style=cStack>(+25% par cumul)</style> de vitesse d'attaque et de réduction de temps de rechargement. \nEn cas d'attaque réussie, les drones gagnent <style=cIsDamage>10%</style> de chance de tirer un  <style=cIsDamage>missile</style> qui inflige <style=cIsDamage>150%</style> de dégâts TOTAUX. \nLes drones gagnent une <style=cIsDamage>mitrailleuse automatique</style> qui inflige <style=cIsDamage>6x50%</style> de dégâts, qui rebondissent vers <style=cIsDamage>1</style> ennemi.",
+	
+	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "Infligez des dégâts bonus quand vous êtes hors de danger.",
+	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Augmente les dégâts de <style=cIsDamage>15%</style> <style=cStack>(+15% par cumul)</style> quand vous êtes hors de danger.",
+	
+	"ITEM_CHAINLIGHTNINGVOID_DESC_RISKYMOD": "<style=cIsDamage>25%</style> de chance de lancer de la <style=cIsDamage>foudre</style> infligeant <style=cIsDamage>60%</style> de dégâts totaux jusqu'à <style=cIsDamage>3 <style=cStack>(+2 par cumul)</style></style> fois. <style=cIsVoid>Corrompt tous les ukulélés</style>.",
+	
+	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "Abbat les projectiles alentours. Le temps de recharge évolue avec les drones en votre possession.",
+	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "Abbat <style=cIsDamage>1</style> <style=cStack>(+1 par cumul)</style> projectiles à moins de <style=cIsDamage>20m</style> toutes les <style=cIsDamage>0.5 secondes</style>. <style=cIsUtility>Le temps de recharge évolue avec les drones en votre possession</style>.",
+	
+	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "Tuer des monstres élite fait apparaître une <style=cIsDamage>Construction Alpha</style> avec <style=cIsHealing>400% <style=cStack>(+200% par cumul)</style> de PV</style> et <style=cIsDamage>400% <style=cStack>(+200% par cumul)</style> de dégâts</style> qui <style=cIsUtility>distrait</style> les ennemis alentours. Limité à <style=cIsUtility>4</style>.",
+	
+	"ITEM_PERMANENTDEBUFFONHIT_DESC_RISKYMOD": "<style=cIsDamage>100%</style> de chance de réduire l'<style=cIsDamage>armure</style> de <style=cIsDamage>1</style> <style=cStack>(+1 par cumul)</style> <style=cIsDamage>de façon permanente</style> en cas d'attaque réussie.",
+	
+	"ITEM_TITANGOLDDURINGTP_DESC_RISKYMOD": "Invoque <style=cIsDamage>Aurelionite</style> pendant un évènement de téléporteur. Elle inflige <style=cIsDamage>100% <style=cStack>(+50% par cumul)</style> de dégâts</style> et possède <style=cIsHealing>200% <style=cStack>(+100% par cumul)</style> PV</style>.",
+	
+	"ITEM_IMMUNETODEBUFF_DESC_RISKYMOD": "Empêche <style=cIsUtility>1 <style=cStack>(+1 par cumul)</style></style> <style=cIsDamage>affaiblissement</style> et octroie à la place une <style=cIsHealing>barrière temporaire</style> pour <style=cIsHealing>25%</style> des <style=cIsHealing>PV max</style>. Se recharge toutes les <style=cIsUtility>5</style> secondes</style>.",
+	
+	"ITEM_HEALINGPOTION_PICKUP_RISKYMOD" : "Gagnez une barrière temporaire lorsque vos PV sont faible. Consommé quand utilisé.",
+	"ITEM_HEALINGPOTION_DESC_RISKYMOD": "Gagnez une <style=cIsHealing>barrière temporaire</style> pour <style=cIsHealing>50% de vos PV</style> quand vous tombez sous <style=cIsHealth>50% de vos PV</style>.",
+	
+	"ITEM_BEARVOID_DESC_RISKYMOD": "<style=cIsHealing>Bloque</style> une fois les dégâts. Se recharge après <style=cIsUtility>20 secondes</style> <style=cStack>(-10% par cumul)</style>. <style=cIsVoid>Corrompt toutes les mauvaises passes</style>.",
+	
+	"ITEM_BARRIERONOVERHEAL_DESC_RISKYMOD": "Vous soigner au-delà de votre maximum octroie une <style=cIsHealing>barrière temporaire</style> pour <style=cIsHealing>50% <style=cStack>(+50% par cumul)</style></style> de la quantité de PV <style=cIsHealing>récupéré</style>. Divise <style=cIsHealing>le taux de réduction de barrière</style> par <style=cIsHealing>2 <style=cStack>(+1 par cumul)</style></style>.",
+
+	"ITEM_LUNARDAGGER_DESC_RISKYMOD": "Augmente les dégâts de base de <style=cIsDamage>100%</style> <style=cStack>(+100% par cumul)</style>. <style=cIsHealth>Divise les PV maximum par 2</style> <style=cStack>(+1 par cumul)</style>.",
+	
+	"ITEM_STRENGTHENBURN_DESC_RISKYMOD": "<style=cIsDamage>5%</style> de chance d'<style=cIsDamage>enflammer</style> par attaque réussie pour <style=cIsDamage>50%</style> des dégâts TOTAUX. Les effets de <style=cIsDamage>brûlure</style> infligent <style=cIsDamage>+300%</style> <style=cStack>(+300% par cumul)</style> de dégâts continus supplémentaire.",
+	
+	"ITEM_CRITDAMAGE_DESC_RISKYMOD": "Gagnez <style=cIsDamage>5% de chance critique</style>. Les <style=cIsDamage>coups critique</style> Infligent <style=cIsDamage>100% damage</style><style=cStack>(+100% par cumul)</style> de dégâts en plus.",
+	
+	"ITEM_BARRAGEONBOSS_DESC_RISKYMOD": "Lors des évènements de boss, <style=cIsUtility>5</style> missiles bombardent la zone et infligent <style=cIsDamage>2.5% <style=cStack>(+2.5% par cumul)</style> des PV max du boss en dégâts</style>. Avant l'évènement de boss, obtenez des missiles supplémentaires, jusqu'à <style=cIsUtility>20</style> <style=cStack>(+5 par cumul)</style> missiles toutes les <style=cIsUtility>25</style> pièces d'or récupérées. <style=cIsUtility>Le nombre de pièces d'or requises augmente avec le temps.</style>",
+	
+	"ITEM_TELEPORTONLOWHEALTH_DESC_RISKYMOD": "Tomber en dessous de <style=cIsHealth>25% de vos PV</style> vous confère <style=cIsHealing>100%</style> de vos  <style=cIsHealing>PV maximum</style> en <style=cIsHealing>barrière temporaire</style>. Gagnez une aura dimensionnelle pendant <style=cIsUtility>8s</style> qui fait  <style=cIsDamage>saigner</style> les ennemis et les <style=cIsUtility>téléporte</style> autre part. Les <style=cIsDamage>ennemis tué</style> par l'aura  <style=cIsUtility>prolongent</style> la durée de <style=cIsUtility>1s</style>. Se recharge au début de chaque niveau.",
+	
+	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "Les ennemis au sol touchés par une <style=cIsUtility>compétence</style> sont <style=cIsUtility>envoyés dans les airs</style> et <style=cIsUtility>étourdis</style>. Les ennemis touchés dans les airs sont <style=cIsUtility>renvoyés dans les airs</style> jusqu'à <style=cIsUtility>2 fois</style> <style=cStack>(+1 par cumul)</style>. Les ennemis envoyés dans les airs subissent <style=cIsDamage>15%</style> de dégâts supplémentaires, toutes sources confondues. Se recharge après <style=cIsUtility>15s</style>.",
+	
+	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Augmente <style=cIsUtility>TOUTES les statistiques</style> de <style=cIsUtility>5%</style> pour chaque bonus, jusqu'à <style=cIsUtility>4</style> <style=cStack>(+4 par cumul)</style> maximum.",
+	
+	"ITEM_TRIGGERENEMYDEBUFFS_DESC_RISKYMOD": "Gagnez <style=cIsDamage>10%</style> de chance de faire <style=cIsDamage>saigner</style> un ennemi. En cas d'ennemi tué, <style=cIsDamage>transfère 33%</style> de tous les cumuls d'affaiblissement à <style=cIsDamage>1 ennemi</style> <style=cStack>(+1 par cumul)</style> situé dans un rayon de <style=cIsUtility>25m</style>.",
+	
+	}
+}
