@@ -58,6 +58,7 @@ namespace RiskyMod.Items.Boss
                 int actual = 0;
 
                 ILCursor c = new ILCursor(il);
+                int victimBodyLoc = 1;//todo: set up dynamic match
                 if (c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "BleedOnHitAndExplode")
                     ))
@@ -65,7 +66,7 @@ namespace RiskyMod.Items.Boss
                     //Make Collapse count towards the proc condition
                     if (c.TryGotoNext( MoveType.After, x => x.MatchCallvirt<CharacterBody>("HasBuff")))
                     {
-                        c.Emit(OpCodes.Ldloc_2);//victimBody
+                        c.Emit(OpCodes.Ldloc, victimBodyLoc);//victimBody
                         c.Emit(OpCodes.Ldarg_1);//damageReport
                         c.EmitDelegate<Func<bool, CharacterBody, DamageReport, bool>>((hasBuff, victimBody, damageReport) =>
                         {
