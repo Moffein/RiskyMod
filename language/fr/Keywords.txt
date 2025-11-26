@@ -1,0 +1,23 @@
+{
+	strings:
+	{
+	"KEYWORD_CROCOREWORK_RISKYMOD" : "<style=cKeywordName>Contagion</style><style=cSub>Principale: Poison\nSecondaire: Fléau\nUtilitaire: Fléau\nSpéciale: Infecte pour 6x100% de dégâts et peut déclencher les effets d'objets.",
+	
+	"KEYWORD_CONTAGION_PRIMARY_RISKYMOD" : "<style=cKeywordName>Primaire</style><style=cIsHealing>Poison</style> on 3rd hit.",
+	"KEYWORD_CONTAGION_SECONDARY_RISKYMOD" :"<style=cKeywordName>Secondaire</style><color=#B1387F>Fléau</color>.",
+	"KEYWORD_CONTAGION_UTILITY_RISKYMOD" : "<style=cKeywordName>Utilitaire</style><color=#B1387F>Fléau</color>.",
+	"KEYWORD_CONTAGION_SPECIAL_RISKYMOD" : "<style=cKeywordName>Spéciale</style><style=cSub><style=cIsDamage>Infecte</style> pour <style=cIsDamage>6x100% de dégâts</style> et peut déclencher les effets d'objets.",
+	"KEYWORD_CONTAGION_SPECIAL_RISKYMOD_BLIGHT" : "<style=cKeywordName>Spéciale</style><color=#B1387F>Fléau</color>.",
+	
+	"KEYWORD_RAPID_REGEN_RISKYMOD" : "<style=cKeywordName>Régénérateur</style><style=cSub>Vous permet de récupérer <style=cIsHealing>10%</style> de vos PV max pendant 3s.",
+	"KEYWORD_BLIGHT_RISKYMOD" : "<style=cKeywordName>Fléau</style><style=cSub>Inflige <style=cIsDamage>360%</style> de dégâts de base pendant 6s. <i>Fléau peut se cumuler.</i></style>",
+	"KEYWORD_POISON_RISKYMOD" : "<style=cKeywordName>Poison</style><style=cSub>Inflige des dégâts aux ennemis correspondant à <style=cIsDamage>6%</style> de leur PV max pendant 10s. <i>Le poison ne peut pas achever les ennemis.</i></style>",
+	"KEYWORD_INTERRUPT_RISKYMOD" : "<style=cKeywordName>Étourdissant</style><style=cSub>Interrompt les ennemis et les étourdit brièvement.",
+	"KEYWORD_SHOCKING_RISKYMOD" : "<style=cKeywordName>Électrochoc</style><style=cSub>Interrompt les ennemis et les étourdit pendant 5 secondes.",
+	"KEYWORD_MAGNETIC_RISKYMOD" : "<style=cKeywordName>Magnétique</style><style=cSub>Attire les petits ennemis volants vers son centre.",
+	"KEYWORD_VOIDCORRUPTION_RISKYMOD" : "<style=cKeywordName>Corruption</style><style=cSub>Gagnez de la Corruption en subissant des dégâts, en tuant des ennemis ou en tenant des objets du vide.",
+	
+	"KEYWORD_LOWHEALTHPROTECTION_RISKYMOD": "<style=cKeywordName>Salut</style><style=cSub>Tous les survivants en vie reçoivent +7% à toutes les stats.",
+	"SEEKER_SECONDARY_TRANQUILITY_DESCRIPTION_RISKYMOD": "<style=cKeywordName>Sérénité</style><style=cSub>Augmente les dégâts de Main invisible de <style=cIsDamage>100%</style> pour chaque Sérénité.",
+	}
+}
