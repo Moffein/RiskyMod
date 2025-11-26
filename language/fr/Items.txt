@@ -106,8 +106,8 @@
 	
 	"ITEM_CHAINLIGHTNINGVOID_DESC_RISKYMOD": "<style=cIsDamage>25%</style> de chance de lancer de la <style=cIsDamage>foudre</style> infligeant <style=cIsDamage>60%</style> de dégâts totaux jusqu'à <style=cIsDamage>3 <style=cStack>(+2 par cumul)</style></style> fois. <style=cIsVoid>Corrompt tous les ukulélés</style>.",
 	
-	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "Abbat les projectiles alentours. Le temps de recharge évolue avec les drones en votre possession.",
-	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "Abbat <style=cIsDamage>1</style> <style=cStack>(+1 par cumul)</style> projectiles à moins de <style=cIsDamage>20m</style> toutes les <style=cIsDamage>0.5 secondes</style>. <style=cIsUtility>Le temps de recharge évolue avec les drones en votre possession</style>.",
+	"ITEM_CAPTAINDEFENSEMATRIX_PICKUP_RISKYMOD" : "Abat les projectiles alentours. Le temps de recharge évolue avec les drones en votre possession.",
+	"ITEM_CAPTAINDEFENSEMATRIX_DESC_RISKYMOD" : "Abat <style=cIsDamage>1</style> <style=cStack>(+1 par cumul)</style> projectiles à moins de <style=cIsDamage>20m</style> toutes les <style=cIsDamage>0.5 secondes</style>. <style=cIsUtility>Le temps de recharge évolue avec les drones en votre possession</style>.",
 	
 	"ITEM_MINORCONSTRUCTONKILL_DESC_RISKYMOD": "Tuer des monstres élite fait apparaître une <style=cIsDamage>Construction Alpha</style> avec <style=cIsHealing>400% <style=cStack>(+200% par cumul)</style> de PV</style> et <style=cIsDamage>400% <style=cStack>(+200% par cumul)</style> de dégâts</style> qui <style=cIsUtility>distrait</style> les ennemis alentours. Limité à <style=cIsUtility>4</style>.",
 	
