@@ -41,7 +41,14 @@ namespace RiskyMod.Items.DLC1.Common
                         if (hasBuff && !self.outOfDanger)
                         {
                             if (NetworkServer.active) self.RemoveBuff(WatchIndicatorBuff);
-                            RoR2.Util.PlaySound("Play_item_proc_delicateWatch_break", self.gameObject);
+                            //RoR2.Util.PlaySound("Play_item_proc_delicateWatch_break", self.gameObject);
+
+                            EffectData vfx = new EffectData
+                            {
+                                origin = self.transform.position,
+                                rootObject = self.gameObject
+                            };
+                            EffectManager.SpawnEffect(HealthComponent.AssetReferences.fragileDamageBonusBreakEffectPrefab, vfx, false);
                         }
                         else if (!hasBuff && self.outOfDanger)
                         {

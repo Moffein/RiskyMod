@@ -42,7 +42,7 @@
 	"COMMANDO_SECONDARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Выстреливает пробивающим снарядом, нанося <style=cIsDamage>450% урона</style>. Поражает разрядом всех врагов поблизости, дополнительно нанося <style=cIsDamage>150% урона</style>.",
 	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Перекатывается</style> на небольшое расстояние, снижая время восстановления всех Навыков на <style=cIsUtility>1 секунду</style>".,
 	
-	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Оглушение</style>. Совершает серию выстрелов, нанося <style=cIsDamage>8x120% урона</style>. Количество выстрелов увеличивается за счет скорости атаки.",
+	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Оглушение</style>. Совершает серию выстрелов, нанося <style=cIsDamage>7x120% урона</style>. Количество выстрелов увеличивается за счет скорости атаки.",
 
 	"COMMANDO_SPECIAL_EXPL_NAME_RISKYMOD" : "Обстрел Шрапнелью",
 	"COMMANDO_SPECIAL_EXPL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Оглушение</style>. Совершает серию разрывных выстрелов, нанося <style=cIsDamage>6x120% урона</style>. Количество выстрелов увеличивается за счет скорости атаки.",

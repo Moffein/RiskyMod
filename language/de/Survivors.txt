@@ -2,7 +2,7 @@
 	strings:
 	{
 	"CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD" : "Verschießt eine Explosion aus Schrotkugeln, die <style=cIsDamage>7x 110% Schaden</style> verursacht. Durch Aufladen wird die <style=cIsUtility>Streuung</style> verringert. Die Anzahl der Schrotkugeln erhöht sich mit der Angriffsgeschwindigkeit.",
-	"CAPTAIN_PRIMARY_DESCRIPTION_VANILLA_RISKYMOD" : "Verschießt eine Explosion aus Schrotkugeln, die <style=cIsDamage>8x120 % Schaden</style> verursacht. Durch Aufladen wird die <style=cIsUtility>Streuung</style> verringert.",
+	"CAPTAIN_PRIMARY_DESCRIPTION_VANILLA_RISKYMOD" : "Verschießt eine Explosion aus Schrotkugeln, die <style=cIsDamage>7x120 % Schaden</style> verursacht. Durch Aufladen wird die <style=cIsUtility>Streuung</style> verringert.",
 	"CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Schockend</style>. Verschieße einen schnellen Tazer, der <style=cIsDamage>100 % Schaden</style> verursacht. Fliegt auf bis zu <style=cIsDamage>6</style> weitere Gegner.",
 	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "Fordere ein <style=cIsUtility>Versorgungsleuchtfeuer</style> an. Kann nur <style=cIsUtility>zweimal pro Ebene</style> angefordert werden.",
 	

@@ -42,7 +42,7 @@
 	"COMMANDO_SECONDARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>450%의 피해</style>를 주는 관통탄을 발사합니다. 주변의 적들에게 추가로 <style=cIsDamage>150%의 피해</style>를 줍니다.",
 	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "짧은 거리를 <style=cIsUtility>구르고</style> 스킬 재사용 대기시간을 <style=cIsUtility>1초</style> 감소시킵니다.",
 	
-	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD": "<style=cIsDamage>기절성</style>. <style=cIsDamage>8x120%의 피해</style>를 주는 연사를 합니다. 발사 횟수는 공격 속도에 따라 증가합니다.",
+	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD": "<style=cIsDamage>기절성</style>. <style=cIsDamage>7x120%의 피해</style>를 주는 연사를 합니다. 발사 횟수는 공격 속도에 따라 증가합니다.",
 
 	"COMMANDO_SPECIAL_EXPL_NAME_RISKYMOD" : "파편 포화",
 	"COMMANDO_SPECIAL_EXPL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>기절성</style>. <style=cIsDamage>6x120%의 피해</style>를 주는 파편탄을 발사합니다. 발사 횟수는 공격 속도에 따라 증가합니다.",

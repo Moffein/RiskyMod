@@ -38,7 +38,7 @@
 	
 	"COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD" : "Dispare um projétil <style=cIsDamage>perfurante</style> que causa <style=cIsDamage>450% de dano</style>. Causa <style=cIsDamage>40%</style> mais dano sempre que atravessa um inimigo.",
         "COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Rola</style> uma pequena distância e reduza o tempo de recarga de hanilidades em <style=cIsUtility>1 s</style>.",
-	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>. Dispare rodadas de fragmentação que causam <style=cIsDamage>8 x 120% de dano</style>. O número de disparos aumenta com a velocidade de ataque.",
+	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>. Dispare rodadas de fragmentação que causam <style=cIsDamage>7 x 120% de dano</style>. O número de disparos aumenta com a velocidade de ataque.",
 
 	"COMMANDO_SPECIAL_SCEPTER_NAME_RISKYMOD" : "Barragem Supressiva",
 	"COMMANDO_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Atordoante</style>.  Dispare rodadas de fragmentação que causam <style=cIsDamage>18 x 150% de dano</style>. O número de disparos aumenta com a velocidade de ataque.",

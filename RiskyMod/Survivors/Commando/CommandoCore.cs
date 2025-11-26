@@ -324,6 +324,7 @@ namespace RiskyMod.Survivors.Commando
                 pie.falloffModel = BlastAttack.FalloffModel.SweetSpot;
                 ProjectileDamage pd = proj.GetComponent<ProjectileDamage>();
                 pd.damageType.AddModdedDamageType(SharedDamageTypes.SweetSpotModifier);
+                pd.damageType |= DamageSource.Secondary;
             }
 
             proj.AddComponent<GrenadeImpactComponent>();
@@ -355,6 +356,9 @@ namespace RiskyMod.Survivors.Commando
             //Prevents projectiles from disappearing at long range
             ProjectileSimple ps = proj.GetComponent<ProjectileSimple>();
             ps.lifetime = 10f;
+
+            ProjectileDamage pd = proj.GetComponent<ProjectileDamage>();
+            pd.damageType = (DamageTypeCombo)DamageSource.Secondary | DamageTypeExtended.Electrical;
 
             ProjectileOverlapAttack poa = proj.GetComponent<ProjectileOverlapAttack>();
             poa.onServerHit = null;

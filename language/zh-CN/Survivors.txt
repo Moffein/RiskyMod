@@ -42,7 +42,7 @@
 	"COMMANDO_SECONDARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "发射穿透弹造成<style=cIsDamage>450%伤害</style>。电击附近的敌人造成<style=cIsDamage>150%额外伤害</style>。",
 	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>翻滚</style>一小段距离，并且减少技能冷却时间<style=cIsUtility>1秒</style>。",
 	
-	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD": "<style=cIsDamage>眩晕</style>。发射分裂弹造成<style=cIsDamage>8x120%的伤害</style>。子弹的数量随攻击速度而增加。",
+	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD": "<style=cIsDamage>眩晕</style>。发射分裂弹造成<style=cIsDamage>7x120%的伤害</style>。子弹的数量随攻击速度而增加。",
 
 	"COMMANDO_SPECIAL_EXPL_NAME_RISKYMOD" : "破片弹幕",
 	"COMMANDO_SPECIAL_EXPL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>眩晕</style>。发射破片弹造成<style=cIsDamage>6x120%伤害</style>。子弹的数量随攻击速度而增加。",

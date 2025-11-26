@@ -42,7 +42,7 @@
 	"COMMANDO_SECONDARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Fire a piercing round for <style=cIsDamage>450% damage</style>. Zaps nearby enemies for an additional <style=cIsDamage>150% damage</style>.",
 	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Roll</style> a short distance and reduce skill cooldowns by <style=cIsUtility>1s</style>.",
 	
-	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Stunning</style>. Fire repeatedly for <style=cIsDamage>8x120% damage</style>. The number of shots increases with attack speed.",
+	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Stunning</style>. Fire repeatedly for <style=cIsDamage>7x120% damage</style>. The number of shots increases with attack speed.",
 
 	"COMMANDO_SPECIAL_EXPL_NAME_RISKYMOD" : "Shrapnel Barrage",
 	"COMMANDO_SPECIAL_EXPL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Stunning</style>. Fire fragmentation rounds for <style=cIsDamage>6x120% damage</style>. The number of shots increases with attack speed.",
