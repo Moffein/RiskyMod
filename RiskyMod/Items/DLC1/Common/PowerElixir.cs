@@ -48,11 +48,11 @@ namespace RiskyMod.Items.DLC1.Common
                 {
                     if (cm.inventory)
                     {
-                        int brokenElixirCount = cm.inventory.GetItemCount(DLC1Content.Items.HealingPotionConsumed);
+                        int brokenElixirCount = cm.inventory.GetItemCountPermanent(DLC1Content.Items.HealingPotionConsumed);
                         if (brokenElixirCount > 0)
                         {
-                            cm.inventory.RemoveItem(DLC1Content.Items.HealingPotionConsumed, brokenElixirCount);
-                            cm.inventory.GiveItem(DLC1Content.Items.HealingPotion, brokenElixirCount);
+                            cm.inventory.RemoveItemPermanent(DLC1Content.Items.HealingPotionConsumed, brokenElixirCount);
+                            cm.inventory.GiveItemPermanent(DLC1Content.Items.HealingPotion, brokenElixirCount);
                             CharacterMasterNotificationQueue.SendTransformNotification(cm, DLC1Content.Items.HealingPotionConsumed.itemIndex, DLC1Content.Items.HealingPotion.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
                         }
                     }
@@ -69,16 +69,43 @@ namespace RiskyMod.Items.DLC1.Common
                 {
                     self.AddBarrier(self.fullCombinedHealth * 0.5f);
 
-                    self.body.inventory.RemoveItem(DLC1Content.Items.HealingPotion, 1);
-                    self.body.inventory.GiveItem(DLC1Content.Items.HealingPotionConsumed, 1);
-                    CharacterMasterNotificationQueue.SendTransformNotification(self.body.master, DLC1Content.Items.HealingPotion.itemIndex, DLC1Content.Items.HealingPotionConsumed.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+                    bool removed = false;
 
-                    EffectData effectData = new EffectData
+                    //Check temp first
+                    int itemCountTemp = self.body.inventory.GetItemCountTemp(DLC1Content.Items.HealingPotion);
+                    if (itemCountTemp > 0)
                     {
-                        origin = self.transform.position
-                    };
-                    effectData.SetNetworkedObjectReference(self.gameObject);
-                    EffectManager.SpawnEffect(healEffect, effectData, true);
+                        removed = true;
+                        self.body.inventory.RemoveItemTemp(DLC1Content.Items.HealingPotion.itemIndex);
+                        self.body.inventory.GiveItemTemp(DLC1Content.Items.HealingPotionConsumed.itemIndex);
+                    }
+
+                    int itemCountChanneled = self.body.inventory.GetItemCountChanneled(DLC1Content.Items.HealingPotion);
+                    if (!removed && itemCountChanneled > 0)
+                    {
+                        removed = true;
+                        self.body.inventory.RemoveItemChanneled(DLC1Content.Items.HealingPotion.itemIndex);
+                        self.body.inventory.GiveItemChanneled(DLC1Content.Items.HealingPotionConsumed.itemIndex);
+                    }
+
+                    int itemCountPermanent = self.body.inventory.GetItemCountPermanent(DLC1Content.Items.HealingPotion);
+                    if (!removed &&  itemCountPermanent > 0)
+                    {
+                        removed = true;
+                        self.body.inventory.RemoveItemPermanent(DLC1Content.Items.HealingPotion.itemIndex);
+                        self.body.inventory.GiveItemPermanent(DLC1Content.Items.HealingPotionConsumed.itemIndex);
+                    }
+
+                    if (removed)
+                    {
+                        CharacterMasterNotificationQueue.SendTransformNotification(self.body.master, DLC1Content.Items.HealingPotion.itemIndex, DLC1Content.Items.HealingPotionConsumed.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+                        EffectData effectData = new EffectData
+                        {
+                            origin = self.transform.position
+                        };
+                        effectData.SetNetworkedObjectReference(self.gameObject);
+                        EffectManager.SpawnEffect(healEffect, effectData, true);
+                    }
                 }
             }
         }
