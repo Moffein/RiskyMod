@@ -58,7 +58,6 @@ namespace RiskyMod.Items.Boss
                 int actual = 0;
 
                 ILCursor c = new ILCursor(il);
-                int victimBodyLoc = 1;//todo: set up dynamic match
                 if (c.TryGotoNext(
                      x => x.MatchLdsfld(typeof(RoR2Content.Items), "BleedOnHitAndExplode")
                     ))
@@ -66,11 +65,24 @@ namespace RiskyMod.Items.Boss
                     //Make Collapse count towards the proc condition
                     if (c.TryGotoNext( MoveType.After, x => x.MatchCallvirt<CharacterBody>("HasBuff")))
                     {
-                        c.Emit(OpCodes.Ldloc, victimBodyLoc);//victimBody
                         c.Emit(OpCodes.Ldarg_1);//damageReport
-                        c.EmitDelegate<Func<bool, CharacterBody, DamageReport, bool>>((hasBuff, victimBody, damageReport) =>
+                        c.EmitDelegate<Func<bool, DamageReport, bool>>((hasBuff, damageReport) =>
                         {
-                            return hasBuff || victimBody.HasBuff(DLC1Content.Buffs.Fracture) || (damageReport != null && damageReport.damageInfo != null && damageReport.damageInfo.dotIndex == DotController.DotIndex.Fracture);
+                            bool victimHasFracture = false;
+                            if (damageReport != null)
+                            {
+                                if (damageReport.victimBody)
+                                {
+                                    victimHasFracture = damageReport.victimBody.HasBuff(DLC1Content.Buffs.Fracture);
+                                }
+                                
+                                if (!victimHasFracture && damageReport.damageInfo != null)
+                                {
+                                    victimHasFracture = damageReport.damageInfo.dotIndex == DotController.DotIndex.Fracture;
+                                }
+                            }
+
+                            return hasBuff || victimHasFracture;
                         });
 
                         //Change explosion damage
