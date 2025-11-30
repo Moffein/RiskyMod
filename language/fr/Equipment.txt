@@ -1,0 +1,12 @@
+{
+	strings:
+	{
+		"EQUIPMENT_FIREBALLDASH_DESC_RISKYMOD": "Vous transforme en <style=cIsDamage>boule de feu draconique</style> pendant <style=cIsDamage>5</style> secondes. Inflige <style=cIsDamage>600% de dégâts</style> à l'impact. Explose à la fin en infligeant <style=cIsDamage>1200% damage</style> et <style=cIsDamage>étourdit</style> les ennemis proche.",
+
+		"EQUIPMENT_BFG_DESC_RISKYMOD": "Tire des vrilles de préons qui touchent les ennemis dans un rayon de 35m et infligent jusqu'à <style=cIsDamage>1180% de dégâts par seconde</style>. En cas de contact, engendre une explosion puissante d'un rayon de 20m qui inflige <style=cIsDamage>8000% de dégâts</style>.",
+		
+		"EQUIPMENT_CRITONUSE_DESC_RISKYMOD": "Offre <style=cIsDamage>+100% de chance de coup critique</style> pendant 8 secondes. La chance excédente est convertie en <style=cIsDamage>dégat critique</style>.",
+		
+		"EQUIPMENT_GUMMYCLONE_DESC_RISKYMOD" : "Fait apparaître un clone gélatineux avec <style=cIsDamage>300% de dégâts</style> et <style=cIsHealing>600% de PV</style>. Expire au bout de <style=cIsUtility>30</style> secondes."
+	}
+}
