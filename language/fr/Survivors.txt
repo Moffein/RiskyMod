@@ -1,0 +1,94 @@
+{
+	strings:
+	{
+	"CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD" : "Tire une salve de plombs infligeant <style=cIsDamage>7x110% de dégâts</style>. Chargez l'attaque pour réduire la  <style=cIsUtility>dispersion</style>. La quantité de plombs augmente avec la vitesse d'attaque.",
+	"CAPTAIN_PRIMARY_DESCRIPTION_VANILLA_RISKYMOD" : "Tire une salve de plombs infligeant <style=cIsDamage>7x110% de dégâts</style>. Chargez l'attaque pour réduire la  <style=cIsUtility>dispersion</style>.",
+	"CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Électrochoc</style>. tire un taser rapide qui inflige <style=cIsDamage>100% de dégâts</style>. Se propage jusqu'à <style=cIsDamage>6</style> cibles.",
+	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "Appelle une <style=cIsUtility>balise de ravitaillement</style>. Ne peux être demandée que 2 fois.",
+	
+	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Pirate</style> tous les interactable alentours, réduisant leur coût de <style=cIsUtility>50%</style>.",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_INTERACTION_RISKYMOD" : "Recharger les compétences",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Recharge les compétences</style> et réduit le temps de recharge des <style=cIsUtility>équipements</style> de <style=cIsUtility>20s</style> à l'utilisation.",
+	
+	"CAPTAIN_SUPPLY_HEAL_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>Permanent</style>. <style=cIsHealing>Soigne</style> tous les alliés proches à hauteur de <style=cIsHealing>10%</style></style> de leur <style=cIsHealing>PV max</style> chaque seconde.",
+	"CAPTAIN_SUPPLY_SHOCKING_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>Permanent</style>. <style=cIsDamage>Électrocute</style> périodiquement tous les ennemis à proxmimité et les immobilise.",
+	"CAPTAIN_SUPPLY_HACKING_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>Permanent</style>. <style=cIsUtility>Pirate</style> tous les interactables à proximité pour un coût continu de <style=cIsUtility>0 $</style>.",
+	"CAPTAIN_SUPPLY_EQUIPMENT_RESTOCK_DESCRIPTION_RISKYMOD_PERMANENT": "<style=cIsHealth>Permanent</style>. <style=cIsUtility>Recharge l'équipement</style> à l'utilisation.",
+	"CAPTAIN_SUPPLY_PRICE_REDUCTION_DESCRIPTION_RISKYMOD_PERMANENT" : "<style=cIsHealth>Permanent</style>. <style=cIsUtility>Pirate</style> tous les interactable alentours, réduisant leur coût de <style=cIsUtility>50%</style>.",
+	"CAPTAIN_SUPPLY_SKILL_RESTOCK_DESCRIPTION_RISKYMOD_PERMANENT" : "<style=cIsHealth>Permanent</style>. <style=cIsUtility>Recharge les compétences</style> et réduit le temps de recharge des <style=cIsUtility>équipements</style> de <style=cIsUtility>20s</style> à l'utilisation.",
+	
+	"BANDIT2_PRIMARY_DESC_RISKYMOD" : "Tire une mitraille de fusil à pompe infligeant <style=cIsDamage>5x90% de dégâts</style>. Peut contenir 4 cartouches.",
+	"BANDIT2_PRIMARY_ALT_DESC_RISKYMOD" : "Tire une rafale au fusil infligeant <style=cIsDamage>360% de dégâts</style>. Peut contenir 4 balles.",
+	"BANDIT2_PASSIVE_DESCRIPTION_RISKYMOD" : "Toutes les attaques <style=cIsDamage>par-derrière</style> sont des <style=cIsDamage>mini coups critiques</style>. Toutes les <style=cIsDamage>chances de coup critique</style> sont converties en <style=cIsDamage>dégâts critique</style>.",
+	"BANDIT2_REVOLVER_NAME_RISKYMOD" : "Pistolero",
+	"BANDIT2_REVOLVER_DESCRIPTION_RISKYMOD" : "Les éliminations au revolver <style=cIsUtility>réinitialisent tous les temps de rechargement</style>.",
+	"BANDIT2_REVOLVER_ALT_DESCRIPTION_RISKYMOD" : "Les éliminations au revolver offrent des <style=cIsDamage>jetons cumulable</style> infligeant <style=cIsDamage>10%</style> de dégâts en plus au revolver.",
+	"BANDIT2_REVOLVER_ALT_PERSIST_DESCRIPTION_RISKYMOD": "Les éliminations au revolver offrent des <style=cIsDamage>jetons cumulable</style> pour plus de dégâts au revolver.",
+	"BANDIT2_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Meurtrier</style>. Effectuez un tir de revolver infligeant <style=cIsDamage>600% de dégâts</style>.",
+	"BANDIT2_SPECIAL_ALT_NAME_RISKYMOD" : "Gâchette facile",
+	"BANDIT2_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Meurtrier</style>. Tirez des balles de revolver à la suite infligeant <style=cIsDamage>6x100% de dégâts</style>. Chaque coup consécutif inflige <style=cIsDamage>20%</style> de dégâts en plus.",
+	"BANDIT2_SECONDARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Étourdissant</style>. Lance une lame cachée infligeant <style=cIsDamage>2x240% de dégâts</style>. Les coups critiques causent aussi de l'<style=cIsHealth>Hémorragie</style>.",
+	"BANDIT2_REVOLVER_STANDOFF_NAME_RISKYMOD" : "Confrontation",
+	"BANDIT2_REVOLVER_STANDOFF_DESCRIPTION_RISKYMOD" : "Les éliminations au revolver <style=cIsDamage>augmentent les dégâts de 20%</style> pendant 15 secondes. Se cumule jusqu'à <style=cIsDamage>5</style> fois.",
+	"BANDIT2_REVOLVER_LOADOUT_TITLE_RISKYMOD" : "Revolver",
+	
+	"BANDIT2_SPECIAL_SCEPTER_NAME_RISKYMOD": "Assassinat",
+	"BANDIT2_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Meurtrier</style>. Effectuez deux tirs de revolver infligeant <style=cIsDamage>2x900% de dégâts</style>.",
+	"BANDIT2_SPECIAL_ALT_SCEPTER_NAME_RISKYMOD" : "Pour une poignée de plomb",
+	"BANDIT2_SPECIAL_ALT_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Meurtrier</style>. Tirez rapidement des balles de revolver infligeant <style=cIsDamage>12x100% de dégâts</style>. Chaque coup consécutif infligent <style=cIsDamage>20%</style> de dégâts en plus.",
+	
+	"COMMANDO_SECONDARY_DESCRIPTION_RISKYMOD" : "Tire une balle <style=cIsDamage>perforante</style> infligeant <style=cIsDamage>450% damage</style>. Inflige <style=cIsDamage>40%</style> de dégâts supplémentaires à chaque fois qu'elle traverse un ennemi.",
+	"COMMANDO_SECONDARY_LIGHTNING_NAME_RISKYMOD": "Foudre phasique",
+	"COMMANDO_SECONDARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Tire une balle perforante infligeant <style=cIsDamage>450% de dégâts</style>. Inflige une décharge aux ennemis proches infligeant <style=cIsDamage>150% de dégâts</style> supplémentaire.",
+	"COMMANDO_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsUtility>Roulez</style> sur une courte distance et réduisez le temps de recharge des compétences de  <style=cIsUtility>1s</style>.",
+	
+	"COMMANDO_SPECIAL_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Étourdissant</style>. Tire à répétition en infligeant <style=cIsDamage>7x120% de dégâts</style>. Le nombre de tirs augmentent avec la vitesse d'attaque.",
+
+	"COMMANDO_SPECIAL_EXPL_NAME_RISKYMOD" : "Barrage de shrapnel",
+	"COMMANDO_SPECIAL_EXPL_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Étourdissant</style>. Tire des balles à fragmentations en infligeant <style=cIsDamage>6x120% de dégâts</style>. Le nombre de tirs augmentent avec la vitesse d'attaque.",
+	"COMMANDO_SPECIAL_EXPL_SCEPTER_NAME_RISKYMOD" : "Volée de shrapnel",
+	"COMMANDO_SPECIAL_EXPL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Étourdissant</style>. Tire des balles à fragmentations en infligeant <style=cIsDamage>12x150% de dégâts</style>. Le nombre de tirs augmentent avec la vitesse d'attaque.",
+	"COMMANDO_SPECIAL_ALT1_SCEPTER_NAME_RISKYMOD" : "Bombardement",
+	"COMMANDO_SPECIAL_ALT1_SCEPTER_DESCRIPTION_RISKYMOD" : "Lancez plusieurs grenade qui explosent, infligeant <style=cIsDamage>5x700% damage</style>. Peut contenir 2 charges.",
+	
+	"HUNTRESS_PRIMARY_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Agile</style>. Lance rapidement une flèche à tête chercheuse qui inflige <style=cIsDamage>200% de dégâts</style>.",
+	"HUNTRESS_PRIMARY_ALT_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Agile</style>. Tire une volée de <style=cIsDamage>3</style> flèches à tête chercheuse infligeant <style=cIsDamage>3x120% de dégâts</style>. Tire <style=cIsDamage>6</style> flèches en cas de coup critique.",
+	"HUNTRESS_SPECIAL_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Vous téléporte</style> dans les airs. Ciblez une zone pour y faire tomber une pluie de flèches, <style=cIsUtility>ralentissant</style> tous les ennemis et infligeant <style=cIsDamage>420% de dégâts par seconde</style>.",
+	"HUNTRESS_SPECIAL_SCEPTER_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Vous téléporte</style> dans les airs. Ciblez une zone pour y faire tomber une pluie de flèches, <style=cIsDamage>enflammant</style> tous les ennemis et infligeant <style=cIsDamage>420% de dégâts par seconde</style>.",
+	
+	"TOOLBOT_PRIMARY_ALT1_DESCRIPTION_RISKYMOD" : "Lance une barre d'armature perforante qui inflige <style=cIsDamage>660% damage</style>.",
+	"TOOLBOT_PRIMARY_ALT3_DESCRIPTION_RISKYMOD" : "Découpe les ennemis à proximité en infligeant <style=cIsDamage>1000% de dégâts par seconde</style>. Toucher un ennemi accorde une <style=cIsHealing>barrière temporaire</style>.",
+	"TOOLBOT_SPECIAL_ALT_DESCRIPTION_RISKYMOD" : "Passez en posture lourde, en équipant vos deux <style=cIsDamage>attaques principales</style> à la fois. Offre <style=cIsUtility>60 d'armure</style>, mais fait perdre <style=cIsHealth>60% de vitesse de déplacement</style>.",
+	
+	"MERC_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Étourdissant</style>. Foncez vers l'avant en infligeant <style=cIsDamage>450% de dégâts</style>. Si vous touchez un ennemi, <style=cIsDamage>vous permet de foncer de nouveau</style>, jusqu'à un total de <style=cIsDamage>3</style> fois.",
+	
+	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "Lance une <style=cIsUtility>explosion sonique</style> qui <style=cIsDamage>affaiblit</style> tous les ennemis touchés. <style=cIsHealing>Soigne à chaque cible touchée</style>.",
+	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Injecte</style> un ennemi, infligeant <style=cIsDamage>330% de dégâts</style>. Les alliés se <style=cIsHealing>soignent</style> pour <style=cIsHealing>10%</style> des dégâts infligé aux ennemis <style=cIsDamage>injecté</style>. Les ennemis  <style=cIsDamage>injecté</style> sont <style=cIsHealth>tué instantanément</style> quand ils sont en dessous de <style=cIsHealth>20% de leur PV</style> et lâchent des <style=cIsHealing>fruits régénérateurs</style>.",
+	
+	"CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "Contagion",
+	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>Réduit les dégâts de base de 20%</style>.\nChaque compétence infligent un effet de <style=cIsDamage>dégâts au fil du temps</style> différent.\n<style=cIsHealing>Poison</style> et <color=#B1387F>Fléau</color> se propagent jusqu'à <style=cIsDamage>1</style> ennemi alentours lors d'une victime.",
+	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD_NOSPREAD" : "<style=cIsHealth>Réduit les dégâts de base de 20%</style>.\nChaque compétence appliquent un  effet de <style=cIsDamage>dégâts au fil du temps</style> différent.",
+	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Étourdissant</style>. Saute dans les airs en infligeant <style=cIsDamage>550% de dégâts</style>. <style=cIsUtility>Réduit</style> le temps de rechargement de <style=cIsUtility>1s</style> à chaque ennemi touché.",
+	"CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD": "Les attaques de <style=cIsHealing>Poison</style> font subir des cumuls de <color=#B1387F>Fléau</color> à la place, ce qui inflige <style=cIsDamage>60% de dégâts par seconde</style> et fait augmenter les dégâts reçus de <style=cIsDamage>5%</style> par cumul.",
+	
+	"MAGE_PRIMARY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Brûlure</style>. Tire un éclair infligeant <style=cIsDamage>4x70% de dégâts</style> aux ennemis. Peut être lancé 4 fois.</style>",
+	"MAGE_PRIMARY_LIGHTNING_DESCRIPTION_RISKYMOD" : "Tire un éclair qui <style=cIsUtility>ralentit</style> et foudroie les ennemis en infligeant <style=cIsDamage>4x85% de dégâts</style>. Peut être lancé 4 fois.</style>",
+	"MAGE_SECONDARY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Glacial</style>. Charge une nano-lance <style=cIsDamage>performante</style> qui inflige <style=cIsDamage>400%-1600%</style> de dégâts.",
+	"MAGE_SPECIAL_LIGHTNING_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Étourdissant</style>. Vous propulse dans les airs, infligeant <style=cIsDamage>800% de dégâts</style>.",
+	"MAGE_UTILITY_ICE_DESCRIPTION_RISKYMOD" : "<style=cIsUtility>Glacial</style>. Crée une barrière qui inflige <style=cIsDamage>100% de dégâts</style> aux ennemis. <style=cIsUtility>Vous pousse en arrière</style> si vous êtes en l'air.",
+	"MAGE_UTILITY_ICE_DESCRIPTION_NOPUSH_RISKYMOD" : "<style=cIsUtility>Glacial</style>. Crée une barrière qui inflige <style=cIsDamage>100% de dégâts</style> aux ennemis.",
+	"MAGE_UTILITY_FIRE_NAME_RISKYMOD" : "Tempête de feu",
+	"MAGE_UTILITY_FIRE_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Brûlure</style>. Créez une tornade de feu qui inflige <style=cIsDamage>360% de dégâts par seconde</style>. <style=cIsUtility>Vous pousse en arrière</style> si vous êtes en l'air.",
+	"MAGE_UTILITY_FIRE_DESCRIPTION_NOPUSH_RISKYMOD" : "<style=cIsDamage>Brûlure</style>. Créez une tornade de feu qui inflige <style=cIsDamage>360% de dégâts par seconde</style>.",
+	"MAGE_SPECIAL_SITHLIGHTNING_NAME_RISKYMOD" : "Électrocution",
+	"MAGE_SPECIAL_SITHLIGHTNING_DESCRIPTION_RISKYMOD" : "Électrocute tous les ennemis en face de vous en infligeant <style=cIsDamage>1000% de dégâts</style>.",
+	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_NAME_RISKYMOD" : "Puissance illimitée",
+	"MAGE_SPECIAL_SITHLIGHTNING_SCEPTER_DESCRIPTION_RISKYMOD" : "Électrocute tous les ennemis en face de vous en infligeant <style=cIsDamage>2000% de dégâts</style>.",
+	
+	"LOADER_SPECIAL_DESCRIPTION_RISKYMOD" : "Lance un pylône <style=cIsUtility>magnétique</style> qui <style=cIsDamage>électrocute</style> jusqu'à <style=cIsDamage>6</style> ennemis à proximité et inflige <style=cIsDamage>100% de dégâts</style>. Peut servir de point d'ancrage pour le <style=cIsUtility>grappin</style>.",
+	
+	"ENGI_SECONDARY_DESCRIPTION_RISKYMOD" : "Pose une mine qui inflige <style=cIsDamage>900% de dégâts</style> une fois complètement armée. Un maximum de 4 peut être posé.",
+	
+	"FALSESON_PASSIVE_DESCRIPTION_RISKYMOD": "Les piques lunaires non utilisées octroient <style=cIsUtility>+5% de vitesse d'attaque</style> et <style=cIsUtility>+5 d'armure</style>. Les piques utilisées octroient <style=cIsUtility>+5% de vitesse de déplacement</style> et <style=cIshealing>+0.8 de récupération de PV</style>."
+	}
+}
