@@ -83,3 +83,4 @@ Brazilian Portuguese Translation - Kauzok
 - German: tymmey
 - Russian: inkyarev
 - Korean: bird_wall
+- French: DarSitam
