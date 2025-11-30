@@ -1,8 +1,8 @@
 {
 	strings:
 	{
-	"CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD" : "Tire une salve de plombs infligeant <style=cIsDamage>7x110% de dégâts</style>. Chargez l'attaque pour réduire la  <style=cIsUtility>dispersion</style>. La quantité de plombs augmente avec la vitesse d'attaque.",
-	"CAPTAIN_PRIMARY_DESCRIPTION_VANILLA_RISKYMOD" : "Tire une salve de plombs infligeant <style=cIsDamage>7x110% de dégâts</style>. Chargez l'attaque pour réduire la  <style=cIsUtility>dispersion</style>.",
+	"CAPTAIN_PRIMARY_DESCRIPTION_RISKYMOD" : "Tire une salve de plombs infligeant <style=cIsDamage>7x110% de dégâts</style>. Chargez l'attaque pour réduire la <style=cIsUtility>dispersion</style>. La quantité de plombs augmente avec la vitesse d'attaque.",
+	"CAPTAIN_PRIMARY_DESCRIPTION_VANILLA_RISKYMOD" : "Tire une salve de plombs infligeant <style=cIsDamage>7x110% de dégâts</style>. Chargez l'attaque pour réduire la <style=cIsUtility>dispersion</style>.",
 	"CAPTAIN_SECONDARY_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Électrochoc</style>. tire un taser rapide qui inflige <style=cIsDamage>100% de dégâts</style>. Se propage jusqu'à <style=cIsDamage>6</style> cibles.",
 	"CAPTAIN_SPECIAL_DESCRIPTION_RISKYMOD" : "Appelle une <style=cIsUtility>balise de ravitaillement</style>. Ne peux être demandée que 2 fois.",
 	
@@ -63,11 +63,11 @@
 	"MERC_UTILITY_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Étourdissant</style>. Foncez vers l'avant en infligeant <style=cIsDamage>450% de dégâts</style>. Si vous touchez un ennemi, <style=cIsDamage>vous permet de foncer de nouveau</style>, jusqu'à un total de <style=cIsDamage>3</style> fois.",
 	
 	"TREEBOT_UTILITY_DESCRIPTION_RISKYMOD" : "Lance une <style=cIsUtility>explosion sonique</style> qui <style=cIsDamage>affaiblit</style> tous les ennemis touchés. <style=cIsHealing>Soigne à chaque cible touchée</style>.",
-	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Injecte</style> un ennemi, infligeant <style=cIsDamage>330% de dégâts</style>. Les alliés se <style=cIsHealing>soignent</style> pour <style=cIsHealing>10%</style> des dégâts infligé aux ennemis <style=cIsDamage>injecté</style>. Les ennemis  <style=cIsDamage>injecté</style> sont <style=cIsHealth>tué instantanément</style> quand ils sont en dessous de <style=cIsHealth>20% de leur PV</style> et lâchent des <style=cIsHealing>fruits régénérateurs</style>.",
+	"TREEBOT_SPECIAL_ALT1_DESCRIPTION_RISKYMOD" : "<style=cIsDamage>Injecte</style> un ennemi, infligeant <style=cIsDamage>330% de dégâts</style>. Les alliés se <style=cIsHealing>soignent</style> pour <style=cIsHealing>10%</style> des dégâts infligé aux ennemis <style=cIsDamage>injecté</style>. Les ennemis <style=cIsDamage>injecté</style> sont <style=cIsHealth>tué instantanément</style> quand ils sont en dessous de <style=cIsHealth>20% de leur PV</style> et lâchent des <style=cIsHealing>fruits régénérateurs</style>.",
 	
 	"CROCO_PASSIVE_CONTAGION_NAME_RISKYMOD" : "Contagion",
 	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD" : "<style=cIsHealth>Réduit les dégâts de base de 20%</style>.\nChaque compétence infligent un effet de <style=cIsDamage>dégâts au fil du temps</style> différent.\n<style=cIsHealing>Poison</style> et <color=#B1387F>Fléau</color> se propagent jusqu'à <style=cIsDamage>1</style> ennemi alentours lors d'une victime.",
-	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD_NOSPREAD" : "<style=cIsHealth>Réduit les dégâts de base de 20%</style>.\nChaque compétence appliquent un  effet de <style=cIsDamage>dégâts au fil du temps</style> différent.",
+	"CROCO_PASSIVE_CONTAGION_DESCRIPTION_RISKYMOD_NOSPREAD" : "<style=cIsHealth>Réduit les dégâts de base de 20%</style>.\nChaque compétence appliquent un effet de <style=cIsDamage>dégâts au fil du temps</style> différent.",
 	"CROCO_UTILITY_ALT1_DESCRIPTION_RISKYMOD": "<style=cIsDamage>Étourdissant</style>. Saute dans les airs en infligeant <style=cIsDamage>550% de dégâts</style>. <style=cIsUtility>Réduit</style> le temps de rechargement de <style=cIsUtility>1s</style> à chaque ennemi touché.",
 	"CROCO_PASSIVE_ALT_DESCRIPTION_RISKYMOD": "Les attaques de <style=cIsHealing>Poison</style> font subir des cumuls de <color=#B1387F>Fléau</color> à la place, ce qui inflige <style=cIsDamage>60% de dégâts par seconde</style> et fait augmenter les dégâts reçus de <style=cIsDamage>5%</style> par cumul.",
 	

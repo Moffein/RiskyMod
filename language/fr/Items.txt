@@ -7,7 +7,7 @@
 	"ITEM_CRITGLASSES_PICKUP_RISKYMOD": "Gagnez 7% de chance par coup d'infliger des 'Coups critiques', doublant les dégâts.",
 	"ITEM_CRITGLASSES_DESC_RISKYMOD": "Vos attaques ont <style=cIsDamage>10%</style> <style=cStack>(+7% par cumul)</style> de chance de porter un <style=cIsDamage>coup critique</style>qui inflige le <style=cIsDamage>double de dégâts</style>.",
 	
-	"ITEM_STICKYBOMB_DESC_RISKYMOD": "En cas d'attaque réussie, <style=cIsDamage>5%</style> <style=cStack>(+5% par cumul)</style> de chance d'attacher une  <style=cIsDamage>bombe</style> à un ennemi, qui explose pour <style=cIsDamage>240%</style> de dégâts totaux.",
+	"ITEM_STICKYBOMB_DESC_RISKYMOD": "En cas d'attaque réussie, <style=cIsDamage>5%</style> <style=cStack>(+5% par cumul)</style> de chance d'attacher une <style=cIsDamage>bombe</style> à un ennemi, qui explose pour <style=cIsDamage>240%</style> de dégâts totaux.",
 	
 	"ITEM_CROWBAR_PICKUP_RISKYMOD": "Le premier coup infligé à un ennemi inflige des dégâts supplémentaire.",
 	"ITEM_CROWBAR_DESC_RISKYMOD": "Inflige <style=cIsDamage>+45%</style> <style=cStack>(+45% par cumul)</style> de dégâts supplémentaire lors de votre <style=cIsDamage>premier coup</style> contre un ennemi.",
@@ -42,10 +42,10 @@
 	"ITEM_THORNS_DESC_RISKYMOD": "Quand vous subissez une attaque, vous explosez dans une déflagration de lames, qui inflige <style=cIsDamage>160%</style> <style=cStack>(+80% par cumul)</style> de dégâts. Frappe jusqu'à <style=cIsDamage>3</style> <style=cStack>(+2 par cumul)</style> cibles dans un rayon de <style=cIsDamage>25m</style>.",
 	
 	"ITEM_SPRINTARMOR_PICKUP_RISKYMOD": "Augmente l'armure. Courir améliore davantage l'armure.",
-	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>Augmente l'armure</style> de <style=cIsHealing>10</style> <style=cStack>(+10 par cumul)</style>. Améliore l'armure de  <style=cIsHealing>10</style> <style=cStack>(+10 par cumul)</style> supplémentaire lorsque vous <style=cIsUtility>courrez</style>.",
+	"ITEM_SPRINTARMOR_DESC_RISKYMOD": "<style=cIsHealing>Augmente l'armure</style> de <style=cIsHealing>10</style> <style=cStack>(+10 par cumul)</style>. Améliore l'armure de <style=cIsHealing>10</style> <style=cStack>(+10 par cumul)</style> supplémentaire lorsque vous <style=cIsUtility>courrez</style>.",
 	
-	"ITEM_EXECUTELOWHEALTHELITE_PICKUP_RISKYMOD": "Inflige des dégâts bonus aux ennemis sous 50% de vie.",
-	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Inflige <style=cIsDamage>+30%</style> <style=cStack>(+30% par cumul)</style> de dégâts aux ennemis sous <style=cIsDamage>50% de vie</style>.",
+	"ITEM_EXECUTELOWHEALTHELITE_PICKUP_RISKYMOD": "Inflige des dégâts bonus aux ennemis en dessous de 50% de PV.",
+	"ITEM_EXECUTELOWHEALTHELITE_DESC_RISKYMOD": "Inflige <style=cIsDamage>+30%</style> <style=cStack>(+30% par cumul)</style> de dégâts aux ennemis en dessous de <style=cIsDamage>50% de PV</style>.",
 	
 	"ITEM_WARCRYONMULTIKILL_PICKUP_RISKYMOD": "Passez en mode frénésie après avoir tué un ennemi. Se cumule 3 fois.",
 	"ITEM_WARCRYONMULTIKILL_DESC_RISKYMOD": "<style=cIsDamage>Tuer un ennemi</style> vous fait passer en mode <style=cIsDamage>Frénésie</style> pendant <style=cIsDamage>6s</style>, augmentant <style=cIsUtility>la vitesse de déplacement</style> et <style=cIsDamage>la vitesse d'attaque</style> de <style=cIsDamage>15%</style> pour chaque ennemi tué. Cumul maximum de <style=cIsDamage>3 <style=cStack>(+2 par cumul)</style></style> bonus.",
@@ -59,7 +59,7 @@
 	"ITEM_ICICLE_DESC_RISKYMOD": "En cas d'ennemi tué, vous entoure d'une <style=cIsDamage>tempête de glace</style> qui inflige <style=cIsDamage>1200% <style=cStack>(+400% par cumul)</style> de dégâts par seconde</style> et <style=cIsUtility>ralentit</style> les ennemis de <style=cIsUtility>80%</style> pendant <style=cIsUtility>1.5s</style>. La tempête <style=cIsDamage>grossit à chaque ennemi tué</style>, augmentant son rayon de <style=cIsDamage>3m</style>. Cumul jusqu'à <style=cIsDamage>18m</style>.",
 	
 	"ITEM_HEADHUNTER_PICKUP_RISKYMOD": "Infligez des dégâts bonus aux élites, et gagnez temporairement leur pouvoir a leur mort.",
-	"ITEM_HEADHUNTER_DESC_RISKYMOD": "Inflige <style=cIsDamage>30%</style> de dégâts supplémentaire aux monstres d'élite. En tuant un élite, gagnez leur pouvoir pendant  <style=cIsDamage>10s</style> <style=cStack>(+5s par cumul)</style>.",
+	"ITEM_HEADHUNTER_DESC_RISKYMOD": "Inflige <style=cIsDamage>30%</style> de dégâts supplémentaire aux monstres d'élite. En tuant un élite, gagnez leur pouvoir pendant <style=cIsDamage>10s</style> <style=cStack>(+5s par cumul)</style>.",
 	
 	"ITEM_FALLBOOTS_PICKUP_RISKYMOD": "Augmente la hauteur de saut et le contrôle aérien. Maintenez \'Interagir\' pour vous écraser au sol.",
 	"ITEM_FALLBOOTS_DESC_RISKYMOD": "Améliore la <style=cIsUtility>hauteur de saut</style> et le <style=cIsUtility>contrôle aérien</style>. Crée une <style=cIsDamage>explosion cinétique</style> d'un rayon de <style=cIsDamage>5m à 100m</style> au contact avec le sol, qui inflige <style=cIsDamage>1000% à 10000%</style> <style=cStack>(+600% à 6000% par cumul)</style> des dégâts de base, et augmente proportionnellement à votre <style=cIsDamage>distance de chute</style>. Se recharge en <style=cIsDamage>10</style> secondes.",
@@ -99,7 +99,7 @@
 	
 	"ITEM_CLOVER_DESC_RISKYMOD": "Tous les effets aléatoires ont <style=cIsUtility>+1</style> <style=cStack>(+1 par cumul)</style> chance de plus de <style=cIsUtility>réussir</style>. Si votre <style=cIsDamage>chance</style> est au dessus de <style=cIsUtility>1</style>, augmente à la place <style=cIsUtility>TOUTES les stats</style> de <style=cIsUtility>40%</style> <style=cStack>(+40% par cumul)</style>.",
 	
-	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Obtenez le <style=cIsDamage>Col. Droneman</style>. \nLes drones gagnent <style=cIsDamage>+25%</style> <style=cStack>(+25% par cumul)</style> de vitesse d'attaque et de réduction de temps de rechargement. \nEn cas d'attaque réussie, les drones gagnent <style=cIsDamage>10%</style> de chance de tirer un  <style=cIsDamage>missile</style> qui inflige <style=cIsDamage>150%</style> de dégâts TOTAUX. \nLes drones gagnent une <style=cIsDamage>mitrailleuse automatique</style> qui inflige <style=cIsDamage>6x50%</style> de dégâts, qui rebondissent vers <style=cIsDamage>1</style> ennemi.",
+	"ITEM_DRONEWEAPONS_DESC_RISKYMOD": "Obtenez le <style=cIsDamage>Col. Droneman</style>. \nLes drones gagnent <style=cIsDamage>+25%</style> <style=cStack>(+25% par cumul)</style> de vitesse d'attaque et de réduction de temps de rechargement. \nEn cas d'attaque réussie, les drones gagnent <style=cIsDamage>10%</style> de chance de tirer un <style=cIsDamage>missile</style> qui inflige <style=cIsDamage>150%</style> de dégâts TOTAUX. \nLes drones gagnent une <style=cIsDamage>mitrailleuse automatique</style> qui inflige <style=cIsDamage>6x50%</style> de dégâts, qui rebondissent vers <style=cIsDamage>1</style> ennemi.",
 	
 	"ITEM_FRAGILEDAMAGEBONUS_PICKUP_RISKYMOD": "Infligez des dégâts bonus quand vous êtes hors de danger.",
 	"ITEM_FRAGILEDAMAGEBONUS_DESC_RISKYMOD": "Augmente les dégâts de <style=cIsDamage>15%</style> <style=cStack>(+15% par cumul)</style> quand vous êtes hors de danger.",
@@ -132,7 +132,7 @@
 	
 	"ITEM_BARRAGEONBOSS_DESC_RISKYMOD": "Lors des évènements de boss, <style=cIsUtility>5</style> missiles bombardent la zone et infligent <style=cIsDamage>2.5% <style=cStack>(+2.5% par cumul)</style> des PV max du boss en dégâts</style>. Avant l'évènement de boss, obtenez des missiles supplémentaires, jusqu'à <style=cIsUtility>20</style> <style=cStack>(+5 par cumul)</style> missiles toutes les <style=cIsUtility>25</style> pièces d'or récupérées. <style=cIsUtility>Le nombre de pièces d'or requises augmente avec le temps.</style>",
 	
-	"ITEM_TELEPORTONLOWHEALTH_DESC_RISKYMOD": "Tomber en dessous de <style=cIsHealth>25% de vos PV</style> vous confère <style=cIsHealing>100%</style> de vos  <style=cIsHealing>PV maximum</style> en <style=cIsHealing>barrière temporaire</style>. Gagnez une aura dimensionnelle pendant <style=cIsUtility>8s</style> qui fait  <style=cIsDamage>saigner</style> les ennemis et les <style=cIsUtility>téléporte</style> autre part. Les <style=cIsDamage>ennemis tué</style> par l'aura  <style=cIsUtility>prolongent</style> la durée de <style=cIsUtility>1s</style>. Se recharge au début de chaque niveau.",
+	"ITEM_TELEPORTONLOWHEALTH_DESC_RISKYMOD": "Tomber en dessous de <style=cIsHealth>25% de vos PV</style> vous confère <style=cIsHealing>100%</style> de vos <style=cIsHealing>PV maximum</style> en <style=cIsHealing>barrière temporaire</style>. Gagnez une aura dimensionnelle pendant <style=cIsUtility>8s</style> qui fait <style=cIsDamage>saigner</style> les ennemis et les <style=cIsUtility>téléporte</style> autre part. Les <style=cIsDamage>ennemis tué</style> par l'aura <style=cIsUtility>prolongent</style> la durée de <style=cIsUtility>1s</style>. Se recharge au début de chaque niveau.",
 	
 	"ITEM_KNOCKBACKHITENEMIES_DESC_RISKYMOD": "Les ennemis au sol touchés par une <style=cIsUtility>compétence</style> sont <style=cIsUtility>envoyés dans les airs</style> et <style=cIsUtility>étourdis</style>. Les ennemis touchés dans les airs sont <style=cIsUtility>renvoyés dans les airs</style> jusqu'à <style=cIsUtility>2 fois</style> <style=cStack>(+1 par cumul)</style>. Les ennemis envoyés dans les airs subissent <style=cIsDamage>15%</style> de dégâts supplémentaires, toutes sources confondues. Se recharge après <style=cIsUtility>15s</style>.",
 	
