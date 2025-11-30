@@ -58,14 +58,14 @@
 	
 	"ITEM_ICICLE_DESC_RISKYMOD": "En cas d'ennemi tué, vous entoure d'une <style=cIsDamage>tempête de glace</style> qui inflige <style=cIsDamage>1200% <style=cStack>(+400% par cumul)</style> de dégâts par seconde</style> et <style=cIsUtility>ralentit</style> les ennemis de <style=cIsUtility>80%</style> pendant <style=cIsUtility>1.5s</style>. La tempête <style=cIsDamage>grossit à chaque ennemi tué</style>, augmentant son rayon de <style=cIsDamage>3m</style>. Cumul jusqu'à <style=cIsDamage>18m</style>.",
 	
-	"ITEM_HEADHUNTER_PICKUP_RISKYMOD": "Infligez des dégâts bonus aux élites, et gagnez temporairement leur pouvoir a leur mort.",
+	"ITEM_HEADHUNTER_PICKUP_RISKYMOD": "Infligez des dégâts bonus aux élites, et gagnez temporairement leur pouvoir à leur mort.",
 	"ITEM_HEADHUNTER_DESC_RISKYMOD": "Inflige <style=cIsDamage>30%</style> de dégâts supplémentaire aux monstres d'élite. En tuant un élite, gagnez leur pouvoir pendant <style=cIsDamage>10s</style> <style=cStack>(+5s par cumul)</style>.",
 	
 	"ITEM_FALLBOOTS_PICKUP_RISKYMOD": "Augmente la hauteur de saut et le contrôle aérien. Maintenez \'Interagir\' pour vous écraser au sol.",
 	"ITEM_FALLBOOTS_DESC_RISKYMOD": "Améliore la <style=cIsUtility>hauteur de saut</style> et le <style=cIsUtility>contrôle aérien</style>. Crée une <style=cIsDamage>explosion cinétique</style> d'un rayon de <style=cIsDamage>5m à 100m</style> au contact avec le sol, qui inflige <style=cIsDamage>1000% à 10000%</style> <style=cStack>(+600% à 6000% par cumul)</style> des dégâts de base, et augmente proportionnellement à votre <style=cIsDamage>distance de chute</style>. Se recharge en <style=cIsDamage>10</style> secondes.",
 	
 	"ITEM_GHOSTONKILL_PICKUP_RISKYMOD": "Tuer un ennemi fait apparaître un fantôme. Se recharge avec le temps.",
-	"ITEM_GHOSTONKILL_DESC_RISKYMOD": "Tuer un ennemi fait <style=cIsDamage>apparaître un fantôme</style> de l'ennemi tué qui inflige <style=cIsDamage>600%</style> <style=cStack>(+180% par cumul)</style> de dégâts. Dure <style=cIsDamage>30s</style> <style=cStack>(+30s par cumul)</style>. Se recharge toutes les <style=cIsUtility>20</style> secondes. Peut avoir jusqu'à <style=cIsUtility>3</style> fantômes a la fois.", 
+	"ITEM_GHOSTONKILL_DESC_RISKYMOD": "Tuer un ennemi fait <style=cIsDamage>apparaître un fantôme</style> de l'ennemi tué qui inflige <style=cIsDamage>600%</style> <style=cStack>(+180% par cumul)</style> de dégâts. Dure <style=cIsDamage>30s</style> <style=cStack>(+30s par cumul)</style>. Se recharge toutes les <style=cIsUtility>20</style> secondes. Peut avoir jusqu'à <style=cIsUtility>3</style> fantômes à la fois.", 
 
 	"ITEM_BEETLEGLAND_DESC_RISKYMOD": "<style=cIsUtility>Recrutez un soldat scarabée</style> avec <style=cIsDamage>300%</style> <style=cStack>(+300% par cumul)</style> de dégâts et <style=cIsHealing>200% <style=cStack>(+100% par cumul)</style></style> de PV.",
 	
