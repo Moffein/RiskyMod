@@ -86,7 +86,7 @@
 	
 	"ITEM_EXPLODEONDEATHVOID_DESC_RISKYMOD": "Quand vous touchez un ennemi ayant <style=cIsDamage>90% de ses PV</style> ou plus, fait apparaître un <style=cIsDamage>pillier de lave</style> dans un rayon de <style=cIsDamage>12m</style> infligeant <style=cIsDamage>350%</style> <style=cStack>(+280% par cumul)</style> de dégâts de base. <style=cIsVoid>Corrompt tous les feux follets</style>.",
 	
-	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Les coups infligeant <style=cIsDamage>plus de 400% de dégâts</style> activent aussi un trou noir qui <style=cIsUtility>aspire les ennemis dans un rayon de 15m</style>. Implose au bout de <style=cIsUtility>5</style> secondes, infligeant <style=cIsDamage>200%</style> <style=cStack>(+120% par cumul)</style> de dégâts TOTAUX. Se recharge toutes les <style=cIsUtility>15</style> secondes.",
+	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Les coups infligeant <style=cIsDamage>plus de 400% de dégâts</style> activent aussi un trou noir qui <style=cIsUtility>aspire les ennemis dans un rayon de 15m</style>. Implose au bout de <style=cIsUtility>5</style> secondes, infligeant <style=cIsDamage>200%</style> <style=cStack>(+120% par cumul)</style> de dégâts TOTAUX. Se recharge toutes les <style=cIsUtility>15</style> secondes. <style=cIsVoid>Corrompt tous les bracelets de Kjaro et Runald</style>.",
 	
 	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Tuer un ennemi améliore la <style=cIsUtility>vitesse de déplacement</style> de <style=cIsUtility>50%</style> pendant <style=cIsUtility>1.5</style> <style=cStack>(+1 par cumul)</style> secondes. <style=cIsDamage>Les victimes consécutives augmentent la durée du bonus</style> pendant 25 secondes maximum.",
 	

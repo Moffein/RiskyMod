@@ -86,7 +86,7 @@
 	
 	"ITEM_EXPLODEONDEATHVOID_DESC_RISKYMOD": "Upon hitting an enemy above <style=cIsDamage>90% health</style>, spawn a <style=cIsDamage>lava pillar</style> in a <style=cIsDamage>12m</style> radius for <style=cIsDamage>350%</style> <style=cStack>(+280% per stack)</style> base damage. <style=cIsVoid>Corrupts all Will-o'-the-wisps</style>.",
 	
-	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Hits that deal <style=cIsDamage>more than 400% damage</style> also fire a black hole that <style=cIsUtility>draws enemies within 15m into its center</style>. Lasts <style=cIsUtility>5</style> seconds before collapsing, dealing <style=cIsDamage>200%</style> <style=cStack>(+120% per stack)</style> TOTAL damage. Recharges every <style=cIsUtility>15</style> seconds.",
+	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Hits that deal <style=cIsDamage>more than 400% damage</style> also fire a black hole that <style=cIsUtility>draws enemies within 15m into its center</style>. Lasts <style=cIsUtility>5</style> seconds before collapsing, dealing <style=cIsDamage>200%</style> <style=cStack>(+120% per stack)</style> TOTAL damage. Recharges every <style=cIsUtility>15</style> seconds. <style=cIsVoid>Corrupts all Runald's and Kjaro's Bands</style>.",
 	
 	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Killing an enemy increases <style=cIsUtility>movement speed</style> by <style=cIsUtility>50%</style> for <style=cIsUtility>1.5</style> <style=cStack>(+1 per stack)</style> seconds. <style=cIsDamage>Consecutive kills increase buff duration</style> for up to 25 seconds.",
 	

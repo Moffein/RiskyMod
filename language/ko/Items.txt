@@ -86,7 +86,7 @@
 	
 	"ITEM_EXPLODEONDEATHVOID_DESC_RISKYMOD": "체력이 <style=cIsDamage>90% 이상</style>인 적을 공격하면 <style=cIsDamage>12m</style> 반경 내에 <style=cIsDamage>350%</style> <style=cStack>(중첩당 +280%)</style>의 기본 피해를 주는 <style=cIsDamage>용암 기둥</style>을 생성합니다. <style=cIsVoid>모든 성냥불 욋가지를 타락시킵니다</style>.",
 	
-	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "<style=cIsDamage>400% 이상의 피해</style>를 주는 공격은 15m 내의 적들을 중심으로 <style=cIsUtility>끌어당기는</style> 블랙홀을 발사합니다. <style=cIsUtility>5</style>초 동안 지속되다 붕괴하며, 총 피해량의 <style=cIsDamage>200%</style> <style=cStack>(중첩당 +120%)</style> 피해를 줍니다. <style=cIsUtility>15</style>초마다 재충전됩니다.",
+	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "<style=cIsDamage>400% 이상의 피해</style>를 주는 공격은 15m 내의 적들을 중심으로 <style=cIsUtility>끌어당기는</style> 블랙홀을 발사합니다. <style=cIsUtility>5</style>초 동안 지속되다 붕괴하며, 총 피해량의 <style=cIsDamage>200%</style> <style=cStack>(중첩당 +120%)</style> 피해를 줍니다. <style=cIsUtility>15</style>초마다 재충전됩니다. <style=cIsVoid>모든 캬로와 루널드의 반지를 오염시킵니다</style>.",
 	
 	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "적 처치 시 <style=cIsUtility>1.5</style> <style=cStack>(중첩당 +1)</style>초 동안 <style=cIsUtility>이동 속도</style>가 <style=cIsUtility>50%</style> 증가합니다. <style=cIsDamage>연속 처치 시 강화 효과 지속 시간이 증가</style>하여 최대 25초까지 지속됩니다.",
 	

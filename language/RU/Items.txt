@@ -86,7 +86,7 @@
 	
 	"ITEM_EXPLODEONDEATHVOID_DESC_RISKYMOD": "При попадании по врагу, чье здоровье выше <style=cIsDamage>90%</style>, создает <style=cIsDamage>лавовый столб</style> в радиусе <style=cIsDamage>12 м.</style>, наносящий <style=cIsDamage>350%</style> <style=cStack>(+280% за шт.)</style> базового урона. <style=cIsVoid>Оскверняет все Блуждающие огоньки</style>.",
 	
-	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Удары, наносящие <style=cIsDamage>более 400% урона</style>, также создают черную дыру, которая <style=cIsUtility>притягивает врагов в радиусе 15 м. к своему центру</style>. Длится <style=cIsUtility>5</style> секунд перед коллапсом, наносящим <style=cIsDamage>200%</style> <style=cStack>(+120% за шт.)</style> ОБЩЕГО урона. Перезаряжается каждые <style=cIsUtility>15</style> секунд.",
+	"ITEM_ELEMENTALRINGVOID_DESC_RISKYMOD": "Удары, наносящие <style=cIsDamage>более 400% урона</style>, также создают черную дыру, которая <style=cIsUtility>притягивает врагов в радиусе 15 м. к своему центру</style>. Длится <style=cIsUtility>5</style> секунд перед коллапсом, наносящим <style=cIsDamage>200%</style> <style=cStack>(+120% за шт.)</style> ОБЩЕГО урона. Перезаряжается каждые <style=cIsUtility>15</style> секунд. <style=cIsVoid>Оскверняет все Браслеты Кьяро и Рунальда</style>.",
 	
 	"ITEM_MOVESPEEDONKILL_DESC_RISKYMOD": "Убийство врага увеличивает <style=cIsUtility>скорость движения</style> на <style=cIsUtility>50%</style> на <style=cIsUtility>1.5</style> <style=cStack>(+1 за шт.)</style> секунду. <style=cIsDamage>Последовательные убийства увеличивают длительность эффекта</style> до 25 секунд.",
 	
