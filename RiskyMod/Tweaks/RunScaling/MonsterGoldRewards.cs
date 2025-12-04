@@ -13,7 +13,7 @@ namespace RiskyMod.Tweaks.RunScaling
 
 		public static bool linearize = true;
 
-		public static float inflationCoefficient = 0.3f;
+		public static float inflationCoefficient = 0.2f;
 
 		private static float goldBank = 0f;
 

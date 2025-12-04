@@ -180,7 +180,7 @@ namespace RiskyMod
             CombatDirectorMultiplier.enabled = CombatDirectorMultiplier.directorCreditMultiplier != 1f;
 
             MonsterGoldRewards.enabled = GeneralCfg.Bind(scalingString, "Gold Scaling Tweaks", true, "Lowers gold earn rate scaling. Mainly makes a difference when looping.").Value;
-            MonsterGoldRewards.inflationCoefficient = GeneralCfg.Bind(scalingString, "Gold Scaling Tweaks - Inflation Coefficient", 0.3f, "Lowers how fast gold gain scales against chest prices. 0 = Vanilla, 0.4 = Equilibrium").Value;
+            MonsterGoldRewards.inflationCoefficient = GeneralCfg.Bind(scalingString, "Gold Scaling Tweaks - Inflation Coefficient", 0.2f, "Lowers how fast gold gain scales against chest prices. 0 = Vanilla, 0.4 = Equilibrium").Value;
             if (!MonsterGoldRewards.enabled)
             {
                 MonsterGoldRewards.linearize = false;
