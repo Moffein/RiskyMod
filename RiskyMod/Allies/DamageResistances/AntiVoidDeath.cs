@@ -25,7 +25,7 @@ namespace RiskyMod.Allies.DamageResistances
                 if ((damageInfo.damageType & DamageType.VoidDeath) > 0 && (damageInfo.damageType & DamageType.BypassOneShotProtection) == 0)
                 {
                     damageInfo.damageType.damageType &= ~DamageType.VoidDeath;
-                    damageInfo.damageType.damageType |= DamageType.NonLethal;
+                    //damageInfo.damageType.damageType |= DamageType.NonLethal;
 
                     //Overwrite damage since actual damage numbers of void implosions are low
                     float totalDamage = self.fullCombinedHealth * 0.5f;

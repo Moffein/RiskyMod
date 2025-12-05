@@ -211,7 +211,7 @@ namespace RiskyMod
             GunnerTurret.teleportWithPlayer = GeneralCfg.Bind(allyString, "Gunner Turret - Teleport with Player", true, "Gunner Turrets are teleported to the player when starting the Teleporter event.").Value;
             GunnerTurret.teleportToMithrix = GeneralCfg.Bind(allyString, "Gunner Turret - Teleport with Player - Teleport to Mithrix", true, "Gunner Turrets are teleported to the player when fighting Mithrix. Requires Teleport with Player.").Value;
             AntiOverheat.enabled = GeneralCfg.Bind(allyString, "No Overheat Death", true, "Drones cannot die to Overheat.").Value;
-            AntiVoidDeath.enabled = GeneralCfg.Bind(allyString, "No Void Death", true, "Drones cannot die to Void Implosions.").Value;
+            AntiVoidDeath.enabled = GeneralCfg.Bind(allyString, "No Void Death", true, "Void Implosions deal high damage to drones instead of instant killing them.").Value;
             AntiOneshot.enabled = GeneralCfg.Bind(allyString, "Drone Oneshot Protection", true, "Drones cannot take more than 60% of their health in a single attack.").Value;
 
             SpawnLimits.maxVoidSeeds = GeneralCfg.Bind(interactString, "Max Void Seeds", 1, "Limit how many Void Seeds can spawn on 1 stage. Vanilla is 3. Set to negative for no limit.").Value;
