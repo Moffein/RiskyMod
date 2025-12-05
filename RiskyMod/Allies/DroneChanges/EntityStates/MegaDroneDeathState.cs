@@ -15,6 +15,10 @@ namespace EntityStates.RiskyMod.MegaDrone
 		{
 			if (NetworkServer.active)
 			{
+				if (characterBody && characterBody.inventory)
+				{
+					droneUpgradeCount = characterBody.inventory.GetItemCountPermanent(DLC3Content.Items.DroneUpgradeHidden);
+				}
 				//Based on ZetTweaks https://github.com/William758/ZetTweaks/blob/main/GameplayModule.cs
 				if (base.transform)
 				{
