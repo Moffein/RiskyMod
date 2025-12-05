@@ -24,6 +24,9 @@ namespace RiskyMod.Allies
 
             new NoVoidDamage();
             new AntiSplat();
+            new AntiOneshot();
+            new AntiVoidDeath();
+            new AntiOverheat();
 
             TweakDrones();
         }
@@ -32,6 +35,14 @@ namespace RiskyMod.Allies
         {
             new GunnerTurret();
             new MegaDrone();
+        }
+
+        public static bool IsDrone(HealthComponent health)
+        {
+            return health.body && !health.body.isPlayerControlled && health.body.teamComponent && health.body.teamComponent.teamIndex == RoR2.TeamIndex.Player
+                && health.body.IsDrone;
+                //&& ((health.body.bodyFlags & CharacterBody.BodyFlags.UsesAmbientLevel) > 0)
+                //    || (health.body.inventory && health.body.inventory.GetItemCountPermanent(RoR2Content.Items.UseAmbientLevel) > 0);
         }
     }
 }
