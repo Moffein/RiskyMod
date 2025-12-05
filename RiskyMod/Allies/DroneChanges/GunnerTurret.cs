@@ -16,8 +16,6 @@ namespace RiskyMod.Allies.DroneChanges
         public static bool teleportWithPlayer = true;
         public static bool teleportToMithrix = true;
 
-        private static BodyIndex gunnerTurretBodyIndex;
-
         public GunnerTurret()
         {
             GameObject gunnerTurret = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/Turret1Body.prefab").WaitForCompletion();
@@ -66,7 +64,7 @@ namespace RiskyMod.Allies.DroneChanges
             foreach (TeamComponent tc in teamMembers)
             {
                 //Prioritize teleporting to TP, and don't teleport if it is already within the TP zone.
-                if (tc.body && tc.body.bodyIndex == gunnerTurretBodyIndex && tc.body.master && tc.body.master.minionOwnership && tc.body.master.minionOwnership.ownerMaster)
+                if (tc.body && tc.body.bodyIndex == RoR2Content.BodyPrefabs.Turret1Body.bodyIndex && tc.body.master && tc.body.master.minionOwnership && tc.body.master.minionOwnership.ownerMaster)
                 {
                     Vector3? targetPosition = null;
                     if (holdout)
@@ -81,35 +79,35 @@ namespace RiskyMod.Allies.DroneChanges
                     }
 
                     CharacterBody ownerBody = tc.body.master.minionOwnership.ownerMaster.GetBody();
-                    if (ownerBody)
+                    if (targetPosition == null && ownerBody)
                     {
-                        if (targetPosition == null) targetPosition = ownerBody.corePosition;
+                        targetPosition = ownerBody.corePosition;
+                    }
 
-                        //Copied from Chirr
-                        SpawnCard spawnCard = ScriptableObject.CreateInstance<SpawnCard>();
-                        spawnCard.hullSize = tc.body.hullClassification;
-                        spawnCard.nodeGraphType = MapNodeGroup.GraphType.Ground;
-                        spawnCard.prefab = SneedUtils.SneedUtils.teleportHelperPrefab;
+                    //Copied from Chirr
+                    SpawnCard spawnCard = ScriptableObject.CreateInstance<SpawnCard>();
+                    spawnCard.hullSize = tc.body.hullClassification;
+                    spawnCard.nodeGraphType = MapNodeGroup.GraphType.Ground;
+                    spawnCard.prefab = SneedUtils.SneedUtils.teleportHelperPrefab;
 
-                        GameObject teleportDestinationHelper = DirectorCore.instance.TrySpawnObject(new DirectorSpawnRequest(spawnCard, new DirectorPlacementRule
+                    GameObject teleportDestinationHelper = DirectorCore.instance.TrySpawnObject(new DirectorSpawnRequest(spawnCard, new DirectorPlacementRule
+                    {
+                        placementMode = DirectorPlacementRule.PlacementMode.Approximate,
+                        position = targetPosition.Value,
+                        minDistance = 5f,
+                        maxDistance = 45f
+                    }, RoR2Application.rng));
+
+                    if (teleportDestinationHelper)
+                    {
+                        Vector3 position = teleportDestinationHelper.transform.position;
+                        TeleportHelper.TeleportBody(tc.body, position, false);
+                        GameObject teleportEffectPrefab = Run.instance.GetTeleportEffectPrefab(tc.body.gameObject);
+                        if (teleportEffectPrefab)
                         {
-                            placementMode = DirectorPlacementRule.PlacementMode.Approximate,
-                            position = targetPosition.Value,
-                            minDistance = 5f,
-                            maxDistance = 45f
-                        }, RoR2Application.rng));
-
-                        if (teleportDestinationHelper)
-                        {
-                            Vector3 position = teleportDestinationHelper.transform.position;
-                            TeleportHelper.TeleportBody(tc.body, position);
-                            GameObject teleportEffectPrefab = Run.instance.GetTeleportEffectPrefab(tc.body.gameObject);
-                            if (teleportEffectPrefab)
-                            {
-                                EffectManager.SimpleEffect(teleportEffectPrefab, position, Quaternion.identity, true);
-                            }
-                            UnityEngine.Object.Destroy(teleportDestinationHelper);
+                            EffectManager.SimpleEffect(teleportEffectPrefab, position, Quaternion.identity, true);
                         }
+                        UnityEngine.Object.Destroy(teleportDestinationHelper);
                     }
                 }
             }
