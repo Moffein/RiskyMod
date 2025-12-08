@@ -67,8 +67,6 @@ namespace RiskyMod.Items.DLC1.Common
             {
                 if (self.combinedHealthFraction <= 0.5f)
                 {
-                    self.AddBarrier(self.fullCombinedHealth * 0.5f);
-
                     bool removed = false;
 
                     //Check temp first
@@ -78,14 +76,6 @@ namespace RiskyMod.Items.DLC1.Common
                         removed = true;
                         self.body.inventory.RemoveItemTemp(DLC1Content.Items.HealingPotion.itemIndex);
                         self.body.inventory.GiveItemTemp(DLC1Content.Items.HealingPotionConsumed.itemIndex);
-                    }
-
-                    int itemCountChanneled = self.body.inventory.GetItemCountChanneled(DLC1Content.Items.HealingPotion);
-                    if (!removed && itemCountChanneled > 0)
-                    {
-                        removed = true;
-                        self.body.inventory.RemoveItemChanneled(DLC1Content.Items.HealingPotion.itemIndex);
-                        self.body.inventory.GiveItemChanneled(DLC1Content.Items.HealingPotionConsumed.itemIndex);
                     }
 
                     int itemCountPermanent = self.body.inventory.GetItemCountPermanent(DLC1Content.Items.HealingPotion);
@@ -98,6 +88,7 @@ namespace RiskyMod.Items.DLC1.Common
 
                     if (removed)
                     {
+                        self.AddBarrier(self.fullCombinedHealth * 0.5f);
                         CharacterMasterNotificationQueue.SendTransformNotification(self.body.master, DLC1Content.Items.HealingPotion.itemIndex, DLC1Content.Items.HealingPotionConsumed.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
                         EffectData effectData = new EffectData
                         {

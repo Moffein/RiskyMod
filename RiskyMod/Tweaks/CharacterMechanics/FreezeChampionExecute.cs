@@ -96,7 +96,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     c.Emit(OpCodes.Ldarg_0);
                     c.EmitDelegate<Func<bool, HealthComponent, bool>>((isFrozen, self) =>
                     {
-                        return isFrozen || self.body.HasBuff(FreezeDebuff);
+                        return isFrozen || (self.body.HasBuff(FreezeDebuff) && !Allies.AlliesCore.IsDrone(self));
                     });
 
                     if(c.TryGotoNext(MoveType.After,
