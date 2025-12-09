@@ -95,11 +95,12 @@ namespace RiskyMod
     [BepInDependency(R2API.PrefabAPI.PluginGUID)]
     [BepInDependency(R2API.ItemAPI.PluginGUID)]
     [BepInDependency(R2API.ProcTypeAPI.PluginGUID)]
+    [BepInDependency(R2API.ExecuteAPI.PluginGUID)]
     [BepInDependency("com.Moffein.RiskyTweaks")]
     [BepInDependency("com.Moffein.RiskyFixes")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.9.12")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.9.13")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {

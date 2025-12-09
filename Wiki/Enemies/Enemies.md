@@ -18,6 +18,7 @@
 - Shield Booster
 - Tesla Coil
 - N'kuhana's Opinion
+- Networked Suffering
 - Frost Relic
 - Spare Drone Parts
 - Empathy Cores
