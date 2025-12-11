@@ -75,7 +75,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             {
                 multiplier = 0f;
             }
-            else if (self.body.isChampion || nerfFreeze)
+            else if ((self.body.isChampion || self.body.bodyIndex == DLC3Content.BodyPrefabs.ExhaustPortWeakpointBody.bodyIndex) || nerfFreeze)
             {
                 multiplier = bossExecuteFractionMultiplier;
             }
