@@ -68,7 +68,7 @@ namespace RiskyMod.Enemies.Mobs.Lunar
                 float damage = FireLunarGuns.baseDamagePerSecondCoefficient / self.baseBulletsPerSecond * self.damageStat;   //Supposed to be firing 2 bulletattacks.
                 self.StartAimMode(0.5f, false);
                 Ray aimRay = self.GetAimRay();
-                ProjectileManager.instance.FireProjectile(shardProjectilePrefab, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), self.gameObject, damage, 0f, isCrit, DamageColorIndex.Default, null, 120f);
+                ProjectileManager.instance.FireProjectile(shardProjectilePrefab, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), self.gameObject, damage, 0f, isCrit, DamageColorIndex.Default, null, 150f);
             };
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/LunarWisp/EntityStates.LunarWisp.FireLunarGuns.asset", "baseFireInterval", "0.125");
         }

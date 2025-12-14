@@ -43,6 +43,7 @@ using RiskyMod.Enemies.Mithrix;
 using RiskyMod.Survivors.Commando;
 using RiskyMod.Content.Enemies;
 using RiskyMod.Survivors.Croco.Tweaks;
+using RiskyMod.Survivors.DLC2.Seeker;
 
 namespace RiskyMod
 {
@@ -85,6 +86,7 @@ namespace RiskyMod
     [BepInDependency("com.RiskyLives.RiskyMithrix", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.RiskySkills", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.RiskySleeps.MithrixWank", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.DebloatedSeeker", BepInDependency.DependencyFlags.SoftDependency)]
     #endregion
 
     [BepInDependency("com.RiskyLives.SneedHooks")]
@@ -100,7 +102,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RiskyFixes")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.9.14")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.9.15")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -286,6 +288,13 @@ namespace RiskyMod
             Survivors.Mage.SkillTweaks.PrimaryRework.enabled = Survivors.Mage.MageCore.modifyFireBolt || Survivors.Mage.MageCore.modifyPlasmaBolt;
 
             TeleExpandOnBossKill.enableDuringEclipse = TeleExpandOnBossKill.enableDuringEclipse || SoftDependencies.EclipseRevamped_CheckEclipse2Config();
+
+            bool debloatedSeekerLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.DebloatedSeeker");
+            if (debloatedSeekerLoaded)
+            {
+                Debug.Log("RiskyMod: Disabling Seeker changes because DebloatedSeeker is loaded.");
+                SeekerCore.enabled = false;
+            }
 
             if (SoftDependencies.RiskyMithrixLoaded)
             {
