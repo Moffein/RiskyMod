@@ -8,6 +8,7 @@ using RiskyMod.Items.DLC1.Uncommon;
 using RiskyMod.Items.DLC1.Void;
 using RiskyMod.Items.DLC2;
 using RiskyMod.Items.DLC3.Common;
+using RiskyMod.Items.DLC3.Food;
 using RiskyMod.Items.DLC3.Legendary;
 using RiskyMod.Items.DLC3.Uncommon;
 using RiskyMod.Items.Equipment;
@@ -29,6 +30,7 @@ namespace RiskyMod.Items
         public static bool bossEnabled = true;
         public static bool lunarEnabled = true;
         public static bool equipmentEnabled = true;
+        public static bool foodEnabled = true;
 
         public static ItemDef[] changedItemPickups = new ItemDef[0];
         public static ItemDef[] changedItemDescs = new ItemDef[0];
@@ -46,6 +48,7 @@ namespace RiskyMod.Items
             ModifyVoid();
             ModifyBoss();
             ModifyLunar();
+            ModifyFood();
             ModifyEquipment();
         }
 
@@ -168,6 +171,12 @@ namespace RiskyMod.Items
             new SuperLeech();
             new Chrysalis();
             new Goobo();
+        }
+
+        private void ModifyFood()
+        {
+            if (!foodEnabled) return;
+            new QuickFix();
         }
 
         private void ModifyItemTokens()

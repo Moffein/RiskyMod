@@ -491,8 +491,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Items\DLC3\Food\" />
-  </ItemGroup>
-
 </Project>

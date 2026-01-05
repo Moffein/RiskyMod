@@ -60,6 +60,7 @@ using RiskyMod.Survivors.DLC2.FalseSon;
 using RiskyMod.Items.DLC3.Common;
 using RiskyMod.Items.DLC3.Uncommon;
 using RiskyMod.Items.DLC3.Legendary;
+using RiskyMod.Items.DLC3.Food;
 
 namespace RiskyMod
 {
@@ -93,6 +94,7 @@ namespace RiskyMod
         private const string bossString = "Items - Boss";
         private const string lunarString = "Items - Lunar";
         private const string equipmentString = "Items - Equipment";
+        private const string mealString = "Items - Meal";
         private const string itemConfigDescString = "Enable changes to this item.";
 
 
@@ -253,6 +255,12 @@ namespace RiskyMod
             ConfigLunars();
             ConfigEquipment();
             ConfigVoidItems();
+            ConfigMealItems();
+        }
+
+        private static void ConfigMealItems()
+        {
+            QuickFix.enabled = ItemCfg.Bind(mealString, "Quick Fix", true, itemConfigDescString).Value;
         }
 
         private static void ConfigCommonItems()
