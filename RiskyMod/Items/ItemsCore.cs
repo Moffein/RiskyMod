@@ -8,6 +8,7 @@ using RiskyMod.Items.DLC1.Uncommon;
 using RiskyMod.Items.DLC1.Void;
 using RiskyMod.Items.DLC2;
 using RiskyMod.Items.DLC3.Common;
+using RiskyMod.Items.DLC3.Uncommon;
 using RiskyMod.Items.Equipment;
 using RiskyMod.Items.Legendary;
 using RiskyMod.Items.Lunar;
@@ -92,6 +93,8 @@ namespace RiskyMod.Items
             new Ignition();
             new BreachingFin();
             new NoxiousThorn();
+
+            new Dynamite();
         }
 
         private void ModifyLegendary()

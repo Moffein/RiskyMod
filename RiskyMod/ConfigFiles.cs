@@ -58,6 +58,7 @@ using RiskyMod.Tweaks.Interactables;
 using RiskyMod.Survivors.DLC2.Seeker;
 using RiskyMod.Survivors.DLC2.FalseSon;
 using RiskyMod.Items.DLC3.Common;
+using RiskyMod.Items.DLC3.Uncommon;
 
 namespace RiskyMod
 {
@@ -315,6 +316,8 @@ namespace RiskyMod
 
             BreachingFin.enabled = ItemCfg.Bind(uncommonString, "Breaching Fin", true, itemConfigDescString).Value;
             NoxiousThorn.enabled = ItemCfg.Bind(uncommonString, "Noxious Thorn", true, itemConfigDescString).Value;
+
+            Dynamite.enabled = ItemCfg.Bind(uncommonString, "Box of Dynamite", true, itemConfigDescString).Value;
         }
 
         private static void ConfigLegendaryItems()
