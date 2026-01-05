@@ -7,6 +7,7 @@ using RiskyMod.Items.DLC1.Legendary;
 using RiskyMod.Items.DLC1.Uncommon;
 using RiskyMod.Items.DLC1.Void;
 using RiskyMod.Items.DLC2;
+using RiskyMod.Items.DLC3.Common;
 using RiskyMod.Items.Equipment;
 using RiskyMod.Items.Legendary;
 using RiskyMod.Items.Lunar;
@@ -62,6 +63,8 @@ namespace RiskyMod.Items
 
             new DelicateWatch();
             new PowerElixir();
+
+            new EclipseLite();
         }
 
         private void ModifyUncommon()

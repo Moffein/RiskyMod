@@ -102,7 +102,7 @@ namespace RiskyMod
     [BepInDependency("com.Moffein.RiskyFixes")]
     [BepInDependency("com.Moffein.AssistManager")]
     [BepInDependency("com.Moffein.DefenseMatrixManager")]
-    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.9.15")]
+    [BepInPlugin("com.RiskyLives.RiskyMod", "RiskyMod", "2.10.0")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class RiskyMod : BaseUnityPlugin
     {
@@ -410,6 +410,7 @@ namespace RiskyMod
             On.RoR2.GlobalEventManager.OnHitAllProcess += OnHitAll.GlobalEventManager_OnHitAll;
             On.RoR2.HealthComponent.UpdateLastHitTime += HealthComponent_UpdateLastHitTime.UpdateLastHitTime;
             SharedHooks.TakeDamage.OnDamageTakenAttackerActions += TakeDamage.DistractOnHit;
+            On.RoR2.Language.GetLocalizedStringByToken += SharedHooks.LanguageModifiers.Language_GetLocalizedStringByToken;
         }
     }
 }

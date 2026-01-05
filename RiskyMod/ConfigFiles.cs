@@ -57,6 +57,7 @@ using RiskyMod.Items.DLC2;
 using RiskyMod.Tweaks.Interactables;
 using RiskyMod.Survivors.DLC2.Seeker;
 using RiskyMod.Survivors.DLC2.FalseSon;
+using RiskyMod.Items.DLC3.Common;
 
 namespace RiskyMod
 {
@@ -274,6 +275,8 @@ namespace RiskyMod
             //Makes it too easy to stunlock things even at very low stacks.
             //StunGrenade.enabled = ItemCfg.Bind(commonString, "Stun Grenade", true, itemConfigDescString).Value;
             StunGrenade.enabled = false;
+
+            EclipseLite.enabled = ItemCfg.Bind(commonString, "Eclipse Lite", true, itemConfigDescString).Value;
         }
 
         private static void ConfigUncommonItems()
