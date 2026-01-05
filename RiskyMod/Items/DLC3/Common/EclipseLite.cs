@@ -3,6 +3,7 @@ using MonoMod.Cil;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine;
 
 namespace RiskyMod.Items.DLC3.Common
 {
@@ -24,6 +25,10 @@ namespace RiskyMod.Items.DLC3.Common
                 && c.TryGotoNext(MoveType.After, x=> x.MatchLdcR4(0.0025f)))
             {
                 c.EmitDelegate<Func<float, float>>(orig => 0.005f);
+            }
+            else
+            {
+                Debug.LogError("RiskyMod: EclipseLite IL hook failed.");
             }
         }
 
