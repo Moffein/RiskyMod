@@ -59,6 +59,7 @@ using RiskyMod.Survivors.DLC2.Seeker;
 using RiskyMod.Survivors.DLC2.FalseSon;
 using RiskyMod.Items.DLC3.Common;
 using RiskyMod.Items.DLC3.Uncommon;
+using RiskyMod.Items.DLC3.Legendary;
 
 namespace RiskyMod
 {
@@ -349,6 +350,8 @@ namespace RiskyMod
 
             Overspill.enabled = ItemCfg.Bind(legendaryString, "Runic Lens", true, itemConfigDescString).Value;
             GrowthNectar.enabled = ItemCfg.Bind(legendaryString, "Growth Nectar", true, itemConfigDescString).Value;
+
+            NetworkedSuffering.enabled = ItemCfg.Bind(legendaryString, "Networked Suffering", true, itemConfigDescString).Value;
         }
 
         private static void ConfigVoidItems()

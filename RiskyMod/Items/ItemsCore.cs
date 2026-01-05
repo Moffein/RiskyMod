@@ -8,6 +8,7 @@ using RiskyMod.Items.DLC1.Uncommon;
 using RiskyMod.Items.DLC1.Void;
 using RiskyMod.Items.DLC2;
 using RiskyMod.Items.DLC3.Common;
+using RiskyMod.Items.DLC3.Legendary;
 using RiskyMod.Items.DLC3.Uncommon;
 using RiskyMod.Items.Equipment;
 using RiskyMod.Items.Legendary;
@@ -117,6 +118,8 @@ namespace RiskyMod.Items
 
             new Overspill();
             new GrowthNectar();
+
+            new NetworkedSuffering();
         }
 
         private void ModifyVoid()
