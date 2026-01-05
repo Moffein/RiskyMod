@@ -61,6 +61,7 @@ using RiskyMod.Items.DLC3.Common;
 using RiskyMod.Items.DLC3.Uncommon;
 using RiskyMod.Items.DLC3.Legendary;
 using RiskyMod.Items.DLC3.Food;
+using RiskyMod.Items.DLC3.Boss;
 
 namespace RiskyMod
 {
@@ -402,6 +403,8 @@ namespace RiskyMod
             DefenseNucleus.ignoreAllyCap = ItemCfg.Bind(bossString, "Defense Nucleus - Ignore Ally Cap", true, "Defense Nucleus Alpha Constructs ignore the ally cap if changes are enabled.").Value;
 
             HalcyonSeed.enabled = ItemCfg.Bind(bossString, "Halcyon Seed", true, itemConfigDescString).Value;
+
+            PrisonMatrix.enabled = ItemCfg.Bind(bossString, "Prison Matrix", true, itemConfigDescString).Value;
         }
 
         private static void ConfigLunars()

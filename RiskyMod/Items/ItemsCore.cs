@@ -7,6 +7,7 @@ using RiskyMod.Items.DLC1.Legendary;
 using RiskyMod.Items.DLC1.Uncommon;
 using RiskyMod.Items.DLC1.Void;
 using RiskyMod.Items.DLC2;
+using RiskyMod.Items.DLC3.Boss;
 using RiskyMod.Items.DLC3.Common;
 using RiskyMod.Items.DLC3.Food;
 using RiskyMod.Items.DLC3.Legendary;
@@ -150,6 +151,7 @@ namespace RiskyMod.Items
             new EmpathyCores();
             new DefenseNucleus();
             new HalcyonSeed();
+            new PrisonMatrix();
         }
 
         private void ModifyLunar()
