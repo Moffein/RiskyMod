@@ -328,6 +328,7 @@ namespace RiskyMod
             NoxiousThorn.enabled = ItemCfg.Bind(uncommonString, "Noxious Thorn", true, itemConfigDescString).Value;
 
             Dynamite.enabled = ItemCfg.Bind(uncommonString, "Box of Dynamite", true, itemConfigDescString).Value;
+            KineticDampener.enabled = ItemCfg.Bind(uncommonString, "Kinetic Dampener", true, itemConfigDescString).Value;
         }
 
         private static void ConfigLegendaryItems()

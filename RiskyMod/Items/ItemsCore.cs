@@ -99,6 +99,7 @@ namespace RiskyMod.Items
             new NoxiousThorn();
 
             new Dynamite();
+            new KineticDampener();
         }
 
         private void ModifyLegendary()
