@@ -16,13 +16,13 @@ namespace RiskyMod.Items.DLC3.Legendary
         private void SharedSufferingManager_OnEnable(On.RoR2.SharedSufferingManager.orig_OnEnable orig, RoR2.SharedSufferingManager self)
         {
             orig(self);
-            self._damageSentToPool = 0.2f;
+            self._damageSentToPool = 0.25f;
         }
 
         private string ModifyLang(string token, string localized)
         {
             if (token != "ITEM_SHAREDSUFFERING_DESC") return localized;
-            return localized.Replace("45", "20");
+            return localized.Replace("45", "25");
         }
     }
 }
