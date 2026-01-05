@@ -46,7 +46,7 @@ namespace RiskyMod.Items.Common
 
         private static void HandleStatsInventory(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
         {
-            int steakCount = sender.inventory.GetItemCount(RoR2Content.Items.FlatHealth);
+            int steakCount = sender.inventory.GetItemCountEffective(RoR2Content.Items.FlatHealth);
             if (steakCount > 0)
             {
                 args.baseHealthAdd += sender.levelMaxHealth * steakCount;

@@ -177,6 +177,7 @@ namespace RiskyMod.Items
         {
             if (!foodEnabled) return;
             new QuickFix();
+            new SearedSteak();
         }
 
         private void ModifyItemTokens()

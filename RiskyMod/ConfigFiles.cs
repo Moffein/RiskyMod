@@ -261,6 +261,7 @@ namespace RiskyMod
         private static void ConfigMealItems()
         {
             QuickFix.enabled = ItemCfg.Bind(mealString, "Quick Fix", true, itemConfigDescString).Value;
+            SearedSteak.enabled = ItemCfg.Bind(mealString, "Seared Steak", true, itemConfigDescString).Value;
         }
 
         private static void ConfigCommonItems()
