@@ -27,12 +27,19 @@
 	- Increased damage from 180% -> 240%
 	- Fuse time reduced from 1.5s to 1.2s
 	- Disabled physics to prevent it from falling off enemies in MP.
+	
+- Stun Grenade
+	- Chance now scales linearly instead of hyperbolically.
+	- Deals 50% TOTAL damage on proc.
 
 - Warbanner
 	- Added extra effects:
 		- +10% damage
 		- 1% max health healed every second
 	- **(RiskyTweaks)** Spawns in Simulacrum and Mithrix.
+	
+- Eclipse Lite
+	- Increased barrier from 1% (+0.25%) -> 1% (+0.5%)
 
 ## Nerfs
 

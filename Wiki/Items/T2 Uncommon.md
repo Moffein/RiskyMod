@@ -73,6 +73,14 @@
 	
 - Breaching Fin
 	- Damage bonus increased from +10% -> +15%
+	
+- Box of Dynamite
+	- Damage increased from 240% (+85%) -> 240% (+120%)
+	
+- Kinetic Dampener
+	- Damage increased from 100% (+10%) -> 100% (+50%)
+	- Blast radius increased from 12.5m -> 20m
+	- Shield increased from 4% -> 10%
 
 ## Nerfs
 

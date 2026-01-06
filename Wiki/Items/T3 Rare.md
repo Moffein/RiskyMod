@@ -37,3 +37,6 @@
 	
 - Runic Lens
 	- Removed proc coefficient.
+	
+- Networked Suffering
+	- Reduced damage from 45% -> 25%

@@ -139,5 +139,15 @@
 	"ITEM_BOOSTALLSTATS_DESC_RISKYMOD": "Grants <style=cIsUtility>5%</style> increase to <style=cIsUtility>ALL stats</style> for each buff, up to a maximum of <style=cIsUtility>4</style> <style=cStack>(+4 per stack)</style>.",
 	
 	"ITEM_TRIGGERENEMYDEBUFFS_DESC_RISKYMOD": "Gain <style=cIsDamage>10%</style> chance to <style=cIsDamage>bleed</style> an enemy. On killing an enemy, <style=cIsDamage>transfer 33%</style> of every debuff stack to <style=cIsDamage>1 enemy</style> <style=cStack>(+1 per stack)</style> within <style=cIsUtility>25m</style>.",
-	}
+	
+	"ITEM_COOKEDSTEAK_DESC_RISKYMOD": "Increases <style=cIsHealing>maximum health</style> by <style=cIsHealing>1.5</style><style=cStack> (+1.5 per stack)</style> levels, plus an additional <style=cIsHealing>5% <style=cStack>(+5% per stack)</style></style> of your <style=cIsHealing>max health</style>.",
+	"ITEM_COOKEDSTEAK_PICKUP_RISKYMOD": "Gain 1.5 levels of max health plus a percentage of your max health. Cooked to perfection.",
+	
+	"ITEM_SHIELDBOOSTER_DESC_RISKYMOD": "Increases armor by <style=cIsUtility>30<style=cStack> (+30 per stack)</style></style> while you have a shield. When shield breaks, release a stunning pulse for <style=cIsDamage>100% damage</style> plus an amount <style=cIsDamage>equal to 100% <style=cStack>(+50% per stack)</style> of your max shield</style>. Grants a shield for <style=cIsHealing>10% of your max health</style>.",
+	
+    "ITEM_POWERCUBE_PICKUP_RISKYMOD": "Gain <style=cIsUtility>10 armor</style>, and increase <style=cIsUtility>all armor</style> by <style=cIsUtility>+50%</style>. Can be placed in a Matrix Terminal.",
+	"ITEM_POWERCUBE_DESC_RISKYMOD": "Gain <style=cIsUtility>10 armor</style>, and increase <style=cIsUtility>all armor</style> by <style=cIsUtility>+50%</style>. Can be placed in a Matrix Terminal.",
+	
+	"ITEM_STUNCHANCEONHIT_DESC_RISKYMOD": "<style=cIsUtility>5%</style> <style=cStack>(+5% per stack)</style> chance on hit to deal <style=cIsDamage>50%</style> TOTAL damage and <style=cIsUtility>stun</style> enemies for <style=cIsUtility>2 seconds</style>.",
+	},
 }

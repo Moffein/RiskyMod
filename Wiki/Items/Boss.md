@@ -12,6 +12,9 @@
 - Titanic Knurl
 	- Health increased from +40 -> +8% max health
 	- Additional Effect: +10 armor per stack
+	
+- Prison Matrix
+	- Added a passive +10 armor so that the item isn't useless without armor items.
 
 ## Nerfs
 
