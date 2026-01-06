@@ -1,4 +1,5 @@
 ﻿using MonoMod.Cil;
+using RiskyMod.SharedHooks;
 using System;
 using UnityEngine;
 
@@ -28,10 +29,12 @@ namespace RiskyMod.Items.DLC3.Uncommon
             }
         }
 
-        private string ModifyLang(string token, string localized)
+        private void ModifyLang(LanguageModifiers.LanguageModifier langMod)
         {
-            if (token != "ITEM_DRONESDROPDYNAMITE_DESC") return localized;
-            return localized.Replace("85", "240");
+            if (langMod.token == "ITEM_DRONESDROPDYNAMITE_DESC")
+            {
+                langMod.local = langMod.local.Replace("85", "120");
+            }
         }
     }
 }

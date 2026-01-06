@@ -1,4 +1,5 @@
 ﻿using MonoMod.Cil;
+using RiskyMod.SharedHooks;
 using RoR2;
 using System;
 using UnityEngine;
@@ -39,10 +40,12 @@ namespace RiskyMod.Items.DLC3.Food
             }
         }
 
-        private string ModifyLang(string token, string localized)
+        private void ModifyLang(LanguageModifiers.LanguageModifier langMod)
         {
-            if (token != "ITEM_BONUSHEALTHBOOST_DESC") return localized;
-            return localized.Replace("15", "25");
+            if (langMod.token == "ITEM_BONUSHEALTHBOOST_DESC")
+            {
+                langMod.local = langMod.local.Replace("15", "25");
+            }
         }
     }
 }

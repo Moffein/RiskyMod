@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RiskyMod.SharedHooks;
+using UnityEngine;
 
 namespace RiskyMod.Items.DLC3.Legendary
 {
@@ -19,10 +20,12 @@ namespace RiskyMod.Items.DLC3.Legendary
             self._damageSentToPool = 0.25f;
         }
 
-        private string ModifyLang(string token, string localized)
+        private void ModifyLang(LanguageModifiers.LanguageModifier langMod)
         {
-            if (token != "ITEM_SHAREDSUFFERING_DESC") return localized;
-            return localized.Replace("45", "25");
+            if (langMod.token == "ITEM_SHAREDSUFFERING_DESC")
+            {
+                langMod.local = langMod.local.Replace("45", "25");
+            }
         }
     }
 }

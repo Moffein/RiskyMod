@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using RiskyMod.SharedHooks;
 
 namespace RiskyMod.Items.DLC3.Common
 {
@@ -32,10 +33,12 @@ namespace RiskyMod.Items.DLC3.Common
             }
         }
 
-        private string ModifyLang(string token, string localized)
+        private void ModifyLang(LanguageModifiers.LanguageModifier langMod)
         {
-            if (token != "ITEM_BARRIERONCOOLDOWN_DESC") return localized;
-            return localized.Replace("25", "5");
+            if (langMod.token == "ITEM_BARRIERONCOOLDOWN_DESC")
+            {
+                langMod.local = langMod.local.Replace("25", "5");
+            }
         }
     }
 }
