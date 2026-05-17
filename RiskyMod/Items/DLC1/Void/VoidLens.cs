@@ -59,7 +59,7 @@ namespace RiskyMod.Items.DLC1.Void
 
         private void BuildVfx()
         {
-            GameObject effect = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/CritGlassesVoid/CritGlassesVoidExecuteEffect.prefab").WaitForCompletion();
+            GameObject effect = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/CritGlassesVoid/CritGlassesVoidExecuteEffect.prefab").WaitForCompletion().InstantiateClone("RiskyModVoidCritEffect", false);
             UnityEngine.Object.Destroy(effect.GetComponent<ShakeEmitter>());
             effect.GetComponent<EffectComponent>().soundName = "";
 
