@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace RiskyMod.Items.Legendary
@@ -70,6 +71,7 @@ namespace RiskyMod.Items.Legendary
 
         private void OnLoad()
         {
+            blacklistedBodies = new List<BodyIndex>();
             blacklistedBodies.Add(DLC1Content.BodyPrefabs.MinorConstructAttachableBody.bodyIndex);
             blacklistedBodies.Add(DLC3Content.BodyPrefabs.SolusWingBody.bodyIndex);
             blacklistedBodies.Add(DLC3Content.BodyPrefabs.SolusHeartBody.bodyIndex);
