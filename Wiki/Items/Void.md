@@ -1,3 +1,11 @@
+## Reworks
+
+- Lost Seer's Lens
+	- Gain 10% crit chance.
+	- Critical strikes hit twice... BUT deal 50% less damage.
+	
+	*Vanilla version makes the game boring in MP. New version acts as a global crit modifiers, gain more procs at the cost of losing out on single-hit damage for Bands.*
+
 ## Buffs
 
 - Singularity Band

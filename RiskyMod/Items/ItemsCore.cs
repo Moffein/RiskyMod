@@ -30,6 +30,7 @@ namespace RiskyMod.Items
         public static bool legendaryEnabled = true;
         public static bool bossEnabled = true;
         public static bool lunarEnabled = true;
+        public static bool voidEnabled = true;
         public static bool equipmentEnabled = true;
         public static bool foodEnabled = true;
 
@@ -130,7 +131,9 @@ namespace RiskyMod.Items
 
         private void ModifyVoid()
         {
+            if (!voidEnabled) return;
             new Dungus();
+            new VoidLens();
             new SaferSpaces();
             new PlasmaShrimp();
             new VoidWisp();
