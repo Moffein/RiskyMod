@@ -103,6 +103,14 @@ namespace RiskyMod.Survivors.DLC2.FalseSon
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC2/FalseSon/EntityStates.FalseSon.LaserFatherCharged.asset", "minimumDuration", "2.25");
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC2/FalseSon/EntityStates.FalseSon.LaserFatherCharged.asset", "maximumDuration", "3");
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC2/FalseSon/EntityStates.FalseSon.LaserFatherCharged.asset", "baseFireFrequency", "10.666666667");//8/0.75
+
+            On.EntityStates.FalseSon.LaserFatherCharged.OnEnter += LaserFatherCharged_OnEnter;
+        }
+
+        private void LaserFatherCharged_OnEnter(On.EntityStates.FalseSon.LaserFatherCharged.orig_OnEnter orig, EntityStates.FalseSon.LaserFatherCharged self)
+        {
+            orig(self);
+            self.fireFrequency = EntityStates.FalseSon.LaserFatherCharged.baseFireFrequency * self.attackSpeedStat;
         }
     }
 }
