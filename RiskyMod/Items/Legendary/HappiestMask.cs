@@ -3,6 +3,7 @@ using MonoMod.Cil;
 using R2API;
 using RiskyMod.SharedHooks;
 using RoR2;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,6 +19,8 @@ namespace RiskyMod.Items.Legendary
 
         public static bool scaleCount = false;
         public static bool noGhostLimit = false;
+
+        public static List<BodyIndex> blacklistedBodies;
 
         public HappiestMask()
         {
@@ -62,13 +65,22 @@ namespace RiskyMod.Items.Legendary
 
             OnCharacterDeath.OnCharacterDeathInventoryActions += TriggerMaskGhost;
             CharacterBody.onBodyInventoryChangedGlobal += CharacterBody_onBodyInventoryChangedGlobal;
+            RoR2Application.onLoad += OnLoad;
+        }
+
+        private void OnLoad()
+        {
+            blacklistedBodies.Add(DLC1Content.BodyPrefabs.MinorConstructAttachableBody.bodyIndex);
+            blacklistedBodies.Add(DLC3Content.BodyPrefabs.SolusWingBody.bodyIndex);
+            blacklistedBodies.Add(DLC3Content.BodyPrefabs.SolusHeartBody.bodyIndex);
+            blacklistedBodies.Add(DLC3Content.BodyPrefabs.SolusMineBody.bodyIndex);
         }
 
         private void CharacterBody_onBodyInventoryChangedGlobal(CharacterBody self)
         {
             if (NetworkServer.active && self.inventory)
             {
-                self.AddItemBehavior<GhostOnKillBehavior>(self.inventory.GetItemCount(RoR2Content.Items.GhostOnKill));
+                self.AddItemBehavior<GhostOnKillBehavior>(self.inventory.GetItemCountEffective(RoR2Content.Items.GhostOnKill));
             }
         }
 
@@ -80,11 +92,18 @@ namespace RiskyMod.Items.Legendary
 
         private static void TriggerMaskGhost(GlobalEventManager self, DamageReport damageReport, CharacterBody attackerBody, Inventory attackerInventory, CharacterBody victimBody)
         {
-            int itemCount = attackerInventory.GetItemCount(RoR2Content.Items.GhostOnKill);
+            int itemCount = attackerInventory.GetItemCountEffective(RoR2Content.Items.GhostOnKill);
             if (itemCount > 0)
             {
-                if (!victimBody.bodyFlags.HasFlag(CharacterBody.BodyFlags.Masterless) && attackerBody.HasBuff(GhostReady.buffIndex) && !attackerBody.HasBuff(GhostCooldown.buffIndex))
+                if (!victimBody.bodyFlags.HasFlag(CharacterBody.BodyFlags.Masterless) && attackerBody.HasBuff(GhostReady.buffIndex) && !attackerBody.HasBuff(GhostCooldown.buffIndex)
+                    && !blacklistedBodies.Contains(victimBody.bodyIndex))
                 {
+                    //half-assed simulacrum softlock fix
+                    if (victimBody.bodyIndex == DLC1Content.BodyPrefabs.VoidInfestorBody.bodyIndex && Run.instance.gameModeIndex == GameModeCatalog.FindGameModeIndex("InfiniteTowerRun"))
+                    {
+                        return;
+                    }
+
                     TeamIndex attackerTeam = attackerBody.teamComponent ? attackerBody.teamComponent.teamIndex : TeamIndex.None;
                     TeamIndex victimTeam = victimBody.teamComponent ? victimBody.teamComponent.teamIndex : TeamIndex.None;
 
