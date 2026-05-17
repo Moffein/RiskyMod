@@ -15,6 +15,7 @@
 	
 - Prison Matrix
 	- Added a passive +10 armor so that the item isn't useless without armor items.
+	- Now ACTUALLY increases armor by 50%.
 
 ## Nerfs
 
