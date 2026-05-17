@@ -132,5 +132,4 @@
 
 - Scorch Wurm
 	- Reduced projectile damage by 20%
-	- HP reduced from 580 -> 480
 	- **(RiskyTweaks)** Removed iframes.

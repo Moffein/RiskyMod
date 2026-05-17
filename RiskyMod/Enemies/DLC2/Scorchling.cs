@@ -18,11 +18,6 @@ namespace RiskyMod.Enemies.DLC2
         {
             if (!enabled) return;
 
-            GameObject bodyObject = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC2/Scorchling/ScorchlingBody.prefab").WaitForCompletion();
-            CharacterBody body = bodyObject.GetComponent<CharacterBody>();
-            body.baseMaxHealth = 480f;
-            body.levelMaxHealth = 144f;
-
             SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/DLC2/Scorchling/EntityStates.Scorchling.LavaBomb.asset", "mortarDamageCoefficient", "0.8");
         }
     }
