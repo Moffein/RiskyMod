@@ -47,6 +47,12 @@
 	- Block stat reduced from 15 -> 10
 	
 	*3 nerfed Bears = 2 unnerfed Bears, this is the value used by Hermit's Scarf in Returns.*
+	
+- Hiker's Boots
+	- Buff only resets when hitting enemies below you. (In Vanilla, it unconditionally resets on damage dealt)
+	- Buff duration reduced from 10s -> 7s
+	
+	*Making this more situational so it isn't a direct upgrade to Lensmakers Glasses.*
 
 ## Tweaks
 

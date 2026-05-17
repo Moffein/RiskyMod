@@ -27,6 +27,7 @@ Fixing up his weird proc coefficients and nerfing his survivability a bit.
 
 - Laser of the Father
 	- **(RiskyTweaks)** Proc coefficient increased from 0.5 -> 1.0
+	- **(RiskyTweaks)** Fixed nonstandard attack speed scaling from Vanilla.
 	- Reduced charge duration from 2s -> 1.5s
 	- Increased fire rate to reduce total state time from 4s -> 3s
 	- Removed falloff.
