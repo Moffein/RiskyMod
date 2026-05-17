@@ -25,10 +25,12 @@ namespace RiskyMod.Items.DLC3.Common
             bool error = true;
             if (c.TryGotoNext(MoveType.After, x => x.MatchLdsfld(typeof(DLC3Content.Buffs), "CritChanceAndDamage")))
             {
+                //Disable unconditional stack refresh
                 c.EmitDelegate<Func<BuffDef, BuffDef>>(x => null);
 
                 if (c.TryGotoNext(x => x.MatchLdloc(0), x => x.MatchLdsfld(typeof(DLC3Content.Buffs), "CritChanceAndDamage"), x => x.MatchCallvirt<CharacterBody>("GetBuffCount")))
                 {
+                    //Re-implement stack refresh inside conditional
                     c.Index++;
                     c.EmitDelegate<Func<CharacterBody, CharacterBody>>(body =>
                     {
@@ -36,6 +38,7 @@ namespace RiskyMod.Items.DLC3.Common
                         return body;
                     });
 
+                    //Change buff duration
                     if (c.TryGotoNext(MoveType.After, x => x.MatchLdsfld(typeof(DLC3Content.Buffs), "CritChanceAndDamage"), x => x.MatchLdcR4(10f)))
                     {
                         c.EmitDelegate<Func<float, float>>(x => 7f);
