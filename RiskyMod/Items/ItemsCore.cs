@@ -71,6 +71,7 @@ namespace RiskyMod.Items
             new PowerElixir();
 
             new EclipseLite();
+            new HikersBoots();
         }
 
         private void ModifyUncommon()

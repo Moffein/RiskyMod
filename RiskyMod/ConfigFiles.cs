@@ -287,6 +287,7 @@ namespace RiskyMod
             StunGrenade.enabled = ItemCfg.Bind(commonString, "Stun Grenade", true, itemConfigDescString).Value;
 
             EclipseLite.enabled = ItemCfg.Bind(commonString, "Eclipse Lite", true, itemConfigDescString).Value;
+            HikersBoots.enabled = ItemCfg.Bind(commonString, "Hikers Boots", true, itemConfigDescString).Value;
         }
 
         private static void ConfigUncommonItems()
