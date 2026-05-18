@@ -14,7 +14,6 @@ namespace RiskyMod.Enemies.Spawnpools
 
             if (!enabled) return;
 
-
             List<SpawnCard> cardsToModify = new List<SpawnCard>()
             {
                 Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/LemurianBruiser/cscLemurianBruiser.asset").WaitForCompletion(),
@@ -37,9 +36,6 @@ namespace RiskyMod.Enemies.Spawnpools
                     }
                 }
             }
-
-            //not needed anymore?
-            //dccs.AddCard(SneedUtils.SneedUtils.FindCategoryIndexByName(dccs, SneedUtils.SneedUtils.MonsterCategories.Minibosses), DirectorCards.GolemNature);
         }
     }
 }

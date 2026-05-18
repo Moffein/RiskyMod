@@ -21,6 +21,8 @@ namespace RiskyMod.Enemies.Spawnpools
                 Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Parent/cscParent.asset").WaitForCompletion(),
                 Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Nullifier/cscNullifier.asset").WaitForCompletion(),
                 Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/DLC1/Gup/cscGupBody.asset").WaitForCompletion(),
+                Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/Grandparent/cscGrandparent.asset").WaitForCompletion(),
+                Addressables.LoadAssetAsync<CharacterSpawnCard>("RoR2/Base/ImpBoss/cscImpBoss.asset").WaitForCompletion(),
             };
 
             var basePool = Addressables.LoadAssetAsync<DirectorCardCategorySelection>("RoR2/DLC2/lakesnight/dccsLakesnightMonsters.asset").WaitForCompletion();
@@ -41,15 +43,6 @@ namespace RiskyMod.Enemies.Spawnpools
                         card.minimumStageCompletions = 3;
                     }
                 }
-            }
-
-            //I am going to become the joker
-            var index = SneedUtils.SneedUtils.FindCategoryIndexByName(dccs, SneedUtils.SneedUtils.MonsterCategories.Minibosses);
-            if (index == -1) index = SneedUtils.SneedUtils.FindCategoryIndexByName(dccs, "Mini Bosses");
-
-            if (index != -1)
-            {
-                dccs.AddCard(index, DirectorCards.GolemNature);
             }
         }
     }

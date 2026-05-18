@@ -24,12 +24,13 @@
 		- Grandparents
 		
 - Viscous Falls
-	- Added Stone Golems
 	- Restricted to Stage 4+:
 		- Elder Lemurians
 		- Parents
 		- Gups
 		- Void Reavers
+		- Imp Overlords
+		- Grandparents
 
 ## Stage 2
 - Wetland Aspect
