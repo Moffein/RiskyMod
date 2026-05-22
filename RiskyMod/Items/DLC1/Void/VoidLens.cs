@@ -96,7 +96,7 @@ namespace RiskyMod.Items.DLC1.Void
         {
             if (damageInfo.crit && attackerBody.inventory && attackerBody.inventory.GetItemCountEffective(DLC1Content.Items.CritGlassesVoid) > 0)
             {
-                damageModifierArgs.damageMultFinal *= 0.45f;    //-55% damage
+                damageModifierArgs.damageMultFinal *= 0.4f;    //-60% damage, means crits are an 80% damage bonus
             }
         }
 
