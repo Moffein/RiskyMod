@@ -33,7 +33,10 @@ namespace RiskyMod.Items.DLC3.Boss
                     c.Emit(OpCodes.Ldarg_0);
                     c.EmitDelegate<Action<CharacterBody>>(body =>
                     {
-                        body.armor *= 1.5f;
+                        if (body.HasBuff(DLC3Content.Buffs.PowerCubeBuff))
+                        {
+                            body.armor *= 1.5f;
+                        }
                     });
                     error = false;
                 }
