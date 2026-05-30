@@ -151,6 +151,6 @@
 	"ITEM_STUNCHANCEONHIT_DESC_RISKYMOD": "<style=cIsUtility>5%</style> <style=cStack>(+5% per stack)</style> chance on hit to deal <style=cIsDamage>50%</style> TOTAL damage and <style=cIsUtility>stun</style> enemies for <style=cIsUtility>2 seconds</style>.",
 	
     "ITEM_CRITGLASSESVOID_PICKUP_RISKYMOD": "Gain <style=cIsDamage>10% critical chance</style>. Critical Strikes hit twice... <style=cIsHealth>BUT deal less damage.</style> <style=cIsVoid>Corrupts all Lens-Maker's Glasses</style>.",
-	"ITEM_CRITGLASSESVOID_DESC_RISKYMOD": "Gain <style=cIsDamage>10% critical chance</style>. <style=cIsDamage>Critical Strikes</style> hit <style=cIsDamage>twice</style>... <style=cIsHealth>BUT deal 60% less damage.</style> <style=cIsVoid>Corrupts all Lens-Maker's Glasses</style>.",
+	"ITEM_CRITGLASSESVOID_DESC_RISKYMOD": "Gain a <style=cIsDamage>10%</style> <style=cStack>(+10% per stack)</style> chance to <style=cIsDamage>Critically Strike</style>. <style=cIsDamage>Critical Strikes</style> hit <style=cIsDamage>twice</style>... <style=cIsHealth>BUT deal 60% less damage.</style> <style=cIsVoid>Corrupts all Lens-Maker's Glasses</style>.",
 	},
 }
