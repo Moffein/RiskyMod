@@ -200,7 +200,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                 {
                     bool notFreezeImmune = !body.HasBuff(DLC2Content.Buffs.FreezeImmune);
                     bool notFrozen = !(body.healthComponent && body.healthComponent.isInFrozenState);
-                    if (notFreezeImmune && notFrozen)
+                    if (notFreezeImmune && notFrozen && !body.IsDrone)
                     {
                         body.AddTimedBuff(FreezeDebuff, 2f);
                     }
@@ -223,7 +223,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     bool notFreezeImmune = !body.HasBuff(DLC2Content.Buffs.FreezeImmune);
                     bool notFrozen = !(body.healthComponent && body.healthComponent.isInFrozenState);
 
-                    if (isOiled && notFreezeImmune && notFrozen)
+                    if (isOiled && notFreezeImmune && notFrozen && !body.IsDrone)
                     {
                         body.AddTimedBuff(FreezeDebuff, 2f);    //this is inconsistent with body
                     }
