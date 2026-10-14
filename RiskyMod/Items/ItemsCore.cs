@@ -12,6 +12,7 @@ using RiskyMod.Items.DLC3.Common;
 using RiskyMod.Items.DLC3.Food;
 using RiskyMod.Items.DLC3.Legendary;
 using RiskyMod.Items.DLC3.Uncommon;
+using RiskyMod.Items.DLC4.Hallowed;
 using RiskyMod.Items.Equipment;
 using RiskyMod.Items.Legendary;
 using RiskyMod.Items.Lunar;
@@ -33,6 +34,7 @@ namespace RiskyMod.Items
         public static bool voidEnabled = true;
         public static bool equipmentEnabled = true;
         public static bool foodEnabled = true;
+        public static bool hallowedEnabled = true;
 
         public static ItemDef[] changedItemPickups = new ItemDef[0];
         public static ItemDef[] changedItemDescs = new ItemDef[0];
@@ -52,6 +54,13 @@ namespace RiskyMod.Items
             ModifyLunar();
             ModifyFood();
             ModifyEquipment();
+            ModifyHallowed();
+        }
+
+        private void ModifyHallowed()
+        {
+            if (!hallowedEnabled) return;
+            new VileCenser();
         }
 
         private void ModifyCommon()

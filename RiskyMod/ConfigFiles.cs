@@ -62,6 +62,7 @@ using RiskyMod.Items.DLC3.Uncommon;
 using RiskyMod.Items.DLC3.Legendary;
 using RiskyMod.Items.DLC3.Food;
 using RiskyMod.Items.DLC3.Boss;
+using RiskyMod.Items.DLC4.Hallowed;
 
 namespace RiskyMod
 {
@@ -96,6 +97,7 @@ namespace RiskyMod
         private const string lunarString = "Items - Lunar";
         private const string equipmentString = "Items - Equipment";
         private const string mealString = "Items - Meal";
+        private const string hallowedString = "Items - Hallowed";
         private const string itemConfigDescString = "Enable changes to this item.";
 
 
@@ -257,6 +259,12 @@ namespace RiskyMod
             ConfigEquipment();
             ConfigVoidItems();
             ConfigMealItems();
+            ConfigHallowedItems();
+        }
+
+        private static void ConfigHallowedItems()
+        {
+            VileCenser.enabled = ItemCfg.Bind(mealString, "Vile Censer", true, itemConfigDescString).Value;
         }
 
         private static void ConfigMealItems()
@@ -466,7 +474,6 @@ namespace RiskyMod
             PressureMines.enabled = SurvivorCfg.Bind(engiString, "Pressure Mine Changes", true, "Pressure Mines only detonate when fully armed.").Value;
             EngiCore.harpoonRangeTweak = SurvivorCfg.Bind(engiString, "Thermal Harpoon Changes", true, "Increases Thermal Harpoon targeting range.").Value;
             TurretChanges.normalizeStats = SurvivorCfg.Bind(engiString, "Normalize Turret Stats", true, "Reduces Turret base damage to 12 while keeping damage output the same.").Value;
-            BubbleDefenseMatrix.enabled = SurvivorCfg.Bind(engiString, "Bubble Shield Changes", true, "Enable changes to this skill.").Value;
 
             MageCore.enabled = SurvivorCfg.Bind(mageString, "Enable Changes", true, "Enable changes to this survivor.").Value;
             MageCore.modifyFireBolt = SurvivorCfg.Bind(mageString, "Fire Bolt Changes", true, "Enable changes to this skill.").Value;

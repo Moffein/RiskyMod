@@ -152,5 +152,7 @@
 	
     "ITEM_CRITGLASSESVOID_PICKUP_RISKYMOD": "Gain <style=cIsDamage>10% critical chance</style>. Critical Strikes hit twice... <style=cIsHealth>BUT deal less damage.</style> <style=cIsVoid>Corrupts all Lens-Maker's Glasses</style>.",
 	"ITEM_CRITGLASSESVOID_DESC_RISKYMOD": "Gain a <style=cIsDamage>10%</style> <style=cStack>(+10% per stack)</style> chance to <style=cIsDamage>Critically Strike</style>. <style=cIsDamage>Critical Strikes</style> hit <style=cIsDamage>twice</style>... <style=cIsHealth>BUT deal 60% less damage.</style> <style=cIsVoid>Corrupts all Lens-Maker's Glasses</style>.",
+	
+	"ITEM_VILECENSER_DESC_RISKYMOD" : "Gain a <style=cIsDamage>10%</style> chance on hit to <style=cIsDamage>stun</style>. Hitting a <style=cIsDamage>stunned</style> target with a <style=cIsUtility>skill</style> releases tendrils of black smoke, dealing <style=cIsDamage>200% <style=cStack>(+100% per stack)</style></style> damage and <style=cIsDamage>chaining to all other enemies</style> within <style=cIsUtility>20m</style>. This effect can repeat."
 	},
 }

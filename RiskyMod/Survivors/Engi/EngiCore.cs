@@ -32,7 +32,6 @@ namespace RiskyMod.Survivors.Engi
 
         private void ModifyUtilities(SkillLocator sk)
         {
-            new BubbleDefenseMatrix();
             if (harpoonRangeTweak)
             {
                 SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Base/Engi/EntityStates.Engi.EngiMissilePainter.Paint.asset", "maxDistance", "2000");
