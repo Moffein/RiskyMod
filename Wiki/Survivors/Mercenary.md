@@ -9,7 +9,7 @@ Almost unchanged aside from minor QoL.
 ## Primaries
 
 - Laser Sword
-	- **(RiskyTweaks)** Expose Combo hit no longer scales with attack speed, so that tech works at high speeds.
+	- **(RiskyTweaks)** Expose Combo hit no longer scales with attack speed, so that combo tech works at high speeds.
 
 ## Utilities
 
