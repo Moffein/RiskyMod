@@ -6,6 +6,7 @@ using R2API;
 using RiskyMod.Content;
 using RiskyMod.SharedHooks;
 using RoR2;
+using RoR2.AsyncManagement;
 using RoR2.Projectile;
 using RoR2.Skills;
 using System;
@@ -144,9 +145,10 @@ namespace RiskyMod.Survivors.Commando
             SkillDef barrageDef = Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/CommandoBodyBarrage.asset").WaitForCompletion();
             if (suppressiveChanges)
             {
-                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset", "baseBulletCount", "8");
-                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset", "damageCoefficient", "1.2");
-                SneedUtils.SneedUtils.SetAddressableEntityStateField("RoR2/Junk/CommandoPerformanceTest/EntityStates.Commando.CommandoWeapon.FireBarrage.asset", "baseDurationBetweenShots", "0.09");
+                string barrageGUID = "13fbea35692079c48ab7fbc20a139828";
+                SneedUtils.SneedUtils.SetAddressableEntityStateField(barrageGUID, "baseBulletCount", "7");
+                SneedUtils.SneedUtils.SetAddressableEntityStateField(barrageGUID, "damageCoefficient", "1.2");
+                SneedUtils.SneedUtils.SetAddressableEntityStateField(barrageGUID, "baseDurationBetweenShots", "0.09");
                 barrageDef.baseRechargeInterval = 7f;
                 barrageDef.interruptPriority = InterruptPriority.PrioritySkill;
                 barrageDef.mustKeyPress = false;
@@ -376,7 +378,9 @@ namespace RiskyMod.Survivors.Commando
             proj.transform.localScale = Vector3.one * 2f;
             projGhost.transform.localScale = Vector3.one * 2f;
 
-            proj.GetComponent<ProjectileController>().ghostPrefab = projGhost;
+            var pc = proj.GetComponent<ProjectileController>();
+            pc.ghostPrefabAddress = default;
+            pc.ghostPrefab = projGhost;
 
             //Prevents projectiles from disappearing at long range
             ProjectileSimple ps = proj.GetComponent<ProjectileSimple>();

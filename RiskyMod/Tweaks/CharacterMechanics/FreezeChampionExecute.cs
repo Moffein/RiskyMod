@@ -240,7 +240,17 @@ namespace RiskyMod.Tweaks.CharacterMechanics
         {
             if ((damageInfo.damageType & DamageType.Freeze2s) == DamageType.Freeze2s)
             {
-                self.body.AddTimedBuff(FreezeDebuff.buffIndex, 2f * damageInfo.procCoefficient);    //this is how freeze is handled in SetStateOnHurt
+                var body = self.body;
+
+                if (body)
+                {
+                    bool notFreezeImmune = !body.HasBuff(DLC2Content.Buffs.FreezeImmune);
+                    bool notFrozen = !(body.healthComponent && body.healthComponent.isInFrozenState);
+                    if (notFreezeImmune && notFrozen && !body.IsDrone)
+                    {
+                        self.body.AddTimedBuff(FreezeDebuff.buffIndex, 2f * damageInfo.procCoefficient);    //this is how freeze is handled in SetStateOnHurt
+                    }
+                }
             }
         }
     }

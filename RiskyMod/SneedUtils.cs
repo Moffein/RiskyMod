@@ -2,6 +2,7 @@
 using R2API;
 using RiskyMod.Content;
 using RoR2;
+using RoR2.AsyncManagement;
 using RoR2.CharacterAI;
 using RoR2.Navigation;
 using RoR2.Skills;

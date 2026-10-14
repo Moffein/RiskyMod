@@ -1,11 +1,6 @@
 ## Commando
 
 Mostly the same, with buffs to his less-used skills.
-
-## Primaries
-
-- Double Tap
-	- **(RiskyFixes)** Fixed attack speed cap being lower than intended.
 	
 ## Secondaries
 

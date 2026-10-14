@@ -43,7 +43,7 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     //I'd like to re-enable the visual, but I need to figure out how to make it not count shields.
                     self.oneShotProtectionFraction = 0f;
 
-                    if (self.cursePenalty > 1f)
+                    if (self.cursePenalty > 11.111111111f)    //100/0.9 = 11.1111
                     {
                         self.hasOneShotProtection = false;
                     }
