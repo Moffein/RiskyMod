@@ -9,14 +9,9 @@ Almost unchanged aside from minor QoL.
 ## Primaries
 
 - Laser Sword
-	- **(RiskyTweaks)** Expose Combo hit no longer scales with attack speed.
+	- **(RiskyTweaks)** Expose Combo hit no longer scales with attack speed, so that tech works at high speeds.
 
 ## Utilities
 
 - Blinding Assault
 	- Increased damage from 300% -> 450% so it's not as outclassed by Focused Assault.
-	
-## Specials
-
-- Eviscerate
-	- **(RiskyFixes)** No longer gets caught on allies.

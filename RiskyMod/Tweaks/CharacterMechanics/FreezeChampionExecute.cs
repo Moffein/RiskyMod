@@ -85,63 +85,33 @@ namespace RiskyMod.Tweaks.CharacterMechanics
         //This doesn't fix Guillotines not stacking with Freeze, but Guillotines are reworked anyways.
         private void ModifyExecuteThreshold()
         {
-            IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
+            IL.RoR2.HealthComponent.TakeDamageProcess += TakeDamageExecute;
+
+            IL.RoR2.HealthComponent.GetHealthBarValues += DisplayExecuteOnHealthBar;
+        }
+
+        private void TakeDamageExecute(ILContext il)
+        {
+            bool error = true;
+            ILCursor c = new ILCursor(il);
+            if (c.TryGotoNext(MoveType.After,
+                x => x.MatchCall<HealthComponent>("get_isInFrozenState")
+                ))
             {
-                bool error = true;
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(MoveType.After,
-                    x => x.MatchCall<HealthComponent>("get_isInFrozenState")
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<bool, HealthComponent, bool>>((isFrozen, self) =>
+                {
+                    return isFrozen || (self.body.HasBuff(FreezeDebuff) && !Allies.AlliesCore.IsDrone(self));
+                });
+
+                if (c.TryGotoNext(MoveType.After,
+                    x => x.MatchLdcR4(0.3f)
                     ))
                 {
                     c.Emit(OpCodes.Ldarg_0);
-                    c.EmitDelegate<Func<bool, HealthComponent, bool>>((isFrozen, self) =>
+                    c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
                     {
-                        return isFrozen || (self.body.HasBuff(FreezeDebuff) && !Allies.AlliesCore.IsDrone(self));
-                    });
-
-                    if(c.TryGotoNext(MoveType.After,
-                        x => x.MatchLdcR4(0.3f)
-                        ))
-                    {
-                        c.Emit(OpCodes.Ldarg_0);
-                        c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
-                        {
-                            return GetExecuteThreshold(executeThreshold, self);
-                        });
-
-                        if(c.TryGotoNext(MoveType.After,
-                            x => x.MatchLdcR4(0.3f)
-                            ))
-                        {
-                            c.Emit(OpCodes.Ldarg_0);
-                            c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
-                            {
-                                return GetExecuteThreshold(executeThreshold, self);
-                            });
-                            error = false;
-                        }
-                    }
-                }
-                
-                if (error)
-                {
-                    UnityEngine.Debug.LogError("RiskyMod: FreezeChampionExecute TakeDamage IL Hook failed");
-                }
-            };
-
-            IL.RoR2.HealthComponent.GetHealthBarValues += (il) =>
-            {
-                bool error = true;
-
-                ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(MoveType.After,
-                    x => x.MatchCall<HealthComponent>("get_isInFrozenState")
-                    ))
-                {
-                    c.Emit(OpCodes.Ldarg_0);
-                    c.EmitDelegate<Func<bool, HealthComponent, bool>>((isFrozen, self) =>
-                    {
-                        return isFrozen || self.body.HasBuff(FreezeDebuff);
+                        return GetExecuteThreshold(executeThreshold, self);
                     });
 
                     if (c.TryGotoNext(MoveType.After,
@@ -156,12 +126,46 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                         error = false;
                     }
                 }
+            }
 
-                if (error)
+            if (error)
+            {
+                UnityEngine.Debug.LogError("RiskyMod: FreezeChampionExecute TakeDamage IL Hook failed");
+            }
+        }
+
+        private void DisplayExecuteOnHealthBar(ILContext il)
+        {
+            bool error = true;
+
+            ILCursor c = new ILCursor(il);
+            if (c.TryGotoNext(MoveType.After,
+                x => x.MatchCall<HealthComponent>("get_isInFrozenState")
+                ))
+            {
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<bool, HealthComponent, bool>>((isFrozen, self) =>
                 {
-                    UnityEngine.Debug.LogError("RiskyMod: FreezeChampionExecute GetHealthBarValues IL Hook failed");
+                    return isFrozen || self.body.HasBuff(FreezeDebuff);
+                });
+
+                if (c.TryGotoNext(MoveType.After,
+                    x => x.MatchLdcR4(0.3f)
+                    ))
+                {
+                    c.Emit(OpCodes.Ldarg_0);
+                    c.EmitDelegate<Func<float, HealthComponent, float>>((executeThreshold, self) =>
+                    {
+                        return GetExecuteThreshold(executeThreshold, self);
+                    });
+                    error = false;
                 }
-            };
+            }
+
+            if (error)
+            {
+                UnityEngine.Debug.LogError("RiskyMod: FreezeChampionExecute GetHealthBarValues IL Hook failed");
+            }
         }
 
         private void ApplyFreezeDebuff()
@@ -185,7 +189,6 @@ namespace RiskyMod.Tweaks.CharacterMechanics
             };
 
             SharedHooks.TakeDamage.OnDamageTakenActions += ApplyDebuff;
-            IL.RoR2.GlobalEventManager.ProcessHitEnemy += GlobalEventManager_ProcessHitEnemy;
             IL.RoR2.CharacterBody.HandleCascadingBuffs += CharacterBody_HandleCascadingBuffs;
         }
 
@@ -202,37 +205,10 @@ namespace RiskyMod.Tweaks.CharacterMechanics
                     bool notFrozen = !(body.healthComponent && body.healthComponent.isInFrozenState);
                     if (notFreezeImmune && notFrozen && !body.IsDrone)
                     {
-                        body.AddTimedBuff(FreezeDebuff, 2f);
+                        body.AddTimedBuff(FreezeDebuff, 3f);
                     }
                     return buff;
                 });
-            }
-        }
-
-        private void GlobalEventManager_ProcessHitEnemy(ILContext il)
-        {
-            ILCursor c = new ILCursor(il);
-
-            if (c.TryGotoNext(x => x.MatchCall<DamageTypeCombo>("IsChefFrostDamage"))
-                && c.TryGotoNext( x=> x.MatchLdloc(1))
-                && c.TryGotoNext(MoveType.After, x => x.MatchLdloc(1))) //Position before SetStateOnHurt GetComponent
-            {
-                c.EmitDelegate<Func<CharacterBody, CharacterBody>>(body =>
-                {
-                    bool isOiled = body.HasBuff(DLC2Content.Buffs.Oiled);
-                    bool notFreezeImmune = !body.HasBuff(DLC2Content.Buffs.FreezeImmune);
-                    bool notFrozen = !(body.healthComponent && body.healthComponent.isInFrozenState);
-
-                    if (isOiled && notFreezeImmune && notFrozen && !body.IsDrone)
-                    {
-                        body.AddTimedBuff(FreezeDebuff, 2f);    //this is inconsistent with body
-                    }
-                    return body;
-                });
-            }
-            else
-            {
-                Debug.LogError("RiskyMod: FreezeChampionExecute ProcessHitEnemy IL hook failed.");
             }
         }
 

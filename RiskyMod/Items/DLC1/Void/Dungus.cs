@@ -9,7 +9,7 @@ namespace RiskyMod.Items.DLC1.Void
     public class Dungus
     {
         public static bool enabled = true;
-        public static float baseHealPercent = 0.012f;
+        public static float baseHealPercent = 0.006f;   //0.012 - 0.006
         public static float stackHealPercent = 0.006f;
         public Dungus()
         {
@@ -21,16 +21,14 @@ namespace RiskyMod.Items.DLC1.Void
                 bool error = true;
 
                 ILCursor c = new ILCursor(il);
-                if(c.TryGotoNext(
-                     x => x.MatchLdcR4(0.01f)
-                    ))
+                if (c.TryGotoNext(MoveType.After, x => x.MatchLdsfld<MushroomVoidBehavior>("healPercentagePerStack")))
                 {
-                    c.Next.Operand = stackHealPercent * 0.5f;
-                    if(c.TryGotoNext(MoveType.After,
+                    c.EmitDelegate<Func<float, float>>(f => stackHealPercent);
+                    if (c.TryGotoNext(MoveType.After,
                          x => x.MatchMul()
                         ))
                     {
-                        c.EmitDelegate<Func<float, float>>(healPercent => healPercent + (baseHealPercent - stackHealPercent) * 0.5f);
+                        c.EmitDelegate<Func<float, float>>(healPercent => healPercent + baseHealPercent);
                         error = false;
                     }
                 }

@@ -72,7 +72,6 @@
 	
 - Xi Construct
 	- Takes 50% more damage while using its laser.
-	- **(RiskyTweaks)** Attempts to stay closer to players.
 	
 - Grandparent
 	- **(RiskyTweaks)** Sun damage stops the moment you break LOS.

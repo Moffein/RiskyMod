@@ -28,7 +28,7 @@ namespace RiskyMod.Items.DLC3.Common
                 //Disable unconditional stack refresh
                 c.EmitDelegate<Func<BuffDef, BuffDef>>(x => null);
 
-                if (c.TryGotoNext(x => x.MatchLdloc(0), x => x.MatchLdsfld(typeof(DLC3Content.Buffs), "CritChanceAndDamage"), x => x.MatchCallvirt<CharacterBody>("GetBuffCount")))
+                if (c.TryGotoNext(x => x.MatchLdloc(1), x => x.MatchLdsfld(typeof(DLC3Content.Buffs), "CritChanceAndDamage"), x => x.MatchCallvirt<CharacterBody>("GetBuffCount")))
                 {
                     //Re-implement stack refresh inside conditional
                     c.Index++;
@@ -45,7 +45,6 @@ namespace RiskyMod.Items.DLC3.Common
                         error = false;
                     }
                 }
-
             }
 
             if (error)
