@@ -26,8 +26,8 @@ namespace RiskyMod.Survivors.Croco.Contagion
 
         public ContagionPassive()
         {
-            if (!enabled) return;
             contagionDamageType = DamageAPI.ReserveDamageType();
+            if (!enabled) return;
             On.RoR2.HealthComponent.TakeDamageProcess += HealthComponent_TakeDamageProcess;
             RoR2Application.onLoad += OnLoad;
             CreateSkillDef();

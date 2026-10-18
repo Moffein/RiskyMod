@@ -28,6 +28,7 @@ This mod used to have a gameplay rework, but that's been condensed into a select
 		- Utility: Blight
 		- Special: Infects for 6x100% damage, can trigger item effects.
 			- 0.5 proc coefficient
+			- Blights if used with Cloying Breath.
 	
 	*Gameplay rework is now a selectable alt passive to improve cross-mod compatibility.*
 	
@@ -48,3 +49,10 @@ This mod used to have a gameplay rework, but that's been condensed into a select
 	- Knocks enemies downwards.
 	
 	*Lower cooldown should make this less of a liability to take since it's on-par with Caustic Leap now. Cooldown reduction lowered to compensate, though the real choice between the 2 is being able to stack debuffs versus being able to spam.*
+	
+## Specials
+
+- Cloying Breath
+	- Blight is now only applied once every 3 ticks. (If BlightReturns is enabled)
+	
+	*Necessary change due to different Blight mechanics in this mod. It's still the highest source of Blight stacks in Acrid's kit, just that it won't hit 25+ stacks off of a single cast now.*

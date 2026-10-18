@@ -22,6 +22,9 @@ namespace RiskyMod.Survivors.Croco
             new ShiftAirControl();
             new ContagionPassive();
             new BlightReturns();
+
+            NerfCloyingBreath.enabled = ContagionPassive.enabled || BlightReturns.enabled;
+            new NerfCloyingBreath();
         }
     }
 }
