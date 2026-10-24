@@ -104,6 +104,15 @@ namespace RiskyMod.Items.Uncommon
         public Transform wardOrigin;
         public HoldoutZoneController holdout;
 
+
+        private void OnDestroy()
+        {
+            if (NetworkServer.active && wardInstance)
+            {
+                Destroy(wardInstance);
+            }
+        }
+
         public int daisyCount
         {
             get

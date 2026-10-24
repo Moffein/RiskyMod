@@ -13,6 +13,11 @@
 	- Health increased from +40 -> +8% max health
 	- Additional Effect: +10 armor per stack
 	
+- Mycelium Cap
+	- Damage increased from 1000% (+200%) -> 1000% (+600%)
+	
+	*Just making this stack like a normal damage item.*
+	
 - Prison Matrix
 	- Added a passive +10 armor so that the item isn't useless without armor items.
 	- Now ACTUALLY increases armor by 50%.

@@ -63,6 +63,7 @@ using RiskyMod.Items.DLC3.Legendary;
 using RiskyMod.Items.DLC3.Food;
 using RiskyMod.Items.DLC3.Boss;
 using RiskyMod.Items.DLC4.Hallowed;
+using RiskyMod.Items.DLC4.Boss;
 
 namespace RiskyMod
 {
@@ -311,7 +312,7 @@ namespace RiskyMod
             Infusion.enabled = ItemCfg.Bind(uncommonString, "Infusion", true, itemConfigDescString).Value;
             Infusion.useBuff = ItemCfg.Bind(uncommonString, "Infusion - Show Buff on HUD", true, "HP gained from Infusion is displayed as a buff on your HUD.").Value;
             LeechingSeed.enabled = ItemCfg.Bind(uncommonString, "Leeching Seed", true, itemConfigDescString).Value;
-            Daisy.enabled = ItemCfg.Bind(uncommonString, "Lepton Daisy", true, itemConfigDescString).Value;
+            Daisy.enabled = ItemCfg.Bind(uncommonString, "Lepton Daisy", false, itemConfigDescString).Value;
             Daisy.disableHealPulse = ItemCfg.Bind(uncommonString, "Lepton Daisy - Disable Heal Pulse", true, "Disables the Vanilla Heal Pulse if Lepton Daisy rework is enabled.").Value;
 
             Guillotine.enabled = ItemCfg.Bind(uncommonString, "Old Guillotine", true, itemConfigDescString).Value;
@@ -409,6 +410,8 @@ namespace RiskyMod
             DefenseNucleus.removeAllyScaling = ItemCfg.Bind(bossString, "Defense Nucleus - Remove Ally Count Scaling", true, "Stacks increase ally damage and health instead of max allies.").Value;
             DefenseNucleus.inheritEliteAffix = ItemCfg.Bind(bossString, "Defense Nucleus - Inherit Elite Affix", true, "Defense Nucleus Alpha Constructs inherit the Elite Affix of the enemy that was killed. This removes their spawn VFX.").Value;
             DefenseNucleus.ignoreAllyCap = ItemCfg.Bind(bossString, "Defense Nucleus - Ignore Ally Cap", true, "Defense Nucleus Alpha Constructs ignore the ally cap if changes are enabled.").Value;
+
+            MushShot.enabled = ItemCfg.Bind(bossString, "Mycelium Cap", true, itemConfigDescString).Value;
 
             HalcyonSeed.enabled = ItemCfg.Bind(bossString, "Halcyon Seed", true, itemConfigDescString).Value;
 

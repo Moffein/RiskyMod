@@ -5,10 +5,6 @@
 	
 	*Makes this more of a thing that you actively play around where you try to maintain the buff, instead of being a sudden all-or-nothing buff that can't be triggered by a lot of characters earlygame.*
 
-- Lepton Daisy
-	- New Effect: Creates a healing field on the Teleporter that heals for 5% (+2.5%) max health.
-		- Spawns during Mithrix and False Son.
-
 - Hunter's Harpoon
 	- New Effect: Increase move speed by 50% for 1.5s (+1s) on kill, stacks up to 25s.
 	
@@ -41,6 +37,12 @@
 	- Now scales with Ambient Level.
 	
 	*Meant for "on damage taken" builds.*
+
+- Lepton Daisy **(Disabled by default)**
+	- New Effect: Creates a healing field on the Teleporter that heals for 5% (+2.5%) max health.
+		- Spawns during Mithrix and False Son.
+		
+	*This was disabled because a lot of new content operates under the assumption that Vanilla Daisy is being run. (ex. Enforcer holdout, Wake)*
 
 ## Buffs
 

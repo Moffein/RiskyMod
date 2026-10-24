@@ -12,6 +12,7 @@ using RiskyMod.Items.DLC3.Common;
 using RiskyMod.Items.DLC3.Food;
 using RiskyMod.Items.DLC3.Legendary;
 using RiskyMod.Items.DLC3.Uncommon;
+using RiskyMod.Items.DLC4.Boss;
 using RiskyMod.Items.DLC4.Hallowed;
 using RiskyMod.Items.Equipment;
 using RiskyMod.Items.Legendary;
@@ -165,6 +166,7 @@ namespace RiskyMod.Items
             new DefenseNucleus();
             new HalcyonSeed();
             new PrisonMatrix();
+            new MushShot();
         }
 
         private void ModifyLunar()
