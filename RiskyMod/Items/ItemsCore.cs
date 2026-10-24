@@ -189,6 +189,7 @@ namespace RiskyMod.Items
             new SuperLeech();
             new Chrysalis();
             new Goobo();
+            new DisposableMissileLauncher();
         }
 
         private void ModifyFood()

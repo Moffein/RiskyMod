@@ -438,6 +438,7 @@ namespace RiskyMod
             SuperLeech.enabled = ItemCfg.Bind(equipmentString, "Super Massive Leech", true, itemConfigDescString).Value;
             VolcanicEgg.enabled = ItemCfg.Bind(equipmentString, "Volcanic Egg", true, itemConfigDescString).Value;
             Goobo.enabled = ItemCfg.Bind(equipmentString, "Goobo Jr.", true, itemConfigDescString).Value;
+            DisposableMissileLauncher.enabled = ItemCfg.Bind(equipmentString, "Disposable Missile Launcher", true, itemConfigDescString).Value;
         }
 
         private static void ConfigSurvivors()
