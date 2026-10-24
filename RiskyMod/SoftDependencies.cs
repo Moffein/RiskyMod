@@ -10,7 +10,6 @@ namespace RiskyMod
 {
     public class SoftDependencies
     {
-        public static bool BlightReturnsLoaded = false;
         public static bool AdditiveExecutesLoaded = false;
         public static bool RiskySkillsLoaded = false;
         public static bool LinearDamageLoaded = false;

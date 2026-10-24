@@ -48,7 +48,6 @@ using RiskyMod.Survivors.DLC2.Seeker;
 namespace RiskyMod
 {
     #region softdependencies
-    [BepInDependency("com.Moffein.BlightReturnsRework", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.AdditiveExecutes", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Moffein.AssistManager", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency(".AVFX_Options..", BepInDependency.DependencyFlags.SoftDependency)]    //Does this softdependency actually work? (since RiskyMod clones the projectiles)
@@ -212,7 +211,6 @@ namespace RiskyMod
             SoftDependencies.RiskyMithrixLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.RiskyLives.RiskyMithrix");
             SoftDependencies.RiskySkillsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.RiskySkills");
             SoftDependencies.AdditiveExecutesLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.AdditiveExecutes");
-            SoftDependencies.BlightReturnsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Moffein.BlightReturnsRework");
         }
 
         private void CheckDependencies()
@@ -220,12 +218,6 @@ namespace RiskyMod
             if (SoftDependencies.KingKombatArenaLoaded)
             {
                 RoR2.Stage.onStageStartGlobal += CheckArenaLoaded;
-            }
-
-            if (BlightReturns.enabled && SoftDependencies.BlightReturnsLoaded)
-            {
-                Debug.Log("RiskyMod: Disabling BlightReturns because standalone plugin is loaded.");
-                BlightReturns.enabled = false;
             }
 
             if (SoftDependencies.ZetTweaksLoaded) ZetTweaksCompat();
