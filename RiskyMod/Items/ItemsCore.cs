@@ -113,6 +113,7 @@ namespace RiskyMod.Items
 
             new Dynamite();
             new KineticDampener();
+            new UnstableTransmitterEquipment();
         }
 
         private void ModifyLegendary()

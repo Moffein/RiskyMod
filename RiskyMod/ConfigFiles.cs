@@ -338,6 +338,10 @@ namespace RiskyMod
 
             Dynamite.enabled = ItemCfg.Bind(uncommonString, "Box of Dynamite", true, itemConfigDescString).Value;
             KineticDampener.enabled = ItemCfg.Bind(uncommonString, "Kinetic Dampener", true, itemConfigDescString).Value;
+
+            //WIP
+            UnstableTransmitterEquipment.enabled = false;
+            //UnstableTransmitterEquipment.enabled = ItemCfg.Bind(uncommonString, "Unstable Transmitter - Equipment Rework", true, "Turns Unstable Transmitter into an equipment.").Value;
         }
 
         private static void ConfigLegendaryItems()
